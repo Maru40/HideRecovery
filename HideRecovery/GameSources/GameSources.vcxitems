@@ -1,0 +1,351 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <ItemsProjectGuid>{8C1D084C-C178-4A5D-84D5-9D8B94E39AB0}</ItemsProjectGuid>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectCapability Include="SourceItemsFromImports" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ActionTimer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ActiveSkillBase.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)AuraBase.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)AuraObjectBase.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)AutoReflection.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)BillBoard_Ex.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CameraRayAlphaManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CollisionObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)EffectBase.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)EffectManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)FadeSprite.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)FieldImpactMap.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)GraphAstar.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ImpactManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)I_Impact.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)I_KnockBack.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)LoadCSV.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)LoadPositionGenerator.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)LookAtCameraManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MaruAnimationHelper.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)AnimationHelper.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)AnimationMainStateMachine.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)AnimatorBase.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ArrowObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)AstarEdge.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)AstarEdgeDraw.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)GraphEdgeBase.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)GraphNodeBase.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)GraphStateNode.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)OriginalMeshToonObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ParticleManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)PlayerObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)PNTToonDraw.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)RangeDestroyManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ReactiveBool.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ReactiveProperty.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ScaleFade.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ScaleParent.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ScalePop.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ScreenFadeManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)SinScaling.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)SoleImpactMap.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)SpriteObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)StartCamera.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)SubAnimatorBase.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)TactileCtrl.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)TactileObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Targeted.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Task_AstarMove.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)AstarNodeDraw.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)BasecrossInputer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)BcPNTSlimeDraw.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Bezier.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)BezierTransitioner.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)BillBoard.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)BoardObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)BuilderVertexPCT.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)BulletBase.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CombatCoordinator.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)EnemyAIDirector.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)FactionCoordinator.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CameraHelper.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CameraShake.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Character.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CollisionAction.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ImpactMap.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)EnemyStatusBase.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)PassiveSkillBase.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)SeekTargetOffsetsManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)SkillBase.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Task_AstarEvade.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Task_Flee.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)TimerDestroy.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ToonPNTStaticModelDraw.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)UtilityStartCamera.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Utility_EnemyStator.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Heuristic.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)I_Damaged.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MaruAction.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)NavGraphNode.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)DebugNumber.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)NumberObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)NumbersCtrl.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)NumbersObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)DebugObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)DelegateSystem.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)StateEdgeBase.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)EnemyBase.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)EnemyMainStateMachine.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)EnemyObjectBase.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)EnemyStateNodeBase.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ex_weak_ptr.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)EyeSearchRange.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)FixedBox.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)FontHelper.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)FoundManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)GameManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)GameManagerObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)GameSaveManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)GameStageBase.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)GameTimer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)GeneratorBase.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)GraphBase.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)HitStopManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)InputHelper.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)I_BrackBoard.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)LoadData.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)LoadStage.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MainCamera.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MainCameraObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MaruHitHelper.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MainStage.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Mathf.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MathHelper.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MessageWindow.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MulchTaskList.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyDelegate.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyRandom.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MaruUtility.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)StateNodeBase.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)OriginalMeshStageObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)SingletonComponent.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)SoundManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)SparseGraph.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)StatorBase.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Task_AroundEyeCheck.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Task_MovePositions.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Task_PlowlingMove.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Task_Wait.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Task_CameraAtMove.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)PlayerInputer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)PlayerMover.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)RandomPositionGenerator.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)SlowTimerManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Project.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ProjectBehavior.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ProjectShader.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Random.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)RotationController.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)SaveHelper.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Scene.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)SeekTarget.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)SeekTPS.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)SoundHelper.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)StageMapCSV.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)StageObjectBase.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)StructIOFileStream.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)TargetManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)TaskList.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Task_ToTargetMove.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)TimeHelper.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ToTargetMove.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Trigger.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)UIHelper.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)UtilityAstar.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)UtilityObstacle.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)UtilityVelocity.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)VelocityManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)WaitTimer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)WallEvasion.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)WallObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)WindowSetting.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ActionTimer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ActiveSkillBase.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)AuraBase.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)AuraObjectBase.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)AutoReflection.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)BillBoard_Ex.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CameraRayAlphaManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CollisionObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)EffectBase.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)EffectManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)FieldImpactMap.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ImpactManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)I_Impact.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)LoadCSV.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)LoadPositionGenerator.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)LookAtCameraManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)OriginalMeshToonObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)FadeSprite.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)GraphAstar.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)I_KnockBack.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MaruAnimationHelper.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)AnimationMainStateMachine.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)AnimatorBase.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ArrowObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)AstarEdge.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)AstarEdgeDraw.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)AstarNodeDraw.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)BasecrossInputer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)BcPNTSlimeDraw.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Bezier.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)BezierTransitioner.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)BillBoard.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)BoardObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)BuilderVertexPCT.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)BulletBase.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CameraHelper.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CameraShake.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Character.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CollisionAction.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CombatCoordinator.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ImpactMap.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)EnemyAIDirector.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)FactionCoordinator.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)GraphBase.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)GraphNodeBase.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)GraphStateNode.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ParticleManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)PassiveSkillBase.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)PNTToonDraw.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)RangeDestoryManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ReactiveBool.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ReactiveProperty.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ScaleFade.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ScaleParent.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ScalePop.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ScreenFadeManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)SeekTargetOffsetsManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)SinScaling.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)SkilBase.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)SoleImpactMap.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)SpriteObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)StartCamera.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)SubAnimatorBase.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)TactileCtrl.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)TactileObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Targeted.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Task_AstarEvade.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Task_AstarMove.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Task_Flee.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)TimerDestory.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ToonPNTStaticModelDraw.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)UtilityStartCamera.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Utility_EnemyStator.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)EnemyStatusBase.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Heuristic.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)I_Damaged.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MaruAction.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)NavGraphNode.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)DebugNumber.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)NumberObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)NumbersCtrl.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)NumbersObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)DebugObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)EyeSearchRange.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)FixedBox.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)FontHelper.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)FoundManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)GameManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)GameManagerObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)GameSaveManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)GameStageBase.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)GameTimer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)GeneratorBase.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)HitStopManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)InputHelper.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)LoadData.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)LoadStage.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MainCamera.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MainCameraObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MaruHitHelper.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MainStage.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Mathf.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MathHelper.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MessageWindow.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyRandom.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MaruUtility.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)OriginalMeshStageObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)SingletonComponent.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)SoundManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)SparseGraph.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)StatorBase.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Task_AroundEyeCheck.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Task_CameraAtMove.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)PlayerInputer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)PlayerMover.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)RandomPosiitonGenerator.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)SlowTimerManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ProjectBehavior.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Random.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)RotationController.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Scene.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)SeekTarget.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)SeekTPS.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)SoundHelper.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)StageMapCSV.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)StageObjectBase.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)TargetManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Task_MovePositions.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Task_PlowlingMove.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Task_ToTargetMove.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Task_Wait.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)TimeHelper.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ToTargetMove.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)UIHelper.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)UtilityAstar.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)UtilityObstacle.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)UtilityVelocity.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)VelocityManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)WaitTimer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)WallEvasion.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)WallObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)WinMain.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="$(MSBuildThisFileDirectory)..\..\Libs\BaseLib\DxShaders\SlimePS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="$(MSBuildThisFileDirectory)..\..\Libs\BaseLib\DxShaders\SlimeVS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+    </FxCompile>
+    <FxCompile Include="$(MSBuildThisFileDirectory)ToonPS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="$(MSBuildThisFileDirectory)ToonVS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+    </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)..\..\Libs\BaseLib\DxShaders\SlimeFunctions.hlsli" />
+    <None Include="$(MSBuildThisFileDirectory)..\..\Libs\BaseLib\DxShaders\SlimeParametors.hlsli" />
+    <None Include="$(MSBuildThisFileDirectory)ToonFunctions.hlsli" />
+    <None Include="$(MSBuildThisFileDirectory)ToonParametors.hlsli" />
+  </ItemGroup>
+</Project>
