@@ -863,9 +863,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Utility_EnemyStator.h">
       <Filter>Maruyama\Enemy\StatorUtility</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)SeekTargetOffsetsManager.h">
-      <Filter>Maruyama\Camera\Seek\SeekTarget\OffsetsManager</Filter>
-    </ClInclude>
+
     <ClInclude Include="$(MSBuildThisFileDirectory)ActiveSkillBase.h">
       <Filter>Maruyama\Enemy\Component\Base\Skill\ActiveSkillBase</Filter>
     </ClInclude>
@@ -1304,9 +1302,6 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Utility_EnemyStator.cpp">
       <Filter>Maruyama\Enemy\StatorUtility</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)SeekTargetOffsetsManager.cpp">
-      <Filter>Maruyama\Camera\Seek\SeekTarget\OffsetsManager</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)ActiveSkillBase.cpp">
       <Filter>Maruyama\Enemy\Component\Base\Skill\ActiveSkillBase</Filter>

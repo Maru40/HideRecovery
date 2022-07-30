@@ -83,7 +83,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)ImpactMap.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)EnemyStatusBase.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)PassiveSkillBase.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)SeekTargetOffsetsManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)SkillBase.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Task_AstarEvade.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Task_Flee.h" />
@@ -234,7 +233,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)ScaleParent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ScalePop.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ScreenFadeManager.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)SeekTargetOffsetsManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)SelecterSprite.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)SelectSprite.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)SinScaling.cpp" />
