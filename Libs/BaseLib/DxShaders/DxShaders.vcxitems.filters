@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <FxCompile Include="$(MSBuildThisFileDirectory)BcPSPCStatic.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)BcPSPNTnTPL.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)BcPSPNTnTPLShadow.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)BcPSPNTPL.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)BcPSPNTPLShadow.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)BcPSPNTVL.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)BcPSPNTVLShadow.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)BcPSPNStaticVL.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)BcPSPTStatic.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)BcVSPCStatic.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)BcVSPCTStatic.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)BcVSPNStaticVL.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)BcVSPNTBonePL.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)BcVSPNTBonePLBn.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)BcVSPNTBonePLBnShadow.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)BcVSPNTBonePLShadow.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)BcVSPNTBoneVL.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)BcVSPNTBoneVLBn.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)BcVSPNTBoneVLBnShadow.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)BcVSPNTBoneVLShadow.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)BcVSPNTnTBonePL.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)BcVSPNTnTBonePLShadow.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)BcVSPNTnTStaticPL.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)BcVSPNTnTStaticPLShadow.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)BcVSPNTStaticPL.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)BcVSPNTStaticPLBn.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)BcVSPNTStaticPLBnShadow.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)BcVSPNTStaticPLShadow.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)BcVSPNTStaticVL.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)BcVSPNTStaticVLBn.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)BcVSPNTStaticVLBnShadow.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)BcVSPNTStaticVLShadow.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)BcVSPTStatic.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)PSPCSprite.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)PSPCStatic.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)PSPCTSprite.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)PSPCTStatic.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)PSPNStatic.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)PSPNTStatic.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)PSPNTStaticShadow.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)PSPNTStaticShadow2.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)PSPTSprite.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)PSPTStatic.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)VSPCSprite.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)VSPCStatic.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)VSPCStaticInstance.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)VSPCTSprite.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)VSPCTStatic.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)VSPCTStaticInstance.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)VSPNStatic.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)VSPNTBone.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)VSPNTBoneShadow.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)VSPNTStatic.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)VSPNTStaticInstance.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)VSPNTStaticInstanceShadow.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)VSPNTStaticShadow.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)VSPTSprite.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)VSPTStatic.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)VSPTStaticInstance.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)VSShadowmap.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)VSShadowmapBone.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)VSShadowmapBoneWithTan.hlsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)BcINCCommon.hlsli" />
+    <None Include="$(MSBuildThisFileDirectory)BcINCLighting.hlsli" />
+    <None Include="$(MSBuildThisFileDirectory)BcINCParameters.hlsli" />
+    <None Include="$(MSBuildThisFileDirectory)BcINCShadow.hlsli" />
+    <None Include="$(MSBuildThisFileDirectory)BcINCStructs.hlsli" />
+    <None Include="$(MSBuildThisFileDirectory)INCParameters.hlsli" />
+    <None Include="$(MSBuildThisFileDirectory)INCShadowmap.hlsli" />
+    <None Include="$(MSBuildThisFileDirectory)INCStructs.hlsli" />
+  </ItemGroup>
+</Project>
