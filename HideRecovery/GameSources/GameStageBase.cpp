@@ -18,7 +18,6 @@
 #include "StartCamera.h"
 
 #include "StageMapCSV.h"
-#include "StageFloor.h"
 #include "WallObject.h"
 #include "OriginalMeshStageObject.h"
 #include "FixedBox.h"
@@ -27,7 +26,6 @@
 #include "ImpactMap.h"
 
 #include "UtilityStartCamera.h"
-#include "BcPNTSlimeDraw.h"
 
 #include "EnemyObjectBase.h"
 

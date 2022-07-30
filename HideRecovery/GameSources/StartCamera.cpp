@@ -14,8 +14,6 @@
 
 #include "MaruUtility.h"
 
-#include "Player.h"
-
 #include "PlayerInputer.h"
 
 namespace basecross {

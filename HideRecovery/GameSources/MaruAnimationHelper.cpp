@@ -14,8 +14,6 @@
 
 #include "TaskList.h"
 #include "SeekTarget.h"
-#include "MetaballChildrenRender.h"
-#include "MetaballMotionManager.h"
 
 namespace basecross {
 

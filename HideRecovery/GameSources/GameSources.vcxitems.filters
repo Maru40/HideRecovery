@@ -148,9 +148,6 @@
     <Filter Include="Maruyama\Shader\SlimeShader">
       <UniqueIdentifier>{ba820d8c-c413-4efa-86f2-8b4dd74b0742}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Maruyama\Shader\SlimeShader\Component">
-      <UniqueIdentifier>{e5bdf586-ad01-47da-ab26-2645a7699ecc}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Maruyama\Utility\Component">
       <UniqueIdentifier>{6b5ad3d8-0619-46c1-82ce-8f7f97faf195}</UniqueIdentifier>
     </Filter>
@@ -562,6 +559,12 @@
     <Filter Include="Maruyama\Utility\SpriteObject">
       <UniqueIdentifier>{3db3786a-93d9-4da8-bbed-f12dbb38a823}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Utility\SelectSprite">
+      <UniqueIdentifier>{6df50a17-32eb-4574-b4fb-3690af162497}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Utility\SelectSprite\Selecter">
+      <UniqueIdentifier>{5c50b608-3824-4798-9cc5-f9c4d9e36deb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -695,9 +698,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)GameManagerObject.h">
       <Filter>Maruyama\GameManager\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)BcPNTSlimeDraw.h">
-      <Filter>Maruyama\Shader\SlimeShader\Component</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)EyeSearchRange.h">
       <Filter>Maruyama\Enemy\Component\EyeSearchRange</Filter>
@@ -1054,6 +1054,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)SpriteObject.h">
       <Filter>Maruyama\Utility\SpriteObject</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)SelectSprite.h">
+      <Filter>Maruyama\Utility\SelectSprite</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)SelecterSprite.h">
+      <Filter>Maruyama\Utility\SelectSprite\Selecter</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -1160,9 +1166,6 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)GameManagerObject.cpp">
       <Filter>Maruyama\GameManager\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)BcPNTSlimeDraw.cpp">
-      <Filter>Maruyama\Shader\SlimeShader\Component</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)EyeSearchRange.cpp">
       <Filter>Maruyama\Enemy\Component\EyeSearchRange</Filter>
@@ -1480,6 +1483,12 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)SpriteObject.cpp">
       <Filter>Maruyama\Utility\SpriteObject</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)SelectSprite.cpp">
+      <Filter>Maruyama\Utility\SelectSprite</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)SelecterSprite.cpp">
+      <Filter>Maruyama\Utility\SelectSprite\Selecter</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

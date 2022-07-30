@@ -54,6 +54,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)ScaleParent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ScalePop.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ScreenFadeManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)SelecterSprite.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)SelectSprite.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)SinScaling.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)SoleImpactMap.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)SpriteObject.h" />
@@ -65,7 +67,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Task_AstarMove.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)AstarNodeDraw.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)BasecrossInputer.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)BcPNTSlimeDraw.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Bezier.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)BezierTransitioner.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)BillBoard.h" />
@@ -206,7 +207,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)AstarEdgeDraw.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)AstarNodeDraw.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)BasecrossInputer.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)BcPNTSlimeDraw.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Bezier.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)BezierTransitioner.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)BillBoard.cpp" />
@@ -235,6 +235,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)ScalePop.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ScreenFadeManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)SeekTargetOffsetsManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)SelecterSprite.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)SelectSprite.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)SinScaling.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)SkilBase.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)SoleImpactMap.cpp" />

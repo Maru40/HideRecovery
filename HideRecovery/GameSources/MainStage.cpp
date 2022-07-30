@@ -27,7 +27,6 @@
 #include "EnemyObjectBase.h"
 
 #include "EffectBase.h"
-#include "DamageEffect.h"
 
 #include "BoardObject.h"
 #include "BillBoard_Ex.h"

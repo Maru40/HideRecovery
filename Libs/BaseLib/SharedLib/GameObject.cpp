@@ -8,8 +8,6 @@
 
 #include "GameStageBase.h"
 
-#include "BcPNTSlimeDraw.h"
-
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
@@ -1522,15 +1520,6 @@ namespace basecross {
 
 			auto LeftPos = PtrLeftTrans->GetWorldMatrix().transInMatrix();
 			auto RightPos = PtrRightTrans->GetWorldMatrix().transInMatrix();
-
-			auto leftSlime = Left->GetComponent<BcPNTSlimeDraw>(false);
-			if (leftSlime) {
-				LeftPos = leftSlime->GetChildrenCenterPosition();
-			}
-			auto rightSlime = Right->GetComponent<BcPNTSlimeDraw>(false);
-			if (rightSlime) {
-				RightPos = rightSlime->GetChildrenCenterPosition();
-			}
 
 			auto LeftLen = bsm::length(LeftPos - CameraEye);
 			auto RightLen = bsm::length(RightPos - CameraEye);

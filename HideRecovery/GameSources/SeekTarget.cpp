@@ -11,8 +11,6 @@
 #include "VelocityManager.h"
 #include "UtilityVelocity.h"
 
-#include "LookTargetManager.h"
-
 #include "Mathf.h"
 
 //#include "DebugObject.h"
