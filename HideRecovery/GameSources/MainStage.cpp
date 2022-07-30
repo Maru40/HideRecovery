@@ -85,7 +85,8 @@ namespace basecross {
 			auto mapOffset = Vec3(0.0, -0.5f, 0.0f);
 			CreateMap(sm_loadMapName, mapOffset);
 
-			AddGameObject<GameObject>()->AddComponent<PNTStaticDraw>()->SetMeshResource(L"DEFAULT_CUBE");
+			//デバッグ
+			//AddGameObject<GameObject>()->AddComponent<PNTStaticDraw>()->SetMeshResource(L"DEFAULT_CUBE");
 
 		}
 		catch (...) {

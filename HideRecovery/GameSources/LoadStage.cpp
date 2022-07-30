@@ -27,10 +27,11 @@ namespace basecross
 
 	const std::vector<LoadStage::ResourceLoadData> LoadStage::m_texureResourceLoadDatas =
 	{
+		ResourceLoadData(L"Floor_TX", L"GrassGround.png"),
+
 		//ResourceLoadData(L"gauge", L"Gauge.png"),
 		//ResourceLoadData(L"clear", L"StageClear.png"),
 		//ResourceLoadData(L"Circle_TX", L"Circle.png"),
-		//ResourceLoadData(L"Floor_TX", L"GrassGround.png"),
 		//ResourceLoadData(L"Rock_TX", L"RockTX.png"),
 		//ResourceLoadData(L"Point_TX", L"Point.png"),
 		//ResourceLoadData(L"Segment_TX", L"Segment.png"),
