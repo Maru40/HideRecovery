@@ -565,6 +565,12 @@
     <Filter Include="Maruyama\Utility\SelectSprite\Selecter">
       <UniqueIdentifier>{5c50b608-3824-4798-9cc5-f9c4d9e36deb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Player\Component">
+      <UniqueIdentifier>{143ce331-44bf-4fb1-a24d-b4a56c0f2c9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Player\Component\PlayerController">
+      <UniqueIdentifier>{e3afa6c2-884a-43f2-a991-5aecbb9e73a1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -863,7 +869,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Utility_EnemyStator.h">
       <Filter>Maruyama\Enemy\StatorUtility</Filter>
     </ClInclude>
-
     <ClInclude Include="$(MSBuildThisFileDirectory)ActiveSkillBase.h">
       <Filter>Maruyama\Enemy\Component\Base\Skill\ActiveSkillBase</Filter>
     </ClInclude>
@@ -1057,6 +1062,9 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)SelecterSprite.h">
       <Filter>Maruyama\Utility\SelectSprite\Selecter</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)PlayerController.h">
+      <Filter>Maruyama\Player\Component\PlayerController</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1484,6 +1492,12 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)SelecterSprite.cpp">
       <Filter>Maruyama\Utility\SelectSprite\Selecter</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)PlayerObject.cpp">
+      <Filter>Maruyama\Player\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)PlayerController.cpp">
+      <Filter>Maruyama\Player\Component\PlayerController</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -45,6 +45,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)GraphStateNode.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)OriginalMeshToonObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ParticleManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)PlayerController.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)PlayerObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)PNTToonDraw.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)RangeDestroyManager.h" />
@@ -225,6 +226,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)GraphStateNode.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ParticleManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)PassiveSkillBase.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)PlayerController.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)PlayerObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)PNTToonDraw.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)RangeDestoryManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ReactiveBool.cpp" />
