@@ -10,14 +10,15 @@
 
 namespace basecross {
 
+	//--------------------------------------------------------------------------------------
+	/// プレイヤーオブジェクト
+	//--------------------------------------------------------------------------------------
 	class PlayerObject : public GameObject
 	{
 	public:
-		PlayerObject(const std::shared_ptr<Stage>& stage)
-			:GameObject(stage)
-		{}
+		PlayerObject(const std::shared_ptr<Stage>& stage);
 
-		void OnCreate() override {}
+		void OnCreate() override;
 
 	};
 
