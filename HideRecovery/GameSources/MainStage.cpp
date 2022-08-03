@@ -50,8 +50,6 @@ namespace basecross {
 
 	wstring MainStage::sm_loadMapName = L"StageS1_Copy.csv";
 
-	const WORD ResetCommand = XINPUT_GAMEPAD_RIGHT_SHOULDER + XINPUT_GAMEPAD_LEFT_SHOULDER + XINPUT_GAMEPAD_START + XINPUT_GAMEPAD_BACK;
-
 	void MainStage::CreateViewLight() {
 		CreateStartCamera(sm_loadMapName);
 		CreateMainCamera();
@@ -84,9 +82,6 @@ namespace basecross {
 			//Mapの読み込み
 			auto mapOffset = Vec3(0.0, -0.5f, 0.0f);
 			CreateMap(sm_loadMapName, mapOffset);
-
-			//デバッグ
-			//AddGameObject<GameObject>()->AddComponent<PNTStaticDraw>()->SetMeshResource(L"DEFAULT_CUBE");
 
 		}
 		catch (...) {
