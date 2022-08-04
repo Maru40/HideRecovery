@@ -29,10 +29,18 @@ namespace basecross {
 	{}
 
 	void PlayerObject::OnCreate() {
-		//デバッグ
-		auto draw = AddComponent<PNTStaticDraw>();
-		draw->SetMeshResource(L"DEFAULT_CUBE");
-		//draw->SetDiffuse(Col4(1.0f, 1.0f, 1.0f, 0.3f));
+		Mat4x4 spanMat;
+		Vec3 scale = Vec3(0.5f);
+		spanMat.affineTransformation(
+			scale,
+			Vec3(0.0f),
+			Vec3(0.0f, XM_PI, 0.0f),
+			Vec3(0.0f, -0.5f, 0.0f)
+		);
+
+		auto draw = AddComponent<PNTBoneModelDraw>();
+		draw->SetMultiMeshResource(L"Player_Mesh");
+		draw->SetMeshToTransformMatrix(spanMat);
 		SetAlphaActive(true);
 
 		transform->SetScale(Vec3(1.0f, 1.5f, 1.0f));
@@ -42,7 +50,7 @@ namespace basecross {
 		playerMover->SetIsCameraAffected(true);
 		AddComponent<RotationController>();
 		AddComponent<PlayerController>();
-		//AddComponent<Gravity>();
+		AddComponent<Gravity>();
 
 		auto springArm = GetStage()->Instantiate<GameObject>(Vec3(), Quat());
 
@@ -58,7 +66,7 @@ namespace basecross {
 
 		auto tpsCamera = GetStage()->Instantiate<GameObject>(Vec3(0, 0, 3), quat);
 		auto virtualCamera = tpsCamera->AddComponent<VirtualCamera>(10);
-		tpsCamera->AddComponent<LookAtCameraManager>(GetThis<GameObject>());
+		tpsCamera->AddComponent<LookAtCameraManager>(GetThis<GameObject>(), LookAtCameraManager::Parametor());
 
 		springArmComponent->AddHitTag(L"Wall");
 		springArmComponent->SetChildObject(tpsCamera);
