@@ -85,8 +85,8 @@ namespace basecross
 		auto moveForward = forward * inputVector.z;
 		auto moveRight = right * inputVector.x;
 
-		Vec3 comvertVec = maru::Utility::CalcuCameraVec((moveForward + moveRight), m_camera.GetShard(), GetGameObject());
-		Vec3 moveVector = comvertVec * App::GetApp()->GetElapsedTime() * m_standMoveSpeed;
+		//Vec3 comvertVec = maru::Utility::CalcuCameraVec((moveForward + moveRight), m_camera.GetShard(), GetGameObject());
+		Vec3 moveVector = (moveForward + moveRight) * App::GetApp()->GetElapsedTime() * m_standMoveSpeed;
 		
 		auto position = transform->GetPosition();
 
