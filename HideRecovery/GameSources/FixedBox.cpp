@@ -49,7 +49,7 @@ namespace basecross {
         vector<uint16_t> indices;
         MeshUtill::CreateCube(1.0f, vertices, indices);
 
-        auto testerFloat = 15.0f;  //将来的に消す。
+        auto testerFloat = 10.0f;  //将来的に消す。
         auto scale = transform->GetScale() / testerFloat;
         float UCount = scale.x; /// m_UPic;
         float VCount = scale.z; /// m_VPic;
