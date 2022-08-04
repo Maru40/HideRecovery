@@ -40,6 +40,8 @@
 
 #include "TaskList.h"
 
+#include "EnemyGeneratorObject.h"
+
 #include "DebugNumber.h"
 #include "NumbersObject.h"
 #include "NumbersCtrl.h"
@@ -78,6 +80,7 @@ namespace basecross {
 			// BGM‚ÌÄ¶
 
 			//Generator‚Ì¶¬
+			AddGameObject<EnemyGeneratorObject>();
 
 			//Map‚Ì“Ç‚İ‚İ
 			auto mapOffset = Vec3(0.0, -0.5f, 0.0f);
