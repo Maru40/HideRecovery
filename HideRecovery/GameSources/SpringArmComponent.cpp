@@ -13,7 +13,7 @@ namespace basecross
 			XMConvertToRadians(-90.0f),      //初期回転位置
 			3.0f,                            //Y軸回転スピード
 			3.0f,                            //Z軸回転スピード
-			XMConvertToRadians(30.0f),       //Y軸の最大値
+			XMConvertToRadians(10.0f),       //Y軸の最大値
 			XMConvertToRadians(10.0f),      //Y軸の最小値
 			100.0f)                          //追従スピード
 	{}
@@ -141,27 +141,6 @@ namespace basecross
 		}
 		
 		m_childTransform->SetPosition(transform->GetPosition() + CalculateDirect() * maxHitData.length);
-
-		//デバッグ
-		auto delta = App::GetApp()->GetElapsedTime();
-		auto debugSpeed = 3.0f;
-		if (PlayerInputer::IsX()) {
-			m_armRange += +debugSpeed * delta;
-		}
-
-		if (PlayerInputer::IsY()) {
-			m_armRange += -debugSpeed * delta;
-		}
-
-		if (PlayerInputer::IsXUp() || PlayerInputer::IsYUp()) {
-			DebugObject::AddString(L"ArmRange: ", false);
-			DebugObject::AddValue(m_armRange);
-		}
-
-		if (PlayerInputer::IsBDown()) {
-			DebugObject::AddString(L"ArmRange: ", false);
-			DebugObject::AddValue(m_armRange);
-		}
 	}
 
 	Vec3 SpringArmComponent::CalculateDirect() {

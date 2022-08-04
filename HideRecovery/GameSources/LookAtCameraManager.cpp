@@ -17,7 +17,7 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 
 	LookAtCameraManager::Parametor::Parametor()
-		:Parametor(Vec3(0.0f, 0.5f, 0.0f))
+		:Parametor(Vec3(0.0f, 1.0f, 0.0f))
 	{}
 
 	LookAtCameraManager::Parametor::Parametor(const Vec3& centerOffset)
