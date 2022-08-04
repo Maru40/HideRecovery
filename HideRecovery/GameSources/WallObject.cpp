@@ -30,6 +30,7 @@ namespace basecross {
 		auto col = AddComponent<CollisionObb>();
 		col->SetFixed(true);
 		AddTag(L"T_Obstacle");
+		AddTag(L"Wall");
 	}
 
 }
