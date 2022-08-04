@@ -46,6 +46,8 @@
 #include "NumbersObject.h"
 #include "NumbersCtrl.h"
 
+#include "CameraHelper.h"
+
 using namespace basecross::Enemy;
 
 namespace basecross {
@@ -76,6 +78,8 @@ namespace basecross {
 
 			//ビューとライトの作成
 			CreateViewLight();
+
+			//Instantiate<CameraObject>();
 
 			// BGMの再生
 
