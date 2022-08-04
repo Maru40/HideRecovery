@@ -12,7 +12,9 @@
 
 namespace basecross {
 
-	//パラメータ----------------------------------------------------------------------------------
+	//--------------------------------------------------------------------------------------
+	/// パラメータ
+	//--------------------------------------------------------------------------------------
 
 	LookAtCameraManager::Parametor::Parametor()
 		:Parametor(Vec3(0.0f, 0.5f, 0.0f))
@@ -26,7 +28,9 @@ namespace basecross {
 		:speed(speed), centerOffset(centerOffset)
 	{}
 
-	//--------------------------------------------------------------------------------------------
+	//--------------------------------------------------------------------------------------
+	/// カメラの視点管理クラス本体
+	//--------------------------------------------------------------------------------------
 
 	LookAtCameraManager::LookAtCameraManager(const std::shared_ptr<GameObject>& objPtr)
 		:LookAtCameraManager(objPtr, nullptr)
@@ -63,7 +67,8 @@ namespace basecross {
 		position += m_param.centerOffset;  //playerが足元がpivotになっているためCenter位置を変える。  
 		float StartTime = 0.0f;
 		float EndTime = 1.0f;
-		auto setPosition = Lerp::CalculateLerp(camera->GetAt(), position, StartTime, EndTime, delta * m_param.speed, Lerp::rate::Linear);
+		//auto setPosition = Lerp::CalculateLerp(camera->GetAt(), position, StartTime, EndTime, delta * m_param.speed, Lerp::rate::Linear);
+		auto setPosition = position;
 
 		camera->SetAt(setPosition);
 	}

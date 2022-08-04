@@ -62,7 +62,7 @@ namespace basecross
 		static const auto& keyBoard = inputDevice->GetKeyBoard();
 		static const auto& xinput = inputDevice->GetXInputGamePad();
 
-		Vec2 rotation;
+		Vec2 rotation(0.0f);
 
 		rotation.x += xinput.GetRightThumb().x;
 		rotation.y += xinput.GetRightThumb().y;

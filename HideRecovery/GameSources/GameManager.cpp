@@ -40,6 +40,10 @@ namespace basecross {
 		:maru::SingletonComponent<GameManager>(objPtr), m_paramPtr(new Parametor())
 	{}
 
+	void GameManager::OnCreate() {
+		ChangeState(State::Game);
+	}
+
 	void GameManager::OnUpdate() {
 		switch (m_paramPtr->state)
 		{

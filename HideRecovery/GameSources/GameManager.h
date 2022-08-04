@@ -30,7 +30,7 @@ namespace basecross {
 		{
 			Start,     //スタート
 			Game,      //ゲーム中
-			Clear,       //クリア
+			Clear,     //クリア
 			Result,    //result
 			GameOver,  //ゲームオーバー
 		};
@@ -52,6 +52,7 @@ namespace basecross {
 		/// <param name="objPtr">このクラスが所有するゲームオブジェクト</param>
 		GameManager(const std::shared_ptr<GameObject>& objPtr);
 
+		void OnCreate() override;
 		void OnUpdate() override;
 
 	private:

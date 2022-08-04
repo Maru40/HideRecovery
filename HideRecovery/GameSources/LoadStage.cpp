@@ -27,7 +27,8 @@ namespace basecross
 
 	const std::vector<LoadStage::ResourceLoadData> LoadStage::m_texureResourceLoadDatas =
 	{
-		ResourceLoadData(L"Floor_TX", L"GrassGround.png"),
+		ResourceLoadData(L"Floor_TX", L"floorRock_TX.png"),
+		ResourceLoadData(L"Wall01_TX", L"Wall01_TX.png"),
 
 		//ResourceLoadData(L"gauge", L"Gauge.png"),
 		//ResourceLoadData(L"clear", L"StageClear.png"),
@@ -129,7 +130,7 @@ namespace basecross
 		
 		//ModelResourceLoadData(L"Player_Mesh",  L"Player_Mesh.bmf", ModelType::BoneMulti,  L"Player\\"),
 		
-		
+		ModelResourceLoadData(L"rack",  L"tana.bmf", ModelType::Static,  L"StageObject\\"),
 	};
 
 	LoadStage::LoadStage(const std::wstring& nextStageKey) :

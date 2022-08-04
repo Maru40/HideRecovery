@@ -1,17 +1,17 @@
 #include"PlayerMover.h"
 #include"PlayerInputer.h"
 
+#include "MaruUtility.h"
+
 namespace basecross
 {
 	PlayerMover::PlayerMover(std::shared_ptr<GameObject>& owner) :
 		Component(owner),
-		m_standMoveSpeed(4.0f),
+		m_standMoveSpeed(7.5f),
 		m_crouchMoveSpeed(1.5f),
 		m_dashPower(1.5f),
 		m_dashUseWeight(0.10f)
-	{
-
-	}
+	{ }
 
 	void PlayerMover::SetMoveSpeed(const float moveSpeed)
 	{
@@ -46,11 +46,13 @@ namespace basecross
 
 	void PlayerMover::OnStart()
 	{
-		m_camera = GetStage()->GetView()->GetTargetCamera();
+		//m_camera = GetStage()->GetView()->GetTargetCamera();
 	}
 
 	void PlayerMover::OnUpdate()
 	{
+		m_camera = GetStage()->GetView()->GetTargetCamera();
+
 		Vec3 inputVector;
 
 		auto inputMove = PlayerInputer::GetMoveDirection();
@@ -83,7 +85,7 @@ namespace basecross
 		auto moveForward = forward * inputVector.z;
 		auto moveRight = right * inputVector.x;
 
-		Vec3 vec = (moveForward + moveRight);
+		//Vec3 comvertVec = maru::Utility::CalcuCameraVec((moveForward + moveRight), m_camera.GetShard(), GetGameObject());
 		Vec3 moveVector = (moveForward + moveRight) * App::GetApp()->GetElapsedTime() * m_standMoveSpeed;
 		
 		auto position = transform->GetPosition();

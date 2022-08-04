@@ -40,17 +40,19 @@
 
 #include "TaskList.h"
 
+#include "EnemyGeneratorObject.h"
+
 #include "DebugNumber.h"
 #include "NumbersObject.h"
 #include "NumbersCtrl.h"
+
+#include "CameraHelper.h"
 
 using namespace basecross::Enemy;
 
 namespace basecross {
 
 	wstring MainStage::sm_loadMapName = L"StageS1_Copy.csv";
-
-	const WORD ResetCommand = XINPUT_GAMEPAD_RIGHT_SHOULDER + XINPUT_GAMEPAD_LEFT_SHOULDER + XINPUT_GAMEPAD_START + XINPUT_GAMEPAD_BACK;
 
 	void MainStage::CreateViewLight() {
 		CreateStartCamera(sm_loadMapName);
@@ -65,11 +67,6 @@ namespace basecross {
 
 	void MainStage::OnCreate() {
 		try {
-			GameStageBase::OnCreate();
-
-			//ステージの設定
-			auto scene = App::GetApp()->GetScene<Scene>();
-			scene->SetStageName(sm_loadMapName);
 
 			// スカイボックス
 			//AddGameObject<Skybox2>();
@@ -77,17 +74,25 @@ namespace basecross {
 			//ビューとライトの作成
 			CreateViewLight();
 
+			auto cameraObj = Instantiate<CameraObject>();
+
+			GameStageBase::OnCreate();
+
+			//ステージの設定
+			auto scene = App::GetApp()->GetScene<Scene>();
+			scene->SetStageName(sm_loadMapName);
+
 			// BGMの再生
 
 			//Generatorの生成
+			AddGameObject<EnemyGeneratorObject>();
 
 			//Mapの読み込み
 			auto mapOffset = Vec3(0.0, -0.5f, 0.0f);
 			CreateMap(sm_loadMapName, mapOffset);
 
 			//デバッグ
-			//AddGameObject<GameObject>()->AddComponent<PNTStaticDraw>()->SetMeshResource(L"DEFAULT_CUBE");
-
+			AddGameObject<DebugObject>();
 		}
 		catch (...) {
 			throw;
