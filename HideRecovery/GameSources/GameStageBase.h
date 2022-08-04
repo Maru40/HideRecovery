@@ -32,16 +32,18 @@ namespace basecross {
 		//--------------------------------------------------------------------------------------
 
 		//メインカメラ
-		std::shared_ptr<SingleView> m_mainView;                    //ビュー
-		std::shared_ptr<MainCamera> m_mainCamera;                  //カメラ
-		std::shared_ptr<MainCameraObject> m_mainCameraObject;      //オブジェクト
+		//std::shared_ptr<SingleView> m_mainView;                    //ビュー
+		//std::shared_ptr<MainCamera> m_mainCamera;                  //カメラ
+		//std::shared_ptr<MainCameraObject> m_mainCameraObject;      //オブジェクト
+		std::shared_ptr<SingleView> m_mainView;						//ビュー
+		std::shared_ptr<Camera> m_mainCamera;						//カメラ
 
 		//スタートカメラ
-		std::shared_ptr<SingleView> m_startView;                   //ビュー
-		std::shared_ptr<StartCamera> m_startCamera;	               //カメラ
+		std::shared_ptr<SingleView> m_startView;					//ビュー
+		std::shared_ptr<StartCamera> m_startCamera;					//カメラ
 													 
 		//レンダーターゲット
-		std::shared_ptr<SlimeRenderTarget> m_slimeRenderTarget;    //スライム用のレンダーターゲット
+		std::shared_ptr<SlimeRenderTarget> m_slimeRenderTarget;		//スライム用のレンダーターゲット
 
 		/// <summary>
 		/// メインカメラの生成
@@ -135,13 +137,13 @@ namespace basecross {
 		/// メインカメラに切り替え
 		/// </summary>
 		/// <returns>メインカメラ</returns>
-		std::shared_ptr<MainCamera> ChangeMainCamera();
+		std::shared_ptr<Camera> ChangeMainCamera();
 
 		/// <summary>
 		/// メインカメラオブジェクトの取得
 		/// </summary>
 		/// <returns>メインカメラオブジェクト</returns>
-		std::shared_ptr<MainCameraObject> GetMainCameraObject() const;
+		//std::shared_ptr<MainCameraObject> GetMainCameraObject() const;
 
 		/// <summary>
 		/// スタートカメラに切り替え

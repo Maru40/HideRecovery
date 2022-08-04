@@ -38,19 +38,28 @@ namespace basecross {
 
 	void GameStageBase::CreateMainCamera()
 	{
-		const Vec3 eye(0.0f, 5.0f, -5.0f);
-		const Vec3 at(0.0f);
+		//const Vec3 eye(0.0f, 5.0f, -5.0f);
+		//const Vec3 at(0.0f);
 
-		//メインカメラの実装
-		m_mainView = ObjectFactory::Create<SingleView>(GetThis<Stage>());
-		m_mainCamera = ObjectFactory::Create<MainCamera>(m_player.GetShard());
+		////メインカメラの実装
+		//m_mainView = ObjectFactory::Create<SingleView>(GetThis<Stage>());
+		//m_mainCamera = ObjectFactory::Create<MainCamera>(m_player.GetShard());
+		//m_mainView->SetCamera(m_mainCamera);
+		//m_mainCamera->SetEye(eye);
+		//m_mainCamera->SetAt(at);
+		//m_mainCameraObject = AddGameObject<MainCameraObject>(m_player.GetShard());
+		//auto mainTrans = m_mainCameraObject->GetComponent<Transform>();
+		//mainTrans->SetPosition(eye);
+		//m_mainCameraObject->SetUpdateActive(false); 
+
+		const Vec3 eye(0.0f, +15.0f, -30.0f);
+		const Vec3 at(0.0f);
+		m_mainView = CreateView<SingleView>();
+		//ビューのカメラの設定
+		m_mainCamera = ObjectFactory::Create<Camera>();
 		m_mainView->SetCamera(m_mainCamera);
 		m_mainCamera->SetEye(eye);
 		m_mainCamera->SetAt(at);
-		m_mainCameraObject = AddGameObject<MainCameraObject>(m_player.GetShard());
-		auto mainTrans = m_mainCameraObject->GetComponent<Transform>();
-		mainTrans->SetPosition(eye);
-		m_mainCameraObject->SetUpdateActive(false); 
 	}
 
 	void GameStageBase::CreateStartCamera(const wstring& stageName) {
@@ -138,21 +147,26 @@ namespace basecross {
 		return m_player.GetShard();
 	}
 
-	std::shared_ptr<MainCamera> GameStageBase::ChangeMainCamera(){
-		auto camera = m_mainView->GetCamera();
-		if (camera) {
-			camera->SetCameraObject(m_mainCameraObject);
-		}
+	std::shared_ptr<Camera> GameStageBase::ChangeMainCamera(){
+		//auto camera = m_mainView->GetCamera();
+		//if (camera) {
+		//	camera->SetCameraObject(m_mainCameraObject);
+		//}
 
+		//SetView(m_mainView);
+
+		//m_mainCameraObject->SetUpdateActive(true);
+		//return dynamic_pointer_cast<MainCamera>(camera);
+
+		auto camera = m_mainView->GetCamera();
 		SetView(m_mainView);
 
-		m_mainCameraObject->SetUpdateActive(true);
-		return dynamic_pointer_cast<MainCamera>(camera);
+		return camera;
 	}
 
-	std::shared_ptr<MainCameraObject> GameStageBase::GetMainCameraObject() const {
-		return m_mainCameraObject;
-	}
+	//std::shared_ptr<MainCameraObject> GameStageBase::GetMainCameraObject() const {
+	//	return m_mainCameraObject;
+	//}
 
 	std::shared_ptr<StartCamera> GameStageBase::ChangeStartCamera() {
 		auto camera = m_startView->GetCamera();
