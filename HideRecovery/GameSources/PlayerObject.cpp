@@ -27,9 +27,11 @@ namespace basecross {
 
 		transform->SetScale(Vec3(1.0f, 1.5f, 1.0f));
 
+		AddComponent<CollisionObb>();
 		AddComponent<PlayerMover>();
 		AddComponent<RotationController>();
 		AddComponent<PlayerController>();
+		AddComponent<Gravity>();
 	}
 
 }
