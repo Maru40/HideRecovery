@@ -67,11 +67,6 @@ namespace basecross {
 
 	void MainStage::OnCreate() {
 		try {
-			GameStageBase::OnCreate();
-
-			//ステージの設定
-			auto scene = App::GetApp()->GetScene<Scene>();
-			scene->SetStageName(sm_loadMapName);
 
 			// スカイボックス
 			//AddGameObject<Skybox2>();
@@ -79,7 +74,13 @@ namespace basecross {
 			//ビューとライトの作成
 			CreateViewLight();
 
-			//Instantiate<CameraObject>();
+			auto cameraObj = Instantiate<CameraObject>();
+
+			GameStageBase::OnCreate();
+
+			//ステージの設定
+			auto scene = App::GetApp()->GetScene<Scene>();
+			scene->SetStageName(sm_loadMapName);
 
 			// BGMの再生
 
@@ -90,6 +91,8 @@ namespace basecross {
 			auto mapOffset = Vec3(0.0, -0.5f, 0.0f);
 			CreateMap(sm_loadMapName, mapOffset);
 
+			//デバッグ
+			AddGameObject<DebugObject>();
 		}
 		catch (...) {
 			throw;
