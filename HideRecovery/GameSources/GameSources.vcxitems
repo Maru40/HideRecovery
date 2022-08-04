@@ -24,9 +24,14 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CollisionObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)EffectBase.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)EffectManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)EnemyGeneratorObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)EnemyStateNode_Plowling.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)EnemyStatorBase.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)FadeSprite.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)FieldImpactMap.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)GraphAstar.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Hero.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)HeroObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ImpactManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)I_Impact.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)I_KnockBack.h" />
@@ -61,6 +66,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)SoleImpactMap.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)SpriteObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)StartCamera.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Stator_Hero.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)SubAnimatorBase.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)TactileCtrl.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)TactileObject.h" />
@@ -189,7 +195,12 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)CollisionObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)EffectBase.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)EffectManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)EnemyGeneratorObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)EnemyStateNode_Plowling.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)EnemyStatorBase.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)FieldImpactMap.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Hero.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)HeroObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ImpactManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)I_Impact.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LoadCSV.cpp" />
@@ -243,6 +254,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)SoleImpactMap.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)SpriteObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)StartCamera.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Stator_Hero.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)SubAnimatorBase.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)TactileCtrl.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)TactileObject.cpp" />

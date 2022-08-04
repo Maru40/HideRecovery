@@ -532,12 +532,6 @@
     <Filter Include="Maruyama\Player\Object">
       <UniqueIdentifier>{eb05b810-df4c-47f8-a8a2-1b32daddc062}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Maruyama\Utility\SlowTimerManager">
-      <UniqueIdentifier>{6ee2f6dd-3299-4208-94e2-3149200ef70f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Maruyama\Utility\SoundManager">
-      <UniqueIdentifier>{bc71c8c5-7141-4225-875d-9909dd940451}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Maruyama\Utility\Effect">
       <UniqueIdentifier>{dbc4e0c5-2376-4792-9bd5-790ea81c3ae8}</UniqueIdentifier>
     </Filter>
@@ -570,6 +564,42 @@
     </Filter>
     <Filter Include="Maruyama\Player\Component\PlayerController">
       <UniqueIdentifier>{e3afa6c2-884a-43f2-a991-5aecbb9e73a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\Object\HeroObject">
+      <UniqueIdentifier>{50da56f8-cb68-44fb-9b50-455df1fec280}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\Component\EachEnemy">
+      <UniqueIdentifier>{e565e0ee-9df9-4032-bb0c-e20da1332512}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\Component\EachEnemy\Hero">
+      <UniqueIdentifier>{62256d80-0e1e-4b39-8814-9a20fd2ed25f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\Component\EachEnemy\Common">
+      <UniqueIdentifier>{ccdb4bfd-0bb2-42a4-960f-4dc02c2b9a85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\Component\EachEnemy\Common\Stator">
+      <UniqueIdentifier>{93633b24-a9c1-46a3-8264-385c5815b594}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Utility\SingletonComponent">
+      <UniqueIdentifier>{a624d904-ed44-4127-92eb-d28b44b9e7b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Utility\SingletonComponent\SlowTimerManager">
+      <UniqueIdentifier>{6ee2f6dd-3299-4208-94e2-3149200ef70f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Utility\SingletonComponent\SoundManager">
+      <UniqueIdentifier>{bc71c8c5-7141-4225-875d-9909dd940451}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\Component\EachEnemy\Common\Stator\State">
+      <UniqueIdentifier>{f546cf15-883a-4dbf-ada7-d567e054b0fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\Component\EachEnemy\Common\Stator\State\Plowling">
+      <UniqueIdentifier>{a29fd000-2d58-45fc-80e2-f4a3a65b164c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\Component\EachEnemy\Hero\Stator">
+      <UniqueIdentifier>{a871ca39-dc2e-4987-b7f5-9ec3ab19df9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Generator\Object">
+      <UniqueIdentifier>{b97609dc-af44-4b8b-90b8-c45ed94eb269}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -733,7 +763,7 @@
       <Filter>Patch\PlayerMover</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)SlowTimerManager.h">
-      <Filter>Maruyama\Utility\SlowTimerManager</Filter>
+      <Filter>Maruyama\Utility\SingletonComponent\SlowTimerManager</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)OriginalMeshStageObject.h">
       <Filter>Maruyama\StageObject\OriginalMeshStageObject</Filter>
@@ -802,7 +832,7 @@
       <Filter>Maruyama\Utility\Component\HitStopManager</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)SoundManager.h">
-      <Filter>Maruyama\Utility\SoundManager</Filter>
+      <Filter>Maruyama\Utility\SingletonComponent\SoundManager</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)CollisionAction.h">
       <Filter>Maruyama\Utility\Component\CollisionAction</Filter>
@@ -1066,6 +1096,24 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)PlayerController.h">
       <Filter>Maruyama\Player\Component\PlayerController</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)HeroObject.h">
+      <Filter>Maruyama\Enemy\Object\HeroObject</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)EnemyStatorBase.h">
+      <Filter>Maruyama\Enemy\Component\EachEnemy\Common\Stator</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)EnemyStateNode_Plowling.h">
+      <Filter>Maruyama\Enemy\Component\EachEnemy\Common\Stator\State\Plowling</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Stator_Hero.h">
+      <Filter>Maruyama\Enemy\Component\EachEnemy\Hero\Stator</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Hero.h">
+      <Filter>Maruyama\Enemy\Component\EachEnemy\Hero</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)EnemyGeneratorObject.h">
+      <Filter>Maruyama\Generator\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -1192,7 +1240,7 @@
       <Filter>Patch\PlayerMover</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)SlowTimerManager.cpp">
-      <Filter>Maruyama\Utility\SlowTimerManager</Filter>
+      <Filter>Maruyama\Utility\SingletonComponent\SlowTimerManager</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)OriginalMeshStageObject.cpp">
       <Filter>Maruyama\StageObject\OriginalMeshStageObject</Filter>
@@ -1249,7 +1297,7 @@
       <Filter>Maruyama\Utility\MaruUtility\Singleton</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)SoundManager.cpp">
-      <Filter>Maruyama\Utility\SoundManager</Filter>
+      <Filter>Maruyama\Utility\SingletonComponent\SoundManager</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)CollisionAction.cpp">
       <Filter>Maruyama\Utility\Component\CollisionAction</Filter>
@@ -1498,6 +1546,24 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)PlayerController.cpp">
       <Filter>Maruyama\Player\Component\PlayerController</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)HeroObject.cpp">
+      <Filter>Maruyama\Enemy\Object\HeroObject</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)EnemyStatorBase.cpp">
+      <Filter>Maruyama\Enemy\Component\EachEnemy\Common\Stator</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)EnemyStateNode_Plowling.cpp">
+      <Filter>Maruyama\Enemy\Component\EachEnemy\Common\Stator\State\Plowling</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Stator_Hero.cpp">
+      <Filter>Maruyama\Enemy\Component\EachEnemy\Hero\Stator</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Hero.cpp">
+      <Filter>Maruyama\Enemy\Component\EachEnemy\Hero</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)EnemyGeneratorObject.cpp">
+      <Filter>Maruyama\Generator\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
