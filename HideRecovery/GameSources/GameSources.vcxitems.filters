@@ -601,6 +601,18 @@
     <Filter Include="Maruyama\Generator\Object">
       <UniqueIdentifier>{b97609dc-af44-4b8b-90b8-c45ed94eb269}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Patch\basecross\CameraHelper\CameraRotate">
+      <UniqueIdentifier>{b6d2318e-3b54-43cc-85ae-0f609cb548ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Patch\basecross\CameraHelper\PlayerCameraMover">
+      <UniqueIdentifier>{f295b7ec-c695-4ddb-81e8-7166510ddf2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Patch\basecross\CameraHelper\ChasingTarget">
+      <UniqueIdentifier>{3ce372f0-de9d-454d-aeb2-01f62e983004}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Patch\basecross\CameraHelper\SpringArmComponent">
+      <UniqueIdentifier>{a4183315-d383-420e-bef7-9c3d686aa08a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1114,6 +1126,18 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)EnemyGeneratorObject.h">
       <Filter>Maruyama\Generator\Object</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CameraRotater.h">
+      <Filter>Patch\basecross\CameraHelper\CameraRotate</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)PlayerCameraMover.h">
+      <Filter>Patch\basecross\CameraHelper\PlayerCameraMover</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ChasingTarget.h">
+      <Filter>Patch\basecross\CameraHelper\ChasingTarget</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)SpringArmComponent.h">
+      <Filter>Patch\basecross\CameraHelper\SpringArmComponent</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -1564,6 +1588,15 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)EnemyGeneratorObject.cpp">
       <Filter>Maruyama\Generator\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CameraRotater.cpp">
+      <Filter>Patch\basecross\CameraHelper\CameraRotate</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)PlayerCameraMover.cpp">
+      <Filter>Patch\basecross\CameraHelper\PlayerCameraMover</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)SpringArmComponent.cpp">
+      <Filter>Patch\basecross\CameraHelper\SpringArmComponent</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
