@@ -66,10 +66,14 @@ namespace basecross {
 		//床生成
 		auto floors = map->CreateObject<FixedBox>(L"Floor", offset);
 		map->CreateObject<WallObject>(L"Block", offset);
+		vector<wstring> wallObjectNames = {
+			L"OutWall", L"UpperWall", L"LowerWall", L"RoomBorderWall"
+		};
+		auto wallObjets = map->CreateObjects<WallObject>(wallObjectNames, offset);
 		
 		//PNTStaticDrawのオリジナルメッシュのオブジェクトの生成
 		vector<wstring> originalMeshStageObjectNames = {
-			L"tree_2", L"tree_dead3"
+			L"rack" //L"tree_2", L"tree_dead3"
 		};
 		auto objects = map->CreateObjects<OriginalMeshStageObject<BcPNTStaticModelDraw>>(originalMeshStageObjectNames, offset);
 		
@@ -119,7 +123,7 @@ namespace basecross {
 			EventSystem::GetInstance(GetThis<Stage>())->SetBasicInputer(PlayerInputer::GetInstance());
 
 			AddGameObject<GameManagerObject>();
-			m_player = AddGameObject<PlayerObject>();
+			m_player = Instantiate<PlayerObject>(Vec3(0.0f, 1.0f, 0.0f), Quat::Identity());
 		}
 		catch (...) {
 			throw;
