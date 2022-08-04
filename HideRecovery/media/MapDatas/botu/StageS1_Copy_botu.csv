@@ -1,0 +1,3 @@
+name, PosX, PosY, PosZ, ScaleX, ScaleY, ScaleZ, RotX, RotY, RotZ,Texture
+Floor,0,0,0,51,0.1,51,0,0,0,
+rack,0,0,2,1,1,1,0,0,0,
