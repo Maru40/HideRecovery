@@ -54,6 +54,18 @@ namespace basecross
 
 		static bool IsDownChoices();
 
+		/// <summary>
+		/// アイテム獲得ボタン
+		/// </summary>
+		/// <returns></returns>
+		static bool IsItemAcquisition();
+
+		/// <summary>
+		/// 隠すアイテムを置くボタン
+		/// </summary>
+		/// <returns></returns>
+		static bool IsPutHideItem();
+
 		static bool IsDash();
 		static bool IsJetPumpPush();
 		static bool IsJetPumpUp();

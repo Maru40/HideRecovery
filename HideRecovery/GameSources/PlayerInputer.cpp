@@ -169,6 +169,16 @@ namespace basecross
 			App::GetApp()->GetMyInputDevice()->GetXInputGamePad().IsInputDown(XInputCode::Down);
 	}
 
+	bool PlayerInputer::IsItemAcquisition() {
+		return App::GetApp()->GetMyInputDevice()->GetKeyBoard().IsInputDown(KeyCode::F) ||
+			App::GetApp()->GetMyInputDevice()->GetXInputGamePad().IsInputDown(XInputCode::A);
+	}
+
+	bool PlayerInputer::IsPutHideItem() {
+		return App::GetApp()->GetMyInputDevice()->GetKeyBoard().IsInputDown(KeyCode::E) ||
+			App::GetApp()->GetMyInputDevice()->GetXInputGamePad().IsInputDown(XInputCode::X);
+	}
+
 	bool PlayerInputer::IsDash() {
 		return App::GetApp()->GetMyInputDevice()->GetKeyBoard().IsInputPush(KeyCode::LeftShift); //|| 
 			//App::GetApp()->GetMyInputDevice()->GetXInputGamePad().IsInputDown(XInputCode::LeftShoulder);
