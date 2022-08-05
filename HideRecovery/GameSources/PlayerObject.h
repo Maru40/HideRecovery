@@ -1,4 +1,4 @@
-#pragma once
+
 /*!
 @file PlayerObject.h
 @brief PlayerObject‚È‚Ç
