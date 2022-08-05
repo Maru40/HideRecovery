@@ -566,6 +566,21 @@ namespace basecross {
 			}
 
 			/// <summary>
+			/// すでに配列に入っているか判断
+			/// </summary>
+			/// <returns>すでに同じものが入っているならtrue</returns>
+			template<class T>
+			static bool IsSameVec(const vector<T>& vec, const T& newPtr) {
+				for (auto& t : vec) {
+					if (t == newPtr) {
+						return true;
+					}
+				}
+
+				return false;
+			}
+
+			/// <summary>
 			/// 配列を別の型にキャストして入れなおして返す。
 			/// </summary>
 			/// <param name="vector">入れなおしたい配列</param>
@@ -592,6 +607,21 @@ namespace basecross {
 			template<class T>
 			static std::vector<std::weak_ptr<T>> ConvertArraySharedToWeak(const std::vector<std::shared_ptr<T>>& vector) {
 				std::vector<std::weak_ptr<T>> result;
+
+				for (auto& value : vector) {
+					result.push_back(value);
+				}
+
+				return result;
+			}
+
+			/// <summary>
+			/// shared_ptrの配列をweak_ptr配列に変換する
+			/// </summary>
+			/// <param name="vector">変換したい配列</param>
+			template<class T>
+			static std::vector<ex_weak_ptr<T>> ConvertArraySharedToExweak(const std::vector<std::shared_ptr<T>>& vector) {
+				std::vector<ex_weak_ptr<T>> result;
 
 				for (auto& value : vector) {
 					result.push_back(value);
