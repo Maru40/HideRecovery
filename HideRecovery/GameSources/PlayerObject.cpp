@@ -42,7 +42,7 @@ namespace basecross {
 			Vec3(0.0f, -0.5f, 0.0f)
 		);
 
-		auto draw = AddComponent<PNTBoneModelDraw>();
+		auto draw = AddComponent<PNTStaticModelDraw>();
 		draw->SetMultiMeshResource(L"Player_Mesh");
 		draw->SetMeshToTransformMatrix(spanMat);
 		SetAlphaActive(true);
