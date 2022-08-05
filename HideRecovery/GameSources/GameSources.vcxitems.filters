@@ -613,6 +613,36 @@
     <Filter Include="Patch\basecross\CameraHelper\SpringArmComponent">
       <UniqueIdentifier>{a4183315-d383-420e-bef7-9c3d686aa08a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Item">
+      <UniqueIdentifier>{431b67ee-88a2-490f-976a-615bc268972e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Item\Object">
+      <UniqueIdentifier>{10630c71-319d-4de9-aef0-00bf9547b950}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Item\Component">
+      <UniqueIdentifier>{7828d06c-8471-4956-a987-9a3b17a67227}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Item\Component\HideItem">
+      <UniqueIdentifier>{6459b9ce-4c65-45b6-9b5b-04eb2e580257}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Item\Object\HideItemObject">
+      <UniqueIdentifier>{224e8ac4-f59c-44d5-9c96-5e34e73b0ad0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Player\Component\ItemBag">
+      <UniqueIdentifier>{a60518bc-001b-40e2-9ba9-8ce25e3311d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Player\Component\ItemAcquisitionManager">
+      <UniqueIdentifier>{4c3c50b3-271f-475c-b99e-a87cb0baa5ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Player\Component\OwnHideItemManager">
+      <UniqueIdentifier>{b849beee-3fb3-4b70-a949-8bc6712d0de3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\StageObject\HidePlaceObject">
+      <UniqueIdentifier>{cf7ca8eb-d6c2-4428-9357-10231d58d3f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\StageObject\HidePlaceObject\HidePlace">
+      <UniqueIdentifier>{32fdea72-fc83-491f-baa6-3e690348c3f9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1138,6 +1168,27 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)SpringArmComponent.h">
       <Filter>Patch\basecross\CameraHelper\SpringArmComponent</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)HideItem.h">
+      <Filter>Maruyama\Item\Component\HideItem</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)HideItemObject.h">
+      <Filter>Maruyama\Item\Object\HideItemObject</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ItemBag.h">
+      <Filter>Maruyama\Player\Component\ItemBag</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ItemBase.h">
+      <Filter>Maruyama\Item\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ItemAcquisitionManager.h">
+      <Filter>Maruyama\Player\Component\ItemAcquisitionManager</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)OwnHideItemManager.h">
+      <Filter>Maruyama\Player\Component\OwnHideItemManager</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)HidePlace.h">
+      <Filter>Maruyama\StageObject\HidePlaceObject\HidePlace</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -1597,6 +1648,27 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)SpringArmComponent.cpp">
       <Filter>Patch\basecross\CameraHelper\SpringArmComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)HideItem.cpp">
+      <Filter>Maruyama\Item\Component\HideItem</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)HideItemObject.cpp">
+      <Filter>Maruyama\Item\Object\HideItemObject</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ItemBag.cpp">
+      <Filter>Maruyama\Player\Component\ItemBag</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ItemAcquisitionManager.cpp">
+      <Filter>Maruyama\Player\Component\ItemAcquisitionManager</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ItemBase.cpp">
+      <Filter>Maruyama\Item\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)OwnHideItemManager.cpp">
+      <Filter>Maruyama\Player\Component\OwnHideItemManager</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)HidePlace.cpp">
+      <Filter>Maruyama\StageObject\HidePlaceObject\HidePlace</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
