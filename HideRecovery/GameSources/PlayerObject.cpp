@@ -22,6 +22,10 @@
 
 #include "LookAtCameraManager.h"
 
+#include "ItemBag.h"
+#include "ItemAcquisitionManager.h"
+#include "OwnHideItemManager.h"
+
 namespace basecross {
 
 	PlayerObject::PlayerObject(const std::shared_ptr<Stage>& stage):
@@ -51,6 +55,12 @@ namespace basecross {
 		AddComponent<RotationController>();
 		AddComponent<PlayerController>();
 		AddComponent<Gravity>();
+		
+		AddComponent<ItemBag>();
+		AddComponent<ItemAcquisitionManager>();
+		AddComponent<OwnHideItemManager>();
+
+		//カメラセッティング----------------------------------------------------------
 
 		auto springArm = GetStage()->Instantiate<GameObject>(Vec3(), Quat());
 
