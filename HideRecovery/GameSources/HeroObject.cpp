@@ -42,8 +42,18 @@ namespace basecross {
 		}
 
 		void HeroObject::SettingModel() {
-			auto draw = AddComponent<PNTStaticDraw>();
-			draw->SetMeshResource(L"DEFAULT_CUBE");
+			Mat4x4 spanMat;
+			Vec3 scale = Vec3(0.5f);
+			spanMat.affineTransformation(
+				scale,
+				Vec3(0.0f),
+				Vec3(0.0f, XM_PI, 0.0f),
+				Vec3(0.0f, -0.5f, 0.0f)
+			);
+
+			auto draw = AddComponent<DrawComp>();
+			draw->SetMultiMeshResource(L"Player_Mesh");
+			draw->SetMeshToTransformMatrix(spanMat);
 
 			draw->SetDiffuse(Col4(1.0f, 0.0f, 0.0f, 1.0f));
 
