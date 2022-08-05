@@ -34,6 +34,10 @@
 
 #include "FieldImpactMap.h"
 
+#include "ItemAcquisitionManager.h"
+
+#include "HidePlace.h"
+
 namespace basecross {
 
 	void GameStageBase::CreateMainCamera()
@@ -85,6 +89,10 @@ namespace basecross {
 			L"rack" //L"tree_2", L"tree_dead3"
 		};
 		auto objects = map->CreateObjects<OriginalMeshStageObject<BcPNTStaticModelDraw>>(originalMeshStageObjectNames, offset);
+		//デバッグでHidePlaceをつける
+		for (auto& object : objects) {
+			object->AddComponent<HidePlace>(HidePlace::Parametor(Vec3(0.0f, 1.85f, 0.0f)));
+		}
 		
 		//トゥーンオブジェクトの生成
 		vector<wstring> originalMeshToonObjects = {
@@ -132,7 +140,13 @@ namespace basecross {
 			EventSystem::GetInstance(GetThis<Stage>())->SetBasicInputer(PlayerInputer::GetInstance());
 
 			AddGameObject<GameManagerObject>();
-			m_player = Instantiate<PlayerObject>(Vec3(0.0f, 1.0f, 0.0f), Quat::Identity());
+			m_player = Instantiate<PlayerObject>(Vec3(20.0f, 1.0f, 0.0f), Quat::Identity());
+
+			//for (int i = 0; i < 7; i++) {
+			//	auto object = Instantiate<GameObject>(Vec3(20.0f, 1.0f, 2.0f + i * 2.0f), Quat::Identity());
+			//	object->AddComponent<ItemAcquisitionManager>();
+			//}
+
 		}
 		catch (...) {
 			throw;

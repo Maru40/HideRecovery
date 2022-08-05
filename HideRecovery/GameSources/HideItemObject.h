@@ -1,7 +1,6 @@
-
 /*!
-@file PlayerObject.h
-@brief PlayerObjectなど
+@file HideItemObject.h
+@brief HideItemObjectなど
 担当：丸山裕喜
 */
 
@@ -11,14 +10,22 @@
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
-	/// プレイヤーオブジェクト
+	/// 隠すアイテムオブジェクト
 	//--------------------------------------------------------------------------------------
-	class PlayerObject : public GameObject
+	class HideItemObject : public GameObject
 	{
 	public:
-		PlayerObject(const std::shared_ptr<Stage>& stage);
+		using DrawComp = PNTStaticDraw;
+
+	private:
+
+	public:
+		HideItemObject(const std::shared_ptr<Stage>& stage);
 
 		void OnCreate() override;
+
+	private:
+		void SettingModel();
 
 	};
 

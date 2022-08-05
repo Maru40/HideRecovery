@@ -81,7 +81,10 @@ namespace basecross
 	}
 
 	void SpringArmComponent::OnCreate() {
-		//m_armRange = 0;
+		CheckRimitY();  //äpìxêßå¿
+		m_param.armVec.y = sinf(m_param.radY);
+		m_param.armVec.x = cosf(m_param.radXZ);
+		m_param.armVec.z = sinf(m_param.radXZ);
 	}
 
 	void SpringArmComponent::OnUpdate2()

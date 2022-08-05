@@ -7,7 +7,7 @@ namespace basecross
 {
 	PlayerMover::PlayerMover(std::shared_ptr<GameObject>& owner) :
 		Component(owner),
-		m_standMoveSpeed(7.5f),
+		m_standMoveSpeed(10.5f),
 		m_crouchMoveSpeed(1.5f),
 		m_dashPower(1.5f),
 		m_dashUseWeight(0.10f)

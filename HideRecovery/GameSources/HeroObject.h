@@ -18,6 +18,11 @@ namespace basecross {
 		class HeroObject : public EnemyObjectBase
 		{
 		public:
+			using DrawComp = PNTBoneModelDraw;
+
+		private:
+
+		public:
 			HeroObject(const std::shared_ptr<Stage>& stage);
 
 			void OnCreate() override;

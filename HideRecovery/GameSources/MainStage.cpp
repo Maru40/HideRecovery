@@ -48,6 +48,8 @@
 
 #include "CameraHelper.h"
 
+#include "HideItemObject.h"
+
 using namespace basecross::Enemy;
 
 namespace basecross {
@@ -90,6 +92,9 @@ namespace basecross {
 			//Mapの読み込み
 			auto mapOffset = Vec3(0.0, -0.5f, 0.0f);
 			CreateMap(sm_loadMapName, mapOffset);
+
+			//隠すアイテムの設定
+			AddGameObject<HideItemObject>();
 
 			//デバッグ
 			AddGameObject<DebugObject>();

@@ -34,7 +34,13 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)GraphAstar.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Hero.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)HeroObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)HideItem.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)HideItemObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)HidePlace.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ImpactManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ItemAcquisitionManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ItemBag.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ItemBase.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)I_Impact.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)I_KnockBack.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LoadCSV.h" />
@@ -51,6 +57,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)GraphNodeBase.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)GraphStateNode.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)OriginalMeshToonObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)OwnHideItemManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ParticleManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)PlayerCameraMover.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)PlayerController.h" />
@@ -206,7 +213,13 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)FieldImpactMap.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Hero.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)HeroObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)HideItem.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)HideItemObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)HidePlace.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ImpactManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ItemAcquisitionManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ItemBag.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ItemBase.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)I_Impact.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LoadCSV.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LoadPositionGenerator.cpp" />
@@ -240,6 +253,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)GraphBase.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)GraphNodeBase.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)GraphStateNode.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)OwnHideItemManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ParticleManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)PassiveSkillBase.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)PlayerCameraMover.cpp" />
