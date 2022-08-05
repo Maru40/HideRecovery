@@ -18,7 +18,8 @@ namespace basecross {
 		class HeroObject : public EnemyObjectBase
 		{
 		public:
-			using DrawComp = PNTBoneModelDraw;
+			//using DrawComp = PNTBoneModelDraw;
+			using DrawComp = PNTStaticModelDraw;
 
 		private:
 
