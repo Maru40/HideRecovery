@@ -10,6 +10,7 @@
 #include "PlayerInputer.h"
 
 #include "PlayerObject.h"
+#include "VillainPlayerObject.h"
 #include "GameManagerObject.h"
 #include "SlowTimerManager.h"
 
@@ -140,7 +141,7 @@ namespace basecross {
 			EventSystem::GetInstance(GetThis<Stage>())->SetBasicInputer(PlayerInputer::GetInstance());
 
 			AddGameObject<GameManagerObject>();
-			m_player = Instantiate<PlayerObject>(Vec3(20.0f, 1.0f, 0.0f), Quat::Identity());
+			m_player = Instantiate<VillainPlayerObject>(Vec3(20.0f, 1.0f, 0.0f), Quat::Identity());
 
 			//for (int i = 0; i < 7; i++) {
 			//	auto object = Instantiate<GameObject>(Vec3(20.0f, 1.0f, 2.0f + i * 2.0f), Quat::Identity());

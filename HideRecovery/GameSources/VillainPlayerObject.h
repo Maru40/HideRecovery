@@ -1,25 +1,26 @@
 
 /*!
-@file PlayerObject.h
-@brief PlayerObjectなど
+@file VillainPlayerObject.h
+@brief VillainPlayerObjectなど
 担当：丸山裕喜
 */
 
 #pragma once
 #include "stdafx.h"
 
+#include "PlayerObject.h"
+
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
-	/// プレイヤーオブジェクト
+	/// 敵側のプレイヤーオブジェクト
 	//--------------------------------------------------------------------------------------
-	class PlayerObject : public GameObject
+	class VillainPlayerObject : public PlayerObject
 	{
 	public:
-		PlayerObject(const std::shared_ptr<Stage>& stage);
+		VillainPlayerObject(const std::shared_ptr<Stage>& stage);
 
-		virtual void OnCreate() override;
-
+		void OnCreate() override;
 	};
 
 }

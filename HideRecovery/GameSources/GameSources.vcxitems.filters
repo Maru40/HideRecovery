@@ -352,27 +352,6 @@
     <Filter Include="Maruyama\Enemy\Component\AI\Director\FactionCoordinator\CombatCoordinator">
       <UniqueIdentifier>{858da604-7114-4c5a-adde-07c38d52bd1e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Maruyama\Enemy\Component\CreateImpactMap">
-      <UniqueIdentifier>{85c139b1-db7d-4ebb-8950-9aac36a54004}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Maruyama\Enemy\Component\CreateImpactMap\Astar">
-      <UniqueIdentifier>{903ccc25-1964-416e-85fa-24096f98d82b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Maruyama\Enemy\Component\CreateImpactMap\Astar\NavGraphNode">
-      <UniqueIdentifier>{d932f87c-878b-499c-a8c7-0f5b3f7e104c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Maruyama\Enemy\Component\CreateImpactMap\Astar\AstarEdge">
-      <UniqueIdentifier>{bd88e604-a688-40ec-8f13-94db39a328a1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Maruyama\Enemy\Component\CreateImpactMap\Astar\SparseGraph">
-      <UniqueIdentifier>{298f0206-4896-439e-956f-447f5fccab1e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Maruyama\Enemy\Component\CreateImpactMap\Astar\Heuristic">
-      <UniqueIdentifier>{8691e2b1-2669-425a-8446-369bd2614c49}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Maruyama\Enemy\Component\CreateImpactMap\Astar\UtilityAstar">
-      <UniqueIdentifier>{3f87677d-6ab6-467f-bd60-6bb8518af247}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Maruyama\Utility\ReactiveBool">
       <UniqueIdentifier>{977500d6-c59e-4fe6-b88e-d560b6570d34}</UniqueIdentifier>
     </Filter>
@@ -448,9 +427,6 @@
     <Filter Include="Maruyama\Utility\DebugOjbect\NumbersObject">
       <UniqueIdentifier>{2ec9818d-7795-4b6b-b96d-d6c97388db4f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Maruyama\Enemy\Component\CreateImpactMap\Astar\GraphAstar">
-      <UniqueIdentifier>{25e3b607-1e41-45a4-ba39-281cab460417}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Maruyama\Stage\MainStage">
       <UniqueIdentifier>{80b588ba-88aa-4316-bc22-801c722f5db6}</UniqueIdentifier>
     </Filter>
@@ -462,21 +438,6 @@
     </Filter>
     <Filter Include="Maruyama\Utility\DebugOjbect\DebugNumber\Object">
       <UniqueIdentifier>{e859ed25-7461-4faf-bb8d-c0629c8825b9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Maruyama\Enemy\Component\CreateImpactMap\ImpactManager">
-      <UniqueIdentifier>{cf4739e0-71bb-4972-9b7e-75aa3f5ff72b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Maruyama\Enemy\Component\CreateImpactMap\Intarfase">
-      <UniqueIdentifier>{d59e5cf1-8d33-4a5e-95a5-06c6495457b7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Maruyama\Enemy\Component\CreateImpactMap\Intarfase\I_Impact">
-      <UniqueIdentifier>{463fc16d-5ccb-4e06-8075-302ac346da83}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Maruyama\Enemy\Component\CreateImpactMap\FieldImpactMap">
-      <UniqueIdentifier>{a307a118-3412-482f-887d-d0f1c0bc7688}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Maruyama\Enemy\Component\CreateImpactMap\SoleImpactMap">
-      <UniqueIdentifier>{09bc4195-9323-4377-84e7-3a7ea75bcad5}</UniqueIdentifier>
     </Filter>
     <Filter Include="Patch\Inputer">
       <UniqueIdentifier>{78650b2c-6e8b-4bbb-ad1e-962334dc6f80}</UniqueIdentifier>
@@ -642,6 +603,54 @@
     </Filter>
     <Filter Include="Maruyama\StageObject\HidePlaceObject\HidePlace">
       <UniqueIdentifier>{32fdea72-fc83-491f-baa6-3e690348c3f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\Component\ImpactMap">
+      <UniqueIdentifier>{85c139b1-db7d-4ebb-8950-9aac36a54004}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\Component\ImpactMap\Astar">
+      <UniqueIdentifier>{903ccc25-1964-416e-85fa-24096f98d82b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\Component\ImpactMap\Astar\NavGraphNode">
+      <UniqueIdentifier>{d932f87c-878b-499c-a8c7-0f5b3f7e104c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\Component\ImpactMap\Astar\AstarEdge">
+      <UniqueIdentifier>{bd88e604-a688-40ec-8f13-94db39a328a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\Component\ImpactMap\Astar\SparseGraph">
+      <UniqueIdentifier>{298f0206-4896-439e-956f-447f5fccab1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\Component\ImpactMap\Astar\Heuristic">
+      <UniqueIdentifier>{8691e2b1-2669-425a-8446-369bd2614c49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\Component\ImpactMap\Astar\UtilityAstar">
+      <UniqueIdentifier>{3f87677d-6ab6-467f-bd60-6bb8518af247}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\Component\ImpactMap\Astar\GraphAstar">
+      <UniqueIdentifier>{25e3b607-1e41-45a4-ba39-281cab460417}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\Component\ImpactMap\ImpactManager">
+      <UniqueIdentifier>{cf4739e0-71bb-4972-9b7e-75aa3f5ff72b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\Component\ImpactMap\Intarfase">
+      <UniqueIdentifier>{d59e5cf1-8d33-4a5e-95a5-06c6495457b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\Component\ImpactMap\Intarfase\I_Impact">
+      <UniqueIdentifier>{463fc16d-5ccb-4e06-8075-302ac346da83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\Component\ImpactMap\FieldImpactMap">
+      <UniqueIdentifier>{a307a118-3412-482f-887d-d0f1c0bc7688}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\Component\ImpactMap\SoleImpactMap">
+      <UniqueIdentifier>{09bc4195-9323-4377-84e7-3a7ea75bcad5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Player\Object\PlayerObjectBase">
+      <UniqueIdentifier>{c347873f-4ac9-46ee-a7d5-8fe0af2cbf1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Player\Object\HeroPlayerObject">
+      <UniqueIdentifier>{d815cba1-fca2-4dad-af04-a2e021b10939}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Player\Object\VillainPlayerObject">
+      <UniqueIdentifier>{3347c70f-848c-4fef-a8f4-a25070520fb2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -888,22 +897,22 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)HitStopManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)TimeHelper.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ImpactMap.h">
-      <Filter>Maruyama\Enemy\Component\CreateImpactMap</Filter>
+      <Filter>Maruyama\Enemy\Component\ImpactMap</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)NavGraphNode.h">
-      <Filter>Maruyama\Enemy\Component\CreateImpactMap\Astar\NavGraphNode</Filter>
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\NavGraphNode</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)AstarEdge.h">
-      <Filter>Maruyama\Enemy\Component\CreateImpactMap\Astar\AstarEdge</Filter>
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\AstarEdge</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)SparseGraph.h">
-      <Filter>Maruyama\Enemy\Component\CreateImpactMap\Astar\SparseGraph</Filter>
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\SparseGraph</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Heuristic.h">
-      <Filter>Maruyama\Enemy\Component\CreateImpactMap\Astar\Heuristic</Filter>
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\Heuristic</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)UtilityAstar.h">
-      <Filter>Maruyama\Enemy\Component\CreateImpactMap\Astar\UtilityAstar</Filter>
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\UtilityAstar</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)MaruAction.h">
       <Filter>Maruyama\Utility\MaruUtility\Action</Filter>
@@ -1011,7 +1020,7 @@
       <Filter>Maruyama\Camera\StartCamera\Utility</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)GraphAstar.h">
-      <Filter>Maruyama\Enemy\Component\CreateImpactMap\Astar\GraphAstar</Filter>
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\GraphAstar</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)I_KnockBack.h">
       <Filter>Maruyama\Interface\I_KnockBack</Filter>
@@ -1100,25 +1109,22 @@
       <Filter>Maruyama\Utility\Component\FadeSprite\ScreenFadeManager</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)ImpactManager.h">
-      <Filter>Maruyama\Enemy\Component\CreateImpactMap\ImpactManager</Filter>
+      <Filter>Maruyama\Enemy\Component\ImpactMap\ImpactManager</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)I_Impact.h">
-      <Filter>Maruyama\Enemy\Component\CreateImpactMap\Intarfase\I_Impact</Filter>
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Intarfase\I_Impact</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)FieldImpactMap.h">
-      <Filter>Maruyama\Enemy\Component\CreateImpactMap\FieldImpactMap</Filter>
+      <Filter>Maruyama\Enemy\Component\ImpactMap\FieldImpactMap</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)SoleImpactMap.h">
-      <Filter>Maruyama\Enemy\Component\CreateImpactMap\SoleImpactMap</Filter>
+      <Filter>Maruyama\Enemy\Component\ImpactMap\SoleImpactMap</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Task_PlowlingMove.h">
       <Filter>Maruyama\Enemy\Component\CommonTask\PlowlingMove</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)EnemyObjectBase.h">
       <Filter>Maruyama\Enemy\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)PlayerObject.h">
-      <Filter>Maruyama\Player\Object</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)EffectBase.h">
       <Filter>Maruyama\Utility\Effect</Filter>
@@ -1188,6 +1194,15 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)HidePlace.h">
       <Filter>Maruyama\StageObject\HidePlaceObject\HidePlace</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)PlayerObject.h">
+      <Filter>Maruyama\Player\Object\PlayerObjectBase</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)HeroPlayerObject.h">
+      <Filter>Maruyama\Player\Object\HeroPlayerObject</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)VillainPlayerObject.h">
+      <Filter>Maruyama\Player\Object\VillainPlayerObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1384,19 +1399,19 @@
       <Filter>Maruyama\Enemy\Component\Base\Status</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)NavGraphNode.cpp">
-      <Filter>Maruyama\Enemy\Component\CreateImpactMap\Astar\NavGraphNode</Filter>
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\NavGraphNode</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)AstarEdge.cpp">
-      <Filter>Maruyama\Enemy\Component\CreateImpactMap\Astar\AstarEdge</Filter>
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\AstarEdge</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)SparseGraph.cpp">
-      <Filter>Maruyama\Enemy\Component\CreateImpactMap\Astar\SparseGraph</Filter>
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\SparseGraph</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Heuristic.cpp">
-      <Filter>Maruyama\Enemy\Component\CreateImpactMap\Astar\Heuristic</Filter>
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\Heuristic</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)UtilityAstar.cpp">
-      <Filter>Maruyama\Enemy\Component\CreateImpactMap\Astar\UtilityAstar</Filter>
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\UtilityAstar</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)MaruAction.cpp">
       <Filter>Maruyama\Utility\MaruUtility\Action</Filter>
@@ -1495,7 +1510,7 @@
       <Filter>Maruyama\Camera\StartCamera\Utility</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)GraphAstar.cpp">
-      <Filter>Maruyama\Enemy\Component\CreateImpactMap\Astar\GraphAstar</Filter>
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\GraphAstar</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)I_KnockBack.cpp">
       <Filter>Maruyama\Interface\I_KnockBack</Filter>
@@ -1584,19 +1599,19 @@
       <Filter>Maruyama\Utility\Component\FadeSprite\ScreenFadeManager</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)ImpactMap.cpp">
-      <Filter>Maruyama\Enemy\Component\CreateImpactMap</Filter>
+      <Filter>Maruyama\Enemy\Component\ImpactMap</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)ImpactManager.cpp">
-      <Filter>Maruyama\Enemy\Component\CreateImpactMap\ImpactManager</Filter>
+      <Filter>Maruyama\Enemy\Component\ImpactMap\ImpactManager</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)I_Impact.cpp">
-      <Filter>Maruyama\Enemy\Component\CreateImpactMap\Intarfase\I_Impact</Filter>
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Intarfase\I_Impact</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)FieldImpactMap.cpp">
-      <Filter>Maruyama\Enemy\Component\CreateImpactMap\FieldImpactMap</Filter>
+      <Filter>Maruyama\Enemy\Component\ImpactMap\FieldImpactMap</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)SoleImpactMap.cpp">
-      <Filter>Maruyama\Enemy\Component\CreateImpactMap\SoleImpactMap</Filter>
+      <Filter>Maruyama\Enemy\Component\ImpactMap\SoleImpactMap</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Task_PlowlingMove.cpp">
       <Filter>Maruyama\Enemy\Component\CommonTask\PlowlingMove</Filter>
@@ -1615,9 +1630,6 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)SelecterSprite.cpp">
       <Filter>Maruyama\Utility\SelectSprite\Selecter</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)PlayerObject.cpp">
-      <Filter>Maruyama\Player\Object</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)PlayerController.cpp">
       <Filter>Maruyama\Player\Component\PlayerController</Filter>
@@ -1669,6 +1681,15 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)HidePlace.cpp">
       <Filter>Maruyama\StageObject\HidePlaceObject\HidePlace</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)PlayerObject.cpp">
+      <Filter>Maruyama\Player\Object\PlayerObjectBase</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)HeroPlayerObject.cpp">
+      <Filter>Maruyama\Player\Object\HeroPlayerObject</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)VillainPlayerObject.cpp">
+      <Filter>Maruyama\Player\Object\VillainPlayerObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

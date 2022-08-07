@@ -34,6 +34,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)GraphAstar.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Hero.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)HeroObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)HeroPlayerObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)HideItem.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)HideItemObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)HidePlace.h" />
@@ -190,6 +191,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)UtilityObstacle.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)UtilityVelocity.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)VelocityManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)VillainPlayerObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WaitTimer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WallEvasion.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WallObject.h" />
@@ -213,6 +215,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)FieldImpactMap.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Hero.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)HeroObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)HeroPlayerObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)HideItem.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)HideItemObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)HidePlace.cpp" />
@@ -353,6 +356,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)UtilityObstacle.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)UtilityVelocity.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)VelocityManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)VillainPlayerObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WaitTimer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WallEvasion.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WallObject.cpp" />
