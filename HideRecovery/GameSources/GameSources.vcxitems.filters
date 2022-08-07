@@ -643,6 +643,15 @@
     <Filter Include="Maruyama\Enemy\Component\ImpactMap\SoleImpactMap">
       <UniqueIdentifier>{09bc4195-9323-4377-84e7-3a7ea75bcad5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Player\Object\PlayerObjectBase">
+      <UniqueIdentifier>{c347873f-4ac9-46ee-a7d5-8fe0af2cbf1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Player\Object\HeroPlayerObject">
+      <UniqueIdentifier>{d815cba1-fca2-4dad-af04-a2e021b10939}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Player\Object\VillainPlayerObject">
+      <UniqueIdentifier>{3347c70f-848c-4fef-a8f4-a25070520fb2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1117,9 +1126,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)EnemyObjectBase.h">
       <Filter>Maruyama\Enemy\Object</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)PlayerObject.h">
-      <Filter>Maruyama\Player\Object</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)EffectBase.h">
       <Filter>Maruyama\Utility\Effect</Filter>
     </ClInclude>
@@ -1188,6 +1194,15 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)HidePlace.h">
       <Filter>Maruyama\StageObject\HidePlaceObject\HidePlace</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)PlayerObject.h">
+      <Filter>Maruyama\Player\Object\PlayerObjectBase</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)HeroPlayerObject.h">
+      <Filter>Maruyama\Player\Object\HeroPlayerObject</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)VillainPlayerObject.h">
+      <Filter>Maruyama\Player\Object\VillainPlayerObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1616,9 +1631,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)SelecterSprite.cpp">
       <Filter>Maruyama\Utility\SelectSprite\Selecter</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)PlayerObject.cpp">
-      <Filter>Maruyama\Player\Object</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)PlayerController.cpp">
       <Filter>Maruyama\Player\Component\PlayerController</Filter>
     </ClCompile>
@@ -1669,6 +1681,15 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)HidePlace.cpp">
       <Filter>Maruyama\StageObject\HidePlaceObject\HidePlace</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)PlayerObject.cpp">
+      <Filter>Maruyama\Player\Object\PlayerObjectBase</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)HeroPlayerObject.cpp">
+      <Filter>Maruyama\Player\Object\HeroPlayerObject</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)VillainPlayerObject.cpp">
+      <Filter>Maruyama\Player\Object\VillainPlayerObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
