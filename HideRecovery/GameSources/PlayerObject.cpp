@@ -24,7 +24,7 @@
 
 #include "ItemBag.h"
 #include "ItemAcquisitionManager.h"
-#include "OwnHideItemManager.h"
+//#include "OwnHideItemManager.h"
 
 namespace basecross {
 
@@ -59,7 +59,7 @@ namespace basecross {
 		
 		AddComponent<ItemBag>();
 		AddComponent<ItemAcquisitionManager>();
-		AddComponent<OwnHideItemManager>();
+		//AddComponent<OwnHideItemManager>();
 
 		//カメラセッティング----------------------------------------------------------
 
