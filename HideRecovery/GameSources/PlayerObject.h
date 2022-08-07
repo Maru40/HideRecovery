@@ -18,7 +18,7 @@ namespace basecross {
 	public:
 		PlayerObject(const std::shared_ptr<Stage>& stage);
 
-		void OnCreate() override;
+		virtual void OnCreate() override;
 
 	};
 
