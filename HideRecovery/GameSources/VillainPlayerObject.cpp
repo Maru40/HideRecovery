@@ -11,6 +11,8 @@
 #include "PlayerObject.h"
 #include "VillainPlayerObject.h"
 
+#include "OwnHideItemManager.h"
+
 namespace basecross {
 
 	VillainPlayerObject::VillainPlayerObject(const std::shared_ptr<Stage>& stage) :
@@ -19,6 +21,8 @@ namespace basecross {
 
 	void VillainPlayerObject::OnCreate() {
 		PlayerObject::OnCreate();
+
+		AddComponent<OwnHideItemManager>();
 	}
 
 }
