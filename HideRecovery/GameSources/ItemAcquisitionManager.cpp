@@ -38,12 +38,12 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 
 	ItemAcquisitionManager::ItemAcquisitionManager(const std::shared_ptr<GameObject>& objPtr) :
-		Component(objPtr), m_param(Parametor())
+		ItemAcquisitionManager(objPtr, Parametor())
 	{}
 
-	void ItemAcquisitionManager::OnCreate() {
-
-	}
+	ItemAcquisitionManager::ItemAcquisitionManager(const std::shared_ptr<GameObject>& objPtr, const Parametor& param):
+		Component(objPtr), m_param(param)
+	{}
 
 	void ItemAcquisitionManager::OnLateStart() {
 		//アイテムを取得する。

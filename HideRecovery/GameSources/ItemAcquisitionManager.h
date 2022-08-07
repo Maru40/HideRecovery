@@ -40,9 +40,19 @@ namespace basecross {
 		std::vector<ex_weak_ptr<ItemBase>> m_allFieldItems;		//フィールドにある全てのアイテムを配列に入れる。
 
 	public:
+		/// <summary>
+		/// コンストラクタ
+		/// </summary>
+		/// <param name="objPtr">このクラスを所有するゲームオブジェクト	</param>
 		ItemAcquisitionManager(const std::shared_ptr<GameObject>& objPtr);
 
-		void OnCreate() override;
+		/// <summary>
+		/// コンストラクタ
+		/// </summary>
+		/// <param name="objPtr">このクラスを所有するゲームオブジェクト</param>
+		/// <param name="param">パラメータ</param>
+		ItemAcquisitionManager(const std::shared_ptr<GameObject>& objPtr, const Parametor& param);
+
 		void OnLateStart() override;
 		void OnUpdate() override;
 

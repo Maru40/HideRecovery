@@ -34,12 +34,13 @@ namespace basecross {
 
 	void PlayerObject::OnCreate() {
 		Mat4x4 spanMat;
-		Vec3 scale = Vec3(0.5f);
+		const float fScale = 0.5f;
+		Vec3 scale = Vec3(fScale);
 		spanMat.affineTransformation(
 			scale,
 			Vec3(0.0f),
 			Vec3(0.0f, XM_PI, 0.0f),
-			Vec3(0.0f, -0.5f, 0.0f)
+			Vec3(0.0f, -fScale, 0.0f)
 		);
 
 		auto draw = AddComponent<PNTStaticModelDraw>();
