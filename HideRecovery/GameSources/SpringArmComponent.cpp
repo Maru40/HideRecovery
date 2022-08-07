@@ -37,7 +37,9 @@ namespace basecross
 		speedXZ(speedXZ),
 		maxY(maxY),
 		minY(minY),
-		lerpSpeed(lerpSpeed)
+		lerpSpeed(lerpSpeed),
+		armSpeed(25.0f),
+		currentArmRange(10.0f)
 	{}
 
 	SpringArmComponent::SpringArmComponent(std::shared_ptr<GameObject>& owner) :
@@ -85,6 +87,7 @@ namespace basecross
 		m_param.armVec.y = sinf(m_param.radY);
 		m_param.armVec.x = cosf(m_param.radXZ);
 		m_param.armVec.z = sinf(m_param.radXZ);
+		m_param.currentArmRange = m_armRange;
 	}
 
 	void SpringArmComponent::OnUpdate2()
@@ -143,13 +146,40 @@ namespace basecross
 			}
 		}
 		
-		m_childTransform->SetPosition(transform->GetPosition() + CalculateDirect() * maxHitData.length);
+		//m_childTransform->SetPosition(transform->GetPosition() + CalculateDirect() * maxHitData.length);
+		//m_childTransform->SetPosition(CalculatePosition(maxHitData.length));
+		m_childTransform->SetPosition(transform->GetPosition() + CalculateDirect() * CalculateArmRange(maxHitData.length));
 	}
 
 	Vec3 SpringArmComponent::CalculateDirect() {
 		InputYVec();
 		InputRXVec();
 		return m_param.armVec;
+	}
+
+	Vec3 SpringArmComponent::CalculatePosition(const float& targetLength) {
+		constexpr float NearRange = 0.25f;
+		auto targetPosition = transform->GetPosition() + CalculateDirect() * targetLength;	//目的地
+		auto toTargetPosition = targetPosition - m_childTransform->GetPosition();
+		if (toTargetPosition.length() < NearRange) {  //近い位置にいたら。
+			return m_childTransform->GetPosition();
+		}
+
+		auto delta = App::GetApp()->GetElapsedTime();
+		auto setPosition = m_childTransform->GetPosition() + toTargetPosition.GetNormalized() * m_param.armSpeed * delta;
+		return setPosition;
+	}
+
+	float SpringArmComponent::CalculateArmRange(const float& targetRange) {
+		if (targetRange == m_param.currentArmRange) {
+			return targetRange;
+		}
+
+		auto delta = App::GetApp()->GetElapsedTime();
+		float range = Lerp::CalculateLerp(m_param.currentArmRange, targetRange, 0, 1, m_param.armSpeed * delta, Lerp::rate::Linear);
+		m_param.currentArmRange = range;
+
+		return range;
 	}
 
 	void SpringArmComponent::InputYVec()   //y軸関係の処理

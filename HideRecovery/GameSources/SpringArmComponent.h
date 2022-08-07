@@ -22,6 +22,9 @@ namespace basecross
 
 			float lerpSpeed;	//補間移動速度
 
+			float armSpeed;		//アームの縮小スピード
+			float currentArmRange; //現在のアームの長さ
+
 			/// <summary>
 			/// コンストラクタ
 			/// </summary>
@@ -81,6 +84,8 @@ namespace basecross
 
 	private:
 		Vec3 CalculateDirect();
+		Vec3 CalculatePosition(const float& targetLength);
+		float CalculateArmRange(const float& targetRange);
 
 		void InputYVec();
 		void InputRXVec();
