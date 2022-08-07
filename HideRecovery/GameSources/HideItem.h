@@ -12,9 +12,16 @@
 
 namespace basecross {
 
+	//--------------------------------------------------------------------------------------
+	/// 隠すアイテム
+	//--------------------------------------------------------------------------------------
 	class HideItem : public ItemBase
 	{
 	public:
+		/// <summary>
+		/// コンストラクタ
+		/// </summary>
+		/// <param name="objPtr">このクラスを所有するゲームオブジェクト</param>
 		HideItem(const std::shared_ptr<GameObject>& objPtr);
 
 		void OnCreate() override;
