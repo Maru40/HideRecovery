@@ -35,11 +35,15 @@ namespace basecross {
 		using Parametor = ItemBag_Parametor;
 
 	private:
-		Parametor m_param;
+		Parametor m_param;							//パラメータ
 
 		std::vector<ex_weak_ptr<ItemBase>> m_items;	//持っているアイテム一覧
 
 	public:
+		/// <summary>
+		/// コンストラクタ
+		/// </summary>
+		/// <param name="objPtr">このクラスを所有するゲームオブジェクト</param>
 		ItemBag(const std::shared_ptr<GameObject>& objPtr);
 
 		void OnCreate() override;
@@ -70,6 +74,10 @@ namespace basecross {
 		/// <returns>取得できるならtrue</returns>
 		bool IsAcquisition(const std::shared_ptr<ItemBase>& item);
 
+		/// <summary>
+		/// 隠すアイテムの取得
+		/// </summary>
+		/// <returns>隠すアイテム</returns>
 		std::shared_ptr<HideItem> GetHideItem() const;
 	};
 
