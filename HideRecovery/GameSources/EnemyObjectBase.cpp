@@ -11,6 +11,8 @@
 #include "ItemBag.h"
 #include "RotationController.h"
 #include "VelocityManager.h"
+#include "TargetManager.h"
+#include "SeekTarget.h"
 
 namespace basecross {
 	namespace Enemy {
@@ -28,6 +30,8 @@ namespace basecross {
 			AddComponent<RotationController>();
 			AddComponent<Gravity>();
 			AddComponent<VelocityManager>();
+			AddComponent<TargetManager>();
+			AddComponent<SeekTarget>(nullptr);
 		}
 
 	}
