@@ -1,12 +1,12 @@
 /*!
-@file HeroObject.cpp
-@brief HeroObject‚È‚ÇŽÀ‘Ì
+@file VillainEnemyObject.cpp
+@brief VillainEnemyObject‚È‚ÇŽÀ‘Ì
 */
 
 #include "stdafx.h"
 #include "Project.h"
 
-#include "HeroObject.h"
+#include "VillainEnemyObject.h"
 
 #include "Hero.h"
 
@@ -19,11 +19,11 @@
 namespace basecross {
 	namespace Enemy {
 
-		HeroObject::HeroObject(const std::shared_ptr<Stage>& stage):
+		VillainObject::VillainObject(const std::shared_ptr<Stage>& stage) :
 			EnemyObjectBase(stage)
 		{}
 
-		void HeroObject::OnCreate() {
+		void VillainObject::OnCreate() {
 			EnemyObjectBase::OnCreate();
 
 			SettingModel();
@@ -41,7 +41,7 @@ namespace basecross {
 			//-------------------------------------------
 		}
 
-		void HeroObject::SettingModel() {
+		void VillainObject::SettingModel() {
 			Mat4x4 spanMat;
 			Vec3 scale = Vec3(0.5f);
 			spanMat.affineTransformation(
@@ -55,7 +55,7 @@ namespace basecross {
 			draw->SetMultiMeshResource(L"Player_Mesh");
 			draw->SetMeshToTransformMatrix(spanMat);
 
-			draw->SetDiffuse(Col4(1.0f, 0.0f, 0.0f, 1.0f));
+			//draw->SetDiffuse(Col4(1.0f, 0.0f, 0.0f, 1.0f));
 
 			transform->SetScale(Vec3(1.0f, 1.5f, 1.0f));
 		}

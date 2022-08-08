@@ -57,9 +57,6 @@ namespace basecross {
 					std::shared_ptr<Task_PlowlingMove::Parametor> moveParamPtr = nullptr;     //移動するパラメータ
 					std::shared_ptr<basecross::Task::Wait_Parametor> waitParamPtr = nullptr;  //待機時のパラメータ
 
-					/// <summary>
-					/// コンストラクタ
-					/// </summary>
 					Parametor();
 
 					/// <summary>

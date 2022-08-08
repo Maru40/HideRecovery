@@ -655,6 +655,15 @@
     <Filter Include="Maruyama\Utility\DebugOjbect\AstarNodeDraw\ImpactDataDraw">
       <UniqueIdentifier>{2eed2494-aae9-4db8-9b9a-9759c54b73bf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Enemy\Component\EachEnemy\Villain">
+      <UniqueIdentifier>{e776cb76-aa0f-4ffe-a5ce-dece851428fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\Component\EachEnemy\Villain\Stator">
+      <UniqueIdentifier>{09384c35-ac04-4f31-9d7f-1ffce728cab8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\Object\VillainObject">
+      <UniqueIdentifier>{3dedd3c7-41e7-4fdc-973d-cd4a8822ac8d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1210,6 +1219,15 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)ImpactDataDraw.h">
       <Filter>Maruyama\Utility\DebugOjbect\AstarNodeDraw\ImpactDataDraw</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Villain.h">
+      <Filter>Maruyama\Enemy\Component\EachEnemy\Villain</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Stator_Villain.h">
+      <Filter>Maruyama\Enemy\Component\EachEnemy\Villain\Stator</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)VillainEnemyObject.h">
+      <Filter>Maruyama\Enemy\Object\VillainObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -1699,6 +1717,15 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)ImpactDataDraw.cpp">
       <Filter>Maruyama\Utility\DebugOjbect\AstarNodeDraw\ImpactDataDraw</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Villain.cpp">
+      <Filter>Maruyama\Enemy\Component\EachEnemy\Villain</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Stator_Villain.cpp">
+      <Filter>Maruyama\Enemy\Component\EachEnemy\Villain\Stator</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)VillainEnemyObject.cpp">
+      <Filter>Maruyama\Enemy\Object\VillainObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
