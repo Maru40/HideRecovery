@@ -24,15 +24,12 @@ namespace basecross {
 
 	private:
 		Vec3 m_position;                  //ノードの場所
-		maru::ImpactData m_impactData;    //影響マップデータ
+		ImpactData m_impactData;		  //影響マップデータ
 
 		ex_weak_ptr<GameObject> m_parent; //親オブジェクト
 
 	public:
 
-		/// <summary>
-		/// コンストラクタ
-		/// </summary>
 		NavGraphNode();
 
 		/// <summary>
