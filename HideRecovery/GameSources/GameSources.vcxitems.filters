@@ -667,6 +667,12 @@
     <Filter Include="Maruyama\Enemy\Component\EachEnemy\Common\Stator\State\Chase">
       <UniqueIdentifier>{e487b252-9e3e-4ff4-b05c-f42faf84d441}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Enemy\Component\EachEnemy\Common\Stator\State\Chase\AstarSeek">
+      <UniqueIdentifier>{07c3e2a4-fc24-42ed-a3f0-50020eedded3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\Component\EachEnemy\Common\Stator\State\Chase\TargetSeek">
+      <UniqueIdentifier>{adb44c54-3b38-4d44-a7f8-69cf1c0a7975}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1231,6 +1237,15 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)VillainEnemyObject.h">
       <Filter>Maruyama\Enemy\Object\VillainObject</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)EnemyStateNode_Chase.h">
+      <Filter>Maruyama\Enemy\Component\EachEnemy\Common\Stator\State\Chase</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ChaseState_AstarSeek.h">
+      <Filter>Maruyama\Enemy\Component\EachEnemy\Common\Stator\State\Chase\AstarSeek</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ChaseState_TargetSeek.h">
+      <Filter>Maruyama\Enemy\Component\EachEnemy\Common\Stator\State\Chase\TargetSeek</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -1732,6 +1747,15 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)EnemyObjectBase.cpp">
       <Filter>Maruyama\Enemy\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)EnemyStateNode_Chase.cpp">
+      <Filter>Maruyama\Enemy\Component\EachEnemy\Common\Stator\State\Chase</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ChaseState_AstarSeek.cpp">
+      <Filter>Maruyama\Enemy\Component\EachEnemy\Common\Stator\State\Chase\AstarSeek</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ChaseState_TargetSeek.cpp">
+      <Filter>Maruyama\Enemy\Component\EachEnemy\Common\Stator\State\Chase\TargetSeek</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
