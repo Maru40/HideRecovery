@@ -22,8 +22,8 @@ namespace basecross {
 
 		ImpactData::ImpactData():
 			dangerValue(1.0f), 
-			confirmationIntervalTime(30.0f), 
-			isConfirmation(false)
+			occupancyValue(0.5f),
+			occupancyType(OccupancyType::Empty)
 		{}
 
 	}
