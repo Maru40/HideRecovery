@@ -652,6 +652,9 @@
     <Filter Include="Maruyama\Player\Object\VillainPlayerObject">
       <UniqueIdentifier>{3347c70f-848c-4fef-a8f4-a25070520fb2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Utility\DebugOjbect\AstarNodeDraw\ImpactDataDraw">
+      <UniqueIdentifier>{2eed2494-aae9-4db8-9b9a-9759c54b73bf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1204,6 +1207,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)VillainPlayerObject.h">
       <Filter>Maruyama\Player\Object\VillainPlayerObject</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ImpactDataDraw.h">
+      <Filter>Maruyama\Utility\DebugOjbect\AstarNodeDraw\ImpactDataDraw</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -1690,6 +1696,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)VillainPlayerObject.cpp">
       <Filter>Maruyama\Player\Object\VillainPlayerObject</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ImpactDataDraw.cpp">
+      <Filter>Maruyama\Utility\DebugOjbect\AstarNodeDraw\ImpactDataDraw</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

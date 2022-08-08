@@ -38,6 +38,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)HideItem.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)HideItemObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)HidePlace.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ImpactDataDraw.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ImpactManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ItemAcquisitionManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ItemBag.h" />
@@ -219,6 +220,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)HideItem.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)HideItemObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)HidePlace.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ImpactDataDraw.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ImpactManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ItemAcquisitionManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ItemBag.cpp" />
