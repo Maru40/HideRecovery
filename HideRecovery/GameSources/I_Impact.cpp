@@ -16,7 +16,15 @@ namespace basecross {
 
 	namespace maru {
 
-		
+		//--------------------------------------------------------------------------------------
+		///	âeãøÉfÅ[É^
+		//--------------------------------------------------------------------------------------
+
+		ImpactData::ImpactData():
+			dangerValue(1.0f), 
+			confirmationIntervalTime(30.0f), 
+			isConfirmation(false)
+		{}
 
 	}
 }

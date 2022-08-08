@@ -29,7 +29,11 @@ namespace basecross {
 		///	影響データ
 		//--------------------------------------------------------------------------------------
 		struct ImpactData {
-			float dangerValue = 1.0f; //危険度
+			float dangerValue;				//危険度
+			float confirmationIntervalTime;	//再確認までのインターバル
+			bool isConfirmation;			//確認済みかどうか
+
+			ImpactData();
 		};
 
 		//--------------------------------------------------------------------------------------
