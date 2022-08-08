@@ -19,7 +19,7 @@ namespace basecross {
 		{
 		public:
 			//using DrawComp = PNTBoneModelDraw;
-			using DrawComp = PNTStaticModelDraw;
+			using DrawComp = PNTBoneModelDraw;
 
 		private:
 
