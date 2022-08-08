@@ -19,6 +19,7 @@
 #include "GameTimer.h"
 #include "EnemyStateNodeBase.h"
 #include "EnemyStateNode_Plowling.h"
+#include "EnemyStateNode_Chase.h"
 
 #include "GameManager.h"
 
@@ -26,6 +27,9 @@
 #include "Task_Wait.h"
 #include "Task_PlowlingMove.h"
 #include "Task_ToTargetMove.h"
+
+#include "Targeted.h"
+#include "TargetManager.h"
 
 namespace basecross {
 	namespace Enemy {
@@ -36,9 +40,11 @@ namespace basecross {
 
 		struct Stator_Hero::Parametor {
 			std::shared_ptr<Enemy::StateNode::Plowling::Parametor> plowlingParamPtr;    //úpúj
+			std::shared_ptr<Enemy::StateNode::Chase::Parametor> chaseParamPtr;			//í«è]
 
 			Parametor():
-				plowlingParamPtr(new Enemy::StateNode::Plowling::Parametor())
+				plowlingParamPtr(new Enemy::StateNode::Plowling::Parametor()),
+				chaseParamPtr(new Enemy::StateNode::Chase::Parametor())
 			{}
 		};
 
@@ -47,6 +53,7 @@ namespace basecross {
 		//--------------------------------------------------------------------------------------
 
 		Stator_Hero_TransitionMember::Stator_Hero_TransitionMember() :
+			plowlingEyeRange(10.0f),
 			attackRange(1.0f)
 		{}
 
@@ -54,7 +61,28 @@ namespace basecross {
 		/// ëJà⁄èåè
 		//--------------------------------------------------------------------------------------
 
+		bool Stator_Hero::IsInEyeRangeTarget(const Stator_Hero_TransitionMember& member) {
+			//auto hideItems 
+			auto targets = maru::Utility::FindComponents<Targeted>();
 
+			for (auto target : targets) {
+				if (!target->GetGameObject()->IsActive()) {
+					continue;
+				}
+
+				auto toTargetVec = maru::Utility::CalcuToTargetVec(GetGameObject(), target->GetGameObject());
+				if (toTargetVec.length() < member.plowlingEyeRange) {
+					//É^Å[ÉQÉbÉgä«óùÇ…É^Å[ÉQÉbÉgÇê›íË
+					if (auto& targetManager = GetGameObject()->GetComponent<TargetManager>(false)) {
+						targetManager->SetTarget(target->GetGameObject());
+					}
+
+					return true;
+				}
+			}
+
+			return false;
+		}
 
 		//--------------------------------------------------------------------------------------
 		/// ÉqÅ[ÉçÅ[ÇÃÉXÉeÅ[É^Å[
@@ -80,6 +108,10 @@ namespace basecross {
 			//úpúj
 			m_stateMachine->AddNode(
 				State::Plowling, std::make_shared<Enemy::StateNode::Plowling>(enemy, m_paramPtr->plowlingParamPtr));
+
+			//í«è]
+			m_stateMachine->AddNode(
+				State::Chase, std::make_shared<Enemy::StateNode::Chase>(enemy, m_paramPtr->chaseParamPtr));
 		}
 
 		void Stator_Hero::CreateEdge() {
@@ -89,10 +121,26 @@ namespace basecross {
 			m_stateMachine->AddEdge(State::Start, State::Plowling,
 				[&](const TransitionMember& member) { return GameManager::GetInstance()->GetCurrentState() == GameManager::State::Game; });
 
+			//Plowling
+			m_stateMachine->AddEdge(State::Plowling, State::Chase, [&](const TransitionMember& member) { return IsInEyeRangeTarget(member); });
+
+			//Chase
+			m_stateMachine->AddEdge(State::Chase, State::Plowling, 
+				[&](const TransitionMember& member) { 
+					//É^Å[ÉQÉbÉgÇ™ë∂ç›Ç∑ÇÈÇ©Ç«Ç§Ç©
+					if (auto targetManager = GetGameObject()->GetComponent<TargetManager>(false)) {
+						return !targetManager->HasTarget();
+					}
+
+					return false;
+				}
+			);
+
 		}
 
 		void Stator_Hero::SettingParametor() {
 			SettingPlowling();
+			SettingChase();
 		}
 
 		void Stator_Hero::SettingPlowling() {
@@ -105,6 +153,10 @@ namespace basecross {
 			moveParamPtr->speed = 5.0f;
 			moveParamPtr->targetNearRange = 6.0f;
 			moveParamPtr->moveType = Task_ToTargetMove::MoveType::ArriveVelocity;
+		}
+
+		void Stator_Hero::SettingChase() {
+
 		}
 
 	}
