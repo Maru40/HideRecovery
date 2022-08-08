@@ -58,7 +58,13 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 
 	bool TargetManager::HasTarget() const {
-		return m_paramPtr->target ? true : false;
+		if (!m_paramPtr->target) {
+			return false;
+		}
+
+		return m_paramPtr->target->IsActive();
+
+		//return m_paramPtr->target ? true : false;
 	}
 
 	Vec3 TargetManager::GetTargetPosition() const {
