@@ -33,7 +33,7 @@ namespace basecross {
 		}
 
 		void Number::OnStart() {
-			wstring texture = L"Number_TX";
+			//wstring texture = L"Number_TX";
 			auto obj = GetGameObject();
 			auto draw = obj->AddComponent<DrawComp>();
 
@@ -42,7 +42,7 @@ namespace basecross {
 			//ƒƒbƒVƒ…‚Ì¶¬
 			draw->CreateOriginalMesh(m_vertices, m_indices);
 			draw->SetOriginalMeshUse(true);
-			draw->SetTextureResource(texture);
+			draw->SetTextureResource(m_texture);
 
 			GetGameObject()->SetAlphaActive(true);
 		}
@@ -62,6 +62,12 @@ namespace basecross {
 			drawComp->UpdateVertices(m_vertices);
 		}
 
+		void Number::SetTexture(const wstring& texture) {
+			m_texture = texture;
+
+			auto draw = GetGameObject()->GetComponent<DrawComp>();
+			draw->SetTextureResource(texture);
+		}
 	}
 }
 

@@ -20,7 +20,7 @@ namespace basecross {
 		//--------------------------------------------------------------------------------------
 		///	影響範囲タイプ
 		//--------------------------------------------------------------------------------------
-		enum class ImpactType {
+		enum class ImpacterType {
 			Circle,  //円範囲
 			Eye,     //視界範囲
 		};
@@ -28,19 +28,26 @@ namespace basecross {
 		//--------------------------------------------------------------------------------------
 		///	影響データ
 		//--------------------------------------------------------------------------------------
-		struct ImpactData 
-		{
-			float value = 0.0f;               //影響度
-			float circleRange = 0.0f;         //円の影響範囲
-			ImpactType type = ImpactType(0);  //影響範囲タイプ(視界が存在するなら、その分加算する。)
+		struct ImpactData {
+			float dangerValue = 1.0f; //危険度
 		};
 
 		//--------------------------------------------------------------------------------------
-		///	影響インターフェース
+		///	影響を与える者のデータ
+		//--------------------------------------------------------------------------------------
+		struct ImpacterData 
+		{
+			float value = 0.0f;					  //影響度
+			float circleRange = 0.0f;			  //円の影響範囲
+			ImpacterType type = ImpacterType(0);  //影響範囲タイプ(視界が存在するなら、その分加算する。)
+		};
+
+		//--------------------------------------------------------------------------------------
+		///	影響を与える者のインターフェース
 		//--------------------------------------------------------------------------------------
 		class I_Impacter
 		{
-			ImpactData m_impactData; //影響データ
+			ImpacterData m_impacterData; //影響を与える者のデータ
 
 		public:
 
@@ -49,28 +56,28 @@ namespace basecross {
 			//--------------------------------------------------------------------------------------
 
 			/// <summary>
-			/// 影響データのセット
+			/// 影響を与える者のデータを設定
 			/// </summary>
 			/// <param name="data">影響データ</param>
-			ImpactData SetImpactData(const ImpactData& data) noexcept { m_impactData = data; }
+			ImpacterData SetImpacterData(const ImpacterData& data) noexcept { m_impacterData = data; }
 
 			/// <summary>
-			/// 影響データの取得
+			/// 影響を与える者のデータを取得
 			/// </summary>
 			/// <returns>影響データ</returns>
-			ImpactData GetImpactData() const noexcept { return m_impactData; }
+			ImpacterData GetImpacterData() const noexcept { return m_impacterData; }
 
 			/// <summary>
-			/// 影響データの参照を取得
+			/// 影響を与える者のデータの参照を取得
 			/// </summary>
 			/// <returns></returns>
-			ImpactData& GetRefImpactData() noexcept { return m_impactData; }
+			ImpacterData& GetRefImpactData() noexcept { return m_impacterData; }
 
 			/// <summary>
 			/// このクラスを所有するゲームオブジェクトを取得する
 			/// </summary>
 			/// <returns>このクラスを所有するゲームオブジェクト</returns>
-			virtual std::shared_ptr<GameObject> GetImpactObject() const noexcept = 0;
+			virtual std::shared_ptr<GameObject> GetImpacterObject() const noexcept = 0;
 
 			/// <summary>
 			/// 視界範囲管理クラスを取得

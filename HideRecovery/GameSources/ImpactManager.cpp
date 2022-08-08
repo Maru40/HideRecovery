@@ -53,10 +53,10 @@ namespace basecross {
 
 		//自分の周囲に影響度を更新する。
 		void ImpactManager::CalculateAroundImpact(const std::shared_ptr<ImpactMap>& impactMap, const std::shared_ptr<I_Impacter>& impacter) {
-			auto data = impacter->GetImpactData();
+			auto data = impacter->GetImpacterData();
 
 			//自分の所属するノードの取得
-			auto nearNode = UtilityAstar::SearchNearNode(*impactMap->GetGraphAstar().get(), impacter->GetImpactObject());
+			auto nearNode = UtilityAstar::SearchNearNode(*impactMap->GetGraphAstar().get(), impacter->GetImpacterObject());
 
 			//自分の周囲から近い部分ほど影響度をアップさせる。
 			
@@ -80,14 +80,14 @@ namespace basecross {
 			//エッジのアクティブ状態の更新
 			EdgeActiveUpdate(impactMap, impacter);
 
-			auto impactType = impacter->GetImpactData().type;
+			auto impactType = impacter->GetImpacterData().type;
 			switch (impactType)
 			{
-			case ImpactType::Circle:
+			case ImpacterType::Circle:
 				CalculateAroundImpact(impactMap, impacter);
 				break;
 
-			case ImpactType::Eye:
+			case ImpacterType::Eye:
 				CalculateAroundImpact(impactMap, impacter);
 				CalculateEyeImpact(impactMap, impacter);
 				break;
