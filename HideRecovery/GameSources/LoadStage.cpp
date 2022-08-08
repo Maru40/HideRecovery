@@ -70,6 +70,8 @@ namespace basecross
 
 		//デバッグテクスチャ
 		ResourceLoadData(L"Number_TX", L"Number.png"),
+		ResourceLoadData(L"NumberWhite_TX", L"Number_White.png"),
+
 		ResourceLoadData(L"Arrow_TX", L"Arrow.png"),
 		ResourceLoadData(L"SquareSprite_TX", L"SquareSprite.png"),
 	};
