@@ -15,6 +15,46 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 	class GraphAstar;
 	class NumbersObject;
+	class NavGraphNode;
+	class ImpactDataDraw;
+	class ImpactDataDrawObject;
+
+	//--------------------------------------------------------------------------------------
+	///	デバッグ表示用のデータ
+	//--------------------------------------------------------------------------------------
+	struct DrawNodeData {
+		std::weak_ptr<NavGraphNode> node;			//ノード
+		std::shared_ptr<NumbersObject> nodeNumber;	//数字表記
+		std::shared_ptr<ImpactDataDrawObject> impactData; //影響データの表示管理クラス
+
+		/// <summary>
+		/// コンストラクタ
+		/// </summary>
+		/// <param name="node">ノードのポインタ</param>
+		DrawNodeData(const std::shared_ptr<NavGraphNode>& node);
+
+		/// <summary>
+		/// ノードが存在するかどうか
+		/// </summary>
+		/// <returns>ノードが存在するならtrue</returns>
+		bool HasNode() const noexcept { return !node.expired(); }
+
+		/// <summary>
+		/// データの更新呼び出し
+		/// </summary>
+		void OnUpdate();
+		
+		/// <summary>
+		/// データの表示更新呼び出し
+		/// </summary>
+		void OnDraw();
+
+		/// <summary>
+		/// データのアクティブの設定
+		/// </summary>
+		/// <param name="isActive">データのアクティブ状態</param>
+		void SetDrawActive(const bool isActive);
+	};
 
 	//--------------------------------------------------------------------------------------
 	///	Astarノード表示
@@ -23,7 +63,7 @@ namespace basecross {
 	{
 		ex_weak_ptr<GraphAstar> m_astar;				//Astarグラフ
 
-		vector<std::shared_ptr<NumbersObject>> m_nodes;	//生成したノードオブジェクト
+		std::vector<DrawNodeData> m_drawDatas;			//生成した表示用データ
 
 	public:
 		/// <summary>
@@ -36,17 +76,32 @@ namespace basecross {
 		void OnCreate() override;
 		void OnUpdate() override;
 		void OnDraw() override;
+		void OnDestroy() override;
 
 	private:
 		/// <summary>
-		/// ノードの生成
+		/// 表示データをAstarのノード分生成
 		/// </summary>
-		void CreateNodeDraw();
+		void CreateDrawDatas();
 
 		/// <summary>
-		/// ノードの位置更新
+		/// ノード番号表示オブジェクトの生成
 		/// </summary>
-		void UpdateNodesPosition();
+		/// <param name="node">生成したいノード</param>
+		/// <returns>生成したオブジェクト</returns>
+		std::shared_ptr<NumbersObject> CreateNodeNumber(const std::shared_ptr<NavGraphNode>& node);
+
+		/// <summary>
+		/// 影響データ表示オブジェクトの生成
+		/// </summary>
+		/// <param name="node">生成したいノード</param>
+		/// <returns>生成したオブジェクト</returns>
+		std::shared_ptr<ImpactDataDrawObject> CreateImpactDataDraw(const std::shared_ptr<NavGraphNode>& node);
+
+		/// <summary>
+		/// ノードの更新
+		/// </summary>
+		void UpdateNodes();
 
 	public:
 		//--------------------------------------------------------------------------------------
@@ -71,6 +126,8 @@ namespace basecross {
 		/// <param name="nodeIndex">設定したいノードのインデックス</param>
 		/// <param name="color">色</param>
 		void SetColor(const int& nodeIndex, const Col4& color);
+
+		
 	};
 
 }
