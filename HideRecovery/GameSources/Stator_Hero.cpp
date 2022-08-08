@@ -61,7 +61,7 @@ namespace basecross {
 		/// ‘JˆÚğŒ
 		//--------------------------------------------------------------------------------------
 
-		bool Stator_Hero::IsInEyeRangeTarget(const Stator_Hero_TransitionMember& member) {
+		bool Stator_Hero::IsInEyeRangeTarget(const TransitionMember& member) {
 			//auto hideItems 
 			auto targets = maru::Utility::FindComponents<Targeted>();
 
