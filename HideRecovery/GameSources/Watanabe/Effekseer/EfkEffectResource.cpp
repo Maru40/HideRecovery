@@ -20,7 +20,7 @@ namespace basecross {
 		// 失敗した場合
 		if (m_effect == nullptr) {
 			throw BaseException(
-				L"エフェクトの生成に失敗しました。",
+				L"エフェクトの生成に失敗しました。\nFileParh : " + m_filePath,
 				L"if (m_effect == nullptr)",
 				L"EfkEffectResource::EfkEffectResource()"
 			);
