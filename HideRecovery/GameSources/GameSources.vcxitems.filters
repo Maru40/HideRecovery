@@ -655,6 +655,9 @@
     <Filter Include="Maruyama\Utility\DebugOjbect\AstarNodeDraw\ImpactDataDraw">
       <UniqueIdentifier>{2eed2494-aae9-4db8-9b9a-9759c54b73bf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Enemy\Component\EachEnemy\Villain">
+      <UniqueIdentifier>{e776cb76-aa0f-4ffe-a5ce-dece851428fc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1210,6 +1213,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)ImpactDataDraw.h">
       <Filter>Maruyama\Utility\DebugOjbect\AstarNodeDraw\ImpactDataDraw</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Villain.h">
+      <Filter>Maruyama\Enemy\Component\EachEnemy\Villain</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -1699,6 +1705,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)ImpactDataDraw.cpp">
       <Filter>Maruyama\Utility\DebugOjbect\AstarNodeDraw\ImpactDataDraw</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Villain.cpp">
+      <Filter>Maruyama\Enemy\Component\EachEnemy\Villain</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
