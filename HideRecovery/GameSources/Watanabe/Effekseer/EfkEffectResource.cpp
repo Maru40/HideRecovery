@@ -13,9 +13,9 @@ namespace basecross {
 			);
 		}
 		// インターフェイスのインスタンスを取得
-		auto iface = EfkInterface::GetInstance();
+		auto iEfk = EfkInterface::GetInstance();
 		// エフェクトの読み込み
-		m_effect = Effekseer::Effect::Create(iface->GetManager(), (const char16_t*)m_filePath.c_str());
+		m_effect = Effekseer::Effect::Create(iEfk->GetManager(), (const char16_t*)m_filePath.c_str());
 
 		// 失敗した場合
 		if (m_effect == nullptr) {

@@ -3,6 +3,7 @@
 
 #include "WatanabeStage.h"
 #include "../DebugClass/Debug.h"
+#include "../Effekseer/EfkEffect.h"
 
 namespace basecross {
 	void WatanabeStage::CreateViewLight() {
@@ -22,8 +23,12 @@ namespace basecross {
 
 	void WatanabeStage::OnCreate() {
 		CreateViewLight();
+		AddGameObject<EfkInterface>();
 		AddGameObject<Debug>();
 		Debug::GetInstance()->Log(L"WatanabeStage");
+
+		auto testObj = AddGameObject<GameObject>();
+		auto efkComp = testObj->AddComponent<EfkComponent>();
 	}
 
 	void WatanabeStage::OnUpdate() {
