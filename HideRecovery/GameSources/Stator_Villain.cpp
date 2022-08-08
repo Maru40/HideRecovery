@@ -47,6 +47,7 @@ namespace basecross {
 		//--------------------------------------------------------------------------------------
 
 		Stator_Villain_TransitionMember::Stator_Villain_TransitionMember() :
+			plowlingEyeRange(10.0f),
 			attackRange(1.0f)
 		{}
 
