@@ -80,6 +80,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)SpriteObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)StartCamera.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Stator_Hero.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Stator_Villain.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)SubAnimatorBase.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)TactileCtrl.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)TactileObject.h" />
@@ -193,6 +194,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)UtilityVelocity.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)VelocityManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Villain.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)VillainEnemyObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)VillainPlayerObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WaitTimer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WallEvasion.h" />
@@ -282,6 +284,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)SpriteObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)StartCamera.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Stator_Hero.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Stator_Villain.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)SubAnimatorBase.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)TactileCtrl.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)TactileObject.cpp" />
@@ -360,6 +363,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)UtilityVelocity.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)VelocityManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Villain.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)VillainEnemyObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)VillainPlayerObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WaitTimer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WallEvasion.cpp" />
