@@ -664,6 +664,21 @@
     <Filter Include="Maruyama\Enemy\Object\VillainObject">
       <UniqueIdentifier>{3dedd3c7-41e7-4fdc-973d-cd4a8822ac8d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe">
+      <UniqueIdentifier>{f5edc6d5-e48c-4927-a4df-0808a0c7bab9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\Effekseer">
+      <UniqueIdentifier>{e9f25c52-b6ee-4aec-b85e-baf48f0f18ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\Utility">
+      <UniqueIdentifier>{c49ea203-a482-40fd-b7a3-f13526b67430}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\DebugClass">
+      <UniqueIdentifier>{d31e0ef7-f341-4d1e-b132-c7a9b5859ae7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\TestStage">
+      <UniqueIdentifier>{5e39f3e5-2840-4f47-9c69-2f2ad0e71d1c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1228,6 +1243,33 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)VillainEnemyObject.h">
       <Filter>Maruyama\Enemy\Object\VillainObject</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Effekseer\EfkComponent.h">
+      <Filter>Watanabe\Effekseer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Effekseer\EfkEffect.h">
+      <Filter>Watanabe\Effekseer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Effekseer\EfkEffectResource.h">
+      <Filter>Watanabe\Effekseer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Effekseer\EfkInterface.h">
+      <Filter>Watanabe\Effekseer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\BaseSingleton.h">
+      <Filter>Watanabe\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\DebugClass\Debug.h">
+      <Filter>Watanabe\DebugClass</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Effekseer\TransformData.h">
+      <Filter>Watanabe\Effekseer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\Utility.h">
+      <Filter>Watanabe\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\WatanabeStage.h">
+      <Filter>Watanabe\TestStage</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -1726,6 +1768,24 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)VillainEnemyObject.cpp">
       <Filter>Maruyama\Enemy\Object\VillainObject</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Effekseer\EfkComponent.cpp">
+      <Filter>Watanabe\Effekseer</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Effekseer\EfkEffectResource.cpp">
+      <Filter>Watanabe\Effekseer</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Effekseer\EfkInterface.cpp">
+      <Filter>Watanabe\Effekseer</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\DebugClass\Debug.cpp">
+      <Filter>Watanabe\DebugClass</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Utility\Utility.cpp">
+      <Filter>Watanabe\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\WatanabeStage.cpp">
+      <Filter>Watanabe\TestStage</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -67,7 +67,7 @@ namespace basecross
 			/// <param name="modelType">モデルのタイプ</param>
 			/// <param name="modelDir">モデルが入っているフォルダ名</param>
 			ModelResourceLoadData(const std::wstring& resourceKey,
-				const std::wstring& filename, const ModelType modelType,const std::wstring& modelDir);
+				const std::wstring& filename, const ModelType modelType, const std::wstring& modelDir);
 		};
 
 		/// <summary>
@@ -115,6 +115,10 @@ namespace basecross
 		/// </summary>
 		static void LoadResource();
 
+		/// <summary>
+		/// エフェクトデータを読み込む
+		/// </summary>
+		void LoadEffectDatas();
 	public:
 		/// <summary>
 		/// コンストラクタ

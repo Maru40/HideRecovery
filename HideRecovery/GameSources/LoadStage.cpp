@@ -3,6 +3,7 @@
 #include"SoundHelper.h"
 #include"GameSaveManager.h"
 #include"PlayerInputer.h"
+#include "Watanabe/Effekseer/EfkEffect.h"
 
 namespace basecross
 {
@@ -10,7 +11,6 @@ namespace basecross
 		resourceKey(resourceKey),
 		filename(filename)
 	{
-
 	}
 
 	LoadStage::ModelResourceLoadData::ModelResourceLoadData(const std::wstring& resourceKey, const std::wstring& filename,
@@ -19,7 +19,6 @@ namespace basecross
 		modelType(modelType),
 		modelDir(modelDir)
 	{
-
 	}
 
 	std::mutex LoadStage::m_mtx;
@@ -90,7 +89,6 @@ namespace basecross
 		//ResourceLoadData(L"PlayerWalk", L"AS_PlayerWalk.wav"),
 		//ResourceLoadData(L"PlayerTackle", L"AS_PlayerTackle.wav"),
 		//ResourceLoadData(L"JettPomp", L"AS_JettPomp.wav"),
-
 	};
 
 	const std::vector<LoadStage::ResourceLoadData> LoadStage::m_bgmResourceLoadDatas =
@@ -106,7 +104,6 @@ namespace basecross
 		//Handy
 		//ModelResourceLoadData(L"Handy_Walk",  L"Handy_Walk2.bmf", ModelType::Bone,  L"Handy\\"),rock.001.bmf/tree_2
 
-		
 		//ModelResourceLoadData(L"rock",  L"rock.bmf", ModelType::Static,  L"Rook\\"),
 		//ModelResourceLoadData(L"rock001",  L"rock001.bmf", ModelType::Static,  L"Rook\\"),
 		//ModelResourceLoadData(L"rock005",  L"rock.005.bmf", ModelType::Static,  L"Rook\\"),
@@ -130,9 +127,9 @@ namespace basecross
 		//ModelResourceLoadData(L"Player_Death",  L"Player_Animation_Dead.bmf", ModelType::BoneMulti,  L"Player\\"),
 		//ModelResourceLoadData(L"Player_WinIdle",  L"Player_Animation_Win_Idle.bmf", ModelType::BoneMulti,  L"Player\\"),
 		//ModelResourceLoadData(L"Player_WinMove",  L"Player_Animation_Win.bmf", ModelType::BoneMulti,  L"Player\\"),
-		
+
 		//ModelResourceLoadData(L"Player_Mesh",  L"Player_Mesh.bmf", ModelType::BoneMulti,  L"Player\\"),
-		
+
 		ModelResourceLoadData(L"rack",  L"tana.bmf", ModelType::Static,  L"StageObject\\"),
 	};
 
@@ -228,7 +225,6 @@ namespace basecross
 			else {
 				app->RegisterResource(modelLoadData.resourceKey, modelMultiMesh);
 			}
-			
 		}
 
 		auto& soundSetting = GameSaveManager::GetSoundSetting();
@@ -241,6 +237,15 @@ namespace basecross
 		m_isLoadFinish = true;
 	}
 
+	void LoadStage::LoadEffectDatas() {
+		// エフェクトの登録に必要
+		AddGameObject<EfkInterface>();
+
+		const auto& app = App::GetApp();
+		std::wstring dir = app->GetDataDirWString() + L"Effects/";
+		EfkEffectResource::RegisterEffectResource(L"TestEffect", dir + L"TestEffect.efk");
+	}
+
 	void LoadStage::OnCreate()
 	{
 		itbs::Input::CursorSetting::SetIsLock(true);
@@ -251,6 +256,8 @@ namespace basecross
 		m_stageBackColor = App::GetApp()->GetScene<Scene>()->GetClearColor();
 
 		App::GetApp()->GetScene<Scene>()->SetClearColor(Col4(0, 0, 0, 1));
+
+		LoadEffectDatas();
 
 		std::thread loadThread(LoadResource);
 
