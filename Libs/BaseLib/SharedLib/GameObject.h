@@ -21,8 +21,8 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 	class GameObject :public ObjectInterface, public ShapeInterface {
 		bool m_UpdateActive = true;	//updateするかどうか
-		bool m_DrawActive = true;		//Drawするかどうか
-		bool m_AlphaActive = false;		//透明かどうか
+		bool m_DrawActive = true;	//Drawするかどうか
+		bool m_AlphaActive = false;	//透明かどうか
 		bool m_SpriteDraw = false;	//スプライトとして描画するかどうか
 
 		bool m_isUpdateActive = true; // 子オブジェクトの際のUpdateActive保存用
@@ -217,6 +217,10 @@ namespace basecross {
 		{
 			SetUpdateActive(b);
 			SetDrawActive(b);
+		}
+
+		bool IsActive() const {
+			return (GetDrawActive() && GetUpdateActive());
 		}
 
 		/// <summary>

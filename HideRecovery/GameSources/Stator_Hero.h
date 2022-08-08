@@ -28,7 +28,8 @@ namespace basecross {
 		//--------------------------------------------------------------------------------------
 		struct Stator_Hero_TransitionMember
 		{
-			float attackRange;	//UŒ‚‹——£
+			float plowlingEyeRange;	//œpœj‹ŠE
+			float attackRange;		//UŒ‚‹——£
 
 			Stator_Hero_TransitionMember();
 		};
@@ -76,11 +77,23 @@ namespace basecross {
 			void CreateEdge() override;
 
 			//--------------------------------------------------------------------------------------
+			/// ‘JˆÚğŒİ’è
+			//--------------------------------------------------------------------------------------
+
+			/// <summary>
+			/// ‹ŠE“à‚Éƒ^[ƒQƒbƒg‚ª‚¢‚é‚©‚Ç‚¤‚©
+			/// </summary>
+			/// <param name="member">‘JˆÚğŒƒƒ“ƒo[</param>
+			/// <returns></returns>
+			bool IsInEyeRangeTarget(const TransitionMember& member);
+
+			//--------------------------------------------------------------------------------------
 			/// ƒpƒ‰ƒ[ƒ^İ’è
 			//--------------------------------------------------------------------------------------
 
 			void SettingParametor();
 			void SettingPlowling();
+			void SettingChase();
 		};
 
 	}

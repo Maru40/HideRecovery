@@ -28,6 +28,7 @@ namespace basecross {
 		//--------------------------------------------------------------------------------------
 		struct Stator_Villain_TransitionMember
 		{
+			float plowlingEyeRange;
 			float attackRange;	//UŒ‚‹——£
 
 			Stator_Villain_TransitionMember();

@@ -678,7 +678,7 @@
     </Filter>
     <Filter Include="Watanabe\TestStage">
       <UniqueIdentifier>{5e39f3e5-2840-4f47-9c69-2f2ad0e71d1c}</UniqueIdentifier>
-	</Filter>
+    </Filter>
     <Filter Include="Maruyama\Enemy\Component\EachEnemy\Common\Stator\State\Chase">
       <UniqueIdentifier>{e487b252-9e3e-4ff4-b05c-f42faf84d441}</UniqueIdentifier>
     </Filter>
@@ -687,7 +687,6 @@
     </Filter>
     <Filter Include="Maruyama\Enemy\Component\EachEnemy\Common\Stator\State\Chase\TargetSeek">
       <UniqueIdentifier>{adb44c54-3b38-4d44-a7f8-69cf1c0a7975}</UniqueIdentifier>
-
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1253,7 +1252,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)VillainEnemyObject.h">
       <Filter>Maruyama\Enemy\Object\VillainObject</Filter>
     </ClInclude>
-
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Effekseer\EfkComponent.h">
       <Filter>Watanabe\Effekseer</Filter>
     </ClInclude>
@@ -1280,7 +1278,7 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\WatanabeStage.h">
       <Filter>Watanabe\TestStage</Filter>
-	</ClInclude>
+    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)EnemyStateNode_Chase.h">
       <Filter>Maruyama\Enemy\Component\EachEnemy\Common\Stator\State\Chase</Filter>
     </ClInclude>
@@ -1289,7 +1287,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)ChaseState_TargetSeek.h">
       <Filter>Maruyama\Enemy\Component\EachEnemy\Common\Stator\State\Chase\TargetSeek</Filter>
-
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1790,7 +1787,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)VillainEnemyObject.cpp">
       <Filter>Maruyama\Enemy\Object\VillainObject</Filter>
     </ClCompile>
-
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Effekseer\EfkComponent.cpp">
       <Filter>Watanabe\Effekseer</Filter>
     </ClCompile>
@@ -1808,7 +1804,7 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\WatanabeStage.cpp">
       <Filter>Watanabe\TestStage</Filter>
-	</ClCompile>
+    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)EnemyObjectBase.cpp">
       <Filter>Maruyama\Enemy\Object</Filter>
     </ClCompile>
@@ -1820,7 +1816,6 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)ChaseState_TargetSeek.cpp">
       <Filter>Maruyama\Enemy\Component\EachEnemy\Common\Stator\State\Chase\TargetSeek</Filter>
-
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

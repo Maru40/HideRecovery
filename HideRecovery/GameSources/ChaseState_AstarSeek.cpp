@@ -51,8 +51,13 @@ namespace basecross {
 				/// Astarを使った追従ステート本体
 				//--------------------------------------------------------------------------------------
 
-				ChaseState_AstarSeek::ChaseState_AstarSeek(const std::shared_ptr<EnemyBase>& owner, const std::shared_ptr<AstarSeekParametor>& paramPtr)
-					:EnemyStateNodeBase<EnemyBase>(owner), m_paramPtr(paramPtr), m_taskList(new TaskList<TaskEnum>())
+				ChaseState_AstarSeek::ChaseState_AstarSeek(
+					const std::shared_ptr<EnemyBase>& owner, 
+					const std::shared_ptr<AstarSeekParametor>& paramPtr
+				) :
+					EnemyStateNodeBase<EnemyBase>(owner), 
+					m_paramPtr(paramPtr), 
+					m_taskList(new TaskList<TaskEnum>())
 				{
 					DefineTask();
 				}

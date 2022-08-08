@@ -11,6 +11,7 @@
 #include "HideItemObject.h"
 
 #include "HideItem.h"
+#include "Targeted.h"
 
 namespace basecross {
 
@@ -22,6 +23,7 @@ namespace basecross {
 		SettingModel();
 
 		AddComponent<HideItem>();
+		AddComponent<Targeted>();
 	}
 
 	void HideItemObject::SettingModel() {

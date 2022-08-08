@@ -30,7 +30,7 @@ namespace basecross {
 				//--------------------------------------------------------------------------------------
 
 				TargetSeekParametor::TargetSeekParametor()
-					: TargetSeekParametor(std::make_shared<SeekTarget::Parametor>())
+					: TargetSeekParametor(std::make_shared<SeekTarget::Parametor>(SeekTarget::SeekType::VelcoityArrive))
 				{}
 
 				TargetSeekParametor::TargetSeekParametor(const std::shared_ptr<SeekTarget::Parametor>& seekParamPtr)
@@ -70,8 +70,7 @@ namespace basecross {
 				}
 
 				void ChaseState_TargetSeek::OnExit() {
-					auto seek = GetOwner()->GetGameObject()->GetComponent<SeekTarget>(false);
-					if (seek) {
+					if (auto seek = GetOwner()->GetGameObject()->GetComponent<SeekTarget>(false)) {
 						seek->SetTarget(nullptr);
 					}
 				}

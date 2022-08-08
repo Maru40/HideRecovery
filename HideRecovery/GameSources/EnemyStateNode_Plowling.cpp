@@ -69,8 +69,11 @@ namespace basecross {
 			/// スライムの徘徊行動ステート本体
 			//--------------------------------------------------------------------------------------
 
-			Plowling::Plowling(const std::shared_ptr<EnemyBase>& owner, const std::shared_ptr<Parametor>& paramPtr)
-				:EnemyStateNodeBase<EnemyBase>(owner), m_paramPtr(paramPtr), m_taskList(new TaskList<TaskEnum>()), m_arriveTimer(new GameTimer(0.0f))
+			Plowling::Plowling(const std::shared_ptr<EnemyBase>& owner, const std::shared_ptr<Parametor>& paramPtr) :
+				EnemyStateNodeBase<EnemyBase>(owner), 
+				m_paramPtr(paramPtr), 
+				m_taskList(new TaskList<TaskEnum>()), 
+				m_arriveTimer(new GameTimer(0.0f))
 			{
 				DefineTask();
 			}
