@@ -8,13 +8,10 @@
 
 #include "VillainEnemyObject.h"
 
-#include "Hero.h"
+#include "Villain.h"
 
 #include "EnemyMainStateMachine.h"
-#include "Stator_Hero.h"
-
-#include "RotationController.h"
-#include "VelocityManager.h"
+#include "Stator_Villain.h"
 
 namespace basecross {
 	namespace Enemy {
@@ -28,17 +25,8 @@ namespace basecross {
 
 			SettingModel();
 
-			AddComponent<Hero>();
-			AddComponent<Stator_Hero>();
-
-			//‹¤’Ê---------------------------------------
-
-			AddComponent<CollisionObb>();
-			AddComponent<RotationController>();
-			AddComponent<Gravity>();
-			AddComponent<VelocityManager>();
-
-			//-------------------------------------------
+			AddComponent<Villain>();
+			AddComponent<Stator_Villain>();
 		}
 
 		void VillainObject::SettingModel() {
