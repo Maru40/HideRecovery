@@ -14,9 +14,9 @@ namespace basecross {
 
 	class NumbersCtrl : public Component 
 	{
-		int m_value = 0;								//表示する値
-
+		float m_value = 0;								//表示する値
 		int m_maxDigit = 3;								//最大桁数
+		wstring m_texture = L"Number_TX";				//数字表示に使うテクスチャ
 
 		vector<ex_weak_ptr<NumberObject>> m_numberObjs;	//生成したナンバーオブジェクト
 
@@ -48,13 +48,37 @@ namespace basecross {
 		/// コンストラクタ
 		/// </summary>
 		/// <param name="objPtr">このクラスを所有するゲームオブジェクト</param>
+		/// <param name="texture">数字表示表のテクスチャ</param>
+		NumbersCtrl(const std::shared_ptr<GameObject>& objPtr, const wstring& texture):
+			Component(objPtr), m_texture(texture)
+		{}
+
+		/// <summary>
+		/// コンストラクタ
+		/// </summary>
+		/// <param name="objPtr">このクラスを所有するゲームオブジェクト</param>
 		/// <param name="maxDigit">最大桁数</param>
 		NumbersCtrl(const std::shared_ptr<GameObject>& objPtr, const int& maxDigit)
 			:Component(objPtr),m_maxDigit(maxDigit)
 		{}
 
 		void OnCreate() override;
+		void OnDestroy() override;
 
+	private:
+		/// <summary>
+		/// 整数部分の変更
+		/// </summary>
+		/// <param name="number">変更したい数字</param>
+		void ChangeIntegerNumber(const int value);
+
+		/// <summary>
+		/// 小数点部分の表示を変更
+		/// </summary>
+		/// <param name="value">変更したい数字</param>
+		void ChangeFloatNumber(const float value);
+
+	public:
 		//--------------------------------------------------------------------------------------
 		///	アクセッサ
 		//--------------------------------------------------------------------------------------
@@ -63,19 +87,31 @@ namespace basecross {
 		/// 表示する値の設定
 		/// </summary>
 		/// <param name="value">表示する値</param>
-		void SetValue(const int& value);
+		void SetValue(const float value);
 
 		/// <summary>
 		/// 表示する数字の取得
 		/// </summary>
 		/// <returns>表示する数字</returns>
-		int GetValue() const noexcept;
+		float GetValue() const noexcept;
 
 		/// <summary>
 		/// 色の設定
 		/// </summary>
 		/// <param name="color">設定する色</param>
 		void SetColor(const Col4& color);
+
+		/// <summary>
+		/// テクスチャの設定
+		/// </summary>
+		/// <param name="texture">テクスチャ</param>
+		void SetTexture(const wstring& texture);
+
+		/// <summary>
+		///	テクスチャの取得
+		/// </summary>
+		/// <returns>テクスチャ</returns>
+		wstring GetTexture() const noexcept { return m_texture; }
 	};
 
 }
