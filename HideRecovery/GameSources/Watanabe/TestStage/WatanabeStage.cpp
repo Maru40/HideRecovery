@@ -7,7 +7,7 @@
 
 namespace basecross {
 	void WatanabeStage::CreateViewLight() {
-		const Vec3 eye(0.0f, 5.0f, -5.0f);
+		const Vec3 eye(10.0f, 10.0f, -10.0f);
 		const Vec3 at(0.0f);
 		auto PtrView = CreateView<SingleView>();
 		//ビューのカメラの設定
@@ -29,6 +29,8 @@ namespace basecross {
 
 		auto testObj = AddGameObject<GameObject>();
 		auto efkComp = testObj->AddComponent<EfkComponent>();
+		efkComp->SetEffectResource(L"TestEffect");
+		efkComp->PlayLoop(L"TestEffect");
 	}
 
 	void WatanabeStage::OnUpdate() {
