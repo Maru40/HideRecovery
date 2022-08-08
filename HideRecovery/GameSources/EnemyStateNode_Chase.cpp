@@ -59,6 +59,8 @@ namespace Enemy {
 		{
 			CreateNode();
 			CreateEdge();
+
+			AddChangeComponent(owner->GetGameObject()->GetComponent<SeekTarget>(false), true, false);
 		}
 
 		//‘JˆÚðŒ----------------------------------------------------------------------------------------------------
@@ -92,6 +94,8 @@ namespace Enemy {
 		//------------------------------------------------------------------------------------------------------------
 
 		void Chase::OnStart() {
+			StartChangeComponents();
+
 			m_stateMachine->ChangeState(StateType::TargetSeek, (int)StateType::TargetSeek);
 		}
 
@@ -103,6 +107,8 @@ namespace Enemy {
 
 		void Chase::OnExit() {
 			m_stateMachine->ForceChangeState(StateType::Null);
+
+			ExitChangeComponents();
 		}
 
 		void Chase::CreateNode() {
