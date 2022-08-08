@@ -1,7 +1,7 @@
 
 /*!
-@file Slime_Chase.h
-@brief Slime_Chaseなど
+@file EnemyStateNode_Chase.h
+@brief EnemyStateNode_Chaseなど
 担当：丸山裕喜
 */
 
@@ -18,6 +18,8 @@ namespace basecross {
 	/// 前方宣言
 	//--------------------------------------------------------------------------------------
 	class TargetManager;
+	template<class node_type, class EnumType, class TransitionType>
+	class EnemyMainStateMachine;
 
 	namespace Enemy {
 
@@ -33,7 +35,7 @@ namespace basecross {
 			//--------------------------------------------------------------------------------------
 			/// スライムの追従ステート
 			//--------------------------------------------------------------------------------------
-			class Slime_Chase : public EnemyStateNodeBase<EnemyBase>
+			class Chase : public EnemyStateNodeBase<EnemyBase>
 			{
 			public:
 				/// <summary>
@@ -77,7 +79,7 @@ namespace basecross {
 				/// </summary>
 				/// <param name="objPtr">このクラスを所有するクラス</param>
 				/// <param name="numCreate">パラメータ</param>
-				Slime_Chase(const std::shared_ptr<EnemyBase>& owner, const std::shared_ptr<Parametor>& paramPtr);
+				Chase(const std::shared_ptr<EnemyBase>& owner, const std::shared_ptr<Parametor>& paramPtr);
 
 				void OnStart() override;
 				bool OnUpdate() override;
