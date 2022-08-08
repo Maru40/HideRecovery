@@ -103,6 +103,8 @@ namespace basecross {
 			:StateNodeBase<EnemyType>(owner)
 		{}
 
+		virtual ~EnemyStateNodeBase() {}
+
 	};
 
 }
