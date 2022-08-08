@@ -349,5 +349,8 @@ MadSweets_Project/Saves/
 *.cso
 
 # Effekseer関連ファイルのみ例外とする
-!/Libs/lib/Debug/Effekseer*.lib
-!/Libs/lib/Release/Effekseer*.lib
+!/Libs/lib/Debug/
+!/Libs/lib/Release/
+
+/Libs/lib/Debug/DirectXTex.lib
+/Libs/lib/Release/DirectXTex.lib
