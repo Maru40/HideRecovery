@@ -59,6 +59,8 @@ namespace basecross {
             :m_owner(owner)
         {}
 
+        virtual ~StateNodeBase() {}
+
     protected:
 
         /// <summary>
