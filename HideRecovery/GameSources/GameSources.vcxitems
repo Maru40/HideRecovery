@@ -214,6 +214,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)EffectBase.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)EffectManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)EnemyGeneratorObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)EnemyObjectBase.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)EnemyStateNode_Plowling.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)EnemyStatorBase.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)FieldImpactMap.cpp" />

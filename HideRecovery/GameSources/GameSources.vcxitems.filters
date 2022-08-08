@@ -664,6 +664,9 @@
     <Filter Include="Maruyama\Enemy\Object\VillainObject">
       <UniqueIdentifier>{3dedd3c7-41e7-4fdc-973d-cd4a8822ac8d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Enemy\Component\EachEnemy\Common\Stator\State\Chase">
+      <UniqueIdentifier>{e487b252-9e3e-4ff4-b05c-f42faf84d441}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1726,6 +1729,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)VillainEnemyObject.cpp">
       <Filter>Maruyama\Enemy\Object\VillainObject</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)EnemyObjectBase.cpp">
+      <Filter>Maruyama\Enemy\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
