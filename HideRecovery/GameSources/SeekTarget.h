@@ -40,6 +40,12 @@ namespace basecross {
 		/// <summary>
 		/// コンストラクタ
 		/// </summary>
+		/// <param name="seekType">追従タイプ</param>
+		SeekTarget_Parametor(const SeekType& seekType);
+
+		/// <summary>
+		/// コンストラクタ
+		/// </summary>
 		/// <param name="range">追従範囲</param>
 		/// <param name="offset">追従オフセット</param>
 		/// <param name="seekType">追従タイプ</param>

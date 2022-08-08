@@ -26,6 +26,10 @@ namespace basecross {
 			SeekType::Lerp)
 	{}
 
+	SeekTarget_Parametor::SeekTarget_Parametor(const SeekType& seekType):
+		SeekTarget_Parametor(15.0f, Vec3(0.0f), seekType)
+	{}
+
 	SeekTarget_Parametor::SeekTarget_Parametor(const float& range, const Vec3& offset, const SeekType& seekType)
 		:SeekTarget_Parametor(10.0f, range, offset, seekType)
 	{}
