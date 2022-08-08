@@ -347,3 +347,7 @@ MadSweets_Project/Debug/
 MadSweets_Project/Release/
 MadSweets_Project/Saves/
 *.cso
+
+# Effekseer関連ファイルのみ例外とする
+!/Libs/lib/Debug/Effekseer*.lib
+!/Libs/lib/Release/Effekseer*.lib

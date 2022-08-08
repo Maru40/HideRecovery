@@ -199,6 +199,14 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)WaitTimer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WallEvasion.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WallObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\DebugClass\Debug.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Effekseer\EfkComponent.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Effekseer\EfkEffect.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Effekseer\EfkEffectResource.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Effekseer\EfkInterface.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Effekseer\TransformData.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\BaseSingleton.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\Utility.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WindowSetting.h" />
   </ItemGroup>
   <ItemGroup>
@@ -368,6 +376,11 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)WaitTimer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WallEvasion.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WallObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\DebugClass\Debug.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Effekseer\EfkComponent.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Effekseer\EfkEffectResource.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Effekseer\EfkInterface.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Utility\Utility.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
