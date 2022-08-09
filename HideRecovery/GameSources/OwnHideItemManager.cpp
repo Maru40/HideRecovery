@@ -26,6 +26,8 @@
 
 #include "RotationController.h"
 
+#include "Watanabe/DebugClass/Debug.h"
+
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
