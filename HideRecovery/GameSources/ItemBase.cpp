@@ -20,6 +20,14 @@ namespace basecross {
 	/// アクセッサ
 	//--------------------------------------------------------------------------------------
 
+	bool ItemBase::IsAcquisition() const {
+		if (GetGameObject()->IsActive()) {
+			return m_isAcquisition;
+		}
+
+		return false;
+	}
+
 	void ItemBase::SetIsAcquisition(const bool isAcquisition) {
 		m_isAcquisition = isAcquisition;
 	}
