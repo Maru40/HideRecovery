@@ -36,8 +36,8 @@ namespace basecross {
 		efkComp->SetEffectResource(L"TestEffect");
 		//efkComp->PlayLoop(L"TestEffect");
 
-		//AddGameObject<CameraObject>();
-		//AddGameObject<HeroPlayerObject>();
+		AddGameObject<CameraObject>();
+		Instantiate<HeroPlayerObject>(Vec3(20.0f, 1.0f, 0.0f), Quat::Identity());
 
 		GameObjecttCSVBuilder builder;
 		builder.Register<Block>(L"Block");
