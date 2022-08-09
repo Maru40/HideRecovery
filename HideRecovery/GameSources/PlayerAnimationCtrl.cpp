@@ -8,10 +8,15 @@
 #include "stdafx.h"
 #include "Project.h"
 
+#include "AnimationCtrl.h"
 #include "PlayerAnimationCtrl.h"
 
 #include "VelocityManager.h"
 #include "PlayerInputer.h"
+
+#include "PlayerMover.h"
+#include "VelocityManager.h"
+#include "PlayerController.h"
 
 namespace basecross {
 
@@ -22,6 +27,69 @@ namespace basecross {
 	PlayerAnimationCtrl_TransitionMember::PlayerAnimationCtrl_TransitionMember():
 		walkSpeed(2.0f)
 	{}
+
+	//--------------------------------------------------------------------------------------
+	/// アニメーション追加パラメータ
+	//--------------------------------------------------------------------------------------
+
+	AnimationParametor::AnimationParametor() :
+		AnimationParametor(State(0), L"", 0, 0, false, 1.0f, nullptr, nullptr, nullptr)
+	{}
+
+	AnimationParametor::AnimationParametor(
+		const State& state,
+		const wstring& name,
+		const int startTime,
+		const int endTime,
+		const bool loop,
+		const float updateSpeed,
+		const std::shared_ptr<I_AnimationStateNode>& stateNode
+	) :
+		AnimationParametor(state, name, startTime, endTime, loop, updateSpeed, 
+			[stateNode]() { stateNode->OnStart(); },
+			[stateNode](const float speed) { return stateNode->OnUpdate(speed); },
+			[stateNode]() { stateNode->OnExit(); }
+		)
+	{}
+
+	AnimationParametor::AnimationParametor(
+		const State& state,
+		const wstring& name,
+		const int startTime,
+		const int endTime,
+		const bool loop,
+		const float updateSpeed,
+		const function<void()>& startEvent,
+		const function<bool(const float)>& updateEvent,
+		const function<void()>& exitEvent
+	):
+		AnimationParametor(state, name, startTime, endTime, loop, 30.0f, updateSpeed, startEvent, updateEvent, exitEvent)
+	{}
+
+	AnimationParametor::AnimationParametor(
+			const State& state,
+			const wstring& name,
+			const int startTime,
+			const int endTime,
+			const bool loop,
+			const float parSecond,
+			const float updateSpeed,
+			const function<void()>& startEvent,
+			const function<bool(const float)>& updateEvent,
+			const function<void()>& exitEvent
+	) :
+		stateType(state),
+		stateName(name),
+		startTime(startTime),
+		loop(loop),
+		timeParSecond(parSecond),
+		updateSpeed(updateSpeed),
+		startEvent(startEvent),
+		updateEvent(updateEvent),
+		exitEvent(exitEvent)
+	{
+		timeLength = endTime - startTime;
+	}
 
 	//--------------------------------------------------------------------------------------
 	/// アニメーション管理本体
@@ -40,12 +108,12 @@ namespace basecross {
 		auto drawComp = object->GetComponent<PNTBoneModelDraw>();
 
 		//アニメーション用のパラメータ
-		AnimationParametor<PlayerAnimationCtrl> params[] = {
-			//ステートEnum,				ステート名,				開始時間,	終了時間,	ループ,		更新速度,	更新イベント
-			{State::Idle,				L"Idle",				1,			39,			true,		1.0f ,		&PlayerAnimationCtrl::Idle},
-			{State::Walk,				L"Dash",				99,			119,		true,		1.0f,		&PlayerAnimationCtrl::Walk},
-			{State::PutItem_Floor,		L"PutItem_Floor",		125,		149,		true,		1.0f,		&PlayerAnimationCtrl::PutItem_Floor},
-			{State::PutItem_HideObject,	L"PutItem_HideObject",	150,		174,		true,		1.0f,		&PlayerAnimationCtrl::PutItem_HideObject},
+		AnimationParametor params[] = {
+			//ステートEnum,				ステート名,				開始時間,	終了時間,	ループ,		更新速度,	イベント
+			{State::Idle,				L"Idle",				1,			39,			true,		1.0f ,		nullptr, [&](const float speed) { return Idle(speed); }, nullptr },
+			{State::Walk,				L"Dash",				99,			119,		true,		1.0f,		nullptr, [&](const float speed) { return Walk(speed); }, nullptr },
+			{State::PutItem_Floor,		L"PutItem_Floor",		125,		149,		true,		1.0f,		std::make_shared<AnimationStateNode::PutItem_Floor>(GetGameObject()) },
+			{State::PutItem_HideObject,	L"PutItem_HideObject",	150,		174,		true,		1.0f,		std::make_shared<AnimationStateNode::PutItem_HideObject>(GetGameObject()) },
 		};
 
 		//アニメーションの設定
@@ -71,25 +139,24 @@ namespace basecross {
 
 	void PlayerAnimationCtrl::OnUpdate()
 	{
-		m_parametorMap[m_currentState].updateEvent(*(this));
+		m_parametorMap[m_currentState].updateEvent(GetCurrentUpdateSpeed());
 
 		//デバッグ--------------------------------------------------
-		//if (PlayerInputer::IsBDown()) {
-		//	ChangeAnimation(State::PutItem_Floor);
-		//}
-		//if (PlayerInputer::IsYDown()) {
-		//	ChangeAnimation(State::PutItem_HideObject);
-		//}
+		if (PlayerInputer::IsBDown()) {
+			ChangeAnimation(State::PutItem_Floor);
+		}
+		if (PlayerInputer::IsYDown()) {
+			ChangeAnimation(State::PutItem_HideObject);
+		}
 	}
 
 	//--------------------------------------------------------------------------------------
 	/// アニメーションイベント
 	//--------------------------------------------------------------------------------------
 
-	void PlayerAnimationCtrl::Idle()
+	bool PlayerAnimationCtrl::Idle(const float speed)
 	{
 		auto delta = App::GetApp()->GetElapsedTime();
-		float speed = GetCurrentUpdateSpeed();
 
 		m_drawComponent.lock()->UpdateAnimation(delta * speed);
 
@@ -99,9 +166,11 @@ namespace basecross {
 				ChangeAnimation(State::Walk);
 			}
 		}
+
+		return false;
 	}
 
-	void PlayerAnimationCtrl::Walk()
+	bool PlayerAnimationCtrl::Walk(const float speed)
 	{
 		auto velocityMananger = GetGameObject()->GetComponent<VelocityManager>(false);
 
@@ -116,14 +185,8 @@ namespace basecross {
 				ChangeAnimation(State::Idle);
 			}
 		}
-	}
 
-	void PlayerAnimationCtrl::PutItem_Floor(){
-		DefaultPlay();
-	}
-
-	void PlayerAnimationCtrl::PutItem_HideObject() {
-		DefaultPlay();
+		return false;
 	}
 
 	void PlayerAnimationCtrl::DefaultPlay(const bool isEndTransitionIdle) {
@@ -153,7 +216,7 @@ namespace basecross {
 	void PlayerAnimationCtrl::ChangeForceAnimation(const State& state) {
 		//終了イベント再生
 		if (auto& exitEvent = m_parametorMap[m_currentState].exitEvent) {
-			exitEvent(*this);
+			exitEvent();
 		}
 
 		m_currentState = state;
@@ -161,8 +224,105 @@ namespace basecross {
 
 		//スタートイベント再生
 		if (auto& startEvent = m_parametorMap[m_currentState].startEvent) {
-			startEvent(*this);
+			startEvent();
 		}
+	}
+
+
+	//--------------------------------------------------------------------------------------
+	/// アニメーションステートノード
+	//--------------------------------------------------------------------------------------
+
+	namespace AnimationStateNode {
+
+		//--------------------------------------------------------------------------------------
+		/// 床にアイテムを置くアニメーション
+		//--------------------------------------------------------------------------------------
+
+		PutItem_Floor::PutItem_Floor(const std::shared_ptr<GameObject>& objPtr) :
+			AnimationStateNodeBase(objPtr)
+		{}
+
+		void PutItem_Floor::OnStart() {
+			if (auto mover = GetOwner()->GetComponent<PlayerMover>(false)) {
+				mover->SetUpdateActive(false);
+			}
+
+			if (auto velocityManager = GetOwner()->GetComponent<VelocityManager>(false)) {
+				velocityManager->ResetAll();
+			}
+
+			if (auto playerContoller = GetOwner()->GetComponent<PlayerController>(false)) {
+				playerContoller->SetUpdateActive(false);
+			}
+		}
+
+		bool PutItem_Floor::OnUpdate(const float speed) {
+			auto isUpdtate = AnimationStateNodeBase::OnUpdate(speed);
+
+			//遷移条件
+			if (GetModel()->GetCurrentAnimationTime() == 0.0f) {
+				auto animationCtrl = GetOwner()->GetComponent<PlayerAnimationCtrl>(false);
+				animationCtrl->ChangeAnimation(PlayerAnimationCtrl::State::Idle);
+			}
+
+			return isUpdtate;
+		}
+
+		void PutItem_Floor::OnExit() {
+			if (auto mover = GetOwner()->GetComponent<PlayerMover>(false)) {
+				mover->SetUpdateActive(true);
+			}
+
+			if (auto playerContoller = GetOwner()->GetComponent<PlayerController>(false)) {
+				playerContoller->SetUpdateActive(true);
+			}
+		}
+
+		//--------------------------------------------------------------------------------------
+		/// 隠すオブジェクトにアイテムを置くアニメーション
+		//--------------------------------------------------------------------------------------
+
+		PutItem_HideObject::PutItem_HideObject(const std::shared_ptr<GameObject>& objPtr) :
+			AnimationStateNodeBase(objPtr)
+		{}
+
+		void PutItem_HideObject::OnStart() {
+			if (auto mover = GetOwner()->GetComponent<PlayerMover>(false)) {
+				mover->SetUpdateActive(false);
+			}
+
+			if (auto velocityManager = GetOwner()->GetComponent<VelocityManager>(false)) {
+				velocityManager->ResetAll();
+			}
+
+			if (auto playerContoller = GetOwner()->GetComponent<PlayerController>(false)) {
+				playerContoller->SetUpdateActive(false);
+			}
+		}
+
+		bool PutItem_HideObject::OnUpdate(const float speed) {
+			auto isUpdtate = AnimationStateNodeBase::OnUpdate(speed);
+
+			//遷移条件
+			if (GetModel()->GetCurrentAnimationTime() == 0.0f) {
+				auto animationCtrl = GetOwner()->GetComponent<PlayerAnimationCtrl>(false);
+				animationCtrl->ChangeAnimation(PlayerAnimationCtrl::State::Idle);
+			}
+
+			return isUpdtate;
+		}
+
+		void PutItem_HideObject::OnExit() {
+			if (auto mover = GetOwner()->GetComponent<PlayerMover>(false)) {
+				mover->SetUpdateActive(true);
+			}
+
+			if (auto playerContoller = GetOwner()->GetComponent<PlayerController>(false)) {
+				playerContoller->SetUpdateActive(true);
+			}
+		}
+
 	}
 
 }
