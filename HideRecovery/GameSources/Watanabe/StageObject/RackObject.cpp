@@ -23,8 +23,12 @@ namespace basecross {
 	void RackObject::OnCreate() {
 		auto drawComp = AddComponent<PNTStaticModelDraw>();
 		drawComp->SetMeshResource(L"rack");
+		drawComp->SetOwnShadowActive(true);
 
 		// 隠せるオブジェクトにする
 		AddComponent<HidePlace>(HidePlace::Parametor(Vec3(0.0f, 1.85f, 0.0f)));
+
+		auto shadow = AddComponent<Shadowmap>();
+		shadow->SetMeshResource(L"rack");
 	}
 }
