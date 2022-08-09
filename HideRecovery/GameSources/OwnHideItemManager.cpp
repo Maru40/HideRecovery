@@ -125,7 +125,8 @@ namespace basecross {
 	Vec3 OwnHideItemManager::CalculateHidePosition() const {
 		if (m_isFleePut) {
 			auto position = transform->GetPosition();
-			position += transform->GetForward();
+			const float PutOffsetSize = 0.5f;
+			position += transform->GetForward() * PutOffsetSize;
 			position.y = -0.25f;
 			return position;
 		}
