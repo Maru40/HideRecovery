@@ -16,6 +16,7 @@ namespace basecross {
 		};
 	private:
 		BlockType m_blockType;
+		shared_ptr<MeshResource> m_meshRes;
 	public:
 		Block(const shared_ptr<Stage>& stage, const BlockType blockType);
 		Block(const shared_ptr<Stage>& stage, const wstring& line);

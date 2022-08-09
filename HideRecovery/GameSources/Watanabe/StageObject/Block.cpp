@@ -6,6 +6,7 @@
 #include "stdafx.h"
 #include "Block.h"
 #include "../Utility/DataExtracter.h"
+#include "../Utility/AdvMeshUtil.h"
 
 namespace basecross {
 	Block::Block(const shared_ptr<Stage>& stage, const BlockType blockType)
@@ -35,13 +36,37 @@ namespace basecross {
 
 	void Block::OnCreate() {
 		auto drawComp = AddComponent<PNTStaticDraw>();
-		drawComp->SetMeshResource(L"DEFAULT_CUBE");
-		drawComp->SetTextureResource(L"Wall01_TX");
+		switch (m_blockType)
+		{
+		case BlockType::Wall:
+			drawComp->SetMeshResource(L"DEFAULT_CUBE");
+			drawComp->SetTextureResource(L"Wall01_TX");
+
+			AddTag(L"T_Obstacle");
+			AddTag(L"Wall");
+			break;
+		case BlockType::Floor:
+		{
+			vector<VertexPositionNormalTexture> vertices;
+			vector<uint16_t> indices;
+
+			// スケールに応じたUVを持つCubeを設定
+			AdvMeshUtil::CreateCube(1.0f, m_transformData.Scale, vertices, indices);
+			m_meshRes = MeshResource::CreateMeshResource(vertices, indices, true);
+			drawComp->SetMeshResource(m_meshRes);
+			drawComp->SetTextureResource(L"Floor_TX");
+
+			AddTag(L"Floor");
+		}
+		break;
+		default:
+			break;
+		}
 
 		auto col = AddComponent<CollisionObb>();
 		col->SetFixed(true);
-		AddTag(L"T_Obstacle");
-		AddTag(L"Wall");
+
+		AddTag(m_name);
 	}
 
 	void Block::OnUpdate() {
