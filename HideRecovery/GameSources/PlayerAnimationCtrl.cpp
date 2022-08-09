@@ -43,7 +43,7 @@ namespace basecross {
 		AnimationParametor<PlayerAnimationCtrl> params[] = {
 			//ステートEnum,				ステート名,				開始時間,	終了時間,	ループ,		更新速度,	更新イベント
 			{State::Idle,				L"Idle",				1,			39,			true,		1.0f ,		&PlayerAnimationCtrl::Idle},
-			{State::Walk,				L"Dash",				99,			119,		true,		0.1f,		&PlayerAnimationCtrl::Walk},
+			{State::Walk,				L"Dash",				99,			119,		true,		1.0f,		&PlayerAnimationCtrl::Walk},
 			{State::PutItem_Floor,		L"PutItem_Floor",		125,		149,		true,		1.0f,		&PlayerAnimationCtrl::PutItem_Floor},
 			{State::PutItem_HideObject,	L"PutItem_HideObject",	150,		174,		true,		1.0f,		&PlayerAnimationCtrl::PutItem_HideObject},
 		};
@@ -108,7 +108,7 @@ namespace basecross {
 		float delta = App::GetApp()->GetElapsedTime();
 		auto moveVec = velocityMananger->GetVelocity();
 		
-		m_drawComponent.lock()->UpdateAnimation(delta * moveVec.length() * GetCurrentUpdateSpeed());
+		m_drawComponent.lock()->UpdateAnimation(delta * GetCurrentUpdateSpeed());
 
 		//遷移条件
 		if (auto velocityManager = GetGameObject()->GetComponent<VelocityManager>(false)) {
