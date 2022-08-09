@@ -39,8 +39,10 @@
 
 #include "HidePlace.h"
 
-namespace basecross {
+#include "Watanabe/StageObject/Block.h"
+#include "Watanabe/StageObject/RackObject.h"
 
+namespace basecross {
 	void GameStageBase::CreateMainCamera()
 	{
 		//const Vec3 eye(0.0f, 5.0f, -5.0f);
@@ -55,7 +57,7 @@ namespace basecross {
 		//m_mainCameraObject = AddGameObject<MainCameraObject>(m_player.GetShard());
 		//auto mainTrans = m_mainCameraObject->GetComponent<Transform>();
 		//mainTrans->SetPosition(eye);
-		//m_mainCameraObject->SetUpdateActive(false); 
+		//m_mainCameraObject->SetUpdateActive(false);
 
 		const Vec3 eye(0.0f, +15.0f, -30.0f);
 		const Vec3 at(0.0f);
@@ -74,33 +76,17 @@ namespace basecross {
 		m_startView->SetCamera(startCam);
 	}
 
-	void GameStageBase::CreateMap(const wstring& fileName, const Vec3& offset) {
-		auto map = AddGameObject<StageMapCSV>(L"MapDatas/", fileName);
+	void GameStageBase::CreateMap(const wstring& fileName) {
+		GameObjecttCSVBuilder builder;
+		builder.Register<Block>(L"Block");
+		builder.Register<RackObject>(L"Rack");
+		auto dir = App::GetApp()->GetDataDirWString();
+		auto path = dir + L"MapDatas/";
+		builder.Build(GetThis<Stage>(), path + fileName);
 
-		//床生成
-		auto floors = map->CreateObject<FixedBox>(L"Floor", offset);
-		map->CreateObject<WallObject>(L"Block", offset);
-		vector<wstring> wallObjectNames = {
-			L"OutWall", L"UpperWall", L"LowerWall", L"RoomBorderWall"
-		};
-		auto wallObjets = map->CreateObjects<WallObject>(wallObjectNames, offset);
-		
-		//PNTStaticDrawのオリジナルメッシュのオブジェクトの生成
-		vector<wstring> originalMeshStageObjectNames = {
-			L"rack" //L"tree_2", L"tree_dead3"
-		};
-		auto objects = map->CreateObjects<OriginalMeshStageObject<BcPNTStaticModelDraw>>(originalMeshStageObjectNames, offset);
-		//デバッグでHidePlaceをつける
-		for (auto& object : objects) {
-			object->AddComponent<HidePlace>(HidePlace::Parametor(Vec3(0.0f, 1.85f, 0.0f)));
-		}
-		
-		//トゥーンオブジェクトの生成
-		vector<wstring> originalMeshToonObjects = {
-			L"rock", L"rock001", L"rock005", L"rock007",
-		};
-		//auto toonObjects = map->CreateObjects<OriginalMeshToonObject>(originalMeshToonObjects, offset);
-		auto toonObjects = map->CreateObjects<OriginalMeshStageObject<ToonPNTStaticModelDraw>>(originalMeshToonObjects, offset);
+		auto floor = GetSharedGameObject<Block>(L"Floor");
+
+		vector<shared_ptr<GameObject>> floors = { floor };
 
 		//フィールドの影響マップの生成
 		AddGameObject<GameObject>()->AddComponent<maru::FieldImpactMap>(maru::Utility::ConvertArrayType<GameObject>(floors));
@@ -139,15 +125,9 @@ namespace basecross {
 	void GameStageBase::OnCreate() {
 		try {
 			EventSystem::GetInstance(GetThis<Stage>())->SetBasicInputer(PlayerInputer::GetInstance());
-
 			AddGameObject<GameManagerObject>();
+
 			m_player = Instantiate<VillainPlayerObject>(Vec3(20.0f, 1.0f, 0.0f), Quat::Identity());
-
-			//for (int i = 0; i < 7; i++) {
-			//	auto object = Instantiate<GameObject>(Vec3(20.0f, 1.0f, 2.0f + i * 2.0f), Quat::Identity());
-			//	object->AddComponent<ItemAcquisitionManager>();
-			//}
-
 		}
 		catch (...) {
 			throw;
@@ -158,11 +138,11 @@ namespace basecross {
 	/// アクセッサ
 	//--------------------------------------------------------------------------------------
 
-	std::shared_ptr<PlayerObject> GameStageBase::GetPlayer() const{
+	std::shared_ptr<PlayerObject> GameStageBase::GetPlayer() const {
 		return m_player.GetShard();
 	}
 
-	std::shared_ptr<Camera> GameStageBase::ChangeMainCamera(){
+	std::shared_ptr<Camera> GameStageBase::ChangeMainCamera() {
 		//auto camera = m_mainView->GetCamera();
 		//if (camera) {
 		//	camera->SetCameraObject(m_mainCameraObject);

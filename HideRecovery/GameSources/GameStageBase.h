@@ -7,7 +7,6 @@
 #include "stdafx.h"
 
 namespace basecross {
-
 	//--------------------------------------------------------------------------------------
 	/// 前方宣言
 	//--------------------------------------------------------------------------------------
@@ -19,7 +18,6 @@ namespace basecross {
 	class SlimeRenderTarget;
 
 	class GameStageBase : public Stage {
-
 	protected:
 		//--------------------------------------------------------------------------------------
 		/// よく使われるオブジェクト
@@ -41,7 +39,7 @@ namespace basecross {
 		//スタートカメラ
 		std::shared_ptr<SingleView> m_startView;					//ビュー
 		std::shared_ptr<StartCamera> m_startCamera;					//カメラ
-													 
+
 		//レンダーターゲット
 		std::shared_ptr<SlimeRenderTarget> m_slimeRenderTarget;		//スライム用のレンダーターゲット
 
@@ -60,8 +58,7 @@ namespace basecross {
 		/// マップの生成
 		/// </summary>
 		/// <param name="fileName">マップファイルの名前</param>
-		/// <param name="offset">マップ全体を動かしたい時のオフセット</param>
-		virtual void CreateMap(const wstring& fileName, const Vec3& offset = Vec3(0.0f));
+		virtual void CreateMap(const wstring& fileName);
 
 		/// <summary>
 		/// 外側のコリジョンを複数生成する関数
@@ -78,7 +75,7 @@ namespace basecross {
 				constexpr float Width = 0.5f;
 				//奥行生成
 				auto forwardPosition = position + (Vec3::Forward() * halfScale.z);
-				CreateMapOutCollision(forwardPosition,  Vec3::Forward(), scale.x, Width);
+				CreateMapOutCollision(forwardPosition, Vec3::Forward(), scale.x, Width);
 
 				//手前側生成
 				auto backPosition = position + (-Vec3::Forward() * halfScale.z);
@@ -86,11 +83,11 @@ namespace basecross {
 
 				//右側
 				auto rightPosition = position + (Vec3::Right() * halfScale.x);
-				CreateMapOutCollision(rightPosition,  Vec3::Right(),   scale.z, Width);
+				CreateMapOutCollision(rightPosition, Vec3::Right(), scale.z, Width);
 
 				//左側
 				auto leftPosition = position + (-Vec3::Right() * halfScale.x);
-				CreateMapOutCollision(leftPosition, -Vec3::Right(),   scale.z, Width);
+				CreateMapOutCollision(leftPosition, -Vec3::Right(), scale.z, Width);
 			}
 		}
 
@@ -150,7 +147,6 @@ namespace basecross {
 		/// </summary>
 		/// <returns>スタートカメラ</returns>
 		std::shared_ptr<StartCamera> ChangeStartCamera();
-
 	};
 }
 //end basecross

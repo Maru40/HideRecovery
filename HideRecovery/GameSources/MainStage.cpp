@@ -50,11 +50,15 @@
 
 #include "HideItemObject.h"
 
+#include "HeroPlayerObject.h"
+#include "VillainPlayerObject.h"
+#include "Watanabe/DebugClass/Debug.h"
+#include "Watanabe/Effekseer/EfkEffect.h"
+
 using namespace basecross::Enemy;
 
 namespace basecross {
-
-	wstring MainStage::sm_loadMapName = L"StageS1_Copy.csv";
+	wstring MainStage::sm_loadMapName = L"StageS2.csv";
 
 	void MainStage::CreateViewLight() {
 		CreateStartCamera(sm_loadMapName);
@@ -69,7 +73,9 @@ namespace basecross {
 
 	void MainStage::OnCreate() {
 		try {
-
+			AddGameObject<EfkInterface>();
+			AddGameObject<Debug>();
+			Debug::GetInstance()->Log(L"MainStage");
 			// スカイボックス
 			//AddGameObject<Skybox2>();
 
@@ -90,8 +96,7 @@ namespace basecross {
 			AddGameObject<EnemyGeneratorObject>();
 
 			//Mapの読み込み
-			auto mapOffset = Vec3(0.0, -0.5f, 0.0f);
-			CreateMap(sm_loadMapName, mapOffset);
+			CreateMap(sm_loadMapName);
 
 			//隠すアイテムの設定
 			AddGameObject<HideItemObject>();
@@ -111,6 +116,5 @@ namespace basecross {
 	wstring MainStage::GetLoadMapName() {
 		return sm_loadMapName;
 	}
-
 }
 //end basecross
