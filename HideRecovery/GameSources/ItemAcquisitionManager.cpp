@@ -94,15 +94,14 @@ namespace basecross {
 				item->GetGameObject()->SetActive(false);
 
 				//アニメーションを再生
-				if (auto animation = GetGameObject()->GetComponent<PlayerAnimationCtrl>(false)) {
+				auto itemPosition = item->GetGameObject()->GetComponent<Transform>()->GetPosition();
+				if (itemPosition.y < 0.0f) {
 					//アイテムが床にあるなら
-					auto itemPosition = item->GetGameObject()->GetComponent<Transform>()->GetPosition();
-					if (itemPosition.y < 0.0f) {
-						animation->ChangeAnimation(PlayerAnimationCtrl::State::PutItem_Floor);
-					}
-					else {
-						animation->ChangeAnimation(PlayerAnimationCtrl::State::PutItem_HideObject);
-					}
+					animator->ChangeAnimation(PlayerAnimationCtrl::State::PutItem_Floor);
+				}
+				else {
+					//アイテムが床にないなら
+					animator->ChangeAnimation(PlayerAnimationCtrl::State::PutItem_HideObject);
 				}
 			}
 		}
