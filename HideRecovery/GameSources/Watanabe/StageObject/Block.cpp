@@ -36,6 +36,8 @@ namespace basecross {
 
 	void Block::OnCreate() {
 		auto drawComp = AddComponent<PNTStaticDraw>();
+		drawComp->SetSamplerState(SamplerState::LinearWrap);
+
 		switch (m_blockType)
 		{
 		case BlockType::Wall:
