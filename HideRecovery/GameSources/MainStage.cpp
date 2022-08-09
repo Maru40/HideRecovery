@@ -103,7 +103,7 @@ namespace basecross {
 			AddGameObject<HideItemObject>();
 
 			//デバッグ
-			AddGameObject<DebugObject>();
+			//AddGameObject<DebugObject>();
 		}
 		catch (...) {
 			throw;
