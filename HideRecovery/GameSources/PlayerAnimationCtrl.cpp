@@ -14,8 +14,20 @@
 
 namespace basecross {
 
+	//--------------------------------------------------------------------------------------
+	/// 遷移メンバー
+	//--------------------------------------------------------------------------------------
+
+	PlayerAnimationCtrl_TransitionMember::PlayerAnimationCtrl_TransitionMember():
+		walkSpeed(2.0f)
+	{}
+
+	//--------------------------------------------------------------------------------------
+	/// アニメーション管理本体
+	//--------------------------------------------------------------------------------------
+
 	PlayerAnimationCtrl::PlayerAnimationCtrl(const std::shared_ptr<GameObject>& objPtr):
-		AnimationCtrl(objPtr), m_currentState(State(0))
+		AnimationCtrl(objPtr), m_currentState(State(0)), m_transitionMember(TransitionMember())
 	{}
 
 	void PlayerAnimationCtrl::OnCreate() 
@@ -23,12 +35,13 @@ namespace basecross {
 		auto object = GetGameObject();
 
 		//メッシュの生成
+		m_drawComponent = GetGameObject()->GetComponent<SmBaseDraw>();
 		auto drawComp = object->GetComponent<PNTBoneModelDraw>();
 
 		//アニメーション用のパラメータ
 		AddAnimeParam<PlayerAnimationCtrl> params[] = {
-			{State::Idle,	L"Idle",       1,    39,   true, &PlayerAnimationCtrl::Wait},
-			{State::Walk,	L"Dash",       99,  119,  true, &PlayerAnimationCtrl::Walk},
+			{State::Idle,	L"Idle",       1,    39,   true, &PlayerAnimationCtrl::Idle},
+			{State::Walk,	L"Dash",       99,  119,   true, &PlayerAnimationCtrl::Walk},
 
 			//{L"Jump",       53,   65,  true, &PlayerAnimationCtrl::Jump},
 			//{L"Turn",       66,  105,  true, &PlayerAnimationCtrl::Turn},
@@ -53,19 +66,19 @@ namespace basecross {
 			);
 
 			m_stateStringMap[param.stateType] = param.stateName;	//マップに登録
-			SetAnimaiton(param.stateName, param.func);				//アニメーションの登録
+			SetAnimaiton(param.stateType, param.func);				//アニメーションの登録
 		}
 
 		ChangeAnimation(params[0].stateType);  //初期アニメ―ション設定
 	}
 
+	void PlayerAnimationCtrl::OnStart() {
+		m_drawComponent = GetGameObject()->GetComponent<SmBaseDraw>();
+	}
 
 	void PlayerAnimationCtrl::OnUpdate()
 	{
-		auto draw = GetGameObject()->GetComponent<SmBaseDraw>();
-		auto name = draw->GetCurrentAnimation();
-
-		m_animations[name](*(this));
+		m_animations[m_currentState](*(this));
 
 		//簡易遷移文
 		if (auto velocityManager = GetGameObject()->GetComponent<VelocityManager>(false)) {
@@ -77,22 +90,21 @@ namespace basecross {
 				ChangeAnimation(State::Walk);
 			}
 		}
-
-		return;
-		//アニメーション確認用
-		auto pad = App::GetApp()->GetInputDevice().GetControlerVec()[0];
-		if (pad.wPressedButtons & XINPUT_GAMEPAD_DPAD_UP) {
-			//ChangeAnimation(L"Turn");
-		}
 	}
 
-	void PlayerAnimationCtrl::Wait()
+	void PlayerAnimationCtrl::Idle()
 	{
 		auto delta = App::GetApp()->GetElapsedTime();
 		float speed = 15.0f;
 
-		auto draw = GetGameObject()->GetComponent<SmBaseDraw>();
-		draw->UpdateAnimation(delta * speed);
+		m_drawComponent.lock()->UpdateAnimation(delta * speed);
+
+		//遷移条件
+		if (auto velocityManager = GetGameObject()->GetComponent<VelocityManager>(false)) {
+			if (m_transitionMember.walkSpeed < velocityManager->GetVelocity().length()) {
+				ChangeAnimation(State::Walk);
+			}
+		}
 	}
 
 	void PlayerAnimationCtrl::Walk()
@@ -104,34 +116,31 @@ namespace basecross {
 
 		auto moveVec = velocityMananger->GetVelocity();
 		
-		auto draw = GetGameObject()->GetComponent<SmBaseDraw>();
+		auto draw = m_drawComponent.lock();
+		draw->UpdateAnimation(delta * moveVec.length() * speed);
 
-		//タイムが0で無い、かつ、moveVecが0.0fだったら。
-		if (draw->GetCurrentAnimationTime() != 0.0f && moveVec.length() == 0.0f) { 
-			draw->UpdateAnimation(delta * speed);
-
-			if (draw->GetCurrentAnimationTime() == 0.0f) {
-				//ChangeAnimation(L"ReturnWait");
+		//遷移条件
+		if (auto velocityManager = GetGameObject()->GetComponent<VelocityManager>(false)) {
+			if (velocityManager->GetVelocity().length() < m_transitionMember.walkSpeed) {
+				ChangeAnimation(State::Idle);
 			}
-		}
-		else {
-			draw->UpdateAnimation(delta * moveVec.length() * speed);
 		}
 	}
 
 	void PlayerAnimationCtrl::DefaultPlay(const float speed) {
 		auto delta = App::GetApp()->GetElapsedTime();
+		auto draw = m_drawComponent.lock();
 
-		auto draw = GetGameObject()->GetComponent<SmBaseDraw>();
 		draw->UpdateAnimation(delta * speed);
 
+		//遷移条件
 		if (draw->GetCurrentAnimationTime() == 0.0f) {
 			ChangeAnimation(State::Idle);
 		}
 	}
 
-	void PlayerAnimationCtrl::SetAnimaiton(const wstring& animeName, const function<void(PlayerAnimationCtrl&)> func) {
-		m_animations[animeName] = func;
+	void PlayerAnimationCtrl::SetAnimaiton(const State& state, const function<void(PlayerAnimationCtrl&)> func) {
+		m_animations[state] = func;
 	}
 
 	void PlayerAnimationCtrl::ChangeAnimation(const State& state) {
@@ -140,8 +149,12 @@ namespace basecross {
 		}
 
 		m_currentState = state;
-		auto draw = GetGameObject()->GetComponent<SmBaseDraw>();
-		draw->ChangeCurrentAnimation(m_stateStringMap[state]);
+		m_drawComponent.lock()->ChangeCurrentAnimation(m_stateStringMap[state]);
+	}
+
+	void PlayerAnimationCtrl::ChangeForceAnimation(const State& state) {
+		m_currentState = state;
+		m_drawComponent.lock()->ChangeCurrentAnimation(m_stateStringMap[state]);
 	}
 
 }

@@ -22,6 +22,15 @@ namespace basecross {
 	};
 
 	//--------------------------------------------------------------------------------------
+	/// 遷移メンバー
+	//--------------------------------------------------------------------------------------
+	struct PlayerAnimationCtrl_TransitionMember {
+		float walkSpeed;
+
+		PlayerAnimationCtrl_TransitionMember();
+	};
+
+	//--------------------------------------------------------------------------------------
 	/// アニメーション追加パラメータ
 	//--------------------------------------------------------------------------------------
 	template<class T>
@@ -34,6 +43,7 @@ namespace basecross {
 		int timeLength;
 		bool loop;
 		float timeParSecond;
+		float updateSpeed;		//更新スピード
 
 		function<void(T&)> func;
 
@@ -69,18 +79,30 @@ namespace basecross {
 	};
 
 	//--------------------------------------------------------------------------------------
+	/// アニメーションパラメータ
+	//--------------------------------------------------------------------------------------
+	struct AnimationParametor {
+		wstring stateName;	//ステート登録に使用した名前
+		float updateSpeed;	//更新スピード
+	};
+
+	//--------------------------------------------------------------------------------------
 	/// プレイヤーのアニメーション管理
 	//--------------------------------------------------------------------------------------
 	class PlayerAnimationCtrl : public AnimationCtrl
 	{
 	public:
 		using State = PlayerAnimationCtrl_State;
+		using TransitionMember = PlayerAnimationCtrl_TransitionMember;
 
 	private:
-		unordered_map<State, wstring> m_stateStringMap;
-		unordered_map<wstring, std::function<void(PlayerAnimationCtrl&)>> m_animations;
+		unordered_map<State, wstring> m_stateStringMap;									//Stateをwstringで登録するマップ。
+		unordered_map<State, std::function<void(PlayerAnimationCtrl&)>> m_animations;	//アニメーションの更新イベントマップ
 
-		State m_currentState;
+		State m_currentState;						//現在のステート
+		TransitionMember m_transitionMember;		//遷移条件メンバー
+
+		std::weak_ptr<SmBaseDraw> m_drawComponent;	//描画コンポ―ネント
 
 	public:
 		/// <summary>
@@ -90,6 +112,7 @@ namespace basecross {
 		PlayerAnimationCtrl(const std::shared_ptr<GameObject>& objPtr);
 
 		void OnCreate() override;
+		void OnStart() override;
 		void OnUpdate() override;
 
 	private:
@@ -100,7 +123,7 @@ namespace basecross {
 		/// <summary>
 		/// 待機
 		/// </summary>
-		void Wait();
+		void Idle();
 
 		/// <summary>
 		/// 歩く
@@ -116,7 +139,7 @@ namespace basecross {
 		/// アニメーションの設定
 		/// </summary>
 		/// <returns>アニメーション</returns>
-		void SetAnimaiton(const wstring& animeName, const function<void(PlayerAnimationCtrl&)> func);
+		void SetAnimaiton(const State& state, const function<void(PlayerAnimationCtrl&)> func);
 
 	public:
 		/// <summary>
@@ -125,12 +148,15 @@ namespace basecross {
 		void ChangeAnimation(const State& state);
 
 		/// <summary>
+		/// 強制アニメーション切り替え
+		/// </summary>
+		/// <param name="state">切り替えるタイプ</param>
+		void ChangeForceAnimation(const State& state);
+
+		/// <summary>
 		/// 現在のアニメーションステートを取得
 		/// </summary>
-		wstring GetCurrentAnimaiton() const {
-			auto draw = GetGameObject()->GetComponent<SmBaseDraw>();
-			return draw->GetCurrentAnimation();
-		}
+		State GetCurrentAnimaiton() const noexcept { m_currentState; }
 	};
 
 }
