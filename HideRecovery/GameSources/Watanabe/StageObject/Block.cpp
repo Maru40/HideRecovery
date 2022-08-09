@@ -5,14 +5,15 @@
 
 #include "stdafx.h"
 #include "Block.h"
+#include "../Utility/DataExtracter.h"
 
 namespace basecross {
 	Block::Block(const shared_ptr<Stage>& stage, const BlockType blockType)
-		:GameObject(stage), m_blockType(blockType)
+		:StageObjectBase(stage, L"Block"), m_blockType(blockType)
 	{}
 
 	Block::Block(const shared_ptr<Stage>& stage, const wstring& line)
-		: GameObject(stage)
+		: StageObjectBase(stage, L"Block")
 	{
 		//vector<wstring> tokens = DataExtracter::DelimitData(line);
 	}

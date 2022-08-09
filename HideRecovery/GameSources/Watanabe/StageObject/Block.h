@@ -5,9 +5,10 @@
 
 #pragma once
 #include "stdafx.h"
+#include "StageObjectBase.h"
 
 namespace basecross {
-	class Block :public GameObject {
+	class Block :public StageObjectBase {
 	public:
 		enum class BlockType {
 			Wall,	// 壁
