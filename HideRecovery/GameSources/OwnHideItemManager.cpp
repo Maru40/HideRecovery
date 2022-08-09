@@ -19,6 +19,11 @@
 
 #include "MaruUtility.h"
 
+#include "PlayerAnimationCtrl.h"
+
+#include "TimeHelper.h"
+#include "GameTimer.h"
+
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
@@ -29,8 +34,10 @@ namespace basecross {
 		OwnHideItemManager_Parametor(2.0f)
 	{}
 
-	OwnHideItemManager_Parametor::OwnHideItemManager_Parametor(const float searchHidePlaceRange):
-		searchHidePlaceRange(searchHidePlaceRange)
+	OwnHideItemManager_Parametor::OwnHideItemManager_Parametor(const float searchHidePlaceRange) :
+		searchHidePlaceRange(searchHidePlaceRange),
+		putFloorAnimationTime(0.2f),
+		putHideObjectAnimationTime(0.2f)
 	{}
 
 	//--------------------------------------------------------------------------------------
@@ -42,12 +49,21 @@ namespace basecross {
 	{}
 
 	OwnHideItemManager::OwnHideItemManager(const std::shared_ptr<GameObject>& objPtr, const Parametor& parametor):
-		Component(objPtr), m_param(parametor), m_isFleePut(true)
+		Component(objPtr), m_param(parametor), m_timer(new GameTimer(0)), m_isFleePut(true)
 	{}
 
 	void OwnHideItemManager::OnUpdate() {
 		if (PlayerInputer::IsPutHideItem()) {
 			PutHideItem();
+		}
+
+		//タイムベント
+		if (!m_timer->IsTimeUp()) {
+			m_timer->UpdateTimer();
+
+			if (m_timer->IsTimeUp()) {
+				
+			}
 		}
 
 		//デバッグコマンド
@@ -71,15 +87,30 @@ namespace basecross {
 			return;
 		}
 
+		auto animator = GetGameObject()->GetComponent<PlayerAnimationCtrl>(false);
+		if (!animator) {
+			return;
+		}
+
 		//置く場所の取得
-		auto position = CalculateHidePosition();
+		auto putEvent = [&, bag, hideItem]() {
+			auto position = CalculateHidePosition();
 
-		auto hideItemTrans = hideItem->GetGameObject()->GetComponent<Transform>();
-		hideItemTrans->SetPosition(position);
-		hideItem->GetGameObject()->SetUpdateActive(true);
-		hideItem->GetGameObject()->SetDrawActive(true);
+			auto hideItemTrans = hideItem->GetGameObject()->GetComponent<Transform>();
+			hideItemTrans->SetPosition(position);
+			hideItem->GetGameObject()->SetActive(true);
 
-		bag->RemoveItem(hideItem);
+			bag->RemoveItem(hideItem);
+		};
+
+		if (m_isFleePut) {
+			animator->ChangeAnimation(PlayerAnimationCtrl::State::PutItem_Floor);
+			m_timer->ResetTimer(m_param.putFloorAnimationTime, putEvent);
+		}
+		else {
+			animator->ChangeAnimation(PlayerAnimationCtrl::State::PutItem_HideObject);
+			m_timer->ResetTimer(m_param.putHideObjectAnimationTime, putEvent);
+		}
 	}
 
 	bool OwnHideItemManager::IsPut() const {
