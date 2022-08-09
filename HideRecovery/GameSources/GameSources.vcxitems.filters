@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0"
+  xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Headers">
       <UniqueIdentifier>{4b0a624a-610d-4bc6-b311-2b02a781cdf9}</UniqueIdentifier>
@@ -694,6 +695,12 @@
     <Filter Include="Maruyama\Stage\TitleStage">
       <UniqueIdentifier>{3bf91c99-a945-4357-8ddf-f3e8fdf07cc0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\StageObject">
+      <UniqueIdentifier>{f9007adf-3cef-4795-98ef-88c505c0d403}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\StageObject\Block">
+      <UniqueIdentifier>{43e006b7-94d9-4d66-b6cc-f14ce7c7bcac}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1303,6 +1310,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)TitleStage.h">
       <Filter>Maruyama\Stage\TitleStage</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\Block.h">
+      <Filter>Watanabe\StageObject\Block</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -1837,6 +1847,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)TitleStage.cpp">
       <Filter>Maruyama\Stage\TitleStage</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\Block.cpp">
+      <Filter>Watanabe\StageObject\Block</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
