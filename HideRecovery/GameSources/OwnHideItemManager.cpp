@@ -24,6 +24,8 @@
 #include "TimeHelper.h"
 #include "GameTimer.h"
 
+#include "RotationController.h"
+
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
@@ -95,11 +97,10 @@ namespace basecross {
 		}
 
 		//’u‚­êŠ‚ÌŽæ“¾
-		auto putEvent = [&, bag, hideItem]() {
-			auto position = CalculateHidePosition();
-
+		auto hidePosition = CalculateHidePosition();	//‰B‚·êŠ
+		auto putEvent = [&, bag, hideItem, hidePosition]() {
 			auto hideItemTrans = hideItem->GetGameObject()->GetComponent<Transform>();
-			hideItemTrans->SetPosition(position);
+			hideItemTrans->SetPosition(hidePosition);
 			hideItem->GetGameObject()->SetActive(true);
 
 			bag->RemoveItem(hideItem);
@@ -112,6 +113,12 @@ namespace basecross {
 		else {
 			animator->ChangeAnimation(PlayerAnimationCtrl::State::PutItem_HideObject);
 			m_timer->ResetTimer(m_param.putHideObjectAnimationTime, putEvent);
+		}
+
+		//Œü‚«‚½‚¢•û–@‚ðÝ’è
+		if (auto rotationController = GetGameObject()->GetComponent<RotationController>(false)) {
+			auto direct = hidePosition - transform->GetPosition();
+			rotationController->SetDirect(direct);
 		}
 	}
 

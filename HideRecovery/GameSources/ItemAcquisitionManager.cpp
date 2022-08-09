@@ -20,6 +20,7 @@
 #include "ItemBag.h"
 
 #include "PlayerAnimationCtrl.h"
+#include "RotationController.h"
 
 namespace basecross {
 
@@ -43,7 +44,7 @@ namespace basecross {
 		ItemAcquisitionManager(objPtr, Parametor())
 	{}
 
-	ItemAcquisitionManager::ItemAcquisitionManager(const std::shared_ptr<GameObject>& objPtr, const Parametor& param):
+	ItemAcquisitionManager::ItemAcquisitionManager(const std::shared_ptr<GameObject>& objPtr, const Parametor& param) :
 		Component(objPtr), m_param(param)
 	{}
 
@@ -103,6 +104,14 @@ namespace basecross {
 					//アイテムが床にないなら
 					animator->ChangeAnimation(PlayerAnimationCtrl::State::PutItem_HideObject);
 				}
+
+				//向きたい方法を設定
+				if (auto rotationController = GetGameObject()->GetComponent<RotationController>(false)) {
+					auto direct = itemPosition - transform->GetPosition();
+					rotationController->SetDirect(direct);
+				}
+
+				break;
 			}
 		}
 	}
