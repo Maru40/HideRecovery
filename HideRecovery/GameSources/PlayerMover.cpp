@@ -3,6 +3,8 @@
 
 #include "MaruUtility.h"
 
+#include "VelocityManager.h"
+
 namespace basecross
 {
 	PlayerMover::PlayerMover(std::shared_ptr<GameObject>& owner) :
@@ -59,6 +61,9 @@ namespace basecross
 
 		if (inputMove.lengthSqr() == 0)
 		{
+			if (auto velocityManager = GetGameObject()->GetComponent<VelocityManager>()) {
+				velocityManager->ResetAll();
+			}
 			return;
 		}
 
@@ -87,11 +92,16 @@ namespace basecross
 
 		//Vec3 comvertVec = maru::Utility::CalcuCameraVec((moveForward + moveRight), m_camera.GetShard(), GetGameObject());
 		Vec3 moveVector = (moveForward + moveRight) * App::GetApp()->GetElapsedTime() * m_standMoveSpeed;
-		
-		auto position = transform->GetPosition();
 
-		position += moveVector;
-		transform->SetPosition(position);
+		if (auto veloicityManager = GetGameObject()->GetComponent<VelocityManager>(false)) {
+			veloicityManager->SetVelocity(moveVector / App::GetApp()->GetElapsedTime());
+		}
+		else {
+			auto position = transform->GetPosition();
+
+			position += moveVector;
+			transform->SetPosition(position);
+		}
 
 	}
 }
