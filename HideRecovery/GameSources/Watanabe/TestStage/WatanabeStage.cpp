@@ -5,6 +5,7 @@
 #include "../DebugClass/Debug.h"
 #include "../Effekseer/EfkEffect.h"
 #include "../StageObject/Block.h"
+#include "../StageObject/RackObject.h"
 
 namespace basecross {
 	void WatanabeStage::CreateViewLight() {
@@ -33,7 +34,8 @@ namespace basecross {
 		efkComp->SetEffectResource(L"TestEffect");
 		efkComp->PlayLoop(L"TestEffect");
 
-		AddGameObject<Block>(Block::BlockType::Wall);
+		//AddGameObject<Block>(Block::BlockType::Wall);
+		AddGameObject<RackObject>();
 	}
 
 	void WatanabeStage::OnUpdate() {

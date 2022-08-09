@@ -212,6 +212,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Effekseer\EfkInterface.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Effekseer\TransformData.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\Block.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\RackObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\WatanabeStage.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\BaseSingleton.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\Utility.h" />
@@ -395,6 +396,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Effekseer\EfkEffectResource.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Effekseer\EfkInterface.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\Block.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\RackObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\WatanabeStage.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Utility\Utility.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WinMain.cpp" />
