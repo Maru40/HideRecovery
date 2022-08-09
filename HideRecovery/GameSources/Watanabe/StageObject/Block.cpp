@@ -7,11 +7,11 @@
 #include "Block.h"
 
 namespace basecross {
-	Block::Block(const std::shared_ptr<Stage> stage, const BlockType blockType)
+	Block::Block(const shared_ptr<Stage>& stage, const BlockType blockType)
 		:GameObject(stage), m_blockType(blockType)
 	{}
 
-	Block::Block(const std::shared_ptr<Stage> stage, const wstring line)
+	Block::Block(const shared_ptr<Stage>& stage, const wstring& line)
 		: GameObject(stage)
 	{
 		//vector<wstring> tokens = DataExtracter::DelimitData(line);
