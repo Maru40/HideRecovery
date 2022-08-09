@@ -142,12 +142,12 @@ namespace basecross {
 		m_parametorMap[m_currentState].updateEvent(GetCurrentUpdateSpeed());
 
 		//デバッグ--------------------------------------------------
-		if (PlayerInputer::IsBDown()) {
-			ChangeAnimation(State::PutItem_Floor);
-		}
-		if (PlayerInputer::IsYDown()) {
-			ChangeAnimation(State::PutItem_HideObject);
-		}
+		//if (PlayerInputer::IsBDown()) {
+		//	ChangeAnimation(State::PutItem_Floor);
+		//}
+		//if (PlayerInputer::IsYDown()) {
+		//	ChangeAnimation(State::PutItem_HideObject);
+		//}
 	}
 
 	//--------------------------------------------------------------------------------------
