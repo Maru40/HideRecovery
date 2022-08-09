@@ -60,6 +60,9 @@ namespace basecross {
 			drawComp->SetTextureResource(L"Floor_TX");
 
 			AddTag(L"Floor");
+
+			// 床のオブジェクトを取得できるようにする
+			GetStage()->SetSharedGameObject(L"Floor", GetThis<Block>());
 		}
 		break;
 		default:
