@@ -15,10 +15,10 @@ namespace basecross {
 	/// アニメーションのステート
 	//--------------------------------------------------------------------------------------
 	enum class PlayerAnimationCtrl_State {
-		Idle,
-		Walk,
-		Put_Floor,
-		Put_HideObject,
+		Idle,				//待機
+		Walk,				//歩く
+		PutItem_Floor,		//床に置く
+		PutItem_HideObject,	//隠すオブジェクトに置く
 	};
 
 	//--------------------------------------------------------------------------------------
@@ -45,7 +45,9 @@ namespace basecross {
 		float timeParSecond;
 		float updateSpeed;		//更新スピード
 
+		function<void(T&)> startEvent;
 		function<void(T&)> updateEvent;
+		function<void(T&)> exitEvent;
 
 		AnimationParametor():
 			AnimationParametor(State(0), L"", 0, 0, false, 1.0f, nullptr)
@@ -60,7 +62,7 @@ namespace basecross {
 			const float updateSpeed,
 			const function<void(T&)> updateEvent
 		) :
-			AnimationParametor(state, name, startTime, endTime, loop, 1.0f, updateSpeed, updateEvent)
+			AnimationParametor(state, name, startTime, endTime, loop, 30.0f, updateSpeed, nullptr, updateEvent, nullptr)
 		{}
 
 		AnimationParametor(
@@ -71,7 +73,9 @@ namespace basecross {
 			const bool loop,
 			const float parSecond,
 			const float updateSpeed,
-			const function<void(T&)> updateEvent
+			const function<void(T&)> startEvent,
+			const function<void(T&)> updateEvent,
+			const function<void(T&)> exitEvent
 		) :
 			stateType(state),
 			stateName(name),
@@ -79,7 +83,9 @@ namespace basecross {
 			loop(loop),
 			timeParSecond(parSecond),
 			updateSpeed(updateSpeed),
-			updateEvent(updateEvent)
+			startEvent(startEvent),
+			updateEvent(updateEvent),
+			exitEvent(exitEvent)
 		{
 			timeLength = endTime - startTime;
 		}
@@ -115,7 +121,7 @@ namespace basecross {
 
 	private:
 		//--------------------------------------------------------------------------------------
-		/// 再生したいアニメーション
+		/// アニメーションイベント
 		//--------------------------------------------------------------------------------------
 
 		/// <summary>
@@ -129,11 +135,25 @@ namespace basecross {
 		void Walk();
 
 		/// <summary>
+		/// 床に置く
+		/// </summary>
+		void PutItem_Floor();
+
+		/// <summary>
+		/// 隠すオブジェクトに入れる
+		/// </summary>
+		void PutItem_HideObject();
+
+		/// <summary>
 		/// デフォルト再生関数
 		/// </summary>
-		void DefaultPlay(const float speed = 15.0f);
+		void DefaultPlay(const bool isEndTransitionIdle = true);
 
 	public:
+		//--------------------------------------------------------------------------------------
+		/// アクセッサ
+		//--------------------------------------------------------------------------------------
+
 		/// <summary>
 		/// アニメーションの切り替え
 		/// </summary>
@@ -148,7 +168,12 @@ namespace basecross {
 		/// <summary>
 		/// 現在のアニメーションステートを取得
 		/// </summary>
-		State GetCurrentAnimaiton() const noexcept { m_currentState; }
+		State GetCurrentAnimaiton() const noexcept { return m_currentState; }
+
+		/// <summary>
+		/// 現在のアニメーション更新速度を取得
+		/// </summary>
+		float GetCurrentUpdateSpeed() const { return m_parametorMap.at(m_currentState).updateSpeed; }
 	};
 
 }

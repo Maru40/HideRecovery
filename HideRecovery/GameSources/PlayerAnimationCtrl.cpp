@@ -11,6 +11,7 @@
 #include "PlayerAnimationCtrl.h"
 
 #include "VelocityManager.h"
+#include "PlayerInputer.h"
 
 namespace basecross {
 
@@ -40,8 +41,11 @@ namespace basecross {
 
 		//アニメーション用のパラメータ
 		AnimationParametor<PlayerAnimationCtrl> params[] = {
-			{State::Idle,	L"Idle",       1,    39,   true, 2.0f , &PlayerAnimationCtrl::Idle},
-			{State::Walk,	L"Dash",       99,  119,   true, 15.0f, &PlayerAnimationCtrl::Walk},
+			//ステートEnum,				ステート名,				開始時間,	終了時間,	ループ,		更新速度,	更新イベント
+			{State::Idle,				L"Idle",				1,			39,			true,		1.0f ,		&PlayerAnimationCtrl::Idle},
+			{State::Walk,				L"Dash",				99,			119,		true,		0.1f,		&PlayerAnimationCtrl::Walk},
+			{State::PutItem_Floor,		L"PutItem_Floor",		125,		149,		true,		1.0f,		&PlayerAnimationCtrl::PutItem_Floor},
+			{State::PutItem_HideObject,	L"PutItem_HideObject",	150,		174,		true,		1.0f,		&PlayerAnimationCtrl::PutItem_HideObject},
 		};
 
 		//アニメーションの設定
@@ -68,12 +72,24 @@ namespace basecross {
 	void PlayerAnimationCtrl::OnUpdate()
 	{
 		m_parametorMap[m_currentState].updateEvent(*(this));
+
+		//デバッグ--------------------------------------------------
+		//if (PlayerInputer::IsBDown()) {
+		//	ChangeAnimation(State::PutItem_Floor);
+		//}
+		//if (PlayerInputer::IsYDown()) {
+		//	ChangeAnimation(State::PutItem_HideObject);
+		//}
 	}
+
+	//--------------------------------------------------------------------------------------
+	/// アニメーションイベント
+	//--------------------------------------------------------------------------------------
 
 	void PlayerAnimationCtrl::Idle()
 	{
 		auto delta = App::GetApp()->GetElapsedTime();
-		float speed = 15.0f;
+		float speed = GetCurrentUpdateSpeed();
 
 		m_drawComponent.lock()->UpdateAnimation(delta * speed);
 
@@ -89,13 +105,10 @@ namespace basecross {
 	{
 		auto velocityMananger = GetGameObject()->GetComponent<VelocityManager>(false);
 
-		const float speed = 2.0f;
-		auto delta = App::GetApp()->GetElapsedTime();
-
+		float delta = App::GetApp()->GetElapsedTime();
 		auto moveVec = velocityMananger->GetVelocity();
 		
-		auto draw = m_drawComponent.lock();
-		draw->UpdateAnimation(delta * moveVec.length() * speed);
+		m_drawComponent.lock()->UpdateAnimation(delta * moveVec.length() * GetCurrentUpdateSpeed());
 
 		//遷移条件
 		if (auto velocityManager = GetGameObject()->GetComponent<VelocityManager>(false)) {
@@ -105,30 +118,51 @@ namespace basecross {
 		}
 	}
 
-	void PlayerAnimationCtrl::DefaultPlay(const float speed) {
+	void PlayerAnimationCtrl::PutItem_Floor(){
+		DefaultPlay();
+	}
+
+	void PlayerAnimationCtrl::PutItem_HideObject() {
+		DefaultPlay();
+	}
+
+	void PlayerAnimationCtrl::DefaultPlay(const bool isEndTransitionIdle) {
 		auto delta = App::GetApp()->GetElapsedTime();
 		auto draw = m_drawComponent.lock();
 
-		draw->UpdateAnimation(delta * speed);
+		draw->UpdateAnimation(delta * GetCurrentUpdateSpeed());
 
 		//遷移条件
-		if (draw->GetCurrentAnimationTime() == 0.0f) {
+		if (isEndTransitionIdle && draw->GetCurrentAnimationTime() == 0.0f) {
 			ChangeAnimation(State::Idle);
 		}
 	}
+
+	//--------------------------------------------------------------------------------------
+	/// アクセッサ
+	//--------------------------------------------------------------------------------------
 
 	void PlayerAnimationCtrl::ChangeAnimation(const State& state) {
 		if (m_currentState == state) {
 			return;
 		}
 
-		m_currentState = state;
-		m_drawComponent.lock()->ChangeCurrentAnimation(m_parametorMap[state].stateName);
+		ChangeForceAnimation(state);
 	}
 
 	void PlayerAnimationCtrl::ChangeForceAnimation(const State& state) {
+		//終了イベント再生
+		if (auto& exitEvent = m_parametorMap[m_currentState].exitEvent) {
+			exitEvent(*this);
+		}
+
 		m_currentState = state;
 		m_drawComponent.lock()->ChangeCurrentAnimation(m_parametorMap[state].stateName);
+
+		//スタートイベント再生
+		if (auto& startEvent = m_parametorMap[m_currentState].startEvent) {
+			startEvent(*this);
+		}
 	}
 
 }
