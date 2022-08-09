@@ -42,6 +42,7 @@ namespace basecross {
 		 * @brief トランスフォームデータを抽出
 		 *
 		 * @param tokens 文字列
+		 * @param transData データの出力先
 		 * @param firstIndex 最初のインデックス（デフォルト：1）
 		 * @return トランスフォームデータ
 		 */

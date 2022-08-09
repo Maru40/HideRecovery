@@ -15,7 +15,22 @@ namespace basecross {
 	Block::Block(const shared_ptr<Stage>& stage, const wstring& line)
 		: StageObjectBase(stage, L"Block")
 	{
-		//vector<wstring> tokens = DataExtracter::DelimitData(line);
+		vector<wstring> tokens = DataExtracter::DelimitData(line);
+		int nextIndex = DataExtracter::TransformDataExtraction(tokens, m_transformData);
+		wstring blockType = tokens[nextIndex];
+		if (blockType == L"Wall") {
+			m_blockType = BlockType::Wall;
+		}
+		else if (blockType == L"Floor") {
+			m_blockType = BlockType::Floor;
+		}
+		else {
+			throw BaseException(
+				L"BlockTypeが不正な値です。",
+				L"BlockType : " + blockType,
+				L"Block::Block(const shared_ptr<Stage>& stage, const wstring& line)"
+			);
+		}
 	}
 
 	void Block::OnCreate() {

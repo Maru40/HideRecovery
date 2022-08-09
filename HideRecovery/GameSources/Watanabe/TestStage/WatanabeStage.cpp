@@ -6,6 +6,8 @@
 #include "../Effekseer/EfkEffect.h"
 #include "../StageObject/Block.h"
 #include "../StageObject/RackObject.h"
+#include "HeroPlayerObject.h"
+#include "CameraHelper.h"
 
 namespace basecross {
 	void WatanabeStage::CreateViewLight() {
@@ -32,10 +34,17 @@ namespace basecross {
 		auto testObj = AddGameObject<GameObject>();
 		auto efkComp = testObj->AddComponent<EfkComponent>();
 		efkComp->SetEffectResource(L"TestEffect");
-		efkComp->PlayLoop(L"TestEffect");
+		//efkComp->PlayLoop(L"TestEffect");
 
-		//AddGameObject<Block>(Block::BlockType::Wall);
-		AddGameObject<RackObject>();
+		//AddGameObject<CameraObject>();
+		//AddGameObject<HeroPlayerObject>();
+
+		GameObjecttCSVBuilder builder;
+		builder.Register<Block>(L"Block");
+		//builder.Register<RackObject>(L"Rack");
+		auto dir = App::GetApp()->GetDataDirWString();
+		auto path = dir + L"MapDatas/";
+		builder.Build(GetThis<Stage>(), path + L"StageS2.csv");
 	}
 
 	void WatanabeStage::OnUpdate() {
