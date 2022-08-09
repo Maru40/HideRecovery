@@ -21,8 +21,10 @@ namespace basecross {
 		///	フィールド影響マップのパラメータ
 		//--------------------------------------------------------------------------------------
 		struct FieldImpactMap_Parametor {
-			float intervalRange = 5.0f;        //影響マップノードの間隔
-			float createHeightOffset = 1.0f;   //生成する高さのオフセット
+			float intervalRange;        //影響マップノードの間隔
+			float createHeightOffset;   //生成する高さのオフセット
+
+			FieldImpactMap_Parametor();
 		};
 
 		//--------------------------------------------------------------------------------------
@@ -83,10 +85,20 @@ namespace basecross {
 			template<class T>
 			void SettingImpactMap(const vector<std::weak_ptr<T>>& objects, const float intervalRange) {
 				for (const auto& weakObject : objects) {
+					constexpr float WallWidth = 1.5f;
+
 					auto object = weakObject.lock();
 					auto objectTrans = object->GetComponent<Transform>();
+
+					//位置設定
 					auto position = objectTrans->GetPosition();
+					position += Vec3::Right()	* WallWidth;
+					position += Vec3::Forward() * WallWidth;
+
+					//大きさ設定
 					auto scale = objectTrans->GetScale();
+					scale.x += -WallWidth;
+					scale.z += -WallWidth;
 
 					auto parametor = maru::ImpactMap::Factory_Parametor();
 					parametor.rect = maru::Rect(position, scale.x, scale.z);
