@@ -20,6 +20,7 @@
 #include "ItemBag.h"
 
 #include "PlayerAnimationCtrl.h"
+#include "RotationController.h"
 
 namespace basecross {
 
@@ -28,7 +29,7 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 
 	ItemAcquisitionManager_Parametor::ItemAcquisitionManager_Parametor() :
-		ItemAcquisitionManager_Parametor(10.0f)
+		ItemAcquisitionManager_Parametor(2.0f)
 	{}
 
 	ItemAcquisitionManager_Parametor::ItemAcquisitionManager_Parametor(const float searchRange) :
@@ -43,7 +44,7 @@ namespace basecross {
 		ItemAcquisitionManager(objPtr, Parametor())
 	{}
 
-	ItemAcquisitionManager::ItemAcquisitionManager(const std::shared_ptr<GameObject>& objPtr, const Parametor& param):
+	ItemAcquisitionManager::ItemAcquisitionManager(const std::shared_ptr<GameObject>& objPtr, const Parametor& param) :
 		Component(objPtr), m_param(param)
 	{}
 
@@ -73,7 +74,14 @@ namespace basecross {
 	void ItemAcquisitionManager::Input_ItemAcquisition() {
 		//バッグを所持していなかったら処理を飛ばす
 		auto bag = GetGameObject()->GetComponent<ItemBag>(false);
-		if (!bag) {
+		auto animator = GetGameObject()->GetComponent<PlayerAnimationCtrl>(false);
+		if (!bag || !animator) {
+			return;
+		}
+
+		//アニメーションが置く状態ならできない
+		auto currentState = animator->GetCurrentAnimaiton();
+		if (currentState == PlayerAnimationCtrl::State::PutItem_Floor || currentState == PlayerAnimationCtrl::State::PutItem_HideObject) {
 			return;
 		}
 
@@ -81,26 +89,42 @@ namespace basecross {
 			//獲得できるアイテム、かつ、バッグに入れることが可能なら
 			if (item->IsAcquisition() && bag->IsAcquisition(item.GetShard())) {
 				//アイテムを入れる。
-				bag->AddItem(item.GetShard());
-
-				//アイテムを獲得された状態にする。
-				item->GetGameObject()->SetActive(false);
-
-				//アニメーションを再生
-				if (auto animation = GetGameObject()->GetComponent<PlayerAnimationCtrl>(false)) {
-					//アイテムが床にあるなら
-					auto itemPosition = item->GetGameObject()->GetComponent<Transform>()->GetPosition();
-					if (itemPosition.y < 0.0f) {
-						animation->ChangeAnimation(PlayerAnimationCtrl::State::PutItem_Floor);
-					}
-					else {
-						animation->ChangeAnimation(PlayerAnimationCtrl::State::PutItem_HideObject);
-					}
-				}
+				ItemAcquisition(item.GetShard());
+				break;
 			}
 		}
 	}
 
+	void ItemAcquisitionManager::ItemAcquisition(const std::shared_ptr<ItemBase>& item) {
+		auto bag = GetGameObject()->GetComponent<ItemBag>(false);
+		auto animator = GetGameObject()->GetComponent<PlayerAnimationCtrl>(false);
+		if (!bag || !animator) {
+			return;
+		}
+
+		//アイテムを入れる。
+		bag->AddItem(item);
+
+		//アイテムを獲得された状態にする。
+		item->GetGameObject()->SetActive(false);
+
+		//アニメーションを再生
+		auto itemPosition = item->GetGameObject()->GetComponent<Transform>()->GetPosition();
+		if (itemPosition.y < 0.0f) {
+			//アイテムが床にあるなら
+			animator->ChangeAnimation(PlayerAnimationCtrl::State::PutItem_Floor);
+		}
+		else {
+			//アイテムが床にないなら
+			animator->ChangeAnimation(PlayerAnimationCtrl::State::PutItem_HideObject);
+		}
+
+		//向きたい方法を設定
+		if (auto rotationController = GetGameObject()->GetComponent<RotationController>(false)) {
+			auto direct = itemPosition - transform->GetPosition();
+			rotationController->SetDirect(direct);
+		}
+	}
 
 	bool ItemAcquisitionManager::IsAcquisitionRange(const std::shared_ptr<ItemBase>& item) {
 		auto toItemVec = maru::Utility::CalcuToTargetVec(GetGameObject(), item->GetGameObject());

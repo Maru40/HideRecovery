@@ -69,6 +69,22 @@ namespace basecross {
 		void PutHideItem();
 
 		/// <summary>
+		/// ブラフ行為
+		/// </summary>
+		void BluffPutHideItem();
+
+		/// <summary>
+		/// アニメーションの再生
+		/// </summary>
+		/// <param name="putEvent">アニメーションイベント</param>
+		void PlayAnimation(const std::function<void()>& putEvent);
+
+		/// <summary>
+		/// 回転処理
+		/// </summary>
+		void Rotation();
+
+		/// <summary>
 		/// 置けるかどうかを返す
 		/// </summary>
 		/// <returns>置けるならtrue</returns>

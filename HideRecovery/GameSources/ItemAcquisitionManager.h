@@ -63,6 +63,11 @@ namespace basecross {
 		void Input_ItemAcquisition();
 
 		/// <summary>
+		/// 実際にアイテムを獲得する処理
+		/// </summary>
+		void ItemAcquisition(const std::shared_ptr<ItemBase>& item);
+
+		/// <summary>
 		/// アイテムが獲得範囲内にいるかどうか判断
 		/// </summary>
 		/// <param name="item">確認したいアイテム</param>

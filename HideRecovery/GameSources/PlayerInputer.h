@@ -66,6 +66,12 @@ namespace basecross
 		/// <returns></returns>
 		static bool IsPutHideItem();
 
+		/// <summary>
+		/// 実際に置かないブラフ行為
+		/// </summary>
+		/// <returns></returns>
+		static bool IsBluffPutItem();
+
 		static bool IsDash();
 		static bool IsJetPumpPush();
 		static bool IsJetPumpUp();
