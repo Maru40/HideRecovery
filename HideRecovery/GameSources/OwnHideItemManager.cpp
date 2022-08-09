@@ -60,10 +60,6 @@ namespace basecross {
 		//タイムベント
 		if (!m_timer->IsTimeUp()) {
 			m_timer->UpdateTimer();
-
-			if (m_timer->IsTimeUp()) {
-				
-			}
 		}
 
 		//デバッグコマンド
@@ -89,6 +85,12 @@ namespace basecross {
 
 		auto animator = GetGameObject()->GetComponent<PlayerAnimationCtrl>(false);
 		if (!animator) {
+			return;
+		}
+
+		//アニメーションが置く状態ならできない
+		auto currentState = animator->GetCurrentAnimaiton();
+		if (currentState == PlayerAnimationCtrl::State::PutItem_Floor || currentState == PlayerAnimationCtrl::State::PutItem_HideObject) {
 			return;
 		}
 

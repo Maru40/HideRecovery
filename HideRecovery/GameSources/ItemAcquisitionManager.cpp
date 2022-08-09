@@ -73,7 +73,14 @@ namespace basecross {
 	void ItemAcquisitionManager::Input_ItemAcquisition() {
 		//バッグを所持していなかったら処理を飛ばす
 		auto bag = GetGameObject()->GetComponent<ItemBag>(false);
-		if (!bag) {
+		auto animator = GetGameObject()->GetComponent<PlayerAnimationCtrl>(false);
+		if (!bag || !animator) {
+			return;
+		}
+
+		//アニメーションが置く状態ならできない
+		auto currentState = animator->GetCurrentAnimaiton();
+		if (currentState == PlayerAnimationCtrl::State::PutItem_Floor || currentState == PlayerAnimationCtrl::State::PutItem_HideObject) {
 			return;
 		}
 
