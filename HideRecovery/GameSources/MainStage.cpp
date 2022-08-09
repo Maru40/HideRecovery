@@ -58,6 +58,7 @@
 using namespace basecross::Enemy;
 
 namespace basecross {
+	//wstring MainStage::sm_loadMapName = L"StageS1_Copy.csv";
 	wstring MainStage::sm_loadMapName = L"StageS2.csv";
 
 	void MainStage::CreateViewLight() {
@@ -102,7 +103,7 @@ namespace basecross {
 			AddGameObject<HideItemObject>();
 
 			//デバッグ
-			AddGameObject<DebugObject>();
+			//AddGameObject<DebugObject>();
 		}
 		catch (...) {
 			throw;

@@ -68,9 +68,9 @@ namespace basecross {
 		{}
 
 		void Factory_ImpactMap::CreateNode(const std::shared_ptr<GraphAstar>& astar) {
-			const auto& rect = m_param.rect;
-			const auto& startPosition = rect.CalculateStartPosition();
-			const auto& intervalRange = m_param.intervalRange;
+			const maru::Rect& rect = m_param.rect;
+			const Vec3& startPosition = rect.CalculateStartPosition();
+			const float& intervalRange = m_param.intervalRange;
 
 			//Šî€‚Æ‚È‚é‰¡‚Ì‘å‚«‚³‚ÆAc‚Ì‘å‚«‚³
 			float numLoopWidth = rect.width / intervalRange;

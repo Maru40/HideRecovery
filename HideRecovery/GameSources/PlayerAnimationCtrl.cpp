@@ -18,6 +18,9 @@
 #include "VelocityManager.h"
 #include "PlayerController.h"
 
+#include "TimeHelper.h"
+#include "GameTimer.h"
+
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------

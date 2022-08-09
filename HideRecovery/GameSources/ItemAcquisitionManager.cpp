@@ -19,6 +19,8 @@
 #include "PlayerInputer.h"
 #include "ItemBag.h"
 
+#include "PlayerAnimationCtrl.h"
+
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
@@ -54,7 +56,7 @@ namespace basecross {
 		//アイテムが範囲内にいるか索敵
 		for (auto& item : m_allFieldItems) {
 			//アクティブ状態でないなら飛ばす。
-			if (!item->GetGameObject()->IsUpdateActive()) {
+			if (!item->GetGameObject()->IsActive()) {
 				continue;
 			}
 
@@ -83,6 +85,18 @@ namespace basecross {
 
 				//アイテムを獲得された状態にする。
 				item->GetGameObject()->SetActive(false);
+
+				//アニメーションを再生
+				if (auto animation = GetGameObject()->GetComponent<PlayerAnimationCtrl>(false)) {
+					//アイテムが床にあるなら
+					auto itemPosition = item->GetGameObject()->GetComponent<Transform>()->GetPosition();
+					if (itemPosition.y < 0.0f) {
+						animation->ChangeAnimation(PlayerAnimationCtrl::State::PutItem_Floor);
+					}
+					else {
+						animation->ChangeAnimation(PlayerAnimationCtrl::State::PutItem_HideObject);
+					}
+				}
 			}
 		}
 	}

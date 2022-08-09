@@ -22,6 +22,18 @@ namespace basecross {
 
 		ex_weak_ptr<FieldImpactMap> SingletonComponent<FieldImpactMap>::sm_instance = nullptr;
 
+		//--------------------------------------------------------------------------------------
+		///	フィールド影響マップのパラメータ
+		//--------------------------------------------------------------------------------------
+
+		FieldImpactMap_Parametor::FieldImpactMap_Parametor():
+			intervalRange(5.0f),
+			createHeightOffset(1.0f)
+		{}
+
+		//--------------------------------------------------------------------------------------
+		///	フィールド影響マップ本体
+		//--------------------------------------------------------------------------------------
 
 		FieldImpactMap::FieldImpactMap(
 			const std::shared_ptr<GameObject>& objPtr, 

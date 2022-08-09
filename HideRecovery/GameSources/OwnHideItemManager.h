@@ -19,7 +19,9 @@ namespace basecross {
 	/// パラメータ
 	//--------------------------------------------------------------------------------------
 	struct OwnHideItemManager_Parametor {
-		float searchHidePlaceRange;	//隠す場所に手が届く範囲
+		float searchHidePlaceRange;			//隠す場所に手が届く範囲
+		float putFloorAnimationTime;		//床に置くアニメーション時間
+		float putHideObjectAnimationTime;	//隠す場所に置くアニメーション時間
 
 		OwnHideItemManager_Parametor();
 
@@ -39,7 +41,8 @@ namespace basecross {
 		using Parametor = OwnHideItemManager_Parametor;
 
 	private:
-		Parametor m_param;	//パラメータ
+		Parametor m_param;					//パラメータ
+		std::unique_ptr<GameTimer> m_timer;	//時間管理
 
 		bool m_isFleePut;	//デバッグ用のどこでも置けるフラグ
 
