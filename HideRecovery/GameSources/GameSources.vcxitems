@@ -16,6 +16,7 @@
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)ActionTimer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ActiveSkillBase.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)AnimationCtrl.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)AuraBase.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)AuraObjectBase.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)AutoReflection.h" />
@@ -64,6 +65,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)OriginalMeshToonObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)OwnHideItemManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ParticleManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)PlayerAnimationCtrl.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)PlayerCameraMover.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)PlayerController.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)PlayerObject.h" />
@@ -280,6 +282,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)OwnHideItemManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ParticleManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)PassiveSkillBase.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)PlayerAnimationCtrl.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)PlayerCameraMover.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)PlayerController.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)PlayerObject.cpp" />

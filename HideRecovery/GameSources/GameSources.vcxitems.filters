@@ -688,6 +688,9 @@
     <Filter Include="Maruyama\Enemy\Component\EachEnemy\Common\Stator\State\Chase\TargetSeek">
       <UniqueIdentifier>{adb44c54-3b38-4d44-a7f8-69cf1c0a7975}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Player\Component\PlayerAnimationCtrl">
+      <UniqueIdentifier>{73576706-d0fa-412a-9bd1-6c0f5e3cf71a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1288,6 +1291,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)ChaseState_TargetSeek.h">
       <Filter>Maruyama\Enemy\Component\EachEnemy\Common\Stator\State\Chase\TargetSeek</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)PlayerAnimationCtrl.h">
+      <Filter>Maruyama\Player\Component\PlayerAnimationCtrl</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)AnimationCtrl.h">
+      <Filter>Maruyama\Player\Component\PlayerAnimationCtrl</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -1816,6 +1825,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)ChaseState_TargetSeek.cpp">
       <Filter>Maruyama\Enemy\Component\EachEnemy\Common\Stator\State\Chase\TargetSeek</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)PlayerAnimationCtrl.cpp">
+      <Filter>Maruyama\Player\Component\PlayerAnimationCtrl</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
