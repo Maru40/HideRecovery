@@ -354,3 +354,15 @@ MadSweets_Project/Saves/
 
 /Libs/lib/Debug/DirectXTex.lib
 /Libs/lib/Release/DirectXTex.lib
+
+!/Libs/PhotonSDK/Common-cpp/lib/Debug/
+!/Libs/PhotonSDK/Common-cpp/lib/Debug/Common-cpp_vc16_debug_windows_mt_x64.pdb
+!/Libs/PhotonSDK/Common-cpp/lib/Release/
+
+!/Libs/PhotonSDK/LoadBalancing-cpp/lib/Debug/
+!/Libs/PhotonSDK/LoadBalancing-cpp/lib/Debug/LoadBalancing-cpp_vc16_debug_windows_mt_x64.pdb
+!/Libs/PhotonSDK/LoadBalancing-cpp/lib/Release/
+
+!/Libs/PhotonSDK/Photon-cpp/lib/Debug/
+!/Libs/PhotonSDK/Photon-cpp/lib/Debug/Photon-cpp_vc16_debug_windows_mt_x64.pdb
+!/Libs/PhotonSDK/Photon-cpp/lib/Release/
