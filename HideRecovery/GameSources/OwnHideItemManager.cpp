@@ -126,7 +126,7 @@ namespace basecross {
 		if (m_isFleePut) {
 			auto position = transform->GetPosition();
 			position += transform->GetForward();
-			position.y = 0.0f;
+			position.y = -0.25f;
 			return position;
 		}
 
