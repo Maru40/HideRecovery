@@ -703,6 +703,21 @@
     <Filter Include="Watanabe\StageObject\RackObject">
       <UniqueIdentifier>{fb4c6639-cb0d-43ee-9bb1-499b48fac66b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\Utility\AdvMeshUtil">
+      <UniqueIdentifier>{b7a03c06-c3dd-483c-ae10-788597b0c83d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\Utility\BaseSingleton">
+      <UniqueIdentifier>{15209dea-fbbb-439c-936c-7ca718851ccd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\Utility\DataExtracter">
+      <UniqueIdentifier>{d0aad1b9-6816-41bb-a4af-fb62de9bfe18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\Utility\TransformData">
+      <UniqueIdentifier>{8304604c-fd18-4c43-b28b-be459e0aec2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\Utility\Utility">
+      <UniqueIdentifier>{f871da4d-e4dc-41d0-8c0a-9a965e06debd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1279,14 +1294,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Effekseer\EfkInterface.h">
       <Filter>Watanabe\Effekseer</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\BaseSingleton.h">
-      <Filter>Watanabe\Utility</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\DebugClass\Debug.h">
       <Filter>Watanabe\DebugClass</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\Utility.h">
-      <Filter>Watanabe\Utility</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\WatanabeStage.h">
       <Filter>Watanabe\TestStage</Filter>
@@ -1315,11 +1324,20 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\RackObject.h">
       <Filter>Watanabe\StageObject\RackObject</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\AdvMeshUtil.h">
+      <Filter>Watanabe\Utility\AdvMeshUtil</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\BaseSingleton.h">
+      <Filter>Watanabe\Utility\BaseSingleton</Filter>
+    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\DataExtracter.h">
-      <Filter>Watanabe\Utility</Filter>
+      <Filter>Watanabe\Utility\DataExtracter</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\Utility.h">
+      <Filter>Watanabe\Utility\Utility</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\TransformData.h">
-      <Filter>Watanabe\Utility</Filter>
+      <Filter>Watanabe\Utility\TransformData</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1832,9 +1850,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\DebugClass\Debug.cpp">
       <Filter>Watanabe\DebugClass</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Utility\Utility.cpp">
-      <Filter>Watanabe\Utility</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\WatanabeStage.cpp">
       <Filter>Watanabe\TestStage</Filter>
     </ClCompile>
@@ -1861,6 +1876,12 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\RackObject.cpp">
       <Filter>Watanabe\StageObject\RackObject</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Utility\AdvMeshUtil.cpp">
+      <Filter>Watanabe\Utility\AdvMeshUtil</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Utility\Utility.cpp">
+      <Filter>Watanabe\Utility\Utility</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
