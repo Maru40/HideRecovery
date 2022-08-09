@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include "stdafx.h"
-#include "AdvancedGameObject.h"
+#include "TransformData.h"
 #include "Utility.h"
 
 namespace basecross {

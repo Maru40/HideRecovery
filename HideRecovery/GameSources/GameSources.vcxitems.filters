@@ -1285,9 +1285,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\DebugClass\Debug.h">
       <Filter>Watanabe\DebugClass</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Effekseer\TransformData.h">
-      <Filter>Watanabe\Effekseer</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\Utility.h">
       <Filter>Watanabe\Utility</Filter>
     </ClInclude>
@@ -1319,6 +1316,9 @@
       <Filter>Watanabe\StageObject\RackObject</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\DataExtracter.h">
+      <Filter>Watanabe\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\TransformData.h">
       <Filter>Watanabe\Utility</Filter>
     </ClInclude>
   </ItemGroup>

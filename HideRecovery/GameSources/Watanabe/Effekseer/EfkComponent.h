@@ -6,43 +6,9 @@
 #pragma once
 #include "stdafx.h"
 #include "EfkEffect.h"
+#include "../Utility/TransformData.h"
 
 namespace basecross {
-	/**
- * @brief 位置、大きさ、回転の情報を持つ構造体
- */
-	struct TransformData {
-		Vec3 Position;
-		Vec3 Scale;
-		Vec3 Rotation;
-		TransformData() {
-			this->Position = Vec3(0.0f);
-			this->Scale = Vec3(1.0f);
-			this->Rotation = Vec3(0.0f);
-		}
-		TransformData(const Vec3& position) {
-			this->Position = position;
-			this->Scale = Vec3(1.0f);
-			this->Rotation = Vec3(0.0f);
-		}
-		TransformData(const Vec3& position, const Vec3& scale) {
-			this->Position = position;
-			this->Scale = scale;
-			this->Rotation = Vec3(0.0f);
-		}
-		TransformData(const Vec3& position, const Vec3& scale, const Vec3& rotation) {
-			this->Position = position;
-			this->Scale = scale;
-			this->Rotation = rotation;
-		}
-		TransformData operator +(const TransformData& data) {
-			this->Position += data.Position;
-			this->Scale += data.Scale;
-			this->Rotation += data.Rotation;
-			return *this;
-		}
-	};
-
 	/**
 	 * @brief 空間タイプ
 	 */
