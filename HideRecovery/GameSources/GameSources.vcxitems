@@ -38,6 +38,10 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)HideItemObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)HidePlace.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ImpactManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineController.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineTestStage.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineTransformSynchronization.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ItemAcquisitionManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ItemBag.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ItemBase.h" />
@@ -217,6 +221,10 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)HideItemObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)HidePlace.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ImpactManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineController.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineTestStage.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineTransformSynchronization.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ItemAcquisitionManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ItemBag.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ItemBase.cpp" />

@@ -643,6 +643,24 @@
     <Filter Include="Maruyama\StageObject\HidePlaceObject\HidePlace">
       <UniqueIdentifier>{32fdea72-fc83-491f-baa6-3e690348c3f9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Itabashi">
+      <UniqueIdentifier>{e4b6a115-32b4-41e4-bdf7-25ca9a77d3cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Itabashi\Online">
+      <UniqueIdentifier>{10a35be9-97d0-4a30-b6cd-0c66a3fc9262}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Itabashi\Stage">
+      <UniqueIdentifier>{df0fb984-2e67-467c-845a-d92da97574d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Itabashi\Online\OnlineTransformSynchronization">
+      <UniqueIdentifier>{86257ca8-c7ca-459c-8544-09c691931490}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Itabashi\Online\OnlineController">
+      <UniqueIdentifier>{5563d5b2-921e-4649-867c-f24adc0594bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Itabashi\Online\OnlineManager">
+      <UniqueIdentifier>{7b179ad0-35b6-4f52-a099-69d7f1ae8a4d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1189,6 +1207,18 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)HidePlace.h">
       <Filter>Maruyama\StageObject\HidePlaceObject\HidePlace</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineController.h">
+      <Filter>Itabashi\Online\OnlineController</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineManager.h">
+      <Filter>Itabashi\Online\OnlineManager</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineTestStage.h">
+      <Filter>Itabashi\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineTransformSynchronization.h">
+      <Filter>Itabashi\Online\OnlineTransformSynchronization</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -1669,6 +1699,18 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)HidePlace.cpp">
       <Filter>Maruyama\StageObject\HidePlaceObject\HidePlace</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineController.cpp">
+      <Filter>Itabashi\Online\OnlineController</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineManager.cpp">
+      <Filter>Itabashi\Online\OnlineManager</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineTestStage.cpp">
+      <Filter>Itabashi\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineTransformSynchronization.cpp">
+      <Filter>Itabashi\Online\OnlineTransformSynchronization</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
