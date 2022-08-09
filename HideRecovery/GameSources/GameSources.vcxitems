@@ -215,6 +215,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\RackObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\WatanabeStage.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\BaseSingleton.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\DataExtracter.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\Utility.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WindowSetting.h" />
   </ItemGroup>

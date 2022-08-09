@@ -1318,6 +1318,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\RackObject.h">
       <Filter>Watanabe\StageObject\RackObject</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\DataExtracter.h">
+      <Filter>Watanabe\Utility</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
