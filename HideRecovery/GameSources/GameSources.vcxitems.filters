@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Headers">
@@ -694,6 +694,24 @@
     <Filter Include="Maruyama\Stage\TitleStage">
       <UniqueIdentifier>{3bf91c99-a945-4357-8ddf-f3e8fdf07cc0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Itabashi">
+      <UniqueIdentifier>{e4b6a115-32b4-41e4-bdf7-25ca9a77d3cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Itabashi\Online">
+      <UniqueIdentifier>{10a35be9-97d0-4a30-b6cd-0c66a3fc9262}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Itabashi\Stage">
+      <UniqueIdentifier>{df0fb984-2e67-467c-845a-d92da97574d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Itabashi\Online\OnlineTransformSynchronization">
+      <UniqueIdentifier>{86257ca8-c7ca-459c-8544-09c691931490}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Itabashi\Online\OnlineController">
+      <UniqueIdentifier>{5563d5b2-921e-4649-867c-f24adc0594bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Itabashi\Online\OnlineManager">
+      <UniqueIdentifier>{7b179ad0-35b6-4f52-a099-69d7f1ae8a4d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -936,8 +954,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)EnemyStatusBase.h">
       <Filter>Maruyama\Enemy\Component\Base\Status</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)HitStopManager.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)TimeHelper.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ImpactMap.h">
       <Filter>Maruyama\Enemy\Component\ImpactMap</Filter>
     </ClInclude>
@@ -1085,8 +1101,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)FadeSprite.h">
       <Filter>Maruyama\Utility\Component\FadeSprite</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)FadeSprite.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)SinScaling.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)BillBoard_Ex.h">
       <Filter>Maruyama\Utility\Component\BillBoard\Ex</Filter>
     </ClInclude>
@@ -1302,6 +1316,18 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)TitleStage.h">
       <Filter>Maruyama\Stage\TitleStage</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineController.h">
+      <Filter>Itabashi\Online\OnlineController</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineManager.h">
+      <Filter>Itabashi\Online\OnlineManager</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineTestStage.h">
+      <Filter>Itabashi\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineTransformSynchronization.h">
+      <Filter>Itabashi\Online\OnlineTransformSynchronization</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1632,8 +1658,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)FadeSprite.cpp">
       <Filter>Maruyama\Utility\Component\FadeSprite</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)FadeSprite.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)SinScaling.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)BillBoard_Ex.cpp">
       <Filter>Maruyama\Utility\Component\BillBoard\Ex</Filter>
     </ClCompile>
@@ -1838,6 +1862,18 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)TitleStage.cpp">
       <Filter>Maruyama\Stage\TitleStage</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineController.cpp">
+      <Filter>Itabashi\Online\OnlineController</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineManager.cpp">
+      <Filter>Itabashi\Online\OnlineManager</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineTestStage.cpp">
+      <Filter>Itabashi\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineTransformSynchronization.cpp">
+      <Filter>Itabashi\Online\OnlineTransformSynchronization</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)HitStopManager.cpp">
@@ -1846,8 +1882,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)TimeHelper.cpp">
       <Filter>Maruyama\Utility\Timer\TimeHelper</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)HitStopManager.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)TimeHelper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="$(MSBuildThisFileDirectory)..\..\Libs\BaseLib\DxShaders\SlimeVS.hlsl">
