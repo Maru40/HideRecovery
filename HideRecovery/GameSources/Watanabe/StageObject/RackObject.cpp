@@ -6,15 +6,19 @@
 #include "stdafx.h"
 #include "RackObject.h"
 #include "HidePlace.h"
+#include "../Utility/DataExtracter.h"
 
 namespace basecross {
 	RackObject::RackObject(const shared_ptr<Stage>& stage)
-		:GameObject(stage)
+		:StageObjectBase(stage, L"RackObject")
 	{}
 
 	RackObject::RackObject(const shared_ptr<Stage>& stage, const wstring& line)
-		: GameObject(stage)
-	{}
+		: StageObjectBase(stage, L"RackObject")
+	{
+		vector<wstring> tokens = DataExtracter::DelimitData(line);
+		DataExtracter::TransformDataExtraction(tokens, m_transformData);
+	}
 
 	void RackObject::OnCreate() {
 		auto drawComp = AddComponent<PNTStaticModelDraw>();

@@ -41,7 +41,7 @@ namespace basecross {
 
 		GameObjecttCSVBuilder builder;
 		builder.Register<Block>(L"Block");
-		//builder.Register<RackObject>(L"Rack");
+		builder.Register<RackObject>(L"Rack");
 		auto dir = App::GetApp()->GetDataDirWString();
 		auto path = dir + L"MapDatas/";
 		builder.Build(GetThis<Stage>(), path + L"StageS2.csv");

@@ -5,9 +5,10 @@
 
 #pragma once
 #include "stdafx.h"
+#include "StageObjectBase.h"
 
 namespace basecross {
-	class RackObject :public GameObject {
+	class RackObject :public StageObjectBase {
 	public:
 		RackObject(const shared_ptr<Stage>& stage);
 		RackObject(const shared_ptr<Stage>& stage, const wstring& line);
