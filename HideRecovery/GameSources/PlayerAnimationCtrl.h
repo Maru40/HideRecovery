@@ -15,7 +15,7 @@ namespace basecross {
 	/// アニメーションのステート
 	//--------------------------------------------------------------------------------------
 	enum class PlayerAnimationCtrl_State {
-		Wait,
+		Idle,
 		Walk,
 		Put_Floor,
 		Put_HideObject,
@@ -112,17 +112,17 @@ namespace basecross {
 		/// </summary>
 		void DefaultPlay(const float speed = 15.0f);
 
-	public:
 		/// <summary>
 		/// アニメーションの設定
 		/// </summary>
 		/// <returns>アニメーション</returns>
 		void SetAnimaiton(const wstring& animeName, const function<void(PlayerAnimationCtrl&)> func);
 
+	public:
 		/// <summary>
 		/// アニメーションの切り替え
 		/// </summary>
-		void ChangeAnimation(const wstring& animeType);
+		void ChangeAnimation(const State& state);
 
 		/// <summary>
 		/// 現在のアニメーションステートを取得

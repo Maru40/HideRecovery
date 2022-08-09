@@ -15,7 +15,7 @@
 namespace basecross {
 
 	PlayerAnimationCtrl::PlayerAnimationCtrl(const std::shared_ptr<GameObject>& objPtr):
-		AnimationCtrl(objPtr), m_currentState(State::Wait)
+		AnimationCtrl(objPtr), m_currentState(State(0))
 	{}
 
 	void PlayerAnimationCtrl::OnCreate() 
@@ -27,7 +27,7 @@ namespace basecross {
 
 		//アニメーション用のパラメータ
 		AddAnimeParam<PlayerAnimationCtrl> params[] = {
-			{State::Wait,	L"Wait",       1,    39,   true, &PlayerAnimationCtrl::Wait},
+			{State::Idle,	L"Idle",       1,    39,   true, &PlayerAnimationCtrl::Wait},
 			{State::Walk,	L"Dash",       99,  119,  true, &PlayerAnimationCtrl::Walk},
 
 			//{L"Jump",       53,   65,  true, &PlayerAnimationCtrl::Jump},
@@ -56,7 +56,7 @@ namespace basecross {
 			SetAnimaiton(param.stateName, param.func);				//アニメーションの登録
 		}
 
-		ChangeAnimation(params[0].stateName);  //初期アニメ―ション設定
+		ChangeAnimation(params[0].stateType);  //初期アニメ―ション設定
 	}
 
 
@@ -71,10 +71,10 @@ namespace basecross {
 		if (auto velocityManager = GetGameObject()->GetComponent<VelocityManager>(false)) {
 			constexpr float DashSpeed = 2.0f;
 			if (velocityManager->GetVelocity().length() < DashSpeed) {
-				ChangeAnimation(L"Wait");
+				ChangeAnimation(State::Idle);
 			}
 			else {
-				ChangeAnimation(L"Dash");
+				ChangeAnimation(State::Walk);
 			}
 		}
 
@@ -83,27 +83,6 @@ namespace basecross {
 		auto pad = App::GetApp()->GetInputDevice().GetControlerVec()[0];
 		if (pad.wPressedButtons & XINPUT_GAMEPAD_DPAD_UP) {
 			//ChangeAnimation(L"Turn");
-		}
-
-		if (pad.wPressedButtons & XINPUT_GAMEPAD_DPAD_DOWN) {
-			//ChangeAnimation(L"HundShake");
-		}
-
-		if (pad.wPressedButtons & XINPUT_GAMEPAD_DPAD_LEFT) {
-			//ChangeAnimation(L"LookOut");
-			ChangeAnimation(L"HundShake");
-		}
-
-		if (pad.wPressedButtons & XINPUT_GAMEPAD_DPAD_RIGHT) {
-			ChangeAnimation(L"Appeal");
-		}
-
-		if (pad.wPressedButtons & XINPUT_GAMEPAD_LEFT_THUMB) {
-			//ChangeAnimation(L"Fall");
-		}
-
-		if (pad.wPressedButtons & XINPUT_GAMEPAD_RIGHT_THUMB) {
-			ChangeAnimation(L"LookOut");
 		}
 	}
 
@@ -147,7 +126,7 @@ namespace basecross {
 		draw->UpdateAnimation(delta * speed);
 
 		if (draw->GetCurrentAnimationTime() == 0.0f) {
-			ChangeAnimation(L"Wait");
+			ChangeAnimation(State::Idle);
 		}
 	}
 
@@ -155,16 +134,14 @@ namespace basecross {
 		m_animations[animeName] = func;
 	}
 
-	void PlayerAnimationCtrl::ChangeAnimation(const wstring& animeName) {
-		auto draw = GetGameObject()->GetComponent<SmBaseDraw>();
-		auto nowName = draw->GetCurrentAnimation();
-
-		//同じアニメーションだったら
-		if (nowName == animeName) {  
-			return;  //再生するアニメーションが同じの場合更新しない。
+	void PlayerAnimationCtrl::ChangeAnimation(const State& state) {
+		if (m_currentState == state) {
+			return;
 		}
 
-		draw->ChangeCurrentAnimation(animeName);
+		m_currentState = state;
+		auto draw = GetGameObject()->GetComponent<SmBaseDraw>();
+		draw->ChangeCurrentAnimation(m_stateStringMap[state]);
 	}
 
 }
