@@ -22,7 +22,7 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 
 	ItemBag_Parametor::ItemBag_Parametor() :
-		ItemBag_Parametor(1)
+		ItemBag_Parametor(3)
 	{}
 
 	ItemBag_Parametor::ItemBag_Parametor(const uint32 numMaxOwn) :
