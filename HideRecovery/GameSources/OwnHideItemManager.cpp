@@ -55,8 +55,14 @@ namespace basecross {
 	{}
 
 	void OwnHideItemManager::OnUpdate() {
+		//隠すボタンを押したら
 		if (PlayerInputer::IsPutHideItem()) {
 			PutHideItem();
+		}
+
+		//ブラフアイテムボタン
+		if (PlayerInputer::IsBluffPutItem()) {
+			BluffPutHideItem();
 		}
 
 		//タイムベント
@@ -76,25 +82,7 @@ namespace basecross {
 		}
 
 		auto bag = GetGameObject()->GetComponent<ItemBag>(false);
-		if (!bag) {
-			return;
-		}
-
 		auto hideItem = bag->GetHideItem();
-		if (!hideItem) {
-			return;
-		}
-
-		auto animator = GetGameObject()->GetComponent<PlayerAnimationCtrl>(false);
-		if (!animator) {
-			return;
-		}
-
-		//アニメーションが置く状態ならできない
-		auto currentState = animator->GetCurrentAnimaiton();
-		if (currentState == PlayerAnimationCtrl::State::PutItem_Floor || currentState == PlayerAnimationCtrl::State::PutItem_HideObject) {
-			return;
-		}
 
 		//置く場所の取得
 		auto hidePosition = CalculateHidePosition();	//隠す場所
@@ -106,6 +94,28 @@ namespace basecross {
 			bag->RemoveItem(hideItem);
 		};
 
+		PlayAnimation(putEvent);
+		Rotation();
+	}
+
+	void OwnHideItemManager::BluffPutHideItem() {
+		if (!IsPut()) {
+			return;
+		}
+
+		PlayAnimation(nullptr);
+		Rotation();
+	}
+
+	void OwnHideItemManager::PlayAnimation(const std::function<void()>& putEvent) {
+		auto animator = GetGameObject()->GetComponent<PlayerAnimationCtrl>(false);
+
+		//アニメーションが置く状態ならできない
+		auto currentState = animator->GetCurrentAnimaiton();
+		if (currentState == PlayerAnimationCtrl::State::PutItem_Floor || currentState == PlayerAnimationCtrl::State::PutItem_HideObject) {
+			return;
+		}
+
 		if (m_isFleePut) {
 			animator->ChangeAnimation(PlayerAnimationCtrl::State::PutItem_Floor);
 			m_timer->ResetTimer(m_param.putFloorAnimationTime, putEvent);
@@ -114,6 +124,10 @@ namespace basecross {
 			animator->ChangeAnimation(PlayerAnimationCtrl::State::PutItem_HideObject);
 			m_timer->ResetTimer(m_param.putHideObjectAnimationTime, putEvent);
 		}
+	}
+
+	void OwnHideItemManager::Rotation() {
+		auto hidePosition = CalculateHidePosition();	//隠す場所
 
 		//向きたい方法を設定
 		if (auto rotationController = GetGameObject()->GetComponent<RotationController>(false)) {
@@ -123,6 +137,14 @@ namespace basecross {
 	}
 
 	bool OwnHideItemManager::IsPut() const {
+		//必要コンポーネント確認
+		auto bag = GetGameObject()->GetComponent<ItemBag>(false);
+		auto animator = GetGameObject()->GetComponent<PlayerAnimationCtrl>(false);
+		if (!bag || !animator) { return false; }	//必要コンポーネントがあるかどうか
+
+		auto hideItem = bag->GetHideItem();	
+		if (!hideItem) { return false; }	//hideItemがあるかどうか
+
 		if (m_isFleePut) { //フリープット状態なら
 			return true;
 		}
