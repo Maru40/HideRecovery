@@ -17,7 +17,7 @@ namespace basecross {
 		: StageObjectBase(stage, L"Block")
 	{
 		vector<wstring> tokens = DataExtracter::DelimitData(line);
-		int nextIndex = DataExtracter::TransformDataExtraction(tokens, m_transformData);
+		size_t nextIndex = DataExtracter::TransformDataExtraction(tokens, m_transformData);
 		wstring blockType = tokens[nextIndex];
 		if (blockType == L"Wall") {
 			m_blockType = BlockType::Wall;
@@ -65,8 +65,6 @@ namespace basecross {
 
 		auto col = AddComponent<CollisionObb>();
 		col->SetFixed(true);
-
-		AddTag(m_name);
 	}
 
 	void Block::OnUpdate() {

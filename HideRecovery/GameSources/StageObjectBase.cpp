@@ -20,6 +20,8 @@ namespace basecross {
 		transComp->SetPosition(m_transformData.Position);
 		transComp->SetScale(m_transformData.Scale);
 		transComp->SetRotation(m_transformData.Rotation);
+
+		AddTag(m_name);
 	}
 
 	void StageObjectBase::OnCreate() {
