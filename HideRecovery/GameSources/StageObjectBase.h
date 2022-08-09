@@ -6,9 +6,9 @@
 
 #pragma once
 #include "stdafx.h"
+#include "Watanabe/Utility/TransformData.h"
 
 namespace basecross {
-
 	//--------------------------------------------------------------------------------------
 	///	ステージオブジェクトの基底クラス
 	//--------------------------------------------------------------------------------------
@@ -17,6 +17,7 @@ namespace basecross {
 	protected:
 		wstring m_name;    //ステージオブジェクトネーム
 		wstring m_texture; //テクスチャネーム
+		TransformData m_transformData; //トランスフォームデータ
 
 	public:
 		/// <summary>
@@ -27,6 +28,7 @@ namespace basecross {
 		/// <param name="texture">テクスチャ名</param>
 		StageObjectBase(const std::shared_ptr<Stage>& stage, const wstring& name, const wstring& texture = L"");
 
+		virtual void OnPreCreate()override;
 		virtual void OnCreate() override;
 
 		//--------------------------------------------------------------------------------------
@@ -45,8 +47,12 @@ namespace basecross {
 		/// <returns>テクスチャ名</returns>
 		wstring GetTexture() const noexcept { return m_texture; }
 
+		/// <summary>
+		/// トランスフォームコンポーネントの取得
+		/// </summary>
+		/// <returns></returns>
+		shared_ptr<Transform> GetTransform() { return GetComponent<Transform>(); }
 	};
-
 }
 
 //endbasecross
