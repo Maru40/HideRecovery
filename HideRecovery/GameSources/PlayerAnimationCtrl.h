@@ -11,6 +11,9 @@
 
 namespace basecross {
 
+	//--------------------------------------------------------------------------------------
+	/// アニメーション追加パラメータ
+	//--------------------------------------------------------------------------------------
 	template<class T>
 	struct AddAnimeParam {
 		wstring name;
@@ -47,54 +50,62 @@ namespace basecross {
 		}
 	};
 
+	//--------------------------------------------------------------------------------------
+	/// プレイヤーのアニメーション管理
+	//--------------------------------------------------------------------------------------
 	class PlayerAnimationCtrl : public AnimationCtrl
 	{
+		enum class State {
+			
+		};
+
 		map<wstring, std::function<void(PlayerAnimationCtrl&)>> m_animations;
 
-		float m_time = 0.0f;
-
-		bool m_isMoveLock;
-		bool m_isCameraLook;
-
-		float CalucGravityVelocityY();
-		bool IsJump();
-
 	public:
-
-		PlayerAnimationCtrl(const std::shared_ptr<GameObject>& objPtr)
-			:AnimationCtrl(objPtr),
-			m_isMoveLock(false),
-			m_isCameraLook(false)
-		{}
+		/// <summary>
+		/// コンストラクタ
+		/// </summary>
+		/// <param name="objPtr">このクラスを所有するゲームオブジェクト</param>
+		PlayerAnimationCtrl(const std::shared_ptr<GameObject>& objPtr);
 
 		void OnCreate() override;
 		void OnUpdate() override;
 
 	private:
+		//--------------------------------------------------------------------------------------
+		/// 再生したいアニメーション
+		//--------------------------------------------------------------------------------------
 
+		/// <summary>
+		/// 待機
+		/// </summary>
 		void Wait();
-		void Walk();
-		void ReturnWalk();
-		void Jump();
-		void Turn();
-		void HundShake();
-		void LookOut();
-		void Appeal();
-		void Fall();
-		void Landing();  //着地
-		void Dest();
-		void TurnFixed();
 
-		void DefaultPlay(const float speed = 15.0f);  //デフォの再生
+		/// <summary>
+		/// 歩く
+		/// </summary>
+		void Walk();
+
+		/// <summary>
+		/// デフォルト再生関数
+		/// </summary>
+		void DefaultPlay(const float speed = 15.0f);
 
 	public:
-
-		//アクセッサ
+		/// <summary>
+		/// アニメーションの設定
+		/// </summary>
+		/// <returns>アニメーション</returns>
 		void SetAnimaiton(const wstring& animeName, const function<void(PlayerAnimationCtrl&)> func);
 
-		void ChangeAnimation(const wstring& animeType);//,const bool isCameraLook = false, const bool isLock = false);
-		void ChangeAnimation(const wstring& animeType,const bool isCameraLook, const bool isLock );
+		/// <summary>
+		/// アニメーションの切り替え
+		/// </summary>
+		void ChangeAnimation(const wstring& animeType);
 
+		/// <summary>
+		/// 現在のアニメーションステートを取得
+		/// </summary>
 		wstring GetCurrentAnimaiton() const {
 			auto draw = GetGameObject()->GetComponent<SmBaseDraw>();
 			return draw->GetCurrentAnimation();

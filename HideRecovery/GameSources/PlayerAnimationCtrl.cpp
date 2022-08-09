@@ -11,79 +11,24 @@
 #include "PlayerAnimationCtrl.h"
 
 #include "VelocityManager.h"
-//#include "CMovePlayer.h"
-//#include "FunctionTimer.h"
-//
-//#include "DebugSprite.h"
-//#include "AccessAddFun.h"
-//#include "Lock.h"
-//#include "BillBoard.h"
 
 namespace basecross {
 
-	float PlayerAnimationCtrl::CalucGravityVelocityY() {
-		//コンポーネントが存在するかの確認
-		//auto jump = GetGameObject()->GetComponent<JumpCtrl>(false);
-		//if (!jump) {
-		//	return 0.0f;
-		//}
-		//auto gravi = GetGameObject()->GetComponent<Gravity>(false);
-		//if (!gravi) {
-		//	return 0.0f;
-		//}
-
-		//float jumpVec = jump->GetJumpVelocity();
-		//auto graviVec = gravi->GetGravityVelocity();
-
-		//auto velocity = jumpVec + graviVec.y;
-
-		//return velocity;
-		return 0;
-	}
-
-	bool PlayerAnimationCtrl::IsJump() {
-		//auto gravi = GetGameObject()->GetComponent<Gravity>(false);
-		//if (!gravi) {
-		//	return false;
-		//}
-
-		//auto velocity = gravi->GetGravityVelocity();
-
-		//if (velocity.y == 0.0f) {
-		//	return false;  //0.0f方向に重力がかかっいない == ジャンプ中でない
-		//}
-		//else {
-		//	return true;  //ジャンプ中
-		//}
-		return false;
-	}
-
+	PlayerAnimationCtrl::PlayerAnimationCtrl(const std::shared_ptr<GameObject>& objPtr):
+		AnimationCtrl(objPtr)
+	{}
 
 	void PlayerAnimationCtrl::OnCreate() 
 	{
-		auto obj = GetGameObject();
-
-		//メッシュの調整用Mat
-		Mat4x4 spanMat;
-		spanMat.affineTransformation(
-			Vec3(1.0f),
-			Vec3(0.0f),
-			Vec3(0.0f, XM_PI, 0.0f),
-			Vec3(0.0f, -1.0f, 0.0f)
-		);
+		auto object = GetGameObject();
 
 		//メッシュの生成
-		auto drawComp = obj->GetComponent<PNTBoneModelDraw>();
-		//drawComp->SetMeshResource(L"Player_Mesh");
-		//drawComp->SetMeshToTransformMatrix(spanMat);
-		//auto shadow = obj->AddComponent<Shadowmap>();
-		//shadow->SetMeshResource(L"Player_Mesh");
+		auto drawComp = object->GetComponent<PNTBoneModelDraw>();
 
 		//アニメーション用のパラメータ
 		AddAnimeParam<PlayerAnimationCtrl> params[] = {
-			{L"Wait",       10,    40,  true, &PlayerAnimationCtrl::Wait},
-			{L"Dash",       100,  119,  true, &PlayerAnimationCtrl::Walk},
-			{L"ReturnWait", 43,   45,  true, &PlayerAnimationCtrl::ReturnWalk},
+			{L"Wait",       1,    39,   true, &PlayerAnimationCtrl::Wait},
+			{L"Dash",       99,  119,  true, &PlayerAnimationCtrl::Walk},
 
 			//{L"Jump",       53,   65,  true, &PlayerAnimationCtrl::Jump},
 			//{L"Turn",       66,  105,  true, &PlayerAnimationCtrl::Turn},
@@ -96,6 +41,7 @@ namespace basecross {
 			//{L"TurnFixed",  75,   75,  true, &PlayerAnimationCtrl::TurnFixed},
 		};
 
+		//アニメーションの設定
 		for (auto& param : params)
 		{
 			drawComp->AddAnimation(
@@ -162,7 +108,7 @@ namespace basecross {
 	void PlayerAnimationCtrl::Wait()
 	{
 		auto delta = App::GetApp()->GetElapsedTime();
-		float speed = 1.0f;
+		float speed = 15.0f;
 
 		auto draw = GetGameObject()->GetComponent<SmBaseDraw>();
 		draw->UpdateAnimation(delta * speed);
@@ -186,88 +132,12 @@ namespace basecross {
 			draw->UpdateAnimation(delta * speed);
 
 			if (draw->GetCurrentAnimationTime() == 0.0f) {
-				ChangeAnimation(L"ReturnWait");
+				//ChangeAnimation(L"ReturnWait");
 			}
 		}
 		else {
 			draw->UpdateAnimation(delta * moveVec.length() * speed);
 		}
-	}
-
-	void PlayerAnimationCtrl::ReturnWalk() {
-		DefaultPlay(15.0f);
-	}
-
-	void PlayerAnimationCtrl::Jump()
-	{
-		auto draw = GetGameObject()->GetComponent<SmBaseDraw>();
-
-		auto delta = App::GetApp()->GetElapsedTime();
-		float speed = 15.0f;
-
-
-		auto velocity = CalucGravityVelocityY();
-
-		if (velocity >= 0.0f) {  //velocityが0以上なら(上方向に移動中)
-			if (draw->GetCurrentAnimationTime() >= 2.0f) { //再生が9より上になったら再生を止める。
-				speed = 0.0f;
-			}
-		}
-		else {  //落下中
-			speed = 0.0f;
-		}
-
-		if (!IsJump()) {  //ジャンプ状態でないなら
-			speed = 30.0f;
-		}
-
-		draw->UpdateAnimation(delta * speed);  //再生
-
-		if (draw->GetCurrentAnimationTime() == 0.0f) { //再生完了したら。
-			ChangeAnimation(L"Wait");
-		}
-		
-	}	
-
-	void PlayerAnimationCtrl::Turn() {
-		DefaultPlay(20.0f);
-	}
-
-	void PlayerAnimationCtrl::HundShake() {
-		DefaultPlay();
-	}
-
-	void PlayerAnimationCtrl::LookOut() {
-		DefaultPlay();
-	}
-
-	void PlayerAnimationCtrl::Appeal() {
-		DefaultPlay();
-	}
-
-	void PlayerAnimationCtrl::Fall() {
-		auto delta = App::GetApp()->GetElapsedTime();
-		float speed = 15.0f;
-
-		auto draw = GetGameObject()->GetComponent<SmBaseDraw>();
-
-		draw->UpdateAnimation(delta * speed);
-	}
-
-	void PlayerAnimationCtrl::Landing() {
-		DefaultPlay(30.0f);
-	}
-
-	void PlayerAnimationCtrl::Dest() {
-		DefaultPlay();
-	}
-
-	void PlayerAnimationCtrl::TurnFixed() {
-		float speed = 10.0f;
-		auto delta = App::GetApp()->GetElapsedTime();
-
-		auto draw = GetGameObject()->GetComponent<SmBaseDraw>();
-		draw->UpdateAnimation(delta * speed);
 	}
 
 	void PlayerAnimationCtrl::DefaultPlay(const float speed) {
@@ -285,51 +155,18 @@ namespace basecross {
 		m_animations[animeName] = func;
 	}
 
-	void PlayerAnimationCtrl::ChangeAnimation(const wstring& animeName){//,const bool isCameraLock, const bool lock) {
+	void PlayerAnimationCtrl::ChangeAnimation(const wstring& animeName) {
 		auto draw = GetGameObject()->GetComponent<SmBaseDraw>();
 		auto nowName = draw->GetCurrentAnimation();
-		if (nowName == animeName && nowName != L"Jump") {  //同じアニメーション且つ、ジャンプアニメーションでないとき
+
+		//同じアニメーションだったら
+		if (nowName == animeName) {  
 			return;  //再生するアニメーションが同じの場合更新しない。
 		}
 
 		draw->ChangeCurrentAnimation(animeName);
-
-		//移動制限など
-		//auto obj = GetGameObject();
-		//if (m_isMoveLock) {  //移動制限
-		//	m_isMoveLock = false;
-		//	auto lockComp = obj->GetComponent<Lock>(false);
-		//	if (lockComp) {
-		//		lockComp->MoveLock(false);
-		//	}
-		//}
-
-		//if (m_isCameraLook) {  //カメラの方向を向く
-		//	m_isCameraLook = false;
-		//	auto bill = obj->GetComponent<BillBoard>(false);
-		//	if (bill) {
-		//		bill->SetUpdateActive(false);
-		//	}
-		//}
 	}
 
-	void PlayerAnimationCtrl::ChangeAnimation(const wstring& animeType, const bool isCameraLook, const bool isLock) {
-		ChangeAnimation(animeType);
-
-		auto obj = GetGameObject();
-		//移動制限
-		//auto lockComp = obj->GetComponent<Lock>(false);
-		//if (lockComp) {
-		//	lockComp->MoveLock(isLock);
-		//	m_isMoveLock = isLock;
-		//}
-
-		//auto bill = obj->GetComponent<BillBoard>(false);
-		//if (bill) {
-		//	bill->SetUpdateActive(isCameraLook);
-		//	m_isCameraLook = isCameraLook;
-		//}
-	}
 }
 
 //endbasecross
