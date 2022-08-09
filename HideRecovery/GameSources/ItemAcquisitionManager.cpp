@@ -29,7 +29,7 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 
 	ItemAcquisitionManager_Parametor::ItemAcquisitionManager_Parametor() :
-		ItemAcquisitionManager_Parametor(10.0f)
+		ItemAcquisitionManager_Parametor(2.0f)
 	{}
 
 	ItemAcquisitionManager_Parametor::ItemAcquisitionManager_Parametor(const float searchRange) :
