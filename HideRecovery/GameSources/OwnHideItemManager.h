@@ -41,7 +41,7 @@ namespace basecross {
 		using Parametor = OwnHideItemManager_Parametor;
 
 	private:
-		Parametor m_param;	//パラメータ
+		Parametor m_param;					//パラメータ
 		std::unique_ptr<GameTimer> m_timer;	//時間管理
 
 		bool m_isFleePut;	//デバッグ用のどこでも置けるフラグ
