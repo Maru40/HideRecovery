@@ -26,6 +26,10 @@
 #include "ItemAcquisitionManager.h"
 //#include "OwnHideItemManager.h"
 
+#include "AnimationCtrl.h"
+#include "PlayerAnimationCtrl.h"
+#include "VelocityManager.h"
+
 namespace basecross {
 
 	PlayerObject::PlayerObject(const std::shared_ptr<Stage>& stage):
@@ -34,16 +38,16 @@ namespace basecross {
 
 	void PlayerObject::OnCreate() {
 		Mat4x4 spanMat;
-		const float fScale = 0.5f;
+		const float fScale = 0.6f;
 		Vec3 scale = Vec3(fScale);
 		spanMat.affineTransformation(
 			scale,
-			Vec3(0.0f),
+			Vec3(0.0f, 0.0f, 0.0f),
 			Vec3(0.0f, XM_PI, 0.0f),
-			Vec3(0.0f, -fScale, 0.0f)
+			Vec3(0.0f, -0.35f, 0.0f)
 		);
 
-		auto draw = AddComponent<PNTStaticModelDraw>();
+		auto draw = AddComponent<PNTBoneModelDraw>();
 		draw->SetMultiMeshResource(L"Player_Mesh");
 		draw->SetMeshToTransformMatrix(spanMat);
 		SetAlphaActive(true);
@@ -61,6 +65,9 @@ namespace basecross {
 		AddComponent<ItemAcquisitionManager>();
 		//AddComponent<OwnHideItemManager>();
 
+		AddComponent<PlayerAnimationCtrl>();
+		AddComponent<VelocityManager>();
+			
 		//カメラセッティング----------------------------------------------------------
 
 		auto springArm = GetStage()->Instantiate<GameObject>(Vec3(), Quat());
