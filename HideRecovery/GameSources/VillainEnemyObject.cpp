@@ -31,7 +31,7 @@ namespace basecross {
 
 		void VillainObject::SettingModel() {
 			Mat4x4 spanMat;
-			Vec3 scale = Vec3(0.5f);
+			Vec3 scale = Vec3(0.6f);
 			spanMat.affineTransformation(
 				scale,
 				Vec3(0.0f),
