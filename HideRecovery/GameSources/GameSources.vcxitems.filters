@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0"
-  xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Headers">
       <UniqueIdentifier>{4b0a624a-610d-4bc6-b311-2b02a781cdf9}</UniqueIdentifier>
@@ -707,9 +706,6 @@
     <Filter Include="Itabashi\Online\OnlineTransformSynchronization">
       <UniqueIdentifier>{86257ca8-c7ca-459c-8544-09c691931490}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Itabashi\Online\OnlineController">
-      <UniqueIdentifier>{5563d5b2-921e-4649-867c-f24adc0594bc}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Itabashi\Online\OnlineManager">
       <UniqueIdentifier>{7b179ad0-35b6-4f52-a099-69d7f1ae8a4d}</UniqueIdentifier>
     </Filter>
@@ -736,6 +732,9 @@
     </Filter>
     <Filter Include="Watanabe\Utility\Utility">
       <UniqueIdentifier>{f871da4d-e4dc-41d0-8c0a-9a965e06debd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Itabashi\Online\PlayerOnlineController">
+      <UniqueIdentifier>{5563d5b2-921e-4649-867c-f24adc0594bc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1333,8 +1332,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)TitleStage.h">
       <Filter>Maruyama\Stage\TitleStage</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineController.h">
-      <Filter>Itabashi\Online\OnlineController</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\PlayerOnlineController.h">
+      <Filter>Itabashi\Online\PlayerOnlineController</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineManager.h">
       <Filter>Itabashi\Online\OnlineManager</Filter>
@@ -1896,8 +1895,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)TitleStage.cpp">
       <Filter>Maruyama\Stage\TitleStage</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineController.cpp">
-      <Filter>Itabashi\Online\OnlineController</Filter>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\PlayerOnlineController.cpp">
+      <Filter>Itabashi\Online\PlayerOnlineController</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineManager.cpp">
       <Filter>Itabashi\Online\OnlineManager</Filter>

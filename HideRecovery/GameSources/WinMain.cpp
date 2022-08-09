@@ -2,7 +2,6 @@
 #include "stdafx.h"
 #include "Project.h"
 #include "PlayerInputer.h"
-#include "Itabashi/OnlineController.h"
 #include "Itabashi/OnlineManager.h"
 
 using namespace basecross;
@@ -117,7 +116,7 @@ HWND InitInstance(HINSTANCE hInstance, int nCmdShow, bool isFullScreen, int iCli
 	UpdateWindow(hWnd);
 
 	// オンラインに使用するアプリIDを設定
-	Online::OnlineController::SetApplicationID(L"f9528b0a-0d67-4296-98f5-0fb9c3c4b5b8");
+	Online::OnlineManager::SetApplicationId(L"f9528b0a-0d67-4296-98f5-0fb9c3c4b5b8");
 
 	return hWnd;
 }

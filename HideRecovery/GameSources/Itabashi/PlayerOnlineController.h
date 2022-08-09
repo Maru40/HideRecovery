@@ -19,7 +19,7 @@ namespace basecross
 {
 namespace Online
 {
-	class OnlineController : public Component, public ExitGames::LoadBalancing::Listener
+	class PlayerOnlineController : public Component, public ExitGames::LoadBalancing::Listener
 	{
 		static std::wstring m_applicationID;
 
@@ -27,7 +27,7 @@ namespace Online
 		int m_playerNumber = 0;
 
 	public:
-		OnlineController(const std::shared_ptr<GameObject>& owner);
+		PlayerOnlineController(const std::shared_ptr<GameObject>& owner);
 
 		void OnUpdate() override;
 
