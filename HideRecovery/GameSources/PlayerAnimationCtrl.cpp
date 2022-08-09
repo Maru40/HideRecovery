@@ -15,7 +15,7 @@
 namespace basecross {
 
 	PlayerAnimationCtrl::PlayerAnimationCtrl(const std::shared_ptr<GameObject>& objPtr):
-		AnimationCtrl(objPtr)
+		AnimationCtrl(objPtr), m_currentState(State::Wait)
 	{}
 
 	void PlayerAnimationCtrl::OnCreate() 
@@ -27,8 +27,8 @@ namespace basecross {
 
 		//アニメーション用のパラメータ
 		AddAnimeParam<PlayerAnimationCtrl> params[] = {
-			{L"Wait",       1,    39,   true, &PlayerAnimationCtrl::Wait},
-			{L"Dash",       99,  119,  true, &PlayerAnimationCtrl::Walk},
+			{State::Wait,	L"Wait",       1,    39,   true, &PlayerAnimationCtrl::Wait},
+			{State::Walk,	L"Dash",       99,  119,  true, &PlayerAnimationCtrl::Walk},
 
 			//{L"Jump",       53,   65,  true, &PlayerAnimationCtrl::Jump},
 			//{L"Turn",       66,  105,  true, &PlayerAnimationCtrl::Turn},
@@ -45,16 +45,18 @@ namespace basecross {
 		for (auto& param : params)
 		{
 			drawComp->AddAnimation(
-				param.name, 
+				param.stateName, 
 				param.startTime, 
 				param.timeLength, 
 				param.loop, 
-				param.timeParSecond);
+				param.timeParSecond
+			);
 
-			SetAnimaiton(param.name, param.func);
+			m_stateStringMap[param.stateType] = param.stateName;	//マップに登録
+			SetAnimaiton(param.stateName, param.func);				//アニメーションの登録
 		}
 
-		ChangeAnimation(params[0].name);  //初期アニメ―ション設定
+		ChangeAnimation(params[0].stateName);  //初期アニメ―ション設定
 	}
 
 
@@ -116,11 +118,9 @@ namespace basecross {
 
 	void PlayerAnimationCtrl::Walk()
 	{
-		auto obj = GetGameObject();
-
 		auto velocityMananger = GetGameObject()->GetComponent<VelocityManager>(false);
 
-		float speed = 2.0f;
+		const float speed = 2.0f;
 		auto delta = App::GetApp()->GetElapsedTime();
 
 		auto moveVec = velocityMananger->GetVelocity();

@@ -12,11 +12,24 @@
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
+	/// アニメーションのステート
+	//--------------------------------------------------------------------------------------
+	enum class PlayerAnimationCtrl_State {
+		Wait,
+		Walk,
+		Put_Floor,
+		Put_HideObject,
+	};
+
+	//--------------------------------------------------------------------------------------
 	/// アニメーション追加パラメータ
 	//--------------------------------------------------------------------------------------
 	template<class T>
 	struct AddAnimeParam {
-		wstring name;
+		using State = PlayerAnimationCtrl_State;
+
+		State stateType;
+		wstring stateName;
 		int startTime;
 		int timeLength;
 		bool loop;
@@ -24,23 +37,28 @@ namespace basecross {
 
 		function<void(T&)> func;
 
-		AddAnimeParam(const wstring& name,
+		AddAnimeParam(
+			const State& state,
+			const wstring& name,
 			const int startTime,
 			const int endTime,
 			const bool loop,
 			const function<void(T&)> func
 		) :
-			AddAnimeParam(name, startTime, endTime, loop, 1.0f, func)
+			AddAnimeParam(state, name, startTime, endTime, loop, 1.0f, func)
 		{}
 
-		AddAnimeParam(const wstring& name,
+		AddAnimeParam(
+			const State& state,
+			const wstring& name,
 			const int startTime,
 			const int endTime,
 			const bool loop,
 			const float parSecond,
 			const function<void(T&)> func
 		) :
-			name(name),
+			stateType(state),
+			stateName(name),
 			startTime(startTime),
 			loop(loop),
 			timeParSecond(parSecond),
@@ -55,11 +73,14 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 	class PlayerAnimationCtrl : public AnimationCtrl
 	{
-		enum class State {
-			
-		};
+	public:
+		using State = PlayerAnimationCtrl_State;
 
-		map<wstring, std::function<void(PlayerAnimationCtrl&)>> m_animations;
+	private:
+		unordered_map<State, wstring> m_stateStringMap;
+		unordered_map<wstring, std::function<void(PlayerAnimationCtrl&)>> m_animations;
+
+		State m_currentState;
 
 	public:
 		/// <summary>
