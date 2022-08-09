@@ -39,19 +39,9 @@ namespace basecross {
 		auto drawComp = object->GetComponent<PNTBoneModelDraw>();
 
 		//アニメーション用のパラメータ
-		AddAnimeParam<PlayerAnimationCtrl> params[] = {
-			{State::Idle,	L"Idle",       1,    39,   true, &PlayerAnimationCtrl::Idle},
-			{State::Walk,	L"Dash",       99,  119,   true, &PlayerAnimationCtrl::Walk},
-
-			//{L"Jump",       53,   65,  true, &PlayerAnimationCtrl::Jump},
-			//{L"Turn",       66,  105,  true, &PlayerAnimationCtrl::Turn},
-			//{L"HundShake", 106,  150,  true, &PlayerAnimationCtrl::HundShake},
-			//{L"LookOut",   151,  250,  true, &PlayerAnimationCtrl::LookOut},
-			//{L"Appeal",    251,  300,  true, &PlayerAnimationCtrl::Appeal},
-			//{L"Fall",      301,  309,  true, &PlayerAnimationCtrl::Fall},
-			//{L"Landing",   310,  320,  true, &PlayerAnimationCtrl::Landing},  //着地
-			//{L"Dest",      321,  370,  true, &PlayerAnimationCtrl::Dest},
-			//{L"TurnFixed",  75,   75,  true, &PlayerAnimationCtrl::TurnFixed},
+		AnimationParametor<PlayerAnimationCtrl> params[] = {
+			{State::Idle,	L"Idle",       1,    39,   true, 2.0f , &PlayerAnimationCtrl::Idle},
+			{State::Walk,	L"Dash",       99,  119,   true, 15.0f, &PlayerAnimationCtrl::Walk},
 		};
 
 		//アニメーションの設定
@@ -65,11 +55,10 @@ namespace basecross {
 				param.timeParSecond
 			);
 
-			m_stateStringMap[param.stateType] = param.stateName;	//マップに登録
-			SetAnimaiton(param.stateType, param.func);				//アニメーションの登録
+			m_parametorMap[param.stateType] = param;
 		}
 
-		ChangeAnimation(params[0].stateType);  //初期アニメ―ション設定
+		ChangeForceAnimation(params[0].stateType);  //初期アニメ―ション設定
 	}
 
 	void PlayerAnimationCtrl::OnStart() {
@@ -78,18 +67,7 @@ namespace basecross {
 
 	void PlayerAnimationCtrl::OnUpdate()
 	{
-		m_animations[m_currentState](*(this));
-
-		//簡易遷移文
-		if (auto velocityManager = GetGameObject()->GetComponent<VelocityManager>(false)) {
-			constexpr float DashSpeed = 2.0f;
-			if (velocityManager->GetVelocity().length() < DashSpeed) {
-				ChangeAnimation(State::Idle);
-			}
-			else {
-				ChangeAnimation(State::Walk);
-			}
-		}
+		m_parametorMap[m_currentState].updateEvent(*(this));
 	}
 
 	void PlayerAnimationCtrl::Idle()
@@ -139,22 +117,18 @@ namespace basecross {
 		}
 	}
 
-	void PlayerAnimationCtrl::SetAnimaiton(const State& state, const function<void(PlayerAnimationCtrl&)> func) {
-		m_animations[state] = func;
-	}
-
 	void PlayerAnimationCtrl::ChangeAnimation(const State& state) {
 		if (m_currentState == state) {
 			return;
 		}
 
 		m_currentState = state;
-		m_drawComponent.lock()->ChangeCurrentAnimation(m_stateStringMap[state]);
+		m_drawComponent.lock()->ChangeCurrentAnimation(m_parametorMap[state].stateName);
 	}
 
 	void PlayerAnimationCtrl::ChangeForceAnimation(const State& state) {
 		m_currentState = state;
-		m_drawComponent.lock()->ChangeCurrentAnimation(m_stateStringMap[state]);
+		m_drawComponent.lock()->ChangeCurrentAnimation(m_parametorMap[state].stateName);
 	}
 
 }

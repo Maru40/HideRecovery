@@ -34,7 +34,7 @@ namespace basecross {
 	/// アニメーション追加パラメータ
 	//--------------------------------------------------------------------------------------
 	template<class T>
-	struct AddAnimeParam {
+	struct AnimationParametor {
 		using State = PlayerAnimationCtrl_State;
 
 		State stateType;
@@ -45,45 +45,44 @@ namespace basecross {
 		float timeParSecond;
 		float updateSpeed;		//更新スピード
 
-		function<void(T&)> func;
+		function<void(T&)> updateEvent;
 
-		AddAnimeParam(
+		AnimationParametor():
+			AnimationParametor(State(0), L"", 0, 0, false, 1.0f, nullptr)
+		{}
+
+		AnimationParametor(
 			const State& state,
 			const wstring& name,
 			const int startTime,
 			const int endTime,
 			const bool loop,
-			const function<void(T&)> func
+			const float updateSpeed,
+			const function<void(T&)> updateEvent
 		) :
-			AddAnimeParam(state, name, startTime, endTime, loop, 1.0f, func)
+			AnimationParametor(state, name, startTime, endTime, loop, 1.0f, updateSpeed, updateEvent)
 		{}
 
-		AddAnimeParam(
+		AnimationParametor(
 			const State& state,
 			const wstring& name,
 			const int startTime,
 			const int endTime,
 			const bool loop,
 			const float parSecond,
-			const function<void(T&)> func
+			const float updateSpeed,
+			const function<void(T&)> updateEvent
 		) :
 			stateType(state),
 			stateName(name),
 			startTime(startTime),
 			loop(loop),
 			timeParSecond(parSecond),
-			func(func)
+			updateSpeed(updateSpeed),
+			updateEvent(updateEvent)
 		{
 			timeLength = endTime - startTime;
 		}
-	};
-
-	//--------------------------------------------------------------------------------------
-	/// アニメーションパラメータ
-	//--------------------------------------------------------------------------------------
-	struct AnimationParametor {
-		wstring stateName;	//ステート登録に使用した名前
-		float updateSpeed;	//更新スピード
 	};
 
 	//--------------------------------------------------------------------------------------
@@ -96,8 +95,7 @@ namespace basecross {
 		using TransitionMember = PlayerAnimationCtrl_TransitionMember;
 
 	private:
-		unordered_map<State, wstring> m_stateStringMap;									//Stateをwstringで登録するマップ。
-		unordered_map<State, std::function<void(PlayerAnimationCtrl&)>> m_animations;	//アニメーションの更新イベントマップ
+		unordered_map<State, AnimationParametor<PlayerAnimationCtrl>> m_parametorMap;	//パラメータマップ
 
 		State m_currentState;						//現在のステート
 		TransitionMember m_transitionMember;		//遷移条件メンバー
@@ -134,12 +132,6 @@ namespace basecross {
 		/// デフォルト再生関数
 		/// </summary>
 		void DefaultPlay(const float speed = 15.0f);
-
-		/// <summary>
-		/// アニメーションの設定
-		/// </summary>
-		/// <returns>アニメーション</returns>
-		void SetAnimaiton(const State& state, const function<void(PlayerAnimationCtrl&)> func);
 
 	public:
 		/// <summary>
