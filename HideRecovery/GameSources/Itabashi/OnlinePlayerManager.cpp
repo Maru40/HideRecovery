@@ -74,8 +74,10 @@ namespace Online
 		{
 			playerObject = GetStage()->AddGameObject<VillainPlayerObject>();
 			auto drawer = playerObject->GetComponent<PNTBoneModelDraw>();
-			drawer->SetDiffuse(Col4(0, 0, 0, 1));
+			drawer->SetDiffuse(Col4(1, 0, 0, 1));
 		}
+
+		++debugCreateCount;
 
 		auto transform = playerObject->GetComponent<Transform>();
 		transform->SetPosition(position);
