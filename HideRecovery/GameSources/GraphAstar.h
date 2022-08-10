@@ -152,16 +152,16 @@ namespace basecross {
 		/// <param name="initialNode">初期スタートノード</param>
 		void LoopSearchAstar(const std::shared_ptr<NavGraphNode>& initialNode, const std::shared_ptr<NavGraphNode>& targetNode);
 
+	public:
+		//--------------------------------------------------------------------------------------
+		///	アクセッサ
+		//--------------------------------------------------------------------------------------
+
 		/// <summary>
 		/// グラフのコピーを返す
 		/// </summary>
 		/// <returns>グラフのコピー</returns>
 		std::shared_ptr<GraphType> CreateCopyGraph();
-
-	public:
-		//--------------------------------------------------------------------------------------
-		///	アクセッサ
-		//--------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// 検索したルートの最後まで来たらtrue
@@ -190,6 +190,12 @@ namespace basecross {
 		const std::stack<std::shared_ptr<NavGraphNode>> GetRoute() const {
 			return m_route;
 		}
+
+		/// <summary>
+		/// ルートをベクター配列にして返す。
+		/// </summary>
+		/// <returns></returns>
+		std::vector<std::shared_ptr<NavGraphNode>> GetRouteVec() const;
 
 		/// <summary>
 		/// 確保したルートのポジション群

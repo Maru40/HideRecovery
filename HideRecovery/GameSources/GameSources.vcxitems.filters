@@ -763,6 +763,9 @@
     <Filter Include="Itabashi\Online\OnlinePlayerManager">
       <UniqueIdentifier>{913a3f2a-aa29-46d1-b17e-989d106e3c4d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Enemy\Component\ImpactMap\Astar\Tester">
+      <UniqueIdentifier>{e0c25eb1-05d0-4534-8b9f-86a6b61eb9c3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1407,6 +1410,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlinePlayerManager.h">
       <Filter>Itabashi\Online\OnlinePlayerManager</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)TesterAstarComponent.h">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\Tester</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -1975,6 +1981,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlinePlayerManager.cpp">
       <Filter>Itabashi\Online\OnlinePlayerManager</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)TesterAstarComponent.cpp">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\Tester</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -188,7 +188,7 @@ namespace basecross {
 	}
 
 	bool GraphAstar::CreateOpenData(const ex_weak_ptr<NavGraphNode>& baseNode, const std::shared_ptr<GraphType>& graph) {
-		bool isArriveTargetNode = false;  //ターゲットノードにたどり着いたかどうか
+		//bool isArriveTargetNode = false;  //ターゲットノードにたどり着いたかどうか
 		auto edges = graph->GetEdges(baseNode->GetIndex());
 
 		for (auto& edge : edges) {
@@ -268,6 +268,17 @@ namespace basecross {
 	}
 
 	//アクセッサ------------------------------------------------------------------------------------------------------
+
+	std::vector<std::shared_ptr<NavGraphNode>> GraphAstar::GetRouteVec() const {
+		std::vector<std::shared_ptr<NavGraphNode>> resultVec;
+		auto copyRoute = m_route;
+		while (!copyRoute.empty()) {
+			resultVec.push_back(copyRoute.top());
+			copyRoute.pop();
+		}
+
+		return resultVec;
+	}
 
 	std::vector<Vec3> GraphAstar::GetRoutePositions() const {
 		std::vector<Vec3> resultPositions;
