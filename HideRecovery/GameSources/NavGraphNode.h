@@ -88,7 +88,7 @@ namespace basecross {
 		/// 影響データのセット
 		/// </summary>
 		/// <param name="data">影響データ</param>
-		ImpactData SetImpactData(const ImpactData& data) noexcept { m_impactData = data; }
+		void SetImpactData(const ImpactData& data) noexcept { m_impactData = data; }
 
 		/// <summary>
 		/// 影響データの取得
