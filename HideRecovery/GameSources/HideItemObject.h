@@ -7,12 +7,14 @@
 #pragma once
 #include "stdafx.h"
 
+#include "StageObjectBase.h"
+
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
 	/// 隠すアイテムオブジェクト
 	//--------------------------------------------------------------------------------------
-	class HideItemObject : public GameObject
+	class HideItemObject : public StageObjectBase
 	{
 	public:
 		using DrawComp = PNTStaticDraw;
@@ -20,7 +22,7 @@ namespace basecross {
 	private:
 
 	public:
-		HideItemObject(const std::shared_ptr<Stage>& stage);
+		HideItemObject(const std::shared_ptr<Stage>& stage, const std::wstring& name);
 
 		void OnCreate() override;
 
