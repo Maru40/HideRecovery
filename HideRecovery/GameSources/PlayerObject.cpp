@@ -59,7 +59,7 @@ namespace basecross {
 
 		AddComponent<CollisionObb>();
 		AddComponent<RotationController>();
-		AddComponent<PlayerController>();
+		//AddComponent<PlayerController>();
 		AddComponent<Gravity>();
 		
 		AddComponent<ItemBag>();
@@ -92,7 +92,7 @@ namespace basecross {
 
 		auto tpsCamera = GetStage()->Instantiate<GameObject>(Vec3(0, 0, 3), quat);
 		//auto virtualCamera = tpsCamera->AddComponent<VirtualCamera>(10);
-		tpsCamera->AddComponent<LookAtCameraManager>(GetThis<GameObject>(), LookAtCameraManager::Parametor());
+		//tpsCamera->AddComponent<LookAtCameraManager>(GetThis<GameObject>(), LookAtCameraManager::Parametor());
 
 		springArmComponent->AddHitTag(L"Wall");
 		springArmComponent->SetChildObject(tpsCamera);
