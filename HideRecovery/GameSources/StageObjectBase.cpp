@@ -16,10 +16,9 @@ namespace basecross {
 
 	void StageObjectBase::OnPreCreate() {
 		GameObject::OnPreCreate();
-		auto transComp = GetTransform();
-		transComp->SetPosition(m_transformData.Position);
-		transComp->SetScale(m_transformData.Scale);
-		transComp->SetRotation(m_transformData.Rotation);
+		transform->SetPosition(m_transformData.Position);
+		transform->SetScale(m_transformData.Scale);
+		transform->SetRotation(m_transformData.Rotation);
 
 		AddTag(m_name);
 	}
