@@ -751,6 +751,12 @@
     <Filter Include="Watanabe\Shader\BoneModelDraw\HLSL">
       <UniqueIdentifier>{5180f2c9-d7d1-45ae-b662-7edd0b2b6279}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\Shader\ModelDraw">
+      <UniqueIdentifier>{0758e925-feff-4a04-a5a1-5eac6bb07c43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\Shader\ModelDraw\HLSL">
+      <UniqueIdentifier>{dea20317-69af-4763-b6a9-278a15f9d844}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1974,11 +1980,14 @@
     <FxCompile Include="$(MSBuildThisFileDirectory)ToonPS.hlsl">
       <Filter>Maruyama\Shader\ToonShader</Filter>
     </FxCompile>
-    <FxCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\HLSL\PSBoneModelDraw.hlsl">
-      <Filter>Watanabe\Shader\BoneModelDraw\HLSL</Filter>
-    </FxCompile>
     <FxCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\HLSL\VSBoneModelDraw.hlsl">
       <Filter>Watanabe\Shader\BoneModelDraw\HLSL</Filter>
+    </FxCompile>
+    <FxCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\HLSL\VSModelDraw.hlsl">
+      <Filter>Watanabe\Shader\ModelDraw\HLSL</Filter>
+    </FxCompile>
+    <FxCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\HLSL\PSModelDraw.hlsl">
+      <Filter>Watanabe\Shader\ModelDraw\HLSL</Filter>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
