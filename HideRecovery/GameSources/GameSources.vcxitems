@@ -45,6 +45,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)ImpactDataDraw.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ImpactManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\ObjectMover.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlinePlayerManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineTestRoom.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\PlayerOnlineController.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineManager.h" />
@@ -255,6 +256,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)ImpactDataDraw.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ImpactManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\ObjectMover.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlinePlayerManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineTestRoom.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\PlayerOnlineController.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineManager.cpp" />

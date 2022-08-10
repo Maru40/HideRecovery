@@ -742,6 +742,9 @@
     <Filter Include="Itabashi\Online\OnlineTestRoom">
       <UniqueIdentifier>{2909f469-304e-476a-b200-f2ed9245ef41}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Itabashi\Online\OnlinePlayerManager">
+      <UniqueIdentifier>{913a3f2a-aa29-46d1-b17e-989d106e3c4d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1377,6 +1380,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineTestRoom.h">
       <Filter>Itabashi\Online\OnlineTestRoom</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlinePlayerManager.h">
+      <Filter>Itabashi\Online\OnlinePlayerManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -1936,6 +1942,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineTestRoom.cpp">
       <Filter>Itabashi\Online\OnlineTestRoom</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlinePlayerManager.cpp">
+      <Filter>Itabashi\Online\OnlinePlayerManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
