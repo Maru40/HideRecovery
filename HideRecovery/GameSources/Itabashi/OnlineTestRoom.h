@@ -35,7 +35,7 @@ namespace Online
 
 				auto onlineController = player->GetComponent<PlayerOnlineController>();
 
-				if (onlineController->GetPlayerNumber() == OnlineManager::GetLocalPlayer().playerNumber)
+				if (onlineController->GetPlayerNumber() == OnlineManager::GetLocalPlayer().getNumber())
 				{
 					auto sp = player->GetArm()->GetComponent<SpringArmComponent>();
 					auto& tpsCamera = sp->GetChildObject();

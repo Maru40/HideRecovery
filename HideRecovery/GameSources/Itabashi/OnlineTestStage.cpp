@@ -25,7 +25,7 @@ namespace basecross
 		void OnUpdate() override
 		{
 			auto transform = m_transform.lock();
-			int localNumber = Online::OnlineManager::GetLocalPlayer().playerNumber;
+			int localNumber = Online::OnlineManager::GetLocalPlayer().getNumber();
 
 			if (!transform || m_playerNumber == 0 || m_playerNumber != localNumber)
 			{
