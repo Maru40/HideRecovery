@@ -121,7 +121,12 @@ namespace basecross {
 		//ノードの番号表示
 		auto numberObject = ObjectFactory::Create<NumbersObject>(GetStage());
 		numberObject->GetComponent<Transform>()->SetPosition(node->GetPosition());
-		numberObject->GetComponent<NumbersCtrl>()->SetValue(static_cast<float>(node->GetIndex()));
+		auto numberCtrl = numberObject->GetComponent<NumbersCtrl>();
+		numberCtrl->SetValue(static_cast<float>(node->GetIndex()));
+
+		//ナンバーの色を占有マップ値に合わせて変更(デバッグ)
+		auto value = node->GetImpactData().occupancyValue;
+		numberCtrl->SetColor(Col4(1.0f, value, value, 1.0f));
 
 		return numberObject;
 	}
