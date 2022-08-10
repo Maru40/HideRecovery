@@ -24,6 +24,7 @@
 
 #include "UtilityAstar.h"
 #include "I_Impact.h"
+#include "Heuristic.h"
 
 namespace basecross {
 
@@ -204,8 +205,8 @@ namespace basecross {
 			std::vector<std::shared_ptr<NavGraphNode>> nodes;
 
 			//自分自身のノードを取得
-			auto node = UtilityAstar::SearchNearNode(*m_astar.get(), selfPosition);
-			if (!node) {
+			auto selfNode = UtilityAstar::SearchNearNode(*m_astar.get(), selfPosition);
+			if (!selfNode) {
 				return nodes;
 			}
 
@@ -214,9 +215,40 @@ namespace basecross {
 			auto eye = impacter->GetEyeSearchRange();
 			EyeSearchRangeParametor eyeParam = eye->GetParametor();
 
+			//Impacterの必要なデータの取得
+			auto impacterPosition = impacterTrans->GetPosition();
 			auto forward = impacterTrans->GetForward();
-			
-			
+
+			auto graph = m_astar->CreateCopyGraph();	//グラフのコピー
+
+			auto nextNode = selfNode;
+			while (true) {
+				std::vector<std::shared_ptr<NavGraphNode>> currentAddNodes;
+				auto currentNode = nextNode;
+				auto edges = graph->GetEdges(currentNode->GetIndex());
+				for (auto edge : edges) {
+					auto toNode = graph->GetNode(edge->GetTo());
+					if (!toNode->IsActive()) {	//アクティブでないならcontinue
+						continue;
+					}
+
+					//ノードが視界内なら
+					if (eye->IsInEyeRange(toNode->GetPosition())) {
+						nodes.push_back(toNode);
+						currentAddNodes.push_back(toNode);
+						toNode->SetIsActive(false);	//ノードを非アクティブにする。
+					}
+					
+					auto currentPosition = currentNode->GetPosition();
+					auto direct = currentPosition + forward;
+					nextNode = UtilityAstar::CalculateTargetDirectNode(*m_astar.get(), currentNode, direct);
+				}
+
+				//追加が一度もされないなら
+				if (currentAddNodes.size() == 0) {
+					break;
+				}
+			}
 
 			return nodes;
 		}
