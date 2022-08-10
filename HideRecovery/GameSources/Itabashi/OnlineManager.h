@@ -20,30 +20,71 @@ namespace basecross
 {
 namespace Online
 {
+	/// <summary>
+	/// オンラインのコールバック用インターフェース
+	/// </summary>
 	class I_OnlineCallBacks
 	{
 	public:
+		/// <summary>
+		/// 接続に成功した場合
+		/// </summary>
 		virtual void OnConnected() = 0;
+		/// <summary>
+		/// 接続に失敗したとき
+		/// </summary>
+		/// <param name="errorCode">エラーコード</param>
 		virtual void OnConnectFailed(int errorCode) = 0;
-
+		/// <summary>
+		/// 接続を切った時
+		/// </summary>
 		virtual void OnDisconnected() = 0;
-
+		/// <summary>
+		/// カスタムイベントが発行されたとき
+		/// </summary>
+		/// <param name="playerNumber">発行したプレイヤー番号</param>
+		/// <param name="eventCode">イベントコード</param>
+		/// <param name="bytes">イベントデータ(バイト配列)</param>
 		virtual void OnCustomEventAction(int playerNumber, std::uint8_t eventCode, const std::uint8_t* bytes) = 0;
-
+		/// <summary>
+		/// 部屋を自分が作成したとき
+		/// </summary>
 		virtual void OnCreateRoom() = 0;
+		/// <summary>
+		/// 自分が部屋の作成に失敗したとき
+		/// </summary>
+		/// <param name="errorCode">エラーコード</param>
 		virtual void OnCreateRoomFailed(int errorCode) = 0;
-
+		/// <summary>
+		/// 部屋の参加に成功したとき
+		/// </summary>
 		virtual void OnJoinRoom() = 0;
+		/// <summary>
+		/// 部屋の参加に失敗したとき
+		/// </summary>
+		/// <param name="errorCode">エラーコード</param>
 		virtual void OnJoinRoomFailed(int errorCode) = 0;
 	};
 
+	/// <summary>
+	/// オンラインのプレイヤー状態
+	/// </summary>
 	struct OnlinePlayer
 	{
+		/// <summary>
+		/// 部屋でプレイヤー番号が何番か（部屋に属していないなら0）
+		/// </summary>
 		int playerNumber = 0;
 	};
 
+	/// <summary>
+	/// オンラインの部屋状態
+	/// </summary>
 	class OnlineRoom
 	{
+		/// <summary>
+		/// 部屋のカスタムプロパティ
+		/// </summary>
 		ExitGames::Common::Hashtable m_customProperties;
 
 	public:
@@ -53,9 +94,17 @@ namespace Online
 
 		}
 
+		/// <summary>
+		/// カスタムプロパティの取得
+		/// </summary>
+		/// <returns>カスタムプロパティ</returns>
 		const ExitGames::Common::Hashtable& GetCustomProperties() const { return m_customProperties; }
 	};
 
+
+	/// <summary>
+	/// オンラインのコールバックを持ったコンポーネント
+	/// </summary>
 	class OnlineComponent : public Component, public I_OnlineCallBacks
 	{
 	public:
@@ -76,14 +125,35 @@ namespace Online
 		virtual void OnJoinRoomFailed(int errorCode) override {}
 	};
 
+	/// <summary>
+	/// オンライン制御用のシングルトンクラス
+	/// </summary>
 	class OnlineManager : public ExitGames::LoadBalancing::Listener
 	{
+		/// <summary>
+		/// 自分自身のインスタンス
+		/// </summary>
 		static std::unique_ptr<OnlineManager> m_instance;
 
+		/// <summary>
+		/// ローカルプレイヤー
+		/// </summary>
 		OnlinePlayer m_localPlayer;
+		/// <summary>
+		/// 部屋の状態（部屋に属していないならnullptr）
+		/// </summary>
 		std::unique_ptr<OnlineRoom> m_room;
+		/// <summary>
+		/// オンラインのコールバック用の配列
+		/// </summary>
 		std::vector<I_OnlineCallBacks*> m_callBacksVector;
+		/// <summary>
+		/// Photonに接続する用のアプリケーションId
+		/// </summary>
 		std::wstring m_applicationId;
+		/// <summary>
+		/// 接続するためのクライアント
+		/// </summary>
 		std::unique_ptr<ExitGames::LoadBalancing::Client> m_client;
 
 		OnlineManager() noexcept = default;
@@ -96,31 +166,84 @@ namespace Online
 		OnlineManager(OnlineManager&&) = delete;
 		OnlineManager& operator=(OnlineManager&&) = delete;
 
+		/// <summary>
+		/// 更新関数
+		/// </summary>
 		static void Update();
 
+		/// <summary>
+		/// コールバックを呼ぶ対象を追加する
+		/// </summary>
+		/// <param name="callbacks">コールバック</param>
 		static void AddCallBacks(I_OnlineCallBacks* callbacks);
+		/// <summary>
+		/// コールバックを呼ぶ対象を削除する
+		/// </summary>
+		/// <param name="callbacks"></param>
 		static void RemoveCallBacks(I_OnlineCallBacks* callbacks);
-
+		/// <summary>
+		/// インスタンスの取得
+		/// </summary>
+		/// <returns>インスタンス</returns>
 		static const std::unique_ptr<OnlineManager>& GetInstance();
-
+		/// <summary>
+		/// ローカルプレイヤー情報の取得
+		/// </summary>
+		/// <returns>ローカルプレイヤー情報</returns>
 		static const OnlinePlayer& GetLocalPlayer() { return GetInstance()->m_localPlayer; }
+		/// <summary>
+		/// 部屋情報の取得
+		/// </summary>
+		/// <returns>部屋情報</returns>
 		static const std::unique_ptr<OnlineRoom>& GetRoom() { return GetInstance()->m_room; }
-
+		/// <summary>
+		/// Photon用のアプリケーションIdの設定
+		/// </summary>
+		/// <param name="applicationId">アプリケーションId</param>
 		static void SetApplicationId(const std::wstring& applicationId) { GetInstance()->m_applicationId = applicationId; }
+		/// <summary>
+		/// Photon用のアプリケーションIdの取得
+		/// </summary>
+		/// <returns>アプリケーションId</returns>
 		static const std::wstring& GetApplicationId() { return GetInstance()->m_applicationId; }
-
+		/// <summary>
+		/// 接続処理
+		/// </summary>
+		/// <param name="version">接続バージョン</param>
+		/// <returns>接続を試すことができたか</returns>
 		static bool Connect(const std::wstring& version = std::wstring());
-
+		/// <summary>
+		/// 接続の終了
+		/// </summary>
 		static void Disconnect();
-
+		/// <summary>
+		/// オンラインの部屋作成
+		/// </summary>
+		/// <param name="roomName">部屋名</param>
+		/// <param name="roomOptions">部屋設定</param>
 		static void CreateRoom(const std::wstring& roomName = std::wstring(),
 			const ExitGames::LoadBalancing::RoomOptions& roomOptions = ExitGames::LoadBalancing::RoomOptions());
-
+		/// <summary>
+		/// オンラインの部屋への参加
+		/// </summary>
+		/// <param name="roomName">部屋名</param>
 		static void JoinRoom(const std::wstring& roomName);
-
+		/// <summary>
+		/// ランダムな部屋参加をするか、部屋を作成する
+		/// </summary>
+		/// <param name="roomOptions">部屋設定</param>
 		static void JoinRandomOrCreateRoom(const ExitGames::LoadBalancing::RoomOptions& roomOptions = ExitGames::LoadBalancing::RoomOptions());
-
+		/// <summary>
+		/// オンラインでイベントを発行する
+		/// </summary>
+		/// <param name="reliable"></param>
+		/// <param name="bytes">送るデータ(バイト配列)</param>
+		/// <param name="size">データサイズ</param>
+		/// <param name="eventCode">イベントコード</param>
+		/// <param name="options">部屋設定</param>
 		static void RaiseEvent(bool reliable, const std::uint8_t* bytes, int size, std::uint8_t eventCode, const ExitGames::LoadBalancing::RaiseEventOptions& options = ExitGames::LoadBalancing::RaiseEventOptions());
+
+		// 自分自身のコールバック -------------------------------------------------------------------------------------------------
 
 		void debugReturn(int debugLevel, const ExitGames::Common::JString& string) override {}
 
@@ -150,6 +273,7 @@ namespace Online
 
 		void leaveRoomReturn(int errorCode, const ExitGames::Common::JString& errorString) override {}
 
+		// -------------------------------------------------------------------------------------------------------------------------
 	};
 }
 }
