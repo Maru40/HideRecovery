@@ -19,11 +19,12 @@ namespace basecross {
 	/// パラメータ
 	//--------------------------------------------------------------------------------------
 	struct ItemBag_Parametor {
-		uint32 numMaxOwn;	//持てる最大数
+		int numStartOwn;	//開始時の所持数
+		int numMaxOwn;	//持てる最大数
 
 		ItemBag_Parametor();
 
-		ItemBag_Parametor(const uint32 numMaxOwn);
+		ItemBag_Parametor(const int numStartOwn, const int numMaxOwn);
 	};
 
 	//--------------------------------------------------------------------------------------

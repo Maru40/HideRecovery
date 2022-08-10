@@ -15,8 +15,8 @@
 
 namespace basecross {
 
-	HideItemObject::HideItemObject(const std::shared_ptr<Stage>& stage):
-		GameObject(stage)
+	HideItemObject::HideItemObject(const std::shared_ptr<Stage>& stage, const std::wstring& name):
+		StageObjectBase(stage, name)
 	{}
 
 	void HideItemObject::OnCreate() {

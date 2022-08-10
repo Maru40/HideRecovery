@@ -28,7 +28,7 @@ namespace basecross {
 		/// Šl“¾‚Å‚«‚éó‘Ô‚©‚Ç‚¤‚©
 		/// </summary>
 		/// <returns>Šl“¾‚Å‚«‚éó‘Ô‚È‚çtrue</returns>
-		bool IsAcquisition() const noexcept { return m_isAcquisition; };
+		bool IsAcquisition() const;
 
 		/// <summary>
 		/// Šl“¾‚Å‚«‚éó‘Ô‚©‚Ç‚¤‚©‚Ìİ’è
