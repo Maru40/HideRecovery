@@ -458,5 +458,6 @@
     <None Include="$(MSBuildThisFileDirectory)..\..\Libs\BaseLib\DxShaders\SlimeParametors.hlsli" />
     <None Include="$(MSBuildThisFileDirectory)ToonFunctions.hlsli" />
     <None Include="$(MSBuildThisFileDirectory)ToonParametors.hlsli" />
+    <None Include="$(MSBuildThisFileDirectory)Watanabe\Shader\HLSL\IncDraw.hlsli" />
   </ItemGroup>
 </Project>

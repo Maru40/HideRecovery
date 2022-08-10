@@ -2003,5 +2003,8 @@
     <None Include="$(MSBuildThisFileDirectory)ToonFunctions.hlsli">
       <Filter>Maruyama\Shader\ToonShader</Filter>
     </None>
+    <None Include="$(MSBuildThisFileDirectory)Watanabe\Shader\HLSL\IncDraw.hlsli">
+      <Filter>Watanabe\Shader</Filter>
+    </None>
   </ItemGroup>
 </Project>
