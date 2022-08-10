@@ -16,6 +16,10 @@ namespace basecross {
 	class GraphAstar;
 	class AstarNodeDraw;
 	class AstarEdgeDraw;
+	class NavGraphNode;
+	class I_Impacter;
+
+	struct EyeSearchRangeParametor;
 
 	namespace maru {
 
@@ -241,6 +245,9 @@ namespace basecross {
 			/// <param name="targetPosition">目的地</param>
 			/// <returns>検索したポジションの配列</returns>
 			std::vector<Vec3> GetRoutePositons(const Vec3& selfPosition, const Vec3& targetPosition);
+
+			//自分の視界内のノードを取得(現在使わないで)
+			std::vector<std::shared_ptr<NavGraphNode>> GetEyeRangeNodes(const Vec3& selfPosition, const std::shared_ptr<I_Impacter>& impacter);
 
 			//------------------------------------------------------------------------------------------------
 			/// アクセッサ

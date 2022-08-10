@@ -215,7 +215,7 @@ namespace basecross {
 				if (auto impactMap = maru::FieldImpactMap::GetInstance()->GetImpactMap()) {
 					auto node = UtilityAstar::SearchNearNode(*impactMap->GetGraphAstar().get(), m_paramPtr->positions[m_index]);
 					if (node) {
-						impactMap->ChangeTargetNodeColor(node->GetIndex(), color);
+						//impactMap->ChangeTargetNodeColor(node->GetIndex(), color);
 					}
 				}
 			}

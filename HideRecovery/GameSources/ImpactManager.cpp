@@ -56,7 +56,7 @@ namespace basecross {
 			auto data = impacter->GetImpacterData();
 
 			//自分の所属するノードの取得
-			auto nearNode = UtilityAstar::SearchNearNode(*impactMap->GetGraphAstar().get(), impacter->GetImpacterObject());
+			auto selfNode = UtilityAstar::SearchNearNode(*impactMap->GetGraphAstar().get(), impacter->GetImpacterObject());
 
 			//自分の周囲から近い部分ほど影響度をアップさせる。
 			
@@ -66,7 +66,13 @@ namespace basecross {
 		void ImpactManager::CalculateEyeImpact(const std::shared_ptr<ImpactMap>& impactMap, const std::shared_ptr<I_Impacter>& impacter) {
 			//視界範囲の取得
 			auto eye = impacter->GetEyeSearchRange();
-			auto eyeParam = eye->GetParametor();
+			EyeSearchRangeParametor eyeParam = eye->GetParametor();
+
+			//自分の所属するノードの取得
+			auto selfNode = UtilityAstar::SearchNearNode(*impactMap->GetGraphAstar().get(), impacter->GetImpacterObject());
+
+			//視界内のノードを取得
+
 
 			//視界内の影響度を更新
 			
