@@ -1,4 +1,9 @@
-﻿#include "stdafx.h"
+﻿/*!
+@file   AdvBaseDraw.cpp
+@brief  カスタム描画クラス実体
+*/
+
+#include "stdafx.h"
 #include "AdvBaseDraw.h"
 #include "DrawComponents.h"
 

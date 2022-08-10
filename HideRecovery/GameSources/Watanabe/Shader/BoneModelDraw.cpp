@@ -31,7 +31,7 @@ namespace basecross {
 	}
 
 	void BoneModelDraw::OnCreate() {
-		//ライティングのみだと極端になるので調整
+		// ライティングのみだと極端になるので調整
 		SetEmissive(bsm::Col4(0.5f, 0.5f, 0.5f, 0.0f));
 		SetDiffuse(bsm::Col4(0.6f, 0.6f, 0.6f, 1.0f));
 	}
@@ -43,14 +43,14 @@ namespace basecross {
 			}
 			SetRasterizerState(RasterizerState::DoubleDraw);
 		}
-		//メッシュリソースの取得
+		// メッシュリソースの取得
 		auto PtrMeshResource = GetMeshResource();
 		if (PtrMeshResource) {
-			//シェーダの設定
+			// シェーダの設定
 			if (IsOwnShadowActive()) {
-				//影付き
+				// 影付き
 				if (GetGameObject()->GetComponent<Shadowmap>(false)) {
-					//シャドウマップがあれば自己影防止用のピクセルシェーダ
+					// シャドウマップがあれば自己影防止用のピクセルシェーダ
 					DrawModel<VSPNTBoneShadow, PSPNTStaticShadow2>(PtrMeshResource->GetMashData());
 				}
 				else {
@@ -61,7 +61,7 @@ namespace basecross {
 				DrawModel<VSBoneModelDraw, PSModelDraw>(PtrMeshResource->GetMashData());
 			}
 		}
-		//マルチメッシュリソースの取得
+		// マルチメッシュリソースの取得
 		auto PtrMultiMeshResource = GetMultiMeshResource();
 		if (PtrMultiMeshResource) {
 			size_t count = PtrMultiMeshResource->GetMeshVecCount();
@@ -83,7 +83,7 @@ namespace basecross {
 			}
 		}
 
-		//後始末
+		// 後始末
 		auto Dev = App::GetApp()->GetDeviceResources();
 		Dev->InitializeStates();
 	}
