@@ -15,6 +15,8 @@
 
 #include "MaruUtility.h"
 
+#include "HideItemObject.h"
+
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
@@ -22,11 +24,11 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 
 	ItemBag_Parametor::ItemBag_Parametor() :
-		ItemBag_Parametor(3)
+		ItemBag_Parametor(0, 3)
 	{}
 
-	ItemBag_Parametor::ItemBag_Parametor(const uint32 numMaxOwn) :
-		numMaxOwn(numMaxOwn)
+	ItemBag_Parametor::ItemBag_Parametor(const int numStartOwn, const int numMaxOwn) :
+		numStartOwn(numStartOwn) ,numMaxOwn(numMaxOwn)
 	{}
 
 	//--------------------------------------------------------------------------------------
@@ -38,7 +40,11 @@ namespace basecross {
 	{}
 
 	void ItemBag::OnCreate() {
-
+		for (int i = 0; i < m_param.numStartOwn; i++) {
+			auto object = GetStage()->Instantiate<HideItemObject>();
+			AddItem(object->GetComponent<ItemBase>());
+			object->SetActive(false);
+		}
 	}
 
 	//--------------------------------------------------------------------------------------
