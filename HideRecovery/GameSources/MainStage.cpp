@@ -104,6 +104,13 @@ namespace basecross {
 
 			//デバッグ
 			//AddGameObject<DebugObject>();
+
+			Debug::GetInstance()->Log(L"入力------------------------------");
+			Debug::GetInstance()->Log(L"X  : 置く");
+			Debug::GetInstance()->Log(L"A  : 拾う");
+			Debug::GetInstance()->Log(L"B  : ブラフ");
+			Debug::GetInstance()->Log(L"↓ : 置く場所制限切り替え");
+			Debug::GetInstance()->Log(L"----------------------------------");
 		}
 		catch (...) {
 			throw;
