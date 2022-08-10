@@ -38,6 +38,7 @@
 #include "ItemAcquisitionManager.h"
 
 #include "HidePlace.h"
+#include "HideItemObject.h"
 
 #include "Watanabe/StageObject/Block.h"
 #include "Watanabe/StageObject/RackObject.h"
@@ -80,6 +81,7 @@ namespace basecross {
 		GameObjecttCSVBuilder builder;
 		builder.Register<Block>(L"Block");
 		builder.Register<RackObject>(L"Rack");
+		builder.Register<HideItemObject>(L"HideItem");
 		auto dir = App::GetApp()->GetDataDirWString();
 		auto path = dir + L"MapDatas/";
 		builder.Build(GetThis<Stage>(), path + fileName);
