@@ -40,6 +40,19 @@ namespace Online
 		/// </summary>
 		virtual void OnDisconnected() = 0;
 		/// <summary>
+		/// 部屋に誰か参加したとき(自分含む)
+		/// </summary>
+		/// <param name="playerNr">参加したプレイヤー番号</param>
+		/// <param name="playernrs">部屋にいる全員のプレイヤー番号配列</param>
+		/// <param name="player">プレイヤー情報</param>
+		virtual void OnJoinRoomEventAction(int playerNumber, const std::vector<int>& playerNumbers, const ExitGames::LoadBalancing::Player& player) = 0;
+		/// <summary>
+		/// 部屋から誰かが抜けたとき(自分含む)
+		/// </summary>
+		/// <param name="playerNr">抜けたプレイヤー番号</param>
+		/// <param name="isInactive">非アクティブか（詳しい意味は調査中）</param>
+		virtual void OnLeaveRoomEventAction(int playerNumber, bool isInactive) = 0;
+		/// <summary>
 		/// カスタムイベントが発行されたとき
 		/// </summary>
 		/// <param name="playerNumber">発行したプレイヤー番号</param>
@@ -67,42 +80,6 @@ namespace Online
 	};
 
 	/// <summary>
-	/// オンラインのプレイヤー状態
-	/// </summary>
-	struct OnlinePlayer
-	{
-		/// <summary>
-		/// 部屋でプレイヤー番号が何番か（部屋に属していないなら0）
-		/// </summary>
-		int playerNumber = 0;
-	};
-
-	/// <summary>
-	/// オンラインの部屋状態
-	/// </summary>
-	class OnlineRoom
-	{
-		/// <summary>
-		/// 部屋のカスタムプロパティ
-		/// </summary>
-		ExitGames::Common::Hashtable m_customProperties;
-
-	public:
-		OnlineRoom(const ExitGames::Common::Hashtable& customProperties) :
-			m_customProperties(customProperties)
-		{
-
-		}
-
-		/// <summary>
-		/// カスタムプロパティの取得
-		/// </summary>
-		/// <returns>カスタムプロパティ</returns>
-		const ExitGames::Common::Hashtable& GetCustomProperties() const { return m_customProperties; }
-	};
-
-
-	/// <summary>
 	/// オンラインのコールバックを持ったコンポーネント
 	/// </summary>
 	class OnlineComponent : public Component, public I_OnlineCallBacks
@@ -115,6 +92,9 @@ namespace Online
 		virtual void OnConnectFailed(int errorCode) override {}
 
 		virtual void OnDisconnected() override {}
+
+		virtual void OnJoinRoomEventAction(int playerNumber, const std::vector<int>& playerNumbers, const ExitGames::LoadBalancing::Player& player) {}
+		virtual void OnLeaveRoomEventAction(int playerNumber, bool isInactive) {}
 
 		virtual void OnCustomEventAction(int playerNumber, std::uint8_t eventCode, const std::uint8_t* bytes) override {}
 
@@ -135,14 +115,6 @@ namespace Online
 		/// </summary>
 		static std::unique_ptr<OnlineManager> m_instance;
 
-		/// <summary>
-		/// ローカルプレイヤー
-		/// </summary>
-		OnlinePlayer m_localPlayer;
-		/// <summary>
-		/// 部屋の状態（部屋に属していないならnullptr）
-		/// </summary>
-		std::unique_ptr<OnlineRoom> m_room;
 		/// <summary>
 		/// オンラインのコールバック用の配列
 		/// </summary>
@@ -190,12 +162,12 @@ namespace Online
 		/// ローカルプレイヤー情報の取得
 		/// </summary>
 		/// <returns>ローカルプレイヤー情報</returns>
-		static const OnlinePlayer& GetLocalPlayer() { return GetInstance()->m_localPlayer; }
+		static const ExitGames::LoadBalancing::MutablePlayer& GetLocalPlayer() { return GetInstance()->m_client->getLocalPlayer(); }
 		/// <summary>
 		/// 部屋情報の取得
 		/// </summary>
 		/// <returns>部屋情報</returns>
-		static const std::unique_ptr<OnlineRoom>& GetRoom() { return GetInstance()->m_room; }
+		static const ExitGames::LoadBalancing::MutableRoom& GetCurrentlyJoinedRoom() { return GetInstance()->m_client->getCurrentlyJoinedRoom(); }
 		/// <summary>
 		/// Photon用のアプリケーションIdの設定
 		/// </summary>
@@ -252,8 +224,8 @@ namespace Online
 		void warningReturn(int warningCode) override {}
 		void serverErrorReturn(int errorCode) override {}
 
-		void joinRoomEventAction(int playerNr, const ExitGames::Common::JVector<int>& playernrs, const ExitGames::LoadBalancing::Player& player) override {}
-		void leaveRoomEventAction(int playerNr, bool isInactive) override {}
+		void joinRoomEventAction(int playerNr, const ExitGames::Common::JVector<int>& playernrs, const ExitGames::LoadBalancing::Player& player) override;
+		void leaveRoomEventAction(int playerNr, bool isInactive) override;
 
 		void customEventAction(int playerNr, nByte eventCode, const ExitGames::Common::Object& eventContent) override;
 
