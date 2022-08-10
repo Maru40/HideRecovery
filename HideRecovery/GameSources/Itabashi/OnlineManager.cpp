@@ -199,7 +199,7 @@ namespace Online
 	{
 		if (errorCode)
 		{
-			OnlineManager::CreateRoom(L"", ExitGames::LoadBalancing::RoomOptions().setMaxPlayers(4));
+			OnlineManager::CreateRoom(L"", ExitGames::LoadBalancing::RoomOptions().setMaxPlayers(6));
 			return;
 		}
 
