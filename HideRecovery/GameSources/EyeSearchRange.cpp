@@ -27,24 +27,35 @@ namespace basecross {
 
 
 	bool EyeSearchRange::IsRange(const std::shared_ptr<GameObject>& target) {
-		auto toVec = maru::Utility::CalcuToTargetVec(GetGameObject(), target);
+		return IsRange(target->GetComponent<Transform>()->GetPosition());
+	}
+
+	bool EyeSearchRange::IsRange(const Vec3& targetPosition) {
+		auto toVec = targetPosition - transform->GetPosition();
 		//長さチェック
 		return toVec.length() <= m_param.length ? true : false;
 	}
 
 	bool EyeSearchRange::IsHeight(const std::shared_ptr<GameObject>& target) {
-		auto selfPos = transform->GetPosition();
-		auto targetPos = target->GetComponent<Transform>()->GetPosition();
+		return IsHeight(target->GetComponent<Transform>()->GetPosition());
+	}
 
-		auto subHeight = targetPos.y - selfPos.y;  //高さの差を求める。
+	bool EyeSearchRange::IsHeight(const Vec3& targetPosition) {
+		auto selfPosition = transform->GetPosition();
+
+		auto subHeight = targetPosition.y - selfPosition.y;  //高さの差を求める。
 		//高さが小さかったら。
 		return std::abs(subHeight) <= m_param.height ? true : false;
 	}
 
 	bool EyeSearchRange::IsRad(const std::shared_ptr<GameObject>& target) {
+		return IsRad(target->GetComponent<Transform>()->GetPosition());
+	}
+
+	bool EyeSearchRange::IsRad(const Vec3& targetPosition) {
 		auto forward = transform->GetForward();
 		forward.y = 0.0f;
-		auto toVec = maru::Utility::CalcuToTargetVec(GetGameObject(), target);
+		auto toVec = targetPosition - transform->GetPosition();
 		toVec.y = 0.0f;
 
 		auto newDot = dot(forward.GetNormalized(), toVec.GetNormalized());
@@ -54,10 +65,12 @@ namespace basecross {
 	}
 
 	bool EyeSearchRange::IsRay(const std::shared_ptr<GameObject>& target){
-		auto targetPosition = target->GetComponent<Transform>()->GetPosition();
-		return !maru::UtilityObstacle::IsRayObstacle(transform->GetPosition(), targetPosition, GetStage()->GetGameObjectVec());
+		return IsRay(target->GetComponent<Transform>()->GetPosition());
 	}
 
+	bool EyeSearchRange::IsRay(const Vec3& targetPosition) {
+		return !maru::UtilityObstacle::IsRayObstacle(transform->GetPosition(), targetPosition, GetStage()->GetGameObjectVec());
+	}
 
 	void EyeSearchRange::Hit(const EyeTargetParametor& targetParam) {
 		targetParam.isFind = true;
@@ -79,8 +92,13 @@ namespace basecross {
 			return false;
 		}
 
+		auto targetPosition = target->GetComponent<Transform>()->GetPosition();
+		return IsInEyeRange(targetPosition);
+	}
+
+	bool EyeSearchRange::IsInEyeRange(const Vec3& position) {
 		//全ての条件がtrueなら視界内に対象がいる。
-		if (IsRange(target) && IsHeight(target) && IsRad(target) && IsRay(target)) {
+		if (IsRange(position) && IsHeight(position) && IsRad(position) && IsRay(position)) {
 			return true;
 		}
 		else {

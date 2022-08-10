@@ -77,12 +77,16 @@ namespace basecross {
 		/// <returns>範囲内ならtrue</returns>
 		bool IsRange(const std::shared_ptr<GameObject>& target);
 
+		bool IsRange(const Vec3& targetPosition);
+
 		/// <summary>
 		/// ターゲットが自分の索敵範囲内の「高さ」にいるかどうかを判断
 		/// </summary>
 		/// <param name="target">索敵ターゲット</param>
 		/// <returns>範囲内ならtrue</returns>
 		bool IsHeight(const std::shared_ptr<GameObject>& target);
+
+		bool IsHeight(const Vec3& targetPosition);
 
 		/// <summary>
 		/// ターゲットが自分の索敵範囲内の角度にいるか判断
@@ -91,12 +95,16 @@ namespace basecross {
 		/// <returns>範囲内ならtrue</returns>
 		bool IsRad(const std::shared_ptr<GameObject>& target);
 
+		bool IsRad(const Vec3& targetPosition);
+
 		/// <summary>
 		/// Rayを飛ばしたときのチェック
 		/// </summary>
 		/// <param name="targetParam">索敵ターゲット</param>
 		/// <returns>範囲内ならtrue</returns>
 		bool IsRay(const std::shared_ptr<GameObject>& target);
+
+		bool IsRay(const Vec3& targetPosition);
 
 		/// <summary>
 		/// ターゲットが索敵範囲内にいるときに呼び出される関数
@@ -126,6 +134,8 @@ namespace basecross {
 		/// <param name="target">ターゲット</param>
 		/// <returns>視界の中にいるならtrue</returns>
 		bool IsInEyeRange(std::shared_ptr<GameObject>& target);
+
+		bool IsInEyeRange(const Vec3& position);
 
 		/// <summary>
 		/// 視界内にいるならtrueを返す
