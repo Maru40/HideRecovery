@@ -736,6 +736,12 @@
     <Filter Include="Itabashi\Online\PlayerOnlineController">
       <UniqueIdentifier>{5563d5b2-921e-4649-867c-f24adc0594bc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Itabashi\ObjectMover">
+      <UniqueIdentifier>{16ba7c74-8a96-4459-9bb4-d2ce046f8fa7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Itabashi\Online\OnlineTestRoom">
+      <UniqueIdentifier>{2909f469-304e-476a-b200-f2ed9245ef41}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1365,6 +1371,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\TransformData.h">
       <Filter>Watanabe\Utility\TransformData</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\ObjectMover.h">
+      <Filter>Itabashi\ObjectMover</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineTestRoom.h">
+      <Filter>Itabashi\Online\OnlineTestRoom</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -1918,6 +1930,12 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Utility\Utility.cpp">
       <Filter>Watanabe\Utility\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\ObjectMover.cpp">
+      <Filter>Itabashi\ObjectMover</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineTestRoom.cpp">
+      <Filter>Itabashi\Online\OnlineTestRoom</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
