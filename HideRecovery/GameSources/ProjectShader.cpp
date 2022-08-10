@@ -19,8 +19,7 @@ namespace basecross {
 		//CS‚ÌŽÀ‘Ì•”
 		IMPLEMENT_DX11_COMPUTE_SHADER(CSMarchingCube, App::GetApp()->GetShadersPath() + L"CSMarchingCube.cso")
 
-		//IMPLEMENT_DX11_CONSTANT_BUFFER(CBTest)
-		// Œ»ó‚ÍCBSimple‚Å‘ã—p‚·‚é
+		IMPLEMENT_DX11_CONSTANT_BUFFER(CBAdvBaseDraw)
 		IMPLEMENT_DX11_VERTEX_SHADER(VSBoneModelDraw, App::GetApp()->GetShadersPath() + L"VSBoneModelDraw.cso")
 		IMPLEMENT_DX11_VERTEX_SHADER(VSModelDraw, App::GetApp()->GetShadersPath() + L"VSModelDraw.cso")
 		IMPLEMENT_DX11_PIXEL_SHADER(PSModelDraw, App::GetApp()->GetShadersPath() + L"PSModelDraw.cso")

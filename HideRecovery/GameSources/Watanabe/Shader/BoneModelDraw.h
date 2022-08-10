@@ -6,9 +6,10 @@
 #pragma once
 #include "stdafx.h"
 #include "ProjectShader.h"
+#include "AdvBaseDraw.h"
 
 namespace basecross {
-	class BoneModelDraw : public SmBaseDraw {
+	class BoneModelDraw : public AdvBaseDraw {
 	public:
 		explicit BoneModelDraw(const shared_ptr<GameObject>& owner);
 		virtual ~BoneModelDraw();

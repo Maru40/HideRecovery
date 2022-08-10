@@ -8,12 +8,12 @@
 
 namespace basecross {
 	BoneModelDraw::BoneModelDraw(const shared_ptr<GameObject>& owner)
-		:SmBaseDraw(owner)
+		:AdvBaseDraw(owner)
 	{}
 	BoneModelDraw::~BoneModelDraw() {}
 
 	void BoneModelDraw::SetMeshResource(const shared_ptr<MeshResource>& meshRes) {
-		SmBaseDraw::SetMeshResource(meshRes);
+		AdvBaseDraw::SetMeshResource(meshRes);
 		BoneInit();
 	}
 
@@ -22,7 +22,7 @@ namespace basecross {
 	}
 
 	void BoneModelDraw::SetMultiMeshResource(const shared_ptr<MultiMeshResource>& meshRes) {
-		SmBaseDraw::SetMultiMeshResource(meshRes);
+		AdvBaseDraw::SetMultiMeshResource(meshRes);
 		BoneInit();
 	}
 

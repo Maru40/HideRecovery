@@ -5,6 +5,7 @@
 
 #pragma once
 #include "stdafx.h"
+#include "Watanabe/Shader/AdvBaseDraw.h"
 
 namespace basecross {
 	DECLARE_DX11_VERTEX_SHADER(SlimeVS, VertexPositionNormalTexture)
@@ -19,7 +20,7 @@ namespace basecross {
 	//コンピュートシェーダ
 	DECLARE_DX11_COMPUTE_SHADER(CSMarchingCube)
 
-	//DECLARE_DX11_CONSTANT_BUFFER(CBTest, SimpleConstants)	// 現状はCBSimpleで代用する
+	DECLARE_DX11_CONSTANT_BUFFER(CBAdvBaseDraw, AdvConstants)
 	DECLARE_DX11_VERTEX_SHADER(VSBoneModelDraw, VertexPositionNormalTextureSkinning)
 	DECLARE_DX11_VERTEX_SHADER(VSModelDraw, VertexPositionNormalTexture)
 	DECLARE_DX11_PIXEL_SHADER(PSModelDraw)
