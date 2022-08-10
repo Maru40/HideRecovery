@@ -3,6 +3,7 @@
 #include "ObjectMover.h"
 #include "RotationController.h"
 #include "PlayerInputer.h"
+#include "MaruUtility.h"
 
 namespace basecross
 {
@@ -28,14 +29,24 @@ namespace Online
 			return;
 		}
 
-		auto objectManager = m_objectMover.lock();
+		auto objectMover = m_objectMover.lock();
 
-		if (!objectManager)
+		if (!objectMover)
 		{
 			return;
 		}
 
-		objectManager->Move(PlayerInputer::GetMoveDirection());
+		objectMover->Move(PlayerInputer::GetMoveDirection());
+
+		auto rotationController = m_rotationController.lock();
+
+		if (rotationController)
+		{
+			auto input = PlayerInputer::GetMoveDirection();
+			auto direct = maru::Utility::CalcuCameraVec(Vec3(input.x, 0, input.y), GetStage()->GetView()->GetTargetCamera(), GetGameObject());
+
+			rotationController->SetDirect(direct);
+		}
 	}
 
 	void PlayerOnlineController::OnCustomEventAction(int playerNumber, std::uint8_t eventCode, const std::uint8_t* bytes)
