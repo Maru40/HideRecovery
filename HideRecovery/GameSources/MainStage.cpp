@@ -100,7 +100,7 @@ namespace basecross {
 			CreateMap(sm_loadMapName);
 
 			//隠すアイテムの設定
-			Instantiate<HideItemObject>(Vec3(0.0f, 0.0f, 0.0f), Quat::Identity());
+			//Instantiate<HideItemObject>(Vec3(0.0f, 0.0f, 0.0f), Quat::Identity());
 
 			//デバッグ
 			//AddGameObject<DebugObject>();
