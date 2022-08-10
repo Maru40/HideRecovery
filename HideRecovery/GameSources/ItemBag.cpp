@@ -1,4 +1,3 @@
-
 /*!
 @file ItemBag.cpp
 @brief ItemBagクラス実体
@@ -18,7 +17,6 @@
 #include "HideItemObject.h"
 
 namespace basecross {
-
 	//--------------------------------------------------------------------------------------
 	/// パラメータ
 	//--------------------------------------------------------------------------------------
@@ -28,20 +26,20 @@ namespace basecross {
 	{}
 
 	ItemBag_Parametor::ItemBag_Parametor(const int numStartOwn, const int numMaxOwn) :
-		numStartOwn(numStartOwn) ,numMaxOwn(numMaxOwn)
+		numStartOwn(numStartOwn), numMaxOwn(numMaxOwn)
 	{}
 
 	//--------------------------------------------------------------------------------------
 	/// アイテムバッグ本体
 	//--------------------------------------------------------------------------------------
 
-	ItemBag::ItemBag(const std::shared_ptr<GameObject>& objPtr):
+	ItemBag::ItemBag(const std::shared_ptr<GameObject>& objPtr) :
 		Component(objPtr), m_param(Parametor())
 	{}
 
 	void ItemBag::OnCreate() {
 		for (int i = 0; i < m_param.numStartOwn; i++) {
-			auto object = GetStage()->AddGameObject<HideItemObject>(L"HideItem");
+			auto object = GetStage()->AddGameObject<HideItemObject>();
 			AddItem(object->GetComponent<ItemBase>());
 			object->SetActive(false);
 		}

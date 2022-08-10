@@ -10,7 +10,6 @@
 #include "StageObjectBase.h"
 
 namespace basecross {
-
 	//--------------------------------------------------------------------------------------
 	/// 隠すアイテムオブジェクト
 	//--------------------------------------------------------------------------------------
@@ -22,13 +21,12 @@ namespace basecross {
 	private:
 
 	public:
-		HideItemObject(const std::shared_ptr<Stage>& stage, const std::wstring& name);
+		HideItemObject(const std::shared_ptr<Stage>& stage);
+		HideItemObject(const std::shared_ptr<Stage>& stage, const std::wstring& line);
 
 		void OnCreate() override;
 
 	private:
 		void SettingModel();
-
 	};
-
 }

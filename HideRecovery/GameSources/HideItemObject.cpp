@@ -1,4 +1,3 @@
-
 /*!
 @file HideItemObject.cpp
 @brief HideItemObjectƒNƒ‰ƒXŽÀ‘Ì
@@ -13,11 +12,19 @@
 #include "HideItem.h"
 #include "Targeted.h"
 
-namespace basecross {
+#include "Watanabe/Utility/DataExtracter.h"
 
-	HideItemObject::HideItemObject(const std::shared_ptr<Stage>& stage, const std::wstring& name):
-		StageObjectBase(stage, name)
+namespace basecross {
+	HideItemObject::HideItemObject(const std::shared_ptr<Stage>& stage) :
+		StageObjectBase(stage, L"HideItem")
 	{}
+
+	HideItemObject::HideItemObject(const std::shared_ptr<Stage>& stage, const std::wstring& line) :
+		StageObjectBase(stage, L"HideItem")
+	{
+		vector<wstring> tokens = DataExtracter::DelimitData(line);
+		size_t nextIndex = DataExtracter::TransformDataExtraction(tokens, m_transformData);
+	}
 
 	void HideItemObject::OnCreate() {
 		SettingModel();
@@ -33,5 +40,4 @@ namespace basecross {
 
 		transform->SetScale(Vec3(0.5f));
 	}
-
 }

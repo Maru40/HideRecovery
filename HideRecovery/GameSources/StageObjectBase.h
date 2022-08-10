@@ -46,12 +46,6 @@ namespace basecross {
 		/// </summary>
 		/// <returns>テクスチャ名</returns>
 		wstring GetTexture() const noexcept { return m_texture; }
-
-		/// <summary>
-		/// トランスフォームコンポーネントの取得
-		/// </summary>
-		/// <returns></returns>
-		shared_ptr<Transform> GetTransform() { return GetComponent<Transform>(); }
 	};
 }
 
