@@ -22,44 +22,9 @@ namespace Online
 
 		void AddPlayer(const std::shared_ptr<PlayerObject>& player) { m_players.push_back(player); }
 
-		void CameraSetting()
-		{
-			for (auto& playerWeak : m_players)
-			{
-				auto player = playerWeak.lock();
-
-				if (!player)
-				{
-					continue;
-				}
-
-				auto onlineController = player->GetComponent<PlayerOnlineController>();
-
-				if (onlineController->GetPlayerNumber() == OnlineManager::GetLocalPlayer().getNumber())
-				{
-					auto sp = player->GetArm()->GetComponent<SpringArmComponent>();
-					auto& tpsCamera = sp->GetChildObject();
-
-					tpsCamera->AddComponent<VirtualCamera>(10);
-					tpsCamera->AddComponent<LookAtCameraManager>(player, LookAtCameraManager::Parametor());
-					break;
-				}
-			}
-		}
-
 		void OnConnected() override
 		{
 			OnlineManager::JoinRandomOrCreateRoom();
-		}
-
-		void OnCreateRoom() override
-		{
-			CameraSetting();
-		}
-
-		void OnJoinRoom() override
-		{
-			CameraSetting();
 		}
 	};
 
