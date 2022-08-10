@@ -253,8 +253,8 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 	setlocale(LC_ALL, "JPN");
 
 	//ウインドウの幅と高さ
-	int iClientWidth = 1280;
-	int iClientHeight = 800;
+	int iClientWidth  = 1920;
+	int iClientHeight = 1080;
 	// フルスクリーンにするかどうかの判定
 	// コマンドラインに/fが設定されていたらフルスクリーンにする
 	bool isFullScreen = false;
