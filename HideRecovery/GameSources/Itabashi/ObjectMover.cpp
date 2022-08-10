@@ -22,7 +22,7 @@ namespace Operator
 
 		if (moveDirection.lengthSqr() == 0)
 		{
-			if (!velocityManager) {
+			if (velocityManager) {
 				velocityManager->ResetAll();
 			}
 
