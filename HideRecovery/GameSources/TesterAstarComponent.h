@@ -24,6 +24,11 @@ namespace basecross {
 
 			void OnUpdate() override;
 
+		private:
+			void UpdateEyeRangeImpactMap();
+
+		public:
+
 			std::shared_ptr<GameObject> GetImpacterObject() const noexcept override;
 
 			std::shared_ptr<EyeSearchRange> GetEyeSearchRange() const override;

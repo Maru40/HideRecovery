@@ -26,13 +26,17 @@ namespace basecross {
 
 		void TesterAstarComponent::OnUpdate() {
 			if (PlayerInputer::GetInstance()->IsLeftDown()) {
-				std::shared_ptr<maru::ImpactMap> impactMap = maru::FieldImpactMap::GetInstance()->GetImpactMap();
+				UpdateEyeRangeImpactMap();
+			}
+		}
 
-				auto nodes = impactMap->GetEyeRangeNodes(transform->GetPosition(), GetThis<I_Impacter>());
+		void TesterAstarComponent::UpdateEyeRangeImpactMap() {
+			std::shared_ptr<maru::ImpactMap> impactMap = maru::FieldImpactMap::GetInstance()->GetImpactMap();
 
-				for (auto node : nodes) {
-					//impactMap->ChangeTargetNodeColor(node->GetIndex(), Col4(1.0f, 0.0f, 0.0f, 1.0f));
-				}
+			auto nodes = impactMap->GetEyeRangeNodes(transform->GetPosition(), GetThis<I_Impacter>());
+
+			for (auto node : nodes) {
+				impactMap->ChangeTargetNodeColor(node->GetIndex(), Col4(1.0f, 0.0f, 0.0f, 1.0f));
 			}
 		}
 
