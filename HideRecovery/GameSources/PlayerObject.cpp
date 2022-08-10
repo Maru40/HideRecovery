@@ -71,6 +71,7 @@ namespace basecross {
 
 		auto objecfMover = AddComponent<Operator::ObjectMover>();
 		objecfMover->SetMoveSpeed(10.5f);
+		objecfMover->SetAffectedCamera(GetStage()->GetView()->GetTargetCamera());
 		AddComponent<Online::PlayerOnlineController>();
 		AddComponent<Online::OnlineTransformSynchronization>();
 			
