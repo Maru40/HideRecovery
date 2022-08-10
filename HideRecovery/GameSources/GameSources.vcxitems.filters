@@ -742,6 +742,15 @@
     <Filter Include="Itabashi\Online\OnlineTestRoom">
       <UniqueIdentifier>{2909f469-304e-476a-b200-f2ed9245ef41}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\Shader">
+      <UniqueIdentifier>{29c518fe-fadb-4761-bd2c-f064869892f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\Shader\BoneModelDraw">
+      <UniqueIdentifier>{f56d43e5-a6f8-473d-a6d9-3238e1161812}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\Shader\BoneModelDraw\HLSL">
+      <UniqueIdentifier>{5180f2c9-d7d1-45ae-b662-7edd0b2b6279}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1377,6 +1386,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineTestRoom.h">
       <Filter>Itabashi\Online\OnlineTestRoom</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\BoneModelDraw.h">
+      <Filter>Watanabe\Shader\BoneModelDraw</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -1937,6 +1949,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineTestRoom.cpp">
       <Filter>Itabashi\Online\OnlineTestRoom</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\BoneModelDraw.cpp">
+      <Filter>Watanabe\Shader\BoneModelDraw</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)HitStopManager.cpp">
@@ -1958,6 +1973,12 @@
     </FxCompile>
     <FxCompile Include="$(MSBuildThisFileDirectory)ToonPS.hlsl">
       <Filter>Maruyama\Shader\ToonShader</Filter>
+    </FxCompile>
+    <FxCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\HLSL\PSBoneModelDraw.hlsl">
+      <Filter>Watanabe\Shader\BoneModelDraw\HLSL</Filter>
+    </FxCompile>
+    <FxCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\HLSL\VSBoneModelDraw.hlsl">
+      <Filter>Watanabe\Shader\BoneModelDraw\HLSL</Filter>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>

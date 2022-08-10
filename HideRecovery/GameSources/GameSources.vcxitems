@@ -216,6 +216,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Effekseer\EfkEffect.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Effekseer\EfkEffectResource.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Effekseer\EfkInterface.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\BoneModelDraw.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\Block.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\RackObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\WatanabeStage.h" />
@@ -409,6 +410,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Effekseer\EfkComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Effekseer\EfkEffectResource.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Effekseer\EfkInterface.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\BoneModelDraw.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\Block.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\RackObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\WatanabeStage.cpp" />
@@ -431,6 +433,16 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
     </FxCompile>
     <FxCompile Include="$(MSBuildThisFileDirectory)ToonVS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+    </FxCompile>
+    <FxCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\HLSL\PSBoneModelDraw.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\HLSL\VSBoneModelDraw.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
