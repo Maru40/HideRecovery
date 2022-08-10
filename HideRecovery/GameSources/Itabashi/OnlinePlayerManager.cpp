@@ -23,6 +23,11 @@ namespace Online
 			Col4(0,1,1,1)
 	};
 
+	/// <summary>
+	/// ヒーローとヴィランを交互に生成するデバッグ用変数
+	/// </summary>
+	int debugCreateCount = 0;
+
 	OnlinePlayerManager::OnlinePlayerManager(const std::shared_ptr<GameObject>& owner) :
 		OnlineComponent(owner)
 	{
@@ -56,7 +61,21 @@ namespace Online
 
 	std::shared_ptr<PlayerObject> OnlinePlayerManager::CreatePlayerObject(int playerNumber, const Vec3& position)
 	{
-		std::shared_ptr<PlayerObject> playerObject = GetStage()->AddGameObject<HeroPlayerObject>();
+		std::shared_ptr<PlayerObject> playerObject;
+
+		// デバッグ用 -- ヒーローとヴィランを交互に作成する
+		if (debugCreateCount % 2 == 0)
+		{
+			playerObject = GetStage()->AddGameObject<HeroPlayerObject>();
+			auto drawer = playerObject->GetComponent<PNTBoneModelDraw>();
+			drawer->SetDiffuse(Col4(1, 1, 1, 1));
+		}
+		else
+		{
+			playerObject = GetStage()->AddGameObject<VillainPlayerObject>();
+			auto drawer = playerObject->GetComponent<PNTBoneModelDraw>();
+			drawer->SetDiffuse(Col4(0, 0, 0, 1));
+		}
 
 		auto transform = playerObject->GetComponent<Transform>();
 		transform->SetPosition(position);
@@ -111,6 +130,8 @@ namespace Online
 
 		auto itr = std::find_if(m_players.begin(), m_players.end(), [find](const std::weak_ptr<PlayerObject>& player) {return *find == player.lock(); });
 		m_players.erase(itr);
+
+		GetStage()->RemoveGameObject<GameObject>(*find);
 	}
 }
 }
