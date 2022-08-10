@@ -24,7 +24,7 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 
 	ItemBag_Parametor::ItemBag_Parametor() :
-		ItemBag_Parametor(0, 3)
+		ItemBag_Parametor(0, 30)
 	{}
 
 	ItemBag_Parametor::ItemBag_Parametor(const int numStartOwn, const int numMaxOwn) :
@@ -41,7 +41,7 @@ namespace basecross {
 
 	void ItemBag::OnCreate() {
 		for (int i = 0; i < m_param.numStartOwn; i++) {
-			auto object = GetStage()->Instantiate<HideItemObject>();
+			auto object = GetStage()->AddGameObject<HideItemObject>(L"HideItem");
 			AddItem(object->GetComponent<ItemBase>());
 			object->SetActive(false);
 		}
