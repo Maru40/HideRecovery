@@ -137,6 +137,16 @@ namespace basecross {
 			auto onlineRoom = AddGameObject<Online::OnlineTestRoom>();
 			auto tester = onlineRoom->GetComponent<Online::OnlineTester>();
 
+			Col4 cols[6] =
+			{
+				Col4(1,0,0,1),
+				Col4(0,1,0,1),
+				Col4(0,0,1,1),
+				Col4(1,1,0,1),
+				Col4(1,0,1,1),
+				Col4(0,1,1,1)
+			};
+
 			for (int i = 0; i < 6; ++i)
 			{
 				std::shared_ptr<PlayerObject> player;
@@ -157,6 +167,9 @@ namespace basecross {
 
 				tester->AddPlayer(player);
 				m_player = player;
+
+				auto drawer = player->GetComponent<PNTBoneModelDraw>();
+				drawer->SetDiffuse(cols[i]);
 			}
 
 			//m_player = Instantiate<VillainPlayerObject>(Vec3(20.0f, 1.0f, 0.0f), Quat::Identity());
