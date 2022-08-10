@@ -26,8 +26,10 @@ namespace basecross {
 
 		void TesterAstarComponent::OnUpdate() {
 			if (PlayerInputer::GetInstance()->IsLeftDown()) {
-				UpdateEyeRangeImpactMap();
+				//UpdateEyeRangeImpactMap();
 			}
+
+			UpdateEyeRangeImpactMap();
 		}
 
 		void TesterAstarComponent::UpdateEyeRangeImpactMap() {
@@ -36,7 +38,15 @@ namespace basecross {
 			auto nodes = impactMap->GetEyeRangeNodes(transform->GetPosition(), GetThis<I_Impacter>());
 
 			for (auto node : nodes) {
-				impactMap->ChangeTargetNodeColor(node->GetIndex(), Col4(1.0f, 0.0f, 0.0f, 1.0f));
+				//‰e‹¿ƒ}ƒbƒv
+				//impactMap->ChangeTargetNodeColor(node->GetIndex(), Col4(1.0f, 0.0f, 0.0f, 1.0f));
+
+				auto impactData = node->GetImpactData();
+				impactData.occupancyValue = 0;
+				node->SetImpactData(impactData);
+
+				auto colorValue = 1.0f - impactData.occupancyValue;
+				impactMap->ChangeTargetNodeColor(node->GetIndex(), Col4(1.0f, colorValue, colorValue, 1.0f));
 			}
 		}
 
