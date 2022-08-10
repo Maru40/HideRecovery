@@ -24,7 +24,7 @@ namespace Online
 
 	void PlayerOnlineController::OnUpdate()
 	{
-		if (m_playerNumber == 0 || m_playerNumber != OnlineManager::GetLocalPlayer().playerNumber)
+		if (m_playerNumber == 0 || m_playerNumber != OnlineManager::GetLocalPlayer().getNumber())
 		{
 			return;
 		}

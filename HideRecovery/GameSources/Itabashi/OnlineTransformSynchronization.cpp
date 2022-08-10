@@ -25,7 +25,7 @@ namespace Online
 	void OnlineTransformSynchronization::OnUpdate2()
 	{
 		auto transform = m_transform.lock();
-		int localNumber = OnlineManager::GetLocalPlayer().playerNumber;
+		int localNumber = OnlineManager::GetLocalPlayer().getNumber();
 
 		if (!transform || m_playerNumber == 0 || m_playerNumber != localNumber)
 		{

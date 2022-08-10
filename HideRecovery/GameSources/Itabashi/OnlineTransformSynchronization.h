@@ -35,7 +35,15 @@ namespace Online
 
 		void OnCustomEventAction(int playerNumber, std::uint8_t eventCode, const std::uint8_t* bytes) override;
 
+		/// <summary>
+		/// 対応するプレイヤー番号の設定
+		/// </summary>
+		/// <param name="playerNumber">プレイヤー番号</param>
 		void SetPlayerNumber(int playerNumber) { m_playerNumber = playerNumber; }
+		/// <summary>
+		/// 対応するプレイヤー番号の取得
+		/// </summary>
+		/// <returns>プレイヤー番号</returns>
 		int GetPlayerNumber() const { return m_playerNumber; }
 	};
 }

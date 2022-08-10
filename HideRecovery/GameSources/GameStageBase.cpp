@@ -49,6 +49,7 @@
 #include "Itabashi/OnlineTransformSynchronization.h"
 
 #include "Itabashi/OnlineTestRoom.h"
+#include "Itabashi/OnlinePlayerManager.h"
 
 namespace basecross {
 	void GameStageBase::CreateMainCamera()
@@ -139,42 +140,7 @@ namespace basecross {
 			auto onlineRoom = AddGameObject<Online::OnlineTestRoom>();
 			auto tester = onlineRoom->GetComponent<Online::OnlineTester>();
 
-			Col4 cols[6] =
-			{
-				Col4(1,0,0,1),
-				Col4(0,1,0,1),
-				Col4(0,0,1,1),
-				Col4(1,1,0,1),
-				Col4(1,0,1,1),
-				Col4(0,1,1,1)
-			};
-
-			for (int i = 0; i < 6; ++i)
-			{
-				std::shared_ptr<PlayerObject> player;
-
-				if (i < 3)
-				{
-					player = Instantiate<VillainPlayerObject>(Vec3(20, 1, i), Quat::Identity());
-				}
-				else
-				{
-					player = Instantiate<HeroPlayerObject>(Vec3(20, 1, i), Quat::Identity());
-				}
-
-				auto onlineController = player->GetComponent<Online::PlayerOnlineController>();
-				onlineController->SetPlayerNumber(i + 1);
-				auto onlineTransform = player->GetComponent<Online::OnlineTransformSynchronization>();
-				onlineTransform->SetPlayerNumber(i + 1);
-
-				tester->AddPlayer(player);
-				m_player = player;
-
-				auto drawer = player->GetComponent<PNTBoneModelDraw>();
-				drawer->SetDiffuse(cols[i]);
-			}
-
-			//m_player = Instantiate<VillainPlayerObject>(Vec3(20.0f, 1.0f, 0.0f), Quat::Identity());
+			onlineRoom->AddComponent<Online::OnlinePlayerManager>();
 
 			Online::OnlineManager::Connect();
 		}

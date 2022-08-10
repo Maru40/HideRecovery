@@ -113,6 +113,29 @@ namespace Online
 		GetInstance()->m_client->opRaiseEvent(reliable, bytes, size, eventCode, options);
 	}
 
+	void OnlineManager::joinRoomEventAction(int playerNr, const ExitGames::Common::JVector<int>& playernrs, const ExitGames::LoadBalancing::Player& player)
+	{
+		std::vector<int> playerNumbers;
+
+		for (int i = 0; i < playernrs.getSize(); ++i)
+		{
+			playerNumbers.push_back(playernrs.getElementAt(i));
+		}
+
+		for (auto& callback : m_callBacksVector)
+		{
+			callback->OnJoinRoomEventAction(playerNr, playerNumbers, player);
+		}
+	}
+
+	void OnlineManager::leaveRoomEventAction(int playerNr, bool isInactive)
+	{
+		for (auto& callback : m_callBacksVector)
+		{
+			callback->OnLeaveRoomEventAction(playerNr, isInactive);
+		}
+	}
+
 	void OnlineManager::customEventAction(int playerNr, nByte eventCode, const ExitGames::Common::Object& eventContent)
 	{
 		auto bytes = ExitGames::Common::ValueObject<std::uint8_t*>(eventContent);
@@ -163,9 +186,6 @@ namespace Online
 			return;
 		}
 
-		m_room = std::make_unique<OnlineRoom>(roomProperties);
-		m_localPlayer.playerNumber = localPlayerNr;
-
 		for (auto& callback : m_callBacksVector)
 		{
 			callback->OnCreateRoom();
@@ -185,9 +205,6 @@ namespace Online
 			return;
 		}
 
-		m_room = std::make_unique<OnlineRoom>(roomProperties);
-		m_localPlayer.playerNumber = localPlayerNr;
-
 		for (auto& callback : m_callBacksVector)
 		{
 			callback->OnJoinRoom();
@@ -202,9 +219,6 @@ namespace Online
 			OnlineManager::CreateRoom(L"", ExitGames::LoadBalancing::RoomOptions().setMaxPlayers(6));
 			return;
 		}
-
-		m_room = std::make_unique<OnlineRoom>(roomProperties);
-		m_localPlayer.playerNumber = localPlayerNr;
 
 		for (auto& callback : m_callBacksVector)
 		{
