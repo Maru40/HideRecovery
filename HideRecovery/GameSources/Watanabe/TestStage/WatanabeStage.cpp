@@ -6,6 +6,7 @@
 #include "../Effekseer/EfkEffect.h"
 #include "../StageObject/Block.h"
 #include "../StageObject/RackObject.h"
+#include "../Shader/BoneModelDraw.h"
 #include "HeroPlayerObject.h"
 #include "CameraHelper.h"
 
@@ -36,8 +37,13 @@ namespace basecross {
 		efkComp->SetEffectResource(L"TestEffect");
 		//efkComp->PlayLoop(L"TestEffect");
 
-		AddGameObject<CameraObject>();
-		Instantiate<HeroPlayerObject>(Vec3(20.0f, 1.0f, 0.0f), Quat::Identity());
+		//AddGameObject<CameraObject>();
+		//Instantiate<HeroPlayerObject>(Vec3(0.0f, 1.0f, 0.0f), Quat::Identity());
+		{
+			auto testModel = AddGameObject<GameObject>();
+			auto testDraw = testModel->AddComponent<BoneModelDraw>();
+			testDraw->SetMultiMeshResource(L"Player_Mesh");
+		}
 
 		GameObjecttCSVBuilder builder;
 		builder.Register<Block>(L"Block");
