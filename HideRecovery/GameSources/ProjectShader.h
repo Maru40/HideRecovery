@@ -20,7 +20,7 @@ namespace basecross {
 	DECLARE_DX11_COMPUTE_SHADER(CSMarchingCube)
 
 	//DECLARE_DX11_CONSTANT_BUFFER(CBTest, SimpleConstants)	// åªèÛÇÕCBSimpleÇ≈ë„ópÇ∑ÇÈ
-	DECLARE_DX11_VERTEX_SHADER(VSBoneModelDraw, VertexPositionNormalTexture)
+	DECLARE_DX11_VERTEX_SHADER(VSBoneModelDraw, VertexPositionNormalTextureSkinning)
 	DECLARE_DX11_VERTEX_SHADER(VSModelDraw, VertexPositionNormalTexture)
 	DECLARE_DX11_PIXEL_SHADER(PSModelDraw)
 }

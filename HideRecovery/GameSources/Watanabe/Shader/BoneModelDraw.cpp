@@ -58,7 +58,7 @@ namespace basecross {
 				}
 			}
 			else {
-				DrawModel<VSPNTBone, PSModelDraw>(PtrMeshResource->GetMashData());
+				DrawModel<VSBoneModelDraw, PSModelDraw>(PtrMeshResource->GetMashData());
 			}
 		}
 		//マルチメッシュリソースの取得
@@ -77,7 +77,7 @@ namespace basecross {
 						}
 					}
 					else {
-						DrawModel<VSPNTBone, PSModelDraw>(vec[i]);
+						DrawModel<VSBoneModelDraw, PSModelDraw>(vec[i]);
 					}
 				}
 			}
