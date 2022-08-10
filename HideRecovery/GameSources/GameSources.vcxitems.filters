@@ -757,7 +757,7 @@
     <Filter Include="Watanabe\Shader\ModelDraw\HLSL">
       <UniqueIdentifier>{dea20317-69af-4763-b6a9-278a15f9d844}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Watanabe\Shader\AdvSmBaseDraw">
+    <Filter Include="Watanabe\Shader\AdvBaseDraw">
       <UniqueIdentifier>{c83a64e8-1f5b-4e32-ad40-12671ad0c201}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -1398,8 +1398,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\BoneModelDraw.h">
       <Filter>Watanabe\Shader\BoneModelDraw</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\AdvSmBaseDraw.h">
-      <Filter>Watanabe\Shader\AdvSmBaseDraw</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\AdvBaseDraw.h">
+      <Filter>Watanabe\Shader\AdvBaseDraw</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1964,8 +1964,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\BoneModelDraw.cpp">
       <Filter>Watanabe\Shader\BoneModelDraw</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\AdvSmBaseDraw.cpp">
-      <Filter>Watanabe\Shader\AdvSmBaseDraw</Filter>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\AdvBaseDraw.cpp">
+      <Filter>Watanabe\Shader\AdvBaseDraw</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -1,5 +1,5 @@
 ﻿#include "stdafx.h"
-#include "AdvSmBaseDraw.h"
+#include "AdvBaseDraw.h"
 #include "DrawComponents.h"
 
 namespace basecross {
