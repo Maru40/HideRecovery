@@ -20,6 +20,11 @@
 
 #include "PlayerInputer.h"
 
+#include "EyeSearchRange.h"
+
+#include "UtilityAstar.h"
+#include "I_Impact.h"
+
 namespace basecross {
 
 	namespace maru {
@@ -194,6 +199,28 @@ namespace basecross {
 			return positions;
 		}
 
+		//自分の視界内のノードを取得
+		std::vector<std::shared_ptr<NavGraphNode>> ImpactMap::GetEyeRangeNodes(const Vec3& selfPosition, const std::shared_ptr<I_Impacter>& impacter) {
+			std::vector<std::shared_ptr<NavGraphNode>> nodes;
+
+			//自分自身のノードを取得
+			auto node = UtilityAstar::SearchNearNode(*m_astar.get(), selfPosition);
+			if (!node) {
+				return nodes;
+			}
+
+			//視界データの取得
+			auto impacterTrans = impacter->GetImpacterObject()->GetComponent<Transform>();
+			auto eye = impacter->GetEyeSearchRange();
+			EyeSearchRangeParametor eyeParam = eye->GetParametor();
+
+			auto forward = impacterTrans->GetForward();
+			
+			
+
+			return nodes;
+		}
+
 		//------------------------------------------------------------------------------------------------
 		/// アクセッサ
 		//------------------------------------------------------------------------------------------------
@@ -201,6 +228,7 @@ namespace basecross {
 		void ImpactMap::SetFactoryParametor(const Factory_Parametor& parametor) noexcept {
 			m_param = parametor;
 		}
+
 		ImpactMap::Factory_Parametor ImpactMap::GetFactoryParametor() const noexcept {
 			return m_param;
 		}
@@ -225,7 +253,7 @@ namespace basecross {
 
 		void ImpactMap::CreateDebugDraw(const bool isDraw) {
 			//デバッグドローの追加
-			return;
+			//return;
 			m_nodeDraw = GetStage()->AddGameObject<GameObject>()->AddComponent<AstarNodeDraw>(m_astar);
 			m_edgeDraw = GetStage()->AddGameObject<GameObject>()->AddComponent<AstarEdgeDraw>(m_astar);
 			SetIsDebugDraw(isDraw);
