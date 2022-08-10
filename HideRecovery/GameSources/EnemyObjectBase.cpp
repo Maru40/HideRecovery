@@ -14,6 +14,8 @@
 #include "TargetManager.h"
 #include "SeekTarget.h"
 
+#include "EyeSearchRange.h"
+
 namespace basecross {
 	namespace Enemy {
 
@@ -31,6 +33,7 @@ namespace basecross {
 			AddComponent<Gravity>();
 			AddComponent<VelocityManager>();
 			AddComponent<TargetManager>();
+			AddComponent<EyeSearchRange>();
 			AddComponent<SeekTarget>(nullptr);
 		}
 
