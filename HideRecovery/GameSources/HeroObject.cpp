@@ -13,6 +13,8 @@
 #include "EnemyMainStateMachine.h"
 #include "Stator_Hero.h"
 
+#include "TesterAstarComponent.h"
+
 namespace basecross {
 	namespace Enemy {
 
@@ -27,6 +29,8 @@ namespace basecross {
 
 			AddComponent<Hero>();
 			AddComponent<Stator_Hero>();
+
+			AddComponent<Tester::TesterAstarComponent>();
 		}
 
 		void HeroObject::SettingModel() {
