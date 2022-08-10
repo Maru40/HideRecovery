@@ -742,6 +742,24 @@
     <Filter Include="Itabashi\Online\OnlineTestRoom">
       <UniqueIdentifier>{2909f469-304e-476a-b200-f2ed9245ef41}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\Shader">
+      <UniqueIdentifier>{29c518fe-fadb-4761-bd2c-f064869892f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\Shader\BoneModelDraw">
+      <UniqueIdentifier>{f56d43e5-a6f8-473d-a6d9-3238e1161812}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\Shader\BoneModelDraw\HLSL">
+      <UniqueIdentifier>{5180f2c9-d7d1-45ae-b662-7edd0b2b6279}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\Shader\ModelDraw">
+      <UniqueIdentifier>{0758e925-feff-4a04-a5a1-5eac6bb07c43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\Shader\ModelDraw\HLSL">
+      <UniqueIdentifier>{dea20317-69af-4763-b6a9-278a15f9d844}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\Shader\AdvBaseDraw">
+      <UniqueIdentifier>{c83a64e8-1f5b-4e32-ad40-12671ad0c201}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1377,6 +1395,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineTestRoom.h">
       <Filter>Itabashi\Online\OnlineTestRoom</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\BoneModelDraw.h">
+      <Filter>Watanabe\Shader\BoneModelDraw</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\AdvBaseDraw.h">
+      <Filter>Watanabe\Shader\AdvBaseDraw</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -1937,6 +1961,12 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineTestRoom.cpp">
       <Filter>Itabashi\Online\OnlineTestRoom</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\BoneModelDraw.cpp">
+      <Filter>Watanabe\Shader\BoneModelDraw</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\AdvBaseDraw.cpp">
+      <Filter>Watanabe\Shader\AdvBaseDraw</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)HitStopManager.cpp">
@@ -1959,6 +1989,15 @@
     <FxCompile Include="$(MSBuildThisFileDirectory)ToonPS.hlsl">
       <Filter>Maruyama\Shader\ToonShader</Filter>
     </FxCompile>
+    <FxCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\HLSL\VSBoneModelDraw.hlsl">
+      <Filter>Watanabe\Shader\BoneModelDraw\HLSL</Filter>
+    </FxCompile>
+    <FxCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\HLSL\VSModelDraw.hlsl">
+      <Filter>Watanabe\Shader\ModelDraw\HLSL</Filter>
+    </FxCompile>
+    <FxCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\HLSL\PSModelDraw.hlsl">
+      <Filter>Watanabe\Shader\ModelDraw\HLSL</Filter>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)..\..\Libs\BaseLib\DxShaders\SlimeParametors.hlsli">
@@ -1972,6 +2011,9 @@
     </None>
     <None Include="$(MSBuildThisFileDirectory)ToonFunctions.hlsli">
       <Filter>Maruyama\Shader\ToonShader</Filter>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Watanabe\Shader\HLSL\IncDraw.hlsli">
+      <Filter>Watanabe\Shader</Filter>
     </None>
   </ItemGroup>
 </Project>

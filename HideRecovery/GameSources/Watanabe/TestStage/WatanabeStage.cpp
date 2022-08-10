@@ -6,12 +6,13 @@
 #include "../Effekseer/EfkEffect.h"
 #include "../StageObject/Block.h"
 #include "../StageObject/RackObject.h"
+#include "../Shader/BoneModelDraw.h"
 #include "HeroPlayerObject.h"
 #include "CameraHelper.h"
 
 namespace basecross {
 	void WatanabeStage::CreateViewLight() {
-		const Vec3 eye(10.0f, 10.0f, -10.0f);
+		const Vec3 eye(5.0f, 5.0f, -5.0f);
 		const Vec3 at(0.0f);
 		auto PtrView = CreateView<SingleView>();
 		//ビューのカメラの設定
@@ -36,8 +37,14 @@ namespace basecross {
 		efkComp->SetEffectResource(L"TestEffect");
 		//efkComp->PlayLoop(L"TestEffect");
 
-		AddGameObject<CameraObject>();
-		Instantiate<HeroPlayerObject>(Vec3(20.0f, 1.0f, 0.0f), Quat::Identity());
+		//AddGameObject<CameraObject>();
+		//Instantiate<HeroPlayerObject>(Vec3(0.0f, 1.0f, 0.0f), Quat::Identity());
+		{
+			m_obj = AddGameObject<GameObject>();
+			auto testDraw = m_obj->AddComponent<BoneModelDraw>();
+			testDraw->SetMultiMeshResource(L"Player_Mesh");
+			//testDraw->SetMeshResource(L"rack");
+		}
 
 		GameObjecttCSVBuilder builder;
 		builder.Register<Block>(L"Block");
@@ -48,5 +55,9 @@ namespace basecross {
 	}
 
 	void WatanabeStage::OnUpdate() {
+		auto delta = App::GetApp()->GetElapsedTime();
+		auto utilPtr = m_obj->GetBehavior<UtilBehavior>();
+		utilPtr->RotToHead(Vec3(cosf(m_delta), 0, sinf(m_delta)), 2 * delta);
+		m_delta += delta;
 	}
 }
