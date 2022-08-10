@@ -1,6 +1,6 @@
-/*!
+ï»¿/*!
 @file LookAtCameraManager.cpp
-@brief LookAtCameraManager‚È‚ÇÀ‘Ì
+@brief LookAtCameraManagerãªã©å®Ÿä½“
 */
 
 #include "stdafx.h"
@@ -13,7 +13,7 @@
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
-	/// ƒpƒ‰ƒ[ƒ^
+	/// ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
 	//--------------------------------------------------------------------------------------
 
 	LookAtCameraManager::Parametor::Parametor()
@@ -29,7 +29,7 @@ namespace basecross {
 	{}
 
 	//--------------------------------------------------------------------------------------
-	/// ƒJƒƒ‰‚Ì‹“_ŠÇ—ƒNƒ‰ƒX–{‘Ì
+	/// ã‚«ãƒ¡ãƒ©ã®è¦–ç‚¹ç®¡ç†ã‚¯ãƒ©ã‚¹æœ¬ä½“
 	//--------------------------------------------------------------------------------------
 
 	LookAtCameraManager::LookAtCameraManager(const std::shared_ptr<GameObject>& objPtr)
@@ -53,7 +53,7 @@ namespace basecross {
 
 	void LookAtCameraManager::LookAtUpdate()
 	{
-		if (!m_target) { //ƒ^[ƒQƒbƒg‚ª‘¶İ‚µ‚È‚¢‚È‚çB
+		if (!m_target) { //ã‚¿ãƒ¼ã‚²ãƒƒãƒˆãŒå­˜åœ¨ã—ãªã„ãªã‚‰ã€‚
 			return;
 		}
 
@@ -64,7 +64,7 @@ namespace basecross {
 
 		auto position = targetTrans->GetWorldPosition();
 
-		position += m_param.centerOffset;  //player‚ª‘«Œ³‚ªpivot‚É‚È‚Á‚Ä‚¢‚é‚½‚ßCenterˆÊ’u‚ğ•Ï‚¦‚éB  
+		position += m_param.centerOffset;  //playerãŒè¶³å…ƒãŒpivotã«ãªã£ã¦ã„ã‚‹ãŸã‚Centerä½ç½®ã‚’å¤‰ãˆã‚‹ã€‚  
 		float StartTime = 0.0f;
 		float EndTime = 1.0f;
 		//auto setPosition = Lerp::CalculateLerp(camera->GetAt(), position, StartTime, EndTime, delta * m_param.speed, Lerp::rate::Linear);

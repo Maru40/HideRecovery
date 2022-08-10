@@ -1,8 +1,8 @@
-
+ï»¿
 /*!
 @file PlayerObject.cpp
-@brief PlayerObjectƒNƒ‰ƒXŽÀ‘Ì
-’S“–FŠÛŽR—TŠì
+@brief PlayerObjectã‚¯ãƒ©ã‚¹å®Ÿä½“
+æ‹…å½“ï¼šä¸¸å±±è£•å–œ
 */
 
 #include "stdafx.h"
@@ -29,6 +29,9 @@
 #include "AnimationCtrl.h"
 #include "PlayerAnimationCtrl.h"
 #include "VelocityManager.h"
+#include "Itabashi/ObjectMover.h"
+#include "Itabashi/PlayerOnlineController.h"
+#include "Itabashi/OnlineTransformSynchronization.h"
 
 namespace basecross {
 
@@ -55,10 +58,8 @@ namespace basecross {
 		transform->SetScale(Vec3(1.0f, 1.5f, 1.0f));
 
 		AddComponent<CollisionObb>();
-		auto playerMover = AddComponent<PlayerMover>();
-		playerMover->SetIsCameraAffected(true);
 		AddComponent<RotationController>();
-		AddComponent<PlayerController>();
+		//AddComponent<PlayerController>();
 		AddComponent<Gravity>();
 		
 		AddComponent<ItemBag>();
@@ -67,8 +68,13 @@ namespace basecross {
 
 		AddComponent<PlayerAnimationCtrl>();
 		AddComponent<VelocityManager>();
+
+		auto objecfMover = AddComponent<Operator::ObjectMover>();
+		objecfMover->SetMoveSpeed(10.5f);
+		AddComponent<Online::PlayerOnlineController>();
+		AddComponent<Online::OnlineTransformSynchronization>();
 			
-		//ƒJƒƒ‰ƒZƒbƒeƒBƒ“ƒO----------------------------------------------------------
+		//ã‚«ãƒ¡ãƒ©ã‚»ãƒƒãƒ†ã‚£ãƒ³ã‚°----------------------------------------------------------
 
 		auto springArm = GetStage()->Instantiate<GameObject>(Vec3(), Quat());
 
@@ -79,12 +85,14 @@ namespace basecross {
 		cameraMover->SetMaxRotX(XM_PIDIV4);
 		auto springArmComponent = springArm->AddComponent<SpringArmComponent>();
 
+		m_arm = springArm;
+
 		Quat quat = Quat::Identity();
 		quat.rotationY(XM_PI);
 
 		auto tpsCamera = GetStage()->Instantiate<GameObject>(Vec3(0, 0, 3), quat);
-		auto virtualCamera = tpsCamera->AddComponent<VirtualCamera>(10);
-		tpsCamera->AddComponent<LookAtCameraManager>(GetThis<GameObject>(), LookAtCameraManager::Parametor());
+		//auto virtualCamera = tpsCamera->AddComponent<VirtualCamera>(10);
+		//tpsCamera->AddComponent<LookAtCameraManager>(GetThis<GameObject>(), LookAtCameraManager::Parametor());
 
 		springArmComponent->AddHitTag(L"Wall");
 		springArmComponent->SetChildObject(tpsCamera);

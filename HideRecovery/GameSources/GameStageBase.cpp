@@ -1,6 +1,6 @@
-/*!
+ï»¿/*!
 @file GameStageBase.cpp
-@brief GameStageBaseÀ‘Ì
+@brief GameStageBaseå®Ÿä½“
 */
 
 #include "stdafx.h"
@@ -11,6 +11,7 @@
 
 #include "PlayerObject.h"
 #include "VillainPlayerObject.h"
+#include "HeroPlayerObject.h"
 #include "GameManagerObject.h"
 #include "SlowTimerManager.h"
 
@@ -43,13 +44,19 @@
 #include "Watanabe/StageObject/Block.h"
 #include "Watanabe/StageObject/RackObject.h"
 
+#include "Itabashi/OnlineManager.h"
+#include "Itabashi/PlayerOnlineController.h"
+#include "Itabashi/OnlineTransformSynchronization.h"
+
+#include "Itabashi/OnlineTestRoom.h"
+
 namespace basecross {
 	void GameStageBase::CreateMainCamera()
 	{
 		//const Vec3 eye(0.0f, 5.0f, -5.0f);
 		//const Vec3 at(0.0f);
 
-		////ƒƒCƒ“ƒJƒƒ‰‚ÌÀ‘•
+		////ãƒ¡ã‚¤ãƒ³ã‚«ãƒ¡ãƒ©ã®å®Ÿè£…
 		//m_mainView = ObjectFactory::Create<SingleView>(GetThis<Stage>());
 		//m_mainCamera = ObjectFactory::Create<MainCamera>(m_player.GetShard());
 		//m_mainView->SetCamera(m_mainCamera);
@@ -63,7 +70,7 @@ namespace basecross {
 		const Vec3 eye(0.0f, +15.0f, -30.0f);
 		const Vec3 at(0.0f);
 		m_mainView = CreateView<SingleView>();
-		//ƒrƒ…[‚ÌƒJƒƒ‰‚Ìİ’è
+		//ãƒ“ãƒ¥ãƒ¼ã®ã‚«ãƒ¡ãƒ©ã®è¨­å®š
 		m_mainCamera = ObjectFactory::Create<Camera>();
 		m_mainView->SetCamera(m_mainCamera);
 		m_mainCamera->SetEye(eye);
@@ -90,10 +97,10 @@ namespace basecross {
 
 		vector<shared_ptr<GameObject>> floors = { floor };
 
-		//ƒtƒB[ƒ‹ƒh‚Ì‰e‹¿ƒ}ƒbƒv‚Ì¶¬
+		//ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã®å½±éŸ¿ãƒãƒƒãƒ—ã®ç”Ÿæˆ
 		AddGameObject<GameObject>()->AddComponent<maru::FieldImpactMap>(maru::Utility::ConvertArrayType<GameObject>(floors));
 
-		//ŠO‘¤ƒRƒŠƒWƒ‡ƒ“İ’è
+		//å¤–å´ã‚³ãƒªã‚¸ãƒ§ãƒ³è¨­å®š
 		CreateMapOutCollisions(floors);
 	}
 
@@ -129,7 +136,47 @@ namespace basecross {
 			EventSystem::GetInstance(GetThis<Stage>())->SetBasicInputer(PlayerInputer::GetInstance());
 			AddGameObject<GameManagerObject>();
 
-			m_player = Instantiate<VillainPlayerObject>(Vec3(20.0f, 1.0f, 0.0f), Quat::Identity());
+			auto onlineRoom = AddGameObject<Online::OnlineTestRoom>();
+			auto tester = onlineRoom->GetComponent<Online::OnlineTester>();
+
+			Col4 cols[6] =
+			{
+				Col4(1,0,0,1),
+				Col4(0,1,0,1),
+				Col4(0,0,1,1),
+				Col4(1,1,0,1),
+				Col4(1,0,1,1),
+				Col4(0,1,1,1)
+			};
+
+			for (int i = 0; i < 6; ++i)
+			{
+				std::shared_ptr<PlayerObject> player;
+
+				if (i < 3)
+				{
+					player = Instantiate<VillainPlayerObject>(Vec3(20, 1, i), Quat::Identity());
+				}
+				else
+				{
+					player = Instantiate<HeroPlayerObject>(Vec3(20, 1, i), Quat::Identity());
+				}
+
+				auto onlineController = player->GetComponent<Online::PlayerOnlineController>();
+				onlineController->SetPlayerNumber(i + 1);
+				auto onlineTransform = player->GetComponent<Online::OnlineTransformSynchronization>();
+				onlineTransform->SetPlayerNumber(i + 1);
+
+				tester->AddPlayer(player);
+				m_player = player;
+
+				auto drawer = player->GetComponent<PNTBoneModelDraw>();
+				drawer->SetDiffuse(cols[i]);
+			}
+
+			//m_player = Instantiate<VillainPlayerObject>(Vec3(20.0f, 1.0f, 0.0f), Quat::Identity());
+
+			Online::OnlineManager::Connect();
 		}
 		catch (...) {
 			throw;
@@ -137,7 +184,7 @@ namespace basecross {
 	}
 
 	//--------------------------------------------------------------------------------------
-	/// ƒAƒNƒZƒbƒT
+	/// ã‚¢ã‚¯ã‚»ãƒƒã‚µ
 	//--------------------------------------------------------------------------------------
 
 	std::shared_ptr<PlayerObject> GameStageBase::GetPlayer() const {

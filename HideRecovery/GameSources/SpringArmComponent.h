@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 namespace basecross
 {
@@ -8,41 +8,41 @@ namespace basecross
 	public:
 		struct Parametor
 		{
-			float armRange;		//ƒA[ƒ€‚Ì’·‚³
-			Vec3  armVec;		//ƒA[ƒ€‚Ì•ûŒü
+			float armRange;		//ã‚¢ãƒ¼ãƒ ã®é•·ã•
+			Vec3  armVec;		//ã‚¢ãƒ¼ãƒ ã®æ–¹å‘
 
-			float radY;			//y²‚ÌŠp“x
-			float radXZ;		//xz²‚ÌŠp“x
+			float radY;			//yè»¸ã®è§’åº¦
+			float radXZ;		//xzè»¸ã®è§’åº¦
 
-			float speedY;		//y²‚Ì‘¬“x
-			float speedXZ;		//xz²‚Ì‘¬“x
+			float speedY;		//yè»¸ã®é€Ÿåº¦
+			float speedXZ;		//xzè»¸ã®é€Ÿåº¦
 
-			float maxY;			//y²‚ÌÅ‘å
-			float minY;			//y²‚ÌÅ­
+			float maxY;			//yè»¸ã®æœ€å¤§
+			float minY;			//yè»¸ã®æœ€å°‘
 
-			float lerpSpeed;	//•âŠÔˆÚ“®‘¬“x
+			float lerpSpeed;	//è£œé–“ç§»å‹•é€Ÿåº¦
 
-			float armSpeed;		//ƒA[ƒ€‚Ìk¬ƒXƒs[ƒh
-			float currentArmRange; //Œ»İ‚ÌƒA[ƒ€‚Ì’·‚³
+			float armSpeed;		//ã‚¢ãƒ¼ãƒ ã®ç¸®å°ã‚¹ãƒ”ãƒ¼ãƒ‰
+			float currentArmRange; //ç¾åœ¨ã®ã‚¢ãƒ¼ãƒ ã®é•·ã•
 
 			/// <summary>
-			/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+			/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 			/// </summary>
 			Parametor();
 
 			/// <summary>
-			/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+			/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 			/// </summary>
-			/// <param name="armRange">ƒA[ƒ€‚Ì’·‚³</param>
-			/// <param name="armVec">ƒA[ƒ€‚Ì•ûŒü</param>
-			/// <param name="radY">y²‚ÌŠp“x</param>
-			/// <param name="radXZ">zy²‚ÌŠp“x</param>
-			/// <param name="speedY">y²‚Ì‘¬“x</param>
-			/// <param name="speedXZ">xz²‚Ì‘¬“x</param>
-			/// <param name="maxY">y²‚ÌÅ‘åŠp“x</param>
-			/// <param name="minY">z²‚ÌÅ‘åŠp“x</param>
-			/// <param name="lerpSpeed">•âŠ®ˆÚ“®‘¬“x</param>
-			/// <param name="seekType">’Ç]ƒ^ƒCƒv</param>
+			/// <param name="armRange">ã‚¢ãƒ¼ãƒ ã®é•·ã•</param>
+			/// <param name="armVec">ã‚¢ãƒ¼ãƒ ã®æ–¹å‘</param>
+			/// <param name="radY">yè»¸ã®è§’åº¦</param>
+			/// <param name="radXZ">zyè»¸ã®è§’åº¦</param>
+			/// <param name="speedY">yè»¸ã®é€Ÿåº¦</param>
+			/// <param name="speedXZ">xzè»¸ã®é€Ÿåº¦</param>
+			/// <param name="maxY">yè»¸ã®æœ€å¤§è§’åº¦</param>
+			/// <param name="minY">zè»¸ã®æœ€å¤§è§’åº¦</param>
+			/// <param name="lerpSpeed">è£œå®Œç§»å‹•é€Ÿåº¦</param>
+			/// <param name="seekType">è¿½å¾“ã‚¿ã‚¤ãƒ—</param>
 			Parametor(const float& armRange,
 				const Vec3& armVec,
 				const float& radY,
@@ -78,6 +78,8 @@ namespace basecross
 		void RemoveHitTag(const std::wstring& hitTag);
 
 		void SetChildObject(const std::shared_ptr<GameObject>& childObject);
+
+		std::shared_ptr<GameObject> GetChildObject() const { return m_childObject.GetShard(); }
 
 		void OnCreate() override;
 		void OnUpdate2() override;

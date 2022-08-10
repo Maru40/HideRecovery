@@ -1,8 +1,8 @@
-
+ï»¿
 /*!
 @file PlayerObject.h
-@brief PlayerObject‚È‚Ç
-’S“–FŠÛR—TŠì
+@brief PlayerObjectãªã©
+æ‹…å½“ï¼šä¸¸å±±è£•å–œ
 */
 
 #pragma once
@@ -11,15 +11,17 @@
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
-	/// ƒvƒŒƒCƒ„[ƒIƒuƒWƒFƒNƒg
+	/// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 	//--------------------------------------------------------------------------------------
 	class PlayerObject : public GameObject
 	{
+		std::weak_ptr<GameObject> m_arm;
 	public:
 		PlayerObject(const std::shared_ptr<Stage>& stage);
 
 		virtual void OnCreate() override;
 
+		std::shared_ptr<GameObject> GetArm() const { return m_arm.lock(); }
 	};
 
 }

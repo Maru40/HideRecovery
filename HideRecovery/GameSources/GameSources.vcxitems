@@ -44,7 +44,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)HidePlace.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ImpactDataDraw.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ImpactManager.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineController.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\ObjectMover.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineTestRoom.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\PlayerOnlineController.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineTestStage.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineTransformSynchronization.h" />
@@ -252,7 +254,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)HidePlace.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ImpactDataDraw.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ImpactManager.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineController.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\ObjectMover.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineTestRoom.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\PlayerOnlineController.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineTestStage.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineTransformSynchronization.cpp" />
