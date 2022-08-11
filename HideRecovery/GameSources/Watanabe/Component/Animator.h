@@ -46,6 +46,9 @@ namespace basecross {
 	public:
 		Animator(const shared_ptr<GameObject>& owner);
 
+		// Animatorでは基本使用しない
+		virtual void OnDraw()override {}
+
 		bool LoadMotionData(wstring data);
 	};
 }
