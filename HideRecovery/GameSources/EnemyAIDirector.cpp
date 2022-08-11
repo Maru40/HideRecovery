@@ -31,7 +31,7 @@ namespace basecross {
 		}
 
 		void AIDirector::SetEnemys() {
-			m_enemys = maru::Utility::FindExWeakPtrComponents<EnemyBase>();
+			m_enemys = maru::Utility::FindWeakPtrComponents<EnemyBase>();
 		}
 
 		std::shared_ptr<FactionCoordinator> AIDirector::AddFaction() {
