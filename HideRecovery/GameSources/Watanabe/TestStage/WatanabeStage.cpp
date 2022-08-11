@@ -8,7 +8,18 @@
 #include "../StageObject/RackObject.h"
 #include "../Shader/BoneModelDraw.h"
 #include "HeroPlayerObject.h"
+#include "VillainPlayerObject.h"
 #include "CameraHelper.h"
+#include "Itabashi/PlayerOnlineController.h"
+#include "Itabashi/OnlineTransformSynchronization.h"
+#include "SpringArmComponent.h"
+#include "CameraHelper.h"
+#include "LookAtCameraManager.h"
+#include "../Component/TestComponent.h"
+#include "Itabashi/ObjectMover.h"
+#include "RotationController.h"
+#include "PlayerInputer.h"
+#include "MaruUtility.h"
 
 namespace basecross {
 	void WatanabeStage::CreateViewLight() {
@@ -37,14 +48,46 @@ namespace basecross {
 		efkComp->SetEffectResource(L"TestEffect");
 		//efkComp->PlayLoop(L"TestEffect");
 
-		//AddGameObject<CameraObject>();
-		//Instantiate<HeroPlayerObject>(Vec3(0.0f, 1.0f, 0.0f), Quat::Identity());
-		{
-			m_obj = AddGameObject<GameObject>();
-			auto testDraw = m_obj->AddComponent<BoneModelDraw>();
-			testDraw->SetMultiMeshResource(L"Player_Mesh");
-			//testDraw->SetMeshResource(L"rack");
-		}
+		AddGameObject<CameraObject>();
+		// ヴィランプレイヤーを生成
+		auto player = Instantiate<VillainPlayerObject>(Vec3(0.0f, 1.0f, 0.0f), Quat::Identity());
+		// テストのためオンライン系のコンポーネントを削除
+		player->RemoveComponent<Online::PlayerOnlineController>();
+		player->RemoveComponent<Online::OnlineTransformSynchronization>();
+		// プレイヤーを見るようなカメラを設定
+		auto sp = player->GetArm()->GetComponent<SpringArmComponent>();
+		auto& tpsCamera = sp->GetChildObject();
+		tpsCamera->AddComponent<VirtualCamera>(10);
+		tpsCamera->AddComponent<LookAtCameraManager>(player, LookAtCameraManager::Parametor());
+
+		auto stage = GetThis<WatanabeStage>();
+		auto testComp = player->AddComponent<TestComponent>();
+		// テスト用にプレイヤーの移動処理を実装
+		testComp->SetOnUpdateFunction(
+			[player, stage]() {
+				auto objectMover = player->GetComponent<Operator::ObjectMover>();
+				if (!objectMover)
+					return;
+
+				objectMover->Move(PlayerInputer::GetMoveDirection());
+
+				auto rotationController = player->GetComponent<RotationController>();
+				if (rotationController)
+				{
+					auto input = PlayerInputer::GetMoveDirection();
+					auto direct = maru::Utility::CalcuCameraVec(Vec3(input.x, 0, input.y), stage->GetView()->GetTargetCamera(), player);
+
+					rotationController->SetDirect(direct);
+				}
+			}
+		);
+
+		//{
+		//	m_obj = AddGameObject<GameObject>();
+		//	auto testDraw = m_obj->AddComponent<BoneModelDraw>();
+		//	testDraw->SetMultiMeshResource(L"Player_Mesh");
+		//	//testDraw->SetMeshResource(L"rack");
+		//}
 
 		GameObjecttCSVBuilder builder;
 		builder.Register<Block>(L"Block");
@@ -55,9 +98,9 @@ namespace basecross {
 	}
 
 	void WatanabeStage::OnUpdate() {
-		auto delta = App::GetApp()->GetElapsedTime();
-		auto utilPtr = m_obj->GetBehavior<UtilBehavior>();
-		utilPtr->RotToHead(Vec3(cosf(m_delta), 0, sinf(m_delta)), 2 * delta);
-		m_delta += delta;
+		//auto delta = App::GetApp()->GetElapsedTime();
+		//auto utilPtr = m_obj->GetBehavior<UtilBehavior>();
+		//utilPtr->RotToHead(Vec3(cosf(m_delta), 0, sinf(m_delta)), 2 * delta);
+		//m_delta += delta;
 	}
 }

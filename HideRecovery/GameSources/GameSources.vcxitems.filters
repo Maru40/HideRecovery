@@ -766,6 +766,12 @@
     <Filter Include="Maruyama\Enemy\Component\ImpactMap\Astar\Tester">
       <UniqueIdentifier>{e0c25eb1-05d0-4534-8b9f-86a6b61eb9c3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\Component">
+      <UniqueIdentifier>{c4ba6e83-372f-404f-9096-43f86c51a649}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\Component\TestComponent">
+      <UniqueIdentifier>{758f8592-1239-4cef-94de-d859cceb9277}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1413,6 +1419,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)TesterAstarComponent.h">
       <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\Tester</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\TestComponent.h">
+      <Filter>Watanabe\Component\TestComponent</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -1984,6 +1993,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)TesterAstarComponent.cpp">
       <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\Tester</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\TestComponent.cpp">
+      <Filter>Watanabe\Component\TestComponent</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
