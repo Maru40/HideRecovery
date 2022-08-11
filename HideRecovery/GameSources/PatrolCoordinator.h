@@ -28,7 +28,12 @@ namespace basecross {
 		public:
 			PatrolCoordinator(const std::shared_ptr<FactionCoordinator>& owner);
 
+			PatrolCoordinator(const std::shared_ptr<FactionCoordinator>& owner, const std::vector<std::weak_ptr<EnemyBase>>& members);
+
 			~PatrolCoordinator() = default;
+
+			void OnStart() override;
+			void OnUpdate() override;
 		};
 
 	}

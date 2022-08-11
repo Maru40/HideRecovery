@@ -15,13 +15,29 @@
 
 #include "MaruUtility.h"
 
+#include "Watanabe/DebugClass/Debug.h"
+
 namespace basecross {
 
 	namespace Enemy {
 
 		PatrolCoordinator::PatrolCoordinator(const std::shared_ptr<FactionCoordinator>& owner):
-			HereOwnerCoordinatorBase(owner)
+			PatrolCoordinator(owner, std::vector<std::weak_ptr<EnemyBase>>())
 		{}
 
+		PatrolCoordinator::PatrolCoordinator(const std::shared_ptr<FactionCoordinator>& owner, const std::vector<std::weak_ptr<EnemyBase>>& members):
+			HereOwnerCoordinatorBase(owner, members)
+		{}
+
+		void PatrolCoordinator::OnStart() {
+			//Debug::GetInstance()->Log((int)GetMembers().size());
+
+			//メンバーの目的地をそれぞれ変更
+
+		}
+
+		void PatrolCoordinator::OnUpdate() {
+			
+		}
 	}
 }
