@@ -13,6 +13,8 @@
 #include "SingletonComponent.h"
 #include "EnemyAIDirector.h"
 
+#include "EnemyBase.h"
+
 namespace basecross {
 
 	namespace Enemy {
@@ -32,6 +34,10 @@ namespace basecross {
 		void FactionCoordinator::OnExit() {
 
 		}
+
+		//--------------------------------------------------------------------------------------
+		/// アクセッサ
+		//--------------------------------------------------------------------------------------
 
 	}
 }
