@@ -20,6 +20,7 @@
 #include "RotationController.h"
 #include "PlayerInputer.h"
 #include "MaruUtility.h"
+#include "../Utility/CSVLoad.h"
 
 namespace basecross {
 	void WatanabeStage::CreateViewLight() {
@@ -42,7 +43,12 @@ namespace basecross {
 		AddGameObject<EfkInterface>();
 		AddGameObject<Debug>();
 		Debug::GetInstance()->Log(L"WatanabeStage");
-
+		{
+			wstring mediaDir;
+			mediaDir = App::GetApp()->GetDataDirWString();
+			wstring dir = mediaDir + L"Models/";
+			CSVLoad::GetInstance()->RegisterFile(L"PlayerMotion", dir + L"Player/PlayerMotion.csv");
+		}
 		auto testObj = AddGameObject<GameObject>();
 		auto efkComp = testObj->AddComponent<EfkComponent>();
 		efkComp->SetEffectResource(L"TestEffect");
