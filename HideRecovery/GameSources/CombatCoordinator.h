@@ -8,13 +8,21 @@
 #pragma once
 #include "stdafx.h"
 
+#include "CoordinatorBase.h"
+
 namespace basecross {
 
 	namespace Enemy {
 
+		//--------------------------------------------------------------------------------------
+		/// 前方宣言
+		//--------------------------------------------------------------------------------------
 		class EnemyBase;
 		class FactionCoordinator;
 
+		//--------------------------------------------------------------------------------------
+		/// 戦闘データのタイプ
+		//--------------------------------------------------------------------------------------
 		enum class CombatCoordinator_Data_State
 		{
 			Move,
@@ -23,58 +31,55 @@ namespace basecross {
 			Wait,
 		};
 
+		//--------------------------------------------------------------------------------------
+		/// 戦闘管理データ
+		//--------------------------------------------------------------------------------------
 		struct CombatCoordinator_Data
 		{
 			using State = CombatCoordinator_Data_State;
 
-			//メンバ変数-------------------------------------------
-
-			ex_weak_ptr<EnemyBase> selfPtr = nullptr;
+			std::weak_ptr<EnemyBase> selfPtr;
 			State state = State::Move;
 
 			//CombatCoordinator_Data();
 		};
 
-
-		//戦闘管理、攻撃権限管理、ロールアサイン
-		class CombatCoordinator
+		//--------------------------------------------------------------------------------------
+		/// 戦闘管理、攻撃権限管理、ロールアサイン
+		//--------------------------------------------------------------------------------------
+		class CombatCoordinator : public HereOwnerCoordinatorBase<FactionCoordinator, EnemyBase>
 		{
 		public:
 			using Data = CombatCoordinator_Data;
 
 		private:
-			ex_weak_ptr<FactionCoordinator> m_owner;
-			vector<ex_weak_ptr<EnemyBase>> m_members;
-
-			std::map<ex_weak_ptr<EnemyBase>, Data> m_dataMap;
-			std::vector<Data> m_requestDatas;
+			std::map<std::weak_ptr<EnemyBase>, Data> m_dataMap;	//エネミーごとのデータマップ
+			std::vector<Data> m_requestDatas;					//リクエストデータ管理配列
 
 		public:
 			CombatCoordinator(const std::shared_ptr<FactionCoordinator>& owner);
-			CombatCoordinator(const std::shared_ptr<FactionCoordinator>& owner, const std::shared_ptr<EnemyBase>& member);
-			CombatCoordinator(const std::shared_ptr<FactionCoordinator>& owner, const vector<ex_weak_ptr<EnemyBase>>& members);
 
-			//void OnStart();
-			void OnUpdate();
-			//void OnExit();
+			~CombatCoordinator() = default;
+
+			void OnStart() override {};
+			void OnUpdate() override;
+			void OnExit() override {};
 			
 		private:
 			//命令の生成
 			void CreateOrder(const Data& data);
 
 		public:
+			//--------------------------------------------------------------------------------------
+			/// アクセッサ
+			//--------------------------------------------------------------------------------------
 
-			//アクセッサ----------------------------------------------------------------
-
-			//メンバーのアサイン
-			void Assign(const std::shared_ptr<EnemyBase>& member);
-			//メンバーのアンアサイン
-			void UnAssign(const std::shared_ptr<EnemyBase>& member);
-
-			//行動のリクエスト
+			/// <summary>
+			/// 行動のリクエスト
+			/// </summary>
+			/// <param name="member">リクエストを送ったメンバー</param>
+			/// <param name="data">リクエストデータ</param>
 			void Request(const std::shared_ptr<EnemyBase>& member, const Data& data);
-
-			std::shared_ptr<FactionCoordinator> GetOwner() const;
 		};
 
 	}
