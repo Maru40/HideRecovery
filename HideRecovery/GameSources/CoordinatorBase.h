@@ -16,7 +16,7 @@ namespace basecross {
 		/// 調整者の基底クラス
 		//--------------------------------------------------------------------------------------
 		template<class T>
-		class CoordinatorBase
+		class CoordinatorBase : public std::enable_shared_from_this<CoordinatorBase<T>>
 		{
 		private:
 			std::vector<std::weak_ptr<T>> m_members;	//登録されたメンバー配列
@@ -63,14 +63,14 @@ namespace basecross {
 			/// メンバーの追加
 			/// </summary>
 			/// <param name="member">メンバー</param>
-			void AddMember(const std::shared_ptr<T>& member) { m_members.push_back(member); }
+			virtual void AddMember(const std::shared_ptr<T>& member) { m_members.push_back(member); }
 
 			/// <summary>
 			/// メンバーの削除
 			/// </summary>
 			/// <param name="member">メンバー</param>
 			/// <returns>削除に成功したらtrue</returns>
-			bool RemoveMember(const std::shared_ptr<T>& member) {
+			virtual bool RemoveMember(const std::shared_ptr<T>& member) {
 				auto iter = m_members.begin();
 				while (iter != m_members.end()) {
 					if (iter->lock() == member) {
@@ -83,6 +83,24 @@ namespace basecross {
 				return false;
 			}
 
+			template<class T>
+			std::shared_ptr<T> GetThis() {
+				auto Ptr = dynamic_pointer_cast<T>(shared_from_this());
+				if (Ptr) {
+					return Ptr;
+				}
+				else {
+					wstring str(L"thisを");
+					str += Util::GetWSTypeName<T>();
+					str += L"型にキャストできません";
+					throw BaseException(
+						str,
+						L"if( ! dynamic_pointer_cast<T>(shared_from_this()) )",
+						L"ObjectInterface::GetThis()"
+					);
+				}
+				return nullptr;
+			}
 		};
 
 
@@ -121,7 +139,7 @@ namespace basecross {
 				CoordinatorBase(members), m_owner(owner)
 			{}
 
-			~HereOwnerCoordinatorBase() = default;
+			virtual ~HereOwnerCoordinatorBase() = default;
 
 		public:
 			//--------------------------------------------------------------------------------------
@@ -132,7 +150,7 @@ namespace basecross {
 			/// 所有者の取得
 			/// </summary>
 			/// <returns>所有者</returns>
-			std::shared_ptr<OwnerType> GetOwner() const noexcept { return m_owner.lock(); }
+			std::shared_ptr<OwnerType> GetOwner() const noexcept { return m_owner.lock(); } 
 		};
 
 	}
