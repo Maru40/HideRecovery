@@ -50,9 +50,13 @@ namespace basecross {
 		/// <param name="csvKey">CSVLoadに登録したアニメーションデータのキー</param>
 		/// <returns>アニメーションクリップ</returns>
 		vector<AnimationClip> LoadAnimationData(const wstring& csvKey);
+
+		void RegisterAnimationClip(AnimationClip clip);
+		void ChangeAnimation(wstring key);
 	public:
 		Animator(const shared_ptr<GameObject>& owner);
 
+		virtual void OnUpdate()override;
 		// Animatorでは基本使用しない
 		virtual void OnDraw()override {}
 	};

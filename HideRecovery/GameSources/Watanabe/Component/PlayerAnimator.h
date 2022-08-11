@@ -9,8 +9,7 @@ namespace basecross {
 		PlayerAnimator(const shared_ptr<GameObject>& owner);
 
 		void OnCreate()override;
-		void OnUpdate()override;
 
-		void ChangeAnimation(PlayerAnimationState state);
+		void ChangePlayerAnimation(PlayerAnimationState state);
 	};
 }

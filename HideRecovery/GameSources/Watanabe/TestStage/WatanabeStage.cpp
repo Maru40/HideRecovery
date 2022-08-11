@@ -22,6 +22,7 @@
 #include "MaruUtility.h"
 #include "../Utility/CSVLoad.h"
 #include "../Component/PlayerAnimator.h"
+#include "PlayerAnimationCtrl.h"
 
 namespace basecross {
 	void WatanabeStage::CreateViewLight() {
@@ -95,8 +96,9 @@ namespace basecross {
 		//	testDraw->SetMultiMeshResource(L"Player_Mesh");
 		//	//testDraw->SetMeshResource(L"rack");
 		//}
-
+		player->RemoveComponent<PlayerAnimationCtrl>();
 		player->AddComponent<PlayerAnimator>();
+		m_obj = player;
 
 		GameObjecttCSVBuilder builder;
 		builder.Register<Block>(L"Block");
@@ -111,5 +113,32 @@ namespace basecross {
 		//auto utilPtr = m_obj->GetBehavior<UtilBehavior>();
 		//utilPtr->RotToHead(Vec3(cosf(m_delta), 0, sinf(m_delta)), 2 * delta);
 		//m_delta += delta;
+		static const auto& inputDevice = App::GetApp()->GetMyInputDevice();
+		static const auto& keyBoard = inputDevice->GetKeyBoard();
+		auto animator = m_obj->GetComponent<PlayerAnimator>();
+		if (keyBoard.IsInputDown(KeyCode::Alpha1)) {
+			animator->ChangePlayerAnimation(PlayerAnimationState::Wait);
+			Debug::GetInstance()->Log(L"Wait");
+		}
+		else if (keyBoard.IsInputDown(KeyCode::Alpha2)) {
+			animator->ChangePlayerAnimation(PlayerAnimationState::Walk_L);
+			Debug::GetInstance()->Log(L"Walk_L");
+		}
+		else if (keyBoard.IsInputDown(KeyCode::Alpha3)) {
+			animator->ChangePlayerAnimation(PlayerAnimationState::Walk_R);
+			Debug::GetInstance()->Log(L"Walk_R");
+		}
+		else if (keyBoard.IsInputDown(KeyCode::Alpha4)) {
+			animator->ChangePlayerAnimation(PlayerAnimationState::Dash);
+			Debug::GetInstance()->Log(L"Dash");
+		}
+		else if (keyBoard.IsInputDown(KeyCode::Alpha5)) {
+			animator->ChangePlayerAnimation(PlayerAnimationState::PutItem_Floor);
+			Debug::GetInstance()->Log(L"PutItem_Floor");
+		}
+		else if (keyBoard.IsInputDown(KeyCode::Alpha6)) {
+			animator->ChangePlayerAnimation(PlayerAnimationState::PutItem_HideObject);
+			Debug::GetInstance()->Log(L"PutItem_HideObject");
+		}
 	}
 }

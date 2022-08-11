@@ -38,4 +38,21 @@ namespace basecross {
 
 		return outputData;
 	}
+
+	void Animator::RegisterAnimationClip(AnimationClip clip) {
+		auto drawer = GetGameObject()->GetComponent<PNTBoneModelDraw>();
+		drawer->AddAnimation(clip.name,
+			clip.start, clip.end - clip.start,
+			clip.isLoop, 30);
+	}
+
+	void Animator::ChangeAnimation(wstring key) {
+		auto drawer = GetGameObject()->GetComponent<PNTBoneModelDraw>();
+		drawer->ChangeCurrentAnimation(key);
+	}
+
+	void Animator::OnUpdate() {
+		auto drawer = GetGameObject()->GetComponent<PNTBoneModelDraw>();
+		drawer->UpdateAnimation(App::GetApp()->GetElapsedTime());
+	}
 }
