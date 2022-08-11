@@ -33,7 +33,7 @@ namespace basecross {
 	///	エフェクト管理クラス
 	//--------------------------------------------------------------------------------------
 
-	ex_weak_ptr<EffectManager>  maru::SingletonComponent<EffectManager>::sm_instance = nullptr;
+	std::weak_ptr<EffectManager>  maru::SingletonComponent<EffectManager>::sm_instance;
 
 	EffectManager::EffectManager(const std::shared_ptr<GameObject>& objPtr)
 		:SingletonComponent(objPtr)

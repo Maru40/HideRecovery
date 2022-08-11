@@ -16,7 +16,7 @@
 
 namespace basecross {
 
-	ex_weak_ptr<HitStopManager> maru::SingletonComponent<HitStopManager>::sm_instance = nullptr;
+	std::weak_ptr<HitStopManager> maru::SingletonComponent<HitStopManager>::sm_instance;
 
 	//--------------------------------------------------------------------------------------
 	///	ヒットストップデータ

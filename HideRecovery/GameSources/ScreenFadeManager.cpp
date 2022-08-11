@@ -23,7 +23,7 @@
 
 namespace basecross {
 
-	ex_weak_ptr<ScreenFadeManager>  maru::SingletonComponent<ScreenFadeManager>::sm_instance = nullptr;
+	std::weak_ptr<ScreenFadeManager>  maru::SingletonComponent<ScreenFadeManager>::sm_instance;
 
 	ScreenFadeManager::ScreenFadeManager(const std::shared_ptr<GameObject>& objPtr)
 		:ScreenFadeManager(objPtr, nullptr)
