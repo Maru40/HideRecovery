@@ -766,6 +766,12 @@
     <Filter Include="Maruyama\Enemy\Component\ImpactMap\Astar\Tester">
       <UniqueIdentifier>{e0c25eb1-05d0-4534-8b9f-86a6b61eb9c3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Enemy\Component\AI\Director\CoordinatorBase">
+      <UniqueIdentifier>{6e74b68c-51e8-430f-a9e2-11dac5c26112}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\Component\AI\Director\FactionCoordinator\PatrolCoordinator">
+      <UniqueIdentifier>{c7cd69c1-ee43-4e1b-a761-89fcdbac4ffd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1413,6 +1419,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)TesterAstarComponent.h">
       <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\Tester</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CoordinatorBase.h">
+      <Filter>Maruyama\Enemy\Component\AI\Director\CoordinatorBase</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)PatrolCoordinator.h">
+      <Filter>Maruyama\Enemy\Component\AI\Director\FactionCoordinator\PatrolCoordinator</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -1984,6 +1996,12 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)TesterAstarComponent.cpp">
       <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\Tester</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CoordinatorBase.cpp">
+      <Filter>Maruyama\Enemy\Component\AI\Director\CoordinatorBase</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)PatrolCoordinator.cpp">
+      <Filter>Maruyama\Enemy\Component\AI\Director\FactionCoordinator\PatrolCoordinator</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
