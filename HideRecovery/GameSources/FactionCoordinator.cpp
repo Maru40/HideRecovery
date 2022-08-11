@@ -15,20 +15,35 @@
 
 #include "EnemyBase.h"
 
+#include "PatrolCoordinator.h"
+#include "CombatCoordinator.h"
+
+#include "Watanabe/DebugClass/Debug.h"
+
+#include <cassert>
+#include <memory>
+
 namespace basecross {
 
 	namespace Enemy {
 
-		FactionCoordinator::FactionCoordinator(const std::shared_ptr<AIDirector>& director)
-			: m_director(director)
+		FactionCoordinator::FactionCoordinator(const std::shared_ptr<AIDirector>& director):
+			FactionCoordinator(director, std::vector<std::weak_ptr<EnemyBase>>())
+		{}
+
+		FactionCoordinator::FactionCoordinator(const std::shared_ptr<AIDirector>& director, const std::vector<std::weak_ptr<EnemyBase>>& members):
+			CoordinatorBase(members), m_director(director)
 		{}
 
 		void FactionCoordinator::OnStart() {
-
+			//âºÇ≈ÉpÉgÉçÅ[ÉãÇçÏê¨
+			auto patrol = CreateFaction<PatrolCoordinator>(m_patrols, GetThis<FactionCoordinator>(), GetMembers());
 		}
 
 		void FactionCoordinator::OnUpdate() {
-			
+			for (auto& coordinator : m_allCoordinators) {
+				coordinator->OnUpdate();
+			}
 		}
 
 		void FactionCoordinator::OnExit() {
