@@ -1,7 +1,7 @@
-name	start	end	isLoop	speed
-Wait	1	39	TRUE	1
-Walk_R	65	94	TRUE	1
-Walk_L	50	79	TRUE	1
-Dash	100	119	TRUE	1
-PutItem_Floor	125	149	FALSE	1
-PutItem_HideObject	150	174	FALSE	1
+name,start,end,isLoop,speed
+Wait,1,39,TRUE,1
+Walk_R,65,94,TRUE,1
+Walk_L,50,79,TRUE,1
+Dash,100,119,TRUE,1
+PutItem_Floor,125,149,FALSE,1
+PutItem_HideObject,150,174,FALSE,1
