@@ -1440,6 +1440,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\PlayerAnimator.h">
       <Filter>Watanabe\Component\PlayerAnimator</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\PlayerAnimationState.h">
+      <Filter>Watanabe\Component\PlayerAnimator</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">

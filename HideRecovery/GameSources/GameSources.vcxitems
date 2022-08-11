@@ -214,6 +214,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)WallEvasion.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WallObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\Animator.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\PlayerAnimationState.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\PlayerAnimator.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\TestComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\DebugClass\Debug.h" />
