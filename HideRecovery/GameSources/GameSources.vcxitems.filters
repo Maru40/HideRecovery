@@ -775,6 +775,9 @@
     <Filter Include="Watanabe\Utility\CSVLoad">
       <UniqueIdentifier>{a113699b-99cd-4eef-9457-aa84497fed9d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\Component\Animator">
+      <UniqueIdentifier>{e88ded65-86cc-4d16-9742-6a493c31b302}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1428,6 +1431,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\CSVLoad.h">
       <Filter>Watanabe\Utility\CSVLoad</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\Animator.h">
+      <Filter>Watanabe\Component\Animator</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2005,6 +2011,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Utility\CSVLoad.cpp">
       <Filter>Watanabe\Utility\CSVLoad</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\Animator.cpp">
+      <Filter>Watanabe\Component\Animator</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
