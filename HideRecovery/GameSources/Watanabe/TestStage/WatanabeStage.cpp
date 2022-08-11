@@ -21,6 +21,7 @@
 #include "PlayerInputer.h"
 #include "MaruUtility.h"
 #include "../Utility/CSVLoad.h"
+#include "../Component/PlayerAnimator.h"
 
 namespace basecross {
 	void WatanabeStage::CreateViewLight() {
@@ -47,7 +48,7 @@ namespace basecross {
 			wstring mediaDir;
 			mediaDir = App::GetApp()->GetDataDirWString();
 			wstring dir = mediaDir + L"Models/";
-			CSVLoad::GetInstance()->RegisterFile(L"PlayerMotion", dir + L"Player/PlayerMotion.csv");
+			CSVLoad::GetInstance()->RegisterFile(L"PlayerAnimation", dir + L"Player/PlayerAnimation.csv");
 		}
 		auto testObj = AddGameObject<GameObject>();
 		auto efkComp = testObj->AddComponent<EfkComponent>();
@@ -94,6 +95,8 @@ namespace basecross {
 		//	testDraw->SetMultiMeshResource(L"Player_Mesh");
 		//	//testDraw->SetMeshResource(L"rack");
 		//}
+
+		player->AddComponent<PlayerAnimator>();
 
 		GameObjecttCSVBuilder builder;
 		builder.Register<Block>(L"Block");

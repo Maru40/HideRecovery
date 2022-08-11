@@ -7,7 +7,11 @@ namespace basecross {
 	{}
 
 	void PlayerAnimator::OnCreate() {
+		auto data = LoadAnimationData(L"PlayerAnimation");
 	}
 	void PlayerAnimator::OnUpdate() {
+	}
+
+	void PlayerAnimator::ChangeAnimation(PlayerAnimationState state) {
 	}
 }

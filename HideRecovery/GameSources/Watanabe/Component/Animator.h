@@ -43,12 +43,17 @@ namespace basecross {
 	};
 
 	class Animator :public Component {
+	protected:
+		/// <summary>
+		/// モーションデータを読み込む
+		/// </summary>
+		/// <param name="csvKey">CSVLoadに登録したアニメーションデータのキー</param>
+		/// <returns>アニメーションクリップ</returns>
+		vector<AnimationClip> LoadAnimationData(const wstring& csvKey);
 	public:
 		Animator(const shared_ptr<GameObject>& owner);
 
 		// Animatorでは基本使用しない
 		virtual void OnDraw()override {}
-
-		bool LoadMotionData(wstring data);
 	};
 }
