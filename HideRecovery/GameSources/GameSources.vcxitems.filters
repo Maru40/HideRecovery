@@ -775,6 +775,9 @@
     <Filter Include="Maruyama\Enemy\Component\AI\TupleSpace">
       <UniqueIdentifier>{b44ae7dc-4e09-4783-b92f-ceb6955ae434}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Enemy\Component\AI\Director\FactionCoordinator\I_FactionMember">
+      <UniqueIdentifier>{9eb6e312-9645-453d-8bec-bf25747c3654}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1431,6 +1434,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)TupleSpace.h">
       <Filter>Maruyama\Enemy\Component\AI\TupleSpace</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)I_FactionMember.h">
+      <Filter>Maruyama\Enemy\Component\AI\Director\FactionCoordinator\I_FactionMember</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2011,6 +2017,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)TupleSpace.cpp">
       <Filter>Maruyama\Enemy\Component\AI\TupleSpace</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)I_FactionMember.cpp">
+      <Filter>Maruyama\Enemy\Component\AI\Director\FactionCoordinator\I_FactionMember</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

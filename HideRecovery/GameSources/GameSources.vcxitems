@@ -55,6 +55,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)ItemAcquisitionManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ItemBag.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ItemBase.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)I_FactionMember.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)I_Impact.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)I_KnockBack.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LoadCSV.h" />
@@ -272,6 +273,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)ItemAcquisitionManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ItemBag.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ItemBase.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)I_FactionMember.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)I_Impact.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LoadCSV.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LoadPositionGenerator.cpp" />
