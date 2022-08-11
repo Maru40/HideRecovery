@@ -27,25 +27,47 @@ namespace basecross {
 		{}
 
 		void AIDirector::OnLateStart() {
-			SetEnemys();
+			SettingStartAllEnemys();
 		}
 
-		void AIDirector::SetEnemys() {
+		void AIDirector::OnUpdate() {
+			//グループ管理の更新
+			for (auto& faction : m_factionCoordinators) {
+				faction->OnUpdate();
+			}
+		}
+
+		void AIDirector::SettingStartAllEnemys() {
 			m_enemys = maru::Utility::FindWeakPtrComponents<EnemyBase>();
 		}
 
-		std::shared_ptr<FactionCoordinator> AIDirector::AddFaction() {
+		std::shared_ptr<FactionCoordinator> AIDirector::CreateFaction() {
 			auto coordinator = std::make_shared<FactionCoordinator>(GetThis<AIDirector>());
+			coordinator->OnStart();
 			m_factionCoordinators.push_back(coordinator);
 
 			return coordinator;
 		}
 
 		bool AIDirector::RemoveFaction(const std::shared_ptr<FactionCoordinator>& removeCoordinator) {
+			removeCoordinator->OnExit();
 			return maru::Utility::RemoveVec(m_factionCoordinators, removeCoordinator);
 		}
 
-		//アクセッサ--------------------------------------------------------------------------------------------------
+		//--------------------------------------------------------------------------------------
+		/// アクセッサ
+		//--------------------------------------------------------------------------------------
 
+		void AIDirector::AddEnemy(const std::shared_ptr<EnemyBase>& enemy) {
+			m_enemys.push_back(enemy);
+		}
+
+		std::shared_ptr<FactionCoordinator> AIDirector::GetFactionCoordinator(const int index) const {
+			if (m_factionCoordinators.size() <= index) { //サイズが小さかったら配列オーバー
+				return nullptr;
+			}
+
+			return m_factionCoordinators[index];
+		}
 	}
 }
