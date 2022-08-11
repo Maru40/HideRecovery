@@ -38,13 +38,12 @@ namespace basecross {
 			auto nodes = impactMap->GetEyeRangeNodes(transform->GetPosition(), GetThis<I_Impacter>());
 
 			for (auto node : nodes) {
-				//影響マップ
-				//impactMap->ChangeTargetNodeColor(node->GetIndex(), Col4(1.0f, 0.0f, 0.0f, 1.0f));
-
+				//占有値更新
 				auto impactData = node->GetImpactData();
 				impactData.occupancyValue = 0;
 				node->SetImpactData(impactData);
 
+				//占有値に合わせてノードの色変更（デバッグ）
 				auto colorValue = 1.0f - impactData.occupancyValue;
 				impactMap->ChangeTargetNodeColor(node->GetIndex(), Col4(1.0f, colorValue, colorValue, 1.0f));
 			}
