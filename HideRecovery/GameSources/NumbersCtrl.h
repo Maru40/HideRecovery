@@ -16,7 +16,7 @@ namespace basecross {
 	{
 		float m_value = 0;								//表示する値
 		int m_maxDigit = 3;								//最大桁数
-		wstring m_texture = L"Number_TX";				//数字表示に使うテクスチャ
+		wstring m_texture = L"NumberWhite_TX";			//数字表示に使うテクスチャ
 
 		vector<ex_weak_ptr<NumberObject>> m_numberObjs;	//生成したナンバーオブジェクト
 

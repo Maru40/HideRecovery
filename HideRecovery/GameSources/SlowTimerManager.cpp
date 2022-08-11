@@ -14,7 +14,7 @@
 
 namespace basecross {
 
-	ex_weak_ptr<SlowTimerManager> maru::SingletonComponent<SlowTimerManager>::sm_instance = nullptr;
+	std::weak_ptr<SlowTimerManager> maru::SingletonComponent<SlowTimerManager>::sm_instance;
 
 	//--------------------------------------------------------------------------------------
 	/// スロータイマーパラメータ

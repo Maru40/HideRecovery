@@ -21,7 +21,7 @@
 
 namespace basecross {
 
-	ex_weak_ptr<GameManager>  maru::SingletonComponent<GameManager>::sm_instance = nullptr;
+	std::weak_ptr<GameManager>  maru::SingletonComponent<GameManager>::sm_instance;
 
 	//--------------------------------------------------------------------------------------
 	/// ƒpƒ‰ƒ[ƒ^

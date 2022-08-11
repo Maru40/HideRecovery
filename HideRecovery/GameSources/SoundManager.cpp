@@ -15,7 +15,7 @@ namespace basecross {
 
 	using namespace maru;
 
-	ex_weak_ptr<SoundManager> SingletonComponent<SoundManager>::sm_instance = nullptr; //スタティックメンバ変数の初期化
+	std::weak_ptr<SoundManager> SingletonComponent<SoundManager>::sm_instance; //スタティックメンバ変数の初期化
 
 	SoundManager::SoundManager(const std::shared_ptr<GameObject>& objPtr)
 		:maru::SingletonComponent<SoundManager>(objPtr), m_baseVolume(1.0f)

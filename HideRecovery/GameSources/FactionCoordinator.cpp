@@ -21,5 +21,17 @@ namespace basecross {
 			: m_director(director)
 		{}
 
+		void FactionCoordinator::OnStart() {
+
+		}
+
+		void FactionCoordinator::OnUpdate() {
+			
+		}
+
+		void FactionCoordinator::OnExit() {
+
+		}
+
 	}
 }

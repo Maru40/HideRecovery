@@ -18,7 +18,7 @@
 
 namespace basecross {
 
-	ex_weak_ptr<Enemy::AIDirector> maru::SingletonComponent<Enemy::AIDirector>::sm_instance = nullptr;
+	std::weak_ptr<Enemy::AIDirector> maru::SingletonComponent<Enemy::AIDirector>::sm_instance;
 
 	namespace Enemy {
 
@@ -31,7 +31,7 @@ namespace basecross {
 		}
 
 		void AIDirector::SetEnemys() {
-			m_enemys = maru::Utility::FindExWeakPtrComponents<EnemyBase>();
+			m_enemys = maru::Utility::FindWeakPtrComponents<EnemyBase>();
 		}
 
 		std::shared_ptr<FactionCoordinator> AIDirector::AddFaction() {

@@ -20,14 +20,14 @@ namespace basecross {
 
 	namespace maru {
 
-		ex_weak_ptr<FieldImpactMap> SingletonComponent<FieldImpactMap>::sm_instance = nullptr;
+		std::weak_ptr<FieldImpactMap> SingletonComponent<FieldImpactMap>::sm_instance;
 
 		//--------------------------------------------------------------------------------------
 		///	フィールド影響マップのパラメータ
 		//--------------------------------------------------------------------------------------
 
 		FieldImpactMap_Parametor::FieldImpactMap_Parametor():
-			intervalRange(5.0f),
+			intervalRange(7.0f),
 			createHeightOffset(1.0f)
 		{}
 

@@ -472,6 +472,27 @@ namespace basecross {
 			}
 
 			/// <summary>
+			/// 指定したコンポーネントを全て見つけて、weak_ptrにして返す
+			/// </summary>
+			template<class T,
+				enable_if_t<is_base_of_v<Component, T>, std::nullptr_t> = nullptr >
+			static vector<std::weak_ptr<T>> FindWeakPtrComponents() {
+				auto stage = GetStage();
+
+				vector<std::weak_ptr<T>> returnObjs;
+
+				auto objs = stage->GetGameObjectVec();
+				for (auto& obj : objs) {
+					auto t = obj->GetComponent<T>(false);
+					if (t) {
+						returnObjs.push_back(t);
+					}
+				}
+
+				return returnObjs;
+			}
+
+			/// <summary>
 			/// 指定したコンポーネントを全て見つけて、ex_weak_ptrにして返す
 			/// </summary>
 			template<class T,

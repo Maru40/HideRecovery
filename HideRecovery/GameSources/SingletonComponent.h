@@ -27,7 +27,7 @@ namespace basecross {
 		template<class T>
 		class SingletonComponent : public Component
 		{ 
-			static ex_weak_ptr<T> sm_instance;	//自分自身のポインタ
+			static weak_ptr<T> sm_instance;	//自分自身のポインタ
 
 		public:
 			/// <summary>
@@ -39,7 +39,7 @@ namespace basecross {
 			{}
 
 			void OnDestroy() override {
-				sm_instance = nullptr;
+				sm_instance.reset();
 			}
 
 			virtual void OnLateStart() override {
@@ -66,17 +66,17 @@ namespace basecross {
 			/// <param name="stage">検索するステージ</param>
 			/// <returns>自分自身のスマートポインタ</returns>
 			static std::shared_ptr<T> GetInstance(const std::shared_ptr<Stage>& stage) {
-				if (sm_instance.GetShard() == nullptr)
+				if (sm_instance.lock() == nullptr)
 				{
 					sm_instance = maru::Utility::FindComponent<T>(stage);
-					if (sm_instance.GetShard() == nullptr)
+					if (sm_instance.lock() == nullptr)
 					{
 						DebugObject::AddString(Util::GetWSTypeName<T>(), false);
 						DebugObject::AddString(L"、がGameSceneに追加されていません");
 					}
 				}
 
-				return sm_instance.GetShard();
+				return sm_instance.lock();
 			}
 		};
 
