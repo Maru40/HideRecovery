@@ -49,7 +49,7 @@ namespace basecross {
 			/// グループ管理の生成
 			/// </summary>
 			/// <returns>生成した派閥</returns>
-			std::shared_ptr<FactionCoordinator> CreateFaction();
+			std::shared_ptr<FactionCoordinator> CreateFaction(const std::vector<std::weak_ptr<EnemyBase>>& assignMembers);
 
 			/// <summary>
 			/// グループ管理の削除

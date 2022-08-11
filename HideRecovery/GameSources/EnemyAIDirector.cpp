@@ -28,6 +28,9 @@ namespace basecross {
 
 		void AIDirector::OnLateStart() {
 			SettingStartAllEnemys();
+
+			//仮で全員一つのファクションにアサイン
+			auto faction = CreateFaction(m_enemys);
 		}
 
 		void AIDirector::OnUpdate() {
@@ -41,8 +44,8 @@ namespace basecross {
 			m_enemys = maru::Utility::FindWeakPtrComponents<EnemyBase>();
 		}
 
-		std::shared_ptr<FactionCoordinator> AIDirector::CreateFaction() {
-			auto coordinator = std::make_shared<FactionCoordinator>(GetThis<AIDirector>());
+		std::shared_ptr<FactionCoordinator> AIDirector::CreateFaction(const std::vector<std::weak_ptr<EnemyBase>>& assignMembers) {
+			auto coordinator = std::make_shared<FactionCoordinator>(GetThis<AIDirector>(), assignMembers);
 			coordinator->OnStart();
 			m_factionCoordinators.push_back(coordinator);
 
