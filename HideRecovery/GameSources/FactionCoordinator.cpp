@@ -10,6 +10,7 @@
 
 #include "FactionCoordinator.h"
 
+#include "I_FactionMember.h"
 #include "SingletonComponent.h"
 #include "EnemyAIDirector.h"
 
@@ -19,9 +20,6 @@
 #include "CombatCoordinator.h"
 
 #include "Watanabe/DebugClass/Debug.h"
-
-#include <cassert>
-#include <memory>
 
 namespace basecross {
 
