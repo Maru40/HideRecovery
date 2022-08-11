@@ -125,6 +125,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)TimerDestroy.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)TitleStage.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ToonPNTStaticModelDraw.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)TupleSpace.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)UtilityStartCamera.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Utility_EnemyStator.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Heuristic.h" />
@@ -341,6 +342,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)TimerDestory.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)TitleStage.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ToonPNTStaticModelDraw.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)TupleSpace.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)UtilityStartCamera.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Utility_EnemyStator.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)EnemyStatusBase.cpp" />
