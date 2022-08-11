@@ -8,6 +8,8 @@
 #pragma once
 #include "stdafx.h"
 
+#include "I_FactionMember.h"
+
 namespace basecross {
 
 	namespace Enemy
@@ -15,7 +17,7 @@ namespace basecross {
 		//--------------------------------------------------------------------------------------
 		///	エネミーの基底クラス
 		//--------------------------------------------------------------------------------------
-		class EnemyBase : public Component
+		class EnemyBase : public Component, public I_FactionMember
 		{
 		public:
 			/// <summary>
