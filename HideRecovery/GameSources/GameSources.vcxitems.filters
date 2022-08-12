@@ -349,9 +349,6 @@
     <Filter Include="Maruyama\Enemy\Component\AI\Director\FactionCoordinator">
       <UniqueIdentifier>{a9b76c83-35b8-4633-b079-bdadc212b589}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Maruyama\Enemy\Component\AI\Director\FactionCoordinator\CombatCoordinator">
-      <UniqueIdentifier>{858da604-7114-4c5a-adde-07c38d52bd1e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Maruyama\Utility\ReactiveBool">
       <UniqueIdentifier>{977500d6-c59e-4fe6-b88e-d560b6570d34}</UniqueIdentifier>
     </Filter>
@@ -769,14 +766,20 @@
     <Filter Include="Maruyama\Enemy\Component\AI\Director\CoordinatorBase">
       <UniqueIdentifier>{6e74b68c-51e8-430f-a9e2-11dac5c26112}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Maruyama\Enemy\Component\AI\Director\FactionCoordinator\PatrolCoordinator">
-      <UniqueIdentifier>{c7cd69c1-ee43-4e1b-a761-89fcdbac4ffd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Maruyama\Enemy\Component\AI\TupleSpace">
       <UniqueIdentifier>{b44ae7dc-4e09-4783-b92f-ceb6955ae434}</UniqueIdentifier>
     </Filter>
     <Filter Include="Maruyama\Enemy\Component\AI\Director\FactionCoordinator\I_FactionMember">
       <UniqueIdentifier>{9eb6e312-9645-453d-8bec-bf25747c3654}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\Component\AI\Director\FactionCoordinator\Fanction">
+      <UniqueIdentifier>{f64e02c6-bb0e-4c88-8f9f-13fd60763a10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\Component\AI\Director\FactionCoordinator\Fanction\CombatCoordinator">
+      <UniqueIdentifier>{858da604-7114-4c5a-adde-07c38d52bd1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\Component\AI\Director\FactionCoordinator\Fanction\PatrolCoordinator">
+      <UniqueIdentifier>{c7cd69c1-ee43-4e1b-a761-89fcdbac4ffd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1096,7 +1099,7 @@
       <Filter>Maruyama\Enemy\Component\AI\Director\FactionCoordinator</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)CombatCoordinator.h">
-      <Filter>Maruyama\Enemy\Component\AI\Director\FactionCoordinator\CombatCoordinator</Filter>
+      <Filter>Maruyama\Enemy\Component\AI\Director\FactionCoordinator\Fanction\CombatCoordinator</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Task_Flee.h">
       <Filter>Maruyama\Enemy\Component\CommonTask\Flee</Filter>
@@ -1429,7 +1432,7 @@
       <Filter>Maruyama\Enemy\Component\AI\Director\CoordinatorBase</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)PatrolCoordinator.h">
-      <Filter>Maruyama\Enemy\Component\AI\Director\FactionCoordinator\PatrolCoordinator</Filter>
+      <Filter>Maruyama\Enemy\Component\AI\Director\FactionCoordinator\Fanction\PatrolCoordinator</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)TupleSpace.h">
       <Filter>Maruyama\Enemy\Component\AI\TupleSpace</Filter>
@@ -1704,7 +1707,7 @@
       <Filter>Maruyama\Enemy\Component\AI\Director\FactionCoordinator</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)CombatCoordinator.cpp">
-      <Filter>Maruyama\Enemy\Component\AI\Director\FactionCoordinator\CombatCoordinator</Filter>
+      <Filter>Maruyama\Enemy\Component\AI\Director\FactionCoordinator\Fanction\CombatCoordinator</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Task_Flee.cpp">
       <Filter>Maruyama\Enemy\Component\CommonTask\Flee</Filter>
@@ -2013,7 +2016,7 @@
       <Filter>Maruyama\Enemy\Component\AI\Director\CoordinatorBase</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)PatrolCoordinator.cpp">
-      <Filter>Maruyama\Enemy\Component\AI\Director\FactionCoordinator\PatrolCoordinator</Filter>
+      <Filter>Maruyama\Enemy\Component\AI\Director\FactionCoordinator\Fanction\PatrolCoordinator</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)TupleSpace.cpp">
       <Filter>Maruyama\Enemy\Component\AI\TupleSpace</Filter>
