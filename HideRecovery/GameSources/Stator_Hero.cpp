@@ -31,6 +31,8 @@
 #include "Targeted.h"
 #include "TargetManager.h"
 
+#include "FactionCoordinator.h"
+
 namespace basecross {
 	namespace Enemy {
 
@@ -53,7 +55,7 @@ namespace basecross {
 		//--------------------------------------------------------------------------------------
 
 		Stator_Hero_TransitionMember::Stator_Hero_TransitionMember() :
-			plowlingEyeRange(10.0f),
+			plowlingEyeRange(100.0f),
 			attackRange(1.0f)
 		{}
 
@@ -76,6 +78,16 @@ namespace basecross {
 					if (auto& targetManager = GetGameObject()->GetComponent<TargetManager>(false)) {
 						targetManager->SetTarget(target->GetGameObject());
 					}
+
+					////デバッグで、見つけたことを知らせる。
+					//auto object = GetGameObject();
+					//auto factionMember = object->GetComponent<I_FactionMember>(false);
+					//auto targetManager = object->GetComponent<TargetManager>(false);
+					//if (factionMember && targetManager) {
+					//	std::shared_ptr<FactionCoordinator> coordinator = factionMember->GetFactionCoordinator();
+					//	//コーディネーターに敵を見つけたことを伝える。
+					//	coordinator->DebugWriteTarget(factionMember, targetManager->GetTarget());
+					//}
 
 					return true;
 				}
