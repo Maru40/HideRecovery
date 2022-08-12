@@ -43,7 +43,7 @@ namespace Online
 	{
 		auto transform = m_transform.lock();
 
-		if (!transform || m_playerNumber != playerNumber)
+		if (!transform || m_playerNumber != playerNumber || eventCode != EVENT_CODE)
 		{
 			return;
 		}
