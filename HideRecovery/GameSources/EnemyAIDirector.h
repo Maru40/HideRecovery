@@ -23,39 +23,57 @@ namespace basecross {
 		//--------------------------------------------------------------------------------------
 		class AIDirector : public maru::SingletonComponent<AIDirector>
 		{
+			//全てのエネミー
 			vector<std::weak_ptr<EnemyBase>> m_enemys;
 
-			//派閥の配列
+			//グループ管理の配列
 			std::vector<std::shared_ptr<FactionCoordinator>> m_factionCoordinators;
 
 		public :
+			/// <summary>
+			/// コンストラクタ
+			/// </summary>
+			/// <param name="objPtr">このクラスを所有するゲームオブジェクト</param>
 			AIDirector(const std::shared_ptr<GameObject>& objPtr);
 
 			void OnLateStart() override;
+			void OnUpdate() override;
 
 		private:
 			/// <summary>
-			/// エネミーを全て取得
+			/// 初期配置されたエネミーを全て取得
 			/// </summary>
-			void SetEnemys();
+			void SettingStartAllEnemys();
 
 			/// <summary>
-			/// 派閥の追加
+			/// グループ管理の生成
 			/// </summary>
 			/// <returns>生成した派閥</returns>
-			std::shared_ptr<FactionCoordinator> AddFaction();
+			std::shared_ptr<FactionCoordinator> CreateFaction(const std::vector<std::weak_ptr<EnemyBase>>& assignMembers);
 
 			/// <summary>
-			/// 派閥の削除
+			/// グループ管理の削除
 			/// </summary>
 			/// <param name="removeCoordinator">削除したい派閥</param>
 			/// <returns>削除できたらtrue</returns>
 			bool RemoveFaction(const std::shared_ptr<FactionCoordinator>& removeCoordinator);
 
 		public:
-			//アクセッサ-------------------------------------------------------------------------------------
+			//--------------------------------------------------------------------------------------
+			/// アクセッサ
+			//--------------------------------------------------------------------------------------
 
+			/// <summary>
+			/// エネミーの追加
+			/// </summary>
+			/// <param name="enemy">エネミー</param>
+			void AddEnemy(const std::shared_ptr<EnemyBase>& enemy);
 
+			/// <summary>
+			/// グループ管理の取得
+			/// </summary>
+			/// <returns></returns>
+			std::shared_ptr<FactionCoordinator> GetFactionCoordinator(const int index) const;
 
 		};
 

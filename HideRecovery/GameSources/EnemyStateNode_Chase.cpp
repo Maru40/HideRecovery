@@ -28,6 +28,9 @@
 #include "UtilityObstacle.h"
 #include "EyeSearchRange.h"
 
+#include "I_FactionMember.h"
+#include "FactionCoordinator.h"
+
 #include "DebugObject.h"
 
 namespace basecross {
@@ -63,7 +66,9 @@ namespace Enemy {
 			AddChangeComponent(owner->GetGameObject()->GetComponent<SeekTarget>(false), true, false);
 		}
 
-		//遷移条件----------------------------------------------------------------------------------------------------
+		//--------------------------------------------------------------------------------------
+		/// 遷移条件
+		//--------------------------------------------------------------------------------------
 
 		bool Chase::ToChaseMove(const TransitionMember& member) {
 			auto ownerObject = GetOwner()->GetGameObject();
@@ -91,9 +96,21 @@ namespace Enemy {
 			return maru::UtilityObstacle::IsRayObstacle(startPosition, endPosition, objects);
 		}
 
-		//------------------------------------------------------------------------------------------------------------
+		//--------------------------------------------------------------------------------------
+		/// 追従ステート本体
+		//--------------------------------------------------------------------------------------
 
 		void Chase::OnStart() {
+			//デバッグで、見つけたことを知らせる。
+			auto object = GetOwner()->GetGameObject();
+			auto factionMember = object->GetComponent<I_FactionMember>(false);
+			auto targetManager = object->GetComponent<TargetManager>(false);
+			if (factionMember && targetManager) {
+				std::shared_ptr<FactionCoordinator> coordinator = factionMember->GetFactionCoordinator();
+				//コーディネーターに敵を見つけたことを伝える。
+				coordinator->DebugWriteTarget(factionMember, targetManager->GetTarget());
+			}
+
 			StartChangeComponents();
 
 			m_stateMachine->ChangeState(StateType::TargetSeek, (int)StateType::TargetSeek);

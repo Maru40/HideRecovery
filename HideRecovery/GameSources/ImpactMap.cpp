@@ -285,7 +285,7 @@ namespace basecross {
 
 		void ImpactMap::CreateDebugDraw(const bool isDraw) {
 			//デバッグドローの追加
-			//return;
+			return;
 			m_nodeDraw = GetStage()->AddGameObject<GameObject>()->AddComponent<AstarNodeDraw>(m_astar);
 			m_edgeDraw = GetStage()->AddGameObject<GameObject>()->AddComponent<AstarEdgeDraw>(m_astar);
 			SetIsDebugDraw(isDraw);
