@@ -76,15 +76,13 @@ namespace Online
 		{
 			client = std::make_unique<ExitGames::LoadBalancing::Client>(
 				*GetInstance(),
-				L"f9528b0a-0d67-4296-98f5-0fb9c3c4b5b8",
+				GetApplicationId().c_str(),
 				version.c_str(),
 				ExitGames::Photon::ConnectionProtocol::DEFAULT,
 				false,
 				ExitGames::LoadBalancing::RegionSelectionMode::BEST
 				);
 		}
-
-		auto test = GetApplicationId().c_str();
 
 		return client->connect();
 	}
