@@ -8,7 +8,21 @@
 #include "../StageObject/RackObject.h"
 #include "../Shader/BoneModelDraw.h"
 #include "HeroPlayerObject.h"
+#include "VillainPlayerObject.h"
 #include "CameraHelper.h"
+#include "Itabashi/PlayerOnlineController.h"
+#include "Itabashi/OnlineTransformSynchronization.h"
+#include "SpringArmComponent.h"
+#include "CameraHelper.h"
+#include "LookAtCameraManager.h"
+#include "../Component/TestComponent.h"
+#include "Itabashi/ObjectMover.h"
+#include "RotationController.h"
+#include "PlayerInputer.h"
+#include "MaruUtility.h"
+#include "../Utility/CSVLoad.h"
+#include "../Component/PlayerAnimator.h"
+#include "PlayerAnimationCtrl.h"
 
 namespace basecross {
 	void WatanabeStage::CreateViewLight() {
@@ -31,20 +45,60 @@ namespace basecross {
 		AddGameObject<EfkInterface>();
 		AddGameObject<Debug>();
 		Debug::GetInstance()->Log(L"WatanabeStage");
-
+		{
+			wstring mediaDir;
+			mediaDir = App::GetApp()->GetDataDirWString();
+			wstring dir = mediaDir + L"Models/";
+			CSVLoad::GetInstance()->RegisterFile(L"PlayerAnimation", dir + L"Player/PlayerAnimation.csv");
+		}
 		auto testObj = AddGameObject<GameObject>();
 		auto efkComp = testObj->AddComponent<EfkComponent>();
 		efkComp->SetEffectResource(L"TestEffect");
 		//efkComp->PlayLoop(L"TestEffect");
 
-		//AddGameObject<CameraObject>();
-		//Instantiate<HeroPlayerObject>(Vec3(0.0f, 1.0f, 0.0f), Quat::Identity());
-		{
-			m_obj = AddGameObject<GameObject>();
-			auto testDraw = m_obj->AddComponent<BoneModelDraw>();
-			testDraw->SetMultiMeshResource(L"Player_Mesh");
-			//testDraw->SetMeshResource(L"rack");
-		}
+		AddGameObject<CameraObject>();
+		// ヴィランプレイヤーを生成
+		auto player = Instantiate<VillainPlayerObject>(Vec3(0.0f, 1.0f, 0.0f), Quat::Identity());
+		// テストのためオンライン系のコンポーネントを削除
+		player->RemoveComponent<Online::PlayerOnlineController>();
+		player->RemoveComponent<Online::OnlineTransformSynchronization>();
+		// プレイヤーを見るようなカメラを設定
+		auto sp = player->GetArm()->GetComponent<SpringArmComponent>();
+		auto& tpsCamera = sp->GetChildObject();
+		tpsCamera->AddComponent<VirtualCamera>(10);
+		tpsCamera->AddComponent<LookAtCameraManager>(player, LookAtCameraManager::Parametor());
+
+		auto stage = GetThis<WatanabeStage>();
+		auto testComp = player->AddComponent<TestComponent>();
+		// テスト用にプレイヤーの移動処理を実装
+		testComp->SetOnUpdateFunction(
+			[player, stage]() {
+				auto objectMover = player->GetComponent<Operator::ObjectMover>();
+				if (!objectMover)
+					return;
+
+				objectMover->Move(PlayerInputer::GetMoveDirection());
+
+				auto rotationController = player->GetComponent<RotationController>();
+				if (rotationController)
+				{
+					auto input = PlayerInputer::GetMoveDirection();
+					auto direct = maru::Utility::CalcuCameraVec(Vec3(input.x, 0, input.y), stage->GetView()->GetTargetCamera(), player);
+
+					rotationController->SetDirect(direct);
+				}
+			}
+		);
+
+		//{
+		//	m_obj = AddGameObject<GameObject>();
+		//	auto testDraw = m_obj->AddComponent<BoneModelDraw>();
+		//	testDraw->SetMultiMeshResource(L"Player_Mesh");
+		//	//testDraw->SetMeshResource(L"rack");
+		//}
+		player->RemoveComponent<PlayerAnimationCtrl>();
+		player->AddComponent<PlayerAnimator>();
+		m_obj = player;
 
 		GameObjecttCSVBuilder builder;
 		builder.Register<Block>(L"Block");
@@ -55,9 +109,36 @@ namespace basecross {
 	}
 
 	void WatanabeStage::OnUpdate() {
-		auto delta = App::GetApp()->GetElapsedTime();
-		auto utilPtr = m_obj->GetBehavior<UtilBehavior>();
-		utilPtr->RotToHead(Vec3(cosf(m_delta), 0, sinf(m_delta)), 2 * delta);
-		m_delta += delta;
+		//auto delta = App::GetApp()->GetElapsedTime();
+		//auto utilPtr = m_obj->GetBehavior<UtilBehavior>();
+		//utilPtr->RotToHead(Vec3(cosf(m_delta), 0, sinf(m_delta)), 2 * delta);
+		//m_delta += delta;
+		static const auto& inputDevice = App::GetApp()->GetMyInputDevice();
+		static const auto& keyBoard = inputDevice->GetKeyBoard();
+		auto animator = m_obj->GetComponent<PlayerAnimator>();
+		if (keyBoard.IsInputDown(KeyCode::Alpha1)) {
+			animator->ChangePlayerAnimation(PlayerAnimationState::Wait);
+			Debug::GetInstance()->Log(L"Wait");
+		}
+		else if (keyBoard.IsInputDown(KeyCode::Alpha2)) {
+			animator->ChangePlayerAnimation(PlayerAnimationState::Walk_L);
+			Debug::GetInstance()->Log(L"Walk_L");
+		}
+		else if (keyBoard.IsInputDown(KeyCode::Alpha3)) {
+			animator->ChangePlayerAnimation(PlayerAnimationState::Walk_R);
+			Debug::GetInstance()->Log(L"Walk_R");
+		}
+		else if (keyBoard.IsInputDown(KeyCode::Alpha4)) {
+			animator->ChangePlayerAnimation(PlayerAnimationState::Dash);
+			Debug::GetInstance()->Log(L"Dash");
+		}
+		else if (keyBoard.IsInputDown(KeyCode::Alpha5)) {
+			animator->ChangePlayerAnimation(PlayerAnimationState::PutItem_Floor);
+			Debug::GetInstance()->Log(L"PutItem_Floor");
+		}
+		else if (keyBoard.IsInputDown(KeyCode::Alpha6)) {
+			animator->ChangePlayerAnimation(PlayerAnimationState::PutItem_HideObject);
+			Debug::GetInstance()->Log(L"PutItem_HideObject");
+		}
 	}
 }
