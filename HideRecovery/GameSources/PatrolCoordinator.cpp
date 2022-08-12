@@ -17,6 +17,8 @@
 
 #include "Watanabe/DebugClass/Debug.h"
 
+#include "I_FactionMember.h"
+
 namespace basecross {
 
 	namespace Enemy {
@@ -30,7 +32,15 @@ namespace basecross {
 		{}
 
 		void PatrolCoordinator::OnStart() {
-			//Debug::GetInstance()->Log((int)GetMembers().size());
+			//メンバーにグループ調整者やタイプを伝える。
+			for (auto& member : GetMembers()) {
+				if (auto iFactionMember = member.lock()->GetGameObject()->GetComponent<I_FactionMember>(false)) {
+					//将来的にデータでまとめる。
+					iFactionMember->SetFactionType(FactionType::Patrol);
+					iFactionMember->SetFactionCoordinator(GetOwner());
+					iFactionMember->SetAssignFaction(GetThis<PatrolCoordinator>());
+				}
+			}
 
 			//メンバーの目的地をそれぞれ変更
 
