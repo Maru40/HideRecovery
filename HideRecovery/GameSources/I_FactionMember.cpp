@@ -10,6 +10,8 @@
 
 #include "I_FactionMember.h"
 
+#include "EnemyBase.h"
+#include "CoordinatorBase.h"
 #include "FactionCoordinator.h"
 
 namespace basecross {
