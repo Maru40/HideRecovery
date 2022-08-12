@@ -19,6 +19,10 @@
 #include "PatrolCoordinator.h"
 #include "CombatCoordinator.h"
 
+#include "TargetManager.h"
+#include "StatorBase.h"
+#include "EnemyStatorBase.h"
+
 #include "Watanabe/DebugClass/Debug.h"
 
 namespace basecross {
@@ -35,7 +39,8 @@ namespace basecross {
 
 		void FactionCoordinator::OnStart() {
 			//仮でパトロールを作成
-			auto patrol = CreateFaction<PatrolCoordinator>(m_patrols, GetThis<FactionCoordinator>(), GetMembers());
+			auto patrolMembers = GetMembers();
+			auto patrol = CreateFaction<PatrolCoordinator>(m_patrols, GetThis<FactionCoordinator>(), patrolMembers);
 		}
 
 		void FactionCoordinator::OnUpdate() {
@@ -52,5 +57,37 @@ namespace basecross {
 		/// アクセッサ
 		//--------------------------------------------------------------------------------------
 
+
+
+
+
+
+		//--------------------------------------------------------------------------------------
+		/// デバッグ
+		//--------------------------------------------------------------------------------------
+
+		void FactionCoordinator::DebugWriteTarget(const std::shared_ptr<I_FactionMember>& member, const std::shared_ptr<GameObject>& target) {
+			auto patrol = member->GetAssignedFaction<PatrolCoordinator>();
+
+			for (auto& weakMember : patrol->GetMembers()) {
+				if (member == weakMember.lock()) {
+					continue;
+				}
+
+				auto object = weakMember.lock()->GetGameObject();
+				auto stator = object->GetComponent<I_Stator_EnumType<Enemy::StateType>>(false);
+				auto targetManager = object->GetComponent<TargetManager>(false);
+
+				if (stator && targetManager) {
+					//仮で追いかけるステートなら更新しない。
+					if (stator->IsCurrentState(Enemy::StateType::Chase)) {
+						return;
+					}
+
+					stator->ChangeState(Enemy::StateType::Chase, (int)Enemy::StateType::Chase);
+					targetManager->SetTarget(target);
+				}
+			}
+		}
 	}
 }

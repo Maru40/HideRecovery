@@ -90,6 +90,16 @@ namespace basecross {
 			/// <returns>ディレクター</returns>
 			std::shared_ptr<AIDirector> GetDirector() const noexcept { return m_director.lock(); }
 
+
+
+
+
+			//--------------------------------------------------------------------------------------
+			/// デバッグ
+			//--------------------------------------------------------------------------------------
+
+			//ターゲットを見つけたと知らせるデバッグ処理
+			void DebugWriteTarget(const std::shared_ptr<I_FactionMember>& member, const std::shared_ptr<GameObject>& target);
 		};
 
 	}
