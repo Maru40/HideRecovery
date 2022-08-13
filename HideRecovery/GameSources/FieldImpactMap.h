@@ -54,13 +54,16 @@ namespace basecross {
 			/// </summary>
 			/// <param name="objPtr">このクラスを所有するゲームオブジェクト</param>
 			/// <param name="floors">影響マップを展開する床データ配列</param>
-			/// <param name="parametor"></param>
+			/// <param name="parametor">パラメータ</param>
 			FieldImpactMap(const std::shared_ptr<GameObject>& objPtr, const std::vector<std::shared_ptr<GameObject>>& floors, const Parametor& parametor);
 			
 			void OnLateStart() override;
 			void OnUpdate() override;
 
 		public:
+			//--------------------------------------------------------------------------------------
+			///	アクセッサ
+			//--------------------------------------------------------------------------------------
 
 			/// <summary>
 			/// 検索したルートを全て取得する。
@@ -75,6 +78,12 @@ namespace basecross {
 			/// </summary>
 			/// <returns>影響マップデータ</returns>
 			std::shared_ptr<ImpactMap> GetImpactMap() const;
+
+			/// <summary>
+			/// ノードの配置間隔距離を取得
+			/// </summary>
+			/// <returns>ノードの配置間隔距離</returns>
+			float GetIntervalRange() const noexcept { return m_param.intervalRange; }
 
 		private:
 			/// <summary>

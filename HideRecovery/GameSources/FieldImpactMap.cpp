@@ -62,6 +62,9 @@ namespace basecross {
 		}
 
 		void FieldImpactMap::OnUpdate() {
+			
+
+			//デバッグ
 			if (m_impactMap) {
 				m_impactMap->DebugInput([]() { return PlayerInputer::GetInstance()->IsYDown(); });
 			}
