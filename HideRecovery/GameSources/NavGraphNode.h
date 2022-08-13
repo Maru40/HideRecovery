@@ -62,6 +62,8 @@ namespace basecross {
 		/// <param name="parent">親オブジェクト</param>
 		NavGraphNode(const int& index, const Vec3& position, const maru::ImpactData& impactData, const std::shared_ptr<GameObject>& parent);
 
+		virtual ~NavGraphNode() = default;
+
 		//--------------------------------------------------------------------------------------
 		///	アクセッサ
 		//--------------------------------------------------------------------------------------
