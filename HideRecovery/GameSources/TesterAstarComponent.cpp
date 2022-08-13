@@ -56,6 +56,10 @@ namespace basecross {
 		std::shared_ptr<EyeSearchRange> TesterAstarComponent::GetEyeSearchRange() const {
 			return GetGameObject()->GetComponent<EyeSearchRange>();
 		}
+
+		std::shared_ptr<maru::ImpactMap> TesterAstarComponent::GetImpactMap() const {
+			return maru::FieldImpactMap::GetInstance()->GetImpactMap();
+		}
 	}
 }
 
