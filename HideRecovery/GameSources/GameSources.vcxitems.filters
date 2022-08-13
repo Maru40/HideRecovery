@@ -781,6 +781,9 @@
     <Filter Include="Maruyama\Enemy\Component\AI\Director\FactionCoordinator\Fanction\PatrolCoordinator">
       <UniqueIdentifier>{c7cd69c1-ee43-4e1b-a761-89fcdbac4ffd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Enemy\Component\ImpactMap\SelfImpactNodeManager">
+      <UniqueIdentifier>{0e752351-8eab-46ac-bd8e-60bd35c7cc0f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1440,6 +1443,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)I_FactionMember.h">
       <Filter>Maruyama\Enemy\Component\AI\Director\FactionCoordinator\I_FactionMember</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)SelfImpactNodeManager.h">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\SelfImpactNodeManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2023,6 +2029,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)I_FactionMember.cpp">
       <Filter>Maruyama\Enemy\Component\AI\Director\FactionCoordinator\I_FactionMember</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)SelfImpactNodeManager.cpp">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\SelfImpactNodeManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
