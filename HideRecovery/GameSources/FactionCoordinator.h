@@ -62,13 +62,16 @@ namespace basecross {
 			/// <param name="members">メンバー配列</param>
 			FactionCoordinator(const std::shared_ptr<AIDirector>& director, const std::vector<std::weak_ptr<EnemyBase>>& members);
 
-			~FactionCoordinator() = default;
+			virtual ~FactionCoordinator() = default;
 
 			void OnStart() override;
 			void OnUpdate() override;
 			void OnExit() override;
 
 		private:
+			/// <summary>
+			/// グループの生成
+			/// </summary>
 			template<class T, class... Ts>
 			std::shared_ptr<T> CreateFaction(std::vector<std::shared_ptr<T>>& addVec, Ts&&... params) {
 				auto faction = std::make_shared<T>(params...);
