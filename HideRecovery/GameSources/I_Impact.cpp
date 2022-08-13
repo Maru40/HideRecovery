@@ -11,6 +11,7 @@
 #include "I_Impact.h"
 
 #include "EyeSearchRange.h"
+#include "NavGraphNode.h"
 
 namespace basecross {
 
@@ -26,5 +27,26 @@ namespace basecross {
 			occupancyType(OccupancyType::Empty)
 		{}
 
+		//--------------------------------------------------------------------------------------
+		///	‰e‹¿‚ğ—^‚¦‚éÒ‚Ìƒf[ƒ^
+		//--------------------------------------------------------------------------------------
+
+		ImpacterData::ImpacterData():
+			value(0.0f),
+			circleRange(0.0f),
+			type(ImpacterType(0))
+		{}
+
+		//--------------------------------------------------------------------------------------
+		///	‰e‹¿‚ğ—^‚¦‚éÒ‚Ì–{‘Ì
+		//--------------------------------------------------------------------------------------
+
+		void I_Impacter::SetSelfNode(const std::shared_ptr<NavGraphNode>& node) {
+			m_impacterData.selfNode = node;
+		}
+
+		std::shared_ptr<NavGraphNode> I_Impacter::GetSelfNode() const {
+			return m_impacterData.selfNode.lock();
+		}
 	}
 }
