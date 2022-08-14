@@ -11,6 +11,7 @@
 #include "ImpactManager.h"
 
 #include "SingletonComponent.h"
+#include "FieldImpactMap.h"
 #include "ImpactMap.h"
 
 #include "GraphAstar.h"
@@ -65,6 +66,8 @@ namespace basecross {
 		//視界範囲の影響度を更新する
 		void ImpactManager::CalculateEyeImpact(const std::shared_ptr<ImpactMap>& impactMap, const std::shared_ptr<I_Impacter>& impacter) {
 			//視界範囲の取得
+			auto impacterObject = impacter->GetImpacterObject();
+			auto impacterTrans = impacterObject->GetComponent<Transform>();
 			auto eye = impacter->GetEyeSearchRange();
 			EyeSearchRangeParametor eyeParam = eye->GetParametor();
 
@@ -72,14 +75,23 @@ namespace basecross {
 			auto selfNode = UtilityAstar::SearchNearNode(*impactMap->GetGraphAstar().get(), impacter->GetImpacterObject());
 
 			//視界内のノードを取得
-
+			auto nodes = impactMap->GetEyeRangeNodes(impacterTrans->GetPosition(), impacter);
 
 			//視界内の影響度を更新
-			
+			for (auto& node : nodes) {
+				//占有値更新
+				auto impactData = node->GetImpactData();
+				impactData.occupancyValue = 0;
+				node->SetImpactData(impactData);
+
+				if (auto fieldImpact = maru::FieldImpactMap::GetInstance()) {
+					fieldImpact->AddOccupancyUpdateData(node);
+				}
+			}
 		}
 
 		//影響度の計算
-		void ImpactManager::CalculateImpact(const std::shared_ptr<ImpactMap>& impactMap, const std::shared_ptr<I_Impacter>& impacter) {
+		void ImpactManager::CalculateAllImpact(const std::shared_ptr<ImpactMap>& impactMap, const std::shared_ptr<I_Impacter>& impacter) {
 			//ノードのアクティブ状態の更新
 			NodeActiveUpdate(impactMap, impacter);
 
