@@ -11,7 +11,6 @@
 #include "GraphNodeBase.h"
 
 #include "I_Impact.h"
-#include "ReactiveProperty.h"
 
 namespace basecross {
 
