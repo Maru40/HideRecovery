@@ -10,6 +10,9 @@
 
 #include "NavGraphNode.h"
 
+#include "MaruAction.h"
+#include "ReactiveProperty.h"
+
 namespace basecross {
 
 	NavGraphNode::NavGraphNode()
@@ -29,19 +32,48 @@ namespace basecross {
 	{}
 
 	NavGraphNode::NavGraphNode(const int& index, const Vec3& position, const maru::ImpactData& impactData, const std::shared_ptr<GameObject>& parent)
-		: GraphNodeBase(index), m_position(position), m_impactData(impactData), m_parent(parent) 
+		: GraphNodeBase(index), m_position(position), m_impactData(new ReactiveProperty<ImpactData>(impactData)), m_parent(parent) 
 	{}
-	
+
+	NavGraphNode::NavGraphNode(const NavGraphNode& node) :
+		NavGraphNode(node.GetIndex(), node.GetPosition(), node.GetImpactData(), node.GetParent())
+	{}
+
+	NavGraphNode::~NavGraphNode() = default;
+
+	//--------------------------------------------------------------------------------------
+	///	アクセッサ
+	//--------------------------------------------------------------------------------------
+
 	Vec3 NavGraphNode::GetPosition() const {
 		//親の設定があるなら、親の場所の相対位置を返す。
 		if (IsParent()) {
-			auto parentTrans = m_parent->GetComponent<Transform>();
+			auto parentTrans = GetParent()->GetComponent<Transform>();
 			return m_position + parentTrans->GetWorldPosition();
 		}
 
 		return m_position;
 	}
 
+	void NavGraphNode::SetImpactData(const ImpactData& data) noexcept { m_impactData->SetValue(data); }
+
+	maru::ImpactData NavGraphNode::GetImpactData() const noexcept { return m_impactData->GetValue(); }
+
+	void NavGraphNode::AddSubscribeImpactData(const std::function<bool()>& whereAction, const std::function<void()>& action) {
+		m_impactData->AddSubscribe(whereAction, action);
+	}
+
+	//--------------------------------------------------------------------------------------
+	///	オペレータ
+	//--------------------------------------------------------------------------------------
+
+	NavGraphNode& NavGraphNode::operator= (const NavGraphNode& other) {
+		m_position = other.m_position;
+		m_impactData.reset(new ReactiveProperty<ImpactData>(other.GetImpactData()));
+		m_parent = other.m_parent;
+
+		return *this;
+	}
 }
 
 //endbasecross

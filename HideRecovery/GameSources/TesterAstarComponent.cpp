@@ -21,6 +21,9 @@
 #include "EyeSearchRange.h"
 #include "NavGraphNode.h"
 
+#include "ImpactManager.h"
+#include "I_Impact.h"
+
 namespace basecross {
 	namespace Tester {
 
@@ -33,7 +36,16 @@ namespace basecross {
 		}
 
 		void TesterAstarComponent::UpdateEyeRangeImpactMap() {
+			auto impacter = GetGameObject()->GetComponent<I_Impacter>(false);
+			if (!impacter) {
+				return;
+			}
+
+			maru::ImpactManager impactManager;
 			std::shared_ptr<maru::ImpactMap> impactMap = maru::FieldImpactMap::GetInstance()->GetImpactMap();
+
+			impactManager.CalculateEyeImpact(impactMap, impacter);
+			return;
 
 			auto nodes = impactMap->GetEyeRangeNodes(transform->GetPosition(), GetThis<I_Impacter>());
 
@@ -55,6 +67,10 @@ namespace basecross {
 
 		std::shared_ptr<EyeSearchRange> TesterAstarComponent::GetEyeSearchRange() const {
 			return GetGameObject()->GetComponent<EyeSearchRange>();
+		}
+
+		std::shared_ptr<maru::ImpactMap> TesterAstarComponent::GetImpactMap() const {
+			return maru::FieldImpactMap::GetInstance()->GetImpactMap();
 		}
 	}
 }

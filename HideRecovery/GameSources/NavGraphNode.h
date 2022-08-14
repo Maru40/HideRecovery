@@ -15,6 +15,17 @@
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
+	///	前方宣言
+	//--------------------------------------------------------------------------------------
+	template<class T> 
+	class ReactiveProperty;
+
+	namespace maru {
+		template<class T> 
+		class Action;
+	}
+
+	//--------------------------------------------------------------------------------------
 	///	ナビグラフ用のノード
 	//--------------------------------------------------------------------------------------
 	class NavGraphNode : public GraphNodeBase
@@ -23,10 +34,10 @@ namespace basecross {
 		using ImpactData = maru::ImpactData;
 
 	private:
-		Vec3 m_position;                  //ノードの場所
-		ImpactData m_impactData;		  //影響マップデータ
+		Vec3 m_position;											//ノードの場所
+		std::unique_ptr<ReactiveProperty<ImpactData>> m_impactData;	//影響マップデータ
 
-		ex_weak_ptr<GameObject> m_parent; //親オブジェクト
+		std::weak_ptr<GameObject> m_parent;							//親オブジェクト
 
 	public:
 
@@ -62,6 +73,14 @@ namespace basecross {
 		/// <param name="parent">親オブジェクト</param>
 		NavGraphNode(const int& index, const Vec3& position, const maru::ImpactData& impactData, const std::shared_ptr<GameObject>& parent);
 
+		/// <summary>
+		/// コピーコンストラクタ
+		/// </summary>
+		/// <param name="node">コピーするノード</param>
+		NavGraphNode(const NavGraphNode& node);
+
+		virtual ~NavGraphNode();
+
 		//--------------------------------------------------------------------------------------
 		///	アクセッサ
 		//--------------------------------------------------------------------------------------
@@ -88,19 +107,19 @@ namespace basecross {
 		/// 影響データのセット
 		/// </summary>
 		/// <param name="data">影響データ</param>
-		void SetImpactData(const ImpactData& data) noexcept { m_impactData = data; }
+		void SetImpactData(const ImpactData& data) noexcept;
 
 		/// <summary>
 		/// 影響データの取得
 		/// </summary>
 		/// <returns>影響データ</returns>
-		ImpactData GetImpactData() const noexcept { return m_impactData; }
+		ImpactData GetImpactData() const noexcept;
 
 		/// <summary>
 		/// 親オブジェクトが存在するかどうか判断
 		/// </summary>
 		/// <returns>親が存在するならtrue</returns>
-		bool IsParent() const noexcept { return m_parent; }
+		bool IsParent() const noexcept { return !m_parent.expired(); }
 
 		/// <summary>
 		/// 親オブジェクトのセット
@@ -112,8 +131,20 @@ namespace basecross {
 		/// 親オブジェクトの取得
 		/// </summary>
 		/// <returns>親オブジェクト</returns>
-		std::shared_ptr<GameObject> GetParent() const { return m_parent.GetShard(); }
+		std::shared_ptr<GameObject> GetParent() const { return m_parent.lock(); }
 
+		/// <summary>
+		/// インパクトデータの変更時に呼び出したいイベントの追加
+		/// </summary>
+		/// <param name="whereAction">条件式</param>
+		/// <param name="action">呼び出したいイベント</param>
+		void AddSubscribeImpactData(const std::function<bool()>& whereAction, const std::function<void()>& action);
+
+		//--------------------------------------------------------------------------------------
+		///	オペレータ
+		//--------------------------------------------------------------------------------------
+
+		NavGraphNode& operator= (const NavGraphNode& other);
 	};
 
 }

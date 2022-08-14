@@ -75,7 +75,8 @@ namespace basecross {
 		return nearNode;
 	}
 
-	std::shared_ptr<NavGraphNode> UtilityAstar::CalculateTargetDirectNode(const GraphAstar& astar,
+	std::shared_ptr<NavGraphNode> UtilityAstar::CalculateTargetDirectNode(
+		const GraphAstar& astar,
 		const std::shared_ptr<NavGraphNode>& startNode,
 		const Vec3& targetPos)
 	{
@@ -88,17 +89,17 @@ namespace basecross {
 		float minRad = 360.0f;
 		std::shared_ptr<NavGraphNode> reNode;
 		for (const auto& edge : edges) {
-			auto toIndex = edge->GetTo();
-			auto nextNode = graph->GetNode(toIndex);
+			auto nextNode = graph->GetNode(edge->GetTo());
 			auto nextPos = nextNode->GetPosition();
 
 			auto toNextNodeVec = nextPos - startNodePos;
 			toNextNodeVec.y = 0.0f;
 
+			//äpìxÇãÅÇﬂÇÈÅB
 			auto newDot = dot(toTargetVec.GetNormalized(), toNextNodeVec.GetNormalized());
 			auto newRad = acosf(newDot);
 
-			if (newRad < minRad) {
+			if (newRad < minRad) {	//äpìxÇ™è¨Ç≥Ç¢Ç»ÇÁ
 				minRad = newRad;
 				reNode = nextNode;
 			}

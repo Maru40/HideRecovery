@@ -45,8 +45,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)HidePlace.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ImpactDataDraw.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ImpactManager.h" />
+
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\Item.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\ObjectHider.h" />
+
+    <ClInclude Include="$(MSBuildThisFileDirectory)SelfImpactNodeManager.h" />
+
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\ObjectMover.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlinePlayerManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineTestRoom.h" />
@@ -334,6 +338,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)ScreenFadeManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)SelecterSprite.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)SelectSprite.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)SelfImpactNodeManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)SinScaling.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)SkilBase.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)SoleImpactMap.cpp" />

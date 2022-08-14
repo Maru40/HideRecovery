@@ -10,6 +10,12 @@
 
 namespace basecross {
 
+	//--------------------------------------------------------------------------------------
+	///	前方宣言
+	//--------------------------------------------------------------------------------------
+	class GameTimer;
+	class NavGraphNode;
+
 	namespace maru {
 
 		//--------------------------------------------------------------------------------------
@@ -28,6 +34,22 @@ namespace basecross {
 		};
 
 		//--------------------------------------------------------------------------------------
+		///	占有値更新データ
+		//--------------------------------------------------------------------------------------
+		struct OccupancyUpdateData {
+			std::unique_ptr<GameTimer> timer;	//タイマー
+			std::weak_ptr<NavGraphNode> node;	//ノード
+
+			OccupancyUpdateData();
+
+			OccupancyUpdateData(const float time, const std::shared_ptr<NavGraphNode>& node);
+
+			OccupancyUpdateData(const GameTimer& timer, const std::shared_ptr<NavGraphNode>& node);
+
+			bool operator== (const OccupancyUpdateData& data);
+		};
+
+		//--------------------------------------------------------------------------------------
 		///	フィールド影響マップ
 		//--------------------------------------------------------------------------------------
 		class FieldImpactMap : public SingletonComponent<FieldImpactMap>
@@ -38,8 +60,9 @@ namespace basecross {
 		private:
 			Parametor m_param; //パラメータ
 
-			std::shared_ptr<ImpactMap> m_impactMap = nullptr; //影響マップ本体
-			std::vector<std::weak_ptr<GameObject>> m_floors;  //影響マップ展開する床データ配列
+			std::shared_ptr<ImpactMap> m_impactMap = nullptr;			//影響マップ本体
+			std::vector<std::weak_ptr<GameObject>> m_floors;			//影響マップ展開する床データ配列
+			std::vector<OccupancyUpdateData> m_occupancyUpdateDatas;	//占有値更新データ
 
 		public:
 			/// <summary>
@@ -54,13 +77,22 @@ namespace basecross {
 			/// </summary>
 			/// <param name="objPtr">このクラスを所有するゲームオブジェクト</param>
 			/// <param name="floors">影響マップを展開する床データ配列</param>
-			/// <param name="parametor"></param>
+			/// <param name="parametor">パラメータ</param>
 			FieldImpactMap(const std::shared_ptr<GameObject>& objPtr, const std::vector<std::shared_ptr<GameObject>>& floors, const Parametor& parametor);
 			
 			void OnLateStart() override;
 			void OnUpdate() override;
 
+		private:
+			/// <summary>
+			/// 占有値更新
+			/// </summary>
+			void OccupancyUpdate();
+
 		public:
+			//--------------------------------------------------------------------------------------
+			///	アクセッサ
+			//--------------------------------------------------------------------------------------
 
 			/// <summary>
 			/// 検索したルートを全て取得する。
@@ -75,6 +107,17 @@ namespace basecross {
 			/// </summary>
 			/// <returns>影響マップデータ</returns>
 			std::shared_ptr<ImpactMap> GetImpactMap() const;
+
+			/// <summary>
+			/// ノードの配置間隔距離を取得
+			/// </summary>
+			/// <returns>ノードの配置間隔距離</returns>
+			float GetIntervalRange() const noexcept { return m_param.intervalRange; }
+
+			/// <summary>
+			/// 占有値更新するデータを生成
+			/// </summary>
+			void AddOccupancyUpdateData(const std::shared_ptr<NavGraphNode>& node);
 
 		private:
 			/// <summary>

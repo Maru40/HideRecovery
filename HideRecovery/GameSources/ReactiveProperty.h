@@ -18,18 +18,20 @@ namespace basecross {
 	class ReactiveProperty 
 	{
 	private:
-		std::weak_ptr<T> value;        //本体データ
+		T value;						//本体データ
 
-		maru::Action<void()> m_action; //呼び出すイベント群
+		maru::Action<void()> m_action;	//呼び出すイベント群
 
 	public:
 		/// <summary>
 		/// コンストラクタ
 		/// </summary>
-		/// <param name="ptr">本体データのポインタ</param>
-		ReactiveProperty(const std::shared_ptr<T>& ptr) {
-			value = ptr;
-		}
+		/// <param name="ptr">本体データ</param>
+		ReactiveProperty(const T& value):
+			value(value)
+		{}
+
+		virtual ~ReactiveProperty() {};
 
 		/// <summary>
 		/// 切り替えた時に呼びたい処理
@@ -58,67 +60,42 @@ namespace basecross {
 		}
 
 		/// <summary>
-		/// 本体データのポインタを取得
+		/// 本体データの設定
 		/// </summary>
-		/// <returns>本体データのポインタ</returns>
-		std::shared_ptr<T> GetValue() const {
-			return value.lock();
-		}
+		/// <param name="value">本体データ</param>
+		void SetValue(const T& value) { this->value = value; }
 
 		/// <summary>
-		/// 本体データのポインタを取得
+		/// 本体データを取得
 		/// </summary>
-		/// <returns>本体データのポインタ</returns>
-		std::shared_ptr<T> GetShared() const {
-			return value.lock();
-		}
+		/// <returns>本体データ</returns>
+		T GetValue() const noexcept { return value; }
 
 		/// <summary>
 		/// 本体データの生ポインタを取得
 		/// </summary>
 		/// <returns>本体データの生ポインタ</returns>
-		T* get() const {
-			return value.lock().get();
-		}
+		T* get() const { return &value; }
 
 		//--------------------------------------------------------------------------------------
 		///	オペレータ
 		//--------------------------------------------------------------------------------------
 
-		std::shared_ptr<T> operator = (const std::shared_ptr<T> t) {
-			if (this->value.lock() != t) { //違うのなら
+		T operator = (const T t) {
+			if (&GetValue() != &t) { //違うのなら
 				m_action.Invoke();
 			}
 
 			this->value = t;
-			return this->value.lock();
+			return this->value;
 		}
 
-		/// <summary>
-		/// 本体データのポインタを取得
-		/// </summary>
-		/// <returns>本体データのポインタ</returns>
-		std::shared_ptr<T> operator -> () const {
-			return value.lock();
+		bool operator == (const T& other) const {
+			return &GetValue() == &other;
 		}
 
-		bool operator == (const std::shared_ptr<T>& other) const {
-			return get() == other.get();
-		}
-
-		bool operator == (const ex_weak_ptr<T>& other) const {
-			return get() == other.get();
-		}
-
-		bool operator != (const std::shared_ptr<T>& other) const {
-			return !(get() == other.get());
-		}
-		bool operator != (const ex_weak_ptr<T>& other) const {
-			return !(get() == other.get());
-		}
-
-		operator bool() const {
-			return !value.expired();
+		bool operator != (const T& other) const {
+			return !(&GetValue() == &other);
 		}
 
 	};

@@ -39,6 +39,8 @@ namespace basecross {
 			/// <param name="impacter">‰e‹¿‚ğ—^‚¦‚éÒ</param>
 			void EdgeActiveUpdate(const std::shared_ptr<ImpactMap>& impactMap, const std::shared_ptr<I_Impacter>& impacter);
 
+		public:
+
 			/// <summary>
 			/// ©•ª‚ÌüˆÍ‚É‰e‹¿“x‚ğXV‚·‚éB
 			/// </summary>
@@ -60,7 +62,7 @@ namespace basecross {
 			/// </summary>
 			/// <param name = "impactMap">‰e‹¿ƒ}ƒbƒv</param>
 			/// <param name = "impacter">‰e‹¿‚ğ—^‚¦‚éÒ</param>
-			void CalculateImpact(const std::shared_ptr<ImpactMap>& impactMap, const std::shared_ptr<I_Impacter>& impacter);
+			void CalculateAllImpact(const std::shared_ptr<ImpactMap>& impactMap, const std::shared_ptr<I_Impacter>& impacter);
 
 		};
 

@@ -52,7 +52,7 @@ namespace basecross {
 			auto impactManager = std::make_shared<ImpactManager>();
 
 			//影響マップ管理クラスに計算させる。
-			impactManager->CalculateImpact(m_impactMap, impacter);
+			impactManager->CalculateAllImpact(m_impactMap, impacter);
 		}
 
 

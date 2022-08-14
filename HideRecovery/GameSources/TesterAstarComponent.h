@@ -13,6 +13,10 @@
 
 namespace basecross {
 
+	namespace maru {
+		class ImpactMap;
+	}
+
 	namespace Tester {
 
 		class TesterAstarComponent : public Component, public maru::I_Impacter
@@ -32,6 +36,8 @@ namespace basecross {
 			std::shared_ptr<GameObject> GetImpacterObject() const noexcept override;
 
 			std::shared_ptr<EyeSearchRange> GetEyeSearchRange() const override;
+
+			std::shared_ptr<maru::ImpactMap> GetImpactMap() const override ;
 		};
 
 	}

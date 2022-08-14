@@ -779,6 +779,7 @@
     <Filter Include="Maruyama\Enemy\Component\AI\Director\FactionCoordinator\Fanction\PatrolCoordinator">
       <UniqueIdentifier>{c7cd69c1-ee43-4e1b-a761-89fcdbac4ffd}</UniqueIdentifier>
     </Filter>
+
     <Filter Include="Watanabe\Component">
       <UniqueIdentifier>{c4ba6e83-372f-404f-9096-43f86c51a649}</UniqueIdentifier>
     </Filter>
@@ -805,6 +806,10 @@
     </Filter>
     <Filter Include="Itabashi\Component\ObjectHider">
       <UniqueIdentifier>{0859a1a3-ab7d-426e-8b79-d25260be3aca}</UniqueIdentifier>
+	</Filter>
+    <Filter Include="Maruyama\Enemy\Component\ImpactMap\SelfImpactNodeManager">
+      <UniqueIdentifier>{0e752351-8eab-46ac-bd8e-60bd35c7cc0f}</UniqueIdentifier>
+
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1465,6 +1470,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)I_FactionMember.h">
       <Filter>Maruyama\Enemy\Component\AI\Director\FactionCoordinator\I_FactionMember</Filter>
     </ClInclude>
+
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\TestComponent.h">
       <Filter>Watanabe\Component\TestComponent</Filter>
     </ClInclude>
@@ -1485,6 +1491,10 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\ObjectHider.h">
       <Filter>Itabashi\Component\ObjectHider</Filter>
+	</ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)SelfImpactNodeManager.h">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\SelfImpactNodeManager</Filter>
+
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2070,6 +2080,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)I_FactionMember.cpp">
       <Filter>Maruyama\Enemy\Component\AI\Director\FactionCoordinator\I_FactionMember</Filter>
     </ClCompile>
+
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\TestComponent.cpp">
       <Filter>Watanabe\Component\TestComponent</Filter>
     </ClCompile>
@@ -2087,6 +2098,10 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\ObjectHider.cpp">
       <Filter>Itabashi\Component\ObjectHider</Filter>
+	</ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)SelfImpactNodeManager.cpp">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\SelfImpactNodeManager</Filter>
+
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

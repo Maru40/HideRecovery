@@ -246,7 +246,12 @@ namespace basecross {
 			/// <returns>検索したポジションの配列</returns>
 			std::vector<Vec3> GetRoutePositons(const Vec3& selfPosition, const Vec3& targetPosition);
 
-			//自分の視界内のノードを取得(現在使わないで)
+			/// <summary>
+			/// 自分の視界内のノードを取得
+			/// </summary>
+			/// <param name="selfPosition">自分自身の位置</param>
+			/// <param name="impacter">影響を与える者</param>
+			/// <returns></returns>
 			std::vector<std::shared_ptr<NavGraphNode>> GetEyeRangeNodes(const Vec3& selfPosition, const std::shared_ptr<I_Impacter>& impacter);
 
 			//------------------------------------------------------------------------------------------------
