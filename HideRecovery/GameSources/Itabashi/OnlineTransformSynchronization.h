@@ -10,6 +10,15 @@ namespace Online
 	/// </summary>
 	class OnlineTransformSynchronization : public OnlineComponent
 	{
+		struct OnlineTransformData
+		{
+			Vec3 position;
+			Quat rotation;
+
+			bool operator==(const OnlineTransformData& other) const;
+			bool operator!=(const OnlineTransformData& other) const { return !(*this == other); }
+		};
+
 		/// <summary>
 		/// Transformコンポーネント
 		/// </summary>
@@ -18,6 +27,9 @@ namespace Online
 		/// 担当するプレイヤーナンバー
 		/// </summary>
 		int m_playerNumber = 0;
+
+		OnlineTransformData m_beforeData;
+
 	public:
 		/// <summary>
 		/// オンラインのイベントコード
