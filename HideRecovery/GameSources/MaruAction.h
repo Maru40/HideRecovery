@@ -21,6 +21,8 @@ namespace basecross {
 			std::vector<std::function<T>> m_functions; //イベント配列
 
 		public:
+			virtual ~Action() = default;
+
 			/// <summary>
 			/// イベントを追加する。
 			/// </summary>
