@@ -1,7 +1,7 @@
-/*!
+ï»¿/*!
 @file ItemBag.cpp
-@brief ItemBagƒNƒ‰ƒXÀ‘Ì
-’S“–FŠÛR—TŠì
+@brief ItemBagã‚¯ãƒ©ã‚¹å®Ÿä½“
+æ‹…å½“ï¼šä¸¸å±±è£•å–œ
 */
 
 #include "stdafx.h"
@@ -15,10 +15,11 @@
 #include "MaruUtility.h"
 
 #include "HideItemObject.h"
+#include "Itabashi/Item.h"
 
 namespace basecross {
 	//--------------------------------------------------------------------------------------
-	/// ƒpƒ‰ƒ[ƒ^
+	/// ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
 	//--------------------------------------------------------------------------------------
 
 	ItemBag_Parametor::ItemBag_Parametor() :
@@ -30,7 +31,7 @@ namespace basecross {
 	{}
 
 	//--------------------------------------------------------------------------------------
-	/// ƒAƒCƒeƒ€ƒoƒbƒO–{‘Ì
+	/// ã‚¢ã‚¤ãƒ†ãƒ ãƒãƒƒã‚°æœ¬ä½“
 	//--------------------------------------------------------------------------------------
 
 	ItemBag::ItemBag(const std::shared_ptr<GameObject>& objPtr) :
@@ -38,28 +39,38 @@ namespace basecross {
 	{}
 
 	void ItemBag::OnCreate() {
+
 		for (int i = 0; i < m_param.numStartOwn; i++) {
 			auto object = GetStage()->AddGameObject<HideItemObject>();
-			AddItem(object->GetComponent<ItemBase>());
-			object->SetActive(false);
+			auto item = object->GetComponent<Item>();
+			AddItem(item);
 		}
 	}
 
 	//--------------------------------------------------------------------------------------
-	/// ƒAƒNƒZƒbƒT
+	/// ã‚¢ã‚¯ã‚»ãƒƒã‚µ
 	//--------------------------------------------------------------------------------------
 
-	void ItemBag::AddItem(const std::shared_ptr<ItemBase>& item) {
+	void ItemBag::AddItem(const std::shared_ptr<Item>& item)
+	{
 		m_items.push_back(item);
+		item->SetItemOwner(GetGameObject(), false);
 	}
 
-	void ItemBag::RemoveItem(const std::shared_ptr<ItemBase>& item) {
-		ex_weak_ptr<ItemBase> exweakItem = item;
-		maru::Utility::RemoveVec(m_items, exweakItem);
+	void ItemBag::RemoveItem(const std::shared_ptr<Item>& item)
+	{
+		auto find = std::find_if(m_items.begin(), m_items.end(), [&item](const std::weak_ptr<Item>& itemWeak) {return itemWeak.lock() == item; });
+
+		if (find != m_items.end())
+		{
+			m_items.erase(find);
+
+			(*find).lock()->ReleaseItemOwner(false);
+		}
 	}
 
-	bool ItemBag::IsAcquisition(const std::shared_ptr<ItemBase>& item) {
-		if (m_items.size() < m_param.numMaxOwn) { //ƒoƒbƒO‚Ì‹ó‚«‚ª‚ ‚Á‚½‚ç
+	bool ItemBag::IsAcquisition(const std::shared_ptr<Item>& item) {
+		if (m_items.size() < m_param.numMaxOwn) { //ãƒãƒƒã‚°ã®ç©ºããŒã‚ã£ãŸã‚‰
 			return true;
 		}
 
@@ -67,7 +78,15 @@ namespace basecross {
 	}
 
 	std::shared_ptr<HideItem> ItemBag::GetHideItem() const {
-		for (auto& item : m_items) {
+		for (auto& itemWeak : m_items) {
+
+			auto item = itemWeak.lock();
+
+			if (!item)
+			{
+				continue;
+			}
+
 			if (auto hideItem = item->GetGameObject()->GetComponent<HideItem>(false)) {
 				return hideItem;
 			}
