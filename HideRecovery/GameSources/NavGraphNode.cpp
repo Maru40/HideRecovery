@@ -59,6 +59,10 @@ namespace basecross {
 
 	maru::ImpactData NavGraphNode::GetImpactData() const noexcept { return m_impactData->GetValue(); }
 
+	void NavGraphNode::AddSubscribeImpactData(const std::function<bool()>& whereAction, const std::function<void()>& action) {
+		m_impactData->AddSubscribe(whereAction, action);
+	}
+
 	//--------------------------------------------------------------------------------------
 	///	オペレータ
 	//--------------------------------------------------------------------------------------

@@ -17,8 +17,13 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 	///	前方宣言
 	//--------------------------------------------------------------------------------------
-	template<class T>
+	template<class T> 
 	class ReactiveProperty;
+
+	namespace maru {
+		template<class T> 
+		class Action;
+	}
 
 	//--------------------------------------------------------------------------------------
 	///	ナビグラフ用のノード
@@ -127,6 +132,13 @@ namespace basecross {
 		/// </summary>
 		/// <returns>親オブジェクト</returns>
 		std::shared_ptr<GameObject> GetParent() const { return m_parent.lock(); }
+
+		/// <summary>
+		/// インパクトデータの変更時に呼び出したいイベントの追加
+		/// </summary>
+		/// <param name="whereAction">条件式</param>
+		/// <param name="action">呼び出したいイベント</param>
+		void AddSubscribeImpactData(const std::function<bool()>& whereAction, const std::function<void()>& action);
 
 		//--------------------------------------------------------------------------------------
 		///	オペレータ
