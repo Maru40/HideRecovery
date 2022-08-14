@@ -234,7 +234,7 @@ namespace basecross {
 
 					//ノードが視界内なら
 					if (eye->IsInEyeRange(toNode->GetPosition())) {
-						nodes.push_back(toNode);
+						nodes.push_back(m_astar->GetGraph()->GetNode(toNode->GetIndex()));
 						currentAddNodes.push_back(toNode);
 						toNode->SetIsActive(false);	//ノードを非アクティブにする。
 					}
