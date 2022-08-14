@@ -45,6 +45,7 @@ namespace basecross {
 			OccupancyType occupancyType;	//占有タイプ
 
 			ImpactData();
+			virtual ~ImpactData();
 		};
 
 		//--------------------------------------------------------------------------------------
