@@ -24,7 +24,8 @@ namespace basecross {
 		ImpactData::ImpactData():
 			dangerValue(1.0f), 
 			occupancyValue(0.5f),
-			occupancyType(OccupancyType::Empty)
+			occupancyType(OccupancyType::Empty),
+			occupacyRecoverySpeed(30.0f)
 		{}
 
 		ImpactData::~ImpactData() {};
