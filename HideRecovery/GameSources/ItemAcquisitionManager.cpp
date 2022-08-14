@@ -11,7 +11,6 @@
 #include "ItemAcquisitionManager.h"
 
 #include "CollisionAction.h"
-#include "Itabashi/OnlineItemBase.h"
 #include "Itabashi/Item.h"
 
 #include "MaruUtility.h"
