@@ -5,11 +5,10 @@ namespace basecross
 {
 namespace Online
 {
-	struct OnlineTransformData
+	bool OnlineTransformSynchronization::OnlineTransformData::operator==(const OnlineTransformData& other) const
 	{
-		Vec3 position;
-		Quat rotation;
-	};
+		return position == other.position && rotation == other.rotation;
+	}
 
 	OnlineTransformSynchronization::OnlineTransformSynchronization(const std::shared_ptr<GameObject>& owner) :
 		OnlineComponent(owner)
@@ -36,14 +35,21 @@ namespace Online
 		data.position = transform->GetWorldPosition();
 		data.rotation = transform->GetWorldQuaternion();
 
+		if (data == m_beforeData)
+		{
+			return;
+		}
+
 		OnlineManager::RaiseEvent(false, (std::uint8_t*)&data, sizeof(OnlineTransformData), EVENT_CODE);
+
+		m_beforeData = data;
 	}
 
 	void OnlineTransformSynchronization::OnCustomEventAction(int playerNumber, std::uint8_t eventCode, const std::uint8_t* bytes)
 	{
 		auto transform = m_transform.lock();
 
-		if (!transform || m_playerNumber != playerNumber)
+		if (!transform || m_playerNumber != playerNumber || eventCode != EVENT_CODE)
 		{
 			return;
 		}

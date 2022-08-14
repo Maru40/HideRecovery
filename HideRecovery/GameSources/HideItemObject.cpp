@@ -1,7 +1,7 @@
-/*!
+ï»¿/*!
 @file HideItemObject.cpp
-@brief HideItemObjectƒNƒ‰ƒXÀ‘Ì
-’S“–FŠÛR—TŠì
+@brief HideItemObjectã‚¯ãƒ©ã‚¹å®Ÿä½“
+æ‹…å½“ï¼šä¸¸å±±è£•å–œ
 */
 
 #include "stdafx.h"
@@ -11,7 +11,8 @@
 
 #include "HideItem.h"
 #include "Targeted.h"
-
+#include "Itabashi/ObjectHider.h"
+#include "Itabashi/Item.h"
 #include "Watanabe/Utility/DataExtracter.h"
 
 namespace basecross {
@@ -27,7 +28,14 @@ namespace basecross {
 	}
 
 	void HideItemObject::OnCreate() {
+		auto ti = GetThis<GameObject>();
 		SettingModel();
+
+		AddComponent<Operator::ObjectHider>();
+		auto item = AddComponent<Item>();
+
+		// ä»®ã®ã‚¢ã‚¤ãƒ†ãƒ ID
+		item->SetItemId(100);
 
 		AddComponent<HideItem>();
 		AddComponent<Targeted>();

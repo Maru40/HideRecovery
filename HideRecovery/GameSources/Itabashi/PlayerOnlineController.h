@@ -4,6 +4,7 @@
 namespace basecross
 {
 	class RotationController;
+	class ItemAcquisitionManager;
 
 namespace Operator
 {
@@ -17,6 +18,25 @@ namespace Online
 	/// </summary>
 	class PlayerOnlineController : public OnlineComponent
 	{
+	public:
+		struct ItemOwnerShipData
+		{
+			int itemId;
+			int playerNumber;
+
+			ItemOwnerShipData(int itemId, int playerNumber) :
+				itemId(itemId),
+				playerNumber(playerNumber)
+			{
+
+			}
+		};
+
+		static constexpr std::uint8_t TRY_ACQUISITION_EVENT_CODE = 2;
+		static constexpr std::uint8_t EXECUTE_ACQUISITION_EVENT_CODE = 3;
+
+	private:
+
 		/// <summary>
 		/// オブジェクトを動かす用のコンポーネント
 		/// </summary>
@@ -25,16 +45,22 @@ namespace Online
 		/// オブジェクトの回転制御用コンポーネント
 		/// </summary>
 		std::weak_ptr<RotationController> m_rotationController;
+
+		std::weak_ptr<ItemAcquisitionManager> m_acquisitionManager;
+
 		/// <summary>
 		/// 対応するプレイヤー番号
 		/// </summary>
 		int m_playerNumber = 0;
 
+
+		void TryAquisition();
+
+		void TryAcquisitionEvent(int itemId, int playerNumber);
+
+		void ExecuteAcquisitionEvent(const ItemOwnerShipData& ownerShipData);
+
 	public:
-		/// <summary>
-		/// オンライン用イベントコード
-		/// </summary>
-		static constexpr std::uint8_t EVENT_CODE = 2;
 
 		PlayerOnlineController(const std::shared_ptr<GameObject>& owner);
 

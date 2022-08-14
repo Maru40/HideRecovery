@@ -1,14 +1,15 @@
-
+ï»¿
 /*!
 @file ItemBase.cpp
-@brief ItemBaseƒNƒ‰ƒXÀ‘Ì
-’S“–FŠÛR—TŠì
+@brief ItemBaseã‚¯ãƒ©ã‚¹å®Ÿä½“
+æ‹…å½“ï¼šä¸¸å±±è£•å–œ
 */
 
 #include "stdafx.h"
 #include "Project.h"
 
 #include "HideItem.h"
+#include "ItemBase.h"
 
 namespace basecross {
 
@@ -17,7 +18,7 @@ namespace basecross {
 	{}
 
 	//--------------------------------------------------------------------------------------
-	/// ƒAƒNƒZƒbƒT
+	/// ã‚¢ã‚¯ã‚»ãƒƒã‚µ
 	//--------------------------------------------------------------------------------------
 
 	bool ItemBase::IsAcquisition() const {

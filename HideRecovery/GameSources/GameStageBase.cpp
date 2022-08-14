@@ -44,10 +44,6 @@
 #include "Watanabe/StageObject/Block.h"
 #include "Watanabe/StageObject/RackObject.h"
 
-#include "Itabashi/OnlineManager.h"
-#include "Itabashi/PlayerOnlineController.h"
-#include "Itabashi/OnlineTransformSynchronization.h"
-
 #include "Itabashi/OnlineTestRoom.h"
 #include "Itabashi/OnlinePlayerManager.h"
 

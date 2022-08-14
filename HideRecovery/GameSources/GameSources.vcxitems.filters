@@ -734,9 +734,6 @@
     <Filter Include="Itabashi\Online\PlayerOnlineController">
       <UniqueIdentifier>{5563d5b2-921e-4649-867c-f24adc0594bc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Itabashi\ObjectMover">
-      <UniqueIdentifier>{16ba7c74-8a96-4459-9bb4-d2ce046f8fa7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Itabashi\Online\OnlineTestRoom">
       <UniqueIdentifier>{2909f469-304e-476a-b200-f2ed9245ef41}</UniqueIdentifier>
     </Filter>
@@ -796,6 +793,18 @@
     </Filter>
     <Filter Include="Watanabe\Component\PlayerAnimator">
       <UniqueIdentifier>{ee70b574-b1c7-408b-a01b-a8f5ce6465d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Itabashi\Component">
+      <UniqueIdentifier>{e77216ec-bca9-4fb9-b96b-cb9b75c168b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Itabashi\Component\Item">
+      <UniqueIdentifier>{aec58b06-9186-4fa6-829f-18427c994f6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Itabashi\Component\ObjectMover">
+      <UniqueIdentifier>{16ba7c74-8a96-4459-9bb4-d2ce046f8fa7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Itabashi\Component\ObjectHider">
+      <UniqueIdentifier>{0859a1a3-ab7d-426e-8b79-d25260be3aca}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1427,7 +1436,7 @@
       <Filter>Watanabe\Utility\TransformData</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\ObjectMover.h">
-      <Filter>Itabashi\ObjectMover</Filter>
+      <Filter>Itabashi\Component\ObjectMover</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineTestRoom.h">
       <Filter>Itabashi\Online\OnlineTestRoom</Filter>
@@ -1470,6 +1479,12 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\PlayerAnimationState.h">
       <Filter>Watanabe\Component\PlayerAnimator</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\Item.h">
+      <Filter>Itabashi\Component\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\ObjectHider.h">
+      <Filter>Itabashi\Component\ObjectHider</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2026,7 +2041,7 @@
       <Filter>Watanabe\Utility\Utility</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\ObjectMover.cpp">
-      <Filter>Itabashi\ObjectMover</Filter>
+      <Filter>Itabashi\Component\ObjectMover</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineTestRoom.cpp">
       <Filter>Itabashi\Online\OnlineTestRoom</Filter>
@@ -2066,6 +2081,12 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\PlayerAnimator.cpp">
       <Filter>Watanabe\Component\PlayerAnimator</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\Item.cpp">
+      <Filter>Itabashi\Component\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\ObjectHider.cpp">
+      <Filter>Itabashi\Component\ObjectHider</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

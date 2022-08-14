@@ -1,23 +1,30 @@
-
+ï»¿
 /*!
 @file HideItem.cpp
-@brief HideItemƒNƒ‰ƒXÀ‘Ì
-’S“–FŠÛR—TŠì
+@brief HideItemã‚¯ãƒ©ã‚¹å®Ÿä½“
+æ‹…å½“ï¼šä¸¸å±±è£•å–œ
 */
 
 #include "stdafx.h"
 #include "Project.h"
 
 #include "HideItem.h"
+#include "Itabashi/ObjectHider.h"
+#include "Itabashi/Item.h"
 
 namespace basecross {
 
 	HideItem::HideItem(const std::shared_ptr<GameObject>& objPtr):
 		ItemBase(objPtr)
-	{}
+	{
+	}
 
-	void HideItem::OnCreate() {
-				
+	void HideItem::OnCreate()
+	{
+		auto gameObject = GetGameObject();
+
+		m_hider = gameObject->GetComponent<Operator::ObjectHider>();
+		m_item = gameObject->GetComponent<Item>();
 	}
 
 }

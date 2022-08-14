@@ -20,6 +20,32 @@ namespace Online
 
 	void OnlineManager::Update()
 	{
+		for (auto& removeCallBack : GetInstance()->m_removeCallBacks)
+		{
+			auto& callBacksVector = GetInstance()->m_callBacksVector;
+			auto itr = callBacksVector.begin();
+
+			while (itr != callBacksVector.end())
+			{
+				if ((*itr) == removeCallBack)
+				{
+					callBacksVector.erase(itr);
+					break;
+				}
+
+				++itr;
+			}
+		}
+
+		GetInstance()->m_removeCallBacks.clear();
+
+		for (auto& addCallBack : GetInstance()->m_addCallBacks)
+		{
+			GetInstance()->m_callBacksVector.push_back(addCallBack);
+		}
+
+		GetInstance()->m_addCallBacks.clear();
+
 		auto& client = GetInstance()->m_client;
 
 		if (client)
@@ -35,25 +61,13 @@ namespace Online
 
 		if (result == callBacksVector.end())
 		{
-			callBacksVector.push_back(callbacks);
+			GetInstance()->m_addCallBacks.push_back(callbacks);
 		}
 	}
 
 	void OnlineManager::RemoveCallBacks(I_OnlineCallBacks* callbacks)
 	{
-		auto& callBacksVector = GetInstance()->m_callBacksVector;
-		auto itr = callBacksVector.begin();
-
-		while (itr != callBacksVector.end())
-		{
-			if ((*itr) == callbacks)
-			{
-				callBacksVector.erase(itr);
-				break;
-			}
-
-			++itr;
-		}
+		GetInstance()->m_removeCallBacks.push_back(callbacks);
 	}
 
 	const std::unique_ptr<OnlineManager>& OnlineManager::GetInstance()
@@ -74,10 +88,15 @@ namespace Online
 
 		if (!GetInstance()->m_client)
 		{
-			client = std::make_unique<ExitGames::LoadBalancing::Client>(*GetInstance(), L"f9528b0a-0d67-4296-98f5-0fb9c3c4b5b8", version.c_str());
+			client = std::make_unique<ExitGames::LoadBalancing::Client>(
+				*GetInstance(),
+				GetApplicationId().c_str(),
+				version.c_str(),
+				ExitGames::Photon::ConnectionProtocol::DEFAULT,
+				false,
+				ExitGames::LoadBalancing::RegionSelectionMode::BEST
+				);
 		}
-
-		auto test = GetApplicationId().c_str();
 
 		return client->connect();
 	}
@@ -122,9 +141,9 @@ namespace Online
 			playerNumbers.push_back(playernrs.getElementAt(i));
 		}
 
-		for (auto& callback : m_callBacksVector)
+		for (auto& callBacks : m_callBacksVector)
 		{
-			callback->OnJoinRoomEventAction(playerNr, playerNumbers, player);
+			callBacks->OnJoinRoomEventAction(playerNr, playerNumbers, player);
 		}
 	}
 

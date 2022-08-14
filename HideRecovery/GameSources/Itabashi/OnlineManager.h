@@ -116,6 +116,15 @@ namespace Online
 		static std::unique_ptr<OnlineManager> m_instance;
 
 		/// <summary>
+		/// 追加一時保存用コールバック配列
+		/// </summary>
+		std::vector<I_OnlineCallBacks*> m_addCallBacks;
+		/// <summary>
+		/// 削除一時保存用コールバック配列
+		/// </summary>
+		std::vector<I_OnlineCallBacks*> m_removeCallBacks;
+
+		/// <summary>
 		/// オンラインのコールバック用の配列
 		/// </summary>
 		std::vector<I_OnlineCallBacks*> m_callBacksVector;

@@ -1,7 +1,7 @@
-/*!
+ï»¿/*!
 @file ItemBag.h
-@brief ItemBag‚È‚Ç
-’S“–FŠÛR—TŠì
+@brief ItemBagãªã©
+æ‹…å½“ï¼šä¸¸å±±è£•å–œ
 */
 
 #pragma once
@@ -10,17 +10,17 @@
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
-	/// ‘O•ûéŒ¾
+	/// å‰æ–¹å®£è¨€
 	//--------------------------------------------------------------------------------------
-	class ItemBase;
+	class Item;
 	class HideItem;
 
 	//--------------------------------------------------------------------------------------
-	/// ƒpƒ‰ƒ[ƒ^
+	/// ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
 	//--------------------------------------------------------------------------------------
 	struct ItemBag_Parametor {
-		int numStartOwn;	//ŠJn‚ÌŠ”
-		int numMaxOwn;	//‚Ä‚éÅ‘å”
+		int numStartOwn;	//é–‹å§‹æ™‚ã®æ‰€æŒæ•°
+		int numMaxOwn;	//æŒã¦ã‚‹æœ€å¤§æ•°
 
 		ItemBag_Parametor();
 
@@ -28,7 +28,7 @@ namespace basecross {
 	};
 
 	//--------------------------------------------------------------------------------------
-	/// ƒAƒCƒeƒ€ƒoƒbƒO
+	/// ã‚¢ã‚¤ãƒ†ãƒ ãƒãƒƒã‚°
 	//--------------------------------------------------------------------------------------
 	class ItemBag : public Component
 	{
@@ -36,15 +36,15 @@ namespace basecross {
 		using Parametor = ItemBag_Parametor;
 
 	private:
-		Parametor m_param;							//ƒpƒ‰ƒ[ƒ^
+		Parametor m_param;							//ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
 
-		std::vector<ex_weak_ptr<ItemBase>> m_items;	//‚Á‚Ä‚¢‚éƒAƒCƒeƒ€ˆê——
+		std::vector<std::weak_ptr<Item>> m_items;	//æŒã£ã¦ã„ã‚‹ã‚¢ã‚¤ãƒ†ãƒ ä¸€è¦§
 
 	public:
 		/// <summary>
-		/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+		/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		/// </summary>
-		/// <param name="objPtr">‚±‚ÌƒNƒ‰ƒX‚ğŠ—L‚·‚éƒQ[ƒ€ƒIƒuƒWƒFƒNƒg</param>
+		/// <param name="objPtr">ã“ã®ã‚¯ãƒ©ã‚¹ã‚’æ‰€æœ‰ã™ã‚‹ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</param>
 		ItemBag(const std::shared_ptr<GameObject>& objPtr);
 
 		void OnCreate() override;
@@ -53,32 +53,32 @@ namespace basecross {
 
 	public:
 		//--------------------------------------------------------------------------------------
-		/// ƒAƒNƒZƒbƒT
+		/// ã‚¢ã‚¯ã‚»ãƒƒã‚µ
 		//--------------------------------------------------------------------------------------
 
 		/// <summary>
-		/// ƒAƒCƒeƒ€‚Ì’Ç‰Á
+		/// ã‚¢ã‚¤ãƒ†ãƒ ã®è¿½åŠ 
 		/// </summary>
-		/// <param name="item">’Ç‰Á‚µ‚½‚¢ƒAƒCƒeƒ€</param>
-		void AddItem(const std::shared_ptr<ItemBase>& item);
+		/// <param name="item">è¿½åŠ ã—ãŸã„ã‚¢ã‚¤ãƒ†ãƒ </param>
+		void AddItem(const std::shared_ptr<Item>& item);
 
 		/// <summary>
-		/// ƒAƒCƒeƒ€‚Ìíœ
+		/// ã‚¢ã‚¤ãƒ†ãƒ ã®å‰Šé™¤
 		/// </summary>
-		/// <param name="item">íœ‚µ‚½‚¢ƒAƒCƒeƒ€</param>
-		void RemoveItem(const std::shared_ptr<ItemBase>& item);
+		/// <param name="item">å‰Šé™¤ã—ãŸã„ã‚¢ã‚¤ãƒ†ãƒ </param>
+		void RemoveItem(const std::shared_ptr<Item>& item);
 
 		/// <summary>
-		/// ˆø”‚Å“n‚³‚ê‚½ƒAƒCƒeƒ€‚ğæ“¾‚Å‚«‚é‚©‚Ç‚¤‚©
+		/// å¼•æ•°ã§æ¸¡ã•ã‚ŒãŸã‚¢ã‚¤ãƒ†ãƒ ã‚’å–å¾—ã§ãã‚‹ã‹ã©ã†ã‹
 		/// </summary>
-		/// <param name="item">è‚É“ü‚ê‚½‚¢ƒAƒCƒeƒ€</param>
-		/// <returns>æ“¾‚Å‚«‚é‚È‚çtrue</returns>
-		bool IsAcquisition(const std::shared_ptr<ItemBase>& item);
+		/// <param name="item">æ‰‹ã«å…¥ã‚ŒãŸã„ã‚¢ã‚¤ãƒ†ãƒ </param>
+		/// <returns>å–å¾—ã§ãã‚‹ãªã‚‰true</returns>
+		bool IsAcquisition(const std::shared_ptr<Item>& item);
 
 		/// <summary>
-		/// ‰B‚·ƒAƒCƒeƒ€‚Ìæ“¾
+		/// éš ã™ã‚¢ã‚¤ãƒ†ãƒ ã®å–å¾—
 		/// </summary>
-		/// <returns>‰B‚·ƒAƒCƒeƒ€</returns>
+		/// <returns>éš ã™ã‚¢ã‚¤ãƒ†ãƒ </returns>
 		std::shared_ptr<HideItem> GetHideItem() const;
 	};
 
