@@ -30,10 +30,10 @@ namespace basecross {
 		using ImpactData = maru::ImpactData;
 
 	private:
-		Vec3 m_position;							//ノードの場所
-		ReactiveProperty<ImpactData> m_impactData;	//影響マップデータ
+		Vec3 m_position;											//ノードの場所
+		std::unique_ptr<ReactiveProperty<ImpactData>> m_impactData;	//影響マップデータ
 
-		ex_weak_ptr<GameObject> m_parent;			//親オブジェクト
+		std::weak_ptr<GameObject> m_parent;							//親オブジェクト
 
 	public:
 
@@ -68,6 +68,12 @@ namespace basecross {
 		/// <param name="impactData">影響マップデータ</param>
 		/// <param name="parent">親オブジェクト</param>
 		NavGraphNode(const int& index, const Vec3& position, const maru::ImpactData& impactData, const std::shared_ptr<GameObject>& parent);
+
+		/// <summary>
+		/// コピーコンストラクタ
+		/// </summary>
+		/// <param name="node">コピーするノード</param>
+		NavGraphNode(const NavGraphNode& node);
 
 		virtual ~NavGraphNode();
 
@@ -109,7 +115,7 @@ namespace basecross {
 		/// 親オブジェクトが存在するかどうか判断
 		/// </summary>
 		/// <returns>親が存在するならtrue</returns>
-		bool IsParent() const noexcept { return m_parent; }
+		bool IsParent() const noexcept { return !m_parent.expired(); }
 
 		/// <summary>
 		/// 親オブジェクトのセット
@@ -121,8 +127,13 @@ namespace basecross {
 		/// 親オブジェクトの取得
 		/// </summary>
 		/// <returns>親オブジェクト</returns>
-		std::shared_ptr<GameObject> GetParent() const { return m_parent.GetShard(); }
+		std::shared_ptr<GameObject> GetParent() const { return m_parent.lock(); }
 
+		//--------------------------------------------------------------------------------------
+		///	オペレータ
+		//--------------------------------------------------------------------------------------
+
+		NavGraphNode& operator= (const NavGraphNode& other);
 	};
 
 }
