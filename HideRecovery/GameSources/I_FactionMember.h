@@ -26,7 +26,7 @@ namespace basecross {
 		//--------------------------------------------------------------------------------------
 		struct I_FactionMember_Parametor
 		{
-			FactionType factionType;									//グループタイプ
+			FactionType factionType = FactionType(0);					//グループタイプ
 			std::weak_ptr<FactionCoordinator> factionCoordinator;		//グループ調整者
 			std::weak_ptr<CoordinatorBase<EnemyBase>> assignedFaction;	//アサインしたグループ
 		};
