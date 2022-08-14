@@ -59,6 +59,10 @@ namespace basecross {
 			);
 		}
 
+		/// <summary>
+		/// 本体データの設定
+		/// </summary>
+		/// <param name="value">本体データ</param>
 		void SetValue(const T& value) { this->value = value; }
 
 		/// <summary>
@@ -78,9 +82,9 @@ namespace basecross {
 		//--------------------------------------------------------------------------------------
 
 		T operator = (const T t) {
-			//if (&GetValue() != &t) { //違うのなら
-			//	m_action.Invoke();
-			//}
+			if (&GetValue() != &t) { //違うのなら
+				m_action.Invoke();
+			}
 
 			this->value = t;
 			return this->value;
