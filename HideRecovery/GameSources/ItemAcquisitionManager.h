@@ -1,8 +1,8 @@
-
+ï»¿
 /*!
 @file ItemAcquisitionManager.h
-@brief ItemAcquisitionManager‚È‚Ç
-’S“–FŠÛR—TŠì
+@brief ItemAcquisitionManagerãªã©
+æ‹…å½“ï¼šä¸¸å±±è£•å–œ
 */
 
 #pragma once
@@ -11,15 +11,15 @@
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
-	/// ‘O•ûéŒ¾
+	/// å‰æ–¹å®£è¨€
 	//--------------------------------------------------------------------------------------
-	class ItemBase;
+	class Item;
 
 	//--------------------------------------------------------------------------------------
-	/// ƒpƒ‰ƒ[ƒ^
+	/// ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
 	//--------------------------------------------------------------------------------------
 	struct ItemAcquisitionManager_Parametor {
-		float searchRange;	//ƒAƒCƒeƒ€õ“G”ÍˆÍ
+		float searchRange;	//ã‚¢ã‚¤ãƒ†ãƒ ç´¢æ•µç¯„å›²
 
 		ItemAcquisitionManager_Parametor();
 
@@ -27,7 +27,7 @@ namespace basecross {
 	};
 
 	//--------------------------------------------------------------------------------------
-	/// ƒAƒCƒeƒ€Šl“¾ŠÇ—
+	/// ã‚¢ã‚¤ãƒ†ãƒ ç²å¾—ç®¡ç†
 	//--------------------------------------------------------------------------------------
 	class ItemAcquisitionManager : public Component
 	{
@@ -35,22 +35,25 @@ namespace basecross {
 		using Parametor = ItemAcquisitionManager_Parametor;
 
 	private:
-		Parametor m_param;	//ƒpƒ‰ƒ[ƒ^
+		Parametor m_param;	//ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
 
-		std::vector<ex_weak_ptr<ItemBase>> m_allFieldItems;		//ƒtƒB[ƒ‹ƒh‚É‚ ‚é‘S‚Ä‚ÌƒAƒCƒeƒ€‚ğ”z—ñ‚É“ü‚ê‚éB
+		std::vector<std::weak_ptr<Item>> m_allFieldItems;		//ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã«ã‚ã‚‹å…¨ã¦ã®ã‚¢ã‚¤ãƒ†ãƒ ã‚’é…åˆ—ã«å…¥ã‚Œã‚‹ã€‚
+		std::vector<std::weak_ptr<Item>> m_acquisitionItems;
+
+		bool m_canAcquisition = false;
 
 	public:
 		/// <summary>
-		/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+		/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		/// </summary>
-		/// <param name="objPtr">‚±‚ÌƒNƒ‰ƒX‚ğŠ—L‚·‚éƒQ[ƒ€ƒIƒuƒWƒFƒNƒg	</param>
+		/// <param name="objPtr">ã“ã®ã‚¯ãƒ©ã‚¹ã‚’æ‰€æœ‰ã™ã‚‹ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ	</param>
 		ItemAcquisitionManager(const std::shared_ptr<GameObject>& objPtr);
 
 		/// <summary>
-		/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+		/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		/// </summary>
-		/// <param name="objPtr">‚±‚ÌƒNƒ‰ƒX‚ğŠ—L‚·‚éƒQ[ƒ€ƒIƒuƒWƒFƒNƒg</param>
-		/// <param name="param">ƒpƒ‰ƒ[ƒ^</param>
+		/// <param name="objPtr">ã“ã®ã‚¯ãƒ©ã‚¹ã‚’æ‰€æœ‰ã™ã‚‹ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</param>
+		/// <param name="param">ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿</param>
 		ItemAcquisitionManager(const std::shared_ptr<GameObject>& objPtr, const Parametor& param);
 
 		void OnLateStart() override;
@@ -58,32 +61,51 @@ namespace basecross {
 
 	private:
 		/// <summary>
-		/// ƒAƒCƒeƒ€Šl“¾‚Ìƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½‚Ìˆ—
+		/// ã‚¢ã‚¤ãƒ†ãƒ ç²å¾—ã®ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚ŒãŸæ™‚ã®å‡¦ç†
 		/// </summary>
 		void Input_ItemAcquisition();
 
-		/// <summary>
-		/// ÀÛ‚ÉƒAƒCƒeƒ€‚ğŠl“¾‚·‚éˆ—
-		/// </summary>
-		void ItemAcquisition(const std::shared_ptr<ItemBase>& item);
+	public:
 
 		/// <summary>
-		/// ƒAƒCƒeƒ€‚ªŠl“¾”ÍˆÍ“à‚É‚¢‚é‚©‚Ç‚¤‚©”»’f
+		/// å®Ÿéš›ã«ã‚¢ã‚¤ãƒ†ãƒ ã‚’ç²å¾—ã™ã‚‹å‡¦ç†
 		/// </summary>
-		/// <param name="item">Šm”F‚µ‚½‚¢ƒAƒCƒeƒ€</param>
-		/// <returns>Šl“¾”ÍˆÍ“à‚È‚çtrue</returns>
-		bool IsAcquisitionRange(const std::shared_ptr<ItemBase>& item);
+		void ItemAcquisition(const std::shared_ptr<Item>& item);
+
+
+	private:
 
 		/// <summary>
-		/// ƒIƒuƒWƒFƒNƒg‚ÌƒT[ƒ`”ÍˆÍ—p‚ÌƒgƒŠƒK[‚ğ¶¬‚·‚éB(‘½•ªƒ{ƒc)
+		/// ã‚¢ã‚¤ãƒ†ãƒ ãŒç²å¾—ç¯„å›²å†…ã«ã„ã‚‹ã‹ã©ã†ã‹åˆ¤æ–­
+		/// </summary>
+		/// <param name="item">ç¢ºèªã—ãŸã„ã‚¢ã‚¤ãƒ†ãƒ </param>
+		/// <returns>ç²å¾—ç¯„å›²å†…ãªã‚‰true</returns>
+		bool IsAcquisitionRange(const std::shared_ptr<Item>& item);
+
+		/// <summary>
+		/// ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ã‚µãƒ¼ãƒç¯„å›²ç”¨ã®ãƒˆãƒªã‚¬ãƒ¼ã‚’ç”Ÿæˆã™ã‚‹ã€‚(å¤šåˆ†ãƒœãƒ„)
 		/// </summary>
 		void CreateSerchTriggerObject();
 
 	public:
 		//--------------------------------------------------------------------------------------
-		/// ƒAƒNƒZƒbƒT
+		/// ã‚¢ã‚¯ã‚»ãƒƒã‚µ
 		//--------------------------------------------------------------------------------------
 
+		/// <summary>
+		/// ã‚¢ã‚¤ãƒ†ãƒ ã‚’å–å¾—ã§ãã‚‹ã‹ã©ã†ã‹
+		/// </summary>
+		/// <param name="item">ã‚¢ã‚¤ãƒ†ãƒ ãŒå–å¾—ã§ãã‚‹ãªã‚‰ã€ã“ã®å¤‰æ•°ã«å…¥ã‚‹</param>
+		/// <returns>å–å¾—ã§ãã‚‹ãªã‚‰true</returns>
+		bool IsAcquisition(std::shared_ptr<Item>& acquisitionedItem = std::shared_ptr<Item>());
+
+		std::vector<std::shared_ptr<Item>> GetFieldAllItem() const;
+
+		/// <summary>
+		/// ç¾çŠ¶å–å¾—ã§ãã‚‹ã‚¢ã‚¤ãƒ†ãƒ ã®é…åˆ—ã®å–å¾—
+		/// </summary>
+		/// <returns>ç¾çŠ¶å–å¾—ã§ãã‚‹ã‚¢ã‚¤ãƒ†ãƒ ã®é…åˆ—</returns>
+		std::vector<std::shared_ptr<Item>> GetCanAcquisitionItems() const;
 	};
 
 }

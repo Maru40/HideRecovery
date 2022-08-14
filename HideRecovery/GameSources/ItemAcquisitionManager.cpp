@@ -1,8 +1,8 @@
-
+ï»¿
 /*!
 @file ItemAcquisitionManager.cpp
-@brief ItemAcquisitionManagerƒNƒ‰ƒXÀ‘Ì
-’S“–FŠÛR—TŠì
+@brief ItemAcquisitionManagerã‚¯ãƒ©ã‚¹å®Ÿä½“
+æ‹…å½“ï¼šä¸¸å±±è£•å–œ
 */
 
 #include "stdafx.h"
@@ -11,7 +11,8 @@
 #include "ItemAcquisitionManager.h"
 
 #include "CollisionAction.h"
-#include "ItemBase.h"
+#include "Itabashi/OnlineItemBase.h"
+#include "Itabashi/Item.h"
 
 #include "MaruUtility.h"
 #include "MaruAction.h"
@@ -25,7 +26,7 @@
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
-	/// ƒpƒ‰ƒ[ƒ^
+	/// ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
 	//--------------------------------------------------------------------------------------
 
 	ItemAcquisitionManager_Parametor::ItemAcquisitionManager_Parametor() :
@@ -37,7 +38,7 @@ namespace basecross {
 	{}
 
 	//--------------------------------------------------------------------------------------
-	/// ƒAƒCƒeƒ€Šl“¾ŠÇ—–{‘Ì
+	/// ã‚¢ã‚¤ãƒ†ãƒ ç²å¾—ç®¡ç†æœ¬ä½“
 	//--------------------------------------------------------------------------------------
 
 	ItemAcquisitionManager::ItemAcquisitionManager(const std::shared_ptr<GameObject>& objPtr) :
@@ -49,109 +50,184 @@ namespace basecross {
 	{}
 
 	void ItemAcquisitionManager::OnLateStart() {
-		//ƒAƒCƒeƒ€‚ğæ“¾‚·‚éB
-		m_allFieldItems = maru::Utility::ConvertArraySharedToExweak(maru::Utility::FindComponents<ItemBase>());
+		//ã‚¢ã‚¤ãƒ†ãƒ ã‚’å–å¾—ã™ã‚‹ã€‚
+		m_allFieldItems = maru::Utility::ConvertArraySharedToWeak(maru::Utility::FindComponents<Item>());
 	}
 
 	void ItemAcquisitionManager::OnUpdate() {
-		//ƒAƒCƒeƒ€‚ª”ÍˆÍ“à‚É‚¢‚é‚©õ“G
-		for (auto& item : m_allFieldItems) {
-			//ƒAƒNƒeƒBƒuó‘Ô‚Å‚È‚¢‚È‚ç”ò‚Î‚·B
+
+		m_acquisitionItems.clear();
+
+		//ã‚¢ã‚¤ãƒ†ãƒ ãŒç¯„å›²å†…ã«ã„ã‚‹ã‹ç´¢æ•µ
+		for (auto& itemWeak : m_allFieldItems) {
+
+			auto item = itemWeak.lock();
+
+			if (!item)
+			{
+				continue;
+			}
+
+			//ã‚¢ã‚¯ãƒ†ã‚£ãƒ–çŠ¶æ…‹ã§ãªã„ãªã‚‰é£›ã°ã™ã€‚
 			if (!item->GetGameObject()->IsActive()) {
 				continue;
 			}
 
-			//õ“G”ÍˆÍ“à‚È‚çtrue
-			item->SetIsAcquisition(IsAcquisitionRange(item.GetShard()));
-		}
+			bool isAcquisitionRange = IsAcquisitionRange(item);
 
-		//ƒAƒCƒeƒ€Šl“¾ƒ{ƒ^ƒ“‚ğ‰Ÿ‚µ‚½‚ç
-		if (PlayerInputer::IsItemAcquisition()) {
-			Input_ItemAcquisition();
-		}
-	}
-
-	void ItemAcquisitionManager::Input_ItemAcquisition() {
-		//ƒoƒbƒO‚ğŠ‚µ‚Ä‚¢‚È‚©‚Á‚½‚çˆ—‚ğ”ò‚Î‚·
-		auto bag = GetGameObject()->GetComponent<ItemBag>(false);
-		auto animator = GetGameObject()->GetComponent<PlayerAnimationCtrl>(false);
-		if (!bag || !animator) {
-			return;
-		}
-
-		//ƒAƒjƒ[ƒVƒ‡ƒ“‚ª’u‚­ó‘Ô‚È‚ç‚Å‚«‚È‚¢
-		auto currentState = animator->GetCurrentAnimaiton();
-		if (currentState == PlayerAnimationCtrl::State::PutItem_Floor || currentState == PlayerAnimationCtrl::State::PutItem_HideObject) {
-			return;
-		}
-
-		for (auto& item : m_allFieldItems) {
-			//Šl“¾‚Å‚«‚éƒAƒCƒeƒ€A‚©‚ÂAƒoƒbƒO‚É“ü‚ê‚é‚±‚Æ‚ª‰Â”\‚È‚ç
-			if (item->IsAcquisition() && bag->IsAcquisition(item.GetShard())) {
-				//ƒAƒCƒeƒ€‚ğ“ü‚ê‚éB
-				ItemAcquisition(item.GetShard());
-				break;
+			if (IsAcquisitionRange(item))
+			{
+				m_acquisitionItems.push_back(item);
 			}
 		}
 	}
 
-	void ItemAcquisitionManager::ItemAcquisition(const std::shared_ptr<ItemBase>& item) {
+	void ItemAcquisitionManager::Input_ItemAcquisition()
+	{
+		std::shared_ptr<Item> acquisitionedItem;
+		if (IsAcquisition(acquisitionedItem))
+		{
+			ItemAcquisition(acquisitionedItem);
+		}
+	}
+
+	void ItemAcquisitionManager::ItemAcquisition(const std::shared_ptr<Item>& item) {
+
+		if (!item)
+		{
+			return;
+		}
+
 		auto bag = GetGameObject()->GetComponent<ItemBag>(false);
 		auto animator = GetGameObject()->GetComponent<PlayerAnimationCtrl>(false);
 		if (!bag || !animator) {
 			return;
 		}
 
-		//ƒAƒCƒeƒ€‚ğ“ü‚ê‚éB
+		//ã‚¢ã‚¤ãƒ†ãƒ ã‚’å…¥ã‚Œã‚‹ã€‚
 		bag->AddItem(item);
 
-		//ƒAƒCƒeƒ€‚ğŠl“¾‚³‚ê‚½ó‘Ô‚É‚·‚éB
+		//ã‚¢ã‚¤ãƒ†ãƒ ã‚’ç²å¾—ã•ã‚ŒãŸçŠ¶æ…‹ã«ã™ã‚‹ã€‚
 		item->GetGameObject()->SetActive(false);
 
-		//ƒAƒjƒ[ƒVƒ‡ƒ“‚ğÄ¶
+		//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’å†ç”Ÿ
 		auto itemPosition = item->GetGameObject()->GetComponent<Transform>()->GetPosition();
 		if (itemPosition.y < 0.0f) {
-			//ƒAƒCƒeƒ€‚ª°‚É‚ ‚é‚È‚ç
+			//ã‚¢ã‚¤ãƒ†ãƒ ãŒåºŠã«ã‚ã‚‹ãªã‚‰
 			animator->ChangeAnimation(PlayerAnimationCtrl::State::PutItem_Floor);
 		}
 		else {
-			//ƒAƒCƒeƒ€‚ª°‚É‚È‚¢‚È‚ç
+			//ã‚¢ã‚¤ãƒ†ãƒ ãŒåºŠã«ãªã„ãªã‚‰
 			animator->ChangeAnimation(PlayerAnimationCtrl::State::PutItem_HideObject);
 		}
 
-		//Œü‚«‚½‚¢•û–@‚ğİ’è
+		//å‘ããŸã„æ–¹æ³•ã‚’è¨­å®š
 		if (auto rotationController = GetGameObject()->GetComponent<RotationController>(false)) {
 			auto direct = itemPosition - transform->GetPosition();
 			rotationController->SetDirect(direct);
 		}
 	}
 
-	bool ItemAcquisitionManager::IsAcquisitionRange(const std::shared_ptr<ItemBase>& item) {
+	bool ItemAcquisitionManager::IsAcquisitionRange(const std::shared_ptr<Item>& item) {
 		auto toItemVec = maru::Utility::CalcuToTargetVec(GetGameObject(), item->GetGameObject());
 
-		return toItemVec.length() < m_param.searchRange; //õ“G”ÍˆÍ“à‚È‚çtrue
+		return toItemVec.length() < m_param.searchRange; //ç´¢æ•µç¯„å›²å†…ãªã‚‰true
 	}
 
 	//--------------------------------------------------------------------------------------
-	/// ƒAƒNƒZƒbƒT
+	/// ã‚¢ã‚¯ã‚»ãƒƒã‚µ
 	//--------------------------------------------------------------------------------------
 
 
 
-	//‘½•ªƒ{ƒcŠÖ”----------------------------------------------------
+	//å¤šåˆ†ãƒœãƒ„é–¢æ•°----------------------------------------------------
 
 	void ItemAcquisitionManager::CreateSerchTriggerObject() {
 		auto object = GetStage()->Instantiate<GameObject>(Vec3(0.0f), transform->GetQuaternion(), GetGameObject());
 		auto objectTrans = object->GetComponent<Transform>();
 		objectTrans->SetScale(Vec3(5.0f, 2.0f, 5.0f));
 
-		//“–‚½‚è”»’èİ’è
+		//å½“ãŸã‚Šåˆ¤å®šè¨­å®š
 		auto collision = object->AddComponent<CollisionObb>();
 		collision->SetAfterCollision(AfterCollision::None);
 		collision->SetDrawActive(true);
 
-		//Õ“ËƒCƒxƒ“ƒgİ’è
+		//è¡çªæ™‚ã‚¤ãƒ™ãƒ³ãƒˆè¨­å®š
 		auto collisionAction = object->AddComponent<maru::CollisionAction>();
+	}
+
+	bool ItemAcquisitionManager::IsAcquisition(std::shared_ptr<Item>& acquisitionedItem)
+	{
+		//ãƒãƒƒã‚°ã‚’æ‰€æŒã—ã¦ã„ãªã‹ã£ãŸã‚‰å‡¦ç†ã‚’é£›ã°ã™
+		auto bag = GetGameObject()->GetComponent<ItemBag>(false);
+
+		if (!bag)
+		{
+			return false;
+		}
+
+		auto animator = GetGameObject()->GetComponent<PlayerAnimationCtrl>(false);
+
+		if (!animator)
+		{
+			return false;
+		}
+
+		//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ãŒç½®ãçŠ¶æ…‹ãªã‚‰ã§ããªã„
+		auto currentState = animator->GetCurrentAnimaiton();
+
+		if (currentState == PlayerAnimationCtrl::State::PutItem_Floor || currentState == PlayerAnimationCtrl::State::PutItem_HideObject)
+		{
+			return false;
+		}
+
+		for (auto& itemWeak : m_acquisitionItems)
+		{
+			auto item = itemWeak.lock();
+
+			//ãƒãƒƒã‚°ã«å…¥ã‚Œã‚‹ã“ã¨ãŒå¯èƒ½ãªã‚‰
+			if (bag->IsAcquisition(item))
+			{
+				acquisitionedItem = item;
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	std::vector<std::shared_ptr<Item>> ItemAcquisitionManager::GetFieldAllItem() const
+	{
+		std::vector<std::shared_ptr<Item>> items;
+
+		for (auto& itemWeak : m_allFieldItems)
+		{
+			auto item = itemWeak.lock();
+
+			if (item)
+			{
+				items.push_back(item);
+			}
+		}
+
+		return items;
+	}
+
+	std::vector<std::shared_ptr<Item>> ItemAcquisitionManager::GetCanAcquisitionItems() const
+	{
+		std::vector<std::shared_ptr<Item>> items;
+
+		for (auto& itemWeak : m_acquisitionItems)
+		{
+			auto item = itemWeak.lock();
+
+			if (item)
+			{
+				items.push_back(item);
+			}
+		}
+
+		return items;
 	}
 
 }
