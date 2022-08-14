@@ -1,8 +1,8 @@
-
+ï»¿
 /*!
 @file ItemAcquisitionManager.cpp
-@brief ItemAcquisitionManagerƒNƒ‰ƒXÀ‘Ì
-’S“–FŠÛR—TŠì
+@brief ItemAcquisitionManagerã‚¯ãƒ©ã‚¹å®Ÿä½“
+æ‹…å½“ï¼šä¸¸å±±è£•å–œ
 */
 
 #include "stdafx.h"
@@ -27,11 +27,12 @@
 #include "RotationController.h"
 
 #include "Watanabe/DebugClass/Debug.h"
+#include "Itabashi/Item.h"
 
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
-	/// ƒpƒ‰ƒ[ƒ^
+	/// ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
 	//--------------------------------------------------------------------------------------
 
 	OwnHideItemManager_Parametor::OwnHideItemManager_Parametor():
@@ -45,7 +46,7 @@ namespace basecross {
 	{}
 
 	//--------------------------------------------------------------------------------------
-	/// ‚Á‚Ä‚¢‚é‰B‚·ƒAƒCƒeƒ€‚ÌŠÇ—–{‘Ì
+	/// æŒã£ã¦ã„ã‚‹éš ã™ã‚¢ã‚¤ãƒ†ãƒ ã®ç®¡ç†æœ¬ä½“
 	//--------------------------------------------------------------------------------------
 
 	OwnHideItemManager::OwnHideItemManager(const std::shared_ptr<GameObject>& objPtr):
@@ -57,43 +58,43 @@ namespace basecross {
 	{}
 
 	void OwnHideItemManager::OnUpdate() {
-		//‰B‚·ƒ{ƒ^ƒ“‚ğ‰Ÿ‚µ‚½‚ç
+		//éš ã™ãƒœã‚¿ãƒ³ã‚’æŠ¼ã—ãŸã‚‰
 		if (PlayerInputer::IsPutHideItem()) {
 			PutHideItem();
 		}
 
-		//ƒuƒ‰ƒtƒAƒCƒeƒ€ƒ{ƒ^ƒ“
+		//ãƒ–ãƒ©ãƒ•ã‚¢ã‚¤ãƒ†ãƒ ãƒœã‚¿ãƒ³
 		if (PlayerInputer::IsBluffPutItem()) {
 			BluffPutHideItem();
 		}
 
-		//ƒ^ƒCƒ€ƒxƒ“ƒg
+		//ã‚¿ã‚¤ãƒ ãƒ™ãƒ³ãƒˆ
 		if (!m_timer->IsTimeUp()) {
 			m_timer->UpdateTimer();
 		}
 
-		//ƒfƒoƒbƒOƒRƒ}ƒ“ƒh
+		//ãƒ‡ãƒãƒƒã‚°ã‚³ãƒãƒ³ãƒ‰
 		if (PlayerInputer::GetInstance()->IsDownDown()) {
 			m_isFleePut = !m_isFleePut;
 		}
 	}
 
 	void OwnHideItemManager::PutHideItem() {
-		if (!IsPut()) { //’u‚¯‚éó‘Ô‚Å‚È‚¢‚È‚ç
+		if (!IsPut()) { //ç½®ã‘ã‚‹çŠ¶æ…‹ã§ãªã„ãªã‚‰
 			return;
 		}
 
 		auto bag = GetGameObject()->GetComponent<ItemBag>(false);
 		auto hideItem = bag->GetHideItem();
 
-		//’u‚­êŠ‚Ìæ“¾
-		auto hidePosition = CalculateHidePosition();	//‰B‚·êŠ
+		//ç½®ãå ´æ‰€ã®å–å¾—
+		auto hidePosition = CalculateHidePosition();	//éš ã™å ´æ‰€
 		auto putEvent = [&, bag, hideItem, hidePosition]() {
 			auto hideItemTrans = hideItem->GetGameObject()->GetComponent<Transform>();
 			hideItemTrans->SetPosition(hidePosition);
 			hideItem->GetGameObject()->SetActive(true);
 
-			bag->RemoveItem(hideItem);
+			bag->RemoveItem(hideItem->GetGameObject()->GetComponent<Item>());
 		};
 
 		PlayAnimation(putEvent);
@@ -112,7 +113,7 @@ namespace basecross {
 	void OwnHideItemManager::PlayAnimation(const std::function<void()>& putEvent) {
 		auto animator = GetGameObject()->GetComponent<PlayerAnimationCtrl>(false);
 
-		//ƒAƒjƒ[ƒVƒ‡ƒ“‚ª’u‚­ó‘Ô‚È‚ç‚Å‚«‚È‚¢
+		//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ãŒç½®ãçŠ¶æ…‹ãªã‚‰ã§ããªã„
 		auto currentState = animator->GetCurrentAnimaiton();
 		if (currentState == PlayerAnimationCtrl::State::PutItem_Floor || currentState == PlayerAnimationCtrl::State::PutItem_HideObject) {
 			return;
@@ -129,9 +130,9 @@ namespace basecross {
 	}
 
 	void OwnHideItemManager::Rotation() {
-		auto hidePosition = CalculateHidePosition();	//‰B‚·êŠ
+		auto hidePosition = CalculateHidePosition();	//éš ã™å ´æ‰€
 
-		//Œü‚«‚½‚¢•û–@‚ğİ’è
+		//å‘ããŸã„æ–¹æ³•ã‚’è¨­å®š
 		if (auto rotationController = GetGameObject()->GetComponent<RotationController>(false)) {
 			auto direct = hidePosition - transform->GetPosition();
 			rotationController->SetDirect(direct);
@@ -139,19 +140,19 @@ namespace basecross {
 	}
 
 	bool OwnHideItemManager::IsPut() const {
-		//•K—vƒRƒ“ƒ|[ƒlƒ“ƒgŠm”F
+		//å¿…è¦ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆç¢ºèª
 		auto bag = GetGameObject()->GetComponent<ItemBag>(false);
 		auto animator = GetGameObject()->GetComponent<PlayerAnimationCtrl>(false);
-		if (!bag || !animator) { return false; }	//•K—vƒRƒ“ƒ|[ƒlƒ“ƒg‚ª‚ ‚é‚©‚Ç‚¤‚©
+		if (!bag || !animator) { return false; }	//å¿…è¦ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆãŒã‚ã‚‹ã‹ã©ã†ã‹
 
 		auto hideItem = bag->GetHideItem();	
-		if (!hideItem) { return false; }	//hideItem‚ª‚ ‚é‚©‚Ç‚¤‚©
+		if (!hideItem) { return false; }	//hideItemãŒã‚ã‚‹ã‹ã©ã†ã‹
 
-		if (m_isFleePut) { //ƒtƒŠ[ƒvƒbƒgó‘Ô‚È‚ç
+		if (m_isFleePut) { //ãƒ•ãƒªãƒ¼ãƒ—ãƒƒãƒˆçŠ¶æ…‹ãªã‚‰
 			return true;
 		}
 
-		//‚»‚¤‚Å‚È‚¢‚È‚ç‹ß‚­‚ÌƒIƒuƒWƒFƒNƒg‚ğ’T‚·
+		//ãã†ã§ãªã„ãªã‚‰è¿‘ãã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æ¢ã™
 		return SearchNearHidePlace() ? true : false;
 	}
 
