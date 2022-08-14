@@ -11,8 +11,15 @@
 #include "GraphNodeBase.h"
 
 #include "I_Impact.h"
+#include "ReactiveProperty.h"
 
 namespace basecross {
+
+	//--------------------------------------------------------------------------------------
+	///	前方宣言
+	//--------------------------------------------------------------------------------------
+	template<class T>
+	class ReactiveProperty;
 
 	//--------------------------------------------------------------------------------------
 	///	ナビグラフ用のノード
@@ -23,10 +30,10 @@ namespace basecross {
 		using ImpactData = maru::ImpactData;
 
 	private:
-		Vec3 m_position;                  //ノードの場所
-		ImpactData m_impactData;		  //影響マップデータ
+		Vec3 m_position;							//ノードの場所
+		ReactiveProperty<ImpactData> m_impactData;	//影響マップデータ
 
-		ex_weak_ptr<GameObject> m_parent; //親オブジェクト
+		ex_weak_ptr<GameObject> m_parent;			//親オブジェクト
 
 	public:
 
@@ -62,7 +69,7 @@ namespace basecross {
 		/// <param name="parent">親オブジェクト</param>
 		NavGraphNode(const int& index, const Vec3& position, const maru::ImpactData& impactData, const std::shared_ptr<GameObject>& parent);
 
-		virtual ~NavGraphNode() = default;
+		virtual ~NavGraphNode();
 
 		//--------------------------------------------------------------------------------------
 		///	アクセッサ
@@ -90,13 +97,13 @@ namespace basecross {
 		/// 影響データのセット
 		/// </summary>
 		/// <param name="data">影響データ</param>
-		void SetImpactData(const ImpactData& data) noexcept { m_impactData = data; }
+		void SetImpactData(const ImpactData& data) noexcept;
 
 		/// <summary>
 		/// 影響データの取得
 		/// </summary>
 		/// <returns>影響データ</returns>
-		ImpactData GetImpactData() const noexcept { return m_impactData; }
+		ImpactData GetImpactData() const noexcept;
 
 		/// <summary>
 		/// 親オブジェクトが存在するかどうか判断

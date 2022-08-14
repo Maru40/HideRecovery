@@ -10,6 +10,9 @@
 
 #include "NavGraphNode.h"
 
+#include "MaruAction.h"
+#include "ReactiveProperty.h"
+
 namespace basecross {
 
 	NavGraphNode::NavGraphNode()
@@ -29,9 +32,15 @@ namespace basecross {
 	{}
 
 	NavGraphNode::NavGraphNode(const int& index, const Vec3& position, const maru::ImpactData& impactData, const std::shared_ptr<GameObject>& parent)
-		: GraphNodeBase(index), m_position(position), m_impactData(impactData), m_parent(parent) 
+		: GraphNodeBase(index), m_position(position), m_impactData(ReactiveProperty<ImpactData>(impactData)), m_parent(parent) 
 	{}
-	
+
+	NavGraphNode::~NavGraphNode() {};
+
+	//--------------------------------------------------------------------------------------
+	///	アクセッサ
+	//--------------------------------------------------------------------------------------
+
 	Vec3 NavGraphNode::GetPosition() const {
 		//親の設定があるなら、親の場所の相対位置を返す。
 		if (IsParent()) {
@@ -41,6 +50,10 @@ namespace basecross {
 
 		return m_position;
 	}
+
+	void NavGraphNode::SetImpactData(const ImpactData& data) noexcept { m_impactData.SetValue(data); }
+
+	maru::ImpactData NavGraphNode::GetImpactData() const noexcept { return m_impactData.GetValue(); }
 
 }
 
