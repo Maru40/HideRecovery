@@ -14,6 +14,7 @@
 #include "Stator_Hero.h"
 
 #include "TesterAstarComponent.h"
+#include "SelfImpactNodeManager.h"
 
 namespace basecross {
 	namespace Enemy {
@@ -30,7 +31,8 @@ namespace basecross {
 			AddComponent<Hero>();
 			AddComponent<Stator_Hero>();
 
-			AddComponent<Tester::TesterAstarComponent>();
+			auto astarComp = AddComponent<Tester::TesterAstarComponent>();
+			AddComponent<maru::SelfImpactNodeManager>(astarComp);
 		}
 
 		void HeroObject::SettingModel() {
