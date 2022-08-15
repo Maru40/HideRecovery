@@ -81,7 +81,7 @@ namespace basecross {
 			for (auto& node : nodes) {
 				//占有値更新
 				auto impactData = node->GetImpactData();
-				impactData.occupancyValue = 0;
+				impactData.occupancyValue = 0.0f;
 				node->SetImpactData(impactData);
 
 				if (auto fieldImpact = maru::FieldImpactMap::GetInstance()) {

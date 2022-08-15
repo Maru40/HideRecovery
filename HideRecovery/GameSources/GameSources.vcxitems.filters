@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0"
-  xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Headers">
       <UniqueIdentifier>{4b0a624a-610d-4bc6-b311-2b02a781cdf9}</UniqueIdentifier>
@@ -779,7 +778,6 @@
     <Filter Include="Maruyama\Enemy\Component\AI\Director\FactionCoordinator\Fanction\PatrolCoordinator">
       <UniqueIdentifier>{c7cd69c1-ee43-4e1b-a761-89fcdbac4ffd}</UniqueIdentifier>
     </Filter>
-
     <Filter Include="Watanabe\Component">
       <UniqueIdentifier>{c4ba6e83-372f-404f-9096-43f86c51a649}</UniqueIdentifier>
     </Filter>
@@ -806,10 +804,15 @@
     </Filter>
     <Filter Include="Itabashi\Component\ObjectHider">
       <UniqueIdentifier>{0859a1a3-ab7d-426e-8b79-d25260be3aca}</UniqueIdentifier>
-	</Filter>
+    </Filter>
     <Filter Include="Maruyama\Enemy\Component\ImpactMap\SelfImpactNodeManager">
       <UniqueIdentifier>{0e752351-8eab-46ac-bd8e-60bd35c7cc0f}</UniqueIdentifier>
-
+    </Filter>
+    <Filter Include="Maruyama\Enemy\Component\ImpactMap\ImpactManager\ImpactDataManager">
+      <UniqueIdentifier>{326f718e-8655-4a5a-88bf-f7bf69369fc7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\Component\ImpactMap\ImpactManager\ImpactDataManager\OccupancyManager">
+      <UniqueIdentifier>{3fd99430-e913-40b9-bfe4-7f27f64e03ab}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1470,7 +1473,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)I_FactionMember.h">
       <Filter>Maruyama\Enemy\Component\AI\Director\FactionCoordinator\I_FactionMember</Filter>
     </ClInclude>
-
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\TestComponent.h">
       <Filter>Watanabe\Component\TestComponent</Filter>
     </ClInclude>
@@ -1491,10 +1493,12 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\ObjectHider.h">
       <Filter>Itabashi\Component\ObjectHider</Filter>
-	</ClInclude>
+    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)SelfImpactNodeManager.h">
       <Filter>Maruyama\Enemy\Component\ImpactMap\SelfImpactNodeManager</Filter>
-
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)OccupancyManager.h">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\ImpactManager\ImpactDataManager\OccupancyManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2080,7 +2084,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)I_FactionMember.cpp">
       <Filter>Maruyama\Enemy\Component\AI\Director\FactionCoordinator\I_FactionMember</Filter>
     </ClCompile>
-
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\TestComponent.cpp">
       <Filter>Watanabe\Component\TestComponent</Filter>
     </ClCompile>
@@ -2098,10 +2101,12 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\ObjectHider.cpp">
       <Filter>Itabashi\Component\ObjectHider</Filter>
-	</ClCompile>
+    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)SelfImpactNodeManager.cpp">
       <Filter>Maruyama\Enemy\Component\ImpactMap\SelfImpactNodeManager</Filter>
-
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)OccupancyManager.cpp">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\ImpactManager\ImpactDataManager\OccupancyManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
