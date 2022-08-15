@@ -22,6 +22,7 @@ namespace basecross {
 		///	前方宣言
 		//--------------------------------------------------------------------------------------
 		class ImpactMap;
+		class OccupancyManager;
 
 		//--------------------------------------------------------------------------------------
 		///	フィールド影響マップのパラメータ
@@ -31,22 +32,6 @@ namespace basecross {
 			float createHeightOffset;   //生成する高さのオフセット
 
 			FieldImpactMap_Parametor();
-		};
-
-		//--------------------------------------------------------------------------------------
-		///	占有値更新データ
-		//--------------------------------------------------------------------------------------
-		struct OccupancyUpdateData {
-			std::unique_ptr<GameTimer> timer;	//タイマー
-			std::weak_ptr<NavGraphNode> node;	//ノード
-
-			OccupancyUpdateData();
-
-			OccupancyUpdateData(const float time, const std::shared_ptr<NavGraphNode>& node);
-
-			OccupancyUpdateData(const GameTimer& timer, const std::shared_ptr<NavGraphNode>& node);
-
-			bool operator== (const OccupancyUpdateData& data);
 		};
 
 		//--------------------------------------------------------------------------------------
@@ -62,7 +47,8 @@ namespace basecross {
 
 			std::shared_ptr<ImpactMap> m_impactMap = nullptr;			//影響マップ本体
 			std::vector<std::weak_ptr<GameObject>> m_floors;			//影響マップ展開する床データ配列
-			std::vector<OccupancyUpdateData> m_occupancyUpdateDatas;	//占有値更新データ
+			//std::vector<OccupancyUpdateData> m_occupancyUpdateDatas;	//占有値更新データ
+			std::unique_ptr<OccupancyManager> m_occupancyManager;
 
 		public:
 			/// <summary>
@@ -117,6 +103,7 @@ namespace basecross {
 			/// <summary>
 			/// 占有値更新するデータを生成
 			/// </summary>
+			/// <param name="node">更新するノード</param>
 			void AddOccupancyUpdateData(const std::shared_ptr<NavGraphNode>& node);
 
 		private:
