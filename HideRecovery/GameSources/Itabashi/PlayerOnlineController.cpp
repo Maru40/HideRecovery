@@ -5,6 +5,7 @@
 #include "PlayerInputer.h"
 #include "MaruUtility.h"
 #include "ItemAcquisitionManager.h"
+#include "OwnHideItemManager.h"
 #include "HideItem.h"
 #include "Item.h"
 
@@ -13,10 +14,40 @@ namespace basecross
 {
 namespace Online
 {
+	struct HideItemOnlineData
+	{
+		int playerNumber;
+		Vec3 position;
+
+		HideItemOnlineData(int playerNumber, const Vec3& position) :
+			playerNumber(playerNumber),
+			position(position)
+		{
+
+		}
+	};
+
 	PlayerOnlineController::PlayerOnlineController(const std::shared_ptr<GameObject>& owner) :
 		OnlineComponent(owner)
 	{
 
+	}
+
+	std::vector<std::shared_ptr<PlayerOnlineController>> PlayerOnlineController::GetPlayerOnlineControllers() const
+	{
+		std::vector<std::shared_ptr<PlayerOnlineController>> onlineControllers;
+
+		for (auto& gameObject : GetStage()->GetGameObjectVec())
+		{
+			auto controller = gameObject->GetComponent<PlayerOnlineController>(false);
+
+			if (controller)
+			{
+				onlineControllers.push_back(controller);
+			}
+		}
+
+		return onlineControllers;
 	}
 
 	void PlayerOnlineController::TryAquisition()
@@ -38,7 +69,7 @@ namespace Online
 		int itemId = item->GetItemId();
 		auto& localPlayer = OnlineManager::GetLocalPlayer();
 
-		if (localPlayer.getIsMasterClient())
+		if (localPlayer.getIsMasterClient() && !item->GetItemOwner())
 		{
 			acquisitionManager->ItemAcquisition(item);
 			OnlineManager::RaiseEvent(false, (std::uint8_t*)&ItemOwnerShipData(itemId, m_playerNumber), sizeof(ItemOwnerShipData), EXECUTE_ACQUISITION_EVENT_CODE);
@@ -52,7 +83,7 @@ namespace Online
 	{
 		auto& localPlayer = OnlineManager::GetLocalPlayer();
 
-		if (!localPlayer.getIsMasterClient())
+		if (!localPlayer.getIsMasterClient() || m_playerNumber != localPlayer.getNumber())
 		{
 			return;
 		}
@@ -66,26 +97,21 @@ namespace Online
 			return;
 		}
 
-		for (auto& gameObject : GetStage()->GetGameObjectVec())
+		for (auto& onlineController : GetPlayerOnlineControllers())
 		{
-			auto onlinePlayer = gameObject->GetComponent<PlayerOnlineController>(false);
-
-			if (!onlinePlayer)
+			if (onlineController->GetPlayerNumber() != playerNumber)
 			{
 				continue;
 			}
 
-			if (onlinePlayer->GetPlayerNumber() == playerNumber)
+			auto otherAcquisitionManager = onlineController->m_acquisitionManager.lock();
+
+			if (otherAcquisitionManager)
 			{
-				auto otherAcquisitionManager = onlinePlayer->m_acquisitionManager.lock();
-
-				if (otherAcquisitionManager)
-				{
-					otherAcquisitionManager->ItemAcquisition(item);
-				}
-
-				break;
+				otherAcquisitionManager->ItemAcquisition(item);
 			}
+
+			break;
 		}
 
 		OnlineManager::RaiseEvent(false, (std::uint8_t*)&ItemOwnerShipData(itemId, playerNumber), sizeof(ItemOwnerShipData), EXECUTE_ACQUISITION_EVENT_CODE);
@@ -108,12 +134,83 @@ namespace Online
 		acquisitionManager->ItemAcquisition(Item::StageFindToItemId(GetStage(), ownerShipData.itemId));
 	}
 
-	void PlayerOnlineController::OnCreate()
+	void PlayerOnlineController::TryItemHide()
+	{
+		if (!PlayerInputer::IsPutHideItem())
+		{
+			return;
+		}
+
+		auto hideItemManager = m_hideItemManager.lock();
+
+		if (!hideItemManager || !hideItemManager->CanPut())
+		{
+			return;
+		}
+
+		auto& localPlayer = OnlineManager::GetLocalPlayer();
+		int localNumber = localPlayer.getNumber();
+
+		if (localPlayer.getIsMasterClient())
+		{
+			auto position = hideItemManager->PutHideItem();
+			OnlineManager::RaiseEvent(false, (std::uint8_t*)&HideItemOnlineData(localNumber, position), sizeof(HideItemOnlineData), EXECUTE_ITEM_HIDE_EVENT_CODE);
+			return;
+		}
+
+		OnlineManager::RaiseEvent(false, (std::uint8_t*)&localNumber, sizeof(int), TRY_ITEM_HIDE_EVENT_CODE);
+	}
+
+	void PlayerOnlineController::TryItemHideEvent(int playerNumber)
+	{
+		auto& localPlayer = OnlineManager::GetLocalPlayer();
+
+		if (!localPlayer.getIsMasterClient() || m_playerNumber != localPlayer.getNumber())
+		{
+			return;
+		}
+
+		for (auto& onlineController : GetPlayerOnlineControllers())
+		{
+			if (onlineController->GetPlayerNumber() != playerNumber)
+			{
+				continue;
+			}
+
+			auto hideItemManager = onlineController->m_hideItemManager.lock();
+
+			if (hideItemManager && hideItemManager->CanPut())
+			{
+				auto position = hideItemManager->PutHideItem();
+				OnlineManager::RaiseEvent(false, (std::uint8_t*)&HideItemOnlineData(playerNumber, position), sizeof(HideItemOnlineData), EXECUTE_ITEM_HIDE_EVENT_CODE);
+			}
+
+			break;
+		}
+	}
+
+	void PlayerOnlineController::ExecuteItemHideEvent(int playerNumber, const Vec3& position)
+	{
+		if (m_playerNumber != playerNumber)
+		{
+			return;
+		}
+
+		auto hideItemManager = m_hideItemManager.lock();
+
+		if (hideItemManager)
+		{
+			hideItemManager->PutHideItem(position);
+		}
+	}
+
+	void PlayerOnlineController::OnLateStart()
 	{
 		auto& owner = GetGameObject();
 		m_objectMover = owner->GetComponent<Operator::ObjectMover>();
 		m_rotationController = owner->GetComponent<RotationController>();
 		m_acquisitionManager = owner->GetComponent<ItemAcquisitionManager>();
+		m_hideItemManager = owner->GetComponent<OwnHideItemManager>(false);
 	}
 
 	void PlayerOnlineController::OnUpdate()
@@ -143,6 +240,8 @@ namespace Online
 		}
 
 		TryAquisition();
+
+		TryItemHide();
 	}
 
 	void PlayerOnlineController::OnCustomEventAction(int playerNumber, std::uint8_t eventCode, const std::uint8_t* bytes)
@@ -163,6 +262,19 @@ namespace Online
 		{
 			auto ownerShipData = *(ItemOwnerShipData*)bytes;
 			ExecuteAcquisitionEvent(ownerShipData);
+			return;
+		}
+
+		if (eventCode == TRY_ITEM_HIDE_EVENT_CODE)
+		{
+			TryItemHideEvent(playerNumber);
+			return;
+		}
+
+		if (eventCode == EXECUTE_ITEM_HIDE_EVENT_CODE)
+		{
+			HideItemOnlineData data = *(HideItemOnlineData*)bytes;
+			ExecuteItemHideEvent(data.playerNumber, data.position);
 			return;
 		}
 	}
