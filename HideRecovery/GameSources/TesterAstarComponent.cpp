@@ -45,20 +45,6 @@ namespace basecross {
 			std::shared_ptr<maru::ImpactMap> impactMap = maru::FieldImpactMap::GetInstance()->GetImpactMap();
 
 			impactManager.CalculateEyeImpact(impactMap, impacter);
-			return;
-
-			auto nodes = impactMap->GetEyeRangeNodes(transform->GetPosition(), GetThis<I_Impacter>());
-
-			for (auto node : nodes) {
-				//占有値更新
-				auto impactData = node->GetImpactData();
-				impactData.occupancyValue = 0;
-				node->SetImpactData(impactData);
-
-				//占有値に合わせてノードの色変更（デバッグ）
-				auto colorValue = 1.0f - impactData.occupancyValue;
-				impactMap->ChangeTargetNodeColor(node->GetIndex(), Col4(1.0f, colorValue, colorValue, 1.0f));
-			}
 		}
 
 		std::shared_ptr<GameObject> TesterAstarComponent::GetImpacterObject() const noexcept {
