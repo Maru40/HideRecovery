@@ -35,7 +35,7 @@ namespace basecross {
 		//--------------------------------------------------------------------------------------
 
 		AIImpacter_Parametor::AIImpacter_Parametor():
-			occupancyUpdateIntervalTime(1.0f)
+			occupancyUpdateIntervalTime(0.5f)
 		{}
 
 		//--------------------------------------------------------------------------------------
