@@ -45,12 +45,10 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)HidePlace.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ImpactDataDraw.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ImpactManager.h" />
-
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\Item.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\ObjectHider.h" />
-
+    <ClInclude Include="$(MSBuildThisFileDirectory)OccupancyManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)SelfImpactNodeManager.h" />
-
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\ObjectMover.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlinePlayerManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineTestRoom.h" />
@@ -291,6 +289,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)LoadCSV.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LoadPositionGenerator.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LookAtCameraManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)OccupancyManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)OriginalMeshToonObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)FadeSprite.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)GraphAstar.cpp" />
