@@ -205,7 +205,7 @@ namespace basecross {
 			std::vector<std::shared_ptr<NavGraphNode>> nodes;
 
 			//Ž©•ªŽ©g‚Ìƒm[ƒh‚ðŽæ“¾
-			auto selfNode = UtilityAstar::SearchNearNode(*m_astar.get(), selfPosition);
+			auto selfNode = impacter->GetImpacterData().selfNode.lock();
 			if (!selfNode) {
 				return nodes;
 			}
