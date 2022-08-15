@@ -154,7 +154,7 @@ namespace basecross {
 				}
 
 				/// <summary>
-				/// テンプレートに一致する命令が受信されたら、通知を受け取る(現在仕様不可)
+				/// テンプレートに一致する命令が受信されたら、通知を受け取る(現在使用不可)
 				/// </summary>
 				template<class T,
 					std::enable_if_t<std::is_base_of_v<I_Tuple, T>, std::nullptr_t> = nullptr>
