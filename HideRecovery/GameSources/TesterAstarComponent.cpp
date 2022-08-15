@@ -24,28 +24,54 @@
 #include "ImpactManager.h"
 #include "I_Impact.h"
 
+#include "TimeHelper.h"
+#include "GameTimer.h"
+
 namespace basecross {
 	namespace Tester {
 
-		void TesterAstarComponent::OnUpdate() {
-			if (PlayerInputer::GetInstance()->IsLeftDown()) {
-				//UpdateEyeRangeImpactMap();
-			}
+		//--------------------------------------------------------------------------------------
+		///	AIの影響者パラメータ
+		//--------------------------------------------------------------------------------------
 
+		AIImpacter_Parametor::AIImpacter_Parametor():
+			occupancyUpdateIntervalTime(1.0f)
+		{}
+
+		//--------------------------------------------------------------------------------------
+		///	AIの影響者本体
+		//--------------------------------------------------------------------------------------
+
+		TesterAstarComponent::TesterAstarComponent(const std::shared_ptr<GameObject>& objPtr):
+			Component(objPtr), m_param(Parametor()), m_occupancyTimer(new GameTimer(m_param.occupancyUpdateIntervalTime))
+		{}
+
+		void TesterAstarComponent::OnUpdate() {
 			UpdateEyeRangeImpactMap();
 		}
 
 		void TesterAstarComponent::UpdateEyeRangeImpactMap() {
-			auto impacter = GetGameObject()->GetComponent<I_Impacter>(false);
+			m_occupancyTimer->UpdateTimer();
+			if (!m_occupancyTimer->IsTimeUp()) { //時間が経過していないなら、処理をしない
+				return;
+			}
+			
+			m_occupancyTimer->ResetTimer(m_param.occupancyUpdateIntervalTime);	//計測時間をリセット
+
+			auto impacter = GetGameObject()->GetComponent<I_Impacter>(false);	//影響者の取得
 			if (!impacter) {
 				return;
 			}
 
 			maru::ImpactManager impactManager;
-			std::shared_ptr<maru::ImpactMap> impactMap = maru::FieldImpactMap::GetInstance()->GetImpactMap();
+			std::shared_ptr<maru::ImpactMap> impactMap = maru::FieldImpactMap::GetInstance()->GetImpactMap();	//影響マップの取得
 
-			impactManager.CalculateEyeImpact(impactMap, impacter);
+			impactManager.CalculateEyeImpact(impactMap, impacter);	//視界範囲ノードの更新
 		}
+
+		//--------------------------------------------------------------------------------------
+		///	インターフェースの実装
+		//--------------------------------------------------------------------------------------
 
 		std::shared_ptr<GameObject> TesterAstarComponent::GetImpacterObject() const noexcept {
 			return GetGameObject();
