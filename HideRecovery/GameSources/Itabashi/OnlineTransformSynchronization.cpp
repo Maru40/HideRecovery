@@ -16,6 +16,18 @@ namespace Online
 		
 	}
 
+	OnlineTransformSynchronization::OnlineTransformData OnlineTransformSynchronization::GetTransformData() const
+	{
+		OnlineTransformData data;
+
+		auto transform = m_transform.lock();
+
+		data.position = transform->GetWorldPosition();
+		data.rotation = transform->GetWorldQuaternion();
+
+		return data;
+	}
+
 	void OnlineTransformSynchronization::OnCreate()
 	{
 		m_transform = GetGameObject()->GetComponent<Transform>();
@@ -31,9 +43,7 @@ namespace Online
 			return;
 		}
 
-		OnlineTransformData data;
-		data.position = transform->GetWorldPosition();
-		data.rotation = transform->GetWorldQuaternion();
+		auto data = GetTransformData();
 
 		if (data == m_beforeData)
 		{

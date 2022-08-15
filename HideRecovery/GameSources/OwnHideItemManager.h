@@ -1,8 +1,8 @@
-
+ï»¿
 /*!
 @file OwnHideItemManager.h
-@brief OwnHideItemManager‚È‚Ç
-’S“–FŠÛR—TŠì
+@brief OwnHideItemManagerãªã©
+æ‹…å½“ï¼šä¸¸å±±è£•å–œ
 */
 
 #pragma once
@@ -11,29 +11,29 @@
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
-	/// ‘O•ûéŒ¾
+	/// å‰æ–¹å®£è¨€
 	//--------------------------------------------------------------------------------------
 	class HidePlace;
 
 	//--------------------------------------------------------------------------------------
-	/// ƒpƒ‰ƒ[ƒ^
+	/// ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
 	//--------------------------------------------------------------------------------------
 	struct OwnHideItemManager_Parametor {
-		float searchHidePlaceRange;			//‰B‚·êŠ‚Éè‚ª“Í‚­”ÍˆÍ
-		float putFloorAnimationTime;		//°‚É’u‚­ƒAƒjƒ[ƒVƒ‡ƒ“ŠÔ
-		float putHideObjectAnimationTime;	//‰B‚·êŠ‚É’u‚­ƒAƒjƒ[ƒVƒ‡ƒ“ŠÔ
+		float searchHidePlaceRange;			//éš ã™å ´æ‰€ã«æ‰‹ãŒå±Šãç¯„å›²
+		float putFloorAnimationTime;		//åºŠã«ç½®ãã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³æ™‚é–“
+		float putHideObjectAnimationTime;	//éš ã™å ´æ‰€ã«ç½®ãã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³æ™‚é–“
 
 		OwnHideItemManager_Parametor();
 
 		/// <summary>
-		/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+		/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		/// </summary>
-		/// <param name="searchHidePlaceRange">‰B‚·êŠ‚Éè‚ª“Í‚­”ÍˆÍ</param>
+		/// <param name="searchHidePlaceRange">éš ã™å ´æ‰€ã«æ‰‹ãŒå±Šãç¯„å›²</param>
 		OwnHideItemManager_Parametor(const float searchHidePlaceRange);
 	};
 
 	//--------------------------------------------------------------------------------------
-	/// ‚Á‚Ä‚¢‚é‰B‚·ƒAƒCƒeƒ€‚ÌŠÇ—
+	/// æŒã£ã¦ã„ã‚‹éš ã™ã‚¢ã‚¤ãƒ†ãƒ ã®ç®¡ç†
 	//--------------------------------------------------------------------------------------
 	class OwnHideItemManager : public Component 
 	{
@@ -41,65 +41,73 @@ namespace basecross {
 		using Parametor = OwnHideItemManager_Parametor;
 
 	private:
-		Parametor m_param;					//ƒpƒ‰ƒ[ƒ^
-		std::unique_ptr<GameTimer> m_timer;	//ŠÔŠÇ—
+		Parametor m_param;					//ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
+		std::unique_ptr<GameTimer> m_timer;	//æ™‚é–“ç®¡ç†
 
-		bool m_isFleePut;	//ƒfƒoƒbƒO—p‚Ì‚Ç‚±‚Å‚à’u‚¯‚éƒtƒ‰ƒO
+		bool m_isFleePut;	//ãƒ‡ãƒãƒƒã‚°ç”¨ã®ã©ã“ã§ã‚‚ç½®ã‘ã‚‹ãƒ•ãƒ©ã‚°
 
 	public:
 		/// <summary>
-		/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+		/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		/// </summary>
-		/// <param name="objPtr">‚±‚ÌƒNƒ‰ƒX‚ğŠ—L‚·‚éƒQ[ƒ€ƒIƒuƒWƒFƒNƒg</param>
+		/// <param name="objPtr">ã“ã®ã‚¯ãƒ©ã‚¹ã‚’æ‰€æœ‰ã™ã‚‹ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</param>
 		OwnHideItemManager(const std::shared_ptr<GameObject>& objPtr);
 
 		/// <summary>
-		/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+		/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		/// </summary>
-		/// <param name="objPtr">‚±‚ÌƒNƒ‰ƒX‚ğŠ—L‚·‚éƒQ[ƒ€ƒIƒuƒWƒFƒNƒg</param>
-		/// <param name="parametor">ƒpƒ‰ƒ[ƒ^</param>
+		/// <param name="objPtr">ã“ã®ã‚¯ãƒ©ã‚¹ã‚’æ‰€æœ‰ã™ã‚‹ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</param>
+		/// <param name="parametor">ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿</param>
 		OwnHideItemManager(const std::shared_ptr<GameObject>& objPtr, const Parametor& parametor);
 
 		void OnUpdate() override;
 
-	private:
 		/// <summary>
-		/// ƒAƒCƒeƒ€‚ğ’u‚­
+		/// ã‚¢ã‚¤ãƒ†ãƒ ã‚’ç½®ã
 		/// </summary>
-		void PutHideItem();
+		/// <returns>ã‚¢ã‚¤ãƒ†ãƒ ã‚’ç½®ã„ãŸåº§æ¨™</returns>
+		Vec3 PutHideItem();
 
 		/// <summary>
-		/// ƒuƒ‰ƒtsˆ×
+		/// ã‚¢ã‚¤ãƒ†ãƒ ã‚’ç½®ã
+		/// </summary>
+		/// <param name="position">ç½®ãåº§æ¨™</param>
+		void PutHideItem(const Vec3& position);
+
+		/// <summary>
+		/// ãƒ–ãƒ©ãƒ•è¡Œç‚º
 		/// </summary>
 		void BluffPutHideItem();
 
 		/// <summary>
-		/// ƒAƒjƒ[ƒVƒ‡ƒ“‚ÌÄ¶
+		/// ç½®ã‘ã‚‹ã‹ã©ã†ã‹ã‚’è¿”ã™
 		/// </summary>
-		/// <param name="putEvent">ƒAƒjƒ[ƒVƒ‡ƒ“ƒCƒxƒ“ƒg</param>
+		/// <returns>ç½®ã‘ã‚‹ãªã‚‰true</returns>
+		bool CanPut() const;
+	private:
+
+		/// <summary>
+		/// ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®å†ç”Ÿ
+		/// </summary>
+		/// <param name="putEvent">ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚¤ãƒ™ãƒ³ãƒˆ</param>
 		void PlayAnimation(const std::function<void()>& putEvent);
 
 		/// <summary>
-		/// ‰ñ“]ˆ—
+		/// å›è»¢å‡¦ç†
 		/// </summary>
 		void Rotation();
 
-		/// <summary>
-		/// ’u‚¯‚é‚©‚Ç‚¤‚©‚ğ•Ô‚·
-		/// </summary>
-		/// <returns>’u‚¯‚é‚È‚çtrue</returns>
-		bool IsPut() const;
 
 		/// <summary>
-		/// ‰B‚·êŠ‚Ìæ“¾
+		/// éš ã™å ´æ‰€ã®å–å¾—
 		/// </summary>
-		/// <returns>‰B‚·êŠ‚ğæ“¾</returns>
+		/// <returns>éš ã™å ´æ‰€ã‚’å–å¾—</returns>
 		Vec3 CalculateHidePosition() const;
 
 		/// <summary>
-		/// ‰B‚·êŠ‚ğ’T‚µ‚Ä•Ô‚·B
+		/// éš ã™å ´æ‰€ã‚’æ¢ã—ã¦è¿”ã™ã€‚
 		/// </summary>
-		/// <returns>‰B‚·êŠ</returns>
+		/// <returns>éš ã™å ´æ‰€</returns>
 		std::shared_ptr<HidePlace> SearchNearHidePlace() const;
 	};
 

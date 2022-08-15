@@ -30,6 +30,8 @@ namespace Online
 
 		OnlineTransformData m_beforeData;
 
+		OnlineTransformData GetTransformData() const;
+
 	public:
 		/// <summary>
 		/// オンラインのイベントコード

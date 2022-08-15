@@ -11,6 +11,7 @@ namespace basecross
 
 	void Item::SetItemOwner(const std::shared_ptr<GameObject>& itemOwner, bool isOwnerParent)
 	{
+		m_itemOwner = itemOwner;
 		auto gameObject = GetGameObject();
 
 		if (isOwnerParent)
@@ -21,6 +22,8 @@ namespace basecross
 
 	void Item::ReleaseItemOwner(bool isParentClear)
 	{
+		m_itemOwner.reset();
+
 		auto gameObject = GetGameObject();
 
 		if (isParentClear)

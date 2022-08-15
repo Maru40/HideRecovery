@@ -54,20 +54,10 @@ namespace basecross {
 	{}
 
 	OwnHideItemManager::OwnHideItemManager(const std::shared_ptr<GameObject>& objPtr, const Parametor& parametor):
-		Component(objPtr), m_param(parametor), m_timer(new GameTimer(0)), m_isFleePut(true)
+		Component(objPtr), m_param(parametor), m_timer(new GameTimer(0)), m_isFleePut(false)
 	{}
 
 	void OwnHideItemManager::OnUpdate() {
-		//隠すボタンを押したら
-		if (PlayerInputer::IsPutHideItem()) {
-			PutHideItem();
-		}
-
-		//ブラフアイテムボタン
-		if (PlayerInputer::IsBluffPutItem()) {
-			BluffPutHideItem();
-		}
-
 		//タイムベント
 		if (!m_timer->IsTimeUp()) {
 			m_timer->UpdateTimer();
@@ -79,9 +69,9 @@ namespace basecross {
 		}
 	}
 
-	void OwnHideItemManager::PutHideItem() {
-		if (!IsPut()) { //置ける状態でないなら
-			return;
+	Vec3 OwnHideItemManager::PutHideItem() {
+		if (!CanPut()) { //置ける状態でないなら
+			return Vec3();
 		}
 
 		auto bag = GetGameObject()->GetComponent<ItemBag>(false);
@@ -99,10 +89,29 @@ namespace basecross {
 
 		PlayAnimation(putEvent);
 		Rotation();
+
+		return hidePosition;
+	}
+
+	void OwnHideItemManager::PutHideItem(const Vec3& position)
+	{
+		auto bag = GetGameObject()->GetComponent<ItemBag>(false);
+		auto hideItem = bag->GetHideItem();
+
+		auto putEvent = [&, bag, hideItem, position]() {
+			auto hideItemTrans = hideItem->GetGameObject()->GetComponent<Transform>();
+			hideItemTrans->SetPosition(position);
+			hideItem->GetGameObject()->SetActive(true);
+
+			bag->RemoveItem(hideItem->GetGameObject()->GetComponent<Item>());
+		};
+
+		PlayAnimation(putEvent);
+		Rotation();
 	}
 
 	void OwnHideItemManager::BluffPutHideItem() {
-		if (!IsPut()) {
+		if (!CanPut()) {
 			return;
 		}
 
@@ -139,7 +148,7 @@ namespace basecross {
 		}
 	}
 
-	bool OwnHideItemManager::IsPut() const {
+	bool OwnHideItemManager::CanPut() const {
 		//必要コンポーネント確認
 		auto bag = GetGameObject()->GetComponent<ItemBag>(false);
 		auto animator = GetGameObject()->GetComponent<PlayerAnimationCtrl>(false);

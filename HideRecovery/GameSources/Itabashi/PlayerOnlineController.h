@@ -5,6 +5,7 @@ namespace basecross
 {
 	class RotationController;
 	class ItemAcquisitionManager;
+	class OwnHideItemManager;
 
 namespace Operator
 {
@@ -34,6 +35,8 @@ namespace Online
 
 		static constexpr std::uint8_t TRY_ACQUISITION_EVENT_CODE = 2;
 		static constexpr std::uint8_t EXECUTE_ACQUISITION_EVENT_CODE = 3;
+		static constexpr std::uint8_t TRY_ITEM_HIDE_EVENT_CODE = 4;
+		static constexpr std::uint8_t EXECUTE_ITEM_HIDE_EVENT_CODE = 5;
 
 	private:
 
@@ -48,11 +51,14 @@ namespace Online
 
 		std::weak_ptr<ItemAcquisitionManager> m_acquisitionManager;
 
+		std::weak_ptr<OwnHideItemManager> m_hideItemManager;
+
 		/// <summary>
 		/// 対応するプレイヤー番号
 		/// </summary>
 		int m_playerNumber = 0;
 
+		std::vector<std::shared_ptr<PlayerOnlineController>> GetPlayerOnlineControllers() const;
 
 		void TryAquisition();
 
@@ -60,11 +66,17 @@ namespace Online
 
 		void ExecuteAcquisitionEvent(const ItemOwnerShipData& ownerShipData);
 
+		void TryItemHide();
+
+		void TryItemHideEvent(int playerNumber);
+
+		void ExecuteItemHideEvent(int playerNumber, const Vec3& position);
+
 	public:
 
 		PlayerOnlineController(const std::shared_ptr<GameObject>& owner);
 
-		void OnCreate() override;
+		void OnLateStart() override;
 
 		void OnUpdate() override;
 
