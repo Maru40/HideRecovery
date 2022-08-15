@@ -48,6 +48,7 @@ namespace basecross {
 	public:
 		AIImpacter(const std::shared_ptr<GameObject>& objPtr);
 
+		void OnCreate() override;
 		void OnUpdate() override;
 
 	private:

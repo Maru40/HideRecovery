@@ -31,7 +31,10 @@
 #include "Targeted.h"
 #include "TargetManager.h"
 
+#include "I_FactionMember.h"
 #include "FactionCoordinator.h"
+
+#include "EyeSearchRange.h"
 
 namespace basecross {
 	namespace Enemy {
@@ -64,30 +67,26 @@ namespace basecross {
 		//--------------------------------------------------------------------------------------
 
 		bool Stator_Hero::IsInEyeRangeTarget(const TransitionMember& member) {
-			//auto hideItems 
 			auto targets = maru::Utility::FindComponents<Targeted>();
+			auto eye = GetGameObject()->GetComponent<EyeSearchRange>(false);
+			if (!eye) {
+				return false;
+			}
 
 			for (auto target : targets) {
 				if (!target->GetGameObject()->IsActive()) {
 					continue;
 				}
 
-				auto toTargetVec = maru::Utility::CalcuToTargetVec(GetGameObject(), target->GetGameObject());
-				if (toTargetVec.length() < member.plowlingEyeRange) {
+				if (eye->IsInEyeRange(target->GetGameObject(), member.plowlingEyeRange)) {
 					//ターゲット管理にターゲットを設定
 					if (auto& targetManager = GetGameObject()->GetComponent<TargetManager>(false)) {
 						targetManager->SetTarget(target->GetGameObject());
 					}
 
-					////デバッグで、見つけたことを知らせる。
-					//auto object = GetGameObject();
-					//auto factionMember = object->GetComponent<I_FactionMember>(false);
-					//auto targetManager = object->GetComponent<TargetManager>(false);
-					//if (factionMember && targetManager) {
-					//	std::shared_ptr<FactionCoordinator> coordinator = factionMember->GetFactionCoordinator();
-					//	//コーディネーターに敵を見つけたことを伝える。
-					//	coordinator->DebugWriteTarget(factionMember, targetManager->GetTarget());
-					//}
+					if (auto& factionMember = GetGameObject()->GetComponent<I_FactionMember>(false)) {
+						
+					}
 
 					return true;
 				}
