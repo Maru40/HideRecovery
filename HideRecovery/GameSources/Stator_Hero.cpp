@@ -31,6 +31,7 @@
 #include "Targeted.h"
 #include "TargetManager.h"
 
+#include "I_FactionMember.h"
 #include "FactionCoordinator.h"
 
 #include "EyeSearchRange.h"
@@ -81,6 +82,10 @@ namespace basecross {
 					//ターゲット管理にターゲットを設定
 					if (auto& targetManager = GetGameObject()->GetComponent<TargetManager>(false)) {
 						targetManager->SetTarget(target->GetGameObject());
+					}
+
+					if (auto& factionMember = GetGameObject()->GetComponent<I_FactionMember>(false)) {
+						
 					}
 
 					return true;
