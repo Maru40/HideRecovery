@@ -14,7 +14,34 @@ namespace basecross {
 
 	namespace Enemy {
 
+		namespace Tuple {
 
+			//--------------------------------------------------------------------------------------
+			/// 希望行動の基底クラス
+			//--------------------------------------------------------------------------------------
 
+			TupleActionBase::TupleActionBase(
+				const std::shared_ptr<GameObject>& acter, 
+				const std::shared_ptr<GameObject>& requester, 
+				const float value
+			) :
+				acter(acter),
+				requester(requester),
+				value(value)
+			{}
+
+			//--------------------------------------------------------------------------------------
+			/// リクエストの基底クラス
+			//--------------------------------------------------------------------------------------
+
+			TupleRequestBase::TupleRequestBase(
+				const std::shared_ptr<GameObject>& requester, 
+				const float value
+			) :
+				requester(requester),
+				value(value)
+			{}
+
+		}
 	}
 }
