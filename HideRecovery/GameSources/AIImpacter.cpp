@@ -27,6 +27,8 @@
 #include "TimeHelper.h"
 #include "GameTimer.h"
 
+#include "TupleSpace.h"
+
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
@@ -46,6 +48,22 @@ namespace basecross {
 		m_param(Parametor()), 
 		m_occupancyTimer(new GameTimer(m_param.occupancyUpdateIntervalTime))
 	{}
+
+	void AIImpacter::OnCreate() {
+		return;
+		//タプルスペースのデバッグ
+		using namespace Enemy::Tuple;
+
+		auto tupleSpace = TupleSpace();
+
+		tupleSpace.Write<TupleRequestBase>(GetGameObject(), 1.0f);
+
+		auto isFunc = [](const std::shared_ptr<TupleRequestBase>& request) { return request->value > 0.5f; };
+		auto read = tupleSpace.Read<TupleRequestBase>(isFunc);
+		auto read2 = tupleSpace.Take(read);
+
+		auto r2 = tupleSpace.Read<TupleRequestBase>(isFunc);
+	}
 
 	void AIImpacter::OnUpdate() {
 		UpdateEyeRangeImpactMap();
