@@ -42,7 +42,9 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 
 	AIImpacter::AIImpacter(const std::shared_ptr<GameObject>& objPtr) :
-		Component(objPtr), m_param(Parametor()), m_occupancyTimer(new GameTimer(m_param.occupancyUpdateIntervalTime))
+		Component(objPtr), 
+		m_param(Parametor()), 
+		m_occupancyTimer(new GameTimer(m_param.occupancyUpdateIntervalTime))
 	{}
 
 	void AIImpacter::OnUpdate() {
