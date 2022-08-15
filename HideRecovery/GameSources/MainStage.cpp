@@ -94,7 +94,7 @@ namespace basecross {
 			// BGM‚ÌÄ¶
 
 			//Generator‚Ì¶¬
-			//AddGameObject<EnemyGeneratorObject>();
+			AddGameObject<EnemyGeneratorObject>();
 
 			//Map‚Ì“Ç‚İ‚İ
 			CreateMap(sm_loadMapName);

@@ -126,7 +126,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)SkillBase.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Task_AstarEvade.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Task_Flee.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)TesterAstarComponent.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)AIImpacter.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)TimerDestroy.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)TitleStage.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ToonPNTStaticModelDraw.h" />
@@ -353,7 +353,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Task_AstarEvade.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Task_AstarMove.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Task_Flee.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)TesterAstarComponent.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)AIImpacter.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)TimerDestory.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)TitleStage.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ToonPNTStaticModelDraw.cpp" />

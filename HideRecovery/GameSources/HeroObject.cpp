@@ -13,7 +13,7 @@
 #include "EnemyMainStateMachine.h"
 #include "Stator_Hero.h"
 
-#include "TesterAstarComponent.h"
+#include "AIImpacter.h"
 #include "SelfImpactNodeManager.h"
 
 namespace basecross {
@@ -31,7 +31,7 @@ namespace basecross {
 			AddComponent<Hero>();
 			AddComponent<Stator_Hero>();
 
-			auto astarComp = AddComponent<Tester::TesterAstarComponent>();
+			auto astarComp = AddComponent<AIImpacter>();
 			AddComponent<maru::SelfImpactNodeManager>(astarComp);
 		}
 
