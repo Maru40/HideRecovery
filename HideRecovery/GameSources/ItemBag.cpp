@@ -63,9 +63,9 @@ namespace basecross {
 
 		if (find != m_items.end())
 		{
-			m_items.erase(find);
+			find->lock()->ReleaseItemOwner(false);
 
-			(*find).lock()->ReleaseItemOwner(false);
+			m_items.erase(find);
 		}
 	}
 

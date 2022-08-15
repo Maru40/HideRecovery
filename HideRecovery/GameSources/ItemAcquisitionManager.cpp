@@ -105,6 +105,7 @@ namespace basecross {
 
 		//アイテムを入れる。
 		bag->AddItem(item);
+		item->SetItemOwner(GetGameObject(), false);
 
 		//アイテムを獲得された状態にする。
 		item->GetGameObject()->SetActive(false);
