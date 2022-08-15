@@ -757,9 +757,6 @@
     <Filter Include="Itabashi\Online\OnlinePlayerManager">
       <UniqueIdentifier>{913a3f2a-aa29-46d1-b17e-989d106e3c4d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Maruyama\Enemy\Component\ImpactMap\Astar\Tester">
-      <UniqueIdentifier>{e0c25eb1-05d0-4534-8b9f-86a6b61eb9c3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Maruyama\Enemy\Component\AI\Director\CoordinatorBase">
       <UniqueIdentifier>{6e74b68c-51e8-430f-a9e2-11dac5c26112}</UniqueIdentifier>
     </Filter>
@@ -813,6 +810,9 @@
     </Filter>
     <Filter Include="Maruyama\Enemy\Component\ImpactMap\ImpactManager\ImpactDataManager\OccupancyManager">
       <UniqueIdentifier>{3fd99430-e913-40b9-bfe4-7f27f64e03ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\Component\ImpactMap\Astar\AIImpacter">
+      <UniqueIdentifier>{e0c25eb1-05d0-4534-8b9f-86a6b61eb9c3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1458,8 +1458,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlinePlayerManager.h">
       <Filter>Itabashi\Online\OnlinePlayerManager</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)TesterAstarComponent.h">
-      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\Tester</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)AIImpacter.h">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\AIImpacter</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)CoordinatorBase.h">
       <Filter>Maruyama\Enemy\Component\AI\Director\CoordinatorBase</Filter>
@@ -2069,8 +2069,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlinePlayerManager.cpp">
       <Filter>Itabashi\Online\OnlinePlayerManager</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)TesterAstarComponent.cpp">
-      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\Tester</Filter>
+    <ClCompile Include="$(MSBuildThisFileDirectory)AIImpacter.cpp">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\AIImpacter</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)CoordinatorBase.cpp">
       <Filter>Maruyama\Enemy\Component\AI\Director\CoordinatorBase</Filter>
