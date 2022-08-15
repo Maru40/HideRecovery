@@ -73,12 +73,12 @@ namespace basecross {
 				auto impactData = node->GetImpactData();
 				auto timeRate = data.timer->GetTimeRate();
 
-				//データの更新
+				//占有値の計算
 				auto endTime = data.timer->GetIntervalTime();
 				auto nowTime = data.timer->GetElapsedTime();
 				auto value = Lerp::CalculateLerp(data.startValue, UPDATE_DESIRED_VALUE, 0.0f, endTime, nowTime, Lerp::rate::Linear);
 
-				//impactData.occupancyValue = UPDATE_DESIRED_VALUE * timeRate;
+				//データの更新
 				impactData.occupancyValue = value;
 				node->SetImpactData(impactData);
 
@@ -133,7 +133,6 @@ namespace basecross {
 				}
 			}
 
-			auto time = CalculateOccupancyIntervalTime(node);
 			auto impactData = node->GetImpactData();
 			m_updateDatas.push_back(OccupancyUpdateData(GameTimer(CalculateOccupancyIntervalTime(node)), node));
 		}
