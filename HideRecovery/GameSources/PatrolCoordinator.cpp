@@ -19,6 +19,12 @@
 
 #include "I_FactionMember.h"
 
+#include "EnemyMainStateMachine.h"
+#include "StatorBase.h"
+#include "EnemyStatorBase.h"
+
+#include "TargetManager.h"
+
 namespace basecross {
 
 	namespace Enemy {
@@ -47,7 +53,40 @@ namespace basecross {
 		}
 
 		void PatrolCoordinator::OnUpdate() {
+			PatrolControl();
+
+			ObserveTuple_FindTarget();
+		}
+
+		void PatrolCoordinator::PatrolControl() {
 			
+		}
+
+		void PatrolCoordinator::ObserveTuple_FindTarget() {
+			auto tupleSpace = GetTupleSpace();
+			auto tuple = tupleSpace->Take<Tuple::FindTarget>();
+			if (!tuple) {
+				return;
+			}
+
+			auto target = tuple->target.lock();
+
+			for (auto& weakMember : GetMembers()) {
+				auto member = weakMember.lock();
+
+				auto stator = member->GetGameObject()->GetComponent<I_Stator_EnumType<Enemy::StateType>>(false);
+				auto targetManager = member->GetGameObject()->GetComponent<TargetManager>(false);
+				if (!stator || !targetManager) {
+					continue;
+				}
+
+				if (stator->IsCurrentState(Enemy::StateType::Chase)) {	//ステートが同じなら処理しない
+					continue;
+				}
+
+				targetManager->SetTarget(target);
+				stator->ChangeState(Enemy::StateType::Chase, (int)Enemy::StateType::Chase);
+			}
 		}
 	}
 }

@@ -34,6 +34,17 @@ namespace basecross {
 
 			void OnStart() override;
 			void OnUpdate() override;
+
+		private:
+			/// <summary>
+			/// パトロールする場所のコントロール
+			/// </summary>
+			void PatrolControl();
+
+			/// <summary>
+			/// ターゲット発見の通知を受け取ったときにする処理
+			/// </summary>
+			void ObserveTuple_FindTarget();
 		};
 
 	}
