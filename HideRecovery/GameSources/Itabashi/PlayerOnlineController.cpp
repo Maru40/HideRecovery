@@ -8,7 +8,7 @@
 #include "OwnHideItemManager.h"
 #include "HideItem.h"
 #include "Item.h"
-
+#include "VelocityManager.h"
 
 namespace basecross
 {
@@ -48,6 +48,50 @@ namespace Online
 		}
 
 		return onlineControllers;
+	}
+
+	void PlayerOnlineController::Move()
+	{
+		auto objectMover = m_objectMover.lock();
+
+		if (!objectMover)
+		{
+			return;
+		}
+
+		auto moveVector = objectMover->Move(PlayerInputer::GetMoveDirection());
+
+		if (moveVector != m_beforeMoveVector)
+		{
+			OnlineManager::RaiseEvent(false, (std::uint8_t*)&(moveVector / App::GetApp()->GetElapsedTime()), sizeof(Vec3), EXECUTE_MOVE_EVENT_CODE);
+		}
+
+		auto rotationController = m_rotationController.lock();
+
+		if (rotationController)
+		{
+			auto input = PlayerInputer::GetMoveDirection();
+			auto direct = maru::Utility::CalcuCameraVec(Vec3(input.x, 0, input.y), GetStage()->GetView()->GetTargetCamera(), GetGameObject());
+
+			rotationController->SetDirect(direct);
+		}
+
+		m_beforeMoveVector = moveVector;
+	}
+
+	void PlayerOnlineController::ExecuteMove(int playerNumber, const Vec3& moveVector)
+	{
+		if (m_playerNumber != playerNumber)
+		{
+			return;
+		}
+
+		auto velocityManager = m_velocityManager.lock();
+
+		if (velocityManager)
+		{
+			velocityManager->SetVelocity(moveVector);
+		}
 	}
 
 	void PlayerOnlineController::TryAquisition()
@@ -211,6 +255,7 @@ namespace Online
 		m_rotationController = owner->GetComponent<RotationController>();
 		m_acquisitionManager = owner->GetComponent<ItemAcquisitionManager>();
 		m_hideItemManager = owner->GetComponent<OwnHideItemManager>(false);
+		m_velocityManager = owner->GetComponent<VelocityManager>();
 	}
 
 	void PlayerOnlineController::OnUpdate()
@@ -220,24 +265,7 @@ namespace Online
 			return;
 		}
 
-		auto objectMover = m_objectMover.lock();
-
-		if (!objectMover)
-		{
-			return;
-		}
-
-		objectMover->Move(PlayerInputer::GetMoveDirection());
-
-		auto rotationController = m_rotationController.lock();
-
-		if (rotationController)
-		{
-			auto input = PlayerInputer::GetMoveDirection();
-			auto direct = maru::Utility::CalcuCameraVec(Vec3(input.x, 0, input.y), GetStage()->GetView()->GetTargetCamera(), GetGameObject());
-
-			rotationController->SetDirect(direct);
-		}
+		Move();
 
 		TryAquisition();
 
@@ -275,6 +303,13 @@ namespace Online
 		{
 			HideItemOnlineData data = *(HideItemOnlineData*)bytes;
 			ExecuteItemHideEvent(data.playerNumber, data.position);
+			return;
+		}
+
+		if (eventCode == EXECUTE_MOVE_EVENT_CODE)
+		{
+			Vec3 moveVector = *(Vec3*)bytes;
+			ExecuteMove(playerNumber, moveVector);
 			return;
 		}
 	}
