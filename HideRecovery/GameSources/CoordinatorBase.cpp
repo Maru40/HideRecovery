@@ -10,6 +10,8 @@
 
 #include "CoordinatorBase.h"
 
+#include "TupleSpace.h"
+
 namespace basecross {
 
 	namespace Enemy {
