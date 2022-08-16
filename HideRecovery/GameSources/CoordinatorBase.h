@@ -8,9 +8,18 @@
 #pragma once
 #include "stdafx.h"
 
+#include "TupleSpace.h"
+
 namespace basecross {
 
 	namespace Enemy {
+
+		//--------------------------------------------------------------------------------------
+		/// 前方宣言
+		//--------------------------------------------------------------------------------------
+		namespace Tuple {
+			class TupleSpace;
+		}
 
 		//--------------------------------------------------------------------------------------
 		/// 調整者の基底クラス
@@ -19,7 +28,9 @@ namespace basecross {
 		class CoordinatorBase : public std::enable_shared_from_this<CoordinatorBase<T>>
 		{
 		private:
-			std::vector<std::weak_ptr<T>> m_members;	//登録されたメンバー配列
+			std::vector<std::weak_ptr<T>> m_members;			//登録されたメンバー配列
+
+			std::shared_ptr<Tuple::TupleSpace> m_tupleSpace;	//タプルスペース
 
 		public:
 			CoordinatorBase():
@@ -39,7 +50,8 @@ namespace basecross {
 			/// </summary>
 			/// <param name="members">所属するメンバー一覧</param>
 			CoordinatorBase(const vector<std::weak_ptr<T>>& members) :
-				m_members(members)
+				m_members(members),
+				m_tupleSpace(new Tuple::TupleSpace())
 			{}
 			
 			virtual ~CoordinatorBase() = default;
@@ -52,6 +64,12 @@ namespace basecross {
 			//--------------------------------------------------------------------------------------
 			/// アクセッサ
 			//--------------------------------------------------------------------------------------
+
+			/// <summary>
+			/// タプルスペースの取得
+			/// </summary>
+			/// <returns>タプルスペース</returns>
+			std::shared_ptr<Tuple::TupleSpace> GetTupleSpace() const noexcept { return m_tupleSpace; }
 
 			/// <summary>
 			/// メンバーの配列を取得

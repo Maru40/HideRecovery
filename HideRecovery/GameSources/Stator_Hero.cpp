@@ -33,6 +33,7 @@
 
 #include "I_FactionMember.h"
 #include "FactionCoordinator.h"
+#include "PatrolCoordinator.h"
 
 #include "EyeSearchRange.h"
 
@@ -80,12 +81,16 @@ namespace basecross {
 
 				if (eye->IsInEyeRange(target->GetGameObject(), member.plowlingEyeRange)) {
 					//ターゲット管理にターゲットを設定
-					if (auto& targetManager = GetGameObject()->GetComponent<TargetManager>(false)) {
-						targetManager->SetTarget(target->GetGameObject());
-					}
+					//if (auto& targetManager = GetGameObject()->GetComponent<TargetManager>(false)) {
+					//	targetManager->SetTarget(target->GetGameObject());
+					//}
 
+					//ファクションに通知
 					if (auto& factionMember = GetGameObject()->GetComponent<I_FactionMember>(false)) {
-						
+						auto faction = factionMember->GetAssignedFaction();
+						auto tupleSpace = faction->GetTupleSpace();
+
+						tupleSpace->Write<Tuple::FindTarget>(Tuple::FindTarget(GetGameObject(), target->GetGameObject()));
 					}
 
 					return true;
