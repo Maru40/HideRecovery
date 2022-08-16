@@ -20,6 +20,8 @@ namespace basecross {
 			class I_Tuple {
 			public:
 				virtual ~I_Tuple() = default;
+
+				virtual bool operator== (const I_Tuple& other);
 			};
 
 			//--------------------------------------------------------------------------------------
@@ -60,6 +62,23 @@ namespace basecross {
 				TupleRequestBase(const std::shared_ptr<GameObject>& requester, const float value);
 
 				virtual ~TupleRequestBase() = default;
+
+				virtual bool operator== (const TupleRequestBase& other);
+			};
+
+			//--------------------------------------------------------------------------------------
+			/// ターゲットを見つけたことを知らせるタプル
+			//--------------------------------------------------------------------------------------
+			class FindTarget : public TupleRequestBase
+			{
+			public:
+				std::weak_ptr<GameObject> target;
+
+				FindTarget(const std::shared_ptr<GameObject>& requester, const std::shared_ptr<GameObject>& target, const float value = 1.0f);
+
+				virtual ~FindTarget() = default;
+
+				bool operator== (const FindTarget& other);
 			};
 
 			//--------------------------------------------------------------------------------------
@@ -86,12 +105,25 @@ namespace basecross {
 				void Write(Ts&&... params) 
 				{
 					auto tIndex = type_index(typeid(T));
-					auto tuple = std::make_shared<T>(params...);
+					auto newTuple = std::make_shared<T>(params...);
 
-					//型が一致するか判断
+					//同じ情報なら書き込まない
+					if (m_tuplesMap.count(tIndex) != 0) {	//Mapに存在する
+						for (auto& tuple : m_tuplesMap[tIndex]) {
+							auto tTuple = dynamic_pointer_cast<T>(tuple);
+							if (!tTuple) {	//キャストできないなら
+								continue;
+							}
+
+							//同一の書き込みなら、書き込まない
+							if (*tTuple.get() == *newTuple.get()) {
+								return;
+							}
+						}
+					}
 
 					//型を入れる。
-					m_tuplesMap[tIndex].push_back(tuple);
+					m_tuplesMap[tIndex].push_back(newTuple);
 				}
 
 				/// <summary>
