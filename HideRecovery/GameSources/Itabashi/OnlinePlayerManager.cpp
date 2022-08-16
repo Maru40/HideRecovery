@@ -13,21 +13,6 @@ namespace basecross
 {
 namespace Online
 {
-	Col4 testCol[OnlinePlayerManager::MAX_PLAYER_NUM] =
-	{
-			Col4(1,0,0,1),
-			Col4(0,1,0,1),
-			Col4(0,0,1,1),
-			Col4(1,1,0,1),
-			Col4(1,0,1,1),
-			Col4(0,1,1,1)
-	};
-
-	/// <summary>
-	/// ヒーローとヴィランを交互に生成するデバッグ用変数
-	/// </summary>
-	int debugCreateCount = 0;
-
 	OnlinePlayerManager::OnlinePlayerManager(const std::shared_ptr<GameObject>& owner) :
 		OnlineComponent(owner)
 	{
@@ -61,23 +46,7 @@ namespace Online
 
 	std::shared_ptr<PlayerObject> OnlinePlayerManager::CreatePlayerObject(int playerNumber, const Vec3& position)
 	{
-		std::shared_ptr<PlayerObject> playerObject;
-
-		// デバッグ用 -- ヒーローとヴィランを交互に作成する
-		if (debugCreateCount % 2 == 0)
-		{
-			playerObject = GetStage()->AddGameObject<HeroPlayerObject>();
-			auto drawer = playerObject->GetComponent<PNTBoneModelDraw>();
-			drawer->SetDiffuse(Col4(1, 1, 1, 1));
-		}
-		else
-		{
-			playerObject = GetStage()->AddGameObject<VillainPlayerObject>();
-			auto drawer = playerObject->GetComponent<PNTBoneModelDraw>();
-			drawer->SetDiffuse(Col4(1, 0, 0, 1));
-		}
-
-		++debugCreateCount;
+		std::shared_ptr<PlayerObject> playerObject = GetStage()->AddGameObject<VillainPlayerObject>();
 
 		auto transform = playerObject->GetComponent<Transform>();
 		transform->SetPosition(position);
