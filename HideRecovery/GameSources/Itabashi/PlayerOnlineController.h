@@ -6,6 +6,7 @@ namespace basecross
 	class RotationController;
 	class ItemAcquisitionManager;
 	class OwnHideItemManager;
+	class VelocityManager;
 
 namespace Operator
 {
@@ -37,6 +38,7 @@ namespace Online
 		static constexpr std::uint8_t EXECUTE_ACQUISITION_EVENT_CODE = 3;
 		static constexpr std::uint8_t TRY_ITEM_HIDE_EVENT_CODE = 4;
 		static constexpr std::uint8_t EXECUTE_ITEM_HIDE_EVENT_CODE = 5;
+		static constexpr std::uint8_t EXECUTE_MOVE_EVENT_CODE = 6;
 
 	private:
 
@@ -53,12 +55,20 @@ namespace Online
 
 		std::weak_ptr<OwnHideItemManager> m_hideItemManager;
 
+		std::weak_ptr<VelocityManager> m_velocityManager;
+
 		/// <summary>
 		/// 対応するプレイヤー番号
 		/// </summary>
 		int m_playerNumber = 0;
 
+		Vec3 m_beforeMoveVector = Vec3();
+
 		std::vector<std::shared_ptr<PlayerOnlineController>> GetPlayerOnlineControllers() const;
+
+		void Move();
+
+		void ExecuteMove(int playerNumber, const Vec3& moveVector);
 
 		void TryAquisition();
 

@@ -16,7 +16,7 @@ namespace Operator
 		m_velocityManager = GetGameObject()->GetComponent<VelocityManager>();
 	}
 
-	void ObjectMover::Move(const Vec2& moveDirection)
+	Vec3 ObjectMover::Move(const Vec2& moveDirection)
 	{
 		auto velocityManager = m_velocityManager.lock();
 
@@ -26,7 +26,7 @@ namespace Operator
 				velocityManager->ResetAll();
 			}
 
-			return;
+			return Vec3();
 		}
 
 		Vec3 inputVector;
@@ -64,6 +64,8 @@ namespace Operator
 			position += moveVector;
 			transform->SetPosition(position);
 		}
+
+		return moveVector;
 	}
 }
 }

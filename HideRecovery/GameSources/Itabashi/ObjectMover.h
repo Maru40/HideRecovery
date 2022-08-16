@@ -47,7 +47,7 @@ namespace Operator
 		void SetVelocityManager(const std::shared_ptr<VelocityManager>& velocityManager) { m_velocityManager = velocityManager; }
 		std::shared_ptr<VelocityManager> GetVelocityManager() const { return m_velocityManager.lock(); }
 
-		void Move(const Vec2& moveDirection);
+		Vec3 Move(const Vec2& moveDirection);
 
 		void Move(float x, float y) { Move(Vec2(x, y)); }
 	};
