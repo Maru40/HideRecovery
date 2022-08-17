@@ -113,7 +113,7 @@ namespace basecross
 		//ModelResourceLoadData(L"tree_dead3",  L"tree_dead3.bmf", ModelType::Static,  L"Tree\\"),
 
 		//ModelResourceLoadData(L"Player_Mesh",  L"Character04.bmf", ModelType::BoneMulti,  L"Player\\"),
-		ModelResourceLoadData(L"Player_Mesh",  L"Character08.bmf", ModelType::BoneMulti,  L"Player\\"),
+		ModelResourceLoadData(L"Player_Mesh",  L"Hero.bmf", ModelType::BoneMulti,  L"Player\\"),
 
 		//ModelResourceLoadData(L"Player_Idle",  L"Player_Animation_Idol.bmf", ModelType::BoneMulti,  L"Player\\"),
 		//ModelResourceLoadData(L"Player_WalkStart",  L"Player_Animation_Walk_Start.bmf", ModelType::BoneMulti,  L"Player\\"),
