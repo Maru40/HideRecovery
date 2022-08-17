@@ -850,6 +850,12 @@
     <Filter Include="Maruyama\Interface\I_TeamMember">
       <UniqueIdentifier>{b5ef7020-022d-4c43-8bae-dc1546ab942f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Player\Component\Respawner">
+      <UniqueIdentifier>{26d17992-ac86-46c2-8274-5be678f79ec3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Player\Component\PlayerSpawnPoint">
+      <UniqueIdentifier>{dc7ceb14-370c-4142-b8ad-1e1db2e39257}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1569,6 +1575,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\OwnArea.h">
       <Filter>Maruyama\Player\Component\OwnArea</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\Respawner.h">
+      <Filter>Maruyama\Player\Component\Respawner</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\PlayerSpawnPoint.h">
+      <Filter>Maruyama\Player\Component\PlayerSpawnPoint</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2206,6 +2218,12 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\OwnArea.cpp">
       <Filter>Maruyama\Player\Component\OwnArea</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\Respawner.cpp">
+      <Filter>Maruyama\Player\Component\Respawner</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\PlayerSpawnPoint.cpp">
+      <Filter>Maruyama\Player\Component\PlayerSpawnPoint</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
