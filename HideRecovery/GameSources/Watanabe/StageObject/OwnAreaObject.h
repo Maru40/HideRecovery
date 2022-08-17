@@ -6,7 +6,7 @@
 #pragma once
 #include "stdafx.h"
 #include "StageObjectBase.h"
-#include "PlayerSpawnPoint.h"
+#include "PlayerSpawnPointObject.h"
 
 namespace basecross {
 	class OwnAreaObject : public StageObjectBase {

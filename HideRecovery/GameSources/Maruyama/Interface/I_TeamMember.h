@@ -8,7 +8,7 @@
 #pragma once
 #include "stdafx.h"
 
-#include "Watanabe/StageObject/PlayerSpawnPoint.h"
+#include "Watanabe/StageObject/PlayerSpawnPointObject.h"
 
 namespace basecross {
 

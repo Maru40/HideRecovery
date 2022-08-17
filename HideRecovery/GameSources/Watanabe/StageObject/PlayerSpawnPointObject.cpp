@@ -4,16 +4,16 @@
 */
 
 #include "stdafx.h"
-#include "PlayerSpawnPoint.h"
+#include "PlayerSpawnPointObject.h"
 #include "../Utility/DataExtracter.h"
 #include "../DebugClass/Debug.h"
 
 namespace basecross {
-	PlayerSpawnPoint::PlayerSpawnPoint(const shared_ptr<Stage>& stage)
+	PlayerSpawnPointObject::PlayerSpawnPointObject(const shared_ptr<Stage>& stage)
 		:StageObjectBase(stage, L"PlayerSpawnPoint"), m_id(0), m_team(Team::East)
 	{}
 
-	PlayerSpawnPoint::PlayerSpawnPoint(const shared_ptr<Stage>& stage, const wstring& line)
+	PlayerSpawnPointObject::PlayerSpawnPointObject(const shared_ptr<Stage>& stage, const wstring& line)
 		: StageObjectBase(stage, L"PlayerSpawnPoint")
 	{
 		vector<wstring> tokens = DataExtracter::DelimitData(line);
@@ -35,9 +35,9 @@ namespace basecross {
 		}
 	}
 
-	void PlayerSpawnPoint::OnCreate() {
+	void PlayerSpawnPointObject::OnCreate() {
 		Debug::GetInstance()->Log(L"Create PlayerSpawnPoint");
 	}
-	void PlayerSpawnPoint::OnUpdate() {
+	void PlayerSpawnPointObject::OnUpdate() {
 	}
 }
