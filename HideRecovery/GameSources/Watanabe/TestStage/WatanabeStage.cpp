@@ -117,27 +117,27 @@ namespace basecross {
 		static const auto& keyBoard = inputDevice->GetKeyBoard();
 		auto animator = m_obj->GetComponent<PlayerAnimator>();
 		if (keyBoard.IsInputDown(KeyCode::Alpha1)) {
-			animator->ChangePlayerAnimation(PlayerAnimationState::Wait);
+			animator->ChangePlayerAnimation(PlayerAnimationState::State::Wait);
 			Debug::GetInstance()->Log(L"Wait");
 		}
 		else if (keyBoard.IsInputDown(KeyCode::Alpha2)) {
-			animator->ChangePlayerAnimation(PlayerAnimationState::Walk_L);
+			animator->ChangePlayerAnimation(PlayerAnimationState::State::Walk_L);
 			Debug::GetInstance()->Log(L"Walk_L");
 		}
 		else if (keyBoard.IsInputDown(KeyCode::Alpha3)) {
-			animator->ChangePlayerAnimation(PlayerAnimationState::Walk_R);
+			animator->ChangePlayerAnimation(PlayerAnimationState::State::Walk_R);
 			Debug::GetInstance()->Log(L"Walk_R");
 		}
 		else if (keyBoard.IsInputDown(KeyCode::Alpha4)) {
-			animator->ChangePlayerAnimation(PlayerAnimationState::Dash);
+			animator->ChangePlayerAnimation(PlayerAnimationState::State::Dash);
 			Debug::GetInstance()->Log(L"Dash");
 		}
 		else if (keyBoard.IsInputDown(KeyCode::Alpha5)) {
-			animator->ChangePlayerAnimation(PlayerAnimationState::PutItem_Floor);
+			animator->ChangePlayerAnimation(PlayerAnimationState::State::PutItem_Floor);
 			Debug::GetInstance()->Log(L"PutItem_Floor");
 		}
 		else if (keyBoard.IsInputDown(KeyCode::Alpha6)) {
-			animator->ChangePlayerAnimation(PlayerAnimationState::PutItem_HideObject);
+			animator->ChangePlayerAnimation(PlayerAnimationState::State::PutItem_HideObject);
 			Debug::GetInstance()->Log(L"PutItem_HideObject");
 		}
 	}
