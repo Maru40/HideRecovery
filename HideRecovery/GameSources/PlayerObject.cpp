@@ -41,6 +41,8 @@
 #include "TackleAttack.h"
 #include "CollisionAction.h"
 
+#include "Maruyama/Player/Component/Respawner.h"
+
 namespace basecross {
 
 	PlayerObject::PlayerObject(const std::shared_ptr<Stage>& stage):
@@ -88,6 +90,8 @@ namespace basecross {
 		AddComponent<ChargeGun>();
 		AddComponent<PlayerStatus>();
 		AddComponent<TackleAttack>();
+
+		AddComponent<Respawner>();
 			
 		//カメラセッティング----------------------------------------------------------
 
