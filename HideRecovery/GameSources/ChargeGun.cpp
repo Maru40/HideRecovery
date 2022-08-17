@@ -32,7 +32,7 @@ namespace basecross {
 		Vec3 instancePosition = transform->GetPosition() + GetBulletInstanceOffset();
 		auto bulletObject = InstantiateBullet(instancePosition, transform->GetQuaternion());
 		if (auto bullet = bulletObject->GetComponent<ChargeBullet>(false)) {
-			bullet->Shot(direct);
+			bullet->Shot(GetGameObject(), direct);
 		}
 	}
 
