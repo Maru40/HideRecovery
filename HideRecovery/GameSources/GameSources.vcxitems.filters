@@ -856,6 +856,9 @@
     <Filter Include="Maruyama\Player\Component\PlayerSpawnPoint">
       <UniqueIdentifier>{dc7ceb14-370c-4142-b8ad-1e1db2e39257}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Player\Component\Deader">
+      <UniqueIdentifier>{cefc959d-f099-45cd-9d0e-a46f156d01bd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1581,6 +1584,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\PlayerSpawnPoint.h">
       <Filter>Maruyama\Player\Component\PlayerSpawnPoint</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\PlayerDeader.h">
+      <Filter>Maruyama\Player\Component\Deader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2224,6 +2230,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\PlayerSpawnPoint.cpp">
       <Filter>Maruyama\Player\Component\PlayerSpawnPoint</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\PlayerDeader.cpp">
+      <Filter>Maruyama\Player\Component\Deader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
