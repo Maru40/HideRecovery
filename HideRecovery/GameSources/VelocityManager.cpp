@@ -11,6 +11,8 @@
 #include "Mathf.h"
 #include "UtilityVelocity.h"
 
+#include "Watanabe/DebugClass/Debug.h"
+
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
@@ -47,9 +49,6 @@ namespace basecross {
 		auto delta = App::GetApp()->GetElapsedTime();
 		m_param.beforeVelocity = m_param.velocity; //前フレームの速度を保存
 
-		//減速処理
-		Deseleration();
-
 		//重力分加算する。
 		auto gravity = GetGameObject()->GetComponent<Gravity>(false);
 		if (gravity && gravity->GetUpdateActive()) {
@@ -65,6 +64,8 @@ namespace basecross {
 		Move();  //移動処理
 
 		ResetForce();
+
+		Deseleration();	//減速処理
 	}
 
 	void VelocityManager::Move() {
@@ -85,12 +86,13 @@ namespace basecross {
 		}
 
 		auto velocity = m_param.velocity;
+		auto woldVecolisty = GetWorldVelocity();
 		auto force = UtilityVelocity::CalucSeekVec(velocity, -velocity, velocity.length() * m_param.deselerationPower);
 		AddForce(force);
 
 		constexpr float StopSpeed = 0.3f;
 		if (velocity.length() <= StopSpeed) {
-			m_param.isDeseleration = false;
+			SetIsDeseleration(false);
 			ResetVelocity();
 		}
 	}
@@ -146,7 +148,7 @@ namespace basecross {
     }
 
     void VelocityManager::StartDeseleration(const float& power) noexcept {
-        m_param.isDeseleration = true;
+        SetIsDeseleration(true);
         m_param.deselerationPower = power;
     }
 
