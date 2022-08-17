@@ -1,8 +1,8 @@
-
+ï»¿
 /*!
 @file WeponBase.h
-@brief WeponBase‚È‚Ç
-’S“–FŠÛR—TŠì
+@brief WeponBaseãªã©
+æ‹…å½“ï¼šä¸¸å±±è£•å–œ
 */
 
 #pragma once
@@ -11,16 +11,16 @@
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
-	/// ƒEƒFƒ|ƒ“‚Ìƒpƒ‰ƒ[ƒ^
+	/// ã‚¦ã‚§ãƒãƒ³ã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
 	//--------------------------------------------------------------------------------------
 	struct WeponBase_Parametor {
-		Vec3 bulletInstanceOffset;	//ƒoƒŒƒbƒg‚ğ¶¬‚·‚éˆÊ’u‚ÌƒIƒtƒZƒbƒg
+		Vec3 bulletInstanceOffset;	//ãƒãƒ¬ãƒƒãƒˆã‚’ç”Ÿæˆã™ã‚‹ä½ç½®ã®ã‚ªãƒ•ã‚»ãƒƒãƒˆ
 
 		WeponBase_Parametor();
 	};
 
 	//--------------------------------------------------------------------------------------
-	/// ƒEƒFƒ|ƒ“‚ÌŠî’êƒNƒ‰ƒX
+	/// ã‚¦ã‚§ãƒãƒ³ã®åŸºåº•ã‚¯ãƒ©ã‚¹
 	//--------------------------------------------------------------------------------------
 	template<class BulletType>
 	class WeponBase : public Component
@@ -37,13 +37,14 @@ namespace basecross {
 		{}
 
 		/// <summary>
-		/// ’e‚ğŒ‚‚Â
+		/// å¼¾ã‚’æ’ƒã¤
 		/// </summary>
-		/// <param name="direct">Œ‚‚Â•ûŒü</param>
-		virtual void Shot(const Vec3& direct) = 0;
+		/// <param name="direct">æ’ƒã¤æ–¹å‘</param>
+		/// <returns>æ’ƒã£ãŸå¼¾ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</returns>
+		virtual std::shared_ptr<BulletType> Shot(const Vec3& direct) = 0;
 
 		/// <summary>
-		/// ’e‚Ì¶¬
+		/// å¼¾ã®ç”Ÿæˆ
 		/// </summary>
 		template<class... Ts>
 		std::shared_ptr<BulletType> InstantiateBullet(const Vec3& position, const Quat& quat, Ts... params) {
@@ -54,31 +55,31 @@ namespace basecross {
 		}
 
 		//--------------------------------------------------------------------------------------
-		/// ƒAƒNƒZƒbƒT
+		/// ã‚¢ã‚¯ã‚»ãƒƒã‚µ
 		//--------------------------------------------------------------------------------------
 
 		/// <summary>
-		/// ƒpƒ‰ƒ[ƒ^‚Ìİ’è
+		/// ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã®è¨­å®š
 		/// </summary>
-		/// <param name="parametor">ƒpƒ‰ƒ[ƒ^</param>
+		/// <param name="parametor">ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿</param>
 		void SetParametor(const Parametor& parametor) noexcept { m_param = parametor; }
 
 		/// <summary>
-		/// ƒpƒ‰ƒ[ƒ^‚Ìæ“¾
+		/// ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã®å–å¾—
 		/// </summary>
-		/// <returns>ƒpƒ‰ƒ[ƒ^</returns>
+		/// <returns>ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿</returns>
 		Parametor GetParametor() const noexcept { return m_param; }
 
 		/// <summary>
-		/// ƒoƒŒƒbƒg‚ğ¶¬‚·‚éˆÊ’u‚ÌƒIƒtƒZƒbƒg‚Ìİ’è
+		/// ãƒãƒ¬ãƒƒãƒˆã‚’ç”Ÿæˆã™ã‚‹ä½ç½®ã®ã‚ªãƒ•ã‚»ãƒƒãƒˆã®è¨­å®š
 		/// </summary>
-		/// <param name="offset">ƒoƒŒƒbƒg‚ğ¶¬‚·‚éˆÊ’u‚ÌƒIƒtƒZƒbƒg</param>
+		/// <param name="offset">ãƒãƒ¬ãƒƒãƒˆã‚’ç”Ÿæˆã™ã‚‹ä½ç½®ã®ã‚ªãƒ•ã‚»ãƒƒãƒˆ</param>
 		void SetBulletInstanceOffset(const Vec3& offset) noexcept { m_param.bulletInstanceOffset = offset; }
 
 		/// <summary>
-		/// ƒoƒŒƒbƒg‚ğ¶¬‚·‚éˆÊ’u‚ÌƒIƒtƒZƒbƒg‚Ìæ“¾
+		/// ãƒãƒ¬ãƒƒãƒˆã‚’ç”Ÿæˆã™ã‚‹ä½ç½®ã®ã‚ªãƒ•ã‚»ãƒƒãƒˆã®å–å¾—
 		/// </summary>
-		/// <returns>ƒoƒŒƒbƒg‚ğ¶¬‚·‚éˆÊ’u‚ÌƒIƒtƒZƒbƒg</returns>
+		/// <returns>ãƒãƒ¬ãƒƒãƒˆã‚’ç”Ÿæˆã™ã‚‹ä½ç½®ã®ã‚ªãƒ•ã‚»ãƒƒãƒˆ</returns>
 		Vec3 GetBulletInstanceOffset() const noexcept { return m_param.bulletInstanceOffset; }
 
 	};

@@ -1,8 +1,8 @@
-
+ï»¿
 /*!
 @file ChargeGun.h
-@brief ChargeGun‚È‚Ç
-’S“–FŠÛR—TŠì
+@brief ChargeGunãªã©
+æ‹…å½“ï¼šä¸¸å±±è£•å–œ
 */
 
 #pragma once
@@ -12,12 +12,12 @@
 
 namespace basecross {
 	//--------------------------------------------------------------------------------------
-	///	‘O•ûéŒ¾
+	///	å‰æ–¹å®£è¨€
 	//--------------------------------------------------------------------------------------
 	class ChargeBulletObject;
 
 	//--------------------------------------------------------------------------------------
-	///	ƒ`ƒƒ[ƒWe
+	///	ãƒãƒ£ãƒ¼ã‚¸éŠƒ
 	//--------------------------------------------------------------------------------------
 	class ChargeGun : public WeponBase<ChargeBulletObject>
 	{
@@ -27,14 +27,14 @@ namespace basecross {
 		void OnCreate() override;
 		void OnUpdate() override;
 
-		void Shot(const Vec3& direct) override;
+		std::shared_ptr<ChargeBulletObject> Shot(const Vec3& direct) override;
 
 	private:
 
 		void UpdateAnimation();
 
 		/// <summary>
-		/// ƒAƒjƒ[ƒVƒ‡ƒ“‚ÌÄ¶
+		/// ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®å†ç”Ÿ
 		/// </summary>
 		void PlayAnimation();
 	};
