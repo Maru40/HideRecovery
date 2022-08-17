@@ -47,7 +47,19 @@ namespace basecross {
 		/// ゲームオブジェクトを取得
 		/// </summary>
 		/// <returns>ゲームオブジェクト</returns>
-		virtual std::shared_ptr<GameObject> GetGameObject() = 0;
+		virtual std::shared_ptr<GameObject> GetOwnerObject() const = 0;
+
+		/// <summary>
+		/// チームタイプの設定
+		/// </summary>
+		/// <param name="team">チームタイプ</param>
+		virtual void SetTeam(const Team& team) = 0;
+
+		/// <summary>
+		/// チームタイプの取得
+		/// </summary>
+		/// <returns>チームタイプ</returns>
+		virtual Team GetTeam() const = 0;
 	};
 
 }

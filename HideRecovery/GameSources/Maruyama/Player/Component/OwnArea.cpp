@@ -39,7 +39,7 @@ namespace basecross {
 	}
 
 	bool OwnArea::IsInArea(const std::shared_ptr<I_TeamMember>& member) {
-		return IsInArea(member->GetGameObject());
+		return IsInArea(member->GetOwnerObject());
 	}
 
 	bool OwnArea::IsInArea(const std::shared_ptr<GameObject>& member) {
