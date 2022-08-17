@@ -12,6 +12,14 @@
 
 #include "TaskList.h"
 
+#include "Watanabe/Component/PlayerAnimator.h"
+
+#include "PlayerInputer.h"
+#include "VelocityManager.h"
+
+#include "Itabashi/ObjectMover.h"
+#include "Itabashi/PlayerOnlineController.h"
+
 namespace basecross {
 
 	TackleAttack::TackleAttack(const std::shared_ptr<GameObject>& objPtr) :
@@ -24,6 +32,10 @@ namespace basecross {
 	}
 
 	void TackleAttack::OnUpdate() {
+		if (PlayerInputer::GetInstance()->IsYDown()) {
+			SelectTask();
+		}
+
 		m_taskList->UpdateTask();
 	}
 
@@ -44,7 +56,7 @@ namespace basecross {
 		TaskEnum tasks[] = {
 			TaskEnum::Preliminary,
 			TaskEnum::Tackle,
-			TaskEnum::EndWait
+			TaskEnum::EndWait,
 		};
 
 		for (const auto& task : tasks) {
@@ -75,16 +87,32 @@ namespace basecross {
 		{}
 
 		void Preriminary_Tackle::OnStart() {
-			//アニメーションの再生
-
+			m_animator = GetOwner()->GetComponent<PlayerAnimator>(false);
+			PlayAnimation();	//アニメーションの再生
 		}
 
 		bool Preriminary_Tackle::OnUpdate() {
-			return true;
+			auto animator = m_animator.lock();
+			if (!animator) {	//アニメーターが存在しないなら、処理を終了させる。
+				return true;
+			}
+
+			//アニメータがDAStartでないなら、処理を終了させる。
+			if (!animator->IsCurretAnimationState(PlayerAnimationState::State::DAStart)) {
+				return true;
+			}
+
+			return animator->IsTargetAnimationEnd();	//アニメーションが終了しているならtrue
 		}
 
 		void Preriminary_Tackle::OnExit() {
 
+		}
+
+		void Preriminary_Tackle::PlayAnimation() {
+			if (auto animator = m_animator.lock()) {
+				animator->ChangePlayerAnimation(PlayerAnimationState::State::DAStart);
+			}
 		}
 
 		//--------------------------------------------------------------------------------------
@@ -93,18 +121,65 @@ namespace basecross {
 
 		Attack_Tackle::Attack_Tackle(const std::shared_ptr<GameObject>& objPtr) :
 			TaskNodeBase(objPtr)
-		{}
+		{
+			
+		}
 
 		void Attack_Tackle::OnStart() {
+			auto delta = App::GetApp()->GetElapsedTime();
 
+			m_animator = GetOwner()->GetComponent<PlayerAnimator>(false);
+
+			if (auto playerController = GetOwner()->GetComponent<Online::PlayerOnlineController>(false)) {
+				playerController->SetUpdateActive(false);
+			}
+
+			//速度を加算
+			if (auto velocityManager = GetOwner()->GetComponent<VelocityManager>(false)) {
+				auto transform = GetOwner()->GetComponent<Transform>();
+				velocityManager->AddForce(transform->GetForward() * 100.0f);
+				velocityManager->StartDeseleration();
+				m_velocityManager = velocityManager;
+			}
+
+			PlayAnimation();
 		}
 
 		bool Attack_Tackle::OnUpdate() {
-			return true;
+			//auto velocityManager = m_velocityManager.lock();
+			//if (!velocityManager) {
+			//	return true;
+			//}
+
+			//return !velocityManager->IsDeseleration();	//減速処理が完了したら切り替える。
+
+			auto animator = m_animator.lock();
+			if (!animator) {	//アニメーターが存在しないなら、処理を終了させる。
+				return true;
+			}
+
+			//アニメータがDAStartでないなら、処理を終了させる。
+			if (!animator->IsCurretAnimationState(PlayerAnimationState::State::DAttack)) {
+				return true;
+			}
+
+			return animator->IsTargetAnimationEnd();	//アニメーションが終了しているならtrue
 		}
 
 		void Attack_Tackle::OnExit() {
+			if (auto velocityManager = m_velocityManager.lock()) {
+				velocityManager->SetIsDeseleration(false);
+			}
 
+			if (auto playerController = GetOwner()->GetComponent<Online::PlayerOnlineController>(false)) {
+				playerController->SetUpdateActive(true);
+			}
+		}
+
+		void Attack_Tackle::PlayAnimation() {
+			if (auto animator = m_animator.lock()) {
+				animator->ChangePlayerAnimation(PlayerAnimationState::State::DAttack);
+			}
 		}
 
 		//--------------------------------------------------------------------------------------

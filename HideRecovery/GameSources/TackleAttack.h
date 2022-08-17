@@ -18,6 +18,9 @@ namespace basecross {
 	template<class T>
 	class TaskList;
 
+	class PlayerAnimator;
+	class VelocityManager;
+
 	//--------------------------------------------------------------------------------------
 	/// É^ÉbÉNÉãçUåÇ
 	//--------------------------------------------------------------------------------------
@@ -68,6 +71,8 @@ namespace basecross {
 		//--------------------------------------------------------------------------------------
 		class Preriminary_Tackle : public TaskNodeBase<GameObject>
 		{
+			std::weak_ptr<PlayerAnimator> m_animator;
+
 		public:
 			Preriminary_Tackle(const std::shared_ptr<GameObject>& objPtr);
 
@@ -76,6 +81,9 @@ namespace basecross {
 			void OnStart() override;
 			bool OnUpdate() override;
 			void OnExit() override;
+
+		private:
+			void PlayAnimation();
 		};
 
 		//--------------------------------------------------------------------------------------
@@ -83,6 +91,9 @@ namespace basecross {
 		//--------------------------------------------------------------------------------------
 		class Attack_Tackle : public TaskNodeBase<GameObject>
 		{
+			std::weak_ptr<PlayerAnimator> m_animator;
+			std::weak_ptr<VelocityManager> m_velocityManager;
+
 		public:
 			Attack_Tackle(const std::shared_ptr<GameObject>& objPtr);
 
@@ -91,6 +102,9 @@ namespace basecross {
 			void OnStart() override;
 			bool OnUpdate() override;
 			void OnExit() override;
+
+		private:
+			void PlayAnimation();
 		};
 
 		//--------------------------------------------------------------------------------------
