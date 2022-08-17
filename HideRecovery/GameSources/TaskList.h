@@ -112,6 +112,25 @@ namespace basecross {
 		}
 	};
 
+	template<class T, class TaskList>
+	class TaskNodeBase_OwnTaskList : public TaskNodeBase<T>
+	{
+		std::weak_ptr<TaskList> m_taskList;	//タスクリスト
+
+	public:
+		TaskNodeBase_OwnTaskList(const std::shared_ptr<T>& owner, const std::shared_ptr<TaskList>& taskList):
+			TaskNodeBase(owner), m_taskList(taskList)
+		{}
+
+		/// <summary>
+		/// タスクリストの取得
+		/// </summary>
+		/// <returns>タスクリスト</returns>
+		std::shared_ptr<TaskList> GetTaskList() const {
+			return m_taskList.lock();
+		}
+	};
+
 	//--------------------------------------------------------------------------------------
 	///	タスク管理のインターフェース
 	//--------------------------------------------------------------------------------------
