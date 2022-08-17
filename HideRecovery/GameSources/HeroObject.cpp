@@ -16,6 +16,8 @@
 #include "AIImpacter.h"
 #include "SelfImpactNodeManager.h"
 
+#include "Watanabe/Component/PlayerStatus.h"
+
 namespace basecross {
 	namespace Enemy {
 
@@ -33,6 +35,8 @@ namespace basecross {
 
 			auto astarComp = AddComponent<AIImpacter>();
 			AddComponent<maru::SelfImpactNodeManager>(astarComp);
+
+			AddComponent<PlayerStatus>();
 		}
 
 		void HeroObject::SettingModel() {
