@@ -841,7 +841,7 @@
     <Filter Include="Watanabe\StageObject\PlayerSpawnPoint">
       <UniqueIdentifier>{650d64cc-4873-463d-acfb-d994d0fa52f3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Watanabe\StageObject\OwnArea">
+    <Filter Include="Watanabe\StageObject\OwnAreaObject">
       <UniqueIdentifier>{d9e93458-e2c6-4508-82d7-0d43b0111188}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -1533,8 +1533,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)BulletBase.h">
       <Filter>Maruyama\Player\Component\Wepon\Bullet\Component</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\OwnArea.h">
-      <Filter>Watanabe\StageObject\OwnArea</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\OwnAreaObject.h">
+      <Filter>Watanabe\StageObject\OwnAreaObject</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\PlayerSpawnPoint.h">
       <Filter>Watanabe\StageObject\PlayerSpawnPoint</Filter>
@@ -2168,8 +2168,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)BulletBase.cpp">
       <Filter>Maruyama\Player\Component\Wepon\Bullet\Component</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\OwnArea.cpp">
-      <Filter>Watanabe\StageObject\OwnArea</Filter>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\OwnAreaObject.cpp">
+      <Filter>Watanabe\StageObject\OwnAreaObject</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\PlayerSpawnPoint.cpp">
       <Filter>Watanabe\StageObject\PlayerSpawnPoint</Filter>

@@ -1,18 +1,18 @@
 ﻿/*!
-@file   OwnArea.cpp
+@file   OwnAreaObject.cpp
 @brief  自陣エリアクラス実体
 */
 
 #include "stdafx.h"
-#include "OwnArea.h"
+#include "OwnAreaObject.h"
 #include "../Utility/DataExtracter.h"
 #include "../DebugClass/Debug.h"
 
 namespace basecross {
-	OwnArea::OwnArea(const shared_ptr<Stage>& stage)
+	OwnAreaObject::OwnAreaObject(const shared_ptr<Stage>& stage)
 		:StageObjectBase(stage, L"OwnArea"), m_areaRadius(20), m_team(Team::East)
 	{}
-	OwnArea::OwnArea(const shared_ptr<Stage>& stage, const wstring& line)
+	OwnAreaObject::OwnAreaObject(const shared_ptr<Stage>& stage, const wstring& line)
 		: StageObjectBase(stage, L"OwnArea")
 	{
 		vector<wstring> tokens = DataExtracter::DelimitData(line);
@@ -36,9 +36,9 @@ namespace basecross {
 		}
 	}
 
-	void OwnArea::OnCreate() {
+	void OwnAreaObject::OnCreate() {
 		Debug::GetInstance()->Log(L"Create OwnArea");
 	}
-	void OwnArea::OnUpdate() {
+	void OwnAreaObject::OnUpdate() {
 	}
 }
