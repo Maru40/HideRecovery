@@ -1,10 +1,11 @@
 ﻿#include "stdafx.h"
 #include "PlayerSpawnPoint.h"
 #include "../Utility/DataExtracter.h"
+#include "../DebugClass/Debug.h"
 
 namespace basecross {
 	PlayerSpawnPoint::PlayerSpawnPoint(const shared_ptr<Stage>& stage)
-		:StageObjectBase(stage, L"PlayerSpawnPoint")
+		:StageObjectBase(stage, L"PlayerSpawnPoint"), m_id(0), m_team(Team::East)
 	{}
 
 	PlayerSpawnPoint::PlayerSpawnPoint(const shared_ptr<Stage>& stage, const wstring& line)
@@ -30,6 +31,7 @@ namespace basecross {
 	}
 
 	void PlayerSpawnPoint::OnCreate() {
+		Debug::GetInstance()->Log(L"Create OwnArea");
 	}
 	void PlayerSpawnPoint::OnUpdate() {
 	}

@@ -1,10 +1,11 @@
 ﻿#include "stdafx.h"
 #include "OwnArea.h"
 #include "../Utility/DataExtracter.h"
+#include "../DebugClass/Debug.h"
 
 namespace basecross {
 	OwnArea::OwnArea(const shared_ptr<Stage>& stage)
-		:StageObjectBase(stage, L"OwnArea")
+		:StageObjectBase(stage, L"OwnArea"), m_areaRadius(20)
 	{}
 	OwnArea::OwnArea(const shared_ptr<Stage>& stage, const wstring& line)
 		: StageObjectBase(stage, L"OwnArea")
@@ -31,6 +32,7 @@ namespace basecross {
 	}
 
 	void OwnArea::OnCreate() {
+		Debug::GetInstance()->Log(L"Create OwnArea");
 	}
 	void OwnArea::OnUpdate() {
 	}
