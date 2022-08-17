@@ -811,10 +811,9 @@
     <Filter Include="Maruyama\Enemy\Component\ImpactMap\Astar\AIImpacter">
       <UniqueIdentifier>{e0c25eb1-05d0-4534-8b9f-86a6b61eb9c3}</UniqueIdentifier>
     </Filter>
-
     <Filter Include="Watanabe\Component\PlayerStatus">
       <UniqueIdentifier>{e5b0a7f1-330c-4e64-b2b7-a9bf570b9739}</UniqueIdentifier>
-	</Filter>
+    </Filter>
     <Filter Include="Maruyama\Player\Component\Wepon">
       <UniqueIdentifier>{79e32bb5-f2d4-48a6-97ef-4bd729f38eab}</UniqueIdentifier>
     </Filter>
@@ -838,7 +837,12 @@
     </Filter>
     <Filter Include="Maruyama\Player\Component\AttackBase\TackleAttack">
       <UniqueIdentifier>{cc3e8f4e-5c69-4292-aa06-7c109e7008bd}</UniqueIdentifier>
-
+    </Filter>
+    <Filter Include="Watanabe\StageObject\PlayerSpawnPoint">
+      <UniqueIdentifier>{650d64cc-4873-463d-acfb-d994d0fa52f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\StageObject\OwnArea">
+      <UniqueIdentifier>{d9e93458-e2c6-4508-82d7-0d43b0111188}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1523,31 +1527,35 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)OccupancyManager.h">
       <Filter>Maruyama\Enemy\Component\ImpactMap\ImpactManager\ImpactDataManager\OccupancyManager</Filter>
     </ClInclude>
-
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\PlayerStatus.h">
       <Filter>Watanabe\Component\PlayerStatus</Filter>
-	</ClInclude>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)BulletBase.h">
+      <Filter>Maruyama\Player\Component\Wepon\Bullet\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\OwnArea.h">
+      <Filter>Watanabe\StageObject\OwnArea</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\PlayerSpawnPoint.h">
+      <Filter>Watanabe\StageObject\PlayerSpawnPoint</Filter>
+    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)WeponBase.h">
       <Filter>Maruyama\Player\Component\Wepon</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)ChargeGun.h">
       <Filter>Maruyama\Player\Component\Wepon\ChargeGun</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)ChargeBullet.h">
-      <Filter>Maruyama\Player\Component\Wepon\Bullet\Component\ChargeBullet</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)ChargeBulletObject.h">
       <Filter>Maruyama\Player\Component\Wepon\Bullet\Object</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)BulletBase.h">
-      <Filter>Maruyama\Player\Component\Wepon\Bullet\Component</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ChargeBullet.h">
+      <Filter>Maruyama\Player\Component\Wepon\Bullet\Component\ChargeBullet</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)AttackBase.h">
       <Filter>Maruyama\Player\Component\AttackBase</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)TackleAttack.h">
       <Filter>Maruyama\Player\Component\AttackBase\TackleAttack</Filter>
-
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2154,28 +2162,32 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)OccupancyManager.cpp">
       <Filter>Maruyama\Enemy\Component\ImpactMap\ImpactManager\ImpactDataManager\OccupancyManager</Filter>
     </ClCompile>
-
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\PlayerStatus.cpp">
       <Filter>Watanabe\Component\PlayerStatus</Filter>
-	</ClCompile>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)BulletBase.cpp">
+      <Filter>Maruyama\Player\Component\Wepon\Bullet\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\OwnArea.cpp">
+      <Filter>Watanabe\StageObject\OwnArea</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\PlayerSpawnPoint.cpp">
+      <Filter>Watanabe\StageObject\PlayerSpawnPoint</Filter>
+    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)WeponBase.cpp">
       <Filter>Maruyama\Player\Component\Wepon</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)ChargeGun.cpp">
       <Filter>Maruyama\Player\Component\Wepon\ChargeGun</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)ChargeBullet.cpp">
-      <Filter>Maruyama\Player\Component\Wepon\Bullet\Component\ChargeBullet</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)ChargeBulletObject.cpp">
       <Filter>Maruyama\Player\Component\Wepon\Bullet\Object</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)BulletBase.cpp">
-      <Filter>Maruyama\Player\Component\Wepon\Bullet\Component</Filter>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ChargeBullet.cpp">
+      <Filter>Maruyama\Player\Component\Wepon\Bullet\Component\ChargeBullet</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)TackleAttack.cpp">
       <Filter>Maruyama\Player\Component\AttackBase\TackleAttack</Filter>
-
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

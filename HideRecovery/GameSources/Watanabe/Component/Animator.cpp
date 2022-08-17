@@ -1,4 +1,9 @@
-﻿#include "stdafx.h"
+﻿/*!
+@file   Animator.cpp
+@brief  アニメーション管理クラス実体
+*/
+
+#include "stdafx.h"
 #include "Animator.h"
 #include "../Utility/CSVLoad.h"
 #include "../Utility/DataExtracter.h"
@@ -28,8 +33,8 @@ namespace basecross {
 			auto delimiterData = DataExtracter::DelimitData(fileData[i]);
 			AnimationClip clip(
 				delimiterData[0],
-				(float)_wtof(delimiterData[1].c_str()),
-				(float)_wtof(delimiterData[2].c_str()),
+				(int)_wtof(delimiterData[1].c_str()),
+				(int)_wtof(delimiterData[2].c_str()),
 				Utility::WStrToBool(delimiterData[3]),
 				(float)_wtof(delimiterData[4].c_str())
 			);

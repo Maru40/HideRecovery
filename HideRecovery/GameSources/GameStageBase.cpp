@@ -43,6 +43,8 @@
 
 #include "Watanabe/StageObject/Block.h"
 #include "Watanabe/StageObject/RackObject.h"
+#include "Watanabe/StageObject/PlayerSpawnPoint.h"
+#include "Watanabe/StageObject/OwnArea.h"
 
 #include "Itabashi/OnlineTestRoom.h"
 #include "Itabashi/OnlinePlayerManager.h"
@@ -86,6 +88,8 @@ namespace basecross {
 		builder.Register<Block>(L"Block");
 		builder.Register<RackObject>(L"Rack");
 		builder.Register<HideItemObject>(L"HideItem");
+		builder.Register<PlayerSpawnPoint>(L"PlayerSpawnPoint");
+		builder.Register<OwnArea>(L"OwnArea");
 		auto dir = App::GetApp()->GetDataDirWString();
 		auto path = dir + L"MapDatas/";
 		builder.Build(GetThis<Stage>(), path + fileName);
