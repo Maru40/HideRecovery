@@ -9,12 +9,17 @@ namespace basecross {
 	void PlayerStatus::OnCreate() {
 	}
 
-	void PlayerStatus::AddDamage(DamageData damage) {
+	void PlayerStatus::AddDamage(const DamageData& damage) {
 		m_status.hp -= damage.value;
 
 		// 念のため0にクランプ
 		if (m_status.hp <= 0)
 			m_status.hp = 0;
+
+		for (auto& damagedFunc : m_damagedFuncs)
+		{
+			damagedFunc(GetThis<PlayerStatus>(), damage);
+		}
 	}
 
 	bool PlayerStatus::IsDead() {
@@ -23,5 +28,10 @@ namespace basecross {
 
 	void PlayerStatus::Respawn() {
 		m_status.Reset();
+	}
+
+	void PlayerStatus::AddFuncAddDamage(const DamageFuncType& damagedFunc)
+	{
+		m_damagedFuncs.push_back(damagedFunc);
 	}
 }

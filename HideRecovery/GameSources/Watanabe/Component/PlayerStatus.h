@@ -19,7 +19,13 @@ namespace basecross {
 	};
 
 	class PlayerStatus :public Component {
+	public:
+		using DamageFuncType = std::function<void(const std::shared_ptr<PlayerStatus>&, const DamageData&)>;
+	private:
 		Status m_status;
+
+		std::vector<DamageFuncType> m_damagedFuncs;
+
 	public:
 		PlayerStatus(const shared_ptr<GameObject>& owner);
 
@@ -27,8 +33,10 @@ namespace basecross {
 		void OnUpdate()override {}
 		void OnDraw()override {}
 
-		void AddDamage(DamageData damage);
+		void AddDamage(const DamageData& damage);
 		bool IsDead();
 		void Respawn();
+
+		void AddFuncAddDamage(const DamageFuncType& damagedFunc);
 	};
 }
