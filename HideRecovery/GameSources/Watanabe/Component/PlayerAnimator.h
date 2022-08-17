@@ -9,10 +9,16 @@
 #include "PlayerAnimationState.h"
 
 namespace basecross {
+	class VelocityManager;
+
 	class PlayerAnimator :public Animator {
+		std::weak_ptr<VelocityManager> m_velocityManager;
+
 	public:
 		PlayerAnimator(const shared_ptr<GameObject>& owner);
 		void OnCreate()override;
+		void OnLateStart() override;
+		void OnUpdate() override;
 
 		/// <summary>
 		/// アニメーションの変更

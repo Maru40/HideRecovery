@@ -38,6 +38,8 @@
 #include "ChargeGun.h"
 #include "Watanabe/Component/PlayerStatus.h"
 
+#include "TackleAttack.h"
+
 namespace basecross {
 
 	PlayerObject::PlayerObject(const std::shared_ptr<Stage>& stage):
@@ -71,7 +73,7 @@ namespace basecross {
 		AddComponent<ItemAcquisitionManager>();
 		//AddComponent<OwnHideItemManager>();
 
-		AddComponent<PlayerAnimationCtrl>();
+		//AddComponent<PlayerAnimationCtrl>();
 		AddComponent<VelocityManager>();
 
 		auto objecfMover = AddComponent<Operator::ObjectMover>();
@@ -82,8 +84,8 @@ namespace basecross {
 
 		AddComponent<PlayerAnimator>();
 		AddComponent<ChargeGun>();
-
 		AddComponent<PlayerStatus>();
+		AddComponent<TackleAttack>();
 			
 		//カメラセッティング----------------------------------------------------------
 

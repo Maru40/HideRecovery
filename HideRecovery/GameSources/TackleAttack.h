@@ -18,6 +18,10 @@ namespace basecross {
 	template<class T>
 	class TaskList;
 
+	class PlayerAnimator;
+	class VelocityManager;
+	class GameTimer;
+
 	//--------------------------------------------------------------------------------------
 	/// タックル攻撃
 	//--------------------------------------------------------------------------------------
@@ -55,6 +59,11 @@ namespace basecross {
 		/// 攻撃開始
 		/// </summary>
 		void StartAttack();
+
+		/// <summary>
+		/// タックル中かどうか
+		/// </summary>
+		bool IsTackle();
 	};
 
 	//--------------------------------------------------------------------------------------
@@ -68,6 +77,8 @@ namespace basecross {
 		//--------------------------------------------------------------------------------------
 		class Preriminary_Tackle : public TaskNodeBase<GameObject>
 		{
+			std::weak_ptr<PlayerAnimator> m_animator;
+
 		public:
 			Preriminary_Tackle(const std::shared_ptr<GameObject>& objPtr);
 
@@ -76,6 +87,9 @@ namespace basecross {
 			void OnStart() override;
 			bool OnUpdate() override;
 			void OnExit() override;
+
+		private:
+			void PlayAnimation();
 		};
 
 		//--------------------------------------------------------------------------------------
@@ -83,6 +97,9 @@ namespace basecross {
 		//--------------------------------------------------------------------------------------
 		class Attack_Tackle : public TaskNodeBase<GameObject>
 		{
+			std::weak_ptr<PlayerAnimator> m_animator;
+			std::weak_ptr<VelocityManager> m_velocityManager;
+
 		public:
 			Attack_Tackle(const std::shared_ptr<GameObject>& objPtr);
 
@@ -91,6 +108,9 @@ namespace basecross {
 			void OnStart() override;
 			bool OnUpdate() override;
 			void OnExit() override;
+
+		private:
+			void PlayAnimation();
 		};
 
 		//--------------------------------------------------------------------------------------
@@ -98,8 +118,13 @@ namespace basecross {
 		//--------------------------------------------------------------------------------------
 		class EndWait_Tackle : public TaskNodeBase<GameObject>
 		{
+			std::unique_ptr<GameTimer> m_timer;
+			std::weak_ptr<VelocityManager> m_velocityManager;
+
+			float m_waitTime = 0.0f;
+
 		public:
-			EndWait_Tackle(const std::shared_ptr<GameObject>& objPtr);
+			EndWait_Tackle(const std::shared_ptr<GameObject>& objPtr, const float waitTime = 0.5f);
 
 			virtual ~EndWait_Tackle() = default;
 
