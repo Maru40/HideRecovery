@@ -23,6 +23,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)BillBoard_Ex.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CameraRayAlphaManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CameraRotater.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ChargeBullet.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ChargeBulletObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ChargeGun.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ChaseState_AstarSeek.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ChaseState_TargetSeek.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ChasingTarget.h" />
@@ -241,6 +244,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\DataExtracter.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\TransformData.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\Utility.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)WeponBase.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WindowSetting.h" />
   </ItemGroup>
   <ItemGroup>
@@ -252,6 +256,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)BillBoard_Ex.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CameraRayAlphaManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CameraRotater.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ChargeBullet.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ChargeBulletObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ChargeGun.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ChaseState_AstarSeek.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ChaseState_TargetSeek.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CollisionObject.cpp" />
@@ -447,6 +454,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Utility\AdvMeshUtil.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Utility\CSVLoad.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Utility\Utility.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)WeponBase.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>

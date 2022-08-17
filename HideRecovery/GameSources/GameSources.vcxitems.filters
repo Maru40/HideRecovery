@@ -307,9 +307,6 @@
     <Filter Include="Maruyama\Enemy\Component\Base\Skill\PassiveSkillBase">
       <UniqueIdentifier>{a18a87e7-50c4-439c-a71e-43a8cdaa99e0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Maruyama\Enemy\Component\Base\Bullet">
-      <UniqueIdentifier>{6b68433a-27c6-4747-b5c4-07e8f1dc8830}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Maruyama\Utility\Component\Destroy">
       <UniqueIdentifier>{9dd402c9-9bc7-490d-8621-86002bc8ed8c}</UniqueIdentifier>
     </Filter>
@@ -814,6 +811,27 @@
     <Filter Include="Maruyama\Enemy\Component\ImpactMap\Astar\AIImpacter">
       <UniqueIdentifier>{e0c25eb1-05d0-4534-8b9f-86a6b61eb9c3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Player\Component\Wepon">
+      <UniqueIdentifier>{79e32bb5-f2d4-48a6-97ef-4bd729f38eab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Player\Component\AttackBase">
+      <UniqueIdentifier>{cc7207ec-b7ae-44c8-bb09-1a018743d1d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Player\Component\Wepon\ChargeGun">
+      <UniqueIdentifier>{e322ea4b-45e0-43f5-8f00-7e5d6bf2ec1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Player\Component\Wepon\Bullet">
+      <UniqueIdentifier>{6b68433a-27c6-4747-b5c4-07e8f1dc8830}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Player\Component\Wepon\Bullet\Object">
+      <UniqueIdentifier>{62572904-a6df-4aa4-84c5-2cc9152bd705}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Player\Component\Wepon\Bullet\Component">
+      <UniqueIdentifier>{7c0d253b-f8db-4caa-b055-8c696815e5fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Player\Component\Wepon\Bullet\Component\ChargeBullet">
+      <UniqueIdentifier>{a1ad01cf-b612-446f-a39d-3bdf8d4c57f3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1118,9 +1136,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)SkillBase.h">
       <Filter>Maruyama\Enemy\Component\Base\Skill</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)BulletBase.h">
-      <Filter>Maruyama\Enemy\Component\Base\Bullet</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)TimerDestroy.h">
       <Filter>Maruyama\Utility\Component\Destroy</Filter>
@@ -1500,6 +1515,21 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)OccupancyManager.h">
       <Filter>Maruyama\Enemy\Component\ImpactMap\ImpactManager\ImpactDataManager\OccupancyManager</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WeponBase.h">
+      <Filter>Maruyama\Player\Component\Wepon</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ChargeGun.h">
+      <Filter>Maruyama\Player\Component\Wepon\ChargeGun</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ChargeBullet.h">
+      <Filter>Maruyama\Player\Component\Wepon\Bullet\Component\ChargeBullet</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ChargeBulletObject.h">
+      <Filter>Maruyama\Player\Component\Wepon\Bullet\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)BulletBase.h">
+      <Filter>Maruyama\Player\Component\Wepon\Bullet\Component</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -1753,9 +1783,6 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)SkilBase.cpp">
       <Filter>Maruyama\Enemy\Component\Base\Skill</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)BulletBase.cpp">
-      <Filter>Maruyama\Enemy\Component\Base\Bullet</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)TimerDestory.cpp">
       <Filter>Maruyama\Utility\Component\Destroy</Filter>
@@ -2107,6 +2134,21 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)OccupancyManager.cpp">
       <Filter>Maruyama\Enemy\Component\ImpactMap\ImpactManager\ImpactDataManager\OccupancyManager</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WeponBase.cpp">
+      <Filter>Maruyama\Player\Component\Wepon</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ChargeGun.cpp">
+      <Filter>Maruyama\Player\Component\Wepon\ChargeGun</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ChargeBullet.cpp">
+      <Filter>Maruyama\Player\Component\Wepon\Bullet\Component\ChargeBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ChargeBulletObject.cpp">
+      <Filter>Maruyama\Player\Component\Wepon\Bullet\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)BulletBase.cpp">
+      <Filter>Maruyama\Player\Component\Wepon\Bullet\Component</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
