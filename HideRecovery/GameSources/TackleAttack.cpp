@@ -23,6 +23,10 @@
 #include "TimeHelper.h"
 #include "GameTimer.h"
 
+#include "CollisionAction.h"
+#include "Watanabe/Component/PlayerStatus.h"
+#include "Watanabe/DebugClass/Debug.h"
+
 namespace basecross {
 
 	TackleAttack::TackleAttack(const std::shared_ptr<GameObject>& objPtr) :
@@ -130,23 +134,43 @@ namespace basecross {
 		}
 
 		//--------------------------------------------------------------------------------------
+		/// タックル攻撃の攻撃中動作のパラメータ
+		//--------------------------------------------------------------------------------------
+
+		Attack_Tackle_Parametor::Attack_Tackle_Parametor(const DamageData& damageData):
+			damageData(damageData),
+			tackleSpeed(500.0f)
+		{}
+
+		//--------------------------------------------------------------------------------------
 		/// タックル攻撃の攻撃中動作
 		//--------------------------------------------------------------------------------------
 
-		Attack_Tackle::Attack_Tackle(const std::shared_ptr<GameObject>& objPtr, const float tackleSpeed) :
+		Attack_Tackle::Attack_Tackle(const std::shared_ptr<GameObject>& objPtr) :
+			Attack_Tackle(objPtr, Parametor(DamageData(1, objPtr)))
+		{}
+
+		Attack_Tackle::Attack_Tackle(const std::shared_ptr<GameObject>& objPtr, const Parametor& parametor) :
 			TaskNodeBase(objPtr),
-			m_tackleSpeed(tackleSpeed)
-		{ }
+			m_param(parametor),
+			m_isCollision(false)
+		{
+			//あたり判定設定
+			if (auto collisionAction = GetOwner()->GetComponent<maru::CollisionAction>(false)) {
+				collisionAction->AddCollisionEnter([&](const CollisionPair& pair) { CollisionEnter(pair); });
+			}
+		}
 
 		void Attack_Tackle::OnStart() {
 			auto delta = App::GetApp()->GetElapsedTime();
 
+			m_isCollision = true;
 			m_animator = GetOwner()->GetComponent<PlayerAnimator>(false);
 
 			//速度を加算
 			if (auto velocityManager = GetOwner()->GetComponent<VelocityManager>(false)) {
 				auto transform = GetOwner()->GetComponent<Transform>();
-				velocityManager->AddForce(transform->GetForward() * m_tackleSpeed);
+				velocityManager->AddForce(transform->GetForward() * m_param.tackleSpeed);
 				velocityManager->StartDeseleration();
 				m_velocityManager = velocityManager;
 			}
@@ -169,12 +193,25 @@ namespace basecross {
 		}
 
 		void Attack_Tackle::OnExit() {
-			
+			m_isCollision = false;
 		}
 
 		void Attack_Tackle::PlayAnimation() {
 			if (auto animator = m_animator.lock()) {
 				animator->ChangePlayerAnimation(PlayerAnimationState::State::DAttack);
+			}
+		}
+
+		void Attack_Tackle::CollisionEnter(const CollisionPair& pair) {
+			if (!m_isCollision) {
+				return;
+			}
+
+			auto other = pair.m_Dest.lock()->GetGameObject();
+			auto playerStatus = other->GetComponent<PlayerStatus>(false);
+			if (playerStatus) {
+				playerStatus->AddDamage(m_param.damageData);
+				Debug::GetInstance()->Log(L"TackleDamage");
 			}
 		}
 
