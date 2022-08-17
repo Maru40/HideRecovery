@@ -10,6 +10,8 @@
 
 #include "Respawner.h"
 
+#include "PlayerSpawnPoint.h"
+
 namespace basecross {
 
 	Respawner::Respawner(const std::shared_ptr<GameObject>& objPtr) :
@@ -18,6 +20,16 @@ namespace basecross {
 
 	void Respawner::OnCreate() {
 
+	}
+
+	void Respawner::Respawn() {
+		if (IsRespawn()) {
+			transform->SetPosition(GetSpawnPoint()->GetWorldPosition());
+		}
+	}
+
+	bool Respawner::IsRespawn() {
+		return GetSpawnPoint() ? true : false;	//スポーンポイントがあるならtrue
 	}
 
 }
