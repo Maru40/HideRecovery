@@ -59,5 +59,11 @@ namespace basecross {
 		virtual void OnUpdate()override;
 		// Animatorでは基本使用しない
 		virtual void OnDraw()override {}
+
+		/// <summary>
+		/// アニメーションが終了しているかどうか
+		/// </summary>
+		/// <returns>アニメーションが終了していたらtrue</returns>
+		virtual bool IsTargetAnimationEnd();
 	};
 }

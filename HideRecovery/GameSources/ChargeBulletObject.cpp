@@ -22,6 +22,9 @@ namespace basecross {
 		SettingModel();
 
 		AddComponent<ChargeBullet>();
+
+		auto collision = AddComponent<CollisionObb>();
+		collision->SetAfterCollision(AfterCollision::None);
 	}
 
 	void ChargeBulletObject::SettingModel() {

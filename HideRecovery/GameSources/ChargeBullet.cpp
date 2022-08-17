@@ -12,7 +12,8 @@
 
 #include "RangeDestroyManager.h"
 
-#include "I_Damaged.h"
+#include "Watanabe/Component/PlayerStatus.h"
+#include "Watanabe/DebugClass/Debug.h"
 
 namespace basecross {
 
@@ -24,7 +25,8 @@ namespace basecross {
 		BulletBase::OnUpdate();
 	}
 
-	void ChargeBullet::Shot(const Vec3& direct) {
+	void ChargeBullet::Shot(const std::shared_ptr<GameObject>& owner, const Vec3& direct) {
+		SetOwner(owner);
 		SetMoveDirect(direct);
 
 		//最大距離を設定
@@ -33,10 +35,14 @@ namespace basecross {
 
 	void ChargeBullet::OnCollisionEnter(const CollisionPair& pair) {
 		auto other = pair.m_Dest.lock()->GetGameObject();
+		if (GetOwner() == other) {	//当たった相手が所有者なら処理をしない
+			return;
+		}
 
 		//ダメージを与える。
-		if (auto damaged = other->GetComponent<I_Damaged>(false)) {
-			damaged->Damaged(DamageData(1.0f));
+		if (auto player = other->GetComponent<PlayerStatus>(false)) {
+			player->AddDamage(DamageData(1));
+			//Debug::GetInstance()->Log(L"Damaged");
 		}
 
 		//自分自身を削除

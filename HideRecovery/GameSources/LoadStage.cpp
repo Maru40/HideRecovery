@@ -4,6 +4,7 @@
 #include"GameSaveManager.h"
 #include"PlayerInputer.h"
 #include "Watanabe/Effekseer/EfkEffect.h"
+#include "Watanabe/Utility/CSVLoad.h"
 
 namespace basecross
 {
@@ -262,6 +263,11 @@ namespace basecross
 		std::thread loadThread(LoadResource);
 
 		loadThread.detach();
+
+		wstring mediaDir;
+		mediaDir = App::GetApp()->GetDataDirWString();
+		wstring dir = mediaDir + L"Models/";
+		CSVLoad::GetInstance()->RegisterFile(L"PlayerAnimation", dir + L"Player/PlayerAnimation.csv");
 	}
 
 	void LoadStage::OnUpdate()

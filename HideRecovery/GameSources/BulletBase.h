@@ -7,15 +7,18 @@
 #pragma once
 #include "stdafx.h"
 
+#include "I_Damaged.h"
+
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
 	///	弾丸の基底クラスのパラメータ
 	//--------------------------------------------------------------------------------------
 	struct BulletBase_Parametor {
-		Vec3 moveDirect;	//移動方向
-		float moveSpeed;	//移動スピード
-		float maxRange;		//移動最大距離
+		Vec3 moveDirect;		//移動方向
+		float moveSpeed;		//移動スピード
+		float maxRange;			//移動最大距離
+		DamageData damageData;	//ダメージデータ
 
 		BulletBase_Parametor();
 	};
@@ -29,7 +32,9 @@ namespace basecross {
 		using Parametor = BulletBase_Parametor;
 
 	private:
-		Parametor m_param;	//パラメータ
+		Parametor m_param;					//パラメータ
+
+		std::weak_ptr<GameObject> m_owner;	//この弾の所有者
 
 	public:
 		/// <summary>
@@ -43,8 +48,9 @@ namespace basecross {
 		/// <summary>
 		/// 撃つ処理
 		/// </summary>
+		/// <param name="owner">撃った者</param>
 		/// <param name="direct">撃つ方向</param>
-		virtual void Shot(const Vec3& direct) {}
+		virtual void Shot(const std::shared_ptr<GameObject>& owner, const Vec3& direct) {}
 
 		/// <summary>
 		/// 撃つ処理が終了したタイミングで呼ぶ処理
@@ -89,6 +95,30 @@ namespace basecross {
 		/// </summary>
 		/// <returns>移動最大距離</returns>
 		float GetMaxRange() const noexcept { return m_param.maxRange; }
+
+		/// <summary>
+		/// ダメージデータの設定
+		/// </summary>
+		/// <param name="data">ダメージデータ</param>
+		void SetDamageData(const DamageData& data) noexcept { m_param.damageData = data; }
+
+		/// <summary>
+		/// ダメージデータの取得
+		/// </summary>
+		/// <returns>ダメージデータ</returns>
+		DamageData GetDamageData() const noexcept { return m_param.damageData; }
+
+		/// <summary>
+		/// 所有者の設定
+		/// </summary>
+		/// <param name="owner">所有者</param>
+		void SetOwner(const std::shared_ptr<GameObject>& owner) noexcept { m_owner = owner; }
+
+		/// <summary>
+		/// 所有者の取得
+		/// </summary>
+		/// <returns>所有者</returns>
+		std::shared_ptr<GameObject> GetOwner() const { return m_owner.lock(); }
 	};
 
 }

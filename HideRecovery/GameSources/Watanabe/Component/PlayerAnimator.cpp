@@ -16,4 +16,11 @@ namespace basecross {
 	void PlayerAnimator::ChangePlayerAnimation(PlayerAnimationState::State state) {
 		ChangeAnimation(PlayerAnimationState::PlayerAnimationState2wstring(state));
 	}
+
+	bool PlayerAnimator::IsCurretAnimationState(const PlayerAnimationState::State& state) const {
+		auto drawer = GetGameObject()->GetComponent<PNTBoneModelDraw>();
+		auto strState = PlayerAnimationState::PlayerAnimationState2wstring(state);
+
+		return strState == drawer->GetCurrentAnimation();
+	}
 }

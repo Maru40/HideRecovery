@@ -55,4 +55,9 @@ namespace basecross {
 		auto drawer = GetGameObject()->GetComponent<PNTBoneModelDraw>();
 		drawer->UpdateAnimation(App::GetApp()->GetElapsedTime());
 	}
+
+	bool Animator::IsTargetAnimationEnd() {
+		auto drawer = GetGameObject()->GetComponent<PNTBoneModelDraw>();
+		return drawer->IsTargetAnimeEnd();
+	}
 }

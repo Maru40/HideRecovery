@@ -11,5 +11,12 @@ namespace basecross {
 		void OnCreate()override;
 
 		void ChangePlayerAnimation(PlayerAnimationState::State state);
+
+		/// <summary>
+		/// 現在のステートを確認
+		/// </summary>
+		/// <param name="state">確認したいステート</param>
+		bool IsCurretAnimationState(const PlayerAnimationState::State& state) const;
+
 	};
 }
