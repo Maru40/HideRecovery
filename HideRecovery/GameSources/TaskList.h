@@ -189,6 +189,7 @@ namespace basecross {
 		int m_currentIndex = 0;
 
 	public:
+		virtual ~TaskList() = default;
 
 		/// <summary>
 		/// 毎フレーム呼び出す関数(呼び出しは外部依存)
