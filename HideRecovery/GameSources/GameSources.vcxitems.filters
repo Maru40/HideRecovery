@@ -814,6 +814,12 @@
     <Filter Include="Maruyama\Enemy\Component\ImpactMap\Astar\AIImpacter">
       <UniqueIdentifier>{e0c25eb1-05d0-4534-8b9f-86a6b61eb9c3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Itabashi\Stage\OnlineMatchStage">
+      <UniqueIdentifier>{98029820-d616-49f2-829f-5dbbb6866197}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Itabashi\Online\OnlineMatching">
+      <UniqueIdentifier>{06330886-be4a-48de-98b1-7bd132101f24}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1500,6 +1506,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)OccupancyManager.h">
       <Filter>Maruyama\Enemy\Component\ImpactMap\ImpactManager\ImpactDataManager\OccupancyManager</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineMatchStage.h">
+      <Filter>Itabashi\Stage\OnlineMatchStage</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineMatching.h">
+      <Filter>Itabashi\Online\OnlineMatching</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2107,6 +2119,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)OccupancyManager.cpp">
       <Filter>Maruyama\Enemy\Component\ImpactMap\ImpactManager\ImpactDataManager\OccupancyManager</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineMatchStage.cpp">
+      <Filter>Itabashi\Stage\OnlineMatchStage</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
