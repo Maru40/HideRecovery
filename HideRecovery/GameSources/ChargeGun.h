@@ -24,6 +24,7 @@ namespace basecross {
 	public:
 		ChargeGun(const std::shared_ptr<GameObject>& objPtr);
 
+		void OnCreate() override;
 		void OnUpdate() override;
 
 		void Shot(const Vec3& direct) override;

@@ -23,8 +23,14 @@ namespace basecross {
 		WeponBase(objPtr)
 	{}
 
+	void ChargeGun::OnCreate() {
+		SetBulletInstanceOffset(Vec3(0.0f, 0.9f, 0.0f));
+	}
+
 	void ChargeGun::OnUpdate() {
 		UpdateAnimation();
+
+		Shot(transform->GetForward());
 	}
 
 	void ChargeGun::UpdateAnimation() {
