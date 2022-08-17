@@ -9,8 +9,8 @@ namespace basecross {
 	void PlayerStatus::OnCreate() {
 	}
 
-	void PlayerStatus::AddDamage(int damage) {
-		m_status.hp -= damage;
+	void PlayerStatus::AddDamage(DamageData damage) {
+		m_status.hp -= damage.value;
 
 		// 念のため0にクランプ
 		if (m_status.hp <= 0)

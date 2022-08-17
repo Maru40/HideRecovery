@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "stdafx.h"
+#include "I_Damaged.h"
 
 namespace basecross {
 	struct Status {
@@ -26,9 +27,8 @@ namespace basecross {
 		void OnUpdate()override {}
 		void OnDraw()override {}
 
-		void AddDamage(int damage);
+		void AddDamage(DamageData damage);
 		bool IsDead();
-
 		void Respawn();
 	};
 }

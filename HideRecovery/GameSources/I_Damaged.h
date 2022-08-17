@@ -8,17 +8,12 @@
 #include "stdafx.h"
 
 namespace basecross {
-
 	//--------------------------------------------------------------------------------------
 	/// ダメージデータ
 	//--------------------------------------------------------------------------------------
 	struct DamageData
 	{
-		float value;      //ダメージ値
-		Vec3 knockVec;    //ノックバック方向
-		float knockPower; //ノックバックパワー
-		float slowTime;   //遅速時間
-		Vec3 hitPoint;    //当たった場所
+		int value;      //ダメージ値
 
 		/// <summary>
 		/// コンストラクタ
@@ -29,16 +24,7 @@ namespace basecross {
 		/// コンストラクタ
 		/// </summary>
 		/// <param name="value">ダメージ値</param>
-		DamageData(const float& value);
-
-		/// <summary>
-		/// コンストラクタ
-		/// </summary>
-		/// <param name="value">ダメージ値</param>
-		/// <param name="knockVec">ノックバック方向</param>
-		/// <param name="knockPower">ノックバックパワー</param>
-		/// <param name="slowTime">遅速時間</param>
-		DamageData(const float& value, const Vec3& knockVec, const float& knockPower, const float& slowTime);
+		DamageData(const int& value);
 
 		DamageData operator+(const DamageData& data);
 
@@ -54,7 +40,6 @@ namespace basecross {
 		/// <param name="data">ダメージデータ</param>
 		virtual void Damaged(const DamageData& data) = 0;
 	};
-
 }
 
 //endbasecorss
