@@ -8,6 +8,8 @@
 #include "../Utility/DataExtracter.h"
 #include "../DebugClass/Debug.h"
 
+#include "Maruyama/Player/Component/OwnArea.h"
+
 namespace basecross {
 	OwnAreaObject::OwnAreaObject(const shared_ptr<Stage>& stage)
 		:StageObjectBase(stage, L"OwnArea"), m_areaRadius(20), m_team(Team::East)
@@ -38,6 +40,8 @@ namespace basecross {
 
 	void OwnAreaObject::OnCreate() {
 		Debug::GetInstance()->Log(L"Create OwnArea");
+
+		AddComponent<OwnArea>(OwnArea::Parametor(m_team, m_areaRadius));
 	}
 	void OwnAreaObject::OnUpdate() {
 	}
