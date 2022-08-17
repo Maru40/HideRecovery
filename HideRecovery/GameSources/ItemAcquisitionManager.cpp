@@ -19,8 +19,9 @@
 #include "PlayerInputer.h"
 #include "ItemBag.h"
 
-#include "PlayerAnimationCtrl.h"
 #include "RotationController.h"
+
+#include "Watanabe/Component/PlayerAnimator.h"
 
 namespace basecross {
 
@@ -98,7 +99,7 @@ namespace basecross {
 		}
 
 		auto bag = GetGameObject()->GetComponent<ItemBag>(false);
-		auto animator = GetGameObject()->GetComponent<PlayerAnimationCtrl>(false);
+		auto animator = GetGameObject()->GetComponent<PlayerAnimator>(false);
 		if (!bag || !animator) {
 			return;
 		}
@@ -114,11 +115,11 @@ namespace basecross {
 		auto itemPosition = item->GetGameObject()->GetComponent<Transform>()->GetPosition();
 		if (itemPosition.y < 0.0f) {
 			//アイテムが床にあるなら
-			animator->ChangeAnimation(PlayerAnimationCtrl::State::PutItem_Floor);
+			animator->ChangePlayerAnimation(PlayerAnimationState::State::PutItem_Floor);
 		}
 		else {
 			//アイテムが床にないなら
-			animator->ChangeAnimation(PlayerAnimationCtrl::State::PutItem_HideObject);
+			animator->ChangePlayerAnimation(PlayerAnimationState::State::PutItem_HideObject);
 		}
 
 		//向きたい方法を設定
@@ -166,7 +167,7 @@ namespace basecross {
 			return false;
 		}
 
-		auto animator = GetGameObject()->GetComponent<PlayerAnimationCtrl>(false);
+		auto animator = GetGameObject()->GetComponent<PlayerAnimator>(false);
 
 		if (!animator)
 		{
@@ -174,9 +175,7 @@ namespace basecross {
 		}
 
 		//アニメーションが置く状態ならできない
-		auto currentState = animator->GetCurrentAnimaiton();
-
-		if (currentState == PlayerAnimationCtrl::State::PutItem_Floor || currentState == PlayerAnimationCtrl::State::PutItem_HideObject)
+		if (animator->IsCurretAnimationState(PlayerAnimationState::State::PutItem_Floor) || animator->IsCurretAnimationState(PlayerAnimationState::State::PutItem_HideObject))
 		{
 			return false;
 		}

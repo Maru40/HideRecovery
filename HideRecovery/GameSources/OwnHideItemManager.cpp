@@ -19,8 +19,6 @@
 
 #include "MaruUtility.h"
 
-#include "PlayerAnimationCtrl.h"
-
 #include "TimeHelper.h"
 #include "GameTimer.h"
 
@@ -28,6 +26,8 @@
 
 #include "Watanabe/DebugClass/Debug.h"
 #include "Itabashi/Item.h"
+
+#include "Watanabe/Component/PlayerAnimator.h"
 
 namespace basecross {
 
@@ -120,20 +120,19 @@ namespace basecross {
 	}
 
 	void OwnHideItemManager::PlayAnimation(const std::function<void()>& putEvent) {
-		auto animator = GetGameObject()->GetComponent<PlayerAnimationCtrl>(false);
+		auto animator = GetGameObject()->GetComponent<PlayerAnimator>(false);
 
 		//アニメーションが置く状態ならできない
-		auto currentState = animator->GetCurrentAnimaiton();
-		if (currentState == PlayerAnimationCtrl::State::PutItem_Floor || currentState == PlayerAnimationCtrl::State::PutItem_HideObject) {
+		if (animator->IsCurretAnimationState(PlayerAnimationState::State::PutItem_Floor) || animator->IsCurretAnimationState(PlayerAnimationState::State::PutItem_HideObject)) {
 			return;
 		}
 
 		if (m_isFleePut) {
-			animator->ChangeAnimation(PlayerAnimationCtrl::State::PutItem_Floor);
+			animator->ChangePlayerAnimation(PlayerAnimationState::State::PutItem_Floor);
 			m_timer->ResetTimer(m_param.putFloorAnimationTime, putEvent);
 		}
 		else {
-			animator->ChangeAnimation(PlayerAnimationCtrl::State::PutItem_HideObject);
+			animator->ChangePlayerAnimation(PlayerAnimationState::State::PutItem_HideObject);
 			m_timer->ResetTimer(m_param.putHideObjectAnimationTime, putEvent);
 		}
 	}
@@ -151,7 +150,7 @@ namespace basecross {
 	bool OwnHideItemManager::CanPut() const {
 		//必要コンポーネント確認
 		auto bag = GetGameObject()->GetComponent<ItemBag>(false);
-		auto animator = GetGameObject()->GetComponent<PlayerAnimationCtrl>(false);
+		auto animator = GetGameObject()->GetComponent<PlayerAnimator>(false);
 		if (!bag || !animator) { return false; }	//必要コンポーネントがあるかどうか
 
 		auto hideItem = bag->GetHideItem();	
