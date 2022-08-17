@@ -12,6 +12,7 @@
 #include "ChargeGun.h"
 #include "ChargeBulletObject.h"
 #include "Watanabe/Component/PlayerStatus.h"
+#include "TackleAttack.h"
 
 template<class T>
 T ConvertByteData(const std::uint8_t* bytes)
@@ -88,8 +89,9 @@ namespace Online
 	void PlayerOnlineController::Move()
 	{
 		auto objectMover = m_objectMover.lock();
+		auto tackleAttack = m_tackleAttack.lock();
 
-		if (!objectMover)
+		if (!objectMover || !tackleAttack || tackleAttack->IsTackle())
 		{
 			return;
 		}
@@ -346,6 +348,42 @@ namespace Online
 		playerStatus->AddDamage(DamageData(damage, attackerOnlineController->GetGameObject()));
 	}
 
+	void PlayerOnlineController::TryTackle()
+	{
+		if (!PlayerInputer::IsTackle())
+		{
+			return;
+		}
+
+		auto tackleAttack = m_tackleAttack.lock();
+
+		if (!tackleAttack || tackleAttack->IsTackle())
+		{
+			return;
+		}
+		
+		tackleAttack->StartAttack();
+
+		OnlineManager::RaiseEvent(false, (uint8_t*)&m_playerNumber, sizeof(int), EXECUTE_TACKLE_EVENT_CODE);
+	}
+
+	void PlayerOnlineController::ExecuteTackle(int playerNumber)
+	{
+		if (m_playerNumber != playerNumber)
+		{
+			return;
+		}
+
+		auto tackleAttack = m_tackleAttack.lock();
+
+		if (!tackleAttack)
+		{
+			return;
+		}
+
+		tackleAttack->StartAttack();
+	}
+
 	void PlayerOnlineController::OnLateStart()
 	{
 		auto& owner = GetGameObject();
@@ -361,6 +399,8 @@ namespace Online
 		auto damageFunc = [&](const std::shared_ptr<PlayerStatus>& playerStatus, const DamageData& damageData) {Damaged(playerStatus, damageData); };
 		playerStatus->AddFuncAddDamage(damageFunc);
 		m_playerStatus = owner->GetComponent<PlayerStatus>();
+
+		m_tackleAttack = owner->GetComponent<TackleAttack>();
 	}
 
 	void PlayerOnlineController::OnUpdate()
@@ -377,6 +417,8 @@ namespace Online
 		TryItemHide();
 
 		Shot();
+
+		TryTackle();
 	}
 
 	void PlayerOnlineController::OnCustomEventAction(int playerNumber, std::uint8_t eventCode, const std::uint8_t* bytes)
@@ -431,6 +473,12 @@ namespace Online
 		{
 			auto data = ConvertByteData<OnlineDamageData>(bytes);
 			ExecuteDamagedEvent(data.attackerPlayerNumber, data.damagedPlayerNumber, data.damage);
+			return;
+		}
+
+		if (eventCode == EXECUTE_TACKLE_EVENT_CODE)
+		{
+			ExecuteTackle(playerNumber);
 			return;
 		}
 	}

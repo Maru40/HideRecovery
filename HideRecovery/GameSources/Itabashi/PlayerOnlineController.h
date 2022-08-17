@@ -9,6 +9,7 @@ namespace basecross
 	class VelocityManager;
 	class ChargeGun;
 	class PlayerStatus;
+	class TackleAttack;
 
 	struct DamageData;
 
@@ -45,6 +46,7 @@ namespace Online
 		static constexpr std::uint8_t EXECUTE_MOVE_EVENT_CODE = 6;
 		static constexpr std::uint8_t EXECUTE_SHOT_EVENT_CODE = 7;
 		static constexpr std::uint8_t EXECUTE_DAMAGE_EVENT_CODE = 8;
+		static constexpr std::uint8_t EXECUTE_TACKLE_EVENT_CODE = 9;
 
 	private:
 
@@ -67,6 +69,8 @@ namespace Online
 		std::weak_ptr<ChargeGun> m_chargeGun;
 
 		std::weak_ptr<PlayerStatus> m_playerStatus;
+
+		std::weak_ptr<TackleAttack> m_tackleAttack;
 
 		/// <summary>
 		/// 対応するプレイヤー番号
@@ -100,6 +104,10 @@ namespace Online
 		void Damaged(const std::shared_ptr<PlayerStatus>& playerStatus, const DamageData& damageData);
 
 		void ExecuteDamagedEvent(int attackerPlayerNumber, int damagedPlayerNumber, int damage);
+
+		void TryTackle();
+
+		void ExecuteTackle(int playerNumber);
 
 	public:
 
