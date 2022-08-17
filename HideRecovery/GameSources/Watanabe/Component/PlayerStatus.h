@@ -33,7 +33,13 @@ namespace basecross {
 	};
 
 	class PlayerStatus :public Component {
+	public:
+		using DamageFuncType = std::function<void(const std::shared_ptr<PlayerStatus>&, const DamageData&)>;
+	private:
 		Status m_status;
+
+		std::vector<DamageFuncType> m_damagedFuncs;
+
 	public:
 		PlayerStatus(const shared_ptr<GameObject>& owner);
 
@@ -45,7 +51,7 @@ namespace basecross {
 		/// ダメージを加える
 		/// </summary>
 		/// <param name="damage">ダメージデータ</param>
-		void AddDamage(DamageData damage);
+		void AddDamage(const DamageData& damage);
 		/// <summary>
 		/// 死んでいるか
 		/// </summary>
@@ -55,5 +61,7 @@ namespace basecross {
 		/// リスポーン（ステータスのリセットのみ）
 		/// </summary>
 		void Respawn();
+
+		void AddFuncAddDamage(const DamageFuncType& damagedFunc);
 	};
 }

@@ -1,8 +1,8 @@
-
+ï»¿
 /*!
 @file ChargeBullet.cpp
-@brief ChargeBullet‚ÌƒNƒ‰ƒXŽÀ‘Ì
-’S“–FŠÛŽR—TŠì
+@brief ChargeBulletã®ã‚¯ãƒ©ã‚¹å®Ÿä½“
+æ‹…å½“ï¼šä¸¸å±±è£•å–œ
 */
 
 #include "stdafx.h"
@@ -14,6 +14,7 @@
 
 #include "Watanabe/Component/PlayerStatus.h"
 #include "Watanabe/DebugClass/Debug.h"
+#include "Itabashi/OnlineManager.h"
 
 namespace basecross {
 
@@ -29,23 +30,23 @@ namespace basecross {
 		SetOwner(owner);
 		SetMoveDirect(direct);
 
-		//Å‘å‹——£‚ðÝ’è
+		//æœ€å¤§è·é›¢ã‚’è¨­å®š
 		auto rangeDestroy = GetGameObject()->AddComponent<RangeDestoryManager>(GetMaxRange());
 	}
 
 	void ChargeBullet::OnCollisionEnter(const CollisionPair& pair) {
 		auto other = pair.m_Dest.lock()->GetGameObject();
-		if (GetOwner() == other) {	//“–‚½‚Á‚½‘ŠŽè‚ªŠ—LŽÒ‚È‚çˆ—‚ð‚µ‚È‚¢
+		if (GetOwner() == other) {	//å½“ãŸã£ãŸç›¸æ‰‹ãŒæ‰€æœ‰è€…ãªã‚‰å‡¦ç†ã‚’ã—ãªã„
 			return;
 		}
 
-		//ƒ_ƒ[ƒW‚ð—^‚¦‚éB
-		if (auto player = other->GetComponent<PlayerStatus>(false)) {
-			player->AddDamage(DamageData(1));
-			//Debug::GetInstance()->Log(L"Damaged");
+		auto player = other->GetComponent<PlayerStatus>(false);
+		//ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’ä¸Žãˆã‚‹ã€‚
+		if (player && Online::OnlineManager::GetLocalPlayer().getIsMasterClient()) {
+			player->AddDamage(DamageData(1, GetOwner()));
 		}
 
-		//Ž©•ªŽ©g‚ðíœ
+		//è‡ªåˆ†è‡ªèº«ã‚’å‰Šé™¤
 		GetStage()->RemoveGameObject<GameObject>(GetGameObject());
 	}
 }

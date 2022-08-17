@@ -9,6 +9,15 @@
 #include "HideItem.h"
 #include "Item.h"
 #include "VelocityManager.h"
+#include "ChargeGun.h"
+#include "ChargeBulletObject.h"
+#include "Watanabe/Component/PlayerStatus.h"
+
+template<class T>
+T ConvertByteData(const std::uint8_t* bytes)
+{
+	return *(T*)bytes;
+}
 
 namespace basecross
 {
@@ -27,27 +36,53 @@ namespace Online
 		}
 	};
 
+	struct ShotOnlineData
+	{
+		Vec3 position;
+		Vec3 direction;
+
+		ShotOnlineData(const Vec3& position, const Vec3& direction) :
+			position(position),
+			direction(direction)
+		{
+
+		}
+	};
+
+	struct OnlineDamageData
+	{
+		int attackerPlayerNumber;
+		int damagedPlayerNumber;
+		int damage;
+
+		OnlineDamageData(int attackerPlayerNumber, int damagedPlayerNumber, int damage) :
+			attackerPlayerNumber(attackerPlayerNumber),
+			damagedPlayerNumber(damagedPlayerNumber),
+			damage(damage)
+		{
+
+		}
+	};
+
 	PlayerOnlineController::PlayerOnlineController(const std::shared_ptr<GameObject>& owner) :
 		OnlineComponent(owner)
 	{
 
 	}
 
-	std::vector<std::shared_ptr<PlayerOnlineController>> PlayerOnlineController::GetPlayerOnlineControllers() const
+	std::shared_ptr<PlayerOnlineController> PlayerOnlineController::GetPlayerOnlineController(int playerNumber) const
 	{
-		std::vector<std::shared_ptr<PlayerOnlineController>> onlineControllers;
-
 		for (auto& gameObject : GetStage()->GetGameObjectVec())
 		{
 			auto controller = gameObject->GetComponent<PlayerOnlineController>(false);
 
-			if (controller)
+			if (controller && controller->GetPlayerNumber() == playerNumber)
 			{
-				onlineControllers.push_back(controller);
+				return controller;
 			}
 		}
 
-		return onlineControllers;
+		return nullptr;
 	}
 
 	void PlayerOnlineController::Move()
@@ -141,21 +176,16 @@ namespace Online
 			return;
 		}
 
-		for (auto& onlineController : GetPlayerOnlineControllers())
-		{
-			if (onlineController->GetPlayerNumber() != playerNumber)
-			{
-				continue;
-			}
+		auto onlineController = GetPlayerOnlineController(playerNumber);
 
+		if (onlineController)
+		{
 			auto otherAcquisitionManager = onlineController->m_acquisitionManager.lock();
 
 			if (otherAcquisitionManager)
 			{
 				otherAcquisitionManager->ItemAcquisition(item);
 			}
-
-			break;
 		}
 
 		OnlineManager::RaiseEvent(false, (std::uint8_t*)&ItemOwnerShipData(itemId, playerNumber), sizeof(ItemOwnerShipData), EXECUTE_ACQUISITION_EVENT_CODE);
@@ -214,22 +244,19 @@ namespace Online
 			return;
 		}
 
-		for (auto& onlineController : GetPlayerOnlineControllers())
+		auto onlineController = GetPlayerOnlineController(playerNumber);
+
+		if (!onlineController)
 		{
-			if (onlineController->GetPlayerNumber() != playerNumber)
-			{
-				continue;
-			}
+			return;
+		}
 
-			auto hideItemManager = onlineController->m_hideItemManager.lock();
+		auto hideItemManager = onlineController->m_hideItemManager.lock();
 
-			if (hideItemManager && hideItemManager->CanPut())
-			{
-				auto position = hideItemManager->PutHideItem();
-				OnlineManager::RaiseEvent(false, (std::uint8_t*)&HideItemOnlineData(playerNumber, position), sizeof(HideItemOnlineData), EXECUTE_ITEM_HIDE_EVENT_CODE);
-			}
-
-			break;
+		if (hideItemManager && hideItemManager->CanPut())
+		{
+			auto position = hideItemManager->PutHideItem();
+			OnlineManager::RaiseEvent(false, (std::uint8_t*)&HideItemOnlineData(playerNumber, position), sizeof(HideItemOnlineData), EXECUTE_ITEM_HIDE_EVENT_CODE);
 		}
 	}
 
@@ -248,14 +275,92 @@ namespace Online
 		}
 	}
 
+	void PlayerOnlineController::Shot()
+	{
+		if (!PlayerInputer::IsShot())
+		{
+			return;
+		}
+
+		auto transform = m_transform.lock();
+		auto chargeGun = m_chargeGun.lock();
+
+		if (!chargeGun)
+		{
+			return;
+		}
+
+		auto bulletObject = chargeGun->Shot(transform->GetForward());
+		auto bulletTransform = bulletObject->GetComponent<Transform>();
+
+		auto shotData = ShotOnlineData(bulletTransform->GetWorldPosition(), transform->GetForward());
+
+		OnlineManager::RaiseEvent(false, (std::uint8_t*)&shotData, sizeof(ShotOnlineData), EXECUTE_SHOT_EVENT_CODE);
+	}
+
+	void PlayerOnlineController::ExecuteShot(int playerNumber, const Vec3& bulletPosition, const Vec3& bulletDirection)
+	{
+		if (playerNumber != m_playerNumber)
+		{
+			return;
+		}
+
+		auto chargeGun = m_chargeGun.lock();
+
+		if (!chargeGun)
+		{
+			return;
+		}
+
+		auto bulletObject = chargeGun->Shot(bulletDirection);
+		auto bulletTransform = bulletObject->GetComponent<Transform>();
+
+		bulletTransform->SetWorldPosition(bulletPosition);
+	}
+
+	void PlayerOnlineController::Damaged(const std::shared_ptr<PlayerStatus>& playerStatus, const DamageData& damageData)
+	{
+		if (!OnlineManager::GetLocalPlayer().getIsMasterClient())
+		{
+			return;
+		}
+
+		auto attackerOnlineController = damageData.attacker->GetComponent<PlayerOnlineController>();
+		auto damagedOnlineController = playerStatus->GetGameObject()->GetComponent<PlayerOnlineController>();
+		OnlineDamageData data(attackerOnlineController->GetPlayerNumber(), damagedOnlineController->GetPlayerNumber(), damageData.value);
+
+		OnlineManager::RaiseEvent(false, (std::uint8_t*)&data, sizeof(OnlineDamageData), EXECUTE_DAMAGE_EVENT_CODE);
+	}
+
+	void PlayerOnlineController::ExecuteDamagedEvent(int attackerPlayerNumber, int damagedPlayerNumber, int damage)
+	{
+		auto playerStatus = m_playerStatus.lock();
+
+		if (!playerStatus || m_playerNumber != damagedPlayerNumber)
+		{
+			return;
+		}
+
+		auto attackerOnlineController = GetPlayerOnlineController(attackerPlayerNumber);
+
+		playerStatus->AddDamage(DamageData(damage, attackerOnlineController->GetGameObject()));
+	}
+
 	void PlayerOnlineController::OnLateStart()
 	{
 		auto& owner = GetGameObject();
+		m_transform = owner->GetComponent<Transform>();
 		m_objectMover = owner->GetComponent<Operator::ObjectMover>();
 		m_rotationController = owner->GetComponent<RotationController>();
 		m_acquisitionManager = owner->GetComponent<ItemAcquisitionManager>();
 		m_hideItemManager = owner->GetComponent<OwnHideItemManager>(false);
 		m_velocityManager = owner->GetComponent<VelocityManager>();
+		m_chargeGun = owner->GetComponent<ChargeGun>();
+
+		auto playerStatus = owner->GetComponent<PlayerStatus>();
+		auto damageFunc = [&](const std::shared_ptr<PlayerStatus>& playerStatus, const DamageData& damageData) {Damaged(playerStatus, damageData); };
+		playerStatus->AddFuncAddDamage(damageFunc);
+		m_playerStatus = owner->GetComponent<PlayerStatus>();
 	}
 
 	void PlayerOnlineController::OnUpdate()
@@ -270,6 +375,8 @@ namespace Online
 		TryAquisition();
 
 		TryItemHide();
+
+		Shot();
 	}
 
 	void PlayerOnlineController::OnCustomEventAction(int playerNumber, std::uint8_t eventCode, const std::uint8_t* bytes)
@@ -281,14 +388,14 @@ namespace Online
 
 		if (eventCode == TRY_ACQUISITION_EVENT_CODE)
 		{
-			int itemId = *(int*)bytes;
+			int itemId = ConvertByteData<int>(bytes);
 			TryAcquisitionEvent(itemId, playerNumber);
 			return;
 		}
 
 		if (eventCode == EXECUTE_ACQUISITION_EVENT_CODE)
 		{
-			auto ownerShipData = *(ItemOwnerShipData*)bytes;
+			auto ownerShipData = ConvertByteData<ItemOwnerShipData>(bytes);
 			ExecuteAcquisitionEvent(ownerShipData);
 			return;
 		}
@@ -301,15 +408,29 @@ namespace Online
 
 		if (eventCode == EXECUTE_ITEM_HIDE_EVENT_CODE)
 		{
-			HideItemOnlineData data = *(HideItemOnlineData*)bytes;
+			auto data = ConvertByteData<HideItemOnlineData>(bytes);
 			ExecuteItemHideEvent(data.playerNumber, data.position);
 			return;
 		}
 
 		if (eventCode == EXECUTE_MOVE_EVENT_CODE)
 		{
-			Vec3 moveVector = *(Vec3*)bytes;
+			auto moveVector = ConvertByteData<Vec3>(bytes);
 			ExecuteMove(playerNumber, moveVector);
+			return;
+		}
+
+		if (eventCode == EXECUTE_SHOT_EVENT_CODE)
+		{
+			auto data = ConvertByteData<ShotOnlineData>(bytes);
+			ExecuteShot(playerNumber, data.position, data.direction);
+			return;
+		}
+
+		if (eventCode == EXECUTE_DAMAGE_EVENT_CODE)
+		{
+			auto data = ConvertByteData<OnlineDamageData>(bytes);
+			ExecuteDamagedEvent(data.attackerPlayerNumber, data.damagedPlayerNumber, data.damage);
 			return;
 		}
 	}

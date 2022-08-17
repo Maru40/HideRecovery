@@ -7,6 +7,10 @@ namespace basecross
 	class ItemAcquisitionManager;
 	class OwnHideItemManager;
 	class VelocityManager;
+	class ChargeGun;
+	class PlayerStatus;
+
+	struct DamageData;
 
 namespace Operator
 {
@@ -39,9 +43,12 @@ namespace Online
 		static constexpr std::uint8_t TRY_ITEM_HIDE_EVENT_CODE = 4;
 		static constexpr std::uint8_t EXECUTE_ITEM_HIDE_EVENT_CODE = 5;
 		static constexpr std::uint8_t EXECUTE_MOVE_EVENT_CODE = 6;
+		static constexpr std::uint8_t EXECUTE_SHOT_EVENT_CODE = 7;
+		static constexpr std::uint8_t EXECUTE_DAMAGE_EVENT_CODE = 8;
 
 	private:
 
+		std::weak_ptr<Transform> m_transform;
 		/// <summary>
 		/// オブジェクトを動かす用のコンポーネント
 		/// </summary>
@@ -57,6 +64,10 @@ namespace Online
 
 		std::weak_ptr<VelocityManager> m_velocityManager;
 
+		std::weak_ptr<ChargeGun> m_chargeGun;
+
+		std::weak_ptr<PlayerStatus> m_playerStatus;
+
 		/// <summary>
 		/// 対応するプレイヤー番号
 		/// </summary>
@@ -64,7 +75,7 @@ namespace Online
 
 		Vec3 m_beforeMoveVector = Vec3();
 
-		std::vector<std::shared_ptr<PlayerOnlineController>> GetPlayerOnlineControllers() const;
+		std::shared_ptr<PlayerOnlineController> GetPlayerOnlineController(int playerNumber) const;
 
 		void Move();
 
@@ -81,6 +92,14 @@ namespace Online
 		void TryItemHideEvent(int playerNumber);
 
 		void ExecuteItemHideEvent(int playerNumber, const Vec3& position);
+
+		void Shot();
+
+		void ExecuteShot(int playerNumber, const Vec3& bulletPosition, const Vec3& bulletDirection);
+
+		void Damaged(const std::shared_ptr<PlayerStatus>& playerStatus, const DamageData& damageData);
+
+		void ExecuteDamagedEvent(int attackerPlayerNumber, int damagedPlayerNumber, int damage);
 
 	public:
 

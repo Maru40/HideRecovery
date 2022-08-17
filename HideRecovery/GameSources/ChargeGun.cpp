@@ -1,8 +1,8 @@
-
+ï»¿
 /*!
 @file ChargeGun.cpp
-@brief ChargeGunƒNƒ‰ƒXÀ‘Ì
-’S“–FŠÛR—TŠì
+@brief ChargeGunã‚¯ãƒ©ã‚¹å®Ÿä½“
+æ‹…å½“ï¼šä¸¸å±±è£•å–œ
 */
 
 #include "stdafx.h"
@@ -24,7 +24,7 @@ namespace basecross {
 	{}
 
 	void ChargeGun::OnCreate() {
-		SetBulletInstanceOffset(Vec3(0.0f, 0.9f, 0.0f));
+		SetBulletInstanceOffset(Vec3(0.0f, 0.5f, 0.0f));
 	}
 
 	void ChargeGun::OnUpdate() {
@@ -37,7 +37,7 @@ namespace basecross {
 			return;
 		}
 
-		//ƒVƒ‡ƒbƒgƒXƒe[ƒg‚Å‚È‚¢‚È‚ç
+		//ã‚·ãƒ§ãƒƒãƒˆã‚¹ãƒ†ãƒ¼ãƒˆã§ãªã„ãªã‚‰
 		if (!animator->IsCurretAnimationState(PlayerAnimationState::State::Shot)) {
 			return;
 		}
@@ -47,15 +47,17 @@ namespace basecross {
 		}
 	}
 
-	void ChargeGun::Shot(const Vec3& direct) {
+	std::shared_ptr<ChargeBulletObject> ChargeGun::Shot(const Vec3& direct) {
 		Vec3 instancePosition = transform->GetPosition() + GetBulletInstanceOffset();
 		auto bulletObject = InstantiateBullet(instancePosition, transform->GetQuaternion());
 		if (auto bullet = bulletObject->GetComponent<ChargeBullet>(false)) {
 			bullet->Shot(GetGameObject(), direct);
 		}
 
-		//ƒAƒjƒ[ƒVƒ‡ƒ“‚ÌÄ¶
+		//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®å†ç”Ÿ
 		PlayAnimation();
+
+		return bulletObject;
 	}
 
 	void ChargeGun::PlayAnimation() {
