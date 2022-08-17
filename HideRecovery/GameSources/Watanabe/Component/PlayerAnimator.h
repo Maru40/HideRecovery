@@ -10,6 +10,6 @@ namespace basecross {
 
 		void OnCreate()override;
 
-		void ChangePlayerAnimation(PlayerAnimationState state);
+		void ChangePlayerAnimation(PlayerAnimationState::State state);
 	};
 }
