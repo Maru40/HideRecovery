@@ -844,6 +844,12 @@
     <Filter Include="Watanabe\StageObject\OwnArea">
       <UniqueIdentifier>{d9e93458-e2c6-4508-82d7-0d43b0111188}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\UI">
+      <UniqueIdentifier>{e8863cfa-4fe2-437d-93d1-f13e7ca99ade}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\UI\Numbers">
+      <UniqueIdentifier>{836206bd-eab5-4746-88f2-7de19e53e09c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1557,6 +1563,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)TackleAttack.h">
       <Filter>Maruyama\Player\Component\AttackBase\TackleAttack</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\Numbers.h">
+      <Filter>Watanabe\UI\Numbers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2188,6 +2197,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)TackleAttack.cpp">
       <Filter>Maruyama\Player\Component\AttackBase\TackleAttack</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\Numbers.cpp">
+      <Filter>Watanabe\UI\Numbers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
