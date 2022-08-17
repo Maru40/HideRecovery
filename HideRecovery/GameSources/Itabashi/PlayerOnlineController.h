@@ -77,6 +77,8 @@ namespace Online
 		/// </summary>
 		int m_playerNumber = 0;
 
+		int m_gamePlayerNumber = 0;
+
 		Vec3 m_beforeMoveVector = Vec3();
 
 		std::shared_ptr<PlayerOnlineController> GetPlayerOnlineController(int playerNumber) const;
@@ -131,6 +133,10 @@ namespace Online
 		/// </summary>
 		/// <returns>プレイヤー番号</returns>
 		int GetPlayerNumber() const { return m_playerNumber; }
+
+		void SetGamePlayerNumber(int gamePlayerNumber) { m_gamePlayerNumber = gamePlayerNumber; }
+
+		int GetGamePlayerNumber() const { return m_gamePlayerNumber; }
 	};
 }
 }
