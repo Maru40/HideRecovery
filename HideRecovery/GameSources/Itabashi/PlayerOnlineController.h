@@ -7,6 +7,7 @@ namespace basecross
 	class ItemAcquisitionManager;
 	class OwnHideItemManager;
 	class VelocityManager;
+	class ChargeGun;
 
 namespace Operator
 {
@@ -39,9 +40,11 @@ namespace Online
 		static constexpr std::uint8_t TRY_ITEM_HIDE_EVENT_CODE = 4;
 		static constexpr std::uint8_t EXECUTE_ITEM_HIDE_EVENT_CODE = 5;
 		static constexpr std::uint8_t EXECUTE_MOVE_EVENT_CODE = 6;
+		static constexpr std::uint8_t EXECUTE_SHOT_EVENT_CODE = 7;
 
 	private:
 
+		std::weak_ptr<Transform> m_transform;
 		/// <summary>
 		/// オブジェクトを動かす用のコンポーネント
 		/// </summary>
@@ -56,6 +59,8 @@ namespace Online
 		std::weak_ptr<OwnHideItemManager> m_hideItemManager;
 
 		std::weak_ptr<VelocityManager> m_velocityManager;
+
+		std::weak_ptr<ChargeGun> m_chargeGun;
 
 		/// <summary>
 		/// 対応するプレイヤー番号
@@ -81,6 +86,10 @@ namespace Online
 		void TryItemHideEvent(int playerNumber);
 
 		void ExecuteItemHideEvent(int playerNumber, const Vec3& position);
+
+		void Shot();
+
+		void ExecuteShot(int playerNumber, const Vec3& bulletPosition, const Vec3& bulletDirection);
 
 	public:
 
