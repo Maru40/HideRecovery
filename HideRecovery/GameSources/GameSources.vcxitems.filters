@@ -1533,11 +1533,29 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)BulletBase.h">
       <Filter>Maruyama\Player\Component\Wepon\Bullet\Component</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\OwnArea.h">
+      <Filter>Watanabe\StageObject\OwnArea</Filter>
+    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\PlayerSpawnPoint.h">
       <Filter>Watanabe\StageObject\PlayerSpawnPoint</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\OwnArea.h">
-      <Filter>Watanabe\StageObject\OwnArea</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WeponBase.h">
+      <Filter>Maruyama\Player\Component\Wepon</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ChargeGun.h">
+      <Filter>Maruyama\Player\Component\Wepon\ChargeGun</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ChargeBulletObject.h">
+      <Filter>Maruyama\Player\Component\Wepon\Bullet\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ChargeBullet.h">
+      <Filter>Maruyama\Player\Component\Wepon\Bullet\Component\ChargeBullet</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)AttackBase.h">
+      <Filter>Maruyama\Player\Component\AttackBase</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)TackleAttack.h">
+      <Filter>Maruyama\Player\Component\AttackBase\TackleAttack</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2150,11 +2168,26 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)BulletBase.cpp">
       <Filter>Maruyama\Player\Component\Wepon\Bullet\Component</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\OwnArea.cpp">
+      <Filter>Watanabe\StageObject\OwnArea</Filter>
+    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\PlayerSpawnPoint.cpp">
       <Filter>Watanabe\StageObject\PlayerSpawnPoint</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\OwnArea.cpp">
-      <Filter>Watanabe\StageObject\OwnArea</Filter>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WeponBase.cpp">
+      <Filter>Maruyama\Player\Component\Wepon</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ChargeGun.cpp">
+      <Filter>Maruyama\Player\Component\Wepon\ChargeGun</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ChargeBulletObject.cpp">
+      <Filter>Maruyama\Player\Component\Wepon\Bullet\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ChargeBullet.cpp">
+      <Filter>Maruyama\Player\Component\Wepon\Bullet\Component\ChargeBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)TackleAttack.cpp">
+      <Filter>Maruyama\Player\Component\AttackBase\TackleAttack</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
