@@ -29,6 +29,7 @@ namespace basecross
 	{
 		ResourceLoadData(L"Floor_TX", L"floorRock_TX.png"),
 		ResourceLoadData(L"Wall01_TX", L"Wall01_TX.png"),
+		ResourceLoadData(L"Numbers_TX",L"Numbers_TX.png"),
 
 		//ResourceLoadData(L"gauge", L"Gauge.png"),
 		//ResourceLoadData(L"clear", L"StageClear.png"),
