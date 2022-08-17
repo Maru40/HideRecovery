@@ -13,14 +13,14 @@ namespace basecross {
 		West
 	};
 
-	class PlayerSpawnPoint :public StageObjectBase {
+	class PlayerSpawnPointObject :public StageObjectBase {
 		// チーム
 		Team m_team;
 		// 固有ID
 		int m_id;
 	public:
-		PlayerSpawnPoint(const shared_ptr<Stage>& stage);
-		PlayerSpawnPoint(const shared_ptr<Stage>& stage, const wstring& line);
+		PlayerSpawnPointObject(const shared_ptr<Stage>& stage);
+		PlayerSpawnPointObject(const shared_ptr<Stage>& stage, const wstring& line);
 
 		void OnCreate()override;
 		void OnUpdate()override;

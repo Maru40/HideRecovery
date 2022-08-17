@@ -18,8 +18,9 @@ namespace basecross {
 		m_status.hp -= damage.value;
 
 		// 念のため0にクランプ
-		if (m_status.hp <= 0)
+		if (m_status.hp <= 0) {
 			m_status.hp = 0;
+		}
 
 		for (auto& damagedFunc : m_damagedFuncs)
 		{

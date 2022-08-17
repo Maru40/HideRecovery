@@ -841,8 +841,23 @@
     <Filter Include="Watanabe\StageObject\PlayerSpawnPoint">
       <UniqueIdentifier>{650d64cc-4873-463d-acfb-d994d0fa52f3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Watanabe\StageObject\OwnArea">
+    <Filter Include="Watanabe\StageObject\OwnAreaObject">
       <UniqueIdentifier>{d9e93458-e2c6-4508-82d7-0d43b0111188}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Player\Component\OwnArea">
+      <UniqueIdentifier>{4ae05393-5053-415b-b261-162edf081f9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Interface\I_TeamMember">
+      <UniqueIdentifier>{b5ef7020-022d-4c43-8bae-dc1546ab942f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Player\Component\Respawner">
+      <UniqueIdentifier>{26d17992-ac86-46c2-8274-5be678f79ec3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Player\Component\PlayerSpawnPoint">
+      <UniqueIdentifier>{dc7ceb14-370c-4142-b8ad-1e1db2e39257}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Player\Component\Deader">
+      <UniqueIdentifier>{cefc959d-f099-45cd-9d0e-a46f156d01bd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1533,10 +1548,10 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)BulletBase.h">
       <Filter>Maruyama\Player\Component\Wepon\Bullet\Component</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\OwnArea.h">
-      <Filter>Watanabe\StageObject\OwnArea</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\OwnAreaObject.h">
+      <Filter>Watanabe\StageObject\OwnAreaObject</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\PlayerSpawnPoint.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\PlayerSpawnPointObject.h">
       <Filter>Watanabe\StageObject\PlayerSpawnPoint</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)WeponBase.h">
@@ -1556,6 +1571,21 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)TackleAttack.h">
       <Filter>Maruyama\Player\Component\AttackBase\TackleAttack</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Interface\I_TeamMember.h">
+      <Filter>Maruyama\Interface\I_TeamMember</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\OwnArea.h">
+      <Filter>Maruyama\Player\Component\OwnArea</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\Respawner.h">
+      <Filter>Maruyama\Player\Component\Respawner</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\PlayerSpawnPoint.h">
+      <Filter>Maruyama\Player\Component\PlayerSpawnPoint</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\PlayerDeader.h">
+      <Filter>Maruyama\Player\Component\Deader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2168,10 +2198,10 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)BulletBase.cpp">
       <Filter>Maruyama\Player\Component\Wepon\Bullet\Component</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\OwnArea.cpp">
-      <Filter>Watanabe\StageObject\OwnArea</Filter>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\OwnAreaObject.cpp">
+      <Filter>Watanabe\StageObject\OwnAreaObject</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\PlayerSpawnPoint.cpp">
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\PlayerSpawnPointObject.cpp">
       <Filter>Watanabe\StageObject\PlayerSpawnPoint</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)WeponBase.cpp">
@@ -2188,6 +2218,21 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)TackleAttack.cpp">
       <Filter>Maruyama\Player\Component\AttackBase\TackleAttack</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Interface\I_TeamMember.cpp">
+      <Filter>Maruyama\Interface\I_TeamMember</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\OwnArea.cpp">
+      <Filter>Maruyama\Player\Component\OwnArea</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\Respawner.cpp">
+      <Filter>Maruyama\Player\Component\Respawner</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\PlayerSpawnPoint.cpp">
+      <Filter>Maruyama\Player\Component\PlayerSpawnPoint</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\PlayerDeader.cpp">
+      <Filter>Maruyama\Player\Component\Deader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
