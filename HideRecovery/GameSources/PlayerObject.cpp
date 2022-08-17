@@ -33,6 +33,8 @@
 #include "Itabashi/PlayerOnlineController.h"
 #include "Itabashi/OnlineTransformSynchronization.h"
 
+#include "ChargeGun.h"
+
 namespace basecross {
 
 	PlayerObject::PlayerObject(const std::shared_ptr<Stage>& stage):
@@ -74,6 +76,8 @@ namespace basecross {
 		objecfMover->SetAffectedCamera(GetStage()->GetView()->GetTargetCamera());
 		AddComponent<Online::PlayerOnlineController>();
 		AddComponent<Online::OnlineTransformSynchronization>();
+
+		AddComponent<ChargeGun>();
 			
 		//カメラセッティング----------------------------------------------------------
 
