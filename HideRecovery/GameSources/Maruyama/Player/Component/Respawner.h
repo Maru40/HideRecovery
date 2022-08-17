@@ -14,12 +14,30 @@ namespace basecross {
 	/// 前方宣言
 	//--------------------------------------------------------------------------------------
 	class PlayerSpawnPoint;
+	class GameTimer;
+
+	//--------------------------------------------------------------------------------------
+	/// リスポーンをさせるクラスのパラメータ
+	//--------------------------------------------------------------------------------------
+	struct Respawner_Parametor {
+		float time;	//リスポーンにかかる時間
+
+		Respawner_Parametor();
+	};
 
 	//--------------------------------------------------------------------------------------
 	/// リスポーンをさせるクラス
 	//--------------------------------------------------------------------------------------
 	class Respawner : public Component
 	{
+	public:
+		using Parametor = Respawner_Parametor;
+
+	private:
+		Parametor m_param;
+
+		std::unique_ptr<GameTimer> m_timer;
+
 		std::weak_ptr<PlayerSpawnPoint> m_spawnPoint;
 
 	public:
@@ -28,6 +46,8 @@ namespace basecross {
 		/// </summary>
 		/// <param name="objPtr">このクラスを所有するゲームオブジェクト</param>
 		Respawner(const std::shared_ptr<GameObject>& objPtr);
+
+		virtual ~Respawner() = default;
 
 		void OnCreate() override;
 
