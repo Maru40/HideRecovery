@@ -7,6 +7,8 @@
 #include "stdafx.h"
 #include "I_Damaged.h"
 
+#include "Maruyama/Interface/I_TeamMember.h"
+
 namespace basecross {
 	/// <summary>
 	/// ステータス構造体
@@ -32,11 +34,13 @@ namespace basecross {
 		}
 	};
 
-	class PlayerStatus :public Component {
+	class PlayerStatus :public Component, public I_TeamMember {
 	public:
 		using DamageFuncType = std::function<void(const std::shared_ptr<PlayerStatus>&, const DamageData&)>;
+
 	private:
 		Status m_status;
+		Team m_team;
 
 		std::vector<DamageFuncType> m_damagedFuncs;
 
@@ -63,5 +67,11 @@ namespace basecross {
 		void Respawn();
 
 		void AddFuncAddDamage(const DamageFuncType& damagedFunc);
+
+		void SetTeam(const Team& team) override { m_team; }
+
+		Team GetTeam() const override { return m_team; }
+
+		std::shared_ptr<GameObject> GetOwnerObject() const override { return GetGameObject(); }
 	};
 }
