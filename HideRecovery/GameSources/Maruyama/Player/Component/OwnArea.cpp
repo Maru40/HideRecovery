@@ -38,6 +38,15 @@ namespace basecross {
 		
 	}
 
+	bool OwnArea::IsInArea(const std::shared_ptr<I_TeamMember>& member) {
+		return IsInArea(member->GetGameObject());
+	}
+
+	bool OwnArea::IsInArea(const std::shared_ptr<GameObject>& member) {
+		auto toObjectVec = maru::Utility::CalcuToTargetVec(GetGameObject(), member);
+		return toObjectVec.length() < GetRadius();	//半径内ならtrue
+	}
+
 	//--------------------------------------------------------------------------------------
 	/// アクセッサ
 	//--------------------------------------------------------------------------------------
@@ -60,12 +69,4 @@ namespace basecross {
 		return false;
 	}
 
-	bool OwnArea::IsInArea(const std::shared_ptr<I_TeamMember>& member) {
-		return IsInArea(member->GetGameObject());
-	}
-
-	bool OwnArea::IsInArea(const std::shared_ptr<GameObject>& member) {
-		auto toObjectVec = maru::Utility::CalcuToTargetVec(GetGameObject(), member);
-		return toObjectVec.length() < GetRadius();	//半径内ならtrue
-	}
 }

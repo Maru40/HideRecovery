@@ -53,6 +53,20 @@ namespace basecross {
 	private:
 
 	public:
+		/// <summary>
+		/// 自陣エリア内にいるかどうか判断
+		/// </summary>
+		/// <param name="member">確認を取りたいメンバー</param>
+		/// <returns>自陣エリア内にいるならtrue</returns>
+		bool IsInArea(const std::shared_ptr<I_TeamMember>& member);
+
+		/// <summary>
+		/// 自陣エリア内にいるかどうか
+		/// </summary>
+		/// <param name="object">確認を取りたいメンバー</param>
+		/// <returns>自陣エリア内にいるならtrue</returns>
+		bool IsInArea(const std::shared_ptr<GameObject>& member);
+
 		//--------------------------------------------------------------------------------------
 		/// アクセッサ
 		//--------------------------------------------------------------------------------------
@@ -92,20 +106,6 @@ namespace basecross {
 		/// </summary>
 		/// <param name="member">削除するメンバー</param>
 		bool RemoveMember(const std::shared_ptr<I_TeamMember>& member);
-
-		/// <summary>
-		/// 自陣エリア内にいるかどうか判断
-		/// </summary>
-		/// <param name="member">確認を取りたいメンバー</param>
-		/// <returns>自陣エリア内にいるならtrue</returns>
-		bool IsInArea(const std::shared_ptr<I_TeamMember>& member);
-
-		/// <summary>
-		/// 自陣エリア内にいるかどうか
-		/// </summary>
-		/// <param name="object">確認を取りたいメンバー</param>
-		/// <returns>自陣エリア内にいるならtrue</returns>
-		bool IsInArea(const std::shared_ptr<GameObject>& member);
 	};
 
 }
