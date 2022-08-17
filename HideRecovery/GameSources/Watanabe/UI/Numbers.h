@@ -4,6 +4,7 @@
 namespace basecross {
 	class NumberSprite :public GameObject {
 		int m_number;
+		vector<VertexPositionColorTexture> vertices;
 	public:
 		NumberSprite(const shared_ptr<Stage>& stage);
 

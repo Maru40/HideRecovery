@@ -23,6 +23,7 @@
 #include "../Utility/CSVLoad.h"
 #include "../Component/PlayerAnimator.h"
 #include "PlayerAnimationCtrl.h"
+#include "../UI/Numbers.h"
 
 namespace basecross {
 	void WatanabeStage::CreateViewLight() {
@@ -106,6 +107,8 @@ namespace basecross {
 		auto dir = App::GetApp()->GetDataDirWString();
 		auto path = dir + L"MapDatas/";
 		builder.Build(GetThis<Stage>(), path + L"StageS2.csv");
+
+		AddGameObject<NumberSprite>()->SetValue(4);
 	}
 
 	void WatanabeStage::OnUpdate() {
