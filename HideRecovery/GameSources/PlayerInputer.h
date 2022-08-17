@@ -74,6 +74,8 @@ namespace basecross
 
 		static bool IsShot();
 
+		static bool IsTackle();
+
 		static bool IsDash();
 		static bool IsJetPumpPush();
 		static bool IsJetPumpUp();
