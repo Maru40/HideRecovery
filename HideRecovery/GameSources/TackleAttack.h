@@ -61,6 +61,11 @@ namespace basecross {
 		void StartAttack();
 
 		/// <summary>
+		/// 強制攻撃開始
+		/// </summary>
+		void ForceStartAttack();
+
+		/// <summary>
 		/// タックル中かどうか
 		/// </summary>
 		bool IsTackle();
@@ -100,8 +105,10 @@ namespace basecross {
 			std::weak_ptr<PlayerAnimator> m_animator;
 			std::weak_ptr<VelocityManager> m_velocityManager;
 
+			float m_tackleSpeed;
+
 		public:
-			Attack_Tackle(const std::shared_ptr<GameObject>& objPtr);
+			Attack_Tackle(const std::shared_ptr<GameObject>& objPtr, const float tackleSpeed = 500.0f);
 
 			virtual ~Attack_Tackle() = default;
 

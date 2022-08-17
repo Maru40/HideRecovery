@@ -71,6 +71,17 @@ namespace basecross {
 		SelectTask();
 	}
 
+	void TackleAttack::ForceStartAttack() {
+		m_taskList->ForceStop();	//タスク強制終了
+
+		//減速処理解除
+		if (auto velocityManager = GetGameObject()->GetComponent<VelocityManager>(false)) {
+			velocityManager->SetIsDeseleration(false);
+		}
+
+		SelectTask();
+	}
+
 	bool TackleAttack::IsTackle() {
 		return !m_taskList->IsEnd();
 	}
@@ -87,7 +98,7 @@ namespace basecross {
 
 		Preriminary_Tackle::Preriminary_Tackle(const std::shared_ptr<GameObject>& objPtr) :
 			TaskNodeBase(objPtr)
-		{}
+		{ }
 
 		void Preriminary_Tackle::OnStart() {
 			m_animator = GetOwner()->GetComponent<PlayerAnimator>(false);
@@ -122,11 +133,10 @@ namespace basecross {
 		/// タックル攻撃の攻撃中動作
 		//--------------------------------------------------------------------------------------
 
-		Attack_Tackle::Attack_Tackle(const std::shared_ptr<GameObject>& objPtr) :
-			TaskNodeBase(objPtr)
-		{
-			
-		}
+		Attack_Tackle::Attack_Tackle(const std::shared_ptr<GameObject>& objPtr, const float tackleSpeed) :
+			TaskNodeBase(objPtr),
+			m_tackleSpeed(tackleSpeed)
+		{ }
 
 		void Attack_Tackle::OnStart() {
 			auto delta = App::GetApp()->GetElapsedTime();
@@ -136,7 +146,7 @@ namespace basecross {
 			//速度を加算
 			if (auto velocityManager = GetOwner()->GetComponent<VelocityManager>(false)) {
 				auto transform = GetOwner()->GetComponent<Transform>();
-				velocityManager->AddForce(transform->GetForward() * 500.0f);
+				velocityManager->AddForce(transform->GetForward() * m_tackleSpeed);
 				velocityManager->StartDeseleration();
 				m_velocityManager = velocityManager;
 			}
