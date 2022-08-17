@@ -68,6 +68,8 @@ namespace basecross {
 		/// </summary>
 		/// <returns>ŒÅ—LID</returns>
 		int GetID() const noexcept { return m_param.id; }
+
+		Vec3 GetWorldPosition() const { return transform->GetWorldPosition(); }
 	};
 
 }
