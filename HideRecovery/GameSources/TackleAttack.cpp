@@ -68,11 +68,15 @@ namespace basecross {
 	}
 
 	void TackleAttack::StartAttack() {
-		if (!m_taskList->IsEnd()) {	//タスクが終了していないなら処理を飛ばす。
+		if (IsTackle()) {	//タックル中なら処理を飛ばす。
 			return;
 		}
 
 		SelectTask();
+	}
+
+	bool TackleAttack::IsTackle() {
+		return !m_taskList->IsEnd();
 	}
 
 	//--------------------------------------------------------------------------------------
@@ -132,10 +136,6 @@ namespace basecross {
 			auto delta = App::GetApp()->GetElapsedTime();
 
 			m_animator = GetOwner()->GetComponent<PlayerAnimator>(false);
-
-			if (auto playerController = GetOwner()->GetComponent<Online::PlayerOnlineController>(false)) {
-				playerController->SetUpdateActive(false);
-			}
 
 			//速度を加算
 			if (auto velocityManager = GetOwner()->GetComponent<VelocityManager>(false)) {
@@ -203,11 +203,6 @@ namespace basecross {
 			//アニメーションの変更
 			if (auto animator = GetOwner()->GetComponent<PlayerAnimator>(false)) {
 				animator->ChangePlayerAnimation(PlayerAnimationState::State::Wait);
-			}
-			
-			//コンポ―ネントの切り替え
-			if (auto playerController = GetOwner()->GetComponent<Online::PlayerOnlineController>(false)) {
-				playerController->SetUpdateActive(true);
 			}
 		}
 	}
