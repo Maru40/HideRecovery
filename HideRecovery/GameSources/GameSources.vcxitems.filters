@@ -832,6 +832,9 @@
     <Filter Include="Maruyama\Player\Component\Wepon\Bullet\Component\ChargeBullet">
       <UniqueIdentifier>{a1ad01cf-b612-446f-a39d-3bdf8d4c57f3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Player\Component\AttackBase\TackleAttack">
+      <UniqueIdentifier>{cc3e8f4e-5c69-4292-aa06-7c109e7008bd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1530,6 +1533,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)BulletBase.h">
       <Filter>Maruyama\Player\Component\Wepon\Bullet\Component</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)AttackBase.h">
+      <Filter>Maruyama\Player\Component\AttackBase</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)TackleAttack.h">
+      <Filter>Maruyama\Player\Component\AttackBase\TackleAttack</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2149,6 +2158,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)BulletBase.cpp">
       <Filter>Maruyama\Player\Component\Wepon\Bullet\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)TackleAttack.cpp">
+      <Filter>Maruyama\Player\Component\AttackBase\TackleAttack</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -17,6 +17,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)ActionTimer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ActiveSkillBase.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)AnimationCtrl.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)AttackBase.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)AuraBase.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)AuraObjectBase.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)AutoReflection.h" />
@@ -104,6 +105,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Stator_Hero.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Stator_Villain.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)SubAnimatorBase.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)TackleAttack.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)TactileCtrl.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)TactileObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Targeted.h" />
@@ -354,6 +356,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Stator_Hero.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Stator_Villain.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)SubAnimatorBase.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)TackleAttack.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)TactileCtrl.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)TactileObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Targeted.cpp" />
