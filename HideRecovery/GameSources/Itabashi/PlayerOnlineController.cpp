@@ -362,7 +362,7 @@ namespace Online
 			return;
 		}
 		
-		tackleAttack->StartAttack();
+		tackleAttack->ForceStartAttack();
 
 		OnlineManager::RaiseEvent(false, (uint8_t*)&m_playerNumber, sizeof(int), EXECUTE_TACKLE_EVENT_CODE);
 	}
