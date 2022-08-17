@@ -48,7 +48,7 @@ namespace basecross {
 		PlayerStatus(const shared_ptr<GameObject>& owner);
 
 		void OnCreate()override;
-		void OnUpdate()override {}
+		void OnUpdate()override;
 		void OnDraw()override {}
 
 		/// <summary>

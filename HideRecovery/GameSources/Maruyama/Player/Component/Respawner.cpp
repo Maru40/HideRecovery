@@ -17,6 +17,8 @@
 
 #include "Watanabe/Component/PlayerStatus.h"
 
+#include "MaruUtility.h"
+
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
@@ -38,24 +40,29 @@ namespace basecross {
 	{}
 
 	void Respawner::OnCreate() {
+		
+	}
+
+	void Respawner::OnUpdate() {
 		if (m_timer->IsTimeUp()) {
 			return;
 		}
 
 		m_timer->UpdateTimer();
+		if (m_timer->IsTimeUp()) {
+			Respawn();
+		}
 	}
 
 	void Respawner::Respawn() {
-		if (IsRespawn()) {
-			auto timerEndFunction = [&]() { 
-				transform->SetPosition(GetSpawnPoint()->GetWorldPosition()); 
-				if (auto status = GetGameObject()->GetComponent<PlayerStatus>(false)) {
-					status->Respawn();
-				}
-			};
-
-			m_timer->ResetTimer(m_param.time, timerEndFunction);
+		transform->SetPosition(GetSpawnPoint()->GetWorldPosition());
+		if (auto status = GetGameObject()->GetComponent<PlayerStatus>(false)) {
+			status->Respawn();
 		}
+	}
+
+	void Respawner::StartRespawn() {
+		m_timer->ResetTimer(m_param.time);
 	}
 
 	bool Respawner::IsRespawn() {

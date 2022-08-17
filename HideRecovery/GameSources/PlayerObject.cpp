@@ -42,6 +42,7 @@
 #include "CollisionAction.h"
 
 #include "Maruyama/Player/Component/Respawner.h"
+#include "Maruyama/Player/Component/PlayerDeader.h"
 
 namespace basecross {
 
@@ -92,6 +93,7 @@ namespace basecross {
 		AddComponent<TackleAttack>();
 
 		AddComponent<Respawner>();
+		AddComponent<PlayerDeader>();
 			
 		//カメラセッティング----------------------------------------------------------
 
