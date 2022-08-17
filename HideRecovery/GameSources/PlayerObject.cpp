@@ -33,6 +33,8 @@
 #include "Itabashi/PlayerOnlineController.h"
 #include "Itabashi/OnlineTransformSynchronization.h"
 
+#include "Watanabe/Component/PlayerAnimator.h"
+
 #include "ChargeGun.h"
 
 namespace basecross {
@@ -77,6 +79,7 @@ namespace basecross {
 		AddComponent<Online::PlayerOnlineController>();
 		AddComponent<Online::OnlineTransformSynchronization>();
 
+		AddComponent<PlayerAnimator>();
 		AddComponent<ChargeGun>();
 			
 		//カメラセッティング----------------------------------------------------------
