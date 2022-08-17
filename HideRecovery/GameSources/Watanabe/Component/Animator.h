@@ -1,4 +1,9 @@
-﻿#pragma once
+﻿/*!
+@file   Animator.h
+@brief  アニメーション管理クラス
+*/
+
+#pragma once
 #include "stdafx.h"
 
 namespace basecross {
@@ -13,11 +18,11 @@ namespace basecross {
 		/// <summary>
 		/// 再生開始時間
 		/// </summary>
-		float start;
+		int start;
 		/// <summary>
 		/// 再生終了時間
 		/// </summary>
-		float end;
+		int end;
 		/// <summary>
 		/// ループするか
 		/// </summary>
@@ -36,7 +41,7 @@ namespace basecross {
 		/// <param name="_isLoop">ループするか</param>
 		/// <param name="_playSpeed">再生速度</param>
 		AnimationClip(const wstring& _name,
-			float _start, float _end, bool _isLoop, float _playSpeed = 1.0f)
+			int _start, int _end, bool _isLoop, float _playSpeed = 1.0f)
 			:name(_name), start(_start), end(_end),
 			isLoop(_isLoop), playSpeed(_playSpeed)
 		{}
@@ -48,10 +53,17 @@ namespace basecross {
 		/// モーションデータを読み込む
 		/// </summary>
 		/// <param name="csvKey">CSVLoadに登録したアニメーションデータのキー</param>
-		/// <returns>アニメーションクリップ</returns>
+		/// <returns>アニメーションクリップ（配列）</returns>
 		vector<AnimationClip> LoadAnimationData(const wstring& csvKey);
-
+		/// <summary>
+		/// アニメーションクリップの登録
+		/// </summary>
+		/// <param name="clip">登録するアニメーションクリップ</param>
 		void RegisterAnimationClip(AnimationClip clip);
+		/// <summary>
+		/// アニメーションの変更（継承側のクラスで呼ぶ）
+		/// </summary>
+		/// <param name="key">変更したいアニメーションキー</param>
 		void ChangeAnimation(wstring key);
 	public:
 		Animator(const shared_ptr<GameObject>& owner);

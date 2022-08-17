@@ -1,11 +1,16 @@
-﻿#include "stdafx.h"
+﻿/*!
+@file   OwnArea.cpp
+@brief  自陣エリアクラス実体
+*/
+
+#include "stdafx.h"
 #include "OwnArea.h"
 #include "../Utility/DataExtracter.h"
 #include "../DebugClass/Debug.h"
 
 namespace basecross {
 	OwnArea::OwnArea(const shared_ptr<Stage>& stage)
-		:StageObjectBase(stage, L"OwnArea"), m_areaRadius(20)
+		:StageObjectBase(stage, L"OwnArea"), m_areaRadius(20), m_team(Team::East)
 	{}
 	OwnArea::OwnArea(const shared_ptr<Stage>& stage, const wstring& line)
 		: StageObjectBase(stage, L"OwnArea")

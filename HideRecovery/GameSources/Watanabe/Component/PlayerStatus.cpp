@@ -1,4 +1,9 @@
-﻿#include "stdafx.h"
+﻿/*!
+@file   PlayerStatus.cpp
+@brief  プレイヤーステータスクラス実体
+*/
+
+#include "stdafx.h"
 #include "PlayerStatus.h"
 
 namespace basecross {

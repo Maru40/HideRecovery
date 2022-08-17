@@ -1,4 +1,9 @@
-﻿#include "stdafx.h"
+﻿/*!
+@file   PlayerAnimator.cpp
+@brief  プレイヤーのアニメーションクラス実体
+*/
+
+#include "stdafx.h"
 #include "PlayerAnimator.h"
 
 namespace basecross {

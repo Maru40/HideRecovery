@@ -1,4 +1,9 @@
-﻿#include "stdafx.h"
+﻿/*!
+@file   PlayerSpawnPoint.cpp
+@brief  プレイヤーのスポーン場所クラス実体
+*/
+
+#include "stdafx.h"
 #include "PlayerSpawnPoint.h"
 #include "../Utility/DataExtracter.h"
 #include "../DebugClass/Debug.h"
@@ -31,7 +36,7 @@ namespace basecross {
 	}
 
 	void PlayerSpawnPoint::OnCreate() {
-		Debug::GetInstance()->Log(L"Create OwnArea");
+		Debug::GetInstance()->Log(L"Create PlayerSpawnPoint");
 	}
 	void PlayerSpawnPoint::OnUpdate() {
 	}

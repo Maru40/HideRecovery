@@ -1,4 +1,9 @@
-﻿#pragma once
+﻿/*!
+@file   PlayerSpawnPoint.h
+@brief  プレイヤーのスポーン場所クラス
+*/
+
+#pragma once
 #include "stdafx.h"
 #include "StageObjectBase.h"
 
@@ -9,7 +14,9 @@ namespace basecross {
 	};
 
 	class PlayerSpawnPoint :public StageObjectBase {
+		// チーム
 		Team m_team;
+		// 固有ID
 		int m_id;
 	public:
 		PlayerSpawnPoint(const shared_ptr<Stage>& stage);
