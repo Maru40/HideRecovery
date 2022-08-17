@@ -26,7 +26,7 @@ namespace basecross {
 
 		void OnUpdate() override;
 
-		void Shot(const Vec3& direct) override;
+		void Shot(const std::shared_ptr<GameObject>& owner, const Vec3& direct) override;
 
 		void OnCollisionEnter(const CollisionPair& pair) override;
 	};
