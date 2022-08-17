@@ -36,6 +36,7 @@
 #include "Watanabe/Component/PlayerAnimator.h"
 
 #include "ChargeGun.h"
+#include "Watanabe/Component/PlayerStatus.h"
 
 namespace basecross {
 
@@ -81,6 +82,8 @@ namespace basecross {
 
 		AddComponent<PlayerAnimator>();
 		AddComponent<ChargeGun>();
+
+		AddComponent<PlayerStatus>();
 			
 		//カメラセッティング----------------------------------------------------------
 
