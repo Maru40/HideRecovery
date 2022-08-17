@@ -6,6 +6,7 @@
 namespace basecross
 {
 	class PlayerObject;
+	class PlayerSpawnPoint;
 
 namespace Online
 {
@@ -16,6 +17,8 @@ namespace Online
 		/// プレイヤーの最大数
 		/// </summary>
 		static constexpr int MAX_PLAYER_NUM = 6;
+
+		std::shared_ptr<PlayerSpawnPoint> GetSpawmPoint(int uniqueId) const;
 
 	private:
 		/// <summary>
