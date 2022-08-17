@@ -27,6 +27,15 @@ namespace basecross {
 		void OnUpdate() override;
 
 		void Shot(const Vec3& direct) override;
+
+	private:
+
+		void UpdateAnimation();
+
+		/// <summary>
+		/// アニメーションの再生
+		/// </summary>
+		void PlayAnimation();
 	};
 
 }
