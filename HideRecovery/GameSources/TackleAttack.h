@@ -26,13 +26,15 @@ namespace basecross {
 		enum class TaskEnum {
 			Preliminary,	//—\”õ“®ì
 			Tackle,			//ƒ^ƒbƒNƒ‹UŒ‚
-			Wait,			//UŒ‚Œã‚Ìd’¼
+			EndWait,		//UŒ‚Œã‚Ìd’¼
 		};
 
 		std::unique_ptr<TaskList<TaskEnum>> m_taskList;
 
 	public:
 		TackleAttack(const std::shared_ptr<GameObject>& objPtr);
+
+		virtual ~TackleAttack() = default;
 
 		void OnCreate() override;
 		void OnUpdate() override;
@@ -47,21 +49,64 @@ namespace basecross {
 		/// ƒ^ƒXƒN‚Ì‘I‘ğ
 		/// </summary>
 		void SelectTask();
+
+	public:
+		/// <summary>
+		/// UŒ‚ŠJn
+		/// </summary>
+		void StartAttack();
 	};
 
+	//--------------------------------------------------------------------------------------
+	/// ƒ^ƒbƒNƒ‹UŒ‚‚Ìƒ^ƒXƒN
+	//--------------------------------------------------------------------------------------
 
 	namespace Task {
 
+		//--------------------------------------------------------------------------------------
+		/// ƒ^ƒbƒNƒ‹UŒ‚‚Ì—\”õ“®ì
+		//--------------------------------------------------------------------------------------
 		class Preriminary_Tackle : public TaskNodeBase<GameObject>
 		{
 		public:
 			Preriminary_Tackle(const std::shared_ptr<GameObject>& objPtr);
+
+			virtual ~Preriminary_Tackle() = default;
 
 			void OnStart() override;
 			bool OnUpdate() override;
 			void OnExit() override;
 		};
 
+		//--------------------------------------------------------------------------------------
+		/// ƒ^ƒbƒNƒ‹UŒ‚‚ÌUŒ‚’†“®ì
+		//--------------------------------------------------------------------------------------
+		class Attack_Tackle : public TaskNodeBase<GameObject>
+		{
+		public:
+			Attack_Tackle(const std::shared_ptr<GameObject>& objPtr);
+
+			virtual ~Attack_Tackle() = default;
+
+			void OnStart() override;
+			bool OnUpdate() override;
+			void OnExit() override;
+		};
+
+		//--------------------------------------------------------------------------------------
+		/// ƒ^ƒbƒNƒ‹UŒ‚‚ÌUŒ‚Œãd’¼
+		//--------------------------------------------------------------------------------------
+		class EndWait_Tackle : public TaskNodeBase<GameObject>
+		{
+		public:
+			EndWait_Tackle(const std::shared_ptr<GameObject>& objPtr);
+
+			virtual ~EndWait_Tackle() = default;
+
+			void OnStart() override;
+			bool OnUpdate() override;
+			void OnExit() override;
+		};
 	}
 
 }
