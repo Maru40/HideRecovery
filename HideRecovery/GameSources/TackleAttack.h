@@ -10,6 +10,7 @@
 
 #include "AttackBase.h"
 #include "TaskList.h"
+#include "I_Damaged.h"
 
 namespace basecross {
 	//--------------------------------------------------------------------------------------
@@ -21,6 +22,7 @@ namespace basecross {
 	class PlayerAnimator;
 	class VelocityManager;
 	class GameTimer;
+	struct CollisionPair;
 
 	//--------------------------------------------------------------------------------------
 	/// タックル攻撃
@@ -61,6 +63,11 @@ namespace basecross {
 		void StartAttack();
 
 		/// <summary>
+		/// 強制攻撃開始
+		/// </summary>
+		void ForceStartAttack();
+
+		/// <summary>
 		/// タックル中かどうか
 		/// </summary>
 		bool IsTackle();
@@ -93,15 +100,44 @@ namespace basecross {
 		};
 
 		//--------------------------------------------------------------------------------------
+		/// タックル攻撃の攻撃中動作のパラメータ
+		//--------------------------------------------------------------------------------------
+		struct Attack_Tackle_Parametor {
+			DamageData damageData;	//ダメージデータ
+			float tackleSpeed;		//タックルスピード
+
+			Attack_Tackle_Parametor(const DamageData& damageData);
+		};
+
+		//--------------------------------------------------------------------------------------
 		/// タックル攻撃の攻撃中動作
 		//--------------------------------------------------------------------------------------
 		class Attack_Tackle : public TaskNodeBase<GameObject>
 		{
-			std::weak_ptr<PlayerAnimator> m_animator;
-			std::weak_ptr<VelocityManager> m_velocityManager;
+		public:
+			using Parametor = Attack_Tackle_Parametor;
+
+		private:
+			Parametor m_param;	//パラメータ
+
+			std::weak_ptr<PlayerAnimator> m_animator;			//アニメータ
+			std::weak_ptr<VelocityManager> m_velocityManager;	//速度管理
+
+			bool m_isCollision;	//あたり判定をとるかどうか
 
 		public:
+			/// <summary>
+			/// コンストラクタ
+			/// </summary>
+			/// <param name="objPtr">このクラスを所有するゲームオブジェクト</param>
 			Attack_Tackle(const std::shared_ptr<GameObject>& objPtr);
+
+			/// <summary>
+			/// コンストラクタ
+			/// </summary>
+			/// <param name="objPtr">このクラスを所有するゲームオブジェクト</param>
+			/// <param name="parametor">パラメータ</param>
+			Attack_Tackle(const std::shared_ptr<GameObject>& objPtr, const Parametor& parametor);
 
 			virtual ~Attack_Tackle() = default;
 
@@ -111,6 +147,8 @@ namespace basecross {
 
 		private:
 			void PlayAnimation();
+
+			void CollisionEnter(const CollisionPair& pair);
 		};
 
 		//--------------------------------------------------------------------------------------
