@@ -39,6 +39,7 @@
 #include "Watanabe/Component/PlayerStatus.h"
 
 #include "TackleAttack.h"
+#include "CollisionAction.h"
 
 namespace basecross {
 
@@ -65,6 +66,7 @@ namespace basecross {
 		transform->SetScale(Vec3(1.0f, 1.5f, 1.0f));
 
 		AddComponent<CollisionObb>();
+		AddComponent<maru::CollisionAction>();
 		AddComponent<RotationController>();
 		//AddComponent<PlayerController>();
 		AddComponent<Gravity>();
