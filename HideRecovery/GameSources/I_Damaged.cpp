@@ -11,11 +11,11 @@
 
 namespace basecross {
 	DamageData::DamageData()
-		:DamageData(20.0f)
+		:DamageData(20)
 	{}
 
 	DamageData::DamageData(const int& value)
-		: DamageData(value)
+		: value(value)
 	{}
 
 	DamageData DamageData::operator+(const DamageData& data) {
