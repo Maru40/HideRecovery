@@ -814,6 +814,9 @@
     <Filter Include="Maruyama\Enemy\Component\ImpactMap\Astar\AIImpacter">
       <UniqueIdentifier>{e0c25eb1-05d0-4534-8b9f-86a6b61eb9c3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\Component\PlayerStatus">
+      <UniqueIdentifier>{e5b0a7f1-330c-4e64-b2b7-a9bf570b9739}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1500,6 +1503,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)OccupancyManager.h">
       <Filter>Maruyama\Enemy\Component\ImpactMap\ImpactManager\ImpactDataManager\OccupancyManager</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\PlayerStatus.h">
+      <Filter>Watanabe\Component\PlayerStatus</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2107,6 +2113,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)OccupancyManager.cpp">
       <Filter>Maruyama\Enemy\Component\ImpactMap\ImpactManager\ImpactDataManager\OccupancyManager</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\PlayerStatus.cpp">
+      <Filter>Watanabe\Component\PlayerStatus</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
