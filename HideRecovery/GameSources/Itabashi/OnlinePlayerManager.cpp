@@ -8,13 +8,31 @@
 #include "SpringArmComponent.h"
 #include "CameraHelper.h"
 #include "LookAtCameraManager.h"
+#include "Maruyama/Player/Component/PlayerSpawnPoint.h"
+#include "Maruyama/Player/Component/Respawner.h"
 
 namespace basecross
 {
 namespace Online
 {
+	std::shared_ptr<PlayerSpawnPoint> OnlinePlayerManager::GetSpawmPoint(int uniqueId) const
+	{
+		for (auto& gameObject : GetStage()->GetGameObjectVec())
+		{
+			auto playerSpawnPoint = gameObject->GetComponent<PlayerSpawnPoint>(false);
+			
+			if (playerSpawnPoint && playerSpawnPoint->GetID() == uniqueId)
+			{
+				return playerSpawnPoint;
+			}
+		}
+
+		return nullptr;
+	}
+
 	OnlinePlayerManager::OnlinePlayerManager(const std::shared_ptr<GameObject>& owner) :
-		OnlineComponent(owner)
+		OnlineComponent(owner),
+		m_numberUses()
 	{
 		for (auto& used : m_numberUses)
 		{
@@ -56,6 +74,20 @@ namespace Online
 
 		auto onlineTransform = playerObject->GetComponent<OnlineTransformSynchronization>();
 		onlineTransform->SetPlayerNumber(playerNumber);
+
+		for (int i = 0; i < MAX_PLAYER_NUM; ++i)
+		{
+			if (!m_numberUses[i])
+			{
+				onlineController->SetGamePlayerNumber(i);
+
+				auto respawner = playerObject->GetComponent<Respawner>();
+				respawner->SetSpawnPoint(GetSpawmPoint(i));
+
+				m_numberUses[i] = true;
+				break;
+			}
+		}
 
 		if (playerNumber != OnlineManager::GetLocalPlayer().getNumber())
 		{
@@ -102,6 +134,8 @@ namespace Online
 		auto itr = std::find_if(m_players.begin(), m_players.end(), [find](const std::weak_ptr<PlayerObject>& player) {return *find == player.lock(); });
 		m_players.erase(itr);
 
+		auto onlineController = (*find)->GetComponent<PlayerOnlineController>();
+		m_numberUses[onlineController->GetGamePlayerNumber()] = false;
 		GetStage()->RemoveGameObject<GameObject>(*find);
 	}
 }
