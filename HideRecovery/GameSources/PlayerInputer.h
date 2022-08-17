@@ -87,6 +87,7 @@ namespace basecross
 		static bool IsUpUp();
 		static bool IsDownUp();
 
+		bool IsRBPush();
 		static bool IsRBDown();
 		static bool IsRBUp();
 		static bool IsLBDown();

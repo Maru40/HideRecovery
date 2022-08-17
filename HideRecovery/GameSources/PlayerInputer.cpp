@@ -249,6 +249,10 @@ namespace basecross
 			App::GetApp()->GetMyInputDevice()->GetXInputGamePad().IsInputUp(XInputCode::Down);
 	}
 
+	bool PlayerInputer::IsRBPush() {
+		return App::GetApp()->GetMyInputDevice()->GetXInputGamePad().IsInputPush(XInputCode::RightShoulder);
+	}
+
 	bool PlayerInputer::IsRBDown() {
 		return App::GetApp()->GetMyInputDevice()->GetXInputGamePad().IsInputDown(XInputCode::RightShoulder);
 	}
