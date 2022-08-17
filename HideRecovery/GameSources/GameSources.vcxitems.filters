@@ -1542,7 +1542,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\OwnAreaObject.h">
       <Filter>Watanabe\StageObject\OwnAreaObject</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\PlayerSpawnPoint.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\PlayerSpawnPointObject.h">
       <Filter>Watanabe\StageObject\PlayerSpawnPoint</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)WeponBase.h">
@@ -2183,7 +2183,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\OwnAreaObject.cpp">
       <Filter>Watanabe\StageObject\OwnAreaObject</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\PlayerSpawnPoint.cpp">
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\PlayerSpawnPointObject.cpp">
       <Filter>Watanabe\StageObject\PlayerSpawnPoint</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)WeponBase.cpp">
