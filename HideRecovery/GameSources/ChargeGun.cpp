@@ -29,8 +29,6 @@ namespace basecross {
 
 	void ChargeGun::OnUpdate() {
 		UpdateAnimation();
-
-		Shot(transform->GetForward());
 	}
 
 	void ChargeGun::UpdateAnimation() {
