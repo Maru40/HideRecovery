@@ -200,10 +200,12 @@ namespace basecross {
 				velocityManager->SetIsDeseleration(false);
 			}
 
+			//アニメーションの変更
 			if (auto animator = GetOwner()->GetComponent<PlayerAnimator>(false)) {
 				animator->ChangePlayerAnimation(PlayerAnimationState::State::Wait);
 			}
 			
+			//コンポ―ネントの切り替え
 			if (auto playerController = GetOwner()->GetComponent<Online::PlayerOnlineController>(false)) {
 				playerController->SetUpdateActive(true);
 			}
