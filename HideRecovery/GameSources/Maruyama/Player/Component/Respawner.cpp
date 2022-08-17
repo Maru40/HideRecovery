@@ -55,8 +55,6 @@ namespace basecross {
 	}
 
 	void Respawner::Respawn() {
-		SetSpawnPoint(maru::Utility::FindComponent<PlayerSpawnPoint>());
-
 		transform->SetPosition(GetSpawnPoint()->GetWorldPosition());
 		if (auto status = GetGameObject()->GetComponent<PlayerStatus>(false)) {
 			status->Respawn();
