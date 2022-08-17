@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include"MathHelper.h"
 
 namespace basecross
@@ -39,7 +39,7 @@ namespace basecross
 
 		static int GetRotationSensitivityLevel();
 
-		//Œˆ’è
+		//æ±ºå®š
 		static bool IsDecision();
 
 		static bool IsCancel();
@@ -55,28 +55,30 @@ namespace basecross
 		static bool IsDownChoices();
 
 		/// <summary>
-		/// ƒAƒCƒeƒ€Šl“¾ƒ{ƒ^ƒ“
+		/// ã‚¢ã‚¤ãƒ†ãƒ ç²å¾—ãƒœã‚¿ãƒ³
 		/// </summary>
 		/// <returns></returns>
 		static bool IsItemAcquisition();
 
 		/// <summary>
-		/// ‰B‚·ƒAƒCƒeƒ€‚ğ’u‚­ƒ{ƒ^ƒ“
+		/// éš ã™ã‚¢ã‚¤ãƒ†ãƒ ã‚’ç½®ããƒœã‚¿ãƒ³
 		/// </summary>
 		/// <returns></returns>
 		static bool IsPutHideItem();
 
 		/// <summary>
-		/// ÀÛ‚É’u‚©‚È‚¢ƒuƒ‰ƒtsˆ×
+		/// å®Ÿéš›ã«ç½®ã‹ãªã„ãƒ–ãƒ©ãƒ•è¡Œç‚º
 		/// </summary>
 		/// <returns></returns>
 		static bool IsBluffPutItem();
+
+		static bool IsShot();
 
 		static bool IsDash();
 		static bool IsJetPumpPush();
 		static bool IsJetPumpUp();
 
-		static bool IsChangeTargetLookCamera(); //ƒ^[ƒQƒeƒBƒ“ƒOƒJƒƒ‰‚É•ÏX‚·‚éƒL[
+		static bool IsChangeTargetLookCamera(); //ã‚¿ãƒ¼ã‚²ãƒ†ã‚£ãƒ³ã‚°ã‚«ãƒ¡ãƒ©ã«å¤‰æ›´ã™ã‚‹ã‚­ãƒ¼
 		static bool IsX();
 		static bool IsY();
 		static bool IsXDown();
@@ -92,7 +94,7 @@ namespace basecross
 		static bool IsRBUp();
 		static bool IsLBDown();
 
-		//ƒfƒoƒbƒOŒn--------------------------------------------------------------
+		//ãƒ‡ãƒãƒƒã‚°ç³»--------------------------------------------------------------
 
 		//static bool IsDebugSlimePressRadChange();
 		//static bool IsDebugHitStopModeChange();

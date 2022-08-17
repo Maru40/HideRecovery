@@ -1,4 +1,4 @@
-#include"PlayerInputer.h"
+ï»¿#include"PlayerInputer.h"
 
 namespace basecross
 {
@@ -184,6 +184,12 @@ namespace basecross
 			App::GetApp()->GetMyInputDevice()->GetXInputGamePad().IsInputDown(XInputCode::B);
 	}
 
+	bool PlayerInputer::IsShot()
+	{
+		return App::GetApp()->GetMyInputDevice()->GetXInputGamePad().IsInputDown(XInputCode::RightShoulder) ||
+			App::GetApp()->GetMyInputDevice()->GetKeyBoard().IsInputDown(KeyCode::Shift);
+	}
+
 	bool PlayerInputer::IsDash() {
 		return App::GetApp()->GetMyInputDevice()->GetKeyBoard().IsInputPush(KeyCode::LeftShift); //|| 
 			//App::GetApp()->GetMyInputDevice()->GetXInputGamePad().IsInputDown(XInputCode::LeftShoulder);
@@ -275,8 +281,8 @@ namespace basecross
 	//}
 
 	//bool PlayerInputer::IsDebugAstarDraw() {
-	//	return App::GetApp()->GetMyInputDevice()->GetKeyBoard().IsInputUp(KeyCode::L); //||       //ƒL[ƒ{[ƒh
-	//		//App::GetApp()->GetMyInputDevice()->GetXInputGamePad().IsInputUp(XInputCode::Back); //ƒRƒ“ƒgƒ[ƒ‰[
+	//	return App::GetApp()->GetMyInputDevice()->GetKeyBoard().IsInputUp(KeyCode::L); //||       //ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰
+	//		//App::GetApp()->GetMyInputDevice()->GetXInputGamePad().IsInputUp(XInputCode::Back); //ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼
 	//}
 
 	std::shared_ptr<PlayerInputer> PlayerInputer::GetInstance()
