@@ -20,6 +20,7 @@ namespace basecross {
 
 	class PlayerAnimator;
 	class VelocityManager;
+	class GameTimer;
 
 	//--------------------------------------------------------------------------------------
 	/// É^ÉbÉNÉãçUåÇ
@@ -112,8 +113,13 @@ namespace basecross {
 		//--------------------------------------------------------------------------------------
 		class EndWait_Tackle : public TaskNodeBase<GameObject>
 		{
+			std::unique_ptr<GameTimer> m_timer;
+			std::weak_ptr<VelocityManager> m_velocityManager;
+
+			float m_waitTime = 0.0f;
+
 		public:
-			EndWait_Tackle(const std::shared_ptr<GameObject>& objPtr);
+			EndWait_Tackle(const std::shared_ptr<GameObject>& objPtr, const float waitTime = 0.5f);
 
 			virtual ~EndWait_Tackle() = default;
 

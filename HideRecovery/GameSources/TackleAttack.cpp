@@ -20,6 +20,9 @@
 #include "Itabashi/ObjectMover.h"
 #include "Itabashi/PlayerOnlineController.h"
 
+#include "TimeHelper.h"
+#include "GameTimer.h"
+
 namespace basecross {
 
 	TackleAttack::TackleAttack(const std::shared_ptr<GameObject>& objPtr) :
@@ -33,7 +36,7 @@ namespace basecross {
 
 	void TackleAttack::OnUpdate() {
 		if (PlayerInputer::GetInstance()->IsYDown()) {
-			SelectTask();
+			StartAttack();
 		}
 
 		m_taskList->UpdateTask();
@@ -137,7 +140,7 @@ namespace basecross {
 			//速度を加算
 			if (auto velocityManager = GetOwner()->GetComponent<VelocityManager>(false)) {
 				auto transform = GetOwner()->GetComponent<Transform>();
-				velocityManager->AddForce(transform->GetForward() * 100.0f);
+				velocityManager->AddForce(transform->GetForward() * 500.0f);
 				velocityManager->StartDeseleration();
 				m_velocityManager = velocityManager;
 			}
@@ -146,13 +149,6 @@ namespace basecross {
 		}
 
 		bool Attack_Tackle::OnUpdate() {
-			//auto velocityManager = m_velocityManager.lock();
-			//if (!velocityManager) {
-			//	return true;
-			//}
-
-			//return !velocityManager->IsDeseleration();	//減速処理が完了したら切り替える。
-
 			auto animator = m_animator.lock();
 			if (!animator) {	//アニメーターが存在しないなら、処理を終了させる。
 				return true;
@@ -167,13 +163,7 @@ namespace basecross {
 		}
 
 		void Attack_Tackle::OnExit() {
-			if (auto velocityManager = m_velocityManager.lock()) {
-				velocityManager->SetIsDeseleration(false);
-			}
-
-			if (auto playerController = GetOwner()->GetComponent<Online::PlayerOnlineController>(false)) {
-				playerController->SetUpdateActive(true);
-			}
+			
 		}
 
 		void Attack_Tackle::PlayAnimation() {
@@ -186,20 +176,37 @@ namespace basecross {
 		/// タックル攻撃の攻撃後硬直
 		//--------------------------------------------------------------------------------------
 
-		EndWait_Tackle::EndWait_Tackle(const std::shared_ptr<GameObject>& objPtr) :
-			TaskNodeBase(objPtr)
+		EndWait_Tackle::EndWait_Tackle(const std::shared_ptr<GameObject>& objPtr, const float waitTime) :
+			TaskNodeBase(objPtr),
+			m_waitTime(waitTime),
+			m_timer(new GameTimer(0))
 		{}
 
 		void EndWait_Tackle::OnStart() {
+			m_velocityManager = GetOwner()->GetComponent<VelocityManager>(false);
 
+			m_timer->ResetTimer(m_waitTime);
 		}
 
 		bool EndWait_Tackle::OnUpdate() {
-			return true;
+			m_timer->UpdateTimer();
+
+			return m_timer->IsTimeUp();
 		}
 
 		void EndWait_Tackle::OnExit() {
+			//減速処理解除
+			if (auto velocityManager = m_velocityManager.lock()) {
+				velocityManager->SetIsDeseleration(false);
+			}
 
+			if (auto animator = GetOwner()->GetComponent<PlayerAnimator>(false)) {
+				animator->ChangePlayerAnimation(PlayerAnimationState::State::Wait);
+			}
+			
+			if (auto playerController = GetOwner()->GetComponent<Online::PlayerOnlineController>(false)) {
+				playerController->SetUpdateActive(true);
+			}
 		}
 	}
 }
