@@ -1,7 +1,7 @@
-/*!
+ï»¿/*!
 @file I_Damaged.cpp
-@brief I_Damaged‚ÌƒNƒ‰ƒXÀ‘Ì
-’S“–FŠÛR—TŠì
+@brief I_Damagedã®ã‚¯ãƒ©ã‚¹å®Ÿä½“
+æ‹…å½“ï¼šä¸¸å±±è£•å–œ
 */
 
 #include "stdafx.h"
@@ -11,11 +11,12 @@
 
 namespace basecross {
 	DamageData::DamageData()
-		:DamageData(20)
+		:DamageData(20, nullptr)
 	{}
 
-	DamageData::DamageData(const int& value)
-		: value(value)
+	DamageData::DamageData(const int& value, const std::shared_ptr<GameObject>& attacker)
+		: value(value),
+		attacker(attacker)
 	{}
 
 	DamageData DamageData::operator+(const DamageData& data) {

@@ -1,7 +1,7 @@
-/*!
+ï»¿/*!
 @file I_Damaged.h
-@brief I_Damaged‚È‚Ç
-’S“–FŠÛR—TŠì
+@brief I_Damagedãªã©
+æ‹…å½“ï¼šä¸¸å±±è£•å–œ
 */
 
 #pragma once
@@ -9,22 +9,24 @@
 
 namespace basecross {
 	//--------------------------------------------------------------------------------------
-	/// ƒ_ƒ[ƒWƒf[ƒ^
+	/// ãƒ€ãƒ¡ãƒ¼ã‚¸ãƒ‡ãƒ¼ã‚¿
 	//--------------------------------------------------------------------------------------
 	struct DamageData
 	{
-		int value;      //ƒ_ƒ[ƒW’l
+		int value;      //ãƒ€ãƒ¡ãƒ¼ã‚¸å€¤
+		std::shared_ptr<GameObject> attacker;
 
 		/// <summary>
-		/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+		/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		/// </summary>
 		DamageData();
 
 		/// <summary>
-		/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+		/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		/// </summary>
-		/// <param name="value">ƒ_ƒ[ƒW’l</param>
-		DamageData(const int& value);
+		/// <param name="value">ãƒ€ãƒ¡ãƒ¼ã‚¸å€¤</param>
+		/// <param name="attacker">æ”»æ’ƒã‚’ã—ãŸã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</param>
+		DamageData(const int& value, const std::shared_ptr<GameObject>& attacker);
 
 		DamageData operator+(const DamageData& data);
 
@@ -35,9 +37,9 @@ namespace basecross {
 	{
 	public:
 		/// <summary>
-		/// ƒ_ƒ[ƒW‚ğó‚¯‚éˆ—
+		/// ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’å—ã‘ã‚‹å‡¦ç†
 		/// </summary>
-		/// <param name="data">ƒ_ƒ[ƒWƒf[ƒ^</param>
+		/// <param name="data">ãƒ€ãƒ¡ãƒ¼ã‚¸ãƒ‡ãƒ¼ã‚¿</param>
 		virtual void Damaged(const DamageData& data) = 0;
 	};
 }
