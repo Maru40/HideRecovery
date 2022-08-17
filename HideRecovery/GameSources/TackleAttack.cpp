@@ -35,10 +35,6 @@ namespace basecross {
 	}
 
 	void TackleAttack::OnUpdate() {
-		if (PlayerInputer::GetInstance()->IsYDown()) {
-			StartAttack();
-		}
-
 		m_taskList->UpdateTask();
 	}
 
