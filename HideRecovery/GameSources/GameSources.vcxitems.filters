@@ -841,6 +841,9 @@
     <Filter Include="Watanabe\StageObject\PlayerSpawnPoint">
       <UniqueIdentifier>{650d64cc-4873-463d-acfb-d994d0fa52f3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\StageObject\OwnArea">
+      <UniqueIdentifier>{d9e93458-e2c6-4508-82d7-0d43b0111188}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1533,6 +1536,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\PlayerSpawnPoint.h">
       <Filter>Watanabe\StageObject\PlayerSpawnPoint</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\OwnArea.h">
+      <Filter>Watanabe\StageObject\OwnArea</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2146,6 +2152,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\PlayerSpawnPoint.cpp">
       <Filter>Watanabe\StageObject\PlayerSpawnPoint</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\OwnArea.cpp">
+      <Filter>Watanabe\StageObject\OwnArea</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
