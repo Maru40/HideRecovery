@@ -43,8 +43,11 @@ namespace basecross {
 		if (animator->IsTargetAnimationEnd()) {	//アニメーションが終了したら
 			//リスポーン処理がアタッチされているなら
 			if (auto respawner = GetGameObject()->GetComponent<Respawner>(false)) {
-				respawner->Respawn();
+				respawner->StartRespawn();
 			}
+
+			//死亡完了アニメーションに変更
+			animator->ChangePlayerAnimation(PlayerAnimationState::State::Wait);
 		}
 	}
 
