@@ -12,6 +12,11 @@
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
+	///	前方宣言
+	//--------------------------------------------------------------------------------------
+	struct CollisionPair;
+
+	//--------------------------------------------------------------------------------------
 	///	チャージ弾
 	//--------------------------------------------------------------------------------------
 	class ChargeBullet : public BulletBase
@@ -22,6 +27,8 @@ namespace basecross {
 		void OnUpdate() override;
 
 		void Shot(const Vec3& direct) override;
+
+		void OnCollisionEnter(const CollisionPair& pair) override;
 	};
 
 }
