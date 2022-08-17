@@ -50,14 +50,19 @@ namespace basecross {
 		virtual ~Respawner() = default;
 
 		void OnCreate() override;
+		void OnUpdate() override;
 
 	private:
-
-	public:
 		/// <summary>
 		/// リスポーン
 		/// </summary>
 		void Respawn();
+
+	public:
+		/// <summary>
+		/// リスポーン開始
+		/// </summary>
+		void StartRespawn();
 
 		/// <summary>
 		/// リスポーンできるかどうか
