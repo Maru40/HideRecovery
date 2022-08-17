@@ -844,6 +844,12 @@
     <Filter Include="Watanabe\StageObject\OwnAreaObject">
       <UniqueIdentifier>{d9e93458-e2c6-4508-82d7-0d43b0111188}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Player\Component\OwnArea">
+      <UniqueIdentifier>{4ae05393-5053-415b-b261-162edf081f9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Interface\I_TeamMember">
+      <UniqueIdentifier>{b5ef7020-022d-4c43-8bae-dc1546ab942f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1557,6 +1563,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)TackleAttack.h">
       <Filter>Maruyama\Player\Component\AttackBase\TackleAttack</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Interface\I_TeamMember.h">
+      <Filter>Maruyama\Interface\I_TeamMember</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\OwnArea.h">
+      <Filter>Maruyama\Player\Component\OwnArea</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2188,6 +2200,12 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)TackleAttack.cpp">
       <Filter>Maruyama\Player\Component\AttackBase\TackleAttack</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Interface\I_TeamMember.cpp">
+      <Filter>Maruyama\Interface\I_TeamMember</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\OwnArea.cpp">
+      <Filter>Maruyama\Player\Component\OwnArea</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

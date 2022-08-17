@@ -51,6 +51,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)ImpactManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\Item.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\ObjectHider.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Interface\I_TeamMember.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\OwnArea.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)OccupancyManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)SelfImpactNodeManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\ObjectMover.h" />
@@ -301,6 +303,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)LoadCSV.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LoadPositionGenerator.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LookAtCameraManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Interface\I_TeamMember.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\OwnArea.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)OccupancyManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)OriginalMeshToonObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)FadeSprite.cpp" />
