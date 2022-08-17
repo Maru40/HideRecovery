@@ -24,7 +24,7 @@ namespace basecross {
 	{}
 
 	void ChargeGun::OnCreate() {
-		SetBulletInstanceOffset(Vec3(0.0f, 0.9f, 0.0f));
+		SetBulletInstanceOffset(Vec3(0.0f, 0.5f, 0.0f));
 	}
 
 	void ChargeGun::OnUpdate() {
