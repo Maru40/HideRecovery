@@ -51,7 +51,7 @@ namespace basecross {
 
 	}
 
-	void Goal::SuccessGoar(const CollisionPair& pair) {
+	void Goal::SuccessGoal(const CollisionPair& pair) {
 		auto other = pair.m_Dest.lock()->GetGameObject();
 
 		//ƒ|ƒCƒ“ƒg‰ÁŽZ
@@ -70,7 +70,7 @@ namespace basecross {
 			hider->Appear(hidePlace->GetHidePosition());
 		}
 
-		Debug::GetInstance()->Log(L"SuccessGoar");
+		Debug::GetInstance()->Log(L"SuccessGoal");
 	}
 
 	bool Goal::IsCollision(const CollisionPair& pair) const {
