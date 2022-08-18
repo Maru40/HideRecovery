@@ -49,6 +49,8 @@
 #include "Itabashi/OnlineTestRoom.h"
 #include "Itabashi/OnlinePlayerManager.h"
 
+#include "Maruyama/StageObject/GoarObject.h"
+
 namespace basecross {
 	void GameStageBase::CreateMainCamera()
 	{
@@ -90,6 +92,7 @@ namespace basecross {
 		builder.Register<HideItemObject>(L"HideItem");
 		builder.Register<PlayerSpawnPointObject>(L"PlayerSpawnPoint");
 		builder.Register<OwnAreaObject>(L"OwnArea");
+		builder.Register<GoarObject>(L"Goar");
 		auto dir = App::GetApp()->GetDataDirWString();
 		auto path = dir + L"MapDatas/";
 		builder.Build(GetThis<Stage>(), path + fileName);
