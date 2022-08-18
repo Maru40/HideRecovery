@@ -1,4 +1,3 @@
-
 /*!
 @file Scene.cpp
 @brief シーン実体
@@ -12,10 +11,10 @@
 //#include "ResultStage.h"
 //#include "TitleStage.h"
 //#include "StageSelect.h"
+#include "Watanabe/TestStage/WatanabeStage.h"
 class LoadStage;
 
-namespace basecross{
-
+namespace basecross {
 	//--------------------------------------------------------------------------------------
 	///	ゲームシーン
 	//--------------------------------------------------------------------------------------
@@ -24,13 +23,13 @@ namespace basecross{
 
 	Scene::~Scene() { }
 
-	void Scene::OnCreate(){
+	void Scene::OnCreate() {
 		try {
 			auto& app = App::GetApp();
 			auto path = app->GetDataDirWString();
 			// テクスチャの読み込み
 			auto texPath = path + L"Textures/";
-			
+
 			//クリアする色を設定
 			Col4 Col;
 			Col.set(31.0f / 255.0f, 30.0f / 255.0f, 71.0f / 255.0f, 255.0f / 255.0f);
@@ -52,7 +51,7 @@ namespace basecross{
 		auto device = app->GetInputDevice();
 		const auto& pad = device.GetControlerVec()[0];
 
-		if(pad.wButtons == ResetCommand)
+		if (pad.wButtons == ResetCommand)
 		{
 			PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToTitleStage");
 		}
@@ -63,11 +62,14 @@ namespace basecross{
 			//最初のアクティブステージの設定
 			//ResetActiveStage<GameStage>();
 		}
-		else if(event->m_MsgStr == L"ToLoadStage"){
-			ResetActiveStage<LoadStage>(L"ToMainStage");
+		else if (event->m_MsgStr == L"ToLoadStage") {
+			ResetActiveStage<LoadStage>(L"ToWatanabeStage");
 		}
 		else if (event->m_MsgStr == L"ToMainStage") {
 			ResetActiveStage<MainStage>();
+		}
+		else if (event->m_MsgStr == L"ToWatanabeStage") {
+			ResetActiveStage<WatanabeStage>();
 		}
 		//else if (event->m_MsgStr == L"ToResultStage") {
 		//	ResetActiveStage<ResultStage>();
@@ -78,7 +80,6 @@ namespace basecross{
 		//else if (event->m_MsgStr == L"ToStageSelect") {
 		//	ResetActiveStage<StageSelect>();
 		//}
-
 	}
 }
 //end basecross
