@@ -12,7 +12,7 @@
 
 namespace basecross {
 	PlayerStatus::PlayerStatus(const shared_ptr<GameObject>& owner)
-		:Component(owner), m_status(10)
+		:Component(owner), m_status(10), m_team(Team(0))
 	{}
 
 	void PlayerStatus::OnCreate() {
