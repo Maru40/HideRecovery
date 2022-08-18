@@ -24,6 +24,7 @@
 #include "../Component/PlayerAnimator.h"
 #include "PlayerAnimationCtrl.h"
 #include "../UI/Numbers.h"
+#include "../UI/CountDownUI.h"
 
 namespace basecross {
 	void WatanabeStage::CreateViewLight() {
@@ -103,7 +104,8 @@ namespace basecross {
 		auto path = dir + L"MapDatas/";
 		builder.Build(GetThis<Stage>(), path + L"StageS2.csv");
 
-		AddGameObject<NumberSprite>()->SetValue(5);
+		//AddGameObject<NumberSprite>()->SetValue(5);
+		AddGameObject<CountDownUI>();
 	}
 
 	void WatanabeStage::OnUpdate() {
