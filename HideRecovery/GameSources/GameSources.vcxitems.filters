@@ -862,6 +862,15 @@
     <Filter Include="Watanabe\UI\GameStartUI">
       <UniqueIdentifier>{ef13040a-724c-48d3-af61-80c192abe0f0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\Component\LifeSpan">
+      <UniqueIdentifier>{a34577d2-92b2-4f50-a078-f939f37bed24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\Component\FadeComponent">
+      <UniqueIdentifier>{5b03eec8-ab13-4009-8bf7-2adb63583526}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\Utility\TimeCounter">
+      <UniqueIdentifier>{58fee1e5-7785-48cc-80a9-ba305df7349e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1590,6 +1599,15 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\GameStartUI.h">
       <Filter>Watanabe\UI\GameStartUI</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\FadeComponent.h">
+      <Filter>Watanabe\Component\FadeComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\LifeSpan.h">
+      <Filter>Watanabe\Component\LifeSpan</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\TimeCounter.h">
+      <Filter>Watanabe\Utility\TimeCounter</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2236,6 +2254,15 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\GameStartUI.cpp">
       <Filter>Watanabe\UI\GameStartUI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\FadeComponent.cpp">
+      <Filter>Watanabe\Component\FadeComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\LifeSpan.cpp">
+      <Filter>Watanabe\Component\LifeSpan</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Utility\TimeCounter.cpp">
+      <Filter>Watanabe\Utility\TimeCounter</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
