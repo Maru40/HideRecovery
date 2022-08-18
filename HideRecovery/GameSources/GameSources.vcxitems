@@ -46,6 +46,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)ImpactDataDraw.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ImpactManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\Item.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageTransitioner.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\ObjectHider.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineMatching.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineMatchStage.h" />
@@ -275,8 +276,10 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)ImpactDataDraw.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ImpactManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\Item.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageTransitioner.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\ObjectHider.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\ObjectMover.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineMatching.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineMatchStage.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlinePlayerManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineTestRoom.cpp" />

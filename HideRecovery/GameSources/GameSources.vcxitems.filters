@@ -820,6 +820,9 @@
     <Filter Include="Itabashi\Online\OnlineMatching">
       <UniqueIdentifier>{06330886-be4a-48de-98b1-7bd132101f24}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Itabashi\Component\MatchStageTransitioner">
+      <UniqueIdentifier>{04d07eac-4827-4430-8b66-911d86917a77}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1512,6 +1515,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineMatching.h">
       <Filter>Itabashi\Online\OnlineMatching</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageTransitioner.h">
+      <Filter>Itabashi\Component\MatchStageTransitioner</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2122,6 +2128,12 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineMatchStage.cpp">
       <Filter>Itabashi\Stage\OnlineMatchStage</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineMatching.cpp">
+      <Filter>Itabashi\Online\OnlineMatching</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageTransitioner.cpp">
+      <Filter>Itabashi\Component\MatchStageTransitioner</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
