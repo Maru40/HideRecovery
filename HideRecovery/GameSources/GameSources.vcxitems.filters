@@ -871,6 +871,15 @@
     <Filter Include="Maruyama\Player\Component\UseOwnArea\Teleport">
       <UniqueIdentifier>{09fd4535-3758-49cd-a022-099f31bc302f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Itabashi\Stage\OnlineMatchStage">
+      <UniqueIdentifier>{98029820-d616-49f2-829f-5dbbb6866197}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Itabashi\Online\OnlineMatching">
+      <UniqueIdentifier>{06330886-be4a-48de-98b1-7bd132101f24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Itabashi\Component\MatchStageTransitioner">
+      <UniqueIdentifier>{04d07eac-4827-4430-8b66-911d86917a77}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1611,6 +1620,15 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\Teleport.h">
       <Filter>Maruyama\Player\Component\UseOwnArea\Teleport</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineMatchStage.h">
+      <Filter>Itabashi\Stage\OnlineMatchStage</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineMatching.h">
+      <Filter>Itabashi\Online\OnlineMatching</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageTransitioner.h">
+      <Filter>Itabashi\Component\MatchStageTransitioner</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2269,6 +2287,15 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\Teleport.cpp">
       <Filter>Maruyama\Player\Component\UseOwnArea\Teleport</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineMatchStage.cpp">
+      <Filter>Itabashi\Stage\OnlineMatchStage</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineMatching.cpp">
+      <Filter>Itabashi\Online\OnlineMatching</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageTransitioner.cpp">
+      <Filter>Itabashi\Component\MatchStageTransitioner</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
