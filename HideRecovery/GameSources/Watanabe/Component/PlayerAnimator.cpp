@@ -22,10 +22,25 @@ namespace basecross {
 
 	void PlayerAnimator::OnLateStart() {
 		m_velocityManager = GetGameObject()->GetComponent<VelocityManager>(false);
+
+		//自動でwaitに変更したいアニメーション一覧
+		PlayerAnimationState::State baseStates[] = {
+			PlayerAnimationState::State::PutItem_Floor,
+			PlayerAnimationState::State::PutItem_HideObject,
+			PlayerAnimationState::State::GunEnd2
+		};
+
+		for (auto& baseState : baseStates) {
+			auto state = PlayerAnimationState::PlayerAnimationState2wstring(baseState);
+			auto isTransition = [&]() { return IsTargetAnimationEnd(); };
+			m_transitionDataMap[state] = TransitionData(isTransition, PlayerAnimationState::State::Wait);
+		}
 	}
 
 	void PlayerAnimator::OnUpdate() {
 		Animator::OnUpdate();
+
+		Transition();
 
 		auto velocityManager = m_velocityManager.lock();
 		if (!velocityManager) {
@@ -43,6 +58,21 @@ namespace basecross {
 		//速度が一定より大きいかつ、Wait状態なら
 		if (velocity.length() > TransitionSpeed && IsCurretAnimationState(PlayerAnimationState::State::Wait)) {
 			ChangePlayerAnimation(PlayerAnimationState::State::Dash);
+		}
+	}
+
+	void PlayerAnimator::Transition() {
+		auto draw = GetGameObject()->GetComponent<PNTBoneModelDraw>();
+		auto currentAnimation = draw->GetCurrentAnimation();
+
+		if (m_transitionDataMap.count(currentAnimation) == 0) {	//メンバーがないなら処理をしない。
+			return;
+		}
+
+		auto& data = m_transitionDataMap.at(currentAnimation);
+
+		if (data.isTransition()) {
+			ChangePlayerAnimation(data.transitionState);
 		}
 	}
 
