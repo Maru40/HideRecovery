@@ -35,7 +35,7 @@ namespace basecross {
 		auto draw = AddComponent<PNTStaticDraw>();
 
 		draw->SetMeshResource(L"DEFAULT_SPHERE");
-		draw->SetDiffuse(Col4(0.0f, 1.0f, 0.0f, 0.2f));
+		draw->SetDiffuse(Col4(0.0f, 1.0f, 0.0f, 0.5f));
 
 		SetAlphaActive(true);
 	}
