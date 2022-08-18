@@ -42,12 +42,15 @@ namespace basecross {
 			return;
 		}
 
-		if (animator->IsTargetAnimationEnd()) {
+		//アニメーションが終了したら
+		if (animator->IsTargetAnimationEnd()) {	
 			animator->ChangePlayerAnimation(PlayerAnimationState::State::GunEnd2);
 		}
 	}
 
 	std::shared_ptr<ChargeBulletObject> ChargeGun::Shot(const Vec3& direct) {
+		RevisionShotDirection();
+
 		Vec3 instancePosition = transform->GetPosition() + GetBulletInstanceOffset();
 		auto bulletObject = InstantiateBullet(instancePosition, transform->GetQuaternion());
 		if (auto bullet = bulletObject->GetComponent<ChargeBullet>(false)) {
@@ -69,4 +72,7 @@ namespace basecross {
 		animator->ChangePlayerAnimation(PlayerAnimationState::State::Shot);
 	}
 
+	void ChargeGun::RevisionShotDirection() {
+
+	}
 }
