@@ -26,6 +26,7 @@
 #include "../UI/Numbers.h"
 #include "../UI/CountDownUI.h"
 #include "../UI/SimpleSprite.h"
+#include "../UI///GameStartUI.h"
 
 namespace basecross {
 	void WatanabeStage::CreateViewLight() {
@@ -106,12 +107,7 @@ namespace basecross {
 		builder.Build(GetThis<Stage>(), path + L"StageS2.csv");
 
 		//AddGameObject<NumberSprite>()->SetValue(5);
-		auto coun = AddGameObject<CountDownUI>();
-		coun->SetScale(2);
-		coun->SetColor(Col4(1, 1, 0, 1));
-		coun->Start();
-
-		AddGameObject<SimpleSprite>(SimpleSprite::Type::SpriteData, L"Numbers");
+		auto coun = AddGameObject<GameStartUI>();
 	}
 
 	void WatanabeStage::OnUpdate() {

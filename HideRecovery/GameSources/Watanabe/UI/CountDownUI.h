@@ -10,6 +10,8 @@ namespace basecross {
 		float m_presentTime;
 		// カウントダウンが有効か
 		bool m_isActive;
+		// カウントダウンが終わったか
+		bool m_isTimeUp;
 		shared_ptr<NumberSprite> m_number;
 		// 終了時のイベント
 		function<void()> m_endTimeEvent;
@@ -21,6 +23,7 @@ namespace basecross {
 
 		void Start();
 		void Reset();
+		bool IsTimeUp();
 
 		void SetScale(float size);
 		void SetColor(Col4 color);

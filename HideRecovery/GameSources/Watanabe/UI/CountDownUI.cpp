@@ -18,6 +18,7 @@ namespace basecross {
 		// 無効の場合 または カウントダウンが終了時 何もしない
 		if (!m_isActive || m_presentTime <= 1.0f) {
 			m_number->SetDrawActive(false);
+			m_isTimeUp = true;
 			return;
 		}
 
@@ -26,7 +27,6 @@ namespace basecross {
 		m_number->SetValue((int)floorf(m_presentTime));
 
 		m_presentTime -= delta;
-		Debug::GetInstance()->Log(m_presentTime);
 	}
 
 	void CountDownUI::Start() {
@@ -34,8 +34,13 @@ namespace basecross {
 	}
 	void CountDownUI::Reset() {
 		m_isActive = false;
+		m_isTimeUp = false;
 		m_presentTime = m_startTime + 1;
-		m_number->SetDrawActive(false);
+		m_number->SetDrawActive(true);
+	}
+
+	bool CountDownUI::IsTimeUp() {
+		return m_isTimeUp;
 	}
 
 	void CountDownUI::SetScale(float size) {
