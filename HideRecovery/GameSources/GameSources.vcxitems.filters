@@ -865,6 +865,12 @@
     <Filter Include="Maruyama\StageObject\GoarObject\Component">
       <UniqueIdentifier>{aee89945-4d3a-4402-a8bf-813411de8856}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Player\Component\UseOwnArea">
+      <UniqueIdentifier>{36c83fd5-3c29-4c61-899b-4ab3ed5f109e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Player\Component\UseOwnArea\Teleport">
+      <UniqueIdentifier>{09fd4535-3758-49cd-a022-099f31bc302f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1599,6 +1605,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\StageObject\GoarObject.h">
       <Filter>Maruyama\StageObject\GoarObject</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\UseOwnArea.h">
+      <Filter>Maruyama\Player\Component\UseOwnArea</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\Teleport.h">
+      <Filter>Maruyama\Player\Component\UseOwnArea\Teleport</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2251,6 +2263,12 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\StageObject\GoarObject.cpp">
       <Filter>Maruyama\StageObject\GoarObject</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\UseOwnArea.cpp">
+      <Filter>Maruyama\Player\Component\UseOwnArea</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\Teleport.cpp">
+      <Filter>Maruyama\Player\Component\UseOwnArea\Teleport</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
