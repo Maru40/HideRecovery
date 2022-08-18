@@ -859,6 +859,12 @@
     <Filter Include="Maruyama\Player\Component\Deader">
       <UniqueIdentifier>{cefc959d-f099-45cd-9d0e-a46f156d01bd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\StageObject\GoarObject">
+      <UniqueIdentifier>{bc1b13fb-a267-4078-b9f7-11ee9d0ae7be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\StageObject\GoarObject\Component">
+      <UniqueIdentifier>{aee89945-4d3a-4402-a8bf-813411de8856}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1587,6 +1593,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\PlayerDeader.h">
       <Filter>Maruyama\Player\Component\Deader</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\StageObject\Goar.h">
+      <Filter>Maruyama\StageObject\GoarObject\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\StageObject\GoarObject.h">
+      <Filter>Maruyama\StageObject\GoarObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2233,6 +2245,12 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\PlayerDeader.cpp">
       <Filter>Maruyama\Player\Component\Deader</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\StageObject\Goar.cpp">
+      <Filter>Maruyama\StageObject\GoarObject\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\StageObject\GoarObject.cpp">
+      <Filter>Maruyama\StageObject\GoarObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -56,6 +56,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\PlayerDeader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\PlayerSpawnPoint.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\Respawner.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\StageObject\Goar.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\StageObject\GoarObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)OccupancyManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)SelfImpactNodeManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\ObjectMover.h" />
@@ -311,6 +313,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\PlayerDeader.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\PlayerSpawnPoint.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\Respawner.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\StageObject\Goar.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\StageObject\GoarObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)OccupancyManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)OriginalMeshToonObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)FadeSprite.cpp" />
