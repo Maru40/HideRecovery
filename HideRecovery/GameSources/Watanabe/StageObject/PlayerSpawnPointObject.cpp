@@ -35,6 +35,10 @@ namespace basecross {
 				L"PlayerSpawnPoint::PlayerSpawnPoint()"
 			);
 		}
+
+		++nextIndex;
+
+		m_id = std::stoi(tokens[nextIndex]);
 	}
 
 	void PlayerSpawnPointObject::OnCreate() {
