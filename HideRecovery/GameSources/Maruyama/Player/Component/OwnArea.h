@@ -49,8 +49,10 @@ namespace basecross {
 		OwnArea(const std::shared_ptr<GameObject>& objPtr, const Parametor& parametor);
 
 		void OnCreate() override;
+		void OnLateStart() override;
 
 	private:
+		void SettingGoal();
 
 	public:
 		/// <summary>
