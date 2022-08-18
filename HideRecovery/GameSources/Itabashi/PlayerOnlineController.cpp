@@ -13,6 +13,8 @@
 #include "ChargeBulletObject.h"
 #include "Watanabe/Component/PlayerStatus.h"
 #include "TackleAttack.h"
+#include "ChargeBullet.h"
+#include <random>
 
 template<class T>
 T ConvertByteData(const std::uint8_t* bytes)
@@ -41,10 +43,12 @@ namespace Online
 	{
 		Vec3 position;
 		Vec3 direction;
+		int instanceId;
 
-		ShotOnlineData(const Vec3& position, const Vec3& direction) :
+		ShotOnlineData(const Vec3& position, const Vec3& direction, const int instanceId) :
 			position(position),
-			direction(direction)
+			direction(direction),
+			instanceId(instanceId)
 		{
 
 		}
@@ -294,13 +298,25 @@ namespace Online
 
 		auto bulletObject = chargeGun->Shot(transform->GetForward());
 		auto bulletTransform = bulletObject->GetComponent<Transform>();
+		
+		auto chargeBullet = bulletObject->GetComponent<ChargeBullet>();
 
-		auto shotData = ShotOnlineData(bulletTransform->GetWorldPosition(), transform->GetForward());
+		if (OnlineManager::GetLocalPlayer().getIsMasterClient())
+		{
+			chargeBullet->AddDestroyEventFunc([&](const std::shared_ptr<GameObject>& gameObject) { BulletDestroyed(gameObject); });
+		}
+
+		int instanceId = CreateInstanceId();
+
+		m_chargeBulletMap.insert(std::make_pair(instanceId, chargeBullet));
+		chargeBullet->SetInstanceId(instanceId);
+
+		auto shotData = ShotOnlineData(bulletTransform->GetWorldPosition(), transform->GetForward(), instanceId);
 
 		OnlineManager::RaiseEvent(false, (std::uint8_t*)&shotData, sizeof(ShotOnlineData), EXECUTE_SHOT_EVENT_CODE);
 	}
 
-	void PlayerOnlineController::ExecuteShot(int playerNumber, const Vec3& bulletPosition, const Vec3& bulletDirection)
+	void PlayerOnlineController::ExecuteShot(int playerNumber, const Vec3& bulletPosition, const Vec3& bulletDirection, int instanceId)
 	{
 		if (playerNumber != m_playerNumber)
 		{
@@ -318,6 +334,39 @@ namespace Online
 		auto bulletTransform = bulletObject->GetComponent<Transform>();
 
 		bulletTransform->SetWorldPosition(bulletPosition);
+
+		auto chargeBullet = bulletObject->GetComponent<ChargeBullet>();
+
+		if (OnlineManager::GetLocalPlayer().getIsMasterClient())
+		{
+			chargeBullet->AddDestroyEventFunc([&](const std::shared_ptr<GameObject>& gameObject) {BulletDestroyed(gameObject); });
+		}
+
+		m_chargeBulletMap.insert(std::make_pair(instanceId, chargeBullet));
+		chargeBullet->SetInstanceId(instanceId);
+	}
+
+	void PlayerOnlineController::BulletDestroyed(const std::shared_ptr<GameObject>& gameObject)
+	{
+		auto chargeBullet = gameObject->GetComponent<ChargeBullet>();
+
+		int instanceId = chargeBullet->GetInstanceId();
+
+		OnlineManager::RaiseEvent(false, (std::uint8_t*)&instanceId, sizeof(int), EXECUTE_BULLET_DESTROY_EVENT_CODE);
+	}
+
+	void PlayerOnlineController::ExecuteBulletDestroyEvent(int bulletInstanceId)
+	{
+		auto find = m_chargeBulletMap.find(bulletInstanceId);
+
+		if (find == m_chargeBulletMap.end())
+		{
+			return;
+		}
+
+		GetStage()->RemoveGameObject<GameObject>(find->second->GetGameObject());
+		find->second->GetGameObject();
+		m_chargeBulletMap.erase(find);
 	}
 
 	void PlayerOnlineController::Damaged(const std::shared_ptr<PlayerStatus>& playerStatus, const DamageData& damageData)
@@ -382,6 +431,15 @@ namespace Online
 		}
 
 		tackleAttack->StartAttack();
+	}
+
+	int PlayerOnlineController::CreateInstanceId() const
+	{
+		std::random_device rd;
+		std::default_random_engine eng(rd());
+		std::uniform_int_distribution<int> distr(0, INT32_MAX);
+
+		return distr(eng);
 	}
 
 	void PlayerOnlineController::OnLateStart()
@@ -472,7 +530,7 @@ namespace Online
 		if (eventCode == EXECUTE_SHOT_EVENT_CODE)
 		{
 			auto data = ConvertByteData<ShotOnlineData>(bytes);
-			ExecuteShot(playerNumber, data.position, data.direction);
+			ExecuteShot(playerNumber, data.position, data.direction, data.instanceId);
 			return;
 		}
 
@@ -486,6 +544,13 @@ namespace Online
 		if (eventCode == EXECUTE_TACKLE_EVENT_CODE)
 		{
 			ExecuteTackle(playerNumber);
+			return;
+		}
+
+		if (eventCode == EXECUTE_BULLET_DESTROY_EVENT_CODE)
+		{
+			int instanceId = ConvertByteData<int>(bytes);
+			ExecuteBulletDestroyEvent(instanceId);
 			return;
 		}
 	}
