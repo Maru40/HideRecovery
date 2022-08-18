@@ -17,6 +17,7 @@ namespace basecross {
 		function<void()> m_endTimeEvent;
 	public:
 		CountDownUI(const shared_ptr<Stage>& stage);
+		CountDownUI(const shared_ptr<Stage>& stage, float countTime);
 
 		void OnCreate()override;
 		void OnUpdate()override;
