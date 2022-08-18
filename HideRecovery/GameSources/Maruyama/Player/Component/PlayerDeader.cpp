@@ -20,7 +20,8 @@
 namespace basecross {
 
 	PlayerDeader::PlayerDeader(const std::shared_ptr<GameObject>& objPtr) :
-		Component(objPtr)
+		Component(objPtr),
+		m_updateFunction(nullptr)
 	{}
 
 	void PlayerDeader::OnLateStart() {
@@ -28,7 +29,9 @@ namespace basecross {
 	}
 
 	void PlayerDeader::OnUpdate() {
-		ObserveAnimation();
+		if (m_updateFunction) {
+			m_updateFunction();
+		}
 	}
 
 	void PlayerDeader::ObserveAnimation() {
@@ -38,7 +41,7 @@ namespace basecross {
 		}
 
 		//アニメーションが死亡状態でないなら監視しない
-		if (!animator->IsCurretAnimationState(PlayerAnimationState::State::Dstart)) {
+		if (!animator->IsCurretAnimationState(PlayerAnimationState::State::Dead)) {
 			return;
 		}
 
@@ -48,20 +51,21 @@ namespace basecross {
 				respawner->StartRespawn();
 			}
 
-			//死亡完了アニメーションに変更
-			animator->ChangePlayerAnimation(PlayerAnimationState::State::Wait);
+			m_updateFunction = nullptr;	//更新をやめる。
 		}
 	}
 
 	void PlayerDeader::StartDead() {
 		auto animator = m_animator.lock();
 		if (animator) {
-			animator->ChangePlayerAnimation(PlayerAnimationState::State::Dstart);
+			animator->ChangePlayerAnimation(PlayerAnimationState::State::Dead);
 		}
 
 		if (auto velocityManager = GetGameObject()->GetComponent<VelocityManager>(false)) {
 			velocityManager->ResetAll();
 		}
+
+		m_updateFunction = [&]() { ObserveAnimation(); };	//更新処理設定
 	}
 
 	bool PlayerDeader::IsDead() {
