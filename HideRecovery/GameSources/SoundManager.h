@@ -34,7 +34,9 @@ namespace basecross {
 
 			PlayerWalk,    //Playerの移動
 			PlayerTackle,  //Playerのタックル
-			JettPomp       //ジェットポンプ
+			JettPomp,      //ジェットポンプ
+
+			ShotSE,
 		};
 
 	private:

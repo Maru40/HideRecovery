@@ -90,6 +90,8 @@ namespace basecross
 		//ResourceLoadData(L"PlayerWalk", L"AS_PlayerWalk.wav"),
 		//ResourceLoadData(L"PlayerTackle", L"AS_PlayerTackle.wav"),
 		//ResourceLoadData(L"JettPomp", L"AS_JettPomp.wav"),
+		ResourceLoadData(L"Shot_SE", L"AS_1086937_SF_ゲーム＿レーザー音＿ドチューン.wav"),
+		
 	};
 
 	const std::vector<LoadStage::ResourceLoadData> LoadStage::m_bgmResourceLoadDatas =
