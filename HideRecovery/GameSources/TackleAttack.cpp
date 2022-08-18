@@ -38,7 +38,17 @@ namespace basecross {
 		DefineTask();
 	}
 
+	void TackleAttack::OnLateStart() {
+		m_status = GetGameObject()->GetComponent<PlayerStatus>(false);
+	}
+
 	void TackleAttack::OnUpdate() {
+		auto status = m_status.lock();
+		if (status && status->IsDead()) {
+			m_taskList->ForceStop();
+			return;
+		}
+
 		m_taskList->UpdateTask();
 	}
 
