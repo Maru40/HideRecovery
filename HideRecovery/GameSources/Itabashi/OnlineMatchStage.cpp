@@ -2,6 +2,7 @@
 #include "OnlineMatchStage.h"
 #include "PlayerInputer.h"
 #include "Scene.h"
+#include "OnlineMatching.h"
 
 namespace basecross
 {
@@ -19,10 +20,19 @@ namespace basecross
 		auto PtrMultiLight = CreateLight<MultiLight>();
 		//デフォルトのライティングを指定
 		PtrMultiLight->SetDefaultLighting();
+
+		auto gameObject = AddGameObject<GameObject>();
+
+		auto onlineMatching = gameObject->AddComponent<Online::OnlineMatching>();
 	}
 
 	void OnlineMatchStage::OnUpdate()
 	{
+		if (PlayerInputer::IsDecision())
+		{
+			PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToMainStage");
+			return;
+		}
 		if (PlayerInputer::IsCancel())
 		{
 			PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToTitleStage");
