@@ -1,6 +1,6 @@
 /*!
-@file   GoarObject.h
-@brief  GoarObject
+@file   GoalObject.h
+@brief  GoalObject
 */
 
 #pragma once
@@ -12,11 +12,11 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 	/// ゴールオブジェクト
 	//--------------------------------------------------------------------------------------
-	class GoarObject :public StageObjectBase 
+	class GoalObject :public StageObjectBase 
 	{
 	public:
-		GoarObject(const shared_ptr<Stage>& stage);
-		GoarObject(const shared_ptr<Stage>& stage, const wstring& line);
+		GoalObject(const shared_ptr<Stage>& stage);
+		GoalObject(const shared_ptr<Stage>& stage, const wstring& line);
 
 		void OnCreate() override;
 

@@ -1,6 +1,6 @@
 /*!
-@file Goar.h
-@brief Goarクラス
+@file Goal.h
+@brief Goalクラス
 担当：丸山裕喜
 */
 
@@ -19,25 +19,25 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 	/// ゴール管理クラスのパラメータ
 	//--------------------------------------------------------------------------------------
-	struct Goar_Parametor {
+	struct Goal_Parametor {
 		Team team;
 
-		Goar_Parametor(const Team& team);
+		Goal_Parametor(const Team& team);
 	};
 
 	//--------------------------------------------------------------------------------------
 	/// ゴール管理クラス
 	//--------------------------------------------------------------------------------------
-	class Goar : public Component
+	class Goal : public Component
 	{
 	public:
-		using Parametor = Goar_Parametor;
+		using Parametor = Goal_Parametor;
 
 	private:
 		Parametor m_param;
 
 	public:
-		Goar(const std::shared_ptr<GameObject>& objPtr, const Parametor& parametor);
+		Goal(const std::shared_ptr<GameObject>& objPtr, const Parametor& parametor);
 
 		void OnCreate() override;
 		void OnUpdate() override;

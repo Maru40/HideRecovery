@@ -59,10 +59,10 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\Respawner.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\Teleport.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\UseOwnArea.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\StageObject\Goar.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\StageObject\GoarObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineMatching.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineMatchStage.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\StageObject\Goal.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\StageObject\GoalObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)OccupancyManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)SelfImpactNodeManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\ObjectMover.h" />
@@ -323,8 +323,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\Respawner.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\Teleport.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\UseOwnArea.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\StageObject\Goar.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\StageObject\GoarObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\StageObject\Goal.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\StageObject\GoalObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)OccupancyManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)OriginalMeshToonObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)FadeSprite.cpp" />

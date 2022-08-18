@@ -1,40 +1,40 @@
 /*!
-@file   GoarObject.cpp
-@brief  GoarObjectŽÀ‘Ì
+@file   GoalObject.cpp
+@brief  GoalObjectŽÀ‘Ì
 */
 
 #include "stdafx.h"
 
-#include "GoarObject.h"
+#include "GoalObject.h"
 
 #include "Watanabe/Utility/DataExtracter.h"
 #include "Watanabe/Utility/AdvMeshUtil.h"
 
-#include "Goar.h"
+#include "Goal.h"
 
 namespace basecross {
 
-	GoarObject::GoarObject(const shared_ptr<Stage>& stage) :
-		StageObjectBase(stage, L"Goar")
+	GoalObject::GoalObject(const shared_ptr<Stage>& stage) :
+		StageObjectBase(stage, L"Goal")
 	{}
 
-	GoarObject::GoarObject(const shared_ptr<Stage>& stage, const wstring& line) :
-		StageObjectBase(stage, L"Goar")
+	GoalObject::GoalObject(const shared_ptr<Stage>& stage, const wstring& line) :
+		StageObjectBase(stage, L"Goal")
 	{
 		vector<wstring> tokens = DataExtracter::DelimitData(line);
 		DataExtracter::TransformDataExtraction(tokens, m_transformData);
 	}
 
-	void GoarObject::OnCreate() {
+	void GoalObject::OnCreate() {
 		SettingModel();
 
-		AddComponent<Goar>(Goar::Parametor(Team::West));
+		AddComponent<Goal>(Goal::Parametor(Team::West));
 
 		auto collision = AddComponent<CollisionObb>();
 		collision->SetAfterCollision(AfterCollision::None);
 	}
 
-	void GoarObject::SettingModel() {
+	void GoalObject::SettingModel() {
 		auto draw = AddComponent<PNTStaticDraw>();
 
 		draw->SetMeshResource(L"DEFAULT_SPHERE");

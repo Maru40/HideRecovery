@@ -1,7 +1,7 @@
 
 /*!
-@file Goar.cpp
-@brief Goarクラス実体
+@file Goal.cpp
+@brief Goalクラス実体
 担当：丸山裕喜
 */
 
@@ -9,7 +9,7 @@
 #include "stdafx.h"
 #include "Project.h"
 
-#include "Goar.h"
+#include "Goal.h"
 
 #include "ItemBag.h"
 #include "Maruyama/Interface/I_TeamMember.h"
@@ -19,13 +19,19 @@
 
 #include "Watanabe/DebugClass/Debug.h"
 
+#include "MaruUtility.h"
+#include "HidePlace.h"
+#include "MyRandom.h"
+
+#include "Itabashi/ObjectHider.h"
+
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
 	/// ゴール管理クラスのパラメータ
 	//--------------------------------------------------------------------------------------
 
-	Goar_Parametor::Goar_Parametor(const Team& team) :
+	Goal_Parametor::Goal_Parametor(const Team& team) :
 		team(team)
 	{}
 
@@ -33,19 +39,19 @@ namespace basecross {
 	/// ゴール管理クラス本体
 	//--------------------------------------------------------------------------------------
 
-	Goar::Goar(const std::shared_ptr<GameObject>& objPtr, const Parametor& parametor):
+	Goal::Goal(const std::shared_ptr<GameObject>& objPtr, const Parametor& parametor):
 		Component(objPtr), m_param(parametor)
 	{}
 
-	void Goar::OnCreate() {
+	void Goal::OnCreate() {
 
 	}
 
-	void Goar::OnUpdate() {
+	void Goal::OnUpdate() {
 
 	}
 
-	void Goar::SuccessGoar(const CollisionPair& pair) {
+	void Goal::SuccessGoar(const CollisionPair& pair) {
 		auto other = pair.m_Dest.lock()->GetGameObject();
 
 		//ポイント加算
@@ -55,15 +61,19 @@ namespace basecross {
 		if (auto itemBag = other->GetComponent<ItemBag>(false)) {
 			auto hideItem = itemBag->GetHideItem();
 			itemBag->RemoveItem(hideItem->GetGameObject()->GetComponent<Item>(false));
+
+			//アイテム再配置
+			auto hidePlaces = maru::Utility::FindComponents<HidePlace>();
+			auto hidePlace = maru::MyRandom::RandomArray(hidePlaces);
+			
+			auto hider = hideItem->GetObjectHider();
+			hider->Appear(hidePlace->GetHidePosition());
 		}
-
-		//アイテム再配置
-
 
 		Debug::GetInstance()->Log(L"SuccessGoar");
 	}
 
-	bool Goar::IsCollision(const CollisionPair& pair) const {
+	bool Goal::IsCollision(const CollisionPair& pair) const {
 		auto other = pair.m_Dest.lock()->GetGameObject();
 		auto teamMember = other->GetComponent<I_TeamMember>(false);
 		auto itemBag = other->GetComponent<ItemBag>(false);
@@ -85,7 +95,7 @@ namespace basecross {
 		return true;
 	}
 
-	void Goar::OnCollisionEnter(const CollisionPair& pair) {
+	void Goal::OnCollisionEnter(const CollisionPair& pair) {
 		if (!IsCollision(pair)) {	//判定を取らないなら処理を飛ばす。
 			return;
 		}
