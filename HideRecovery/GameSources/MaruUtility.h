@@ -436,7 +436,15 @@ namespace basecross {
 				enable_if_t<is_base_of_v<Component, T>, std::nullptr_t> = nullptr >
 			static vector<shared_ptr<T>> FindComponents() {
 				auto stage = GetStage();
+				return FindComponents<T>(stage);
+			}
 
+			/// <summary>
+			/// 指定したコンポ―ネントを複数見つける
+			/// </summary>
+			template<class T,
+				enable_if_t<is_base_of_v<Component, T>, std::nullptr_t> = nullptr >
+			static vector<shared_ptr<T>> FindComponents(const std::shared_ptr<Stage>& stage) {
 				vector<shared_ptr<T>> returnObjs;
 
 				auto objs = stage->GetGameObjectVec();
