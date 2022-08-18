@@ -105,7 +105,10 @@ namespace basecross {
 		builder.Build(GetThis<Stage>(), path + L"StageS2.csv");
 
 		//AddGameObject<NumberSprite>()->SetValue(5);
-		AddGameObject<CountDownUI>();
+		auto coun = AddGameObject<CountDownUI>();
+		coun->SetScale(2);
+		coun->SetColor(Col4(1, 1, 0, 1));
+		coun->Start();
 	}
 
 	void WatanabeStage::OnUpdate() {

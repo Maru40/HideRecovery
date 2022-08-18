@@ -11,6 +11,7 @@ namespace basecross {
 
 		void OnCreate()override;
 		void SetValue(int number);
+		shared_ptr<PCTSpriteDraw> GetDrawComponent();
 	};
 
 	class Numbers :public GameObject {

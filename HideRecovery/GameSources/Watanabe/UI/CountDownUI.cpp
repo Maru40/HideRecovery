@@ -4,11 +4,13 @@
 
 namespace basecross {
 	CountDownUI::CountDownUI(const shared_ptr<Stage>& stage)
-		:GameObject(stage), m_startTime(3), m_presentTime(0), m_isActive(true)
+		:GameObject(stage), m_startTime(3), m_presentTime(0), m_isActive(false)
 	{}
 
 	void CountDownUI::OnCreate() {
 		m_number = GetStage()->AddGameObject<NumberSprite>();
+		m_number->GetComponent<Transform>()->SetParent(GetThis<CountDownUI>());
+
 		// 切り捨ての関係上+1
 		m_presentTime = m_startTime + 1;
 	}
@@ -25,5 +27,22 @@ namespace basecross {
 
 		m_presentTime -= delta;
 		Debug::GetInstance()->Log(m_presentTime);
+	}
+
+	void CountDownUI::Start() {
+		m_isActive = true;
+	}
+	void CountDownUI::Reset() {
+		m_isActive = false;
+		m_presentTime = m_startTime + 1;
+		m_number->SetDrawActive(false);
+	}
+
+	void CountDownUI::SetScale(float size) {
+		m_number->GetComponent<Transform>()->SetScale(Vec3(size));
+	}
+
+	void CountDownUI::SetColor(Col4 color) {
+		m_number->GetDrawComponent()->SetDiffuse(color);
 	}
 }

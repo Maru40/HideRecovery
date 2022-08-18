@@ -11,10 +11,18 @@ namespace basecross {
 		// カウントダウンが有効か
 		bool m_isActive;
 		shared_ptr<NumberSprite> m_number;
+		// 終了時のイベント
+		function<void()> m_endTimeEvent;
 	public:
 		CountDownUI(const shared_ptr<Stage>& stage);
 
 		void OnCreate()override;
 		void OnUpdate()override;
+
+		void Start();
+		void Reset();
+
+		void SetScale(float size);
+		void SetColor(Col4 color);
 	};
 }

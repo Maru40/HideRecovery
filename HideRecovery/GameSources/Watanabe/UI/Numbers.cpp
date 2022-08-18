@@ -59,6 +59,10 @@ namespace basecross {
 		m_spriteDraw.lock()->UpdateVertices(vertices);
 	}
 
+	shared_ptr<PCTSpriteDraw> NumberSprite::GetDrawComponent() {
+		return m_spriteDraw.lock();
+	}
+
 	Numbers::Numbers(const shared_ptr<Stage>& stage)
 		:GameObject(stage)
 	{}
