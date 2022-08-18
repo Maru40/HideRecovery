@@ -25,7 +25,6 @@
 
 #include "CollisionAction.h"
 #include "Watanabe/Component/PlayerStatus.h"
-#include "Watanabe/DebugClass/Debug.h"
 
 namespace basecross {
 
@@ -221,7 +220,6 @@ namespace basecross {
 			auto playerStatus = other->GetComponent<PlayerStatus>(false);
 			if (playerStatus) {
 				playerStatus->AddDamage(m_param.damageData);
-				Debug::GetInstance()->Log(L"TackleDamage");
 			}
 		}
 
