@@ -15,6 +15,8 @@
 #include "Watanabe/Component/PlayerAnimator.h"
 #include "Watanabe/Component/PlayerStatus.h"
 
+#include "VelocityManager.h"
+
 namespace basecross {
 
 	PlayerDeader::PlayerDeader(const std::shared_ptr<GameObject>& objPtr) :
@@ -55,6 +57,10 @@ namespace basecross {
 		auto animator = m_animator.lock();
 		if (animator) {
 			animator->ChangePlayerAnimation(PlayerAnimationState::State::Dstart);
+		}
+
+		if (auto velocityManager = GetGameObject()->GetComponent<VelocityManager>(false)) {
+			velocityManager->ResetAll();
 		}
 	}
 
