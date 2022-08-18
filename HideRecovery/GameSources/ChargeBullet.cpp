@@ -40,10 +40,21 @@ namespace basecross {
 			return;
 		}
 
+		if (!Online::OnlineManager::GetLocalPlayer().getIsMasterClient())
+		{
+			return;
+		}
+
 		auto player = other->GetComponent<PlayerStatus>(false);
 		//ダメージを与える。
-		if (player && Online::OnlineManager::GetLocalPlayer().getIsMasterClient()) {
+		if (player)
+		{
 			player->AddDamage(DamageData(1, GetOwner()));
+		}
+
+		for (auto& destroyEventFunc : m_destroyEventFuncs)
+		{
+			destroyEventFunc(GetGameObject());
 		}
 
 		//自分自身を削除
