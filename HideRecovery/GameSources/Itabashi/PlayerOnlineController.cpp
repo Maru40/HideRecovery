@@ -410,6 +410,13 @@ namespace Online
 			return;
 		}
 
+		auto playerStatus = m_playerStatus.lock();
+
+		if (playerStatus->IsDead())
+		{
+			return;
+		}
+
 		Move();
 
 		TryAquisition();
