@@ -850,6 +850,9 @@
     <Filter Include="Watanabe\UI\Numbers">
       <UniqueIdentifier>{836206bd-eab5-4746-88f2-7de19e53e09c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\UI\SpriteDataManager">
+      <UniqueIdentifier>{61313965-a2c9-4caf-b51e-88efb28c78df}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1566,6 +1569,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\Numbers.h">
       <Filter>Watanabe\UI\Numbers</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\SpriteDataManager.h">
+      <Filter>Watanabe\UI\SpriteDataManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2200,6 +2206,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\Numbers.cpp">
       <Filter>Watanabe\UI\Numbers</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\SpriteDataManager.cpp">
+      <Filter>Watanabe\UI\SpriteDataManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

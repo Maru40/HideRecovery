@@ -244,6 +244,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\RackObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\WatanabeStage.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\Numbers.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\SpriteDataManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\AdvMeshUtil.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\BaseSingleton.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\CSVLoad.h" />
@@ -462,6 +463,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\RackObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\WatanabeStage.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\Numbers.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\SpriteDataManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Utility\AdvMeshUtil.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Utility\CSVLoad.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Utility\Utility.cpp" />
