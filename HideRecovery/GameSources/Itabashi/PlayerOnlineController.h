@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "OnlineManager.h"
+#include <unordered_map>
 
 namespace basecross
 {
@@ -10,6 +11,7 @@ namespace basecross
 	class ChargeGun;
 	class PlayerStatus;
 	class TackleAttack;
+	class ChargeBullet;
 
 	struct DamageData;
 
@@ -47,6 +49,7 @@ namespace Online
 		static constexpr std::uint8_t EXECUTE_SHOT_EVENT_CODE = 7;
 		static constexpr std::uint8_t EXECUTE_DAMAGE_EVENT_CODE = 8;
 		static constexpr std::uint8_t EXECUTE_TACKLE_EVENT_CODE = 9;
+		static constexpr std::uint8_t EXECUTE_BULLET_DESTROY_EVENT_CODE = 11;
 
 	private:
 
@@ -79,6 +82,8 @@ namespace Online
 
 		int m_gamePlayerNumber = 0;
 
+		std::unordered_map<int, std::shared_ptr<ChargeBullet>> m_chargeBulletMap;
+
 		Vec3 m_beforeMoveVector = Vec3();
 
 		std::shared_ptr<PlayerOnlineController> GetPlayerOnlineController(int playerNumber) const;
@@ -101,7 +106,11 @@ namespace Online
 
 		void Shot();
 
-		void ExecuteShot(int playerNumber, const Vec3& bulletPosition, const Vec3& bulletDirection);
+		void ExecuteShot(int playerNumber, const Vec3& bulletPosition, const Vec3& bulletDirection, int instanceId);
+
+		void BulletDestroyed(const std::shared_ptr<GameObject>& destroyedGameObject);
+
+		void ExecuteBulletDestroyEvent(int bulletInstanceId);
 
 		void Damaged(const std::shared_ptr<PlayerStatus>& playerStatus, const DamageData& damageData);
 
@@ -110,6 +119,8 @@ namespace Online
 		void TryTackle();
 
 		void ExecuteTackle(int playerNumber);
+
+		int CreateInstanceId() const;
 
 	public:
 

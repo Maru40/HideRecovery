@@ -1,7 +1,7 @@
-/*!
+ï»¿/*!
 @file ChargeBullet.h
-@brief ChargeBullet‚È‚Ç
-’S“–FŠÛR—TŠì
+@brief ChargeBulletãªã©
+æ‹…å½“ï¼šä¸¸å±±è£•å–œ
 */
 
 #pragma once
@@ -12,15 +12,19 @@
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
-	///	‘O•ûéŒ¾
+	///	å‰æ–¹å®£è¨€
 	//--------------------------------------------------------------------------------------
 	struct CollisionPair;
 
 	//--------------------------------------------------------------------------------------
-	///	ƒ`ƒƒ[ƒW’e
+	///	ãƒãƒ£ãƒ¼ã‚¸å¼¾
 	//--------------------------------------------------------------------------------------
 	class ChargeBullet : public BulletBase
 	{
+		std::vector<std::function<void(const std::shared_ptr<GameObject>&)>> m_destroyEventFuncs;
+
+		int m_instanceId = -1;
+
 	public:
 		ChargeBullet(const std::shared_ptr<GameObject>& objPtr);
 
@@ -29,6 +33,15 @@ namespace basecross {
 		void Shot(const std::shared_ptr<GameObject>& owner, const Vec3& direct) override;
 
 		void OnCollisionEnter(const CollisionPair& pair) override;
+
+		void AddDestroyEventFunc(const std::function<void(const std::shared_ptr<GameObject>&)>& destroyEventFunc)
+		{
+			m_destroyEventFuncs.push_back(destroyEventFunc);
+		}
+		
+		void SetInstanceId(int instanceId) { m_instanceId = instanceId; }
+
+		int GetInstanceId() const { return m_instanceId; }
 	};
 
 }
