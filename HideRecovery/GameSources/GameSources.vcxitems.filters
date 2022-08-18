@@ -859,6 +859,9 @@
     <Filter Include="Watanabe\UI\SimpleSprite">
       <UniqueIdentifier>{cbb30077-a9d6-453d-8cac-567a7bc4bd0d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\UI\GameStartUI">
+      <UniqueIdentifier>{ef13040a-724c-48d3-af61-80c192abe0f0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1584,6 +1587,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\SimpleSprite.h">
       <Filter>Watanabe\UI\SimpleSprite</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\GameStartUI.h">
+      <Filter>Watanabe\UI\GameStartUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2227,6 +2233,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\SimpleSprite.cpp">
       <Filter>Watanabe\UI\SimpleSprite</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\GameStartUI.cpp">
+      <Filter>Watanabe\UI\GameStartUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
