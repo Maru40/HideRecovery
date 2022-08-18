@@ -243,6 +243,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\PlayerSpawnPoint.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\RackObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\WatanabeStage.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\CountDownUI.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\Numbers.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\SpriteDataManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\AdvMeshUtil.h" />
@@ -462,6 +463,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\PlayerSpawnPoint.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\RackObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\WatanabeStage.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\CountDownUI.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\Numbers.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\SpriteDataManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Utility\AdvMeshUtil.cpp" />

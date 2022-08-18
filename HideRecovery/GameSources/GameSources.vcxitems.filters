@@ -853,6 +853,9 @@
     <Filter Include="Watanabe\UI\SpriteDataManager">
       <UniqueIdentifier>{61313965-a2c9-4caf-b51e-88efb28c78df}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\UI\CountDownUI">
+      <UniqueIdentifier>{12bc70fa-39b8-4d37-a860-cafacffd7d9d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1572,6 +1575,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\SpriteDataManager.h">
       <Filter>Watanabe\UI\SpriteDataManager</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\CountDownUI.h">
+      <Filter>Watanabe\UI\CountDownUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2209,6 +2215,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\SpriteDataManager.cpp">
       <Filter>Watanabe\UI\SpriteDataManager</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\CountDownUI.cpp">
+      <Filter>Watanabe\UI\CountDownUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
