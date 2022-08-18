@@ -176,7 +176,7 @@ namespace Online
 		/// 部屋情報の取得
 		/// </summary>
 		/// <returns>部屋情報</returns>
-		static const ExitGames::LoadBalancing::MutableRoom& GetCurrentlyJoinedRoom() { return GetInstance()->m_client->getCurrentlyJoinedRoom(); }
+		static ExitGames::LoadBalancing::MutableRoom& GetCurrentlyJoinedRoom() { return GetInstance()->m_client->getCurrentlyJoinedRoom(); }
 		/// <summary>
 		/// Photon用のアプリケーションIdの設定
 		/// </summary>
