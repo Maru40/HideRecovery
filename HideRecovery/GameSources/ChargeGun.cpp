@@ -16,6 +16,7 @@
 #include "PlayerInputer.h"
 
 #include "Watanabe/Component/PlayerAnimator.h"
+#include "SoundManager.h"
 
 namespace basecross {
 
@@ -50,6 +51,11 @@ namespace basecross {
 
 	std::shared_ptr<ChargeBulletObject> ChargeGun::Shot(const Vec3& direct) {
 		RevisionShotDirection();
+
+		if (auto soundManager = SoundManager::GetInstance()) {
+			constexpr float Volume = 0.1f;
+			soundManager->PlayOneShot(SoundManager::ID::ShotSE, Volume);
+		}
 
 		Vec3 instancePosition = transform->GetPosition() + GetBulletInstanceOffset();
 		auto bulletObject = InstantiateBullet(instancePosition, transform->GetQuaternion());
