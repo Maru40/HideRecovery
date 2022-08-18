@@ -91,8 +91,8 @@ namespace basecross {
 		builder.Register<RackObject>(L"Rack");
 		builder.Register<HideItemObject>(L"HideItem");
 		builder.Register<PlayerSpawnPointObject>(L"PlayerSpawnPoint");
-		builder.Register<OwnAreaObject>(L"OwnArea");
 		builder.Register<GoalObject>(L"Goal");
+		builder.Register<OwnAreaObject>(L"OwnArea");
 		auto dir = App::GetApp()->GetDataDirWString();
 		auto path = dir + L"MapDatas/";
 		builder.Build(GetThis<Stage>(), path + fileName);
