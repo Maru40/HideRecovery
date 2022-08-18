@@ -11,6 +11,7 @@
 #include "OwnArea.h"
 
 #include "Maruyama/Interface/I_TeamMember.h"
+#include "Maruyama/StageObject/Goal.h"
 
 #include "MaruUtility.h"
 
@@ -36,6 +37,26 @@ namespace basecross {
 
 	void OwnArea::OnCreate() {
 		
+	}
+
+	void OwnArea::OnLateStart() {
+		SettingGoal();
+	}
+
+	void OwnArea::SettingGoal() {
+		//仮で一番近いゴールをチームに設定。
+		float minRange = FLT_MAX;
+		std::shared_ptr<Goal> nearGoal;
+		auto goals = maru::Utility::FindComponents<Goal>(GetStage());
+		for (auto& goal : goals) {
+			auto toVec = maru::Utility::CalcuToTargetVec(goal->GetGameObject(), GetGameObject());
+			if (toVec.length() < minRange) {
+				minRange = toVec.length();
+				nearGoal = goal;
+			}
+		}
+
+		nearGoal->SetTeam(GetTeam());
 	}
 
 	bool OwnArea::IsInArea(const std::shared_ptr<I_TeamMember>& member) {
