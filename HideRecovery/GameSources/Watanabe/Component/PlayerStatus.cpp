@@ -23,6 +23,10 @@ namespace basecross {
 	}
 
 	void PlayerStatus::AddDamage(const DamageData& damage) {
+		if (IsDead()) {
+			return;
+		}
+
 		m_status.hp -= damage.value;
 
 		// 念のため0にクランプ
