@@ -100,7 +100,7 @@ namespace basecross {
 			return;
 		}
 
-		SuccessGoar(pair);
+		SuccessGoal(pair);
 	}
 }
 
