@@ -19,6 +19,7 @@ namespace basecross {
 	template<class T>
 	class TaskList;
 
+	class PlayerStatus;
 	class PlayerAnimator;
 	class VelocityManager;
 	class GameTimer;
@@ -36,6 +37,7 @@ namespace basecross {
 		};
 
 		std::unique_ptr<TaskList<TaskEnum>> m_taskList;
+		std::weak_ptr<PlayerStatus> m_status;
 
 	public:
 		TackleAttack(const std::shared_ptr<GameObject>& objPtr);
@@ -43,6 +45,7 @@ namespace basecross {
 		virtual ~TackleAttack() = default;
 
 		void OnCreate() override;
+		void OnLateStart() override;
 		void OnUpdate() override;
 
 	private:
