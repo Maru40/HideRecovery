@@ -132,6 +132,8 @@ namespace basecross
 		//ModelResourceLoadData(L"Player_Mesh",  L"Player_Mesh.bmf", ModelType::BoneMulti,  L"Player\\"),
 
 		ModelResourceLoadData(L"rack",  L"tana.bmf", ModelType::Static,  L"StageObject\\"),
+		ModelResourceLoadData(L"Goal",  L"Goal.bmf", ModelType::StaticMulti,  L"StageObject\\"),
+		
 	};
 
 	LoadStage::LoadStage(const std::wstring& nextStageKey) :
