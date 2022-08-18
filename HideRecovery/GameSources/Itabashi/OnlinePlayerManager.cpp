@@ -62,18 +62,17 @@ namespace Online
 		return playerObjects;
 	}
 
-	std::shared_ptr<PlayerObject> OnlinePlayerManager::CreatePlayerObject(int playerNumber, const Vec3& position)
+	std::shared_ptr<PlayerObject> OnlinePlayerManager::CreatePlayerObject(int playerNumber)
 	{
 		std::shared_ptr<PlayerObject> playerObject = GetStage()->AddGameObject<VillainPlayerObject>();
-
-		auto transform = playerObject->GetComponent<Transform>();
-		transform->SetPosition(position);
 
 		auto onlineController = playerObject->GetComponent<PlayerOnlineController>();
 		onlineController->SetPlayerNumber(playerNumber);
 
 		auto onlineTransform = playerObject->GetComponent<OnlineTransformSynchronization>();
 		onlineTransform->SetPlayerNumber(playerNumber);
+
+		std::shared_ptr<PlayerSpawnPoint> spawnPoint;
 
 		for (int i = 0; i < MAX_PLAYER_NUM; ++i)
 		{
@@ -82,12 +81,16 @@ namespace Online
 				onlineController->SetGamePlayerNumber(i);
 
 				auto respawner = playerObject->GetComponent<Respawner>();
-				respawner->SetSpawnPoint(GetSpawmPoint(i));
+				spawnPoint = GetSpawmPoint(i);
+				respawner->SetSpawnPoint(spawnPoint);
 
 				m_numberUses[i] = true;
 				break;
 			}
 		}
+
+		auto transform = playerObject->GetComponent<Transform>();
+		transform->SetPosition(spawnPoint->GetWorldPosition());
 
 		if (playerNumber != OnlineManager::GetLocalPlayer().getNumber())
 		{
@@ -114,7 +117,7 @@ namespace Online
 
 			if (find == players.end())
 			{
-				auto playerObject = CreatePlayerObject(number, Vec3(20, 1, 0));
+				auto playerObject = CreatePlayerObject(number);
 				m_players.push_back(playerObject);
 			}
 		}

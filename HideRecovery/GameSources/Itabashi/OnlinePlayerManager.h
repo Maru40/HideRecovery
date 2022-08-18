@@ -39,9 +39,8 @@ namespace Online
 		/// プレイヤーオブジェクトの生成
 		/// </summary>
 		/// <param name="playerNumber">プレイヤー番号</param>
-		/// <param name="position">生成する座標</param>
 		/// <returns></returns>
-		std::shared_ptr<PlayerObject> CreatePlayerObject(int playerNumber, const Vec3& position);
+		std::shared_ptr<PlayerObject> CreatePlayerObject(int playerNumber);
 	public:
 
 		OnlinePlayerManager(const std::shared_ptr<GameObject>& owner);
