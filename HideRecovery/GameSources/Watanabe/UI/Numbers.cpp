@@ -20,19 +20,20 @@ namespace basecross {
 			Vec2((fnumber + 1) * size.x,size.y)
 		};
 		Utility::ConvertToUVCoordinates(uv, data.useTextureKey, uv01);
+		auto halfSize = size / 2.0f;
 		Col4 color(1);
 		vertices = {
-			{Vec3(0.0f     ,    0.0f, 0.0f), color, uv01[0]},
-			{Vec3(size.x,    0.0f, 0.0f), color, uv01[1]},
-			{Vec3(0.0f     , -size.y, 0.0f), color, uv01[2]},
-			{Vec3(size.x, -size.y, 0.0f), color, uv01[3]}
+			{Vec3(-halfSize.x, +halfSize.y, 0.0f), color, uv01[0]},
+			{Vec3(+halfSize.x, +halfSize.y, 0.0f), color, uv01[1]},
+			{Vec3(-halfSize.x, -halfSize.y, 0.0f), color, uv01[2]},
+			{Vec3(+halfSize.x, -halfSize.y, 0.0f), color, uv01[3]}
 		};
 		std::vector<uint16_t> indices = {
 			0, 1, 2,
 			2, 1, 3
 		};
-		auto drawComp = AddComponent<PCTSpriteDraw>(vertices, indices);
-		drawComp->SetTextureResource(data.useTextureKey);
+		m_spriteDraw = AddComponent<PCTSpriteDraw>(vertices, indices);
+		m_spriteDraw.lock()->SetTextureResource(data.useTextureKey);
 
 		SetAlphaActive(true);
 	}
@@ -49,15 +50,13 @@ namespace basecross {
 			Vec2((fnumber + 1) * size.x,size.y)
 		};
 		Utility::ConvertToUVCoordinates(uv, data.useTextureKey, uv01);
+		auto halfSize = size / 2.0f;
 		Col4 color(1);
-		vertices = {
-			{Vec3(0.0f     ,    0.0f, 0.0f), color, uv01[0]},
-			{Vec3(size.x,    0.0f, 0.0f), color, uv01[1]},
-			{Vec3(0.0f     , -size.y, 0.0f), color, uv01[2]},
-			{Vec3(size.x, -size.y, 0.0f), color, uv01[3]}
-		};
+		for (int i = 0; i < vertices.size(); i++) {
+			vertices[i].textureCoordinate = uv01[i];
+		}
 
-		GetComponent<PCTSpriteDraw>()->UpdateVertices(vertices);
+		m_spriteDraw.lock()->UpdateVertices(vertices);
 	}
 
 	Numbers::Numbers(const shared_ptr<Stage>& stage)
