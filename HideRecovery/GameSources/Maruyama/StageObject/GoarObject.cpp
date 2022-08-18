@@ -14,27 +14,27 @@
 
 namespace basecross {
 
-	GoarObject::GoarObject(const shared_ptr<Stage>& stage) :
+	GoalObject::GoalObject(const shared_ptr<Stage>& stage) :
 		StageObjectBase(stage, L"Goar")
 	{}
 
-	GoarObject::GoarObject(const shared_ptr<Stage>& stage, const wstring& line) :
+	GoalObject::GoalObject(const shared_ptr<Stage>& stage, const wstring& line) :
 		StageObjectBase(stage, L"Goar")
 	{
 		vector<wstring> tokens = DataExtracter::DelimitData(line);
 		DataExtracter::TransformDataExtraction(tokens, m_transformData);
 	}
 
-	void GoarObject::OnCreate() {
+	void GoalObject::OnCreate() {
 		SettingModel();
 
-		AddComponent<Goar>(Goar::Parametor(Team::West));
+		AddComponent<Goal>(Goal::Parametor(Team::West));
 
 		auto collision = AddComponent<CollisionObb>();
 		collision->SetAfterCollision(AfterCollision::None);
 	}
 
-	void GoarObject::SettingModel() {
+	void GoalObject::SettingModel() {
 		auto draw = AddComponent<PNTStaticDraw>();
 
 		draw->SetMeshResource(L"DEFAULT_SPHERE");

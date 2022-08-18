@@ -92,7 +92,7 @@ namespace basecross {
 		builder.Register<HideItemObject>(L"HideItem");
 		builder.Register<PlayerSpawnPointObject>(L"PlayerSpawnPoint");
 		builder.Register<OwnAreaObject>(L"OwnArea");
-		builder.Register<GoarObject>(L"Goar");
+		builder.Register<GoalObject>(L"Goal");
 		auto dir = App::GetApp()->GetDataDirWString();
 		auto path = dir + L"MapDatas/";
 		builder.Build(GetThis<Stage>(), path + fileName);
