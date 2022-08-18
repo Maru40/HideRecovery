@@ -23,6 +23,8 @@ namespace basecross {
 			GunEnd2,
 			DAStart,
 			DAttack,
+			Dead,
+			GSDead,
 		};
 
 		wstring static PlayerAnimationState2wstring(const PlayerAnimationState::State& state) {
@@ -64,10 +66,15 @@ namespace basecross {
 				return L"DAStart";
 			case PlayerAnimationState::State::DAttack:
 				return L"DAttack";
+			case PlayerAnimationState::State::Dead:
+				return L"Dead";
+			case PlayerAnimationState::State::GSDead:
+				return L"GSDead";
 
 			default:
 				break;
 			}
+			return L"";
 		}
 	};
 }
