@@ -11,6 +11,11 @@
 #include "Maruyama/Player/Component/PlayerSpawnPoint.h"
 #include "Maruyama/Player/Component/Respawner.h"
 
+#include "Maruyama/Interface/I_TeamMember.h"
+#include "Maruyama/Player/Component/OwnArea.h"
+
+#include "MaruUtility.h"
+
 namespace basecross
 {
 namespace Online
@@ -74,6 +79,8 @@ namespace Online
 
 		std::shared_ptr<PlayerSpawnPoint> spawnPoint;
 
+		auto areas = maru::Utility::FindComponents<OwnArea>(GetStage());
+
 		for (int i = 0; i < MAX_PLAYER_NUM; ++i)
 		{
 			if (!m_numberUses[i])
@@ -83,6 +90,18 @@ namespace Online
 				auto respawner = playerObject->GetComponent<Respawner>();
 				spawnPoint = GetSpawmPoint(i);
 				respawner->SetSpawnPoint(spawnPoint);
+
+				//チームメンバーにチームを割り当てる。
+				if (auto teamMember = playerObject->GetComponent<I_TeamMember>(false)) {
+					auto team = spawnPoint->GetTeam();
+					teamMember->SetTeam(team);
+					for (auto& area : areas) {
+						if (area->GetTeam() == team) {
+							teamMember->SetOwnArea(area);
+							break;
+						}
+					}
+				}
 
 				m_numberUses[i] = true;
 				break;
