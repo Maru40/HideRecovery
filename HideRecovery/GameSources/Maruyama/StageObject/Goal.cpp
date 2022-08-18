@@ -9,7 +9,7 @@
 #include "stdafx.h"
 #include "Project.h"
 
-#include "Goar.h"
+#include "Goal.h"
 
 #include "ItemBag.h"
 #include "Maruyama/Interface/I_TeamMember.h"

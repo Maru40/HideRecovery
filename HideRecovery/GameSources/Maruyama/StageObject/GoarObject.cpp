@@ -10,7 +10,7 @@
 #include "Watanabe/Utility/DataExtracter.h"
 #include "Watanabe/Utility/AdvMeshUtil.h"
 
-#include "Goar.h"
+#include "Goal.h"
 
 namespace basecross {
 
