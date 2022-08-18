@@ -12,9 +12,6 @@ namespace basecross {
 		weak_ptr<PCTSpriteDraw> m_spriteDraw;
 		Type m_type;
 		wstring m_key;
-
-		void SetupTexture();
-		void SetupSpriteData();
 	public:
 		SimpleSprite(const shared_ptr<Stage>& stage, Type type, const wstring& key);
 

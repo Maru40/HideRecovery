@@ -28,7 +28,7 @@ namespace basecross {
 			{Vec3(-halfSize.x, -halfSize.y, 0.0f), color, uv01[2]},
 			{Vec3(+halfSize.x, -halfSize.y, 0.0f), color, uv01[3]}
 		};
-		std::vector<uint16_t> indices = {
+		vector<uint16_t> indices = {
 			0, 1, 2,
 			2, 1, 3
 		};

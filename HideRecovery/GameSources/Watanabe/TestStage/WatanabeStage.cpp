@@ -25,6 +25,7 @@
 #include "PlayerAnimationCtrl.h"
 #include "../UI/Numbers.h"
 #include "../UI/CountDownUI.h"
+#include "../UI/SimpleSprite.h"
 
 namespace basecross {
 	void WatanabeStage::CreateViewLight() {
@@ -109,6 +110,8 @@ namespace basecross {
 		coun->SetScale(2);
 		coun->SetColor(Col4(1, 1, 0, 1));
 		coun->Start();
+
+		AddGameObject<SimpleSprite>(SimpleSprite::Type::SpriteData, L"Numbers");
 	}
 
 	void WatanabeStage::OnUpdate() {
