@@ -1,6 +1,6 @@
 /*!
-@file   Block.cpp
-@brief  ステージを構成するブロッククラス実体
+@file   GoarObject.cpp
+@brief  GoarObject実体
 */
 
 #include "stdafx.h"

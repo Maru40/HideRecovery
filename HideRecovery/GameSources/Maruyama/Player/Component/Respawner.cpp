@@ -16,6 +16,7 @@
 #include "GameTimer.h"
 
 #include "Watanabe/Component/PlayerStatus.h"
+#include "Watanabe/Component/PlayerAnimator.h"
 
 #include "MaruUtility.h"
 
@@ -56,8 +57,13 @@ namespace basecross {
 
 	void Respawner::Respawn() {
 		transform->SetPosition(GetSpawnPoint()->GetWorldPosition());
+
 		if (auto status = GetGameObject()->GetComponent<PlayerStatus>(false)) {
 			status->Respawn();
+		}
+
+		if (auto animator = GetGameObject()->GetComponent<PlayerAnimator>(false)) {
+			animator->ChangePlayerAnimation(PlayerAnimationState::State::Wait);
 		}
 	}
 

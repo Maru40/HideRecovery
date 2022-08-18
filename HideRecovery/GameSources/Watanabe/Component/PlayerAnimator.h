@@ -11,8 +11,23 @@
 namespace basecross {
 	class VelocityManager;
 
+	struct TransitionData {
+		std::function<bool()> isTransition;				//遷移条件
+		PlayerAnimationState::State transitionState;	//遷移したいステート
+
+		TransitionData() :
+			TransitionData(nullptr, PlayerAnimationState::State(0))
+		{}
+
+		TransitionData(const std::function<bool()>& isTransition, const PlayerAnimationState::State& state) :
+			isTransition(isTransition), transitionState(state)
+		{}
+	};
+
 	class PlayerAnimator :public Animator {
 		std::weak_ptr<VelocityManager> m_velocityManager;
+
+		std::unordered_map<wstring, TransitionData> m_transitionDataMap;
 
 	public:
 		PlayerAnimator(const shared_ptr<GameObject>& owner);
@@ -20,6 +35,10 @@ namespace basecross {
 		void OnLateStart() override;
 		void OnUpdate() override;
 
+	private:
+		void Transition();
+
+	public:
 		/// <summary>
 		/// アニメーションの変更
 		/// </summary>

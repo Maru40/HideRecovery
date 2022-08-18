@@ -31,7 +31,8 @@ namespace basecross {
 		using Parametor = PlayerDeader_Parametor;
 
 	private:
-		std::weak_ptr<PlayerAnimator> m_animator;
+		std::weak_ptr<PlayerAnimator> m_animator;	//アニメーター
+		std::function<void()> m_updateFunction;		//更新処理
 
 	public:
 		PlayerDeader(const std::shared_ptr<GameObject>& objPtr);
