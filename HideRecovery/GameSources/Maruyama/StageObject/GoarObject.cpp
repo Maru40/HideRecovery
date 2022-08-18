@@ -28,7 +28,10 @@ namespace basecross {
 	void GoarObject::OnCreate() {
 		SettingModel();
 
-		AddComponent<Goar>();
+		AddComponent<Goar>(Goar::Parametor(Team::West));
+
+		auto collision = AddComponent<CollisionObb>();
+		collision->SetAfterCollision(AfterCollision::None);
 	}
 
 	void GoarObject::SettingModel() {
