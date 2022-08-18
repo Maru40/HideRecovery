@@ -47,7 +47,7 @@ namespace basecross {
 		/// ƒS[ƒ‹¬Œ÷
 		/// </summary>
 		/// <param name="pair">ƒS[ƒ‹‚ğ‚µ‚½l</param>
-		void SuccessGoar(const CollisionPair& pair);
+		void SuccessGoal(const CollisionPair& pair);
 
 		/// <summary>
 		/// “–‚½‚è”»’è‚ğ‚Æ‚é‚©‚Ç‚¤‚©
