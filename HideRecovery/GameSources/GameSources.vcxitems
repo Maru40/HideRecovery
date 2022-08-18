@@ -56,6 +56,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\PlayerDeader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\PlayerSpawnPoint.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\Respawner.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\Teleport.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\UseOwnArea.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\StageObject\Goar.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\StageObject\GoarObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)OccupancyManager.h" />
@@ -313,6 +315,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\PlayerDeader.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\PlayerSpawnPoint.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\Respawner.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\Teleport.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\UseOwnArea.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\StageObject\Goar.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\StageObject\GoarObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)OccupancyManager.cpp" />
