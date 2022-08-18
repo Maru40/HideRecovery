@@ -265,6 +265,7 @@ namespace basecross
 
 		loadThread.detach();
 
+		// CSVファイルの読み込み（できれば関数で分けたい）
 		wstring mediaDir;
 		mediaDir = App::GetApp()->GetDataDirWString();
 		wstring dir = mediaDir + L"Models/";

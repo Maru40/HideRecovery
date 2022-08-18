@@ -1,6 +1,7 @@
 ﻿#include "stdafx.h"
 #include "Numbers.h"
 #include "../Utility/Utility.h"
+#include "SpriteDataManager.h"
 
 namespace basecross {
 	NumberSprite::NumberSprite(const shared_ptr<Stage>& stage)
@@ -8,50 +9,52 @@ namespace basecross {
 	{}
 
 	void NumberSprite::OnCreate() {
-		const wstring TextureKey = L"Numbers_TX";
+		auto data = SpriteDataManager::GetInstance()->GetSpriteData(L"Numbers");
 
-		float fontwidth = 102.0f;
+		Vec2 size = data.size;
 		float fnumber = static_cast<float>(m_number);
 		vector<Vec2> uv01, uv = {
-			Vec2((fnumber + 0) * fontwidth,0.0f),
-			Vec2((fnumber + 1) * fontwidth,0.0f),
-			Vec2((fnumber + 0) * fontwidth,64.0f),
-			Vec2((fnumber + 1) * fontwidth,64.0f)
+			Vec2((fnumber + 0) * size.x,0.0f),
+			Vec2((fnumber + 1) * size.x,0.0f),
+			Vec2((fnumber + 0) * size.x,size.y),
+			Vec2((fnumber + 1) * size.x,size.y)
 		};
-		Utility::ConvertToUVCoordinates(uv, TextureKey, uv01);
+		Utility::ConvertToUVCoordinates(uv, data.useTextureKey, uv01);
 		Col4 color(1);
 		vertices = {
 			{Vec3(0.0f     ,    0.0f, 0.0f), color, uv01[0]},
-			{Vec3(fontwidth,    0.0f, 0.0f), color, uv01[1]},
-			{Vec3(0.0f     , -100.0f, 0.0f), color, uv01[2]},
-			{Vec3(fontwidth, -100.0f, 0.0f), color, uv01[3]}
+			{Vec3(size.x,    0.0f, 0.0f), color, uv01[1]},
+			{Vec3(0.0f     , -size.y, 0.0f), color, uv01[2]},
+			{Vec3(size.x, -size.y, 0.0f), color, uv01[3]}
 		};
 		std::vector<uint16_t> indices = {
 			0, 1, 2,
 			2, 1, 3
 		};
 		auto drawComp = AddComponent<PCTSpriteDraw>(vertices, indices);
-		drawComp->SetTextureResource(TextureKey);
+		drawComp->SetTextureResource(data.useTextureKey);
 
 		SetAlphaActive(true);
 	}
 
 	void NumberSprite::SetValue(int number) {
-		float fontwidth = 102.0f;
+		auto data = SpriteDataManager::GetInstance()->GetSpriteData(L"Numbers");
+		m_number = number;
+		Vec2 size = data.size;
 		float fnumber = static_cast<float>(number);
 		vector<Vec2> uv01, uv = {
-			Vec2((fnumber + 0) * fontwidth,0.0f),
-			Vec2((fnumber + 1) * fontwidth,0.0f),
-			Vec2((fnumber + 0) * fontwidth,64.0f),
-			Vec2((fnumber + 1) * fontwidth,64.0f)
+			Vec2((fnumber + 0) * size.x,0.0f),
+			Vec2((fnumber + 1) * size.x,0.0f),
+			Vec2((fnumber + 0) * size.x,size.y),
+			Vec2((fnumber + 1) * size.x,size.y)
 		};
-		Utility::ConvertToUVCoordinates(uv, L"Numbers_TX", uv01);
+		Utility::ConvertToUVCoordinates(uv, data.useTextureKey, uv01);
 		Col4 color(1);
 		vertices = {
 			{Vec3(0.0f     ,    0.0f, 0.0f), color, uv01[0]},
-			{Vec3(fontwidth,    0.0f, 0.0f), color, uv01[1]},
-			{Vec3(0.0f     , -100.0f, 0.0f), color, uv01[2]},
-			{Vec3(fontwidth, -100.0f, 0.0f), color, uv01[3]}
+			{Vec3(size.x,    0.0f, 0.0f), color, uv01[1]},
+			{Vec3(0.0f     , -size.y, 0.0f), color, uv01[2]},
+			{Vec3(size.x, -size.y, 0.0f), color, uv01[3]}
 		};
 
 		GetComponent<PCTSpriteDraw>()->UpdateVertices(vertices);

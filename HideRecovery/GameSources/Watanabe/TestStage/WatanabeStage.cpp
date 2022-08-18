@@ -46,12 +46,7 @@ namespace basecross {
 		AddGameObject<EfkInterface>();
 		AddGameObject<Debug>();
 		Debug::GetInstance()->Log(L"WatanabeStage");
-		{
-			wstring mediaDir;
-			mediaDir = App::GetApp()->GetDataDirWString();
-			wstring dir = mediaDir + L"Models/";
-			CSVLoad::GetInstance()->RegisterFile(L"PlayerAnimation", dir + L"Player/PlayerAnimation.csv");
-		}
+
 		auto testObj = AddGameObject<GameObject>();
 		auto efkComp = testObj->AddComponent<EfkComponent>();
 		efkComp->SetEffectResource(L"TestEffect");
@@ -108,7 +103,7 @@ namespace basecross {
 		auto path = dir + L"MapDatas/";
 		builder.Build(GetThis<Stage>(), path + L"StageS2.csv");
 
-		AddGameObject<NumberSprite>()->SetValue(4);
+		AddGameObject<NumberSprite>()->SetValue(5);
 	}
 
 	void WatanabeStage::OnUpdate() {

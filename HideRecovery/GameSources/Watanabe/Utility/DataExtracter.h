@@ -39,6 +39,23 @@ namespace basecross {
 		};
 
 		/**
+		 * @brief Vector2を抽出
+		 *
+		 * @param tokens 文字列
+		 * @param firstIndex 最初のインデックス（デフォルト：0）
+		 * @return Vector2データ
+		 */
+		static Vec2 Vector2DataExtraction(const vector<wstring>& tokens, size_t firstIndex = 0)
+		{
+			Vec2 vec;
+			vec = Vec2(
+				(float)_wtof(tokens[firstIndex + 0].c_str()),
+				(float)_wtof(tokens[firstIndex + 1].c_str())
+			);
+			return vec;
+		};
+
+		/**
 		 * @brief トランスフォームデータを抽出
 		 *
 		 * @param tokens 文字列
