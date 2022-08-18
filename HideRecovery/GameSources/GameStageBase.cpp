@@ -49,7 +49,7 @@
 #include "Itabashi/OnlineTestRoom.h"
 #include "Itabashi/OnlinePlayerManager.h"
 
-#include "Maruyama/StageObject/GoarObject.h"
+#include "Maruyama/StageObject/GoalObject.h"
 
 namespace basecross {
 	void GameStageBase::CreateMainCamera()

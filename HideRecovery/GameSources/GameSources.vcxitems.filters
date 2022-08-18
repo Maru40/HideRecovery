@@ -1602,7 +1602,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\StageObject\Goal.h">
       <Filter>Maruyama\StageObject\GoalObject\Component</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\StageObject\GoarObject.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\StageObject\GoalObject.h">
       <Filter>Maruyama\StageObject\GoalObject</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\UseOwnArea.h">
@@ -2261,7 +2261,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\StageObject\Goal.cpp">
       <Filter>Maruyama\StageObject\GoalObject\Component</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\StageObject\GoarObject.cpp">
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\StageObject\GoalObject.cpp">
       <Filter>Maruyama\StageObject\GoalObject</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\UseOwnArea.cpp">

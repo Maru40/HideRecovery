@@ -5,7 +5,7 @@
 
 #include "stdafx.h"
 
-#include "GoarObject.h"
+#include "GoalObject.h"
 
 #include "Watanabe/Utility/DataExtracter.h"
 #include "Watanabe/Utility/AdvMeshUtil.h"
