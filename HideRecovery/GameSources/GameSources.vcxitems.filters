@@ -880,6 +880,9 @@
     <Filter Include="Maruyama\StageObject\GoalObject\Component">
       <UniqueIdentifier>{aee89945-4d3a-4402-a8bf-813411de8856}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Player\Component\UseWepon">
+      <UniqueIdentifier>{38306d85-3742-4018-9700-889e103e9207}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1629,6 +1632,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageTransitioner.h">
       <Filter>Itabashi\Component\MatchStageTransitioner</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\UseWepon.h">
+      <Filter>Maruyama\Player\Component\UseWepon</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2296,6 +2302,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageTransitioner.cpp">
       <Filter>Itabashi\Component\MatchStageTransitioner</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\UseWepon.cpp">
+      <Filter>Maruyama\Player\Component\UseWepon</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
