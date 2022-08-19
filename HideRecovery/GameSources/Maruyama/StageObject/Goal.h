@@ -1,23 +1,24 @@
-/*!
+ï»¿/*!
 @file Goal.h
-@brief GoalƒNƒ‰ƒX
-’S“–FŠÛR—TŠì
+@brief Goalã‚¯ãƒ©ã‚¹
+æ‹…å½“ï¼šä¸¸å±±è£•å–œ
 */
 
 #pragma once
 #include "stdafx.h"
 
 #include "Watanabe/StageObject/PlayerSpawnPointObject.h"
+#include "Itabashi/OnlineManager.h"
 
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
-	/// ‘O•ûéŒ¾
+	/// å‰æ–¹å®£è¨€
 	//--------------------------------------------------------------------------------------
 	struct CollisionPair;
 
 	//--------------------------------------------------------------------------------------
-	/// ƒS[ƒ‹ŠÇ—ƒNƒ‰ƒX‚Ìƒpƒ‰ƒ[ƒ^
+	/// ã‚´ãƒ¼ãƒ«ç®¡ç†ã‚¯ãƒ©ã‚¹ã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
 	//--------------------------------------------------------------------------------------
 	struct Goal_Parametor {
 		Team team;
@@ -26,12 +27,13 @@ namespace basecross {
 	};
 
 	//--------------------------------------------------------------------------------------
-	/// ƒS[ƒ‹ŠÇ—ƒNƒ‰ƒX
+	/// ã‚´ãƒ¼ãƒ«ç®¡ç†ã‚¯ãƒ©ã‚¹
 	//--------------------------------------------------------------------------------------
-	class Goal : public Component
+	class Goal : public Online::OnlineComponent
 	{
 	public:
 		using Parametor = Goal_Parametor;
+		static constexpr std::uint8_t EXECUTE_GOAL_EVENT_CODE = 30;
 
 	private:
 		Parametor m_param;
@@ -44,36 +46,40 @@ namespace basecross {
 
 	private:
 		/// <summary>
-		/// ƒS[ƒ‹¬Œ÷
+		/// ã‚´ãƒ¼ãƒ«æˆåŠŸ
 		/// </summary>
-		/// <param name="pair">ƒS[ƒ‹‚ğ‚µ‚½l</param>
+		/// <param name="pair">ã‚´ãƒ¼ãƒ«ã‚’ã—ãŸäºº</param>
 		void SuccessGoal(const CollisionPair& pair);
 
+		void SuccessGoal(Team team, int playerNumber, int itemId, const Vec3& hidePosition);
+
 		/// <summary>
-		/// “–‚½‚è”»’è‚ğ‚Æ‚é‚©‚Ç‚¤‚©
+		/// å½“ãŸã‚Šåˆ¤å®šã‚’ã¨ã‚‹ã‹ã©ã†ã‹
 		/// </summary>
-		/// <param name="pair">“–‚½‚Á‚½‘Šè‚Ìƒf[ƒ^</param>
-		/// <returns>“–‚½‚è”»’è‚ğ‚Æ‚é‚È‚çtrue</returns>
+		/// <param name="pair">å½“ãŸã£ãŸç›¸æ‰‹ã®ãƒ‡ãƒ¼ã‚¿</param>
+		/// <returns>å½“ãŸã‚Šåˆ¤å®šã‚’ã¨ã‚‹ãªã‚‰true</returns>
 		bool IsCollision(const CollisionPair& pair) const;
 
 	public:
 		void OnCollisionEnter(const CollisionPair& pair) override;
 
 		//--------------------------------------------------------------------------------------
-		/// ƒAƒNƒZƒbƒT
+		/// ã‚¢ã‚¯ã‚»ãƒƒã‚µ
 		//--------------------------------------------------------------------------------------
 
 		/// <summary>
-		/// ƒ`[ƒ€ƒ^ƒCƒv‚Ìİ’è
+		/// ãƒãƒ¼ãƒ ã‚¿ã‚¤ãƒ—ã®è¨­å®š
 		/// </summary>
-		/// <param name="team">ƒ`[ƒ€ƒ^ƒCƒv</param>
+		/// <param name="team">ãƒãƒ¼ãƒ ã‚¿ã‚¤ãƒ—</param>
 		void SetTeam(const Team& team) noexcept { m_param.team = team; }
 
 		/// <summary>
-		/// ƒ`[ƒ€ƒ^ƒCƒv‚Ìæ“¾
+		/// ãƒãƒ¼ãƒ ã‚¿ã‚¤ãƒ—ã®å–å¾—
 		/// </summary>
-		/// <returns>ƒ`[ƒ€ƒ^ƒCƒv</returns>
+		/// <returns>ãƒãƒ¼ãƒ ã‚¿ã‚¤ãƒ—</returns>
 		Team GetTeam() const noexcept { return m_param.team; }
+
+		void OnCustomEventAction(int playerNumber, std::uint8_t eventCode, const std::uint8_t* bytes) override;
 
 	};
 
