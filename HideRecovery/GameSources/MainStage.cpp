@@ -60,6 +60,7 @@ using namespace basecross::Enemy;
 namespace basecross {
 	//wstring MainStage::sm_loadMapName = L"StageS1_Copy.csv";
 	wstring MainStage::sm_loadMapName = L"StageS2.csv";
+	//wstring MainStage::sm_loadMapName = L"TestOwnArea.csv";
 
 	void MainStage::CreateViewLight() {
 		CreateStartCamera(sm_loadMapName);

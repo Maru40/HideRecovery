@@ -46,6 +46,8 @@ namespace basecross {
 		m_soundMap[ID::PlayerWalk] = L"PlayerWalk";
 		m_soundMap[ID::PlayerTackle] = L"PlayerTackle";
 		m_soundMap[ID::JettPomp] = L"JettPomp";
+
+		m_soundMap[ID::ShotSE] = L"Shot_SE";
 	}
 
 	void SoundManager::AddSoundItem(const ID& id, const std::shared_ptr<SoundItem>& item) {

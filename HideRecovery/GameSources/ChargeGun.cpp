@@ -16,6 +16,7 @@
 #include "PlayerInputer.h"
 
 #include "Watanabe/Component/PlayerAnimator.h"
+#include "SoundManager.h"
 
 namespace basecross {
 
@@ -42,12 +43,20 @@ namespace basecross {
 			return;
 		}
 
-		if (animator->IsTargetAnimationEnd()) {
+		//アニメーションが終了したら
+		if (animator->IsTargetAnimationEnd()) {	
 			animator->ChangePlayerAnimation(PlayerAnimationState::State::GunEnd2);
 		}
 	}
 
 	std::shared_ptr<ChargeBulletObject> ChargeGun::Shot(const Vec3& direct) {
+		RevisionShotDirection();
+
+		if (auto soundManager = SoundManager::GetInstance()) {
+			constexpr float Volume = 0.1f;
+			soundManager->PlayOneShot(SoundManager::ID::ShotSE, Volume);
+		}
+
 		Vec3 instancePosition = transform->GetPosition() + GetBulletInstanceOffset();
 		auto bulletObject = InstantiateBullet(instancePosition, transform->GetQuaternion());
 		if (auto bullet = bulletObject->GetComponent<ChargeBullet>(false)) {
@@ -69,4 +78,7 @@ namespace basecross {
 		animator->ChangePlayerAnimation(PlayerAnimationState::State::Shot);
 	}
 
+	void ChargeGun::RevisionShotDirection() {
+
+	}
 }

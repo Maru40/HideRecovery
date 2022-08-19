@@ -30,13 +30,20 @@ namespace basecross {
 		std::shared_ptr<ChargeBulletObject> Shot(const Vec3& direct) override;
 
 	private:
-
+		/// <summary>
+		/// アニメーションの更新
+		/// </summary>
 		void UpdateAnimation();
 
 		/// <summary>
 		/// アニメーションの再生
 		/// </summary>
 		void PlayAnimation();
+
+		/// <summary>
+		/// 撃つ方向の修正
+		/// </summary>
+		void RevisionShotDirection();
 	};
 
 }
