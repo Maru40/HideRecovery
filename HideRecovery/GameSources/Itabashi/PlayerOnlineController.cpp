@@ -75,9 +75,9 @@ namespace Online
 
 	}
 
-	std::shared_ptr<PlayerOnlineController> PlayerOnlineController::GetPlayerOnlineController(int playerNumber) const
+	std::shared_ptr<PlayerOnlineController> PlayerOnlineController::GetPlayerOnlineController(int playerNumber)
 	{
-		for (auto& gameObject : GetStage()->GetGameObjectVec())
+		for (auto& gameObject : App::GetApp()->GetScene<Scene>()->GetActiveStage()->GetGameObjectVec())
 		{
 			auto controller = gameObject->GetComponent<PlayerOnlineController>(false);
 
