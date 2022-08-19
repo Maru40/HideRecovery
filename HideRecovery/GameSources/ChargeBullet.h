@@ -34,6 +34,8 @@ namespace basecross {
 
 		void OnCollisionEnter(const CollisionPair& pair) override;
 
+		void OnDestroy() override;
+
 		void AddDestroyEventFunc(const std::function<void(const std::shared_ptr<GameObject>&)>& destroyEventFunc)
 		{
 			m_destroyEventFuncs.push_back(destroyEventFunc);
