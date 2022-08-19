@@ -37,7 +37,7 @@ namespace basecross {
 
 	void GoalObject::SettingModel() {
 		Mat4x4 spanMat;
-		const float fScale = 0.5f;
+		const float fScale = 1.0f;
 		Vec3 scale = Vec3(fScale);
 		spanMat.affineTransformation(
 			scale,
