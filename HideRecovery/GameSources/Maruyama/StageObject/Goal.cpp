@@ -1,8 +1,8 @@
-
+ï»¿
 /*!
 @file Goal.cpp
-@brief GoalƒNƒ‰ƒXÀ‘Ì
-’S“–FŠÛR—TŠì
+@brief Goalã‚¯ãƒ©ã‚¹å®Ÿä½“
+æ‹…å½“ï¼šä¸¸å±±è£•å–œ
 */
 
 
@@ -24,23 +24,42 @@
 #include "MyRandom.h"
 
 #include "Itabashi/ObjectHider.h"
+#include "Itabashi/OnlineManager.h"
+#include "Itabashi/PlayerOnlineController.h"
 
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
-	/// ƒS[ƒ‹ŠÇ—ƒNƒ‰ƒX‚Ìƒpƒ‰ƒ[ƒ^
+	/// ã‚´ãƒ¼ãƒ«ç®¡ç†ã‚¯ãƒ©ã‚¹ã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
 	//--------------------------------------------------------------------------------------
+
+	struct OnlineGoalData
+	{
+		Team team;
+		int playerNumber;
+		int itemId;
+		Vec3 hidePosition;
+
+		OnlineGoalData(Team team,int playerNumber, int itemId,const Vec3& hidePosition) :
+			team(team),
+			playerNumber(playerNumber),
+			itemId(itemId),
+			hidePosition(hidePosition)
+		{
+
+		}
+	};
 
 	Goal_Parametor::Goal_Parametor(const Team& team) :
 		team(team)
 	{}
 
 	//--------------------------------------------------------------------------------------
-	/// ƒS[ƒ‹ŠÇ—ƒNƒ‰ƒX–{‘Ì
+	/// ã‚´ãƒ¼ãƒ«ç®¡ç†ã‚¯ãƒ©ã‚¹æœ¬ä½“
 	//--------------------------------------------------------------------------------------
 
 	Goal::Goal(const std::shared_ptr<GameObject>& objPtr, const Parametor& parametor):
-		Component(objPtr), m_param(parametor)
+		OnlineComponent(objPtr), m_param(parametor)
 	{}
 
 	void Goal::OnCreate() {
@@ -54,20 +73,51 @@ namespace basecross {
 	void Goal::SuccessGoal(const CollisionPair& pair) {
 		auto other = pair.m_Dest.lock()->GetGameObject();
 
-		//ƒ|ƒCƒ“ƒg‰ÁZ
+		//ãƒã‚¤ãƒ³ãƒˆåŠ ç®—
 
 
-		//ƒAƒCƒeƒ€íœ
+		//ã‚¢ã‚¤ãƒ†ãƒ å‰Šé™¤
 		if (auto itemBag = other->GetComponent<ItemBag>(false)) {
 			auto hideItem = itemBag->GetHideItem();
+			auto item = hideItem->GetGameObject()->GetComponent<Item>();
 			itemBag->RemoveItem(hideItem->GetGameObject()->GetComponent<Item>(false));
+			auto onlineController = other->GetComponent<Online::PlayerOnlineController>();
 
-			//ƒAƒCƒeƒ€Ä”z’u
+			//ã‚¢ã‚¤ãƒ†ãƒ å†é…ç½®
 			auto hidePlaces = maru::Utility::FindComponents<HidePlace>();
 			auto hidePlace = maru::MyRandom::RandomArray(hidePlaces);
 			
 			auto hider = hideItem->GetObjectHider();
 			hider->Appear(hidePlace->GetHidePosition());
+
+			auto data = OnlineGoalData(m_param.team, onlineController->GetPlayerNumber(), item->GetItemId(), hidePlace->GetHidePosition());
+			Online::OnlineManager::RaiseEvent(false, (std::uint8_t*)&data, sizeof(OnlineGoalData), EXECUTE_GOAL_EVENT_CODE);
+		}
+
+		Debug::GetInstance()->Log(L"SuccessGoal");
+	}
+
+	void Goal::SuccessGoal(Team team, int playerNumber, int itemId, const Vec3& hidePosition)
+	{
+		if (m_param.team != team)
+		{
+			return;
+		}
+
+		auto onlineController = Online::PlayerOnlineController::GetPlayerOnlineController(playerNumber);
+		auto other = onlineController->GetGameObject();
+
+		//ãƒã‚¤ãƒ³ãƒˆåŠ ç®—
+
+
+		//ã‚¢ã‚¤ãƒ†ãƒ å‰Šé™¤
+		if (auto itemBag = other->GetComponent<ItemBag>(false)) {
+			auto item = itemBag->GetItem(itemId);
+			auto hideItem = item->GetGameObject()->GetComponent<HideItem>();
+			itemBag->RemoveItem(item);
+
+			auto hider = hideItem->GetObjectHider();
+			hider->Appear(hidePosition);
 		}
 
 		Debug::GetInstance()->Log(L"SuccessGoal");
@@ -82,13 +132,18 @@ namespace basecross {
 			return false;
 		}
 
-		//ƒ`[ƒ€ƒ^ƒCƒv‚ª“¯‚¶‚È‚çA“–‚½‚è”»’è‚ğ‚µ‚È‚¢
+		//ãƒãƒ¼ãƒ ã‚¿ã‚¤ãƒ—ãŒåŒã˜ãªã‚‰ã€å½“ãŸã‚Šåˆ¤å®šã‚’ã—ãªã„
 		if (teamMember->GetTeam() == GetTeam()) {
 			return false;
 		}
 
 		auto hideItem = itemBag->GetHideItem();
-		if (!hideItem) {	//‰B‚µƒAƒCƒeƒ€‚ğ‚Á‚Ä‚¢‚È‚¢‚È‚çfalse
+		if (!hideItem) {	//éš ã—ã‚¢ã‚¤ãƒ†ãƒ ã‚’æŒã£ã¦ã„ãªã„ãªã‚‰false
+			return false;
+		}
+
+		if (!Online::OnlineManager::GetLocalPlayer().getIsMasterClient())
+		{
 			return false;
 		}
 
@@ -96,11 +151,21 @@ namespace basecross {
 	}
 
 	void Goal::OnCollisionEnter(const CollisionPair& pair) {
-		if (!IsCollision(pair)) {	//”»’è‚ğæ‚ç‚È‚¢‚È‚çˆ—‚ğ”ò‚Î‚·B
+		if (!IsCollision(pair)) {	//åˆ¤å®šã‚’å–ã‚‰ãªã„ãªã‚‰å‡¦ç†ã‚’é£›ã°ã™ã€‚
 			return;
 		}
 
 		SuccessGoal(pair);
+	}
+
+	void Goal::OnCustomEventAction(int playerNumber, std::uint8_t eventCode, const std::uint8_t* bytes)
+	{
+		if (eventCode == EXECUTE_GOAL_EVENT_CODE)
+		{
+			auto data = *(OnlineGoalData*)bytes;
+			SuccessGoal(data.team, data.playerNumber, data.itemId, data.hidePosition);
+			return;
+		}
 	}
 }
 
