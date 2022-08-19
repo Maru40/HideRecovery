@@ -52,12 +52,15 @@ namespace basecross {
 			player->AddDamage(DamageData(1, GetOwner()));
 		}
 
+		//自分自身を削除
+		GetStage()->RemoveGameObject<GameObject>(GetGameObject());
+	}
+
+	void ChargeBullet::OnDestroy()
+	{
 		for (auto& destroyEventFunc : m_destroyEventFuncs)
 		{
 			destroyEventFunc(GetGameObject());
 		}
-
-		//自分自身を削除
-		GetStage()->RemoveGameObject<GameObject>(GetGameObject());
 	}
 }
