@@ -8,46 +8,40 @@ namespace basecross {
 	{}
 
 	CountDownUI::CountDownUI(const shared_ptr<Stage>& stage, float countTime)
-		: GameObject(stage), m_startTime(countTime), m_presentTime(0),
-		m_isActive(false), m_isTimeUp(false)
+		: GameObject(stage), m_startTime(countTime), m_presentTime(0), m_isTimeUp(false)
 	{}
 
 	void CountDownUI::OnCreate() {
 		m_number = GetStage()->AddGameObject<NumberSprite>();
 		m_number->GetComponent<Transform>()->SetParent(GetThis<CountDownUI>());
 		m_number->SetValue((int)floorf(m_startTime));
-
-		// 切り捨ての関係上+（0.9999fなのは4にならないようにするため）
+		Debug::GetInstance()->Log((int)floorf(m_startTime));
+		// 切り捨ての関係上+1
 		m_presentTime = m_startTime + 1;
 
-		m_number->SetDrawActive(false);
+		m_number->SetActive(false);
 	}
-	void CountDownUI::OnUpdate() {
-		if (!m_isActive) {
-			return;
-		}
 
+	void CountDownUI::OnUpdate() {
 		if (m_presentTime <= 1.0f) {
-			m_number->SetDrawActive(false);
+			m_number->SetActive(false);
 			m_isTimeUp = true;
 			return;
 		}
 
 		float delta = App::GetApp()->GetElapsedTime();
 		m_number->SetValue((int)floorf(m_presentTime));
-
 		m_presentTime -= delta;
 	}
 
 	void CountDownUI::Start() {
-		m_number->SetDrawActive(true);
-		m_isActive = true;
+		m_number->SetActive(true);
 	}
+
 	void CountDownUI::Reset() {
-		m_isActive = false;
 		m_isTimeUp = false;
 		m_presentTime = m_startTime + 1;
-		m_number->SetDrawActive(true);
+		m_number->SetActive(false);
 	}
 
 	bool CountDownUI::IsTimeUp() {

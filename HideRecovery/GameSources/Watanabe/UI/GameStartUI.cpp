@@ -4,20 +4,19 @@
 
 namespace basecross {
 	GameStartUI::GameStartUI(const shared_ptr<Stage>& stage)
-		:GameObject(stage), m_isStart(false)
+		:GameObject(stage), m_isStart(false), m_invisibleTimer(1)
 	{}
 
 	void GameStartUI::OnCreate() {
 		const float countTime = 3.0f;
 
 		auto lifeSpan = AddComponent<LifeSpan>();
-		lifeSpan->SetLifeTime(countTime + 2);
+		lifeSpan->SetLifeTime(countTime + 1);
 
 		const auto& stage = GetStage();
 		m_countDown = stage->AddGameObject<CountDownUI>(countTime);
 		m_strStart = stage->AddGameObject<SimpleSprite>(
 			SimpleSprite::Type::SpriteData, L"Start");
-
 		m_strStart->SetDrawActive(false);
 
 		m_countDown->SetScale(2);
@@ -25,6 +24,8 @@ namespace basecross {
 
 		m_strStart->GetComponent<Transform>()->SetScale(Vec3(2));
 		m_strStart->GetDrawComponent()->SetDiffuse(Col4(1, 0.5f, 0, 1));
+
+		//m_countDown->Start();
 	}
 	void GameStartUI::OnUpdate() {
 		if (!m_isStart)

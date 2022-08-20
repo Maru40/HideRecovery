@@ -104,10 +104,11 @@ namespace basecross {
 		builder.Register<RackObject>(L"Rack");
 		auto dir = App::GetApp()->GetDataDirWString();
 		auto path = dir + L"MapDatas/";
-		builder.Build(GetThis<Stage>(), path + L"StageS2.csv");
+		builder.Build(GetThis<Stage>(), path + L"TestStage.csv");
 
 		//AddGameObject<NumberSprite>()->SetValue(5);
-		m_obj = AddGameObject<GameStartUI>();
+		//m_obj = AddGameObject<GameStartUI>();
+		m_obj = AddGameObject<CountDownUI>();
 	}
 
 	void WatanabeStage::OnUpdate() {
@@ -119,7 +120,7 @@ namespace basecross {
 		static const auto& keyBoard = inputDevice->GetKeyBoard();
 		if (keyBoard.IsInputDown(KeyCode::Alpha1)) {
 			//AddGameObject<GameStartUI>()->Start();
-			dynamic_pointer_cast<GameStartUI>(m_obj)->Start();
+			dynamic_pointer_cast<CountDownUI>(m_obj)->Start();
 			Debug::GetInstance()->Log(L"Start");
 		}
 	}

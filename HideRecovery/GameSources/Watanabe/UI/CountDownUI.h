@@ -8,8 +8,6 @@ namespace basecross {
 		float m_startTime;
 		// 現在の時間
 		float m_presentTime;
-		// カウントダウンが有効か
-		bool m_isActive;
 		// カウントダウンが終わったか
 		bool m_isTimeUp;
 		shared_ptr<NumberSprite> m_number;
