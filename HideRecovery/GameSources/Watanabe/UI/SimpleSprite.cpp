@@ -1,7 +1,7 @@
 ﻿#include "stdafx.h"
 #include "SimpleSprite.h"
 #include "../Utility/Utility.h"
-#include "SpriteDataManager.h"
+#include "../Manager/SpriteDataManager.h"
 
 namespace basecross {
 	SimpleSprite::SimpleSprite(const shared_ptr<Stage>& stage, Type type, const wstring& key)
@@ -10,7 +10,7 @@ namespace basecross {
 
 	void SimpleSprite::OnCreate() {
 		vector<VertexPositionColorTexture> vertices;
-		wt::SpriteData data;
+		sdm::SpriteData data;
 		switch (m_type)
 		{
 		case SimpleSprite::Type::Texture:

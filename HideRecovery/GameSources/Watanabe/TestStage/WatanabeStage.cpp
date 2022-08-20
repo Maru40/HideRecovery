@@ -27,6 +27,8 @@
 #include "../UI/CountDownUI.h"
 #include "../UI/SimpleSprite.h"
 #include "../UI///GameStartUI.h"
+#include "../Manager/PointManager.h"
+#include "../Manager/TimeManager.h"
 
 namespace basecross {
 	void WatanabeStage::CreateViewLight() {
@@ -104,7 +106,7 @@ namespace basecross {
 		builder.Register<RackObject>(L"Rack");
 		auto dir = App::GetApp()->GetDataDirWString();
 		auto path = dir + L"MapDatas/";
-		builder.Build(GetThis<Stage>(), path + L"TestStage.csv");
+		builder.Build(GetThis<Stage>(), path + L"StageS2.csv");
 
 		//AddGameObject<NumberSprite>()->SetValue(5);
 		//m_obj = AddGameObject<GameStartUI>();
@@ -123,5 +125,8 @@ namespace basecross {
 			dynamic_pointer_cast<CountDownUI>(m_obj)->Start();
 			Debug::GetInstance()->Log(L"Start");
 		}
+
+		TimeManager::GetInstance()->UpdateTime();
+		Debug::GetInstance()->Log(TimeManager::GetInstance()->GetTimer().GetElaspedTime());
 	}
 }

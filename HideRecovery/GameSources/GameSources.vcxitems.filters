@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0"
-  xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Headers">
       <UniqueIdentifier>{4b0a624a-610d-4bc6-b311-2b02a781cdf9}</UniqueIdentifier>
@@ -881,15 +880,11 @@
     <Filter Include="Maruyama\StageObject\GoalObject\Component">
       <UniqueIdentifier>{aee89945-4d3a-4402-a8bf-813411de8856}</UniqueIdentifier>
     </Filter>
-
     <Filter Include="Watanabe\UI">
       <UniqueIdentifier>{e8863cfa-4fe2-437d-93d1-f13e7ca99ade}</UniqueIdentifier>
     </Filter>
     <Filter Include="Watanabe\UI\Numbers">
       <UniqueIdentifier>{836206bd-eab5-4746-88f2-7de19e53e09c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Watanabe\UI\SpriteDataManager">
-      <UniqueIdentifier>{61313965-a2c9-4caf-b51e-88efb28c78df}</UniqueIdentifier>
     </Filter>
     <Filter Include="Watanabe\UI\CountDownUI">
       <UniqueIdentifier>{12bc70fa-39b8-4d37-a860-cafacffd7d9d}</UniqueIdentifier>
@@ -908,10 +903,21 @@
     </Filter>
     <Filter Include="Watanabe\Utility\TimeCounter">
       <UniqueIdentifier>{58fee1e5-7785-48cc-80a9-ba305df7349e}</UniqueIdentifier>
-	</Filter>
+    </Filter>
     <Filter Include="Maruyama\Player\Component\UseWepon">
       <UniqueIdentifier>{38306d85-3742-4018-9700-889e103e9207}</UniqueIdentifier>
-
+    </Filter>
+    <Filter Include="Watanabe\Manager">
+      <UniqueIdentifier>{854239b7-08c3-4a50-800b-ec9485b65b13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\Manager\SpriteDataManager">
+      <UniqueIdentifier>{61313965-a2c9-4caf-b51e-88efb28c78df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\Manager\TimeManager">
+      <UniqueIdentifier>{a90c6fa5-f8cf-4785-8158-c9406627ff9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\Manager\PointManager">
+      <UniqueIdentifier>{1d34191b-57ea-4e96-9a2b-d3c6e6bc42f4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1662,12 +1668,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageTransitioner.h">
       <Filter>Itabashi\Component\MatchStageTransitioner</Filter>
     </ClInclude>
-
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\Numbers.h">
       <Filter>Watanabe\UI\Numbers</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\SpriteDataManager.h">
-      <Filter>Watanabe\UI\SpriteDataManager</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\CountDownUI.h">
       <Filter>Watanabe\UI\CountDownUI</Filter>
@@ -1686,10 +1688,18 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\TimeCounter.h">
       <Filter>Watanabe\Utility\TimeCounter</Filter>
-	</ClInclude>
+    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\UseWepon.h">
       <Filter>Maruyama\Player\Component\UseWepon</Filter>
-
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Manager\SpriteDataManager.h">
+      <Filter>Watanabe\Manager\SpriteDataManager</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Manager\PointManager.h">
+      <Filter>Watanabe\Manager\PointManager</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Manager\TimeManager.h">
+      <Filter>Watanabe\Manager\TimeManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2359,12 +2369,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageTransitioner.cpp">
       <Filter>Itabashi\Component\MatchStageTransitioner</Filter>
     </ClCompile>
-
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\Numbers.cpp">
       <Filter>Watanabe\UI\Numbers</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\SpriteDataManager.cpp">
-      <Filter>Watanabe\UI\SpriteDataManager</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\CountDownUI.cpp">
       <Filter>Watanabe\UI\CountDownUI</Filter>
@@ -2383,11 +2389,18 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Utility\TimeCounter.cpp">
       <Filter>Watanabe\Utility\TimeCounter</Filter>
-
-	</ClCompile>
+    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\UseWepon.cpp">
       <Filter>Maruyama\Player\Component\UseWepon</Filter>
-
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Manager\SpriteDataManager.cpp">
+      <Filter>Watanabe\Manager\SpriteDataManager</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Manager\PointManager.cpp">
+      <Filter>Watanabe\Manager\PointManager</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Manager\TimeManager.cpp">
+      <Filter>Watanabe\Manager\TimeManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
