@@ -907,6 +907,7 @@
     <Filter Include="Maruyama\Player\Component\UseWepon">
       <UniqueIdentifier>{38306d85-3742-4018-9700-889e103e9207}</UniqueIdentifier>
     </Filter>
+
     <Filter Include="Watanabe\Manager">
       <UniqueIdentifier>{854239b7-08c3-4a50-800b-ec9485b65b13}</UniqueIdentifier>
     </Filter>
@@ -918,6 +919,10 @@
     </Filter>
     <Filter Include="Watanabe\Manager\PointManager">
       <UniqueIdentifier>{1d34191b-57ea-4e96-9a2b-d3c6e6bc42f4}</UniqueIdentifier>
+	</Filter>
+    <Filter Include="Maruyama\Player\Component\Wepon\Bullet\Object\ChargeBulletObject">
+      <UniqueIdentifier>{aec48c4f-ef98-40ab-b305-d142aa930618}</UniqueIdentifier>
+
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1620,9 +1625,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)ChargeGun.h">
       <Filter>Maruyama\Player\Component\Wepon\ChargeGun</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)ChargeBulletObject.h">
-      <Filter>Maruyama\Player\Component\Wepon\Bullet\Object</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)ChargeBullet.h">
       <Filter>Maruyama\Player\Component\Wepon\Bullet\Component\ChargeBullet</Filter>
     </ClInclude>
@@ -1692,6 +1694,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\UseWepon.h">
       <Filter>Maruyama\Player\Component\UseWepon</Filter>
     </ClInclude>
+
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Manager\SpriteDataManager.h">
       <Filter>Watanabe\Manager\SpriteDataManager</Filter>
     </ClInclude>
@@ -1700,6 +1703,13 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Manager\TimeManager.h">
       <Filter>Watanabe\Manager\TimeManager</Filter>
+	</ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ChargeBulletObject.h">
+      <Filter>Maruyama\Player\Component\Wepon\Bullet\Object\ChargeBulletObject</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Bullet\Object\BulletObjectBase.h">
+      <Filter>Maruyama\Player\Component\Wepon\Bullet\Object</Filter>
+
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2324,9 +2334,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)ChargeGun.cpp">
       <Filter>Maruyama\Player\Component\Wepon\ChargeGun</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)ChargeBulletObject.cpp">
-      <Filter>Maruyama\Player\Component\Wepon\Bullet\Object</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)ChargeBullet.cpp">
       <Filter>Maruyama\Player\Component\Wepon\Bullet\Component\ChargeBullet</Filter>
     </ClCompile>
@@ -2393,6 +2400,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\UseWepon.cpp">
       <Filter>Maruyama\Player\Component\UseWepon</Filter>
     </ClCompile>
+
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Manager\SpriteDataManager.cpp">
       <Filter>Watanabe\Manager\SpriteDataManager</Filter>
     </ClCompile>
@@ -2401,6 +2409,10 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Manager\TimeManager.cpp">
       <Filter>Watanabe\Manager\TimeManager</Filter>
+	</ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ChargeBulletObject.cpp">
+      <Filter>Maruyama\Player\Component\Wepon\Bullet\Object\ChargeBulletObject</Filter>
+
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

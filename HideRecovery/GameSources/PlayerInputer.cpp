@@ -277,6 +277,10 @@ namespace basecross
 		return App::GetApp()->GetMyInputDevice()->GetXInputGamePad().IsInputDown(XInputCode::LeftShoulder);
 	}
 
+	bool PlayerInputer::IsLBUp() {
+		return App::GetApp()->GetMyInputDevice()->GetXInputGamePad().IsInputUp(XInputCode::LeftShoulder);
+	}
+
 	//bool PlayerInputer::IsDebugSlimePressRadChange() {
 	//	return App::GetApp()->GetMyInputDevice()->GetKeyBoard().IsInputUp(KeyCode::P);
 	//}

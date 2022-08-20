@@ -7,9 +7,11 @@
 #pragma once
 #include "stdafx.h"
 
+#include "Maruyama/Bullet/Object/BulletObjectBase.h"
+
 namespace basecross {
 
-	class ChargeBulletObject : public GameObject 
+	class ChargeBulletObject : public BulletObjectBase 
 	{
 	public:
 		ChargeBulletObject(const std::shared_ptr<Stage>& stage);

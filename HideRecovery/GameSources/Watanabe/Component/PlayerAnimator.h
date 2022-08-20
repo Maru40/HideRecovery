@@ -76,6 +76,13 @@ namespace basecross {
 		/// <param name="state">確認したいステート</param>
 		bool IsCurretAnimationState(const PlayerAnimationState::State& state) const;
 
+		/// <summary>
+		/// アニメーションイベントの設定
+		/// </summary>
+		/// <param name="state">ステート</param>
+		/// <param name="start">開始時イベント</param>
+		/// <param name="update">更新イベント</param>
+		/// <param name="exit">終了時イベント</param>
 		void AddAnimationEvent(
 			const PlayerAnimationState::State& state,
 			const std::function<void()>& start,
@@ -83,6 +90,11 @@ namespace basecross {
 			const std::function<void()>& exit
 		);
 
+		/// <summary>
+		/// アニメーションイベントの設定
+		/// </summary>
+		/// <param name="state">ステート</param>
+		/// <param name="animationEvent">アニメーションイベント</param>
 		void AddAnimationEvent(const PlayerAnimationState::State& state, const AnimationEvent& animationEvent);
 
 	};

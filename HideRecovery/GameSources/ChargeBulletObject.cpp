@@ -15,7 +15,7 @@
 namespace basecross {
 
 	ChargeBulletObject::ChargeBulletObject(const std::shared_ptr<Stage>& stage)
-		:GameObject(stage)
+		:BulletObjectBase(stage)
 	{}
 
 	void ChargeBulletObject::OnCreate() {

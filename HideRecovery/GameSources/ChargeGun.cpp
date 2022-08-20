@@ -19,6 +19,8 @@
 #include "Watanabe/Component/PlayerAnimator.h"
 #include "SoundManager.h"
 
+#include "Maruyama/Player/Component/UseWepon.h"
+
 namespace basecross {
 
 	ChargeGun::ChargeGun(const std::shared_ptr<GameObject>& objPtr) :
@@ -30,59 +32,52 @@ namespace basecross {
 	}
 
 	void ChargeGun::OnLateStart() {
-		if (auto animator = GetGameObject()->GetComponent<PlayerAnimator>(false)) {
-			std::function<void()> exit = [&]() {
-				if (auto mover = GetGameObject()->GetComponent<Operator::ObjectMover>(false)) {
-					mover->SetIsAim(false);
-				}
-			};
-
-			animator->AddAnimationEvent(PlayerAnimationState::State::GunEnd2, nullptr, nullptr, exit);
-		}
+		m_useWepon = GetGameObject()->GetComponent<UseWepon>(false);
 	}
 
 	void ChargeGun::OnUpdate() {
-		UpdateShotAnimation();
+		UpdateAnimation();
 	}
 
-	void ChargeGun::UpdateShotAnimation() {
+	void ChargeGun::UpdateAnimation() {
+		//エイム中なら処理をしない
+		auto useWepon = m_useWepon.lock();
+		if (useWepon && useWepon->IsAim()) {
+			return;
+		}
+
 		auto animator = GetGameObject()->GetComponent<PlayerAnimator>(false);
 		if (!animator) {
 			return;
 		}
 
-		//ショットステートでないなら
-		if (!animator->IsCurretAnimationState(PlayerAnimationState::State::Shot)) {
+		if (!animator->IsCurretAnimationState(PlayerAnimationState::State::Shot)) {	//Shot中でないなら処理をしない
 			return;
 		}
 
-		//アニメーションが終了したら
-		if (animator->IsTargetAnimationEnd()) {	
+		if (animator->IsTargetAnimationEnd()) {
 			animator->ChangePlayerAnimation(PlayerAnimationState::State::GunEnd2);
 		}
 	}
 
-	std::shared_ptr<ChargeBulletObject> ChargeGun::Shot(const Vec3& direct) {
+	std::shared_ptr<BulletObjectBase> ChargeGun::Shot(const Vec3& direct) {
 		RevisionShotDirection();
 
+		//音の再生
 		if (auto soundManager = SoundManager::GetInstance()) {
 			constexpr float Volume = 0.1f;
 			soundManager->PlayOneShot(SoundManager::ID::ShotSE, Volume);
 		}
 
+		//弾の生成
 		Vec3 instancePosition = transform->GetPosition() + GetBulletInstanceOffset();
-		auto bulletObject = InstantiateBullet(instancePosition, transform->GetQuaternion());
+		auto bulletObject = InstantiateBullet<ChargeBulletObject>(instancePosition, transform->GetQuaternion());
 		if (auto bullet = bulletObject->GetComponent<ChargeBullet>(false)) {
 			bullet->Shot(GetGameObject(), direct);
 		}
 
 		//アニメーションの再生
 		PlayAnimation();
-
-		//ムーバーでAim状態にする。
-		if (auto mover = GetGameObject()->GetComponent<Operator::ObjectMover>(false)) {
-			mover->SetIsAim(true);
-		}
 
 		return bulletObject;
 	}
@@ -98,5 +93,17 @@ namespace basecross {
 
 	void ChargeGun::RevisionShotDirection() {
 
+	}
+
+	//--------------------------------------------------------------------------------------
+	///	アクセッサ
+	//--------------------------------------------------------------------------------------
+
+	bool ChargeGun::IsShot() const {
+		if (auto useWepon = GetGameObject()->GetComponent<UseWepon>(false)) {
+			return useWepon->IsAim();
+		}
+
+		return false;
 	}
 }

@@ -11,6 +11,11 @@
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
+	/// 前方宣言
+	//--------------------------------------------------------------------------------------
+	class BulletObjectBase;
+
+	//--------------------------------------------------------------------------------------
 	/// ウェポンのパラメータ
 	//--------------------------------------------------------------------------------------
 	struct WeponBase_Parametor {
@@ -22,7 +27,6 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 	/// ウェポンの基底クラス
 	//--------------------------------------------------------------------------------------
-	template<class BulletType>
 	class WeponBase : public Component
 	{
 	public:
@@ -36,20 +40,21 @@ namespace basecross {
 			Component(objPtr)
 		{}
 
+		virtual ~WeponBase() = default;
+
 		/// <summary>
 		/// 弾を撃つ
 		/// </summary>
 		/// <param name="direct">撃つ方向</param>
 		/// <returns>撃った弾のオブジェクト</returns>
-		virtual std::shared_ptr<BulletType> Shot(const Vec3& direct) = 0;
+		virtual std::shared_ptr<BulletObjectBase> Shot(const Vec3& direct) = 0;
 
 		/// <summary>
 		/// 弾の生成
 		/// </summary>
-		template<class... Ts>
+		template<class BulletType, class... Ts>
 		std::shared_ptr<BulletType> InstantiateBullet(const Vec3& position, const Quat& quat, Ts... params) {
 			auto bulletObject = GetStage()->Instantiate<BulletType>(position, quat, params...);
-			//auto bullet = bulletObject->AddComponent<BulletType>();
 
 			return bulletObject;
 		}

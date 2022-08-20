@@ -16,6 +16,8 @@
 #include "ChargeBullet.h"
 #include <random>
 
+#include "Maruyama/Player/Component/UseWepon.h"
+
 template<class T>
 T ConvertByteData(const std::uint8_t* bytes)
 {
@@ -94,6 +96,7 @@ namespace Online
 	{
 		auto objectMover = m_objectMover.lock();
 		auto tackleAttack = m_tackleAttack.lock();
+		auto useWepon = m_useWepon.lock();
 
 		if (!objectMover || !tackleAttack || tackleAttack->IsTackle())
 		{
@@ -109,7 +112,7 @@ namespace Online
 
 		auto rotationController = m_rotationController.lock();
 
-		if (rotationController && !objectMover->IsAim())	//ローテーションがあり、Aim状態でないなら
+		if (rotationController && !useWepon->IsAim())	//ローテーションがあり、Aim状態でないなら
 		{
 			auto input = PlayerInputer::GetMoveDirection();
 			auto direct = maru::Utility::CalcuCameraVec(Vec3(input.x, 0, input.y), GetStage()->GetView()->GetTargetCamera(), GetGameObject());
@@ -459,6 +462,7 @@ namespace Online
 		m_playerStatus = owner->GetComponent<PlayerStatus>();
 
 		m_tackleAttack = owner->GetComponent<TackleAttack>();
+		m_useWepon = owner->GetComponent<UseWepon>();
 	}
 
 	void PlayerOnlineController::OnUpdate()
