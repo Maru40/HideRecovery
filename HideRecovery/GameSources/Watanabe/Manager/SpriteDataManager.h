@@ -3,7 +3,7 @@
 #include "../Utility/BaseSingleton.h"
 
 namespace basecross {
-	namespace wt {
+	namespace sdm {
 		struct SpriteData {
 			// 使うテクスチャのキー
 			wstring useTextureKey;
@@ -19,7 +19,7 @@ namespace basecross {
 	}
 
 	class SpriteDataManager :public BaseSingleton<SpriteDataManager> {
-		map<wstring, wt::SpriteData> m_spriteDataMap;
+		map<wstring, sdm::SpriteData> m_spriteDataMap;
 		static const wstring LoadCSVFileKey;
 	public:
 		/// <summary>
@@ -27,7 +27,7 @@ namespace basecross {
 		/// </summary>
 		/// <param name="name">識別用の名前</param>
 		/// <returns>SpriteData</returns>
-		wt::SpriteData GetSpriteData(const wstring name);
+		sdm::SpriteData GetSpriteData(const wstring name);
 	private:
 		SpriteDataManager() {}
 		~SpriteDataManager() {}

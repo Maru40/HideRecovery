@@ -8,7 +8,7 @@ namespace basecross {
 	unique_ptr<SpriteDataManager, SpriteDataManager::Deleter> SpriteDataManager::m_instance = nullptr;
 	const wstring SpriteDataManager::LoadCSVFileKey = L"SpriteData";
 
-	wt::SpriteData SpriteDataManager::GetSpriteData(const wstring name) {
+	sdm::SpriteData SpriteDataManager::GetSpriteData(const wstring name) {
 		// データがなければ作る
 		if (m_spriteDataMap.count(name) == 0) {
 			// ファイルを読み込みnameに該当するデータを検索する
@@ -23,7 +23,7 @@ namespace basecross {
 			}
 			auto tokens = DataExtracter::DelimitData(spriteDatas[targetIndex]);
 
-			wt::SpriteData data = {};
+			sdm::SpriteData data = {};
 			data.useTextureKey = tokens[1];
 			data.origin = DataExtracter::Vector2DataExtraction(tokens, 2);
 			data.size = DataExtracter::Vector2DataExtraction(tokens, 4);

@@ -10,7 +10,7 @@ namespace basecross {
 
 	void SimpleSprite::OnCreate() {
 		vector<VertexPositionColorTexture> vertices;
-		wt::SpriteData data;
+		sdm::SpriteData data;
 		switch (m_type)
 		{
 		case SimpleSprite::Type::Texture:
