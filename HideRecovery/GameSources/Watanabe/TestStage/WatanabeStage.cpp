@@ -27,6 +27,10 @@
 #include "../UI/CountDownUI.h"
 #include "../UI/SimpleSprite.h"
 #include "../UI///GameStartUI.h"
+#include "HideItemObject.h"
+#include "Watanabe/StageObject/PlayerSpawnPointObject.h"
+#include "Watanabe/StageObject/OwnAreaObject.h"
+#include "Maruyama/StageObject/GoalObject.h"
 
 namespace basecross {
 	void WatanabeStage::CreateViewLight() {
@@ -99,12 +103,20 @@ namespace basecross {
 		player->AddComponent<PlayerAnimator>();
 		m_obj = player;
 
+		//SetSharedObjectGroup();
+
 		GameObjecttCSVBuilder builder;
 		builder.Register<Block>(L"Block");
 		builder.Register<RackObject>(L"Rack");
+		builder.Register<HideItemObject>(L"HideItem");
+		builder.Register<PlayerSpawnPointObject>(L"PlayerSpawnPoint");
+		builder.Register<GoalObject>(L"Goal");
+		builder.Register<OwnAreaObject>(L"OwnArea");
 		auto dir = App::GetApp()->GetDataDirWString();
 		auto path = dir + L"MapDatas/";
-		builder.Build(GetThis<Stage>(), path + L"TestStage.csv");
+		builder.Build(GetThis<Stage>(), path + L"StageS2.csv");
+
+		auto floor = GetSharedGameObject<Block>(L"Floor");
 
 		//AddGameObject<NumberSprite>()->SetValue(5);
 		//m_obj = AddGameObject<GameStartUI>();
