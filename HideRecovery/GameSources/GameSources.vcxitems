@@ -49,7 +49,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)HidePlace.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ImpactDataDraw.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ImpactManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\GamePlayerManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\Item.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageRoomer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageTransitioner.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\ObjectHider.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Interface\I_TeamMember.h" />
@@ -296,7 +298,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)HidePlace.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ImpactDataDraw.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ImpactManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\GamePlayerManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\Item.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageRoomer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageTransitioner.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\ObjectHider.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\ObjectMover.cpp" />

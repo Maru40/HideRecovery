@@ -871,14 +871,23 @@
     <Filter Include="Itabashi\Online\OnlineMatching">
       <UniqueIdentifier>{06330886-be4a-48de-98b1-7bd132101f24}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Itabashi\Component\MatchStageTransitioner">
-      <UniqueIdentifier>{04d07eac-4827-4430-8b66-911d86917a77}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Maruyama\StageObject\GoalObject">
       <UniqueIdentifier>{bc1b13fb-a267-4078-b9f7-11ee9d0ae7be}</UniqueIdentifier>
     </Filter>
     <Filter Include="Maruyama\StageObject\GoalObject\Component">
       <UniqueIdentifier>{aee89945-4d3a-4402-a8bf-813411de8856}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Itabashi\Component\GamePlayerManager">
+      <UniqueIdentifier>{39d83704-6c6d-4593-aa36-81bbce5dad4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Itabashi\Component\OnlineMatchStage">
+      <UniqueIdentifier>{88c6169c-cf2d-461e-a6bd-c0a8d45a00c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Itabashi\Component\OnlineMatchStage\MatchStageTransitioner">
+      <UniqueIdentifier>{04d07eac-4827-4430-8b66-911d86917a77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Itabashi\Component\OnlineMatchStage\MatchStageRoomer">
+      <UniqueIdentifier>{d15c9508-5a27-4b95-91df-2f53335c8158}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1627,7 +1636,13 @@
       <Filter>Itabashi\Online\OnlineMatching</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageTransitioner.h">
-      <Filter>Itabashi\Component\MatchStageTransitioner</Filter>
+      <Filter>Itabashi\Component\OnlineMatchStage\MatchStageTransitioner</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\GamePlayerManager.h">
+      <Filter>Itabashi\Component\GamePlayerManager</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageRoomer.h">
+      <Filter>Itabashi\Component\OnlineMatchStage\MatchStageRoomer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2295,7 +2310,13 @@
       <Filter>Itabashi\Online\OnlineMatching</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageTransitioner.cpp">
-      <Filter>Itabashi\Component\MatchStageTransitioner</Filter>
+      <Filter>Itabashi\Component\OnlineMatchStage\MatchStageTransitioner</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\GamePlayerManager.cpp">
+      <Filter>Itabashi\Component\GamePlayerManager</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageRoomer.cpp">
+      <Filter>Itabashi\Component\OnlineMatchStage\MatchStageRoomer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
