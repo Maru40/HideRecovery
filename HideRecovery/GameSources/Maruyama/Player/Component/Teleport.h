@@ -18,6 +18,14 @@ namespace basecross {
 	public:
 		Teleport(const std::shared_ptr<GameObject>& objPtr);
 
+	private:
+
+
+	public:
+		/// <summary>
+		/// マップを開く。
+		/// </summary>
+		void OpenMap();
 	};
 
 }
