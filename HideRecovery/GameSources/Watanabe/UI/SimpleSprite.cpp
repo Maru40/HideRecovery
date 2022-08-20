@@ -1,7 +1,7 @@
 ﻿#include "stdafx.h"
 #include "SimpleSprite.h"
 #include "../Utility/Utility.h"
-#include "SpriteDataManager.h"
+#include "../Manager/SpriteDataManager.h"
 
 namespace basecross {
 	SimpleSprite::SimpleSprite(const shared_ptr<Stage>& stage, Type type, const wstring& key)

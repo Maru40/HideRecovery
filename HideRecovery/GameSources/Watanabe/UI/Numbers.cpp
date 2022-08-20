@@ -1,7 +1,7 @@
 ﻿#include "stdafx.h"
 #include "Numbers.h"
 #include "../Utility/Utility.h"
-#include "SpriteDataManager.h"
+#include "../Manager/SpriteDataManager.h"
 
 namespace basecross {
 	NumberSprite::NumberSprite(const shared_ptr<Stage>& stage)
