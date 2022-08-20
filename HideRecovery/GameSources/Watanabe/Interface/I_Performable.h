@@ -19,10 +19,6 @@ namespace basecross {
 		/// </summary>
 		virtual void Reset() = 0;
 
-		/// <summary>
-		/// 有効の切り替え
-		/// </summary>
-		/// <param name="flg">trueで有効</param>
-		virtual void SetActive(bool flg) = 0;
+		//virtual void SetActive(bool flg) = 0;
 	};
 }

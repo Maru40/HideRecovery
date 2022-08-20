@@ -925,6 +925,9 @@
     <Filter Include="Watanabe\Interface\I_Performable">
       <UniqueIdentifier>{64d98f04-ab65-4a3e-9586-93fb87df4204}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\StageObject\FireworksObject">
+      <UniqueIdentifier>{685fb349-b487-41c4-b452-27e65f725331}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1710,6 +1713,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Interface\I_Performable.h">
       <Filter>Watanabe\Interface\I_Performable</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\FireworksObject.h">
+      <Filter>Watanabe\StageObject\FireworksObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2410,6 +2416,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Manager\TimeManager.cpp">
       <Filter>Watanabe\Manager\TimeManager</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\FireworksObject.cpp">
+      <Filter>Watanabe\StageObject\FireworksObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
