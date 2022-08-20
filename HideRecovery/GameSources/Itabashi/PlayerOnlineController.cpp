@@ -109,7 +109,7 @@ namespace Online
 
 		auto rotationController = m_rotationController.lock();
 
-		if (rotationController)
+		if (rotationController && !objectMover->IsAim())	//ローテーションがあり、Aim状態でないなら
 		{
 			auto input = PlayerInputer::GetMoveDirection();
 			auto direct = maru::Utility::CalcuCameraVec(Vec3(input.x, 0, input.y), GetStage()->GetView()->GetTargetCamera(), GetGameObject());

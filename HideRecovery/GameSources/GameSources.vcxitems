@@ -61,6 +61,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\UseOwnArea.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineMatching.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineMatchStage.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\UseWepon.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\StageObject\Goal.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\StageObject\GoalObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)OccupancyManager.h" />
@@ -331,6 +332,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\Respawner.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\Teleport.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\UseOwnArea.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\UseWepon.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\StageObject\Goal.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\StageObject\GoalObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)OccupancyManager.cpp" />

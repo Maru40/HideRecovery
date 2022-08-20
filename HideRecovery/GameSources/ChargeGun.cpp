@@ -15,6 +15,7 @@
 
 #include "PlayerInputer.h"
 
+#include "Itabashi/ObjectMover.h"
 #include "Watanabe/Component/PlayerAnimator.h"
 #include "SoundManager.h"
 
@@ -28,11 +29,23 @@ namespace basecross {
 		SetBulletInstanceOffset(Vec3(0.0f, 0.5f, 0.0f));
 	}
 
-	void ChargeGun::OnUpdate() {
-		UpdateAnimation();
+	void ChargeGun::OnLateStart() {
+		if (auto animator = GetGameObject()->GetComponent<PlayerAnimator>(false)) {
+			std::function<void()> exit = [&]() {
+				if (auto mover = GetGameObject()->GetComponent<Operator::ObjectMover>(false)) {
+					mover->SetIsAim(false);
+				}
+			};
+
+			animator->AddAnimationEvent(PlayerAnimationState::State::GunEnd2, nullptr, nullptr, exit);
+		}
 	}
 
-	void ChargeGun::UpdateAnimation() {
+	void ChargeGun::OnUpdate() {
+		UpdateShotAnimation();
+	}
+
+	void ChargeGun::UpdateShotAnimation() {
 		auto animator = GetGameObject()->GetComponent<PlayerAnimator>(false);
 		if (!animator) {
 			return;
@@ -65,6 +78,11 @@ namespace basecross {
 
 		//アニメーションの再生
 		PlayAnimation();
+
+		//ムーバーでAim状態にする。
+		if (auto mover = GetGameObject()->GetComponent<Operator::ObjectMover>(false)) {
+			mover->SetIsAim(true);
+		}
 
 		return bulletObject;
 	}

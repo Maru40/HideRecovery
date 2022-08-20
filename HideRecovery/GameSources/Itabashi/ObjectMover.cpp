@@ -2,6 +2,8 @@
 #include "ObjectMover.h"
 #include "VelocityManager.h"
 
+#include "MaruUtility.h"
+
 namespace basecross
 {
 namespace Operator
@@ -16,8 +18,7 @@ namespace Operator
 		m_velocityManager = GetGameObject()->GetComponent<VelocityManager>();
 	}
 
-	Vec3 ObjectMover::Move(const Vec2& moveDirection)
-	{
+	Vec3 ObjectMover::NormalMove(const Vec2& moveDirection) {
 		auto velocityManager = m_velocityManager.lock();
 
 		if (moveDirection.lengthSqr() == 0)
@@ -66,6 +67,22 @@ namespace Operator
 		}
 
 		return moveVector;
+	}
+
+	Vec3 ObjectMover::AimMove(const Vec2& moveDirection) {
+		Vec3 resultVec = NormalMove(moveDirection);
+
+		return resultVec;
+	}
+
+	Vec3 ObjectMover::Move(const Vec2& moveDirection)
+	{
+		if (IsAim()) {
+			return AimMove(moveDirection);
+		}
+		else {
+			return NormalMove(moveDirection);
+		}
 	}
 }
 }

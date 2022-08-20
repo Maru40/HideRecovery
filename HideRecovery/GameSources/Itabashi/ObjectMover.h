@@ -14,6 +14,7 @@ namespace Operator
 		std::weak_ptr<VelocityManager> m_velocityManager;
 
 		bool m_isCameraAffected = true;
+		bool m_isAim = false;
 
 		float m_moveSpeed = 1.0f;
 
@@ -25,6 +26,19 @@ namespace Operator
 		void OnUpdate() override {}
 
 		void OnDraw() override {}
+
+	private:
+		/// <summary>
+		/// NormalMove
+		/// </summary>
+		Vec3 NormalMove(const Vec2& moveDirection);
+
+		/// <summary>
+		/// Aim中の移動
+		/// </summary>
+		Vec3 AimMove(const Vec2& moveDirection);
+
+	public:
 
 		/// <summary>
 		/// 影響を受けるカメラを設定する
@@ -50,6 +64,10 @@ namespace Operator
 		Vec3 Move(const Vec2& moveDirection);
 
 		void Move(float x, float y) { Move(Vec2(x, y)); }
+
+		bool IsAim() const noexcept { return m_isAim; }
+
+		void SetIsAim(const bool isAim) { m_isAim = isAim; }
 	};
 }
 }

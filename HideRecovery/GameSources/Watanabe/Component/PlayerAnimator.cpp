@@ -41,6 +41,7 @@ namespace basecross {
 		Animator::OnUpdate();
 
 		Transition();
+		UpdateEvent();
 
 		auto velocityManager = m_velocityManager.lock();
 		if (!velocityManager) {
@@ -49,6 +50,7 @@ namespace basecross {
 
 		constexpr float TransitionSpeed = 0.1f;	//遷移速度
 		auto velocity = velocityManager->GetVelocity();
+		velocity.y = 0.0f;
 
 		//速度が一定以下かつ、Dash状態なら
 		if (velocity.length() < TransitionSpeed && IsCurretAnimationState(PlayerAnimationState::State::Dash)) {
@@ -76,8 +78,46 @@ namespace basecross {
 		}
 	}
 
+	void PlayerAnimator::StartEvent() {
+		auto draw = GetGameObject()->GetComponent<PNTBoneModelDraw>();
+		auto currentAnimation = draw->GetCurrentAnimation();
+		auto events = m_animationEventsMap[currentAnimation];
+		for (auto& event : events) {
+			if (event.start) {
+				event.start();
+			}
+		}
+	}
+
+	void PlayerAnimator::UpdateEvent() {
+		auto draw = GetGameObject()->GetComponent<PNTBoneModelDraw>();
+		auto currentAnimation = draw->GetCurrentAnimation();
+		auto events = m_animationEventsMap[currentAnimation];
+		for (auto& event : events) {
+			if (event.update) {
+				event.update();
+			}
+		}
+	}
+
+	void PlayerAnimator::ExitEvent() {
+		//終了イベントを呼ぶ
+		auto draw = GetGameObject()->GetComponent<PNTBoneModelDraw>();
+		auto currentAnimation = draw->GetCurrentAnimation();
+		auto events = m_animationEventsMap[currentAnimation];
+		for (auto& event : events) {
+			if (event.exit) {
+				event.exit();
+			}
+		}
+	}
+
 	void PlayerAnimator::ChangePlayerAnimation(PlayerAnimationState::State state) {
+		ExitEvent();
+
 		ChangeAnimation(PlayerAnimationState::PlayerAnimationState2wstring(state));
+
+		StartEvent();
 	}
 
 	bool PlayerAnimator::IsCurretAnimationState(const PlayerAnimationState::State& state) const {
@@ -85,5 +125,19 @@ namespace basecross {
 		auto strState = PlayerAnimationState::PlayerAnimationState2wstring(state);
 
 		return strState == drawer->GetCurrentAnimation();
+	}
+
+	void PlayerAnimator::AddAnimationEvent(
+		const PlayerAnimationState::State& state,
+		const std::function<void()>& start,
+		const std::function<bool()>& update,
+		const std::function<void()>& exit
+	)
+	{
+		AddAnimationEvent(state, AnimationEvent(start, update, exit));
+	}
+
+	void PlayerAnimator::AddAnimationEvent(const PlayerAnimationState::State& state, const AnimationEvent& animationEvent) {
+		m_animationEventsMap[PlayerAnimationState::PlayerAnimationState2wstring(state)].push_back(animationEvent);
 	}
 }
