@@ -15,12 +15,15 @@ namespace basecross {
 	///	前方宣言
 	//--------------------------------------------------------------------------------------
 	class ChargeBulletObject;
+	class UseWepon;
 
 	//--------------------------------------------------------------------------------------
 	///	チャージ銃
 	//--------------------------------------------------------------------------------------
-	class ChargeGun : public WeponBase<ChargeBulletObject>
+	class ChargeGun : public WeponBase
 	{
+		std::weak_ptr<UseWepon> m_useWepon;
+
 	public:
 		ChargeGun(const std::shared_ptr<GameObject>& objPtr);
 
@@ -28,13 +31,10 @@ namespace basecross {
 		void OnLateStart() override;
 		void OnUpdate() override;
 
-		std::shared_ptr<ChargeBulletObject> Shot(const Vec3& direct) override;
+		std::shared_ptr<BulletObjectBase> Shot(const Vec3& direct) override;
 
 	private:
-		/// <summary>
-		/// Shotアニメーション中の更新処理
-		/// </summary>
-		void UpdateShotAnimation();
+		void UpdateAnimation();
 
 		/// <summary>
 		/// アニメーションの再生
@@ -45,6 +45,17 @@ namespace basecross {
 		/// 撃つ方向の修正
 		/// </summary>
 		void RevisionShotDirection();
+
+	public:
+		//--------------------------------------------------------------------------------------
+		///	アクセッサ
+		//--------------------------------------------------------------------------------------
+
+		/// <summary>
+		/// 撃てる状態かどうか
+		/// </summary>
+		/// <returns>撃てる状態ならtrue</returns>
+		bool IsShot() const;
 	};
 
 }
