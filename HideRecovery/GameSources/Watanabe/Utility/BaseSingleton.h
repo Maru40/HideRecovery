@@ -48,7 +48,7 @@ namespace basecross {
 		 * @return インスタンス
 		 */
 		static unique_ptr<T, Deleter>& GetInstance(bool exceptionActive = false) {
-			if (!m_instance) {
+			if (!CheckInstance()) {
 				if (!exceptionActive) {
 					CreateInstance();
 				}
