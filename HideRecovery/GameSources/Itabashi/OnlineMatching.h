@@ -43,6 +43,8 @@ namespace Online
 		int GetPlayerCount() const;
 
 		void Reset();
+
+		static int GetPlayerNumberToGameNumber(int gameNumber) { return m_playerNumbers[gameNumber]; }
 	};
 }
 }
