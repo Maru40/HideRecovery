@@ -7,14 +7,15 @@
 #include "Block.h"
 #include "../Utility/DataExtracter.h"
 #include "../Utility/AdvMeshUtil.h"
+#include "GameStageBase.h"
 
 namespace basecross {
 	Block::Block(const shared_ptr<Stage>& stage, const BlockType blockType)
-		:StageObjectBase(stage, L"Block"), m_blockType(blockType)
+		:StageObjectBase(stage, L"Block"), m_blockType(blockType), m_isReactCamera(true)
 	{}
 
 	Block::Block(const shared_ptr<Stage>& stage, const wstring& line)
-		: StageObjectBase(stage, L"Block")
+		: StageObjectBase(stage, L"Block"), m_isReactCamera(true)
 	{
 		vector<wstring> tokens = DataExtracter::DelimitData(line);
 		size_t nextIndex = DataExtracter::TransformDataExtraction(tokens, m_transformData);
@@ -32,6 +33,10 @@ namespace basecross {
 				L"Block::Block(const shared_ptr<Stage>& stage, const wstring& line)"
 			);
 		}
+
+		if (tokens.size() > nextIndex + 1) {
+			m_isReactCamera = Utility::WStrToBool(tokens[nextIndex + 1]);
+		}
 	}
 
 	void Block::OnCreate() {
@@ -45,8 +50,10 @@ namespace basecross {
 			drawComp->SetMeshResource(L"DEFAULT_CUBE");
 			drawComp->SetTextureResource(L"Wall01_TX");
 
-			AddTag(L"T_Obstacle");
-			AddTag(L"Wall");
+			if (m_isReactCamera) {
+				AddTag(L"T_Obstacle");
+				AddTag(L"Wall");
+			}
 			break;
 		case BlockType::Floor:
 		{
@@ -61,8 +68,10 @@ namespace basecross {
 
 			AddTag(L"Floor");
 
-			// 床のオブジェクトを取得できるようにする
-			GetStage()->SetSharedGameObject(L"Floor", GetThis<Block>());
+			auto stage = GetTypeStage<GameStageBase>(false);
+			if (stage) {
+				stage->AddFloorObject(GetThis<Block>());
+			}
 		}
 		break;
 		default:

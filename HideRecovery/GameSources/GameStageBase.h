@@ -24,6 +24,7 @@ namespace basecross {
 		//--------------------------------------------------------------------------------------
 
 		ex_weak_ptr<PlayerObject> m_player;
+		std::vector<std::shared_ptr<GameObject>> m_floors; // 床に対応するオブジェクト
 
 		//--------------------------------------------------------------------------------------
 		/// カメラ
@@ -147,6 +148,14 @@ namespace basecross {
 		/// </summary>
 		/// <returns>スタートカメラ</returns>
 		std::shared_ptr<StartCamera> ChangeStartCamera();
+
+		/// <summary>
+		/// 床に対応するオブジェクトを追加
+		/// </summary>
+		/// <param name="obj">オブジェクト</param>
+		void AddFloorObject(std::shared_ptr<GameObject> obj) {
+			m_floors.push_back(obj);
+		}
 	};
 }
 //end basecross

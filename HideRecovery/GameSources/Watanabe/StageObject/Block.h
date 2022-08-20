@@ -15,8 +15,12 @@ namespace basecross {
 			Floor	// 床
 		};
 	private:
+		// ブロックの種類
 		BlockType m_blockType;
+		// メッシュデータ
 		shared_ptr<MeshResource> m_meshRes;
+		// このオブジェクトがカメラを遮るか
+		bool m_isReactCamera;
 	public:
 		Block(const shared_ptr<Stage>& stage, const BlockType blockType);
 		Block(const shared_ptr<Stage>& stage, const wstring& line);
