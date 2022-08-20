@@ -116,8 +116,6 @@ namespace basecross {
 		auto path = dir + L"MapDatas/";
 		builder.Build(GetThis<Stage>(), path + L"StageS2.csv");
 
-		auto floor = GetSharedGameObject<Block>(L"Floor");
-
 		//AddGameObject<NumberSprite>()->SetValue(5);
 		//m_obj = AddGameObject<GameStartUI>();
 		m_obj = AddGameObject<CountDownUI>();

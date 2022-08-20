@@ -97,15 +97,10 @@ namespace basecross {
 		auto path = dir + L"MapDatas/";
 		builder.Build(GetThis<Stage>(), path + fileName);
 
-		auto floor = GetSharedGameObject<Block>(L"Floor");
-
-		vector<shared_ptr<GameObject>> floors = { floor };
-
 		//フィールドの影響マップの生成
-		AddGameObject<GameObject>()->AddComponent<maru::FieldImpactMap>(maru::Utility::ConvertArrayType<GameObject>(floors));
-
+		//AddGameObject<GameObject>()->AddComponent<maru::FieldImpactMap>(maru::Utility::ConvertArrayType<GameObject>(m_floors));
 		//外側コリジョン設定
-		CreateMapOutCollisions(floors);
+		CreateMapOutCollisions(m_floors);
 	}
 
 	void GameStageBase::CreateMapOutCollision(const Vec3& startPosition, const Vec3& forward, const float& length, const float& width, const float& height) {

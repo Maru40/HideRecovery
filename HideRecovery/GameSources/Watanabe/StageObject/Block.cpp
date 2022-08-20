@@ -7,6 +7,7 @@
 #include "Block.h"
 #include "../Utility/DataExtracter.h"
 #include "../Utility/AdvMeshUtil.h"
+#include "GameStageBase.h"
 
 namespace basecross {
 	Block::Block(const shared_ptr<Stage>& stage, const BlockType blockType)
@@ -67,9 +68,9 @@ namespace basecross {
 
 			AddTag(L"Floor");
 
-			if (!GetStage()->GetSharedGameObject<Block>(L"Floor", false)) {
-				// 床のオブジェクトを取得できるようにする
-				GetStage()->SetSharedGameObject(L"Floor", GetThis<Block>());
+			auto stage = GetTypeStage<GameStageBase>(false);
+			if (stage) {
+				stage->AddFloorObject(GetThis<Block>());
 			}
 		}
 		break;
