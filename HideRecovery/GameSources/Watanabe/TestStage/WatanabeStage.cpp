@@ -111,12 +111,6 @@ namespace basecross {
 		//AddGameObject<NumberSprite>()->SetValue(5);
 		//m_obj = AddGameObject<GameStartUI>();
 		m_obj = AddGameObject<CountDownUI>();
-
-		PointManager::GetInstance()->AddPoint(Team::East);
-		PointManager::GetInstance()->AddPoint(Team::East);
-		PointManager::GetInstance()->AddPoint(Team::West);
-		Debug::GetInstance()->Log(PointManager::GetInstance()->GetPoint(Team::East));
-		Debug::GetInstance()->Log(PointManager::GetInstance()->GetPoint(Team::West));
 	}
 
 	void WatanabeStage::OnUpdate() {
@@ -131,5 +125,8 @@ namespace basecross {
 			dynamic_pointer_cast<CountDownUI>(m_obj)->Start();
 			Debug::GetInstance()->Log(L"Start");
 		}
+
+		TimeManager::GetInstance()->UpdateTime();
+		Debug::GetInstance()->Log(TimeManager::GetInstance()->GetTimer().GetElaspedTime());
 	}
 }
