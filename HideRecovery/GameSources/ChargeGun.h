@@ -25,15 +25,16 @@ namespace basecross {
 		ChargeGun(const std::shared_ptr<GameObject>& objPtr);
 
 		void OnCreate() override;
+		void OnLateStart() override;
 		void OnUpdate() override;
 
 		std::shared_ptr<ChargeBulletObject> Shot(const Vec3& direct) override;
 
 	private:
 		/// <summary>
-		/// アニメーションの更新
+		/// Shotアニメーション中の更新処理
 		/// </summary>
-		void UpdateAnimation();
+		void UpdateShotAnimation();
 
 		/// <summary>
 		/// アニメーションの再生
