@@ -33,7 +33,7 @@ namespace basecross
 			return;
 		}
 
-		if (PlayerInputer::IsDecision() && Online::OnlineManager::GetLocalPlayer().getIsMasterClient())
+		if (PlayerInputer::IsDecision() && Online::OnlineManager::GetLocalPlayer().getIsMasterClient() && onlineMatching->GetPlayerCount() > 0)
 		{
 			Online::OnlineManager::GetCurrentlyJoinedRoom().setIsOpen(false);
 			PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToMainStage");
