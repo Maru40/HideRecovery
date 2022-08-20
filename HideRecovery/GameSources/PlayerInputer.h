@@ -95,6 +95,7 @@ namespace basecross
 		static bool IsRBDown();
 		static bool IsRBUp();
 		static bool IsLBDown();
+		static bool IsLBUp();
 
 		//デバッグ系--------------------------------------------------------------
 
