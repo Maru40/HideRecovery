@@ -23,6 +23,10 @@
 #include "../Utility/CSVLoad.h"
 #include "../Component/PlayerAnimator.h"
 #include "PlayerAnimationCtrl.h"
+#include "../UI/Numbers.h"
+#include "../UI/CountDownUI.h"
+#include "../UI/SimpleSprite.h"
+#include "../UI///GameStartUI.h"
 
 namespace basecross {
 	void WatanabeStage::CreateViewLight() {
@@ -45,12 +49,7 @@ namespace basecross {
 		AddGameObject<EfkInterface>();
 		AddGameObject<Debug>();
 		Debug::GetInstance()->Log(L"WatanabeStage");
-		{
-			wstring mediaDir;
-			mediaDir = App::GetApp()->GetDataDirWString();
-			wstring dir = mediaDir + L"Models/";
-			CSVLoad::GetInstance()->RegisterFile(L"PlayerAnimation", dir + L"Player/PlayerAnimation.csv");
-		}
+
 		auto testObj = AddGameObject<GameObject>();
 		auto efkComp = testObj->AddComponent<EfkComponent>();
 		efkComp->SetEffectResource(L"TestEffect");
@@ -105,7 +104,11 @@ namespace basecross {
 		builder.Register<RackObject>(L"Rack");
 		auto dir = App::GetApp()->GetDataDirWString();
 		auto path = dir + L"MapDatas/";
-		builder.Build(GetThis<Stage>(), path + L"StageS2.csv");
+		builder.Build(GetThis<Stage>(), path + L"TestStage.csv");
+
+		//AddGameObject<NumberSprite>()->SetValue(5);
+		//m_obj = AddGameObject<GameStartUI>();
+		m_obj = AddGameObject<CountDownUI>();
 	}
 
 	void WatanabeStage::OnUpdate() {
@@ -115,30 +118,10 @@ namespace basecross {
 		//m_delta += delta;
 		static const auto& inputDevice = App::GetApp()->GetMyInputDevice();
 		static const auto& keyBoard = inputDevice->GetKeyBoard();
-		auto animator = m_obj->GetComponent<PlayerAnimator>();
 		if (keyBoard.IsInputDown(KeyCode::Alpha1)) {
-			animator->ChangePlayerAnimation(PlayerAnimationState::State::Wait);
-			Debug::GetInstance()->Log(L"Wait");
-		}
-		else if (keyBoard.IsInputDown(KeyCode::Alpha2)) {
-			animator->ChangePlayerAnimation(PlayerAnimationState::State::Walk_L);
-			Debug::GetInstance()->Log(L"Walk_L");
-		}
-		else if (keyBoard.IsInputDown(KeyCode::Alpha3)) {
-			animator->ChangePlayerAnimation(PlayerAnimationState::State::Walk_R);
-			Debug::GetInstance()->Log(L"Walk_R");
-		}
-		else if (keyBoard.IsInputDown(KeyCode::Alpha4)) {
-			animator->ChangePlayerAnimation(PlayerAnimationState::State::Dash);
-			Debug::GetInstance()->Log(L"Dash");
-		}
-		else if (keyBoard.IsInputDown(KeyCode::Alpha5)) {
-			animator->ChangePlayerAnimation(PlayerAnimationState::State::PutItem_Floor);
-			Debug::GetInstance()->Log(L"PutItem_Floor");
-		}
-		else if (keyBoard.IsInputDown(KeyCode::Alpha6)) {
-			animator->ChangePlayerAnimation(PlayerAnimationState::State::PutItem_HideObject);
-			Debug::GetInstance()->Log(L"PutItem_HideObject");
+			//AddGameObject<GameStartUI>()->Start();
+			dynamic_pointer_cast<CountDownUI>(m_obj)->Start();
+			Debug::GetInstance()->Log(L"Start");
 		}
 	}
 }

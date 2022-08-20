@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0"
+  xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Headers">
       <UniqueIdentifier>{4b0a624a-610d-4bc6-b311-2b02a781cdf9}</UniqueIdentifier>
@@ -880,6 +881,33 @@
     <Filter Include="Maruyama\StageObject\GoalObject\Component">
       <UniqueIdentifier>{aee89945-4d3a-4402-a8bf-813411de8856}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\UI">
+      <UniqueIdentifier>{e8863cfa-4fe2-437d-93d1-f13e7ca99ade}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\UI\Numbers">
+      <UniqueIdentifier>{836206bd-eab5-4746-88f2-7de19e53e09c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\UI\SpriteDataManager">
+      <UniqueIdentifier>{61313965-a2c9-4caf-b51e-88efb28c78df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\UI\CountDownUI">
+      <UniqueIdentifier>{12bc70fa-39b8-4d37-a860-cafacffd7d9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\UI\SimpleSprite">
+      <UniqueIdentifier>{cbb30077-a9d6-453d-8cac-567a7bc4bd0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\UI\GameStartUI">
+      <UniqueIdentifier>{ef13040a-724c-48d3-af61-80c192abe0f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\Component\LifeSpan">
+      <UniqueIdentifier>{a34577d2-92b2-4f50-a078-f939f37bed24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\Component\FadeComponent">
+      <UniqueIdentifier>{5b03eec8-ab13-4009-8bf7-2adb63583526}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\Utility\TimeCounter">
+      <UniqueIdentifier>{58fee1e5-7785-48cc-80a9-ba305df7349e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1629,6 +1657,30 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageTransitioner.h">
       <Filter>Itabashi\Component\MatchStageTransitioner</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\Numbers.h">
+      <Filter>Watanabe\UI\Numbers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\SpriteDataManager.h">
+      <Filter>Watanabe\UI\SpriteDataManager</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\CountDownUI.h">
+      <Filter>Watanabe\UI\CountDownUI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\SimpleSprite.h">
+      <Filter>Watanabe\UI\SimpleSprite</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\GameStartUI.h">
+      <Filter>Watanabe\UI\GameStartUI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\FadeComponent.h">
+      <Filter>Watanabe\Component\FadeComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\LifeSpan.h">
+      <Filter>Watanabe\Component\LifeSpan</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\TimeCounter.h">
+      <Filter>Watanabe\Utility\TimeCounter</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2296,6 +2348,30 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageTransitioner.cpp">
       <Filter>Itabashi\Component\MatchStageTransitioner</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\Numbers.cpp">
+      <Filter>Watanabe\UI\Numbers</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\SpriteDataManager.cpp">
+      <Filter>Watanabe\UI\SpriteDataManager</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\CountDownUI.cpp">
+      <Filter>Watanabe\UI\CountDownUI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\SimpleSprite.cpp">
+      <Filter>Watanabe\UI\SimpleSprite</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\GameStartUI.cpp">
+      <Filter>Watanabe\UI\GameStartUI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\FadeComponent.cpp">
+      <Filter>Watanabe\Component\FadeComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\LifeSpan.cpp">
+      <Filter>Watanabe\Component\LifeSpan</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Utility\TimeCounter.cpp">
+      <Filter>Watanabe\Utility\TimeCounter</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

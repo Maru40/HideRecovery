@@ -29,6 +29,10 @@ namespace basecross
 	{
 		ResourceLoadData(L"Floor_TX", L"floorRock_TX.png"),
 		ResourceLoadData(L"Wall01_TX", L"Wall01_TX.png"),
+		ResourceLoadData(L"Numbers_TX",L"Numbers_TX.png"),
+		ResourceLoadData(L"StartAndFinish_TX",L"StartAndFinish_TX.png"),
+		ResourceLoadData(L"Relocation_TX",L"Relocation_TX.png"),
+		ResourceLoadData(L"Team_TX",L"Team_TX.png"),
 
 		//ResourceLoadData(L"gauge", L"Gauge.png"),
 		//ResourceLoadData(L"clear", L"StageClear.png"),
@@ -268,10 +272,13 @@ namespace basecross
 
 		loadThread.detach();
 
+		// CSVファイルの読み込み（できれば関数で分けたい）
 		wstring mediaDir;
 		mediaDir = App::GetApp()->GetDataDirWString();
 		wstring dir = mediaDir + L"Models/";
 		CSVLoad::GetInstance()->RegisterFile(L"PlayerAnimation", dir + L"Player/PlayerAnimation.csv");
+		dir = mediaDir + L"CSVDatas/";
+		CSVLoad::GetInstance()->RegisterFile(L"SpriteData", dir + L"SpriteData.csv");
 	}
 
 	void LoadStage::OnUpdate()
