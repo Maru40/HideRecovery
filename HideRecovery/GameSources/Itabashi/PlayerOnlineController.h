@@ -12,6 +12,7 @@ namespace basecross
 	class PlayerStatus;
 	class TackleAttack;
 	class ChargeBullet;
+	class UseWepon;
 
 	struct DamageData;
 
@@ -74,6 +75,8 @@ namespace Online
 		std::weak_ptr<PlayerStatus> m_playerStatus;
 
 		std::weak_ptr<TackleAttack> m_tackleAttack;
+
+		std::weak_ptr<UseWepon> m_useWepon;
 
 		/// <summary>
 		/// 対応するプレイヤー番号
