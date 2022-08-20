@@ -4,4 +4,9 @@
 namespace basecross {
 	// インスタンスの初期化
 	unique_ptr<ScoreManager, ScoreManager::Deleter> ScoreManager::m_instance = nullptr;
+
+	int ScoreManager::GetScore(Team team) {
+	}
+	void ScoreManager::AddScore() {
+	}
 }
