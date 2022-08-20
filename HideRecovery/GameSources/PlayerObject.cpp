@@ -53,7 +53,7 @@ namespace basecross {
 
 	void PlayerObject::OnCreate() {
 		Mat4x4 spanMat;
-		const float fScale = 0.6f;
+		const float fScale = 0.8f;
 		Vec3 scale = Vec3(fScale);
 		spanMat.affineTransformation(
 			scale,
@@ -67,9 +67,10 @@ namespace basecross {
 		draw->SetMeshToTransformMatrix(spanMat);
 		SetAlphaActive(true);
 
-		transform->SetScale(Vec3(1.0f, 1.5f, 1.0f));
-
-		AddComponent<CollisionObb>();
+		auto collision = AddComponent<CollisionObb>();
+		//collision->SetDrawActive(true);
+		constexpr float CollisionSize = 1.0f;
+		collision->SetMakedSize(CollisionSize);
 		AddComponent<maru::CollisionAction>();
 		AddComponent<RotationController>();
 		//AddComponent<PlayerController>();
@@ -96,6 +97,9 @@ namespace basecross {
 		AddComponent<Respawner>();
 		AddComponent<PlayerDeader>();
 		AddComponent<UseWepon>();
+
+		constexpr float ScaleValue = 1.0f;
+		transform->SetScale(Vec3(ScaleValue));
 			
 		//カメラセッティング----------------------------------------------------------
 
