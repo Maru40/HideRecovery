@@ -13,8 +13,8 @@ namespace basecross
 			XMConvertToRadians(-90.0f),      //初期回転位置
 			3.0f,                            //Y軸回転スピード
 			3.0f,                            //Z軸回転スピード
-			XMConvertToRadians(10.0f),       //Y軸の最大値
-			XMConvertToRadians(10.0f),      //Y軸の最小値
+			XMConvertToRadians(17.0f),       //Y軸の最大値
+			XMConvertToRadians(17.0f),       //Y軸の最小値
 			100.0f)                          //追従スピード
 	{}
 
@@ -43,7 +43,7 @@ namespace basecross
 	{}
 
 	SpringArmComponent::SpringArmComponent(std::shared_ptr<GameObject>& owner) :
-		Component(owner), m_armRange(10.0f)
+		Component(owner), m_armRange(6.0f)
 	{
 
 	}
