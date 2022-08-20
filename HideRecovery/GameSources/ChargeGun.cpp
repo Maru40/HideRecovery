@@ -61,8 +61,6 @@ namespace basecross {
 	}
 
 	std::shared_ptr<BulletObjectBase> ChargeGun::Shot(const Vec3& direct) {
-		RevisionShotDirection();
-
 		//音の再生
 		if (auto soundManager = SoundManager::GetInstance()) {
 			constexpr float Volume = 0.1f;
