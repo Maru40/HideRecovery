@@ -14,6 +14,7 @@ namespace basecross {
 	/// 前方宣言
 	//--------------------------------------------------------------------------------------
 	class WeponBase;
+	class RotationController;
 
 	namespace maru {
 		class ReactiveBool;
@@ -50,6 +51,8 @@ namespace basecross {
 
 		std::weak_ptr<WeponBase> m_wepon;	//武器
 
+		std::weak_ptr<RotationController> m_rotationController;	//回転コントローラー
+
 	public:
 		/// <summary>
 		/// コンストラクタ
@@ -74,6 +77,11 @@ namespace basecross {
 		/// エイム中の更新処理
 		/// </summary>
 		void AimUpdate();
+
+		/// <summary>
+		/// 回転更新
+		/// </summary>
+		void RotationUpdate();
 
 		/// <summary>
 		/// エイム状態を切り替えたときに呼び出したい処理の設定
