@@ -37,6 +37,8 @@ namespace basecross {
 			/// <param name="b">boolの初期値</param>
 			ReactiveBool(const bool b);
 
+			virtual ~ReactiveBool() = default;
+
 		public:
 			//--------------------------------------------------------------------------------------
 			///	アクセッサ
