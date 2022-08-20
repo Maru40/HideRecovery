@@ -251,6 +251,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Effekseer\EfkEffect.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Effekseer\EfkEffectResource.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Effekseer\EfkInterface.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Interface\I_Performable.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Manager\PointManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Manager\SpriteDataManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Manager\TimeManager.h" />

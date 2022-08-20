@@ -919,6 +919,12 @@
     <Filter Include="Watanabe\Manager\PointManager">
       <UniqueIdentifier>{1d34191b-57ea-4e96-9a2b-d3c6e6bc42f4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\Interface">
+      <UniqueIdentifier>{7bc954cf-c74f-4568-b2f2-0bf556c984df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\Interface\I_Performable">
+      <UniqueIdentifier>{64d98f04-ab65-4a3e-9586-93fb87df4204}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1700,6 +1706,9 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Manager\TimeManager.h">
       <Filter>Watanabe\Manager\TimeManager</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Interface\I_Performable.h">
+      <Filter>Watanabe\Interface\I_Performable</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
