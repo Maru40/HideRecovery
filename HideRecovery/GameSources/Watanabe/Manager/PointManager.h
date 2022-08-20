@@ -18,9 +18,9 @@ namespace basecross {
 		/// <summary>
 		/// 点数を1点追加
 		/// </summary>
-		void AddPoint();
+		void AddPoint(Team team);
 	private:
-		PointManager() {}
+		PointManager();
 		~PointManager() {}
 		friend class BaseSingleton<PointManager>;
 	};
