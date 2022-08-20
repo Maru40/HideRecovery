@@ -4,7 +4,7 @@
 #include "../StageObject/PlayerSpawnPointObject.h"
 
 namespace basecross {
-	class ScoreManager :public BaseSingleton<ScoreManager> {
+	class PointManager :public BaseSingleton<PointManager> {
 		// それぞれのチームのスコア
 		unordered_map<Team, int> m_teamScoreMap;
 	public:
@@ -13,15 +13,15 @@ namespace basecross {
 		/// </summary>
 		/// <param name="team">どのチームのポイントか</param>
 		/// <returns>そのチームの点数</returns>
-		int GetScore(Team team);
+		int GetPoint(Team team);
 
 		/// <summary>
 		/// 点数を1点追加
 		/// </summary>
-		void AddScore();
+		void AddPoint();
 	private:
-		ScoreManager() {}
-		~ScoreManager() {}
-		friend class BaseSingleton<ScoreManager>;
+		PointManager() {}
+		~PointManager() {}
+		friend class BaseSingleton<PointManager>;
 	};
 }
