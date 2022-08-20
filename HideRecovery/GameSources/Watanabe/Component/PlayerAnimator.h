@@ -24,11 +24,32 @@ namespace basecross {
 		{}
 	};
 
+	struct AnimationEvent {
+		std::function<void()> start;
+		std::function<bool()> update;
+		std::function<void()> exit;
+
+		AnimationEvent():
+			AnimationEvent(nullptr, nullptr, nullptr)
+		{}
+
+		AnimationEvent(
+			const std::function<void()>& start, 
+			const std::function<bool()>& update,
+			const std::function<void()>& exit
+		) :
+			start(start),
+			update(update),
+			exit(exit)
+		{}
+	};
+
 	class PlayerAnimator :public Animator {
 		std::weak_ptr<VelocityManager> m_velocityManager;
 
 		std::unordered_map<wstring, TransitionData> m_transitionDataMap;
-
+		std::unordered_map<wstring, std::vector<AnimationEvent>> m_animationEventsMap;
+		
 	public:
 		PlayerAnimator(const shared_ptr<GameObject>& owner);
 		void OnCreate()override;
@@ -37,6 +58,10 @@ namespace basecross {
 
 	private:
 		void Transition();
+
+		void StartEvent();
+		void UpdateEvent();
+		void ExitEvent();
 
 	public:
 		/// <summary>
@@ -50,6 +75,15 @@ namespace basecross {
 		/// </summary>
 		/// <param name="state">確認したいステート</param>
 		bool IsCurretAnimationState(const PlayerAnimationState::State& state) const;
+
+		void AddAnimationEvent(
+			const PlayerAnimationState::State& state,
+			const std::function<void()>& start,
+			const std::function<bool()>& update,
+			const std::function<void()>& exit
+		);
+
+		void AddAnimationEvent(const PlayerAnimationState::State& state, const AnimationEvent& animationEvent);
 
 	};
 }
