@@ -29,6 +29,7 @@
 #include "../UI///GameStartUI.h"
 #include "../Manager/PointManager.h"
 #include "../Manager/TimeManager.h"
+#include "../StageObject/FireworksObject.h"
 
 namespace basecross {
 	void WatanabeStage::CreateViewLight() {
@@ -111,6 +112,8 @@ namespace basecross {
 		//AddGameObject<NumberSprite>()->SetValue(5);
 		//m_obj = AddGameObject<GameStartUI>();
 		m_obj = AddGameObject<CountDownUI>();
+
+		m_per = AddGameObject<FireworksObject>();
 	}
 
 	void WatanabeStage::OnUpdate() {
@@ -125,8 +128,8 @@ namespace basecross {
 			dynamic_pointer_cast<CountDownUI>(m_obj)->Start();
 			Debug::GetInstance()->Log(L"Start");
 		}
-
-		TimeManager::GetInstance()->UpdateTime();
-		Debug::GetInstance()->Log(TimeManager::GetInstance()->GetTimer().GetElaspedTime());
+		else if (keyBoard.IsInputDown(KeyCode::Alpha2)) {
+			m_per->Start();
+		}
 	}
 }
