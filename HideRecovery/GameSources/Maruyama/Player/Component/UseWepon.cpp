@@ -18,6 +18,8 @@
 
 #include "Watanabe/Component/PlayerAnimator.h"
 
+#include "RotationController.h"
+
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
@@ -51,6 +53,8 @@ namespace basecross {
 
 	void UseWepon::OnLateStart() {
 		SettingReactiveIsAim();
+
+		m_rotationController = GetGameObject()->GetComponent<RotationController>(false);
 	}
 
 	void UseWepon::OnUpdate() {
@@ -69,7 +73,18 @@ namespace basecross {
 	}
 
 	void UseWepon::AimUpdate() {
+		RotationUpdate();
+	}
 
+	void UseWepon::RotationUpdate() {
+		auto camera = GetStage()->GetView()->GetTargetCamera();
+		auto rotationController = m_rotationController.lock();
+		if (!camera || !rotationController) {
+			return;
+		}
+
+		auto cameraForward = camera->GetAt() - camera->GetEye();
+		rotationController->SetDirect(cameraForward);
 	}
 
 	void UseWepon::SettingReactiveIsAim() {
