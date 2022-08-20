@@ -26,8 +26,6 @@ namespace Online
 	public:
 		OnlineMatching(const std::shared_ptr<GameObject>& owner);
 
-		void OnCreate() override;
-
 		void OnCreateRoom() override;
 
 		void OnJoinRoom() override;
