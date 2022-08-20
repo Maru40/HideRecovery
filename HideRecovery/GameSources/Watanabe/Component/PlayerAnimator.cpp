@@ -101,7 +101,6 @@ namespace basecross {
 	}
 
 	void PlayerAnimator::ExitEvent() {
-		//終了イベントを呼ぶ
 		auto draw = GetGameObject()->GetComponent<PNTBoneModelDraw>();
 		auto currentAnimation = draw->GetCurrentAnimation();
 		auto events = m_animationEventsMap[currentAnimation];

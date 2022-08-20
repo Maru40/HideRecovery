@@ -16,4 +16,7 @@ namespace basecross {
 		Component(objPtr)
 	{}
 
+	void Teleport::OpenMap() {
+
+	}
 }
