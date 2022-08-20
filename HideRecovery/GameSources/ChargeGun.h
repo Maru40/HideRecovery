@@ -34,6 +34,9 @@ namespace basecross {
 		std::shared_ptr<BulletObjectBase> Shot(const Vec3& direct) override;
 
 	private:
+		/// <summary>
+		/// アニメーションの更新
+		/// </summary>
 		void UpdateAnimation();
 
 		/// <summary>

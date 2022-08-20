@@ -27,12 +27,15 @@
 #include "Itabashi/OnlineManager.h"
 #include "Itabashi/PlayerOnlineController.h"
 
+#include "Watanabe/Manager/PointManager.h"
+
+#include "GameTimer.h"
+
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
-	/// ゴール管理クラスのパラメータ
+	/// オンライン用データ
 	//--------------------------------------------------------------------------------------
-
 	struct OnlineGoalData
 	{
 		Team team;
@@ -45,13 +48,17 @@ namespace basecross {
 			playerNumber(playerNumber),
 			itemId(itemId),
 			hidePosition(hidePosition)
-		{
-
-		}
+		{}
 	};
 
+	//--------------------------------------------------------------------------------------
+	/// ゴール管理クラスのパラメータ
+	//--------------------------------------------------------------------------------------
+
 	Goal_Parametor::Goal_Parametor(const Team& team) :
-		team(team)
+		team(team),
+		itemHiderTime(3.0f),
+		timeDrawPosition(Vec3(0.0f, 0.0f, 0.0f))
 	{}
 
 	//--------------------------------------------------------------------------------------
@@ -59,7 +66,9 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 
 	Goal::Goal(const std::shared_ptr<GameObject>& objPtr, const Parametor& parametor):
-		OnlineComponent(objPtr), m_param(parametor)
+		OnlineComponent(objPtr),
+		m_param(parametor),
+		m_timer(new GameTimer(0))
 	{}
 
 	void Goal::OnCreate() {
@@ -67,14 +76,23 @@ namespace basecross {
 	}
 
 	void Goal::OnUpdate() {
+		if (!m_timer->IsTimeUp()) {
+			TimerUpdate();
+		}
+	}
 
+	void Goal::TimerUpdate() {
+		m_timer->UpdateTimer();
+
+		//残り時間を渡す。
+		float leftTime = m_timer->GetLeftTime();
 	}
 
 	void Goal::SuccessGoal(const CollisionPair& pair) {
 		auto other = pair.m_Dest.lock()->GetGameObject();
 
 		//ポイント加算
-
+		AddPoint(GetTeam());
 
 		//アイテム削除
 		if (auto itemBag = other->GetComponent<ItemBag>(false)) {
@@ -83,15 +101,21 @@ namespace basecross {
 			itemBag->RemoveItem(hideItem->GetGameObject()->GetComponent<Item>(false));
 			auto onlineController = other->GetComponent<Online::PlayerOnlineController>();
 
-			//アイテム再配置
+			//再配置場所の取得
 			auto hidePlaces = maru::Utility::FindComponents<HidePlace>();
 			auto hidePlace = maru::MyRandom::RandomArray(hidePlaces);
-			
-			auto hider = hideItem->GetObjectHider();
-			hider->Appear(hidePlace->GetHidePosition());
+
+			//アイテム再配置イベント
+			auto itemHiderEvent = [hideItem, hidePlace]() {
+				auto hider = hideItem->GetObjectHider();
+				hider->Appear(hidePlace->GetHidePosition());
+			};
 
 			auto data = OnlineGoalData(m_param.team, onlineController->GetPlayerNumber(), item->GetItemId(), hidePlace->GetHidePosition());
 			Online::OnlineManager::RaiseEvent(false, (std::uint8_t*)&data, sizeof(OnlineGoalData), EXECUTE_GOAL_EVENT_CODE);
+
+			//カウントダウンスタート
+			StartCountDown(itemHiderEvent);
 		}
 
 		Debug::GetInstance()->Log(L"SuccessGoal");
@@ -108,7 +132,7 @@ namespace basecross {
 		auto other = onlineController->GetGameObject();
 
 		//ポイント加算
-
+		AddPoint(GetTeam());
 
 		//アイテム削除
 		if (auto itemBag = other->GetComponent<ItemBag>(false)) {
@@ -116,11 +140,27 @@ namespace basecross {
 			auto hideItem = item->GetGameObject()->GetComponent<HideItem>();
 			itemBag->RemoveItem(item);
 
-			auto hider = hideItem->GetObjectHider();
-			hider->Appear(hidePosition);
+			//アイテムの配置イベント
+			auto itemHiderEvent = [hideItem, hidePosition]() {
+				auto hider = hideItem->GetObjectHider();
+				hider->Appear(hidePosition);
+			};
+
+			//カウントダウン開始
+			StartCountDown(itemHiderEvent);
 		}
 
 		Debug::GetInstance()->Log(L"SuccessGoal");
+	}
+
+	void Goal::AddPoint(const Team& team) {
+		if (auto& pointManager = PointManager::GetInstance()) {
+			pointManager->AddPoint(team);
+		}
+	}
+
+	void Goal::StartCountDown(const std::function<void()>& endEvent) {
+		m_timer->ResetTimer(m_param.itemHiderTime, endEvent);
 	}
 
 	bool Goal::IsCollision(const CollisionPair& pair) const {
