@@ -74,6 +74,11 @@ namespace basecross {
 		/// タックル中かどうか
 		/// </summary>
 		bool IsTackle();
+
+		/// <summary>
+		/// タスクの強制終了
+		/// </summary>
+		void ForceTaskReset();
 	};
 
 	//--------------------------------------------------------------------------------------
