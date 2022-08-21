@@ -55,10 +55,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Bullet\Object\BulletObjectBase.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Interface\I_TaskLister.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Interface\I_TeamMember.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\GoalAnimationController.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\OwnArea.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\PlayerDeader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\PlayerSpawnPoint.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\Respawner.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\Task_GoalAnimation.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\Teleport.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\UseOwnArea.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineMatching.h" />
@@ -331,10 +333,12 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)LookAtCameraManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Interface\I_TaskLister.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Interface\I_TeamMember.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\GoalAnimationController.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\OwnArea.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\PlayerDeader.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\PlayerSpawnPoint.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\Respawner.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\Task_GoalAnimation.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\Teleport.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\UseOwnArea.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\UseWepon.cpp" />

@@ -925,6 +925,12 @@
     <Filter Include="Maruyama\Interface\I_TaskLister">
       <UniqueIdentifier>{d68fd196-517d-428f-875b-9caf8bc5557b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Player\Component\Animation">
+      <UniqueIdentifier>{7af58b20-1132-49a1-b680-216084a49625}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Player\Component\Animation\Task">
+      <UniqueIdentifier>{10779a04-40c6-40b3-90ab-37c6b3756b32}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1713,6 +1719,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Interface\I_TaskLister.h">
       <Filter>Maruyama\Interface\I_TaskLister</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\GoalAnimationController.h">
+      <Filter>Maruyama\Player\Component\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\Task_GoalAnimation.h">
+      <Filter>Maruyama\Player\Component\Animation\Task</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2416,6 +2428,12 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Interface\I_TaskLister.cpp">
       <Filter>Maruyama\Interface\I_TaskLister</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\GoalAnimationController.cpp">
+      <Filter>Maruyama\Player\Component\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\Task_GoalAnimation.cpp">
+      <Filter>Maruyama\Player\Component\Animation\Task</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
