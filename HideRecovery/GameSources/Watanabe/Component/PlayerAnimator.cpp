@@ -8,6 +8,11 @@
 
 #include "VelocityManager.h"
 
+#include "PlayerInputer.h"
+#include "Maruyama/Player/Component/GoalAnimationController.h"
+#include "Maruyama/StageObject/Goal.h"
+#include "MaruUtility.h"
+
 namespace basecross {
 	PlayerAnimator::PlayerAnimator(const shared_ptr<GameObject>& owner)
 		:Animator(owner)
@@ -60,6 +65,16 @@ namespace basecross {
 		//速度が一定より大きいかつ、Wait状態なら
 		if (velocity.length() > TransitionSpeed && IsCurretAnimationState(PlayerAnimationState::State::Wait)) {
 			ChangePlayerAnimation(PlayerAnimationState::State::Dash);
+		}
+
+		return;
+		//デバッグ
+		if (PlayerInputer::GetInstance()->IsUpDown()) {
+			if (auto goalCtrl = GetGameObject()->GetComponent<GoalAnimationController>(false)) {
+				goalCtrl->SetDunkPosition(maru::Utility::FindComponent<Goal>()->GetDunkPosition());
+			}
+
+			ChangePlayerAnimation(PlayerAnimationState::State::Goal1);
 		}
 	}
 
