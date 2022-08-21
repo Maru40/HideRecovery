@@ -13,13 +13,66 @@
 
 namespace basecross {
 	namespace Task {
+		//--------------------------------------------------------------------------------------
+		///	移動タイプ
+		//--------------------------------------------------------------------------------------
+		enum class ToTargetMove_MoveType {
+			Lerp,            //補間
+			Transform,       //通常トランスフォーム
+			SeekVelocity,    //追従速度
+			ArriveVelocity,  //到着速度
+		};
+
+		//--------------------------------------------------------------------------------------
+		///	時間計測タイプ
+		//--------------------------------------------------------------------------------------
+		enum class ToTargetMove_DeltaType {
+			Normal, //通常
+			Real,   //リアルタイム
+		};
 
 		//--------------------------------------------------------------------------------------
 		///	指定箇所まで移動するタスクのパラメータ
 		//--------------------------------------------------------------------------------------
 		struct ToTargetMove_Parametor
 		{
+			using MoveType = ToTargetMove_MoveType;	
+			using DeltaType = ToTargetMove_DeltaType;
 
+			Vec3 startPosition;       //開始位置
+			Vec3 endPosition;         //終了位置
+			float speed;              //移動速度
+			float targetNearRange;    //目的地にたどり着いたと判断する距離
+			MoveType moveType;        //移動タイプ
+			DeltaType deltaType;      //時間計測タイプ
+
+			/// <summary>
+			/// コンストラクタ
+			/// </summary>
+			ToTargetMove_Parametor();
+
+			/// <summary>
+			/// コンストラクタ
+			/// </summary>
+			/// <param name="speed">移動速度</param>
+			/// <param name="taretNearRange">目的地にたどり着いたと判断する距離</param>
+			/// <param name="moveType">移動タイプ</param>
+			/// <param name="deltaType">時間計測タイプ</param>
+			ToTargetMove_Parametor(const float& speed, const float& taretNearRange,
+				const MoveType moveType = MoveType::Lerp, const DeltaType& deltaType = DeltaType::Normal);
+
+			/// <summary>
+			/// コンストラクタ
+			/// </summary>
+			/// <param name="startPosition">開始位置</param>
+			/// <param name="endPosition">終了位置</param>
+			/// <param name="speed">移動速度</param>
+			/// <param name="taretNearRange">目的地にたどり着いたと判断する距離</param>
+			/// <param name="moveType">移動タイプ</param>
+			/// <param name="deltaType">時間計測タイプ</param>
+			ToTargetMove_Parametor(const Vec3& startPosition, const Vec3& endPosition,
+				const float& speed, const float& taretNearRange,
+				const MoveType moveType = MoveType::Lerp, const DeltaType& deltaType = DeltaType::Normal);
 		};
 
 		//--------------------------------------------------------------------------------------
@@ -28,64 +81,9 @@ namespace basecross {
 		class ToTargetMove : public TaskNodeBase<GameObject>
 		{
 		public:
-			//--------------------------------------------------------------------------------------
-			///	移動タイプ
-			//--------------------------------------------------------------------------------------
-			enum class MoveType {
-				Lerp,            //補間
-				Transform,       //通常トランスフォーム
-				SeekVelocity,    //追従速度
-				ArriveVelocity,  //到着速度
-			};
-
-			//--------------------------------------------------------------------------------------
-			///	時間計測タイプ
-			//--------------------------------------------------------------------------------------
-			enum class DeltaType {
-				Normal, //通常
-				Real,   //リアルタイム
-			};
-
-			//--------------------------------------------------------------------------------------
-			///	パラメータ
-			//--------------------------------------------------------------------------------------
-			struct Parametor
-			{
-				Vec3 startPosition;       //開始位置
-				Vec3 endPosition;         //終了位置
-				float speed;              //移動速度
-				float targetNearRange;    //目的地にたどり着いたと判断する距離
-				MoveType moveType;        //移動タイプ
-				DeltaType deltaType;      //時間計測タイプ
-
-				/// <summary>
-				/// コンストラクタ
-				/// </summary>
-				Parametor();
-
-				/// <summary>
-				/// コンストラクタ
-				/// </summary>
-				/// <param name="speed">移動速度</param>
-				/// <param name="taretNearRange">目的地にたどり着いたと判断する距離</param>
-				/// <param name="moveType">移動タイプ</param>
-				/// <param name="deltaType">時間計測タイプ</param>
-				Parametor(const float& speed, const float& taretNearRange,
-					const MoveType moveType = MoveType::Lerp, const DeltaType& deltaType = DeltaType::Normal);
-
-				/// <summary>
-				/// コンストラクタ
-				/// </summary>
-				/// <param name="startPosition">開始位置</param>
-				/// <param name="endPosition">終了位置</param>
-				/// <param name="speed">移動速度</param>
-				/// <param name="taretNearRange">目的地にたどり着いたと判断する距離</param>
-				/// <param name="moveType">移動タイプ</param>
-				/// <param name="deltaType">時間計測タイプ</param>
-				Parametor(const Vec3& startPosition, const Vec3& endPosition,
-					const float& speed, const float& taretNearRange,
-					const MoveType moveType = MoveType::Lerp, const DeltaType& deltaType = DeltaType::Normal);
-			};
+			using Parametor = ToTargetMove_Parametor;
+			using MoveType = ToTargetMove_MoveType;
+			using DeltaType = ToTargetMove_DeltaType;
 
 		private:
 			ex_weak_ptr<Parametor> m_paramPtr;	//パラメータ

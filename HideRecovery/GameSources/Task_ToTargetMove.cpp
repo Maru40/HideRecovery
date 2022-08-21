@@ -19,18 +19,18 @@ namespace basecross {
 		///	ÉpÉâÉÅÅ[É^
 		//--------------------------------------------------------------------------------------
 
-		ToTargetMove::Parametor::Parametor()
-			:Parametor(1.0f, 0.01f, MoveType::Lerp)
+		ToTargetMove_Parametor::ToTargetMove_Parametor() :
+			ToTargetMove_Parametor(1.0f, 0.01f, MoveType::Lerp)
 		{}
 
-		ToTargetMove::Parametor::Parametor(
+		ToTargetMove_Parametor::ToTargetMove_Parametor(
 			const float& speed, const float& taretNearRange,
 			const MoveType moveType, const DeltaType& deltaType
 		) :
-			Parametor(Vec3(0.0f), Vec3(0.0f), speed, taretNearRange, moveType, deltaType)
+			ToTargetMove_Parametor(Vec3(0.0f), Vec3(0.0f), speed, taretNearRange, moveType, deltaType)
 		{}
 
-		ToTargetMove::Parametor::Parametor(
+		ToTargetMove_Parametor::ToTargetMove_Parametor(
 			const Vec3& startPosition,
 			const Vec3& endPosition,
 			const float& speed,
