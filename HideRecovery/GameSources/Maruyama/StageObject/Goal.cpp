@@ -28,8 +28,11 @@
 #include "Itabashi/PlayerOnlineController.h"
 
 #include "Watanabe/Manager/PointManager.h"
+#include "Watanabe/Component/PlayerAnimator.h"
 
 #include "GameTimer.h"
+
+#include "TackleAttack.h"
 
 namespace basecross {
 
@@ -91,6 +94,11 @@ namespace basecross {
 	void Goal::SuccessGoal(const CollisionPair& pair) {
 		auto other = pair.m_Dest.lock()->GetGameObject();
 
+		//タックル状態なら状態をリセット
+		if (auto tackle = other->GetComponent<TackleAttack>(false)) {
+			tackle->ForceTaskReset();
+		}
+
 		//ポイント加算
 		AddPoint(GetTeam());
 
@@ -123,8 +131,7 @@ namespace basecross {
 
 	void Goal::SuccessGoal(Team team, int playerNumber, int itemId, const Vec3& hidePosition)
 	{
-		if (m_param.team != team)
-		{
+		if (GetTeam() != team) {
 			return;
 		}
 
@@ -163,6 +170,17 @@ namespace basecross {
 		m_timer->ResetTimer(m_param.itemHiderTime, endEvent);
 	}
 
+	void Goal::PlayAnimation(const CollisionPair& pair) {
+		auto other = pair.m_Dest.lock()->GetGameObject();
+		auto animator = other->GetComponent<PlayerAnimator>();
+		if (!animator) {
+			return;
+		}
+
+		//ゴールを決めるアニメーションに変更
+		animator->ChangePlayerAnimation(PlayerAnimationState::State::Goal1);
+	}
+
 	bool Goal::IsCollision(const CollisionPair& pair) const {
 		auto other = pair.m_Dest.lock()->GetGameObject();
 		auto teamMember = other->GetComponent<I_TeamMember>(false);
@@ -182,8 +200,7 @@ namespace basecross {
 			return false;
 		}
 
-		if (!Online::OnlineManager::GetLocalPlayer().getIsMasterClient())
-		{
+		if (!Online::OnlineManager::GetLocalPlayer().getIsMasterClient()) {
 			return false;
 		}
 
@@ -194,6 +211,9 @@ namespace basecross {
 		if (!IsCollision(pair)) {	//判定を取らないなら処理を飛ばす。
 			return;
 		}
+
+		//アニメーションの再生
+		PlayAnimation(pair);
 
 		SuccessGoal(pair);
 	}

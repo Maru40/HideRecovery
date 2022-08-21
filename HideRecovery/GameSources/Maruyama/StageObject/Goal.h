@@ -84,6 +84,11 @@ namespace basecross {
 		void StartCountDown(const std::function<void()>& endEvent);
 
 		/// <summary>
+		/// アニメーション再生
+		/// </summary>
+		void PlayAnimation(const CollisionPair& pair);
+
+		/// <summary>
 		/// 当たり判定をとるかどうか
 		/// </summary>
 		/// <param name="pair">当たった相手のデータ</param>
