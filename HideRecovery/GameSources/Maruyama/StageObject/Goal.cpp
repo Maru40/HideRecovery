@@ -103,8 +103,12 @@ namespace basecross {
 
 		//ゴールアニメーションの設定
 		if (auto goalAnimationController = other->GetComponent<GoalAnimationController>(false)) {
-			goalAnimationController->SetDunkPosition(transform->GetPosition() + m_param.dunkPositionOffset);
+			goalAnimationController->SetDunkPosition(GetDunkPosition());
 		}
+
+		//if (auto goalCtrl = GetGameObject()->GetComponent<GoalAnimationController>(false)) {
+		//	goalCtrl->SetDunkPosition(maru::Utility::FindComponent<Goal>()->GetDunkPosition());
+		//}
 
 		//ポイント加算
 		AddPoint(GetTeam());
@@ -219,10 +223,10 @@ namespace basecross {
 			return;
 		}
 
+		SuccessGoal(pair);
+
 		//アニメーションの再生
 		PlayAnimation(pair);
-
-		SuccessGoal(pair);
 	}
 
 	void Goal::OnCustomEventAction(int playerNumber, std::uint8_t eventCode, const std::uint8_t* bytes)
