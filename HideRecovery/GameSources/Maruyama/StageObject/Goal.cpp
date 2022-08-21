@@ -33,6 +33,7 @@
 #include "GameTimer.h"
 
 #include "TackleAttack.h"
+#include "Maruyama/Player/Component/GoalAnimationController.h"
 
 namespace basecross {
 
@@ -61,7 +62,8 @@ namespace basecross {
 	Goal_Parametor::Goal_Parametor(const Team& team) :
 		team(team),
 		itemHiderTime(3.0f),
-		timeDrawPosition(Vec3(0.0f, 0.0f, 0.0f))
+		timeDrawPosition(Vec3(0.0f, 0.0f, 0.0f)),
+		dunkPositionOffset(Vec3(0.0f, 3.0f, 0.0f))
 	{}
 
 	//--------------------------------------------------------------------------------------
@@ -97,6 +99,11 @@ namespace basecross {
 		//タックル状態なら状態をリセット
 		if (auto tackle = other->GetComponent<TackleAttack>(false)) {
 			tackle->ForceTaskReset();
+		}
+
+		//ゴールアニメーションの設定
+		if (auto goalAnimationController = other->GetComponent<GoalAnimationController>(false)) {
+			goalAnimationController->SetDunkPosition(transform->GetPosition() + m_param.dunkPositionOffset);
 		}
 
 		//ポイント加算

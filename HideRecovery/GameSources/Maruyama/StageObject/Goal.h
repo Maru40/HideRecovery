@@ -22,9 +22,10 @@ namespace basecross {
 	/// ゴール管理クラスのパラメータ
 	//--------------------------------------------------------------------------------------
 	struct Goal_Parametor {
-		Team team;				//チームタイプ
-		float itemHiderTime;	//アイテム再配置までの時間
-		Vec3 timeDrawPosition;	//時間表示場所
+		Team team;					//チームタイプ
+		float itemHiderTime;		//アイテム再配置までの時間
+		Vec3 timeDrawPosition;		//時間表示場所
+		Vec3 dunkPositionOffset;	//ダンクをする位置のオフセット
 
 		Goal_Parametor(const Team& team);
 	};
@@ -137,6 +138,8 @@ namespace basecross {
 		/// </summary>
 		/// <returns>再配置までの時間を表示する位置</returns>
 		Vec3 GetTimeDrawPosition() const noexcept { return m_param.timeDrawPosition; }
+
+		Vec3 GetDunkPosition() const { return transform->GetPosition() + m_param.dunkPositionOffset; }
 		
 		/// <summary>
 		/// オンライン用イベント
@@ -145,7 +148,6 @@ namespace basecross {
 		/// <param name="eventCode">イベントコード</param>
 		/// <param name="bytes">データ</param>
 		void OnCustomEventAction(int playerNumber, std::uint8_t eventCode, const std::uint8_t* bytes) override;
-
 	};
 
 }
