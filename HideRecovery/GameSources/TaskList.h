@@ -43,6 +43,7 @@ namespace basecross {
 	class TaskNodeBase : public I_TaskNode 
 	{
 		std::weak_ptr<T> m_owner;	//このクラスを所有するクラス
+		bool m_isActive;
 
 	public:
 		/// <summary>
@@ -50,7 +51,7 @@ namespace basecross {
 		/// </summary>
 		/// <param name="owner">このタスクを所有するクラス</param>
 		TaskNodeBase(const std::shared_ptr<T>& owner)
-			:m_owner(owner)
+			:m_owner(owner), m_isActive(true)
 		{}
 
 	protected:
@@ -61,6 +62,11 @@ namespace basecross {
 		std::shared_ptr<T> GetOwner() {
 			return m_owner.lock();
 		}
+
+	public:
+		void SetIsActive(const bool isActive) noexcept { m_isActive = isActive; }
+
+		bool IsActive() const noexcept { return m_isActive; }
 	};
 
 	//--------------------------------------------------------------------------------------
