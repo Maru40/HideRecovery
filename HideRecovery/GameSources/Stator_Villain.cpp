@@ -105,7 +105,7 @@ namespace basecross {
 			auto& moveParamPtr = plowlingParamPtr->moveParamPtr->moveParamPtr;
 			moveParamPtr->speed = 5.0f;
 			moveParamPtr->targetNearRange = 6.0f;
-			moveParamPtr->moveType = Task_ToTargetMove::MoveType::ArriveVelocity;
+			moveParamPtr->moveType = Task::Task_ToTargetMove::MoveType::ArriveVelocity;
 		}
 
 	}

@@ -100,7 +100,7 @@ namespace basecross {
 		//フィールドの影響マップの生成
 		//AddGameObject<GameObject>()->AddComponent<maru::FieldImpactMap>(maru::Utility::ConvertArrayType<GameObject>(m_floors));
 		//外側コリジョン設定
-		CreateMapOutCollisions(m_floors);
+		//CreateMapOutCollisions(m_floors);
 	}
 
 	void GameStageBase::CreateMapOutCollision(const Vec3& startPosition, const Vec3& forward, const float& length, const float& width, const float& height) {

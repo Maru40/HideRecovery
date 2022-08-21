@@ -34,8 +34,8 @@
 #include "DebugObject.h"
 
 namespace basecross {
-	using MoveType = Task_ToTargetMove::MoveType;
-	using DeltaType = Task_ToTargetMove::DeltaType;
+	using MoveType = Task::Task_ToTargetMove::MoveType;
+	using DeltaType = Task::Task_ToTargetMove::DeltaType;
 
 namespace Enemy {
 
@@ -49,7 +49,7 @@ namespace Enemy {
 			targetSeekParamPtr(new ChaseState::TargetSeekParametor(
 				std::make_shared<SeekTarget::Parametor>(5.0f, 0.0f, Vec3(0.0f), SeekTarget::SeekType::VelocitySeek))),
 			astarSeekParamPtr(new ChaseState::AstarSeekParametor(
-				std::make_shared<Task_MovePositions_Parametor>(std::make_shared<Task_ToTargetMove::Parametor>(
+				std::make_shared<Task_MovePositions_Parametor>(std::make_shared<Task::Task_ToTargetMove::Parametor>(
 					5.0f, 1.0f, MoveType::SeekVelocity, DeltaType::Normal)),
 				std::make_shared<Task::AroundEyeCheck_Parametor>())
 			)
