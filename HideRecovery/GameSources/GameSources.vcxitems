@@ -53,6 +53,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageTransitioner.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\ObjectHider.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Bullet\Object\BulletObjectBase.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Interface\I_TaskLister.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Interface\I_TeamMember.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\OwnArea.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\PlayerDeader.h" />
@@ -328,6 +329,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)LoadCSV.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LoadPositionGenerator.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LookAtCameraManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Interface\I_TaskLister.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Interface\I_TeamMember.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\OwnArea.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\PlayerDeader.cpp" />
