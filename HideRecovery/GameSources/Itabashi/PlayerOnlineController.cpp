@@ -17,6 +17,7 @@
 #include <random>
 
 #include "Maruyama/Player/Component/UseWepon.h"
+#include "Watanabe/Component/PlayerAnimator.h"
 
 template<class T>
 T ConvertByteData(const std::uint8_t* bytes)
@@ -97,8 +98,9 @@ namespace Online
 		auto objectMover = m_objectMover.lock();
 		auto tackleAttack = m_tackleAttack.lock();
 		auto useWepon = m_useWepon.lock();
+		auto animator = GetGameObject()->GetComponent<PlayerAnimator>(false);
 
-		if (!objectMover || !tackleAttack || tackleAttack->IsTackle())
+		if (!objectMover || !tackleAttack || tackleAttack->IsTackle() || animator->IsCurretAnimationState(PlayerAnimationState::State::Goal1))
 		{
 			return;
 		}
