@@ -18,6 +18,8 @@ namespace basecross {
 
 	namespace Task {
 		struct Wait_Parametor;
+		struct ToTargetMove_Parametor;
+		struct ReturnJump_Parametor;
 	}
 
 	//--------------------------------------------------------------------------------------
@@ -27,13 +29,18 @@ namespace basecross {
 	{
 		Vec3 startPosition;		//開始位置
 		Vec3 dunkPosition;		//ダンクする位置
-		Vec3 jumpPower;			//ジャンプする力
+		float jumpDegree;		//ジャンプする角度
 		float dunkMoveSpeed;	//ダンクにかける時間
 
-		std::shared_ptr<Task::Wait_Parametor> preliminaryJumpParam;	//ジャンプ溜めタスクパラメータ
-		//ダンクするところまでの移動
-
+		std::shared_ptr<Task::Wait_Parametor> preliminaryJumpParam;		//ジャンプ溜めタスクパラメータ
+		std::shared_ptr<Task::ToTargetMove_Parametor> dunkMoveParam;	//ダンクするところまでの移動
+		std::shared_ptr<Task::Wait_Parametor> dunkAfterWaitParam;		//ダンク後の待機
+		std::shared_ptr<Task::ReturnJump_Parametor> returnJumpParam;	//ダンク後の元の位置に戻る処理
+		std::shared_ptr<Task::Wait_Parametor> endWaitParam;				//着地後の硬直
+			
 		GoalAnimationController_Parametor();
+
+		float GetJumpRad() const;
 	};
 
 	//--------------------------------------------------------------------------------------
@@ -105,6 +112,7 @@ namespace basecross {
 		/// </summary>
 		/// <returns>ダンク位置</returns>
 		Vec3 GetDunkPosition() const noexcept { return m_param.dunkPosition; }
+
 	};
 
 }
