@@ -18,20 +18,20 @@ namespace basecross {
 	/// パラメータ
 	//--------------------------------------------------------------------------------------
 
-	using MoveType = Task::Task_ToTargetMove::MoveType;
-	using DeltaType = Task::Task_ToTargetMove::DeltaType;
+	using MoveType = Task::ToTargetMove::MoveType;
+	using DeltaType = Task::ToTargetMove::DeltaType;
 
 	Task_MovePositions_Parametor::Task_MovePositions_Parametor() :
-		Task_MovePositions_Parametor(std::make_shared<Task::Task_ToTargetMove::Parametor>(
+		Task_MovePositions_Parametor(std::make_shared<Task::ToTargetMove::Parametor>(
 			Vec3(0.0f), Vec3(0.0f), 3.0f, 2.0f, MoveType::SeekVelocity, DeltaType::Normal))
 	{}
 
-	Task_MovePositions_Parametor::Task_MovePositions_Parametor(const Task::Task_ToTargetMove::Parametor& moveParametor)
-		: Task_MovePositions_Parametor(std::make_shared<Task::Task_ToTargetMove::Parametor>(moveParametor))
+	Task_MovePositions_Parametor::Task_MovePositions_Parametor(const Task::ToTargetMove::Parametor& moveParametor)
+		: Task_MovePositions_Parametor(std::make_shared<Task::ToTargetMove::Parametor>(moveParametor))
 	{}
 
 	Task_MovePositions_Parametor::Task_MovePositions_Parametor(
-		const std::shared_ptr<Task::Task_ToTargetMove::Parametor>& moveParamPtr
+		const std::shared_ptr<Task::ToTargetMove::Parametor>& moveParamPtr
 	):
 		moveParamPtr(moveParamPtr), 
 		isSetInitializePosition(false)
@@ -78,7 +78,7 @@ namespace basecross {
 
 	void Task_MovePositions::DefineTask() {
 		//ターゲットに向かう処理
-		m_taskList->DefineTask(TaskEnum::Move, std::make_shared<Task::Task_ToTargetMove>(GetOwner(), m_paramPtr->moveParamPtr));
+		m_taskList->DefineTask(TaskEnum::Move, std::make_shared<Task::ToTargetMove>(GetOwner(), m_paramPtr->moveParamPtr));
 	}
 
 	void Task_MovePositions::SelectTask() {

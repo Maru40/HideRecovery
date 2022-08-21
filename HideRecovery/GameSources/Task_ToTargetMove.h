@@ -14,12 +14,18 @@
 namespace basecross {
 	namespace Task {
 
-		
+		//--------------------------------------------------------------------------------------
+		///	指定箇所まで移動するタスクのパラメータ
+		//--------------------------------------------------------------------------------------
+		struct ToTargetMove_Parametor
+		{
+
+		};
 
 		//--------------------------------------------------------------------------------------
 		///	指定箇所まで移動するタスク
 		//--------------------------------------------------------------------------------------
-		class Task_ToTargetMove : public TaskNodeBase<GameObject>
+		class ToTargetMove : public TaskNodeBase<GameObject>
 		{
 		public:
 			//--------------------------------------------------------------------------------------
@@ -90,7 +96,7 @@ namespace basecross {
 			/// </summary>
 			/// <param name="owner">このクラスを所有するゲームオブジェクト</param>
 			/// <param name="paramPtr">パラメータ</param>
-			Task_ToTargetMove(const std::shared_ptr<GameObject>& owner, const std::shared_ptr<Parametor>& paramPtr);
+			ToTargetMove(const std::shared_ptr<GameObject>& owner, const std::shared_ptr<Parametor>& paramPtr);
 
 			void OnStart() override;
 			bool OnUpdate() override;
@@ -156,13 +162,13 @@ namespace basecross {
 			/// パラメータの設定
 			/// </summary>
 			/// <param name="parametor">パラメータ</param>
-			void SetParametor(const std::shared_ptr<Task_ToTargetMove::Parametor>& parametor) noexcept;
+			void SetParametor(const std::shared_ptr<ToTargetMove::Parametor>& parametor) noexcept;
 
 			/// <summary>
 			/// パラメータの取得
 			/// </summary>
 			/// <returns>パラメータ</returns>
-			std::shared_ptr<Task_ToTargetMove::Parametor> GetParametor() const;
+			std::shared_ptr<ToTargetMove::Parametor> GetParametor() const;
 
 		};
 

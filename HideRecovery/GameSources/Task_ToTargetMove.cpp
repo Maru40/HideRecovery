@@ -19,18 +19,18 @@ namespace basecross {
 		///	パラメータ
 		//--------------------------------------------------------------------------------------
 
-		Task_ToTargetMove::Parametor::Parametor()
+		ToTargetMove::Parametor::Parametor()
 			:Parametor(1.0f, 0.01f, MoveType::Lerp)
 		{}
 
-		Task_ToTargetMove::Parametor::Parametor(
+		ToTargetMove::Parametor::Parametor(
 			const float& speed, const float& taretNearRange,
 			const MoveType moveType, const DeltaType& deltaType
 		) :
 			Parametor(Vec3(0.0f), Vec3(0.0f), speed, taretNearRange, moveType, deltaType)
 		{}
 
-		Task_ToTargetMove::Parametor::Parametor(
+		ToTargetMove::Parametor::Parametor(
 			const Vec3& startPosition,
 			const Vec3& endPosition,
 			const float& speed,
@@ -50,15 +50,15 @@ namespace basecross {
 		///	指定箇所まで移動するタスク本体
 		//--------------------------------------------------------------------------------------
 
-		Task_ToTargetMove::Task_ToTargetMove(const std::shared_ptr<GameObject>& owner, const std::shared_ptr<Parametor>& paramPtr)
+		ToTargetMove::ToTargetMove(const std::shared_ptr<GameObject>& owner, const std::shared_ptr<Parametor>& paramPtr)
 			:TaskNodeBase<GameObject>(owner), m_paramPtr(paramPtr)
 		{}
 
-		void Task_ToTargetMove::OnStart() {
+		void ToTargetMove::OnStart() {
 			GetOwner()->GetComponent<Transform>()->SetPosition(m_paramPtr->startPosition);
 		}
 
-		bool Task_ToTargetMove::OnUpdate() {
+		bool ToTargetMove::OnUpdate() {
 			if (IsEnd()) {
 				return IsEnd();
 			}
@@ -68,19 +68,19 @@ namespace basecross {
 			return IsEnd();
 		}
 
-		void Task_ToTargetMove::OnExit() {
+		void ToTargetMove::OnExit() {
 
 		}
 
-		void Task_ToTargetMove::SetOwnerPosition(const Vec3& position) {
+		void ToTargetMove::SetOwnerPosition(const Vec3& position) {
 			GetOwner()->GetComponent<Transform>()->SetPosition(position);
 		}
 
-		Vec3 Task_ToTargetMove::GetOwnerPosition() {
+		Vec3 ToTargetMove::GetOwnerPosition() {
 			return GetOwner()->GetComponent<Transform>()->GetPosition();
 		}
 
-		void Task_ToTargetMove::MoveUpdate() {
+		void ToTargetMove::MoveUpdate() {
 			switch (m_paramPtr->moveType)
 			{
 			case MoveType::Lerp:
@@ -100,7 +100,7 @@ namespace basecross {
 			}
 		}
 
-		void Task_ToTargetMove::LerpMove() {
+		void ToTargetMove::LerpMove() {
 			auto owner = GetOwner();
 			auto delta = GetElapsedTime();
 			auto speed = m_paramPtr->speed * delta;
@@ -112,7 +112,7 @@ namespace basecross {
 			SetOwnerPosition(position);
 		}
 
-		void Task_ToTargetMove::TransformMove() {
+		void ToTargetMove::TransformMove() {
 			auto owner = GetOwner();
 			auto ownerTrans = owner->GetComponent<Transform>();
 			auto delta = GetElapsedTime();
@@ -125,7 +125,7 @@ namespace basecross {
 			ownerTrans->SetPosition(position);
 		}
 
-		void Task_ToTargetMove::VelocityMove() {
+		void ToTargetMove::VelocityMove() {
 			auto owner = GetOwner();
 			auto velocityManager = owner->GetComponent<VelocityManager>(false);
 			if (!velocityManager) {
@@ -136,7 +136,7 @@ namespace basecross {
 			velocityManager->AddForce(force);
 		}
 
-		Vec3 Task_ToTargetMove::CalculateVelocityForce() {
+		Vec3 ToTargetMove::CalculateVelocityForce() {
 			auto owner = GetOwner();
 			auto velocityManager = owner->GetComponent<VelocityManager>(false);
 			if (!velocityManager) {
@@ -160,7 +160,7 @@ namespace basecross {
 			return force;
 		}
 
-		float Task_ToTargetMove::GetElapsedTime() {
+		float ToTargetMove::GetElapsedTime() {
 			auto& stepTimer = App::GetApp()->GetStepTimer();
 
 			switch (m_paramPtr->deltaType) {
@@ -178,7 +178,7 @@ namespace basecross {
 			};
 		}
 
-		bool Task_ToTargetMove::IsEnd() {
+		bool ToTargetMove::IsEnd() {
 			auto toEndPosition = m_paramPtr->endPosition - GetOwnerPosition();
 
 			const float BetweenLength = m_paramPtr->targetNearRange;
@@ -189,11 +189,11 @@ namespace basecross {
 		///	アクセッサ
 		//--------------------------------------------------------------------------------------
 
-		void Task_ToTargetMove::SetParametor(const std::shared_ptr<Parametor>& paramPtr) noexcept {
+		void ToTargetMove::SetParametor(const std::shared_ptr<Parametor>& paramPtr) noexcept {
 			m_paramPtr = paramPtr;
 		}
 
-		std::shared_ptr<Task_ToTargetMove::Parametor> Task_ToTargetMove::GetParametor() const {
+		std::shared_ptr<ToTargetMove::Parametor> ToTargetMove::GetParametor() const {
 			return m_paramPtr.GetShard();
 		}
 
