@@ -35,9 +35,6 @@ namespace Operator
 		inputVector.x = moveDirection.x;
 		inputVector.z = moveDirection.y;
 
-		Vec3 forward = Vec3(0, 0, 1);
-		Vec3 right = Vec3(1, 0, 0);
-
 		auto camera = m_camera.lock();
 
 		if (camera && m_isCameraAffected)
@@ -45,11 +42,13 @@ namespace Operator
 			Vec3 cameraForward = camera->GetAt() - camera->GetEye();
 			cameraForward.y = 0;
 			cameraForward.normalize();
-			forward = cameraForward;
-			right = Vec3(cameraForward.z, 0, -cameraForward.x);
+			m_defaultForward = cameraForward;
 		}
 
-		auto moveForward = forward * inputVector.z;
+		Vec3 right = Vec3(m_defaultForward.z, 0, -m_defaultForward.x);
+
+
+		auto moveForward = m_defaultForward * inputVector.z;
 		auto moveRight = right * inputVector.x;
 
 		Vec3 moveVector = (moveForward + moveRight) * App::GetApp()->GetElapsedTime() * m_moveSpeed;
