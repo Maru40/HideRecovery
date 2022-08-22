@@ -33,11 +33,9 @@ namespace basecross {
 			auto fadeManager = ScreenFadeManager::GetInstance();
 
 			auto endEvent = [fadeManager]() {
-				if (!fadeManager) {
-					return;
+				if (fadeManager) {
+					fadeManager->FadeStart(FadeType::In);
 				}
-
-				fadeManager->FadeStart(FadeType::In);
 			};
 
 			if (fadeManager) {
