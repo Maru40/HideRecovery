@@ -7,22 +7,21 @@
 #include "OwnAreaObject.h"
 #include "../Utility/DataExtracter.h"
 #include "../DebugClass/Debug.h"
+#include "../Utility/AdvMeshUtil.h"
 
 #include "Maruyama/Player/Component/OwnArea.h"
 
 namespace basecross {
 	OwnAreaObject::OwnAreaObject(const shared_ptr<Stage>& stage)
-		:StageObjectBase(stage, L"OwnArea"), m_areaRadius(20), m_team(Team::East)
+		:StageObjectBase(stage, L"OwnArea"), m_areaRadius(0), m_team(Team::East)
 	{}
 	OwnAreaObject::OwnAreaObject(const shared_ptr<Stage>& stage, const wstring& line)
-		: StageObjectBase(stage, L"OwnArea")
+		: StageObjectBase(stage, L"OwnArea"), m_areaRadius(0)
 	{
 		vector<wstring> tokens = DataExtracter::DelimitData(line);
 		size_t nextIndex = DataExtracter::TransformDataExtraction(tokens, m_transformData);
 
-		m_areaRadius = (float)_wtof(tokens[nextIndex + 0].c_str());
-
-		wstring teamType = tokens[nextIndex + 1];
+		wstring teamType = tokens[nextIndex];
 		if (teamType == L"East") {
 			m_team = Team::East;
 		}
@@ -33,13 +32,44 @@ namespace basecross {
 			throw BaseException(
 				L"Teamが不正な値です。",
 				L"Team : " + teamType,
-				L"OwnArea::OwnArea()"
+				L"OwnAreaObject::OwnAreaObject()"
 			);
 		}
 	}
 
 	void OwnAreaObject::OnCreate() {
-		Debug::GetInstance()->Log(L"Create OwnArea");
+		auto drawComp = AddComponent<PNTStaticDraw>();
+		drawComp->SetSamplerState(SamplerState::LinearWrap);
+		drawComp->SetOwnShadowActive(true);
+
+		vector<VertexPositionNormalTexture> vertices;
+		vector<uint16_t> indices;
+
+		// スケールに応じたUVを持つCubeを設定
+		AdvMeshUtil::CreateCube(4.0f, m_transformData.Scale, vertices, indices);
+		m_meshRes = MeshResource::CreateMeshResource(vertices, indices, true);
+		drawComp->SetMeshResource(m_meshRes);
+		drawComp->SetTextureResource(L"Floor_TX");
+		AddTag(L"Floor");
+
+		// 仮で色を変える
+		{
+			switch (m_team)
+			{
+			case Team::East:
+				drawComp->SetDiffuse(Col4(0, 0, 1, 1));
+				break;
+			case Team::West:
+				drawComp->SetDiffuse(Col4(1, 0, 0, 1));
+				break;
+			default:
+				break;
+			}
+		}
+
+		auto col = AddComponent<CollisionObb>();
+		col->SetFixed(true);
+		col->SetAfterCollision(AfterCollision::None);
 
 		AddComponent<OwnArea>(OwnArea::Parametor(m_team, m_areaRadius));
 	}
