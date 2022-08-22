@@ -1716,20 +1716,17 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Manager\TimeManager.h">
       <Filter>Watanabe\Manager\TimeManager</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\MessageUI.h">
-      <Filter>Watanabe\UI\MessageUI</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\GoalMessageUI.h">
-      <Filter>Watanabe\UI\MessageUI\GoalMessageUI</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\FireworksObject.h">
       <Filter>Watanabe\StageObject\FireworksObject</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Interface\I_Performable.h">
       <Filter>Watanabe\Interface\I_Performable</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Bullet\Object\BulletObjectBase.h">
-      <Filter>Maruyama\Player\Component\Wepon\Bullet\Object</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\GoalMessageUI.h">
+      <Filter>Watanabe\UI\MessageUI\GoalMessageUI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\MessageUI.h">
+      <Filter>Watanabe\UI\MessageUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2432,14 +2429,14 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Manager\TimeManager.cpp">
       <Filter>Watanabe\Manager\TimeManager</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\MessageUI.cpp">
-      <Filter>Watanabe\UI\MessageUI</Filter>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\FireworksObject.cpp">
+      <Filter>Watanabe\StageObject\FireworksObject</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\GoalMessageUI.cpp">
       <Filter>Watanabe\UI\MessageUI\GoalMessageUI</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\FireworksObject.cpp">
-      <Filter>Watanabe\StageObject\FireworksObject</Filter>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\MessageUI.cpp">
+      <Filter>Watanabe\UI\MessageUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -7,7 +7,15 @@ namespace basecross {
 	{}
 
 	void GoalMessageUI::OnCreate() {
+		m_sprite = GetStage()->AddGameObject<SimpleSprite>(SimpleSprite::Type::SpriteData, L"Goal");
+		m_sprite->SetActive(false);
 	}
+
 	void GoalMessageUI::Start() {
+		m_sprite->SetActive(true);
+	}
+
+	void GoalMessageUI::Reset() {
+		m_sprite->SetActive(false);
 	}
 }
