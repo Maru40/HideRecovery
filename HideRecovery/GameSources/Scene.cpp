@@ -12,6 +12,8 @@
 //#include "TitleStage.h"
 //#include "StageSelect.h"
 #include "Watanabe/TestStage/WatanabeStage.h"
+#include "Itabashi/OnlineMatchStage.h"
+
 class LoadStage;
 
 namespace basecross {
@@ -63,7 +65,7 @@ namespace basecross {
 			//ResetActiveStage<GameStage>();
 		}
 		else if (event->m_MsgStr == L"ToLoadStage") {
-			ResetActiveStage<LoadStage>(L"ToMainStage");
+			ResetActiveStage<LoadStage>(L"ToMatchingStage");
 		}
 		else if (event->m_MsgStr == L"ToMainStage") {
 			ResetActiveStage<MainStage>();
@@ -80,6 +82,10 @@ namespace basecross {
 		//else if (event->m_MsgStr == L"ToStageSelect") {
 		//	ResetActiveStage<StageSelect>();
 		//}
+		else if (event->m_MsgStr == L"ToMatchingStage")
+		{
+			ResetActiveStage<OnlineMatchStage>();
+		}
 	}
 }
 //end basecross

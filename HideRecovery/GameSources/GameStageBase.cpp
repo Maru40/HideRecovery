@@ -50,6 +50,7 @@
 #include "Itabashi/OnlinePlayerManager.h"
 
 #include "Maruyama/StageObject/GoalObject.h"
+#include "Itabashi/GamePlayerManager.h"
 
 namespace basecross {
 	void GameStageBase::CreateMainCamera()
@@ -138,7 +139,7 @@ namespace basecross {
 			auto onlineRoom = AddGameObject<Online::OnlineTestRoom>();
 			auto tester = onlineRoom->GetComponent<Online::OnlineTester>();
 
-			onlineRoom->AddComponent<Online::OnlinePlayerManager>();
+			onlineRoom->AddComponent<GamePlayerManager>();
 
 			Online::OnlineManager::Connect();
 		}

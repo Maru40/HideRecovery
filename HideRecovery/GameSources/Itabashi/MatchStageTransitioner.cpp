@@ -7,7 +7,7 @@
 namespace basecross
 {
 	MatchStageTransitioner::MatchStageTransitioner(const std::shared_ptr<GameObject>& owner) :
-		Component(owner)
+		OnlineComponent(owner)
 	{
 
 	}
@@ -33,9 +33,19 @@ namespace basecross
 			return;
 		}
 
-		if (PlayerInputer::IsDecision() && Online::OnlineManager::GetLocalPlayer().getIsMasterClient())
+		if (PlayerInputer::IsDecision() && Online::OnlineManager::GetLocalPlayer().getIsMasterClient() && onlineMatching->GetPlayerCount() > 0)
 		{
 			Online::OnlineManager::GetCurrentlyJoinedRoom().setIsOpen(false);
+			PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToMainStage");
+			Online::OnlineManager::RaiseEvent(false, nullptr, 0, TO_MAINSTAGE_EVENT_CODE);
+			return;
+		}
+	}
+
+	void MatchStageTransitioner::OnCustomEventAction(int playerNumber, std::uint8_t eventCode, const std::uint8_t* bytes)
+	{
+		if (eventCode == TO_MAINSTAGE_EVENT_CODE)
+		{
 			PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToMainStage");
 			return;
 		}

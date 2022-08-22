@@ -3,6 +3,9 @@
 #include "PlayerInputer.h"
 #include "Scene.h"
 #include "OnlineMatching.h"
+#include "MatchStageTransitioner.h"
+#include "MatchStageRoomer.h"
+#include "Watanabe/DebugClass/Debug.h"
 
 namespace basecross
 {
@@ -21,21 +24,16 @@ namespace basecross
 		//デフォルトのライティングを指定
 		PtrMultiLight->SetDefaultLighting();
 
+		auto debugObject = AddGameObject<Debug>();
+
 		auto gameObject = AddGameObject<GameObject>();
 
 		auto onlineMatching = gameObject->AddComponent<Online::OnlineMatching>();
+		auto matchStageRoomer = gameObject->AddComponent<MatchStageRoomer>();
+		auto matchStageTransitioner = gameObject->AddComponent<MatchStageTransitioner>();
 	}
 
 	void OnlineMatchStage::OnUpdate()
 	{
-		if (PlayerInputer::IsDecision())
-		{
-			PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToMainStage");
-			return;
-		}
-		if (PlayerInputer::IsCancel())
-		{
-			PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToTitleStage");
-		}
 	}
 }

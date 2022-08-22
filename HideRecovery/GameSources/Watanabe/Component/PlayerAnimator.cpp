@@ -42,7 +42,7 @@ namespace basecross {
 		}
 	}
 
-	void PlayerAnimator::OnUpdate() {
+	void PlayerAnimator::OnUpdate2() {
 		Animator::OnUpdate();
 
 		Transition();

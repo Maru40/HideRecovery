@@ -49,10 +49,6 @@ namespace Online
 		std::memcpy(m_playerNumbers, playerNumbers, sizeof(m_playerNumbers));
 	}
 
-	void OnlineMatching::OnCreate()
-	{
-	}
-
 	void OnlineMatching::OnCreateRoom()
 	{
 	}
