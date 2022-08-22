@@ -51,6 +51,8 @@ namespace Online
 		static constexpr std::uint8_t EXECUTE_DAMAGE_EVENT_CODE = 8;
 		static constexpr std::uint8_t EXECUTE_TACKLE_EVENT_CODE = 9;
 		static constexpr std::uint8_t EXECUTE_BULLET_DESTROY_EVENT_CODE = 11;
+		static constexpr std::uint8_t EXECUTE_AIM_STATE_CHANGE_EVENT_CODE = 12;
+		static constexpr std::uint8_t EXECUTE_CAMERA_FORWARD_EVENT_CODE = 13;
 
 	private:
 
@@ -78,6 +80,8 @@ namespace Online
 
 		std::weak_ptr<UseWepon> m_useWepon;
 
+		std::weak_ptr<Camera> m_camera;
+
 		/// <summary>
 		/// 対応するプレイヤー番号
 		/// </summary>
@@ -88,6 +92,12 @@ namespace Online
 		std::unordered_map<int, std::shared_ptr<ChargeBullet>> m_chargeBulletMap;
 
 		Vec3 m_beforeMoveVector = Vec3();
+
+		Vec3 m_cameraForward = Vec3();
+
+		void UpdateCameraForward();
+
+		void ExecuteCameraForward(int playerNumber, const Vec3& cameraForward);
 
 		void Move();
 
@@ -121,6 +131,10 @@ namespace Online
 
 		void ExecuteTackle(int playerNumber);
 
+		void TryAim();
+
+		void ExecuteAimEvent(int playerNumber, bool isAim);
+
 		int CreateInstanceId() const;
 
 	public:
@@ -149,6 +163,9 @@ namespace Online
 		void SetGamePlayerNumber(int gamePlayerNumber) { m_gamePlayerNumber = gamePlayerNumber; }
 
 		int GetGamePlayerNumber() const { return m_gamePlayerNumber; }
+
+		void SetCamera(const std::shared_ptr<Camera>& camera) { m_camera = camera; }
+		std::shared_ptr<Camera> GetCamera() const { return m_camera.lock(); }
 
 		static std::shared_ptr<PlayerOnlineController> GetPlayerOnlineController(int playerNumber);
 	};
