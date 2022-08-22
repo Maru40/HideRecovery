@@ -7,3 +7,11 @@ EastTeam,Team_TX,0,165,1024,165
 Goal,Team_TX,0,330,750,165
 West,Team_TX,0,0,512,165
 East,Team_TX,0,165,512,165
+Press A,Message_TX,0,0,1024,128
+ToTitle,Message_TX,0,128,512,92
+GameStart,Message_TX,0,220,700,120
+WaitHost,Message_TX,0,340,700,120
+Relocation,Message_TX,0,460,1024,120
+GetBall,Message_TX,0,580,900,120
+StolenBall,Message_TX,0,700,800,120
+Matching,Message_TX,0,820,700,120
