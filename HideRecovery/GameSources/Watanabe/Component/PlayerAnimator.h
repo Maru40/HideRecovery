@@ -8,6 +8,8 @@
 #include "Animator.h"
 #include "PlayerAnimationState.h"
 
+#include "MaruAction.h"
+
 namespace basecross {
 	class VelocityManager;
 
@@ -44,11 +46,24 @@ namespace basecross {
 		{}
 	};
 
+	struct TimeAnimationEvent {
+		float time;
+		std::function<void()> timeEvent;
+		bool isActive;
+
+		TimeAnimationEvent();
+
+		TimeAnimationEvent(const float time, const std::function<void()>& timeEvent);
+	};
+
 	class PlayerAnimator :public Animator {
 		std::weak_ptr<VelocityManager> m_velocityManager;
 
 		std::unordered_map<wstring, TransitionData> m_transitionDataMap;
 		std::unordered_map<wstring, std::vector<AnimationEvent>> m_animationEventsMap;
+		std::unordered_map<wstring, std::vector<TimeAnimationEvent>> m_timeEventsMap;
+
+		float m_beforeAnimationTime;
 		
 	public:
 		PlayerAnimator(const shared_ptr<GameObject>& owner);
@@ -62,6 +77,8 @@ namespace basecross {
 		void StartEvent();
 		void UpdateEvent();
 		void ExitEvent();
+
+		void TimeEventUpdate();
 
 	public:
 		/// <summary>
@@ -97,5 +114,19 @@ namespace basecross {
 		/// <param name="animationEvent">アニメーションイベント</param>
 		void AddAnimationEvent(const PlayerAnimationState::State& state, const AnimationEvent& animationEvent);
 
+		/// <summary>
+		/// タイムイベントの追加
+		/// </summary>
+		/// <param name="state">ステート</param>
+		/// <param name="time">時間</param>
+		/// <param name="function">イベント</param>
+		void AddTimeEvent(const PlayerAnimationState::State& state, const float time, const std::function<void()>& timeEvent);
+
+		/// <summary>
+		/// タイムイベントの追加
+		/// </summary>
+		/// <param name="state">ステート</param>
+		/// <param name="timeEvent">タイムイベント</param>
+		void AddTimeEvent(const PlayerAnimationState::State& state, const TimeAnimationEvent& timeEvent);
 	};
 }
