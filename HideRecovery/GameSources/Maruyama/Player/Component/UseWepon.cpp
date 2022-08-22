@@ -1,8 +1,8 @@
-
+ï»¿
 /*!
 @file UseWepon.cpp
-@brief UseWeponƒNƒ‰ƒXÀ‘Ì
-’S“–FŠÛR—TŠì
+@brief UseWeponã‚¯ãƒ©ã‚¹å®Ÿä½“
+æ‹…å½“ï¼šä¸¸å±±è£•å–œ
 */
 
 #include "stdafx.h"
@@ -23,7 +23,7 @@
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
-	/// ƒEƒFƒ|ƒ“‚ğg—p‚·‚éƒNƒ‰ƒX‚Ìƒpƒ‰ƒ[ƒ^
+	/// ã‚¦ã‚§ãƒãƒ³ã‚’ä½¿ç”¨ã™ã‚‹ã‚¯ãƒ©ã‚¹ã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
 	//--------------------------------------------------------------------------------------
 	UseWepon_Parametor::UseWepon_Parametor() :
 		UseWepon_Parametor(false)
@@ -38,7 +38,7 @@ namespace basecross {
 	{}
 
 	//--------------------------------------------------------------------------------------
-	/// ƒEƒFƒ|ƒ“‚ğg—p‚·‚éƒNƒ‰ƒX–{‘Ì
+	/// ã‚¦ã‚§ãƒãƒ³ã‚’ä½¿ç”¨ã™ã‚‹ã‚¯ãƒ©ã‚¹æœ¬ä½“
 	//--------------------------------------------------------------------------------------
 
 	UseWepon::UseWepon(const std::shared_ptr<GameObject>& objPtr) :
@@ -61,15 +61,6 @@ namespace basecross {
 		if (IsAim()) {
 			AimUpdate();
 		}
-
-		if (PlayerInputer::GetInstance()->IsLBDown()) {
-			SetIsAim(true);
-		}
-		
-		if (PlayerInputer::GetInstance()->IsLBUp()) {
-			SetIsAim(false);
-		}
-
 	}
 
 	void UseWepon::AimUpdate() {
@@ -83,20 +74,24 @@ namespace basecross {
 			return;
 		}
 
-		auto cameraForward = camera->GetAt() - camera->GetEye();
-		rotationController->SetDirect(cameraForward);
+		if (m_isUseCamera)
+		{
+			m_direction = camera->GetAt() - camera->GetEye();
+		}
+
+		rotationController->SetDirect(m_direction);
 	}
 
 	void UseWepon::SettingReactiveIsAim() {
 		auto& isAim = m_param.isAim;
 
-		auto trueFunction = [&]() {		//Aimó‘Ô‚É‚È‚Á‚½
+		auto trueFunction = [&]() {		//AimçŠ¶æ…‹ã«ãªã£ãŸæ™‚
 			if (auto animator = GetGameObject()->GetComponent<PlayerAnimator>(false)) {
 				animator->ChangePlayerAnimation(PlayerAnimationState::State::GunSet2);
 			}
 		};
 
-		auto falseFunction = [&]() {	//Aimó‘Ô‚Å‚È‚­‚È‚Á‚½
+		auto falseFunction = [&]() {	//AimçŠ¶æ…‹ã§ãªããªã£ãŸæ™‚
 			if (auto animator = GetGameObject()->GetComponent<PlayerAnimator>(false)) {
 				animator->ChangePlayerAnimation(PlayerAnimationState::State::GunEnd2);
 			}
@@ -107,7 +102,7 @@ namespace basecross {
 	}
 
 	//--------------------------------------------------------------------------------------
-	/// ƒAƒNƒZƒbƒT
+	/// ã‚¢ã‚¯ã‚»ãƒƒã‚µ
 	//--------------------------------------------------------------------------------------
 
 	void UseWepon::SetIsAim(const bool isAim) { *m_param.isAim = isAim; }

@@ -18,6 +18,8 @@ namespace Operator
 
 		float m_moveSpeed = 1.0f;
 
+		Vec3 m_defaultForward = Vec3(0, 0, 1);
+
 	public:
 		ObjectMover(const std::shared_ptr<GameObject>& owner);
 
@@ -68,6 +70,10 @@ namespace Operator
 		bool IsAim() const noexcept { return m_isAim; }
 
 		void SetIsAim(const bool isAim) { m_isAim = isAim; }
+
+		void SetDefaultForward(const Vec3& defaultForward) { m_defaultForward = defaultForward; }
+
+		const Vec3& GetDefaultForward() const { return m_defaultForward; }
 	};
 }
 }

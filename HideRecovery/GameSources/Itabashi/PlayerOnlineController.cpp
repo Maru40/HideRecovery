@@ -93,6 +93,44 @@ namespace Online
 		return nullptr;
 	}
 
+	void PlayerOnlineController::UpdateCameraForward()
+	{
+		auto camera = m_camera.lock();
+
+		if (!camera)
+		{
+			return;
+		}
+
+		auto forward = camera->GetAt() - camera->GetEye();
+		forward.normalize();
+
+		if (m_cameraForward == forward)
+		{
+			return;
+		}
+
+		m_cameraForward = forward;
+
+		OnlineManager::RaiseEvent(false, (std::uint8_t*)&m_cameraForward, sizeof(Vec3), EXECUTE_CAMERA_FORWARD_EVENT_CODE);
+	}
+
+	void PlayerOnlineController::ExecuteCameraForward(int playerNumber, const Vec3& cameraForward)
+	{
+		if (m_playerNumber != playerNumber)
+		{
+			return;
+		}
+
+		m_cameraForward = cameraForward;
+
+		auto objectMover = m_objectMover.lock();
+		auto useWeapon = m_useWepon.lock();
+
+		objectMover->SetDefaultForward(cameraForward);
+		useWeapon->SetDirection(cameraForward);
+	}
+
 	void PlayerOnlineController::Move()
 	{
 		auto objectMover = m_objectMover.lock();
@@ -438,6 +476,45 @@ namespace Online
 		tackleAttack->StartAttack();
 	}
 
+	void PlayerOnlineController::TryAim()
+	{
+		auto useWeapon = m_useWepon.lock();
+
+		if (!useWeapon)
+		{
+			return;
+		}
+
+		bool isAim = false;
+
+		if (PlayerInputer::GetInstance()->IsLBDown())
+		{
+			isAim = true;
+			useWeapon->SetIsAim(isAim);
+			OnlineManager::RaiseEvent(false, (std::uint8_t*)&isAim, sizeof(bool), EXECUTE_AIM_STATE_CHANGE_EVENT_CODE);
+		}
+
+		if (PlayerInputer::GetInstance()->IsLBUp())
+		{
+			isAim = false;
+			useWeapon->SetIsAim(isAim);
+			OnlineManager::RaiseEvent(false, (std::uint8_t*)&isAim, sizeof(bool), EXECUTE_AIM_STATE_CHANGE_EVENT_CODE);
+		}
+
+	}
+
+	void PlayerOnlineController::ExecuteAimEvent(int playerNumber, bool isAim)
+	{
+		if (m_playerNumber != playerNumber)
+		{
+			return;
+		}
+
+		auto useWeapon = m_useWepon.lock();
+
+		useWeapon->SetIsAim(isAim);
+	}
+
 	int PlayerOnlineController::CreateInstanceId() const
 	{
 		std::random_device rd;
@@ -481,6 +558,8 @@ namespace Online
 			return;
 		}
 
+		UpdateCameraForward();
+
 		Move();
 
 		TryAquisition();
@@ -490,12 +569,21 @@ namespace Online
 		Shot();
 
 		TryTackle();
+
+		TryAim();
 	}
 
 	void PlayerOnlineController::OnCustomEventAction(int playerNumber, std::uint8_t eventCode, const std::uint8_t* bytes)
 	{
 		if (m_playerNumber == 0)
 		{
+			return;
+		}
+
+		if (eventCode == EXECUTE_CAMERA_FORWARD_EVENT_CODE)
+		{
+			auto cameraForward = ConvertByteData<Vec3>(bytes);
+			ExecuteCameraForward(playerNumber, cameraForward);
 			return;
 		}
 
@@ -557,6 +645,13 @@ namespace Online
 		{
 			int instanceId = ConvertByteData<int>(bytes);
 			ExecuteBulletDestroyEvent(instanceId);
+			return;
+		}
+
+		if (eventCode == EXECUTE_AIM_STATE_CHANGE_EVENT_CODE)
+		{
+			bool isAim = ConvertByteData<bool>(bytes);
+			ExecuteAimEvent(playerNumber, isAim);
 			return;
 		}
 	}
