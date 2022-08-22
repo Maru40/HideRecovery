@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "stdafx.h"
 
 namespace basecross {
@@ -26,7 +26,6 @@ namespace basecross {
 			Dead,
 			GSDead,
 			Goal1,
-
 		};
 
 		wstring static PlayerAnimationState2wstring(const PlayerAnimationState::State& state) {

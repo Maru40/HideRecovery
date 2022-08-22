@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0"
+  xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Headers">
       <UniqueIdentifier>{4b0a624a-610d-4bc6-b311-2b02a781cdf9}</UniqueIdentifier>
@@ -931,6 +932,21 @@
     <Filter Include="Maruyama\Player\Component\Animation\Task">
       <UniqueIdentifier>{10779a04-40c6-40b3-90ab-37c6b3756b32}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\Interface">
+      <UniqueIdentifier>{7bc954cf-c74f-4568-b2f2-0bf556c984df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\Interface\I_Performable">
+      <UniqueIdentifier>{64d98f04-ab65-4a3e-9586-93fb87df4204}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\StageObject\FireworksObject">
+      <UniqueIdentifier>{685fb349-b487-41c4-b452-27e65f725331}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\UI\MessageUI">
+      <UniqueIdentifier>{ac3cfb5d-2655-4eea-b71c-8df746eaf86e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\UI\MessageUI\GoalMessageUI">
+      <UniqueIdentifier>{c193d291-eb9f-40a2-8218-47159c096e9a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1725,6 +1741,18 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\Task_GoalAnimation.h">
       <Filter>Maruyama\Player\Component\Animation\Task</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\FireworksObject.h">
+      <Filter>Watanabe\StageObject\FireworksObject</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Interface\I_Performable.h">
+      <Filter>Watanabe\Interface\I_Performable</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\GoalMessageUI.h">
+      <Filter>Watanabe\UI\MessageUI\GoalMessageUI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\MessageUI.h">
+      <Filter>Watanabe\UI\MessageUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2434,6 +2462,15 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\Task_GoalAnimation.cpp">
       <Filter>Maruyama\Player\Component\Animation\Task</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\FireworksObject.cpp">
+      <Filter>Watanabe\StageObject\FireworksObject</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\GoalMessageUI.cpp">
+      <Filter>Watanabe\UI\MessageUI\GoalMessageUI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\MessageUI.cpp">
+      <Filter>Watanabe\UI\MessageUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -10,9 +10,10 @@
 namespace basecross {
 	class LifeSpan :public Component {
 		TimeCounter m_timer;
+		bool m_isRemove;
 	public:
-		LifeSpan(const shared_ptr<GameObject>& gameObjectPtr, float interval = 1.0f)
-			:Component(gameObjectPtr), m_timer(interval)
+		LifeSpan(const shared_ptr<GameObject>& gameObjectPtr)
+			:Component(gameObjectPtr), m_timer(1.0f), m_isRemove(true)
 		{}
 
 		void OnCreate()override {}
@@ -21,6 +22,14 @@ namespace basecross {
 
 		void SetLifeTime(float lifeTime) {
 			m_timer.SetIntervalTime(lifeTime);
+		}
+
+		void IsRemove(bool flg) {
+			m_isRemove = flg;
+		}
+
+		void Reset() {
+			m_timer.Reset();
 		}
 	};
 }

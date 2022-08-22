@@ -5,6 +5,7 @@
 #include"PlayerInputer.h"
 #include "Watanabe/Effekseer/EfkEffect.h"
 #include "Watanabe/Utility/CSVLoad.h"
+#include "Watanabe/DebugClass/Debug.h"
 
 namespace basecross
 {
@@ -95,7 +96,6 @@ namespace basecross
 		//ResourceLoadData(L"PlayerTackle", L"AS_PlayerTackle.wav"),
 		//ResourceLoadData(L"JettPomp", L"AS_JettPomp.wav"),
 		ResourceLoadData(L"Shot_SE", L"AS_1086937_SF_ゲーム＿レーザー音＿ドチューン.wav"),
-		
 	};
 
 	const std::vector<LoadStage::ResourceLoadData> LoadStage::m_bgmResourceLoadDatas =
@@ -139,7 +139,6 @@ namespace basecross
 
 		ModelResourceLoadData(L"rack",  L"tana.bmf", ModelType::Static,  L"StageObject\\"),
 		ModelResourceLoadData(L"Goal",  L"Goal.bmf", ModelType::StaticMulti,  L"StageObject\\"),
-		
 	};
 
 	LoadStage::LoadStage(const std::wstring& nextStageKey) :
@@ -253,6 +252,7 @@ namespace basecross
 		const auto& app = App::GetApp();
 		std::wstring dir = app->GetDataDirWString() + L"Effects/";
 		EfkEffectResource::RegisterEffectResource(L"TestEffect", dir + L"TestEffect.efk");
+		EfkEffectResource::RegisterEffectResource(L"Fireworks", dir + L"Fireworks.efk");
 	}
 
 	void LoadStage::OnCreate()
@@ -261,6 +261,9 @@ namespace basecross
 		itbs::Input::CursorSetting::SetIsDraw(false);
 
 		CreateViewLight();
+
+		AddGameObject<Debug>();
+		Debug::GetInstance()->Log(L"LoadStage");
 
 		m_stageBackColor = App::GetApp()->GetScene<Scene>()->GetClearColor();
 
