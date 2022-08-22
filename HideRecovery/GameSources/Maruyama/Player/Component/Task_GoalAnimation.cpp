@@ -17,12 +17,20 @@
 namespace basecross {
 	namespace Task {
 
+		//--------------------------------------------------------------------------------------
+		/// ジャンプ後の元の位置に戻る処理のパラメータ
+		//--------------------------------------------------------------------------------------
+
 		ReturnJump_Parametor::ReturnJump_Parametor() :
 			returnDirect(Vec3(0.0f)),
 			jumpRad(XMConvertToRadians(65.0f)),
 			jumpUpPower(850.0f),
 			jumpHorizontalPower(450.0f)
 		{}
+
+		//--------------------------------------------------------------------------------------
+		/// ジャンプ後の元の位置に戻る処理
+		//--------------------------------------------------------------------------------------
 
 		ReturnJump::ReturnJump(const std::shared_ptr<GameObject>& objPtr, const std::shared_ptr<Parametor>& paramPtr) :
 			TaskNodeBase(objPtr),
