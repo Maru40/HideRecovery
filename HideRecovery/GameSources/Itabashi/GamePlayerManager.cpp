@@ -12,6 +12,7 @@
 #include "SpringArmComponent.h"
 #include "CameraHelper.h"
 #include "LookAtCameraManager.h"
+#include "Maruyama/Player/Component/UseWepon.h"
 
 namespace basecross
 {
@@ -66,6 +67,11 @@ namespace basecross
 
 		tpsCamera->AddComponent<VirtualCamera>(10);
 		tpsCamera->AddComponent<LookAtCameraManager>(playerObject, LookAtCameraManager::Parametor());
+
+		onlineController->SetCamera(GetStage()->GetView()->GetTargetCamera());
+
+		auto useWeapon = playerObject->GetComponent<UseWepon>();
+		useWeapon->SetIsUseCamera(true);
 
 		return playerObject;
 	}
