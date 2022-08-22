@@ -45,6 +45,7 @@
 #include "Watanabe/StageObject/RackObject.h"
 #include "Watanabe/StageObject/PlayerSpawnPointObject.h"
 #include "Watanabe/StageObject/OwnAreaObject.h"
+#include "Watanabe/UI/TimerUI.h"
 
 #include "Itabashi/OnlineTestRoom.h"
 #include "Itabashi/OnlinePlayerManager.h"
@@ -97,6 +98,10 @@ namespace basecross {
 		auto dir = App::GetApp()->GetDataDirWString();
 		auto path = dir + L"MapDatas/";
 		builder.Build(GetThis<Stage>(), path + fileName);
+
+		GameObjecttCSVBuilder uiBuilder;
+		uiBuilder.Register<TimerUI>(L"TimerUI");
+		uiBuilder.Build(GetThis<Stage>(), path + L"UILayout.csv");
 
 		//フィールドの影響マップの生成
 		//AddGameObject<GameObject>()->AddComponent<maru::FieldImpactMap>(maru::Utility::ConvertArrayType<GameObject>(m_floors));
