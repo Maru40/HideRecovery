@@ -56,14 +56,7 @@ namespace basecross {
 			}
 		}
 
-		switch (GetTeam()) {
-		case Team::East:
-			nearGoal->SetTeam(Team::West);
-			break;
-		case Team::West:
-			nearGoal->SetTeam(Team::East);
-			break;
-		}
+		nearGoal->SetTeam(GetTeam());
 	}
 
 	bool OwnArea::IsInArea(const std::shared_ptr<I_TeamMember>& member) {
