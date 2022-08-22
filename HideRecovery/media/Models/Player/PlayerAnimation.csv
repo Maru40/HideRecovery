@@ -1,5 +1,5 @@
 name,start,end,isLoop,speed
-Wait, b,39,TRUE,1
+Wait,1,39,TRUE,1
 Walk_R,65,94,TRUE,1
 Walk_L,50,79,TRUE,1
 Dstart,96,99,FALSE,1
