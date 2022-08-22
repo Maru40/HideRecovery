@@ -3,9 +3,10 @@
 #include "CountDownUI.h"
 #include "SimpleSprite.h"
 #include "../Utility/TimeCounter.h"
+#include "../Interface/I_Performable.h"
 
 namespace basecross {
-	class GameStartUI :public GameObject {
+	class GameStartUI :public GameObject, public I_Performable {
 		// カウントダウンUI
 		shared_ptr<CountDownUI> m_countDown;
 		// 「Start」の文字表示用
@@ -18,9 +19,9 @@ namespace basecross {
 
 		void OnCreate()override;
 		void OnUpdate()override;
-		void OnDestroy()override;
 
-		void Start();
-		bool IsGameBegan();
+		void Start()override;
+		void Reset()override;
+		bool IsGameBegin();
 	};
 }

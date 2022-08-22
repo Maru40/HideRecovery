@@ -32,8 +32,10 @@ namespace basecross
 		ResourceLoadData(L"Wall01_TX", L"Wall01_TX.png"),
 		ResourceLoadData(L"Numbers_TX",L"Numbers_TX.png"),
 		ResourceLoadData(L"StartAndFinish_TX",L"StartAndFinish_TX.png"),
-		ResourceLoadData(L"Relocation_TX",L"Relocation_TX.png"),
+		ResourceLoadData(L"Message_TX",L"Message_TX.png"),
 		ResourceLoadData(L"Team_TX",L"Team_TX.png"),
+		ResourceLoadData(L"HP_TX",L"HP_TX.png"),
+		ResourceLoadData(L"HPGauge_TX",L"HPGauge_TX.png"),
 
 		//ResourceLoadData(L"gauge", L"Gauge.png"),
 		//ResourceLoadData(L"clear", L"StageClear.png"),

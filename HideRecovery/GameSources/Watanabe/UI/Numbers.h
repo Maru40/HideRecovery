@@ -18,9 +18,11 @@ namespace basecross {
 		vector<shared_ptr<NumberSprite>> m_numbers;
 		int m_numDigits;
 	public:
-		Numbers(const shared_ptr<Stage>& stage);
+		Numbers(const shared_ptr<Stage>& stage, int digits);
 
 		void OnCreate()override;
 		void SetNumber(int num);
+
+		void OnDraw()override;
 	};
 }
