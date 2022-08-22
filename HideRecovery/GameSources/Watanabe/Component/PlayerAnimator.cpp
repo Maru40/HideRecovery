@@ -59,6 +59,7 @@ namespace basecross {
 
 		Transition();
 		UpdateEvent();
+		TimeEventUpdate();
 
 		auto velocityManager = m_velocityManager.lock();
 		if (!velocityManager) {
@@ -108,7 +109,7 @@ namespace basecross {
 	void PlayerAnimator::StartEvent() {
 		auto draw = GetGameObject()->GetComponent<PNTBoneModelDraw>();
 		auto currentAnimation = draw->GetCurrentAnimation();
-		auto events = m_animationEventsMap[currentAnimation];
+		auto& events = m_animationEventsMap[currentAnimation];
 		for (auto& event : events) {
 			if (event.start) {
 				event.start();
@@ -119,7 +120,7 @@ namespace basecross {
 	void PlayerAnimator::UpdateEvent() {
 		auto draw = GetGameObject()->GetComponent<PNTBoneModelDraw>();
 		auto currentAnimation = draw->GetCurrentAnimation();
-		auto events = m_animationEventsMap[currentAnimation];
+		auto& events = m_animationEventsMap[currentAnimation];
 		for (auto& event : events) {
 			if (event.update) {
 				event.update();
@@ -130,7 +131,7 @@ namespace basecross {
 	void PlayerAnimator::ExitEvent() {
 		auto draw = GetGameObject()->GetComponent<PNTBoneModelDraw>();
 		auto currentAnimation = draw->GetCurrentAnimation();
-		auto events = m_animationEventsMap[currentAnimation];
+		auto& events = m_animationEventsMap[currentAnimation];
 		for (auto& event : events) {
 			if (event.exit) {
 				event.exit();
@@ -142,7 +143,7 @@ namespace basecross {
 		auto draw = GetGameObject()->GetComponent<PNTBoneModelDraw>();
 		float currentTime = draw->GetCurrentAnimationTime();
 		auto currentAnimation = draw->GetCurrentAnimation();
-		auto events = m_timeEventsMap[currentAnimation];
+		auto& events = m_timeEventsMap[currentAnimation];
 		for (auto& data : events) {
 			if (!data.isActive) {	//アクティブでないなら処理をとば
 				continue;
@@ -175,6 +176,7 @@ namespace basecross {
 	void PlayerAnimator::ChangePlayerAnimation(PlayerAnimationState::State state) {
 		ExitEvent();
 
+		m_beforeAnimationTime = 0.0f;
 		ChangeAnimation(PlayerAnimationState::PlayerAnimationState2wstring(state));
 
 		StartEvent();

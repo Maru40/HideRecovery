@@ -6,6 +6,8 @@
 
 #include "stdafx.h"
 
+#include "VelocityManager.h"
+
 namespace basecross {
 
 	struct CollisionPiece {
@@ -397,6 +399,11 @@ namespace basecross {
 					auto f = bsm::angleBetweenNormals(v.m_SrcHitNormal, Vec3(0, 1, 0));
 					if (abs(f) < XM_PIDIV4) {
 						Gr->SetGravityVerocityZero();
+						if (auto velocityManager = ShSrc->GetGameObject()->GetComponent<VelocityManager>(false)) {
+							auto velocity = velocityManager->GetVelocity();
+							velocity.y = 0;
+							velocityManager->SetVelocity(velocity);
+						}
 					}
 				}
 			}
@@ -415,6 +422,11 @@ namespace basecross {
 					auto f = bsm::angleBetweenNormals(v.m_SrcHitNormal, Vec3(0, 1, 0));
 					if (abs(f) < XM_PIDIV4) {
 						Gr->SetGravityVerocityZero();
+						if (auto velocityManager = ShSrc->GetGameObject()->GetComponent<VelocityManager>(false)) {
+							auto velocity = velocityManager->GetVelocity();
+							velocity.y = 0;
+							velocityManager->SetVelocity(velocity);
+						}
 					}
 				}
 			}

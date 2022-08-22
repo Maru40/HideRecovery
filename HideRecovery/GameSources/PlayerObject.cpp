@@ -67,6 +67,7 @@ namespace basecross {
 		draw->SetMultiMeshResource(L"Player_Mesh");
 		draw->SetMeshToTransformMatrix(spanMat);
 		SetAlphaActive(true);
+		//draw->SetDiffuse(Col4(0.0f, 0.0f, 1.0f, 1.0f));
 
 		auto collision = AddComponent<CollisionObb>();
 		//collision->SetDrawActive(true);
