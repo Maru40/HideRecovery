@@ -40,7 +40,7 @@ namespace basecross {
 			/// </summary>
 			struct Parametor
 			{
-				std::shared_ptr<Task_ToTargetMove::Parametor> moveParamPtr; //移動パラメータ
+				std::shared_ptr<Task::ToTargetMove::Parametor> moveParamPtr; //移動パラメータ
 
 				Parametor();
 
@@ -48,7 +48,7 @@ namespace basecross {
 				/// コンストラクタ
 				/// </summary>
 				/// <param name="moveParamPtr">移動パラメータ</param>
-				Parametor(const std::shared_ptr<Task_ToTargetMove::Parametor>& moveParamPtr);
+				Parametor(const std::shared_ptr<Task::ToTargetMove::Parametor>& moveParamPtr);
 			};
 
 		private:

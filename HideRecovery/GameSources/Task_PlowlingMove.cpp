@@ -33,10 +33,10 @@ namespace basecross {
 		//--------------------------------------------------------------------------------------
 
 		Task_PlowlingMove::Parametor::Parametor()
-			:Parametor(std::make_shared<Task_ToTargetMove::Parametor>())
+			:Parametor(std::make_shared<Task::ToTargetMove::Parametor>())
 		{}
 
-		Task_PlowlingMove::Parametor::Parametor(const std::shared_ptr<Task_ToTargetMove::Parametor>& moveParamPtr)
+		Task_PlowlingMove::Parametor::Parametor(const std::shared_ptr<Task::ToTargetMove::Parametor>& moveParamPtr)
 			:moveParamPtr(moveParamPtr)
 		{}
 
@@ -77,7 +77,7 @@ namespace basecross {
 
 		void Task_PlowlingMove::DefineTask() {
 			//–Ú“I’n‚ÉŒü‚©‚Á‚ÄˆÚ“®‚·‚éˆ—
-			m_taskList->DefineTask(TaskEnum::ToTargetMove, std::make_shared<Task_ToTargetMove>(GetOwner()->GetGameObject(), m_paramPtr->moveParamPtr));
+			m_taskList->DefineTask(TaskEnum::ToTargetMove, std::make_shared<Task::ToTargetMove>(GetOwner()->GetGameObject(), m_paramPtr->moveParamPtr));
 		}
 
 		void Task_PlowlingMove::SelectTask() {

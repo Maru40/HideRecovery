@@ -28,8 +28,12 @@
 #include "Itabashi/PlayerOnlineController.h"
 
 #include "Watanabe/Manager/PointManager.h"
+#include "Watanabe/Component/PlayerAnimator.h"
 
 #include "GameTimer.h"
+
+#include "TackleAttack.h"
+#include "Maruyama/Player/Component/GoalAnimationController.h"
 
 namespace basecross {
 
@@ -58,7 +62,8 @@ namespace basecross {
 	Goal_Parametor::Goal_Parametor(const Team& team) :
 		team(team),
 		itemHiderTime(3.0f),
-		timeDrawPosition(Vec3(0.0f, 0.0f, 0.0f))
+		timeDrawPosition(Vec3(0.0f, 0.0f, 0.0f)),
+		dunkPositionOffset(Vec3(0.0f, 3.0f, 0.0f))
 	{}
 
 	//--------------------------------------------------------------------------------------
@@ -90,6 +95,20 @@ namespace basecross {
 
 	void Goal::SuccessGoal(const CollisionPair& pair) {
 		auto other = pair.m_Dest.lock()->GetGameObject();
+
+		//タックル状態なら状態をリセット
+		if (auto tackle = other->GetComponent<TackleAttack>(false)) {
+			tackle->ForceTaskReset();
+		}
+
+		//ゴールアニメーションの設定
+		if (auto goalAnimationController = other->GetComponent<GoalAnimationController>(false)) {
+			goalAnimationController->SetDunkPosition(GetDunkPosition());
+		}
+
+		//if (auto goalCtrl = GetGameObject()->GetComponent<GoalAnimationController>(false)) {
+		//	goalCtrl->SetDunkPosition(maru::Utility::FindComponent<Goal>()->GetDunkPosition());
+		//}
 
 		//ポイント加算
 		AddPoint(GetTeam());
@@ -123,8 +142,7 @@ namespace basecross {
 
 	void Goal::SuccessGoal(Team team, int playerNumber, int itemId, const Vec3& hidePosition)
 	{
-		if (m_param.team != team)
-		{
+		if (GetTeam() != team) {
 			return;
 		}
 
@@ -163,6 +181,17 @@ namespace basecross {
 		m_timer->ResetTimer(m_param.itemHiderTime, endEvent);
 	}
 
+	void Goal::PlayAnimation(const CollisionPair& pair) {
+		auto other = pair.m_Dest.lock()->GetGameObject();
+		auto animator = other->GetComponent<PlayerAnimator>();
+		if (!animator) {
+			return;
+		}
+
+		//ゴールを決めるアニメーションに変更
+		animator->ChangePlayerAnimation(PlayerAnimationState::State::Goal1);
+	}
+
 	bool Goal::IsCollision(const CollisionPair& pair) const {
 		auto other = pair.m_Dest.lock()->GetGameObject();
 		auto teamMember = other->GetComponent<I_TeamMember>(false);
@@ -182,8 +211,7 @@ namespace basecross {
 			return false;
 		}
 
-		if (!Online::OnlineManager::GetLocalPlayer().getIsMasterClient())
-		{
+		if (!Online::OnlineManager::GetLocalPlayer().getIsMasterClient()) {
 			return false;
 		}
 
@@ -196,6 +224,9 @@ namespace basecross {
 		}
 
 		SuccessGoal(pair);
+
+		//アニメーションの再生
+		PlayAnimation(pair);
 	}
 
 	void Goal::OnCustomEventAction(int playerNumber, std::uint8_t eventCode, const std::uint8_t* bytes)

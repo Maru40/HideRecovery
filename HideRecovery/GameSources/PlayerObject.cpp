@@ -44,6 +44,7 @@
 #include "Maruyama/Player/Component/Respawner.h"
 #include "Maruyama/Player/Component/PlayerDeader.h"
 #include "Maruyama/Player/Component/UseWepon.h"
+#include "Maruyama/Player/Component/GoalAnimationController.h"
 
 namespace basecross {
 
@@ -74,7 +75,8 @@ namespace basecross {
 		AddComponent<maru::CollisionAction>();
 		AddComponent<RotationController>();
 		//AddComponent<PlayerController>();
-		AddComponent<Gravity>();
+		auto gravity = AddComponent<Gravity>();
+		gravity->SetGravity(Vec3(0.0f ,-4.8f, 0.0f));
 		
 		AddComponent<ItemBag>();
 		AddComponent<ItemAcquisitionManager>();
@@ -97,6 +99,7 @@ namespace basecross {
 		AddComponent<Respawner>();
 		AddComponent<PlayerDeader>();
 		AddComponent<UseWepon>();
+		AddComponent<GoalAnimationController>();
 
 		constexpr float ScaleValue = 1.0f;
 		transform->SetScale(Vec3(ScaleValue));

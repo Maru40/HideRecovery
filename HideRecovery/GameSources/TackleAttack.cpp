@@ -85,18 +85,21 @@ namespace basecross {
 	}
 
 	void TackleAttack::ForceStartAttack() {
-		m_taskList->ForceStop();	//タスク強制終了
-
-		//減速処理解除
-		if (auto velocityManager = GetGameObject()->GetComponent<VelocityManager>(false)) {
-			velocityManager->SetIsDeseleration(false);
-		}
+		ForceTaskReset();
 
 		SelectTask();
 	}
 
 	bool TackleAttack::IsTackle() {
 		return !m_taskList->IsEnd();
+	}
+
+	void TackleAttack::ForceTaskReset() {
+		m_taskList->ForceStop();
+		//減速処理解除
+		if (auto velocityManager = GetGameObject()->GetComponent<VelocityManager>(false)) {
+			velocityManager->SetIsDeseleration(false);
+		}
 	}
 
 	//--------------------------------------------------------------------------------------
@@ -114,6 +117,8 @@ namespace basecross {
 		{ }
 
 		void Preriminary_Tackle::OnStart() {
+			SetIsActive(true);
+
 			m_animator = GetOwner()->GetComponent<PlayerAnimator>(false);
 			PlayAnimation();	//アニメーションの再生
 		}
@@ -133,7 +138,7 @@ namespace basecross {
 		}
 
 		void Preriminary_Tackle::OnExit() {
-
+			SetIsActive(false);
 		}
 
 		void Preriminary_Tackle::PlayAnimation() {

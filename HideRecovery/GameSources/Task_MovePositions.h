@@ -18,12 +18,12 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 	struct Task_MovePositions_Parametor{
 		std::vector<Vec3> positions;  //œpœj‚·‚é–Ú“I’nŒQ
-		std::shared_ptr<Task_ToTargetMove::Parametor> moveParamPtr;
+		std::shared_ptr<Task::ToTargetMove::Parametor> moveParamPtr;
 		bool isSetInitializePosition; //‰Šúİ’è‚Ìƒ|ƒWƒVƒ‡ƒ“‚ÉuŠÔˆÚ“®‚³‚¹‚é‚©‚Ç‚¤‚©
 
 		Task_MovePositions_Parametor();
-		Task_MovePositions_Parametor(const Task_ToTargetMove::Parametor& moveParametor);
-		Task_MovePositions_Parametor(const std::shared_ptr<Task_ToTargetMove::Parametor>& moveParamPtr);
+		Task_MovePositions_Parametor(const Task::ToTargetMove::Parametor& moveParametor);
+		Task_MovePositions_Parametor(const std::shared_ptr<Task::ToTargetMove::Parametor>& moveParamPtr);
 	};
 
 	//--------------------------------------------------------------------------------------

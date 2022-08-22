@@ -925,8 +925,8 @@ namespace basecross {
 		pImpl->m_GravityVelocity += pImpl->m_Gravity * ElapsedTime;
 		auto Pos = PtrTransform->GetPosition();
 //		auto Pos = PtrTransform->GetWorldPosition();
-		Pos += pImpl->m_GravityVelocity * ElapsedTime;
-		PtrTransform->SetPosition(Pos);
+		//Pos += pImpl->m_GravityVelocity * ElapsedTime;
+		//PtrTransform->SetPosition(Pos);
 	}
 
 
