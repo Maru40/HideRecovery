@@ -63,12 +63,41 @@ namespace basecross {
 		return m_spriteDraw.lock();
 	}
 
-	Numbers::Numbers(const shared_ptr<Stage>& stage)
-		:GameObject(stage)
+	Numbers::Numbers(const shared_ptr<Stage>& stage, int digits)
+		:GameObject(stage), m_numDigits(digits), m_numbers(0)
 	{}
 
 	void Numbers::OnCreate() {
+		auto spriteData = SpriteDataManager::GetInstance()->GetSpriteData(L"Numbers");
+
+		Vec3 offset(-(spriteData.size.x / 2) * (m_numDigits - 1), 0.0f, 0.0f);
+		for (int i = 0; i < m_numDigits; i++) {
+			auto number = ObjectFactory::Create<NumberSprite>(GetStage());
+			auto numberTrans = number->GetComponent<Transform>();
+			numberTrans->SetParent(GetThis<Numbers>());
+			numberTrans->SetPosition(transform->GetPosition() + offset);
+			m_numbers.push_back(number);
+
+			offset += Vec3(spriteData.size.x, 0.0f, 0.0f);
+		}
 	}
+
+	void Numbers::OnDraw() {
+		for (auto number : m_numbers) {
+			number->OnDraw();
+		}
+	}
+
 	void Numbers::SetNumber(int num) {
+		if (num < 0)
+			return;
+
+		int place = static_cast<int>(pow(10, m_numbers.size() - 1));
+		for (auto& number : m_numbers)
+		{
+			int value = num / place % 10;
+			place /= 10;
+			number->SetValue(value); // 数字を更新
+		}
 	}
 }
