@@ -31,6 +31,7 @@
 #include "../Manager/TimeManager.h"
 #include "../StageObject/FireworksObject.h"
 #include "../UI/GoalMessageUI.h"
+#include "../UI/GameFinishUI.h"
 
 namespace basecross {
 	void WatanabeStage::CreateViewLight() {
@@ -112,9 +113,8 @@ namespace basecross {
 
 		//AddGameObject<NumberSprite>()->SetValue(5);
 		//m_obj = AddGameObject<GameStartUI>();
-		m_obj = AddGameObject<CountDownUI>();
 
-		m_per = AddGameObject<GameStartUI>();
+		m_per = AddGameObject<GameFinishUI>();
 	}
 
 	void WatanabeStage::OnUpdate() {
