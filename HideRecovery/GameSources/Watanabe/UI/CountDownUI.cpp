@@ -1,5 +1,6 @@
 ﻿#include "stdafx.h"
 #include "CountDownUI.h"
+#include "../Utility/Utility.h"
 #include "../DebugClass/Debug.h"
 
 namespace basecross {
@@ -13,9 +14,6 @@ namespace basecross {
 
 	void CountDownUI::OnCreate() {
 		m_number = GetStage()->AddGameObject<NumberSprite>();
-		m_number->GetComponent<Transform>()->SetParent(GetThis<CountDownUI>());
-		m_number->SetValue((int)floorf(m_startTime));
-		Debug::GetInstance()->Log((int)floorf(m_startTime));
 		// 切り捨ての関係上+1
 		m_presentTime = m_startTime + 1;
 
@@ -24,13 +22,15 @@ namespace basecross {
 
 	void CountDownUI::OnUpdate() {
 		if (m_presentTime <= 1.0f) {
-			m_number->SetActive(false);
 			m_isTimeUp = true;
+			m_number->SetActive(false);
 			return;
 		}
 
 		float delta = App::GetApp()->GetElapsedTime();
-		m_number->SetValue((int)floorf(m_presentTime));
+		// 現在時間を1～m_startTimeの間でクランプ
+		float displayNum = Utility::Clamp(m_presentTime, 1.0f, m_startTime);
+		m_number->SetValue((int)floorf(displayNum));
 		m_presentTime -= delta;
 	}
 

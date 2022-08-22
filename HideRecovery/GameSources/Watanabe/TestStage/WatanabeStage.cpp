@@ -114,7 +114,7 @@ namespace basecross {
 		//m_obj = AddGameObject<GameStartUI>();
 		m_obj = AddGameObject<CountDownUI>();
 
-		m_per = AddGameObject<GoalMessageUI>();
+		m_per = AddGameObject<GameStartUI>();
 	}
 
 	void WatanabeStage::OnUpdate() {
@@ -131,6 +131,7 @@ namespace basecross {
 		}
 		else if (keyBoard.IsInputDown(KeyCode::Alpha2)) {
 			Debug::GetInstance()->Log(L"Play");
+			//m_per->Reset();
 			m_per->Start();
 		}
 	}
