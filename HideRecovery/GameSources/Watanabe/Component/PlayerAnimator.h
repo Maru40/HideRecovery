@@ -33,7 +33,7 @@ namespace basecross {
 		PlayerAnimator(const shared_ptr<GameObject>& owner);
 		void OnCreate()override;
 		void OnLateStart() override;
-		void OnUpdate() override;
+		void OnUpdate2() override;
 
 	private:
 		void Transition();

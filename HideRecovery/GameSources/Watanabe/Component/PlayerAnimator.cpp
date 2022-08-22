@@ -37,7 +37,7 @@ namespace basecross {
 		}
 	}
 
-	void PlayerAnimator::OnUpdate() {
+	void PlayerAnimator::OnUpdate2() {
 		Animator::OnUpdate();
 
 		Transition();
@@ -49,6 +49,7 @@ namespace basecross {
 
 		constexpr float TransitionSpeed = 0.1f;	//遷移速度
 		auto velocity = velocityManager->GetVelocity();
+		velocity.y = 0;
 
 		//速度が一定以下かつ、Dash状態なら
 		if (velocity.length() < TransitionSpeed && IsCurretAnimationState(PlayerAnimationState::State::Dash)) {
