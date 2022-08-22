@@ -29,11 +29,15 @@
 
 #include "Watanabe/Manager/PointManager.h"
 #include "Watanabe/Component/PlayerAnimator.h"
+#include "Watanabe/Interface/I_Performable.h"
+#include "Watanabe/StageObject/FireworksObject.h"
 
 #include "GameTimer.h"
 
 #include "TackleAttack.h"
 #include "Maruyama/Player/Component/GoalAnimationController.h"
+
+#include "PlayerInputer.h"
 
 namespace basecross {
 
@@ -64,7 +68,16 @@ namespace basecross {
 		itemHiderTime(3.0f),
 		timeDrawPosition(Vec3(0.0f, 0.0f, 0.0f)),
 		dunkPositionOffset(Vec3(0.0f, 3.0f, 0.0f))
-	{}
+	{
+		constexpr float fOffset = +1.0f;
+		constexpr float fOffsetY = -0.5f;
+		firePositionOffsets = {
+			Vec3(+fOffset, fOffsetY, +fOffset),
+			Vec3(+fOffset, fOffsetY, -fOffset),
+			Vec3(-fOffset, fOffsetY, +fOffset),
+			Vec3(-fOffset, fOffsetY, -fOffset),
+		};
+	}
 
 	//--------------------------------------------------------------------------------------
 	/// ゴール管理クラス本体
@@ -76,13 +89,28 @@ namespace basecross {
 		m_timer(new GameTimer(0))
 	{}
 
-	void Goal::OnCreate() {
-
+	void Goal::OnLateStart() {
+		SettingPerformable();
 	}
 
 	void Goal::OnUpdate() {
 		if (!m_timer->IsTimeUp()) {
 			TimerUpdate();
+		}
+
+		if (PlayerInputer::GetInstance()->IsRightDown()) {
+			for (auto weakFire : m_fireEffets) {
+				if (auto fire = weakFire.lock()) {
+					fire->Start();
+				}
+			}
+		}
+	}
+
+	void Goal::SettingPerformable() {
+		for (auto offset : m_param.firePositionOffsets) {
+			auto fire = GetStage()->Instantiate<FireworksObject>(transform->GetPosition() + offset, Quat::Identity());
+			m_fireEffets.push_back(fire);
 		}
 	}
 
@@ -106,9 +134,12 @@ namespace basecross {
 			goalAnimationController->SetDunkPosition(GetDunkPosition());
 		}
 
-		//if (auto goalCtrl = GetGameObject()->GetComponent<GoalAnimationController>(false)) {
-		//	goalCtrl->SetDunkPosition(maru::Utility::FindComponent<Goal>()->GetDunkPosition());
-		//}
+		//ファイヤーエフェクト
+		for (auto weakFire : m_fireEffets) {
+			if (auto fire = weakFire.lock()) {
+				fire->Start();
+			}
+		}
 
 		//ポイント加算
 		AddPoint(GetTeam());
