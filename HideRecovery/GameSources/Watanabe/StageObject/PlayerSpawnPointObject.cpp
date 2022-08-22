@@ -42,8 +42,6 @@ namespace basecross {
 	}
 
 	void PlayerSpawnPointObject::OnCreate() {
-		Debug::GetInstance()->Log(L"Create PlayerSpawnPoint");
-
 		AddComponent<PlayerSpawnPoint>(PlayerSpawnPoint::Parametor(m_team, m_id));
 	}
 	void PlayerSpawnPointObject::OnUpdate() {

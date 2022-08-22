@@ -33,6 +33,10 @@
 #include "../UI/GoalMessageUI.h"
 #include "../UI/GameFinishUI.h"
 #include "../UI/TimerUI.h"
+#include "../StageObject/OwnAreaObject.h"
+
+#include "HideItemObject.h"
+#include "Maruyama/StageObject/GoalObject.h"
 
 namespace basecross {
 	void WatanabeStage::CreateViewLight() {
@@ -108,16 +112,24 @@ namespace basecross {
 		GameObjecttCSVBuilder builder;
 		builder.Register<Block>(L"Block");
 		builder.Register<RackObject>(L"Rack");
+		builder.Register<HideItemObject>(L"HideItem");
+		builder.Register<PlayerSpawnPointObject>(L"PlayerSpawnPoint");
+		builder.Register<GoalObject>(L"Goal");
+		builder.Register<OwnAreaObject>(L"OwnAreaObject");
 		auto dir = App::GetApp()->GetDataDirWString();
 		auto path = dir + L"MapDatas/";
 		builder.Build(GetThis<Stage>(), path + L"StageS2.csv");
 
+		GameObjecttCSVBuilder uiBuilder;
+		uiBuilder.Register<TimerUI>(L"TimerUI");
+		uiBuilder.Build(GetThis<Stage>(), path + L"UILayout.csv");
+
 		//AddGameObject<NumberSprite>()->SetValue(5);
 		//m_obj = AddGameObject<GameStartUI>();
 
-		auto obj = AddGameObject<TimerUI>();
-
 		m_per = AddGameObject<GameFinishUI>();
+		TimeManager::CreateInstance();
+		TimeManager::GetInstance()->GetTimer().Reset(4);
 	}
 
 	void WatanabeStage::OnUpdate() {
@@ -137,6 +149,11 @@ namespace basecross {
 			//m_per->Reset();
 			m_per->Start();
 		}
-		//TimeManager::GetInstance()->UpdateTime();
+
+		TimeManager::GetInstance()->UpdateTime();
+		auto timer = TimeManager::GetInstance()->GetTimer();
+		if (timer.IsTimeUp()) {
+			//m_per->Start();
+		}
 	}
 }
