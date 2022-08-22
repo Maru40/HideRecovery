@@ -2,6 +2,7 @@
 #include "Numbers.h"
 #include "../Utility/Utility.h"
 #include "../Manager/SpriteDataManager.h"
+#include "../DebugClass/Debug.h"
 
 namespace basecross {
 	NumberSprite::NumberSprite(const shared_ptr<Stage>& stage)
@@ -72,19 +73,13 @@ namespace basecross {
 
 		Vec3 offset(-(spriteData.size.x / 2) * (m_numDigits - 1), 0.0f, 0.0f);
 		for (int i = 0; i < m_numDigits; i++) {
-			auto number = ObjectFactory::Create<NumberSprite>(GetStage());
+			auto number = GetStage()->AddGameObject<NumberSprite>();
 			auto numberTrans = number->GetComponent<Transform>();
 			numberTrans->SetParent(GetThis<Numbers>());
 			numberTrans->SetPosition(transform->GetPosition() + offset);
 			m_numbers.push_back(number);
 
 			offset += Vec3(spriteData.size.x, 0.0f, 0.0f);
-		}
-	}
-
-	void Numbers::OnDraw() {
-		for (auto number : m_numbers) {
-			number->OnDraw();
 		}
 	}
 
