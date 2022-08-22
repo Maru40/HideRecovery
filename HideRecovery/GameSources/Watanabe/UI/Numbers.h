@@ -10,6 +10,7 @@ namespace basecross {
 		NumberSprite(const shared_ptr<Stage>& stage);
 
 		void OnCreate()override;
+
 		void SetValue(int number);
 		shared_ptr<PCTSpriteDraw> GetDrawComponent();
 	};
@@ -22,7 +23,5 @@ namespace basecross {
 
 		void OnCreate()override;
 		void SetNumber(int num);
-
-		void OnDraw()override;
 	};
 }

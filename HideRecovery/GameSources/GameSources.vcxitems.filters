@@ -958,6 +958,9 @@
     <Filter Include="Watanabe\UI\GameFinishUI">
       <UniqueIdentifier>{1968564a-b4c0-4fc3-910e-78bf32437180}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\UI\TimerUI">
+      <UniqueIdentifier>{7b628202-a57b-4ecb-8b92-a93a9f37c368}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1773,6 +1776,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\GameFinishUI.h">
       <Filter>Watanabe\UI\GameFinishUI</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\TimerUI.h">
+      <Filter>Watanabe\UI\TimerUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2500,6 +2506,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\GameFinishUI.cpp">
       <Filter>Watanabe\UI\GameFinishUI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\TimerUI.cpp">
+      <Filter>Watanabe\UI\TimerUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
