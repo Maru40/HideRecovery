@@ -1,8 +1,8 @@
-
+ï»¿
 /*!
 @file UseWepon.h
-@brief UseWepon‚È‚Ç
-’S“–FŠÛR—TŠì
+@brief UseWeponãªã©
+æ‹…å½“ï¼šä¸¸å±±è£•å–œ
 */
 
 #pragma once
@@ -11,7 +11,7 @@
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
-	/// ‘O•ûéŒ¾
+	/// å‰æ–¹å®£è¨€
 	//--------------------------------------------------------------------------------------
 	class WeponBase;
 	class RotationController;
@@ -21,17 +21,17 @@ namespace basecross {
 	}
 
 	//--------------------------------------------------------------------------------------
-	/// ƒEƒFƒ|ƒ“‚ğg—p‚·‚éƒNƒ‰ƒX‚Ìƒpƒ‰ƒ[ƒ^
+	/// ã‚¦ã‚§ãƒãƒ³ã‚’ä½¿ç”¨ã™ã‚‹ã‚¯ãƒ©ã‚¹ã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
 	//--------------------------------------------------------------------------------------
 	struct UseWepon_Parametor {
-		std::unique_ptr<maru::ReactiveBool> isAim;	//Aim’†‚©‚Ç‚¤‚©
+		std::unique_ptr<maru::ReactiveBool> isAim;	//Aimä¸­ã‹ã©ã†ã‹
 
 		UseWepon_Parametor();
 
 		UseWepon_Parametor(const bool isAim);
 
 		/// <summary>
-		/// ƒRƒs[ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+		/// ã‚³ãƒ”ãƒ¼ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		/// </summary>
 		UseWepon_Parametor(const UseWepon_Parametor& parametor);
 
@@ -39,7 +39,7 @@ namespace basecross {
 	};
 
 	//--------------------------------------------------------------------------------------
-	/// ƒEƒFƒ|ƒ“‚ğg—p‚·‚éƒNƒ‰ƒX
+	/// ã‚¦ã‚§ãƒãƒ³ã‚’ä½¿ç”¨ã™ã‚‹ã‚¯ãƒ©ã‚¹
 	//--------------------------------------------------------------------------------------
 	class UseWepon : public Component
 	{
@@ -47,24 +47,28 @@ namespace basecross {
 		using Parametor = UseWepon_Parametor;
 
 	private:
-		Parametor m_param;					//ƒpƒ‰ƒ[ƒ^
+		Parametor m_param;					//ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
 
-		std::weak_ptr<WeponBase> m_wepon;	//•Ší
+		std::weak_ptr<WeponBase> m_wepon;	//æ­¦å™¨
 
-		std::weak_ptr<RotationController> m_rotationController;	//‰ñ“]ƒRƒ“ƒgƒ[ƒ‰[
+		std::weak_ptr<RotationController> m_rotationController;	//å›è»¢ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼
+
+		Vec3 m_direction = Vec3(0, 0, 1);
+
+		bool m_isUseCamera = false;
 
 	public:
 		/// <summary>
-		/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+		/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		/// </summary>
-		/// <param name="objPtr">‚±‚ÌƒNƒ‰ƒX‚ğŠ—L‚·‚éƒQ[ƒ€ƒIƒuƒWƒFƒNƒg</param>
+		/// <param name="objPtr">ã“ã®ã‚¯ãƒ©ã‚¹ã‚’æ‰€æœ‰ã™ã‚‹ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</param>
 		UseWepon(const std::shared_ptr<GameObject>& objPtr);
 
 		/// <summary>
-		/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+		/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		/// </summary>
-		/// <param name="objPtr">‚±‚ÌƒNƒ‰ƒX‚ğŠ—L‚·‚éƒQ[ƒ€ƒIƒuƒWƒFƒNƒg</param>
-		/// <param name="wepon">•Ší</param>
+		/// <param name="objPtr">ã“ã®ã‚¯ãƒ©ã‚¹ã‚’æ‰€æœ‰ã™ã‚‹ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</param>
+		/// <param name="wepon">æ­¦å™¨</param>
 		UseWepon(const std::shared_ptr<GameObject>& objPtr, const std::shared_ptr<WeponBase>& wepon);
 
 		virtual ~UseWepon() = default;
@@ -74,48 +78,54 @@ namespace basecross {
 
 	private:
 		/// <summary>
-		/// ƒGƒCƒ€’†‚ÌXVˆ—
+		/// ã‚¨ã‚¤ãƒ ä¸­ã®æ›´æ–°å‡¦ç†
 		/// </summary>
 		void AimUpdate();
 
 		/// <summary>
-		/// ‰ñ“]XV
+		/// å›è»¢æ›´æ–°
 		/// </summary>
 		void RotationUpdate();
 
 		/// <summary>
-		/// ƒGƒCƒ€ó‘Ô‚ğØ‚è‘Ö‚¦‚½‚Æ‚«‚ÉŒÄ‚Ño‚µ‚½‚¢ˆ—‚Ìİ’è
+		/// ã‚¨ã‚¤ãƒ çŠ¶æ…‹ã‚’åˆ‡ã‚Šæ›¿ãˆãŸã¨ãã«å‘¼ã³å‡ºã—ãŸã„å‡¦ç†ã®è¨­å®š
 		/// </summary>
 		void SettingReactiveIsAim();
 
 	public:
 		//--------------------------------------------------------------------------------------
-		/// ƒAƒNƒZƒbƒT
+		/// ã‚¢ã‚¯ã‚»ãƒƒã‚µ
 		//--------------------------------------------------------------------------------------
 
 		/// <summary>
-		/// ƒGƒCƒ€’†‚Ìİ’è
+		/// ã‚¨ã‚¤ãƒ ä¸­ã®è¨­å®š
 		/// </summary>
-		/// <param name="isAim">ƒGƒCƒ€’†‚©‚Ç‚¤‚©</param>
+		/// <param name="isAim">ã‚¨ã‚¤ãƒ ä¸­ã‹ã©ã†ã‹</param>
 		void SetIsAim(const bool isAim);
 
 		/// <summary>
-		/// ƒGƒCƒ€’†‚©‚Ç‚¤‚©
+		/// ã‚¨ã‚¤ãƒ ä¸­ã‹ã©ã†ã‹
 		/// </summary>
-		/// <returns>ƒGƒCƒ€’†‚È‚çtrue</returns>
+		/// <returns>ã‚¨ã‚¤ãƒ ä¸­ãªã‚‰true</returns>
 		bool IsAim() const;
 
 		/// <summary>
-		/// •Ší‚Ìİ’è
+		/// æ­¦å™¨ã®è¨­å®š
 		/// </summary>
-		/// <param name="wepon">•Ší</param>
+		/// <param name="wepon">æ­¦å™¨</param>
 		void SetWepon(const std::shared_ptr<WeponBase>& wepon) noexcept;
 
 		/// <summary>
-		/// •Ší‚Ìæ“¾
+		/// æ­¦å™¨ã®å–å¾—
 		/// </summary>
-		/// <returns>•Ší</returns>
+		/// <returns>æ­¦å™¨</returns>
 		std::shared_ptr<WeponBase> GetWepon() const noexcept;
+
+		void SetDirection(const Vec3& direction) { m_direction = direction; }
+		Vec3 GetDirection() const { return m_direction; }
+
+		void SetIsUseCamera(bool isUseCamera) { m_isUseCamera = isUseCamera; }
+		bool IsUseCamera() const { return m_isUseCamera; }
 		
 	};
 
