@@ -30,8 +30,11 @@ namespace basecross {
 		SetOwner(owner);
 		SetMoveDirect(direct);
 
-		//最大距離を設定
-		auto rangeDestroy = GetGameObject()->AddComponent<RangeDestoryManager>(GetMaxRange());
+		if (Online::OnlineManager::GetLocalPlayer().getIsMasterClient())
+		{
+			//最大距離を設定
+			auto rangeDestroy = GetGameObject()->AddComponent<RangeDestoryManager>(GetMaxRange());
+		}
 	}
 
 	void ChargeBullet::OnCollisionEnter(const CollisionPair& pair) {
