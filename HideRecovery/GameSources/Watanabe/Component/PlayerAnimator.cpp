@@ -14,8 +14,20 @@
 #include "MaruUtility.h"
 
 namespace basecross {
+
+	TimeAnimationEvent::TimeAnimationEvent() :
+		TimeAnimationEvent(0.0f, nullptr)
+	{}
+
+	TimeAnimationEvent::TimeAnimationEvent(const float time, const std::function<void()>& timeEvent) :
+		time(time),
+		timeEvent(timeEvent),
+		isActive(true)
+	{}
+
+
 	PlayerAnimator::PlayerAnimator(const shared_ptr<GameObject>& owner)
-		:Animator(owner)
+		:Animator(owner), m_beforeAnimationTime(0.0f)
 	{}
 
 	void PlayerAnimator::OnCreate() {
@@ -126,6 +138,40 @@ namespace basecross {
 		}
 	}
 
+	void PlayerAnimator::TimeEventUpdate() {
+		auto draw = GetGameObject()->GetComponent<PNTBoneModelDraw>();
+		float currentTime = draw->GetCurrentAnimationTime();
+		auto currentAnimation = draw->GetCurrentAnimation();
+		auto events = m_timeEventsMap[currentAnimation];
+		for (auto& data : events) {
+			if (!data.isActive) {	//アクティブでないなら処理をとば
+				continue;
+			}
+
+			if (data.time < currentTime) {	//時間を超えていたら。
+				if (data.timeEvent) {
+					data.timeEvent();
+					data.isActive = false;
+				}
+			}
+		}
+
+		//アニメーションがループされたら
+		if (currentTime < m_beforeAnimationTime) {
+			for (auto& data : events) {
+				if (data.isActive) {	//アクティブなら
+					if (data.timeEvent) {
+						data.timeEvent();
+					}
+				}
+
+				data.isActive = true;
+			}
+		}
+
+		m_beforeAnimationTime = currentTime;
+	}
+
 	void PlayerAnimator::ChangePlayerAnimation(PlayerAnimationState::State state) {
 		ExitEvent();
 
@@ -153,5 +199,13 @@ namespace basecross {
 
 	void PlayerAnimator::AddAnimationEvent(const PlayerAnimationState::State& state, const AnimationEvent& animationEvent) {
 		m_animationEventsMap[PlayerAnimationState::PlayerAnimationState2wstring(state)].push_back(animationEvent);
+	}
+
+	void PlayerAnimator::AddTimeEvent(const PlayerAnimationState::State& state, const float time, const std::function<void()>& timeEvent){
+		AddTimeEvent(state, TimeAnimationEvent(time, timeEvent));
+	}
+
+	void PlayerAnimator::AddTimeEvent(const PlayerAnimationState::State& state, const TimeAnimationEvent& timeEvent){
+		m_timeEventsMap[PlayerAnimationState::PlayerAnimationState2wstring(state)].push_back(timeEvent);
 	}
 }
