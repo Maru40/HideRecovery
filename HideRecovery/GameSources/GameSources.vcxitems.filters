@@ -1815,6 +1815,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\UIObjects.h">
       <Filter>Watanabe\UI</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\MatchingUILayoutStage.h">
+      <Filter>Watanabe\TestStage</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2560,6 +2563,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\UIObjectBase.cpp">
       <Filter>Watanabe\UI\UIObjectBase</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\MatchingUILayoutStage.cpp">
+      <Filter>Watanabe\TestStage</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
