@@ -143,6 +143,10 @@ namespace basecross {
 		/// <returns>再配置までの時間を表示する位置</returns>
 		Vec3 GetTimeDrawPosition() const noexcept { return m_param.timeDrawPosition; }
 
+		/// <summary>
+		/// ダンク位置を取得できるようにした。
+		/// </summary>
+		/// <returns>ダンク位置</returns>
 		Vec3 GetDunkPosition() const { return transform->GetPosition() + m_param.dunkPositionOffset; }
 		
 		/// <summary>
