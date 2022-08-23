@@ -2,11 +2,23 @@
 #include "SimpleSprite.h"
 #include "../Utility/Utility.h"
 #include "../Manager/SpriteDataManager.h"
+#include "../Utility/DataExtracter.h"
 
 namespace basecross {
 	SimpleSprite::SimpleSprite(const shared_ptr<Stage>& stage, Type type, const wstring& key)
-		:GameObject(stage), m_type(type), m_key(key)
+		:StageObjectBase(stage, L"SimpleSprite"), m_type(type), m_key(key)
 	{}
+
+	SimpleSprite::SimpleSprite(const shared_ptr<Stage>& stage, const wstring& line)
+		: StageObjectBase(stage, L"SimpleSprite")
+	{
+		vector<wstring> tokens = DataExtracter::DelimitData(line);
+		DataExtracter::TransformDataExtraction(tokens, m_transformData);
+
+		// 仮で入れる
+		m_type = Type::SpriteData;
+		m_key = L"East";
+	}
 
 	void SimpleSprite::OnCreate() {
 		vector<VertexPositionColorTexture> vertices;

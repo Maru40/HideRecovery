@@ -125,12 +125,13 @@ namespace basecross {
 
 		GameObjecttCSVBuilder uiBuilder;
 		uiBuilder.Register<TimerUI>(L"TimerUI");
+		uiBuilder.Register<HPGaugeUI>(L"HPGaugeUI");
+		uiBuilder.Register<PointUI>(L"PointUI");
+		uiBuilder.Register<SimpleSprite>(L"SimpleSprite");
 		uiBuilder.Build(GetThis<Stage>(), path + L"UILayout.csv");
 
 		//AddGameObject<NumberSprite>()->SetValue(5);
 		//m_obj = AddGameObject<GameStartUI>();
-		AddGameObject<HPGaugeUI>();
-		AddGameObject<PointUI>();
 
 		m_per = AddGameObject<GameFinishUI>();
 		TimeManager::CreateInstance();
@@ -142,23 +143,21 @@ namespace basecross {
 		//auto utilPtr = m_obj->GetBehavior<UtilBehavior>();
 		//utilPtr->RotToHead(Vec3(cosf(m_delta), 0, sinf(m_delta)), 2 * delta);
 		//m_delta += delta;
-		static const auto& inputDevice = App::GetApp()->GetMyInputDevice();
-		static const auto& keyBoard = inputDevice->GetKeyBoard();
+		const auto& inputDevice = App::GetApp()->GetMyInputDevice();
+		const auto& keyBoard = inputDevice->GetKeyBoard();
+		const auto& pad = inputDevice->GetXInputGamePad();
 		if (keyBoard.IsInputDown(KeyCode::Alpha1)) {
 			//AddGameObject<GameStartUI>()->Start();
-			dynamic_pointer_cast<CountDownUI>(m_obj)->Start();
-			Debug::GetInstance()->Log(L"Start");
+			//dynamic_pointer_cast<CountDownUI>(m_obj)->Start();
+			//Debug::GetInstance()->Log(L"Start");
 		}
 		else if (keyBoard.IsInputDown(KeyCode::Alpha2)) {
-			Debug::GetInstance()->Log(L"Play");
+			//Debug::GetInstance()->Log(L"Play");
 			//m_per->Reset();
-			m_per->Start();
-		}
-
-		TimeManager::GetInstance()->UpdateTime();
-		auto timer = TimeManager::GetInstance()->GetTimer();
-		if (timer.IsTimeUp()) {
 			//m_per->Start();
+		}
+		else if (pad.IsInputDown(XInputCode::Start)) {
+			PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToWatanabeStage");
 		}
 	}
 }

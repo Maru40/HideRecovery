@@ -1,11 +1,19 @@
 ﻿#include "stdafx.h"
 #include "HPGaugeUI.h"
 #include "../Utility/Utility.h"
+#include "../Utility/DataExtracter.h"
 
 namespace basecross {
 	HPGaugeUI::HPGaugeUI(const shared_ptr<Stage>& stage)
-		:GameObject(stage)
+		:StageObjectBase(stage, L"HPGaugeUI")
 	{}
+
+	HPGaugeUI::HPGaugeUI(const shared_ptr<Stage>& stage, const wstring& line)
+		: StageObjectBase(stage, L"HPGaugeUI")
+	{
+		vector<wstring> tokens = DataExtracter::DelimitData(line);
+		DataExtracter::TransformDataExtraction(tokens, m_transformData);
+	}
 
 	void HPGaugeUI::OnCreate() {
 		const wstring TextureKey = L"HPGauge_TX";
@@ -41,10 +49,10 @@ namespace basecross {
 		auto ptrDraw = m_drawComp.lock();
 		ptrDraw->SetTextureResource(TextureKey);
 		ptrDraw->SetGaugeColor(Col4(0, 1, 0, 1));
-		//ptrDraw->IsBackground(true);
+		ptrDraw->IsBackground(true);
 		SetAlphaActive(true);
 	}
 	void HPGaugeUI::OnUpdate() {
-		m_drawComp.lock()->SetRate(0.4);
+		m_drawComp.lock()->SetRate(0.4f);
 	}
 }
