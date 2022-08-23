@@ -100,6 +100,8 @@ namespace basecross {
 			//Mapの読み込み
 			CreateMap(sm_loadMapName);
 
+			m_gameStartUI = AddGameObject<GameStartUI>();
+			m_gameFinishUI = AddGameObject<GameFinishUI>();
 			//隠すアイテムの設定
 			//Instantiate<HideItemObject>(Vec3(0.0f, 0.0f, 0.0f), Quat::Identity());
 
@@ -118,12 +120,37 @@ namespace basecross {
 		}
 	}
 
+	void MainStage::OnUpdate() {
+		// デバッグ用
+		const auto& keyBoard = App::GetApp()->GetMyInputDevice()->GetKeyBoard();
+		if (keyBoard.IsInputDown(KeyCode::Alpha1)) {
+			m_gameStartUI->Start();
+			Debug::GetInstance()->Log(L"StartUI");
+		}
+		if (keyBoard.IsInputDown(KeyCode::Alpha2)) {
+			m_gameFinishUI->Start();
+			Debug::GetInstance()->Log(L"FinishUI");
+		}
+		if (keyBoard.IsInputDown(KeyCode::Alpha0)) {
+			m_gameStartUI->Reset();
+			m_gameFinishUI->Reset();
+			Debug::GetInstance()->Log(L"ResetUI");
+		}
+	}
+
 	void MainStage::SetLoadMapName(const wstring& name) {
 		sm_loadMapName = name;
 	}
 
 	wstring MainStage::GetLoadMapName() {
 		return sm_loadMapName;
+	}
+
+	std::shared_ptr<GameStartUI> MainStage::GetGameStartUI() {
+		return m_gameStartUI;
+	}
+	std::shared_ptr<GameFinishUI> MainStage::GetGameFinishUI() {
+		return m_gameFinishUI;
 	}
 }
 //end basecross

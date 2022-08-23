@@ -40,8 +40,9 @@ namespace basecross {
 
 	void GameFinishUI::Reset() {
 		m_isStart = false;
-		m_countDown->SetActive(true);
+		m_countDown->SetActive(false);
 		m_countDown->Reset();
+		m_strFinish->SetActive(false);
 	}
 
 	bool GameFinishUI::IsFinish() {
