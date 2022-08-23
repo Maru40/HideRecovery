@@ -970,6 +970,9 @@
     <Filter Include="Watanabe\Shader\PCTGaugeSprite\HLSL">
       <UniqueIdentifier>{0d0cbe3e-f9b0-4d90-97ab-7a1373dc2147}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\UI\HPGaugeUI">
+      <UniqueIdentifier>{a2593847-6a7c-4a7d-90f1-1388e8d315ba}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1794,6 +1797,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\MySpriteBaseDraw.h">
       <Filter>Watanabe\Shader\MySpriteBaseDraw</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\HPGaugeUI.h">
+      <Filter>Watanabe\UI\HPGaugeUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2530,6 +2536,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\MySpriteBaseDraw.cpp">
       <Filter>Watanabe\Shader\MySpriteBaseDraw</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\HPGaugeUI.cpp">
+      <Filter>Watanabe\UI\HPGaugeUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
