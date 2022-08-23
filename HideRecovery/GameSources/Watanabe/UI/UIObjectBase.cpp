@@ -2,18 +2,17 @@
 #include "UIObjectBase.h"
 
 namespace basecross {
-	UIObjectBase::UIObjectBase(const shared_ptr<Stage>& stage)
-		:GameObject(stage)
+	UIObjectBase::UIObjectBase(const shared_ptr<Stage>& stage, const wstring& name)
+		:GameObject(stage), m_name(name)
 	{}
 
 	void UIObjectBase::OnPreCreate() {
 		GameObject::OnPreCreate();
 		rectTransform = AddComponent<RectTransform>();
-		auto rectTrans = rectTransform.lock();
-		rectTrans->SetPosition(m_rectTransformData.Position);
-		rectTrans->SetScale(m_rectTransformData.Scale);
-		rectTrans->SetRotation(m_rectTransformData.Rotation);
+		rectTransform->SetPosition(m_rectTransformData.Position);
+		rectTransform->SetScale(m_rectTransformData.Scale);
+		rectTransform->SetRotation(m_rectTransformData.Rotation);
 
-		//AddTag(L"UI");
+		AddTag(m_name);
 	}
 }
