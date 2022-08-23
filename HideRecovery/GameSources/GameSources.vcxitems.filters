@@ -1812,6 +1812,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\UIObjectBase.h">
       <Filter>Watanabe\UI\UIObjectBase</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\UIObjects.h">
+      <Filter>Watanabe\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">

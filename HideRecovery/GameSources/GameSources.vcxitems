@@ -282,6 +282,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\SimpleSprite.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\TimerUI.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\UIObjectBase.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\UIObjects.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\AdvMeshUtil.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\BaseSingleton.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\CSVLoad.h" />
