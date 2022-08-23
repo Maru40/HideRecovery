@@ -29,6 +29,19 @@ namespace basecross
 {
 namespace Online
 {
+	struct OnlineMoveData
+	{
+		Vec3 moveVector;
+		Vec3 forward;
+
+		OnlineMoveData(const Vec3& moveVector, const Vec3& forward) :
+			moveVector(moveVector),
+			forward(forward)
+		{
+
+		}
+	};
+
 	struct HideItemOnlineData
 	{
 		int playerNumber;
@@ -145,25 +158,27 @@ namespace Online
 
 		auto moveVector = objectMover->Move(PlayerInputer::GetMoveDirection());
 
-		if (moveVector != m_beforeMoveVector)
-		{
-			OnlineManager::RaiseEvent(false, (std::uint8_t*)&(moveVector / App::GetApp()->GetElapsedTime()), sizeof(Vec3), EXECUTE_MOVE_EVENT_CODE);
-		}
-
 		auto rotationController = m_rotationController.lock();
+
+		auto direction = rotationController->GetDirect();
 
 		if (rotationController && !useWepon->IsAim())	//ローテーションがあり、Aim状態でないなら
 		{
 			auto input = PlayerInputer::GetMoveDirection();
-			auto direct = maru::Utility::CalcuCameraVec(Vec3(input.x, 0, input.y), GetStage()->GetView()->GetTargetCamera(), GetGameObject());
+			direction = maru::Utility::CalcuCameraVec(Vec3(input.x, 0, input.y), GetStage()->GetView()->GetTargetCamera(), GetGameObject());
 
-			rotationController->SetDirect(direct);
+			rotationController->SetDirect(direction);
+		}
+
+		if (moveVector != m_beforeMoveVector)
+		{
+			OnlineManager::RaiseEvent(false, (std::uint8_t*)&OnlineMoveData(moveVector, direction), sizeof(OnlineMoveData), EXECUTE_MOVE_EVENT_CODE);
 		}
 
 		m_beforeMoveVector = moveVector;
 	}
 
-	void PlayerOnlineController::ExecuteMove(int playerNumber, const Vec3& moveVector)
+	void PlayerOnlineController::ExecuteMove(int playerNumber, const Vec3& moveVector, const Vec3& forward)
 	{
 		if (m_playerNumber != playerNumber)
 		{
@@ -171,11 +186,10 @@ namespace Online
 		}
 
 		auto velocityManager = m_velocityManager.lock();
+		auto rotationController = m_rotationController.lock();
 
-		if (velocityManager)
-		{
-			velocityManager->SetVelocity(moveVector);
-		}
+		velocityManager->SetVelocity(moveVector);
+		rotationController->SetDirect(forward);
 	}
 
 	void PlayerOnlineController::TryAquisition()
@@ -616,8 +630,8 @@ namespace Online
 
 		if (eventCode == EXECUTE_MOVE_EVENT_CODE)
 		{
-			auto moveVector = ConvertByteData<Vec3>(bytes);
-			ExecuteMove(playerNumber, moveVector);
+			auto moveData = ConvertByteData<OnlineMoveData>(bytes);
+			ExecuteMove(playerNumber, moveData.moveVector, moveData.forward);
 			return;
 		}
 

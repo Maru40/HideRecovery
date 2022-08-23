@@ -101,7 +101,7 @@ namespace Online
 
 		void Move();
 
-		void ExecuteMove(int playerNumber, const Vec3& moveVector);
+		void ExecuteMove(int playerNumber, const Vec3& moveVector, const Vec3& forward);
 
 		void TryAquisition();
 
