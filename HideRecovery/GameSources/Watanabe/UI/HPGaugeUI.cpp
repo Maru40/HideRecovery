@@ -5,14 +5,14 @@
 
 namespace basecross {
 	HPGaugeUI::HPGaugeUI(const shared_ptr<Stage>& stage)
-		:StageObjectBase(stage, L"HPGaugeUI")
+		:UIObjectBase(stage, L"HPGaugeUI")
 	{}
 
 	HPGaugeUI::HPGaugeUI(const shared_ptr<Stage>& stage, const wstring& line)
-		: StageObjectBase(stage, L"HPGaugeUI")
+		: UIObjectBase(stage, L"HPGaugeUI")
 	{
 		vector<wstring> tokens = DataExtracter::DelimitData(line);
-		DataExtracter::TransformDataExtraction(tokens, m_transformData);
+		DataExtracter::RectTransformDataExtraction(tokens, m_rectTransformData);
 	}
 
 	void HPGaugeUI::OnCreate() {

@@ -6,18 +6,30 @@
 
 namespace basecross {
 	SimpleSprite::SimpleSprite(const shared_ptr<Stage>& stage, Type type, const wstring& key)
-		:StageObjectBase(stage, L"SimpleSprite"), m_type(type), m_key(key)
+		:UIObjectBase(stage, L"SimpleSprite"), m_type(type), m_key(key)
 	{}
 
 	SimpleSprite::SimpleSprite(const shared_ptr<Stage>& stage, const wstring& line)
-		: StageObjectBase(stage, L"SimpleSprite")
+		: UIObjectBase(stage, L"SimpleSprite")
 	{
 		vector<wstring> tokens = DataExtracter::DelimitData(line);
-		DataExtracter::TransformDataExtraction(tokens, m_transformData);
+		auto nextIndex = DataExtracter::RectTransformDataExtraction(tokens, m_rectTransformData);
 
-		// 仮で入れる
-		m_type = Type::SpriteData;
-		m_key = L"East";
+		wstring type = tokens[nextIndex + 0];
+		if (type == L"SpriteData") {
+			m_type = Type::SpriteData;
+		}
+		else if (type == L"Texture") {
+			m_type = Type::Texture;
+		}
+		else {
+			throw BaseException(
+				L"typeが不正な値です。",
+				L"type : " + type,
+				L"SimpleSprite::SimpleSprite()"
+			);
+		}
+		m_key = tokens[nextIndex + 1];
 	}
 
 	void SimpleSprite::OnCreate() {

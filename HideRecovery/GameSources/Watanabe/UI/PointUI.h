@@ -2,10 +2,10 @@
 #include "stdafx.h"
 #include "Numbers.h"
 #include "../StageObject/PlayerSpawnPointObject.h"
-#include "StageObjectBase.h"
+#include "UIObjectBase.h"
 
 namespace basecross {
-	class PointUI :public StageObjectBase {
+	class PointUI :public UIObjectBase {
 		shared_ptr<Numbers> m_numbers;
 		Team m_team;
 	public:

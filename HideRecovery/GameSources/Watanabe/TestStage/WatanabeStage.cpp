@@ -137,6 +137,11 @@ namespace basecross {
 		m_per = AddGameObject<GameFinishUI>();
 		TimeManager::CreateInstance();
 		TimeManager::GetInstance()->GetTimer().Reset(4);
+
+		for (int i = 0; i < 10; i++) {
+			PointManager::GetInstance()->AddPoint(Team::East);
+		}
+		PointManager::GetInstance()->AddPoint(Team::West);
 	}
 
 	void WatanabeStage::OnUpdate() {

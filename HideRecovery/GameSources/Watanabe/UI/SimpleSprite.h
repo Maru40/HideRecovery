@@ -1,9 +1,9 @@
 ﻿#pragma once
 #include "stdafx.h"
-#include "StageObjectBase.h"
+#include "UIObjectBase.h"
 
 namespace basecross {
-	class SimpleSprite :public StageObjectBase {
+	class SimpleSprite :public UIObjectBase {
 	public:
 		enum class Type {
 			Texture,

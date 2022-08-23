@@ -2,10 +2,10 @@
 #include "stdafx.h"
 #include "../Component/PlayerStatus.h"
 #include "../Shader/PCTGaugeSprite.h"
-#include "StageObjectBase.h"
+#include "UIObjectBase.h"
 
 namespace basecross {
-	class HPGaugeUI :public StageObjectBase {
+	class HPGaugeUI :public UIObjectBase {
 		weak_ptr<PlayerStatus> m_status;
 		weak_ptr<PCTGaugeSprite> m_drawComp;
 	public:
