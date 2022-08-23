@@ -11,73 +11,102 @@
 #include "MaruAction.h"
 
 namespace basecross {
+	//--------------------------------------------------------------------------------------
+	/// 前方宣言
+	//--------------------------------------------------------------------------------------
 	class VelocityManager;
 
+	//--------------------------------------------------------------------------------------
+	/// 遷移データ
+	//--------------------------------------------------------------------------------------
 	struct TransitionData {
 		std::function<bool()> isTransition;				//遷移条件
 		PlayerAnimationState::State transitionState;	//遷移したいステート
 
-		TransitionData() :
-			TransitionData(nullptr, PlayerAnimationState::State(0))
-		{}
+		TransitionData();
 
-		TransitionData(const std::function<bool()>& isTransition, const PlayerAnimationState::State& state) :
-			isTransition(isTransition), transitionState(state)
-		{}
+		/// <summary>
+		/// コンストラクタ
+		/// </summary>
+		/// <param name="isTransition">遷移できる状態かどうか</param>
+		/// <param name="state">ステート</param>
+		TransitionData(const std::function<bool()>& isTransition, const PlayerAnimationState::State& state);
 	};
 
+	//--------------------------------------------------------------------------------------
+	/// アニメーションイベント
+	//--------------------------------------------------------------------------------------
 	struct AnimationEvent {
-		std::function<void()> start;
-		std::function<bool()> update;
-		std::function<void()> exit;
+		std::function<void()> start;	//開始イベント
+		std::function<bool()> update;	//更新イベント
+		std::function<void()> exit;		//終了イベント
 
-		AnimationEvent():
-			AnimationEvent(nullptr, nullptr, nullptr)
-		{}
+		AnimationEvent();
 
+		/// <summary>
+		/// コンストラクタ
+		/// </summary>
+		/// <param name="start">開始イベント</param>
+		/// <param name="update">更新イベント</param>
+		/// <param name="exit">終了イベント</param>
 		AnimationEvent(
-			const std::function<void()>& start, 
+			const std::function<void()>& start,
 			const std::function<bool()>& update,
 			const std::function<void()>& exit
-		) :
-			start(start),
-			update(update),
-			exit(exit)
-		{}
+		);
 	};
 
+	//--------------------------------------------------------------------------------------
+	/// タイムアニメーションイベント
+	//--------------------------------------------------------------------------------------
 	struct TimeAnimationEvent {
-		float time;
-		std::function<void()> timeEvent;
-		bool isActive;
+		float time;		//時間
+		std::function<void()> timeEvent;	//タイムイベント
+		bool isActive;	//アクティブ
 
 		TimeAnimationEvent();
 
+		/// <summary>
+		/// コンストラクタ
+		/// </summary>
+		/// <param name="time">タイム</param>
+		/// <param name="timeEvent">タイムイベント</param>
 		TimeAnimationEvent(const float time, const std::function<void()>& timeEvent);
 	};
 
-	class PlayerAnimator :public Animator {
-		std::weak_ptr<VelocityManager> m_velocityManager;
+	//--------------------------------------------------------------------------------------
+	/// プレイヤーアニメーター
+	//--------------------------------------------------------------------------------------
+	class PlayerAnimator : public Animator
+	{
+		std::weak_ptr<VelocityManager> m_velocityManager;								//速度管理
 
-		std::unordered_map<wstring, TransitionData> m_transitionDataMap;
-		std::unordered_map<wstring, std::vector<AnimationEvent>> m_animationEventsMap;
-		std::unordered_map<wstring, std::vector<TimeAnimationEvent>> m_timeEventsMap;
+		std::unordered_map<wstring, TransitionData> m_transitionDataMap;				//遷移データマップ
+		std::unordered_map<wstring, std::vector<AnimationEvent>> m_animationEventsMap;	//アニメーションイベントマップ
+		std::unordered_map<wstring, std::vector<TimeAnimationEvent>> m_timeEventsMap;	//タイムイベントマップ
 
-		float m_beforeAnimationTime;
+		float m_beforeAnimationTime;	//前フレームアニメーションタイム管理
 		
 	public:
 		PlayerAnimator(const shared_ptr<GameObject>& owner);
-		void OnCreate()override;
+
+		void OnCreate() override;
 		void OnLateStart() override;
 		void OnUpdate2() override;
 
 	private:
+		/// <summary>
+		/// 遷移管理
+		/// </summary>
 		void Transition();
 
 		void StartEvent();
 		void UpdateEvent();
 		void ExitEvent();
 
+		/// <summary>
+		/// タイムイベント更新
+		/// </summary>
 		void TimeEventUpdate();
 
 	public:
