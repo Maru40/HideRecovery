@@ -973,6 +973,9 @@
     <Filter Include="Watanabe\UI\HPGaugeUI">
       <UniqueIdentifier>{a2593847-6a7c-4a7d-90f1-1388e8d315ba}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\UI\PointUI">
+      <UniqueIdentifier>{84ddc596-cc64-4838-b3c6-be5327258be9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1800,6 +1803,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\HPGaugeUI.h">
       <Filter>Watanabe\UI\HPGaugeUI</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\PointUI.h">
+      <Filter>Watanabe\UI\PointUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2539,6 +2545,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\HPGaugeUI.cpp">
       <Filter>Watanabe\UI\HPGaugeUI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\PointUI.cpp">
+      <Filter>Watanabe\UI\PointUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
