@@ -38,6 +38,8 @@
 #include "HideItemObject.h"
 #include "Maruyama/StageObject/GoalObject.h"
 
+#include "../UI/HPGaugeUI.h"
+
 namespace basecross {
 	void WatanabeStage::CreateViewLight() {
 		const Vec3 eye(5.0f, 5.0f, -5.0f);
@@ -126,7 +128,7 @@ namespace basecross {
 
 		//AddGameObject<NumberSprite>()->SetValue(5);
 		//m_obj = AddGameObject<GameStartUI>();
-
+		AddGameObject<HPGaugeUI>();
 		m_per = AddGameObject<GameFinishUI>();
 		TimeManager::CreateInstance();
 		TimeManager::GetInstance()->GetTimer().Reset(4);
