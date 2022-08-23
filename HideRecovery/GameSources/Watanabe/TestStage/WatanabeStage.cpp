@@ -131,7 +131,8 @@ namespace basecross {
 		uiBuilder.Build(GetThis<Stage>(), path + L"UILayout.csv");
 
 		//AddGameObject<NumberSprite>()->SetValue(5);
-		//m_obj = AddGameObject<GameStartUI>();
+		m_gameStartUI = AddGameObject<GameStartUI>();
+		m_gameFinishUI = AddGameObject<GameFinishUI>();
 
 		m_per = AddGameObject<GameFinishUI>();
 		TimeManager::CreateInstance();
@@ -147,16 +148,19 @@ namespace basecross {
 		const auto& keyBoard = inputDevice->GetKeyBoard();
 		const auto& pad = inputDevice->GetXInputGamePad();
 		if (keyBoard.IsInputDown(KeyCode::Alpha1)) {
-			//AddGameObject<GameStartUI>()->Start();
-			//dynamic_pointer_cast<CountDownUI>(m_obj)->Start();
-			//Debug::GetInstance()->Log(L"Start");
+			m_gameStartUI->Start();
+			Debug::GetInstance()->Log(L"StartUI");
 		}
-		else if (keyBoard.IsInputDown(KeyCode::Alpha2)) {
-			//Debug::GetInstance()->Log(L"Play");
-			//m_per->Reset();
-			//m_per->Start();
+		if (keyBoard.IsInputDown(KeyCode::Alpha2)) {
+			m_gameFinishUI->Start();
+			Debug::GetInstance()->Log(L"FinishUI");
 		}
-		else if (pad.IsInputDown(XInputCode::Start)) {
+		if (keyBoard.IsInputDown(KeyCode::Alpha0)) {
+			m_gameStartUI->Reset();
+			m_gameFinishUI->Reset();
+			Debug::GetInstance()->Log(L"ResetUI");
+		}
+		if (pad.IsInputDown(XInputCode::Start)) {
 			PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToWatanabeStage");
 		}
 	}
