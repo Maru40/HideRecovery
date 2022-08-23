@@ -281,6 +281,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\PointUI.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\SimpleSprite.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\TimerUI.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\UIObjectBase.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\AdvMeshUtil.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\BaseSingleton.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\CSVLoad.h" />
@@ -535,6 +536,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\PointUI.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\SimpleSprite.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\TimerUI.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\UIObjectBase.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Utility\AdvMeshUtil.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Utility\CSVLoad.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Utility\TimeCounter.cpp" />

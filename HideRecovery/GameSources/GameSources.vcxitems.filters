@@ -976,6 +976,9 @@
     <Filter Include="Watanabe\UI\PointUI">
       <UniqueIdentifier>{84ddc596-cc64-4838-b3c6-be5327258be9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\UI\UIObjectBase">
+      <UniqueIdentifier>{5d31169b-5442-42f5-a576-c0dfad7a3dd8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1806,6 +1809,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\PointUI.h">
       <Filter>Watanabe\UI\PointUI</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\UIObjectBase.h">
+      <Filter>Watanabe\UI\UIObjectBase</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2548,6 +2554,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\PointUI.cpp">
       <Filter>Watanabe\UI\PointUI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\UIObjectBase.cpp">
+      <Filter>Watanabe\UI\UIObjectBase</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

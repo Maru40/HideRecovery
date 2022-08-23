@@ -36,4 +36,39 @@ namespace basecross {
 			return *this;
 		}
 	};
+
+	/**
+	 * @brief UI用の位置、大きさ、回転の情報を持つ構造体
+	 */
+	struct RectTransformData {
+		Vec2 Position;
+		Vec2 Scale;
+		float Rotation;
+		RectTransformData() {
+			this->Position = Vec2(0.0f);
+			this->Scale = Vec2(1.0f);
+			this->Rotation = 0.0f;
+		}
+		RectTransformData(const Vec2& position) {
+			this->Position = position;
+			this->Scale = Vec2(1.0f);
+			this->Rotation = 0.0f;
+		}
+		RectTransformData(const Vec2& position, const Vec2& scale) {
+			this->Position = position;
+			this->Scale = scale;
+			this->Rotation = 0.0f;
+		}
+		RectTransformData(const Vec2& position, const Vec2& scale, float& rotation) {
+			this->Position = position;
+			this->Scale = scale;
+			this->Rotation = rotation;
+		}
+		RectTransformData operator +(const RectTransformData& data) {
+			this->Position += data.Position;
+			this->Scale += data.Scale;
+			this->Rotation += data.Rotation;
+			return *this;
+		}
+	};
 }
