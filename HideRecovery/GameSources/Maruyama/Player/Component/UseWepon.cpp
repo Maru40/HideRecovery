@@ -19,12 +19,15 @@
 #include "Watanabe/Component/PlayerAnimator.h"
 
 #include "RotationController.h"
+#include "VelocityManager.h"
+#include "MaruUtility.h"
 
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
 	/// ウェポンを使用するクラスのパラメータ
 	//--------------------------------------------------------------------------------------
+
 	UseWepon_Parametor::UseWepon_Parametor() :
 		UseWepon_Parametor(false)
 	{}
@@ -52,9 +55,11 @@ namespace basecross {
 	{}
 
 	void UseWepon::OnLateStart() {
-		SettingReactiveIsAim();
-
 		m_rotationController = GetGameObject()->GetComponent<RotationController>(false);
+		m_velocityManager = GetGameObject()->GetComponent<VelocityManager>(false);
+		m_animator = GetGameObject()->GetComponent<PlayerAnimator>(false);
+
+		SettingReactiveIsAim();
 	}
 
 	void UseWepon::OnUpdate() {
@@ -65,6 +70,60 @@ namespace basecross {
 
 	void UseWepon::AimUpdate() {
 		RotationUpdate();
+		AnimationUpdate();
+	}
+
+	void UseWepon::AnimationUpdate() {
+		auto velocityManager = m_velocityManager.lock();
+		auto animator = m_animator.lock();
+		if (!velocityManager || !animator) {
+			return;
+		}
+
+		if (animator->IsCurretAnimationState(PlayerAnimationState::State::GunSet2)) {	//GunSet2の間なら処理を飛ばす。
+			return;
+		}
+
+		auto velocity = velocityManager->GetVelocity();
+		velocity.y = 0.0f;
+
+		constexpr float StopVelocity = 0.01f;
+		if (velocity.length() <= StopVelocity) {	//止まっていると判断する速度なら
+			animator->ChangePlayerAnimation(PlayerAnimationState::State::Shot);
+		}
+
+		PlayerAnimationState::State states[] = {
+			PlayerAnimationState::State::GunFront,
+			PlayerAnimationState::State::GunBack,
+			PlayerAnimationState::State::GunRight,
+			PlayerAnimationState::State::GunLeft,
+		};
+
+		vector<Vec3> directions = {
+			transform->GetForward(),
+			-transform->GetForward(),
+			transform->GetRight(),
+			-transform->GetRight(),
+		};
+
+		auto resultDirection = maru::Utility::CalculateNearDirect(velocity, directions);	//一番近い方向を取得
+
+		//方向に合わせてEnumを取得
+		PlayerAnimationState::State state;
+		int index = 0;
+		for (auto& direction : directions) {
+			if (direction == resultDirection) {
+				state = states[index];
+				break;
+			}
+			index++;
+		}
+
+		if (animator->IsCurretAnimationState(state)) {	//同じアニメーションならfalse
+			return;
+		}
+
+		animator->ChangePlayerAnimation(state);
 	}
 
 	void UseWepon::RotationUpdate() {
@@ -74,8 +133,7 @@ namespace basecross {
 			return;
 		}
 
-		if (m_isUseCamera)
-		{
+		if (m_isUseCamera) {
 			m_direction = camera->GetAt() - camera->GetEye();
 		}
 

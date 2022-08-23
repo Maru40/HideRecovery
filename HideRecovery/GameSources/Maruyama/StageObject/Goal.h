@@ -27,7 +27,7 @@ namespace basecross {
 		float itemHiderTime;		//アイテム再配置までの時間
 		Vec3 timeDrawPosition;		//時間表示場所
 		Vec3 dunkPositionOffset;	//ダンクをする位置のオフセット
-		std::vector<Vec3> firePositionOffsets;
+		std::vector<Vec3> firePositionOffsets;	//ファイヤーポジションオフセット
 
 		Goal_Parametor(const Team& team);
 	};
@@ -143,6 +143,10 @@ namespace basecross {
 		/// <returns>再配置までの時間を表示する位置</returns>
 		Vec3 GetTimeDrawPosition() const noexcept { return m_param.timeDrawPosition; }
 
+		/// <summary>
+		/// ダンク位置を取得できるようにした。
+		/// </summary>
+		/// <returns>ダンク位置</returns>
 		Vec3 GetDunkPosition() const { return transform->GetPosition() + m_param.dunkPositionOffset; }
 		
 		/// <summary>

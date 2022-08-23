@@ -47,7 +47,8 @@ namespace basecross {
 		{}
 	};
 
-	class Animator :public Component {
+	class Animator :public Component
+	{
 	protected:
 		/// <summary>
 		/// モーションデータを読み込む
@@ -55,16 +56,19 @@ namespace basecross {
 		/// <param name="csvKey">CSVLoadに登録したアニメーションデータのキー</param>
 		/// <returns>アニメーションクリップ（配列）</returns>
 		vector<AnimationClip> LoadAnimationData(const wstring& csvKey);
+
 		/// <summary>
 		/// アニメーションクリップの登録
 		/// </summary>
 		/// <param name="clip">登録するアニメーションクリップ</param>
 		void RegisterAnimationClip(AnimationClip clip);
+
 		/// <summary>
 		/// アニメーションの変更（継承側のクラスで呼ぶ）
 		/// </summary>
 		/// <param name="key">変更したいアニメーションキー</param>
 		void ChangeAnimation(wstring key);
+
 	public:
 		Animator(const shared_ptr<GameObject>& owner);
 

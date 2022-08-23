@@ -96,12 +96,13 @@ namespace basecross {
 			Vec3 resultDirect;
 
 			//ˆê”Ô‹ß‚¢Œü‚«‚ğæ‚éB
-			float minDot = 99999999.0f;
+			float minDot = FLT_MAX;
 			for (auto direct : directs) {
 				float newDot = dot(direct.GetNormalized(), stdDirect.GetNormalized());
-				if (newDot < minDot) {
+				float newRad = acosf(newDot);
+				if (newRad < minDot) {
 					resultDirect = direct;
-					minDot = newDot;
+					minDot = newRad;
 				}
 			}
 

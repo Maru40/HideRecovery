@@ -11,7 +11,7 @@
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
-	/// テレポート機能
+	/// テレポート機能のパラメータ
 	//--------------------------------------------------------------------------------------
 
 	struct Teleport_Parametor 
@@ -28,7 +28,7 @@ namespace basecross {
 		using Parametor = Teleport_Parametor;
 
 	private:
-		Parametor m_param;
+		Parametor m_param;		//パラメータ
 
 	public:
 		Teleport(const std::shared_ptr<GameObject>& objPtr);

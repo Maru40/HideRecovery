@@ -15,6 +15,40 @@
 
 namespace basecross {
 
+	//--------------------------------------------------------------------------------------
+	/// 遷移データ
+	//--------------------------------------------------------------------------------------
+
+	TransitionData::TransitionData() :
+		TransitionData(nullptr, PlayerAnimationState::State(0))
+	{}
+
+	TransitionData::TransitionData(const std::function<bool()>& isTransition, const PlayerAnimationState::State& state) :
+		isTransition(isTransition), transitionState(state)
+	{}
+
+	//--------------------------------------------------------------------------------------
+	/// アニメーションイベント
+	//--------------------------------------------------------------------------------------
+
+	AnimationEvent::AnimationEvent() :
+		AnimationEvent(nullptr, nullptr, nullptr)
+	{}
+
+	AnimationEvent::AnimationEvent(
+		const std::function<void()>& start,
+		const std::function<bool()>& update,
+		const std::function<void()>& exit
+	) :
+		start(start),
+		update(update),
+		exit(exit)
+	{}
+
+	//--------------------------------------------------------------------------------------
+	/// タイムアニメーションイベント
+	//--------------------------------------------------------------------------------------
+
 	TimeAnimationEvent::TimeAnimationEvent() :
 		TimeAnimationEvent(0.0f, nullptr)
 	{}
@@ -25,6 +59,9 @@ namespace basecross {
 		isActive(true)
 	{}
 
+	//--------------------------------------------------------------------------------------
+	/// プレイヤーアニメーター本体
+	//--------------------------------------------------------------------------------------
 
 	PlayerAnimator::PlayerAnimator(const shared_ptr<GameObject>& owner)
 		:Animator(owner), m_beforeAnimationTime(0.0f)
@@ -51,6 +88,13 @@ namespace basecross {
 			auto state = PlayerAnimationState::PlayerAnimationState2wstring(baseState);
 			auto isTransition = [&]() { return IsTargetAnimationEnd(); };
 			m_transitionDataMap[state] = TransitionData(isTransition, PlayerAnimationState::State::Wait);
+		}
+
+		//自動でshotに遷移したいアニメーション
+		{
+			auto state = PlayerAnimationState::PlayerAnimationState2wstring(PlayerAnimationState::State::GunSet2);
+			auto isTransition = [&]() { return IsTargetAnimationEnd(); };
+			m_transitionDataMap[state] = TransitionData(isTransition, PlayerAnimationState::State::Shot);
 		}
 	}
 
@@ -80,14 +124,9 @@ namespace basecross {
 			ChangePlayerAnimation(PlayerAnimationState::State::Dash);
 		}
 
-		return;
 		//デバッグ
 		if (PlayerInputer::GetInstance()->IsUpDown()) {
-			if (auto goalCtrl = GetGameObject()->GetComponent<GoalAnimationController>(false)) {
-				goalCtrl->SetDunkPosition(maru::Utility::FindComponent<Goal>()->GetDunkPosition());
-			}
-
-			ChangePlayerAnimation(PlayerAnimationState::State::Goal1);
+			ChangePlayerAnimation(PlayerAnimationState::State::GunLeft);
 		}
 	}
 
@@ -145,7 +184,7 @@ namespace basecross {
 		auto currentAnimation = draw->GetCurrentAnimation();
 		auto& events = m_timeEventsMap[currentAnimation];
 		for (auto& data : events) {
-			if (!data.isActive) {	//アクティブでないなら処理をとば
+			if (!data.isActive) {	//アクティブでないなら処理をとばす
 				continue;
 			}
 

@@ -86,7 +86,7 @@ namespace basecross {
 			return;
 		}
 
-		animator->ChangePlayerAnimation(PlayerAnimationState::State::Shot);
+		//animator->ChangePlayerAnimation(PlayerAnimationState::State::Shot);
 	}
 
 	void ChargeGun::RevisionShotDirection() {

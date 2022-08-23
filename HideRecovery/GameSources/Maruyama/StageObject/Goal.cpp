@@ -97,14 +97,6 @@ namespace basecross {
 		if (!m_timer->IsTimeUp()) {
 			TimerUpdate();
 		}
-
-		if (PlayerInputer::GetInstance()->IsRightDown()) {
-			for (auto weakFire : m_fireEffets) {
-				if (auto fire = weakFire.lock()) {
-					fire->Start();
-				}
-			}
-		}
 	}
 
 	void Goal::SettingPerformable() {
