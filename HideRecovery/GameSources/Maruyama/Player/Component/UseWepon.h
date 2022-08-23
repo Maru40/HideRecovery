@@ -15,6 +15,8 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 	class WeponBase;
 	class RotationController;
+	class VelocityManager;
+	class PlayerAnimator;
 
 	namespace maru {
 		class ReactiveBool;
@@ -51,7 +53,9 @@ namespace basecross {
 
 		std::weak_ptr<WeponBase> m_wepon;	//武器
 
+		std::weak_ptr<VelocityManager> m_velocityManager;		//速度管理
 		std::weak_ptr<RotationController> m_rotationController;	//回転コントローラー
+		std::weak_ptr<PlayerAnimator> m_animator;				//アニメーター
 
 		Vec3 m_direction = Vec3(0, 0, 1);
 
@@ -86,6 +90,11 @@ namespace basecross {
 		/// 回転更新
 		/// </summary>
 		void RotationUpdate();
+
+		/// <summary>
+		/// アニメーション更新
+		/// </summary>
+		void AnimationUpdate();
 
 		/// <summary>
 		/// エイム状態を切り替えたときに呼び出したい処理の設定
