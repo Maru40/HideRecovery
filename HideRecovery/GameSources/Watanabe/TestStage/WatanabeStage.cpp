@@ -39,6 +39,7 @@
 #include "Maruyama/StageObject/GoalObject.h"
 
 #include "../UI/HPGaugeUI.h"
+#include "../UI/PointUI.h"
 
 namespace basecross {
 	void WatanabeStage::CreateViewLight() {
@@ -129,6 +130,8 @@ namespace basecross {
 		//AddGameObject<NumberSprite>()->SetValue(5);
 		//m_obj = AddGameObject<GameStartUI>();
 		AddGameObject<HPGaugeUI>();
+		AddGameObject<PointUI>();
+
 		m_per = AddGameObject<GameFinishUI>();
 		TimeManager::CreateInstance();
 		TimeManager::GetInstance()->GetTimer().Reset(4);
