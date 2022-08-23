@@ -72,6 +72,8 @@ namespace basecross {
 
 		Team GetTeam() const override { return m_team; }
 
+		Status GetStatus() const { return m_status; }
+
 		std::shared_ptr<GameObject> GetOwnerObject() const override { return GetGameObject(); }
 	};
 }

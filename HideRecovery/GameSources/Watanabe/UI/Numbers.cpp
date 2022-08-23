@@ -1,12 +1,11 @@
 ﻿#include "stdafx.h"
 #include "Numbers.h"
 #include "../Utility/Utility.h"
-#include "../Manager/SpriteDataManager.h"
 #include "../DebugClass/Debug.h"
 
 namespace basecross {
 	NumberSprite::NumberSprite(const shared_ptr<Stage>& stage)
-		:GameObject(stage), m_number(0)
+		:UIObjectBase(stage, L"NumberSprite"), m_number(0)
 	{}
 
 	void NumberSprite::OnCreate() {
@@ -65,22 +64,39 @@ namespace basecross {
 	}
 
 	Numbers::Numbers(const shared_ptr<Stage>& stage, int digits)
-		:GameObject(stage), m_numDigits(digits), m_numbers(0)
+		:UIObjectBase(stage, L"Numbers"), m_numDigits(digits), m_beforeScale(Vec2(0))
+
 	{}
 
 	void Numbers::OnCreate() {
-		auto spriteData = SpriteDataManager::GetInstance()->GetSpriteData(L"Numbers");
-
-		Vec3 offset(-(spriteData.size.x / 2) * (m_numDigits - 1), 0.0f, 0.0f);
+		m_spriteData = SpriteDataManager::GetInstance()->GetSpriteData(L"Numbers");
+		Vec2 offset(-(m_spriteData.size.x / 2) * (m_numDigits - 1), 0.0f);
 		for (int i = 0; i < m_numDigits; i++) {
 			auto number = GetStage()->AddGameObject<NumberSprite>();
-			auto numberTrans = number->GetComponent<Transform>();
-			numberTrans->SetParent(GetThis<Numbers>());
-			numberTrans->SetPosition(transform->GetPosition() + offset);
+			number->SetParent(GetThis<Numbers>());
+			auto numberRect = number->GetComponent<RectTransform>();
+			numberRect->SetPosition(rectTransform->GetPosition() + offset);
 			m_numbers.push_back(number);
 
-			offset += Vec3(spriteData.size.x, 0.0f, 0.0f);
+			offset += Vec2(m_spriteData.size.x, 0.0f);
 		}
+		m_beforeScale = rectTransform->GetWorldScale();
+	}
+
+	void Numbers::OnUpdate() {
+		Vec2 scale = rectTransform->GetWorldScale();
+		// スケール変更時のみ実行
+		if (scale != m_beforeScale) {
+			float scaleX = scale.x;
+			Vec2 offset(-(m_spriteData.size.x / 2) * (m_numDigits - 1) * scaleX, 0.0f);
+			for (auto number : m_numbers) {
+				auto numberRect = number->GetComponent<RectTransform>();
+				numberRect->SetPosition(rectTransform->GetPosition() + offset);
+
+				offset += Vec2(m_spriteData.size.x * scaleX, 0.0f);
+			}
+		}
+		m_beforeScale = rectTransform->GetWorldScale();
 	}
 
 	void Numbers::SetNumber(int num) {

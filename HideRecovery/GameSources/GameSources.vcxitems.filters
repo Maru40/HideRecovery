@@ -961,6 +961,24 @@
     <Filter Include="Watanabe\UI\TimerUI">
       <UniqueIdentifier>{7b628202-a57b-4ecb-8b92-a93a9f37c368}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\Shader\PCTGaugeSprite">
+      <UniqueIdentifier>{3be4a76e-d183-4a57-b1c1-1348bd445a81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\Shader\MySpriteBaseDraw">
+      <UniqueIdentifier>{f63d8ce3-dc7c-4be9-b9aa-a7e95d2c2528}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\Shader\PCTGaugeSprite\HLSL">
+      <UniqueIdentifier>{0d0cbe3e-f9b0-4d90-97ab-7a1373dc2147}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\UI\HPGaugeUI">
+      <UniqueIdentifier>{a2593847-6a7c-4a7d-90f1-1388e8d315ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\UI\PointUI">
+      <UniqueIdentifier>{84ddc596-cc64-4838-b3c6-be5327258be9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\UI\UIObjectBase">
+      <UniqueIdentifier>{5d31169b-5442-42f5-a576-c0dfad7a3dd8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1779,6 +1797,24 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\TimerUI.h">
       <Filter>Watanabe\UI\TimerUI</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\PCTGaugeSprite.h">
+      <Filter>Watanabe\Shader\PCTGaugeSprite</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\MySpriteBaseDraw.h">
+      <Filter>Watanabe\Shader\MySpriteBaseDraw</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\HPGaugeUI.h">
+      <Filter>Watanabe\UI\HPGaugeUI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\PointUI.h">
+      <Filter>Watanabe\UI\PointUI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\UIObjectBase.h">
+      <Filter>Watanabe\UI\UIObjectBase</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\UIObjects.h">
+      <Filter>Watanabe\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2510,6 +2546,21 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\TimerUI.cpp">
       <Filter>Watanabe\UI\TimerUI</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\PCTGaugeSprite.cpp">
+      <Filter>Watanabe\Shader\PCTGaugeSprite</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\MySpriteBaseDraw.cpp">
+      <Filter>Watanabe\Shader\MySpriteBaseDraw</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\HPGaugeUI.cpp">
+      <Filter>Watanabe\UI\HPGaugeUI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\PointUI.cpp">
+      <Filter>Watanabe\UI\PointUI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\UIObjectBase.cpp">
+      <Filter>Watanabe\UI\UIObjectBase</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)HitStopManager.cpp">
@@ -2541,6 +2592,12 @@
     <FxCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\HLSL\PSModelDraw.hlsl">
       <Filter>Watanabe\Shader\ModelDraw\HLSL</Filter>
     </FxCompile>
+    <FxCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\HLSL\PSPCTGaugeSprite.hlsl">
+      <Filter>Watanabe\Shader\PCTGaugeSprite\HLSL</Filter>
+    </FxCompile>
+    <FxCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\HLSL\VSPCTGaugeSprite.hlsl">
+      <Filter>Watanabe\Shader\PCTGaugeSprite\HLSL</Filter>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)..\..\Libs\BaseLib\DxShaders\SlimeParametors.hlsli">
@@ -2557,6 +2614,9 @@
     </None>
     <None Include="$(MSBuildThisFileDirectory)Watanabe\Shader\HLSL\IncDraw.hlsli">
       <Filter>Watanabe\Shader</Filter>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Watanabe\Shader\HLSL\INCPCTGaugeSprite.hlsli">
+      <Filter>Watanabe\Shader\PCTGaugeSprite\HLSL</Filter>
     </None>
   </ItemGroup>
 </Project>

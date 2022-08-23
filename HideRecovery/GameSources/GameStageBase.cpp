@@ -45,7 +45,7 @@
 #include "Watanabe/StageObject/RackObject.h"
 #include "Watanabe/StageObject/PlayerSpawnPointObject.h"
 #include "Watanabe/StageObject/OwnAreaObject.h"
-#include "Watanabe/UI/TimerUI.h"
+#include "Watanabe/UI/UIObjects.h"
 
 #include "Itabashi/OnlineTestRoom.h"
 #include "Itabashi/OnlinePlayerManager.h"
@@ -101,6 +101,9 @@ namespace basecross {
 
 		GameObjecttCSVBuilder uiBuilder;
 		uiBuilder.Register<TimerUI>(L"TimerUI");
+		uiBuilder.Register<HPGaugeUI>(L"HPGaugeUI");
+		uiBuilder.Register<PointUI>(L"PointUI");
+		uiBuilder.Register<SimpleSprite>(L"SimpleSprite");
 		uiBuilder.Build(GetThis<Stage>(), path + L"UILayout.csv");
 
 		//フィールドの影響マップの生成

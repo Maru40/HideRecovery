@@ -72,6 +72,21 @@ namespace basecross {
 		}
 
 		/**
+		 * @brief レクトトランスフォームデータを抽出
+		 *
+		 * @param tokens 文字列
+		 * @param rectTransData データの出力先
+		 * @param firstIndex 最初のインデックス（デフォルト：1）
+		 * @return 次のインデックス
+		 */
+		static size_t RectTransformDataExtraction(const vector<wstring>& tokens, RectTransformData& rectTransData, size_t firstIndex = 1) {
+			rectTransData.Position = Vector2DataExtraction(tokens, firstIndex);
+			rectTransData.Scale = Vector2DataExtraction(tokens, firstIndex + 2);
+			rectTransData.Rotation = XMConvertToRadians((float)_wtof(tokens[firstIndex + 4].c_str()));
+			return firstIndex + 5;
+		}
+
+		/**
 		 * @brief カラーデータを抽出
 		 *
 		 * @param tokens 文字列

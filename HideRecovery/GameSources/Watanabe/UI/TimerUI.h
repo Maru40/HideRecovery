@@ -2,10 +2,10 @@
 #include "stdafx.h"
 #include "SimpleSprite.h"
 #include "Numbers.h"
-#include "StageObjectBase.h"
+#include "UIObjectBase.h"
 
 namespace basecross {
-	class TimerUI :public StageObjectBase {
+	class TimerUI :public UIObjectBase {
 		shared_ptr<SimpleSprite> m_sprite;
 		shared_ptr<Numbers> m_numbers;
 	public:

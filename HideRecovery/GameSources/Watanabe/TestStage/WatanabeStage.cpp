@@ -38,6 +38,9 @@
 #include "HideItemObject.h"
 #include "Maruyama/StageObject/GoalObject.h"
 
+#include "../UI/HPGaugeUI.h"
+#include "../UI/PointUI.h"
+
 namespace basecross {
 	void WatanabeStage::CreateViewLight() {
 		const Vec3 eye(5.0f, 5.0f, -5.0f);
@@ -122,14 +125,23 @@ namespace basecross {
 
 		GameObjecttCSVBuilder uiBuilder;
 		uiBuilder.Register<TimerUI>(L"TimerUI");
+		uiBuilder.Register<HPGaugeUI>(L"HPGaugeUI");
+		uiBuilder.Register<PointUI>(L"PointUI");
+		uiBuilder.Register<SimpleSprite>(L"SimpleSprite");
 		uiBuilder.Build(GetThis<Stage>(), path + L"UILayout.csv");
 
 		//AddGameObject<NumberSprite>()->SetValue(5);
-		//m_obj = AddGameObject<GameStartUI>();
+		m_gameStartUI = AddGameObject<GameStartUI>();
+		m_gameFinishUI = AddGameObject<GameFinishUI>();
 
 		m_per = AddGameObject<GameFinishUI>();
 		TimeManager::CreateInstance();
 		TimeManager::GetInstance()->GetTimer().Reset(4);
+
+		for (int i = 0; i < 10; i++) {
+			PointManager::GetInstance()->AddPoint(Team::East);
+		}
+		PointManager::GetInstance()->AddPoint(Team::West);
 	}
 
 	void WatanabeStage::OnUpdate() {
@@ -137,23 +149,24 @@ namespace basecross {
 		//auto utilPtr = m_obj->GetBehavior<UtilBehavior>();
 		//utilPtr->RotToHead(Vec3(cosf(m_delta), 0, sinf(m_delta)), 2 * delta);
 		//m_delta += delta;
-		static const auto& inputDevice = App::GetApp()->GetMyInputDevice();
-		static const auto& keyBoard = inputDevice->GetKeyBoard();
+		const auto& inputDevice = App::GetApp()->GetMyInputDevice();
+		const auto& keyBoard = inputDevice->GetKeyBoard();
+		const auto& pad = inputDevice->GetXInputGamePad();
 		if (keyBoard.IsInputDown(KeyCode::Alpha1)) {
-			//AddGameObject<GameStartUI>()->Start();
-			dynamic_pointer_cast<CountDownUI>(m_obj)->Start();
-			Debug::GetInstance()->Log(L"Start");
+			m_gameStartUI->Start();
+			Debug::GetInstance()->Log(L"StartUI");
 		}
-		else if (keyBoard.IsInputDown(KeyCode::Alpha2)) {
-			Debug::GetInstance()->Log(L"Play");
-			//m_per->Reset();
-			m_per->Start();
+		if (keyBoard.IsInputDown(KeyCode::Alpha2)) {
+			m_gameFinishUI->Start();
+			Debug::GetInstance()->Log(L"FinishUI");
 		}
-
-		TimeManager::GetInstance()->UpdateTime();
-		auto timer = TimeManager::GetInstance()->GetTimer();
-		if (timer.IsTimeUp()) {
-			//m_per->Start();
+		if (keyBoard.IsInputDown(KeyCode::Alpha0)) {
+			m_gameStartUI->Reset();
+			m_gameFinishUI->Reset();
+			Debug::GetInstance()->Log(L"ResetUI");
+		}
+		if (pad.IsInputDown(XInputCode::Start)) {
+			PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToWatanabeStage");
 		}
 	}
 }

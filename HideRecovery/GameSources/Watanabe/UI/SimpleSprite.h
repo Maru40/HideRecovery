@@ -1,8 +1,9 @@
 ﻿#pragma once
 #include "stdafx.h"
+#include "UIObjectBase.h"
 
 namespace basecross {
-	class SimpleSprite :public GameObject {
+	class SimpleSprite :public UIObjectBase {
 	public:
 		enum class Type {
 			Texture,
@@ -14,6 +15,7 @@ namespace basecross {
 		wstring m_key;
 	public:
 		SimpleSprite(const shared_ptr<Stage>& stage, Type type, const wstring& key);
+		SimpleSprite(const shared_ptr<Stage>& stage, const wstring& line);
 
 		void OnCreate()override;
 		shared_ptr<PCTSpriteDraw> GetDrawComponent();

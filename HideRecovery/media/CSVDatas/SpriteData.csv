@@ -1,5 +1,5 @@
 name,useTextureKey,originX,originY,SizeX,SizeY
-Numbers,Numbers_TX,0,0,102,64
+Numbers,Numbers_TX,0,0,102,128
 Start,StartAndFinish_TX,0,0,512,128
 Finish,StartAndFinish_TX,0,128,512,128
 WestTeam,Team_TX,0,0,1024,165
