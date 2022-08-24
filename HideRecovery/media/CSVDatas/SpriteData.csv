@@ -9,6 +9,7 @@ West,Team_TX,0,0,512,165
 East,Team_TX,0,165,512,165
 Press A,Message_TX,0,0,1024,128
 ToTitle,Message_TX,0,128,512,92
+ToContinue,Message_TX,512,128,512,92
 GameStart,Message_TX,0,220,700,120
 WaitHost,Message_TX,0,340,700,120
 Relocation,Message_TX,0,460,1024,120
