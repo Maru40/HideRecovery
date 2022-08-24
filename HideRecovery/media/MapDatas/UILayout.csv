@@ -1,7 +1,7 @@
-name, PosX, PosY, ScaleX, ScaleY,Rot,,
-TimerUI,0,480,0.8,0.8,0,,
-HPGaugeUI,0,-480,0.5,0.5,0,,
-PointUI,270,400,0.7,0.7,0,East,
-PointUI,-270,400,0.7,0.7,0,West,
-SimpleSprite,270,480,0.5,0.5,0,SpriteData,East
-SimpleSprite,-270,480,0.5,0.5,0,SpriteData,West
+className,UIName,PosX,PosY,ScaleX,ScaleY,Rot,,
+TimerUI,Timer,0,480,0.8,0.8,0,,
+HPGaugeUI,HPGauge,0,-480,0.5,0.5,0,,
+PointUI,EastPoint,270,400,0.7,0.7,0,East,
+PointUI,WestPoint,-270,400,0.7,0.7,0,West,
+SimpleSprite,TeamEast,270,480,0.5,0.5,0,SpriteData,East
+SimpleSprite,TeamWest,-270,480,0.5,0.5,0,SpriteData,West

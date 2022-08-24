@@ -36,6 +36,8 @@ namespace basecross {
 
 	class UIObjectCSVBuilder {
 		map<wstring, shared_ptr<UIObjectCreatorBaseCSV>> m_creatorMap;
+		// 生成したオブジェクトマップ
+		map<wstring, shared_ptr<UIObjectBase>> m_uiObjectMap;
 	public:
 		UIObjectCSVBuilder();
 		~UIObjectCSVBuilder();
@@ -65,5 +67,12 @@ namespace basecross {
 		/// <param name="stage">所属するステージ</param>
 		/// <param name="fileName">CSVファイル名</param>
 		void Build(const shared_ptr<Stage>& stage, const wstring& fileName);
+
+		/// <summary>
+		/// 生成したUIオブジェクトを取得する
+		/// </summary>
+		/// <param name="uiName">UIオブジェクトの名前</param>
+		/// <returns>UIオブジェクト</returns>
+		shared_ptr<UIObjectBase> GetUIObject(const wstring& uiName);
 	};
 }

@@ -1,5 +1,6 @@
 ﻿#include "stdafx.h"
 #include "UIObjectCSVBuilder.h"
+#include "../Utility/DataExtracter.h"
 
 namespace basecross {
 	UIObjectCSVBuilder::UIObjectCSVBuilder() {}
@@ -18,21 +19,27 @@ namespace basecross {
 
 	void UIObjectCSVBuilder::Build(const shared_ptr<Stage>& stage, const wstring& fileName) {
 		try {
-			//CSVファイル
-			CsvFile GameStageCsv(fileName);
-			GameStageCsv.ReadCsv();
-			//CSVの全体の配列
-			//CSVからすべての行を抜き出す
-			auto& LineVec = GameStageCsv.GetCsvVec();
-			for (auto& v : LineVec) {
+			// CSVファイル
+			CsvFile gameStageCsv(fileName);
+			gameStageCsv.ReadCsv();
+			// CSVからすべての行を抜き出す
+			auto& lineVec = gameStageCsv.GetCsvVec();
+			for (auto& v : lineVec) {
 				//トークン（カラム）の配列
-				vector<wstring> Tokens;
-				Util::WStrToTokenVector(Tokens, v, L',');
-				CreateFromCSV(Tokens[0], stage, v);
+				vector<wstring> tokens = DataExtracter::DelimitData(v);
+				auto uiObject = CreateFromCSV(tokens[0], stage, v);
+				m_uiObjectMap[tokens[1]] = uiObject;
 			}
 		}
 		catch (...) {
 			throw;
 		}
+	}
+
+	shared_ptr<UIObjectBase> UIObjectCSVBuilder::GetUIObject(const wstring& uiName) {
+		if (m_uiObjectMap.count(uiName) > 0) {
+			return m_uiObjectMap[uiName];
+		}
+		return nullptr;
 	}
 }
