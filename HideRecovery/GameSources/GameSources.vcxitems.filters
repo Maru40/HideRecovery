@@ -979,6 +979,9 @@
     <Filter Include="Watanabe\UI\UIObjectBase">
       <UniqueIdentifier>{5d31169b-5442-42f5-a576-c0dfad7a3dd8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\UI\UIObjectCSVBuilder">
+      <UniqueIdentifier>{70263625-1218-456a-b48b-591d3187d75d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1818,6 +1821,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\MatchingUILayoutStage.h">
       <Filter>Watanabe\TestStage</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\UIObjectCSVBuilder.h">
+      <Filter>Watanabe\UI\UIObjectCSVBuilder</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2566,6 +2572,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\MatchingUILayoutStage.cpp">
       <Filter>Watanabe\TestStage</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\UIObjectCSVBuilder.cpp">
+      <Filter>Watanabe\UI\UIObjectCSVBuilder</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
