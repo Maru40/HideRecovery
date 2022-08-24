@@ -34,7 +34,7 @@ namespace basecross {
 		uiBuilder.Register<SimpleSprite>(L"SimpleSprite");
 		auto dir = App::GetApp()->GetDataDirWString();
 		auto path = dir + L"MapDatas/";
-		uiBuilder.Build(GetThis<Stage>(), path + L"TitleUILayout.csv");
+		uiBuilder.Build(GetThis<Stage>(), path + L"MatchingUILayout.csv");
 	}
 	void MatchingUILayoutStage::OnUpdate() {
 		const auto& inputDevice = App::GetApp()->GetMyInputDevice();
