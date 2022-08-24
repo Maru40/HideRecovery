@@ -99,12 +99,12 @@ namespace basecross {
 		auto path = dir + L"MapDatas/";
 		builder.Build(GetThis<Stage>(), path + fileName);
 
-		GameObjecttCSVBuilder uiBuilder;
+		UIObjectCSVBuilder uiBuilder;
 		uiBuilder.Register<TimerUI>(L"TimerUI");
 		uiBuilder.Register<HPGaugeUI>(L"HPGaugeUI");
 		uiBuilder.Register<PointUI>(L"PointUI");
 		uiBuilder.Register<SimpleSprite>(L"SimpleSprite");
-		uiBuilder.Build(GetThis<Stage>(), path + L"UILayout.csv");
+		uiBuilder.Build(GetThis<Stage>(), path + L"GameUILayout.csv");
 
 		//フィールドの影響マップの生成
 		//AddGameObject<GameObject>()->AddComponent<maru::FieldImpactMap>(maru::Utility::ConvertArrayType<GameObject>(m_floors));

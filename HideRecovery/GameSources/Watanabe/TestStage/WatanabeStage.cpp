@@ -129,7 +129,7 @@ namespace basecross {
 		uiBuilder.Register<HPGaugeUI>(L"HPGaugeUI");
 		uiBuilder.Register<PointUI>(L"PointUI");
 		uiBuilder.Register<SimpleSprite>(L"SimpleSprite");
-		uiBuilder.Build(GetThis<Stage>(), path + L"UILayout.csv");
+		uiBuilder.Build(GetThis<Stage>(), path + L"GameUILayout.csv");
 
 		//AddGameObject<NumberSprite>()->SetValue(5);
 		m_gameStartUI = AddGameObject<GameStartUI>();
