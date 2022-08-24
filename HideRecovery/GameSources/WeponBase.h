@@ -19,6 +19,7 @@ namespace basecross {
 	/// ウェポンのパラメータ
 	//--------------------------------------------------------------------------------------
 	struct WeponBase_Parametor {
+		float weight;				//重さ
 		Vec3 bulletInstanceOffset;	//バレットを生成する位置のオフセット
 
 		WeponBase_Parametor();
@@ -74,6 +75,18 @@ namespace basecross {
 		/// </summary>
 		/// <returns>パラメータ</returns>
 		Parametor GetParametor() const noexcept { return m_param; }
+
+		/// <summary>
+		/// 武器の重さの設定
+		/// </summary>
+		/// <param name="weight">武器の重さ</param>
+		void SetWeight(const float weight) noexcept { m_param.weight = weight; }
+
+		/// <summary>
+		/// 重さの取得
+		/// </summary>
+		/// <returns>重さ</returns>
+		float GetWeight() const noexcept { return m_param.weight; }
 
 		/// <summary>
 		/// バレットを生成する位置のオフセットの設定
