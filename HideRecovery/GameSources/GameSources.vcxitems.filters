@@ -991,6 +991,9 @@
     <Filter Include="Watanabe\Component\BallAnimator">
       <UniqueIdentifier>{2fcd9309-862c-4bee-8d67-11d8b1c05b45}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Player\Component\BuffController">
+      <UniqueIdentifier>{31d97b9a-9871-41a9-a792-1acbccd1f260}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1845,6 +1848,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\BallAnimationState.h">
       <Filter>Watanabe\Component\BallAnimator</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\BuffController.h">
+      <Filter>Maruyama\Player\Component\BuffController</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2605,6 +2611,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\BallAnimator.cpp">
       <Filter>Watanabe\Component\BallAnimator</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\BuffController.cpp">
+      <Filter>Maruyama\Player\Component\BuffController</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

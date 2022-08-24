@@ -57,6 +57,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Bullet\Object\BulletObjectBase.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Interface\I_TaskLister.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Interface\I_TeamMember.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\BuffController.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\GoalAnimationController.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\OwnArea.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\PlayerDeader.h" />
@@ -355,6 +356,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)LookAtCameraManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Interface\I_TaskLister.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Interface\I_TeamMember.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\BuffController.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\GoalAnimationController.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\OwnArea.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\PlayerDeader.cpp" />
