@@ -1842,7 +1842,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\BallAnimator.h">
       <Filter>Watanabe\Component\BallAnimator</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\BallAnimatorState.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\BallAnimationState.h">
       <Filter>Watanabe\Component\BallAnimator</Filter>
     </ClInclude>
   </ItemGroup>

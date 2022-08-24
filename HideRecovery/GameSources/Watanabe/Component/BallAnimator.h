@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include "stdafx.h"
 #include "Animator.h"
-#include "BallAnimatorState.h"
+#include "BallAnimationState.h"
 
 namespace basecross {
 	class BallAnimator :public Animator {
@@ -14,6 +14,6 @@ namespace basecross {
 		/// アニメーションの変更
 		/// </summary>
 		/// <param name="state">変更するアニメーションのステート</param>
-		void ChangePlayerAnimation(BallAnimatorState::State state);
+		void ChangeBallAnimation(BallAnimationState::State state);
 	};
 }

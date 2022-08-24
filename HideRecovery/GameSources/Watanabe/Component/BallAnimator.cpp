@@ -13,7 +13,7 @@ namespace basecross {
 		}
 	}
 
-	void BallAnimator::ChangePlayerAnimation(BallAnimatorState::State state) {
-		ChangeAnimation(BallAnimatorState::BallAnimatorState2wstring(state));
+	void BallAnimator::ChangeBallAnimation(BallAnimationState::State state) {
+		ChangeAnimation(BallAnimationState::BallAnimationState2wstring(state));
 	}
 }
