@@ -45,6 +45,7 @@
 #include "Watanabe/StageObject/RackObject.h"
 #include "Watanabe/StageObject/PlayerSpawnPointObject.h"
 #include "Watanabe/StageObject/OwnAreaObject.h"
+#include "Watanabe/StageObject/Container.h"
 #include "Watanabe/UI/UIObjects.h"
 
 #include "Itabashi/OnlineTestRoom.h"
@@ -95,6 +96,7 @@ namespace basecross {
 		builder.Register<PlayerSpawnPointObject>(L"PlayerSpawnPoint");
 		builder.Register<GoalObject>(L"Goal");
 		builder.Register<OwnAreaObject>(L"OwnAreaObject");
+		builder.Register<Container>(L"Container");
 		auto dir = App::GetApp()->GetDataDirWString();
 		auto path = dir + L"MapDatas/";
 		builder.Build(GetThis<Stage>(), path + fileName);

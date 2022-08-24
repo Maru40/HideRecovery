@@ -121,6 +121,7 @@ namespace basecross {
 		builder.Register<PlayerSpawnPointObject>(L"PlayerSpawnPoint");
 		builder.Register<GoalObject>(L"Goal");
 		builder.Register<OwnAreaObject>(L"OwnAreaObject");
+		builder.Register<Container>(L"Container");
 		auto dir = App::GetApp()->GetDataDirWString();
 		auto path = dir + L"MapDatas/";
 		builder.Build(GetThis<Stage>(), path + L"StageS2.csv");
@@ -147,8 +148,6 @@ namespace basecross {
 
 		auto name = uiBuilder.GetUIObject(L"Timer");
 		Debug::GetInstance()->Log(name != nullptr);
-
-		AddGameObject<Container>();
 	}
 
 	void WatanabeStage::OnUpdate() {
