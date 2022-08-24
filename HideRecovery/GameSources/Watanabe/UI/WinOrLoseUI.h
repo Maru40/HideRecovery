@@ -2,6 +2,7 @@
 #include "stdafx.h"
 #include "UIObjectBase.h"
 #include "SimpleSprite.h"
+#include "../StageObject/PlayerSpawnPointObject.h"
 
 namespace basecross {
 	class WinOrLoseUI :public UIObjectBase {
@@ -11,5 +12,6 @@ namespace basecross {
 		WinOrLoseUI(const shared_ptr<Stage>& stage, const wstring& line);
 
 		void OnCreate()override;
+		void SetTeam(Team team);
 	};
 }

@@ -6,6 +6,7 @@
 #include "Scene.h"
 #include "PlayerInputer.h"
 #include "../UI/UIObjects.h"
+#include "../Manager/PointManager.h"
 
 namespace basecross {
 	void MatchingUILayoutStage::CreateViewLight() {
@@ -35,8 +36,8 @@ namespace basecross {
 		//auto dir = App::GetApp()->GetDataDirWString();
 		//auto path = dir + L"MapDatas/";
 		//uiBuilder.Build(GetThis<Stage>(), path + L"MatchingUILayout.csv");
-
-		AddGameObject<WinOrLoseUI>();
+		PointManager::GetInstance()->AddPoint(Team::East);
+		AddGameObject<WinOrLoseUI>()->SetTeam(Team::East);
 	}
 	void MatchingUILayoutStage::OnUpdate() {
 		const auto& inputDevice = App::GetApp()->GetMyInputDevice();
