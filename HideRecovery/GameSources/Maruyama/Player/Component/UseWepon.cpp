@@ -16,6 +16,7 @@
 
 #include "PlayerInputer.h"
 
+#include "Itabashi/ObjectMover.h"
 #include "Watanabe/Component/PlayerAnimator.h"
 
 #include "RotationController.h"
@@ -147,6 +148,10 @@ namespace basecross {
 			if (auto animator = GetGameObject()->GetComponent<PlayerAnimator>(false)) {
 				animator->ChangePlayerAnimation(PlayerAnimationState::State::GunSet2);
 			}
+
+			//if (auto mover = GetGameObject()->GetComponent<Operator::ObjectMover>(false)) {
+			//	mover->SetMoveSpeed();
+			//}
 		};
 
 		auto falseFunction = [&]() {	//Aim状態でなくなった時
@@ -170,5 +175,10 @@ namespace basecross {
 	void UseWepon::SetWepon(const std::shared_ptr<WeponBase>& wepon) noexcept { m_wepon = wepon; }
 
 	std::shared_ptr<WeponBase> UseWepon::GetWepon() const noexcept { return m_wepon.lock(); }
+
+	float UseWepon::GetWeaponWeight() const noexcept {
+		auto weapon = GetWepon();
+		return weapon ? weapon->GetWeight() : 0.0f;	//武器があるなら武器の重さを返す。
+	}
 
 }
