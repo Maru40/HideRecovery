@@ -23,12 +23,14 @@ namespace basecross {
 		}
 
 		vector<AnimationClip> outputData;
+		m_animationClipMap.clear();
 
 		auto fileData = CSVLoad::GetInstance()->GetData(csvKey);
 		for (int i = 0; i < fileData.size(); i++) {
 			// 1行目は見出しなので無視
-			if (i == 0)
+			if (i == 0) {
 				continue;
+			}
 			// ","で区切る
 			auto delimiterData = DataExtracter::DelimitData(fileData[i]);
 			AnimationClip clip(
@@ -39,6 +41,7 @@ namespace basecross {
 				(float)_wtof(delimiterData[4].c_str())
 			);
 			outputData.push_back(clip);
+			m_animationClipMap[delimiterData[0]] = clip;
 		}
 
 		return outputData;
@@ -58,11 +61,18 @@ namespace basecross {
 
 	void Animator::OnUpdate() {
 		auto drawer = GetGameObject()->GetComponent<PNTBoneModelDraw>();
-		drawer->UpdateAnimation(App::GetApp()->GetElapsedTime());
+		drawer->UpdateAnimation(App::GetApp()->GetElapsedTime() * GetPlaySpeed());
 	}
 
 	bool Animator::IsTargetAnimationEnd() {
 		auto drawer = GetGameObject()->GetComponent<PNTBoneModelDraw>();
 		return drawer->IsTargetAnimeEnd();
+	}
+
+	float Animator::GetPlaySpeed() {
+		auto drawer = GetGameObject()->GetComponent<PNTBoneModelDraw>();
+		auto keyName = drawer->GetCurrentAnimation();
+
+		return m_animationClipMap[keyName].playSpeed;
 	}
 }

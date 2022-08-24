@@ -49,6 +49,8 @@ namespace basecross {
 
 	class Animator :public Component
 	{
+		std::unordered_map<wstring, AnimationClip> m_animationClipMap;
+
 	protected:
 		/// <summary>
 		/// モーションデータを読み込む
@@ -81,5 +83,7 @@ namespace basecross {
 		/// </summary>
 		/// <returns>アニメーションが終了していたらtrue</returns>
 		virtual bool IsTargetAnimationEnd();
+
+		float GetPlaySpeed();
 	};
 }
