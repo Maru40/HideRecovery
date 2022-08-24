@@ -74,5 +74,34 @@ namespace basecross {
 		/// <param name="uiName">UIオブジェクトの名前</param>
 		/// <returns>UIオブジェクト</returns>
 		shared_ptr<UIObjectBase> GetUIObject(const wstring& uiName);
+
+		/// <summary>
+		/// 生成したUIオブジェクトを取得する（型変換あり）
+		/// </summary>
+		/// <typeparam name="T">取得する型</typeparam>
+		/// <param name="uiName">UIオブジェクトの名前</param>
+		/// <param name="exceptionActive">例外を出すか</param>
+		/// <returns>UIオブジェクト</returns>
+		template<typename T>
+		shared_ptr<T> GetUIObject(const wstring& uiName, bool exceptionActive = true) {
+			// uiNameのペアの存在確認
+			if (m_uiObjectMap.count(uiName) > 0) {
+				shared_ptr<T> ptr = dynamic_pointer_cast<T>(m_uiObjectMap[uiName]);
+				// キャストがうまく行けばそのまま返す
+				if (ptr) {
+					return ptr;
+				}
+				else {
+					if (exceptionActive) {
+						throw BaseException(
+							L"オブジェクトを" + Util::GetWSTypeName<T>() + L"型にキャストできません",
+							L"uiName : " + uiName,
+							L"UIObjectCSVBuilder::GetUIObject()"
+						);
+					}
+				}
+			}
+			return nullptr;
+		}
 	};
 }

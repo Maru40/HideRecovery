@@ -28,16 +28,21 @@ namespace basecross {
 		AddGameObject<Debug>();
 		Debug::GetInstance()->Log(L"MatchingUILayoutStage");
 
-		//UIObjectCSVBuilder uiBuilder;
-		//uiBuilder.Register<TimerUI>(L"TimerUI");
-		//uiBuilder.Register<HPGaugeUI>(L"HPGaugeUI");
-		//uiBuilder.Register<PointUI>(L"PointUI");
-		//uiBuilder.Register<SimpleSprite>(L"SimpleSprite");
-		//auto dir = App::GetApp()->GetDataDirWString();
-		//auto path = dir + L"MapDatas/";
-		//uiBuilder.Build(GetThis<Stage>(), path + L"MatchingUILayout.csv");
-		PointManager::GetInstance()->AddPoint(Team::East);
-		AddGameObject<WinOrLoseUI>()->SetTeam(Team::East);
+		UIObjectCSVBuilder uiBuilder;
+		uiBuilder.Register<TimerUI>(L"TimerUI");
+		uiBuilder.Register<HPGaugeUI>(L"HPGaugeUI");
+		uiBuilder.Register<PointUI>(L"PointUI");
+		uiBuilder.Register<SimpleSprite>(L"SimpleSprite");
+		uiBuilder.Register<WinOrLoseUI>(L"WinOrLoseUI");
+		auto dir = App::GetApp()->GetDataDirWString();
+		auto path = dir + L"MapDatas/";
+		uiBuilder.Build(GetThis<Stage>(), path + L"ResultUILayout.csv");
+
+		auto winOrLose = uiBuilder.GetUIObject<WinOrLoseUI>(L"WinOrLose");
+		if (winOrLose) {
+			PointManager::GetInstance()->AddPoint(Team::East);
+			winOrLose->SetTeam(Team::East);
+		}
 	}
 	void MatchingUILayoutStage::OnUpdate() {
 		const auto& inputDevice = App::GetApp()->GetMyInputDevice();
