@@ -2,6 +2,10 @@
 #include "MatchingUILayoutStage.h"
 #include "../UI/UIObjects.h"
 #include "../DebugClass/Debug.h"
+#include "InputHelper.h"
+#include "Scene.h"
+#include "PlayerInputer.h"
+#include "../UI/UIObjects.h"
 
 namespace basecross {
 	void MatchingUILayoutStage::CreateViewLight() {
@@ -22,7 +26,21 @@ namespace basecross {
 		CreateViewLight();
 		AddGameObject<Debug>();
 		Debug::GetInstance()->Log(L"MatchingUILayoutStage");
+
+		UIObjectCSVBuilder uiBuilder;
+		uiBuilder.Register<TimerUI>(L"TimerUI");
+		uiBuilder.Register<HPGaugeUI>(L"HPGaugeUI");
+		uiBuilder.Register<PointUI>(L"PointUI");
+		uiBuilder.Register<SimpleSprite>(L"SimpleSprite");
+		auto dir = App::GetApp()->GetDataDirWString();
+		auto path = dir + L"MapDatas/";
+		uiBuilder.Build(GetThis<Stage>(), path + L"TitleUILayout.csv");
 	}
 	void MatchingUILayoutStage::OnUpdate() {
+		const auto& inputDevice = App::GetApp()->GetMyInputDevice();
+		const auto& pad = inputDevice->GetXInputGamePad();
+		if (pad.IsInputDown(XInputCode::Start)) {
+			PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToMatchingUILayoutStage");
+		}
 	}
 }
