@@ -64,7 +64,7 @@ namespace basecross {
 		);
 
 		auto draw = AddComponent<PNTBoneModelDraw>();
-		draw->SetMultiMeshResource(L"Player_Mesh");
+		draw->SetMultiMeshResource(L"Player_Mesh_Red");
 		draw->SetMeshToTransformMatrix(spanMat);
 		SetAlphaActive(true);
 		//draw->SetDiffuse(Col4(0.0f, 0.0f, 1.0f, 1.0f));
