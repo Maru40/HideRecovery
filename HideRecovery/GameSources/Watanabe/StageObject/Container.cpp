@@ -23,5 +23,16 @@ namespace basecross {
 
 		AddTag(L"T_Obstacle");
 		AddTag(L"Wall");
+
+		m_hitTestObject = GetStage()->AddGameObject<GameObject>();
+
+		auto transComp = m_hitTestObject->GetComponent<Transform>();
+		transComp->SetPosition(transform->GetPosition() + Vec3(0, 2, 0));
+		transComp->SetQuaternion(transform->GetQuaternion());
+		transComp->SetScale(Vec3(4, 4, 8.5));
+		m_hitTestObject->SetParent(GetThis<Container>());
+
+		auto collision = m_hitTestObject->AddComponent<CollisionObb>();
+		collision->SetFixed(true);
 	}
 }
