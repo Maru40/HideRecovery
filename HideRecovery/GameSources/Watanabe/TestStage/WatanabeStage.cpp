@@ -41,6 +41,7 @@
 #include "../UI/HPGaugeUI.h"
 #include "../UI/PointUI.h"
 #include "../UI/UIObjectCSVBuilder.h"
+#include "../StageObject/Container.h"
 
 namespace basecross {
 	void WatanabeStage::CreateViewLight() {
@@ -146,6 +147,8 @@ namespace basecross {
 
 		auto name = uiBuilder.GetUIObject(L"Timer");
 		Debug::GetInstance()->Log(name != nullptr);
+
+		AddGameObject<Container>();
 	}
 
 	void WatanabeStage::OnUpdate() {

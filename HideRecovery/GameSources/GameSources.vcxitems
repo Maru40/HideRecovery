@@ -266,6 +266,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\MySpriteBaseDraw.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\PCTGaugeSprite.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\Block.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\Container.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\FireworksObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\OwnAreaObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\PlayerSpawnPointObject.h" />
@@ -525,6 +526,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\MySpriteBaseDraw.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\PCTGaugeSprite.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\Block.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\Container.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\FireworksObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\OwnAreaObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\PlayerSpawnPointObject.cpp" />
