@@ -93,13 +93,13 @@ namespace basecross {
 		AddComponent<Online::OnlineTransformSynchronization>();
 
 		AddComponent<PlayerAnimator>();
-		AddComponent<ChargeGun>();
+		auto chargeGun = AddComponent<ChargeGun>();
 		AddComponent<PlayerStatus>();
 		AddComponent<TackleAttack>();
 
 		AddComponent<Respawner>();
 		AddComponent<PlayerDeader>();
-		AddComponent<UseWepon>();
+		auto useWeapon = AddComponent<UseWepon>(chargeGun);
 		AddComponent<GoalAnimationController>();
 
 		constexpr float ScaleValue = 1.0f;
