@@ -288,6 +288,7 @@ namespace basecross
 		mediaDir = App::GetApp()->GetDataDirWString();
 		wstring dir = mediaDir + L"Models/";
 		CSVLoad::GetInstance()->RegisterFile(L"PlayerAnimation", dir + L"Player/PlayerAnimation.csv");
+		CSVLoad::GetInstance()->RegisterFile(L"BallAnimation", dir + L"Ball/BallAnimation.csv");
 		dir = mediaDir + L"CSVDatas/";
 		CSVLoad::GetInstance()->RegisterFile(L"SpriteData", dir + L"SpriteData.csv");
 	}
