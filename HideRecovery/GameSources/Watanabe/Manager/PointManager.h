@@ -8,6 +8,12 @@ namespace basecross {
 		// それぞれのチームのスコア
 		unordered_map<Team, int> m_teamScoreMap;
 	public:
+		enum class WinOrLose {
+			Win,
+			Draw,
+			Lose
+		};
+
 		/// <summary>
 		/// 点数を取得
 		/// </summary>
@@ -19,6 +25,13 @@ namespace basecross {
 		/// 点数を1点追加
 		/// </summary>
 		void AddPoint(Team team);
+
+		/// <summary>
+		/// 自チームの勝敗を取得する
+		/// </summary>
+		/// <param name="team">チーム</param>
+		/// <returns>勝敗</returns>
+		WinOrLose GetSelfTeamWinOrLose(Team team);
 	private:
 		PointManager();
 		~PointManager() {}

@@ -40,6 +40,7 @@
 
 #include "../UI/HPGaugeUI.h"
 #include "../UI/PointUI.h"
+#include "../UI/UIObjectCSVBuilder.h"
 
 namespace basecross {
 	void WatanabeStage::CreateViewLight() {
@@ -123,12 +124,12 @@ namespace basecross {
 		auto path = dir + L"MapDatas/";
 		builder.Build(GetThis<Stage>(), path + L"StageS2.csv");
 
-		GameObjecttCSVBuilder uiBuilder;
+		UIObjectCSVBuilder uiBuilder;
 		uiBuilder.Register<TimerUI>(L"TimerUI");
 		uiBuilder.Register<HPGaugeUI>(L"HPGaugeUI");
 		uiBuilder.Register<PointUI>(L"PointUI");
 		uiBuilder.Register<SimpleSprite>(L"SimpleSprite");
-		uiBuilder.Build(GetThis<Stage>(), path + L"UILayout.csv");
+		uiBuilder.Build(GetThis<Stage>(), path + L"GameUILayout.csv");
 
 		//AddGameObject<NumberSprite>()->SetValue(5);
 		m_gameStartUI = AddGameObject<GameStartUI>();
@@ -142,6 +143,9 @@ namespace basecross {
 			PointManager::GetInstance()->AddPoint(Team::East);
 		}
 		PointManager::GetInstance()->AddPoint(Team::West);
+
+		auto name = uiBuilder.GetUIObject(L"Timer");
+		Debug::GetInstance()->Log(name != nullptr);
 	}
 
 	void WatanabeStage::OnUpdate() {

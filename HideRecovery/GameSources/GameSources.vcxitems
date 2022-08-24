@@ -270,6 +270,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\OwnAreaObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\PlayerSpawnPointObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\RackObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\MatchingUILayoutStage.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\WatanabeStage.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\CountDownUI.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\GameFinishUI.h" />
@@ -282,7 +283,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\SimpleSprite.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\TimerUI.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\UIObjectBase.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\UIObjectCSVBuilder.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\UIObjects.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\WinOrLoseUI.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\AdvMeshUtil.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\BaseSingleton.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\CSVLoad.h" />
@@ -526,6 +529,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\OwnAreaObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\PlayerSpawnPointObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\RackObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\MatchingUILayoutStage.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\WatanabeStage.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\CountDownUI.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\GameFinishUI.cpp" />
@@ -538,6 +542,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\SimpleSprite.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\TimerUI.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\UIObjectBase.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\UIObjectCSVBuilder.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\WinOrLoseUI.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Utility\AdvMeshUtil.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Utility\CSVLoad.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Utility\TimeCounter.cpp" />

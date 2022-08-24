@@ -1,6 +1,9 @@
 ﻿#pragma once
 
-#include "Watanabe/UI/TimerUI.h"
-#include "Watanabe/UI/HPGaugeUI.h"
-#include "Watanabe/UI/PointUI.h"
-#include "Watanabe/UI/SimpleSprite.h"
+#include "UIObjectCSVBuilder.h"
+
+#include "TimerUI.h"
+#include "HPGaugeUI.h"
+#include "PointUI.h"
+#include "SimpleSprite.h"
+#include "WinOrLoseUI.h"

@@ -3,7 +3,7 @@
 
 namespace basecross {
 	UIObjectBase::UIObjectBase(const shared_ptr<Stage>& stage, const wstring& name)
-		:GameObject(stage), m_name(name)
+		:GameObject(stage), m_uiName(name)
 	{}
 
 	void UIObjectBase::OnPreCreate() {
@@ -13,6 +13,6 @@ namespace basecross {
 		rectTransform->SetScale(m_rectTransformData.Scale);
 		rectTransform->SetRotation(m_rectTransformData.Rotation);
 
-		AddTag(m_name);
+		AddTag(m_uiName);
 	}
 }

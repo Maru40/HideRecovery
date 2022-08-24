@@ -17,4 +17,36 @@ namespace basecross {
 	void PointManager::AddPoint(Team team) {
 		m_teamScoreMap[team]++;
 	}
+
+	PointManager::WinOrLose PointManager::GetSelfTeamWinOrLose(Team team) {
+		int eastPoint = m_teamScoreMap[Team::East];
+		int westPoint = m_teamScoreMap[Team::West];
+		if (eastPoint == westPoint) {
+			return WinOrLose::Draw;
+		}
+
+		// 双方の点数が異なれば勝敗は決まる
+		switch (team)
+		{
+		case Team::East:
+			if (eastPoint > westPoint) {
+				return WinOrLose::Win;
+			}
+			else {
+				return WinOrLose::Lose;
+			}
+			break;
+		case Team::West:
+			if (eastPoint < westPoint) {
+				return WinOrLose::Win;
+			}
+			else {
+				return WinOrLose::Lose;
+			}
+			break;
+		}
+
+		// ここまで実行されないが一応
+		return WinOrLose::Draw;
+	}
 }

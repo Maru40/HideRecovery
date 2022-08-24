@@ -1,0 +1,4 @@
+className,UIName,PosX,PosY,ScaleX,ScaleY,Rot,,
+SimpleSprite,ToTitle,650,-450,1,1,0,SpriteData,ToTitle
+SimpleSprite,ToContinue,-650,-450,1,1,0,SpriteData,ToContinue
+WinOrLoseUI,WinOrLose,0,300,1,1,0,,

@@ -18,6 +18,8 @@ namespace basecross {
 		SimpleSprite(const shared_ptr<Stage>& stage, const wstring& line);
 
 		void OnCreate()override;
+
+		//void ChangeSprite(Type type, const wstring& key);
 		shared_ptr<PCTSpriteDraw> GetDrawComponent();
 	};
 }
