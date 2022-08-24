@@ -6,3 +6,4 @@
 #include "HPGaugeUI.h"
 #include "PointUI.h"
 #include "SimpleSprite.h"
+#include "WinOrLoseUI.h"

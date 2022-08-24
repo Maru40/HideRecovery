@@ -982,6 +982,9 @@
     <Filter Include="Watanabe\UI\UIObjectCSVBuilder">
       <UniqueIdentifier>{70263625-1218-456a-b48b-591d3187d75d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\UI\WinOrLoseUI">
+      <UniqueIdentifier>{1bf9e41f-9d3f-47cb-992b-cf50e4986590}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1824,6 +1827,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\UIObjectCSVBuilder.h">
       <Filter>Watanabe\UI\UIObjectCSVBuilder</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\WinOrLoseUI.h">
+      <Filter>Watanabe\UI\WinOrLoseUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2575,6 +2581,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\UIObjectCSVBuilder.cpp">
       <Filter>Watanabe\UI\UIObjectCSVBuilder</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\WinOrLoseUI.cpp">
+      <Filter>Watanabe\UI\WinOrLoseUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
