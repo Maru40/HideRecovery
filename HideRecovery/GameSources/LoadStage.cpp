@@ -127,6 +127,8 @@ namespace basecross
 		ModelResourceLoadData(L"Player_Mesh",  L"Hero.bmf", ModelType::BoneMulti,  L"Player\\"),
 		ModelResourceLoadData(L"Player_Mesh_Red",  L"Black.bmf", ModelType::BoneMulti,  L"Player\\"),
 
+		ModelResourceLoadData(L"Ball_Model",  L"Ball.bmf", ModelType::BoneMulti,  L"Ball\\"),
+
 		//ModelResourceLoadData(L"Player_Idle",  L"Player_Animation_Idol.bmf", ModelType::BoneMulti,  L"Player\\"),
 		//ModelResourceLoadData(L"Player_WalkStart",  L"Player_Animation_Walk_Start.bmf", ModelType::BoneMulti,  L"Player\\"),
 		//ModelResourceLoadData(L"Player_Walk",  L"Player_Animation_Walk.bmf", ModelType::BoneMulti,  L"Player\\"),
@@ -143,6 +145,7 @@ namespace basecross
 		//ModelResourceLoadData(L"Player_Mesh",  L"Player_Mesh.bmf", ModelType::BoneMulti,  L"Player\\"),
 
 		ModelResourceLoadData(L"rack",  L"tana.bmf", ModelType::Static,  L"StageObject\\"),
+		ModelResourceLoadData(L"Container",  L"Container.bmf", ModelType::StaticMulti,  L"StageObject\\"),
 		ModelResourceLoadData(L"Goal",  L"Goal.bmf", ModelType::StaticMulti,  L"StageObject\\"),
 	};
 
@@ -285,6 +288,7 @@ namespace basecross
 		mediaDir = App::GetApp()->GetDataDirWString();
 		wstring dir = mediaDir + L"Models/";
 		CSVLoad::GetInstance()->RegisterFile(L"PlayerAnimation", dir + L"Player/PlayerAnimation.csv");
+		CSVLoad::GetInstance()->RegisterFile(L"BallAnimation", dir + L"Ball/BallAnimation.csv");
 		dir = mediaDir + L"CSVDatas/";
 		CSVLoad::GetInstance()->RegisterFile(L"SpriteData", dir + L"SpriteData.csv");
 	}

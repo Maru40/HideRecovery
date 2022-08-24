@@ -36,13 +36,11 @@ namespace basecross {
 		uiBuilder.Register<WinOrLoseUI>(L"WinOrLoseUI");
 		auto dir = App::GetApp()->GetDataDirWString();
 		auto path = dir + L"MapDatas/";
-		uiBuilder.Build(GetThis<Stage>(), path + L"ResultUILayout.csv");
+		uiBuilder.Build(GetThis<Stage>(), path + L"TitleUILayout.csv");
 
-		auto winOrLose = uiBuilder.GetUIObject<WinOrLoseUI>(L"WinOrLose");
-		if (winOrLose) {
-			PointManager::GetInstance()->AddPoint(Team::East);
-			winOrLose->SetTeam(Team::East);
-		}
+		auto ball = AddGameObject<GameObject>();
+		auto drawComp = ball->AddComponent<PNTBoneModelDraw>();
+		drawComp->SetMultiMeshResource(L"Ball_Model");
 	}
 	void MatchingUILayoutStage::OnUpdate() {
 		const auto& inputDevice = App::GetApp()->GetMyInputDevice();

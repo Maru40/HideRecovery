@@ -41,6 +41,7 @@
 #include "../UI/HPGaugeUI.h"
 #include "../UI/PointUI.h"
 #include "../UI/UIObjectCSVBuilder.h"
+#include "../StageObject/Container.h"
 
 namespace basecross {
 	void WatanabeStage::CreateViewLight() {
@@ -120,6 +121,7 @@ namespace basecross {
 		builder.Register<PlayerSpawnPointObject>(L"PlayerSpawnPoint");
 		builder.Register<GoalObject>(L"Goal");
 		builder.Register<OwnAreaObject>(L"OwnAreaObject");
+		builder.Register<Container>(L"Container");
 		auto dir = App::GetApp()->GetDataDirWString();
 		auto path = dir + L"MapDatas/";
 		builder.Build(GetThis<Stage>(), path + L"StageS2.csv");

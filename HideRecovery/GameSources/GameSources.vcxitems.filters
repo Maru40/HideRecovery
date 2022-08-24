@@ -985,6 +985,12 @@
     <Filter Include="Watanabe\UI\WinOrLoseUI">
       <UniqueIdentifier>{1bf9e41f-9d3f-47cb-992b-cf50e4986590}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\StageObject\Container">
+      <UniqueIdentifier>{01d700c2-67b1-4f15-9a99-0da99f2e6764}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\Component\BallAnimator">
+      <UniqueIdentifier>{2fcd9309-862c-4bee-8d67-11d8b1c05b45}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1830,6 +1836,15 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\WinOrLoseUI.h">
       <Filter>Watanabe\UI\WinOrLoseUI</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\Container.h">
+      <Filter>Watanabe\StageObject\Container</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\BallAnimator.h">
+      <Filter>Watanabe\Component\BallAnimator</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\BallAnimationState.h">
+      <Filter>Watanabe\Component\BallAnimator</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2584,6 +2599,12 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\WinOrLoseUI.cpp">
       <Filter>Watanabe\UI\WinOrLoseUI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\Container.cpp">
+      <Filter>Watanabe\StageObject\Container</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\BallAnimator.cpp">
+      <Filter>Watanabe\Component\BallAnimator</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
