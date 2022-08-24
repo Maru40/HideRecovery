@@ -10,8 +10,7 @@ namespace Operator
 {
 	ObjectMover::ObjectMover(const std::shared_ptr<GameObject>& owner) :
 		Component(owner)
-	{
-	}
+	{}
 
 	void ObjectMover::OnCreate()
 	{
