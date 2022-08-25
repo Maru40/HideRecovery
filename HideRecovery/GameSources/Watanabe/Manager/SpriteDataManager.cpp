@@ -8,7 +8,7 @@ namespace basecross {
 	unique_ptr<SpriteDataManager, SpriteDataManager::Deleter> SpriteDataManager::m_instance = nullptr;
 	const wstring SpriteDataManager::LoadCSVFileKey = L"SpriteData";
 
-	sdm::SpriteData SpriteDataManager::GetSpriteData(const wstring name) {
+	sdm::SpriteData SpriteDataManager::GetSpriteData(const wstring& name) {
 		// データがなければ作る
 		if (m_spriteDataMap.count(name) == 0) {
 			// ファイルを読み込みnameに該当するデータを検索する

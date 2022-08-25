@@ -19,3 +19,4 @@ Matching,Message_TX,0,820,700,120
 Win,WinOrLose_TX,0,0,280,128
 Lose,WinOrLose_TX,0,128,415,128
 Draw,WinOrLose_TX,0,256,420,128
+10,Numbers_TX,1028,0,172,128

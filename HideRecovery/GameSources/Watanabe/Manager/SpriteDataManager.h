@@ -27,7 +27,7 @@ namespace basecross {
 		/// </summary>
 		/// <param name="name">識別用の名前</param>
 		/// <returns>SpriteData</returns>
-		sdm::SpriteData GetSpriteData(const wstring name);
+		sdm::SpriteData GetSpriteData(const wstring& name);
 	private:
 		SpriteDataManager() {}
 		~SpriteDataManager() {}

@@ -46,6 +46,7 @@ namespace basecross {
 
 		//m_sprite = AddGameObject<SplashMessageUI>();
 		AddGameObject<HPGaugeBoardPoly>();
+		AddGameObject<NumberSprite>()->SetValue(9);
 	}
 	void MatchingUILayoutStage::OnUpdate() {
 		const auto& inputDevice = App::GetApp()->GetMyInputDevice();
