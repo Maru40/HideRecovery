@@ -245,7 +245,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)WaitTimer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WallEvasion.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WallObject.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\BoardPoly\HPGaugeBoardPoly.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\BoardPoly\HPGaugeBP.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\Animator.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\BallAnimationState.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\BallAnimator.h" />
@@ -515,7 +515,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)WaitTimer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WallEvasion.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WallObject.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\BoardPoly\HPGaugeBoardPoly.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\BoardPoly\HPGaugeBP.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\Animator.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\BallAnimator.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\FadeComponent.cpp" />

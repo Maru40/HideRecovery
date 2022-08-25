@@ -7,7 +7,7 @@
 #include "PlayerInputer.h"
 #include "../UI/UIObjects.h"
 #include "../Manager/PointManager.h"
-#include "../BoardPoly/HPGaugeBoardPoly.h"
+#include "../BoardPoly/HPGaugeBP.h"
 
 namespace basecross {
 	void MatchingUILayoutStage::CreateViewLight() {
@@ -45,7 +45,7 @@ namespace basecross {
 		//drawComp->SetMultiMeshResource(L"Ball_Model");
 
 		//m_sprite = AddGameObject<SplashMessageUI>();
-		AddGameObject<HPGaugeBoardPoly>();
+		AddGameObject<HPGaugeBP>();
 		AddGameObject<NumberSprite>()->SetValue(9);
 	}
 	void MatchingUILayoutStage::OnUpdate() {

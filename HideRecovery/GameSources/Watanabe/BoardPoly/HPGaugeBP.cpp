@@ -1,14 +1,14 @@
 ﻿#include "stdafx.h"
-#include "HPGaugeBoardPoly.h"
+#include "HPGaugeBP.h"
 #include "BillBoard.h"
 #include "../Utility/Utility.h"
 
 namespace basecross {
-	HPGaugeBoardPoly::HPGaugeBoardPoly(const shared_ptr<Stage>& stage)
-		:StageObjectBase(stage, L"HPGaugeBoardPoly")
+	HPGaugeBP::HPGaugeBP(const shared_ptr<Stage>& stage)
+		:StageObjectBase(stage, L"HPGaugeBP")
 	{}
 
-	void HPGaugeBoardPoly::OnCreate() {
+	void HPGaugeBP::OnCreate() {
 		Vec2 origin(0.0f);
 		auto size = Vec2(1, 0.2f);
 		// テクスチャ座標でUVを定義
@@ -48,7 +48,7 @@ namespace basecross {
 
 		SetAlphaActive(true);
 	}
-	void HPGaugeBoardPoly::OnUpdate() {
+	void HPGaugeBP::OnUpdate() {
 		m_drawComp.lock()->SetRate(0.5);
 	}
 }
