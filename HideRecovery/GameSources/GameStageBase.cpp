@@ -41,11 +41,7 @@
 #include "HidePlace.h"
 #include "HideItemObject.h"
 
-#include "Watanabe/StageObject/Block.h"
-#include "Watanabe/StageObject/RackObject.h"
-#include "Watanabe/StageObject/PlayerSpawnPointObject.h"
-#include "Watanabe/StageObject/OwnAreaObject.h"
-#include "Watanabe/StageObject/Container.h"
+#include "Watanabe/StageObject/StageObjects.h"
 #include "Watanabe/UI/UIObjects.h"
 
 #include "Itabashi/OnlineTestRoom.h"
@@ -143,15 +139,6 @@ namespace basecross {
 
 	void GameStageBase::OnCreate() {
 		try {
-			EventSystem::GetInstance(GetThis<Stage>())->SetBasicInputer(PlayerInputer::GetInstance());
-			AddGameObject<GameManagerObject>();
-
-			auto onlineRoom = AddGameObject<Online::OnlineTestRoom>();
-			auto tester = onlineRoom->GetComponent<Online::OnlineTester>();
-
-			onlineRoom->AddComponent<GamePlayerManager>();
-
-			Online::OnlineManager::Connect();
 		}
 		catch (...) {
 			throw;
