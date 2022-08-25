@@ -15,7 +15,12 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 	class PlayerObject : public GameObject
 	{
-		std::weak_ptr<GameObject> m_arm;
+	public:
+		using DrawComp = PNTBoneModelDraw;
+
+	private:
+		std::weak_ptr<GameObject> m_arm;	//アーム
+
 	public:
 		PlayerObject(const std::shared_ptr<Stage>& stage);
 
