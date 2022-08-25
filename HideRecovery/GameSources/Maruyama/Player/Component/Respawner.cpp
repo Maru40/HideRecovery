@@ -17,6 +17,7 @@
 
 #include "Watanabe/Component/PlayerStatus.h"
 #include "Watanabe/Component/PlayerAnimator.h"
+#include "Maruyama/Player/Component/UseWepon.h"
 
 #include "MaruUtility.h"
 
@@ -60,6 +61,10 @@ namespace basecross {
 
 		if (auto status = GetGameObject()->GetComponent<PlayerStatus>(false)) {
 			status->Respawn();
+		}
+
+		if (auto useWeapon = GetGameObject()->GetComponent<UseWepon>(false)) {
+			useWeapon->SetIsAim(false);
 		}
 
 		if (auto animator = GetGameObject()->GetComponent<PlayerAnimator>(false)) {
