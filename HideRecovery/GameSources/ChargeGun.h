@@ -16,6 +16,7 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 	class ChargeBulletObject;
 	class UseWepon;
+	class GameTimer;
 
 	//--------------------------------------------------------------------------------------
 	///	チャージ銃
@@ -23,6 +24,8 @@ namespace basecross {
 	class ChargeGun : public WeponBase
 	{
 		std::weak_ptr<UseWepon> m_useWepon;
+
+		std::unique_ptr<GameTimer> m_timer;
 
 	public:
 		ChargeGun(const std::shared_ptr<GameObject>& objPtr);
