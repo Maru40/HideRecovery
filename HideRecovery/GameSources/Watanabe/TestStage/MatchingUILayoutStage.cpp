@@ -41,12 +41,17 @@ namespace basecross {
 		auto ball = AddGameObject<GameObject>();
 		auto drawComp = ball->AddComponent<PNTBoneModelDraw>();
 		drawComp->SetMultiMeshResource(L"Ball_Model");
+
+		m_sprite = AddGameObject<SplashMessageUI>();
 	}
 	void MatchingUILayoutStage::OnUpdate() {
 		const auto& inputDevice = App::GetApp()->GetMyInputDevice();
 		const auto& pad = inputDevice->GetXInputGamePad();
 		if (pad.IsInputDown(XInputCode::Start)) {
 			PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToMatchingUILayoutStage");
+		}
+		if (pad.IsInputDown(XInputCode::A)) {
+			m_sprite->SetMessage(SplashMessageUI::MessageType::GetBall);
 		}
 	}
 }
