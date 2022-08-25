@@ -5,7 +5,6 @@
 
 #include "Watanabe/DebugClass/Debug.h"
 #include "Watanabe/UI/UIObjects.h"
-#include "Watanabe/StageObject/StageObjects.h"
 
 namespace basecross {
 	void TitleStage::CreateViewLight() {
@@ -28,22 +27,15 @@ namespace basecross {
 		AddGameObject<Debug>();
 		Debug::GetInstance()->Log(L"TitleStage");
 
-		GameObjecttCSVBuilder builder;
-		builder.Register<Block>(L"Block");
-		builder.Register<RackObject>(L"Rack");
-		builder.Register<HideItemObject>(L"HideItem");
-		builder.Register<PlayerSpawnPointObject>(L"PlayerSpawnPoint");
-		builder.Register<GoalObject>(L"Goal");
-		builder.Register<OwnAreaObject>(L"OwnAreaObject");
-		builder.Register<Container>(L"Container");
-		auto dir = App::GetApp()->GetDataDirWString();
-		auto path = dir + L"MapDatas/";
-		builder.Build(GetThis<Stage>(), path + L"StageS2.csv");
+		CreateMap(L"StageS2.csv");
 
 		UIObjectCSVBuilder uiBuilder;
 		uiBuilder.Register<SimpleSprite>(L"SimpleSprite");
+		auto dir = App::GetApp()->GetDataDirWString();
+		auto path = dir + L"MapDatas/";
 		uiBuilder.Build(GetThis<Stage>(), path + L"TitleUILayout.csv");
 
+		// GetComponentでnullptrになるためコメントアウト
 		//auto titleLogo = uiBuilder.GetUIObject<SimpleSprite>(L"TitleLogo");
 		//auto drawComp = titleLogo->GetComponent<PCTSpriteDraw>();
 		//if (drawComp) {
@@ -56,6 +48,7 @@ namespace basecross {
 		//}
 	}
 	void TitleStage::OnUpdate() {
+		// マッチング画面への遷移処理
 		const auto& inputDevice = App::GetApp()->GetMyInputDevice();
 		const auto& pad = inputDevice->GetXInputGamePad();
 		if (pad.IsInputDown(XInputCode::A)) {

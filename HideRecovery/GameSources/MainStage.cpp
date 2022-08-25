@@ -109,6 +109,8 @@ namespace basecross {
 
 			//Mapの読み込み
 			CreateMap(sm_loadMapName);
+			// UIレイアウトの読み込み
+			CreateUI(L"GameUILayout.csv");
 
 			m_gameStartUI = AddGameObject<GameStartUI>();
 			m_gameFinishUI = AddGameObject<GameFinishUI>();
