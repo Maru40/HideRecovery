@@ -354,6 +354,10 @@ namespace Online
 		}
 
 		auto bulletObject = chargeGun->Shot(transform->GetForward());
+		if (!bulletObject) {
+			return;
+		}
+
 		auto bulletTransform = bulletObject->GetComponent<Transform>();
 		
 		auto chargeBullet = bulletObject->GetComponent<ChargeBullet>();
@@ -388,6 +392,10 @@ namespace Online
 		}
 
 		auto bulletObject = chargeGun->Shot(bulletDirection);
+		if (!bulletObject) {
+			return;
+		}
+
 		auto bulletTransform = bulletObject->GetComponent<Transform>();
 
 		bulletTransform->SetWorldPosition(bulletPosition);
@@ -501,14 +509,14 @@ namespace Online
 
 		bool isAim = false;
 
-		if (PlayerInputer::GetInstance()->IsLBDown())
+		if (PlayerInputer::GetInstance()->IsAim() && !useWeapon->IsAim())
 		{
 			isAim = true;
 			useWeapon->SetIsAim(isAim);
 			OnlineManager::RaiseEvent(false, (std::uint8_t*)&isAim, sizeof(bool), EXECUTE_AIM_STATE_CHANGE_EVENT_CODE);
 		}
 
-		if (PlayerInputer::GetInstance()->IsLBUp())
+		if (PlayerInputer::GetInstance()->IsAimRelease() && useWeapon->IsAim())
 		{
 			isAim = false;
 			useWeapon->SetIsAim(isAim);
