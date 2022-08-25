@@ -1003,6 +1003,12 @@
     <Filter Include="Watanabe\BoardPoly\HPGaugeBoardPoly">
       <UniqueIdentifier>{43255080-d5fb-4b60-b18e-726e7df895d9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\Shader\PCTGaugeDraw">
+      <UniqueIdentifier>{835dc54a-e3f9-4e6f-952c-61e9f4283137}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\Shader\PCTGaugeDraw\HLSL">
+      <UniqueIdentifier>{40a4474d-d7c1-4bcf-ab58-51baae455d6c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1869,6 +1875,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\BoardPoly\HPGaugeBoardPoly.h">
       <Filter>Watanabe\BoardPoly\HPGaugeBoardPoly</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\PCTGaugeDraw.h">
+      <Filter>Watanabe\Shader\PCTGaugeDraw</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2639,6 +2648,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\BoardPoly\HPGaugeBoardPoly.cpp">
       <Filter>Watanabe\BoardPoly\HPGaugeBoardPoly</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\PCTGaugeDraw.cpp">
+      <Filter>Watanabe\Shader\PCTGaugeDraw</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)HitStopManager.cpp">
@@ -2676,6 +2688,12 @@
     <FxCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\HLSL\VSPCTGaugeSprite.hlsl">
       <Filter>Watanabe\Shader\PCTGaugeSprite\HLSL</Filter>
     </FxCompile>
+    <FxCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\HLSL\VSPCTGaugeDraw.hlsl">
+      <Filter>Watanabe\Shader\PCTGaugeDraw\HLSL</Filter>
+    </FxCompile>
+    <FxCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\HLSL\PSPCTGaugeDraw.hlsl">
+      <Filter>Watanabe\Shader\PCTGaugeDraw\HLSL</Filter>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)..\..\Libs\BaseLib\DxShaders\SlimeParametors.hlsli">
@@ -2695,6 +2713,9 @@
     </None>
     <None Include="$(MSBuildThisFileDirectory)Watanabe\Shader\HLSL\INCPCTGaugeSprite.hlsli">
       <Filter>Watanabe\Shader\PCTGaugeSprite\HLSL</Filter>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Watanabe\Shader\HLSL\INCPCTGaugeDraw.hlsli">
+      <Filter>Watanabe\Shader\PCTGaugeDraw\HLSL</Filter>
     </None>
   </ItemGroup>
 </Project>
