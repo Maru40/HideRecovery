@@ -184,10 +184,27 @@ namespace basecross
 			App::GetApp()->GetMyInputDevice()->GetXInputGamePad().IsInputDown(XInputCode::B);
 	}
 
+	bool PlayerInputer::IsAim() {
+		auto device = App::GetApp()->GetInputDevice();
+		const auto& pad = device.GetControlerVec()[0];
+		return pad.bLeftTrigger >= XINPUT_GAMEPAD_TRIGGER_THRESHOLD;
+	}
+
+	bool PlayerInputer::IsAimRelease() {
+		auto device = App::GetApp()->GetInputDevice();
+		const auto& pad = device.GetControlerVec()[0];
+		return pad.bLeftTrigger < XINPUT_GAMEPAD_TRIGGER_THRESHOLD;
+	}
+
 	bool PlayerInputer::IsShot()
 	{
-		return App::GetApp()->GetMyInputDevice()->GetXInputGamePad().IsInputDown(XInputCode::RightShoulder) ||
-			App::GetApp()->GetMyInputDevice()->GetKeyBoard().IsInputDown(KeyCode::Shift);
+		auto device = App::GetApp()->GetInputDevice();
+		const auto& pad = device.GetControlerVec()[0];
+		return pad.bRightTrigger >= XINPUT_GAMEPAD_TRIGGER_THRESHOLD || 
+			App::GetApp()->GetMyInputDevice()->GetKeyBoard().IsInputPush(KeyCode::Shift);
+
+		//return App::GetApp()->GetMyInputDevice()->GetXInputGamePad().IsInputPush(XInputCode::RightShoulder) ||
+		//	
 	}
 
 	bool PlayerInputer::IsTackle()

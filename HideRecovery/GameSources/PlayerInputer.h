@@ -72,6 +72,9 @@ namespace basecross
 		/// <returns></returns>
 		static bool IsBluffPutItem();
 
+		static bool IsAim();
+		static bool IsAimRelease();
+
 		static bool IsShot();
 
 		static bool IsTackle();
