@@ -31,6 +31,7 @@
 #include "Watanabe/Component/PlayerAnimator.h"
 #include "Watanabe/Interface/I_Performable.h"
 #include "Watanabe/StageObject/FireworksObject.h"
+#include "Watanabe/Component/BallAnimator.h"
 
 #include "GameTimer.h"
 
@@ -68,7 +69,8 @@ namespace basecross {
 		team(team),
 		itemHiderTime(3.0f),
 		timeDrawPosition(Vec3(0.0f, 0.0f, 0.0f)),
-		dunkPositionOffset(Vec3(0.0f, 3.0f, 0.0f))
+		dunkPositionOffset(Vec3(0.0f, 3.0f, 0.0f)),
+		dunkBallPositionOffset(Vec3(0.0f, 1.85f, -0.5f))
 	{
 		constexpr float fOffset = +1.0f;
 		constexpr float fOffsetY = -0.5f;
@@ -116,6 +118,7 @@ namespace basecross {
 
 	void Goal::SuccessGoal(const CollisionPair& pair) {
 		auto other = pair.m_Dest.lock()->GetGameObject();
+		auto otherTrans = other->GetComponent<Transform>();
 
 		//タックル状態なら状態をリセット
 		if (auto tackle = other->GetComponent<TackleAttack>(false)) {
@@ -125,13 +128,8 @@ namespace basecross {
 		//ゴールアニメーションの設定
 		if (auto goalAnimationController = other->GetComponent<GoalAnimationController>(false)) {
 			goalAnimationController->SetDunkPosition(GetDunkPosition());
-		}
-
-		//ファイヤーエフェクト
-		for (auto weakFire : m_fireEffets) {
-			if (auto fire = weakFire.lock()) {
-				fire->Start();
-			}
+			goalAnimationController->SetDunkBallPosition(transform->GetPosition() + m_param.dunkBallPositionOffset);
+			goalAnimationController->SetGoal(GetThis<Goal>());
 		}
 
 		//ポイント加算
@@ -255,6 +253,14 @@ namespace basecross {
 
 		//アニメーションの再生
 		PlayAnimation(pair);
+	}
+
+	void Goal::PlayFireEffects() {
+		for (auto weakFire : m_fireEffets) {
+			if (auto fire = weakFire.lock()) {
+				fire->Start();
+			}
+		}
 	}
 
 	void Goal::OnCustomEventAction(int playerNumber, std::uint8_t eventCode, const std::uint8_t* bytes)
