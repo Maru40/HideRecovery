@@ -11,8 +11,8 @@
 
 namespace basecross {
 	void ResultStage::CreateViewLight() {
-		const Vec3 eye(20.0f, 5.0f, 0.0f);
-		const Vec3 at(5.0f);
+		const Vec3 eye(0.0f, 3.0f, 20.0f);
+		const Vec3 at(1.0f);
 		auto PtrView = CreateView<SingleView>();
 		//ビューのカメラの設定
 		auto PtrCamera = ObjectFactory::Create<Camera>();
@@ -32,7 +32,7 @@ namespace basecross {
 		Debug::GetInstance()->Log(L"A : マッチング画面へ");
 		Debug::GetInstance()->Log(L"B : タイトル画面へ");
 
-		CreateMap(L"StageS2.csv");
+		CreateMap(L"WaitStage.csv");
 
 		UIObjectCSVBuilder uiBuilder;
 		uiBuilder.Register<TimerUI>(L"TimerUI");
