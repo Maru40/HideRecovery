@@ -991,6 +991,9 @@
     <Filter Include="Watanabe\Component\BallAnimator">
       <UniqueIdentifier>{2fcd9309-862c-4bee-8d67-11d8b1c05b45}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\Stage">
+      <UniqueIdentifier>{fa44efd3-52b5-4633-9a69-bd20faef81bd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1848,6 +1851,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\StageObjects.h">
       <Filter>Watanabe\StageObject</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Stage\ResultStage.h">
+      <Filter>Watanabe\Stage</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2608,6 +2614,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\BallAnimator.cpp">
       <Filter>Watanabe\Component\BallAnimator</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Stage\ResultStage.cpp">
+      <Filter>Watanabe\Stage</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

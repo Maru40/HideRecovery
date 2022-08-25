@@ -8,7 +8,7 @@
 
 #include "MainStage.h"
 #include "LoadStage.h"
-//#include "ResultStage.h"
+#include "Watanabe/Stage/ResultStage.h"
 #include "TitleStage.h"
 //#include "StageSelect.h"
 #include "Watanabe/TestStage/WatanabeStage.h"
@@ -74,9 +74,9 @@ namespace basecross {
 		else if (event->m_MsgStr == L"ToWatanabeStage") {
 			ResetActiveStage<MatchingUILayoutStage>();
 		}
-		//else if (event->m_MsgStr == L"ToResultStage") {
-		//	ResetActiveStage<ResultStage>();
-		//}
+		else if (event->m_MsgStr == L"ToResultStage") {
+			ResetActiveStage<ResultStage>();
+		}
 		else if (event->m_MsgStr == L"ToTitleStage") {
 			ResetActiveStage<TitleStage>();
 		}
