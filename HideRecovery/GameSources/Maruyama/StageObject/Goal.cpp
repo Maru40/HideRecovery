@@ -36,6 +36,7 @@
 
 #include "TackleAttack.h"
 #include "Maruyama/Player/Component/GoalAnimationController.h"
+#include "Maruyama/Interface/I_TeamMember.h"
 
 #include "PlayerInputer.h"
 
@@ -134,7 +135,9 @@ namespace basecross {
 		}
 
 		//ポイント加算
-		AddPoint(GetTeam());
+		if (auto teamMember = other->GetComponent<I_TeamMember>(false)) {
+			AddPoint(teamMember->GetTeam());
+		}
 
 		//アイテム削除
 		if (auto itemBag = other->GetComponent<ItemBag>(false)) {
@@ -173,7 +176,9 @@ namespace basecross {
 		auto other = onlineController->GetGameObject();
 
 		//ポイント加算
-		AddPoint(GetTeam());
+		if (auto teamMember = other->GetComponent<I_TeamMember>(false)) {
+			AddPoint(teamMember->GetTeam());
+		}
 
 		//アイテム削除
 		if (auto itemBag = other->GetComponent<ItemBag>(false)) {
