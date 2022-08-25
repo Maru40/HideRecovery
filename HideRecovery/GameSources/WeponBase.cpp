@@ -17,7 +17,7 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 
 	WeponBase_Parametor::WeponBase_Parametor() :
-		weight(1.0f),
+		weight(4.5f),
 		bulletInstanceOffset(Vec3(0.0f))
 	{}
 
