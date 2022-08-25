@@ -63,8 +63,11 @@ namespace basecross {
 	/// プレイヤーアニメーター本体
 	//--------------------------------------------------------------------------------------
 
-	PlayerAnimator::PlayerAnimator(const shared_ptr<GameObject>& owner)
-		:Animator(owner), m_beforeAnimationTime(0.0f)
+	PlayerAnimator::PlayerAnimator(const shared_ptr<GameObject>& owner) :
+		Animator(owner), 
+		m_waitTransitionSpeed(0.1f),
+		m_walkTransitionSpeed(5.0f),
+		m_beforeAnimationTime(0.0f)
 	{}
 
 	void PlayerAnimator::OnCreate() {
@@ -87,14 +90,79 @@ namespace basecross {
 		for (auto& baseState : baseStates) {
 			auto state = PlayerAnimationState::PlayerAnimationState2wstring(baseState);
 			auto isTransition = [&]() { return IsTargetAnimationEnd(); };
-			m_transitionDataMap[state] = TransitionData(isTransition, PlayerAnimationState::State::Wait);
+			m_transitionDatasMap[state].push_back(TransitionData(isTransition, PlayerAnimationState::State::Wait));
 		}
 
 		//自動でshotに遷移したいアニメーション
 		{
 			auto state = PlayerAnimationState::PlayerAnimationState2wstring(PlayerAnimationState::State::GunSet2);
 			auto isTransition = [&]() { return IsTargetAnimationEnd(); };
-			m_transitionDataMap[state] = TransitionData(isTransition, PlayerAnimationState::State::Shot);
+			m_transitionDatasMap[state].push_back(TransitionData(isTransition, PlayerAnimationState::State::Shot));
+		}
+
+		//速度でwaitにするアニメーション
+		{
+			auto velocityManager = GetGameObject()->GetComponent<VelocityManager>(false);
+			wstring states[] = {
+				PlayerAnimationState::PlayerAnimationState2wstring(PlayerAnimationState::State::Walk_L),
+				PlayerAnimationState::PlayerAnimationState2wstring(PlayerAnimationState::State::Dash),
+			};
+
+;			auto isTransition = [&, velocityManager]() { 
+				auto velocity = velocityManager->GetVelocity();
+				velocity.y = 0;
+				return velocity.length() < m_waitTransitionSpeed; 
+			};
+
+			for (const auto& state : states) {
+				m_transitionDatasMap[state].push_back(TransitionData(isTransition, PlayerAnimationState::State::Wait));
+			}
+		}
+
+		//速度でWalkに変更するスピード
+		{
+			auto velocityManager = GetGameObject()->GetComponent<VelocityManager>(false);
+			wstring states[] = {
+				PlayerAnimationState::PlayerAnimationState2wstring(PlayerAnimationState::State::Wait),
+			};
+			auto isTransition = [&, velocityManager]() {
+				auto velocity = velocityManager->GetVelocity();
+				velocity.y = 0;
+				return velocity.length() > m_waitTransitionSpeed;
+			};
+
+			for (const auto& state : states) {
+				m_transitionDatasMap[state].push_back(TransitionData(isTransition, PlayerAnimationState::State::Walk_L));
+			}
+
+			//Dashの時
+			auto state = PlayerAnimationState::PlayerAnimationState2wstring(PlayerAnimationState::State::Dash);
+
+			auto isDashToWalkTransition = [&, velocityManager]() {
+				auto velocity = velocityManager->GetVelocity();
+				velocity.y = 0;
+				return velocity.length() < m_walkTransitionSpeed;
+			};
+
+			m_transitionDatasMap[state].push_back(TransitionData(isDashToWalkTransition, PlayerAnimationState::State::Walk_L));
+		}
+
+		//速度でDashに変更するスピード
+		{
+			auto velocityManager = GetGameObject()->GetComponent<VelocityManager>(false);
+			wstring states[] = {
+				PlayerAnimationState::PlayerAnimationState2wstring(PlayerAnimationState::State::Wait),
+				PlayerAnimationState::PlayerAnimationState2wstring(PlayerAnimationState::State::Walk_L),
+			};
+			auto isTransition = [&, velocityManager]() {
+				auto velocity = velocityManager->GetVelocity();
+				velocity.y = 0;
+				return velocity.length() > m_walkTransitionSpeed;
+			};
+
+			for (const auto& state : states) {
+				m_transitionDatasMap[state].push_back(TransitionData(isTransition, PlayerAnimationState::State::Dash));
+			}
 		}
 	}
 
@@ -104,44 +172,22 @@ namespace basecross {
 		Transition();
 		UpdateEvent();
 		TimeEventUpdate();
-
-		auto velocityManager = m_velocityManager.lock();
-		if (!velocityManager) {
-			return;
-		}
-
-		constexpr float TransitionSpeed = 0.1f;	//遷移速度
-		auto velocity = velocityManager->GetVelocity();
-		velocity.y = 0.0f;
-
-		//速度が一定以下かつ、Dash状態なら
-		if (velocity.length() < TransitionSpeed && IsCurretAnimationState(PlayerAnimationState::State::Dash)) {
-			ChangePlayerAnimation(PlayerAnimationState::State::Wait);
-		}
-
-		//速度が一定より大きいかつ、Wait状態なら
-		if (velocity.length() > TransitionSpeed && IsCurretAnimationState(PlayerAnimationState::State::Wait)) {
-			ChangePlayerAnimation(PlayerAnimationState::State::Dash);
-		}
-
-		//デバッグ
-		if (PlayerInputer::GetInstance()->IsUpDown()) {
-			ChangePlayerAnimation(PlayerAnimationState::State::GunLeft);
-		}
 	}
 
 	void PlayerAnimator::Transition() {
 		auto draw = GetGameObject()->GetComponent<PNTBoneModelDraw>();
 		auto currentAnimation = draw->GetCurrentAnimation();
 
-		if (m_transitionDataMap.count(currentAnimation) == 0) {	//メンバーがないなら処理をしない。
+		if (m_transitionDatasMap.count(currentAnimation) == 0) {	//メンバーがないなら処理をしない。
 			return;
 		}
 
-		auto& data = m_transitionDataMap.at(currentAnimation);
+		auto& datas = m_transitionDatasMap.at(currentAnimation);
 
-		if (data.isTransition()) {
-			ChangePlayerAnimation(data.transitionState);
+		for (auto& data : datas) {
+			if (data.isTransition()) {
+				ChangePlayerAnimation(data.transitionState);
+			}
 		}
 	}
 

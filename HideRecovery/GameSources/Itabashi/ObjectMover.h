@@ -4,6 +4,7 @@
 namespace basecross
 {
 	class VelocityManager;
+	class UseWepon;
 
 namespace Operator
 {
@@ -12,6 +13,7 @@ namespace Operator
 		std::weak_ptr<Transform> m_transform;
 		std::weak_ptr<Camera> m_camera;
 		std::weak_ptr<VelocityManager> m_velocityManager;
+		std::weak_ptr<UseWepon> m_useWepon;
 
 		bool m_isCameraAffected = true;
 		bool m_isAim = false;
@@ -24,6 +26,7 @@ namespace Operator
 		ObjectMover(const std::shared_ptr<GameObject>& owner);
 
 		void OnCreate() override;
+		void OnLateStart() override;
 
 		void OnUpdate() override {}
 

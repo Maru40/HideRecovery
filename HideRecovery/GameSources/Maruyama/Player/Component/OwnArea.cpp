@@ -40,7 +40,7 @@ namespace basecross {
 	}
 
 	void OwnArea::OnLateStart() {
-		SettingGoal();
+		//SettingGoal();
 	}
 
 	void OwnArea::SettingGoal() {

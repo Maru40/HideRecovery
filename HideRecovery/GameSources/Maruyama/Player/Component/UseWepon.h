@@ -130,12 +130,19 @@ namespace basecross {
 		/// <returns>武器</returns>
 		std::shared_ptr<WeponBase> GetWepon() const noexcept;
 
+		/// <summary>
+		/// 武器の重さを取得
+		/// </summary>
+		/// <returns>武器の重さ</returns>
+		float GetWeaponWeight() const noexcept;
+
 		void SetDirection(const Vec3& direction) { m_direction = direction; }
+		
 		Vec3 GetDirection() const { return m_direction; }
 
 		void SetIsUseCamera(bool isUseCamera) { m_isUseCamera = isUseCamera; }
+
 		bool IsUseCamera() const { return m_isUseCamera; }
-		
 	};
 
 }

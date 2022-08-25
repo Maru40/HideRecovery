@@ -79,9 +79,12 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 	class PlayerAnimator : public Animator
 	{
+		float m_waitTransitionSpeed;
+		float m_walkTransitionSpeed;
+
 		std::weak_ptr<VelocityManager> m_velocityManager;								//速度管理
 
-		std::unordered_map<wstring, TransitionData> m_transitionDataMap;				//遷移データマップ
+		std::unordered_map<wstring, std::vector<TransitionData>> m_transitionDatasMap;	//遷移データマップ
 		std::unordered_map<wstring, std::vector<AnimationEvent>> m_animationEventsMap;	//アニメーションイベントマップ
 		std::unordered_map<wstring, std::vector<TimeAnimationEvent>> m_timeEventsMap;	//タイムイベントマップ
 

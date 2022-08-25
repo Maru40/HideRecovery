@@ -63,7 +63,7 @@ namespace basecross {
 			Vec3(0.0f, -0.5f, 0.0f)
 		);
 
-		auto draw = AddComponent<PNTBoneModelDraw>();
+		auto draw = AddComponent<DrawComp>();
 		draw->SetMultiMeshResource(L"Player_Mesh_Red");
 		draw->SetMeshToTransformMatrix(spanMat);
 		SetAlphaActive(true);
@@ -87,19 +87,19 @@ namespace basecross {
 		AddComponent<VelocityManager>();
 
 		auto objecfMover = AddComponent<Operator::ObjectMover>();
-		objecfMover->SetMoveSpeed(10.5f);
+		objecfMover->SetMoveSpeed(8.5f);
 		objecfMover->SetAffectedCamera(GetStage()->GetView()->GetTargetCamera());
 		AddComponent<Online::PlayerOnlineController>();
 		AddComponent<Online::OnlineTransformSynchronization>();
 
 		AddComponent<PlayerAnimator>();
-		AddComponent<ChargeGun>();
+		auto chargeGun = AddComponent<ChargeGun>();
 		AddComponent<PlayerStatus>();
 		AddComponent<TackleAttack>();
 
 		AddComponent<Respawner>();
 		AddComponent<PlayerDeader>();
-		AddComponent<UseWepon>();
+		auto useWeapon = AddComponent<UseWepon>(chargeGun);
 		AddComponent<GoalAnimationController>();
 
 		constexpr float ScaleValue = 1.0f;
