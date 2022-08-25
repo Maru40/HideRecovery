@@ -66,13 +66,6 @@ namespace basecross {
 		draw->SetMeshToTransformMatrix(spanMat);
 		draw->SetMultiMeshResource(L"Goal");
 
-		//if (m_team == Team::East) {
-		//	draw->SetDiffuse(Col4(1.0f, 0.0f, 0.0f, 1.0f));
-		//}
-		//else {
-		//	draw->SetDiffuse(Col4(0.0f, 0.0f, 1.0f, 1.0f));
-		//}
-
 		//SetAlphaActive(true);
 	}
 }
