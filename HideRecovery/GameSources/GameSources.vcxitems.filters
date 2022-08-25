@@ -994,6 +994,9 @@
     <Filter Include="Watanabe\Stage">
       <UniqueIdentifier>{fa44efd3-52b5-4633-9a69-bd20faef81bd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\UI\SplashMessageUI">
+      <UniqueIdentifier>{e8a97f8b-fe02-42c6-9149-f7a504b29970}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1854,6 +1857,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Stage\ResultStage.h">
       <Filter>Watanabe\Stage</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\SplashMessageUI.h">
+      <Filter>Watanabe\UI\SplashMessageUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2617,6 +2623,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Stage\ResultStage.cpp">
       <Filter>Watanabe\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\SplashMessageUI.cpp">
+      <Filter>Watanabe\UI\SplashMessageUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

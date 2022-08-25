@@ -7,3 +7,4 @@
 #include "PointUI.h"
 #include "SimpleSprite.h"
 #include "WinOrLoseUI.h"
+#include "SplashMessageUI.h"
