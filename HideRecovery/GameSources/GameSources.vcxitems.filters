@@ -997,6 +997,12 @@
     <Filter Include="Watanabe\UI\SplashMessageUI">
       <UniqueIdentifier>{e8a97f8b-fe02-42c6-9149-f7a504b29970}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\BoardPoly">
+      <UniqueIdentifier>{acb1fc43-9929-4c64-a9ee-b14465341eee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\BoardPoly\HPGaugeBoardPoly">
+      <UniqueIdentifier>{43255080-d5fb-4b60-b18e-726e7df895d9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1860,6 +1866,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\SplashMessageUI.h">
       <Filter>Watanabe\UI\SplashMessageUI</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\BoardPoly\HPGaugeBoardPoly.h">
+      <Filter>Watanabe\BoardPoly\HPGaugeBoardPoly</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2626,6 +2635,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\SplashMessageUI.cpp">
       <Filter>Watanabe\UI\SplashMessageUI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\BoardPoly\HPGaugeBoardPoly.cpp">
+      <Filter>Watanabe\BoardPoly\HPGaugeBoardPoly</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
