@@ -1,5 +1,7 @@
 ﻿#include "stdafx.h"
 #include "HPGaugeBoardPoly.h"
+#include "BillBoard.h"
+#include "../Utility/Utility.h"
 
 namespace basecross {
 	HPGaugeBoardPoly::HPGaugeBoardPoly(const shared_ptr<Stage>& stage)
@@ -39,6 +41,10 @@ namespace basecross {
 		drawComp->SetTextureResouce(L"HPGauge_TX");
 		drawComp->IsBackground(true);
 		drawComp->SetGaugeColor(Col4(0, 1, 0, 1));
+
+		auto billBoard = AddComponent<BillBoard>();
+		billBoard->SetRotationOffset(
+			Utility::ConvertDegVecToRadVec(Vec3(0, 0, 180)));
 
 		SetAlphaActive(true);
 	}

@@ -10,13 +10,7 @@ namespace basecross {
 		:DrawComponent(gameObjectPtr),
 		m_rate(0.0f), m_threshold(0.01f), m_isBackground(false),
 		m_diffuse(Col4(1)), m_emissive(Col4(0))
-	{
-		// パイプラインステートをデフォルトの2D
-		SetBlendState(BlendState::Opaque);
-		SetDepthStencilState(DepthStencilState::None);
-		SetRasterizerState(RasterizerState::CullBack);
-		SetSamplerState(SamplerState::LinearClamp);
-	}
+	{}
 
 	void PCTGaugeDraw::OnCreate() {
 	}
