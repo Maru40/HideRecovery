@@ -75,6 +75,24 @@ namespace basecross {
 		void IsBackground(bool flg) {
 			m_isBackground = flg;
 		}
+
+		/**
+		 * @brief メッシュリソースのセット
+		 *
+		 * @param meshRes メッシュリソース
+		 */
+		void SetMeshResouce(const shared_ptr<MeshResource>& meshRes) {
+			m_meshResource = meshRes;
+		}
+
+		/**
+		 * @brief テクスチャリソースのセット
+		 *
+		 * @param key キー
+		 */
+		void SetTextureResouce(const wstring& key) {
+			m_textureResource = App::GetApp()->GetResource<TextureResource>(key);
+		}
 	private:
 		/**
 		 * @brief コンスタントバッファの設定

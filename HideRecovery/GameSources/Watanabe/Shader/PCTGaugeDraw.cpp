@@ -8,7 +8,8 @@ namespace basecross {
 
 		PCTGaugeDraw::PCTGaugeDraw(const shared_ptr<GameObject>& gameObjectPtr)
 		:DrawComponent(gameObjectPtr),
-		m_rate(0.0f), m_threshold(0.01f), m_isBackground(false)
+		m_rate(0.0f), m_threshold(0.01f), m_isBackground(false),
+		m_diffuse(Col4(1)), m_emissive(Col4(0))
 	{
 		// パイプラインステートをデフォルトの2D
 		SetBlendState(BlendState::Opaque);
@@ -130,6 +131,6 @@ namespace basecross {
 		// 割合やしきい値を設定
 		// フラグはここで設定できるものだけ設定
 		spCb.RatioAndThresholdEtc =
-			Vec4(m_rate, m_threshold, 0, m_isBackground ? 1.0f : 0.0f);
+			Vec4(m_rate, m_threshold, m_isBackground ? 1.0f : 0.0f, 0);
 	}
 }

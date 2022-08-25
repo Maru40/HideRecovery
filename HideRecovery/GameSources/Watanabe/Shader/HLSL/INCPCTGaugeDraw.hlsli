@@ -19,8 +19,7 @@ cbuffer ParametersBuffer : register(b0)
     float4x4 Projection : packoffset(c8);
     float4 Emissive : packoffset(c12);
     float4 Diffuse : packoffset(c13);
-    float Ratio : packoffset(c6.x);
-    float Threshold : packoffset(c6.y);
-    uint UseGradientTextureFlg : packoffset(c6.z);
-    uint IsBackground : packoffset(c6.w);
+    float Ratio : packoffset(c14.x);
+    float Threshold : packoffset(c14.y);
+    uint IsBackground : packoffset(c14.z);
 };
