@@ -1,9 +1,9 @@
 name,start,end,isLoop,speed
-Wait,1,39,TRUE,1
-Walk_R,65,94,TRUE,1
-Walk_L,50,79,TRUE,1
+Wait,1,39,TRUE,0.5
+Walk_R,65,94,TRUE,0.5
+Walk_L,50,79,TRUE,0.5
 Dstart,96,99,FALSE,1
-Dash,100,119,TRUE,1
+Dash,100,119,TRUE,0.5
 PutItem_Floor,125,149,FALSE,1
 PutItem_HideObject,150,174,FALSE,1
 GunSet1,175,179,FALSE,1
@@ -19,4 +19,4 @@ DAStart,381,388,FALSE,1
 DAttack,389,414,FALSE,1
 Dead,415,444,FALSE,1
 GSDead,445,474,FALSE,1
-Goal1,476,560,FALSE,1
+Goal1,476,560,FALSE,0.5
