@@ -8,6 +8,7 @@
 
 #include "PlayerInputer.h"
 
+#include "PlayerObject.h"
 #include "Maruyama/Player/Component/PlayerDeader.h"
 
 namespace basecross {
@@ -55,5 +56,22 @@ namespace basecross {
 	void PlayerStatus::AddFuncAddDamage(const DamageFuncType& damagedFunc)
 	{
 		m_damagedFuncs.push_back(damagedFunc);
+	}
+
+	void PlayerStatus::SetTeam(const Team& team) {
+		m_team = team;
+
+		if (auto drawer = GetGameObject()->GetComponent<PlayerObject::DrawComp>(false)) {
+			switch (team)
+			{
+			case Team::West:
+				drawer->SetMultiMeshResource(L"Player_Mesh_Blue");
+				break;
+
+			case Team::East:
+				drawer->SetMultiMeshResource(L"Player_Mesh_Red");
+				break;
+			}
+		}
 	}
 }

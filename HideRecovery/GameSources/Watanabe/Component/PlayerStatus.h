@@ -56,11 +56,13 @@ namespace basecross {
 		/// </summary>
 		/// <param name="damage">ダメージデータ</param>
 		void AddDamage(const DamageData& damage);
+
 		/// <summary>
 		/// 死んでいるか
 		/// </summary>
 		/// <returns>trueなら死んでいる</returns>
 		bool IsDead();
+
 		/// <summary>
 		/// リスポーン（ステータスのリセットのみ）
 		/// </summary>
@@ -68,8 +70,16 @@ namespace basecross {
 
 		void AddFuncAddDamage(const DamageFuncType& damagedFunc);
 
-		void SetTeam(const Team& team) override { m_team; }
+		/// <summary>
+		/// チームの設定
+		/// </summary>
+		/// <param name="team">設定するチーム</param>
+		void SetTeam(const Team& team) override;
 
+		/// <summary>
+		/// チームの取得
+		/// </summary>
+		/// <returns>チーム</returns>
 		Team GetTeam() const override { return m_team; }
 
 		Status GetStatus() const { return m_status; }
