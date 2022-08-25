@@ -9,6 +9,7 @@
 
 #include "Watanabe/Utility/DataExtracter.h"
 #include "Watanabe/Utility/AdvMeshUtil.h"
+#include "Watanabe/StageObject/PlayerSpawnPointObject.h"
 
 #include "Goal.h"
 
@@ -22,13 +23,28 @@ namespace basecross {
 		StageObjectBase(stage, L"Goal")
 	{
 		vector<wstring> tokens = DataExtracter::DelimitData(line);
-		DataExtracter::TransformDataExtraction(tokens, m_transformData);
+		size_t nextIndex = DataExtracter::TransformDataExtraction(tokens, m_transformData);
+
+		wstring teamType = tokens[nextIndex];
+		if (teamType == L"East") {
+			m_team = Team::East;
+		}
+		else if (teamType == L"West") {
+			m_team = Team::West;
+		}
+		else {
+			throw BaseException(
+				L"BlockTypeÇ™ïsê≥Ç»ílÇ≈Ç∑ÅB",
+				L"BlockType : " + teamType,
+				L"Block::Block(const shared_ptr<Stage>& stage, const wstring& line)"
+			);
+		}
 	}
 
 	void GoalObject::OnCreate() {
 		SettingModel();
 
-		AddComponent<Goal>(Goal::Parametor(Team::West));
+		AddComponent<Goal>(Goal::Parametor(m_team));
 
 		auto collision = AddComponent<CollisionObb>();
 		collision->SetAfterCollision(AfterCollision::None);
@@ -49,6 +65,13 @@ namespace basecross {
 		auto draw = AddComponent<PNTStaticDraw>();
 		draw->SetMeshToTransformMatrix(spanMat);
 		draw->SetMultiMeshResource(L"Goal");
+
+		//if (m_team == Team::East) {
+		//	draw->SetDiffuse(Col4(1.0f, 0.0f, 0.0f, 1.0f));
+		//}
+		//else {
+		//	draw->SetDiffuse(Col4(0.0f, 0.0f, 1.0f, 1.0f));
+		//}
 
 		//SetAlphaActive(true);
 	}
