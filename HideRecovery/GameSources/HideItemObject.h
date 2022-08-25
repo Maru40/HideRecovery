@@ -16,7 +16,7 @@ namespace basecross {
 	class HideItemObject : public StageObjectBase
 	{
 	public:
-		using DrawComp = PNTStaticDraw;
+		using DrawComp = PNTBoneModelDraw;
 
 	private:
 
@@ -25,6 +25,7 @@ namespace basecross {
 		HideItemObject(const std::shared_ptr<Stage>& stage, const std::wstring& line);
 
 		void OnCreate() override;
+		void OnUpdate() override;
 
 	private:
 		void SettingModel();

@@ -15,6 +15,7 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 	template<class T>
 	class TaskList;
+	class Goal;
 
 	namespace Task {
 		struct Wait_Parametor;
@@ -29,6 +30,7 @@ namespace basecross {
 	{
 		Vec3 startPosition;		//開始位置
 		Vec3 dunkPosition;		//ダンクする位置
+		Vec3 dunkBallPosition;	//ボールをダンクする位置
 		float jumpDegree;		//ジャンプする角度
 		float dunkMoveSpeed;	//ダンクにかける時間
 
@@ -62,12 +64,15 @@ namespace basecross {
 	private:
 		Parametor m_param;		//パラメータ
 
+		std::weak_ptr<Goal> m_goal;
+		std::weak_ptr<GameObject> m_ball;
 		std::unique_ptr<TaskList<TaskEnum>> m_taskList;	//タスク管理
 
 	public:
 		GoalAnimationController(const std::shared_ptr<GameObject>& objPtr);
 
 		void OnLateStart() override;
+		void OnUpdate() override;
 
 	private:
 		/// <summary>
@@ -113,6 +118,13 @@ namespace basecross {
 		/// <returns>ダンク位置</returns>
 		Vec3 GetDunkPosition() const noexcept { return m_param.dunkPosition; }
 
+		void SetDunkBallPosition(const Vec3& position) noexcept { m_param.dunkBallPosition = position; }
+
+		Vec3 GetDunkBallPosition() const noexcept { return m_param.dunkBallPosition; }
+
+		void SetGoal(const std::shared_ptr<Goal>& goal) { m_goal = goal; }
+
+		std::shared_ptr<Goal> GetGoal() const { return m_goal.lock(); }
 	};
 
 }

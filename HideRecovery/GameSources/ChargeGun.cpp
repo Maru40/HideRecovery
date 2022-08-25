@@ -21,10 +21,14 @@
 
 #include "Maruyama/Player/Component/UseWepon.h"
 
+#include "TimeHelper.h"
+#include "GameTimer.h"
+
 namespace basecross {
 
 	ChargeGun::ChargeGun(const std::shared_ptr<GameObject>& objPtr) :
-		WeponBase(objPtr)
+		WeponBase(objPtr),
+		m_timer(new GameTimer(0.0f))
 	{}
 
 	void ChargeGun::OnCreate() {
@@ -36,7 +40,8 @@ namespace basecross {
 	}
 
 	void ChargeGun::OnUpdate() {
-		UpdateAnimation();
+		//UpdateAnimation();
+		m_timer->UpdateTimer();
 	}
 
 	void ChargeGun::UpdateAnimation() {
@@ -61,6 +66,17 @@ namespace basecross {
 	}
 
 	std::shared_ptr<BulletObjectBase> ChargeGun::Shot(const Vec3& direct) {
+		if (!m_timer->IsTimeUp()) {
+			return nullptr;
+		}
+
+		auto useWeapon = m_useWepon.lock();
+		if (useWeapon && !useWeapon->IsAim()){
+			return nullptr;
+		}
+
+		m_timer->ResetTimer(GetShotIntervalTime());
+
 		//音の再生
 		if (auto soundManager = SoundManager::GetInstance()) {
 			constexpr float Volume = 0.1f;

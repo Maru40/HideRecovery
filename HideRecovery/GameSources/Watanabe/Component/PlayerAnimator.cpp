@@ -273,8 +273,16 @@ namespace basecross {
 
 		ExitEvent();
 
+		wstring strState = PlayerAnimationState::PlayerAnimationState2wstring(state);
+		//タイムイベントのリセット
 		m_beforeAnimationTime = 0.0f;
-		ChangeAnimation(PlayerAnimationState::PlayerAnimationState2wstring(state));
+		if (m_timeEventsMap.count(strState) != 0) {
+			for (auto& timeEvent : m_timeEventsMap.at(strState)) {
+				timeEvent.isActive = true;
+			}
+		}
+
+		ChangeAnimation(strState);
 
 		StartEvent();
 	}
