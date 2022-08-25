@@ -34,24 +34,25 @@ namespace basecross {
 		uiBuilder.Register<PointUI>(L"PointUI");
 		uiBuilder.Register<SimpleSprite>(L"SimpleSprite");
 		uiBuilder.Register<WinOrLoseUI>(L"WinOrLoseUI");
+		uiBuilder.Register<SplashMessageUI>(L"SplashMessageUI");
 		auto dir = App::GetApp()->GetDataDirWString();
 		auto path = dir + L"MapDatas/";
-		uiBuilder.Build(GetThis<Stage>(), path + L"TitleUILayout.csv");
+		uiBuilder.Build(GetThis<Stage>(), path + L"GameUILayout.csv");
 
 		auto ball = AddGameObject<GameObject>();
 		auto drawComp = ball->AddComponent<PNTBoneModelDraw>();
 		drawComp->SetMultiMeshResource(L"Ball_Model");
 
-		m_sprite = AddGameObject<SplashMessageUI>();
+		//m_sprite = AddGameObject<SplashMessageUI>();
 	}
 	void MatchingUILayoutStage::OnUpdate() {
 		const auto& inputDevice = App::GetApp()->GetMyInputDevice();
 		const auto& pad = inputDevice->GetXInputGamePad();
 		if (pad.IsInputDown(XInputCode::Start)) {
-			PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToMatchingUILayoutStage");
+			PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToWatanabeStage");
 		}
 		if (pad.IsInputDown(XInputCode::A)) {
-			m_sprite->SetMessage(SplashMessageUI::MessageType::GetBall);
+			//m_sprite->SetMessage(SplashMessageUI::MessageType::GetBall);
 		}
 	}
 }

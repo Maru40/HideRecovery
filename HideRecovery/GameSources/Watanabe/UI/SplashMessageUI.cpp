@@ -1,7 +1,9 @@
 ﻿#include "stdafx.h"
 #include "SplashMessageUI.h"
+#include "../Utility/DataExtracter.h"
 
 namespace basecross {
+	// 初期化
 	map<SplashMessageUI::MessageType, SplashMessageUI::MessageData> SplashMessageUI::sm_Type2DataMap =
 	{
 		{MessageType::Relocation,MessageData(SimpleSprite::Type::SpriteData,L"Relocation")},
@@ -15,10 +17,15 @@ namespace basecross {
 
 	SplashMessageUI::SplashMessageUI(const shared_ptr<Stage>& stage, const wstring& line)
 		: UIObjectBase(stage, L"SplashMessageUI"), m_isStart(false), m_timer(3)
-	{}
+	{
+		vector<wstring> tokens = DataExtracter::DelimitData(line);
+		size_t nextIndex = DataExtracter::RectTransformDataExtraction(tokens, m_rectTransformData);
+		m_timer.SetIntervalTime(stof(tokens[nextIndex]));
+	}
 
 	void SplashMessageUI::OnCreate() {
-		m_sprite = GetStage()->AddGameObject<SimpleSprite>();
+		m_sprite = GetStage()->AddGameObject<SimpleSprite>(SimpleSprite::Type::SpriteData, L"StolenBall");
+		m_sprite->SetParent(GetThis<SplashMessageUI>());
 		m_sprite->SetActive(false);
 	}
 
