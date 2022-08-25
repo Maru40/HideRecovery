@@ -18,6 +18,7 @@
 
 #include "Itabashi/ObjectMover.h"
 #include "Watanabe/Component/PlayerAnimator.h"
+#include "Watanabe/Component/PlayerStatus.h"
 
 #include "RotationController.h"
 #include "VelocityManager.h"
@@ -145,16 +146,22 @@ namespace basecross {
 		auto& isAim = m_param.isAim;
 
 		auto trueFunction = [&]() {		//Aim状態になった時
-			if (auto animator = GetGameObject()->GetComponent<PlayerAnimator>(false)) {
-				animator->ChangePlayerAnimation(PlayerAnimationState::State::GunSet2);
+			auto status = GetGameObject()->GetComponent<PlayerStatus>(false);
+			if (status && status->IsDead()) {
+				return;
 			}
 
-			//if (auto mover = GetGameObject()->GetComponent<Operator::ObjectMover>(false)) {
-			//	mover->SetMoveSpeed();
-			//}
+			if (auto animator = GetGameObject()->GetComponent<PlayerAnimator>(false)) {	//アニメーションの遷移
+				animator->ChangePlayerAnimation(PlayerAnimationState::State::GunSet2);
+			}
 		};
 
 		auto falseFunction = [&]() {	//Aim状態でなくなった時
+			auto status = GetGameObject()->GetComponent<PlayerStatus>(false);
+			if (status && status->IsDead()) {
+				return;
+			}
+
 			if (auto animator = GetGameObject()->GetComponent<PlayerAnimator>(false)) {
 				animator->ChangePlayerAnimation(PlayerAnimationState::State::GunEnd2);
 			}
@@ -168,7 +175,9 @@ namespace basecross {
 	/// アクセッサ
 	//--------------------------------------------------------------------------------------
 
-	void UseWepon::SetIsAim(const bool isAim) { *m_param.isAim = isAim; }
+	void UseWepon::SetIsAim(const bool isAim) { 
+		*m_param.isAim = isAim; 
+	}
 
 	bool UseWepon::IsAim() const { return m_param.isAim->GetValue(); }
 

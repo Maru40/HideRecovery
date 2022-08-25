@@ -188,7 +188,7 @@ namespace Online
 		auto velocityManager = m_velocityManager.lock();
 		auto rotationController = m_rotationController.lock();
 
-		velocityManager->SetVelocity(moveVector);
+		velocityManager->SetVelocity(moveVector / App::GetApp()->GetElapsedTime());
 		rotationController->SetDirect(forward);
 	}
 

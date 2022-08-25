@@ -169,9 +169,9 @@ namespace basecross {
 	void PlayerAnimator::OnUpdate2() {
 		Animator::OnUpdate();
 
-		Transition();
-		UpdateEvent();
-		TimeEventUpdate();
+		Transition();		//遷移
+		UpdateEvent();		//更新イベント
+		TimeEventUpdate();	//タイムイベント
 	}
 
 	void PlayerAnimator::Transition() {
@@ -186,6 +186,12 @@ namespace basecross {
 
 		for (auto& data : datas) {
 			if (data.isTransition()) {
+				if ((IsCurretAnimationState(PlayerAnimationState::State::Dead) || IsCurretAnimationState(PlayerAnimationState::State::GSDead)) &&
+					data.transitionState != PlayerAnimationState::State::Wait)
+				{
+					return;
+				}
+
 				ChangePlayerAnimation(data.transitionState);
 			}
 		}
@@ -259,6 +265,12 @@ namespace basecross {
 	}
 
 	void PlayerAnimator::ChangePlayerAnimation(PlayerAnimationState::State state) {
+		if ((IsCurretAnimationState(PlayerAnimationState::State::Dead) || IsCurretAnimationState(PlayerAnimationState::State::GSDead)) &&
+			state != PlayerAnimationState::State::Wait)
+		{
+			return;
+		}
+
 		ExitEvent();
 
 		m_beforeAnimationTime = 0.0f;
