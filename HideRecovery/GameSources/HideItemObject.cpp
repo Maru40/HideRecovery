@@ -14,6 +14,9 @@
 #include "Itabashi/ObjectHider.h"
 #include "Itabashi/Item.h"
 #include "Watanabe/Utility/DataExtracter.h"
+#include "Watanabe/Component/BallAnimator.h"
+
+#include "PlayerInputer.h"
 
 namespace basecross {
 	HideItemObject::HideItemObject(const std::shared_ptr<Stage>& stage) :
@@ -39,12 +42,38 @@ namespace basecross {
 
 		AddComponent<HideItem>();
 		AddComponent<Targeted>();
+
+		auto animator = AddComponent<BallAnimator>();
+		animator->ChangeBallAnimation(BallAnimationState::State::Gwait);
+	}
+
+	void HideItemObject::OnUpdate() {
+		//デバッグ-----------------------------------------------------------------
+
+		auto animator = GetComponent<BallAnimator>(false);
+
+		if (PlayerInputer::GetInstance()->IsLeftDown()) {
+			animator->ChangeBallAnimation(BallAnimationState::State::Goal);
+		}
+
+		//-------------------------------------------------------------------------
 	}
 
 	void HideItemObject::SettingModel() {
+		Mat4x4 spanMat;
+		const float fScale = 1.0f;
+		Vec3 scale = Vec3(fScale);
+		spanMat.affineTransformation(
+			scale,
+			Vec3(0.0f, 0.0f, 0.0f),
+			Vec3(0.0f, XM_PI, 0.0f),
+			Vec3(0.0f, 0.0f, 0.0f)
+		);
+
 		auto draw = AddComponent<DrawComp>();
-		draw->SetMeshResource(L"DEFAULT_SPHERE");
+		draw->SetMultiMeshResource(L"Ball_Model");
 		draw->SetDiffuse(Col4(0.0f, 0.5f, 0.0f, 1.0f));
+		draw->SetMeshToTransformMatrix(spanMat);
 
 		transform->SetScale(Vec3(0.5f));
 	}
