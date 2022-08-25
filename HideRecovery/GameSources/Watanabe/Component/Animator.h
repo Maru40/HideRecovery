@@ -32,6 +32,10 @@ namespace basecross {
 		/// </summary>
 		float playSpeed;
 
+		AnimationClip():
+			AnimationClip(L"", 0, 0 , false)
+		{}
+
 		/// <summary>
 		/// コンストラクタ
 		/// </summary>
@@ -41,8 +45,9 @@ namespace basecross {
 		/// <param name="_isLoop">ループするか</param>
 		/// <param name="_playSpeed">再生速度</param>
 		AnimationClip(const wstring& _name,
-			int _start, int _end, bool _isLoop, float _playSpeed = 1.0f)
-			:name(_name), start(_start), end(_end),
+			int _start, int _end, bool _isLoop, float _playSpeed = 1.0f
+		) :
+			name(_name), start(_start), end(_end),
 			isLoop(_isLoop), playSpeed(_playSpeed)
 		{}
 	};
