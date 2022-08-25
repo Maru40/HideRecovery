@@ -1009,6 +1009,9 @@
     <Filter Include="Watanabe\BoardPoly\HPGaugeBP">
       <UniqueIdentifier>{43255080-d5fb-4b60-b18e-726e7df895d9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\BoardPoly\RelocationCountBP">
+      <UniqueIdentifier>{8b4de21e-b461-4aac-a765-92077f52445e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1878,6 +1881,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\BoardPoly\HPGaugeBP.h">
       <Filter>Watanabe\BoardPoly\HPGaugeBP</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\BoardPoly\RelocationCountBP.h">
+      <Filter>Watanabe\BoardPoly\RelocationCountBP</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2650,6 +2656,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\BoardPoly\HPGaugeBP.cpp">
       <Filter>Watanabe\BoardPoly\HPGaugeBP</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\BoardPoly\RelocationCountBP.cpp">
+      <Filter>Watanabe\BoardPoly\RelocationCountBP</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
