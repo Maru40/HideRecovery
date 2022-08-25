@@ -16,6 +16,7 @@
 #include "Watanabe/Component/PlayerStatus.h"
 
 #include "VelocityManager.h"
+#include "UseWepon.h"
 
 namespace basecross {
 
@@ -26,12 +27,29 @@ namespace basecross {
 
 	void PlayerDeader::OnLateStart() {
 		m_animator = GetGameObject()->GetComponent<PlayerAnimator>(false);
+
+		auto animator = m_animator.lock();
+		if (animator) {
+			PlayerAnimationState::State states[] = {
+				PlayerAnimationState::State::Dead,
+				PlayerAnimationState::State::GSDead,
+			};
+
+			auto update = [&, animator]() {
+				if (m_updateFunction) {
+					m_updateFunction();
+				}
+				return false;
+			};
+
+			for (auto& state : states) {
+				animator->AddAnimationEvent(state, nullptr, update, nullptr);
+			}
+		}
 	}
 
 	void PlayerDeader::OnUpdate() {
-		if (m_updateFunction) {
-			m_updateFunction();
-		}
+
 	}
 
 	void PlayerDeader::ObserveAnimation() {
@@ -41,7 +59,9 @@ namespace basecross {
 		}
 
 		//アニメーションが死亡状態でないなら監視しない
-		if (!animator->IsCurretAnimationState(PlayerAnimationState::State::Dead)) {
+		if (!animator->IsCurretAnimationState(PlayerAnimationState::State::Dead) && 
+			!animator->IsCurretAnimationState(PlayerAnimationState::State::GSDead))
+		{
 			return;
 		}
 
@@ -56,9 +76,17 @@ namespace basecross {
 	}
 
 	void PlayerDeader::StartDead() {
+		auto useWeapon = GetGameObject()->GetComponent<UseWepon>(false);
 		auto animator = m_animator.lock();
-		if (animator) {
-			animator->ChangePlayerAnimation(PlayerAnimationState::State::Dead);
+
+		if (animator && useWeapon) {
+			//IsAimなら
+			if (useWeapon->IsAim()) {
+				animator->ChangePlayerAnimation(PlayerAnimationState::State::GSDead);
+			}
+			else {
+				animator->ChangePlayerAnimation(PlayerAnimationState::State::Dead);
+			}
 		}
 
 		if (auto velocityManager = GetGameObject()->GetComponent<VelocityManager>(false)) {
