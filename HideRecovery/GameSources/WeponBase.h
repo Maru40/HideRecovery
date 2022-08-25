@@ -20,6 +20,7 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 	struct WeponBase_Parametor {
 		float weight;				//重さ
+		float shotIntervalTime;		//連射速度
 		Vec3 bulletInstanceOffset;	//バレットを生成する位置のオフセット
 
 		WeponBase_Parametor();
@@ -87,6 +88,10 @@ namespace basecross {
 		/// </summary>
 		/// <returns>重さ</returns>
 		float GetWeight() const noexcept { return m_param.weight; }
+
+		void SetShotIntervalTime(const float time) { m_param.shotIntervalTime = time; }
+
+		float GetShotIntervalTime() const noexcept { return m_param.shotIntervalTime; }
 
 		/// <summary>
 		/// バレットを生成する位置のオフセットの設定
