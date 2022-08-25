@@ -55,6 +55,11 @@
 #include "Watanabe/DebugClass/Debug.h"
 #include "Watanabe/Effekseer/EfkEffect.h"
 
+#include "Itabashi/OnlineTestRoom.h"
+#include "Itabashi/OnlinePlayerManager.h"
+#include "GameManagerObject.h"
+#include "Itabashi/GamePlayerManager.h"
+
 using namespace basecross::Enemy;
 
 namespace basecross {
@@ -86,7 +91,12 @@ namespace basecross {
 
 			auto cameraObj = Instantiate<CameraObject>();
 
-			GameStageBase::OnCreate();
+			EventSystem::GetInstance(GetThis<Stage>())->SetBasicInputer(PlayerInputer::GetInstance());
+			AddGameObject<GameManagerObject>();
+
+			auto onlineRoom = AddGameObject<Online::OnlineTestRoom>();
+			auto tester = onlineRoom->GetComponent<Online::OnlineTester>();
+			onlineRoom->AddComponent<GamePlayerManager>();
 
 			//ステージの設定
 			auto scene = App::GetApp()->GetScene<Scene>();
@@ -99,6 +109,8 @@ namespace basecross {
 
 			//Mapの読み込み
 			CreateMap(sm_loadMapName);
+			// UIレイアウトの読み込み
+			CreateUI(L"GameUILayout.csv");
 
 			m_gameStartUI = AddGameObject<GameStartUI>();
 			m_gameFinishUI = AddGameObject<GameFinishUI>();

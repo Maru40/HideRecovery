@@ -1,12 +1,12 @@
-#pragma once
+﻿#pragma once
 #include "stdafx.h"
 #include "GameStageBase.h"
 
 namespace basecross {
-	class TitleStage :public GameStageBase {
+	class ResultStage :public GameStageBase {
 		void CreateViewLight();
 	public:
-		TitleStage() :GameStageBase() {}
+		ResultStage() :GameStageBase() {}
 
 		void OnCreate()override;
 		void OnUpdate()override;

@@ -41,11 +41,7 @@
 #include "HidePlace.h"
 #include "HideItemObject.h"
 
-#include "Watanabe/StageObject/Block.h"
-#include "Watanabe/StageObject/RackObject.h"
-#include "Watanabe/StageObject/PlayerSpawnPointObject.h"
-#include "Watanabe/StageObject/OwnAreaObject.h"
-#include "Watanabe/StageObject/Container.h"
+#include "Watanabe/StageObject/StageObjects.h"
 #include "Watanabe/UI/UIObjects.h"
 
 #include "Itabashi/OnlineTestRoom.h"
@@ -101,17 +97,21 @@ namespace basecross {
 		auto path = dir + L"MapDatas/";
 		builder.Build(GetThis<Stage>(), path + fileName);
 
+		//フィールドの影響マップの生成
+		//AddGameObject<GameObject>()->AddComponent<maru::FieldImpactMap>(maru::Utility::ConvertArrayType<GameObject>(m_floors));
+		//外側コリジョン設定
+		//CreateMapOutCollisions(m_floors);
+	}
+
+	void GameStageBase::CreateUI(const wstring& fileName) {
 		UIObjectCSVBuilder uiBuilder;
 		uiBuilder.Register<TimerUI>(L"TimerUI");
 		uiBuilder.Register<HPGaugeUI>(L"HPGaugeUI");
 		uiBuilder.Register<PointUI>(L"PointUI");
 		uiBuilder.Register<SimpleSprite>(L"SimpleSprite");
-		uiBuilder.Build(GetThis<Stage>(), path + L"GameUILayout.csv");
-
-		//フィールドの影響マップの生成
-		//AddGameObject<GameObject>()->AddComponent<maru::FieldImpactMap>(maru::Utility::ConvertArrayType<GameObject>(m_floors));
-		//外側コリジョン設定
-		//CreateMapOutCollisions(m_floors);
+		auto dir = App::GetApp()->GetDataDirWString();
+		auto path = dir + L"MapDatas/";
+		uiBuilder.Build(GetThis<Stage>(), path + fileName);
 	}
 
 	void GameStageBase::CreateMapOutCollision(const Vec3& startPosition, const Vec3& forward, const float& length, const float& width, const float& height) {
@@ -143,15 +143,6 @@ namespace basecross {
 
 	void GameStageBase::OnCreate() {
 		try {
-			EventSystem::GetInstance(GetThis<Stage>())->SetBasicInputer(PlayerInputer::GetInstance());
-			AddGameObject<GameManagerObject>();
-
-			auto onlineRoom = AddGameObject<Online::OnlineTestRoom>();
-			auto tester = onlineRoom->GetComponent<Online::OnlineTester>();
-
-			onlineRoom->AddComponent<GamePlayerManager>();
-
-			Online::OnlineManager::Connect();
 		}
 		catch (...) {
 			throw;

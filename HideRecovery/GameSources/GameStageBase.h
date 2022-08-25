@@ -62,6 +62,12 @@ namespace basecross {
 		virtual void CreateMap(const wstring& fileName);
 
 		/// <summary>
+		/// UIの生成
+		/// </summary>
+		/// <param name="fileName">UIレイアウトファイルの名前</param>
+		virtual void CreateUI(const wstring& fileName);
+
+		/// <summary>
 		/// 外側のコリジョンを複数生成する関数
 		/// </summary>
 		/// <param name="objects">生成するベースとなる床オブジェクト</param>

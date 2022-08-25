@@ -8,10 +8,11 @@
 
 #include "MainStage.h"
 #include "LoadStage.h"
-//#include "ResultStage.h"
-//#include "TitleStage.h"
+#include "Watanabe/Stage/ResultStage.h"
+#include "TitleStage.h"
 //#include "StageSelect.h"
 #include "Watanabe/TestStage/WatanabeStage.h"
+#include "Watanabe/TestStage/MatchingUILayoutStage.h"
 #include "Itabashi/OnlineMatchStage.h"
 
 class LoadStage;
@@ -65,20 +66,20 @@ namespace basecross {
 			//ResetActiveStage<GameStage>();
 		}
 		else if (event->m_MsgStr == L"ToLoadStage") {
-			ResetActiveStage<LoadStage>(L"ToMatchingStage");
+			ResetActiveStage<LoadStage>(L"ToTitleStage");
 		}
 		else if (event->m_MsgStr == L"ToMainStage") {
 			ResetActiveStage<MainStage>();
 		}
 		else if (event->m_MsgStr == L"ToWatanabeStage") {
-			ResetActiveStage<WatanabeStage>();
+			ResetActiveStage<MatchingUILayoutStage>();
 		}
-		//else if (event->m_MsgStr == L"ToResultStage") {
-		//	ResetActiveStage<ResultStage>();
-		//}
-		//else if (event->m_MsgStr == L"ToTitleStage") {
-		//	ResetActiveStage<TitleStage>();
-		//}
+		else if (event->m_MsgStr == L"ToResultStage") {
+			ResetActiveStage<ResultStage>();
+		}
+		else if (event->m_MsgStr == L"ToTitleStage") {
+			ResetActiveStage<TitleStage>();
+		}
 		//else if (event->m_MsgStr == L"ToStageSelect") {
 		//	ResetActiveStage<StageSelect>();
 		//}
