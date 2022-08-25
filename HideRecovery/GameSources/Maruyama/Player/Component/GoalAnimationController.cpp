@@ -24,6 +24,11 @@
 
 #include "VelocityManager.h"
 #include "RotationController.h"
+#include "Watanabe/Component/BallAnimator.h"
+
+#include "HideItemObject.h"
+#include "PlayerInputer.h"
+#include "Maruyama/StageObject/Goal.h"
 
 namespace basecross {
 
@@ -34,12 +39,13 @@ namespace basecross {
 	GoalAnimationController_Parametor::GoalAnimationController_Parametor() :
 		startPosition(Vec3(0)),
 		dunkPosition(Vec3(0)),
+		dunkBallPosition(Vec3(0)),
 		jumpDegree(30.0f),
 		dunkMoveSpeed(3.0f),
 
 		preliminaryJumpParam(std::make_shared<Task::Wait::Parametor>(0.0f)),
 		dunkMoveParam(std::make_shared<Task::ToTargetMove::Parametor>(3.0f, 0.1f, Task::ToTargetMove_MoveType::Lerp)),
-		dunkAfterWaitParam(std::make_shared<Task::Wait::Parametor>(0.5f)),
+		dunkAfterWaitParam(std::make_shared<Task::Wait::Parametor>(0.65f)),
 		returnJumpParam(std::make_shared<Task::ReturnJump_Parametor>()),
 		endWaitParam(std::make_shared<Task::Wait::Parametor>(0.5f))
 	{}
@@ -70,6 +76,30 @@ namespace basecross {
 			[&]() { return UpdateAnimationEvent(); },
 			[&]() { ExitAnimationEvent(); }
 		);
+
+		auto timeEvent = [&]() {
+			if (!m_ball.lock()) {
+				return;
+			}
+
+			m_ball.lock()->SetParent(nullptr);
+			m_ball.lock()->GetComponent<Transform>()->SetPosition(GetDunkBallPosition());
+
+			if (auto goal = m_goal.lock()) {
+				goal->PlayFireEffects();
+			}
+		};
+		animator->AddTimeEvent(
+			PlayerAnimationState::State::Goal1,
+			0.9f,
+			timeEvent
+		);
+	}
+
+	void GoalAnimationController::OnUpdate() {
+		if (PlayerInputer::GetInstance()->IsRightDown()) {
+			GetGameObject()->GetComponent<PlayerAnimator>()->ChangePlayerAnimation(PlayerAnimationState::State::Goal1);
+		}
 	}
 
 	void GoalAnimationController::StartAnimationEvent() {
@@ -80,15 +110,15 @@ namespace basecross {
 
 		m_param.returnJumpParam->returnDirect = transform->GetPosition() - m_param.dunkPosition;
 
-		if (auto gravity = GetGameObject()->GetComponent<Gravity>(false)) {	//重力の解除
+		if (auto gravity = GetGameObject()->GetComponent<Gravity>(false)) {							//重力の解除
 			gravity->SetUpdateActive(false);
 		}
 
-		if (auto velocityManager = GetGameObject()->GetComponent<VelocityManager>(false)) {	//速度停止
+		if (auto velocityManager = GetGameObject()->GetComponent<VelocityManager>(false)) {			//速度停止
 			velocityManager->ResetAll();
 		}
 
-		if (auto rotationController = GetGameObject()->GetComponent<RotationController>(false)) {
+		if (auto rotationController = GetGameObject()->GetComponent<RotationController>(false)) {	//回転コントローラー
 			rotationController->SetDirect(m_param.dunkPosition - transform->GetPosition());
 		}
 
@@ -112,7 +142,14 @@ namespace basecross {
 
 		//ジャンプの溜め
 		m_param.preliminaryJumpParam->start = [&]() { //開始時イベント
+			const auto Offset = Vec3(0.0f, 0.25f, 0.0f);
+			auto hideItem = GetStage()->Instantiate<HideItemObject>(Offset, Quat::Identity(), GetGameObject());
+			m_ball = hideItem;
 
+			auto animator = hideItem->GetComponent<BallAnimator>(false);
+			if (animator) {
+				animator->ChangeBallAnimation(BallAnimationState::State::Goal);
+			}
 		};	
 		m_taskList->DefineTask(TaskEnum::PreliminaryJump, std::make_shared<Task::Wait>(m_param.preliminaryJumpParam));
 
@@ -121,10 +158,12 @@ namespace basecross {
 		m_taskList->DefineTask(TaskEnum::DunkMove, std::make_shared<Task::ToTargetMove>(object, m_param.dunkMoveParam));
 
 		//ダンク後の待機
+		m_param.dunkAfterWaitParam->start = [&]() {
+
+		};
+
 		m_param.dunkAfterWaitParam->exit = [&]() {
-			if (auto gravity = GetGameObject()->GetComponent<Gravity>(false)) {	//重力の解除
-				//gravity->SetUpdateActive(true);
-			}
+			
 		};
 		m_taskList->DefineTask(TaskEnum::DunkWait, std::make_shared<Task::Wait>(m_param.dunkAfterWaitParam));
 
@@ -135,6 +174,11 @@ namespace basecross {
 		m_param.endWaitParam->exit = [&]() {
 			if (auto animator = GetGameObject()->GetComponent<PlayerAnimator>(false)) {
 				animator->ChangePlayerAnimation(PlayerAnimationState::State::Wait);
+			}
+
+			auto ball = m_ball.lock();
+			if (ball) {
+				GetStage()->RemoveGameObject<GameObject>(ball);
 			}
 		};
 		m_taskList->DefineTask(TaskEnum::EndWait, std::make_shared<Task::Wait>(m_param.endWaitParam));
