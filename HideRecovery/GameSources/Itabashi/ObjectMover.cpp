@@ -1,6 +1,7 @@
 ﻿#include "stdafx.h"
 #include "ObjectMover.h"
 #include "VelocityManager.h"
+#include "Maruyama/Player/Component/UseWepon.h"
 
 #include "MaruUtility.h"
 
@@ -17,8 +18,13 @@ namespace Operator
 		m_velocityManager = GetGameObject()->GetComponent<VelocityManager>();
 	}
 
+	void ObjectMover::OnLateStart() {
+		m_useWepon = GetGameObject()->GetComponent<UseWepon>(false);
+	}
+
 	Vec3 ObjectMover::NormalMove(const Vec2& moveDirection) {
 		auto velocityManager = m_velocityManager.lock();
+		auto useWeapon = m_useWepon.lock();
 
 		if (moveDirection.lengthSqr() == 0)
 		{
@@ -49,8 +55,12 @@ namespace Operator
 
 		auto moveForward = m_defaultForward * inputVector.z;
 		auto moveRight = right * inputVector.x;
+		auto moveSpeed = m_moveSpeed;
+		if (useWeapon && useWeapon->IsAim()) {
+			moveSpeed += -useWeapon->GetWeaponWeight();
+		}
 
-		Vec3 moveVector = (moveForward + moveRight) * App::GetApp()->GetElapsedTime() * m_moveSpeed;
+		Vec3 moveVector = (moveForward + moveRight) * App::GetApp()->GetElapsedTime() * moveSpeed;
 
 		if (velocityManager)
 		{
