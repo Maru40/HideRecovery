@@ -273,6 +273,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\OwnAreaObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\PlayerSpawnPointObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\RackObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\StageObjects.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\MatchingUILayoutStage.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\WatanabeStage.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\CountDownUI.h" />
