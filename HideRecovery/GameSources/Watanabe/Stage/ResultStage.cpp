@@ -12,7 +12,7 @@
 namespace basecross {
 	void ResultStage::CreateViewLight() {
 		const Vec3 eye(0.0f, 3.0f, 20.0f);
-		const Vec3 at(1.0f);
+		const Vec3 at(0.0f);
 		auto PtrView = CreateView<SingleView>();
 		//ビューのカメラの設定
 		auto PtrCamera = ObjectFactory::Create<Camera>();
