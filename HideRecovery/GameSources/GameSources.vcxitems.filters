@@ -961,6 +961,9 @@
     <Filter Include="Watanabe\UI\TimerUI">
       <UniqueIdentifier>{7b628202-a57b-4ecb-8b92-a93a9f37c368}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Itabashi\Component\OnlineGameTimer">
+      <UniqueIdentifier>{9ac3a7f7-8918-46a4-a557-9b165484fd6f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1779,6 +1782,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\TimerUI.h">
       <Filter>Watanabe\UI\TimerUI</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineGameTimer.h">
+      <Filter>Itabashi\Component\OnlineGameTimer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2509,6 +2515,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\TimerUI.cpp">
       <Filter>Watanabe\UI\TimerUI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineGameTimer.cpp">
+      <Filter>Itabashi\Component\OnlineGameTimer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
