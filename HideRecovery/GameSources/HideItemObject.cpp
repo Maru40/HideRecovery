@@ -50,11 +50,11 @@ namespace basecross {
 	void HideItemObject::OnUpdate() {
 		//デバッグ-----------------------------------------------------------------
 
-		auto animator = GetComponent<BallAnimator>(false);
+		//auto animator = GetComponent<BallAnimator>(false);
 
-		if (PlayerInputer::GetInstance()->IsLeftDown()) {
-			animator->ChangeBallAnimation(BallAnimationState::State::Goal);
-		}
+		//if (PlayerInputer::GetInstance()->IsLeftDown()) {
+		//	animator->ChangeBallAnimation(BallAnimationState::State::Goal);
+		//}
 
 		//-------------------------------------------------------------------------
 	}
