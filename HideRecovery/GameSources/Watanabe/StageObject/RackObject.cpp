@@ -8,6 +8,8 @@
 #include "HidePlace.h"
 #include "../Utility/DataExtracter.h"
 
+#include "Watanabe/Component/BoxAnimator.h"
+
 namespace basecross {
 	RackObject::RackObject(const shared_ptr<Stage>& stage)
 		:StageObjectBase(stage, L"RackObject")
@@ -31,6 +33,8 @@ namespace basecross {
 		drawComp->SetMultiMeshResource(L"Box_Model");
 		drawComp->SetOwnShadowActive(true);
 
+		auto animator = AddComponent<BoxAnimator>();
+		 
 		// 隠せるオブジェクトにする
 		AddComponent<HidePlace>(HidePlace::Parametor(Vec3(0.0f, 0.15f, 0.0f)));
 
@@ -39,5 +43,9 @@ namespace basecross {
 
 		auto shadow = AddComponent<Shadowmap>();
 		//shadow->SetMeshResource(L"Box_Model");
+	}
+
+	void RackObject::OnUpdate() {
+
 	}
 }
