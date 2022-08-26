@@ -54,11 +54,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageRoomer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageTransitioner.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\ObjectHider.h" />
-
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineGameTimer.h" />
-
     <ClInclude Include="$(MSBuildThisFileDirectory)MapCursor.h" />
-
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Bullet\Object\BulletObjectBase.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Interface\I_TaskLister.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Interface\I_TeamMember.h" />
