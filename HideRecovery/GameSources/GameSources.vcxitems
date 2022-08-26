@@ -54,11 +54,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageRoomer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageTransitioner.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\ObjectHider.h" />
-
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineGameTimer.h" />
-
     <ClInclude Include="$(MSBuildThisFileDirectory)MapCursor.h" />
-
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Bullet\Object\BulletObjectBase.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Interface\I_TaskLister.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Interface\I_TeamMember.h" />
@@ -301,6 +298,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\SimpleSprite.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\SplashMessageUI.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\TimerUI.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\TransitionSpriteUI.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\UIObjectBase.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\UIObjectCSVBuilder.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\UIObjects.h" />
@@ -572,6 +570,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\SimpleSprite.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\SplashMessageUI.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\TimerUI.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\TransitionSpriteUI.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\UIObjectBase.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\UIObjectCSVBuilder.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\WinOrLoseUI.cpp" />
