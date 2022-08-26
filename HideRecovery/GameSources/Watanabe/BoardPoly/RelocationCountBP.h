@@ -4,6 +4,7 @@
 
 namespace basecross {
 	class RelocationCountBP :public StageObjectBase {
+		weak_ptr<PCTStaticDraw> m_drawComp;
 	public:
 		RelocationCountBP(const shared_ptr<Stage>& stage);
 
