@@ -14,6 +14,8 @@ namespace basecross {
 			Relocation,	// ボールが再配置された
 			GetBall,	// ボールを入手した
 			StolenBall,	// ボールを奪われた
+			CreateRoom,	// 部屋を作成した
+			JoinRoom,	// 部屋に参加した
 		};
 	private:
 		struct MessageData {

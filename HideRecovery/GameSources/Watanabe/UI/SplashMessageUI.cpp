@@ -9,6 +9,8 @@ namespace basecross {
 		{MessageType::Relocation,MessageData(SimpleSprite::Type::SpriteData,L"Relocation")},
 		{MessageType::GetBall,MessageData(SimpleSprite::Type::SpriteData,L"GetBall")},
 		{MessageType::StolenBall,MessageData(SimpleSprite::Type::SpriteData,L"StolenBall")},
+		{MessageType::CreateRoom,MessageData(SimpleSprite::Type::SpriteData,L"CreateRoom")},
+		{MessageType::JoinRoom,MessageData(SimpleSprite::Type::SpriteData,L"JoinRoom")},
 	};
 
 	SplashMessageUI::SplashMessageUI(const shared_ptr<Stage>& stage)
