@@ -97,6 +97,7 @@ namespace basecross {
 
 		AddComponent<PlayerAnimator>();
 		auto chargeGun = AddComponent<ChargeGun>();
+		auto soundEmitter = AddComponent<SoundEmitter>();
 		AddComponent<PlayerStatus>();
 		AddComponent<TackleAttack>();
 
