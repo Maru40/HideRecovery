@@ -139,6 +139,8 @@ namespace basecross {
 		if (auto velocityManager = GetGameObject()->GetComponent<VelocityManager>(false)) {
 			velocityManager->ResetAll();
 		}
+
+		//m_taskList->ForceStop();
 	}
 
 	void GoalAnimationController::DefineTask() {
