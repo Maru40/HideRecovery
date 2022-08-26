@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0"
+  xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Headers">
       <UniqueIdentifier>{4b0a624a-610d-4bc6-b311-2b02a781cdf9}</UniqueIdentifier>
@@ -1000,7 +1001,6 @@
     <Filter Include="Maruyama\Player\Component\BuffController">
       <UniqueIdentifier>{31d97b9a-9871-41a9-a792-1acbccd1f260}</UniqueIdentifier>
     </Filter>
-
     <Filter Include="Itabashi\Component\OnlineGameTimer">
       <UniqueIdentifier>{9ac3a7f7-8918-46a4-a557-9b165484fd6f}</UniqueIdentifier>
     </Filter>
@@ -1027,7 +1027,9 @@
     </Filter>
     <Filter Include="Maruyama\Player\Component\UseOwnArea\Map\Cursor">
       <UniqueIdentifier>{ea4d839c-cc7b-461e-a10a-3ac44dff4aa2}</UniqueIdentifier>
-
+    </Filter>
+    <Filter Include="Watanabe\Component\MatchingUIController">
+      <UniqueIdentifier>{1a9e3d56-cc44-4a7c-82be-bad3043ebbd8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1895,7 +1897,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\BuffController.h">
       <Filter>Maruyama\Player\Component\BuffController</Filter>
     </ClInclude>
-
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineGameTimer.h">
       <Filter>Itabashi\Component\OnlineGameTimer</Filter>
     </ClInclude>
@@ -1919,7 +1920,9 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)MapCursor.h">
       <Filter>Maruyama\Player\Component\UseOwnArea\Map\Cursor</Filter>
-
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\MatchingUIController.h">
+      <Filter>Watanabe\Component\MatchingUIController</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2691,7 +2694,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\BuffController.cpp">
       <Filter>Maruyama\Player\Component\BuffController</Filter>
     </ClCompile>
-
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineGameTimer.cpp">
       <Filter>Itabashi\Component\OnlineGameTimer</Filter>
     </ClCompile>
@@ -2710,6 +2712,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\FieldMap.cpp">
       <Filter>Maruyama\Player\Component\UseOwnArea\Map</Filter>
 
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\MatchingUIController.cpp">
+      <Filter>Watanabe\Component\MatchingUIController</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

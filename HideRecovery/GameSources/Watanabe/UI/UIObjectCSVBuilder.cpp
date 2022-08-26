@@ -6,6 +6,10 @@ namespace basecross {
 	UIObjectCSVBuilder::UIObjectCSVBuilder() {}
 	UIObjectCSVBuilder::~UIObjectCSVBuilder() {}
 
+	shared_ptr<UIObjectCSVBuilder> UIObjectCSVBuilder::Create() {
+		return shared_ptr<UIObjectCSVBuilder>(new UIObjectCSVBuilder());
+	}
+
 	shared_ptr<UIObjectBase> UIObjectCSVBuilder::CreateFromCSV(const wstring& name, const shared_ptr<Stage>& stage, const wstring& line) {
 		auto it = m_creatorMap.find(name);
 		if (it == m_creatorMap.end()) {

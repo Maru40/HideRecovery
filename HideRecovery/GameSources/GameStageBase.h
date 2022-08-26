@@ -16,6 +16,7 @@ namespace basecross {
 	class StartCamera;
 	class StageObjectBase;
 	class SlimeRenderTarget;
+	class UIObjectCSVBuilder;
 
 	class GameStageBase : public Stage {
 	protected:
@@ -65,7 +66,8 @@ namespace basecross {
 		/// UIの生成
 		/// </summary>
 		/// <param name="fileName">UIレイアウトファイルの名前</param>
-		virtual void CreateUI(const wstring& fileName);
+		/// <returns>ビルダー</returns>
+		virtual std::shared_ptr<UIObjectCSVBuilder> CreateUI(const wstring& fileName);
 
 		/// <summary>
 		/// 外側のコリジョンを複数生成する関数

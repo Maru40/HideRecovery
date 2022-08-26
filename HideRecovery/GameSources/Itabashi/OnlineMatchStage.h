@@ -1,9 +1,10 @@
 ﻿#pragma once
 #include "stdafx.h"
+#include "GameStageBase.h"
 
 namespace basecross
 {
-	class OnlineMatchStage : public Stage
+	class OnlineMatchStage : public GameStageBase
 	{
 	public:
 		void OnCreate() override;
