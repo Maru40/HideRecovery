@@ -11,6 +11,11 @@
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
+	/// 前方宣言
+	//--------------------------------------------------------------------------------------
+	class FieldMap;
+
+	//--------------------------------------------------------------------------------------
 	/// テレポート機能のパラメータ
 	//--------------------------------------------------------------------------------------
 
@@ -30,6 +35,8 @@ namespace basecross {
 	private:
 		Parametor m_param;		//パラメータ
 
+		std::weak_ptr<FieldMap> m_fieldMap;	//マップ
+
 	public:
 		Teleport(const std::shared_ptr<GameObject>& objPtr);
 
@@ -37,7 +44,8 @@ namespace basecross {
 		void OnUpdate() override;
 
 	private:
-
+		void SettingFieldMap();
+		void SettingAnimationEvent();
 
 	public:
 		/// <summary>
@@ -65,6 +73,8 @@ namespace basecross {
 		/// </summary>
 		/// <returns>テレポート位置</returns>
 		Vec3 GetTeleportPosition() const noexcept { return m_param.position; }
+
+		std::shared_ptr<FieldMap> GetFieldMap() const;
 	};
 
 }
