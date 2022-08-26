@@ -39,11 +39,13 @@ namespace basecross
 		ResourceLoadData(L"TitleLogo_TX",L"TitleLogo_TX.png"),
 		ResourceLoadData(L"WinOrLose_TX",L"WinOrLose_TX.png"),
 
+		ResourceLoadData(L"FiledMap_TX", L"FiledMap_TX.png"),
+
 		//ResourceLoadData(L"gauge", L"Gauge.png"),
 		//ResourceLoadData(L"clear", L"StageClear.png"),
 		//ResourceLoadData(L"Circle_TX", L"Circle.png"),
 		//ResourceLoadData(L"Rock_TX", L"RockTX.png"),
-		//ResourceLoadData(L"Point_TX", L"Point.png"),
+		ResourceLoadData(L"Point_TX", L"Point.png"),
 		//ResourceLoadData(L"Segment_TX", L"Segment.png"),
 
 		//Effect
@@ -128,7 +130,7 @@ namespace basecross
 		ModelResourceLoadData(L"Player_Mesh_Red",  L"Black.bmf", ModelType::BoneMulti,  L"Player\\"),
 
 		ModelResourceLoadData(L"Ball_Model",  L"Ball.bmf", ModelType::BoneMulti,  L"Ball\\"),
-		ModelResourceLoadData(L"Box_Model", L"Box.bmf", ModelType::StaticMulti, L"Box\\"),
+		ModelResourceLoadData(L"Box_Model", L"Box.bmf", ModelType::BoneMulti, L"Box\\"),
 
 		//ModelResourceLoadData(L"Player_Idle",  L"Player_Animation_Idol.bmf", ModelType::BoneMulti,  L"Player\\"),
 		//ModelResourceLoadData(L"Player_WalkStart",  L"Player_Animation_Walk_Start.bmf", ModelType::BoneMulti,  L"Player\\"),
