@@ -1000,7 +1000,9 @@
 	</Filter>
     <Filter Include="Maruyama\Player\Component\BuffController">
       <UniqueIdentifier>{31d97b9a-9871-41a9-a792-1acbccd1f260}</UniqueIdentifier>
-
+	</Filter>
+    <Filter Include="Itabashi\Component\OnlineGameTimer">
+      <UniqueIdentifier>{9ac3a7f7-8918-46a4-a557-9b165484fd6f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1869,6 +1871,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\BuffController.h">
       <Filter>Maruyama\Player\Component\BuffController</Filter>
 
+	</ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineGameTimer.h">
+      <Filter>Itabashi\Component\OnlineGameTimer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2642,6 +2647,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\BuffController.cpp">
       <Filter>Maruyama\Player\Component\BuffController</Filter>
 
+	</ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineGameTimer.cpp">
+      <Filter>Itabashi\Component\OnlineGameTimer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

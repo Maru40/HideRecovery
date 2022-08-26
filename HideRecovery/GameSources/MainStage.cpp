@@ -1,6 +1,6 @@
-/*!
+ï»¿/*!
 @file MainStage.cpp
-@brief MainStageÀ‘Ì
+@brief MainStageå®Ÿä½“
 */
 
 #include "stdafx.h"
@@ -59,6 +59,8 @@
 #include "Itabashi/OnlinePlayerManager.h"
 #include "GameManagerObject.h"
 #include "Itabashi/GamePlayerManager.h"
+#include "Itabashi/OnlineGameTimer.h"
+#include "Watanabe/UI/GameStartUI.h"
 
 using namespace basecross::Enemy;
 
@@ -70,12 +72,12 @@ namespace basecross {
 	void MainStage::CreateViewLight() {
 		CreateStartCamera(sm_loadMapName);
 		CreateMainCamera();
-		//ƒ}ƒ‹ƒ`ƒ‰ƒCƒg‚Ìì¬
+		//ãƒãƒ«ãƒãƒ©ã‚¤ãƒˆã®ä½œæˆ
 		auto PtrMultiLight = CreateLight<MultiLight>();
-		//ƒfƒtƒHƒ‹ƒg‚Ìƒ‰ƒCƒeƒBƒ“ƒO‚ğw’è
+		//ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®ãƒ©ã‚¤ãƒ†ã‚£ãƒ³ã‚°ã‚’æŒ‡å®š
 		PtrMultiLight->SetDefaultLighting();
 
-		ChangeMainCamera(); //‰ŠúƒJƒƒ‰‚Ìİ’è
+		ChangeMainCamera(); //åˆæœŸã‚«ãƒ¡ãƒ©ã®è¨­å®š
 	}
 
 	void MainStage::OnCreate() {
@@ -83,10 +85,10 @@ namespace basecross {
 			AddGameObject<EfkInterface>();
 			AddGameObject<Debug>();
 			Debug::GetInstance()->Log(L"MainStage");
-			// ƒXƒJƒCƒ{ƒbƒNƒX
+			// ã‚¹ã‚«ã‚¤ãƒœãƒƒã‚¯ã‚¹
 			//AddGameObject<Skybox2>();
 
-			//ƒrƒ…[‚Æƒ‰ƒCƒg‚Ìì¬
+			//ãƒ“ãƒ¥ãƒ¼ã¨ãƒ©ã‚¤ãƒˆã®ä½œæˆ
 			CreateViewLight();
 
 			auto cameraObj = Instantiate<CameraObject>();
@@ -96,35 +98,40 @@ namespace basecross {
 
 			auto onlineRoom = AddGameObject<Online::OnlineTestRoom>();
 			auto tester = onlineRoom->GetComponent<Online::OnlineTester>();
+			auto onlineGameTimer = onlineRoom->AddComponent<OnlineGameTimer>();
 			onlineRoom->AddComponent<GamePlayerManager>();
 
-			//ƒXƒe[ƒW‚Ìİ’è
+			auto gameStartUI = AddGameObject<GameStartUI>();
+			std::weak_ptr<GameStartUI> weakgameStartUI = gameStartUI;
+			onlineGameTimer->AddGameStartCountFuncs([weakgameStartUI]() {weakgameStartUI.lock()->Start(); });
+
+			//ã‚¹ãƒ†ãƒ¼ã‚¸ã®è¨­å®š
 			auto scene = App::GetApp()->GetScene<Scene>();
 			scene->SetStageName(sm_loadMapName);
 
-			// BGM‚ÌÄ¶
+			// BGMã®å†ç”Ÿ
 
-			//Generator‚Ì¶¬
+			//Generatorã®ç”Ÿæˆ
 			//AddGameObject<EnemyGeneratorObject>();
 
-			//Map‚Ì“Ç‚İ‚İ
+			//Mapã®èª­ã¿è¾¼ã¿
 			CreateMap(sm_loadMapName);
-			// UIƒŒƒCƒAƒEƒg‚Ì“Ç‚İ‚İ
+			// UIãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã®èª­ã¿è¾¼ã¿
 			CreateUI(L"GameUILayout.csv");
 
 			m_gameStartUI = AddGameObject<GameStartUI>();
 			m_gameFinishUI = AddGameObject<GameFinishUI>();
-			//‰B‚·ƒAƒCƒeƒ€‚Ìİ’è
+			//éš ã™ã‚¢ã‚¤ãƒ†ãƒ ã®è¨­å®š
 			//Instantiate<HideItemObject>(Vec3(0.0f, 0.0f, 0.0f), Quat::Identity());
 
-			//ƒfƒoƒbƒO
+			//ãƒ‡ãƒãƒƒã‚°
 			//AddGameObject<DebugObject>();
 
-			Debug::GetInstance()->Log(L"“ü—Í------------------------------");
-			Debug::GetInstance()->Log(L"X  : ’u‚­");
-			Debug::GetInstance()->Log(L"A  : E‚¤");
-			Debug::GetInstance()->Log(L"B  : ƒuƒ‰ƒt");
-			Debug::GetInstance()->Log(L"« : ’u‚­êŠ§ŒÀØ‚è‘Ö‚¦");
+			Debug::GetInstance()->Log(L"å…¥åŠ›------------------------------");
+			Debug::GetInstance()->Log(L"X  : ç½®ã");
+			Debug::GetInstance()->Log(L"A  : æ‹¾ã†");
+			Debug::GetInstance()->Log(L"B  : ãƒ–ãƒ©ãƒ•");
+			Debug::GetInstance()->Log(L"â†“ : ç½®ãå ´æ‰€åˆ¶é™åˆ‡ã‚Šæ›¿ãˆ");
 			Debug::GetInstance()->Log(L"----------------------------------");
 		}
 		catch (...) {
@@ -133,7 +140,7 @@ namespace basecross {
 	}
 
 	void MainStage::OnUpdate() {
-		// ƒfƒoƒbƒO—p
+		// ãƒ‡ãƒãƒƒã‚°ç”¨
 		const auto& keyBoard = App::GetApp()->GetMyInputDevice()->GetKeyBoard();
 		if (keyBoard.IsInputDown(KeyCode::Alpha1)) {
 			m_gameStartUI->Start();
