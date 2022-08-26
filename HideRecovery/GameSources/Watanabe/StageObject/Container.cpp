@@ -26,7 +26,7 @@ namespace basecross {
 		transComp->SetPosition(transform->GetPosition() + Vec3(0, 2, 0));
 		transComp->SetQuaternion(transform->GetQuaternion());
 		transComp->SetScale(Vec3(4, 4, 8.5));
-		m_hitTestObject->SetParent(GetThis<Container>());
+
 		auto collision = m_hitTestObject->AddComponent<CollisionObb>();
 		collision->SetFixed(true);
 		m_hitTestObject->AddTag(L"T_Obstacle");
