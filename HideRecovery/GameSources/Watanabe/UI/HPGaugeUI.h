@@ -14,5 +14,7 @@ namespace basecross {
 
 		void OnCreate()override;
 		void OnUpdate()override;
+
+		void SetPlayerStatus(const shared_ptr<PlayerStatus> status);
 	};
 }

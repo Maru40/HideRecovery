@@ -9,7 +9,7 @@ namespace basecross {
 		weak_ptr<PlayerStatus> m_status;
 		weak_ptr<PCTGaugeDraw> m_drawComp;
 	public:
-		HPGaugeBP(const shared_ptr<Stage>& stage);
+		HPGaugeBP(const shared_ptr<Stage>& stage, const shared_ptr<PlayerStatus>& status);
 
 		void OnCreate()override;
 		void OnUpdate()override;

@@ -1,11 +1,12 @@
 ﻿#include "stdafx.h"
 #include "HPGaugeBP.h"
 #include "BillBoard.h"
+#include "../Component/SyncObject.h"
 #include "../Utility/Utility.h"
 
 namespace basecross {
-	HPGaugeBP::HPGaugeBP(const shared_ptr<Stage>& stage)
-		:StageObjectBase(stage, L"HPGaugeBP")
+	HPGaugeBP::HPGaugeBP(const shared_ptr<Stage>& stage, const shared_ptr<PlayerStatus>& status)
+		: StageObjectBase(stage, L"HPGaugeBP"), m_status(status)
 	{}
 
 	void HPGaugeBP::OnCreate() {
@@ -46,9 +47,15 @@ namespace basecross {
 		billBoard->SetRotationOffset(
 			Utility::ConvertDegVecToRadVec(Vec3(0, 0, 180)));
 
-		SetAlphaActive(true);
+		auto targetTrans = m_status.lock()->GetGameObject()->GetComponent<Transform>();
+		auto syncComp = AddComponent<SyncObject>();
+		syncComp->SetTarget(targetTrans);
+		syncComp->SetOffsetPosition(Vec3(0, 1.5f, 0));
+
+		//SetAlphaActive(true);
 	}
 	void HPGaugeBP::OnUpdate() {
-		m_drawComp.lock()->SetRate(0.5);
+		auto status = m_status.lock()->GetStatus();
+		m_drawComp.lock()->SetRate(status.hp / (float)status.maxHp);
 	}
 }

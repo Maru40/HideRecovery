@@ -1033,6 +1033,9 @@
     <Filter Include="Watanabe\UI\TransitionSpriteUI">
       <UniqueIdentifier>{c9888073-38be-48d0-ac3f-075846839be5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\Component\SyncObject">
+      <UniqueIdentifier>{abc29dd6-3683-4c6d-8126-a64bc63069f7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1929,6 +1932,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\TransitionSpriteUI.h">
       <Filter>Watanabe\UI\TransitionSpriteUI</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\SyncObject.h">
+      <Filter>Watanabe\Component\SyncObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2722,6 +2728,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\TransitionSpriteUI.cpp">
       <Filter>Watanabe\UI\TransitionSpriteUI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\SyncObject.cpp">
+      <Filter>Watanabe\Component\SyncObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

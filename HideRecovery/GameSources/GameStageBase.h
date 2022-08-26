@@ -45,6 +45,9 @@ namespace basecross {
 		//レンダーターゲット
 		std::shared_ptr<SlimeRenderTarget> m_slimeRenderTarget;		//スライム用のレンダーターゲット
 
+		// ビルダー
+		std::shared_ptr<UIObjectCSVBuilder> m_uiObjectCSVBuilder;	//UI用のオブジェクトビルダー
+
 		/// <summary>
 		/// メインカメラの生成
 		/// </summary>
@@ -163,6 +166,14 @@ namespace basecross {
 		/// <param name="obj">オブジェクト</param>
 		void AddFloorObject(std::shared_ptr<GameObject> obj) {
 			m_floors.push_back(obj);
+		}
+
+		/// <summary>
+		/// UI用のオブジェクトビルダーを取得
+		/// </summary>
+		/// <returns>オブジェクトビルダー</returns>
+		std::shared_ptr<UIObjectCSVBuilder> GetUIObjectCSVBuilder() {
+			return m_uiObjectCSVBuilder;
 		}
 	};
 }

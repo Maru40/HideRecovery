@@ -113,7 +113,7 @@ namespace basecross {
 		auto dir = App::GetApp()->GetDataDirWString();
 		auto path = dir + L"MapDatas/";
 		uiBuilder->Build(GetThis<Stage>(), path + fileName);
-
+		m_uiObjectCSVBuilder = uiBuilder;
 		return uiBuilder;
 	}
 

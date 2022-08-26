@@ -53,6 +53,14 @@ namespace basecross {
 		SetAlphaActive(true);
 	}
 	void HPGaugeUI::OnUpdate() {
-		m_drawComp.lock()->SetRate(0.4f);
+		if (m_status.use_count() == 0)
+			return;
+
+		auto status = m_status.lock()->GetStatus();
+		m_drawComp.lock()->SetRate(status.hp / (float)status.maxHp);
+	}
+
+	void HPGaugeUI::SetPlayerStatus(const shared_ptr<PlayerStatus> status) {
+		m_status = status;
 	}
 }

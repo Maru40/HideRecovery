@@ -13,6 +13,9 @@
 #include "CameraHelper.h"
 #include "LookAtCameraManager.h"
 #include "Maruyama/Player/Component/UseWepon.h"
+#include "MainStage.h"
+#include "Watanabe/UI/UIObjects.h"
+#include "Watanabe/BoardPoly/HPGaugeBP.h"
 
 namespace basecross
 {
@@ -59,6 +62,11 @@ namespace basecross
 
 		if (playerNumber != Online::OnlineManager::GetLocalPlayer().getNumber())
 		{
+			// 他プレイヤーは板ポリHPゲージをつける
+			//（位置の同期はHPGaugeBP内で設定してある）
+			auto playerStatus = playerObject->GetComponent<PlayerStatus>();
+			GetStage()->AddGameObject<HPGaugeBP>(playerStatus);
+
 			return playerObject;
 		}
 
@@ -72,6 +80,13 @@ namespace basecross
 
 		auto useWeapon = playerObject->GetComponent<UseWepon>();
 		useWeapon->SetIsUseCamera(true);
+
+		// 自身のHPゲージにステータスコンポーネントをセット
+		auto mainStage = GetGameObject()->GetTypeStage<MainStage>(false);
+		if (mainStage) {
+			auto hpGauge = mainStage->GetUIObjectCSVBuilder()->GetUIObject<HPGaugeUI>(L"HPGauge");
+			hpGauge->SetPlayerStatus(playerObject->GetComponent<PlayerStatus>());
+		}
 
 		return playerObject;
 	}

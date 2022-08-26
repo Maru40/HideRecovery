@@ -45,7 +45,6 @@ namespace basecross {
 		//drawComp->SetMultiMeshResource(L"Ball_Model");
 
 		//m_sprite = AddGameObject<SplashMessageUI>();
-		AddGameObject<HPGaugeBP>();
 		AddGameObject<NumberSprite>()->SetValue(9);
 	}
 	void MatchingUILayoutStage::OnUpdate() {
