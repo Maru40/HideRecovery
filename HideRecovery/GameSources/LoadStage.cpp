@@ -133,6 +133,8 @@ namespace basecross
 		ModelResourceLoadData(L"Ball_Model",  L"Ball.bmf", ModelType::BoneMulti,  L"Ball\\"),
 		ModelResourceLoadData(L"Box_Model", L"Box.bmf", ModelType::BoneMulti, L"Box\\"),
 
+		ModelResourceLoadData(L"SkyBox_Model", L"SkyBox.bmf", ModelType::Static, L"SkyBox\\"),
+
 		//ModelResourceLoadData(L"Player_Idle",  L"Player_Animation_Idol.bmf", ModelType::BoneMulti,  L"Player\\"),
 		//ModelResourceLoadData(L"Player_WalkStart",  L"Player_Animation_Walk_Start.bmf", ModelType::BoneMulti,  L"Player\\"),
 		//ModelResourceLoadData(L"Player_Walk",  L"Player_Animation_Walk.bmf", ModelType::BoneMulti,  L"Player\\"),

@@ -6,6 +6,7 @@
 #include "OwnAreaObject.h"
 #include "PlayerSpawnPointObject.h"
 #include "RackObject.h"
+#include "SkyBox.h"
 
 #include "HideItemObject.h"
 #include "Maruyama/StageObject/GoalObject.h"

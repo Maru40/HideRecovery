@@ -97,6 +97,8 @@ namespace basecross {
 		auto path = dir + L"MapDatas/";
 		builder.Build(GetThis<Stage>(), path + fileName);
 
+		AddGameObject<SkyBox>(Vec3(500));
+
 		//フィールドの影響マップの生成
 		//AddGameObject<GameObject>()->AddComponent<maru::FieldImpactMap>(maru::Utility::ConvertArrayType<GameObject>(m_floors));
 		//外側コリジョン設定
