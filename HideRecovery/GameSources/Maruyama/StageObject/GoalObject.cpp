@@ -1,6 +1,6 @@
-/*!
+ï»¿/*!
 @file   GoalObject.cpp
-@brief  GoalObjectÀ‘Ì
+@brief  GoalObjectå®Ÿä½“
 */
 
 #include "stdafx.h"
@@ -34,7 +34,7 @@ namespace basecross {
 		}
 		else {
 			throw BaseException(
-				L"BlockType‚ª•s³‚È’l‚Å‚·B",
+				L"BlockTypeãŒä¸æ­£ãªå€¤ã§ã™ã€‚",
 				L"BlockType : " + teamType,
 				L"Block::Block(const shared_ptr<Stage>& stage, const wstring& line)"
 			);
@@ -62,7 +62,7 @@ namespace basecross {
 			Vec3(0.0f, -0.4f, 0.0f)
 		);
 
-		auto draw = AddComponent<PNTStaticDraw>();
+		auto draw = AddComponent<PNTStaticModelDraw>();
 		draw->SetMeshToTransformMatrix(spanMat);
 		draw->SetMultiMeshResource(L"Goal");
 
