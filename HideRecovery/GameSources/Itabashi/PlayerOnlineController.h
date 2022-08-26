@@ -168,6 +168,8 @@ namespace Online
 		std::shared_ptr<Camera> GetCamera() const { return m_camera.lock(); }
 
 		static std::shared_ptr<PlayerOnlineController> GetPlayerOnlineController(int playerNumber);
+
+		static std::shared_ptr<PlayerOnlineController> GetLocalOnlineController() { return GetPlayerOnlineController(Online::OnlineManager::GetLocalPlayer().getNumber()); }
 	};
 }
 }
