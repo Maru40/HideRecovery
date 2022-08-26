@@ -92,7 +92,7 @@ namespace basecross {
 		/// <summary>
 		/// アニメーション再生
 		/// </summary>
-		void PlayAnimation(const CollisionPair& pair);
+		void PlayAnimation(const std::shared_ptr<GameObject>& other);
 
 		/// <summary>
 		/// 当たり判定をとるかどうか

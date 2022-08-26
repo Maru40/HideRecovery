@@ -178,6 +178,13 @@ namespace basecross {
 			AddPoint(teamMember->GetTeam());
 		}
 
+		//ゴールアニメーションの設定
+		if (auto goalAnimationController = other->GetComponent<GoalAnimationController>(false)) {
+			goalAnimationController->SetDunkPosition(GetDunkPosition());
+			goalAnimationController->SetDunkBallPosition(transform->GetPosition() + m_param.dunkBallPositionOffset);
+			goalAnimationController->SetGoal(GetThis<Goal>());
+		}
+
 		//アイテム削除
 		if (auto itemBag = other->GetComponent<ItemBag>(false)) {
 			auto item = itemBag->GetItem(itemId);
@@ -195,6 +202,8 @@ namespace basecross {
 		}
 
 		Debug::GetInstance()->Log(L"SuccessGoal");
+
+		PlayAnimation(other);
 	}
 
 	void Goal::AddPoint(const Team& team) {
@@ -207,8 +216,7 @@ namespace basecross {
 		m_timer->ResetTimer(m_param.itemHiderTime, endEvent);
 	}
 
-	void Goal::PlayAnimation(const CollisionPair& pair) {
-		auto other = pair.m_Dest.lock()->GetGameObject();
+	void Goal::PlayAnimation(const std::shared_ptr<GameObject>& other) {
 		auto animator = other->GetComponent<PlayerAnimator>();
 		if (!animator) {
 			return;
@@ -252,7 +260,7 @@ namespace basecross {
 		SuccessGoal(pair);
 
 		//アニメーションの再生
-		PlayAnimation(pair);
+		PlayAnimation(pair.m_Dest.lock()->GetGameObject());
 	}
 
 	void Goal::PlayFireEffects() {

@@ -40,8 +40,7 @@ namespace Online
 			}
 		}
 
-		auto options = ExitGames::LoadBalancing::RaiseEventOptions().setTargetPlayers(&playerNumber, 1);
-		OnlineManager::RaiseEvent(false, (std::uint8_t*)m_playerNumbers, sizeof(m_playerNumbers), EXECUTE_UPDATE_PLAYER_NUMBERS, options);
+		OnlineManager::RaiseEvent(false, (std::uint8_t*)m_playerNumbers, sizeof(m_playerNumbers), EXECUTE_UPDATE_PLAYER_NUMBERS);
 	}
 
 	void OnlineMatching::ExecuteGetPlayerStateEvent(int playerNumbers[])
