@@ -13,6 +13,8 @@
 #include "CameraHelper.h"
 #include "LookAtCameraManager.h"
 #include "Maruyama/Player/Component/UseWepon.h"
+#include "MainStage.h"
+#include "Watanabe/UI/UIObjects.h"
 
 namespace basecross
 {
@@ -72,6 +74,13 @@ namespace basecross
 
 		auto useWeapon = playerObject->GetComponent<UseWepon>();
 		useWeapon->SetIsUseCamera(true);
+
+		// 自身のHPゲージにステータスコンポーネントをセット
+		auto mainStage = GetGameObject()->GetTypeStage<MainStage>(false);
+		if (mainStage) {
+			auto hpGauge = mainStage->GetUIObjectCSVBuilder()->GetUIObject<HPGaugeUI>(L"HPGauge");
+			hpGauge->SetPlayerStatus(playerObject->GetComponent<PlayerStatus>());
+		}
 
 		return playerObject;
 	}
