@@ -20,3 +20,5 @@ Win,WinOrLose_TX,0,0,280,128
 Lose,WinOrLose_TX,0,128,415,128
 Draw,WinOrLose_TX,0,256,420,128
 10,Numbers_TX,1028,0,172,128
+CreateRoom,Message_TX,0,940,1024,120
+JoinRoom,Message_TX,0,1060,1024,120
