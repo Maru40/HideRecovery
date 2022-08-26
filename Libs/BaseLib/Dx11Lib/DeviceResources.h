@@ -1,6 +1,6 @@
-/*!
+ï»¿/*!
 @file DeviceResources.h
-@brief ƒeƒNƒXƒ`ƒƒAƒƒbƒVƒ…ADx11ƒfƒoƒCƒXƒŠƒ\[ƒX
+@brief ãƒ†ã‚¯ã‚¹ãƒãƒ£ã€ãƒ¡ãƒƒã‚·ãƒ¥ã€Dx11ãƒ‡ãƒã‚¤ã‚¹ãƒªã‚½ãƒ¼ã‚¹
 @copyright Copyright (c) 2017 WiZ Tamura Hiroki,Yamanoi Yasushi.
 */
 
@@ -11,7 +11,7 @@ namespace basecross {
 
 #define BASECROSS_DXVERSION 11
 	//--------------------------------------------------------------------------------------
-	///	ƒeƒNƒXƒ`ƒƒƒŠƒ\[ƒX
+	///	ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒªã‚½ãƒ¼ã‚¹
 	//--------------------------------------------------------------------------------------
 	class TextureResource : public BaseResource {
 		friend class ObjectFactory;
@@ -19,41 +19,41 @@ namespace basecross {
 	public:
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒeƒNƒXƒ`ƒƒì¬—p‚ÌstaticŠÖ”
-		@param[in]	FileName	ƒtƒ@ƒCƒ‹–¼
-		@param[in]	TexType	ƒeƒNƒXƒ`ƒƒƒ^ƒCƒv
+		@brief	ãƒ†ã‚¯ã‚¹ãƒãƒ£ä½œæˆç”¨ã®staticé–¢æ•°
+		@param[in]	FileName	ãƒ•ã‚¡ã‚¤ãƒ«å
+		@param[in]	TexType	ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚¿ã‚¤ãƒ—
 		*/
 		//--------------------------------------------------------------------------------------
 		static  shared_ptr<TextureResource> CreateTextureResource(const wstring& FileName, const wstring& TexType = L"WIC");
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒfƒXƒgƒ‰ƒNƒ^
+		@brief	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		virtual ~TextureResource();
-		//ƒAƒNƒZƒT
+		//ã‚¢ã‚¯ã‚»ã‚µ
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒVƒF[ƒ_[ƒŠƒ\[ƒXƒrƒ…[‚Ìæ“¾
-		@return	‚±‚ÌƒeƒNƒXƒ`ƒƒ‚ÌƒVƒF[ƒ_[ƒŠƒ\[ƒXƒrƒ…[
+		@brief	ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒªã‚½ãƒ¼ã‚¹ãƒ“ãƒ¥ãƒ¼ã®å–å¾—
+		@return	ã“ã®ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒªã‚½ãƒ¼ã‚¹ãƒ“ãƒ¥ãƒ¼
 		*/
 		//--------------------------------------------------------------------------------------
 		ComPtr<ID3D11ShaderResourceView>& GetShaderResourceView() const;
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒeƒNƒXƒ`ƒƒ‚Ìƒtƒ@ƒCƒ‹–¼‚Ìæ“¾
-		@return	‚±‚ÌƒeƒNƒXƒ`ƒƒ‚Ìƒtƒ@ƒCƒ‹–¼
+		@brief	ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ãƒ•ã‚¡ã‚¤ãƒ«åã®å–å¾—
+		@return	ã“ã®ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ãƒ•ã‚¡ã‚¤ãƒ«å
 		*/
 		//--------------------------------------------------------------------------------------
 		const wstring& GetTextureFileName() const;
 	private:
-		// pImplƒCƒfƒBƒIƒ€
+		// pImplã‚¤ãƒ‡ã‚£ã‚ªãƒ 
 		struct Impl;
 		unique_ptr<Impl> pImpl;
 	};
 
 	//--------------------------------------------------------------------------------------
-	///	’¸“_‚²‚Æ‚ÌƒXƒLƒjƒ“ƒOî•ñ
+	///	é ‚ç‚¹ã”ã¨ã®ã‚¹ã‚­ãƒ‹ãƒ³ã‚°æƒ…å ±
 	//--------------------------------------------------------------------------------------
 	struct SkinPrimData {
 		uint32_t indices[4];
@@ -61,53 +61,53 @@ namespace basecross {
 	};
 
 	//--------------------------------------------------------------------------------------
-	///	ˆê‚Â‚ÌƒƒbƒVƒ…ƒf[ƒ^
+	///	ä¸€ã¤ã®ãƒ¡ãƒƒã‚·ãƒ¥ãƒ‡ãƒ¼ã‚¿
 	//--------------------------------------------------------------------------------------
 	struct MeshPrimData {
-		//’¸“_ƒoƒbƒtƒ@
+		//é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡
 		ComPtr<ID3D11Buffer> m_VertexBuffer;
-		//ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@
+		//ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡
 		ComPtr<ID3D11Buffer> m_IndexBuffer;
-		//’¸“_‚Ì”
+		//é ‚ç‚¹ã®æ•°
 		UINT m_NumVertices;
-		//ƒCƒ“ƒfƒbƒNƒX‚Ì”
+		//ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã®æ•°
 		UINT m_NumIndicis;
-		//‚±‚ÌƒƒbƒVƒ…‚ÌŒ`ƒCƒ“ƒfƒbƒNƒX
+		//ã“ã®ãƒ¡ãƒƒã‚·ãƒ¥ã®å½¢ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
 		type_index m_MeshTypeIndex;
-		//ƒXƒgƒ‰ƒCƒh”
+		//ã‚¹ãƒˆãƒ©ã‚¤ãƒ‰æ•°
 		UINT m_NumStride;
-		//•`‰æƒgƒ|ƒƒW[
+		//æç”»ãƒˆãƒãƒ­ã‚¸ãƒ¼
 		D3D11_PRIMITIVE_TOPOLOGY m_PrimitiveTopology;
-		//ƒoƒbƒNƒAƒbƒvƒf[ƒ^
+		//ãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—ãƒ‡ãƒ¼ã‚¿
 		shared_ptr<BackupDataBase> m_BackUpData;
-		//ƒƒbƒVƒ…‚Æ‚Æƒ^ƒ“ƒXƒtƒH[ƒ€‚Ì·•ªs—ñiƒƒbƒVƒ…’PˆÊ‚Åİ’è‚·‚éê‡j
+		//ãƒ¡ãƒƒã‚·ãƒ¥ã¨ã¨ã‚¿ãƒ³ã‚¹ãƒ•ã‚©ãƒ¼ãƒ ã®å·®åˆ†è¡Œåˆ—ï¼ˆãƒ¡ãƒƒã‚·ãƒ¥å˜ä½ã§è¨­å®šã™ã‚‹å ´åˆï¼‰
 		bsm::Mat4x4 m_MeshToTransformMatrix;
-		//ƒƒbƒVƒ…‚Ì·•ªs—ñ‚ğİ’è‚·‚é‚©‚Ç‚¤‚©
+		//ãƒ¡ãƒƒã‚·ãƒ¥ã®å·®åˆ†è¡Œåˆ—ã‚’è¨­å®šã™ã‚‹ã‹ã©ã†ã‹
 		bool m_UseMeshToTransformMatrix;
-		//ƒeƒNƒXƒ`ƒƒƒŠƒ\[ƒX(ƒƒbƒVƒ…’PˆÊ‚Åİ’è‚·‚éê‡)
+		//ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒªã‚½ãƒ¼ã‚¹(ãƒ¡ãƒƒã‚·ãƒ¥å˜ä½ã§è¨­å®šã™ã‚‹å ´åˆ)
 		weak_ptr<TextureResource> m_TextureResource;
-		//ƒ}ƒeƒŠƒAƒ‹‚Ì”z—ñiƒ‚ƒfƒ‹‚Åg—pj
+		//ãƒãƒ†ãƒªã‚¢ãƒ«ã®é…åˆ—ï¼ˆãƒ¢ãƒ‡ãƒ«ã§ä½¿ç”¨ï¼‰
 		vector<MaterialEx> m_MaterialExVec;
-		//ˆÈ‰ºAƒ{[ƒ“—p
-		//ƒ{[ƒ“‚©‚Ç‚¤‚©
+		//ä»¥ä¸‹ã€ãƒœãƒ¼ãƒ³ç”¨
+		//ãƒœãƒ¼ãƒ³ã‹ã©ã†ã‹
 		bool m_IsSkining;
-		//ƒ{[ƒ“‚Ì”
+		//ãƒœãƒ¼ãƒ³ã®æ•°
 		UINT m_BoneCount;
-		//ƒTƒ“ƒvƒŠƒ“ƒO”
+		//ã‚µãƒ³ãƒ—ãƒªãƒ³ã‚°æ•°
 		UINT m_SampleCount;
-		//ƒTƒ“ƒvƒŠƒ“ƒO‚³‚ê‚½ƒ{[ƒ“s—ñ
+		//ã‚µãƒ³ãƒ—ãƒªãƒ³ã‚°ã•ã‚ŒãŸãƒœãƒ¼ãƒ³è¡Œåˆ—
 		vector<bsm::Mat4x4> m_SampleMatrixVec;
-		//ƒ}ƒ‹ƒ`ƒƒbƒVƒ…‚Ìê‡‚ÌƒƒbƒVƒ…ƒCƒ“ƒfƒbƒNƒX
+		//ãƒãƒ«ãƒãƒ¡ãƒƒã‚·ãƒ¥ã®å ´åˆã®ãƒ¡ãƒƒã‚·ãƒ¥ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
 		UINT m_MultiMeshIndex;
-		//”Ä—p‚Ég‚¦‚éƒ[ƒJƒ‹’¸“_‚Ì”z—ñ
+		//æ±ç”¨ã«ä½¿ãˆã‚‹ãƒ­ãƒ¼ã‚«ãƒ«é ‚ç‚¹ã®é…åˆ—
 		vector<VertexPosition> m_Vertices;
-		//ƒXƒLƒjƒ“ƒOî•ñ
+		//ã‚¹ã‚­ãƒ‹ãƒ³ã‚°æƒ…å ±
 		vector<SkinPrimData> m_Skins;
 		MeshPrimData():
 			m_IsSkining(false),
 			m_BoneCount(0),
 			m_SampleCount(0),
-			m_MeshTypeIndex(typeid(VertexPosition)),	//•Ö‹XãVertexPosition‚É‰Šú‰»
+			m_MeshTypeIndex(typeid(VertexPosition)),	//ä¾¿å®œä¸ŠVertexPositionã«åˆæœŸåŒ–
 			m_NumStride(sizeof(VertexPosition)),
 			m_PrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST),
 			m_MeshToTransformMatrix(),
@@ -120,18 +120,18 @@ namespace basecross {
 
 
 	//--------------------------------------------------------------------------------------
-	///	ƒƒbƒVƒ…ƒŠƒ\[ƒX
+	///	ãƒ¡ãƒƒã‚·ãƒ¥ãƒªã‚½ãƒ¼ã‚¹
 	//--------------------------------------------------------------------------------------
 	class MeshResource : public BaseResource {
 		friend class ObjectFactory;
 		MeshPrimData m_MeshPrimData;
 	protected:
-		//”h¶ƒNƒ‰ƒX‚©‚ç‚Ì‚İƒAƒNƒZƒX‚Å‚«‚éƒAƒNƒZƒT
+		//æ´¾ç”Ÿã‚¯ãƒ©ã‚¹ã‹ã‚‰ã®ã¿ã‚¢ã‚¯ã‚»ã‚¹ã§ãã‚‹ã‚¢ã‚¯ã‚»ã‚µ
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	’¸“_ƒoƒbƒtƒ@‚Ìİ’è
-		@param[in]	VertexBuffer	’¸“_ƒoƒbƒtƒ@
-		@return	‚È‚µ
+		@brief	é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã®è¨­å®š
+		@param[in]	VertexBuffer	é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		void SetVertexBuffer(ComPtr<ID3D11Buffer>& VertexBuffer) {
@@ -139,10 +139,10 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	’¸“_”‚Ìİ’è<br />
-		’¸“_ƒoƒbƒtƒ@‚Ì”‚Æ‡‚í‚¹‚È‚¯‚ê‚Î‚È‚ç‚È‚¢‚Ì‚ÅATd‚Ég—p‚·‚é
-		@param[in]	NumVertices	’¸“_”
-		@return	‚È‚µ
+		@brief	é ‚ç‚¹æ•°ã®è¨­å®š<br />
+		é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã®æ•°ã¨åˆã‚ã›ãªã‘ã‚Œã°ãªã‚‰ãªã„ã®ã§ã€æ…é‡ã«ä½¿ç”¨ã™ã‚‹
+		@param[in]	NumVertices	é ‚ç‚¹æ•°
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		void SetNumVertices(UINT NumVertices) {
@@ -150,9 +150,9 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@‚Ìİ’è
-		@param[in]	IndexBuffer	ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@
-		@return	‚È‚µ
+		@brief	ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ã®è¨­å®š
+		@param[in]	IndexBuffer	ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		void SetIndexBuffer(ComPtr<ID3D11Buffer>& IndexBuffer) {
@@ -160,10 +160,10 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒCƒ“ƒfƒbƒNƒX”‚Ìİ’è<br />
-		ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@‚Ì”‚Æ‡‚í‚¹‚È‚¯‚ê‚Î‚È‚ç‚È‚¢‚Ì‚ÅATd‚Ég—p‚·‚é
-		@param[in]	IndexBuffer	ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@
-		@return	‚È‚µ
+		@brief	ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹æ•°ã®è¨­å®š<br />
+		ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ã®æ•°ã¨åˆã‚ã›ãªã‘ã‚Œã°ãªã‚‰ãªã„ã®ã§ã€æ…é‡ã«ä½¿ç”¨ã™ã‚‹
+		@param[in]	IndexBuffer	ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		void SetNumIndicis(UINT NumIndicis) {
@@ -171,9 +171,9 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	’¸“_‚ÌŒ^‚ÆƒXƒgƒ‰ƒCƒh‚ğİ’è‚·‚é
-		@tparam	T	’¸“_‚ÌŒ^
-		@return	‚È‚µ
+		@brief	é ‚ç‚¹ã®å‹ã¨ã‚¹ãƒˆãƒ©ã‚¤ãƒ‰ã‚’è¨­å®šã™ã‚‹
+		@tparam	T	é ‚ç‚¹ã®å‹
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		template<typename T>
@@ -183,23 +183,23 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒvƒƒeƒNƒgƒRƒ“ƒXƒgƒ‰ƒNƒ^<br />
-		\’z‚ÍƒXƒ^ƒeƒBƒbƒNŠÖ”‚ğ—˜—p‚·‚é
+		@brief	ãƒ—ãƒ­ãƒ†ã‚¯ãƒˆã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿<br />
+		æ§‹ç¯‰ã¯ã‚¹ã‚¿ãƒ†ã‚£ãƒƒã‚¯é–¢æ•°ã‚’åˆ©ç”¨ã™ã‚‹
 		*/
 		//--------------------------------------------------------------------------------------
 		MeshResource();
 	public:
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒfƒXƒgƒ‰ƒNƒ^
+		@brief	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		virtual ~MeshResource();
-		//ƒAƒNƒZƒT
+		//ã‚¢ã‚¯ã‚»ã‚µ
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	’¸“_ƒoƒbƒtƒ@‚Ìæ“¾
-		@return	’¸“_ƒoƒbƒtƒ@
+		@brief	é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã®å–å¾—
+		@return	é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡
 		*/
 		//--------------------------------------------------------------------------------------
 		ComPtr<ID3D11Buffer> GetVertexBuffer() const {
@@ -207,8 +207,8 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@‚Ìæ“¾
-		@return	ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@
+		@brief	ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ã®å–å¾—
+		@return	ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡
 		*/
 		//--------------------------------------------------------------------------------------
 		ComPtr<ID3D11Buffer> GetIndexBuffer() const {
@@ -216,8 +216,8 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	’¸“_”‚Ìæ“¾
-		@return	’¸“_”
+		@brief	é ‚ç‚¹æ•°ã®å–å¾—
+		@return	é ‚ç‚¹æ•°
 		*/
 		//--------------------------------------------------------------------------------------
 		UINT GetNumVertices() const {
@@ -225,8 +225,8 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒCƒ“ƒfƒbƒNƒX”‚Ìæ“¾
-		@return	ƒCƒ“ƒfƒbƒNƒX”
+		@brief	ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹æ•°ã®å–å¾—
+		@return	ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹æ•°
 		*/
 		//--------------------------------------------------------------------------------------
 		UINT GetNumIndicis() const {
@@ -234,8 +234,8 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒXƒgƒ‰ƒCƒh”‚Ìæ“¾
-		@return	ƒXƒgƒ‰ƒCƒh”
+		@brief	ã‚¹ãƒˆãƒ©ã‚¤ãƒ‰æ•°ã®å–å¾—
+		@return	ã‚¹ãƒˆãƒ©ã‚¤ãƒ‰æ•°
 		*/
 		//--------------------------------------------------------------------------------------
 		UINT GetNumStride() const {
@@ -243,8 +243,8 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	•`‰æƒgƒ|ƒƒW[‚Ìæ“¾
-		@return	•`‰æƒgƒ|ƒƒW[
+		@brief	æç”»ãƒˆãƒãƒ­ã‚¸ãƒ¼ã®å–å¾—
+		@return	æç”»ãƒˆãƒãƒ­ã‚¸ãƒ¼
 		*/
 		//--------------------------------------------------------------------------------------
 		D3D11_PRIMITIVE_TOPOLOGY GetPrimitiveTopology() const {
@@ -252,9 +252,9 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	•`‰æƒgƒ|ƒƒW[‚Ìİ’è
-		@param[in]	Topology	•`‰æƒgƒ|ƒƒW[
-		@return	‚È‚µ
+		@brief	æç”»ãƒˆãƒãƒ­ã‚¸ãƒ¼ã®è¨­å®š
+		@param[in]	Topology	æç”»ãƒˆãƒãƒ­ã‚¸ãƒ¼
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		void SetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY Topology){
@@ -262,7 +262,7 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	type_index‚Ìæ“¾
+		@brief	type_indexã®å–å¾—
 		@return	type_index
 		*/
 		//--------------------------------------------------------------------------------------
@@ -271,10 +271,10 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒƒbƒVƒ…‚Æƒ[ƒ‹ƒhs—ñ‚ÌŠÔ‚ğ•âŠ®‚·‚és—ñ‚Ìæ“¾(ƒƒbƒVƒ…‚Éİ’è‚·‚éê‡)<br />
-		ƒƒbƒVƒ…‚ÌƒTƒCƒY‚âŒü‚«A’†S‚ÌˆÊ’u‚ªƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚Ìƒ[ƒ‹ƒhs—ñ‚Æ·ˆÙ‚ª‚ ‚éê‡A<br />
-		‚»‚ÌŠÔ‚ğ•âŠ®‚·‚és—ñ‚ğİ’è‚Å‚«‚éB
-		@return	ƒƒbƒVƒ…‚Æƒ[ƒ‹ƒhs—ñ‚ÌŠÔ‚ğ•âŠ®‚·‚és—ñ
+		@brief	ãƒ¡ãƒƒã‚·ãƒ¥ã¨ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ã®é–“ã‚’è£œå®Œã™ã‚‹è¡Œåˆ—ã®å–å¾—(ãƒ¡ãƒƒã‚·ãƒ¥ã«è¨­å®šã™ã‚‹å ´åˆ)<br />
+		ãƒ¡ãƒƒã‚·ãƒ¥ã®ã‚µã‚¤ã‚ºã‚„å‘ãã€ä¸­å¿ƒã®ä½ç½®ãŒã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ã¨å·®ç•°ãŒã‚ã‚‹å ´åˆã€<br />
+		ãã®é–“ã‚’è£œå®Œã™ã‚‹è¡Œåˆ—ã‚’è¨­å®šã§ãã‚‹ã€‚
+		@return	ãƒ¡ãƒƒã‚·ãƒ¥ã¨ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ã®é–“ã‚’è£œå®Œã™ã‚‹è¡Œåˆ—
 		*/
 		//--------------------------------------------------------------------------------------
 		const bsm::Mat4x4& GetMeshToTransformMatrix() const {
@@ -282,11 +282,11 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒƒbƒVƒ…‚Æƒ[ƒ‹ƒhs—ñ‚ÌŠÔ‚ğ•âŠ®‚·‚és—ñ‚Ìæ“¾(ƒƒbƒVƒ…‚Éİ’è‚·‚éê‡)<br />
-		ƒƒbƒVƒ…‚ÌƒTƒCƒY‚âŒü‚«A’†S‚ÌˆÊ’u‚ªƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚Ìƒ[ƒ‹ƒhs—ñ‚Æ·ˆÙ‚ª‚ ‚éê‡A<br />
-		‚»‚ÌŠÔ‚ğ•âŠ®‚·‚és—ñ‚ğİ’è‚Å‚«‚éB
-		@param[in]	Mat	İ’è‚·‚és—ñ
-		@return	‚È‚µ
+		@brief	ãƒ¡ãƒƒã‚·ãƒ¥ã¨ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ã®é–“ã‚’è£œå®Œã™ã‚‹è¡Œåˆ—ã®å–å¾—(ãƒ¡ãƒƒã‚·ãƒ¥ã«è¨­å®šã™ã‚‹å ´åˆ)<br />
+		ãƒ¡ãƒƒã‚·ãƒ¥ã®ã‚µã‚¤ã‚ºã‚„å‘ãã€ä¸­å¿ƒã®ä½ç½®ãŒã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ã¨å·®ç•°ãŒã‚ã‚‹å ´åˆã€<br />
+		ãã®é–“ã‚’è£œå®Œã™ã‚‹è¡Œåˆ—ã‚’è¨­å®šã§ãã‚‹ã€‚
+		@param[in]	Mat	è¨­å®šã™ã‚‹è¡Œåˆ—
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		void SetMeshToTransformMatrix(const bsm::Mat4x4& Mat) {
@@ -294,8 +294,8 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒƒbƒVƒ…‚Éİ’è‚µ‚½ƒƒbƒVƒ…‚Æƒ[ƒ‹ƒhs—ñ‚ÌŠÔ‚ğ•âŠ®‚·‚és—ñ‚ğg‚¤‚©‚Ç‚¤‚©
-		@return@ƒƒbƒVƒ…‚Éİ’è‚µ‚½ƒƒbƒVƒ…‚Æƒ[ƒ‹ƒhs—ñ‚ÌŠÔ‚ğ•âŠ®‚·‚és—ñ‚ğg‚¤‚©‚Ç‚¤‚©
+		@brief	ãƒ¡ãƒƒã‚·ãƒ¥ã«è¨­å®šã—ãŸãƒ¡ãƒƒã‚·ãƒ¥ã¨ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ã®é–“ã‚’è£œå®Œã™ã‚‹è¡Œåˆ—ã‚’ä½¿ã†ã‹ã©ã†ã‹
+		@returnã€€ãƒ¡ãƒƒã‚·ãƒ¥ã«è¨­å®šã—ãŸãƒ¡ãƒƒã‚·ãƒ¥ã¨ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ã®é–“ã‚’è£œå®Œã™ã‚‹è¡Œåˆ—ã‚’ä½¿ã†ã‹ã©ã†ã‹
 		*/
 		//--------------------------------------------------------------------------------------
 		bool IsUseMeshToTransformMatrix() const {
@@ -303,9 +303,9 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒƒbƒVƒ…‚Éİ’è‚µ‚½ƒƒbƒVƒ…‚Æƒ[ƒ‹ƒhs—ñ‚ÌŠÔ‚ğ•âŠ®‚·‚és—ñ‚ğg‚¤‚©‚Ç‚¤‚©‚ğİ’è
-		@param[in]	b	g—p‚·‚é‚È‚çtrue
-		@return@‚È‚µ
+		@brief	ãƒ¡ãƒƒã‚·ãƒ¥ã«è¨­å®šã—ãŸãƒ¡ãƒƒã‚·ãƒ¥ã¨ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ã®é–“ã‚’è£œå®Œã™ã‚‹è¡Œåˆ—ã‚’ä½¿ã†ã‹ã©ã†ã‹ã‚’è¨­å®š
+		@param[in]	b	ä½¿ç”¨ã™ã‚‹ãªã‚‰true
+		@returnã€€ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		void SetUseMeshToTransformMatrix(bool b){
@@ -313,9 +313,9 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒeƒNƒXƒ`ƒƒƒŠƒ\[ƒX‚Ìİ’è(ƒƒbƒVƒ…–ˆ‚Ìê‡)
-		@param[in]	TextureRes	ƒeƒNƒXƒ`ƒƒƒŠƒ\[ƒX
-		@return	‚È‚µ
+		@brief	ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒªã‚½ãƒ¼ã‚¹ã®è¨­å®š(ãƒ¡ãƒƒã‚·ãƒ¥æ¯ã®å ´åˆ)
+		@param[in]	TextureRes	ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒªã‚½ãƒ¼ã‚¹
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		void SetTextureResource(const shared_ptr<TextureResource>& TextureRes) {
@@ -323,9 +323,9 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒeƒNƒXƒ`ƒƒƒŠƒ\[ƒX‚Ìİ’è(ƒƒbƒVƒ…–ˆ‚Ìê‡)
-		@param[in]	TextureKey	“o˜^‚³‚ê‚Ä‚¢‚éƒeƒNƒXƒ`ƒƒƒL[
-		@return	‚È‚µ
+		@brief	ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒªã‚½ãƒ¼ã‚¹ã®è¨­å®š(ãƒ¡ãƒƒã‚·ãƒ¥æ¯ã®å ´åˆ)
+		@param[in]	TextureKey	ç™»éŒ²ã•ã‚Œã¦ã„ã‚‹ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚­ãƒ¼
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		void SetTextureResource(const wstring& TextureKey) {
@@ -333,12 +333,12 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒeƒNƒXƒ`ƒƒƒŠƒ\[ƒX‚Ìæ“¾(ƒƒbƒVƒ…–ˆ‚Ìê‡)
-		@return	ƒeƒNƒXƒ`ƒƒƒŠƒ\[ƒX
+		@brief	ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒªã‚½ãƒ¼ã‚¹ã®å–å¾—(ãƒ¡ãƒƒã‚·ãƒ¥æ¯ã®å ´åˆ)
+		@return	ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒªã‚½ãƒ¼ã‚¹
 		*/
 		//--------------------------------------------------------------------------------------
 		shared_ptr<TextureResource> GetTextureResource() const {
-			//ƒeƒNƒXƒ`ƒƒ‚ª‚È‚¯‚ê‚Înull‚ğ•Ô‚·
+			//ãƒ†ã‚¯ã‚¹ãƒãƒ£ãŒãªã‘ã‚Œã°nullã‚’è¿”ã™
 			auto shptr = m_MeshPrimData.m_TextureResource.lock();
 			if (shptr) {
 				return shptr;
@@ -347,8 +347,8 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒ}ƒeƒŠƒAƒ‹”z—ñ‚Ìæ“¾
-		@return	ƒ}ƒeƒŠƒAƒ‹‚Ì”z—ñ
+		@brief	ãƒãƒ†ãƒªã‚¢ãƒ«é…åˆ—ã®å–å¾—
+		@return	ãƒãƒ†ãƒªã‚¢ãƒ«ã®é…åˆ—
 		*/
 		//--------------------------------------------------------------------------------------
 		const vector<MaterialEx>& GetMaterialExVec()const {
@@ -356,8 +356,8 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒ}ƒeƒŠƒAƒ‹”z—ñ‚Ìæ“¾(‘‚«‚İ—p)
-		@return	ƒ}ƒeƒŠƒAƒ‹‚Ì”z—ñ
+		@brief	ãƒãƒ†ãƒªã‚¢ãƒ«é…åˆ—ã®å–å¾—(æ›¸ãè¾¼ã¿ç”¨)
+		@return	ãƒãƒ†ãƒªã‚¢ãƒ«ã®é…åˆ—
 		*/
 		//--------------------------------------------------------------------------------------
 		vector<MaterialEx>& GetMaterialExVec(){
@@ -366,16 +366,16 @@ namespace basecross {
 
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒXƒLƒjƒ“ƒO‚·‚é‚©‚Ç‚¤‚©.<br />
-		‰¼‘zŠÖ”‚È‚Ì‚ÅA”h¶ƒNƒ‰ƒX‚Å“Æ©‚É‘½d’è‹`‚·‚é
-		@return	ƒXƒLƒjƒ“ƒO‚·‚éê‡‚Ítrue
+		@brief	ã‚¹ã‚­ãƒ‹ãƒ³ã‚°ã™ã‚‹ã‹ã©ã†ã‹.<br />
+		ä»®æƒ³é–¢æ•°ãªã®ã§ã€æ´¾ç”Ÿã‚¯ãƒ©ã‚¹ã§ç‹¬è‡ªã«å¤šé‡å®šç¾©ã™ã‚‹
+		@return	ã‚¹ã‚­ãƒ‹ãƒ³ã‚°ã™ã‚‹å ´åˆã¯true
 		*/
 		//--------------------------------------------------------------------------------------
 		virtual bool IsSkining() const { return m_MeshPrimData.m_IsSkining; }
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒ{[ƒ“”‚ğ“¾‚é
-		@return	ƒ{[ƒ“”
+		@brief	ãƒœãƒ¼ãƒ³æ•°ã‚’å¾—ã‚‹
+		@return	ãƒœãƒ¼ãƒ³æ•°
 		*/
 		//--------------------------------------------------------------------------------------
 		UINT GetBoneCount() const {
@@ -383,8 +383,8 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒTƒ“ƒvƒŠƒ“ƒO”‚ğ“¾‚é
-		@return	ƒTƒ“ƒvƒŠƒ“ƒO”
+		@brief	ã‚µãƒ³ãƒ—ãƒªãƒ³ã‚°æ•°ã‚’å¾—ã‚‹
+		@return	ã‚µãƒ³ãƒ—ãƒªãƒ³ã‚°æ•°
 		*/
 		//--------------------------------------------------------------------------------------
 		UINT GetSampleCount() const {
@@ -392,8 +392,8 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒTƒ“ƒvƒŠƒ“ƒO‚³‚ê‚½s—ñ‚Ì”z—ñ‚ğ“¾‚é
-		@return	ƒTƒ“ƒvƒŠƒ“ƒO‚³‚ê‚½s—ñ‚Ì”z—ñ‚ÌQÆ
+		@brief	ã‚µãƒ³ãƒ—ãƒªãƒ³ã‚°ã•ã‚ŒãŸè¡Œåˆ—ã®é…åˆ—ã‚’å¾—ã‚‹
+		@return	ã‚µãƒ³ãƒ—ãƒªãƒ³ã‚°ã•ã‚ŒãŸè¡Œåˆ—ã®é…åˆ—ã®å‚ç…§
 		*/
 		//--------------------------------------------------------------------------------------
 		const vector<bsm::Mat4x4>& GetSampleMatrixVec() const {
@@ -401,8 +401,8 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒƒbƒVƒ…ƒf[ƒ^‚ğ“¾‚é
-		@return	ƒƒbƒVƒ…ƒf[ƒ^
+		@brief	ãƒ¡ãƒƒã‚·ãƒ¥ãƒ‡ãƒ¼ã‚¿ã‚’å¾—ã‚‹
+		@return	ãƒ¡ãƒƒã‚·ãƒ¥ãƒ‡ãƒ¼ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		const MeshPrimData& GetMashData()const {
@@ -410,30 +410,30 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒƒbƒVƒ…ƒf[ƒ^‚ğİ’è‚·‚é
-		@param[out]	data	æ“¾‚·‚éƒf[ƒ^‚ÌQÆ
-		@return	‚È‚µ
+		@brief	ãƒ¡ãƒƒã‚·ãƒ¥ãƒ‡ãƒ¼ã‚¿ã‚’è¨­å®šã™ã‚‹
+		@param[out]	data	å–å¾—ã™ã‚‹ãƒ‡ãƒ¼ã‚¿ã®å‚ç…§
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		void SetMashData(const MeshPrimData& data) {
 			m_MeshPrimData = data;
 		}
-		//ƒŠƒ\[ƒX\’z
+		//ãƒªã‚½ãƒ¼ã‚¹æ§‹ç¯‰
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒoƒbƒtƒ@‚ğì¬‚·‚é
-		@param[in]	pDx11Device	ƒfƒoƒCƒX
-		@param[in]	pBufferDesc	ƒoƒbƒtƒ@ƒfƒXƒNƒvƒŠƒ^
-		@param[in]	pDataDesc	ƒf[ƒ^ƒfƒXƒNƒvƒŠƒ^
-		@param[out]	pBuffer	’¸“_ƒoƒbƒtƒ@
-		@return	‚È‚µ
+		@brief	ãƒãƒƒãƒ•ã‚¡ã‚’ä½œæˆã™ã‚‹
+		@param[in]	pDx11Device	ãƒ‡ãƒã‚¤ã‚¹
+		@param[in]	pBufferDesc	ãƒãƒƒãƒ•ã‚¡ãƒ‡ã‚¹ã‚¯ãƒ—ãƒªã‚¿
+		@param[in]	pDataDesc	ãƒ‡ãƒ¼ã‚¿ãƒ‡ã‚¹ã‚¯ãƒ—ãƒªã‚¿
+		@param[out]	pBuffer	é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		static void CreatePrimitiveBuffer(ID3D11Device* pDx11Device, const D3D11_BUFFER_DESC* pBufferDesc, const D3D11_SUBRESOURCE_DATA* pDataDesc, ID3D11Buffer** pBuffer) {
 			if (FAILED(pDx11Device->CreateBuffer(pBufferDesc, pDataDesc, pBuffer))) {
-				// ‰Šú‰»¸”s
+				// åˆæœŸåŒ–å¤±æ•—
 				throw BaseException(
-					L"ƒoƒbƒtƒ@ì¬‚É¸”s‚µ‚Ü‚µ‚½B",
+					L"ãƒãƒƒãƒ•ã‚¡ä½œæˆã«å¤±æ•—ã—ã¾ã—ãŸã€‚",
 					L"if(FAILED(pDx11Device->CreateBuffer()))",
 					L"VertexUtil::CreatePrimitiveBuffer()"
 				);
@@ -441,13 +441,13 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒoƒbƒtƒ@‚ğì¬‚·‚é
-		@tparam	T	ƒf[ƒ^‚ÌŒ^
-		@param[in]	pDx11Device	ƒfƒoƒCƒX
-		@param[in]	data	ƒf[ƒ^
-		@param[in]	bindFlags	ƒoƒCƒ“ƒhƒtƒ‰ƒO
-		@param[out]	pBuffer	ƒoƒbƒtƒ@
-		@return	‚È‚µ
+		@brief	ãƒãƒƒãƒ•ã‚¡ã‚’ä½œæˆã™ã‚‹
+		@tparam	T	ãƒ‡ãƒ¼ã‚¿ã®å‹
+		@param[in]	pDx11Device	ãƒ‡ãƒã‚¤ã‚¹
+		@param[in]	data	ãƒ‡ãƒ¼ã‚¿
+		@param[in]	bindFlags	ãƒã‚¤ãƒ³ãƒ‰ãƒ•ãƒ©ã‚°
+		@param[out]	pBuffer	ãƒãƒƒãƒ•ã‚¡
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		template<typename T>
@@ -461,9 +461,9 @@ namespace basecross {
 			dataDesc.pSysMem = &data.front();
 
 			if (FAILED(pDx11Device->CreateBuffer(&bufferDesc, &dataDesc, pBuffer))) {
-				// ‰Šú‰»¸”s
+				// åˆæœŸåŒ–å¤±æ•—
 				throw BaseException(
-					L"ƒoƒbƒtƒ@ì¬‚É¸”s‚µ‚Ü‚µ‚½B",
+					L"ãƒãƒƒãƒ•ã‚¡ä½œæˆã«å¤±æ•—ã—ã¾ã—ãŸã€‚",
 					L"if(FAILED(pDx11Device->CreateBuffer()))",
 					L"VertexUtil::CreatePrimitiveBuffer()"
 				);
@@ -471,11 +471,11 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	’¸“_ƒoƒbƒtƒ@‚ğì¬‚·‚é
-		@tparam	T	’¸“_‚ÌŒ^
-		@param[out]	VertexBuffer	•Ô‚³‚ê‚éƒoƒbƒtƒ@
-		@param[in]	data	ƒf[ƒ^
-		@return	‚È‚µ
+		@brief	é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã‚’ä½œæˆã™ã‚‹
+		@tparam	T	é ‚ç‚¹ã®å‹
+		@param[out]	VertexBuffer	è¿”ã•ã‚Œã‚‹ãƒãƒƒãƒ•ã‚¡
+		@param[in]	data	ãƒ‡ãƒ¼ã‚¿
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		template<typename T>
@@ -485,18 +485,18 @@ namespace basecross {
 			auto pDx11Device = Dev->GetD3DDevice();
 			Util::DemandCreate(VertexBuffer, Mutex, [&](ID3D11Buffer** pResult)
 			{
-				//’¸“_ƒoƒbƒtƒ@‚Ìì¬
+				//é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã®ä½œæˆ
 				MeshResource::CreatePrimitiveBuffer(pDx11Device, data, D3D11_BIND_VERTEX_BUFFER, pResult);
 			});
 		}
 
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@‚ğì¬‚·‚é
-		@tparam	T	ƒCƒ“ƒfƒbƒNƒX‚ÌŒ^
-		@param[out]	IndexBuffer	•Ô‚³‚ê‚éƒoƒbƒtƒ@
-		@param[in]	data	ƒf[ƒ^
-		@return	‚È‚µ
+		@brief	ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ã‚’ä½œæˆã™ã‚‹
+		@tparam	T	ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã®å‹
+		@param[out]	IndexBuffer	è¿”ã•ã‚Œã‚‹ãƒãƒƒãƒ•ã‚¡
+		@param[in]	data	ãƒ‡ãƒ¼ã‚¿
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		template<typename T>
@@ -506,18 +506,18 @@ namespace basecross {
 			auto pDx11Device = Dev->GetD3DDevice();
 			Util::DemandCreate(IndexBuffer, Mutex, [&](ID3D11Buffer** pResult)
 			{
-				//ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@‚Ìì¬
+				//ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ã®ä½œæˆ
 				MeshResource::CreatePrimitiveBuffer(pDx11Device, data, D3D11_BIND_INDEX_BUFFER, pResult);
 			});
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	’¸“_ƒf[ƒ^‚ğ•ÏX‚Å‚«‚é’¸“_ƒoƒbƒtƒ@‚ğì¬‚·‚é
-		@tparam	T	’¸“_‚ÌŒ^
-		@param[in]	pDx11Device	ƒfƒoƒCƒX
-		@param[in]	data	ƒf[ƒ^
-		@param[out]	pBuffer	•Ô‚³‚ê‚éƒoƒbƒtƒ@
-		@return	‚È‚µ
+		@brief	é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿ã‚’å¤‰æ›´ã§ãã‚‹é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã‚’ä½œæˆã™ã‚‹
+		@tparam	T	é ‚ç‚¹ã®å‹
+		@param[in]	pDx11Device	ãƒ‡ãƒã‚¤ã‚¹
+		@param[in]	data	ãƒ‡ãƒ¼ã‚¿
+		@param[out]	pBuffer	è¿”ã•ã‚Œã‚‹ãƒãƒƒãƒ•ã‚¡
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		template<typename T>
@@ -532,9 +532,9 @@ namespace basecross {
 			dataDesc.pSysMem = &data.front();
 
 			if (FAILED(pDx11Device->CreateBuffer(&bufferDesc, &dataDesc, pBuffer))) {
-				// ‰Šú‰»¸”s
+				// åˆæœŸåŒ–å¤±æ•—
 				throw BaseException(
-					L"ƒoƒbƒtƒ@ì¬‚É¸”s‚µ‚Ü‚µ‚½B",
+					L"ãƒãƒƒãƒ•ã‚¡ä½œæˆã«å¤±æ•—ã—ã¾ã—ãŸã€‚",
 					L"if(FAILED(pDx11Device->CreateBuffer()))",
 					L"VertexUtil::CreateDynamicVertexBuffer()"
 				);
@@ -542,11 +542,11 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	’¸“_ƒf[ƒ^‚ğ•ÏX‚Å‚«‚é’¸“_ƒoƒbƒtƒ@‚ğì¬‚·‚é
-		@tparam	T	’¸“_‚ÌŒ^
-		@param[out]	VertexBuffer	•Ô‚³‚ê‚éƒoƒbƒtƒ@
-		@param[in]	data	ƒf[ƒ^
-		@return	‚È‚µ
+		@brief	é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿ã‚’å¤‰æ›´ã§ãã‚‹é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã‚’ä½œæˆã™ã‚‹
+		@tparam	T	é ‚ç‚¹ã®å‹
+		@param[out]	VertexBuffer	è¿”ã•ã‚Œã‚‹ãƒãƒƒãƒ•ã‚¡
+		@param[in]	data	ãƒ‡ãƒ¼ã‚¿
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		template<typename T>
@@ -556,128 +556,128 @@ namespace basecross {
 			auto pDx11Device = Dev->GetD3DDevice();
 			Util::DemandCreate(VertexBuffer, Mutex, [&](ID3D11Buffer** pResult)
 			{
-				//’¸“_ƒoƒbƒtƒ@‚Ìì¬
+				//é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã®ä½œæˆ
 				MeshResource::CreateDynamicPrimitiveVertexBuffer(pDx11Device, data, pResult);
 			});
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	4ŠpŒ`•½–Ê‚Ìì¬
-		@param[in]	size		1•Ó‚ÌƒTƒCƒY
-		@param[in]	AccessWrite = false	’¸“_‚ğ•ÏX‚Å‚«‚é‚©‚Ç‚¤‚©
-		@return	ƒŠƒ\[ƒX‚ÌƒXƒ}[ƒgƒ|ƒCƒ“ƒ^
+		@brief	4è§’å½¢å¹³é¢ã®ä½œæˆ
+		@param[in]	size		1è¾ºã®ã‚µã‚¤ã‚º
+		@param[in]	AccessWrite = false	é ‚ç‚¹ã‚’å¤‰æ›´ã§ãã‚‹ã‹ã©ã†ã‹
+		@return	ãƒªã‚½ãƒ¼ã‚¹ã®ã‚¹ãƒãƒ¼ãƒˆãƒã‚¤ãƒ³ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		static shared_ptr<MeshResource> CreateSquare(float Size, bool AccessWrite = false);
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒLƒ…[ƒui—§•û‘Ìj‚Ìì¬
-		@param[in]	size	1•Ó‚ÌƒTƒCƒY
-		@param[in]	AccessWrite = false	’¸“_‚ğ•ÏX‚Å‚«‚é‚©‚Ç‚¤‚©
-		@return	ƒŠƒ\[ƒX‚ÌƒXƒ}[ƒgƒ|ƒCƒ“ƒ^
+		@brief	ã‚­ãƒ¥ãƒ¼ãƒ–ï¼ˆç«‹æ–¹ä½“ï¼‰ã®ä½œæˆ
+		@param[in]	size	1è¾ºã®ã‚µã‚¤ã‚º
+		@param[in]	AccessWrite = false	é ‚ç‚¹ã‚’å¤‰æ›´ã§ãã‚‹ã‹ã©ã†ã‹
+		@return	ãƒªã‚½ãƒ¼ã‚¹ã®ã‚¹ãƒãƒ¼ãƒˆãƒã‚¤ãƒ³ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		static shared_ptr<MeshResource> CreateCube(float Size, bool AccessWrite = false);
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	‹…‘Ì‚Ìì¬
-		@param[in]	Diameter	’¼Œa
-		@param[in]	Tessellation	•ªŠ„”
-		@param[in]	AccessWrite = false	’¸“_‚ğ•ÏX‚Å‚«‚é‚©‚Ç‚¤‚©
-		@return	ƒŠƒ\[ƒX‚ÌƒXƒ}[ƒgƒ|ƒCƒ“ƒ^
+		@brief	çƒä½“ã®ä½œæˆ
+		@param[in]	Diameter	ç›´å¾„
+		@param[in]	Tessellation	åˆ†å‰²æ•°
+		@param[in]	AccessWrite = false	é ‚ç‚¹ã‚’å¤‰æ›´ã§ãã‚‹ã‹ã©ã†ã‹
+		@return	ãƒªã‚½ãƒ¼ã‚¹ã®ã‚¹ãƒãƒ¼ãƒˆãƒã‚¤ãƒ³ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		static shared_ptr<MeshResource> CreateSphere(float Diameter, size_t Tessellation, bool AccessWrite = false);
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒJƒvƒZƒ‹‚Ìì¬
-		@param[in]	Diameter	’¼Œa
-		@param[in]	Height	‚‚³
-		@param[in]	Tessellation	•ªŠ„”
-		@param[in]	AccessWrite = false	’¸“_‚ğ•ÏX‚Å‚«‚é‚©‚Ç‚¤‚©
-		@return	ƒŠƒ\[ƒX‚ÌƒXƒ}[ƒgƒ|ƒCƒ“ƒ^
+		@brief	ã‚«ãƒ—ã‚»ãƒ«ã®ä½œæˆ
+		@param[in]	Diameter	ç›´å¾„
+		@param[in]	Height	é«˜ã•
+		@param[in]	Tessellation	åˆ†å‰²æ•°
+		@param[in]	AccessWrite = false	é ‚ç‚¹ã‚’å¤‰æ›´ã§ãã‚‹ã‹ã©ã†ã‹
+		@return	ãƒªã‚½ãƒ¼ã‚¹ã®ã‚¹ãƒãƒ¼ãƒˆãƒã‚¤ãƒ³ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		static shared_ptr<MeshResource> CreateCapsule(float Diameter, float Height, size_t Tessellation, bool AccessWrite = false);
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒVƒŠƒ“ƒ_[‚Ìì¬
-		@param[in]	Height	‚‚³
-		@param[in]	Diameter	’¼Œa
-		@param[in]	Tessellation	•ªŠ„”
-		@param[in]	AccessWrite = false	’¸“_‚ğ•ÏX‚Å‚«‚é‚©‚Ç‚¤‚©
-		@return	ƒŠƒ\[ƒX‚ÌƒXƒ}[ƒgƒ|ƒCƒ“ƒ^
+		@brief	ã‚·ãƒªãƒ³ãƒ€ãƒ¼ã®ä½œæˆ
+		@param[in]	Height	é«˜ã•
+		@param[in]	Diameter	ç›´å¾„
+		@param[in]	Tessellation	åˆ†å‰²æ•°
+		@param[in]	AccessWrite = false	é ‚ç‚¹ã‚’å¤‰æ›´ã§ãã‚‹ã‹ã©ã†ã‹
+		@return	ãƒªã‚½ãƒ¼ã‚¹ã®ã‚¹ãƒãƒ¼ãƒˆãƒã‚¤ãƒ³ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		static shared_ptr<MeshResource> CreateCylinder(float Height, float Diameter, size_t Tessellation, bool AccessWrite = false);
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒR[ƒ“‚Ìì¬
-		@param[in]	Diameter	’¼Œa
-		@param[in]	Height	‚‚³
-		@param[in]	Tessellation	•ªŠ„”
-		@param[in]	AccessWrite = false	’¸“_‚ğ•ÏX‚Å‚«‚é‚©‚Ç‚¤‚©
-		@return	ƒŠƒ\[ƒX‚ÌƒXƒ}[ƒgƒ|ƒCƒ“ƒ^
+		@brief	ã‚³ãƒ¼ãƒ³ã®ä½œæˆ
+		@param[in]	Diameter	ç›´å¾„
+		@param[in]	Height	é«˜ã•
+		@param[in]	Tessellation	åˆ†å‰²æ•°
+		@param[in]	AccessWrite = false	é ‚ç‚¹ã‚’å¤‰æ›´ã§ãã‚‹ã‹ã©ã†ã‹
+		@return	ãƒªã‚½ãƒ¼ã‚¹ã®ã‚¹ãƒãƒ¼ãƒˆãƒã‚¤ãƒ³ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		static shared_ptr<MeshResource> CreateCone(float Diameter, float Height, size_t Tessellation, bool AccessWrite = false);
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒg[ƒ‰ƒX‚Ìì¬
-		@param[in]	Diameter	’¼Œa
-		@param[in]	Thickness	ƒh[ƒiƒbƒc‚Ì‘¾‚³
-		@param[in]	Tessellation	•ªŠ„”
-		@param[in]	AccessWrite = false	’¸“_‚ğ•ÏX‚Å‚«‚é‚©‚Ç‚¤‚©
-		@return	ƒŠƒ\[ƒX‚ÌƒXƒ}[ƒgƒ|ƒCƒ“ƒ^
+		@brief	ãƒˆãƒ¼ãƒ©ã‚¹ã®ä½œæˆ
+		@param[in]	Diameter	ç›´å¾„
+		@param[in]	Thickness	ãƒ‰ãƒ¼ãƒŠãƒƒãƒ„ã®å¤ªã•
+		@param[in]	Tessellation	åˆ†å‰²æ•°
+		@param[in]	AccessWrite = false	é ‚ç‚¹ã‚’å¤‰æ›´ã§ãã‚‹ã‹ã©ã†ã‹
+		@return	ãƒªã‚½ãƒ¼ã‚¹ã®ã‚¹ãƒãƒ¼ãƒˆãƒã‚¤ãƒ³ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		static shared_ptr<MeshResource> CreateTorus(float Diameter, float Thickness, size_t Tessellation, bool AccessWrite = false);
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	³4–Ê‘Ì‚Ìì¬
-		@param[in]	Size	1•Ó‚ÌƒTƒCƒY
-		@param[in]	AccessWrite = false	’¸“_‚ğ•ÏX‚Å‚«‚é‚©‚Ç‚¤‚©
-		@return	ƒŠƒ\[ƒX‚ÌƒXƒ}[ƒgƒ|ƒCƒ“ƒ^
+		@brief	æ­£4é¢ä½“ã®ä½œæˆ
+		@param[in]	Size	1è¾ºã®ã‚µã‚¤ã‚º
+		@param[in]	AccessWrite = false	é ‚ç‚¹ã‚’å¤‰æ›´ã§ãã‚‹ã‹ã©ã†ã‹
+		@return	ãƒªã‚½ãƒ¼ã‚¹ã®ã‚¹ãƒãƒ¼ãƒˆãƒã‚¤ãƒ³ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		static shared_ptr<MeshResource> CreateTetrahedron(float Size, bool AccessWrite = false);
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	³8–Ê‘Ì‚Ìì¬
-		@param[in]	Size	1•Ó‚ÌƒTƒCƒY
-		@param[in]	AccessWrite = false	’¸“_‚ğ•ÏX‚Å‚«‚é‚©‚Ç‚¤‚©
-		@return	ƒŠƒ\[ƒX‚ÌƒXƒ}[ƒgƒ|ƒCƒ“ƒ^
+		@brief	æ­£8é¢ä½“ã®ä½œæˆ
+		@param[in]	Size	1è¾ºã®ã‚µã‚¤ã‚º
+		@param[in]	AccessWrite = false	é ‚ç‚¹ã‚’å¤‰æ›´ã§ãã‚‹ã‹ã©ã†ã‹
+		@return	ãƒªã‚½ãƒ¼ã‚¹ã®ã‚¹ãƒãƒ¼ãƒˆãƒã‚¤ãƒ³ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		static shared_ptr<MeshResource> CreateOctahedron(float Size, bool AccessWrite = false);
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	³12–Ê‘Ì‚Ìì¬
-		@param[in]	Size	1•Ó‚ÌƒTƒCƒY
-		@param[in]	AccessWrite = false	’¸“_‚ğ•ÏX‚Å‚«‚é‚©‚Ç‚¤‚©
-		@return	ƒŠƒ\[ƒX‚ÌƒXƒ}[ƒgƒ|ƒCƒ“ƒ^
+		@brief	æ­£12é¢ä½“ã®ä½œæˆ
+		@param[in]	Size	1è¾ºã®ã‚µã‚¤ã‚º
+		@param[in]	AccessWrite = false	é ‚ç‚¹ã‚’å¤‰æ›´ã§ãã‚‹ã‹ã©ã†ã‹
+		@return	ãƒªã‚½ãƒ¼ã‚¹ã®ã‚¹ãƒãƒ¼ãƒˆãƒã‚¤ãƒ³ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		static shared_ptr<MeshResource> CreateDodecahedron(float Size, bool AccessWrite = false);
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	³20–Ê‘Ì‚Ìì¬
-		@param[in]	Size	1•Ó‚ÌƒTƒCƒY
-		@param[in]	AccessWrite = false	’¸“_‚ğ•ÏX‚Å‚«‚é‚©‚Ç‚¤‚©
-		@return	ƒŠƒ\[ƒX‚ÌƒXƒ}[ƒgƒ|ƒCƒ“ƒ^
+		@brief	æ­£20é¢ä½“ã®ä½œæˆ
+		@param[in]	Size	1è¾ºã®ã‚µã‚¤ã‚º
+		@param[in]	AccessWrite = false	é ‚ç‚¹ã‚’å¤‰æ›´ã§ãã‚‹ã‹ã©ã†ã‹
+		@return	ãƒªã‚½ãƒ¼ã‚¹ã®ã‚¹ãƒãƒ¼ãƒˆãƒã‚¤ãƒ³ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		static shared_ptr<MeshResource> CreateIcosahedron(float Size, bool AccessWrite = false);
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒIƒŠƒWƒiƒ‹ƒƒbƒVƒ…ƒf[ƒ^‚Ì“Ç‚İ‚İiƒXƒ^ƒeƒBƒbƒNƒƒbƒVƒ…j
-		@param[in]	Reader	ƒŠ[ƒ_[
-		@param[in]	BinDataDir	Šî€ƒfƒBƒŒƒNƒgƒŠ
-		@param[in]	BinDataFile	ƒf[ƒ^ƒtƒ@ƒCƒ‹–¼
-		@param[out]	vertices	’¸“_‚ÌQÆ
-		@param[out]	indices	ƒCƒ“ƒfƒbƒNƒX‚ÌQÆ
-		@param[out]	materials	ƒ}ƒeƒŠƒAƒ‹‚ÌQÆ
-		@return	‚È‚µ
+		@brief	ã‚ªãƒªã‚¸ãƒŠãƒ«ãƒ¡ãƒƒã‚·ãƒ¥ãƒ‡ãƒ¼ã‚¿ã®èª­ã¿è¾¼ã¿ï¼ˆã‚¹ã‚¿ãƒ†ã‚£ãƒƒã‚¯ãƒ¡ãƒƒã‚·ãƒ¥ï¼‰
+		@param[in]	Reader	ãƒªãƒ¼ãƒ€ãƒ¼
+		@param[in]	BinDataDir	åŸºæº–ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª
+		@param[in]	BinDataFile	ãƒ‡ãƒ¼ã‚¿ãƒ•ã‚¡ã‚¤ãƒ«å
+		@param[out]	vertices	é ‚ç‚¹ã®å‚ç…§
+		@param[out]	indices	ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã®å‚ç…§
+		@param[out]	materials	ãƒãƒ†ãƒªã‚¢ãƒ«ã®å‚ç…§
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		static void ReadBaseData(BinaryReader& Reader, const wstring& BinDataDir, const wstring& BinDataFile,
@@ -685,17 +685,17 @@ namespace basecross {
 			vector<uint16_t>& indices, vector<MaterialEx>& materials);
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒIƒŠƒWƒiƒ‹ƒƒbƒVƒ…ƒf[ƒ^‚Ì“Ç‚İ‚İiƒ{[ƒ“ƒƒbƒVƒ…j
-		@param[in]	Reader	ƒŠ[ƒ_[
-		@param[in]	BinDataDir	Šî€ƒfƒBƒŒƒNƒgƒŠ
-		@param[in]	BinDataFile	ƒf[ƒ^ƒtƒ@ƒCƒ‹–¼
-		@param[out]	vertices	’¸“_‚ÌQÆ
-		@param[out]	indices	ƒCƒ“ƒfƒbƒNƒX‚ÌQÆ
-		@param[out]	materials	ƒ}ƒeƒŠƒAƒ‹‚ÌQÆ
-		@param[out]	bonematrix	ƒ{[ƒ“s—ñ‚ÌQÆ
-		@param[out]	BoneCount	ƒ{[ƒ“”‚ÌQÆ
-		@param[out]	SampleCount	ƒTƒ“ƒvƒ‹”‚ÌQÆ
-		@return	‚È‚µ
+		@brief	ã‚ªãƒªã‚¸ãƒŠãƒ«ãƒ¡ãƒƒã‚·ãƒ¥ãƒ‡ãƒ¼ã‚¿ã®èª­ã¿è¾¼ã¿ï¼ˆãƒœãƒ¼ãƒ³ãƒ¡ãƒƒã‚·ãƒ¥ï¼‰
+		@param[in]	Reader	ãƒªãƒ¼ãƒ€ãƒ¼
+		@param[in]	BinDataDir	åŸºæº–ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª
+		@param[in]	BinDataFile	ãƒ‡ãƒ¼ã‚¿ãƒ•ã‚¡ã‚¤ãƒ«å
+		@param[out]	vertices	é ‚ç‚¹ã®å‚ç…§
+		@param[out]	indices	ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã®å‚ç…§
+		@param[out]	materials	ãƒãƒ†ãƒªã‚¢ãƒ«ã®å‚ç…§
+		@param[out]	bonematrix	ãƒœãƒ¼ãƒ³è¡Œåˆ—ã®å‚ç…§
+		@param[out]	BoneCount	ãƒœãƒ¼ãƒ³æ•°ã®å‚ç…§
+		@param[out]	SampleCount	ã‚µãƒ³ãƒ—ãƒ«æ•°ã®å‚ç…§
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		static void ReadBaseBoneData(BinaryReader& Reader,const wstring& BinDataDir, const wstring& BinDataFile,
@@ -704,119 +704,119 @@ namespace basecross {
 			vector<bsm::Mat4x4>& bonematrix, UINT& BoneCount, UINT& SampleCount);
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒIƒŠƒWƒiƒ‹ƒƒbƒVƒ…‚Ìì¬iƒXƒ^ƒeƒBƒbƒNƒƒbƒVƒ…EƒŠ[ƒ_w’è”Åj
-		@param[in]	Reader	ƒŠ[ƒ_[
-		@param[in]	BinDataDir	Šî€ƒfƒBƒŒƒNƒgƒŠ
-		@param[in]	BinDataFile	ƒf[ƒ^ƒtƒ@ƒCƒ‹–¼
-		@param[in]	AccessWrite = false	’¸“_‚ğ•ÏX‚Å‚«‚é‚©‚Ç‚¤‚©
-		@return	ƒŠƒ\[ƒX‚ÌƒXƒ}[ƒgƒ|ƒCƒ“ƒ^
+		@brief	ã‚ªãƒªã‚¸ãƒŠãƒ«ãƒ¡ãƒƒã‚·ãƒ¥ã®ä½œæˆï¼ˆã‚¹ã‚¿ãƒ†ã‚£ãƒƒã‚¯ãƒ¡ãƒƒã‚·ãƒ¥ãƒ»ãƒªãƒ¼ãƒ€æŒ‡å®šç‰ˆï¼‰
+		@param[in]	Reader	ãƒªãƒ¼ãƒ€ãƒ¼
+		@param[in]	BinDataDir	åŸºæº–ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª
+		@param[in]	BinDataFile	ãƒ‡ãƒ¼ã‚¿ãƒ•ã‚¡ã‚¤ãƒ«å
+		@param[in]	AccessWrite = false	é ‚ç‚¹ã‚’å¤‰æ›´ã§ãã‚‹ã‹ã©ã†ã‹
+		@return	ãƒªã‚½ãƒ¼ã‚¹ã®ã‚¹ãƒãƒ¼ãƒˆãƒã‚¤ãƒ³ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		static shared_ptr<MeshResource> CreateStaticModelMeshBase(BinaryReader& Reader, const wstring& BinDataDir,
 			const wstring& BinDataFile, bool AccessWrite = false);
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒ^ƒ“ƒWƒFƒ“ƒg•t‚«ƒIƒŠƒWƒiƒ‹ƒƒbƒVƒ…‚Ìì¬iƒXƒ^ƒeƒBƒbƒNƒƒbƒVƒ…EƒŠ[ƒ_w’è”Åj
-		@param[in]	Reader	ƒŠ[ƒ_[
-		@param[in]	BinDataDir	Šî€ƒfƒBƒŒƒNƒgƒŠ
-		@param[in]	BinDataFile	ƒf[ƒ^ƒtƒ@ƒCƒ‹–¼
-		@param[in]	AccessWrite = false	’¸“_‚ğ•ÏX‚Å‚«‚é‚©‚Ç‚¤‚©
-		@return	ƒŠƒ\[ƒX‚ÌƒXƒ}[ƒgƒ|ƒCƒ“ƒ^
+		@brief	ã‚¿ãƒ³ã‚¸ã‚§ãƒ³ãƒˆä»˜ãã‚ªãƒªã‚¸ãƒŠãƒ«ãƒ¡ãƒƒã‚·ãƒ¥ã®ä½œæˆï¼ˆã‚¹ã‚¿ãƒ†ã‚£ãƒƒã‚¯ãƒ¡ãƒƒã‚·ãƒ¥ãƒ»ãƒªãƒ¼ãƒ€æŒ‡å®šç‰ˆï¼‰
+		@param[in]	Reader	ãƒªãƒ¼ãƒ€ãƒ¼
+		@param[in]	BinDataDir	åŸºæº–ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª
+		@param[in]	BinDataFile	ãƒ‡ãƒ¼ã‚¿ãƒ•ã‚¡ã‚¤ãƒ«å
+		@param[in]	AccessWrite = false	é ‚ç‚¹ã‚’å¤‰æ›´ã§ãã‚‹ã‹ã©ã†ã‹
+		@return	ãƒªã‚½ãƒ¼ã‚¹ã®ã‚¹ãƒãƒ¼ãƒˆãƒã‚¤ãƒ³ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		static shared_ptr<MeshResource> CreateStaticModelMeshWithTangentBase(BinaryReader& Reader, const wstring& BinDataDir,
 			const wstring& BinDataFile, bool AccessWrite = false);
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒIƒŠƒWƒiƒ‹ƒƒbƒVƒ…‚Ìì¬iƒ{[ƒ“ƒƒbƒVƒ…EƒŠ[ƒ_w’è”Åj
-		@param[in]	Reader	ƒŠ[ƒ_[
-		@param[in]	BinDataDir	Šî€ƒfƒBƒŒƒNƒgƒŠ
-		@param[in]	BinDataFile	ƒf[ƒ^ƒtƒ@ƒCƒ‹–¼
-		@param[in]	AccessWrite = false	’¸“_‚ğ•ÏX‚Å‚«‚é‚©‚Ç‚¤‚©
-		@return	ƒŠƒ\[ƒX‚ÌƒXƒ}[ƒgƒ|ƒCƒ“ƒ^
+		@brief	ã‚ªãƒªã‚¸ãƒŠãƒ«ãƒ¡ãƒƒã‚·ãƒ¥ã®ä½œæˆï¼ˆãƒœãƒ¼ãƒ³ãƒ¡ãƒƒã‚·ãƒ¥ãƒ»ãƒªãƒ¼ãƒ€æŒ‡å®šç‰ˆï¼‰
+		@param[in]	Reader	ãƒªãƒ¼ãƒ€ãƒ¼
+		@param[in]	BinDataDir	åŸºæº–ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª
+		@param[in]	BinDataFile	ãƒ‡ãƒ¼ã‚¿ãƒ•ã‚¡ã‚¤ãƒ«å
+		@param[in]	AccessWrite = false	é ‚ç‚¹ã‚’å¤‰æ›´ã§ãã‚‹ã‹ã©ã†ã‹
+		@return	ãƒªã‚½ãƒ¼ã‚¹ã®ã‚¹ãƒãƒ¼ãƒˆãƒã‚¤ãƒ³ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		static shared_ptr<MeshResource> CreateBoneModelMeshBase(BinaryReader& Reader, const wstring& BinDataDir,
 			const wstring& BinDataFile, bool AccessWrite = false);
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒ^ƒ“ƒWƒFƒ“ƒg•t‚«ƒIƒŠƒWƒiƒ‹ƒƒbƒVƒ…‚Ìì¬iƒ{[ƒ“ƒƒbƒVƒ…EƒŠ[ƒ_w’è”Åj
-		@param[in]	Reader	ƒŠ[ƒ_[
-		@param[in]	BinDataDir	Šî€ƒfƒBƒŒƒNƒgƒŠ
-		@param[in]	BinDataFile	ƒf[ƒ^ƒtƒ@ƒCƒ‹–¼
-		@param[in]	AccessWrite = false	’¸“_‚ğ•ÏX‚Å‚«‚é‚©‚Ç‚¤‚©
-		@return	ƒŠƒ\[ƒX‚ÌƒXƒ}[ƒgƒ|ƒCƒ“ƒ^
+		@brief	ã‚¿ãƒ³ã‚¸ã‚§ãƒ³ãƒˆä»˜ãã‚ªãƒªã‚¸ãƒŠãƒ«ãƒ¡ãƒƒã‚·ãƒ¥ã®ä½œæˆï¼ˆãƒœãƒ¼ãƒ³ãƒ¡ãƒƒã‚·ãƒ¥ãƒ»ãƒªãƒ¼ãƒ€æŒ‡å®šç‰ˆï¼‰
+		@param[in]	Reader	ãƒªãƒ¼ãƒ€ãƒ¼
+		@param[in]	BinDataDir	åŸºæº–ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª
+		@param[in]	BinDataFile	ãƒ‡ãƒ¼ã‚¿ãƒ•ã‚¡ã‚¤ãƒ«å
+		@param[in]	AccessWrite = false	é ‚ç‚¹ã‚’å¤‰æ›´ã§ãã‚‹ã‹ã©ã†ã‹
+		@return	ãƒªã‚½ãƒ¼ã‚¹ã®ã‚¹ãƒãƒ¼ãƒˆãƒã‚¤ãƒ³ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		static shared_ptr<MeshResource> CreateBoneModelMeshWithTangentBase(BinaryReader& Reader, const wstring& BinDataDir,
 			const wstring& BinDataFile, bool AccessWrite = false);
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒIƒŠƒWƒiƒ‹ƒƒbƒVƒ…‚Ìì¬iƒXƒ^ƒeƒBƒbƒNƒƒbƒVƒ…j
-		@param[in]	BinDataDir	Šî€ƒfƒBƒŒƒNƒgƒŠ
-		@param[in]	BinDataFile	ƒf[ƒ^ƒtƒ@ƒCƒ‹–¼
-		@param[in]	AccessWrite = false	’¸“_‚ğ•ÏX‚Å‚«‚é‚©‚Ç‚¤‚©
-		@return	ƒŠƒ\[ƒX‚ÌƒXƒ}[ƒgƒ|ƒCƒ“ƒ^
+		@brief	ã‚ªãƒªã‚¸ãƒŠãƒ«ãƒ¡ãƒƒã‚·ãƒ¥ã®ä½œæˆï¼ˆã‚¹ã‚¿ãƒ†ã‚£ãƒƒã‚¯ãƒ¡ãƒƒã‚·ãƒ¥ï¼‰
+		@param[in]	BinDataDir	åŸºæº–ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª
+		@param[in]	BinDataFile	ãƒ‡ãƒ¼ã‚¿ãƒ•ã‚¡ã‚¤ãƒ«å
+		@param[in]	AccessWrite = false	é ‚ç‚¹ã‚’å¤‰æ›´ã§ãã‚‹ã‹ã©ã†ã‹
+		@return	ãƒªã‚½ãƒ¼ã‚¹ã®ã‚¹ãƒãƒ¼ãƒˆãƒã‚¤ãƒ³ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		static shared_ptr<MeshResource> CreateStaticModelMesh(const wstring& BinDataDir,
 			const wstring& BinDataFile, bool AccessWrite = false);
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒ^ƒ“ƒWƒFƒ“ƒg•t‚«ƒIƒŠƒWƒiƒ‹ƒƒbƒVƒ…‚Ìì¬iƒXƒ^ƒeƒBƒbƒNƒƒbƒVƒ…j
-		@param[in]	BinDataDir	Šî€ƒfƒBƒŒƒNƒgƒŠ
-		@param[in]	BinDataFile	ƒf[ƒ^ƒtƒ@ƒCƒ‹–¼
-		@param[in]	AccessWrite = false	’¸“_‚ğ•ÏX‚Å‚«‚é‚©‚Ç‚¤‚©
-		@return	ƒŠƒ\[ƒX‚ÌƒXƒ}[ƒgƒ|ƒCƒ“ƒ^
+		@brief	ã‚¿ãƒ³ã‚¸ã‚§ãƒ³ãƒˆä»˜ãã‚ªãƒªã‚¸ãƒŠãƒ«ãƒ¡ãƒƒã‚·ãƒ¥ã®ä½œæˆï¼ˆã‚¹ã‚¿ãƒ†ã‚£ãƒƒã‚¯ãƒ¡ãƒƒã‚·ãƒ¥ï¼‰
+		@param[in]	BinDataDir	åŸºæº–ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª
+		@param[in]	BinDataFile	ãƒ‡ãƒ¼ã‚¿ãƒ•ã‚¡ã‚¤ãƒ«å
+		@param[in]	AccessWrite = false	é ‚ç‚¹ã‚’å¤‰æ›´ã§ãã‚‹ã‹ã©ã†ã‹
+		@return	ãƒªã‚½ãƒ¼ã‚¹ã®ã‚¹ãƒãƒ¼ãƒˆãƒã‚¤ãƒ³ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		static shared_ptr<MeshResource> CreateStaticModelMeshWithTangent(const wstring& BinDataDir,
 			const wstring& BinDataFile, bool AccessWrite = false);
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒIƒŠƒWƒiƒ‹ƒƒbƒVƒ…‚Ìì¬iƒ{[ƒ“ƒƒbƒVƒ…j
-		@param[in]	BinDataDir	Šî€ƒfƒBƒŒƒNƒgƒŠ
-		@param[in]	BinDataFile	ƒf[ƒ^ƒtƒ@ƒCƒ‹–¼
-		@param[in]	AccessWrite = false	’¸“_‚ğ•ÏX‚Å‚«‚é‚©‚Ç‚¤‚©
-		@return	ƒŠƒ\[ƒX‚ÌƒXƒ}[ƒgƒ|ƒCƒ“ƒ^
+		@brief	ã‚ªãƒªã‚¸ãƒŠãƒ«ãƒ¡ãƒƒã‚·ãƒ¥ã®ä½œæˆï¼ˆãƒœãƒ¼ãƒ³ãƒ¡ãƒƒã‚·ãƒ¥ï¼‰
+		@param[in]	BinDataDir	åŸºæº–ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª
+		@param[in]	BinDataFile	ãƒ‡ãƒ¼ã‚¿ãƒ•ã‚¡ã‚¤ãƒ«å
+		@param[in]	AccessWrite = false	é ‚ç‚¹ã‚’å¤‰æ›´ã§ãã‚‹ã‹ã©ã†ã‹
+		@return	ãƒªã‚½ãƒ¼ã‚¹ã®ã‚¹ãƒãƒ¼ãƒˆãƒã‚¤ãƒ³ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		static shared_ptr<MeshResource> CreateBoneModelMesh(const wstring& BinDataDir,
 			const wstring& BinDataFile, bool AccessWrite = false);
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒ^ƒ“ƒWƒFƒ“ƒg•t‚«ƒIƒŠƒWƒiƒ‹ƒƒbƒVƒ…‚Ìì¬iƒ{[ƒ“ƒƒbƒVƒ…j
-		@param[in]	BinDataDir	Šî€ƒfƒBƒŒƒNƒgƒŠ
-		@param[in]	BinDataFile	ƒf[ƒ^ƒtƒ@ƒCƒ‹–¼
-		@param[in]	AccessWrite = false	’¸“_‚ğ•ÏX‚Å‚«‚é‚©‚Ç‚¤‚©
-		@return	ƒŠƒ\[ƒX‚ÌƒXƒ}[ƒgƒ|ƒCƒ“ƒ^
+		@brief	ã‚¿ãƒ³ã‚¸ã‚§ãƒ³ãƒˆä»˜ãã‚ªãƒªã‚¸ãƒŠãƒ«ãƒ¡ãƒƒã‚·ãƒ¥ã®ä½œæˆï¼ˆãƒœãƒ¼ãƒ³ãƒ¡ãƒƒã‚·ãƒ¥ï¼‰
+		@param[in]	BinDataDir	åŸºæº–ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª
+		@param[in]	BinDataFile	ãƒ‡ãƒ¼ã‚¿ãƒ•ã‚¡ã‚¤ãƒ«å
+		@param[in]	AccessWrite = false	é ‚ç‚¹ã‚’å¤‰æ›´ã§ãã‚‹ã‹ã©ã†ã‹
+		@return	ãƒªã‚½ãƒ¼ã‚¹ã®ã‚¹ãƒãƒ¼ãƒˆãƒã‚¤ãƒ³ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		static shared_ptr<MeshResource> CreateBoneModelMeshWithTangent(const wstring& BinDataDir,
 			const wstring& BinDataFile, bool AccessWrite = false);
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒƒbƒVƒ…ƒŠƒ\[ƒX‚Ìì¬
-		@tparam	T	’¸“_Œ^
-		@param[in]	vertices	’¸“_‚Ì”z—ñ
-		@param[in]	AccessWrite	ã‘‚«‰Â”\‚©‚Ç‚¤‚©
-		@return	ƒŠƒ\[ƒX‚ÌƒXƒ}[ƒgƒ|ƒCƒ“ƒ^
+		@brief	ãƒ¡ãƒƒã‚·ãƒ¥ãƒªã‚½ãƒ¼ã‚¹ã®ä½œæˆ
+		@tparam	T	é ‚ç‚¹å‹
+		@param[in]	vertices	é ‚ç‚¹ã®é…åˆ—
+		@param[in]	AccessWrite	ä¸Šæ›¸ãå¯èƒ½ã‹ã©ã†ã‹
+		@return	ãƒªã‚½ãƒ¼ã‚¹ã®ã‚¹ãƒãƒ¼ãƒˆãƒã‚¤ãƒ³ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		template<typename T>
 		static  shared_ptr<MeshResource> CreateMeshResource(const vector<T>& vertices, bool AccessWrite) {
 			std::mutex Mutex;
-			//ƒfƒoƒCƒX‚Ìæ“¾
+			//ãƒ‡ãƒã‚¤ã‚¹ã®å–å¾—
 			auto Dev = App::GetApp()->GetDeviceResources();
 			auto pDx11Device = Dev->GetD3DDevice();
 			auto Ptr = ObjectFactory::Create<MeshResource>();
-			//”Ä—p’¸“_‚Ìì¬
+			//æ±ç”¨é ‚ç‚¹ã®ä½œæˆ
 			for (auto& v : vertices) {
 				VertexPosition vertex;
 				vertex.position = v.position;
 				Ptr->m_MeshPrimData.m_Vertices.push_back(vertex);
 			}
-			//ƒoƒbƒtƒ@‚Ìì¬
+			//ãƒãƒƒãƒ•ã‚¡ã®ä½œæˆ
 			if (AccessWrite) {
 				Util::DemandCreate(Ptr->m_MeshPrimData.m_VertexBuffer, Mutex, [&](ID3D11Buffer** pResult)
 				{
@@ -825,18 +825,18 @@ namespace basecross {
 						PtrBackup->m_Vertices.push_back(v);
 					}
 					Ptr->m_MeshPrimData.m_BackUpData = PtrBackup;
-					//’¸“_ƒoƒbƒtƒ@‚Ìì¬
+					//é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã®ä½œæˆ
 					MeshResource::CreateDynamicPrimitiveVertexBuffer(pDx11Device, vertices, pResult);
 				});
 			}
 			else {
 				Util::DemandCreate(Ptr->m_MeshPrimData.m_VertexBuffer, Mutex, [&](ID3D11Buffer** pResult)
 				{
-					//’¸“_ƒoƒbƒtƒ@‚Ìì¬
+					//é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã®ä½œæˆ
 					MeshResource::CreatePrimitiveBuffer(pDx11Device, vertices, D3D11_BIND_VERTEX_BUFFER, pResult);
 				});
 			}
-			//’¸“_”‚Ìİ’è
+			//é ‚ç‚¹æ•°ã®è¨­å®š
 			Ptr->m_MeshPrimData.m_NumVertices = static_cast<UINT>(vertices.size());
 			Ptr->m_MeshPrimData.m_MeshTypeIndex = typeid(T);
 			Ptr->m_MeshPrimData.m_NumStride = sizeof(T);
@@ -844,30 +844,30 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒƒbƒVƒ…ƒŠƒ\[ƒX‚Ìì¬
-		@tparam	T	’¸“_‚ÌŒ^
-		@param[in]	vertices	’¸“_‚Ì”z—ñ
-		@param[in]	indices	ƒCƒ“ƒfƒbƒNƒX‚Ì”z—ñ
-		@param[in]	AccessWrite	ã‘‚«‰Â”\‚©‚Ç‚¤‚©
-		@return	ƒŠƒ\[ƒX‚ÌƒXƒ}[ƒgƒ|ƒCƒ“ƒ^
+		@brief	ãƒ¡ãƒƒã‚·ãƒ¥ãƒªã‚½ãƒ¼ã‚¹ã®ä½œæˆ
+		@tparam	T	é ‚ç‚¹ã®å‹
+		@param[in]	vertices	é ‚ç‚¹ã®é…åˆ—
+		@param[in]	indices	ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã®é…åˆ—
+		@param[in]	AccessWrite	ä¸Šæ›¸ãå¯èƒ½ã‹ã©ã†ã‹
+		@return	ãƒªã‚½ãƒ¼ã‚¹ã®ã‚¹ãƒãƒ¼ãƒˆãƒã‚¤ãƒ³ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		template<typename T>
 		static  shared_ptr<MeshResource> CreateMeshResource(const vector<T>& vertices, const vector<uint16_t>& indices, bool AccessWrite) {
 			std::mutex Mutex;
-			//ƒfƒoƒCƒX‚Ìæ“¾
+			//ãƒ‡ãƒã‚¤ã‚¹ã®å–å¾—
 			auto Dev = App::GetApp()->GetDeviceResources();
 			auto pDx11Device = Dev->GetD3DDevice();
 			auto pID3D11DeviceContext = Dev->GetD3DDeviceContext();
 			auto Ptr = ObjectFactory::Create<MeshResource>();
-			//”Ä—p’¸“_‚Ìì¬B
-			//ƒCƒ“ƒfƒbƒNƒX‚ğ‚à‚Æ‚Éì¬‚·‚é
+			//æ±ç”¨é ‚ç‚¹ã®ä½œæˆã€‚
+			//ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã‚’ã‚‚ã¨ã«ä½œæˆã™ã‚‹
 			for (auto i : indices) {
 				VertexPosition vertex;
 				vertex.position = vertices[i].position;
 				Ptr->m_MeshPrimData.m_Vertices.push_back(vertex);
-				//ƒXƒLƒ“î•ñ‚ğ‚Â‚©‚Ç‚¤‚©
-				//VertexPositionNormalTangentColorTextureSkinning‚Í–¢‘Î‰
+				//ã‚¹ã‚­ãƒ³æƒ…å ±ã‚’æŒã¤ã‹ã©ã†ã‹
+				//VertexPositionNormalTangentColorTextureSkinningã¯æœªå¯¾å¿œ
 				if (typeid(T) == typeid(VertexPositionNormalTextureSkinning)) {
 					auto& ref = (VertexPositionNormalTextureSkinning&)vertices[i];
 					SkinPrimData sdata;
@@ -888,7 +888,7 @@ namespace basecross {
 					Ptr->m_MeshPrimData.m_Skins.push_back(sdata);
 				}
 			}
-			//ƒoƒbƒtƒ@‚Ìì¬
+			//ãƒãƒƒãƒ•ã‚¡ã®ä½œæˆ
 			if (AccessWrite) {
 				Util::DemandCreate(Ptr->m_MeshPrimData.m_VertexBuffer, Mutex, [&](ID3D11Buffer** pResult)
 				{
@@ -897,20 +897,20 @@ namespace basecross {
 						PtrBackup->m_Vertices.push_back(v);
 					}
 					Ptr->m_MeshPrimData.m_BackUpData = PtrBackup;
-					//’¸“_ƒoƒbƒtƒ@‚Ìì¬
+					//é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã®ä½œæˆ
 					MeshResource::CreateDynamicPrimitiveVertexBuffer(pDx11Device, vertices, pResult);
 				});
 			}
 			else {
 				Util::DemandCreate(Ptr->m_MeshPrimData.m_VertexBuffer, Mutex, [&](ID3D11Buffer** pResult)
 				{
-					//’¸“_ƒoƒbƒtƒ@‚Ìì¬
+					//é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã®ä½œæˆ
 					MeshResource::CreatePrimitiveBuffer(pDx11Device, vertices, D3D11_BIND_VERTEX_BUFFER, pResult);
 				});
 			}
-			//’¸“_”‚Ìİ’è
+			//é ‚ç‚¹æ•°ã®è¨­å®š
 			Ptr->m_MeshPrimData.m_NumVertices = static_cast<UINT>(vertices.size());
-			//ƒCƒ“ƒfƒbƒNƒX‚Ìì¬
+			//ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã®ä½œæˆ
 			Util::DemandCreate(Ptr->m_MeshPrimData.m_IndexBuffer, Mutex, [&](ID3D11Buffer** pResult)
 			{
 				if (Ptr->m_MeshPrimData.m_BackUpData) {
@@ -919,10 +919,10 @@ namespace basecross {
 						PtrBackup->m_Indices.push_back(v);
 					}
 				}
-				//ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@‚Ìì¬
+				//ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ã®ä½œæˆ
 				MeshResource::CreatePrimitiveBuffer(pDx11Device, indices, D3D11_BIND_INDEX_BUFFER, pResult);
 			});
-			//ƒCƒ“ƒfƒbƒNƒX”‚Ìİ’è
+			//ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹æ•°ã®è¨­å®š
 			Ptr->m_MeshPrimData.m_NumIndicis = static_cast<UINT>(indices.size());
 			Ptr->m_MeshPrimData.m_MeshTypeIndex = typeid(T);
 			Ptr->m_MeshPrimData.m_NumStride = sizeof(T);
@@ -930,12 +930,12 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒoƒbƒNƒAƒbƒvƒf[ƒ^‚Ìæ“¾<br />
-		AccessWrite‚ªtrue‚Åì¬‚³‚ê‚½ƒŠƒ\[ƒX‚ÍA’¸“_‚Ì”z—ñ‚É‚æ‚Á‚Ä’¸“_‚ğ•ÏX‚Å‚«‚éB<br />
-		AccessWrite‚ªtrue‚Å‚È‚¢ê‡‚ÍAƒoƒbƒNƒAƒbƒv‚Í‹ó‚Å‚ ‚éB
-		@tparam	T	’¸“_‚ÌŒ^
-		@param	‚È‚µ
-		@return	ƒoƒbƒNƒAƒbƒvƒf[ƒ^‚Ì”z—ñB
+		@brief	ãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—ãƒ‡ãƒ¼ã‚¿ã®å–å¾—<br />
+		AccessWriteãŒtrueã§ä½œæˆã•ã‚ŒãŸãƒªã‚½ãƒ¼ã‚¹ã¯ã€é ‚ç‚¹ã®é…åˆ—ã«ã‚ˆã£ã¦é ‚ç‚¹ã‚’å¤‰æ›´ã§ãã‚‹ã€‚<br />
+		AccessWriteãŒtrueã§ãªã„å ´åˆã¯ã€ãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—ã¯ç©ºã§ã‚ã‚‹ã€‚
+		@tparam	T	é ‚ç‚¹ã®å‹
+		@param	ãªã—
+		@return	ãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—ãƒ‡ãƒ¼ã‚¿ã®é…åˆ—ã€‚
 		*/
 		//--------------------------------------------------------------------------------------
 		template<typename T>
@@ -943,7 +943,7 @@ namespace basecross {
 			auto Ptr = dynamic_pointer_cast< BackupData<T> >(m_MeshPrimData.m_BackUpData);
 			if (!Ptr) {
 				throw BaseException(
-					L"ƒoƒbƒNƒAƒbƒv‚ğTŒ^‚ÉƒLƒƒƒXƒg‚Å‚«‚Ü‚¹‚ñ",
+					L"ãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—ã‚’Tå‹ã«ã‚­ãƒ£ã‚¹ãƒˆã§ãã¾ã›ã‚“",
 					Util::GetWSTypeName<T>(),
 					L"MeshResource::GetBackupVerteces<T>()"
 				);
@@ -952,12 +952,12 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒoƒbƒNƒAƒbƒvƒf[ƒ^‚ÌƒCƒ“ƒfƒbƒNƒXæ“¾<br />
-		AccessWrite‚ªtrue‚Åì¬‚³‚ê‚½ƒŠƒ\[ƒX‚ÍA’¸“_‚Ì”z—ñ‚É‚æ‚Á‚Ä’¸“_‚ğ•ÏX‚Å‚«‚éB<br />
-		AccessWrite‚ªtrue‚Å‚È‚¢ê‡‚ÍAƒoƒbƒNƒAƒbƒv‚Í‹ó‚Å‚ ‚éB
-		@tparam	T	’¸“_‚ÌŒ^
-		@param	‚È‚µ
-		@return	ƒoƒbƒNƒAƒbƒvƒf[ƒ^ƒCƒ“ƒfƒbƒNƒX‚Ì”z—ñB
+		@brief	ãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—ãƒ‡ãƒ¼ã‚¿ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹å–å¾—<br />
+		AccessWriteãŒtrueã§ä½œæˆã•ã‚ŒãŸãƒªã‚½ãƒ¼ã‚¹ã¯ã€é ‚ç‚¹ã®é…åˆ—ã«ã‚ˆã£ã¦é ‚ç‚¹ã‚’å¤‰æ›´ã§ãã‚‹ã€‚<br />
+		AccessWriteãŒtrueã§ãªã„å ´åˆã¯ã€ãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—ã¯ç©ºã§ã‚ã‚‹ã€‚
+		@tparam	T	é ‚ç‚¹ã®å‹
+		@param	ãªã—
+		@return	ãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—ãƒ‡ãƒ¼ã‚¿ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã®é…åˆ—ã€‚
 		*/
 		//--------------------------------------------------------------------------------------
 		template<typename T>
@@ -965,7 +965,7 @@ namespace basecross {
 			auto Ptr = dynamic_pointer_cast< BackupData<T> >(m_MeshPrimData.m_BackUpData);
 			if (!Ptr) {
 				throw BaseException(
-					L"ƒoƒbƒNƒAƒbƒv‚ğTŒ^‚ÉƒLƒƒƒXƒg‚Å‚«‚Ü‚¹‚ñ",
+					L"ãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—ã‚’Tå‹ã«ã‚­ãƒ£ã‚¹ãƒˆã§ãã¾ã›ã‚“",
 					Util::GetWSTypeName<T>(),
 					L"MeshResource::GetBackupIndices<T>()"
 				);
@@ -975,9 +975,9 @@ namespace basecross {
 
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	”Ä—p‚É—˜—p‚Å‚«‚é’¸“_‚Ìæ“¾<br />
-		@param	‚È‚µ
-		@return	’¸“_‚Ì”z—ñB
+		@brief	æ±ç”¨ã«åˆ©ç”¨ã§ãã‚‹é ‚ç‚¹ã®å–å¾—<br />
+		@param	ãªã—
+		@return	é ‚ç‚¹ã®é…åˆ—ã€‚
 		*/
 		//--------------------------------------------------------------------------------------
 		const vector<VertexPosition>& GetVerteces() const {
@@ -985,16 +985,16 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	”Ä—p‚É—˜—p‚Å‚«‚éƒ[ƒJƒ‹’¸“_(Vec3)‚Ìæ“¾<br />
-		@param[out]	ret	‘ã“ü‚³‚ê‚é’¸“_‚Ì”z—ñ
-		@return	‚È‚µ
+		@brief	æ±ç”¨ã«åˆ©ç”¨ã§ãã‚‹ãƒ­ãƒ¼ã‚«ãƒ«é ‚ç‚¹(Vec3)ã®å–å¾—<br />
+		@param[out]	ret	ä»£å…¥ã•ã‚Œã‚‹é ‚ç‚¹ã®é…åˆ—
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		void GetLocalPositions(vector<bsm::Vec3>& ret)const {
-			//ƒ[ƒ‹ƒhs—ñ
+			//ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—
 			bsm::Mat4x4 world;
 			if (m_MeshPrimData.m_UseMeshToTransformMatrix) {
-				//ƒƒbƒVƒ…‚ª•ÏŠ·s—ñ‚ğ‚Á‚Ä‚¢‚éê‡
+				//ãƒ¡ãƒƒã‚·ãƒ¥ãŒå¤‰æ›è¡Œåˆ—ã‚’æŒã£ã¦ã„ã‚‹å ´åˆ
 				world = GetMeshToTransformMatrix();
 			}
 			else {
@@ -1010,9 +1010,9 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	”Ä—p‚É—˜—p‚Å‚«‚éƒXƒLƒ“î•ñ‚Ìæ“¾<br />
-		@param	‚È‚µ
-		@return	ƒXƒLƒ“î•ñ‚Ì”z—ñi‹ó‚Ìê‡‚ ‚èjB
+		@brief	æ±ç”¨ã«åˆ©ç”¨ã§ãã‚‹ã‚¹ã‚­ãƒ³æƒ…å ±ã®å–å¾—<br />
+		@param	ãªã—
+		@return	ã‚¹ã‚­ãƒ³æƒ…å ±ã®é…åˆ—ï¼ˆç©ºã®å ´åˆã‚ã‚Šï¼‰ã€‚
 		*/
 		//--------------------------------------------------------------------------------------
 		const vector<SkinPrimData>& GetSkins() const {
@@ -1020,11 +1020,11 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	’¸“_‚Ì•ÏX.<br />
-		AccessWrite‚ªtrue‚Åì¬‚³‚ê‚½ƒŠƒ\[ƒX‚ÍA’¸“_‚Ì”z—ñ‚É‚æ‚Á‚Ä’¸“_‚ğ•ÏX‚·‚éB
-		@tparam	T	’¸“_‚ÌŒ^
-		@param[in]	NewBuffer	’¸“_‚Ì”z—ñ
-		@return	‚È‚µ
+		@brief	é ‚ç‚¹ã®å¤‰æ›´.<br />
+		AccessWriteãŒtrueã§ä½œæˆã•ã‚ŒãŸãƒªã‚½ãƒ¼ã‚¹ã¯ã€é ‚ç‚¹ã®é…åˆ—ã«ã‚ˆã£ã¦é ‚ç‚¹ã‚’å¤‰æ›´ã™ã‚‹ã€‚
+		@tparam	T	é ‚ç‚¹ã®å‹
+		@param[in]	NewBuffer	é ‚ç‚¹ã®é…åˆ—
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		template<typename T>
@@ -1032,48 +1032,48 @@ namespace basecross {
 			auto Ptr = dynamic_pointer_cast< BackupData<T> >(m_MeshPrimData.m_BackUpData);
 			if (!Ptr) {
 				throw BaseException(
-					L"ƒoƒbƒNƒAƒbƒv‚ğTŒ^‚ÉƒLƒƒƒXƒg‚Å‚«‚Ü‚¹‚ñ",
+					L"ãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—ã‚’Tå‹ã«ã‚­ãƒ£ã‚¹ãƒˆã§ãã¾ã›ã‚“",
 					Util::GetWSTypeName<T>(),
 					L"MeshResource::UpdateVirtexBuffer<T>()"
 				);
 			}
 
 			if (NewBuffer.size() != Ptr->m_Vertices.size()) {
-				// Map¸”s
+				// Mapå¤±æ•—
 				throw BaseException(
-					L"•ÏX‚·‚é’¸“_‚Ì”‚ªƒoƒbƒNƒAƒbƒv‚Æˆá‚¢‚Ü‚·",
+					L"å¤‰æ›´ã™ã‚‹é ‚ç‚¹ã®æ•°ãŒãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—ã¨é•ã„ã¾ã™",
 					L"if (NewBuffer.size() != Ptr->m_Vertices.size())",
 					L"MeshResource::UpdateVirtexBuffer<T>()"
 				);
 			}
-			//À•W‚ğ•ÏX‚·‚é
+			//åº§æ¨™ã‚’å¤‰æ›´ã™ã‚‹
 			auto Dev = App::GetApp()->GetDeviceResources();
 			auto pID3D11DeviceContext = Dev->GetD3DDeviceContext();
-			//’¸“_ƒoƒbƒtƒ@‚ğƒŠƒ\[ƒX‚©‚çæ‚èo‚·
+			//é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã‚’ãƒªã‚½ãƒ¼ã‚¹ã‹ã‚‰å–ã‚Šå‡ºã™
 			auto pVertexBuffer = GetVertexBuffer().Get();
 
-			//D3D11_MAP_WRITE_DISCARD‚Íd—vB‚±‚Ìˆ—‚É‚æ‚èAGPU‚É×–‚‚³‚ê‚È‚¢
+			//D3D11_MAP_WRITE_DISCARDã¯é‡è¦ã€‚ã“ã®å‡¦ç†ã«ã‚ˆã‚Šã€GPUã«é‚ªé­”ã•ã‚Œãªã„
 			D3D11_MAP mapType = D3D11_MAP_WRITE_DISCARD;
 			D3D11_MAPPED_SUBRESOURCE mappedBuffer;
-			//’¸“_‚Ìƒ}ƒbƒv
+			//é ‚ç‚¹ã®ãƒãƒƒãƒ—
 			if (FAILED(pID3D11DeviceContext->Map(pVertexBuffer, 0, mapType, 0, &mappedBuffer))) {
-				// Map¸”s
+				// Mapå¤±æ•—
 				throw BaseException(
-					L"’¸“_‚ÌMap‚É¸”s‚µ‚Ü‚µ‚½B",
+					L"é ‚ç‚¹ã®Mapã«å¤±æ•—ã—ã¾ã—ãŸã€‚",
 					L"if(FAILED(pID3D11DeviceContext->Map()))",
 					L"MeshResource::UpdateVirtexBuffer<T>()"
 				);
 			}
-			//’¸“_‚Ì•ÏX
+			//é ‚ç‚¹ã®å¤‰æ›´
 			T* vertices = (T*)mappedBuffer.pData;
 			for (size_t i = 0; i < NewBuffer.size(); i++) {
 				vertices[i] = NewBuffer[i];
 			}
-			//ƒAƒ“ƒ}ƒbƒv
+			//ã‚¢ãƒ³ãƒãƒƒãƒ—
 			pID3D11DeviceContext->Unmap(pVertexBuffer, 0);
 
-			//”Ä—p’¸“_‚Ìì¬
-			//ƒCƒ“ƒfƒbƒNƒX‚ğ‚à‚Æ‚Éì¬‚·‚é
+			//æ±ç”¨é ‚ç‚¹ã®ä½œæˆ
+			//ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã‚’ã‚‚ã¨ã«ä½œæˆã™ã‚‹
 			m_MeshPrimData.m_Vertices.clear();
 			if (GetNumIndicis() > 0) {
 				auto& indices = GetBackupIndices<T>();
@@ -1081,8 +1081,8 @@ namespace basecross {
 					VertexPosition vertex;
 					vertex.position = NewBuffer[i].position;
 					m_MeshPrimData.m_Vertices.push_back(vertex);
-					//ƒXƒLƒ“î•ñ‚ğ‚Â‚©‚Ç‚¤‚©
-					//VertexPositionNormalTangentColorTextureSkinning‚Í–¢‘Î‰
+					//ã‚¹ã‚­ãƒ³æƒ…å ±ã‚’æŒã¤ã‹ã©ã†ã‹
+					//VertexPositionNormalTangentColorTextureSkinningã¯æœªå¯¾å¿œ
 					if (typeid(T) == typeid(VertexPositionNormalTextureSkinning)) {
 						m_MeshPrimData.m_Skins.clear();
 						auto& ref = (VertexPositionNormalTextureSkinning&)NewBuffer[i];
@@ -1107,7 +1107,7 @@ namespace basecross {
 				}
 			}
 			else {
-				//”Ä—p’¸“_‚Ìì¬
+				//æ±ç”¨é ‚ç‚¹ã®ä½œæˆ
 				for (auto& v : NewBuffer) {
 					VertexPosition vertex;
 					vertex.position = v.position;
@@ -1121,30 +1121,30 @@ namespace basecross {
 
 
 	//--------------------------------------------------------------------------------------
-	///	ƒ}ƒ‹ƒ`ƒƒbƒVƒ…ƒŠƒ\[ƒX
+	///	ãƒãƒ«ãƒãƒ¡ãƒƒã‚·ãƒ¥ãƒªã‚½ãƒ¼ã‚¹
 	//--------------------------------------------------------------------------------------
 	class MultiMeshResource : public BaseResource {
 		friend class ObjectFactory;
-		//ƒƒbƒVƒ…ƒf[ƒ^‚Ì”z—ñ
+		//ãƒ¡ãƒƒã‚·ãƒ¥ãƒ‡ãƒ¼ã‚¿ã®é…åˆ—
 		vector<MeshPrimData> m_MeshPrimDataVec;
-		//”z—ñ‚ÌãŒÀƒ`ƒFƒbƒN(ƒGƒ‰[‚Ìê‡‚Í—áŠO)
+		//é…åˆ—ã®ä¸Šé™ãƒã‚§ãƒƒã‚¯(ã‚¨ãƒ©ãƒ¼ã®å ´åˆã¯ä¾‹å¤–)
 		void CheckMeshVecCount(size_t Index)const {
 			if (Index >= m_MeshPrimDataVec.size()) {
 				throw BaseException(
-					L"ƒƒbƒVƒ…”z—ñ‚ÌãŒÀ‚ğ’´‚¦‚Ü‚µ‚½",
+					L"ãƒ¡ãƒƒã‚·ãƒ¥é…åˆ—ã®ä¸Šé™ã‚’è¶…ãˆã¾ã—ãŸ",
 					L"if (Index >= m_MeshPrimDataVec.size())",
 					L"MultiMeshResource::CheckVecCount()"
 				);
 			}
 		}
 	protected:
-		//”h¶ƒNƒ‰ƒX‚©‚ç‚Ì‚İƒAƒNƒZƒX‚Å‚«‚éƒAƒNƒZƒT
+		//æ´¾ç”Ÿã‚¯ãƒ©ã‚¹ã‹ã‚‰ã®ã¿ã‚¢ã‚¯ã‚»ã‚¹ã§ãã‚‹ã‚¢ã‚¯ã‚»ã‚µ
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	’¸“_ƒoƒbƒtƒ@‚Ìİ’è
-		@param[in]	VertexBuffer	’¸“_ƒoƒbƒtƒ@
-		@param[in]	Index	ƒf[ƒ^”z—ñ‚ÌƒCƒ“ƒfƒbƒNƒX
-		@return	‚È‚µ
+		@brief	é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã®è¨­å®š
+		@param[in]	VertexBuffer	é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡
+		@param[in]	Index	ãƒ‡ãƒ¼ã‚¿é…åˆ—ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		void SetVertexBuffer(const ComPtr<ID3D11Buffer>& VertexBuffer, size_t Index) {
@@ -1153,11 +1153,11 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	’¸“_”‚Ìİ’è<br />
-		’¸“_ƒoƒbƒtƒ@‚Ì”‚Æ‡‚í‚¹‚È‚¯‚ê‚Î‚È‚ç‚È‚¢‚Ì‚ÅATd‚Ég—p‚·‚é
-		@param[in]	NumVertices	’¸“_”
-		@param[in]	Index	ƒf[ƒ^”z—ñ‚ÌƒCƒ“ƒfƒbƒNƒX
-		@return	‚È‚µ
+		@brief	é ‚ç‚¹æ•°ã®è¨­å®š<br />
+		é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã®æ•°ã¨åˆã‚ã›ãªã‘ã‚Œã°ãªã‚‰ãªã„ã®ã§ã€æ…é‡ã«ä½¿ç”¨ã™ã‚‹
+		@param[in]	NumVertices	é ‚ç‚¹æ•°
+		@param[in]	Index	ãƒ‡ãƒ¼ã‚¿é…åˆ—ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		void SetNumVertices(UINT NumVertices, size_t Index) {
@@ -1166,10 +1166,10 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@‚Ìİ’è
-		@param[in]	IndexBuffer	ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@
-		@param[in]	Index	ƒf[ƒ^”z—ñ‚ÌƒCƒ“ƒfƒbƒNƒX
-		@return	‚È‚µ
+		@brief	ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ã®è¨­å®š
+		@param[in]	IndexBuffer	ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡
+		@param[in]	Index	ãƒ‡ãƒ¼ã‚¿é…åˆ—ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		void SetIndexBuffer(const ComPtr<ID3D11Buffer>& IndexBuffer, size_t Index) {
@@ -1178,11 +1178,11 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒCƒ“ƒfƒbƒNƒX”‚Ìİ’è<br />
-		ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@‚Ì”‚Æ‡‚í‚¹‚È‚¯‚ê‚Î‚È‚ç‚È‚¢‚Ì‚ÅATd‚Ég—p‚·‚é
-		@param[in]	IndexBuffer	ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@
-		@param[in]	Index	ƒf[ƒ^”z—ñ‚ÌƒCƒ“ƒfƒbƒNƒX
-		@return	‚È‚µ
+		@brief	ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹æ•°ã®è¨­å®š<br />
+		ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ã®æ•°ã¨åˆã‚ã›ãªã‘ã‚Œã°ãªã‚‰ãªã„ã®ã§ã€æ…é‡ã«ä½¿ç”¨ã™ã‚‹
+		@param[in]	IndexBuffer	ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡
+		@param[in]	Index	ãƒ‡ãƒ¼ã‚¿é…åˆ—ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		void SetNumIndicis(UINT NumIndicis, size_t Index) {
@@ -1191,10 +1191,10 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	’¸“_‚ÌŒ^‚ÆƒXƒgƒ‰ƒCƒh‚ğİ’è‚·‚é
-		@tparam	T	’¸“_‚ÌŒ^
-		@param[in]	Index	ƒf[ƒ^”z—ñ‚ÌƒCƒ“ƒfƒbƒNƒX
-		@return	‚È‚µ
+		@brief	é ‚ç‚¹ã®å‹ã¨ã‚¹ãƒˆãƒ©ã‚¤ãƒ‰ã‚’è¨­å®šã™ã‚‹
+		@tparam	T	é ‚ç‚¹ã®å‹
+		@param[in]	Index	ãƒ‡ãƒ¼ã‚¿é…åˆ—ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		template<typename T>
@@ -1205,23 +1205,23 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒvƒƒeƒNƒgƒRƒ“ƒXƒgƒ‰ƒNƒ^<br />
-		\’z‚ÍƒXƒ^ƒeƒBƒbƒNŠÖ”‚ğ—˜—p‚·‚é
+		@brief	ãƒ—ãƒ­ãƒ†ã‚¯ãƒˆã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿<br />
+		æ§‹ç¯‰ã¯ã‚¹ã‚¿ãƒ†ã‚£ãƒƒã‚¯é–¢æ•°ã‚’åˆ©ç”¨ã™ã‚‹
 		*/
 		//--------------------------------------------------------------------------------------
 		MultiMeshResource();
 	public:
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒfƒXƒgƒ‰ƒNƒ^
+		@brief	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		virtual ~MultiMeshResource();
-		//ƒAƒNƒZƒT
+		//ã‚¢ã‚¯ã‚»ã‚µ
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒƒbƒVƒ…ƒf[ƒ^‚Ì”‚Ìæ“¾
-		@return	ƒƒbƒVƒ…ƒf[ƒ^‚Ì”
+		@brief	ãƒ¡ãƒƒã‚·ãƒ¥ãƒ‡ãƒ¼ã‚¿ã®æ•°ã®å–å¾—
+		@return	ãƒ¡ãƒƒã‚·ãƒ¥ãƒ‡ãƒ¼ã‚¿ã®æ•°
 		*/
 		//--------------------------------------------------------------------------------------
 		size_t GetMeshVecCount() const {
@@ -1229,8 +1229,8 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒƒbƒVƒ…ƒf[ƒ^‚Ì”z—ñ‚Ìæ“¾
-		@return	ƒƒbƒVƒ…ƒf[ƒ^‚Ì”z—ñ
+		@brief	ãƒ¡ãƒƒã‚·ãƒ¥ãƒ‡ãƒ¼ã‚¿ã®é…åˆ—ã®å–å¾—
+		@return	ãƒ¡ãƒƒã‚·ãƒ¥ãƒ‡ãƒ¼ã‚¿ã®é…åˆ—
 		*/
 		//--------------------------------------------------------------------------------------
 		const vector<MeshPrimData>& GetMeshVec() const {
@@ -1238,8 +1238,8 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒƒbƒVƒ…ƒf[ƒ^‚Ì”z—ñ‚Ìæ“¾i‘‚«Š·‚¦—pj
-		@return	ƒƒbƒVƒ…ƒf[ƒ^‚Ì”z—ñ
+		@brief	ãƒ¡ãƒƒã‚·ãƒ¥ãƒ‡ãƒ¼ã‚¿ã®é…åˆ—ã®å–å¾—ï¼ˆæ›¸ãæ›ãˆç”¨ï¼‰
+		@return	ãƒ¡ãƒƒã‚·ãƒ¥ãƒ‡ãƒ¼ã‚¿ã®é…åˆ—
 		*/
 		//--------------------------------------------------------------------------------------
 		vector<MeshPrimData>& GetMeshVec(){
@@ -1247,8 +1247,8 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒƒbƒVƒ…ƒf[ƒ^‚Ì’Ç‰Á
-		@return	’Ç‰Á‚³‚ê‚½ƒCƒ“ƒfƒbƒNƒX
+		@brief	ãƒ¡ãƒƒã‚·ãƒ¥ãƒ‡ãƒ¼ã‚¿ã®è¿½åŠ 
+		@return	è¿½åŠ ã•ã‚ŒãŸã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
 		*/
 		//--------------------------------------------------------------------------------------
 		size_t AddMesh(const MeshPrimData& Data) {
@@ -1261,9 +1261,9 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒƒbƒVƒ…ƒf[ƒ^‚Ì’Ç‰ÁBƒƒbƒVƒ…ƒf[ƒ^“à‚ÌComPtr‚Í‹¤—L‚³‚ê‚é‚Ì‚Å’ˆÓ
-		@param[in]	Res	ƒƒbƒVƒ…ƒŠƒ\[ƒX
-		@return	’Ç‰Á‚³‚ê‚½ƒCƒ“ƒfƒbƒNƒX
+		@brief	ãƒ¡ãƒƒã‚·ãƒ¥ãƒ‡ãƒ¼ã‚¿ã®è¿½åŠ ã€‚ãƒ¡ãƒƒã‚·ãƒ¥ãƒ‡ãƒ¼ã‚¿å†…ã®ComPtrã¯å…±æœ‰ã•ã‚Œã‚‹ã®ã§æ³¨æ„
+		@param[in]	Res	ãƒ¡ãƒƒã‚·ãƒ¥ãƒªã‚½ãƒ¼ã‚¹
+		@return	è¿½åŠ ã•ã‚ŒãŸã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
 		*/
 		//--------------------------------------------------------------------------------------
 		size_t AddMesh(const shared_ptr<MeshResource>& Res) {
@@ -1276,9 +1276,9 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒƒbƒVƒ…ƒf[ƒ^‚Ì’Ç‰ÁBƒƒbƒVƒ…ƒf[ƒ^“à‚ÌComPtr‚Í‹¤—L‚³‚ê‚é‚Ì‚Å’ˆÓ
-		@param[in]	MeshKey	ƒƒbƒVƒ…ƒL[
-		@return	’Ç‰Á‚³‚ê‚½ƒCƒ“ƒfƒbƒNƒX
+		@brief	ãƒ¡ãƒƒã‚·ãƒ¥ãƒ‡ãƒ¼ã‚¿ã®è¿½åŠ ã€‚ãƒ¡ãƒƒã‚·ãƒ¥ãƒ‡ãƒ¼ã‚¿å†…ã®ComPtrã¯å…±æœ‰ã•ã‚Œã‚‹ã®ã§æ³¨æ„
+		@param[in]	MeshKey	ãƒ¡ãƒƒã‚·ãƒ¥ã‚­ãƒ¼
+		@return	è¿½åŠ ã•ã‚ŒãŸã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
 		*/
 		//--------------------------------------------------------------------------------------
 		size_t AddMesh(const wstring& MeshKey) {
@@ -1286,11 +1286,11 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒƒbƒVƒ…ƒŠƒ\[ƒX‚Ì’Ç‰Á
-		@tparam	T	’¸“_‚ÌŒ^
-		@param[in]	vertices	’¸“_‚Ì”z—ñ
-		@param[in]	AccessWrite	ã‘‚«‰Â”\‚©‚Ç‚¤‚©
-		@return	’Ç‰Á‚³‚ê‚½ƒCƒ“ƒfƒbƒNƒX
+		@brief	ãƒ¡ãƒƒã‚·ãƒ¥ãƒªã‚½ãƒ¼ã‚¹ã®è¿½åŠ 
+		@tparam	T	é ‚ç‚¹ã®å‹
+		@param[in]	vertices	é ‚ç‚¹ã®é…åˆ—
+		@param[in]	AccessWrite	ä¸Šæ›¸ãå¯èƒ½ã‹ã©ã†ã‹
+		@return	è¿½åŠ ã•ã‚ŒãŸã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
 		*/
 		//--------------------------------------------------------------------------------------
 		template<typename T>
@@ -1300,12 +1300,12 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒƒbƒVƒ…ƒŠƒ\[ƒX‚Ì’Ç‰Á
-		@tparam	T	’¸“_‚ÌŒ^
-		@param[in]	vertices	’¸“_‚Ì”z—ñ
-		@param[in]	indices	ƒCƒ“ƒfƒbƒNƒX‚Ì”z—ñ
-		@param[in]	AccessWrite	ã‘‚«‰Â”\‚©‚Ç‚¤‚©
-		@return	’Ç‰Á‚³‚ê‚½ƒCƒ“ƒfƒbƒNƒX
+		@brief	ãƒ¡ãƒƒã‚·ãƒ¥ãƒªã‚½ãƒ¼ã‚¹ã®è¿½åŠ 
+		@tparam	T	é ‚ç‚¹ã®å‹
+		@param[in]	vertices	é ‚ç‚¹ã®é…åˆ—
+		@param[in]	indices	ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã®é…åˆ—
+		@param[in]	AccessWrite	ä¸Šæ›¸ãå¯èƒ½ã‹ã©ã†ã‹
+		@return	è¿½åŠ ã•ã‚ŒãŸã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
 		*/
 		//--------------------------------------------------------------------------------------
 		template<typename T>
@@ -1315,9 +1315,9 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒƒbƒVƒ…ƒf[ƒ^‚ğíœ‚·‚éi‚·‚®‚Éíœ‚·‚é‚Ì‚ÅAƒCƒ“ƒfƒbƒNƒX‚ğŠÇ—‚·‚éê‡‚Í’ˆÓj
-		@param[out]	Index	íœ‚·‚éƒCƒ“ƒfƒbƒNƒX
-		@return	‚È‚µ
+		@brief	ãƒ¡ãƒƒã‚·ãƒ¥ãƒ‡ãƒ¼ã‚¿ã‚’å‰Šé™¤ã™ã‚‹ï¼ˆã™ãã«å‰Šé™¤ã™ã‚‹ã®ã§ã€ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã‚’ç®¡ç†ã™ã‚‹å ´åˆã¯æ³¨æ„ï¼‰
+		@param[out]	Index	å‰Šé™¤ã™ã‚‹ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		void RemoveMashData(size_t Index){
@@ -1329,10 +1329,10 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒƒbƒVƒ…ƒf[ƒ^‚ğ“¾‚é
-		@param[out]	data	æ“¾‚·‚éƒf[ƒ^‚ÌQÆ
-		@param[in]	Index	ƒf[ƒ^”z—ñ‚ÌƒCƒ“ƒfƒbƒNƒX
-		@return	‚È‚µ
+		@brief	ãƒ¡ãƒƒã‚·ãƒ¥ãƒ‡ãƒ¼ã‚¿ã‚’å¾—ã‚‹
+		@param[out]	data	å–å¾—ã™ã‚‹ãƒ‡ãƒ¼ã‚¿ã®å‚ç…§
+		@param[in]	Index	ãƒ‡ãƒ¼ã‚¿é…åˆ—ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		void GetMashData(MeshPrimData& data, size_t Index)const {
@@ -1341,9 +1341,9 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	’¸“_ƒoƒbƒtƒ@‚Ìæ“¾
-		@param[in]	Index	ƒf[ƒ^”z—ñ‚ÌƒCƒ“ƒfƒbƒNƒX
-		@return	’¸“_ƒoƒbƒtƒ@
+		@brief	é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã®å–å¾—
+		@param[in]	Index	ãƒ‡ãƒ¼ã‚¿é…åˆ—ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
+		@return	é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡
 		*/
 		//--------------------------------------------------------------------------------------
 		ComPtr<ID3D11Buffer> GetVertexBuffer(size_t Index) const {
@@ -1352,9 +1352,9 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@‚Ìæ“¾
-		@param[in]	Index	ƒf[ƒ^”z—ñ‚ÌƒCƒ“ƒfƒbƒNƒX
-		@return	ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@
+		@brief	ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ã®å–å¾—
+		@param[in]	Index	ãƒ‡ãƒ¼ã‚¿é…åˆ—ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
+		@return	ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡
 		*/
 		//--------------------------------------------------------------------------------------
 		ComPtr<ID3D11Buffer> GetIndexBuffer(size_t Index) const {
@@ -1363,9 +1363,9 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	’¸“_”‚Ìæ“¾
-		@param[in]	Index	ƒf[ƒ^”z—ñ‚ÌƒCƒ“ƒfƒbƒNƒX
-		@return	’¸“_”
+		@brief	é ‚ç‚¹æ•°ã®å–å¾—
+		@param[in]	Index	ãƒ‡ãƒ¼ã‚¿é…åˆ—ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
+		@return	é ‚ç‚¹æ•°
 		*/
 		//--------------------------------------------------------------------------------------
 		UINT GetNumVertices(size_t Index) const {
@@ -1374,9 +1374,9 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒCƒ“ƒfƒbƒNƒX”‚Ìæ“¾
-		@param[in]	Index	ƒf[ƒ^”z—ñ‚ÌƒCƒ“ƒfƒbƒNƒX
-		@return	ƒCƒ“ƒfƒbƒNƒX”
+		@brief	ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹æ•°ã®å–å¾—
+		@param[in]	Index	ãƒ‡ãƒ¼ã‚¿é…åˆ—ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
+		@return	ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹æ•°
 		*/
 		//--------------------------------------------------------------------------------------
 		UINT GetNumIndicis(size_t Index) const {
@@ -1385,9 +1385,9 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒXƒgƒ‰ƒCƒh”‚Ìæ“¾
-		@param[in]	Index	ƒf[ƒ^”z—ñ‚ÌƒCƒ“ƒfƒbƒNƒX
-		@return	ƒXƒgƒ‰ƒCƒh”
+		@brief	ã‚¹ãƒˆãƒ©ã‚¤ãƒ‰æ•°ã®å–å¾—
+		@param[in]	Index	ãƒ‡ãƒ¼ã‚¿é…åˆ—ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
+		@return	ã‚¹ãƒˆãƒ©ã‚¤ãƒ‰æ•°
 		*/
 		//--------------------------------------------------------------------------------------
 		UINT GetNumStride(size_t Index) const {
@@ -1396,9 +1396,9 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	•`‰æƒgƒ|ƒƒW[‚Ìæ“¾
-		@param[in]	Index	ƒf[ƒ^”z—ñ‚ÌƒCƒ“ƒfƒbƒNƒX
-		@return	•`‰æƒgƒ|ƒƒW[
+		@brief	æç”»ãƒˆãƒãƒ­ã‚¸ãƒ¼ã®å–å¾—
+		@param[in]	Index	ãƒ‡ãƒ¼ã‚¿é…åˆ—ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
+		@return	æç”»ãƒˆãƒãƒ­ã‚¸ãƒ¼
 		*/
 		//--------------------------------------------------------------------------------------
 		D3D11_PRIMITIVE_TOPOLOGY GetPrimitiveTopology(size_t Index) const {
@@ -1407,10 +1407,10 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	•`‰æƒgƒ|ƒƒW[‚Ìİ’è
-		@param[in]	Topology	•`‰æƒgƒ|ƒƒW[
-		@param[in]	Index	ƒf[ƒ^”z—ñ‚ÌƒCƒ“ƒfƒbƒNƒX
-		@return	‚È‚µ
+		@brief	æç”»ãƒˆãƒãƒ­ã‚¸ãƒ¼ã®è¨­å®š
+		@param[in]	Topology	æç”»ãƒˆãƒãƒ­ã‚¸ãƒ¼
+		@param[in]	Index	ãƒ‡ãƒ¼ã‚¿é…åˆ—ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		void SetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY Topology, size_t Index) {
@@ -1419,8 +1419,8 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	type_index‚Ìæ“¾
-		@param[in]	Index	ƒf[ƒ^”z—ñ‚ÌƒCƒ“ƒfƒbƒNƒX
+		@brief	type_indexã®å–å¾—
+		@param[in]	Index	ãƒ‡ãƒ¼ã‚¿é…åˆ—ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
 		@return	type_index
 		*/
 		//--------------------------------------------------------------------------------------
@@ -1430,10 +1430,10 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒƒbƒVƒ…‚Æƒ[ƒ‹ƒhs—ñ‚ÌŠÔ‚ğ•âŠ®‚·‚és—ñ‚Ìæ“¾(ƒƒbƒVƒ…‚Éİ’è‚·‚éê‡)<br />
-		ƒƒbƒVƒ…‚ÌƒTƒCƒY‚âŒü‚«A’†S‚ÌˆÊ’u‚ªƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚Ìƒ[ƒ‹ƒhs—ñ‚Æ·ˆÙ‚ª‚ ‚éê‡A<br />
-		‚»‚ÌŠÔ‚ğ•âŠ®‚·‚és—ñ‚ğİ’è‚Å‚«‚éB
-		@return	ƒƒbƒVƒ…‚Æƒ[ƒ‹ƒhs—ñ‚ÌŠÔ‚ğ•âŠ®‚·‚és—ñ
+		@brief	ãƒ¡ãƒƒã‚·ãƒ¥ã¨ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ã®é–“ã‚’è£œå®Œã™ã‚‹è¡Œåˆ—ã®å–å¾—(ãƒ¡ãƒƒã‚·ãƒ¥ã«è¨­å®šã™ã‚‹å ´åˆ)<br />
+		ãƒ¡ãƒƒã‚·ãƒ¥ã®ã‚µã‚¤ã‚ºã‚„å‘ãã€ä¸­å¿ƒã®ä½ç½®ãŒã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ã¨å·®ç•°ãŒã‚ã‚‹å ´åˆã€<br />
+		ãã®é–“ã‚’è£œå®Œã™ã‚‹è¡Œåˆ—ã‚’è¨­å®šã§ãã‚‹ã€‚
+		@return	ãƒ¡ãƒƒã‚·ãƒ¥ã¨ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ã®é–“ã‚’è£œå®Œã™ã‚‹è¡Œåˆ—
 		*/
 		//--------------------------------------------------------------------------------------
 		const bsm::Mat4x4& GetMeshToTransformMatrix(size_t Index) const {
@@ -1442,11 +1442,11 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒƒbƒVƒ…‚Æƒ[ƒ‹ƒhs—ñ‚ÌŠÔ‚ğ•âŠ®‚·‚és—ñ‚Ìæ“¾(ƒƒbƒVƒ…‚Éİ’è‚·‚éê‡)<br />
-		ƒƒbƒVƒ…‚ÌƒTƒCƒY‚âŒü‚«A’†S‚ÌˆÊ’u‚ªƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚Ìƒ[ƒ‹ƒhs—ñ‚Æ·ˆÙ‚ª‚ ‚éê‡A<br />
-		‚»‚ÌŠÔ‚ğ•âŠ®‚·‚és—ñ‚ğİ’è‚Å‚«‚éB
-		@param[in]	Mat	İ’è‚·‚és—ñ
-		@return	‚È‚µ
+		@brief	ãƒ¡ãƒƒã‚·ãƒ¥ã¨ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ã®é–“ã‚’è£œå®Œã™ã‚‹è¡Œåˆ—ã®å–å¾—(ãƒ¡ãƒƒã‚·ãƒ¥ã«è¨­å®šã™ã‚‹å ´åˆ)<br />
+		ãƒ¡ãƒƒã‚·ãƒ¥ã®ã‚µã‚¤ã‚ºã‚„å‘ãã€ä¸­å¿ƒã®ä½ç½®ãŒã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ã¨å·®ç•°ãŒã‚ã‚‹å ´åˆã€<br />
+		ãã®é–“ã‚’è£œå®Œã™ã‚‹è¡Œåˆ—ã‚’è¨­å®šã§ãã‚‹ã€‚
+		@param[in]	Mat	è¨­å®šã™ã‚‹è¡Œåˆ—
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		void SetMeshToTransformMatrix(const bsm::Mat4x4& Mat, size_t Index) {
@@ -1455,8 +1455,8 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒƒbƒVƒ…‚Éİ’è‚µ‚½ƒƒbƒVƒ…‚Æƒ[ƒ‹ƒhs—ñ‚ÌŠÔ‚ğ•âŠ®‚·‚és—ñ‚ğg‚¤‚©‚Ç‚¤‚©
-		@return@ƒƒbƒVƒ…‚Éİ’è‚µ‚½ƒƒbƒVƒ…‚Æƒ[ƒ‹ƒhs—ñ‚ÌŠÔ‚ğ•âŠ®‚·‚és—ñ‚ğg‚¤‚©‚Ç‚¤‚©
+		@brief	ãƒ¡ãƒƒã‚·ãƒ¥ã«è¨­å®šã—ãŸãƒ¡ãƒƒã‚·ãƒ¥ã¨ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ã®é–“ã‚’è£œå®Œã™ã‚‹è¡Œåˆ—ã‚’ä½¿ã†ã‹ã©ã†ã‹
+		@returnã€€ãƒ¡ãƒƒã‚·ãƒ¥ã«è¨­å®šã—ãŸãƒ¡ãƒƒã‚·ãƒ¥ã¨ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ã®é–“ã‚’è£œå®Œã™ã‚‹è¡Œåˆ—ã‚’ä½¿ã†ã‹ã©ã†ã‹
 		*/
 		//--------------------------------------------------------------------------------------
 		bool IsUseMeshToTransformMatrix(size_t Index) const {
@@ -1465,9 +1465,9 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒƒbƒVƒ…‚Éİ’è‚µ‚½ƒƒbƒVƒ…‚Æƒ[ƒ‹ƒhs—ñ‚ÌŠÔ‚ğ•âŠ®‚·‚és—ñ‚ğg‚¤‚©‚Ç‚¤‚©‚ğİ’è
-		@param[in]	b	g—p‚·‚é‚È‚çtrue
-		@return@‚È‚µ
+		@brief	ãƒ¡ãƒƒã‚·ãƒ¥ã«è¨­å®šã—ãŸãƒ¡ãƒƒã‚·ãƒ¥ã¨ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ã®é–“ã‚’è£œå®Œã™ã‚‹è¡Œåˆ—ã‚’ä½¿ã†ã‹ã©ã†ã‹ã‚’è¨­å®š
+		@param[in]	b	ä½¿ç”¨ã™ã‚‹ãªã‚‰true
+		@returnã€€ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		void SetUseMeshToTransformMatrix(bool b, size_t Index) {
@@ -1476,9 +1476,9 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒeƒNƒXƒ`ƒƒƒŠƒ\[ƒX‚Ìİ’è(ƒƒbƒVƒ…–ˆ‚Ìê‡)
-		@param[in]	TextureRes	ƒeƒNƒXƒ`ƒƒƒŠƒ\[ƒX
-		@return	‚È‚µ
+		@brief	ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒªã‚½ãƒ¼ã‚¹ã®è¨­å®š(ãƒ¡ãƒƒã‚·ãƒ¥æ¯ã®å ´åˆ)
+		@param[in]	TextureRes	ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒªã‚½ãƒ¼ã‚¹
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		void SetTextureResource(const shared_ptr<TextureResource>& TextureRes, size_t Index) {
@@ -1487,9 +1487,9 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒeƒNƒXƒ`ƒƒƒŠƒ\[ƒX‚Ìİ’è(ƒƒbƒVƒ…–ˆ‚Ìê‡)
-		@param[in]	TextureKey	“o˜^‚³‚ê‚Ä‚¢‚éƒeƒNƒXƒ`ƒƒƒL[
-		@return	‚È‚µ
+		@brief	ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒªã‚½ãƒ¼ã‚¹ã®è¨­å®š(ãƒ¡ãƒƒã‚·ãƒ¥æ¯ã®å ´åˆ)
+		@param[in]	TextureKey	ç™»éŒ²ã•ã‚Œã¦ã„ã‚‹ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚­ãƒ¼
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		void SetTextureResource(const wstring& TextureKey, size_t Index) {
@@ -1498,13 +1498,13 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒeƒNƒXƒ`ƒƒƒŠƒ\[ƒX‚Ìæ“¾(ƒƒbƒVƒ…–ˆ‚Ìê‡)
-		@return	ƒeƒNƒXƒ`ƒƒƒŠƒ\[ƒX
+		@brief	ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒªã‚½ãƒ¼ã‚¹ã®å–å¾—(ãƒ¡ãƒƒã‚·ãƒ¥æ¯ã®å ´åˆ)
+		@return	ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒªã‚½ãƒ¼ã‚¹
 		*/
 		//--------------------------------------------------------------------------------------
 		shared_ptr<TextureResource> GetTextureResource(size_t Index) const {
 			CheckMeshVecCount(Index);
-			//ƒeƒNƒXƒ`ƒƒ‚ª‚È‚¯‚ê‚Înull‚ğ•Ô‚·
+			//ãƒ†ã‚¯ã‚¹ãƒãƒ£ãŒãªã‘ã‚Œã°nullã‚’è¿”ã™
 			auto shptr = m_MeshPrimDataVec[Index].m_TextureResource.lock();
 			if (shptr) {
 				return shptr;
@@ -1513,9 +1513,9 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒ}ƒeƒŠƒAƒ‹”z—ñ‚Ìæ“¾
-		@param[in]	Index	ƒf[ƒ^”z—ñ‚ÌƒCƒ“ƒfƒbƒNƒX
-		@return	ƒ}ƒeƒŠƒAƒ‹‚Ì”z—ñ
+		@brief	ãƒãƒ†ãƒªã‚¢ãƒ«é…åˆ—ã®å–å¾—
+		@param[in]	Index	ãƒ‡ãƒ¼ã‚¿é…åˆ—ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
+		@return	ãƒãƒ†ãƒªã‚¢ãƒ«ã®é…åˆ—
 		*/
 		//--------------------------------------------------------------------------------------
 		const vector<MaterialEx>& GetMaterialExVec(size_t Index)const {
@@ -1524,9 +1524,9 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒ}ƒeƒŠƒAƒ‹”z—ñ‚Ìæ“¾(‘‚«‚İ—p)
-		@param[in]	Index	ƒf[ƒ^”z—ñ‚ÌƒCƒ“ƒfƒbƒNƒX
-		@return	ƒ}ƒeƒŠƒAƒ‹‚Ì”z—ñ
+		@brief	ãƒãƒ†ãƒªã‚¢ãƒ«é…åˆ—ã®å–å¾—(æ›¸ãè¾¼ã¿ç”¨)
+		@param[in]	Index	ãƒ‡ãƒ¼ã‚¿é…åˆ—ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
+		@return	ãƒãƒ†ãƒªã‚¢ãƒ«ã®é…åˆ—
 		*/
 		//--------------------------------------------------------------------------------------
 		vector<MaterialEx>& GetMaterialExVec(size_t Index) {
@@ -1536,10 +1536,10 @@ namespace basecross {
 
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒXƒLƒjƒ“ƒO‚·‚é‚©‚Ç‚¤‚©.<br />
-		‰¼‘zŠÖ”‚È‚Ì‚ÅA”h¶ƒNƒ‰ƒX‚Å“Æ©‚É‘½d’è‹`‚·‚é
-		@param[in]	Index	ƒf[ƒ^”z—ñ‚ÌƒCƒ“ƒfƒbƒNƒX
-		@return	ƒXƒLƒjƒ“ƒO‚·‚éê‡‚Ítrue
+		@brief	ã‚¹ã‚­ãƒ‹ãƒ³ã‚°ã™ã‚‹ã‹ã©ã†ã‹.<br />
+		ä»®æƒ³é–¢æ•°ãªã®ã§ã€æ´¾ç”Ÿã‚¯ãƒ©ã‚¹ã§ç‹¬è‡ªã«å¤šé‡å®šç¾©ã™ã‚‹
+		@param[in]	Index	ãƒ‡ãƒ¼ã‚¿é…åˆ—ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
+		@return	ã‚¹ã‚­ãƒ‹ãƒ³ã‚°ã™ã‚‹å ´åˆã¯true
 		*/
 		//--------------------------------------------------------------------------------------
 		virtual bool IsSkining(size_t Index) const {
@@ -1548,9 +1548,9 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒ{[ƒ“”‚ğ“¾‚é
-		@param[in]	Index	ƒf[ƒ^”z—ñ‚ÌƒCƒ“ƒfƒbƒNƒX
-		@return	ƒ{[ƒ“”
+		@brief	ãƒœãƒ¼ãƒ³æ•°ã‚’å¾—ã‚‹
+		@param[in]	Index	ãƒ‡ãƒ¼ã‚¿é…åˆ—ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
+		@return	ãƒœãƒ¼ãƒ³æ•°
 		*/
 		//--------------------------------------------------------------------------------------
 		UINT GetBoneCount(size_t Index) const {
@@ -1559,9 +1559,9 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒTƒ“ƒvƒŠƒ“ƒO”‚ğ“¾‚é
-		@param[in]	Index	ƒf[ƒ^”z—ñ‚ÌƒCƒ“ƒfƒbƒNƒX
-		@return	ƒTƒ“ƒvƒŠƒ“ƒO”
+		@brief	ã‚µãƒ³ãƒ—ãƒªãƒ³ã‚°æ•°ã‚’å¾—ã‚‹
+		@param[in]	Index	ãƒ‡ãƒ¼ã‚¿é…åˆ—ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
+		@return	ã‚µãƒ³ãƒ—ãƒªãƒ³ã‚°æ•°
 		*/
 		//--------------------------------------------------------------------------------------
 		UINT GetSampleCount(size_t Index) const {
@@ -1570,9 +1570,9 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒTƒ“ƒvƒŠƒ“ƒO‚³‚ê‚½s—ñ‚Ì”z—ñ‚ğ“¾‚é
-		@param[in]	Index	ƒf[ƒ^”z—ñ‚ÌƒCƒ“ƒfƒbƒNƒX
-		@return	ƒTƒ“ƒvƒŠƒ“ƒO‚³‚ê‚½s—ñ‚Ì”z—ñ‚ÌQÆ
+		@brief	ã‚µãƒ³ãƒ—ãƒªãƒ³ã‚°ã•ã‚ŒãŸè¡Œåˆ—ã®é…åˆ—ã‚’å¾—ã‚‹
+		@param[in]	Index	ãƒ‡ãƒ¼ã‚¿é…åˆ—ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
+		@return	ã‚µãƒ³ãƒ—ãƒªãƒ³ã‚°ã•ã‚ŒãŸè¡Œåˆ—ã®é…åˆ—ã®å‚ç…§
 		*/
 		//--------------------------------------------------------------------------------------
 		const vector<bsm::Mat4x4>& GetSampleMatrixVec(size_t Index) const {
@@ -1581,10 +1581,10 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒoƒbƒNƒAƒbƒvƒf[ƒ^‚Ìæ“¾
-		@tparam	T	’¸“_‚ÌŒ^
-		@param[in]	Index	ƒf[ƒ^”z—ñ‚ÌƒCƒ“ƒfƒbƒNƒX
-		@return	ƒoƒbƒNƒAƒbƒvƒf[ƒ^‚Ì”z—ñB
+		@brief	ãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—ãƒ‡ãƒ¼ã‚¿ã®å–å¾—
+		@tparam	T	é ‚ç‚¹ã®å‹
+		@param[in]	Index	ãƒ‡ãƒ¼ã‚¿é…åˆ—ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
+		@return	ãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—ãƒ‡ãƒ¼ã‚¿ã®é…åˆ—ã€‚
 		*/
 		//--------------------------------------------------------------------------------------
 		template<typename T>
@@ -1593,7 +1593,7 @@ namespace basecross {
 			auto Ptr = dynamic_pointer_cast< BackupData<T> >(m_MeshPrimDataVec[Index].m_BackUpData);
 			if (!Ptr) {
 				throw BaseException(
-					L"ƒoƒbƒNƒAƒbƒv‚ğTŒ^‚ÉƒLƒƒƒXƒg‚Å‚«‚Ü‚¹‚ñ",
+					L"ãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—ã‚’Tå‹ã«ã‚­ãƒ£ã‚¹ãƒˆã§ãã¾ã›ã‚“",
 					Util::GetWSTypeName<T>(),
 					L"MultiMeshResource::GetBackupVerteces<T>()"
 				);
@@ -1602,12 +1602,12 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	’¸“_‚Ì•ÏX.<br />
-		AccessWrite‚ªtrue‚Åì¬‚³‚ê‚½ƒŠƒ\[ƒX‚ÍA’¸“_‚Ì”z—ñ‚É‚æ‚Á‚Ä’¸“_‚ğ•ÏX‚·‚éB
-		@tparam	T	’¸“_‚ÌŒ^
-		@param[in]	NewBuffer	’¸“_‚Ì”z—ñ
-		@param[in]	Index	ƒf[ƒ^”z—ñ‚ÌƒCƒ“ƒfƒbƒNƒX
-		@return	‚È‚µ
+		@brief	é ‚ç‚¹ã®å¤‰æ›´.<br />
+		AccessWriteãŒtrueã§ä½œæˆã•ã‚ŒãŸãƒªã‚½ãƒ¼ã‚¹ã¯ã€é ‚ç‚¹ã®é…åˆ—ã«ã‚ˆã£ã¦é ‚ç‚¹ã‚’å¤‰æ›´ã™ã‚‹ã€‚
+		@tparam	T	é ‚ç‚¹ã®å‹
+		@param[in]	NewBuffer	é ‚ç‚¹ã®é…åˆ—
+		@param[in]	Index	ãƒ‡ãƒ¼ã‚¿é…åˆ—ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		template<typename T>
@@ -1616,51 +1616,51 @@ namespace basecross {
 			auto Ptr = dynamic_pointer_cast< BackupData<T> >(m_MeshPrimDataVec[Index].m_BackUpData);
 			if (!Ptr) {
 				throw BaseException(
-					L"ƒoƒbƒNƒAƒbƒv‚ğTŒ^‚ÉƒLƒƒƒXƒg‚Å‚«‚Ü‚¹‚ñ",
+					L"ãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—ã‚’Tå‹ã«ã‚­ãƒ£ã‚¹ãƒˆã§ãã¾ã›ã‚“",
 					Util::GetWSTypeName<T>(),
 					L"MultiMeshResource::UpdateVirtexBuffer<T>()"
 				);
 			}
 
 			if (NewBuffer.size() != Ptr->m_Vertices.size()) {
-				// Map¸”s
+				// Mapå¤±æ•—
 				throw BaseException(
-					L"•ÏX‚·‚é’¸“_‚Ì”‚ªƒoƒbƒNƒAƒbƒv‚Æˆá‚¢‚Ü‚·",
+					L"å¤‰æ›´ã™ã‚‹é ‚ç‚¹ã®æ•°ãŒãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—ã¨é•ã„ã¾ã™",
 					L"if (NewBuffer.size() != Ptr->m_Vertices.size())",
 					L"MultiMeshResource::UpdateVirtexBuffer<T>()"
 				);
 			}
-			//À•W‚ğ•ÏX‚·‚é
+			//åº§æ¨™ã‚’å¤‰æ›´ã™ã‚‹
 			auto Dev = App::GetApp()->GetDeviceResources();
 			auto pID3D11DeviceContext = Dev->GetD3DDeviceContext();
-			//’¸“_ƒoƒbƒtƒ@‚ğƒŠƒ\[ƒX‚©‚çæ‚èo‚·
+			//é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã‚’ãƒªã‚½ãƒ¼ã‚¹ã‹ã‚‰å–ã‚Šå‡ºã™
 			auto pVertexBuffer = GetVertexBuffer(Index).Get();
 
-			//D3D11_MAP_WRITE_DISCARD‚Íd—vB‚±‚Ìˆ—‚É‚æ‚èAGPU‚É×–‚‚³‚ê‚È‚¢
+			//D3D11_MAP_WRITE_DISCARDã¯é‡è¦ã€‚ã“ã®å‡¦ç†ã«ã‚ˆã‚Šã€GPUã«é‚ªé­”ã•ã‚Œãªã„
 			D3D11_MAP mapType = D3D11_MAP_WRITE_DISCARD;
 			D3D11_MAPPED_SUBRESOURCE mappedBuffer;
-			//’¸“_‚Ìƒ}ƒbƒv
+			//é ‚ç‚¹ã®ãƒãƒƒãƒ—
 			if (FAILED(pID3D11DeviceContext->Map(pVertexBuffer, 0, mapType, 0, &mappedBuffer))) {
-				// Map¸”s
+				// Mapå¤±æ•—
 				throw BaseException(
-					L"’¸“_‚ÌMap‚É¸”s‚µ‚Ü‚µ‚½B",
+					L"é ‚ç‚¹ã®Mapã«å¤±æ•—ã—ã¾ã—ãŸã€‚",
 					L"if(FAILED(pID3D11DeviceContext->Map()))",
 					L"MultiMeshResource::UpdateVirtexBuffer<T>()"
 				);
 			}
-			//’¸“_‚Ì•ÏX
+			//é ‚ç‚¹ã®å¤‰æ›´
 			T* vertices = (T*)mappedBuffer.pData;
 			for (size_t i = 0; i < NewBuffer.size(); i++) {
 				vertices[i] = NewBuffer[i];
 			}
-			//ƒAƒ“ƒ}ƒbƒv
+			//ã‚¢ãƒ³ãƒãƒƒãƒ—
 			pID3D11DeviceContext->Unmap(pVertexBuffer, 0);
 
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒ}ƒ‹ƒ`ƒƒbƒVƒ…ƒŠƒ\[ƒX‚Ìì¬
-		@return	ƒŠƒ\[ƒX‚ÌƒXƒ}[ƒgƒ|ƒCƒ“ƒ^
+		@brief	ãƒãƒ«ãƒãƒ¡ãƒƒã‚·ãƒ¥ãƒªã‚½ãƒ¼ã‚¹ã®ä½œæˆ
+		@return	ãƒªã‚½ãƒ¼ã‚¹ã®ã‚¹ãƒãƒ¼ãƒˆãƒã‚¤ãƒ³ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		static  shared_ptr<MultiMeshResource> CreateMultiMeshResource() {
@@ -1669,44 +1669,44 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒIƒŠƒWƒiƒ‹ƒ}ƒ‹ƒ`ƒƒbƒVƒ…‚Ìì¬iƒXƒ^ƒeƒBƒbƒNƒƒbƒVƒ…j
-		@param[in]	BinDataDir	Šî€ƒfƒBƒŒƒNƒgƒŠ
-		@param[in]	BinDataFile	ƒf[ƒ^ƒtƒ@ƒCƒ‹–¼
-		@param[in]	AccessWrite = false	’¸“_‚ğ•ÏX‚Å‚«‚é‚©‚Ç‚¤‚©
-		@return	ƒŠƒ\[ƒX‚ÌƒXƒ}[ƒgƒ|ƒCƒ“ƒ^
+		@brief	ã‚ªãƒªã‚¸ãƒŠãƒ«ãƒãƒ«ãƒãƒ¡ãƒƒã‚·ãƒ¥ã®ä½œæˆï¼ˆã‚¹ã‚¿ãƒ†ã‚£ãƒƒã‚¯ãƒ¡ãƒƒã‚·ãƒ¥ï¼‰
+		@param[in]	BinDataDir	åŸºæº–ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª
+		@param[in]	BinDataFile	ãƒ‡ãƒ¼ã‚¿ãƒ•ã‚¡ã‚¤ãƒ«å
+		@param[in]	AccessWrite = false	é ‚ç‚¹ã‚’å¤‰æ›´ã§ãã‚‹ã‹ã©ã†ã‹
+		@return	ãƒªã‚½ãƒ¼ã‚¹ã®ã‚¹ãƒãƒ¼ãƒˆãƒã‚¤ãƒ³ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		static shared_ptr<MultiMeshResource> CreateStaticModelMultiMesh(const wstring& BinDataDir,
 			const wstring& BinDataFile, bool AccessWrite = false);
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒ^ƒ“ƒWƒFƒ“ƒg•t‚«ƒIƒŠƒWƒiƒ‹ƒ}ƒ‹ƒ`ƒƒbƒVƒ…‚Ìì¬iƒXƒ^ƒeƒBƒbƒNƒƒbƒVƒ…j
-		@param[in]	BinDataDir	Šî€ƒfƒBƒŒƒNƒgƒŠ
-		@param[in]	BinDataFile	ƒf[ƒ^ƒtƒ@ƒCƒ‹–¼
-		@param[in]	AccessWrite = false	’¸“_‚ğ•ÏX‚Å‚«‚é‚©‚Ç‚¤‚©
-		@return	ƒŠƒ\[ƒX‚ÌƒXƒ}[ƒgƒ|ƒCƒ“ƒ^
+		@brief	ã‚¿ãƒ³ã‚¸ã‚§ãƒ³ãƒˆä»˜ãã‚ªãƒªã‚¸ãƒŠãƒ«ãƒãƒ«ãƒãƒ¡ãƒƒã‚·ãƒ¥ã®ä½œæˆï¼ˆã‚¹ã‚¿ãƒ†ã‚£ãƒƒã‚¯ãƒ¡ãƒƒã‚·ãƒ¥ï¼‰
+		@param[in]	BinDataDir	åŸºæº–ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª
+		@param[in]	BinDataFile	ãƒ‡ãƒ¼ã‚¿ãƒ•ã‚¡ã‚¤ãƒ«å
+		@param[in]	AccessWrite = false	é ‚ç‚¹ã‚’å¤‰æ›´ã§ãã‚‹ã‹ã©ã†ã‹
+		@return	ãƒªã‚½ãƒ¼ã‚¹ã®ã‚¹ãƒãƒ¼ãƒˆãƒã‚¤ãƒ³ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		static shared_ptr<MultiMeshResource> CreateStaticModelMultiMeshWithTangent(const wstring& BinDataDir,
 			const wstring& BinDataFile, bool AccessWrite = false);
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒIƒŠƒWƒiƒ‹ƒ}ƒ‹ƒ`ƒƒbƒVƒ…‚Ìì¬iƒ{[ƒ“ƒƒbƒVƒ…j
-		@param[in]	BinDataDir	Šî€ƒfƒBƒŒƒNƒgƒŠ
-		@param[in]	BinDataFile	ƒf[ƒ^ƒtƒ@ƒCƒ‹–¼
-		@param[in]	AccessWrite = false	’¸“_‚ğ•ÏX‚Å‚«‚é‚©‚Ç‚¤‚©
-		@return	ƒŠƒ\[ƒX‚ÌƒXƒ}[ƒgƒ|ƒCƒ“ƒ^
+		@brief	ã‚ªãƒªã‚¸ãƒŠãƒ«ãƒãƒ«ãƒãƒ¡ãƒƒã‚·ãƒ¥ã®ä½œæˆï¼ˆãƒœãƒ¼ãƒ³ãƒ¡ãƒƒã‚·ãƒ¥ï¼‰
+		@param[in]	BinDataDir	åŸºæº–ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª
+		@param[in]	BinDataFile	ãƒ‡ãƒ¼ã‚¿ãƒ•ã‚¡ã‚¤ãƒ«å
+		@param[in]	AccessWrite = false	é ‚ç‚¹ã‚’å¤‰æ›´ã§ãã‚‹ã‹ã©ã†ã‹
+		@return	ãƒªã‚½ãƒ¼ã‚¹ã®ã‚¹ãƒãƒ¼ãƒˆãƒã‚¤ãƒ³ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		static shared_ptr<MultiMeshResource> CreateBoneModelMultiMesh(const wstring& BinDataDir,
 			const wstring& BinDataFile, bool AccessWrite = false);
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒ^ƒ“ƒWƒFƒ“ƒg•t‚«ƒIƒŠƒWƒiƒ‹ƒ}ƒ‹ƒ`ƒƒbƒVƒ…‚Ìì¬iƒ{[ƒ“ƒƒbƒVƒ…j
-		@param[in]	BinDataDir	Šî€ƒfƒBƒŒƒNƒgƒŠ
-		@param[in]	BinDataFile	ƒf[ƒ^ƒtƒ@ƒCƒ‹–¼
-		@param[in]	AccessWrite = false	’¸“_‚ğ•ÏX‚Å‚«‚é‚©‚Ç‚¤‚©
-		@return	ƒŠƒ\[ƒX‚ÌƒXƒ}[ƒgƒ|ƒCƒ“ƒ^
+		@brief	ã‚¿ãƒ³ã‚¸ã‚§ãƒ³ãƒˆä»˜ãã‚ªãƒªã‚¸ãƒŠãƒ«ãƒãƒ«ãƒãƒ¡ãƒƒã‚·ãƒ¥ã®ä½œæˆï¼ˆãƒœãƒ¼ãƒ³ãƒ¡ãƒƒã‚·ãƒ¥ï¼‰
+		@param[in]	BinDataDir	åŸºæº–ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª
+		@param[in]	BinDataFile	ãƒ‡ãƒ¼ã‚¿ãƒ•ã‚¡ã‚¤ãƒ«å
+		@param[in]	AccessWrite = false	é ‚ç‚¹ã‚’å¤‰æ›´ã§ãã‚‹ã‹ã©ã†ã‹
+		@return	ãƒªã‚½ãƒ¼ã‚¹ã®ã‚¹ãƒãƒ¼ãƒˆãƒã‚¤ãƒ³ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		static shared_ptr<MultiMeshResource> CreateBoneModelMultiMeshWithTangent(const wstring& BinDataDir,
@@ -1714,9 +1714,9 @@ namespace basecross {
 
 	};
 
-	//”Ä—p“I‚Èİ’è—p’è‹`
+	//æ±ç”¨çš„ãªè¨­å®šç”¨å®šç¾©
 	//--------------------------------------------------------------------------------------
-	///	ƒuƒŒƒ“ƒhƒXƒe[ƒg
+	///	ãƒ–ãƒ¬ãƒ³ãƒ‰ã‚¹ãƒ†ãƒ¼ãƒˆ
 	//--------------------------------------------------------------------------------------
 	enum class BlendState {
 		Opaque,
@@ -1727,7 +1727,7 @@ namespace basecross {
 	};
 
 	//--------------------------------------------------------------------------------------
-	///	ƒfƒvƒXƒXƒeƒ“ƒVƒ‹ƒXƒe[ƒg
+	///	ãƒ‡ãƒ—ã‚¹ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ã‚¹ãƒ†ãƒ¼ãƒˆ
 	//--------------------------------------------------------------------------------------
 	enum class DepthStencilState {
 		None,
@@ -1736,18 +1736,18 @@ namespace basecross {
 	};
 
 	//--------------------------------------------------------------------------------------
-	///	ƒ‰ƒXƒ^ƒ‰ƒCƒUƒXƒe[ƒg
+	///	ãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ã‚¹ãƒ†ãƒ¼ãƒˆ
 	//--------------------------------------------------------------------------------------
 	enum class RasterizerState {
 		CullNone,
 		CullFront,
 		CullBack,
 		Wireframe,
-		DoubleDraw,	//”w–Ê•`‰æ‚ÌŒãA‘O–Ê•`‰æ
+		DoubleDraw,	//èƒŒé¢æç”»ã®å¾Œã€å‰é¢æç”»
 	};
 
 	//--------------------------------------------------------------------------------------
-	///	ƒTƒ“ƒvƒ‰[ƒXƒe[ƒg
+	///	ã‚µãƒ³ãƒ—ãƒ©ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆ
 	//--------------------------------------------------------------------------------------
 	enum class SamplerState {
 		SamplerNone,
@@ -1764,188 +1764,188 @@ namespace basecross {
 	class ShadowMapRenderTarget;
 	class RenderState;
 	//--------------------------------------------------------------------------------------
-	///	DirectX11ƒfƒoƒCƒXƒNƒ‰ƒX
+	///	DirectX11ãƒ‡ãƒã‚¤ã‚¹ã‚¯ãƒ©ã‚¹
 	//--------------------------------------------------------------------------------------
 	class DeviceResources {
 	public:
-		//\’z‚Æ”jŠü
+		//æ§‹ç¯‰ã¨ç ´æ£„
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-		@param[in]	hWnd	ƒEƒCƒ“ƒhƒE‚Ìƒnƒ“ƒhƒ‹
-		@param[in]	isFullScreen	ƒtƒ‹ƒXƒNƒŠ[ƒ“‚©‚Ç‚¤‚©
-		@param[in]	Width	•
-		@param[in]	Height	‚‚³
+		@brief	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+		@param[in]	hWnd	ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã®ãƒãƒ³ãƒ‰ãƒ«
+		@param[in]	isFullScreen	ãƒ•ãƒ«ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‹ã©ã†ã‹
+		@param[in]	Width	å¹…
+		@param[in]	Height	é«˜ã•
 		*/
 		//--------------------------------------------------------------------------------------
 		DeviceResources(HWND hWnd, bool isFullScreen, UINT Width, UINT Height);
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒfƒXƒgƒ‰ƒNƒ^
+		@brief	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		virtual ~DeviceResources();
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief ƒRƒ“ƒeƒ“ƒc‚Ìì¬Œã‚Ìˆ—iDx12‚ÆŒİŠ·«‚ğ•Û‚Â‚½‚ß‚É‚ ‚éj
-		@param[in]	ShadowActive	‰e‚ª—LŒø‚©‚Ç‚¤‚©
-		@return	‚È‚µ
+		@brief ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã®ä½œæˆå¾Œã®å‡¦ç†ï¼ˆDx12ã¨äº’æ›æ€§ã‚’ä¿ã¤ãŸã‚ã«ã‚ã‚‹ï¼‰
+		@param[in]	ShadowActive	å½±ãŒæœ‰åŠ¹ã‹ã©ã†ã‹
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		virtual void AfterInitContents(bool ShadowActive) {}
-		//D3DƒAƒNƒZƒT
+		//D3Dã‚¢ã‚¯ã‚»ã‚µ
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	D3D11Device2ƒCƒ“ƒ^[ƒtƒFƒCƒX‚Ìæ“¾
-		@return	D3D11Device2ƒCƒ“ƒ^[ƒtƒFƒCƒX
+		@brief	D3D11Device2ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã®å–å¾—
+		@return	D3D11Device2ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹
 		*/
 		//--------------------------------------------------------------------------------------
 		ID3D11Device2* GetD3DDevice() const;
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	D3D11DeviceContext2ƒCƒ“ƒ^[ƒtƒFƒCƒX‚Ìæ“¾
-		@return	D3D11DeviceContext2ƒCƒ“ƒ^[ƒtƒFƒCƒX
+		@brief	D3D11DeviceContext2ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã®å–å¾—
+		@return	D3D11DeviceContext2ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹
 		*/
 		//--------------------------------------------------------------------------------------
 		ID3D11DeviceContext2* GetD3DDeviceContext() const;
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	DXGISwapChain1ƒCƒ“ƒ^[ƒtƒFƒCƒX‚Ìæ“¾
-		@return	DXGISwapChain1ƒCƒ“ƒ^[ƒtƒFƒCƒX
+		@brief	DXGISwapChain1ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã®å–å¾—
+		@return	DXGISwapChain1ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹
 		*/
 		//--------------------------------------------------------------------------------------
 		IDXGISwapChain1* GetSwapChain() const;
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	D3D_FEATURE_LEVEL‚Ìæ“¾
+		@brief	D3D_FEATURE_LEVELã®å–å¾—
 		@return	D3D_FEATURE_LEVEL
 		*/
 		//--------------------------------------------------------------------------------------
 		D3D_FEATURE_LEVEL GetFeatureLevel() const;
-		// D2D ƒAƒNƒZƒT
+		// D2D ã‚¢ã‚¯ã‚»ã‚µ
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	D2D1Factory2ƒCƒ“ƒ^[ƒtƒFƒCƒX‚Ìæ“¾
-		@return	D2D1Factory2ƒCƒ“ƒ^[ƒtƒFƒCƒX
+		@brief	D2D1Factory2ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã®å–å¾—
+		@return	D2D1Factory2ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹
 		*/
 		//--------------------------------------------------------------------------------------
 		ID2D1Factory2* GetD2DFactory() const;
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	D2D1Device1ƒCƒ“ƒ^[ƒtƒFƒCƒX‚Ìæ“¾
-		@return	D2D1Device1ƒCƒ“ƒ^[ƒtƒFƒCƒX
+		@brief	D2D1Device1ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã®å–å¾—
+		@return	D2D1Device1ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹
 		*/
 		//--------------------------------------------------------------------------------------
 		ID2D1Device1* GetD2DDevice() const;
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	D2D1DeviceContext1ƒCƒ“ƒ^[ƒtƒFƒCƒX‚Ìæ“¾
-		@return	D2D1DeviceContext1ƒCƒ“ƒ^[ƒtƒFƒCƒX
+		@brief	D2D1DeviceContext1ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã®å–å¾—
+		@return	D2D1DeviceContext1ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹
 		*/
 		//--------------------------------------------------------------------------------------
 		ID2D1DeviceContext1* GetD2DDeviceContext() const;
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	DWriteFactory2ƒCƒ“ƒ^[ƒtƒFƒCƒX‚Ìæ“¾
-		@return	DWriteFactory2ƒCƒ“ƒ^[ƒtƒFƒCƒX
+		@brief	DWriteFactory2ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã®å–å¾—
+		@return	DWriteFactory2ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹
 		*/
 		//--------------------------------------------------------------------------------------
 		IDWriteFactory2* GetDWriteFactory() const;
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	WICImagingFactory2ƒCƒ“ƒ^[ƒtƒFƒCƒX‚Ìæ“¾
-		@return	WICImagingFactory2ƒCƒ“ƒ^[ƒtƒFƒCƒX
+		@brief	WICImagingFactory2ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã®å–å¾—
+		@return	WICImagingFactory2ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹
 		*/
 		//--------------------------------------------------------------------------------------
 		IWICImagingFactory2* GetWicImagingFactory() const;
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒVƒƒƒhƒEƒ}ƒbƒv‚ÌƒNƒŠƒA
-		@return	‚È‚µ
+		@brief	ã‚·ãƒ£ãƒ‰ã‚¦ãƒãƒƒãƒ—ã®ã‚¯ãƒªã‚¢
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		virtual void ClearShadowmapViews();
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒVƒƒƒhƒEƒ}ƒbƒv•`‰æ‚ÌŠJn
-		@return	‚È‚µ
+		@brief	ã‚·ãƒ£ãƒ‰ã‚¦ãƒãƒƒãƒ—æç”»ã®é–‹å§‹
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		virtual void StartShadowmapDraw();
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒVƒƒƒhƒEƒ}ƒbƒv•`‰æ‚ÌI—¹
-		@return	‚È‚µ
+		@brief	ã‚·ãƒ£ãƒ‰ã‚¦ãƒãƒƒãƒ—æç”»ã®çµ‚äº†
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		virtual void EndShadowmapDraw();
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	’Êí•`‰æ‚ÌƒNƒŠƒA
-		@param[in]	col	ƒNƒŠƒAF
-		@return	‚È‚µ
+		@brief	é€šå¸¸æç”»ã®ã‚¯ãƒªã‚¢
+		@param[in]	col	ã‚¯ãƒªã‚¢è‰²
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		virtual void ClearDefaultViews(const bsm::Col4& col = bsm::Col4(0, 0, 0, 1.0f));
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	’Êí•`‰æ‚ÌŠJn
-		@return	‚È‚µ
+		@brief	é€šå¸¸æç”»ã®é–‹å§‹
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		virtual void StartDefaultDraw();
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	’Êí•`‰æ‚ÌI—¹
-		@return	‚È‚µ
+		@brief	é€šå¸¸æç”»ã®çµ‚äº†
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		virtual void EndDefaultDraw();
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	•`‰æ‚ÌŒãn––<br />
-		‚·‚×‚Ä‚ÌƒpƒCƒvƒ‰ƒCƒ“İ’è‚ğƒfƒtƒHƒ‹ƒg‚É–ß‚·
-		@return	‚È‚µ
+		@brief	æç”»ã®å¾Œå§‹æœ«<br />
+		ã™ã¹ã¦ã®ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³è¨­å®šã‚’ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã«æˆ»ã™
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		void InitializeStates();
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief ƒfƒtƒHƒ‹ƒg‚ÌƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚Ìæ“¾
-		@return	ƒfƒtƒHƒ‹ƒg‚ÌƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg
+		@brief ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®å–å¾—
+		@return	ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆ
 		*/
 		//--------------------------------------------------------------------------------------
 		shared_ptr<DefaultRenderTarget> GetDefaultRenderTarget();
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief ƒVƒƒƒhƒEƒ}ƒbƒv‚ÌƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚Ìæ“¾
-		@return	ƒVƒƒƒhƒEƒ}ƒbƒv‚ÌƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg
+		@brief ã‚·ãƒ£ãƒ‰ã‚¦ãƒãƒƒãƒ—ã®ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®å–å¾—
+		@return	ã‚·ãƒ£ãƒ‰ã‚¦ãƒãƒƒãƒ—ã®ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆ
 		*/
 		//--------------------------------------------------------------------------------------
-		shared_ptr<ShadowMapRenderTarget> GetShadowMapRenderTarget(float ShadowMapDimension = 2048.0f);
+		shared_ptr<ShadowMapRenderTarget> GetShadowMapRenderTarget(float ShadowMapDimension = 8192.0f);
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief ƒŒƒ“ƒ_ƒŠƒ“ƒOƒXƒe[ƒg‚Ìæ“¾
-		@return	ƒŒƒ“ƒ_ƒŠƒ“ƒOƒXƒe[ƒg
+		@brief ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¹ãƒ†ãƒ¼ãƒˆã®å–å¾—
+		@return	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¹ãƒ†ãƒ¼ãƒˆ
 		*/
 		//--------------------------------------------------------------------------------------
 		shared_ptr<RenderState> GetRenderState()const;
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief ƒtƒƒ“ƒgƒoƒbƒtƒ@‚É“]‘—
-		@return	‚È‚µ
+		@brief ãƒ•ãƒ­ãƒ³ãƒˆãƒãƒƒãƒ•ã‚¡ã«è»¢é€
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		void Present(unsigned int SyncInterval, unsigned int  Flags);
 
 	private:
-		// pImplƒCƒfƒBƒIƒ€
+		// pImplã‚¤ãƒ‡ã‚£ã‚ªãƒ 
 		struct Impl;
 		unique_ptr<Impl> pImpl;
-		//ƒRƒs[‹Ö~
+		//ã‚³ãƒ”ãƒ¼ç¦æ­¢
 		DeviceResources(const DeviceResources&) = delete;
 		DeviceResources& operator=(const DeviceResources&) = delete;
-		//ƒ€[ƒu‹Ö~
+		//ãƒ ãƒ¼ãƒ–ç¦æ­¢
 		DeviceResources(const DeviceResources&&) = delete;
 		DeviceResources& operator=(const DeviceResources&&) = delete;
 	};
@@ -1953,197 +1953,197 @@ namespace basecross {
 
 
 	//--------------------------------------------------------------------------------------
-	///	ƒŒƒ“ƒ_ƒŠƒ“ƒOƒXƒe[ƒgƒNƒ‰ƒX
+	///	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¹ãƒ†ãƒ¼ãƒˆã‚¯ãƒ©ã‚¹
 	//--------------------------------------------------------------------------------------
 	class RenderState {
 	public:
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+		@brief	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		RenderState();
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒfƒXƒgƒ‰ƒNƒ^
+		@brief	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		virtual ~RenderState();
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	“h‚è‚Â‚Ô‚µ‚ÌƒuƒŒƒ“ƒhƒXƒe[ƒg‚Ìæ“¾
-		@return	ƒuƒŒƒ“ƒhƒXƒe[ƒgƒCƒ“ƒ^[ƒtƒFƒCƒX‚Ìƒ|ƒCƒ“ƒ^
+		@brief	å¡—ã‚Šã¤ã¶ã—ã®ãƒ–ãƒ¬ãƒ³ãƒ‰ã‚¹ãƒ†ãƒ¼ãƒˆã®å–å¾—
+		@return	ãƒ–ãƒ¬ãƒ³ãƒ‰ã‚¹ãƒ†ãƒ¼ãƒˆã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		ID3D11BlendState* GetOpaque()const;
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	’Pƒ‚È“§–¾ˆ—‚Ìæ“¾
-		@return	ƒuƒŒƒ“ƒhƒXƒe[ƒgƒCƒ“ƒ^[ƒtƒFƒCƒX‚Ìƒ|ƒCƒ“ƒ^
+		@brief	å˜ç´”ãªé€æ˜å‡¦ç†ã®å–å¾—
+		@return	ãƒ–ãƒ¬ãƒ³ãƒ‰ã‚¹ãƒ†ãƒ¼ãƒˆã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		ID3D11BlendState* GetAlphaBlend()const;
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	”¼“§–¾ˆ—‚Ìæ“¾
-		@return	ƒuƒŒƒ“ƒhƒXƒe[ƒgƒCƒ“ƒ^[ƒtƒFƒCƒX‚Ìƒ|ƒCƒ“ƒ^
+		@brief	åŠé€æ˜å‡¦ç†ã®å–å¾—
+		@return	ãƒ–ãƒ¬ãƒ³ãƒ‰ã‚¹ãƒ†ãƒ¼ãƒˆã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		ID3D11BlendState* GetAlphaBlendEx()const;
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	‰ÁZˆ—‚Ìæ“¾
-		@return	ƒuƒŒƒ“ƒhƒXƒe[ƒgƒCƒ“ƒ^[ƒtƒFƒCƒX‚Ìƒ|ƒCƒ“ƒ^
+		@brief	åŠ ç®—å‡¦ç†ã®å–å¾—
+		@return	ãƒ–ãƒ¬ãƒ³ãƒ‰ã‚¹ãƒ†ãƒ¼ãƒˆã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		ID3D11BlendState* GetAdditive()const;
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒAƒ‹ƒtƒ@‚ğg—p‚µ‚½Œ³‚Ìƒf[ƒ^‚Æ‘ÎÛƒf[ƒ^‚ğƒuƒŒƒ“ƒhˆ—‚Ìæ“¾
-		@return	ƒuƒŒƒ“ƒhƒXƒe[ƒgƒCƒ“ƒ^[ƒtƒFƒCƒX‚Ìƒ|ƒCƒ“ƒ^
+		@brief	ã‚¢ãƒ«ãƒ•ã‚¡ã‚’ä½¿ç”¨ã—ãŸå…ƒã®ãƒ‡ãƒ¼ã‚¿ã¨å¯¾è±¡ãƒ‡ãƒ¼ã‚¿ã‚’ãƒ–ãƒ¬ãƒ³ãƒ‰å‡¦ç†ã®å–å¾—
+		@return	ãƒ–ãƒ¬ãƒ³ãƒ‰ã‚¹ãƒ†ãƒ¼ãƒˆã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		ID3D11BlendState* GetNonPremultiplied()const;
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒAƒ‹ƒtƒ@ƒeƒXƒg
-		@return	ƒuƒŒƒ“ƒhƒXƒe[ƒgƒCƒ“ƒ^[ƒtƒFƒCƒX‚Ìƒ|ƒCƒ“ƒ^
+		@brief	ã‚¢ãƒ«ãƒ•ã‚¡ãƒ†ã‚¹ãƒˆ
+		@return	ãƒ–ãƒ¬ãƒ³ãƒ‰ã‚¹ãƒ†ãƒ¼ãƒˆã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		ID3D11BlendState* GetAlphaToCoverage()const;
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	[“xˆ—‚È‚µ‚ÌƒfƒvƒXƒXƒeƒ“ƒVƒ‹ƒXƒe[ƒg‚Ìæ“¾
-		@return	ƒfƒvƒXƒXƒeƒ“ƒVƒ‹ƒXƒe[ƒgƒCƒ“ƒ^[ƒtƒFƒCƒX‚Ìƒ|ƒCƒ“ƒ^
+		@brief	æ·±åº¦å‡¦ç†ãªã—ã®ãƒ‡ãƒ—ã‚¹ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ã‚¹ãƒ†ãƒ¼ãƒˆã®å–å¾—
+		@return	ãƒ‡ãƒ—ã‚¹ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ã‚¹ãƒ†ãƒ¼ãƒˆã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		ID3D11DepthStencilState* GetDepthNone()const;
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	’Êí[“x‚ÌƒfƒvƒXƒXƒeƒ“ƒVƒ‹ƒXƒe[ƒg‚Ìæ“¾
-		@return	ƒfƒvƒXƒXƒeƒ“ƒVƒ‹ƒXƒe[ƒgƒCƒ“ƒ^[ƒtƒFƒCƒX‚Ìƒ|ƒCƒ“ƒ^
+		@brief	é€šå¸¸æ·±åº¦ã®ãƒ‡ãƒ—ã‚¹ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ã‚¹ãƒ†ãƒ¼ãƒˆã®å–å¾—
+		@return	ãƒ‡ãƒ—ã‚¹ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ã‚¹ãƒ†ãƒ¼ãƒˆã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		ID3D11DepthStencilState* GetDepthDefault()const;
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	“Ç‚İæ‚èê—p‚ÌƒfƒvƒXƒXƒeƒ“ƒVƒ‹ƒXƒe[ƒg‚Ìæ“¾
-		@return	ƒfƒvƒXƒXƒeƒ“ƒVƒ‹ƒXƒe[ƒgƒCƒ“ƒ^[ƒtƒFƒCƒX‚Ìƒ|ƒCƒ“ƒ^
+		@brief	èª­ã¿å–ã‚Šå°‚ç”¨ã®ãƒ‡ãƒ—ã‚¹ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ã‚¹ãƒ†ãƒ¼ãƒˆã®å–å¾—
+		@return	ãƒ‡ãƒ—ã‚¹ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ã‚¹ãƒ†ãƒ¼ãƒˆã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		ID3D11DepthStencilState* GetDepthRead()const;
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒJƒŠƒ“ƒO‚È‚µ‚Ìƒ‰ƒXƒ^ƒ‰ƒCƒUƒXƒe[ƒg‚Ìæ“¾
-		@return	ƒ‰ƒXƒ^ƒ‰ƒCƒUƒXƒe[ƒgƒCƒ“ƒ^[ƒtƒFƒCƒX‚Ìƒ|ƒCƒ“ƒ^
+		@brief	ã‚«ãƒªãƒ³ã‚°ãªã—ã®ãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ã‚¹ãƒ†ãƒ¼ãƒˆã®å–å¾—
+		@return	ãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ã‚¹ãƒ†ãƒ¼ãƒˆã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		ID3D11RasterizerState* GetCullNone()const;
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒJƒŠƒ“ƒO‚È‚µ‚Ìƒ‰ƒXƒ^ƒ‰ƒCƒUƒXƒe[ƒgiƒV[ƒT[ˆ—j‚Ìæ“¾
-		@return	ƒ‰ƒXƒ^ƒ‰ƒCƒUƒXƒe[ƒgƒCƒ“ƒ^[ƒtƒFƒCƒX‚Ìƒ|ƒCƒ“ƒ^
+		@brief	ã‚«ãƒªãƒ³ã‚°ãªã—ã®ãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ã‚¹ãƒ†ãƒ¼ãƒˆï¼ˆã‚·ãƒ¼ã‚µãƒ¼å‡¦ç†ï¼‰ã®å–å¾—
+		@return	ãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ã‚¹ãƒ†ãƒ¼ãƒˆã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		ID3D11RasterizerState* GetCullNoneScissor()const;
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒtƒƒ“ƒgƒJƒŠƒ“ƒOi”w–Ê•`‰æ‚Ì‚İj‚Ìƒ‰ƒXƒ^ƒ‰ƒCƒUƒXƒe[ƒg‚Ìæ“¾
-		@return	ƒ‰ƒXƒ^ƒ‰ƒCƒUƒXƒe[ƒgƒCƒ“ƒ^[ƒtƒFƒCƒX‚Ìƒ|ƒCƒ“ƒ^
+		@brief	ãƒ•ãƒ­ãƒ³ãƒˆã‚«ãƒªãƒ³ã‚°ï¼ˆèƒŒé¢æç”»ã®ã¿ï¼‰ã®ãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ã‚¹ãƒ†ãƒ¼ãƒˆã®å–å¾—
+		@return	ãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ã‚¹ãƒ†ãƒ¼ãƒˆã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		ID3D11RasterizerState* GetCullFront()const;
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒtƒƒ“ƒgƒJƒŠƒ“ƒOi”w–Ê•`‰æ‚Ì‚İj‚Ìƒ‰ƒXƒ^ƒ‰ƒCƒUƒXƒe[ƒgiƒV[ƒT[ˆ—j‚Ìæ“¾
-		@return	ƒ‰ƒXƒ^ƒ‰ƒCƒUƒXƒe[ƒgƒCƒ“ƒ^[ƒtƒFƒCƒX‚Ìƒ|ƒCƒ“ƒ^
+		@brief	ãƒ•ãƒ­ãƒ³ãƒˆã‚«ãƒªãƒ³ã‚°ï¼ˆèƒŒé¢æç”»ã®ã¿ï¼‰ã®ãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ã‚¹ãƒ†ãƒ¼ãƒˆï¼ˆã‚·ãƒ¼ã‚µãƒ¼å‡¦ç†ï¼‰ã®å–å¾—
+		@return	ãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ã‚¹ãƒ†ãƒ¼ãƒˆã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		ID3D11RasterizerState* GetCullFrontScissor()const;
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒoƒbƒNƒJƒŠƒ“ƒOi‘O–Ê•`‰æ‚Ì‚İj‚Ìƒ‰ƒXƒ^ƒ‰ƒCƒUƒXƒe[ƒg‚Ìæ“¾
-		@return	ƒ‰ƒXƒ^ƒ‰ƒCƒUƒXƒe[ƒgƒCƒ“ƒ^[ƒtƒFƒCƒX‚Ìƒ|ƒCƒ“ƒ^
+		@brief	ãƒãƒƒã‚¯ã‚«ãƒªãƒ³ã‚°ï¼ˆå‰é¢æç”»ã®ã¿ï¼‰ã®ãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ã‚¹ãƒ†ãƒ¼ãƒˆã®å–å¾—
+		@return	ãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ã‚¹ãƒ†ãƒ¼ãƒˆã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		ID3D11RasterizerState* GetCullBack()const;
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒoƒbƒNƒJƒŠƒ“ƒOi‘O–Ê•`‰æ‚Ì‚İj‚Ìƒ‰ƒXƒ^ƒ‰ƒCƒUƒXƒe[ƒgiƒV[ƒT[ˆ—j‚Ìæ“¾
-		@return	ƒ‰ƒXƒ^ƒ‰ƒCƒUƒXƒe[ƒgƒCƒ“ƒ^[ƒtƒFƒCƒX‚Ìƒ|ƒCƒ“ƒ^
+		@brief	ãƒãƒƒã‚¯ã‚«ãƒªãƒ³ã‚°ï¼ˆå‰é¢æç”»ã®ã¿ï¼‰ã®ãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ã‚¹ãƒ†ãƒ¼ãƒˆï¼ˆã‚·ãƒ¼ã‚µãƒ¼å‡¦ç†ï¼‰ã®å–å¾—
+		@return	ãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ã‚¹ãƒ†ãƒ¼ãƒˆã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		ID3D11RasterizerState* GetCullBackScissor()const;
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒƒCƒAƒtƒŒ[ƒ€‚Ìƒ‰ƒXƒ^ƒ‰ƒCƒUƒXƒe[ƒg‚Ìæ“¾
-		@return	ƒ‰ƒXƒ^ƒ‰ƒCƒUƒXƒe[ƒgƒCƒ“ƒ^[ƒtƒFƒCƒX‚Ìƒ|ƒCƒ“ƒ^
+		@brief	ãƒ¯ã‚¤ã‚¢ãƒ•ãƒ¬ãƒ¼ãƒ ã®ãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ã‚¹ãƒ†ãƒ¼ãƒˆã®å–å¾—
+		@return	ãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ã‚¹ãƒ†ãƒ¼ãƒˆã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		ID3D11RasterizerState* GetWireframe()const;
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒƒCƒAƒtƒŒ[ƒ€‚Ìƒ‰ƒXƒ^ƒ‰ƒCƒUƒXƒe[ƒgiƒV[ƒT[ˆ—j‚Ìæ“¾
-		@return	ƒ‰ƒXƒ^ƒ‰ƒCƒUƒXƒe[ƒgƒCƒ“ƒ^[ƒtƒFƒCƒX‚Ìƒ|ƒCƒ“ƒ^
+		@brief	ãƒ¯ã‚¤ã‚¢ãƒ•ãƒ¬ãƒ¼ãƒ ã®ãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ã‚¹ãƒ†ãƒ¼ãƒˆï¼ˆã‚·ãƒ¼ã‚µãƒ¼å‡¦ç†ï¼‰ã®å–å¾—
+		@return	ãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ã‚¹ãƒ†ãƒ¼ãƒˆã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		ID3D11RasterizerState* GetWireframeScissor()const;
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	“_ƒtƒBƒ‹ƒ^ƒŠƒ“ƒO‚ÆƒeƒNƒXƒ`ƒƒ[À•Wƒ‰ƒbƒv‚ÌƒTƒ“ƒvƒ‰[ƒXƒe[ƒg‚Ìæ“¾
-		@return	ƒTƒ“ƒvƒ‰[ƒXƒe[ƒgƒCƒ“ƒ^[ƒtƒFƒCƒX‚Ìƒ|ƒCƒ“ƒ^
+		@brief	ç‚¹ãƒ•ã‚£ãƒ«ã‚¿ãƒªãƒ³ã‚°ã¨ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¼åº§æ¨™ãƒ©ãƒƒãƒ—ã®ã‚µãƒ³ãƒ—ãƒ©ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆã®å–å¾—
+		@return	ã‚µãƒ³ãƒ—ãƒ©ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		ID3D11SamplerState* GetPointWrap()const;
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	“_ƒtƒBƒ‹ƒ^ƒŠƒ“ƒO‚ÆƒeƒNƒXƒ`ƒƒ[À•WƒNƒ‰ƒ“ƒv‚ÌƒTƒ“ƒvƒ‰[ƒXƒe[ƒg‚Ìæ“¾
-		@return	ƒTƒ“ƒvƒ‰[ƒXƒe[ƒgƒCƒ“ƒ^[ƒtƒFƒCƒX‚Ìƒ|ƒCƒ“ƒ^
+		@brief	ç‚¹ãƒ•ã‚£ãƒ«ã‚¿ãƒªãƒ³ã‚°ã¨ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¼åº§æ¨™ã‚¯ãƒ©ãƒ³ãƒ—ã®ã‚µãƒ³ãƒ—ãƒ©ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆã®å–å¾—
+		@return	ã‚µãƒ³ãƒ—ãƒ©ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		ID3D11SamplerState* GetPointClamp()const;
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	üŒ`ƒtƒBƒ‹ƒ^ƒŠƒ“ƒO‚ÆƒeƒNƒXƒ`ƒƒ[À•Wƒ‰ƒbƒv‚ÌƒTƒ“ƒvƒ‰[ƒXƒe[ƒg‚Ìæ“¾
-		@return	ƒTƒ“ƒvƒ‰[ƒXƒe[ƒgƒCƒ“ƒ^[ƒtƒFƒCƒX‚Ìƒ|ƒCƒ“ƒ^
+		@brief	ç·šå½¢ãƒ•ã‚£ãƒ«ã‚¿ãƒªãƒ³ã‚°ã¨ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¼åº§æ¨™ãƒ©ãƒƒãƒ—ã®ã‚µãƒ³ãƒ—ãƒ©ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆã®å–å¾—
+		@return	ã‚µãƒ³ãƒ—ãƒ©ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		ID3D11SamplerState* GetLinearWrap()const;
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	üŒ`ƒtƒBƒ‹ƒ^ƒŠƒ“ƒO‚ÆƒeƒNƒXƒ`ƒƒ[À•WƒNƒ‰ƒ“ƒv‚ÌƒTƒ“ƒvƒ‰[ƒXƒe[ƒg‚Ìæ“¾
-		@return	ƒTƒ“ƒvƒ‰[ƒXƒe[ƒgƒCƒ“ƒ^[ƒtƒFƒCƒX‚Ìƒ|ƒCƒ“ƒ^
+		@brief	ç·šå½¢ãƒ•ã‚£ãƒ«ã‚¿ãƒªãƒ³ã‚°ã¨ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¼åº§æ¨™ã‚¯ãƒ©ãƒ³ãƒ—ã®ã‚µãƒ³ãƒ—ãƒ©ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆã®å–å¾—
+		@return	ã‚µãƒ³ãƒ—ãƒ©ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		ID3D11SamplerState* GetLinearClamp()const;
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ˆÙ•û«ƒtƒBƒ‹ƒ^ƒŠƒ“ƒO‚ÆƒeƒNƒXƒ`ƒƒ[À•Wƒ‰ƒbƒv‚ÌƒTƒ“ƒvƒ‰[ƒXƒe[ƒg‚Ìæ“¾
-		@return	ƒTƒ“ƒvƒ‰[ƒXƒe[ƒgƒCƒ“ƒ^[ƒtƒFƒCƒX‚Ìƒ|ƒCƒ“ƒ^
+		@brief	ç•°æ–¹æ€§ãƒ•ã‚£ãƒ«ã‚¿ãƒªãƒ³ã‚°ã¨ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¼åº§æ¨™ãƒ©ãƒƒãƒ—ã®ã‚µãƒ³ãƒ—ãƒ©ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆã®å–å¾—
+		@return	ã‚µãƒ³ãƒ—ãƒ©ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		ID3D11SamplerState* GetAnisotropicWrap()const;
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ˆÙ•û«ƒtƒBƒ‹ƒ^ƒŠƒ“ƒO‚ÆƒeƒNƒXƒ`ƒƒ[À•WƒNƒ‰ƒ“ƒv‚ÌƒTƒ“ƒvƒ‰[ƒXƒe[ƒg‚Ìæ“¾
-		@return	ƒTƒ“ƒvƒ‰[ƒXƒe[ƒgƒCƒ“ƒ^[ƒtƒFƒCƒX‚Ìƒ|ƒCƒ“ƒ^
+		@brief	ç•°æ–¹æ€§ãƒ•ã‚£ãƒ«ã‚¿ãƒªãƒ³ã‚°ã¨ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¼åº§æ¨™ã‚¯ãƒ©ãƒ³ãƒ—ã®ã‚µãƒ³ãƒ—ãƒ©ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆã®å–å¾—
+		@return	ã‚µãƒ³ãƒ—ãƒ©ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		ID3D11SamplerState* GetAnisotropicClamp()const;
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	üŒ`ƒtƒBƒ‹ƒ^ƒŠƒ“ƒO‚ğg‚Á‚½”äŠrƒTƒ“ƒvƒ‰[ƒXƒe[ƒg‚Ìæ“¾
-		@return	ƒTƒ“ƒvƒ‰[ƒXƒe[ƒgƒCƒ“ƒ^[ƒtƒFƒCƒX‚Ìƒ|ƒCƒ“ƒ^
+		@brief	ç·šå½¢ãƒ•ã‚£ãƒ«ã‚¿ãƒªãƒ³ã‚°ã‚’ä½¿ã£ãŸæ¯”è¼ƒã‚µãƒ³ãƒ—ãƒ©ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆã®å–å¾—
+		@return	ã‚µãƒ³ãƒ—ãƒ©ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		ID3D11SamplerState* GetComparisonLinear()const;
-		//ˆÈ‰ºAƒŒƒ“ƒ_ƒŠƒ“ƒOƒXƒe[ƒg‚ÌŠeenum’l‚É‚æ‚éƒfƒoƒCƒX‚Ö‚Ìİ’è
+		//ä»¥ä¸‹ã€ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¹ãƒ†ãƒ¼ãƒˆã®å„enumå€¤ã«ã‚ˆã‚‹ãƒ‡ãƒã‚¤ã‚¹ã¸ã®è¨­å®š
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	BlendState‚Ìİ’è
-		@param[in]	pContext	ID3D11DeviceContext2ƒRƒ“ƒeƒLƒXƒg‚Ìƒ|ƒCƒ“ƒ^
-		@param[in]	state	BlendState’l
-		@return	‚È‚µ
+		@brief	BlendStateã®è¨­å®š
+		@param[in]	pContext	ID3D11DeviceContext2ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆã®ãƒã‚¤ãƒ³ã‚¿
+		@param[in]	state	BlendStateå€¤
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		void SetBlendState(ID3D11DeviceContext2* pContext, BlendState state) {
@@ -2161,17 +2161,17 @@ namespace basecross {
 				pContext->OMSetBlendState(GetNonPremultiplied(), nullptr, 0xffffffff);
 				break;
 			default:
-				//ƒfƒtƒHƒ‹ƒg‚Í“h‚è‚Â‚Ô‚µ
+				//ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã¯å¡—ã‚Šã¤ã¶ã—
 				pContext->OMSetBlendState(GetOpaque(), nullptr, 0xffffffff);
 				break;
 			}
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	DepthStencilState‚Ìİ’è
-		@param[in]	pContext	ID3D11DeviceContext2ƒRƒ“ƒeƒLƒXƒg‚Ìƒ|ƒCƒ“ƒ^
-		@param[in]	state	DepthStencilState’l
-		@return	‚È‚µ
+		@brief	DepthStencilStateã®è¨­å®š
+		@param[in]	pContext	ID3D11DeviceContext2ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆã®ãƒã‚¤ãƒ³ã‚¿
+		@param[in]	state	DepthStencilStateå€¤
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		void SetDepthStencilState(ID3D11DeviceContext2* pContext, DepthStencilState state) {
@@ -2189,43 +2189,43 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	RasterizerState‚Ìİ’è
-		@param[in]	pContext	ID3D11DeviceContext2ƒRƒ“ƒeƒLƒXƒg‚Ìƒ|ƒCƒ“ƒ^
-		@param[in]	state	RasterizerState’l
-		@return	‚È‚µ
+		@brief	RasterizerStateã®è¨­å®š
+		@param[in]	pContext	ID3D11DeviceContext2ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆã®ãƒã‚¤ãƒ³ã‚¿
+		@param[in]	state	RasterizerStateå€¤
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		void SetRasterizerState(ID3D11DeviceContext2* pContext, RasterizerState state) {
 			switch (state) {
 			case RasterizerState::CullBack:
-				//ƒ‰ƒXƒ^ƒ‰ƒCƒUƒXƒe[ƒgi•\•`‰æj
+				//ãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ã‚¹ãƒ†ãƒ¼ãƒˆï¼ˆè¡¨æç”»ï¼‰
 				pContext->RSSetState(GetCullBack());
 				break;
 			case RasterizerState::CullFront:
-				//ƒ‰ƒXƒ^ƒ‰ƒCƒUƒXƒe[ƒgi— •`‰æj
+				//ãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ã‚¹ãƒ†ãƒ¼ãƒˆï¼ˆè£æç”»ï¼‰
 				pContext->RSSetState(GetCullFront());
 				break;
 			case RasterizerState::CullNone:
-				//ƒ‰ƒXƒ^ƒ‰ƒCƒUƒXƒe[ƒgi—¼–Ê•`‰æj
+				//ãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ã‚¹ãƒ†ãƒ¼ãƒˆï¼ˆä¸¡é¢æç”»ï¼‰
 				pContext->RSSetState(GetCullNone());
 				break;
 			case RasterizerState::Wireframe:
-				//ƒ‰ƒXƒ^ƒ‰ƒCƒUƒXƒe[ƒgiƒƒCƒAƒtƒŒ[ƒ€j
+				//ãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ã‚¹ãƒ†ãƒ¼ãƒˆï¼ˆãƒ¯ã‚¤ã‚¢ãƒ•ãƒ¬ãƒ¼ãƒ ï¼‰
 				pContext->RSSetState(GetWireframe());
 				break;
 			case RasterizerState::DoubleDraw:
-				//ƒ‰ƒXƒ^ƒ‰ƒCƒUƒXƒe[ƒgi— •`‰æ‚ğİ’èj
+				//ãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ã‚¹ãƒ†ãƒ¼ãƒˆï¼ˆè£æç”»ã‚’è¨­å®šï¼‰
 				pContext->RSSetState(GetCullFront());
 				break;
 			}
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	1‚Â‚ÌSamplerState‚Ìİ’è
-		@param[in]	pContext	ID3D11DeviceContext2ƒRƒ“ƒeƒLƒXƒg‚Ìƒ|ƒCƒ“ƒ^
-		@param[in]	state	SamplerState’l
-		@param[in]	slot	ƒXƒƒbƒg”Ô†
-		@return	‚È‚µ
+		@brief	1ã¤ã®SamplerStateã®è¨­å®š
+		@param[in]	pContext	ID3D11DeviceContext2ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆã®ãƒã‚¤ãƒ³ã‚¿
+		@param[in]	state	SamplerStateå€¤
+		@param[in]	slot	ã‚¹ãƒ­ãƒƒãƒˆç•ªå·
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		void SetSamplerState(ID3D11DeviceContext2* pContext, SamplerState state,UINT slot) {
@@ -2233,7 +2233,7 @@ namespace basecross {
 			ID3D11SamplerState* pNullSR[D3D11_COMMONSHADER_SAMPLER_SLOT_COUNT] = { nullptr };
 			switch (state) {
 			case SamplerState::SamplerNone:
-				//ƒTƒ“ƒvƒ‰[ƒNƒŠƒA
+				//ã‚µãƒ³ãƒ—ãƒ©ãƒ¼ã‚¯ãƒªã‚¢
 				pContext->PSSetSamplers(slot, 1, pNullSR);
 				break;
 			case SamplerState::PointWrap:
@@ -2265,7 +2265,7 @@ namespace basecross {
 				pContext->PSSetSamplers(slot, 1, &pSampler);
 				break;
 			default:
-				//ƒfƒtƒHƒ‹ƒg‚ÍClamp
+				//ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã¯Clamp
 				pSampler = GetLinearClamp();
 				pContext->PSSetSamplers(slot, 1, &pSampler);
 				break;
@@ -2273,9 +2273,9 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	SamplerState‚ğ‚·‚×‚ÄƒNƒŠƒA‚·‚é
-		@param[in]	pContext	ID3D11DeviceContext2ƒRƒ“ƒeƒLƒXƒg‚Ìƒ|ƒCƒ“ƒ^
-		@return	‚È‚µ
+		@brief	SamplerStateã‚’ã™ã¹ã¦ã‚¯ãƒªã‚¢ã™ã‚‹
+		@param[in]	pContext	ID3D11DeviceContext2ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆã®ãƒã‚¤ãƒ³ã‚¿
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		void SetSamplerAllClear(ID3D11DeviceContext2* pContext) {
@@ -2285,80 +2285,80 @@ namespace basecross {
 
 
 	private:
-		// pImplƒCƒfƒBƒIƒ€
+		// pImplã‚¤ãƒ‡ã‚£ã‚ªãƒ 
 		struct Impl;
 		unique_ptr<Impl> pImpl;
-		//ƒRƒs[‹Ö~
+		//ã‚³ãƒ”ãƒ¼ç¦æ­¢
 		RenderState(const RenderState&) = delete;
 		RenderState& operator=(const RenderState&) = delete;
-		//ƒ€[ƒu‹Ö~
+		//ãƒ ãƒ¼ãƒ–ç¦æ­¢
 		RenderState(const RenderState&&) = delete;
 		RenderState& operator=(const RenderState&&) = delete;
 	};
 
 	//--------------------------------------------------------------------------------------
-	///	ƒŒƒ“ƒ_[ƒ^[ƒQƒbƒgŠî’êƒNƒ‰ƒX
+	///	ãƒ¬ãƒ³ãƒ€ãƒ¼ã‚¿ãƒ¼ã‚²ãƒƒãƒˆåŸºåº•ã‚¯ãƒ©ã‚¹
 	//--------------------------------------------------------------------------------------
 	class RenderTarget {
 	protected:
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒvƒƒeƒNƒgƒRƒ“ƒXƒgƒ‰ƒNƒ^
+		@brief	ãƒ—ãƒ­ãƒ†ã‚¯ãƒˆã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		RenderTarget();
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒvƒƒeƒNƒgƒfƒXƒgƒ‰ƒNƒ^
+		@brief	ãƒ—ãƒ­ãƒ†ã‚¯ãƒˆãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		virtual ~RenderTarget();
 	public:
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒrƒ…[ƒ|[ƒg‚ğ“¾‚é
-		@return	ƒrƒ…[ƒ|[ƒg
+		@brief	ãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆã‚’å¾—ã‚‹
+		@return	ãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆ
 		*/
 		//--------------------------------------------------------------------------------------
 		const D3D11_VIEWPORT& GetViewport() const;
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief ƒrƒ…[ƒ|[ƒg‚Ìİ’è
-		@param[in]	Viewport	ƒrƒ…[ƒ|[ƒg
-		@return	‚È‚µ
+		@brief ãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆã®è¨­å®š
+		@param[in]	Viewport	ãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆ
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		void SetViewport(const D3D11_VIEWPORT& Viewport);
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ğƒNƒŠƒA‚·‚éƒˆ‰¼‘zŠÖ”
-		@param[in]	col	ƒNƒŠƒAF
-		@return	‚È‚µ
+		@brief	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’ã‚¯ãƒªã‚¢ã™ã‚‹ç´”ç²‹ä»®æƒ³é–¢æ•°
+		@param[in]	col	ã‚¯ãƒªã‚¢è‰²
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		virtual void ClearViews(const bsm::Col4& col = bsm::Col4(0, 0, 0, 1.0f)) = 0;
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ğŠJn‚·‚éƒˆ‰¼‘zŠÖ”
-		@return	‚È‚µ
+		@brief	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’é–‹å§‹ã™ã‚‹ç´”ç²‹ä»®æƒ³é–¢æ•°
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		virtual void StartRenderTarget() = 0;
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ğI—¹‚·‚éƒˆ‰¼‘zŠÖ”
-		@return	‚È‚µ
+		@brief	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’çµ‚äº†ã™ã‚‹ç´”ç²‹ä»®æƒ³é–¢æ•°
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		virtual void EndRenderTarget() = 0;
 	private:
-		// pImplƒCƒfƒBƒIƒ€
+		// pImplã‚¤ãƒ‡ã‚£ã‚ªãƒ 
 		struct Impl;
 		unique_ptr<Impl> pImpl;
-		//ƒRƒs[‹Ö~
+		//ã‚³ãƒ”ãƒ¼ç¦æ­¢
 		RenderTarget(const RenderTarget&) = delete;
 		RenderTarget& operator=(const RenderTarget&) = delete;
-		//ƒ€[ƒu‹Ö~
+		//ãƒ ãƒ¼ãƒ–ç¦æ­¢
 		RenderTarget(const RenderTarget&&) = delete;
 		RenderTarget& operator=(const RenderTarget&&) = delete;
 	};
@@ -2367,149 +2367,149 @@ namespace basecross {
 	class Stage;
 
 	//--------------------------------------------------------------------------------------
-	///	ƒVƒƒƒhƒEƒ}ƒbƒv‚ÌƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg
+	///	ã‚·ãƒ£ãƒ‰ã‚¦ãƒãƒƒãƒ—ã®ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆ
 	//--------------------------------------------------------------------------------------
 	class ShadowMapRenderTarget : public RenderTarget {
 	public:
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-		@param[in]	ShadowMapDimension	ƒVƒƒƒhƒEƒ}ƒbƒv‚Ì‘å‚«‚³
+		@brief	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+		@param[in]	ShadowMapDimension	ã‚·ãƒ£ãƒ‰ã‚¦ãƒãƒƒãƒ—ã®å¤§ãã•
 		*/
 		//--------------------------------------------------------------------------------------
 		ShadowMapRenderTarget(float ShadowMapDimension);
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒfƒXƒgƒ‰ƒNƒ^
+		@brief	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		virtual ~ShadowMapRenderTarget();
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒVƒƒƒhƒEƒ}ƒbƒv‚Ì‘å‚«‚³‚ğ“¾‚é
-		@return	ƒVƒƒƒhƒEƒ}ƒbƒv‚Ì‘å‚«‚³
+		@brief	ã‚·ãƒ£ãƒ‰ã‚¦ãƒãƒƒãƒ—ã®å¤§ãã•ã‚’å¾—ã‚‹
+		@return	ã‚·ãƒ£ãƒ‰ã‚¦ãƒãƒƒãƒ—ã®å¤§ãã•
 		*/
 		//--------------------------------------------------------------------------------------
 		float GetShadowMapDimension() const;
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒVƒƒƒhƒEƒ}ƒbƒv‚ÌƒVƒF[ƒ_ƒŠƒ\[ƒXƒrƒ…[‚ğ“¾‚é
-		@return	ƒVƒƒƒhƒEƒ}ƒbƒv‚ÌƒVƒF[ƒ_ƒŠƒ\[ƒXƒrƒ…[ƒCƒ“ƒ^[ƒtƒFƒCƒX‚Ìƒ|ƒCƒ“ƒ^
+		@brief	ã‚·ãƒ£ãƒ‰ã‚¦ãƒãƒƒãƒ—ã®ã‚·ã‚§ãƒ¼ãƒ€ãƒªã‚½ãƒ¼ã‚¹ãƒ“ãƒ¥ãƒ¼ã‚’å¾—ã‚‹
+		@return	ã‚·ãƒ£ãƒ‰ã‚¦ãƒãƒƒãƒ—ã®ã‚·ã‚§ãƒ¼ãƒ€ãƒªã‚½ãƒ¼ã‚¹ãƒ“ãƒ¥ãƒ¼ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		ID3D11ShaderResourceView* GetShaderResourceView() const;
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒVƒƒƒhƒEƒ}ƒbƒv‚ÌƒfƒvƒXƒXƒeƒ“ƒVƒ‹ƒeƒNƒXƒ`ƒƒ‚ğ“¾‚é
-		@return	ƒVƒƒƒhƒEƒ}ƒbƒv‚ÌƒfƒvƒXƒXƒeƒ“ƒVƒ‹ƒeƒNƒXƒ`ƒƒƒCƒ“ƒ^[ƒtƒFƒCƒX‚Ìƒ|ƒCƒ“ƒ^
+		@brief	ã‚·ãƒ£ãƒ‰ã‚¦ãƒãƒƒãƒ—ã®ãƒ‡ãƒ—ã‚¹ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’å¾—ã‚‹
+		@return	ã‚·ãƒ£ãƒ‰ã‚¦ãƒãƒƒãƒ—ã®ãƒ‡ãƒ—ã‚¹ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		ID3D11Texture2D*		GetDepthStencil() const;
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒVƒƒƒhƒEƒ}ƒbƒv‚ÌƒfƒvƒXƒXƒeƒ“ƒVƒ‹ƒVƒF[ƒ_ƒŠƒ\[ƒXƒrƒ…[‚ğ“¾‚é
-		@return	ƒVƒƒƒhƒEƒ}ƒbƒv‚ÌƒfƒvƒXƒXƒeƒ“ƒVƒ‹ƒVƒF[ƒ_ƒŠƒ\[ƒXƒrƒ…[ƒCƒ“ƒ^[ƒtƒFƒCƒX‚Ìƒ|ƒCƒ“ƒ^
+		@brief	ã‚·ãƒ£ãƒ‰ã‚¦ãƒãƒƒãƒ—ã®ãƒ‡ãƒ—ã‚¹ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ãƒªã‚½ãƒ¼ã‚¹ãƒ“ãƒ¥ãƒ¼ã‚’å¾—ã‚‹
+		@return	ã‚·ãƒ£ãƒ‰ã‚¦ãƒãƒƒãƒ—ã®ãƒ‡ãƒ—ã‚¹ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ãƒªã‚½ãƒ¼ã‚¹ãƒ“ãƒ¥ãƒ¼ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		ID3D11DepthStencilView*	GetDepthStencilView() const;
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ğƒNƒŠƒA‚·‚é‰¼‘zŠÖ”
-		@param[in]	col	ƒNƒŠƒAF
-		@return	‚È‚µ
+		@brief	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’ã‚¯ãƒªã‚¢ã™ã‚‹ä»®æƒ³é–¢æ•°
+		@param[in]	col	ã‚¯ãƒªã‚¢è‰²
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		virtual void ClearViews(const bsm::Col4& col = bsm::Col4(0, 0, 0, 1.0f)) override;
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ğŠJn‚·‚é
-		@return	‚È‚µ
+		@brief	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’é–‹å§‹ã™ã‚‹
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		virtual void StartRenderTarget()override;
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ğI—¹‚·‚é
-		@return	‚È‚µ
+		@brief	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’çµ‚äº†ã™ã‚‹
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		virtual void EndRenderTarget()override;
 	private:
-		// pImplƒCƒfƒBƒIƒ€
+		// pImplã‚¤ãƒ‡ã‚£ã‚ªãƒ 
 		struct Impl;
 		unique_ptr<Impl> pImpl;
 	};
 
 
 	//--------------------------------------------------------------------------------------
-	///	ƒfƒtƒHƒ‹ƒg‚ÌƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg
+	///	ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆ
 	//--------------------------------------------------------------------------------------
 	class DefaultRenderTarget : public RenderTarget {
 	public:
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+		@brief	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		explicit DefaultRenderTarget();
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒfƒXƒgƒ‰ƒNƒ^
+		@brief	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		virtual ~DefaultRenderTarget();
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒgƒrƒ…[‚ğ“¾‚é
-		@return	ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒgƒrƒ…[ƒCƒ“ƒ^[ƒtƒFƒCƒX‚Ìƒ|ƒCƒ“ƒ^
+		@brief	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆãƒ“ãƒ¥ãƒ¼ã‚’å¾—ã‚‹
+		@return	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆãƒ“ãƒ¥ãƒ¼ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		ID3D11RenderTargetView* GetRenderTargetView() const;
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒfƒvƒXƒXƒeƒ“ƒVƒ‹ƒeƒNƒXƒ`ƒƒ‚ğ“¾‚é
-		@return	ƒfƒvƒXƒXƒeƒ“ƒVƒ‹ƒeƒNƒXƒ`ƒƒƒCƒ“ƒ^[ƒtƒFƒCƒX‚Ìƒ|ƒCƒ“ƒ^
+		@brief	ãƒ‡ãƒ—ã‚¹ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’å¾—ã‚‹
+		@return	ãƒ‡ãƒ—ã‚¹ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		ID3D11Texture2D*		GetDepthStencil() const;
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒfƒvƒXƒXƒeƒ“ƒVƒ‹ƒrƒ…[‚ğ“¾‚é
-		@return	ƒfƒvƒXƒXƒeƒ“ƒVƒ‹ƒrƒ…[ƒCƒ“ƒ^[ƒtƒFƒCƒX‚Ìƒ|ƒCƒ“ƒ^
+		@brief	ãƒ‡ãƒ—ã‚¹ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ãƒ“ãƒ¥ãƒ¼ã‚’å¾—ã‚‹
+		@return	ãƒ‡ãƒ—ã‚¹ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ãƒ“ãƒ¥ãƒ¼ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		ID3D11DepthStencilView*	GetDepthStencilView() const;
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	2ŸŒ³ƒ^[ƒQƒbƒg‚Ìƒrƒbƒgƒ}ƒbƒv‚ğ“¾‚é
-		@return	2ŸŒ³ƒ^[ƒQƒbƒg‚Ìƒrƒbƒgƒ}ƒbƒvƒCƒ“ƒ^[ƒtƒFƒCƒX‚Ìƒ|ƒCƒ“ƒ^
+		@brief	2æ¬¡å…ƒã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®ãƒ“ãƒƒãƒˆãƒãƒƒãƒ—ã‚’å¾—ã‚‹
+		@return	2æ¬¡å…ƒã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®ãƒ“ãƒƒãƒˆãƒãƒƒãƒ—ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		ID2D1Bitmap1*			GetD2DTargetBitmap() const;
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ğƒNƒŠƒA‚·‚é‰¼‘zŠÖ”iƒXƒNƒŠ[ƒ“‘S‘Ì‚ğƒNƒŠƒA‚·‚éj
-		@param[in]	col	ƒNƒŠƒAF
-		@return	‚È‚µ
+		@brief	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’ã‚¯ãƒªã‚¢ã™ã‚‹ä»®æƒ³é–¢æ•°ï¼ˆã‚¹ã‚¯ãƒªãƒ¼ãƒ³å…¨ä½“ã‚’ã‚¯ãƒªã‚¢ã™ã‚‹ï¼‰
+		@param[in]	col	ã‚¯ãƒªã‚¢è‰²
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		virtual void ClearViews(const bsm::Col4& col = bsm::Col4(0, 0, 0, 1.0f)) override;
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ğŠJn‚·‚é
-		@return	‚È‚µ
+		@brief	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’é–‹å§‹ã™ã‚‹
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		virtual void StartRenderTarget()override;
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ğI—¹‚·‚é
-		@return	‚È‚µ
+		@brief	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’çµ‚äº†ã™ã‚‹
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		virtual void EndRenderTarget()override;
 	private:
-		// pImplƒCƒfƒBƒIƒ€
+		// pImplã‚¤ãƒ‡ã‚£ã‚ªãƒ 
 		struct Impl;
 		unique_ptr<Impl> pImpl;
 	};
@@ -2518,19 +2518,19 @@ namespace basecross {
 
 
 	//--------------------------------------------------------------------------------------
-	///	ƒVƒF[ƒ_ŠÖ˜AƒŠƒ\[ƒX‚ÌƒCƒ“ƒ^[ƒtƒFƒCƒX
+	///	ã‚·ã‚§ãƒ¼ãƒ€é–¢é€£ãƒªã‚½ãƒ¼ã‚¹ã®ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹
 	//--------------------------------------------------------------------------------------
 	class ShaderResource {
 	protected:
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒvƒƒeƒNƒgƒRƒ“ƒXƒgƒ‰ƒNƒ^
+		@brief	ãƒ—ãƒ­ãƒ†ã‚¯ãƒˆã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		ShaderResource();
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒvƒƒeƒNƒgƒfƒXƒgƒ‰ƒNƒ^
+		@brief	ãƒ—ãƒ­ãƒ†ã‚¯ãƒˆãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		virtual ~ShaderResource();
@@ -2538,106 +2538,106 @@ namespace basecross {
 		static const int m_LightMax{ 3 };
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒoƒCƒiƒŠƒtƒ@ƒCƒ‹‚ğ“Ç‚İ‚Ş
-		@param[in]	fileName	ƒtƒ@ƒCƒ‹–¼
-		@param[out]	Data	ƒoƒCƒiƒŠƒf[ƒ^‚Ì–ß‚è
-		@param[out]	CsoSz	ƒTƒCƒY‚Ì–ß‚è
-		@return	‚È‚µ
+		@brief	ãƒã‚¤ãƒŠãƒªãƒ•ã‚¡ã‚¤ãƒ«ã‚’èª­ã¿è¾¼ã‚€
+		@param[in]	fileName	ãƒ•ã‚¡ã‚¤ãƒ«å
+		@param[out]	Data	ãƒã‚¤ãƒŠãƒªãƒ‡ãƒ¼ã‚¿ã®æˆ»ã‚Š
+		@param[out]	CsoSz	ã‚µã‚¤ã‚ºã®æˆ»ã‚Š
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		static void ReadBinaryFile(const wstring& fileName, unique_ptr<uint8_t[]>& Data, size_t& CsoSz);
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒoƒCƒiƒŠƒf[ƒ^‚©‚ç’¸“_ƒVƒF[ƒ_‚ğì¬‚·‚é
-		@param[in]	Data	ƒoƒCƒiƒŠƒf[ƒ^
-		@param[in]	CsoSz	ƒTƒCƒY
-		@param[out]	pResult	ó‚¯æ‚éƒVƒF[ƒ_
-		@return	‚È‚µ
+		@brief	ãƒã‚¤ãƒŠãƒªãƒ‡ãƒ¼ã‚¿ã‹ã‚‰é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ã‚’ä½œæˆã™ã‚‹
+		@param[in]	Data	ãƒã‚¤ãƒŠãƒªãƒ‡ãƒ¼ã‚¿
+		@param[in]	CsoSz	ã‚µã‚¤ã‚º
+		@param[out]	pResult	å—ã‘å–ã‚‹ã‚·ã‚§ãƒ¼ãƒ€
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		static void CreateVertexShader(unique_ptr<uint8_t[]>& Data, size_t CsoSz, ID3D11VertexShader** pResult);
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒoƒCƒiƒŠƒf[ƒ^‚©‚çƒCƒ“ƒvƒbƒgƒŒƒCƒAƒEƒg‚ğì¬‚·‚é
-		@param[in]	Data	ƒoƒCƒiƒŠƒf[ƒ^
-		@param[in]	CsoSz	ƒTƒCƒY
-		@param[in]	pElement	’¸“_’è‹`
-		@param[in]	NumElement	’¸“_’è‹`‚Ì”
-		@param[out]	pResult	ó‚¯æ‚éƒŒƒCƒAƒEƒg
-		@return	‚È‚µ
+		@brief	ãƒã‚¤ãƒŠãƒªãƒ‡ãƒ¼ã‚¿ã‹ã‚‰ã‚¤ãƒ³ãƒ—ãƒƒãƒˆãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã‚’ä½œæˆã™ã‚‹
+		@param[in]	Data	ãƒã‚¤ãƒŠãƒªãƒ‡ãƒ¼ã‚¿
+		@param[in]	CsoSz	ã‚µã‚¤ã‚º
+		@param[in]	pElement	é ‚ç‚¹å®šç¾©
+		@param[in]	NumElement	é ‚ç‚¹å®šç¾©ã®æ•°
+		@param[out]	pResult	å—ã‘å–ã‚‹ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆ
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		static void CreateInputLayout(unique_ptr<uint8_t[]>& Data, size_t CsoSz,
 			const D3D11_INPUT_ELEMENT_DESC* pElement, UINT NumElement, ID3D11InputLayout** pResult);
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒoƒCƒiƒŠƒf[ƒ^‚©‚çƒsƒNƒZƒ‹ƒVƒF[ƒ_‚ğì¬‚·‚é
-		@param[in]	Data	ƒoƒCƒiƒŠƒf[ƒ^
-		@param[in]	CsoSz	ƒTƒCƒY
-		@param[out]	pResult	ó‚¯æ‚éƒVƒF[ƒ_
-		@return	‚È‚µ
+		@brief	ãƒã‚¤ãƒŠãƒªãƒ‡ãƒ¼ã‚¿ã‹ã‚‰ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ã‚’ä½œæˆã™ã‚‹
+		@param[in]	Data	ãƒã‚¤ãƒŠãƒªãƒ‡ãƒ¼ã‚¿
+		@param[in]	CsoSz	ã‚µã‚¤ã‚º
+		@param[out]	pResult	å—ã‘å–ã‚‹ã‚·ã‚§ãƒ¼ãƒ€
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		static void CreatePixelShader(unique_ptr<uint8_t[]>& Data, size_t CsoSz, ID3D11PixelShader** pResult);
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒoƒCƒiƒŠƒf[ƒ^‚©‚çƒWƒIƒƒgƒŠƒVƒF[ƒ_‚ğì¬‚·‚é
-		@param[in]	Data	ƒoƒCƒiƒŠƒf[ƒ^
-		@param[in]	CsoSz	ƒTƒCƒY
-		@param[out]	pResult	ó‚¯æ‚éƒVƒF[ƒ_
-		@return	‚È‚µ
+		@brief	ãƒã‚¤ãƒŠãƒªãƒ‡ãƒ¼ã‚¿ã‹ã‚‰ã‚¸ã‚ªãƒ¡ãƒˆãƒªã‚·ã‚§ãƒ¼ãƒ€ã‚’ä½œæˆã™ã‚‹
+		@param[in]	Data	ãƒã‚¤ãƒŠãƒªãƒ‡ãƒ¼ã‚¿
+		@param[in]	CsoSz	ã‚µã‚¤ã‚º
+		@param[out]	pResult	å—ã‘å–ã‚‹ã‚·ã‚§ãƒ¼ãƒ€
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		static void CreateGeometryShader(unique_ptr<uint8_t[]>& Data, size_t CsoSz, ID3D11GeometryShader** pResult);
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒoƒCƒiƒŠƒf[ƒ^‚©‚çƒWƒIƒƒgƒŠƒVƒF[ƒ_‚ğì¬‚·‚é
-		@param[in]	Data	ƒoƒCƒiƒŠƒf[ƒ^
-		@param[in]	CsoSz	ƒTƒCƒY
-		@param[in]	SOEntries	’è‹`‚³‚ê‚½ƒGƒ“ƒgƒŠ‚Ì”z—ñ
-		@param[in]	Stride	1ŒÂ‚ÌƒXƒgƒ‰ƒCƒhƒTƒCƒY
-		@param[in]	NumStride	ƒXƒgƒ‰ƒCƒh”
-		@param[out]	pResult	ó‚¯æ‚éƒVƒF[ƒ_
-		@return	‚È‚µ
+		@brief	ãƒã‚¤ãƒŠãƒªãƒ‡ãƒ¼ã‚¿ã‹ã‚‰ã‚¸ã‚ªãƒ¡ãƒˆãƒªã‚·ã‚§ãƒ¼ãƒ€ã‚’ä½œæˆã™ã‚‹
+		@param[in]	Data	ãƒã‚¤ãƒŠãƒªãƒ‡ãƒ¼ã‚¿
+		@param[in]	CsoSz	ã‚µã‚¤ã‚º
+		@param[in]	SOEntries	å®šç¾©ã•ã‚ŒãŸã‚¨ãƒ³ãƒˆãƒªã®é…åˆ—
+		@param[in]	Stride	1å€‹ã®ã‚¹ãƒˆãƒ©ã‚¤ãƒ‰ã‚µã‚¤ã‚º
+		@param[in]	NumStride	ã‚¹ãƒˆãƒ©ã‚¤ãƒ‰æ•°
+		@param[out]	pResult	å—ã‘å–ã‚‹ã‚·ã‚§ãƒ¼ãƒ€
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		static void CreateGeometryShader(unique_ptr<uint8_t[]>& Data, size_t CsoSz,
 			const vector<D3D11_SO_DECLARATION_ENTRY>& SOEntries, UINT Stride, UINT NumStride, ID3D11GeometryShader** pResult);
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒoƒCƒiƒŠƒf[ƒ^‚©‚çƒRƒ“ƒsƒ…[ƒgƒVƒF[ƒ_‚ğì¬‚·‚é
-		@param[in]	Data	ƒoƒCƒiƒŠƒf[ƒ^
-		@param[in]	CsoSz	ƒTƒCƒY
-		@param[out]	pResult	ó‚¯æ‚éƒVƒF[ƒ_
-		@return	‚È‚µ
+		@brief	ãƒã‚¤ãƒŠãƒªãƒ‡ãƒ¼ã‚¿ã‹ã‚‰ã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ãƒˆã‚·ã‚§ãƒ¼ãƒ€ã‚’ä½œæˆã™ã‚‹
+		@param[in]	Data	ãƒã‚¤ãƒŠãƒªãƒ‡ãƒ¼ã‚¿
+		@param[in]	CsoSz	ã‚µã‚¤ã‚º
+		@param[out]	pResult	å—ã‘å–ã‚‹ã‚·ã‚§ãƒ¼ãƒ€
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		static void CreateComputeShader(unique_ptr<uint8_t[]>& Data, size_t CsoSz, ID3D11ComputeShader** pResult);
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒRƒ“ƒXƒ^ƒ“ƒgƒoƒbƒtƒ@‚ğì¬‚·‚é
-		@param[in]	BuffSize	ƒTƒCƒY
-		@param[out]	pResult	ó‚¯æ‚éƒRƒ“ƒXƒ^ƒ“ƒgƒoƒbƒtƒ@
-		@return	‚È‚µ
+		@brief	ã‚³ãƒ³ã‚¹ã‚¿ãƒ³ãƒˆãƒãƒƒãƒ•ã‚¡ã‚’ä½œæˆã™ã‚‹
+		@param[in]	BuffSize	ã‚µã‚¤ã‚º
+		@param[out]	pResult	å—ã‘å–ã‚‹ã‚³ãƒ³ã‚¹ã‚¿ãƒ³ãƒˆãƒãƒƒãƒ•ã‚¡
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		static void CreateConstantBuffer(UINT BuffSize, ID3D11Buffer** pResult);
 	protected:
-		//ƒ~ƒ…[ƒeƒbƒNƒX
+		//ãƒŸãƒ¥ãƒ¼ãƒ†ãƒƒã‚¯ã‚¹
 		std::mutex MutexBase;
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	’¸“_ƒVƒF[ƒ_ƒAƒNƒZƒbƒT
-		@param[in]	Filename	ƒtƒ@ƒCƒ‹–¼
-		@param[out]	VSPtr	ŒŸØ‚·‚éƒVƒF[ƒ_iCOMj
-		@return	ƒVƒF[ƒ_ƒCƒ“ƒ^[ƒtƒFƒCƒX
+		@brief	é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ã‚¢ã‚¯ã‚»ãƒƒã‚µ
+		@param[in]	Filename	ãƒ•ã‚¡ã‚¤ãƒ«å
+		@param[out]	VSPtr	æ¤œè¨¼ã™ã‚‹ã‚·ã‚§ãƒ¼ãƒ€ï¼ˆCOMï¼‰
+		@return	ã‚·ã‚§ãƒ¼ãƒ€ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹
 		*/
 		//--------------------------------------------------------------------------------------
 		ID3D11VertexShader* GetVertexShaderBase(const wstring& Filename, ComPtr<ID3D11VertexShader>& VSPtr) {
 			return Util::DemandCreate(VSPtr, MutexBase, [&](ID3D11VertexShader** pResult)
 			{
 				std::unique_ptr<uint8_t[]> data;
-				//ƒVƒF[ƒ_‚Ì“Ç‚İ‚İ
+				//ã‚·ã‚§ãƒ¼ãƒ€ã®èª­ã¿è¾¼ã¿
 				size_t cso_sz = 0;
 				ShaderResource::ReadBinaryFile(Filename, data, cso_sz);
 				ShaderResource::CreateVertexShader(data, cso_sz, pResult);
@@ -2645,10 +2645,10 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒCƒ“ƒvƒbƒgƒŒƒCƒAƒEƒgƒAƒNƒZƒbƒT
-		@param[in]	Filename	ƒtƒ@ƒCƒ‹–¼
-		@param[out]	ILPtr	ŒŸØ‚·‚éƒVƒF[ƒ_iCOMj
-		@return	ƒVƒF[ƒ_ƒCƒ“ƒ^[ƒtƒFƒCƒX
+		@brief	ã‚¤ãƒ³ãƒ—ãƒƒãƒˆãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã‚¢ã‚¯ã‚»ãƒƒã‚µ
+		@param[in]	Filename	ãƒ•ã‚¡ã‚¤ãƒ«å
+		@param[out]	ILPtr	æ¤œè¨¼ã™ã‚‹ã‚·ã‚§ãƒ¼ãƒ€ï¼ˆCOMï¼‰
+		@return	ã‚·ã‚§ãƒ¼ãƒ€ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹
 		*/
 		//--------------------------------------------------------------------------------------
 		ID3D11InputLayout* GetInputLayoutBase(const wstring& Filename, ComPtr<ID3D11InputLayout>& ILPtr,
@@ -2656,7 +2656,7 @@ namespace basecross {
 			return Util::DemandCreate(ILPtr, MutexBase, [&](ID3D11InputLayout** pResult)
 			{
 				std::unique_ptr<uint8_t[]> data;
-				//ƒVƒF[ƒ_‚Ì“Ç‚İ‚İ
+				//ã‚·ã‚§ãƒ¼ãƒ€ã®èª­ã¿è¾¼ã¿
 				size_t cso_sz = 0;
 				ShaderResource::ReadBinaryFile(Filename, data, cso_sz);
 				ShaderResource::CreateInputLayout(
@@ -2669,10 +2669,10 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒRƒ“ƒXƒ^ƒ“ƒgƒoƒbƒtƒ@ƒAƒNƒZƒbƒT
-		@param[in]	BuffSize	ƒTƒCƒY
-		@param[out]	Buffer	ŒŸØ‚·‚éƒoƒbƒtƒ@iCOMj
-		@return	ƒVƒF[ƒ_ƒCƒ“ƒ^[ƒtƒFƒCƒX
+		@brief	ã‚³ãƒ³ã‚¹ã‚¿ãƒ³ãƒˆãƒãƒƒãƒ•ã‚¡ã‚¢ã‚¯ã‚»ãƒƒã‚µ
+		@param[in]	BuffSize	ã‚µã‚¤ã‚º
+		@param[out]	Buffer	æ¤œè¨¼ã™ã‚‹ãƒãƒƒãƒ•ã‚¡ï¼ˆCOMï¼‰
+		@return	ã‚·ã‚§ãƒ¼ãƒ€ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹
 		*/
 		//--------------------------------------------------------------------------------------
 		ID3D11Buffer* GetConstantBufferBase(UINT BuffSize, ComPtr<ID3D11Buffer>& Buffer) {
@@ -2683,17 +2683,17 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒsƒNƒZƒ‹ƒVƒF[ƒ_ƒAƒNƒZƒbƒT
-		@param[in]	Filename	ƒtƒ@ƒCƒ‹–¼
-		@param[out]	PSPtr	ŒŸØ‚·‚éƒVƒF[ƒ_iCOMj
-		@return	ƒVƒF[ƒ_ƒCƒ“ƒ^[ƒtƒFƒCƒX
+		@brief	ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ã‚¢ã‚¯ã‚»ãƒƒã‚µ
+		@param[in]	Filename	ãƒ•ã‚¡ã‚¤ãƒ«å
+		@param[out]	PSPtr	æ¤œè¨¼ã™ã‚‹ã‚·ã‚§ãƒ¼ãƒ€ï¼ˆCOMï¼‰
+		@return	ã‚·ã‚§ãƒ¼ãƒ€ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹
 		*/
 		//--------------------------------------------------------------------------------------
 		ID3D11PixelShader* GetPixelShaderBase(const wstring& Filename, ComPtr<ID3D11PixelShader>& PSPtr) {
 			return Util::DemandCreate(PSPtr, MutexBase, [&](ID3D11PixelShader** pResult)
 			{
 				std::unique_ptr<uint8_t[]> data;
-				//ƒVƒF[ƒ_‚Ì“Ç‚İ‚İ
+				//ã‚·ã‚§ãƒ¼ãƒ€ã®èª­ã¿è¾¼ã¿
 				size_t cso_sz = 0;
 				ShaderResource::ReadBinaryFile(Filename, data, cso_sz);
 				ShaderResource::CreatePixelShader(data, cso_sz, pResult);
@@ -2701,17 +2701,17 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒWƒIƒƒgƒŠƒVƒF[ƒ_ƒAƒNƒZƒbƒT
-		@param[in]	Filename	ƒtƒ@ƒCƒ‹–¼
-		@param[out]	GSPtr	ŒŸØ‚·‚éƒVƒF[ƒ_iCOMj
-		@return	ƒVƒF[ƒ_ƒCƒ“ƒ^[ƒtƒFƒCƒX
+		@brief	ã‚¸ã‚ªãƒ¡ãƒˆãƒªã‚·ã‚§ãƒ¼ãƒ€ã‚¢ã‚¯ã‚»ãƒƒã‚µ
+		@param[in]	Filename	ãƒ•ã‚¡ã‚¤ãƒ«å
+		@param[out]	GSPtr	æ¤œè¨¼ã™ã‚‹ã‚·ã‚§ãƒ¼ãƒ€ï¼ˆCOMï¼‰
+		@return	ã‚·ã‚§ãƒ¼ãƒ€ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹
 		*/
 		//--------------------------------------------------------------------------------------
 		ID3D11GeometryShader* GetGeometryShaderBase(const wstring& Filename, ComPtr<ID3D11GeometryShader>& GSPtr) {
 			return Util::DemandCreate(GSPtr, MutexBase, [&](ID3D11GeometryShader** pResult)
 			{
 				std::unique_ptr<uint8_t[]> data;
-				//ƒVƒF[ƒ_‚Ì“Ç‚İ‚İ
+				//ã‚·ã‚§ãƒ¼ãƒ€ã®èª­ã¿è¾¼ã¿
 				size_t cso_sz = 0;
 				ShaderResource::ReadBinaryFile(Filename, data, cso_sz);
 				ShaderResource::CreateGeometryShader(data, cso_sz, pResult);
@@ -2719,13 +2719,13 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒWƒIƒƒgƒŠƒVƒF[ƒ_ƒAƒNƒZƒbƒT
-		@param[in]	Filename	ƒtƒ@ƒCƒ‹–¼
-		@param[in]	SOEntries	ƒGƒ“ƒgƒŠ‚Ì”z—ñ
-		@param[in]	Stride	ƒXƒgƒ‰ƒCƒh
-		@param[in]	NumStride	ƒXƒgƒ‰ƒCƒh”
-		@param[out]	GSPtr	ŒŸØ‚·‚éƒVƒF[ƒ_iCOMj
-		@return	ƒVƒF[ƒ_ƒCƒ“ƒ^[ƒtƒFƒCƒX
+		@brief	ã‚¸ã‚ªãƒ¡ãƒˆãƒªã‚·ã‚§ãƒ¼ãƒ€ã‚¢ã‚¯ã‚»ãƒƒã‚µ
+		@param[in]	Filename	ãƒ•ã‚¡ã‚¤ãƒ«å
+		@param[in]	SOEntries	ã‚¨ãƒ³ãƒˆãƒªã®é…åˆ—
+		@param[in]	Stride	ã‚¹ãƒˆãƒ©ã‚¤ãƒ‰
+		@param[in]	NumStride	ã‚¹ãƒˆãƒ©ã‚¤ãƒ‰æ•°
+		@param[out]	GSPtr	æ¤œè¨¼ã™ã‚‹ã‚·ã‚§ãƒ¼ãƒ€ï¼ˆCOMï¼‰
+		@return	ã‚·ã‚§ãƒ¼ãƒ€ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹
 		*/
 		//--------------------------------------------------------------------------------------
 		ID3D11GeometryShader* GetGeometryShaderBase(const wstring& Filename,
@@ -2735,7 +2735,7 @@ namespace basecross {
 			return Util::DemandCreate(GSPtr, MutexBase, [&](ID3D11GeometryShader** pResult)
 			{
 				std::unique_ptr<uint8_t[]> data;
-				//ƒVƒF[ƒ_‚Ì“Ç‚İ‚İ
+				//ã‚·ã‚§ãƒ¼ãƒ€ã®èª­ã¿è¾¼ã¿
 				size_t cso_sz = 0;
 				ShaderResource::ReadBinaryFile(Filename, data, cso_sz);
 				ShaderResource::CreateGeometryShader(data, cso_sz, SOEntries, Stride, NumStride, pResult);
@@ -2743,64 +2743,64 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒRƒ“ƒsƒ…[ƒgƒVƒF[ƒ_ƒAƒNƒZƒbƒT
-		@param[in]	Filename	ƒtƒ@ƒCƒ‹–¼
-		@param[out]	CSPtr	ŒŸØ‚·‚éƒVƒF[ƒ_iCOMj
-		@return	ƒVƒF[ƒ_ƒCƒ“ƒ^[ƒtƒFƒCƒX
+		@brief	ã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ãƒˆã‚·ã‚§ãƒ¼ãƒ€ã‚¢ã‚¯ã‚»ãƒƒã‚µ
+		@param[in]	Filename	ãƒ•ã‚¡ã‚¤ãƒ«å
+		@param[out]	CSPtr	æ¤œè¨¼ã™ã‚‹ã‚·ã‚§ãƒ¼ãƒ€ï¼ˆCOMï¼‰
+		@return	ã‚·ã‚§ãƒ¼ãƒ€ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹
 		*/
 		//--------------------------------------------------------------------------------------
 		ID3D11ComputeShader* GetComputeShaderBase(const wstring& Filename, ComPtr<ID3D11ComputeShader>& CSPtr) {
 			return Util::DemandCreate(CSPtr, MutexBase, [&](ID3D11ComputeShader** pResult)
 			{
 				std::unique_ptr<uint8_t[]> data;
-				//ƒVƒF[ƒ_‚Ì“Ç‚İ‚İ
+				//ã‚·ã‚§ãƒ¼ãƒ€ã®èª­ã¿è¾¼ã¿
 				size_t cso_sz = 0;
 				ShaderResource::ReadBinaryFile(Filename, data, cso_sz);
 				ShaderResource::CreateComputeShader(data, cso_sz, pResult);
 			});
 		}
 	private:
-		// pImplƒCƒfƒBƒIƒ€
+		// pImplã‚¤ãƒ‡ã‚£ã‚ªãƒ 
 		struct Impl;
 		unique_ptr<Impl> pImpl;
-		//ƒRƒs[‹Ö~
+		//ã‚³ãƒ”ãƒ¼ç¦æ­¢
 		ShaderResource(const ShaderResource&) = delete;
 		ShaderResource& operator=(const ShaderResource&) = delete;
-		//ƒ€[ƒu‹Ö~
+		//ãƒ ãƒ¼ãƒ–ç¦æ­¢
 		ShaderResource(const ShaderResource&&) = delete;
 		ShaderResource& operator=(const ShaderResource&&) = delete;
 	};
 
 	//--------------------------------------------------------------------------------------
-	///	ƒRƒ“ƒXƒ^ƒ“ƒgƒoƒbƒtƒ@(ƒVƒ“ƒOƒ‹ƒgƒ“)
+	///	ã‚³ãƒ³ã‚¹ã‚¿ãƒ³ãƒˆãƒãƒƒãƒ•ã‚¡(ã‚·ãƒ³ã‚°ãƒ«ãƒˆãƒ³)
 	//--------------------------------------------------------------------------------------
 	template<typename ShaderType, typename ConstantType>
 	class ConstantBuffer : public ShaderResource {
 	protected:
-		//ƒfƒŠ[ƒ^[
+		//ãƒ‡ãƒªãƒ¼ã‚¿ãƒ¼
 		struct Deleter
 		{
 			void operator()(ShaderType *p) { delete p; }
 		};
 		ComPtr<ID3D11Buffer> m_Buffer;
-		//ƒ~ƒ…[ƒeƒbƒNƒX
+		//ãƒŸãƒ¥ãƒ¼ãƒ†ãƒƒã‚¯ã‚¹
 		std::mutex Mutex;
-		//\’z‚Æ”jŠü
+		//æ§‹ç¯‰ã¨ç ´æ£„
 		ConstantBuffer<ShaderType, ConstantType>() : ShaderResource() {}
 		virtual ~ConstantBuffer() {}
 		static unique_ptr<ShaderType, Deleter> m_Ptr;
-		//ƒRƒs[‹Ö~
+		//ã‚³ãƒ”ãƒ¼ç¦æ­¢
 		ConstantBuffer<ShaderType, ConstantType>(ConstantBuffer const&) = delete;
 		ConstantBuffer<ShaderType, ConstantType>& operator=(ConstantBuffer<ShaderType, ConstantType> const&) = delete;
-		//ƒ€[ƒu‹Ö~
+		//ãƒ ãƒ¼ãƒ–ç¦æ­¢
 		ConstantBuffer(const ConstantBuffer&&) = delete;
 		ConstantBuffer& operator=(const ConstantBuffer&&) = delete;
 	public:
-		//ŒöŠJƒAƒNƒZƒbƒT
+		//å…¬é–‹ã‚¢ã‚¯ã‚»ãƒƒã‚µ
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒRƒ“ƒXƒ^ƒ“ƒgƒoƒbƒtƒ@‚ğ“¾‚é
-		@return	ƒRƒ“ƒXƒ^ƒ“ƒgƒoƒbƒtƒ@
+		@brief	ã‚³ãƒ³ã‚¹ã‚¿ãƒ³ãƒˆãƒãƒƒãƒ•ã‚¡ã‚’å¾—ã‚‹
+		@return	ã‚³ãƒ³ã‚¹ã‚¿ãƒ³ãƒˆãƒãƒƒãƒ•ã‚¡
 		*/
 		//--------------------------------------------------------------------------------------
 		ID3D11Buffer* GetBuffer() {
@@ -2808,8 +2808,8 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒCƒ“ƒXƒ^ƒ“ƒX‚ğ“¾‚é
-		@return	ƒNƒ‰ƒX‚ÌƒCƒ“ƒXƒ^ƒ“ƒX
+		@brief	ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’å¾—ã‚‹
+		@return	ã‚¯ãƒ©ã‚¹ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
 		*/
 		//--------------------------------------------------------------------------------------
 		static unique_ptr<ShaderType, Deleter>& GetPtr() {
@@ -2822,22 +2822,22 @@ namespace basecross {
 
 
 	//--------------------------------------------------------------------------------------
-	///	ƒRƒ“ƒXƒ^ƒ“ƒgƒoƒbƒtƒ@
+	///	ã‚³ãƒ³ã‚¹ã‚¿ãƒ³ãƒˆãƒãƒƒãƒ•ã‚¡
 	//--------------------------------------------------------------------------------------
 	template<typename ConstantType>
 	class CBuffer : public ShaderResource {
 		ComPtr<ID3D11Buffer> m_Buffer;
-		//ƒRƒs[‹Ö~
+		//ã‚³ãƒ”ãƒ¼ç¦æ­¢
 		CBuffer(CBuffer const&) = delete;
 		CBuffer& operator=(CBuffer<ConstantType> const&) = delete;
-		//ƒ€[ƒu‹Ö~
+		//ãƒ ãƒ¼ãƒ–ç¦æ­¢
 		CBuffer(const CBuffer&&) = delete;
 		CBuffer& operator=(const CBuffer&&) = delete;
 	public:
-		//\’z‚Æ”jŠü
+		//æ§‹ç¯‰ã¨ç ´æ£„
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+		@brief	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		CBuffer() : ShaderResource() {
@@ -2845,15 +2845,15 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒfƒXƒgƒ‰ƒNƒ^
+		@brief	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		virtual ~CBuffer() {}
-		//ŒöŠJƒAƒNƒZƒbƒT
+		//å…¬é–‹ã‚¢ã‚¯ã‚»ãƒƒã‚µ
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒRƒ“ƒXƒ^ƒ“ƒgƒoƒbƒtƒ@‚ğ“¾‚é
-		@return	ƒRƒ“ƒXƒ^ƒ“ƒgƒoƒbƒtƒ@
+		@brief	ã‚³ãƒ³ã‚¹ã‚¿ãƒ³ãƒˆãƒãƒƒãƒ•ã‚¡ã‚’å¾—ã‚‹
+		@return	ã‚³ãƒ³ã‚¹ã‚¿ãƒ³ãƒˆãƒãƒƒãƒ•ã‚¡
 		*/
 		//--------------------------------------------------------------------------------------
 		ID3D11Buffer* GetBuffer() {
@@ -2864,30 +2864,30 @@ namespace basecross {
 
 
 	//--------------------------------------------------------------------------------------
-	///	’¸“_ƒVƒF[ƒ_(ƒVƒ“ƒOƒ‹ƒgƒ“)
+	///	é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€(ã‚·ãƒ³ã‚°ãƒ«ãƒˆãƒ³)
 	//--------------------------------------------------------------------------------------
 	template<typename ShaderType, typename VirtexType>
 	class VertexShader : public ShaderResource {
 		wstring m_Filename;
 	protected:
-		//ƒfƒŠ[ƒ^[
+		//ãƒ‡ãƒªãƒ¼ã‚¿ãƒ¼
 		struct Deleter
 		{
 			void operator()(ShaderType *p) { delete p; }
 		};
 		ComPtr<ID3D11VertexShader> m_VSPtr;
 		ComPtr<ID3D11InputLayout> m_ILPtr;
-		//ƒ~ƒ…[ƒeƒbƒNƒX
+		//ãƒŸãƒ¥ãƒ¼ãƒ†ãƒƒã‚¯ã‚¹
 		std::mutex Mutex;
-		//\’z‚Æ”jŠü
+		//æ§‹ç¯‰ã¨ç ´æ£„
 		VertexShader<ShaderType, VirtexType>(const wstring& Filename) : ShaderResource(), m_Filename(Filename) {}
 		virtual ~VertexShader() {}
 		static unique_ptr<ShaderType, Deleter> m_Ptr;
 	public:
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	’¸“_ƒVƒF[ƒ_‚ğ“¾‚é
-		@return	’¸“_ƒVƒF[ƒ_
+		@brief	é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ã‚’å¾—ã‚‹
+		@return	é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€
 		*/
 		//--------------------------------------------------------------------------------------
 		ID3D11VertexShader* GetShader() {
@@ -2895,8 +2895,8 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒCƒ“ƒvƒbƒgƒŒƒCƒAƒEƒg‚ğ“¾‚é
-		@return	ƒCƒ“ƒvƒbƒgƒŒƒCƒAƒEƒg
+		@brief	ã‚¤ãƒ³ãƒ—ãƒƒãƒˆãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã‚’å¾—ã‚‹
+		@return	ã‚¤ãƒ³ãƒ—ãƒƒãƒˆãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆ
 		*/
 		//--------------------------------------------------------------------------------------
 		ID3D11InputLayout* GetInputLayout() {
@@ -2904,8 +2904,8 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒCƒ“ƒXƒ^ƒ“ƒX‚ğ“¾‚é
-		@return	ƒNƒ‰ƒX‚ÌƒCƒ“ƒXƒ^ƒ“ƒX
+		@brief	ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’å¾—ã‚‹
+		@return	ã‚¯ãƒ©ã‚¹ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
 		*/
 		//--------------------------------------------------------------------------------------
 		static unique_ptr<ShaderType, Deleter>& GetPtr() {
@@ -2917,7 +2917,7 @@ namespace basecross {
 	};
 
 	//--------------------------------------------------------------------------------------
-	///	’¸“_ƒVƒF[ƒ_
+	///	é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€
 	//--------------------------------------------------------------------------------------
 	template<typename VirtexType>
 	class VShader : public ShaderResource {
@@ -2927,14 +2927,14 @@ namespace basecross {
 	public:
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+		@brief	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		VShader() : ShaderResource(), m_Filename() {}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-		@param[in]	Filename	ƒtƒ@ƒCƒ‹–¼
+		@brief	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+		@param[in]	Filename	ãƒ•ã‚¡ã‚¤ãƒ«å
 		*/
 		//--------------------------------------------------------------------------------------
 		VShader(const wstring& Filename) : ShaderResource(), m_Filename(Filename) {
@@ -2943,15 +2943,15 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒfƒXƒgƒ‰ƒNƒ^
+		@brief	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		virtual ~VShader() {}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	\’z
-		@param[in]	Filename	ƒtƒ@ƒCƒ‹–¼
-		@return	‚È‚µ
+		@brief	æ§‹ç¯‰
+		@param[in]	Filename	ãƒ•ã‚¡ã‚¤ãƒ«å
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		void Create(const wstring& Filename) {
@@ -2963,8 +2963,8 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	’¸“_ƒVƒF[ƒ_‚ğ“¾‚é
-		@return	’¸“_ƒVƒF[ƒ_
+		@brief	é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ã‚’å¾—ã‚‹
+		@return	é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€
 		*/
 		//--------------------------------------------------------------------------------------
 		ID3D11VertexShader* GetShader() {
@@ -2972,8 +2972,8 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒCƒ“ƒvƒbƒgƒŒƒCƒAƒEƒg‚ğ“¾‚é
-		@return	ƒCƒ“ƒvƒbƒgƒŒƒCƒAƒEƒg
+		@brief	ã‚¤ãƒ³ãƒ—ãƒƒãƒˆãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã‚’å¾—ã‚‹
+		@return	ã‚¤ãƒ³ãƒ—ãƒƒãƒˆãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆ
 		*/
 		//--------------------------------------------------------------------------------------
 		ID3D11InputLayout* GetInputLayout() {
@@ -2982,29 +2982,29 @@ namespace basecross {
 	};
 
 	//--------------------------------------------------------------------------------------
-	///	ƒsƒNƒZƒ‹ƒVƒF[ƒ_(ƒVƒ“ƒOƒ‹ƒgƒ“)
+	///	ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€(ã‚·ãƒ³ã‚°ãƒ«ãƒˆãƒ³)
 	//--------------------------------------------------------------------------------------
 	template<typename ShaderType>
 	class PixelShader : public ShaderResource {
 		wstring m_Filename;
 	protected:
-		//ƒfƒŠ[ƒ^[
+		//ãƒ‡ãƒªãƒ¼ã‚¿ãƒ¼
 		struct Deleter
 		{
 			void operator()(ShaderType *p) { delete p; }
 		};
 		ComPtr<ID3D11PixelShader> m_PSPtr;
-		//ƒ~ƒ…[ƒeƒbƒNƒX
+		//ãƒŸãƒ¥ãƒ¼ãƒ†ãƒƒã‚¯ã‚¹
 		std::mutex Mutex;
-		//\’z‚Æ”jŠü
+		//æ§‹ç¯‰ã¨ç ´æ£„
 		PixelShader<ShaderType>(const wstring& Filename) : ShaderResource(), m_Filename(Filename) {}
 		virtual ~PixelShader() {}
 		static unique_ptr<ShaderType, Deleter> m_Ptr;
 	public:
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒsƒNƒZƒ‹ƒVƒF[ƒ_‚ğ“¾‚é
-		@return	ƒsƒNƒZƒ‹ƒVƒF[ƒ_
+		@brief	ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ã‚’å¾—ã‚‹
+		@return	ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€
 		*/
 		//--------------------------------------------------------------------------------------
 		ID3D11PixelShader* GetShader() {
@@ -3012,8 +3012,8 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒCƒ“ƒXƒ^ƒ“ƒX‚ğ“¾‚é
-		@return	ƒNƒ‰ƒX‚ÌƒCƒ“ƒXƒ^ƒ“ƒX
+		@brief	ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’å¾—ã‚‹
+		@return	ã‚¯ãƒ©ã‚¹ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
 		*/
 		//--------------------------------------------------------------------------------------
 		static unique_ptr<ShaderType, Deleter>& GetPtr() {
@@ -3025,7 +3025,7 @@ namespace basecross {
 	};
 
 	//--------------------------------------------------------------------------------------
-	///	ƒsƒNƒZƒ‹ƒVƒF[ƒ_
+	///	ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€
 	//--------------------------------------------------------------------------------------
 	class PShader : public ShaderResource {
 		wstring m_Filename;
@@ -3033,14 +3033,14 @@ namespace basecross {
 	public:
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+		@brief	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		PShader() : ShaderResource(), m_Filename() {}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-		@param[in]	Filename	ƒtƒ@ƒCƒ‹–¼
+		@brief	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+		@param[in]	Filename	ãƒ•ã‚¡ã‚¤ãƒ«å
 		*/
 		//--------------------------------------------------------------------------------------
 		PShader(const wstring& Filename) : ShaderResource(), m_Filename(Filename) {
@@ -3048,15 +3048,15 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒfƒXƒgƒ‰ƒNƒ^
+		@brief	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		virtual ~PShader() {}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	\’z
-		@param[in]	Filename	ƒtƒ@ƒCƒ‹–¼
-		@return	‚È‚µ
+		@brief	æ§‹ç¯‰
+		@param[in]	Filename	ãƒ•ã‚¡ã‚¤ãƒ«å
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		void Create(const wstring& Filename) {
@@ -3066,8 +3066,8 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒsƒNƒZƒ‹ƒVƒF[ƒ_‚ğ“¾‚é
-		@return	ƒsƒNƒZƒ‹ƒVƒF[ƒ_
+		@brief	ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ã‚’å¾—ã‚‹
+		@return	ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€
 		*/
 		//--------------------------------------------------------------------------------------
 		ID3D11PixelShader* GetShader() {
@@ -3075,7 +3075,7 @@ namespace basecross {
 		}
 	};
 	//--------------------------------------------------------------------------------------
-	///	ƒWƒIƒƒgƒŠƒVƒF[ƒ_(ƒVƒ“ƒOƒ‹ƒgƒ“)
+	///	ã‚¸ã‚ªãƒ¡ãƒˆãƒªã‚·ã‚§ãƒ¼ãƒ€(ã‚·ãƒ³ã‚°ãƒ«ãƒˆãƒ³)
 	//--------------------------------------------------------------------------------------
 	template<typename ShaderType>
 	class GeometryShader : public ShaderResource {
@@ -3084,26 +3084,26 @@ namespace basecross {
 		UINT m_Stride;
 		UINT m_NumStride;
 	protected:
-		//ƒfƒŠ[ƒ^[
+		//ãƒ‡ãƒªãƒ¼ã‚¿ãƒ¼
 		struct Deleter
 		{
 			void operator()(ShaderType *p) { delete p; }
 		};
 		ComPtr<ID3D11GeometryShader> m_GSPtr;
-		//ƒ~ƒ…[ƒeƒbƒNƒX
+		//ãƒŸãƒ¥ãƒ¼ãƒ†ãƒƒã‚¯ã‚¹
 		std::mutex Mutex;
-		//\’z‚Æ”jŠü
+		//æ§‹ç¯‰ã¨ç ´æ£„
 		GeometryShader<ShaderType>(const wstring& Filename) : ShaderResource(), m_Filename(Filename) {}
 		virtual ~GeometryShader() {}
 		static unique_ptr<ShaderType, Deleter> m_Ptr;
 	public:
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒXƒƒbƒgƒGƒ“ƒgƒŠ‚Ì“o˜^
-		@param[in]	SOEntries	ƒGƒ“ƒgƒŠ‚Ì”z—ñ
-		@param[in]	Stride	ƒXƒgƒ‰ƒCƒh
-		@param[in]	NumStride	ƒXƒgƒ‰ƒCƒh”
-		@return	‚È‚µ
+		@brief	ã‚¹ãƒ­ãƒƒãƒˆã‚¨ãƒ³ãƒˆãƒªã®ç™»éŒ²
+		@param[in]	SOEntries	ã‚¨ãƒ³ãƒˆãƒªã®é…åˆ—
+		@param[in]	Stride	ã‚¹ãƒˆãƒ©ã‚¤ãƒ‰
+		@param[in]	NumStride	ã‚¹ãƒˆãƒ©ã‚¤ãƒ‰æ•°
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		void SetSOEntries(const vector<D3D11_SO_DECLARATION_ENTRY>& SOEntries,
@@ -3118,8 +3118,8 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒWƒIƒƒgƒŠƒVƒF[ƒ_‚ğ“¾‚é
-		@return	ƒWƒIƒƒgƒŠƒVƒF[ƒ_
+		@brief	ã‚¸ã‚ªãƒ¡ãƒˆãƒªã‚·ã‚§ãƒ¼ãƒ€ã‚’å¾—ã‚‹
+		@return	ã‚¸ã‚ªãƒ¡ãƒˆãƒªã‚·ã‚§ãƒ¼ãƒ€
 		*/
 		//--------------------------------------------------------------------------------------
 		ID3D11GeometryShader* GetShader() {
@@ -3132,8 +3132,8 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒCƒ“ƒXƒ^ƒ“ƒX‚ğ“¾‚é
-		@return	ƒNƒ‰ƒX‚ÌƒCƒ“ƒXƒ^ƒ“ƒX
+		@brief	ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’å¾—ã‚‹
+		@return	ã‚¯ãƒ©ã‚¹ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
 		*/
 		//--------------------------------------------------------------------------------------
 		static unique_ptr<ShaderType, Deleter>& GetPtr() {
@@ -3146,7 +3146,7 @@ namespace basecross {
 
 
 	//--------------------------------------------------------------------------------------
-	///	ƒWƒIƒƒgƒŠƒVƒF[ƒ_
+	///	ã‚¸ã‚ªãƒ¡ãƒˆãƒªã‚·ã‚§ãƒ¼ãƒ€
 	//--------------------------------------------------------------------------------------
 	class GShader : public ShaderResource {
 		ComPtr<ID3D11GeometryShader> m_GSPtr;
@@ -3157,30 +3157,30 @@ namespace basecross {
 	public:
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+		@brief	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		GShader() : ShaderResource(), m_Filename(), m_Stride(0), m_NumStride(0) {}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-		@param[in]	Filename	ƒtƒ@ƒCƒ‹–¼
+		@brief	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+		@param[in]	Filename	ãƒ•ã‚¡ã‚¤ãƒ«å
 		*/
 		//--------------------------------------------------------------------------------------
 		GShader(const wstring& Filename) : ShaderResource(), m_Filename(Filename), m_Stride(0), m_NumStride(0) {}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒfƒXƒgƒ‰ƒNƒ^
+		@brief	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		virtual ~GShader() {}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒXƒƒbƒgƒGƒ“ƒgƒŠ‚Ì“o˜^
-		@param[in]	SOEntries	ƒGƒ“ƒgƒŠ‚Ì”z—ñ
-		@param[in]	Stride	ƒXƒgƒ‰ƒCƒh
-		@param[in]	NumStride	ƒXƒgƒ‰ƒCƒh”
-		@return	‚È‚µ
+		@brief	ã‚¹ãƒ­ãƒƒãƒˆã‚¨ãƒ³ãƒˆãƒªã®ç™»éŒ²
+		@param[in]	SOEntries	ã‚¨ãƒ³ãƒˆãƒªã®é…åˆ—
+		@param[in]	Stride	ã‚¹ãƒˆãƒ©ã‚¤ãƒ‰
+		@param[in]	NumStride	ã‚¹ãƒˆãƒ©ã‚¤ãƒ‰æ•°
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		void SetSOEntries(const vector<D3D11_SO_DECLARATION_ENTRY>& SOEntries,
@@ -3195,9 +3195,9 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	\’z
-		@param[in]	Filename	ƒtƒ@ƒCƒ‹–¼
-		@return	‚È‚µ
+		@brief	æ§‹ç¯‰
+		@param[in]	Filename	ãƒ•ã‚¡ã‚¤ãƒ«å
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		void Create(const wstring& Filename) {
@@ -3212,8 +3212,8 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒWƒIƒƒgƒŠƒVƒF[ƒ_‚ğ“¾‚é
-		@return	ƒWƒIƒƒgƒŠƒVƒF[ƒ_
+		@brief	ã‚¸ã‚ªãƒ¡ãƒˆãƒªã‚·ã‚§ãƒ¼ãƒ€ã‚’å¾—ã‚‹
+		@return	ã‚¸ã‚ªãƒ¡ãƒˆãƒªã‚·ã‚§ãƒ¼ãƒ€
 		*/
 		//--------------------------------------------------------------------------------------
 		ID3D11GeometryShader* GetShader() {
@@ -3228,29 +3228,29 @@ namespace basecross {
 
 
 	//--------------------------------------------------------------------------------------
-	///	ƒRƒ“ƒsƒ…[ƒgƒVƒF[ƒ_(ƒVƒ“ƒOƒ‹ƒgƒ“)
+	///	ã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ãƒˆã‚·ã‚§ãƒ¼ãƒ€(ã‚·ãƒ³ã‚°ãƒ«ãƒˆãƒ³)
 	//--------------------------------------------------------------------------------------
 	template<typename ShaderType>
 	class ComputeShader : public ShaderResource {
 		wstring m_Filename;
 	protected:
-		//ƒfƒŠ[ƒ^[
+		//ãƒ‡ãƒªãƒ¼ã‚¿ãƒ¼
 		struct Deleter
 		{
 			void operator()(ShaderType *p) { delete p; }
 		};
 		ComPtr<ID3D11ComputeShader> m_CSPtr;
-		//ƒ~ƒ…[ƒeƒbƒNƒX
+		//ãƒŸãƒ¥ãƒ¼ãƒ†ãƒƒã‚¯ã‚¹
 		std::mutex Mutex;
-		//\’z‚Æ”jŠü
+		//æ§‹ç¯‰ã¨ç ´æ£„
 		ComputeShader<ShaderType>(const wstring& Filename) : ShaderResource(), m_Filename(Filename) {}
 		virtual ~ComputeShader() {}
 		static unique_ptr<ShaderType, Deleter> m_Ptr;
 	public:
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒRƒ“ƒsƒ…[ƒgƒVƒF[ƒ_‚ğ“¾‚é
-		@return	ƒRƒ“ƒsƒ…[ƒgƒVƒF[ƒ_
+		@brief	ã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ãƒˆã‚·ã‚§ãƒ¼ãƒ€ã‚’å¾—ã‚‹
+		@return	ã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ãƒˆã‚·ã‚§ãƒ¼ãƒ€
 		*/
 		//--------------------------------------------------------------------------------------
 		ID3D11ComputeShader* GetShader() {
@@ -3258,8 +3258,8 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒCƒ“ƒXƒ^ƒ“ƒX‚ğ“¾‚é
-		@return	ƒNƒ‰ƒX‚ÌƒCƒ“ƒXƒ^ƒ“ƒX
+		@brief	ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’å¾—ã‚‹
+		@return	ã‚¯ãƒ©ã‚¹ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
 		*/
 		//--------------------------------------------------------------------------------------
 		static unique_ptr<ShaderType, Deleter>& GetPtr() {
@@ -3271,7 +3271,7 @@ namespace basecross {
 	};
 
 	//--------------------------------------------------------------------------------------
-	///	ƒRƒ“ƒsƒ…[ƒgƒVƒF[ƒ_
+	///	ã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ãƒˆã‚·ã‚§ãƒ¼ãƒ€
 	//--------------------------------------------------------------------------------------
 	class CShader : public ShaderResource {
 		wstring m_Filename;
@@ -3279,14 +3279,14 @@ namespace basecross {
 	public:
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+		@brief	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		CShader() : ShaderResource(), m_Filename() {}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-		@param[in]	Filename	ƒtƒ@ƒCƒ‹–¼
+		@brief	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+		@param[in]	Filename	ãƒ•ã‚¡ã‚¤ãƒ«å
 		*/
 		//--------------------------------------------------------------------------------------
 		CShader(const wstring& Filename) : ShaderResource(), m_Filename(Filename) {
@@ -3294,15 +3294,15 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒfƒXƒgƒ‰ƒNƒ^
+		@brief	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		*/
 		//--------------------------------------------------------------------------------------
 		virtual ~CShader() {}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	\’z
-		@param[in]	Filename	ƒtƒ@ƒCƒ‹–¼
-		@return	‚È‚µ
+		@brief	æ§‹ç¯‰
+		@param[in]	Filename	ãƒ•ã‚¡ã‚¤ãƒ«å
+		@return	ãªã—
 		*/
 		//--------------------------------------------------------------------------------------
 		void Create(const wstring& Filename) {
@@ -3312,8 +3312,8 @@ namespace basecross {
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief	ƒRƒ“ƒsƒ…[ƒgƒVƒF[ƒ_‚ğ“¾‚é
-		@return	ƒRƒ“ƒsƒ…[ƒgƒVƒF[ƒ_
+		@brief	ã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ãƒˆã‚·ã‚§ãƒ¼ãƒ€ã‚’å¾—ã‚‹
+		@return	ã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ãƒˆã‚·ã‚§ãƒ¼ãƒ€
 		*/
 		//--------------------------------------------------------------------------------------
 		ID3D11ComputeShader* GetShader() {
@@ -3321,11 +3321,11 @@ namespace basecross {
 		}
 	};
 
-	//‚±‚ê‚æ‚èŒÂ•ÊƒVƒF[ƒ_[
-	//ƒRƒ“ƒXƒ^ƒ“ƒgƒoƒbƒtƒ@éŒ¾—pƒ}ƒNƒ
+	//ã“ã‚Œã‚ˆã‚Šå€‹åˆ¥ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼
+	//ã‚³ãƒ³ã‚¹ã‚¿ãƒ³ãƒˆãƒãƒƒãƒ•ã‚¡å®£è¨€ç”¨ãƒã‚¯ãƒ­
 #define DECLARE_DX11_CONSTANT_BUFFER(CBName,CBStruct) class CBName : public ConstantBuffer<CBName,CBStruct> { public: };
 
-	//ƒVƒF[ƒ_éŒ¾—pƒ}ƒNƒ
+	//ã‚·ã‚§ãƒ¼ãƒ€å®£è¨€ç”¨ãƒã‚¯ãƒ­
 #define DECLARE_DX11_VERTEX_SHADER(ShaderName,VertexType) class ShaderName : public VertexShader<ShaderName,VertexType>{ public: ShaderName(); };
 
 #define DECLARE_DX11_PIXEL_SHADER(ShaderName) class ShaderName : public PixelShader<ShaderName>{ public: ShaderName(); };
@@ -3334,10 +3334,10 @@ namespace basecross {
 
 #define DECLARE_DX11_COMPUTE_SHADER(ShaderName) class ShaderName : public ComputeShader<ShaderName>{ public: ShaderName(); };
 
-	//ƒRƒ“ƒXƒ^ƒ“ƒgƒoƒbƒtƒ@À‘Ì—pƒ}ƒN
+	//ã‚³ãƒ³ã‚¹ã‚¿ãƒ³ãƒˆãƒãƒƒãƒ•ã‚¡å®Ÿä½“ç”¨ãƒã‚¯
 #define IMPLEMENT_DX11_CONSTANT_BUFFER(CBName) unique_ptr<CBName, CBName::Deleter> CBName::m_Ptr;
 
-	//ƒVƒF[ƒ_À‘Ì—pƒ}ƒNƒ
+	//ã‚·ã‚§ãƒ¼ãƒ€å®Ÿä½“ç”¨ãƒã‚¯ãƒ­
 #define IMPLEMENT_DX11_VERTEX_SHADER(ShaderName,CsoFilename) unique_ptr<ShaderName, ShaderName::Deleter> ShaderName::m_Ptr; ShaderName::ShaderName() : VertexShader(CsoFilename){}
 
 #define IMPLEMENT_DX11_PIXEL_SHADER(ShaderName,CsoFilename) unique_ptr<ShaderName, ShaderName::Deleter> ShaderName::m_Ptr; ShaderName::ShaderName() : PixelShader(CsoFilename){}
