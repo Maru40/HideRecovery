@@ -73,6 +73,8 @@ namespace basecross
 		auto useWeapon = playerObject->GetComponent<UseWepon>();
 		useWeapon->SetIsUseCamera(true);
 
+		auto soundListener = playerObject->AddComponent<SoundListener>();
+
 		return playerObject;
 	}
 
