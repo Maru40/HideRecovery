@@ -23,8 +23,10 @@ namespace basecross {
 	void RackObject::OnCreate() {
 		auto col = AddComponent<CollisionObb>();
 		col->SetFixed(true);
+		const float colSize = 1.1f;
+		col->SetMakedSize(colSize);
 
-		auto drawComp = AddComponent<PNTStaticModelDraw>();
+		auto drawComp = AddComponent<PNTBoneModelDraw>();
 		//drawComp->SetMeshResource(L"rack");
 		drawComp->SetMultiMeshResource(L"Box_Model");
 		drawComp->SetOwnShadowActive(true);
