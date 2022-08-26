@@ -6,12 +6,13 @@
 #include "MatchStageTransitioner.h"
 #include "MatchStageRoomer.h"
 #include "Watanabe/DebugClass/Debug.h"
+#include "Watanabe/UI/UIObjects.h"
 
 namespace basecross
 {
 	void OnlineMatchStage::OnCreate()
 	{
-		const Vec3 eye(0.0f, 5.0f, -5.0f);
+		const Vec3 eye(0.0f, 3.0f, 20.0f);
 		const Vec3 at(0.0f);
 		auto PtrView = CreateView<SingleView>();
 		//ビューのカメラの設定
@@ -25,12 +26,21 @@ namespace basecross
 		PtrMultiLight->SetDefaultLighting();
 
 		auto debugObject = AddGameObject<Debug>();
+		debugObject->Log(L"OnlineMatchStage");
 
 		auto gameObject = AddGameObject<GameObject>();
 
 		auto onlineMatching = gameObject->AddComponent<Online::OnlineMatching>();
 		auto matchStageRoomer = gameObject->AddComponent<MatchStageRoomer>();
 		auto matchStageTransitioner = gameObject->AddComponent<MatchStageTransitioner>();
+
+		// マップとUIの生成
+		CreateMap(L"WaitStage.csv");
+		UIObjectCSVBuilder uiBuilder;
+		uiBuilder.Register<SimpleSprite>(L"SimpleSprite");
+		auto dir = App::GetApp()->GetDataDirWString();
+		auto path = dir + L"MapDatas/";
+		uiBuilder.Build(GetThis<Stage>(), path + L"MatchingUILayout.csv");
 	}
 
 	void OnlineMatchStage::OnUpdate()
