@@ -18,7 +18,7 @@ namespace basecross {
 	class MapCursor : public Component
 	{
 	public:
-		
+		//MapCursor(const std::shared_ptr<GameObject>& objPtr);
 	};
 	
 }
