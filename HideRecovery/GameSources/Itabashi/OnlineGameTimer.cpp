@@ -62,17 +62,19 @@ namespace basecross
 			return;
 		}
 
-		if (m_isTimerUpdate)
+		if (!m_isTimerUpdate)
 		{
-			TimeManager::GetInstance()->UpdateTime();
+			return;
 		}
+
+		TimeManager::GetInstance()->UpdateTime();
 	}
 
 	void OnlineGameTimer::OnCustomEventAction(int playerNumber, std::uint8_t eventCode, const std::uint8_t* bytes)
 	{
 		if (eventCode == GAMETIMER_START_CHECK_EVENT_CODE)
 		{
-			if (IsStartable())
+			if (!IsStartable())
 			{
 				return;
 			}
