@@ -24,8 +24,11 @@ namespace basecross {
 	class ChargeGun : public WeponBase
 	{
 		std::weak_ptr<UseWepon> m_useWepon;
+		std::weak_ptr<SoundEmitter> m_soundEmitter;
 
 		std::unique_ptr<GameTimer> m_timer;
+
+		SoundClip m_shotSoundClip;
 
 	public:
 		ChargeGun(const std::shared_ptr<GameObject>& objPtr);

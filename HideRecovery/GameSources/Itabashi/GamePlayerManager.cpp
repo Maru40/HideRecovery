@@ -88,6 +88,8 @@ namespace basecross
 			hpGauge->SetPlayerStatus(playerObject->GetComponent<PlayerStatus>());
 		}
 
+		auto soundListener = playerObject->AddComponent<SoundListener>();
+
 		return playerObject;
 	}
 

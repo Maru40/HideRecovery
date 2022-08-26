@@ -1036,6 +1036,9 @@
     <Filter Include="Watanabe\Component\SyncObject">
       <UniqueIdentifier>{abc29dd6-3683-4c6d-8126-a64bc63069f7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Itabashi\Patch">
+      <UniqueIdentifier>{ecf38f3d-3ccf-4415-b6a4-73543a20ef38}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">

@@ -1,6 +1,6 @@
-/*!
+ï»¿/*!
 @file App.cpp
-@brief ƒAƒvƒŠƒP[ƒVƒ‡ƒ“ƒNƒ‰ƒXB“ü—Í‹@Ší“™À‘Ì
+@brief ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã‚¯ãƒ©ã‚¹ã€‚å…¥åŠ›æ©Ÿå™¨ç­‰å®Ÿä½“
 @copyright Copyright (c) 2017 WiZ Tamura Hiroki,Yamanoi Yasushi.
 */
 #include "stdafx.h"
@@ -9,7 +9,7 @@
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
-	//	XAudio2Manager::ImplƒNƒ‰ƒX
+	//	XAudio2Manager::Implã‚¯ãƒ©ã‚¹
 	//--------------------------------------------------------------------------------------
 	struct XAudio2Manager::Impl {
 		bool m_IsAudioActive;
@@ -38,7 +38,7 @@ namespace basecross {
 			m_IXAudio2.Reset();
 			m_IXAudio2 = nullptr;
 		}
-		//ƒAƒCƒeƒ€”z—ñ‚ğƒ`ƒFƒbƒN‚µ‚È‚ª‚ç•K—v‚Å‚ ‚ê‚Î’Ç‰Á‚·‚é
+		//ã‚¢ã‚¤ãƒ†ãƒ é…åˆ—ã‚’ãƒã‚§ãƒƒã‚¯ã—ãªãŒã‚‰å¿…è¦ã§ã‚ã‚Œã°è¿½åŠ ã™ã‚‹
 		shared_ptr<SoundItem> ChkAndPushBackItem(const SoundItem& Item) {
 			for (auto v : m_SoundItemVec) {
 				if (!v->m_SourceVoice) {
@@ -81,7 +81,7 @@ namespace basecross {
 
 
 	//--------------------------------------------------------------------------------------
-	/// XAudio2ƒ}ƒl[ƒWƒƒƒNƒ‰ƒX
+	/// XAudio2ãƒãƒãƒ¼ã‚¸ãƒ£ã‚¯ãƒ©ã‚¹
 	//--------------------------------------------------------------------------------------
 	XAudio2Manager::XAudio2Manager():
 		pImpl(new Impl())
@@ -130,7 +130,7 @@ namespace basecross {
 		debug.BreakMask = XAUDIO2_LOG_ERRORS;
 		pImpl->m_IXAudio2->SetDebugConfiguration(&debug, 0);
 #endif
-		//ƒ}ƒXƒ^ƒŠƒ“ƒOƒ{ƒCƒX
+		//ãƒã‚¹ã‚¿ãƒªãƒ³ã‚°ãƒœã‚¤ã‚¹
 		if (FAILED(hr = pImpl->m_IXAudio2->CreateMasteringVoice(&pImpl->m_MasteringVoice)))
 		{
 			pImpl->m_IXAudio2.Reset();
@@ -154,7 +154,7 @@ namespace basecross {
 			return nullptr;
 		}
 		auto SoundRes = App::GetApp()->GetResource<AudioResource>(ResKey);
-		//ƒ\[ƒXƒ{ƒCƒX‚Ìì¬
+		//ã‚½ãƒ¼ã‚¹ãƒœã‚¤ã‚¹ã®ä½œæˆ
 		SoundItem Item;
 		HRESULT hr = pImpl->m_IXAudio2->CreateSourceVoice(&Item.m_SourceVoice, SoundRes->GetOutputWaveFormatEx(), XAUDIO2_VOICE_USEFILTER);
 		if (FAILED(hr)) {
@@ -165,6 +165,10 @@ namespace basecross {
 		auto Ptr = pImpl->ChkAndPushBackItem(Item);
 		XAUDIO2_BUFFER buffer = { 0 };
 		buffer.AudioBytes = (UINT32)SoundRes->GetSoundData().size();
+		if (buffer.AudioBytes % 10 == 1)
+		{
+			buffer.AudioBytes-=1;
+		}
 		buffer.LoopCount = (UINT32)LoopCount;
 		buffer.pAudioData = &SoundRes->GetSoundData().front();
 		buffer.Flags = XAUDIO2_END_OF_STREAM;
@@ -198,16 +202,16 @@ namespace basecross {
 
 	//--------------------------------------------------------------------------------------
 	//	struct AudioResource::Impl;
-	//	—p“r: ImplƒCƒfƒBƒIƒ€
+	//	ç”¨é€”: Implã‚¤ãƒ‡ã‚£ã‚ªãƒ 
 	//--------------------------------------------------------------------------------------
 	struct AudioResource::Impl {
-		WAVEFORMATEX m_WaveFormat;	//ƒEƒFƒuƒtƒH[ƒ}ƒbƒg
-		vector<byte> m_SoundData;	//ƒf[ƒ^
-		wstring m_FileName;		//ƒtƒ@ƒCƒ‹‚Ö‚ÌƒpƒX
+		WAVEFORMATEX m_WaveFormat;	//ã‚¦ã‚§ãƒ–ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆ
+		vector<byte> m_SoundData;	//ãƒ‡ãƒ¼ã‚¿
+		wstring m_FileName;		//ãƒ•ã‚¡ã‚¤ãƒ«ã¸ã®ãƒ‘ã‚¹
 		Impl(const wstring& FileName) :
 			m_FileName(FileName) {}
 		~Impl() {}
-		//ƒ~ƒ…[ƒeƒbƒNƒX
+		//ãƒŸãƒ¥ãƒ¼ãƒ†ãƒƒã‚¯ã‚¹
 		std::mutex Mutex;
 
 	};
@@ -216,7 +220,7 @@ namespace basecross {
 
 	//--------------------------------------------------------------------------------------
 	//	class AudioResource : public BaseResource;
-	//	—p“r: ƒI[ƒfƒBƒIƒŠƒ\[ƒXiwav‚È‚Çj‚Ìƒ‰ƒbƒsƒ“ƒOƒNƒ‰ƒX
+	//	ç”¨é€”: ã‚ªãƒ¼ãƒ‡ã‚£ã‚ªãƒªã‚½ãƒ¼ã‚¹ï¼ˆwavãªã©ï¼‰ã®ãƒ©ãƒƒãƒ”ãƒ³ã‚°ã‚¯ãƒ©ã‚¹
 	//--------------------------------------------------------------------------------------
 	AudioResource::AudioResource(const wstring& FileName) :
 		BaseResource(),
@@ -225,14 +229,14 @@ namespace basecross {
 		try {
 			
 			if (!App::GetApp()->GetXAudio2Manager()->IsAudioActive()) {
-				//ƒ}ƒl[ƒWƒƒ‚ª–³Œø‚È‚çƒŠƒ^[ƒ“
+				//ãƒãƒãƒ¼ã‚¸ãƒ£ãŒç„¡åŠ¹ãªã‚‰ãƒªã‚¿ãƒ¼ãƒ³
 				return;
 			}
 
 
 			ThrowIfFailed(
 				MFStartup(MF_VERSION),
-				L"MediaFoundation‚Ì‰Šú‰»‚É¸”s‚µ‚Ü‚µ‚½",
+				L"MediaFoundationã®åˆæœŸåŒ–ã«å¤±æ•—ã—ã¾ã—ãŸ",
 				L"MFStartup(MF_VERSION)",
 				L"AudioResource::AudioResource()"
 			);
@@ -241,7 +245,7 @@ namespace basecross {
 
 			ThrowIfFailed(
 				MFCreateSourceReaderFromURL(FileName.c_str(), nullptr, &reader),
-				L"ƒTƒEƒ“ƒhƒŠ[ƒ_[‚Ìì¬‚É¸”s‚µ‚Ü‚µ‚½",
+				L"ã‚µã‚¦ãƒ³ãƒ‰ãƒªãƒ¼ãƒ€ãƒ¼ã®ä½œæˆã«å¤±æ•—ã—ã¾ã—ãŸ",
 				L"MFCreateSourceReaderFromURL(FileName.c_str(),nullptr,&reader)",
 				L"AudioResource::AudioResource()"
 			);
@@ -253,28 +257,28 @@ namespace basecross {
 
 			ThrowIfFailed(
 				MFCreateMediaType(&mediaType),
-				L"ƒƒfƒBƒAƒ^ƒCƒv‚Ìì¬‚É¸”s‚µ‚Ü‚µ‚½",
+				L"ãƒ¡ãƒ‡ã‚£ã‚¢ã‚¿ã‚¤ãƒ—ã®ä½œæˆã«å¤±æ•—ã—ã¾ã—ãŸ",
 				L"MFCreateMediaType(&mediaType)",
 				L"AudioResource::AudioResource()"
 			);
 
 			ThrowIfFailed(
 				mediaType->SetGUID(MF_MT_MAJOR_TYPE, MFMediaType_Audio),
-				L"ƒƒfƒBƒAGUID‚Ìİ’è‚É¸”s‚µ‚Ü‚µ‚½",
+				L"ãƒ¡ãƒ‡ã‚£ã‚¢GUIDã®è¨­å®šã«å¤±æ•—ã—ã¾ã—ãŸ",
 				L"mediaType->SetGUID(MF_MT_MAJOR_TYPE, MFMediaType_Audio)",
 				L"AudioResource::AudioResource()"
 			);
 
 			ThrowIfFailed(
 				mediaType->SetGUID(MF_MT_SUBTYPE, MFAudioFormat_PCM),
-				L"ƒƒfƒBƒAƒTƒuGUID‚Ìİ’è‚É¸”s‚µ‚Ü‚µ‚½",
+				L"ãƒ¡ãƒ‡ã‚£ã‚¢ã‚µãƒ–GUIDã®è¨­å®šã«å¤±æ•—ã—ã¾ã—ãŸ",
 				L"mediaType->SetGUID(MF_MT_SUBTYPE, MFAudioFormat_PCM)",
 				L"AudioResource::AudioResource()"
 			);
 
 			ThrowIfFailed(
 				reader->SetCurrentMediaType(static_cast<uint32>(MF_SOURCE_READER_FIRST_AUDIO_STREAM), 0, mediaType.Get()),
-				L"ƒŠ[ƒ_[‚Ö‚ÌƒƒfƒBƒAƒ^ƒCƒv‚Ìİ’è‚É¸”s‚µ‚Ü‚µ‚½",
+				L"ãƒªãƒ¼ãƒ€ãƒ¼ã¸ã®ãƒ¡ãƒ‡ã‚£ã‚¢ã‚¿ã‚¤ãƒ—ã®è¨­å®šã«å¤±æ•—ã—ã¾ã—ãŸ",
 				L"reader->SetCurrentMediaType(static_cast<uint32>(MF_SOURCE_READER_FIRST_AUDIO_STREAM), 0, mediaType.Get())",
 				L"AudioResource::AudioResource()"
 			);
@@ -285,7 +289,7 @@ namespace basecross {
 
 			ThrowIfFailed(
 				reader->GetCurrentMediaType(static_cast<uint32>(MF_SOURCE_READER_FIRST_AUDIO_STREAM), &outputMediaType),
-				L"o—Í—p‚ÌƒƒfƒBƒAƒ^ƒCƒv‚Ìİ’è‚É¸”s‚µ‚Ü‚µ‚½",
+				L"å‡ºåŠ›ç”¨ã®ãƒ¡ãƒ‡ã‚£ã‚¢ã‚¿ã‚¤ãƒ—ã®è¨­å®šã«å¤±æ•—ã—ã¾ã—ãŸ",
 				L"reader->GetCurrentMediaType(static_cast<uint32>(MF_SOURCE_READER_FIRST_AUDIO_STREAM), &outputMediaType)",
 				L"AudioResource::AudioResource()"
 			);
@@ -295,7 +299,7 @@ namespace basecross {
 
 			ThrowIfFailed(
 				MFCreateWaveFormatExFromMFMediaType(outputMediaType.Get(), &waveFormat, &size),
-				L"ƒEƒFƒuƒtƒH[ƒ}ƒbƒg‚Ìİ’è‚É¸”s‚µ‚Ü‚µ‚½",
+				L"ã‚¦ã‚§ãƒ–ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã®è¨­å®šã«å¤±æ•—ã—ã¾ã—ãŸ",
 				L"MFCreateWaveFormatExFromMFMediaType(outputMediaType.Get(), &waveFormat, &size)",
 				L"AudioResource::AudioResource()"
 			);
@@ -308,7 +312,7 @@ namespace basecross {
 
 			ThrowIfFailed(
 				reader->GetPresentationAttribute(static_cast<uint32>(MF_SOURCE_READER_MEDIASOURCE), MF_PD_DURATION, &propVariant),
-				L"ƒAƒgƒŠƒrƒ…[ƒg‚Ìİ’è‚É¸”s‚µ‚Ü‚µ‚½",
+				L"ã‚¢ãƒˆãƒªãƒ“ãƒ¥ãƒ¼ãƒˆã®è¨­å®šã«å¤±æ•—ã—ã¾ã—ãŸ",
 				L"reader->GetPresentationAttribute(static_cast<uint32>(MF_SOURCE_READER_MEDIASOURCE), MF_PD_DURATION, &propVariant)",
 				L"AudioResource::AudioResource()"
 			);
@@ -335,7 +339,7 @@ namespace basecross {
 
 				ThrowIfFailed(
 					reader->ReadSample(static_cast<uint32>(MF_SOURCE_READER_FIRST_AUDIO_STREAM), 0, nullptr, &flags, nullptr, &sample),
-					L"ƒTƒ“ƒvƒ‰[‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚Ü‚µ‚½",
+					L"ã‚µãƒ³ãƒ—ãƒ©ãƒ¼ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ",
 					L"reader->ReadSample(static_cast<uint32>(MF_SOURCE_READER_FIRST_AUDIO_STREAM), 0, nullptr, &flags, nullptr, &sample)",
 					L"AudioResource::AudioResource()"
 				);
@@ -344,7 +348,7 @@ namespace basecross {
 				{
 					ThrowIfFailed(
 						sample->ConvertToContiguousBuffer(&mediaBuffer),
-						L"ƒTƒ“ƒvƒ‰[‚ÌƒRƒ“ƒo[ƒg‚É¸”s‚µ‚Ü‚µ‚½",
+						L"ã‚µãƒ³ãƒ—ãƒ©ãƒ¼ã®ã‚³ãƒ³ãƒãƒ¼ãƒˆã«å¤±æ•—ã—ã¾ã—ãŸ",
 						L"sample->ConvertToContiguousBuffer(&mediaBuffer)",
 						L"AudioResource::AudioResource()"
 					);
@@ -354,7 +358,7 @@ namespace basecross {
 
 					ThrowIfFailed(
 						mediaBuffer->Lock(&audioData, nullptr, &sampleBufferLength),
-						L"ƒoƒbƒtƒ@‚ÌLock‚É¸”s‚µ‚Ü‚µ‚½",
+						L"ãƒãƒƒãƒ•ã‚¡ã®Lockã«å¤±æ•—ã—ã¾ã—ãŸ",
 						L"mediaBuffer->Lock(&audioData, nullptr, &sampleBufferLength)",
 						L"AudioResource::AudioResource()"
 					);
@@ -388,19 +392,19 @@ namespace basecross {
 
 	//--------------------------------------------------------------------------------------
 	//	struct EventDispatcher::Impl;
-	//	—p“r: Impl\‘¢‘Ì
+	//	ç”¨é€”: Implæ§‹é€ ä½“
 	//--------------------------------------------------------------------------------------
 	struct EventDispatcher::Impl {
-		//ƒCƒxƒ“ƒg‚ÌƒLƒ…[
+		//ã‚¤ãƒ™ãƒ³ãƒˆã®ã‚­ãƒ¥ãƒ¼
 		list< shared_ptr<Event> > m_PriorityQ;
 		map<wstring, vector<weak_ptr<ObjectInterface>>> m_EventInterfaceGroupMap;
 		//
 		//--------------------------------------------------------------------------------------
 		//	void Discharge(
-		//	const Event& event	//ƒCƒxƒ“ƒg
+		//	const Event& event	//ã‚¤ãƒ™ãƒ³ãƒˆ
 		//	);
-		//—p“r: ƒCƒxƒ“ƒg‚Ì‘—M
-		//–ß‚è’l: ‚È‚µ
+		//ç”¨é€”: ã‚¤ãƒ™ãƒ³ãƒˆã®é€ä¿¡
+		//æˆ»ã‚Šå€¤: ãªã—
 		//--------------------------------------------------------------------------------------
 		void Discharge(const shared_ptr<Event>& event);
 		Impl() {}
@@ -410,7 +414,7 @@ namespace basecross {
 	void EventDispatcher::Impl::Discharge(const shared_ptr<Event>& event) {
 		auto shptr = event->m_Receiver.lock();
 		if (shptr) {
-			//ó‚¯è‚ª—LŒø
+			//å—ã‘æ‰‹ãŒæœ‰åŠ¹
 			shptr->OnEvent(event);
 		}
 	}
@@ -418,9 +422,9 @@ namespace basecross {
 
 
 	//--------------------------------------------------------------------------------------
-	///	ƒCƒxƒ“ƒg”z‘—ƒNƒ‰ƒX
+	///	ã‚¤ãƒ™ãƒ³ãƒˆé…é€ã‚¯ãƒ©ã‚¹
 	//--------------------------------------------------------------------------------------
-	//\’z‚Æ”jŠü
+	//æ§‹ç¯‰ã¨ç ´æ£„
 	EventDispatcher::EventDispatcher():
 		pImpl(new Impl())
 	{}
@@ -429,11 +433,11 @@ namespace basecross {
 	void EventDispatcher::AddEventReceiverGroup(const wstring& GroupKey, const shared_ptr<ObjectInterface>& Receiver) {
 		auto it = pImpl->m_EventInterfaceGroupMap.find(GroupKey);
 		if (it != pImpl->m_EventInterfaceGroupMap.end()) {
-			//ƒL[‚ª‚ ‚Á‚½
+			//ã‚­ãƒ¼ãŒã‚ã£ãŸ
 			it->second.push_back(Receiver);
 		}
 		else {
-			//ƒOƒ‹[ƒv‚ª‚È‚¢
+			//ã‚°ãƒ«ãƒ¼ãƒ—ãŒãªã„
 			vector<weak_ptr<ObjectInterface>> vec;
 			pImpl->m_EventInterfaceGroupMap[GroupKey] = vec;
 			pImpl->m_EventInterfaceGroupMap[GroupKey].push_back(Receiver);
@@ -441,80 +445,80 @@ namespace basecross {
 	}
 
 
-	//ƒCƒxƒ“ƒg‚ÌPOSTiƒLƒ…[‚É“ü‚ê‚éj
+	//ã‚¤ãƒ™ãƒ³ãƒˆã®POSTï¼ˆã‚­ãƒ¥ãƒ¼ã«å…¥ã‚Œã‚‹ï¼‰
 	void EventDispatcher::PostEvent(float Delay, const shared_ptr<ObjectInterface>& Sender, const shared_ptr<ObjectInterface>& Receiver,
 		const wstring& MsgStr, const  shared_ptr<void>& Info) {
-		//ƒCƒxƒ“ƒg‚Ìì¬ 
+		//ã‚¤ãƒ™ãƒ³ãƒˆã®ä½œæˆ 
 		auto Ptr = make_shared<Event>(Delay, Sender, Receiver, MsgStr, Info);
-		//ƒLƒ…[‚É‚½‚ß‚é
+		//ã‚­ãƒ¥ãƒ¼ã«ãŸã‚ã‚‹
 		pImpl->m_PriorityQ.push_back(Ptr);
 	}
 
 	void EventDispatcher::PostEvent(float DispatchTime, const shared_ptr<ObjectInterface>& Sender, const wstring& ReceiverKey,
 		const wstring& MsgStr, const  shared_ptr<void>& Info) {
-		//ReceiverKey‚É‚æ‚é‘Šè‚Ì“Á’è
-		//d•¡ƒL[‚ÌŒŸ¸
+		//ReceiverKeyã«ã‚ˆã‚‹ç›¸æ‰‹ã®ç‰¹å®š
+		//é‡è¤‡ã‚­ãƒ¼ã®æ¤œæŸ»
 		auto it = pImpl->m_EventInterfaceGroupMap.find(ReceiverKey);
 		if (it != pImpl->m_EventInterfaceGroupMap.end()) {
-			//ƒL[‚ª‚ ‚Á‚½
+			//ã‚­ãƒ¼ãŒã‚ã£ãŸ
 			for (auto v : it->second) {
 				auto shptr = v.lock();
 				if (shptr) {
-					//ƒCƒxƒ“ƒg‚Ìì¬ 
+					//ã‚¤ãƒ™ãƒ³ãƒˆã®ä½œæˆ 
 					auto Ptr = make_shared<Event>(0.0f, Sender, shptr, MsgStr, Info);
-					//ƒLƒ…[‚É‚½‚ß‚é
+					//ã‚­ãƒ¥ãƒ¼ã«ãŸã‚ã‚‹
 					pImpl->m_PriorityQ.push_back(Ptr);
 				}
 			}
 		}
-		//ƒL[‚ªŒ©‚Â‚©‚ç‚È‚­‚Ä‚à‰½‚à‚µ‚È‚¢
+		//ã‚­ãƒ¼ãŒè¦‹ã¤ã‹ã‚‰ãªãã¦ã‚‚ä½•ã‚‚ã—ãªã„
 	}
 
 
-	//ƒCƒxƒ“ƒg‚ÌSENDiƒLƒ…[‚É“ü‚ê‚¸‚É‚»‚Ì‚Ü‚Ü‘—‚éj
+	//ã‚¤ãƒ™ãƒ³ãƒˆã®SENDï¼ˆã‚­ãƒ¥ãƒ¼ã«å…¥ã‚Œãšã«ãã®ã¾ã¾é€ã‚‹ï¼‰
 	void EventDispatcher::SendEvent(const shared_ptr<ObjectInterface>& Sender, const shared_ptr<ObjectInterface>& Receiver,
 		const wstring& MsgStr, const  shared_ptr<void>& Info) {
-		//ƒCƒxƒ“ƒg‚Ìì¬ 
+		//ã‚¤ãƒ™ãƒ³ãƒˆã®ä½œæˆ 
 		auto Ptr = make_shared<Event>(0.0f, Sender, Receiver, MsgStr, Info);
-		//‘—M
+		//é€ä¿¡
 		pImpl->Discharge(Ptr);
 	}
 
 	void EventDispatcher::SendEvent(const shared_ptr<ObjectInterface>& Sender, const wstring& ReceiverKey,
 		const wstring& MsgStr, const  shared_ptr<void>& Info) {
-		//ReceiverKey‚É‚æ‚é‘Šè‚Ì“Á’è
-		//d•¡ƒL[‚ÌŒŸ¸
+		//ReceiverKeyã«ã‚ˆã‚‹ç›¸æ‰‹ã®ç‰¹å®š
+		//é‡è¤‡ã‚­ãƒ¼ã®æ¤œæŸ»
 		auto it = pImpl->m_EventInterfaceGroupMap.find(ReceiverKey);
 		if (it != pImpl->m_EventInterfaceGroupMap.end()) {
-			//ƒL[‚ª‚ ‚Á‚½
+			//ã‚­ãƒ¼ãŒã‚ã£ãŸ
 			for (auto v : it->second) {
 				auto shptr = v.lock();
 				if (shptr) {
-					//ƒCƒxƒ“ƒg‚Ìì¬ 
+					//ã‚¤ãƒ™ãƒ³ãƒˆã®ä½œæˆ 
 					auto Ptr = make_shared<Event>(0.0f, Sender, shptr, MsgStr, Info);
-					//ƒCƒxƒ“ƒg‚Ì‘—o
+					//ã‚¤ãƒ™ãƒ³ãƒˆã®é€å‡º
 					pImpl->Discharge(Ptr);
 				}
 			}
 		}
-		//ƒL[‚ªŒ©‚Â‚©‚ç‚È‚­‚Ä‚à‰½‚à‚µ‚È‚¢
+		//ã‚­ãƒ¼ãŒè¦‹ã¤ã‹ã‚‰ãªãã¦ã‚‚ä½•ã‚‚ã—ãªã„
 	}
 
 
 	void EventDispatcher::DispatchDelayedEvwnt() {
-		//‘O‰ñ‚Ìƒ^[ƒ“‚©‚ç‚ÌŠÔ
+		//å‰å›ã®ã‚¿ãƒ¼ãƒ³ã‹ã‚‰ã®æ™‚é–“
 		float ElapsedTime = App::GetApp()->GetElapsedTime();
 		auto it = pImpl->m_PriorityQ.begin();
 		while (it != pImpl->m_PriorityQ.end()) {
 			(*it)->m_DispatchTime -= ElapsedTime;
 			if ((*it)->m_DispatchTime <= 0.0f) {
 				(*it)->m_DispatchTime = 0.0f;
-				//ƒƒbƒZ[ƒW‚Ì‘—M
+				//ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®é€ä¿¡
 				pImpl->Discharge(*it);
-				//ƒLƒ…[‚©‚çíœ
+				//ã‚­ãƒ¥ãƒ¼ã‹ã‚‰å‰Šé™¤
 				it = pImpl->m_PriorityQ.erase(it);
-				//íœŒã‚ÌƒCƒeƒŒ[ƒ^‚ªuÅŒãv‚Ì
-				//‚Æ‚«‚Íƒ‹[ƒv‚ğ”²‚¯‚é
+				//å‰Šé™¤å¾Œã®ã‚¤ãƒ†ãƒ¬ãƒ¼ã‚¿ãŒã€Œæœ€å¾Œã€ã®
+				//ã¨ãã¯ãƒ«ãƒ¼ãƒ—ã‚’æŠœã‘ã‚‹
 				if (it == pImpl->m_PriorityQ.end()) {
 					break;
 				}
@@ -538,12 +542,12 @@ namespace basecross {
 
 
 	//--------------------------------------------------------------------------------------
-	///	ƒ€[ƒr[‚Åg—p‚·‚éƒl[ƒ€ƒXƒy[ƒX
+	///	ãƒ ãƒ¼ãƒ“ãƒ¼ã§ä½¿ç”¨ã™ã‚‹ãƒãƒ¼ãƒ ã‚¹ãƒšãƒ¼ã‚¹
 	//--------------------------------------------------------------------------------------
 	namespace movie {
 
 		//--------------------------------------------------------------------------------------
-		///	ƒ€[ƒr[—pƒR[ƒ‹ƒoƒbƒNƒNƒ‰ƒX
+		///	ãƒ ãƒ¼ãƒ“ãƒ¼ç”¨ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯ã‚¯ãƒ©ã‚¹
 		//--------------------------------------------------------------------------------------
 		class MediaPlayerCallback : public IMFPMediaPlayerCallback
 		{
@@ -582,7 +586,7 @@ namespace basecross {
 			// IMFPMediaPlayerCallback methods
 			void STDMETHODCALLTYPE OnMediaPlayerEvent(MFP_EVENT_HEADER *pEventHeader);
 		};
-		//ƒ€[ƒr[—pƒf[ƒ^
+		//ãƒ ãƒ¼ãƒ“ãƒ¼ç”¨ãƒ‡ãƒ¼ã‚¿
 		namespace data {
 			ComPtr<IMFPMediaPlayer> Player;
 			ComPtr<MediaPlayerCallback> PlayerCB;
@@ -592,20 +596,20 @@ namespace basecross {
 		}
 
 		//--------------------------------------------------------------------------------------
-		//	ƒ€[ƒr[—pƒ`ƒƒƒCƒ‹ƒhƒEƒCƒ“ƒhƒEƒNƒ‰ƒX“o˜^
+		//	ãƒ ãƒ¼ãƒ“ãƒ¼ç”¨ãƒãƒ£ã‚¤ãƒ«ãƒ‰ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã‚¯ãƒ©ã‚¹ç™»éŒ²
 		//--------------------------------------------------------------------------------------
 		BOOL RegisterChild(HINSTANCE hInst, WNDPROC WndProc, const wchar_t* szClassName)
 		{
 			WNDCLASS wc = {};
 			wc.style = CS_HREDRAW | CS_VREDRAW | CS_DBLCLKS;
-			wc.lpfnWndProc = WndProc;    //ƒvƒƒV[ƒWƒƒ–¼
+			wc.lpfnWndProc = WndProc;    //ãƒ—ãƒ­ã‚·ãƒ¼ã‚¸ãƒ£å
 			wc.cbClsExtra = 0;
 			wc.cbWndExtra = 0;
-			wc.hInstance = hInst;        //ƒCƒ“ƒXƒ^ƒ“ƒX
+			wc.hInstance = hInst;        //ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
 			wc.hIcon = LoadIcon(NULL, IDI_APPLICATION);
 			wc.hCursor = LoadCursor(NULL, IDC_ARROW);
 			wc.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);
-			wc.lpszMenuName = NULL;    //ƒƒjƒ…[–¼
+			wc.lpszMenuName = NULL;    //ãƒ¡ãƒ‹ãƒ¥ãƒ¼å
 			wc.lpszClassName = (LPCWSTR)szClassName;
 			return (RegisterClass(&wc));
 		}
@@ -654,15 +658,15 @@ namespace basecross {
 			data::ChildHWnd = CreateWindowExW(
 				WS_EX_TOPMOST,
 				L"BaseCrossChildClass",
-				L"",//ƒ^ƒCƒgƒ‹ƒo[‚É‚±‚Ì–¼‘O‚ª•\¦‚³‚ê‚Ü‚·
-				WS_CHILD,    //ƒEƒBƒ“ƒhƒE‚Ìí—Ş
-				0,    //‚wÀ•W
-				0,    //‚xÀ•W
-				rectPar.right,    //•
-				rectPar.bottom,    //‚‚³
-				ParHWnd,            //eƒEƒBƒ“ƒhƒE‚Ìƒnƒ“ƒhƒ‹Ae‚ğì‚é‚Æ‚«‚ÍNULL
-				0, //ƒƒjƒ…[ƒnƒ“ƒhƒ‹Aq‹Ÿ‚ÌID
-				hInst,            //ƒCƒ“ƒXƒ^ƒ“ƒXƒnƒ“ƒhƒ‹
+				L"",//ã‚¿ã‚¤ãƒˆãƒ«ãƒãƒ¼ã«ã“ã®åå‰ãŒè¡¨ç¤ºã•ã‚Œã¾ã™
+				WS_CHILD,    //ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ç¨®é¡
+				0,    //ï¼¸åº§æ¨™
+				0,    //ï¼¹åº§æ¨™
+				rectPar.right,    //å¹…
+				rectPar.bottom,    //é«˜ã•
+				ParHWnd,            //è¦ªã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ãƒãƒ³ãƒ‰ãƒ«ã€è¦ªã‚’ä½œã‚‹ã¨ãã¯NULL
+				0, //ãƒ¡ãƒ‹ãƒ¥ãƒ¼ãƒãƒ³ãƒ‰ãƒ«ã€å­ä¾›ã®ID
+				hInst,            //ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ãƒãƒ³ãƒ‰ãƒ«
 				NULL);
 			ShowWindow(data::ChildHWnd, SW_SHOW);
 			UpdateWindow(data::ChildHWnd);
@@ -682,7 +686,7 @@ namespace basecross {
 
 				if (FAILED(hr)) { 
 					throw BaseException(
-						L"ƒ€[ƒr[ƒtƒ@ƒCƒ‹‚Ì“o˜^‚É¸”s‚µ‚Ü‚µ‚½",
+						L"ãƒ ãƒ¼ãƒ“ãƒ¼ãƒ•ã‚¡ã‚¤ãƒ«ã®ç™»éŒ²ã«å¤±æ•—ã—ã¾ã—ãŸ",
 						L"if (FAILED(pEvent->pMediaItem->HasVideo))",
 						L"OnMediaItemCreated()"
 					);
@@ -704,7 +708,7 @@ namespace basecross {
 			if (FAILED(hr))
 			{
 				throw BaseException(
-					L"ƒ€[ƒr[ƒtƒ@ƒCƒ‹‚ÌÄ¶‚É¸”s‚µ‚Ü‚µ‚½",
+					L"ãƒ ãƒ¼ãƒ“ãƒ¼ãƒ•ã‚¡ã‚¤ãƒ«ã®å†ç”Ÿã«å¤±æ•—ã—ã¾ã—ãŸ",
 					L"if (FAILED(movie::g_Player->Play))",
 					L"OnMediaItemSet()"
 				);
@@ -719,7 +723,7 @@ namespace basecross {
 				if (FAILED(hr))
 				{
 					throw BaseException(
-						L"ƒ€[ƒr[ƒtƒ@ƒCƒ‹‚Ì˜A‘±Ä¶‚É¸”s‚µ‚Ü‚µ‚½",
+						L"ãƒ ãƒ¼ãƒ“ãƒ¼ãƒ•ã‚¡ã‚¤ãƒ«ã®é€£ç¶šå†ç”Ÿã«å¤±æ•—ã—ã¾ã—ãŸ",
 						L"if (FAILED(movie::g_Player->Play))",
 						L"OnMediaPlayEnd()"
 					);
@@ -733,7 +737,7 @@ namespace basecross {
 			if (FAILED(pEventHeader->hrEvent))
 			{
 				throw BaseException(
-					L"ƒ€[ƒr[‚ÌƒR[ƒ‹ƒoƒbƒNŠÖ”‚ÌƒCƒxƒ“ƒgæ“¾‚É¸”s‚µ‚Ü‚µ‚½",
+					L"ãƒ ãƒ¼ãƒ“ãƒ¼ã®ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯é–¢æ•°ã®ã‚¤ãƒ™ãƒ³ãƒˆå–å¾—ã«å¤±æ•—ã—ã¾ã—ãŸ",
 					L"if (FAILED(pEventHeader->hrEvent))",
 					L" MediaPlayerCallback::OnMediaPlayerEvent()"
 				);
@@ -777,7 +781,7 @@ namespace basecross {
 				data::PlayerCB.Reset();
 			}
 			data::bHasVideo = false;
-			//ƒEƒCƒ“ƒhƒE‚Ìíœ
+			//ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã®å‰Šé™¤
 			if (data::ChildHWnd) {
 				DestroyWindow(data::ChildHWnd);
 			}
@@ -798,7 +802,7 @@ namespace basecross {
 				if (data::PlayerCB == nullptr)
 				{
 					throw BaseException(
-						L"ƒ€[ƒr[‚ÌƒR[ƒ‹ƒoƒbƒNŠÖ”‚Ìİ’è‚É¸”s‚µ‚Ü‚µ‚½",
+						L"ãƒ ãƒ¼ãƒ“ãƒ¼ã®ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯é–¢æ•°ã®è¨­å®šã«å¤±æ•—ã—ã¾ã—ãŸ",
 						L"if (g_PlayerCB == nullptr)",
 						L"App::PlayMovie()"
 					);
@@ -815,7 +819,7 @@ namespace basecross {
 
 				if (FAILED(hr)) {
 					throw BaseException(
-						L"ƒ€[ƒr[‚ÌƒvƒŒƒCƒ„[‚Ìì¬‚É¸”s‚µ‚Ü‚µ‚½",
+						L"ãƒ ãƒ¼ãƒ“ãƒ¼ã®ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ä½œæˆã«å¤±æ•—ã—ã¾ã—ãŸ",
 						L"FAILED MFPCreateMediaPlayer",
 						L"App::PlayMovie()"
 					);
@@ -855,11 +859,11 @@ namespace basecross {
 
 	//--------------------------------------------------------------------------------------
 	//	class App;
-	//	—p“r: ƒAƒvƒŠƒP[ƒVƒ‡ƒ“ƒNƒ‰ƒX
+	//	ç”¨é€”: ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã‚¯ãƒ©ã‚¹
 	//--------------------------------------------------------------------------------------
-	//static•Ï”À‘Ì
+	//staticå¤‰æ•°å®Ÿä½“
 	unique_ptr<App, App::AppDeleter> App::m_App;
-	//\’z
+	//æ§‹ç¯‰
 	App::App(HINSTANCE hInstance, HWND hWnd, bool FullScreen, UINT Width, UINT Height) :
 		m_hInstance{ hInstance },
 		m_hWnd{ hWnd },
@@ -871,9 +875,9 @@ namespace basecross {
 		m_inputDevice(new itbs::Input::InputDevice())
 	{
 		try {
-			//Šî€ƒfƒBƒŒƒNƒgƒŠ‚Ìİ’è
-			//‘Š‘ÎƒpƒX‚É‚·‚é‚ÆAƒtƒ@ƒCƒ‹ƒ_ƒCƒAƒƒO‚ÅƒJƒŒƒ“ƒgƒpƒX‚ª‹¶‚¤‚Ì‚Å
-			//â‘ÎƒpƒXw’è
+			//åŸºæº–ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã®è¨­å®š
+			//ç›¸å¯¾ãƒ‘ã‚¹ã«ã™ã‚‹ã¨ã€ãƒ•ã‚¡ã‚¤ãƒ«ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã§ã‚«ãƒ¬ãƒ³ãƒˆãƒ‘ã‚¹ãŒç‹‚ã†ã®ã§
+			//çµ¶å¯¾ãƒ‘ã‚¹æŒ‡å®š
 			wchar_t Modulebuff[MAX_PATH];
 			wchar_t Drivebuff[_MAX_DRIVE];
 			wchar_t Dirbuff[_MAX_DIR];
@@ -886,73 +890,73 @@ namespace basecross {
 			::ZeroMemory(FileNamebuff, sizeof(FileNamebuff));
 			::ZeroMemory(Extbuff, sizeof(Extbuff));
 
-			//ƒ‚ƒWƒ…[ƒ‹–¼iƒvƒƒOƒ‰ƒ€ƒtƒ@ƒCƒ‹–¼j‚ğ“¾‚é
+			//ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«åï¼ˆãƒ—ãƒ­ã‚°ãƒ©ãƒ ãƒ•ã‚¡ã‚¤ãƒ«åï¼‰ã‚’å¾—ã‚‹
 			if (!::GetModuleFileName(nullptr, Modulebuff, sizeof(Modulebuff))) {
 				throw BaseException(
-					L"ƒ‚ƒWƒ…[ƒ‹‚ªæ“¾‚Å‚«‚Ü‚¹‚ñB",
+					L"ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ãŒå–å¾—ã§ãã¾ã›ã‚“ã€‚",
 					L"if(!::GetModuleFileName())",
 					L"App::App()"
 				);
 			}
 			m_wstrModulePath = Modulebuff;
-			//ƒ‚ƒWƒ…[ƒ‹–¼‚©‚çAŠeƒuƒƒbƒN‚É•ª‚¯‚é
+			//ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«åã‹ã‚‰ã€å„ãƒ–ãƒ­ãƒƒã‚¯ã«åˆ†ã‘ã‚‹
 			_wsplitpath_s(Modulebuff,
 				Drivebuff, _MAX_DRIVE,
 				Dirbuff, _MAX_DIR,
 				FileNamebuff, _MAX_FNAME,
 				Extbuff, _MAX_EXT);
 
-			//ƒhƒ‰ƒCƒu–¼‚Ìæ“¾
+			//ãƒ‰ãƒ©ã‚¤ãƒ–åã®å–å¾—
 			m_wstrDir = Drivebuff;
-			//ƒfƒBƒŒƒNƒgƒŠ–¼‚Ìæ“¾
+			//ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªåã®å–å¾—
 			m_wstrDir += Dirbuff;
-			//mediaƒfƒBƒŒƒNƒgƒŠ‚ğ’T‚·
+			//mediaãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’æ¢ã™
 			m_wstrDataPath = m_wstrDir;
 			m_wstrDataPath += L"media";
-			//‚Ü‚¸AÀsƒtƒ@ƒCƒ‹‚Æ“¯‚¶ƒfƒBƒŒƒNƒgƒŠ‚ğ’T‚·
+			//ã¾ãšã€å®Ÿè¡Œãƒ•ã‚¡ã‚¤ãƒ«ã¨åŒã˜ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’æ¢ã™
 			DWORD RetCode;
 			RetCode = GetFileAttributes(m_wstrDataPath.c_str());
 			if (RetCode == 0xFFFFFFFF) {
-				//¸”s‚µ‚½
+				//å¤±æ•—ã—ãŸ
 				m_wstrDataPath = m_wstrDir;
 				m_wstrDataPath += L"..\\media";
 				RetCode = GetFileAttributes(m_wstrDataPath.c_str());
 				if (RetCode == 0xFFFFFFFF) {
-					//Ä‚Ñ¸”s‚µ‚½
+					//å†ã³å¤±æ•—ã—ãŸ
 					throw BaseException(
-						L"mediaƒfƒBƒŒƒNƒgƒŠ‚ğŠm”F‚Å‚«‚Ü‚¹‚ñB",
+						L"mediaãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’ç¢ºèªã§ãã¾ã›ã‚“ã€‚",
 						L"if(RetCode == 0xFFFFFFFF)",
 						L"App::App()"
 					);
 				}
 				else {
 					m_wstrDataPath += L"\\";
-					//‘Š‘ÎƒpƒX‚Ìİ’è
+					//ç›¸å¯¾ãƒ‘ã‚¹ã®è¨­å®š
 					m_wstrRelativeDataPath = L"..\\media\\";
 				}
 			}
 			else {
 				m_wstrDataPath += L"\\";
-				//‘Š‘ÎƒpƒX‚Ìİ’è
+				//ç›¸å¯¾ãƒ‘ã‚¹ã®è¨­å®š
 				m_wstrRelativeDataPath = L"media\\";
 			}
 			m_wstrShadersPath = m_wstrDataPath + L"Shaders\\";
 			m_wstrRelativeShadersPath = m_wstrRelativeDataPath + L"Shaders\\";
 
-			//ScriptsƒfƒBƒŒƒNƒgƒŠ‚ğ’T‚·
+			//Scriptsãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’æ¢ã™
 			m_wstrScriptsPath = m_wstrDir;
 			m_wstrScriptsPath += L"scripts";
-			//‚Ü‚¸AÀsƒtƒ@ƒCƒ‹‚Æ“¯‚¶ƒfƒBƒŒƒNƒgƒŠ‚ğ’T‚·
+			//ã¾ãšã€å®Ÿè¡Œãƒ•ã‚¡ã‚¤ãƒ«ã¨åŒã˜ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’æ¢ã™
 			RetCode = GetFileAttributes(m_wstrScriptsPath.c_str());
 			if (RetCode == 0xFFFFFFFF) {
-				//¸”s‚µ‚½
+				//å¤±æ•—ã—ãŸ
 				m_wstrScriptsPath = m_wstrDir;
 				m_wstrScriptsPath += L"..\\scripts";
 				RetCode = GetFileAttributes(m_wstrDataPath.c_str());
 				if (RetCode == 0xFFFFFFFF) {
-					//Ä‚Ñ¸”s‚µ‚½
-					//ScriptsƒfƒBƒŒƒNƒgƒŠ‚Í•K{‚Å‚Í‚È‚¢‚Ì‚ÅÄ‚Ñ
-					//Àsƒtƒ@ƒCƒ‹‚Æ“¯‚¶ƒfƒBƒŒƒNƒgƒŠ‚Éİ’è
+					//å†ã³å¤±æ•—ã—ãŸ
+					//Scriptsãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã¯å¿…é ˆã§ã¯ãªã„ã®ã§å†ã³
+					//å®Ÿè¡Œãƒ•ã‚¡ã‚¤ãƒ«ã¨åŒã˜ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã«è¨­å®š
 					m_ScriptsDirActive = false;
 					m_wstrScriptsPath = L"";
 					m_wstrScriptsPath += L"";
@@ -960,38 +964,38 @@ namespace basecross {
 				else {
 					m_ScriptsDirActive = true;
 					m_wstrScriptsPath += L"\\";
-					//‘Š‘ÎƒpƒX‚Ìİ’è
+					//ç›¸å¯¾ãƒ‘ã‚¹ã®è¨­å®š
 					m_wstrRelativeScriptsPath = L"..\\scripts\\";
 				}
 			}
 			else {
 				m_ScriptsDirActive = true;
 				m_wstrScriptsPath += L"\\";
-				//‘Š‘ÎƒpƒX‚Ìİ’è
+				//ç›¸å¯¾ãƒ‘ã‚¹ã®è¨­å®š
 				m_wstrRelativeScriptsPath = L"scripts\\";
 			}
 
-			//AssetsƒfƒBƒŒƒNƒgƒŠ‚ğ’T‚·
+			//Assetsãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’æ¢ã™
 			m_wstrRelativeAssetsPath = m_wstrDir;
 			m_wstrRelativeAssetsPath += L"..\\..\\Assets";
-			//‘Š‘ÎƒfƒBƒŒƒNƒgƒŠ‚ğ’T‚·
+			//ç›¸å¯¾ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’æ¢ã™
 			RetCode = GetFileAttributes(m_wstrRelativeAssetsPath.c_str());
 			if (RetCode == 0xFFFFFFFF) {
-				//¸”s‚µ‚½
-				//ƒAƒZƒbƒgƒfƒBƒŒƒNƒgƒŠ‚ğƒƒfƒBƒAƒfƒBƒŒƒNƒgƒŠ‚É‚·‚é
+				//å¤±æ•—ã—ãŸ
+				//ã‚¢ã‚»ãƒƒãƒˆãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’ãƒ¡ãƒ‡ã‚£ã‚¢ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã«ã™ã‚‹
 				m_wstrRelativeAssetsPath = m_wstrRelativeDataPath;
 			}
 			else {
-				//¬Œ÷‚µ‚½
+				//æˆåŠŸã—ãŸ
 				m_wstrRelativeAssetsPath += L"\\";
 			}
-			////ƒfƒoƒCƒXƒŠƒ\[ƒX‚Ì\’z
+			////ãƒ‡ãƒã‚¤ã‚¹ãƒªã‚½ãƒ¼ã‚¹ã®æ§‹ç¯‰
 			m_DeviceResources = shared_ptr<DeviceResources>(new DeviceResources(hWnd, FullScreen, Width, Height));
-			//ƒI[ƒfƒBƒIƒ}ƒl[ƒWƒƒ‚Ìæ“¾
+			//ã‚ªãƒ¼ãƒ‡ã‚£ã‚ªãƒãƒãƒ¼ã‚¸ãƒ£ã®å–å¾—
 			GetXAudio2Manager();
-			//ƒCƒxƒ“ƒg”z‘—ƒNƒ‰ƒX
+			//ã‚¤ãƒ™ãƒ³ãƒˆé…é€ã‚¯ãƒ©ã‚¹
 			m_EventDispatcher = make_shared<EventDispatcher>();
-			//—”‚Ì‰Šú‰»
+			//ä¹±æ•°ã®åˆæœŸåŒ–
 			srand((unsigned)time(nullptr));
 
 		}
@@ -1000,12 +1004,12 @@ namespace basecross {
 		}
 	}
 
-	//ƒVƒ“ƒOƒ‹ƒgƒ“\’z
+	//ã‚·ãƒ³ã‚°ãƒ«ãƒˆãƒ³æ§‹ç¯‰
 	unique_ptr<App, App::AppDeleter>& App::CreateApp(HINSTANCE hInstance, HWND hWnd,
 		bool FullScreen, UINT Width, UINT Height, bool ShadowActive) {
 		try {
 			if (m_App.get() == 0) {
-				//©•ª©g‚Ì\’z
+				//è‡ªåˆ†è‡ªèº«ã®æ§‹ç¯‰
 				m_App.reset(new App(hInstance, hWnd, FullScreen, Width, Height));
 				m_App->AfterInitContents(ShadowActive);
 
@@ -1017,12 +1021,12 @@ namespace basecross {
 		}
 	}
 
-	//ƒVƒ“ƒOƒ‹ƒgƒ“ƒAƒNƒZƒT
+	//ã‚·ãƒ³ã‚°ãƒ«ãƒˆãƒ³ã‚¢ã‚¯ã‚»ã‚µ
 	unique_ptr<App, App::AppDeleter>& App::GetApp() {
 		try {
 			if (m_App.get() == 0) {
 				throw BaseException(
-					L"ƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚ª‚Ü‚¾ì¬‚³‚ê‚Ä‚Ü‚¹‚ñ",
+					L"ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ãŒã¾ã ä½œæˆã•ã‚Œã¦ã¾ã›ã‚“",
 					L"if (m_App.get() == 0)",
 					L"App::GetApp()"
 				);
@@ -1042,7 +1046,7 @@ namespace basecross {
 		return true;
 	}
 
-	//‹­§”jŠü
+	//å¼·åˆ¶ç ´æ£„
 	void App::DeleteApp() {
 		if (m_App.get()) {
 			m_App->GetSceneInterface()->OnDestroy();
@@ -1069,7 +1073,7 @@ namespace basecross {
 	void App::AfterInitContents(bool ShadowActive) {
 		if (!m_DeviceResources) {
 			throw BaseException(
-				L"ƒfƒoƒCƒX‚ª‰Šú‰»‚³‚ê‚Ä‚¢‚Ü‚¹‚ñ",
+				L"ãƒ‡ãƒã‚¤ã‚¹ãŒåˆæœŸåŒ–ã•ã‚Œã¦ã„ã¾ã›ã‚“",
 				L"if (!m_DeviceResources)",
 				L"App::AfterInitContents()"
 			);
@@ -1083,50 +1087,50 @@ namespace basecross {
 		try {
 			if (Key == L"") {
 				throw BaseException(
-					L"ƒL[‚ª‹ó”’‚Å‚·",
+					L"ã‚­ãƒ¼ãŒç©ºç™½ã§ã™",
 					L"if(Key == L\"\")",
 					L"App::RegisterResource()"
 				);
 			}
 			if (!ResObj) {
 				throw BaseException(
-					L"ƒŠƒ\[ƒX‚ª•s’è‚Å‚·",
+					L"ãƒªã‚½ãƒ¼ã‚¹ãŒä¸å®šã§ã™",
 					L"if(!pResObj)",
 					L"App::RegisterResource()"
 				);
 			}
 			map<wstring, shared_ptr<BaseResource> >::iterator it;
-			//d•¡ƒ|ƒCƒ“ƒ^‚ÌŒŸ¸
+			//é‡è¤‡ãƒã‚¤ãƒ³ã‚¿ã®æ¤œæŸ»
 			for (it = m_ResMap.begin(); it != m_ResMap.end(); it++) {
 				if (it->second == ResObj) {
-					//ƒ|ƒCƒ“ƒ^‚ªd•¡‚µ‚Ä‚¢‚Ä‚àAƒL[‚ª“¯‚¶‚È‚ç
-					//‚·‚Å‚É“o˜^‚³‚ê‚Ä‚¢‚é‚Ì‚ÅƒŠƒ^[ƒ“
+					//ãƒã‚¤ãƒ³ã‚¿ãŒé‡è¤‡ã—ã¦ã„ã¦ã‚‚ã€ã‚­ãƒ¼ãŒåŒã˜ãªã‚‰
+					//ã™ã§ã«ç™»éŒ²ã•ã‚Œã¦ã„ã‚‹ã®ã§ãƒªã‚¿ãƒ¼ãƒ³
 					if (it->first == Key) {
 						return;
 					}
 					wstring keyerr = Key;
 					throw BaseException(
-						L"‚·‚Å‚É‚»‚ÌƒŠƒ\[ƒX‚Í“o˜^‚³‚ê‚Ä‚¢‚Ü‚·",
+						L"ã™ã§ã«ãã®ãƒªã‚½ãƒ¼ã‚¹ã¯ç™»éŒ²ã•ã‚Œã¦ã„ã¾ã™",
 						keyerr,
 						L"App::RegisterResource()"
 					);
 				}
 			}
-			//d•¡ƒL[‚ÌŒŸ¸
+			//é‡è¤‡ã‚­ãƒ¼ã®æ¤œæŸ»
 			it = m_ResMap.find(Key);
 			if (it != m_ResMap.end()) {
-				//w’è‚Ì–¼‘O‚ªŒ©‚Â‚©‚Á‚½
-				//—áŠO”­¶
+				//æŒ‡å®šã®åå‰ãŒè¦‹ã¤ã‹ã£ãŸ
+				//ä¾‹å¤–ç™ºç”Ÿ
 				wstring keyerr = Key;
 				throw BaseException(
-					L"‚·‚Å‚É‚»‚ÌƒL[‚Í“o˜^‚³‚ê‚Ä‚¢‚Ü‚·",
+					L"ã™ã§ã«ãã®ã‚­ãƒ¼ã¯ç™»éŒ²ã•ã‚Œã¦ã„ã¾ã™",
 					keyerr,
 					L"App::RegisterResource()"
 				);
 			}
 			else {
-				//Œ©‚Â‚©‚ç‚È‚¢
-				//ƒŠƒ\[ƒXƒyƒA‚Ì’Ç‰Á
+				//è¦‹ã¤ã‹ã‚‰ãªã„
+				//ãƒªã‚½ãƒ¼ã‚¹ãƒšã‚¢ã®è¿½åŠ 
 				m_ResMap[Key] = ResObj;
 			}
 		}
@@ -1135,8 +1139,8 @@ namespace basecross {
 		}
 	}
 
-	//ƒeƒNƒXƒ`ƒƒ‚Ì“o˜^(“¯‚¶ƒL[‚ÌƒeƒNƒXƒ`ƒƒ‚ª‚È‚¯‚ê‚Îƒtƒ@ƒCƒ‹–¼‚Åì¬‚µA“o˜^)
-	//“¯‚¶–¼‘O‚ÌƒeƒNƒXƒ`ƒƒ‚ª‚ ‚ê‚Î‚»‚Ìƒ|ƒCƒ“ƒ^‚ğ•Ô‚·
+	//ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ç™»éŒ²(åŒã˜ã‚­ãƒ¼ã®ãƒ†ã‚¯ã‚¹ãƒãƒ£ãŒãªã‘ã‚Œã°ãƒ•ã‚¡ã‚¤ãƒ«åã§ä½œæˆã—ã€ç™»éŒ²)
+	//åŒã˜åå‰ã®ãƒ†ã‚¯ã‚¹ãƒãƒ£ãŒã‚ã‚Œã°ãã®ãƒã‚¤ãƒ³ã‚¿ã‚’è¿”ã™
 	shared_ptr<TextureResource> App::RegisterTexture(const wstring& Key, const wstring& TextureFileName, const wstring& TexType) {
 		if (CheckResource<TextureResource>(Key)) {
 			return GetResource<TextureResource>(Key);
@@ -1148,8 +1152,8 @@ namespace basecross {
 	}
 
 
-	//Wav‚Ì“o˜^(“¯‚¶ƒL[‚ÌWav‚ª‚È‚¯‚ê‚Îƒtƒ@ƒCƒ‹–¼‚Åì¬‚µA“o˜^)
-	//“¯‚¶–¼‘O‚ÌWav‚ª‚ ‚ê‚Î‚»‚Ìƒ|ƒCƒ“ƒ^‚ğ•Ô‚·
+	//Wavã®ç™»éŒ²(åŒã˜ã‚­ãƒ¼ã®WavãŒãªã‘ã‚Œã°ãƒ•ã‚¡ã‚¤ãƒ«åã§ä½œæˆã—ã€ç™»éŒ²)
+	//åŒã˜åå‰ã®WavãŒã‚ã‚Œã°ãã®ãƒã‚¤ãƒ³ã‚¿ã‚’è¿”ã™
 	shared_ptr<AudioResource> App::RegisterWav(const wstring& Key, const wstring& WavFileName) {
 		if (CheckResource<AudioResource>(Key)) {
 			return GetResource<AudioResource>(Key);
@@ -1172,11 +1176,11 @@ namespace basecross {
 		if (IsFullScreen()) {
 			return;
 		}
-		//ƒ{[ƒ_[ƒŒƒXƒEƒCƒ“ƒhƒE‚ğg—p
+		//ãƒœãƒ¼ãƒ€ãƒ¼ãƒ¬ã‚¹ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã‚’ä½¿ç”¨
 		auto iClientWidth = GetSystemMetrics(SM_CXSCREEN);
 		auto iClientHeight = GetSystemMetrics(SM_CYSCREEN);
 		auto HWnd = GetHWnd();
-		//ƒEƒBƒ“ƒhƒE‚ÌƒXƒ^ƒCƒ‹‚ğ•Ï‚¦‚é
+		//ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ã‚¹ã‚¿ã‚¤ãƒ«ã‚’å¤‰ãˆã‚‹
 		SetWindowLong(HWnd, GWL_STYLE, WS_POPUP);
 		SetWindowPos(
 			HWnd, HWND_TOP,
@@ -1189,7 +1193,7 @@ namespace basecross {
 	void App::SetWindowMode(const RECT& r) {
 		auto HWnd = GetHWnd();
 		if (IsFullScreen()) {
-			//ƒtƒ‹ƒXƒNƒŠ[ƒ“‚È‚çƒEƒCƒ“ƒhƒEƒXƒ^ƒCƒ‹‚ğ•Ï‚¦‚é
+			//ãƒ•ãƒ«ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ãªã‚‰ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã‚¹ã‚¿ã‚¤ãƒ«ã‚’å¤‰ãˆã‚‹
 			SetWindowLong(HWnd, GWL_STYLE, WS_OVERLAPPEDWINDOW);
 		}
 		SetWindowPos(
@@ -1202,32 +1206,32 @@ namespace basecross {
 
 	void App::UpdateDraw(unsigned int SyncInterval) {
 		if (!m_SceneInterface) {
-			//ƒV[ƒ“‚ª‚ª–³Œø‚È‚ç
+			//ã‚·ãƒ¼ãƒ³ãŒãŒç„¡åŠ¹ãªã‚‰
 			throw BaseException(
-				L"ƒV[ƒ“‚ª‚ ‚è‚Ü‚¹‚ñ",
+				L"ã‚·ãƒ¼ãƒ³ãŒã‚ã‚Šã¾ã›ã‚“",
 				L"if(!m_SceneInterface)",
 				L"App::UpdateDraw()"
 			);
 		}
-		//ƒI[ƒfƒBƒI‚ÌXV
+		//ã‚ªãƒ¼ãƒ‡ã‚£ã‚ªã®æ›´æ–°
 		GetXAudio2Manager()->OnUpdate();
-		// ƒV[ƒ“ ƒIƒuƒWƒFƒNƒg‚ğXV‚µ‚Ü‚·B
+		// ã‚·ãƒ¼ãƒ³ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æ›´æ–°ã—ã¾ã™ã€‚
 		m_InputDevice.ResetControlerState();
 		m_Timer.Tick([&]()
 			{
-				//ƒCƒxƒ“ƒgƒLƒ…[‚Ì‘—M
+				//ã‚¤ãƒ™ãƒ³ãƒˆã‚­ãƒ¥ãƒ¼ã®é€ä¿¡
 				m_EventDispatcher->DispatchDelayedEvwnt();
 				m_SceneInterface->OnUpdate();
 			});
-		// ‰‰ñXV‘O‚ÉƒŒƒ“ƒ_ƒŠƒ“ƒO‚Ís‚í‚È‚¢B
+		// åˆå›æ›´æ–°å‰ã«ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã¯è¡Œã‚ãªã„ã€‚
 		if (GetFrameCount() == 0)
 		{
 			return;
 		}
 		if (!movie::IsMovieActive()) {
-			//ƒ€[ƒr[‚ª–³Œø
+			//ãƒ ãƒ¼ãƒ“ãƒ¼ãŒç„¡åŠ¹
 			m_SceneInterface->OnDraw();
-			// ƒoƒbƒNƒoƒbƒtƒ@‚©‚çƒtƒƒ“ƒgƒoƒbƒtƒ@‚É“]‘—
+			// ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡ã‹ã‚‰ãƒ•ãƒ­ãƒ³ãƒˆãƒãƒƒãƒ•ã‚¡ã«è»¢é€
 			m_DeviceResources->Present(SyncInterval, 0);
 		}
 	}

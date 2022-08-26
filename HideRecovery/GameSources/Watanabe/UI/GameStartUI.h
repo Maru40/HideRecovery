@@ -13,7 +13,12 @@ namespace basecross {
 		shared_ptr<SimpleSprite> m_strStart;
 		// 消えるまでのタイマー
 		TimeCounter m_invisibleTimer;
+
 		bool m_isStart;
+		bool m_isBeforeTimeUp = false;
+
+		std::vector<std::function<void()>> m_timeUpEventFuncs;
+
 	public:
 		GameStartUI(const shared_ptr<Stage>& stage);
 
@@ -23,5 +28,7 @@ namespace basecross {
 		void Start()override;
 		void Reset()override;
 		bool IsGameBegin();
+
+		void AddTimeUpEventFunc(const std::function<void()>& timeUpEventFunc) { m_timeUpEventFuncs.push_back(timeUpEventFunc); }
 	};
 }

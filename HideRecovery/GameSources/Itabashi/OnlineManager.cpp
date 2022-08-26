@@ -136,7 +136,7 @@ namespace Online
 	{
 		std::vector<int> playerNumbers;
 
-		for (int i = 0; i < playernrs.getSize(); ++i)
+		for (int i = 0; (std::uint8_t)i < playernrs.getSize(); ++i)
 		{
 			playerNumbers.push_back(playernrs.getElementAt(i));
 		}

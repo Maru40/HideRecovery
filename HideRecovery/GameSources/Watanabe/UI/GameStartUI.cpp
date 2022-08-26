@@ -28,6 +28,14 @@ namespace basecross {
 		if (!m_isStart)
 			return;
 
+		if (!m_isBeforeTimeUp && m_countDown->IsTimeUp())
+		{
+			for (auto& timeUpEventFunc : m_timeUpEventFuncs)
+			{
+				timeUpEventFunc();
+			}
+		}
+
 		if (m_countDown->IsTimeUp()) {
 			m_strStart->SetDrawActive(true);
 			if (m_invisibleTimer.Count()) {
@@ -35,16 +43,20 @@ namespace basecross {
 				m_countDown->SetActive(false);
 			}
 		}
+
+		m_isBeforeTimeUp = m_countDown->IsTimeUp();
 	}
 
 	void GameStartUI::Start() {
 		m_isStart = true;
+		m_isBeforeTimeUp = false;
 		m_countDown->SetActive(true);
 		m_countDown->Start();
 	}
 
 	void GameStartUI::Reset() {
 		m_isStart = false;
+		m_isBeforeTimeUp = false;
 		m_countDown->SetActive(true);
 		m_countDown->Reset();
 		m_invisibleTimer.Reset();

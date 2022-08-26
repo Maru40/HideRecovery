@@ -1,4 +1,4 @@
-#include"LoadStage.h"
+ï»¿#include"LoadStage.h"
 #include"Scene.h"
 #include"SoundHelper.h"
 #include"GameSaveManager.h"
@@ -79,7 +79,7 @@ namespace basecross
 		//RampTex
 		ResourceLoadData(L"Ramp_Rock_TX", L"RampTex_Rock.png"),
 
-		//ƒfƒoƒbƒOƒeƒNƒXƒ`ƒƒ
+		//ãƒ‡ãƒãƒƒã‚°ãƒ†ã‚¯ã‚¹ãƒãƒ£
 		ResourceLoadData(L"Number_TX", L"Number.png"),
 		ResourceLoadData(L"NumberWhite_TX", L"Number_White.png"),
 
@@ -101,7 +101,7 @@ namespace basecross
 		//ResourceLoadData(L"PlayerWalk", L"AS_PlayerWalk.wav"),
 		//ResourceLoadData(L"PlayerTackle", L"AS_PlayerTackle.wav"),
 		//ResourceLoadData(L"JettPomp", L"AS_JettPomp.wav"),
-		ResourceLoadData(L"Shot_SE", L"AS_1086937_SF_ƒQ[ƒ€QƒŒ[ƒU[‰¹Qƒhƒ`ƒ…[ƒ“.wav"),
+		ResourceLoadData(L"Shot_SE", L"AS_1086937_SF_ã‚²ãƒ¼ãƒ ï¼¿ãƒ¬ãƒ¼ã‚¶ãƒ¼éŸ³ï¼¿ãƒ‰ãƒãƒ¥ãƒ¼ãƒ³.wav"),
 	};
 
 	const std::vector<LoadStage::ResourceLoadData> LoadStage::m_bgmResourceLoadDatas =
@@ -110,6 +110,7 @@ namespace basecross
 		//ResourceLoadData(L"Select_BGM_01", L"AS_SelectBGM1.wav"),
 		//ResourceLoadData(L"Game_BGM_01", L"AS_GameBGM1.wav"),
 		//ResourceLoadData(L"Title_BGM_01", L"AS_TitleBGM1.wav"),
+		ResourceLoadData(L"GameStageBGM", L"GameStageBGM.wav")
 	};
 
 	const std::vector<LoadStage::ModelResourceLoadData> LoadStage::m_modelResourceLoadDatas =
@@ -161,14 +162,14 @@ namespace basecross
 		const Vec3 eye(0.0f, 5.0f, -5.0f);
 		const Vec3 at(0.0f);
 		auto PtrView = CreateView<SingleView>();
-		//ƒrƒ…[‚ÌƒJƒƒ‰‚Ìİ’è
+		//ãƒ“ãƒ¥ãƒ¼ã®ã‚«ãƒ¡ãƒ©ã®è¨­å®š
 		auto PtrCamera = ObjectFactory::Create<Camera>();
 		PtrView->SetCamera(PtrCamera);
 		PtrCamera->SetEye(eye);
 		PtrCamera->SetAt(at);
-		//ƒ}ƒ‹ƒ`ƒ‰ƒCƒg‚Ìì¬
+		//ãƒãƒ«ãƒãƒ©ã‚¤ãƒˆã®ä½œæˆ
 		auto PtrMultiLight = CreateLight<MultiLight>();
-		//ƒfƒtƒHƒ‹ƒg‚Ìƒ‰ƒCƒeƒBƒ“ƒO‚ğw’è
+		//ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®ãƒ©ã‚¤ãƒ†ã‚£ãƒ³ã‚°ã‚’æŒ‡å®š
 		PtrMultiLight->SetDefaultLighting();
 	}
 
@@ -181,7 +182,7 @@ namespace basecross
 		std::wstring mediaDir;
 		mediaDir = app->GetDataDirWString();
 
-		// ƒeƒNƒXƒ`ƒƒƒtƒHƒ‹ƒ_
+		// ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ•ã‚©ãƒ«ãƒ€
 
 		std::wstring dir = mediaDir + L"Textures\\";
 
@@ -190,7 +191,7 @@ namespace basecross
 			app->RegisterTexture(textureLoadData.resourceKey, dir + textureLoadData.filename);
 		}
 
-		// SEƒtƒHƒ‹ƒ_
+		// SEãƒ•ã‚©ãƒ«ãƒ€
 
 		dir = mediaDir + L"SEs\\";
 
@@ -199,7 +200,7 @@ namespace basecross
 			app->RegisterWav(seLoadData.resourceKey, dir + seLoadData.filename);
 		}
 
-		// BGMƒtƒHƒ‹ƒ_
+		// BGMãƒ•ã‚©ãƒ«ãƒ€
 
 		dir = mediaDir + L"BGMs\\";
 
@@ -208,7 +209,7 @@ namespace basecross
 			app->RegisterWav(bgmLoadData.resourceKey, dir + bgmLoadData.filename);
 		}
 
-		// ƒ‚ƒfƒ‹ƒtƒHƒ‹ƒ_
+		// ãƒ¢ãƒ‡ãƒ«ãƒ•ã‚©ãƒ«ãƒ€
 
 		dir = mediaDir + L"Models\\";
 
@@ -257,7 +258,7 @@ namespace basecross
 	}
 
 	void LoadStage::LoadEffectDatas() {
-		// ƒGƒtƒFƒNƒg‚Ì“o˜^‚É•K—v
+		// ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®ç™»éŒ²ã«å¿…è¦
 		AddGameObject<EfkInterface>();
 
 		const auto& app = App::GetApp();
@@ -286,7 +287,7 @@ namespace basecross
 
 		loadThread.detach();
 
-		// CSVƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İi‚Å‚«‚ê‚ÎŠÖ”‚Å•ª‚¯‚½‚¢j
+		// CSVãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿ï¼ˆã§ãã‚Œã°é–¢æ•°ã§åˆ†ã‘ãŸã„ï¼‰
 		wstring mediaDir;
 		mediaDir = App::GetApp()->GetDataDirWString();
 		wstring dir = mediaDir + L"Models/";
