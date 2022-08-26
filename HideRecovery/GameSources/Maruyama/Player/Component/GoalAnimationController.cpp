@@ -135,6 +135,10 @@ namespace basecross {
 		if (auto gravity = GetGameObject()->GetComponent<Gravity>(false)) {	//d—Í‚Ì‰ðœ
 			gravity->SetUpdateActive(true);
 		}
+
+		if (auto velocityManager = GetGameObject()->GetComponent<VelocityManager>(false)) {
+			velocityManager->ResetAll();
+		}
 	}
 
 	void GoalAnimationController::DefineTask() {
