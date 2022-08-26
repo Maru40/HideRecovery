@@ -39,23 +39,49 @@ namespace basecross {
 	}
 
 	void NumberSprite::SetValue(int number) {
-		auto data = SpriteDataManager::GetInstance()->GetSpriteData(L"Numbers");
 		m_number = number;
-		Vec2 size = data.size;
-		float fnumber = static_cast<float>(number);
-		vector<Vec2> uv01, uv = {
-			Vec2((fnumber + 0) * size.x,0.0f),
-			Vec2((fnumber + 1) * size.x,0.0f),
-			Vec2((fnumber + 0) * size.x,size.y),
-			Vec2((fnumber + 1) * size.x,size.y)
-		};
-		Utility::ConvertToUVCoordinates(uv, data.useTextureKey, uv01);
-		auto halfSize = size / 2.0f;
-		Col4 color(1);
-		for (int i = 0; i < vertices.size(); i++) {
-			vertices[i].textureCoordinate = uv01[i];
+		sdm::SpriteData data;
+		vector<Vec2> uv01, uv;
+		// 単体で10を表示
+		if (number == 10) {
+			data = SpriteDataManager::GetInstance()->GetSpriteData(L"10");
+			Vec2 size = data.size;
+			uv = {
+				data.origin + Vec2(0.0f, 0.0f),
+				data.origin + Vec2(size.x, 0.0f),
+				data.origin + Vec2(0.0f, size.y),
+				data.origin + size
+			};
+			Utility::ConvertToUVCoordinates(uv, data.useTextureKey, uv01);
+			auto halfSize = size / 2.0f;
+			Col4 color(1);
+			vertices = {
+				{Vec3(-halfSize.x, +halfSize.y, 0.0f), color, uv01[0]},
+				{Vec3(+halfSize.x, +halfSize.y, 0.0f), color, uv01[1]},
+				{Vec3(-halfSize.x, -halfSize.y, 0.0f), color, uv01[2]},
+				{Vec3(+halfSize.x, -halfSize.y, 0.0f), color, uv01[3]}
+			};
 		}
-
+		else {
+			data = SpriteDataManager::GetInstance()->GetSpriteData(L"Numbers");
+			Vec2 size = data.size;
+			float fnumber = static_cast<float>(number);
+			uv = {
+				Vec2((fnumber + 0) * size.x,0.0f),
+				Vec2((fnumber + 1) * size.x,0.0f),
+				Vec2((fnumber + 0) * size.x,size.y),
+				Vec2((fnumber + 1) * size.x,size.y)
+			};
+			Utility::ConvertToUVCoordinates(uv, data.useTextureKey, uv01);
+			auto halfSize = size / 2.0f;
+			Col4 color(1);
+			vertices = {
+				{Vec3(-halfSize.x, +halfSize.y, 0.0f), color, uv01[0]},
+				{Vec3(+halfSize.x, +halfSize.y, 0.0f), color, uv01[1]},
+				{Vec3(-halfSize.x, -halfSize.y, 0.0f), color, uv01[2]},
+				{Vec3(+halfSize.x, -halfSize.y, 0.0f), color, uv01[3]}
+			};
+		}
 		m_spriteDraw.lock()->UpdateVertices(vertices);
 	}
 

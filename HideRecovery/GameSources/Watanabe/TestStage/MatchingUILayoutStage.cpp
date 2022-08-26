@@ -7,6 +7,7 @@
 #include "PlayerInputer.h"
 #include "../UI/UIObjects.h"
 #include "../Manager/PointManager.h"
+#include "../BoardPoly/HPGaugeBP.h"
 
 namespace basecross {
 	void MatchingUILayoutStage::CreateViewLight() {
@@ -39,11 +40,13 @@ namespace basecross {
 		auto path = dir + L"MapDatas/";
 		uiBuilder.Build(GetThis<Stage>(), path + L"GameUILayout.csv");
 
-		auto ball = AddGameObject<GameObject>();
-		auto drawComp = ball->AddComponent<PNTBoneModelDraw>();
-		drawComp->SetMultiMeshResource(L"Ball_Model");
+		//auto ball = AddGameObject<GameObject>();
+		//auto drawComp = ball->AddComponent<PNTBoneModelDraw>();
+		//drawComp->SetMultiMeshResource(L"Ball_Model");
 
 		//m_sprite = AddGameObject<SplashMessageUI>();
+		AddGameObject<HPGaugeBP>();
+		AddGameObject<NumberSprite>()->SetValue(9);
 	}
 	void MatchingUILayoutStage::OnUpdate() {
 		const auto& inputDevice = App::GetApp()->GetMyInputDevice();
