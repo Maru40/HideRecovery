@@ -103,16 +103,18 @@ namespace basecross {
 		//CreateMapOutCollisions(m_floors);
 	}
 
-	void GameStageBase::CreateUI(const wstring& fileName) {
-		UIObjectCSVBuilder uiBuilder;
-		uiBuilder.Register<TimerUI>(L"TimerUI");
-		uiBuilder.Register<HPGaugeUI>(L"HPGaugeUI");
-		uiBuilder.Register<PointUI>(L"PointUI");
-		uiBuilder.Register<SimpleSprite>(L"SimpleSprite");
-		uiBuilder.Register<SplashMessageUI>(L"SplashMessageUI");
+	std::shared_ptr<UIObjectCSVBuilder> GameStageBase::CreateUI(const wstring& fileName) {
+		auto uiBuilder = UIObjectCSVBuilder::Create();
+		uiBuilder->Register<TimerUI>(L"TimerUI");
+		uiBuilder->Register<HPGaugeUI>(L"HPGaugeUI");
+		uiBuilder->Register<PointUI>(L"PointUI");
+		uiBuilder->Register<SimpleSprite>(L"SimpleSprite");
+		uiBuilder->Register<SplashMessageUI>(L"SplashMessageUI");
 		auto dir = App::GetApp()->GetDataDirWString();
 		auto path = dir + L"MapDatas/";
-		uiBuilder.Build(GetThis<Stage>(), path + fileName);
+		uiBuilder->Build(GetThis<Stage>(), path + fileName);
+
+		return uiBuilder;
 	}
 
 	void GameStageBase::CreateMapOutCollision(const Vec3& startPosition, const Vec3& forward, const float& length, const float& width, const float& height) {

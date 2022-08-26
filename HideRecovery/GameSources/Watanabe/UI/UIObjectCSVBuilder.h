@@ -43,6 +43,12 @@ namespace basecross {
 		~UIObjectCSVBuilder();
 
 		/// <summary>
+		/// 自身のインスタンスを生成
+		/// </summary>
+		/// <returns>インスタンス</returns>
+		static shared_ptr<UIObjectCSVBuilder> Create();
+
+		/// <summary>
 		/// クリエーターを登録する
 		/// </summary>
 		/// <typeparam name="T">登録する型（ゲームオブジェクトの派生）</typeparam>

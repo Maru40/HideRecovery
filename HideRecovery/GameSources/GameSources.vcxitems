@@ -254,6 +254,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\BallAnimator.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\FadeComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\LifeSpan.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\MatchingUIController.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\PlayerAnimationState.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\PlayerAnimator.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\PlayerStatus.h" />
@@ -526,6 +527,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\BallAnimator.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\FadeComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\LifeSpan.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\MatchingUIController.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\PlayerAnimator.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\PlayerStatus.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\TestComponent.cpp" />

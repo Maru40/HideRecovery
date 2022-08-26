@@ -7,6 +7,7 @@
 #include "MatchStageRoomer.h"
 #include "Watanabe/DebugClass/Debug.h"
 #include "Watanabe/UI/UIObjects.h"
+#include "Watanabe/Component/MatchingUIController.h"
 
 namespace basecross
 {
@@ -36,11 +37,8 @@ namespace basecross
 
 		// マップとUIの生成
 		CreateMap(L"WaitStage.csv");
-		UIObjectCSVBuilder uiBuilder;
-		uiBuilder.Register<SimpleSprite>(L"SimpleSprite");
-		auto dir = App::GetApp()->GetDataDirWString();
-		auto path = dir + L"MapDatas/";
-		uiBuilder.Build(GetThis<Stage>(), path + L"MatchingUILayout.csv");
+		auto uiBuilder = CreateUI(L"MatchingUILayout.csv");
+		gameObject->AddComponent<MatchingUIController>(uiBuilder);
 	}
 
 	void OnlineMatchStage::OnUpdate()
