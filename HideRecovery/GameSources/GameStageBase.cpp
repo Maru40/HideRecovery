@@ -52,6 +52,8 @@
 
 #include "Maruyama/StageObject/GoalObject.h"
 #include "Itabashi/GamePlayerManager.h"
+#include "Itabashi/OnlineGameTimer.h"
+#include "Watanabe/UI/CountDownUI.h"
 
 namespace basecross {
 	void GameStageBase::CreateMainCamera()
@@ -143,8 +145,12 @@ namespace basecross {
 
 			auto onlineRoom = AddGameObject<Online::OnlineTestRoom>();
 			auto tester = onlineRoom->GetComponent<Online::OnlineTester>();
-
+			auto onlineGameTimer = onlineRoom->AddComponent<OnlineGameTimer>();
 			onlineRoom->AddComponent<GamePlayerManager>();
+
+			auto countDownObject = AddGameObject<CountDownUI>();
+			std::weak_ptr<CountDownUI> weakCountDownUI = countDownObject;
+			onlineGameTimer->AddGameStartCountFuncs([weakCountDownUI]() {weakCountDownUI.lock()->Start(); });
 
 			Online::OnlineManager::Connect();
 		}
