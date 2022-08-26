@@ -1003,6 +1003,9 @@
     <Filter Include="Maruyama\Player\Component\UseOwnArea\Map">
       <UniqueIdentifier>{7ff6dde1-fa02-4b36-943c-bf140cc13566}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Player\Component\UseOwnArea\Map\Cursor">
+      <UniqueIdentifier>{ea4d839c-cc7b-461e-a10a-3ac44dff4aa2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1871,6 +1874,9 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\FieldMap.h">
       <Filter>Maruyama\Player\Component\UseOwnArea\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MapCursor.h">
+      <Filter>Maruyama\Player\Component\UseOwnArea\Map\Cursor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
