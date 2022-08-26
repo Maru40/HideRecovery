@@ -1,5 +1,6 @@
 ﻿#include "stdafx.h"
 #include "OnlineGameTimer.h"
+#include "Watanabe/Manager/TimeManager.h"
 
 namespace basecross
 {
@@ -12,7 +13,7 @@ namespace basecross
 
 	bool OnlineGameTimer::IsStartable() const
 	{
-		return m_isGameStartable;
+		return m_isStartable;
 	}
 
 	void OnlineGameTimer::StartCheck()
@@ -50,24 +51,30 @@ namespace basecross
 
 	void OnlineGameTimer::OnCreate()
 	{
+		m_isStartable = true;
 	}
 
 	void OnlineGameTimer::OnUpdate()
 	{
-		if (m_isGameStartable)
+		if (!m_isGameStartable)
+		{
+			StartCheck();
+			return;
+		}
+
+		if (!m_isTimerUpdate)
 		{
 			return;
 		}
 
-		StartCheck();
-
+		TimeManager::GetInstance()->UpdateTime();
 	}
 
 	void OnlineGameTimer::OnCustomEventAction(int playerNumber, std::uint8_t eventCode, const std::uint8_t* bytes)
 	{
 		if (eventCode == GAMETIMER_START_CHECK_EVENT_CODE)
 		{
-			if (IsStartable())
+			if (!IsStartable())
 			{
 				return;
 			}

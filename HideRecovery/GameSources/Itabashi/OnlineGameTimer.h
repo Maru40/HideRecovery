@@ -17,6 +17,8 @@ namespace basecross
 
 		bool m_isStartable = false;
 		bool m_isGameStartable = false;
+		bool m_isTimerUpdate = false;
+		bool m_isBeforeTimeUp = false;
 
 		float m_timeCount = 0.0f;
 
@@ -25,6 +27,8 @@ namespace basecross
 		std::unordered_set<int> m_startOkPlayerNumbers;
 
 		std::vector<std::function<void()>> m_gameStartCountFuncs;
+
+		std::vector<std::function<void()>> m_gameFinishEventFuncs;
 
 		bool IsStartable() const;
 
@@ -41,6 +45,12 @@ namespace basecross
 
 		void OnLeaveRoomEventAction(int playerNumber, bool isInactive) override;
 
-		void AddGameStartCountFuncs(const std::function<void()>& gameStartCountFunc) { m_gameStartCountFuncs.push_back(gameStartCountFunc); }
+		void AddGameStartCountFunc(const std::function<void()>& gameStartCountFunc) { m_gameStartCountFuncs.push_back(gameStartCountFunc); }
+
+		void AddGameFinishEventFunc(const std::function<void()>& gameFinishEventFunc) { m_gameFinishEventFuncs.push_back(gameFinishEventFunc); }
+
+		void GameTimerStart() { m_isTimerUpdate = true; }
+
+		void GameTimerStop() { m_isTimerUpdate = false; }
 	};
 }
