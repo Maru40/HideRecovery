@@ -1,0 +1,4 @@
+name,start,end,isLoop,speed
+Open,1,19,FALSE,1
+Wait,20,20,FALSE,1
+Close,21,40,FALSE,1
