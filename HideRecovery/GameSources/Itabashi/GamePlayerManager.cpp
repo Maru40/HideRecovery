@@ -15,6 +15,7 @@
 #include "Maruyama/Player/Component/UseWepon.h"
 #include "MainStage.h"
 #include "Watanabe/UI/UIObjects.h"
+#include "Watanabe/BoardPoly/HPGaugeBP.h"
 
 namespace basecross
 {
@@ -61,6 +62,11 @@ namespace basecross
 
 		if (playerNumber != Online::OnlineManager::GetLocalPlayer().getNumber())
 		{
+			// 他プレイヤーは板ポリHPゲージをつける
+			//（位置の同期はHPGaugeBP内で設定してある）
+			auto playerStatus = playerObject->GetComponent<PlayerStatus>();
+			GetStage()->AddGameObject<HPGaugeBP>(playerStatus);
+
 			return playerObject;
 		}
 
