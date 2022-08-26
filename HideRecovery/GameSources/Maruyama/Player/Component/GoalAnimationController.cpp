@@ -97,9 +97,9 @@ namespace basecross {
 	}
 
 	void GoalAnimationController::OnUpdate() {
-		if (PlayerInputer::GetInstance()->IsRightDown()) {
-			GetGameObject()->GetComponent<PlayerAnimator>()->ChangePlayerAnimation(PlayerAnimationState::State::Goal1);
-		}
+		//if (PlayerInputer::GetInstance()->IsRightDown()) {
+		//	GetGameObject()->GetComponent<PlayerAnimator>()->ChangePlayerAnimation(PlayerAnimationState::State::Goal1);
+		//}
 	}
 
 	void GoalAnimationController::StartAnimationEvent() {

@@ -45,6 +45,8 @@
 #include "Maruyama/Player/Component/PlayerDeader.h"
 #include "Maruyama/Player/Component/UseWepon.h"
 #include "Maruyama/Player/Component/GoalAnimationController.h"
+#include "Maruyama/Player/Component/Teleport.h"
+#include "Maruyama/Player/Component/FieldMap.h"
 
 namespace basecross {
 
@@ -88,6 +90,7 @@ namespace basecross {
 
 		auto objecfMover = AddComponent<Operator::ObjectMover>();
 		objecfMover->SetMoveSpeed(8.5f);
+		//objecfMover->SetMoveSpeed(28.5f);
 		objecfMover->SetAffectedCamera(GetStage()->GetView()->GetTargetCamera());
 		AddComponent<Online::PlayerOnlineController>();
 		AddComponent<Online::OnlineTransformSynchronization>();
@@ -101,6 +104,8 @@ namespace basecross {
 		AddComponent<PlayerDeader>();
 		auto useWeapon = AddComponent<UseWepon>(chargeGun);
 		AddComponent<GoalAnimationController>();
+		//AddComponent<FieldMap>();
+		AddComponent<Teleport>();
 
 		constexpr float ScaleValue = 1.0f;
 		transform->SetScale(Vec3(ScaleValue));

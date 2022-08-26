@@ -1000,6 +1000,7 @@
     <Filter Include="Maruyama\Player\Component\BuffController">
       <UniqueIdentifier>{31d97b9a-9871-41a9-a792-1acbccd1f260}</UniqueIdentifier>
     </Filter>
+
     <Filter Include="Itabashi\Component\OnlineGameTimer">
       <UniqueIdentifier>{9ac3a7f7-8918-46a4-a557-9b165484fd6f}</UniqueIdentifier>
     </Filter>
@@ -1020,6 +1021,13 @@
     </Filter>
     <Filter Include="Watanabe\Component\BoxAnimator">
       <UniqueIdentifier>{95a4fc44-76fa-48c8-bcb2-866a7287e857}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Player\Component\UseOwnArea\Map">
+      <UniqueIdentifier>{7ff6dde1-fa02-4b36-943c-bf140cc13566}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Player\Component\UseOwnArea\Map\Cursor">
+      <UniqueIdentifier>{ea4d839c-cc7b-461e-a10a-3ac44dff4aa2}</UniqueIdentifier>
+
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1887,6 +1895,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\BuffController.h">
       <Filter>Maruyama\Player\Component\BuffController</Filter>
     </ClInclude>
+
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineGameTimer.h">
       <Filter>Itabashi\Component\OnlineGameTimer</Filter>
     </ClInclude>
@@ -1904,6 +1913,13 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\BoxAnimationState.h">
       <Filter>Watanabe\Component\BoxAnimator</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\FieldMap.h">
+      <Filter>Maruyama\Player\Component\UseOwnArea\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MapCursor.h">
+      <Filter>Maruyama\Player\Component\UseOwnArea\Map\Cursor</Filter>
+
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2675,6 +2691,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\BuffController.cpp">
       <Filter>Maruyama\Player\Component\BuffController</Filter>
     </ClCompile>
+
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineGameTimer.cpp">
       <Filter>Itabashi\Component\OnlineGameTimer</Filter>
     </ClCompile>
@@ -2689,6 +2706,10 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\BoxAnimator.cpp">
       <Filter>Watanabe\Component\BoxAnimator</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\FieldMap.cpp">
+      <Filter>Maruyama\Player\Component\UseOwnArea\Map</Filter>
+
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

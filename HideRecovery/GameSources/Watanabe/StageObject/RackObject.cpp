@@ -23,14 +23,19 @@ namespace basecross {
 	void RackObject::OnCreate() {
 		auto col = AddComponent<CollisionObb>();
 		col->SetFixed(true);
+		const float colSize = 1.2f;
+		col->SetMakedSize(colSize);
 
-		auto drawComp = AddComponent<PNTStaticModelDraw>();
+		auto drawComp = AddComponent<PNTBoneModelDraw>();
 		//drawComp->SetMeshResource(L"rack");
 		drawComp->SetMultiMeshResource(L"Box_Model");
 		drawComp->SetOwnShadowActive(true);
 
 		// 隠せるオブジェクトにする
 		AddComponent<HidePlace>(HidePlace::Parametor(Vec3(0.0f, 0.15f, 0.0f)));
+
+		//constexpr float fScale = 0.75f;
+		//transform->SetScale(Vec3(fScale));
 
 		auto shadow = AddComponent<Shadowmap>();
 		//shadow->SetMeshResource(L"Box_Model");

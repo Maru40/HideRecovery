@@ -26,6 +26,7 @@
 #include "ScreenFadeManager.h"
 
 #include "TaskList.h"
+#include "Maruyama/Player/Component/FieldMap.h"
 
 namespace basecross {
 
@@ -42,6 +43,7 @@ namespace basecross {
 		AddComponent<Enemy::AIDirector>();
 		AddComponent<EffectManager>();
 		AddComponent<ScreenFadeManager>();
+		AddComponent<FieldMap>();
 	}
 
 }
