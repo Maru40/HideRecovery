@@ -58,6 +58,11 @@ namespace basecross {
 		/// </summary>
 		void OpenMap();
 
+		/// <summary>
+		/// マップを閉じる
+		/// </summary>
+		void CloseMap();
+
 		//--------------------------------------------------------------------------------------
 		/// アクセッサ
 		//--------------------------------------------------------------------------------------
@@ -74,7 +79,13 @@ namespace basecross {
 		/// <returns>テレポート位置</returns>
 		Vec3 GetTeleportPosition() const noexcept { return m_param.position; }
 
+		/// <summary>
+		/// フィールドマップの取得
+		/// </summary>
+		/// <returns>フィールドマップ</returns>
 		std::shared_ptr<FieldMap> GetFieldMap() const;
+
+		bool IsTeleport() const;
 	};
 
 }

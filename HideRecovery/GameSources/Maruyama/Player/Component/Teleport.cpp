@@ -36,29 +36,11 @@ namespace basecross {
 
 	void Teleport::OnLateStart() {
 		SettingFieldMap();			//マップテクスチャの設定
-		//SettingAnimationEvent();	//アニメーションイベント設定
+		SettingAnimationEvent();	//アニメーションイベント設定
 	}
 
 	void Teleport::OnUpdate() {
-		//Debug::GetInstance()->Log(transform->GetPosition());
-		if (PlayerInputer::GetInstance()->IsRightDown()) {
-			return;
-			auto param = Builder::VertexPCTParametor(Vec3(100.0f, 100.0f, 0.0f), Vec2(256.0f, 256.0f), L"Point_TX");
-			auto sprite = GetStage()->AddGameObject<SpriteObject>(param);
-			auto spriteTrans = sprite->GetComponent<Transform>();
 
-			auto rect = GetFieldMap()->GetRect();
-			auto startPosition = transform->GetPosition();
-			float xRate = startPosition.x / (rect.width * 0.5f);
-			float yRate = startPosition.z / (rect.depth * 0.5f);
-			spriteTrans->SetPosition(Vec3(256.0f * xRate, 512.0f * yRate, 0.0f));
-		}
-
-		if (PlayerInputer::GetInstance()->IsLeftDown()) {
-			bool isDraw = !GetFieldMap()->GetMapDraw();
-			GetFieldMap()->SetMapDraw(true);
-
-		}
 	}
 
 	void Teleport::SettingFieldMap() {
@@ -80,7 +62,10 @@ namespace basecross {
 			auto fadeManager = ScreenFadeManager::GetInstance(GetStage());
 
 			//フェード終了イベント
-			auto endEvent = [fadeManager]() {
+			auto endEvent = [&,fadeManager, animator]() {
+				animator->ChangePlayerAnimation(PlayerAnimationState::State::Wait);
+				GetGameObject()->GetComponent<Transform>()->SetPosition(GetTeleportPosition());	//テレポート
+
 				if (fadeManager) {
 					fadeManager->FadeStart(FadeType::In);
 				}
@@ -90,16 +75,12 @@ namespace basecross {
 			if (fadeManager) {
 				fadeManager->FadeStart(FadeType::Out, endEvent);
 			}
-
-			transform->SetPosition(GetTeleportPosition());	//テレポート
-
-			animator->ChangePlayerAnimation(PlayerAnimationState::State::Wait);	//アニメーションの再生(将来的に変更)
 				//エフェクトの再生
 		};
 
 		//アニメーションイベントの登録
 		animator->AddAnimationEvent(
-			PlayerAnimationState::State::Dash,
+			PlayerAnimationState::State::PutItem_Floor,
 			nullptr,
 			nullptr,
 			exit
@@ -107,8 +88,14 @@ namespace basecross {
 	}
 
 	void Teleport::StartTeleport() {
+		//テレポート場所を設定
+		SetTeleportPosition(GetFieldMap()->GetMapCursor()->GetCursorFiledPosition());
+
+		//マップを閉じる
+		CloseMap();
+
 		if (auto animator = GetGameObject()->GetComponent<PlayerAnimator>(false)) {
-				//テレポートアニメーション
+			animator->ChangePlayerAnimation(PlayerAnimationState::State::PutItem_Floor);	//テレポートアニメーション
 		}
 
 			//エフェクトの再生
@@ -116,9 +103,19 @@ namespace basecross {
 
 	void Teleport::OpenMap() {
 		auto fieldMap = GetFieldMap();
+		if (fieldMap->GetMapDraw()) {	//マップが開いているならCloseする。
+			CloseMap();
+			return;
+		}
 
 		fieldMap->GetMapCursor()->SetTarget(GetGameObject());
 		fieldMap->SetMapDraw(true);
+	}
+
+	void Teleport::CloseMap() {
+		auto fieldMap = GetFieldMap();
+
+		fieldMap->SetMapDraw(false);
 	}
 
 	//--------------------------------------------------------------------------------------
@@ -128,4 +125,24 @@ namespace basecross {
 	std::shared_ptr<FieldMap> Teleport::GetFieldMap() const {
 		return m_fieldMap.lock();
 	}
+
+	bool Teleport::IsTeleport() const {
+		return GetFieldMap()->IsMapDraw();	//現在はマップが開いているなら飛べる。
+	}
+
+
+
+
+
+	//if (PlayerInputer::GetInstance()->IsRightDown()) {
+		//	auto param = Builder::VertexPCTParametor(Vec3(100.0f, 100.0f, 0.0f), Vec2(256.0f, 256.0f), L"Point_TX");
+		//	auto sprite = GetStage()->AddGameObject<SpriteObject>(param);
+		//	auto spriteTrans = sprite->GetComponent<Transform>();
+
+		//	auto rect = GetFieldMap()->GetRect();
+		//	auto startPosition = transform->GetPosition();
+		//	float xRate = startPosition.x / (rect.width * 0.5f);
+		//	float yRate = startPosition.z / (rect.depth * 0.5f);
+		//	spriteTrans->SetPosition(Vec3(256.0f * xRate, 512.0f * yRate, 0.0f));
+	//}
 }
