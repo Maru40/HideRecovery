@@ -86,14 +86,16 @@ namespace basecross {
 	/// ゴール管理クラス本体
 	//--------------------------------------------------------------------------------------
 
-	Goal::Goal(const std::shared_ptr<GameObject>& objPtr, const Parametor& parametor):
+	Goal::Goal(const std::shared_ptr<GameObject>& objPtr, const Parametor& parametor) :
 		OnlineComponent(objPtr),
 		m_param(parametor),
-		m_timer(new GameTimer(0))
+		m_timer(new GameTimer(0)),
+		m_goalEffectSoundClip(L"GoalEffectSE", false, 0.5f)
 	{}
 
 	void Goal::OnLateStart() {
 		SettingPerformable();
+		m_soundEmitter = GetGameObject()->GetComponent<SoundEmitter>();
 	}
 
 	void Goal::OnUpdate() {
@@ -116,8 +118,8 @@ namespace basecross {
 		float leftTime = m_timer->GetLeftTime();
 	}
 
-	void Goal::SuccessGoal(const CollisionPair& pair) {
-		auto other = pair.m_Dest.lock()->GetGameObject();
+	Vec3 Goal::GoalProcess(const std::shared_ptr<GameObject>& other, const std::shared_ptr<Item>& item)
+	{
 		auto otherTrans = other->GetComponent<Transform>();
 
 		//タックル状態なら状態をリセット
@@ -137,31 +139,38 @@ namespace basecross {
 			AddPoint(teamMember->GetTeam());
 		}
 
-		//アイテム削除
-		if (auto itemBag = other->GetComponent<ItemBag>(false)) {
-			auto hideItem = itemBag->GetHideItem();
-			auto item = hideItem->GetGameObject()->GetComponent<Item>();
-			itemBag->RemoveItem(hideItem->GetGameObject()->GetComponent<Item>(false));
-			auto onlineController = other->GetComponent<Online::PlayerOnlineController>();
+		//再配置場所の取得
+		auto hidePlaces = maru::Utility::FindComponents<HidePlace>();
+		auto hidePlace = maru::MyRandom::RandomArray(hidePlaces);
+		std::weak_ptr<Operator::ObjectHider> weakObjectHider = item->GetGameObject()->GetComponent<Operator::ObjectHider>();
 
-			//再配置場所の取得
-			auto hidePlaces = maru::Utility::FindComponents<HidePlace>();
-			auto hidePlace = maru::MyRandom::RandomArray(hidePlaces);
+		//アイテム再配置イベント
+		auto itemHiderEvent = [weakObjectHider, hidePlace]() {
+			auto hider = weakObjectHider.lock();
+			hider->Appear(hidePlace->GetHidePosition());
+		};
 
-			//アイテム再配置イベント
-			auto itemHiderEvent = [hideItem, hidePlace]() {
-				auto hider = hideItem->GetObjectHider();
-				hider->Appear(hidePlace->GetHidePosition());
-			};
-
-			auto data = OnlineGoalData(m_param.team, onlineController->GetPlayerNumber(), item->GetItemId(), hidePlace->GetHidePosition());
-			Online::OnlineManager::RaiseEvent(false, (std::uint8_t*)&data, sizeof(OnlineGoalData), EXECUTE_GOAL_EVENT_CODE);
-
-			//カウントダウンスタート
-			StartCountDown(itemHiderEvent);
-		}
+		//カウントダウンスタート
+		StartCountDown(itemHiderEvent);
 
 		Debug::GetInstance()->Log(L"SuccessGoal");
+
+		return hidePlace->GetHidePosition();
+	}
+
+	void Goal::SuccessGoal(const CollisionPair& pair) {
+		auto other = pair.m_Dest.lock()->GetGameObject();
+		auto itemBag = other->GetComponent<ItemBag>();
+		auto hideItem = itemBag->GetHideItem();
+		auto item = hideItem->GetGameObject()->GetComponent<Item>();
+		auto onlineController = other->GetComponent<Online::PlayerOnlineController>();
+
+		itemBag->RemoveItem(item);
+
+		auto hidePosition = GoalProcess(other, item);
+
+		auto data = OnlineGoalData(m_param.team, onlineController->GetPlayerNumber(), item->GetItemId(), hidePosition);
+		Online::OnlineManager::RaiseEvent(false, (std::uint8_t*)&data, sizeof(OnlineGoalData), EXECUTE_GOAL_EVENT_CODE);
 	}
 
 	void Goal::SuccessGoal(Team team, int playerNumber, int itemId, const Vec3& hidePosition)
@@ -172,36 +181,11 @@ namespace basecross {
 
 		auto onlineController = Online::PlayerOnlineController::GetPlayerOnlineController(playerNumber);
 		auto other = onlineController->GetGameObject();
+		auto itemBag = other->GetComponent<ItemBag>();
+		auto item = itemBag->GetItem(itemId);
+		itemBag->RemoveItem(item);
 
-		//ポイント加算
-		if (auto teamMember = other->GetComponent<I_TeamMember>(false)) {
-			AddPoint(teamMember->GetTeam());
-		}
-
-		//ゴールアニメーションの設定
-		if (auto goalAnimationController = other->GetComponent<GoalAnimationController>(false)) {
-			goalAnimationController->SetDunkPosition(GetDunkPosition());
-			goalAnimationController->SetDunkBallPosition(transform->GetPosition() + m_param.dunkBallPositionOffset);
-			goalAnimationController->SetGoal(GetThis<Goal>());
-		}
-
-		//アイテム削除
-		if (auto itemBag = other->GetComponent<ItemBag>(false)) {
-			auto item = itemBag->GetItem(itemId);
-			auto hideItem = item->GetGameObject()->GetComponent<HideItem>();
-			itemBag->RemoveItem(item);
-
-			//アイテムの配置イベント
-			auto itemHiderEvent = [hideItem, hidePosition]() {
-				auto hider = hideItem->GetObjectHider();
-				hider->Appear(hidePosition);
-			};
-
-			//カウントダウン開始
-			StartCountDown(itemHiderEvent);
-		}
-
-		Debug::GetInstance()->Log(L"SuccessGoal");
+		GoalProcess(other, item);
 
 		PlayAnimation(other);
 	}

@@ -18,6 +18,7 @@ namespace basecross {
 	class GameTimer;
 	class I_Performable;
 	struct CollisionPair;
+	class Item;
 
 	//--------------------------------------------------------------------------------------
 	/// ゴール管理クラスのパラメータ
@@ -50,6 +51,10 @@ namespace basecross {
 
 		std::unique_ptr<GameTimer> m_timer;	//タイム管理クラス
 
+		std::weak_ptr<SoundEmitter> m_soundEmitter;
+
+		SoundClip m_goalEffectSoundClip;
+
 	public:
 		Goal(const std::shared_ptr<GameObject>& objPtr, const Parametor& parametor);
 
@@ -63,6 +68,8 @@ namespace basecross {
 		/// 時間更新処理
 		/// </summary>
 		void TimerUpdate();
+
+		Vec3 GoalProcess(const std::shared_ptr<GameObject>& other, const std::shared_ptr<Item>& item);
 
 		/// <summary>
 		/// ゴール成功(ゴールした人の処理)
