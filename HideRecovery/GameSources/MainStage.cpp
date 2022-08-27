@@ -105,7 +105,8 @@ namespace basecross {
 			auto gameStartUI = AddGameObject<GameStartUI>();
 			std::weak_ptr<GameStartUI> weakgameStartUI = gameStartUI;
 			onlineGameTimer->AddGameStartCountFunc([weakgameStartUI]() {weakgameStartUI.lock()->Start(); });
-			gameStartUI->AddTimeUpEventFunc([]() {SimpleSoundManager::ChangeBGM(L"GameStageBGM", 0.25f); });
+			gameStartUI->AddTimeUpEventFunc([]() {SimpleSoundManager::ChangeBGM(L"GameStageBGM", 0.05f); });
+			gameStartUI->AddTimeUpEventFunc([]() {SimpleSoundManager::OnePlaySE(L"GameStartSE", 0.25f); });
 			std::weak_ptr<OnlineGameTimer> weakOnlineGameTimer = onlineGameTimer;
 			gameStartUI->AddTimeUpEventFunc([weakOnlineGameTimer]() {weakOnlineGameTimer.lock()->GameTimerStart(); });
 
