@@ -47,6 +47,9 @@ namespace basecross
 	void OnlineGameTimer::GameCountStart()
 	{
 		m_isGameStartable = true;
+		m_timeCount = 0.0f;
+		m_count = 1;
+		SimpleSoundManager::OnePlaySE(L"StartCountSE", 0.5f);
 
 		for (auto& m_gameStartCountFuncs : m_gameStartCountFuncs)
 		{
@@ -73,6 +76,15 @@ namespace basecross
 
 		if (!m_isTimerUpdate)
 		{
+			m_timeCount += App::GetApp()->GetElapsedTime();
+
+			if (m_timeCount >= 1.0f && m_count < 3)
+			{
+				m_timeCount -= 1.0f;
+				SimpleSoundManager::OnePlaySE(L"StartCountSE", 0.5f);
+				++m_count;
+			}
+
 			return;
 		}
 

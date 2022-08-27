@@ -21,6 +21,7 @@ namespace basecross
 		bool m_isBeforeTimeUp = false;
 
 		float m_timeCount = 0.0f;
+		int m_count = 0;
 
 		float m_startCheckSpan;
 
