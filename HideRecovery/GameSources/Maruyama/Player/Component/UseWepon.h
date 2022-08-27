@@ -57,9 +57,13 @@ namespace basecross {
 		std::weak_ptr<RotationController> m_rotationController;	//回転コントローラー
 		std::weak_ptr<PlayerAnimator> m_animator;				//アニメーター
 
+		std::weak_ptr<SoundEmitter> m_soundEmitter;
+
 		Vec3 m_direction = Vec3(0, 0, 1);
 
 		bool m_isUseCamera = false;
+
+		SoundClip m_readyArmsSoundClip;
 
 	public:
 		/// <summary>

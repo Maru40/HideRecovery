@@ -34,10 +34,14 @@ namespace basecross
 
 		void StartCheck();
 
+		void GameCountStart();
+
 	public:
 		OnlineGameTimer(const std::shared_ptr<GameObject>& owner);
 
 		void OnCreate() override;
+
+		void OnLateStart() override;
 
 		void OnUpdate() override;
 

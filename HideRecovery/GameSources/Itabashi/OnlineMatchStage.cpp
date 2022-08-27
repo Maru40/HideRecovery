@@ -39,6 +39,8 @@ namespace basecross
 		CreateMap(L"WaitStage.csv");
 		auto uiBuilder = CreateUI(L"MatchingUILayout.csv");
 		gameObject->AddComponent<MatchingUIController>(uiBuilder);
+
+		SimpleSoundManager::ChangeBGM(L"MatchingStageBGM", 0.1f);
 	}
 
 	void OnlineMatchStage::OnUpdate()

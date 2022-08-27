@@ -53,13 +53,15 @@ namespace basecross {
 	UseWepon::UseWepon(const std::shared_ptr<GameObject>& objPtr, const std::shared_ptr<WeponBase>& wepon) :
 		Component(objPtr),
 		m_param(Parametor()),
-		m_wepon(wepon)
+		m_wepon(wepon),
+		m_readyArmsSoundClip(L"ReadyArmsSE", false, 0.75f)
 	{}
 
 	void UseWepon::OnLateStart() {
 		m_rotationController = GetGameObject()->GetComponent<RotationController>(false);
 		m_velocityManager = GetGameObject()->GetComponent<VelocityManager>(false);
 		m_animator = GetGameObject()->GetComponent<PlayerAnimator>(false);
+		m_soundEmitter = GetGameObject()->GetComponent<SoundEmitter>(false);
 
 		SettingReactiveIsAim();
 	}
@@ -153,6 +155,7 @@ namespace basecross {
 
 			if (auto animator = GetGameObject()->GetComponent<PlayerAnimator>(false)) {	//アニメーションの遷移
 				animator->ChangePlayerAnimation(PlayerAnimationState::State::GunSet2);
+				m_soundEmitter.lock()->PlaySoundClip(m_readyArmsSoundClip);
 			}
 		};
 

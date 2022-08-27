@@ -44,6 +44,7 @@ namespace basecross {
 	void GoalObject::OnCreate() {
 		SettingModel();
 
+		AddComponent<SoundEmitter>();
 		AddComponent<Goal>(Goal::Parametor(m_team));
 
 		auto collision = AddComponent<CollisionObb>();

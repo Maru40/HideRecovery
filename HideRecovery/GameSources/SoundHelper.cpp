@@ -1,4 +1,4 @@
-#include"SoundHelper.h"
+ï»¿#include"SoundHelper.h"
 #include"MathHelper.h"
 #include"GameSaveManager.h"
 
@@ -253,7 +253,7 @@ namespace basecross
 
 	void SoundListener::CheckInit()
 	{
-		// ‰Šú‰»‚³‚ê‚Ä‚¢‚½‚ç‰½‚à‚µ‚È‚¢
+		// åˆæœŸåŒ–ã•ã‚Œã¦ã„ãŸã‚‰ä½•ã‚‚ã—ãªã„
 		if (m_isInited)
 		{
 			return;
@@ -261,16 +261,16 @@ namespace basecross
 
 		auto masteringVoice = App::GetApp()->GetXAudio2Manager()->GetMasteringVoice();
 
-		// o—Í‚·‚éƒXƒs[ƒJ[‚Ìƒpƒ^[ƒ“(‰¡‚É2ŒÂAˆÍ‚Ş‚æ‚¤‚É6ŒÂ‚È‚Ç)
+		// å‡ºåŠ›ã™ã‚‹ã‚¹ãƒ”ãƒ¼ã‚«ãƒ¼ã®ãƒ‘ã‚¿ãƒ¼ãƒ³(æ¨ªã«2å€‹ã€å›²ã‚€ã‚ˆã†ã«6å€‹ãªã©)
 		DWORD channelMask;
 		masteringVoice->GetChannelMask(&channelMask);
 
-		// X3Audio‚Ì‰Šú‰»‚ğs‚¤
+		// X3Audioã®åˆæœŸåŒ–ã‚’è¡Œã†
 		auto hr = X3DAudioInitialize(channelMask, X3DAUDIO_SPEED_OF_SOUND, m_X3DAudioHandle);
 
 		m_isInited = (hr == S_OK);
 
-		// ‰Šú‰»‚ª¬Œ÷‚µ‚È‚©‚Á‚½ê‡
+		// åˆæœŸåŒ–ãŒæˆåŠŸã—ãªã‹ã£ãŸå ´åˆ
 		if (!m_isInited)
 		{
 			return;
@@ -279,7 +279,7 @@ namespace basecross
 		XAUDIO2_VOICE_DETAILS voiceDetails;
 		masteringVoice->GetVoiceDetails(&voiceDetails);
 
-		m_dspSettring.DstChannelCount = voiceDetails.InputChannels; // o—Íƒ`ƒƒƒ“ƒlƒ‹‚Ì”‚Ìİ’è
+		m_dspSettring.DstChannelCount = voiceDetails.InputChannels; // å‡ºåŠ›ãƒãƒ£ãƒ³ãƒãƒ«ã®æ•°ã®è¨­å®š
 
 		m_dspSettring.pMatrixCoefficients = new FLOAT32[16]{};
 	}
@@ -287,9 +287,9 @@ namespace basecross
 	X3DAUDIO_LISTENER SoundListener::CreateListener() const
 	{
 		X3DAUDIO_LISTENER listener{};
-		listener.OrientFront = transform->GetForward(); // Z²‚ÌŒü‚«
-		listener.OrientTop = transform->GetUp(); // Y²‚ÌŒü‚«
-		listener.Position = transform->GetWorldPosition(); // ƒ[ƒ‹ƒhÀ•W
+		listener.OrientFront = transform->GetForward(); // Zè»¸ã®å‘ã
+		listener.OrientTop = transform->GetUp(); // Yè»¸ã®å‘ã
+		listener.Position = transform->GetWorldPosition(); // ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™
 		//listener.Velocity = transform->GetVelocity();
 
 		return listener;
@@ -306,7 +306,7 @@ namespace basecross
 		CheckInit();
 
 		/// <summary>
-		/// ‰Šú‰»‚³‚ê‚Ä‚¢‚È‚©‚Á‚½‚ç‰½‚à‚µ‚È‚¢
+		/// åˆæœŸåŒ–ã•ã‚Œã¦ã„ãªã‹ã£ãŸã‚‰ä½•ã‚‚ã—ãªã„
 		/// </summary>
 		if (!m_isInited)
 		{
@@ -338,11 +338,11 @@ namespace basecross
 	X3DAUDIO_EMITTER SoundEmitter::CreateEmitter(const ex_weak_ptr<SoundItem>& soundItem) const
 	{
 		X3DAUDIO_EMITTER emitter{};
-		emitter.OrientFront = transform->GetForward(); // Z²•ûŒü
-		emitter.OrientTop = transform->GetUp(); // Y²•ûŒü
-		emitter.Position = transform->GetWorldPosition(); // ƒ[ƒ‹ƒhÀ•W
-		emitter.ChannelCount = 1; // ‚¨‚»‚ç‚­‰¹‚ª–Â‚éŒÂ” Šî–{1
-		emitter.CurveDistanceScaler = 1.0f; // ‰¹‚ÌˆÊ’u‚É‚æ‚éŒ¸Š‹Èü‚ÌƒXƒP[ƒ‹
+		emitter.OrientFront = transform->GetForward(); // Zè»¸æ–¹å‘
+		emitter.OrientTop = transform->GetUp(); // Yè»¸æ–¹å‘
+		emitter.Position = transform->GetWorldPosition(); // ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™
+		emitter.ChannelCount = 1; // ãŠãã‚‰ãéŸ³ãŒé³´ã‚‹å€‹æ•° åŸºæœ¬1
+		emitter.CurveDistanceScaler = 1.0f; // éŸ³ã®ä½ç½®ã«ã‚ˆã‚‹æ¸›è¡°æ›²ç·šã®ã‚¹ã‚±ãƒ¼ãƒ«
 
 		return emitter;
 	}

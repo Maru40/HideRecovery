@@ -101,7 +101,14 @@ namespace basecross
 		//ResourceLoadData(L"PlayerWalk", L"AS_PlayerWalk.wav"),
 		//ResourceLoadData(L"PlayerTackle", L"AS_PlayerTackle.wav"),
 		//ResourceLoadData(L"JettPomp", L"AS_JettPomp.wav"),
-		ResourceLoadData(L"Shot_SE", L"AS_1086937_SF_ゲーム＿レーザー音＿ドチューン.wav"),
+		ResourceLoadData(L"Shot_SE", L"ShotSE.wav"),
+
+		ResourceLoadData(L"ReadyArmsSE", L"ReadyArmsSE.wav"),
+		ResourceLoadData(L"PlayerDamageSE", L"PlayerDamageSE.wav"),
+		ResourceLoadData(L"DecisionSE", L"DecisionSE.wav"),
+		ResourceLoadData(L"TitlePlessedSE", L"TitlePlessedSE.wav"),
+		ResourceLoadData(L"GameStartSE", L"GameStartSE.wav"),
+		ResourceLoadData(L"GoalEffectSE", L"GoalEffectSE.wav")
 	};
 
 	const std::vector<LoadStage::ResourceLoadData> LoadStage::m_bgmResourceLoadDatas =
@@ -110,7 +117,9 @@ namespace basecross
 		//ResourceLoadData(L"Select_BGM_01", L"AS_SelectBGM1.wav"),
 		//ResourceLoadData(L"Game_BGM_01", L"AS_GameBGM1.wav"),
 		//ResourceLoadData(L"Title_BGM_01", L"AS_TitleBGM1.wav"),
-		ResourceLoadData(L"GameStageBGM", L"GameStageBGM.wav")
+		ResourceLoadData(L"GameStageBGM", L"GameStageBGM.wav"),
+		ResourceLoadData(L"TitleStageBGM", L"TitleStageBGM.wav"),
+		ResourceLoadData(L"MatchingStageBGM", L"MatchingStageBGM.wav")
 	};
 
 	const std::vector<LoadStage::ModelResourceLoadData> LoadStage::m_modelResourceLoadDatas =
