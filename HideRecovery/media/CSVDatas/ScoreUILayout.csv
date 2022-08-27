@@ -1,5 +1,5 @@
 className,UIName,PosX,PosY,ScaleX,ScaleY,Rot,,
-SimpleSprite,Background,0,50,1.6,1.1,0,Texture,SquareSprite_TX
+SimpleSprite,Background,0,50,1.6,1.1,0,Texture,Frame_TX
 SimpleSprite,KillCountLabel,-48,24,0.8,0.8,0,SpriteData,KillCount
 SimpleSprite,GoalCountLabel,-68,-56,0.8,0.8,0,SpriteData,GoalCount
 Numbers,KillCountNumber,80,26,0.56,0.56,0,2,
