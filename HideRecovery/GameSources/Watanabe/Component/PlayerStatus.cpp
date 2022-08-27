@@ -13,10 +13,13 @@
 
 namespace basecross {
 	PlayerStatus::PlayerStatus(const shared_ptr<GameObject>& owner)
-		:Component(owner), m_status(10), m_team(Team(0))
+		:Component(owner), m_status(10), m_team(Team(0)),
+		m_damageSoundClip(L"PlayerDamageSE", false, 0.75f)
 	{}
 
-	void PlayerStatus::OnCreate() {
+	void PlayerStatus::OnLateStart()
+	{
+		m_soundEmitter = GetGameObject()->GetComponent<SoundEmitter>();
 	}
 
 	void PlayerStatus::OnUpdate() {
@@ -38,6 +41,9 @@ namespace basecross {
 
 			m_status.hp = 0;
 		}
+
+		auto soundEmitter = m_soundEmitter.lock();
+		soundEmitter->PlaySoundClip(m_damageSoundClip);
 
 		for (auto& damagedFunc : m_damagedFuncs)
 		{

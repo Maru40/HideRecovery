@@ -43,11 +43,14 @@ namespace basecross {
 		Team m_team;
 
 		std::vector<DamageFuncType> m_damagedFuncs;
+		std::weak_ptr<SoundEmitter> m_soundEmitter;
+
+		SoundClip m_damageSoundClip;
 
 	public:
 		PlayerStatus(const shared_ptr<GameObject>& owner);
 
-		void OnCreate()override;
+		void OnLateStart()override;
 		void OnUpdate()override;
 		void OnDraw()override {}
 
