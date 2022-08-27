@@ -34,12 +34,7 @@ namespace basecross
 
 		if (m_startOkPlayerNumbers.size() >= Online::OnlineManager::GetCurrentlyJoinedRoom().getPlayerCount() - 1)
 		{
-			m_isGameStartable = true;
-
-			for (auto& m_gameStartCountFuncs : m_gameStartCountFuncs)
-			{
-				m_gameStartCountFuncs();
-			}
+			GameCountStart();
 
 			Online::OnlineManager::RaiseEvent(false, nullptr, 0, GAMETIMER_START_EVENT_CODE);
 
@@ -49,9 +44,23 @@ namespace basecross
 		Online::OnlineManager::RaiseEvent(false, nullptr, 0, GAMETIMER_START_CHECK_EVENT_CODE);
 	}
 
+	void OnlineGameTimer::GameCountStart()
+	{
+		m_isGameStartable = true;
+
+		for (auto& m_gameStartCountFuncs : m_gameStartCountFuncs)
+		{
+			m_gameStartCountFuncs();
+		}
+	}
+
 	void OnlineGameTimer::OnCreate()
 	{
 		m_isStartable = true;
+	}
+
+	void OnlineGameTimer::OnLateStart()
+	{
 	}
 
 	void OnlineGameTimer::OnUpdate()
@@ -97,12 +106,7 @@ namespace basecross
 
 		if (eventCode == GAMETIMER_START_EVENT_CODE)
 		{
-			m_isGameStartable = true;
-
-			for (auto& gameStartCountFunc : m_gameStartCountFuncs)
-			{
-				gameStartCountFunc();
-			}
+			GameCountStart();
 
 			return;
 		}
