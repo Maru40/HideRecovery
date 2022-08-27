@@ -82,6 +82,12 @@ namespace basecross
 		//RampTex
 		ResourceLoadData(L"Ramp_Rock_TX", L"RampTex_Rock.png"),
 
+		// コンテナ用テクスチャ
+		ResourceLoadData(L"RedContianerTx", L"Contianer/RedContianerTx.png"),
+		ResourceLoadData(L"GreenContianerTx", L"Contianer/GreenContianerTx.png"),
+		ResourceLoadData(L"BlueContianerTx", L"Contianer/BlueContianerTx.png"),
+		ResourceLoadData(L"YellowContianerTx", L"Contianer/YellowContianerTx.png"),
+
 		//デバッグテクスチャ
 		ResourceLoadData(L"Number_TX", L"Number.png"),
 		ResourceLoadData(L"NumberWhite_TX", L"Number_White.png"),
