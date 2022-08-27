@@ -15,12 +15,16 @@ namespace basecross
 
 	private:
 
+		static constexpr int FINISH_COUNT_ELAPSED_TIME = 295;
+
 		bool m_isStartable = false;
 		bool m_isGameStartable = false;
 		bool m_isTimerUpdate = false;
 		bool m_isBeforeTimeUp = false;
+		bool m_isBeforeFinishCount = false;
 
 		float m_timeCount = 0.0f;
+		int m_count = 0;
 
 		float m_startCheckSpan;
 
@@ -28,6 +32,7 @@ namespace basecross
 
 		std::vector<std::function<void()>> m_gameStartCountFuncs;
 
+		std::vector<std::function<void()>> m_gameFinishCountEventFuncs;
 		std::vector<std::function<void()>> m_gameFinishEventFuncs;
 
 		bool IsStartable() const;
@@ -35,6 +40,8 @@ namespace basecross
 		void StartCheck();
 
 		void GameCountStart();
+
+		void TimeSkipToFinish();
 
 	public:
 		OnlineGameTimer(const std::shared_ptr<GameObject>& owner);
@@ -50,6 +57,8 @@ namespace basecross
 		void OnLeaveRoomEventAction(int playerNumber, bool isInactive) override;
 
 		void AddGameStartCountFunc(const std::function<void()>& gameStartCountFunc) { m_gameStartCountFuncs.push_back(gameStartCountFunc); }
+
+		void AddGameFinishCountEventFunc(const std::function<void()>& gameFinishCountEventFunc) { m_gameFinishCountEventFuncs.push_back(gameFinishCountEventFunc); }
 
 		void AddGameFinishEventFunc(const std::function<void()>& gameFinishEventFunc) { m_gameFinishEventFuncs.push_back(gameFinishEventFunc); }
 

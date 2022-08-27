@@ -62,6 +62,7 @@
 #include "Itabashi/OnlineGameTimer.h"
 #include "Watanabe/UI/GameStartUI.h"
 #include "Watanabe/Manager/TimeManager.h"
+#include "Itabashi/MainStageTransitioner.h"
 
 using namespace basecross::Enemy;
 
@@ -101,6 +102,7 @@ namespace basecross {
 			auto tester = onlineRoom->GetComponent<Online::OnlineTester>();
 			auto onlineGameTimer = onlineRoom->AddComponent<OnlineGameTimer>();
 			onlineRoom->AddComponent<GamePlayerManager>();
+			onlineRoom->AddComponent<Online::MainStageTransitioner>();
 
 			auto gameStartUI = AddGameObject<GameStartUI>();
 			std::weak_ptr<GameStartUI> weakgameStartUI = gameStartUI;
@@ -109,6 +111,11 @@ namespace basecross {
 			gameStartUI->AddTimeUpEventFunc([]() {SimpleSoundManager::OnePlaySE(L"GameStartSE", 0.25f); });
 			std::weak_ptr<OnlineGameTimer> weakOnlineGameTimer = onlineGameTimer;
 			gameStartUI->AddTimeUpEventFunc([weakOnlineGameTimer]() {weakOnlineGameTimer.lock()->GameTimerStart(); });
+
+			auto gameFinishUI = AddGameObject<GameFinishUI>();
+			std::weak_ptr<GameFinishUI> weakGameFinishUI = gameFinishUI;
+			onlineGameTimer->AddGameFinishCountEventFunc([weakGameFinishUI]() {weakGameFinishUI.lock()->Start(); });
+			onlineGameTimer->AddGameFinishEventFunc([]() { SimpleSoundManager::OnePlaySE(L"GameStartSE", 0.25f); });
 
 			//ステージの設定
 			auto scene = App::GetApp()->GetScene<Scene>();

@@ -1048,6 +1048,9 @@
     <Filter Include="Watanabe\UI\ScoreUI">
       <UniqueIdentifier>{2001fb82-cb47-46d1-aa74-237983ed774a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Itabashi\Component\MainStageTransitioner">
+      <UniqueIdentifier>{c192c26c-6dc4-4d27-98b3-cda6e718a55f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1956,6 +1959,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\ScoreUI.h">
       <Filter>Watanabe\UI\ScoreUI</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MainStageTransitioner.h">
+      <Filter>Itabashi\Component\MainStageTransitioner</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2761,6 +2767,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\ScoreUI.cpp">
       <Filter>Watanabe\UI\ScoreUI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\MainStageTransitioner.cpp">
+      <Filter>Itabashi\Component\MainStageTransitioner</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
