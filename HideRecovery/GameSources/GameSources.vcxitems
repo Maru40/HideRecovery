@@ -271,6 +271,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Effekseer\EfkInterface.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Interface\I_Performable.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Manager\PointManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Manager\ScoreManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Manager\SpriteDataManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Manager\TimeManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\AdvBaseDraw.h" />
@@ -546,6 +547,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Effekseer\EfkEffectResource.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Effekseer\EfkInterface.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Manager\PointManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Manager\ScoreManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Manager\SpriteDataManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Manager\TimeManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\AdvBaseDraw.cpp" />
