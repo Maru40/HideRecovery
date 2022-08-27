@@ -12,6 +12,13 @@ namespace basecross
 
 	}
 
+	void MatchStageTransitioner::GoToMainStage()
+	{
+		SimpleSoundManager::StopBGM();
+		SimpleSoundManager::OnePlaySE(L"DecisionSE", 0.5f);
+		PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToMainStage");
+	}
+
 	void MatchStageTransitioner::OnCreate()
 	{
 		m_onlineMatching = GetGameObject()->GetComponent<Online::OnlineMatching>(false);
@@ -36,7 +43,7 @@ namespace basecross
 		if (PlayerInputer::IsDecision() && Online::OnlineManager::GetLocalPlayer().getIsMasterClient() && onlineMatching->GetPlayerCount() > 0)
 		{
 			Online::OnlineManager::GetCurrentlyJoinedRoom().setIsOpen(false);
-			PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToMainStage");
+			GoToMainStage();
 			Online::OnlineManager::RaiseEvent(false, nullptr, 0, TO_MAINSTAGE_EVENT_CODE);
 			return;
 		}
@@ -46,7 +53,7 @@ namespace basecross
 	{
 		if (eventCode == TO_MAINSTAGE_EVENT_CODE)
 		{
-			PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToMainStage");
+			GoToMainStage();
 			return;
 		}
 	}
