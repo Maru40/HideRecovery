@@ -67,6 +67,8 @@ namespace basecross {
 
 	bool FieldMap::GetMapDraw() const { return GetMapTexture()->GetDrawActive(); }
 
+	bool FieldMap::IsMapDraw() const { return GetMapDraw(); }
+
 	std::shared_ptr<SpriteObject> FieldMap::GetMapTexture() const { return m_mapTexture.lock(); }
 
 	std::shared_ptr<MapCursor> FieldMap::GetMapCursor() const { return m_cursor.lock(); }

@@ -60,6 +60,8 @@ namespace basecross {
 
 		bool GetMapDraw() const;
 
+		bool IsMapDraw() const;
+
 		std::shared_ptr<SpriteObject> GetMapTexture() const;
 
 		std::shared_ptr<MapCursor> GetMapCursor() const;
