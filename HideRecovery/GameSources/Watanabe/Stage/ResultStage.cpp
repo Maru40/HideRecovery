@@ -8,6 +8,7 @@
 
 #include "../Manager/PointManager.h"
 #include "../Manager/TimeManager.h"
+#include "Itabashi/OnlineManager.h"
 
 namespace basecross {
 	void ResultStage::CreateViewLight() {
@@ -52,6 +53,8 @@ namespace basecross {
 		// 1ゲーム終了したのでインスタンスを破棄（リセット）
 		PointManager::DeleteInstance();
 		TimeManager::DeleteInstance();
+
+		Online::OnlineManager::Disconnect();
 	}
 
 	void ResultStage::OnUpdate() {
