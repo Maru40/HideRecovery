@@ -24,3 +24,4 @@ CreateRoom,Message_TX,0,940,1024,120
 JoinRoom,Message_TX,0,1060,1024,120
 KillCount,ScoreLabel_TX,0,0,256,64
 GoalCount,ScoreLabel_TX,0,64,310,64
+Player,Team_TX,0,495,600,205
