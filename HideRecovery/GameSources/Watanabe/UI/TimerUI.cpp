@@ -22,6 +22,6 @@ namespace basecross {
 	}
 	void TimerUI::OnUpdate() {
 		float time = TimeManager::GetInstance()->GetTimer().GetLeftTime();
-		m_numbers->SetNumber((int)floorf(time));
+		m_numbers->SetNumber((int)std::ceilf(time));
 	}
 }
