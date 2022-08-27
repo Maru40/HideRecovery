@@ -84,7 +84,8 @@ namespace basecross {
 		PlayerAnimationState::State baseStates[] = {
 			PlayerAnimationState::State::PutItem_Floor,
 			PlayerAnimationState::State::PutItem_HideObject,
-			PlayerAnimationState::State::GunEnd2
+			PlayerAnimationState::State::GunEnd2,
+			PlayerAnimationState::State::EndTeleport,
 		};
 
 		for (auto& baseState : baseStates) {
@@ -162,6 +163,18 @@ namespace basecross {
 
 			for (const auto& state : states) {
 				m_transitionDatasMap[state].push_back(TransitionData(isTransition, PlayerAnimationState::State::Dash));
+			}
+		}
+
+		//Teleportからの遷移
+		{
+			wstring states[] = {
+				PlayerAnimationState::PlayerAnimationState2wstring(PlayerAnimationState::State::StartTeleport),
+			};
+			auto isTransition = [&]() { return IsTargetAnimationEnd(); };
+
+			for (const auto& state : states) {
+				m_transitionDatasMap[state].push_back(TransitionData(isTransition, PlayerAnimationState::State::ExcuteTeleport));
 			}
 		}
 	}
