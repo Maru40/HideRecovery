@@ -57,6 +57,16 @@ namespace basecross
 		}
 	}
 
+	void OnlineGameTimer::TimeSkipToFinish()
+	{
+		auto& timeManager = TimeManager::GetInstance();
+
+		while (timeManager->GetTimer().GetElaspedTime() < FINISH_COUNT_ELAPSED_TIME)
+		{
+			timeManager->UpdateTime();
+		}
+	}
+
 	void OnlineGameTimer::OnCreate()
 	{
 		m_isStartable = true;
@@ -89,6 +99,52 @@ namespace basecross
 		}
 
 		TimeManager::GetInstance()->UpdateTime();
+
+		// デバッグ用
+		if (App::GetApp()->GetMyInputDevice()->GetKeyBoard().IsInputDown(itbs::Input::KeyCode::X))
+		{
+			TimeSkipToFinish();
+		}
+
+		auto timeCounter = TimeManager::GetInstance()->GetTimer();
+
+		bool isFinishCount = timeCounter.GetElaspedTime() >= FINISH_COUNT_ELAPSED_TIME;
+		bool isTimeUp = timeCounter.IsTimeUp();
+
+		if (!m_isBeforeFinishCount && isFinishCount)
+		{
+			m_timeCount = 0.0f;
+			m_count = 1;
+			SimpleSoundManager::OnePlaySE(L"StartCountSE", 0.5f);
+
+			for (auto& finishCountEventFunc : m_gameFinishCountEventFuncs)
+			{
+				finishCountEventFunc();
+			}
+		}
+
+		if (isFinishCount)
+		{
+			m_timeCount += App::GetApp()->GetElapsedTime();
+			
+			if (m_timeCount >= 1.0f && m_count < 5)
+			{
+				m_timeCount -= 1.0f;
+				SimpleSoundManager::OnePlaySE(L"StartCountSE", 0.5f);
+				++m_count;
+			}
+		}
+
+		if (!m_isBeforeTimeUp && isTimeUp)
+		{
+			for (auto& finishEventFunc : m_gameFinishEventFuncs)
+			{
+				finishEventFunc();
+			}
+		}
+
+		m_isBeforeFinishCount = isFinishCount;
+		m_isBeforeTimeUp = isTimeUp;
 	}
 
 	void OnlineGameTimer::OnCustomEventAction(int playerNumber, std::uint8_t eventCode, const std::uint8_t* bytes)
