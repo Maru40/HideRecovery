@@ -112,6 +112,8 @@ namespace basecross {
 		uiBuilder->Register<PointUI>(L"PointUI");
 		uiBuilder->Register<SimpleSprite>(L"SimpleSprite");
 		uiBuilder->Register<SplashMessageUI>(L"SplashMessageUI");
+		uiBuilder->Register<ScoreUI>(L"ScoreUI");
+		uiBuilder->Register<WinOrLoseUI>(L"WinOrLoseUI");
 		auto dir = App::GetApp()->GetDataDirWString();
 		auto path = dir + L"MapDatas/";
 		uiBuilder->Build(GetThis<Stage>(), path + fileName);

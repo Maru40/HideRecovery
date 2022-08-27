@@ -109,28 +109,28 @@ namespace basecross {
 			auto number = GetStage()->AddGameObject<NumberSprite>();
 			number->SetParent(GetThis<Numbers>());
 			auto numberRect = number->GetComponent<RectTransform>();
-			numberRect->SetPosition(rectTransform->GetPosition() + offset);
+			numberRect->SetPosition(m_rectTransform->GetPosition() + offset);
 			m_numbers.push_back(number);
 
 			offset += Vec2(m_spriteData.size.x, 0.0f);
 		}
-		m_beforeScale = rectTransform->GetWorldScale();
+		m_beforeScale = m_rectTransform->GetWorldScale();
 	}
 
 	void Numbers::OnUpdate() {
-		Vec2 scale = rectTransform->GetWorldScale();
+		Vec2 scale = m_rectTransform->GetWorldScale();
 		// スケール変更時のみ実行
 		if (scale != m_beforeScale) {
 			float scaleX = scale.x;
 			Vec2 offset(-(m_spriteData.size.x / 2) * (m_numDigits - 1) * scaleX, 0.0f);
 			for (auto number : m_numbers) {
 				auto numberRect = number->GetComponent<RectTransform>();
-				numberRect->SetPosition(rectTransform->GetPosition() + offset);
+				numberRect->SetPosition(m_rectTransform->GetPosition() + offset);
 
 				offset += Vec2(m_spriteData.size.x * scaleX, 0.0f);
 			}
 		}
-		m_beforeScale = rectTransform->GetWorldScale();
+		m_beforeScale = m_rectTransform->GetWorldScale();
 	}
 
 	void Numbers::SetNumber(int num) {

@@ -72,7 +72,8 @@ namespace basecross {
 		/// </summary>
 		/// <param name="stage">所属するステージ</param>
 		/// <param name="fileName">CSVファイル名</param>
-		void Build(const shared_ptr<Stage>& stage, const wstring& fileName);
+		/// <param name="parent">親になるオブジェクト</param>
+		void Build(const shared_ptr<Stage>& stage, const wstring& fileName, const shared_ptr<GameObject>& parent = nullptr);
 
 		/// <summary>
 		/// 生成したUIオブジェクトを取得する
@@ -107,7 +108,20 @@ namespace basecross {
 					}
 				}
 			}
+			else if (exceptionActive) {
+				throw BaseException(
+					L"オブジェクトが見つかりませんでした",
+					L"uiName : " + uiName,
+					L"UIObjectCSVBuilder::GetUIObject()"
+				);
+			}
 			return nullptr;
 		}
+
+		/// <summary>
+		/// 生成したすべてのオブジェクトを取得
+		/// </summary>
+		/// <returns></returns>
+		vector<shared_ptr<UIObjectBase>> GetUIObjects();
 	};
 }

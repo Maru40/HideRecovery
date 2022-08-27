@@ -30,7 +30,7 @@ namespace basecross {
 		uiBuilder->Register<Numbers>(L"Numbers");
 		auto dir = App::GetApp()->GetDataDirWString();
 		auto path = dir + L"CSVDatas/";
-		uiBuilder->Build(GetStage(), path + L"ScoreUILayout.csv");
+		uiBuilder->Build(GetStage(), path + L"ScoreUILayout.csv", GetThis<ScoreUI>());
 
 		// データの適用
 		auto playerNumberUI = uiBuilder->GetUIObject<Numbers>(L"PlayerNumber");
