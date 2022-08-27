@@ -7,6 +7,7 @@
 #include "PlayerInputer.h"
 #include "../UI/UIObjects.h"
 #include "../Manager/PointManager.h"
+#include "../Manager/ScoreManager.h"
 #include "../BoardPoly/HPGaugeBP.h"
 
 namespace basecross {
@@ -36,16 +37,13 @@ namespace basecross {
 		uiBuilder.Register<SimpleSprite>(L"SimpleSprite");
 		uiBuilder.Register<WinOrLoseUI>(L"WinOrLoseUI");
 		uiBuilder.Register<SplashMessageUI>(L"SplashMessageUI");
+		uiBuilder.Register<Numbers>(L"Numbers");
 		auto dir = App::GetApp()->GetDataDirWString();
 		auto path = dir + L"MapDatas/";
-		uiBuilder.Build(GetThis<Stage>(), path + L"GameUILayout.csv");
+		uiBuilder.Build(GetThis<Stage>(), path + L"TestUILayout.csv");
 
-		//auto ball = AddGameObject<GameObject>();
-		//auto drawComp = ball->AddComponent<PNTBoneModelDraw>();
-		//drawComp->SetMultiMeshResource(L"Ball_Model");
-
-		//m_sprite = AddGameObject<SplashMessageUI>();
-		AddGameObject<NumberSprite>()->SetValue(9);
+		ScoreManager::GetInstance()->AddKillCount(0);
+		//AddGameObject<ScoreUI>(0);
 	}
 	void MatchingUILayoutStage::OnUpdate() {
 		const auto& inputDevice = App::GetApp()->GetMyInputDevice();
