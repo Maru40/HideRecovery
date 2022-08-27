@@ -38,6 +38,8 @@ namespace basecross {
 		void SetTarget(const std::shared_ptr<GameObject>& target) { m_target = target; }
 
 		std::shared_ptr<GameObject> GetTarget() const noexcept { return m_target.lock(); }
+
+		Vec3 GetCursorFiledPosition();
 	};
 	
 }
