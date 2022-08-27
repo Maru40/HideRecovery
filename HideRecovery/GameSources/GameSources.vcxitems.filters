@@ -1045,6 +1045,9 @@
     <Filter Include="Watanabe\Manager\ScoreManager">
       <UniqueIdentifier>{c5983f7f-caf1-4588-8a4a-23e1b709f558}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\UI\ScoreUI">
+      <UniqueIdentifier>{2001fb82-cb47-46d1-aa74-237983ed774a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1950,6 +1953,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Manager\ScoreManager.h">
       <Filter>Watanabe\Manager\ScoreManager</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\ScoreUI.h">
+      <Filter>Watanabe\UI\ScoreUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2752,6 +2758,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Manager\ScoreManager.cpp">
       <Filter>Watanabe\Manager\ScoreManager</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\ScoreUI.cpp">
+      <Filter>Watanabe\UI\ScoreUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
