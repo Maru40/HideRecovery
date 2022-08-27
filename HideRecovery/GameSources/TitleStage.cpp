@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "TitleStage.h"
 #include "PlayerInputer.h"
 #include "Scene.h"
@@ -11,14 +11,14 @@ namespace basecross {
 		const Vec3 eye(20.0f, 20.0f, -20.0f);
 		const Vec3 at(5.0f);
 		auto PtrView = CreateView<SingleView>();
-		//ƒrƒ…[‚ÌƒJƒƒ‰‚Ìİ’è
+		//ãƒ“ãƒ¥ãƒ¼ã®ã‚«ãƒ¡ãƒ©ã®è¨­å®š
 		auto PtrCamera = ObjectFactory::Create<Camera>();
 		PtrView->SetCamera(PtrCamera);
 		PtrCamera->SetEye(eye);
 		PtrCamera->SetAt(at);
-		//ƒ}ƒ‹ƒ`ƒ‰ƒCƒg‚Ìì¬
+		//ãƒãƒ«ãƒãƒ©ã‚¤ãƒˆã®ä½œæˆ
 		auto PtrMultiLight = CreateLight<MultiLight>();
-		//ƒfƒtƒHƒ‹ƒg‚Ìƒ‰ƒCƒeƒBƒ“ƒO‚ğw’è
+		//ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®ãƒ©ã‚¤ãƒ†ã‚£ãƒ³ã‚°ã‚’æŒ‡å®š
 		PtrMultiLight->SetDefaultLighting();
 	}
 
@@ -35,7 +35,7 @@ namespace basecross {
 		auto path = dir + L"MapDatas/";
 		uiBuilder.Build(GetThis<Stage>(), path + L"TitleUILayout.csv");
 
-		// GetComponent‚Ånullptr‚É‚È‚é‚½‚ßƒRƒƒ“ƒgƒAƒEƒg
+		// GetComponentã§nullptrã«ãªã‚‹ãŸã‚ã‚³ãƒ¡ãƒ³ãƒˆã‚¢ã‚¦ãƒˆ
 		//auto titleLogo = uiBuilder.GetUIObject<SimpleSprite>(L"TitleLogo");
 		//auto drawComp = titleLogo->GetComponent<PCTSpriteDraw>();
 		//if (drawComp) {
@@ -46,12 +46,15 @@ namespace basecross {
 		//if (drawComp) {
 		//	drawComp->SetDiffuse(Col4(0, 0, 0, 1));
 		//}
+
+		SimpleSoundManager::ChangeBGM(L"TitleStageBGM", 0.1f);
 	}
 	void TitleStage::OnUpdate() {
-		// ƒ}ƒbƒ`ƒ“ƒO‰æ–Ê‚Ö‚Ì‘JˆÚˆ—
+		// ãƒãƒƒãƒãƒ³ã‚°ç”»é¢ã¸ã®é·ç§»å‡¦ç†
 		const auto& inputDevice = App::GetApp()->GetMyInputDevice();
 		const auto& pad = inputDevice->GetXInputGamePad();
 		if (pad.IsInputDown(XInputCode::A)) {
+			SimpleSoundManager::OnePlaySE(L"TitlePlessedSE", 0.25f);
 			PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToMatchingStage");
 		}
 	}
