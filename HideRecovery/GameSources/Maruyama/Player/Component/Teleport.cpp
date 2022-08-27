@@ -115,7 +115,10 @@ namespace basecross {
 	}
 
 	void Teleport::OpenMap() {
-		GetFieldMap()->SetMapDraw(true);
+		auto fieldMap = GetFieldMap();
+
+		fieldMap->GetMapCursor()->SetTarget(GetGameObject());
+		fieldMap->SetMapDraw(true);
 	}
 
 	//--------------------------------------------------------------------------------------

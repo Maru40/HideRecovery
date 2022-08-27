@@ -46,16 +46,19 @@ namespace basecross {
 	}
 
 	void FieldMap::SettingDraw() {
+		//マップテクスチャの生成
 		auto builder = Builder::BuilderVertexPCT(m_builderParam);
-
 		auto mapTextrue = GetStage()->AddGameObject<SpriteObject>(m_builderParam);
-
 		m_mapTexture = mapTextrue;
 
-		//カーソル作成
+		//カーソル生成
 		auto cursor = GetStage()->AddGameObject<GameObject>()->AddComponent<MapCursor>();
 		m_cursor = cursor;
 	}
+
+	//--------------------------------------------------------------------------------------
+	/// アクセッサ
+	//--------------------------------------------------------------------------------------
 
 	void FieldMap::SetMapDraw(const bool isDraw) {
 		GetMapTexture()->SetDrawActive(isDraw);
@@ -64,9 +67,7 @@ namespace basecross {
 
 	bool FieldMap::GetMapDraw() const { return GetMapTexture()->GetDrawActive(); }
 
-	std::shared_ptr<SpriteObject> FieldMap::GetMapTexture() const {
-		return m_mapTexture.lock();
-	}
+	std::shared_ptr<SpriteObject> FieldMap::GetMapTexture() const { return m_mapTexture.lock(); }
 
 	std::shared_ptr<MapCursor> FieldMap::GetMapCursor() const { return m_cursor.lock(); }
 
