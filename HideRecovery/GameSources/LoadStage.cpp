@@ -279,6 +279,10 @@ namespace basecross
 		std::wstring dir = app->GetDataDirWString() + L"Effects/";
 		EfkEffectResource::RegisterEffectResource(L"TestEffect", dir + L"TestEffect.efk");
 		EfkEffectResource::RegisterEffectResource(L"Fireworks", dir + L"Fireworks.efk");
+		EfkEffectResource::RegisterEffectResource(L"Confetti", dir + L"Confetti.efk");
+		EfkEffectResource::RegisterEffectResource(L"Respawn", dir + L"Respawn.efk");
+		EfkEffectResource::RegisterEffectResource(L"Smoke", dir + L"Smoke.efk");
+		EfkEffectResource::RegisterEffectResource(L"Hit", dir + L"Hit.efk");
 	}
 
 	void LoadStage::OnCreate()
