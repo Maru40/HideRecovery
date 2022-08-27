@@ -548,17 +548,20 @@ namespace Online
 	}
 
 	void PlayerOnlineController::TeleportInputer() {
-		auto teleport = GetGameObject()->GetComponent<Teleport>(false);
-		if (!teleport) {
-			return;
-		}
-
 		if (PlayerInputer::GetInstance()->IsLeftDown()) {
+			auto teleport = GetGameObject()->GetComponent<Teleport>(false);
+			if (!teleport) {
+				return;
+			}
+
 			teleport->OpenMap();
 		}
 
-		if (PlayerInputer::GetInstance()->IsDesitionDown() && teleport->IsTeleport()) {
-			teleport->StartTeleport();
+		if (PlayerInputer::GetInstance()->IsDesitionDown()) {
+			auto teleport = GetGameObject()->GetComponent<Teleport>(false);
+			if (teleport) {
+				teleport->StartTeleport();
+			}
 		}
 	}
 
