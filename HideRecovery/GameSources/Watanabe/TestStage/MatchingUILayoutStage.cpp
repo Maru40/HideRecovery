@@ -1,6 +1,5 @@
 ﻿#include "stdafx.h"
 #include "MatchingUILayoutStage.h"
-#include "../UI/UIObjects.h"
 #include "../DebugClass/Debug.h"
 #include "InputHelper.h"
 #include "Scene.h"
@@ -9,10 +8,13 @@
 #include "../Manager/PointManager.h"
 #include "../Manager/ScoreManager.h"
 #include "../BoardPoly/HPGaugeBP.h"
+#include "../StageObject/StageObjects.h"
+#include "Maruyama/Player/Component/PlayerSpawnPoint.h"
+#include "VillainPlayerObject.h"
 
 namespace basecross {
 	void MatchingUILayoutStage::CreateViewLight() {
-		const Vec3 eye(5.0f, 5.0f, -5.0f);
+		const Vec3 eye(0.0f, 3.0f, 20.0f);
 		const Vec3 at(0.0f);
 		auto PtrView = CreateView<SingleView>();
 		//ビューのカメラの設定
@@ -29,21 +31,22 @@ namespace basecross {
 		CreateViewLight();
 		AddGameObject<Debug>();
 		Debug::GetInstance()->Log(L"MatchingUILayoutStage");
-
-		UIObjectCSVBuilder uiBuilder;
-		uiBuilder.Register<TimerUI>(L"TimerUI");
-		uiBuilder.Register<HPGaugeUI>(L"HPGaugeUI");
-		uiBuilder.Register<PointUI>(L"PointUI");
-		uiBuilder.Register<SimpleSprite>(L"SimpleSprite");
-		uiBuilder.Register<WinOrLoseUI>(L"WinOrLoseUI");
-		uiBuilder.Register<SplashMessageUI>(L"SplashMessageUI");
-		uiBuilder.Register<Numbers>(L"Numbers");
-		auto dir = App::GetApp()->GetDataDirWString();
-		auto path = dir + L"MapDatas/";
-		//uiBuilder.Build(GetThis<Stage>(), path + L"TestUILayout.csv");
-
 		ScoreManager::GetInstance()->AddKillCount(0);
-		AddGameObject<ScoreUI>(0);
+
+		CreateMap(L"WaitStage.csv");
+		PointManager::GetInstance()->AddPoint(Team::East);
+		auto uiBuilder = CreateUI(L"ResultUILayout.csv");
+		auto WinOrLose = uiBuilder->GetUIObject<WinOrLoseUI>(L"WinOrLose");
+		WinOrLose->SetTeam(Team::East);
+
+		//for (auto gameObject : GetGameObjectVec()) {
+		//	auto playerSpawnPoint = dynamic_pointer_cast<PlayerSpawnPointObject>(gameObject);
+		//	if (playerSpawnPoint)
+		//	{
+		//		auto player = AddGameObject<VillainPlayerObject>();
+		//		player->GetComponent<Transform>()->SetPosition(playerSpawnPoint->GetComponent<Transform>()->GetWorldPosition());
+		//	}
+		//}
 	}
 	void MatchingUILayoutStage::OnUpdate() {
 		const auto& inputDevice = App::GetApp()->GetMyInputDevice();
