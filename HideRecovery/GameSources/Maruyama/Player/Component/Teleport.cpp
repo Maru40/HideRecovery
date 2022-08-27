@@ -63,7 +63,7 @@ namespace basecross {
 
 			//フェード終了イベント
 			auto endEvent = [&,fadeManager, animator]() {
-				animator->ChangePlayerAnimation(PlayerAnimationState::State::Wait);
+				animator->ChangePlayerAnimation(PlayerAnimationState::State::EndTeleport);
 				GetGameObject()->GetComponent<Transform>()->SetPosition(GetTeleportPosition());	//テレポート
 
 				if (fadeManager) {
@@ -80,7 +80,7 @@ namespace basecross {
 
 		//アニメーションイベントの登録
 		animator->AddAnimationEvent(
-			PlayerAnimationState::State::PutItem_Floor,
+			PlayerAnimationState::State::StartTeleport,
 			nullptr,
 			nullptr,
 			exit
@@ -95,7 +95,7 @@ namespace basecross {
 		CloseMap();
 
 		if (auto animator = GetGameObject()->GetComponent<PlayerAnimator>(false)) {
-			animator->ChangePlayerAnimation(PlayerAnimationState::State::PutItem_Floor);	//テレポートアニメーション
+			animator->ChangePlayerAnimation(PlayerAnimationState::State::StartTeleport);	//テレポートアニメーション
 		}
 
 			//エフェクトの再生
