@@ -28,6 +28,7 @@ namespace basecross {
 		Vec2 m_beforeScale;
 	public:
 		Numbers(const shared_ptr<Stage>& stage, int digits);
+		Numbers(const shared_ptr<Stage>& stage, const wstring& line);
 
 		void OnCreate()override;
 		void OnUpdate()override;
