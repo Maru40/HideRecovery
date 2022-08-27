@@ -40,10 +40,10 @@ namespace basecross {
 		uiBuilder.Register<Numbers>(L"Numbers");
 		auto dir = App::GetApp()->GetDataDirWString();
 		auto path = dir + L"MapDatas/";
-		uiBuilder.Build(GetThis<Stage>(), path + L"TestUILayout.csv");
+		//uiBuilder.Build(GetThis<Stage>(), path + L"TestUILayout.csv");
 
 		ScoreManager::GetInstance()->AddKillCount(0);
-		//AddGameObject<ScoreUI>(0);
+		AddGameObject<ScoreUI>(0);
 	}
 	void MatchingUILayoutStage::OnUpdate() {
 		const auto& inputDevice = App::GetApp()->GetMyInputDevice();
