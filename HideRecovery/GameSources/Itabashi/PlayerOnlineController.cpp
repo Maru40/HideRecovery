@@ -17,6 +17,7 @@
 #include <random>
 
 #include "Maruyama/Player/Component/UseWepon.h"
+#include "Maruyama/Player/Component/Teleport.h"
 #include "Watanabe/Component/PlayerAnimator.h"
 
 template<class T>
@@ -546,6 +547,21 @@ namespace Online
 		return distr(eng);
 	}
 
+	void PlayerOnlineController::TeleportInputer() {
+		if (PlayerInputer::GetInstance()->IsLeftDown()) {
+			auto teleport = GetGameObject()->GetComponent<Teleport>(false);
+			if (!teleport) {
+				return;
+			}
+
+			teleport->OpenMap();
+		}
+	}
+
+	void PlayerOnlineController::MapCursorMove() {
+		
+	}
+
 	void PlayerOnlineController::OnLateStart()
 	{
 		auto& owner = GetGameObject();
@@ -593,6 +609,10 @@ namespace Online
 		TryTackle();
 
 		TryAim();
+
+		TeleportInputer();
+
+		MapCursorMove();
 	}
 
 	void PlayerOnlineController::OnCustomEventAction(int playerNumber, std::uint8_t eventCode, const std::uint8_t* bytes)
