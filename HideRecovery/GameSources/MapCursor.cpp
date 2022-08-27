@@ -59,7 +59,7 @@ namespace basecross {
 		auto startPosition = transform->GetPosition();
 		float xRate = startPosition.x / (256.0f);
 		float yRate = startPosition.y / (512.0f);
-		auto position = (Vec3(50.0f * xRate, 1.0f, 100.0f * yRate));
+		auto position = (Vec3(50.0f * xRate, 0.15f, 100.0f * yRate));
 
 		return position;
 	}
