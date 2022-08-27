@@ -1,0 +1,8 @@
+className,UIName,PosX,PosY,ScaleX,ScaleY,Rot,,
+SimpleSprite,Background,0,50,1.6,1.1,0,Texture,Frame_TX
+SimpleSprite,KillCountLabel,-48,24,0.8,0.8,0,SpriteData,KillCount
+SimpleSprite,GoalCountLabel,-68,-56,0.8,0.8,0,SpriteData,GoalCount
+Numbers,KillCountNumber,80,26,0.56,0.56,0,2,
+Numbers,GoalCountNumber,80,-26,0.56,0.56,0,2,
+SimpleSprite,PlayerLabel,-40,120,0.48,0.48,0,SpriteData,Player
+Numbers,PlayerNumber,90,88,0.48,0.48,0,1,

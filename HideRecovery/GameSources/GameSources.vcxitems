@@ -271,6 +271,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Effekseer\EfkInterface.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Interface\I_Performable.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Manager\PointManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Manager\ScoreManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Manager\SpriteDataManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Manager\TimeManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\AdvBaseDraw.h" />
@@ -297,6 +298,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\MessageUI.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\Numbers.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\PointUI.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\ScoreUI.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\SimpleSprite.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\SplashMessageUI.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\TimerUI.h" />
@@ -546,6 +548,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Effekseer\EfkEffectResource.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Effekseer\EfkInterface.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Manager\PointManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Manager\ScoreManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Manager\SpriteDataManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Manager\TimeManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\AdvBaseDraw.cpp" />
@@ -571,6 +574,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\MessageUI.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\Numbers.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\PointUI.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\ScoreUI.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\SimpleSprite.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\SplashMessageUI.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\TimerUI.cpp" />

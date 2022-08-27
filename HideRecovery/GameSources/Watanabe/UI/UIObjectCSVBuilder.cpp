@@ -20,8 +20,7 @@ namespace basecross {
 			return ptr;
 		}
 	}
-
-	void UIObjectCSVBuilder::Build(const shared_ptr<Stage>& stage, const wstring& fileName) {
+	void UIObjectCSVBuilder::Build(const shared_ptr<Stage>& stage, const wstring& fileName, const shared_ptr<GameObject>& parent) {
 		try {
 			// CSVファイル
 			CsvFile gameStageCsv(fileName);
@@ -32,7 +31,10 @@ namespace basecross {
 				//トークン（カラム）の配列
 				vector<wstring> tokens = DataExtracter::DelimitData(v);
 				auto uiObject = CreateFromCSV(tokens[0], stage, v);
-				m_uiObjectMap[tokens[1]] = uiObject;
+				if (uiObject) {
+					m_uiObjectMap[tokens[1]] = uiObject;
+					uiObject->SetParent(parent);
+				}
 			}
 		}
 		catch (...) {
@@ -45,5 +47,13 @@ namespace basecross {
 			return m_uiObjectMap[uiName];
 		}
 		return nullptr;
+	}
+
+	vector<shared_ptr<UIObjectBase>> UIObjectCSVBuilder::GetUIObjects() {
+		vector<shared_ptr<UIObjectBase>> uiObjects;
+		for (auto uiObjectPair : m_uiObjectMap) {
+			uiObjects.push_back(uiObjectPair.second);
+		}
+		return uiObjects;
 	}
 }

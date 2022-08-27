@@ -8,10 +8,10 @@ namespace basecross {
 
 	void UIObjectBase::OnPreCreate() {
 		GameObject::OnPreCreate();
-		rectTransform = AddComponent<RectTransform>();
-		rectTransform->SetPosition(m_rectTransformData.Position);
-		rectTransform->SetScale(m_rectTransformData.Scale);
-		rectTransform->SetRotation(m_rectTransformData.Rotation);
+		m_rectTransform = AddComponent<RectTransform>();
+		m_rectTransform->SetPosition(m_rectTransformData.Position);
+		m_rectTransform->SetScale(m_rectTransformData.Scale);
+		m_rectTransform->SetRotation(m_rectTransformData.Rotation);
 
 		AddTag(m_uiName);
 	}

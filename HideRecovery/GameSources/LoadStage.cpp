@@ -6,6 +6,7 @@
 #include "Watanabe/Effekseer/EfkEffect.h"
 #include "Watanabe/Utility/CSVLoad.h"
 #include "Watanabe/DebugClass/Debug.h"
+#include "Watanabe/UI/SimpleSprite.h"
 
 namespace basecross
 {
@@ -38,6 +39,8 @@ namespace basecross
 		ResourceLoadData(L"HPGauge_TX",L"HPGauge_TX.png"),
 		ResourceLoadData(L"TitleLogo_TX",L"TitleLogo_TX.png"),
 		ResourceLoadData(L"WinOrLose_TX",L"WinOrLose_TX.png"),
+		ResourceLoadData(L"ScoreLabel_TX",L"ScoreLabel_TX.png"),
+		ResourceLoadData(L"Frame_TX",L"Frame_TX.png"),
 
 		ResourceLoadData(L"FiledMap_TX", L"FiledMap_TX.png"),
 
@@ -288,6 +291,14 @@ namespace basecross
 		AddGameObject<Debug>();
 		Debug::GetInstance()->Log(L"LoadStage");
 
+		// ローディングテクスチャの読み込み
+		const auto& app = App::GetApp();
+		wstring mediaDir = app->GetDataDirWString();
+		wstring dir = mediaDir + L"Textures/";
+		app->RegisterTexture(L"Loading_TX", dir + L"Loading_TX.png");
+		// 「Now Loading...」の表示（要調整）
+		//AddGameObject<SimpleSprite>(SimpleSprite::Type::Texture, L"Loading_TX");
+
 		m_stageBackColor = App::GetApp()->GetScene<Scene>()->GetClearColor();
 
 		App::GetApp()->GetScene<Scene>()->SetClearColor(Col4(0, 0, 0, 1));
@@ -299,9 +310,7 @@ namespace basecross
 		loadThread.detach();
 
 		// CSVファイルの読み込み（できれば関数で分けたい）
-		wstring mediaDir;
-		mediaDir = App::GetApp()->GetDataDirWString();
-		wstring dir = mediaDir + L"Models/";
+		dir = mediaDir + L"Models/";
 		CSVLoad::GetInstance()->RegisterFile(L"PlayerAnimation", dir + L"Player/PlayerAnimation.csv");
 		CSVLoad::GetInstance()->RegisterFile(L"BallAnimation", dir + L"Ball/BallAnimation.csv");
 		dir = mediaDir + L"CSVDatas/";
