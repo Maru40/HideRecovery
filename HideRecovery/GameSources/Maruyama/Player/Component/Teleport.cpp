@@ -21,6 +21,7 @@
 #include "Watanabe/DebugClass/Debug.h"
 #include "PlayerInputer.h"
 #include "SpriteObject.h"
+#include "MapCursor.h"
 
 namespace basecross {
 
@@ -41,6 +42,7 @@ namespace basecross {
 	void Teleport::OnUpdate() {
 		//Debug::GetInstance()->Log(transform->GetPosition());
 		if (PlayerInputer::GetInstance()->IsRightDown()) {
+			return;
 			auto param = Builder::VertexPCTParametor(Vec3(100.0f, 100.0f, 0.0f), Vec2(256.0f, 256.0f), L"Point_TX");
 			auto sprite = GetStage()->AddGameObject<SpriteObject>(param);
 			auto spriteTrans = sprite->GetComponent<Transform>();
@@ -53,13 +55,16 @@ namespace basecross {
 		}
 
 		if (PlayerInputer::GetInstance()->IsLeftDown()) {
-			//GetFieldMap()->SetMapDraw(GetF);
+			bool isDraw = !GetFieldMap()->GetMapDraw();
+			GetFieldMap()->SetMapDraw(true);
+
 		}
 	}
 
 	void Teleport::SettingFieldMap() {
 		auto fieldMap = FieldMap::GetInstance();
 		fieldMap->SetMapDraw(false);
+		fieldMap->GetMapCursor()->SetTarget(GetGameObject());
 
 		m_fieldMap = fieldMap;
 	}
