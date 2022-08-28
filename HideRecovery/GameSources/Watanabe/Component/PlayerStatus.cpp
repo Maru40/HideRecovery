@@ -41,15 +41,6 @@ namespace basecross {
 				deader->StartDead();
 			}
 
-			//アイテムを落とす。
-			if (auto itemBag = GetGameObject()->GetComponent<ItemBag>(false)) {
-				auto hideItem = itemBag->GetHideItem();
-				if (hideItem) {
-					hideItem->GetGameObject()->GetComponent<Transform>()->SetPosition(transform->GetPosition());
-					hideItem->GetGameObject()->SetActive(true);
-				}
-			}
-
 			m_status.hp = 0;
 		}
 
