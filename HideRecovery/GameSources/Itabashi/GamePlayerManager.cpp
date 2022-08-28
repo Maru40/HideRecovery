@@ -9,6 +9,7 @@
 #include "Maruyama/Player/Component/OwnArea.h"
 #include "Maruyama/Player/Component/Respawner.h"
 #include "Maruyama/Interface/I_TeamMember.h"
+#include "Maruyama/Player/Component/Teleport.h"
 #include "SpringArmComponent.h"
 #include "CameraHelper.h"
 #include "LookAtCameraManager.h"
@@ -77,6 +78,8 @@ namespace basecross
 		tpsCamera->AddComponent<LookAtCameraManager>(playerObject, LookAtCameraManager::Parametor());
 
 		onlineController->SetCamera(GetStage()->GetView()->GetTargetCamera());
+
+		playerObject->AddComponent<Teleport>();	//テレポートの生成
 
 		auto useWeapon = playerObject->GetComponent<UseWepon>();
 		useWeapon->SetIsUseCamera(true);
