@@ -1042,6 +1042,9 @@
     <Filter Include="Watanabe\StageObject\SkyBox">
       <UniqueIdentifier>{87e2f388-252b-4ee5-8c36-d4f13014cb88}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Camera\CameraForwardController">
+      <UniqueIdentifier>{bf0fd107-9794-46f9-8d17-12f47c070c05}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1944,6 +1947,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\SkyBox.h">
       <Filter>Watanabe\StageObject\SkyBox</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Camera\Component\CameraForwardController.h">
+      <Filter>Maruyama\Camera\CameraForwardController</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2746,6 +2752,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)MapCursor.cpp">
       <Filter>Maruyama\Player\Component\UseOwnArea\Map\Cursor</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Camera\Component\CameraForwardController.cpp">
+      <Filter>Maruyama\Camera\CameraForwardController</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
