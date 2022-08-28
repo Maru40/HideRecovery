@@ -1051,6 +1051,9 @@
     <Filter Include="Itabashi\Component\MainStageTransitioner">
       <UniqueIdentifier>{c192c26c-6dc4-4d27-98b3-cda6e718a55f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Camera\CameraForwardController">
+      <UniqueIdentifier>{6cf37f95-4c14-42a0-a957-0143e3bc1950}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1962,6 +1965,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MainStageTransitioner.h">
       <Filter>Itabashi\Component\MainStageTransitioner</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Camera\Component\CameraForwardController.h">
+      <Filter>Maruyama\Camera\CameraForwardController</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2770,6 +2776,12 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\MainStageTransitioner.cpp">
       <Filter>Itabashi\Component\MainStageTransitioner</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MapCursor.cpp">
+      <Filter>Maruyama\Player\Component\UseOwnArea\Map\Cursor</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Camera\Component\CameraForwardController.cpp">
+      <Filter>Maruyama\Camera\CameraForwardController</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
