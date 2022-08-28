@@ -43,12 +43,12 @@ namespace basecross {
 
 	void Teleport::OnCreate() {
 		//ƒJƒƒ‰‚Ì¶¬
-		auto cameraObject = GetStage()->AddGameObject<GameObject>();
-		auto camera = cameraObject->AddComponent<VirtualCamera>(11);
-		camera->SetUpdateActive(false);
-		cameraObject->AddComponent<CameraForwardController>(camera);
+		//auto cameraObject = GetStage()->AddGameObject<GameObject>();
+		//auto camera = cameraObject->AddComponent<VirtualCamera>(11);
+		//camera->SetUpdateActive(false);
+		//cameraObject->AddComponent<CameraForwardController>(camera);
 
-		m_camera = camera;
+		//m_camera = camera;
 	}
 
 	void Teleport::OnLateStart() {
