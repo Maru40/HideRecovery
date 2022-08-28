@@ -181,7 +181,6 @@ namespace basecross {
 		auto camera = GetStage()->GetView()->GetTargetCamera();
 		auto baseDirection = camera->GetAt() - camera->GetEye();
 		auto selfTeamMember = GetGameObject()->GetComponent<I_TeamMember>(false);
-		//auto eye = GetGameObject()->GetComponent<EyeSearchRange>(false);
 
 		Vec3 resultVec = baseDirection;
 
@@ -195,8 +194,10 @@ namespace basecross {
 		auto eye = cameraObject->GetComponent<EyeSearchRange>(false);
 		if (!eye) {
 			eye = cameraObject->AddComponent<EyeSearchRange>();
-			constexpr float height = 20.0f;
-			eye->SetEyeHeight(height);
+			constexpr float Height = 20.0f;
+			constexpr float Degree = 40.0f;
+			eye->SetEyeHeight(Height);
+			eye->SetEyeDegree(Degree);
 		}
 
 		//距離管理データ
