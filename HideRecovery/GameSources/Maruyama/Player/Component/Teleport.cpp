@@ -23,6 +23,12 @@
 #include "SpriteObject.h"
 #include "MapCursor.h"
 
+#include "TimeHelper.h"
+#include "GameTimer.h"
+
+#include "CameraHelper.h"
+#include "Maruyama/Camera/Component/CameraForwardController.h"
+
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
@@ -31,8 +37,19 @@ namespace basecross {
 
 	Teleport::Teleport(const std::shared_ptr<GameObject>& objPtr) :
 		Component(objPtr),
-		m_param(Parametor())
+		m_param(Parametor()),
+		m_timer(new GameTimer(0))
 	{}
+
+	void Teleport::OnCreate() {
+		//カメラの生成
+		auto cameraObject = GetStage()->AddGameObject<GameObject>();
+		auto camera = cameraObject->AddComponent<VirtualCamera>(11);
+		camera->SetUpdateActive(false);
+		cameraObject->AddComponent<CameraForwardController>(camera);
+
+		m_camera = camera;
+	}
 
 	void Teleport::OnLateStart() {
 		SettingFieldMap();			//マップテクスチャの設定
@@ -40,7 +57,7 @@ namespace basecross {
 	}
 
 	void Teleport::OnUpdate() {
-
+		m_timer->UpdateTimer();
 	}
 
 	void Teleport::SettingFieldMap() {
@@ -61,20 +78,49 @@ namespace basecross {
 		auto exit = [&, animator]() {
 			auto fadeManager = ScreenFadeManager::GetInstance(GetStage());
 
-			//フェード終了イベント
-			auto endEvent = [&,fadeManager, animator]() {
-				animator->ChangePlayerAnimation(PlayerAnimationState::State::EndTeleport);
-				GetGameObject()->GetComponent<Transform>()->SetPosition(GetTeleportPosition());	//テレポート
+			const bool IsFade = true;
+			if (IsFade) {
+				//フェード終了イベント
+				auto endEvent = [&, fadeManager, animator]() {
+					animator->ChangePlayerAnimation(PlayerAnimationState::State::EndTeleport);
+					GetGameObject()->GetComponent<Transform>()->SetPosition(GetTeleportPosition());	//テレポート
+					
+					if (fadeManager) {
+						fadeManager->FadeStart(FadeType::In);
+					}
+				};
 
+				//フェード開始イベント
 				if (fadeManager) {
-					fadeManager->FadeStart(FadeType::In);
+					fadeManager->FadeStart(FadeType::Out, endEvent);
 				}
-			};
-
-			//フェード開始イベント
-			if (fadeManager) {
-				fadeManager->FadeStart(FadeType::Out, endEvent);
 			}
+			else {
+				//カメラを今のカメラに合わせる。
+				auto tpsCamera = GetStage()->GetView()->GetTargetCamera();
+				auto tpsCameraTrans = tpsCamera->GetCameraObject()->GetComponent<Transform>();
+				auto tpsAt = tpsCamera->GetAt();
+				auto tpsForward = tpsAt - tpsCamera->GetEye();
+
+				auto camera = m_camera.lock();
+				auto cameraTrans = camera->GetGameObject()->GetComponent<Transform>();
+				cameraTrans->SetPosition(tpsCameraTrans->GetPosition());
+				auto forwardController = camera->GetGameObject()->GetComponent<CameraForwardController>(false);
+				if (forwardController) {
+
+				}
+
+				//カメラを移動させる
+				
+
+				//移動しきったら、演出開始
+
+
+				//演出が終わったら操作開始
+
+			}
+
+
 				//エフェクトの再生
 		};
 
@@ -131,7 +177,9 @@ namespace basecross {
 	}
 
 
-
+	std::shared_ptr<VirtualCamera> Teleport::GetTeleportCamera() const {
+		return m_camera.lock();
+	}
 
 
 	//if (PlayerInputer::GetInstance()->IsRightDown()) {
