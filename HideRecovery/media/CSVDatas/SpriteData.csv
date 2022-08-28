@@ -22,6 +22,6 @@ Draw,WinOrLose_TX,0,256,420,128
 10,Numbers_TX,1028,0,172,128
 CreateRoom,Message_TX,0,940,1024,120
 JoinRoom,Message_TX,0,1060,1024,120
-KillCount,ScoreLabel_TX,0,0,256,64
-GoalCount,ScoreLabel_TX,0,64,310,64
+KillCount,ScoreLabel_TX,0,0,76,64
+GoalCount,ScoreLabel_TX,0,64,128,64
 Player,Team_TX,0,495,600,205
