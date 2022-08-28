@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "stdafx.h"
 
 namespace basecross {
@@ -26,6 +26,10 @@ namespace basecross {
 			Dead,
 			GSDead,
 			Goal1,
+			StartTeleport,
+			ExcuteTeleport,
+			EndTeleport,
+
 		};
 
 		wstring static PlayerAnimationState2wstring(const PlayerAnimationState::State& state) {
@@ -73,6 +77,12 @@ namespace basecross {
 				return L"GSDead";
 			case PlayerAnimationState::State::Goal1:
 				return L"Goal1";
+			case PlayerAnimationState::State::StartTeleport:
+				return L"StartTeleport";
+			case PlayerAnimationState::State::ExcuteTeleport:
+				return L"ExcuteTeleport";
+			case PlayerAnimationState::State::EndTeleport:
+				return L"EndTeleport";
 
 			default:
 				break;

@@ -30,7 +30,7 @@ namespace basecross {
 	void FadeSpriteManager::OnCreate() {
 		//FadeSprite‚Ì¶¬
 		if (!m_fadeSprite) {
-			auto param = Builder::VertexPCTParametor(Vec3(1280.0f, 800.0f, 0.0f), Vec2(256.0f, 256.0f), L"SquareSprite_TX");
+			auto param = Builder::VertexPCTParametor(Vec3(1960.0f, 1080.0f, 0.0f), Vec2(256.0f, 256.0f), L"SquareSprite_TX");
 			m_fadeSprite = GetStage()->AddGameObject<SpriteObject>(param);
 			m_fadeSprite->GetComponent<SpriteObject::DrawComp>()->SetDiffuse(Col4(0.0f, 0.0f, 0.0f, 0.0f));
 

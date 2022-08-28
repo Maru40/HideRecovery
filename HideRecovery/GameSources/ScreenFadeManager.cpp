@@ -35,7 +35,7 @@ namespace basecross {
 
 	void ScreenFadeManager::OnCreate() {
 		if (!m_fadeSpriteManager) { //nullptr‚¾‚Á‚½‚ç
-			auto param = Builder::VertexPCTParametor(Vec3(1280.0f, 800.0f, 0.0f), Vec2(256.0f, 256.0f), L"SquareSprite_TX");
+			auto param = Builder::VertexPCTParametor(Vec3(1960.0f, 1080.0f, 0.0f), Vec2(256.0f, 256.0f), L"SquareSprite_TX");
 			auto spriteObject = GetStage()->AddGameObject<SpriteObject>(param);
 			spriteObject->GetComponent<SpriteObject::DrawComp>()->SetDiffuse(Col4(0.0f, 0.0f, 0.0f, 0.0f));
 			m_fadeSpriteManager = spriteObject->AddComponent<FadeSpriteManager>();

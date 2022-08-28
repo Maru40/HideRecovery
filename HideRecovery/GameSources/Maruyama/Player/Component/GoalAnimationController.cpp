@@ -89,9 +89,11 @@ namespace basecross {
 				goal->PlayFireEffects();
 			}
 		};
+
+		constexpr float Time = 0.9f;
 		animator->AddTimeEvent(
 			PlayerAnimationState::State::Goal1,
-			0.9f,
+			Time,
 			timeEvent
 		);
 	}

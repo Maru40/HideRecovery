@@ -1,7 +1,7 @@
 
 /*!
-@file FieldMap.h
-@brief FieldMap‚È‚Ç
+@file MapCursor.h
+@brief MapCursor‚È‚Ç
 ’S“–FŠÛR—TŠì
 */
 
@@ -15,10 +15,31 @@
 
 namespace basecross {
 
+	class SpriteObject;
+
 	class MapCursor : public Component
 	{
+		std::weak_ptr<GameObject> m_target;
+		std::weak_ptr<SpriteObject> m_sprite;
+
 	public:
-		//MapCursor(const std::shared_ptr<GameObject>& objPtr);
+		MapCursor(const std::shared_ptr<GameObject>& objPtr);
+
+		void OnCreate() override;
+		void OnUpdate() override;
+
+		void OnDrawActive() override;
+		void OnDrawFalse() override;
+
+	private:
+		void MoveCursor();
+
+	public:
+		void SetTarget(const std::shared_ptr<GameObject>& target) { m_target = target; }
+
+		std::shared_ptr<GameObject> GetTarget() const noexcept { return m_target.lock(); }
+
+		Vec3 GetCursorFiledPosition();
 	};
 	
 }

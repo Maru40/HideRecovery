@@ -11,6 +11,7 @@
 #include "FieldMap.h"
 
 #include "SpriteObject.h"
+#include "MapCursor.h"
 
 namespace basecross {
 
@@ -45,21 +46,31 @@ namespace basecross {
 	}
 
 	void FieldMap::SettingDraw() {
+		//マップテクスチャの生成
 		auto builder = Builder::BuilderVertexPCT(m_builderParam);
-
 		auto mapTextrue = GetStage()->AddGameObject<SpriteObject>(m_builderParam);
-
 		m_mapTexture = mapTextrue;
+
+		//カーソル生成
+		auto cursor = GetStage()->AddGameObject<GameObject>()->AddComponent<MapCursor>();
+		m_cursor = cursor;
 	}
+
+	//--------------------------------------------------------------------------------------
+	/// アクセッサ
+	//--------------------------------------------------------------------------------------
 
 	void FieldMap::SetMapDraw(const bool isDraw) {
 		GetMapTexture()->SetDrawActive(isDraw);
+		GetMapCursor()->SetDrawActive(isDraw);
 	}
 
 	bool FieldMap::GetMapDraw() const { return GetMapTexture()->GetDrawActive(); }
 
-	std::shared_ptr<SpriteObject> FieldMap::GetMapTexture() const {
-		return m_mapTexture.lock();
-	}
+	bool FieldMap::IsMapDraw() const { return GetMapDraw(); }
+
+	std::shared_ptr<SpriteObject> FieldMap::GetMapTexture() const { return m_mapTexture.lock(); }
+
+	std::shared_ptr<MapCursor> FieldMap::GetMapCursor() const { return m_cursor.lock(); }
 
 }

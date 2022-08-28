@@ -19,6 +19,7 @@ namespace basecross {
 	/// 前方宣言
 	//--------------------------------------------------------------------------------------
 	class SpriteObject;
+	class MapCursor;
 
 	//--------------------------------------------------------------------------------------
 	/// フィールドマップのパラメータ
@@ -43,6 +44,7 @@ namespace basecross {
 		Builder::VertexPCTParametor m_builderParam;		//マップテクスチャ生成パラメータ
 
 		std::weak_ptr<SpriteObject> m_mapTexture;		//マップテクスチャ
+		std::weak_ptr<MapCursor> m_cursor;				//カーソル
 
 	public:
 		FieldMap(const std::shared_ptr<GameObject>& objPtr);
@@ -58,7 +60,11 @@ namespace basecross {
 
 		bool GetMapDraw() const;
 
+		bool IsMapDraw() const;
+
 		std::shared_ptr<SpriteObject> GetMapTexture() const;
+
+		std::shared_ptr<MapCursor> GetMapCursor() const;
 
 		void SetFieldSize(const std::shared_ptr<GameObject>& floor) {
 			auto scale = floor->GetComponent<Transform>()->GetScale();

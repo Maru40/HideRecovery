@@ -137,6 +137,10 @@ namespace Online
 
 		int CreateInstanceId() const;
 
+		void TeleportInputer();
+
+		void MapCursorMove();
+
 	public:
 
 		PlayerOnlineController(const std::shared_ptr<GameObject>& owner);
