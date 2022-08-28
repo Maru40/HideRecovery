@@ -331,6 +331,7 @@ namespace basecross
 		dir = mediaDir + L"Models/";
 		CSVLoad::GetInstance()->RegisterFile(L"PlayerAnimation", dir + L"Player/PlayerAnimation.csv");
 		CSVLoad::GetInstance()->RegisterFile(L"BallAnimation", dir + L"Ball/BallAnimation.csv");
+		CSVLoad::GetInstance()->RegisterFile(L"BoxAnimation", dir + L"Box/BoxAnimation.csv");
 		dir = mediaDir + L"CSVDatas/";
 		CSVLoad::GetInstance()->RegisterFile(L"SpriteData", dir + L"SpriteData.csv");
 	}

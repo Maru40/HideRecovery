@@ -7,7 +7,7 @@ namespace basecross {
 	{}
 
 	void BoxAnimator::OnCreate() {
-		auto data = LoadAnimationData(L"BallAnimation");
+		auto data = LoadAnimationData(L"BoxAnimation");
 		for (auto d : data) {
 			RegisterAnimationClip(d);
 		}

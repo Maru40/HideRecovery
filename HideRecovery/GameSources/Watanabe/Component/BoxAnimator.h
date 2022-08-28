@@ -4,7 +4,8 @@
 #include "BoxAnimationState.h"
 
 namespace basecross {
-	class BoxAnimator :public Animator {
+	class BoxAnimator :public Animator 
+	{
 	public:
 		BoxAnimator(const shared_ptr<GameObject>& owner);
 
