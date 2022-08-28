@@ -283,13 +283,13 @@ namespace basecross
 
 		const auto& app = App::GetApp();
 		std::wstring dir = app->GetDataDirWString() + L"Effects/";
-		EfkEffectResource::RegisterEffectResource(L"TestEffect", dir + L"TestEffect.efk");
 		EfkEffectResource::RegisterEffectResource(L"Fireworks", dir + L"Fireworks.efk");
 		EfkEffectResource::RegisterEffectResource(L"Confetti", dir + L"Confetti.efk");
 		EfkEffectResource::RegisterEffectResource(L"Respawn", dir + L"Respawn.efk");
 		EfkEffectResource::RegisterEffectResource(L"Smoke", dir + L"Smoke.efk");
 		EfkEffectResource::RegisterEffectResource(L"Hit", dir + L"Hit.efk");
-		EfkEffectResource::RegisterEffectResource(L"Bullet", dir + L"Bullet.efk");
+		EfkEffectResource::RegisterEffectResource(L"BlueBullet", dir + L"BlueBullet.efk");
+		EfkEffectResource::RegisterEffectResource(L"RedBullet", dir + L"RedBullet.efk");
 		EfkEffectResource::RegisterEffectResource(L"Tackle", dir + L"Tackle.efk");
 	}
 

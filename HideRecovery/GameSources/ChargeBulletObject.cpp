@@ -32,14 +32,14 @@ namespace basecross {
 		//draw->SetMeshResource(L"DEFAULT_CUBE");
 
 		auto efkComp = AddComponent<EfkComponent>();
-		efkComp->SetEffectResource(L"Bullet", TransformData(Vec3(0, 0, 0), Vec3(0.3f)));
-		efkComp->IsSyncGameObject(L"Bullet", true);
-		efkComp->Play(L"Bullet", true);
+		efkComp->SetEffectResource(L"BlueBullet", TransformData(Vec3(0, 0, 0), Vec3(0.3f)));
+		efkComp->IsSyncGameObject(L"BlueBullet", true);
+		efkComp->Play(L"BlueBullet", true);
 
 		transform->SetScale(Vec3(0.25f));
 	}
 
 	void ChargeBulletObject::OnDestroy() {
-		GetComponent<EfkComponent>()->Stop(L"Bullet");
+		GetComponent<EfkComponent>()->Stop(L"BlueBullet");
 	}
 }
