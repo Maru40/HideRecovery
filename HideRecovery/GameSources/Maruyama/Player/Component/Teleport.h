@@ -97,7 +97,16 @@ namespace basecross {
 		/// <returns>テレポートできるならtrue</returns>
 		bool IsTeleport() const;
 
+		/// <summary>
+		/// テレポートカメラの設定
+		/// </summary>
+		/// <param name="camera">カメラの設定</param>
+		void SetTeleportCamera(const std::shared_ptr<VirtualCamera> camera);
 
+		/// <summary>
+		/// テレポートカメラの取得
+		/// </summary>
+		/// <returns>テレポートカメラ</returns>
 		std::shared_ptr<VirtualCamera> GetTeleportCamera() const;
 	};
 
