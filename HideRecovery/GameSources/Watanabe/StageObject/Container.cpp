@@ -4,19 +4,24 @@
 
 namespace basecross {
 	Container::Container(const shared_ptr<Stage>& stage)
-		:StageObjectBase(stage, L"Container")
+		:StageObjectBase(stage, L"Container"), m_color(L"Green")
 	{}
 	Container::Container(const shared_ptr<Stage>& stage, const wstring& line)
 		: StageObjectBase(stage, L"Container")
 	{
 		vector<wstring> tokens = DataExtracter::DelimitData(line);
-		DataExtracter::TransformDataExtraction(tokens, m_transformData);
+		size_t nextIndex = DataExtracter::TransformDataExtraction(tokens, m_transformData);
+
+		m_color = tokens[nextIndex];
 	}
 
 	void Container::OnCreate() {
 		auto drawComp = AddComponent<PNTStaticModelDraw>();
 		drawComp->SetMultiMeshResource(L"Container");
 		drawComp->SetOwnShadowActive(true);
+		// モデルのテクスチャを無効にして、別のテクスチャを使用
+		drawComp->SetModelTextureEnabled(false);
+		drawComp->SetTextureResource(m_color + L"ContianerTx");
 
 		auto shadow = AddComponent<Shadowmap>();
 		shadow->SetMultiMeshResource(L"Container");

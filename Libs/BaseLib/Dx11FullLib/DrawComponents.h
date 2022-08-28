@@ -7,7 +7,6 @@
 #include "stdafx.h"
 
 namespace basecross {
-
 	//--------------------------------------------------------------------------------------
 	/*!
 	@brief	ビューポートとシサー矩形設定
@@ -47,7 +46,7 @@ namespace basecross {
 		/// 射影行列
 		bsm::Mat4x4 mProj;
 		/// Bone用
-		bsm::Vec4 Bones[3 * 72];
+		bsm::Vec4 Bones[3 * 100];
 		ShadowConstants() {
 			memset(this, 0, sizeof(ShadowConstants));
 		};
@@ -57,7 +56,6 @@ namespace basecross {
 	DECLARE_DX11_VERTEX_SHADER(VSShadowmap, VertexPositionNormalTexture)
 	DECLARE_DX11_VERTEX_SHADER(VSShadowmapBone, VertexPositionNormalTextureSkinning)
 	DECLARE_DX11_VERTEX_SHADER(VSShadowmapBoneWithTan, VertexPositionNormalTangentTextureSkinning)
-
 
 	//--------------------------------------------------------------------------------------
 	///	スプライト用コンスタントバッファ構造体
@@ -86,8 +84,6 @@ namespace basecross {
 	//PCTSprite
 	DECLARE_DX11_VERTEX_SHADER(VSPCTSprite, VertexPositionColorTexture)
 	DECLARE_DX11_PIXEL_SHADER(PSPCTSprite)
-
-
 
 	//--------------------------------------------------------------------------------------
 	///	SimpleConstantsコンスタントバッファ構造体
@@ -158,7 +154,6 @@ namespace basecross {
 	///PNTStaticInstance
 	DECLARE_DX11_VERTEX_SHADER(VSPNTStaticInstance, VertexPositionNormalTextureMatrix)
 	DECLARE_DX11_VERTEX_SHADER(VSPNTStaticInstanceShadow, VertexPositionNormalTextureMatrix)
-
 
 	class GameObject;
 
@@ -517,8 +512,6 @@ namespace basecross {
 		unique_ptr<Impl> pImpl;
 	};
 
-
-
 	//--------------------------------------------------------------------------------------
 	///	PCTParticle描画コンポーネント(パーティクル描画)
 	//--------------------------------------------------------------------------------------
@@ -532,7 +525,7 @@ namespace basecross {
 		@param[in]	AddType	加算処理するかどうか
 		*/
 		//--------------------------------------------------------------------------------------
-		explicit PCTParticleDraw(const shared_ptr<GameObject>& GameObjectPtr, size_t MaxInstance,bool AddType = false);
+		explicit PCTParticleDraw(const shared_ptr<GameObject>& GameObjectPtr, size_t MaxInstance, bool AddType = false);
 		//--------------------------------------------------------------------------------------
 		/*!
 		@brief	デストラクタ
@@ -551,8 +544,8 @@ namespace basecross {
 		@return	なし
 		*/
 		//--------------------------------------------------------------------------------------
-		void AddParticle(float ToCaneraLength, const bsm::Mat4x4& WorldMatrix, 
-			const shared_ptr<TextureResource>& TextureRes,const bsm::Col4& Diffuse = bsm::Col4(1,1,1,1));
+		void AddParticle(float ToCaneraLength, const bsm::Mat4x4& WorldMatrix,
+			const shared_ptr<TextureResource>& TextureRes, const bsm::Col4& Diffuse = bsm::Col4(1, 1, 1, 1));
 		//--------------------------------------------------------------------------------------
 		/*!
 		@brief	OnCreate処理
@@ -641,7 +634,6 @@ namespace basecross {
 					L"if (!GetMeshResource())",
 					L"SpriteBaseDraw::UpdateVertices()"
 				);
-
 			}
 			if (Vertices.size() > SpriteMesh->GetNumVertices()) {
 				throw BaseException(
@@ -924,7 +916,6 @@ namespace basecross {
 		virtual void OnDraw()override;
 	};
 
-
 	//--------------------------------------------------------------------------------------
 	///	PCTSprite描画コンポーネント
 	//--------------------------------------------------------------------------------------
@@ -975,7 +966,6 @@ namespace basecross {
 		//--------------------------------------------------------------------------------------
 		virtual void OnDraw()override;
 	};
-
 
 	//--------------------------------------------------------------------------------------
 	///	アニメーションデータ構造体.
@@ -1059,7 +1049,7 @@ namespace basecross {
 		*/
 		//--------------------------------------------------------------------------------------
 		void DrawWireFrame(const shared_ptr<GameObject>& GameObj,
-			const shared_ptr<MeshResource>& Mesh,const bsm::Mat4x4& MeshToTransformMatrix = bsm::Mat4x4());
+			const shared_ptr<MeshResource>& Mesh, const bsm::Mat4x4& MeshToTransformMatrix = bsm::Mat4x4());
 		//--------------------------------------------------------------------------------------
 		/*!
 		@brief	ワイアフレーム描画処理
@@ -1071,7 +1061,6 @@ namespace basecross {
 		//--------------------------------------------------------------------------------------
 		void DrawWireFrameWithWorldMatrix(const shared_ptr<GameObject>& GameObj,
 			const shared_ptr<MeshResource>& Mesh, const bsm::Mat4x4& WorldMatrix);
-
 	};
 
 	//--------------------------------------------------------------------------------------
@@ -1134,7 +1123,6 @@ namespace basecross {
 					}
 				}
 			}
-
 		}
 		//--------------------------------------------------------------------------------------
 		/*!
@@ -1473,7 +1461,6 @@ namespace basecross {
 			return true;
 		}
 	};
-
 
 	//--------------------------------------------------------------------------------------
 	///	これより新システム
@@ -1935,7 +1922,6 @@ namespace basecross {
 					L"if (!GetOriginalMeshResource())",
 					L"StaticBaseDraw::UpdateVertices()"
 				);
-
 			}
 			MeshRes->UpdateVirtexBuffer(Vertices);
 		}
@@ -2493,7 +2479,6 @@ namespace basecross {
 		virtual void OnDraw()override;
 	};
 
-
 	//--------------------------------------------------------------------------------------
 	///	PTStatic描画コンポーネント
 	//--------------------------------------------------------------------------------------
@@ -2732,7 +2717,6 @@ namespace basecross {
 		virtual void OnDraw()override;
 	};
 
-
 	//--------------------------------------------------------------------------------------
 	///	PCStaticInstance描画コンポーネント
 	//--------------------------------------------------------------------------------------
@@ -2896,7 +2880,5 @@ namespace basecross {
 		//--------------------------------------------------------------------------------------
 		virtual void OnDraw()override;
 	};
-
-
 }
 //end basecross

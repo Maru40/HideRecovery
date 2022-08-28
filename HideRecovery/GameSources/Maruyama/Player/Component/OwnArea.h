@@ -1,4 +1,3 @@
-
 /*!
 @file OwnArea.h
 @brief OwnAreaなど
@@ -7,11 +6,9 @@
 
 #pragma once
 #include "stdafx.h"
-
-#include "Watanabe/StageObject/PlayerSpawnPointObject.h"
+#include "Maruyama/Interface/I_TeamMember.h"
 
 namespace basecross {
-
 	//--------------------------------------------------------------------------------------
 	/// 前方宣言
 	//--------------------------------------------------------------------------------------
@@ -21,10 +18,10 @@ namespace basecross {
 	/// 自陣エリアのパラメータ
 	//--------------------------------------------------------------------------------------
 	struct OwnArea_Parametor {
-		Team team;		//チーム
+		team::TeamType team;		//チーム
 		float radius;	//エリア範囲の半径
 
-		OwnArea_Parametor(const Team& team, const float radius);
+		OwnArea_Parametor(const team::TeamType& team, const float radius);
 	};
 
 	//--------------------------------------------------------------------------------------
@@ -77,13 +74,13 @@ namespace basecross {
 		/// チームの設定
 		/// </summary>
 		/// <param name="team">チーム</param>
-		void SetTeam(const Team& team) noexcept { m_param.team = team; }
+		void SetTeam(const team::TeamType& team) noexcept { m_param.team = team; }
 
 		/// <summary>
 		/// チームの取得
 		/// </summary>
 		/// <returns>チーム</returns>
-		Team GetTeam() const noexcept { return m_param.team; }
+		team::TeamType GetTeam() const noexcept { return m_param.team; }
 
 		/// <summary>
 		/// エリア半径の設定
@@ -109,5 +106,4 @@ namespace basecross {
 		/// <param name="member">削除するメンバー</param>
 		bool RemoveMember(const std::shared_ptr<I_TeamMember>& member);
 	};
-
 }

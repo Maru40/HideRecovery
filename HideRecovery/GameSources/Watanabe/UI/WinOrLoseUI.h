@@ -12,6 +12,6 @@ namespace basecross {
 		WinOrLoseUI(const shared_ptr<Stage>& stage, const wstring& line);
 
 		void OnCreate()override;
-		void SetTeam(Team team);
+		void SetTeam(team::TeamType team);
 	};
 }

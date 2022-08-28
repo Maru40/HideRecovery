@@ -6,16 +6,12 @@
 #pragma once
 #include "stdafx.h"
 #include "StageObjectBase.h"
+#include "Maruyama/Interface/I_TeamMember.h"
 
 namespace basecross {
-	enum class Team {
-		East,
-		West
-	};
-
 	class PlayerSpawnPointObject :public StageObjectBase {
 		// チーム
-		Team m_team;
+		team::TeamType m_team;
 		// 固有ID
 		int m_id;
 	public:

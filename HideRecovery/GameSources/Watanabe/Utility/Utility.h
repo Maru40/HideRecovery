@@ -123,7 +123,7 @@ namespace basecross {
 		 * @param color 0～255の範囲の色データ
 		 * @return Col4 0～1の範囲の色データ
 		 */
-		Col4 ConvertColorZeroToOne(Col4 color);
+		Col4 ConvertColorZeroToOne(const Col4& color);
 
 		/**
 		 * @brief ベクトルの長さを変更する

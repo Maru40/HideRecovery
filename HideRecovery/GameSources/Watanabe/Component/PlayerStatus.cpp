@@ -13,7 +13,7 @@
 
 namespace basecross {
 	PlayerStatus::PlayerStatus(const shared_ptr<GameObject>& owner)
-		:Component(owner), m_status(10), m_team(Team(0)),
+		:Component(owner), m_status(10), m_team(team::TeamType(0)),
 		m_damageSoundClip(L"PlayerDamageSE", false, 0.75f)
 	{}
 
@@ -23,7 +23,6 @@ namespace basecross {
 	}
 
 	void PlayerStatus::OnUpdate() {
-
 	}
 
 	void PlayerStatus::AddDamage(const DamageData& damage) {
@@ -64,17 +63,17 @@ namespace basecross {
 		m_damagedFuncs.push_back(damagedFunc);
 	}
 
-	void PlayerStatus::SetTeam(const Team& team) {
+	void PlayerStatus::SetTeam(const team::TeamType& team) {
 		m_team = team;
 
 		if (auto drawer = GetGameObject()->GetComponent<PlayerObject::DrawComp>(false)) {
 			switch (team)
 			{
-			case Team::West:
+			case team::TeamType::Red:
 				drawer->SetMultiMeshResource(L"Player_Mesh_Blue");
 				break;
 
-			case Team::East:
+			case team::TeamType::Blue:
 				drawer->SetMultiMeshResource(L"Player_Mesh_Red");
 				break;
 			}

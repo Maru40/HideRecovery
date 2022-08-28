@@ -18,14 +18,14 @@ namespace basecross {
 	void WinOrLoseUI::OnCreate() {
 	}
 
-	void WinOrLoseUI::SetTeam(Team team) {
+	void WinOrLoseUI::SetTeam(team::TeamType team) {
 		wstring teamStr = L"";
 		switch (team)
 		{
-		case Team::East:
+		case team::TeamType::Blue:
 			teamStr = L"EastTeam";
 			break;
-		case Team::West:
+		case team::TeamType::Red:
 			teamStr = L"WestTeam";
 			break;
 		}

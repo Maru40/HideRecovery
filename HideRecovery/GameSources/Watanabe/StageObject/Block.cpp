@@ -65,6 +65,7 @@ namespace basecross {
 			m_meshRes = MeshResource::CreateMeshResource(vertices, indices, true);
 			drawComp->SetMeshResource(m_meshRes);
 			drawComp->SetTextureResource(L"Floor_TX");
+			drawComp->SetDiffuse(Col4(0.3f));
 
 			AddTag(L"Floor");
 

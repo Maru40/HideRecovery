@@ -1,4 +1,3 @@
-
 /*!
 @file Respawner.cpp
 @brief Respawnerクラス実体
@@ -17,17 +16,17 @@
 
 #include "Watanabe/Component/PlayerStatus.h"
 #include "Watanabe/Component/PlayerAnimator.h"
+#include "Watanabe/Effekseer/EfkEffect.h"
 #include "Maruyama/Player/Component/UseWepon.h"
 
 #include "MaruUtility.h"
 
 namespace basecross {
-
 	//--------------------------------------------------------------------------------------
 	/// リスポーンをさせるクラスのパラメータ
 	//--------------------------------------------------------------------------------------
 
-	Respawner_Parametor::Respawner_Parametor() : 
+	Respawner_Parametor::Respawner_Parametor() :
 		time(2.0f)
 	{}
 
@@ -42,7 +41,6 @@ namespace basecross {
 	{}
 
 	void Respawner::OnCreate() {
-		
 	}
 
 	void Respawner::OnUpdate() {
@@ -70,6 +68,10 @@ namespace basecross {
 		if (auto animator = GetGameObject()->GetComponent<PlayerAnimator>(false)) {
 			animator->ChangePlayerAnimation(PlayerAnimationState::State::Wait);
 		}
+
+		if (auto efkComp = GetGameObject()->GetComponent<EfkComponent>(false)) {
+			efkComp->Play(L"Respawn");
+		}
 	}
 
 	void Respawner::StartRespawn() {
@@ -79,5 +81,4 @@ namespace basecross {
 	bool Respawner::IsRespawn() {
 		return GetSpawnPoint() ? true : false;	//スポーンポイントがあるならtrue
 	}
-
 }

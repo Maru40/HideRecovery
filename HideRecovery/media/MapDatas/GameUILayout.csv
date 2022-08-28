@@ -1,8 +1,8 @@
 className,UIName,PosX,PosY,ScaleX,ScaleY,Rot,,
 TimerUI,Timer,0,480,0.8,0.8,0,,
 HPGaugeUI,HPGauge,0,-480,0.5,0.5,0,,
-PointUI,EastPoint,270,400,0.7,0.7,0,East,
-PointUI,WestPoint,-270,400,0.7,0.7,0,West,
-SimpleSprite,TeamEast,275,480,0.5,0.5,0,SpriteData,East
-SimpleSprite,TeamWest,-265,480,0.5,0.5,0,SpriteData,West
+PointUI,BluePoint,270,400,0.7,0.7,0,Blue,
+PointUI,RedPoint,-270,400,0.7,0.7,0,Red,
+SimpleSprite,TeamBlue,275,480,0.5,0.5,0,SpriteData,Blue
+SimpleSprite,TeamRed,-265,480,0.5,0.5,0,SpriteData,Red
 SplashMessageUI,SplashMessage,0,200,0.8,0.8,0,3,

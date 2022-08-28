@@ -1,5 +1,4 @@
-﻿
-/*!
+﻿/*!
 @file PlayerObject.cpp
 @brief PlayerObjectクラス実体
 担当：丸山裕喜
@@ -34,6 +33,7 @@
 #include "Itabashi/OnlineTransformSynchronization.h"
 
 #include "Watanabe/Component/PlayerAnimator.h"
+#include "Watanabe/Effekseer/EfkEffect.h"
 
 #include "ChargeGun.h"
 #include "Watanabe/Component/PlayerStatus.h"
@@ -49,8 +49,7 @@
 #include "Maruyama/Player/Component/FieldMap.h"
 
 namespace basecross {
-
-	PlayerObject::PlayerObject(const std::shared_ptr<Stage>& stage):
+	PlayerObject::PlayerObject(const std::shared_ptr<Stage>& stage) :
 		GameObject(stage)
 	{}
 
@@ -79,8 +78,8 @@ namespace basecross {
 		AddComponent<RotationController>();
 		//AddComponent<PlayerController>();
 		auto gravity = AddComponent<Gravity>();
-		gravity->SetGravity(Vec3(0.0f ,-4.8f, 0.0f));
-		
+		gravity->SetGravity(Vec3(0.0f, -4.8f, 0.0f));
+
 		AddComponent<ItemBag>();
 		AddComponent<ItemAcquisitionManager>();
 		//AddComponent<OwnHideItemManager>();
@@ -98,7 +97,7 @@ namespace basecross {
 		AddComponent<PlayerAnimator>();
 		auto chargeGun = AddComponent<ChargeGun>();
 		auto soundEmitter = AddComponent<SoundEmitter>();
-		AddComponent<PlayerStatus>();
+		auto playerStatus = AddComponent<PlayerStatus>();
 		AddComponent<TackleAttack>();
 
 		AddComponent<Respawner>();
@@ -108,9 +107,31 @@ namespace basecross {
 		//AddComponent<FieldMap>();
 		AddComponent<Teleport>();
 
+		// エフェクトの設定
+		auto efkComp = AddComponent<EfkComponent>();
+		efkComp->SetEffectResource(L"Respawn", TransformData(Vec3(0, -0.5f, 0), Vec3(0.3f, 2.0f, 0.3f)));
+		efkComp->SetEffectResource(L"Smoke", TransformData(), true);
+		efkComp->SetEffectResource(L"PlayerHit", TransformData(Vec3(0, 0.5f, 0), Vec3(0.5f)), true);
+		efkComp->IsSyncGameObject(L"PlayerHit", true);
+		efkComp->SetEffectResource(L"MuzzleFlash", TransformData(Vec3(0, 0.5f, 0.5f), Vec3(0.5f), Vec3(0, 180, 0)), true);
+		efkComp->IsSyncGameObject(L"MuzzleFlash", true);
+		efkComp->SetEffectResource(L"Tackle");
+		efkComp->IsSyncGameObject(L"Tackle", true);
+
+		// 被弾時のエフェクトを再生を登録
+		playerStatus->AddFuncAddDamage(
+			[&](const std::shared_ptr<PlayerStatus>& playerStatus, const DamageData& damageData) {
+				auto efkComp = playerStatus->GetGameObject()->GetComponent<EfkComponent>();
+				efkComp->Play(L"PlayerHit");
+			}
+		);
+		auto shadowmap = AddComponent<Shadowmap>();
+		shadowmap->SetMultiMeshResource(L"Player_Mesh_Red");
+		shadowmap->SetMeshToTransformMatrix(spanMat);
+
 		constexpr float ScaleValue = 1.0f;
 		transform->SetScale(Vec3(ScaleValue));
-			
+
 		//カメラセッティング----------------------------------------------------------
 
 		auto springArm = GetStage()->Instantiate<GameObject>(Vec3(), Quat());
@@ -134,5 +155,4 @@ namespace basecross {
 		springArmComponent->AddHitTag(L"Wall");
 		springArmComponent->SetChildObject(tpsCamera);
 	}
-
 }

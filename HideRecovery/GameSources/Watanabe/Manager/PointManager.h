@@ -6,7 +6,7 @@
 namespace basecross {
 	class PointManager :public BaseSingleton<PointManager> {
 		// それぞれのチームのスコア
-		unordered_map<Team, int> m_teamScoreMap;
+		unordered_map<team::TeamType, int> m_teamScoreMap;
 	public:
 		enum class WinOrLose {
 			Win,
@@ -19,19 +19,19 @@ namespace basecross {
 		/// </summary>
 		/// <param name="team">どのチームのポイントか</param>
 		/// <returns>そのチームの点数</returns>
-		int GetPoint(Team team);
+		int GetPoint(team::TeamType team);
 
 		/// <summary>
 		/// 点数を1点追加
 		/// </summary>
-		void AddPoint(Team team);
+		void AddPoint(team::TeamType team);
 
 		/// <summary>
 		/// 自チームの勝敗を取得する
 		/// </summary>
 		/// <param name="team">チーム</param>
 		/// <returns>勝敗</returns>
-		WinOrLose GetSelfTeamWinOrLose(Team team);
+		WinOrLose GetSelfTeamWinOrLose(team::TeamType team);
 	private:
 		PointManager();
 		~PointManager() {}

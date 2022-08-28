@@ -142,9 +142,9 @@ namespace basecross {
 		TimeManager::GetInstance()->GetTimer().Reset(4);
 
 		for (int i = 0; i < 10; i++) {
-			PointManager::GetInstance()->AddPoint(Team::East);
+			PointManager::GetInstance()->AddPoint(team::TeamType::Blue);
 		}
-		PointManager::GetInstance()->AddPoint(Team::West);
+		PointManager::GetInstance()->AddPoint(team::TeamType::Red);
 
 		auto name = uiBuilder.GetUIObject(L"Timer");
 		Debug::GetInstance()->Log(name != nullptr);

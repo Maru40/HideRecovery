@@ -9,12 +9,10 @@
 
 #include "Watanabe/Utility/DataExtracter.h"
 #include "Watanabe/Utility/AdvMeshUtil.h"
-#include "Watanabe/StageObject/PlayerSpawnPointObject.h"
 
 #include "Goal.h"
 
 namespace basecross {
-
 	GoalObject::GoalObject(const shared_ptr<Stage>& stage) :
 		StageObjectBase(stage, L"Goal")
 	{}
@@ -26,11 +24,11 @@ namespace basecross {
 		size_t nextIndex = DataExtracter::TransformDataExtraction(tokens, m_transformData);
 
 		wstring teamType = tokens[nextIndex];
-		if (teamType == L"East") {
-			m_team = Team::East;
+		if (teamType == L"Blue") {
+			m_team = team::TeamType::Blue;
 		}
-		else if (teamType == L"West") {
-			m_team = Team::West;
+		else if (teamType == L"Red") {
+			m_team = team::TeamType::Red;
 		}
 		else {
 			throw BaseException(

@@ -5,7 +5,7 @@
 
 namespace basecross {
 	PointUI::PointUI(const shared_ptr<Stage>& stage)
-		:UIObjectBase(stage, L"PointUI"), m_team(Team::East)
+		:UIObjectBase(stage, L"PointUI"), m_team(team::TeamType::Blue)
 	{}
 
 	PointUI::PointUI(const shared_ptr<Stage>& stage, const wstring& line)
@@ -14,18 +14,18 @@ namespace basecross {
 		vector<wstring> tokens = DataExtracter::DelimitData(line);
 		auto nextIndex = DataExtracter::RectTransformDataExtraction(tokens, m_rectTransformData);
 		// 仮で入れる
-		m_team = Team::East;
+		m_team = team::TeamType::Blue;
 		wstring teamType = tokens[nextIndex];
-		if (teamType == L"East") {
-			m_team = Team::East;
+		if (teamType == L"Blue") {
+			m_team = team::TeamType::Blue;
 		}
-		else if (teamType == L"West") {
-			m_team = Team::West;
+		else if (teamType == L"Red") {
+			m_team = team::TeamType::Red;
 		}
 		else {
 			throw BaseException(
 				L"Teamが不正な値です。",
-				L"Team : " + teamType,
+				L"team::TeamType : " + teamType,
 				L"PointUI::PointUI()"
 			);
 		}

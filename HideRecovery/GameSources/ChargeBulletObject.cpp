@@ -1,4 +1,3 @@
-
 /*!
 @file ChargeBulletObject.cpp
 @brief ChargeBulletObject‚ÌƒNƒ‰ƒXŽÀ‘Ì
@@ -12,8 +11,9 @@
 
 #include "ChargeBullet.h"
 
-namespace basecross {
+#include "Watanabe/Effekseer/EfkEffect.h"
 
+namespace basecross {
 	ChargeBulletObject::ChargeBulletObject(const std::shared_ptr<Stage>& stage)
 		:BulletObjectBase(stage)
 	{}
@@ -28,10 +28,21 @@ namespace basecross {
 	}
 
 	void ChargeBulletObject::SettingModel() {
-		auto draw = AddComponent<PNTStaticDraw>();
-		draw->SetMeshResource(L"DEFAULT_CUBE");
+		//auto draw = AddComponent<PNTStaticDraw>();
+		//draw->SetMeshResource(L"DEFAULT_CUBE");
+
+		auto efkComp = AddComponent<EfkComponent>();
+		efkComp->SetEffectResource(L"BlueBullet", TransformData(Vec3(0, 0, 0), Vec3(0.3f)));
+		efkComp->IsSyncGameObject(L"BlueBullet", true);
+		efkComp->SetEffectResource(L"BlueHit", TransformData(Vec3(0, 0, 0), Vec3(0.2f)));
+		efkComp->Play(L"BlueBullet", true);
 
 		transform->SetScale(Vec3(0.25f));
 	}
 
+	void ChargeBulletObject::OnDestroy() {
+		auto efkComp = GetComponent<EfkComponent>();
+		efkComp->Stop(L"BlueBullet");
+		efkComp->Play(L"BlueHit", true);
+	}
 }

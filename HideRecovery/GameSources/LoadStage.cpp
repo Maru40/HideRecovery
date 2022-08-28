@@ -84,6 +84,12 @@ namespace basecross
 		//RampTex
 		ResourceLoadData(L"Ramp_Rock_TX", L"RampTex_Rock.png"),
 
+		// コンテナ用テクスチャ
+		ResourceLoadData(L"RedContianerTx", L"Contianer/RedContianerTx.png"),
+		ResourceLoadData(L"GreenContianerTx", L"Contianer/GreenContianerTx.png"),
+		ResourceLoadData(L"BlueContianerTx", L"Contianer/BlueContianerTx.png"),
+		ResourceLoadData(L"YellowContianerTx", L"Contianer/YellowContianerTx.png"),
+
 		//デバッグテクスチャ
 		ResourceLoadData(L"Number_TX", L"Number.png"),
 		ResourceLoadData(L"NumberWhite_TX", L"Number_White.png"),
@@ -280,8 +286,17 @@ namespace basecross
 
 		const auto& app = App::GetApp();
 		std::wstring dir = app->GetDataDirWString() + L"Effects/";
-		EfkEffectResource::RegisterEffectResource(L"TestEffect", dir + L"TestEffect.efk");
 		EfkEffectResource::RegisterEffectResource(L"Fireworks", dir + L"Fireworks.efk");
+		EfkEffectResource::RegisterEffectResource(L"Confetti", dir + L"Confetti.efk");
+		EfkEffectResource::RegisterEffectResource(L"Respawn", dir + L"Respawn.efk");
+		EfkEffectResource::RegisterEffectResource(L"Smoke", dir + L"Smoke.efk");
+		EfkEffectResource::RegisterEffectResource(L"PlayerHit", dir + L"PlayerHit.efk");
+		EfkEffectResource::RegisterEffectResource(L"BlueHit", dir + L"BlueHit.efk");
+		EfkEffectResource::RegisterEffectResource(L"RedHit", dir + L"RedHit.efk");
+		EfkEffectResource::RegisterEffectResource(L"MuzzleFlash", dir + L"MuzzleFlash.efk");
+		EfkEffectResource::RegisterEffectResource(L"BlueBullet", dir + L"BlueBullet.efk");
+		EfkEffectResource::RegisterEffectResource(L"RedBullet", dir + L"RedBullet.efk");
+		EfkEffectResource::RegisterEffectResource(L"Tackle", dir + L"Tackle.efk");
 	}
 
 	void LoadStage::OnCreate()

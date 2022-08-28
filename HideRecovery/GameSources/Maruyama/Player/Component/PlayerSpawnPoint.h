@@ -1,4 +1,3 @@
-
 /*!
 @file PlayerSpawnPoint.h
 @brief PlayerSpawnPointなど
@@ -8,15 +7,14 @@
 #pragma once
 #include "stdafx.h"
 
-#include "Watanabe/StageObject/PlayerSpawnPointObject.h"
+#include "Maruyama/Interface/I_TeamMember.h"
 
 namespace basecross {
-
 	//--------------------------------------------------------------------------------------
 	/// プレイヤーがスポーンされる位置管理クラスのパラメータ
 	//--------------------------------------------------------------------------------------
 	struct PlayerSpawnPoint_Parametor {
-		Team team;	// チーム
+		team::TeamType team;	// チーム
 		int id;		// 固有ID
 
 		/// <summary>
@@ -24,7 +22,7 @@ namespace basecross {
 		/// </summary>
 		/// <param name="team">チーム</param>
 		/// <param name="id">固有ID</param>
-		PlayerSpawnPoint_Parametor(const Team& team, const int id);
+		PlayerSpawnPoint_Parametor(const team::TeamType& team, const int id);
 	};
 
 	//--------------------------------------------------------------------------------------
@@ -55,13 +53,13 @@ namespace basecross {
 		/// チームタイプの設定
 		/// </summary>
 		/// <param name="team">チームタイプ</param>
-		void SetTeam(const Team& team) noexcept { m_param.team = team; }
+		void SetTeam(const team::TeamType& team) noexcept { m_param.team = team; }
 
 		/// <summary>
 		/// チームタイプの取得
 		/// </summary>
 		/// <returns>チームタイプ</returns>
-		Team GetTeam() const noexcept { return m_param.team; }
+		team::TeamType GetTeam() const noexcept { return m_param.team; }
 
 		/// <summary>
 		/// 固有IDの取得
@@ -71,5 +69,4 @@ namespace basecross {
 
 		Vec3 GetWorldPosition() const { return transform->GetWorldPosition(); }
 	};
-
 }

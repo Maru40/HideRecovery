@@ -6,20 +6,20 @@
 #pragma once
 #include "stdafx.h"
 #include "StageObjectBase.h"
+#include "Maruyama/Interface/I_TeamMember.h"
 
 namespace basecross {
-
 	//--------------------------------------------------------------------------------------
 	/// 前方宣言
 	//--------------------------------------------------------------------------------------
-	enum class Team;
+	enum class team::TeamType;
 
 	//--------------------------------------------------------------------------------------
 	/// ゴールオブジェクト
 	//--------------------------------------------------------------------------------------
-	class GoalObject :public StageObjectBase 
+	class GoalObject :public StageObjectBase
 	{
-		Team m_team;
+		team::TeamType m_team;
 
 	public:
 		GoalObject(const shared_ptr<Stage>& stage);
@@ -30,5 +30,4 @@ namespace basecross {
 	private:
 		void SettingModel();
 	};
-
 }

@@ -1,4 +1,3 @@
-
 /*!
 @file TackleAttack.cpp
 @brief TackleAttackクラス実体
@@ -25,9 +24,9 @@
 
 #include "CollisionAction.h"
 #include "Watanabe/Component/PlayerStatus.h"
+#include "Watanabe/Effekseer/EfkEffect.h"
 
 namespace basecross {
-
 	TackleAttack::TackleAttack(const std::shared_ptr<GameObject>& objPtr) :
 		AttackBase(objPtr),
 		m_taskList(new TaskList<TaskEnum>())
@@ -107,7 +106,6 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 
 	namespace Task {
-
 		//--------------------------------------------------------------------------------------
 		/// タックル攻撃の予備動作
 		//--------------------------------------------------------------------------------------
@@ -151,7 +149,7 @@ namespace basecross {
 		/// タックル攻撃の攻撃中動作のパラメータ
 		//--------------------------------------------------------------------------------------
 
-		Attack_Tackle_Parametor::Attack_Tackle_Parametor(const DamageData& damageData):
+		Attack_Tackle_Parametor::Attack_Tackle_Parametor(const DamageData& damageData) :
 			damageData(damageData),
 			tackleSpeed(500.0f)
 		{}
@@ -190,6 +188,11 @@ namespace basecross {
 			}
 
 			PlayAnimation();
+
+			// タックルエフェクトの再生
+			if (auto efkComp = GetOwner()->GetComponent<EfkComponent>(false)) {
+				efkComp->Play(L"Tackle", true);
+			}
 		}
 
 		bool Attack_Tackle::OnUpdate() {

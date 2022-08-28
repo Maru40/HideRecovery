@@ -13,7 +13,7 @@
 
 namespace basecross {
 	OwnAreaObject::OwnAreaObject(const shared_ptr<Stage>& stage)
-		:StageObjectBase(stage, L"OwnArea"), m_areaRadius(0), m_team(Team::East)
+		:StageObjectBase(stage, L"OwnArea"), m_areaRadius(0), m_team(team::TeamType::Blue)
 	{}
 	OwnAreaObject::OwnAreaObject(const shared_ptr<Stage>& stage, const wstring& line)
 		: StageObjectBase(stage, L"OwnArea"), m_areaRadius(0)
@@ -22,16 +22,16 @@ namespace basecross {
 		size_t nextIndex = DataExtracter::TransformDataExtraction(tokens, m_transformData);
 
 		wstring teamType = tokens[nextIndex];
-		if (teamType == L"East") {
-			m_team = Team::East;
+		if (teamType == L"Blue") {
+			m_team = team::TeamType::Blue;
 		}
-		else if (teamType == L"West") {
-			m_team = Team::West;
+		else if (teamType == L"Red") {
+			m_team = team::TeamType::Red;
 		}
 		else {
 			throw BaseException(
 				L"Teamが不正な値です。",
-				L"Team : " + teamType,
+				L"team::TeamType : " + teamType,
 				L"OwnAreaObject::OwnAreaObject()"
 			);
 		}
@@ -56,10 +56,10 @@ namespace basecross {
 		{
 			switch (m_team)
 			{
-			case Team::East:
+			case team::TeamType::Blue:
 				drawComp->SetDiffuse(Col4(0, 0, 1, 1));
 				break;
-			case Team::West:
+			case team::TeamType::Red:
 				drawComp->SetDiffuse(Col4(1, 0, 0, 1));
 				break;
 			default:

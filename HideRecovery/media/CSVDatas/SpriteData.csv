@@ -2,11 +2,11 @@ name,useTextureKey,originX,originY,SizeX,SizeY
 Numbers,Numbers_TX,0,0,102,128
 Start,StartAndFinish_TX,0,0,512,128
 Finish,StartAndFinish_TX,0,128,512,128
-WestTeam,Team_TX,0,0,840,165
-EastTeam,Team_TX,0,165,945,165
+RedTeam,Team_TX,0,0,840,165
+BlueTeam,Team_TX,0,165,945,165
 Goal,Team_TX,0,330,750,165
-West,Team_TX,0,0,340,165
-East,Team_TX,0,165,440,165
+Red,Team_TX,0,0,340,165
+Blue,Team_TX,0,165,440,165
 Press A,Message_TX,0,0,1024,128
 ToTitle,Message_TX,0,128,512,92
 ToContinue,Message_TX,512,128,512,92
@@ -22,6 +22,6 @@ Draw,WinOrLose_TX,0,256,420,128
 10,Numbers_TX,1028,0,172,128
 CreateRoom,Message_TX,0,940,1024,120
 JoinRoom,Message_TX,0,1060,1024,120
-KillCount,ScoreLabel_TX,0,0,256,64
-GoalCount,ScoreLabel_TX,0,64,310,64
+KillCount,ScoreLabel_TX,0,0,76,64
+GoalCount,ScoreLabel_TX,0,64,128,64
 Player,Team_TX,0,495,600,205
