@@ -105,6 +105,12 @@ namespace basecross {
 		/// </summary>
 		void SettingReactiveIsAim();
 
+		/// <summary>
+		/// 回転する向きを計算して返す。
+		/// </summary>
+		/// <returns>回転する向き</returns>
+		Vec3 CalculateRotationDirection();
+
 	public:
 		//--------------------------------------------------------------------------------------
 		/// アクセッサ

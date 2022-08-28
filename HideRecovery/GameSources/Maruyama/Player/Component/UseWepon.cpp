@@ -174,6 +174,16 @@ namespace basecross {
 		isAim->AddFunction(false, falseFunction);
 	}
 
+	Vec3 UseWepon::CalculateRotationDirection() {
+		auto camera = GetStage()->GetView()->GetTargetCamera();
+		auto baseDirection = camera->GetAt() - camera->GetEye();
+
+		//playerの検索
+
+
+		return Vec3(0);
+	}
+
 	//--------------------------------------------------------------------------------------
 	/// アクセッサ
 	//--------------------------------------------------------------------------------------
