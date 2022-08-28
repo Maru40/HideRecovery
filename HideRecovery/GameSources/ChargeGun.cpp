@@ -95,9 +95,7 @@ namespace basecross {
 
 		// マズルフラッシュエフェクトの再生
 		if (auto efkComp = GetGameObject()->GetComponent<EfkComponent>(false)) {
-			efkComp->Play(L"Hit", true);
-			// 再生先が先じゃないと反映されない
-			//efkComp->SetPosition(L"Hit", instancePosition);
+			efkComp->Play(L"MuzzleFlash", true);
 		}
 
 		return bulletObject;

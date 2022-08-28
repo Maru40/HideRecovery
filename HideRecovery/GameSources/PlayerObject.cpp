@@ -111,8 +111,10 @@ namespace basecross {
 		auto efkComp = AddComponent<EfkComponent>();
 		efkComp->SetEffectResource(L"Respawn", TransformData(Vec3(0, -0.5f, 0), Vec3(0.3f, 2.0f, 0.3f)));
 		efkComp->SetEffectResource(L"Smoke", TransformData(), true);
-		efkComp->SetEffectResource(L"Hit", TransformData(Vec3(0, 0.5f, 0.5f), Vec3(0.5f), Vec3(0, 180, 0)), true);
-		efkComp->IsSyncGameObject(L"Hit", true);
+		efkComp->SetEffectResource(L"PlayerHit", TransformData(Vec3(0, 0.5f, 0.5f), Vec3(0.5f), Vec3(0, 180, 0)), true);
+		efkComp->IsSyncGameObject(L"PlayerHit", true);
+		efkComp->SetEffectResource(L"MuzzleFlash", TransformData(Vec3(0, 0.5f, 0.5f), Vec3(0.5f), Vec3(0, 180, 0)), true);
+		efkComp->IsSyncGameObject(L"MuzzleFlash", true);
 		efkComp->SetEffectResource(L"Tackle");
 		efkComp->IsSyncGameObject(L"Tackle", true);
 
@@ -120,7 +122,7 @@ namespace basecross {
 		playerStatus->AddFuncAddDamage(
 			[&](const std::shared_ptr<PlayerStatus>& playerStatus, const DamageData& damageData) {
 				auto efkComp = playerStatus->GetGameObject()->GetComponent<EfkComponent>();
-				efkComp->Play(L"Hit");
+				efkComp->Play(L"PlayerHit");
 			}
 		);
 		auto shadowmap = AddComponent<Shadowmap>();

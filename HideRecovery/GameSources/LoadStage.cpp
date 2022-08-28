@@ -287,7 +287,10 @@ namespace basecross
 		EfkEffectResource::RegisterEffectResource(L"Confetti", dir + L"Confetti.efk");
 		EfkEffectResource::RegisterEffectResource(L"Respawn", dir + L"Respawn.efk");
 		EfkEffectResource::RegisterEffectResource(L"Smoke", dir + L"Smoke.efk");
-		EfkEffectResource::RegisterEffectResource(L"Hit", dir + L"Hit.efk");
+		EfkEffectResource::RegisterEffectResource(L"PlayerHit", dir + L"PlayerHit.efk");
+		EfkEffectResource::RegisterEffectResource(L"BlueHit", dir + L"BlueHit.efk");
+		EfkEffectResource::RegisterEffectResource(L"RedHit", dir + L"RedHit.efk");
+		EfkEffectResource::RegisterEffectResource(L"MuzzleFlash", dir + L"MuzzleFlash.efk");
 		EfkEffectResource::RegisterEffectResource(L"BlueBullet", dir + L"BlueBullet.efk");
 		EfkEffectResource::RegisterEffectResource(L"RedBullet", dir + L"RedBullet.efk");
 		EfkEffectResource::RegisterEffectResource(L"Tackle", dir + L"Tackle.efk");

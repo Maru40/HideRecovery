@@ -34,12 +34,15 @@ namespace basecross {
 		auto efkComp = AddComponent<EfkComponent>();
 		efkComp->SetEffectResource(L"BlueBullet", TransformData(Vec3(0, 0, 0), Vec3(0.3f)));
 		efkComp->IsSyncGameObject(L"BlueBullet", true);
+		efkComp->SetEffectResource(L"BlueHit", TransformData(Vec3(0, 0, 0), Vec3(0.2f)));
 		efkComp->Play(L"BlueBullet", true);
 
 		transform->SetScale(Vec3(0.25f));
 	}
 
 	void ChargeBulletObject::OnDestroy() {
-		GetComponent<EfkComponent>()->Stop(L"BlueBullet");
+		auto efkComp = GetComponent<EfkComponent>();
+		efkComp->Stop(L"BlueBullet");
+		efkComp->Play(L"BlueHit", true);
 	}
 }
