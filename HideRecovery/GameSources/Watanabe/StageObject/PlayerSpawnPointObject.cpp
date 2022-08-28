@@ -12,7 +12,7 @@
 
 namespace basecross {
 	PlayerSpawnPointObject::PlayerSpawnPointObject(const shared_ptr<Stage>& stage)
-		:StageObjectBase(stage, L"PlayerSpawnPoint"), m_id(0), m_team(Team::East)
+		:StageObjectBase(stage, L"PlayerSpawnPoint"), m_id(0), m_team(team::TeamType::East)
 	{}
 
 	PlayerSpawnPointObject::PlayerSpawnPointObject(const shared_ptr<Stage>& stage, const wstring& line)
@@ -23,15 +23,15 @@ namespace basecross {
 
 		wstring teamType = tokens[nextIndex];
 		if (teamType == L"East") {
-			m_team = Team::East;
+			m_team = team::TeamType::East;
 		}
 		else if (teamType == L"West") {
-			m_team = Team::West;
+			m_team = team::TeamType::West;
 		}
 		else {
 			throw BaseException(
 				L"Teamが不正な値です。",
-				L"Team : " + teamType,
+				L"team::TeamType : " + teamType,
 				L"PlayerSpawnPoint::PlayerSpawnPoint()"
 			);
 		}

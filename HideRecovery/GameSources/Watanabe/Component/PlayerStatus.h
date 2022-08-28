@@ -40,7 +40,7 @@ namespace basecross {
 
 	private:
 		Status m_status;
-		Team m_team;
+		team::TeamType m_team;
 
 		std::vector<DamageFuncType> m_damagedFuncs;
 		std::weak_ptr<SoundEmitter> m_soundEmitter;
@@ -77,13 +77,13 @@ namespace basecross {
 		/// チームの設定
 		/// </summary>
 		/// <param name="team">設定するチーム</param>
-		void SetTeam(const Team& team) override;
+		void SetTeam(const team::TeamType& team) override;
 
 		/// <summary>
 		/// チームの取得
 		/// </summary>
 		/// <returns>チーム</returns>
-		Team GetTeam() const override { return m_team; }
+		team::TeamType GetTeam() const override { return m_team; }
 
 		Status GetStatus() const { return m_status; }
 

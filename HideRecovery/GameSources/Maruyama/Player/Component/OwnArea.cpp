@@ -1,4 +1,3 @@
-
 /*!
 @file OwnArea.cpp
 @brief OwnAreaクラス実体
@@ -16,12 +15,11 @@
 #include "MaruUtility.h"
 
 namespace basecross {
-
 	//--------------------------------------------------------------------------------------
 	/// 自陣エリアのパラメータ
 	//--------------------------------------------------------------------------------------
 
-	OwnArea_Parametor::OwnArea_Parametor(const Team& team, const float radius):
+	OwnArea_Parametor::OwnArea_Parametor(const team::TeamType& team, const float radius) :
 		team(team),
 		radius(radius)
 	{}
@@ -36,7 +34,6 @@ namespace basecross {
 	{}
 
 	void OwnArea::OnCreate() {
-		
 	}
 
 	void OwnArea::OnLateStart() {
@@ -89,5 +86,4 @@ namespace basecross {
 
 		return false;
 	}
-
 }

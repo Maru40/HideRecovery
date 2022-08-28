@@ -1,4 +1,3 @@
-
 /*!
 @file I_TeamMember.h
 @brief I_TeamMemberなど
@@ -8,14 +7,27 @@
 #pragma once
 #include "stdafx.h"
 
-#include "Watanabe/StageObject/PlayerSpawnPointObject.h"
+#include "Watanabe/Utility/Utility.h"
 
 namespace basecross {
-
 	//--------------------------------------------------------------------------------------
 	/// 前方宣言
 	//--------------------------------------------------------------------------------------
 	class OwnArea;
+
+	namespace team {
+		/// <summary>
+		/// チームタイプ
+		/// </summary>
+		enum class TeamType {
+			East,
+			West
+		};
+
+		// 各チームの色
+		const Col4 REDTEAM_COLOR = Utility::ConvertColorZeroToOne(Col4(243.0f, 17.0f, 67.0f, 255.0f));
+		const Col4 BLUETEAM_COLOR = Utility::ConvertColorZeroToOne(Col4(0.0f, 150.0f, 226.0f, 255.0f));
+	}
 
 	//--------------------------------------------------------------------------------------
 	/// チームメンバーのインターフェース
@@ -53,13 +65,12 @@ namespace basecross {
 		/// チームタイプの設定
 		/// </summary>
 		/// <param name="team">チームタイプ</param>
-		virtual void SetTeam(const Team& team) = 0;
+		virtual void SetTeam(const team::TeamType& team) = 0;
 
 		/// <summary>
 		/// チームタイプの取得
 		/// </summary>
 		/// <returns>チームタイプ</returns>
-		virtual Team GetTeam() const = 0;
+		virtual team::TeamType GetTeam() const = 0;
 	};
-
 }

@@ -1,4 +1,3 @@
-
 /*!
 @file PlayerSpawnPoint.cpp
 @brief PlayerSpawnPointƒNƒ‰ƒXŽÀ‘Ì
@@ -11,8 +10,7 @@
 #include "PlayerSpawnPoint.h"
 
 namespace basecross {
-
-	PlayerSpawnPoint_Parametor::PlayerSpawnPoint_Parametor(const Team& team, const int id) :
+	PlayerSpawnPoint_Parametor::PlayerSpawnPoint_Parametor(const team::TeamType& team, const int id) :
 		team(team),
 		id(id)
 	{}
@@ -21,5 +19,4 @@ namespace basecross {
 		Component(objPtr),
 		m_param(parametor)
 	{}
-
 }

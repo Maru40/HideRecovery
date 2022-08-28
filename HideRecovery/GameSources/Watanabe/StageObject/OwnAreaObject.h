@@ -6,14 +6,14 @@
 #pragma once
 #include "stdafx.h"
 #include "StageObjectBase.h"
-#include "PlayerSpawnPointObject.h"
+#include "Maruyama/Interface/I_TeamMember.h"
 
 namespace basecross {
 	class OwnAreaObject : public StageObjectBase {
 		// エリアの半径
 		float m_areaRadius;
 		// チーム
-		Team m_team;
+		team::TeamType m_team;
 		// メッシュデータ
 		shared_ptr<MeshResource> m_meshRes;
 	public:

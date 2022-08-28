@@ -125,8 +125,8 @@ namespace basecross {
 			}
 		}
 
-		Col4 ConvertColorZeroToOne(Col4 color) {
-			return color / 255;
+		Col4 ConvertColorZeroToOne(const Col4& color) {
+			return color / 255.0f;
 		}
 
 		Vec3 ChangeVectorLength(const Vec3& vector, float length) {

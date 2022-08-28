@@ -7,11 +7,10 @@
 #pragma once
 #include "stdafx.h"
 
-#include "Watanabe/StageObject/PlayerSpawnPointObject.h"
+#include "../Interface/I_TeamMember.h"
 #include "Itabashi/OnlineManager.h"
 
 namespace basecross {
-
 	//--------------------------------------------------------------------------------------
 	/// 前方宣言
 	//--------------------------------------------------------------------------------------
@@ -24,14 +23,14 @@ namespace basecross {
 	/// ゴール管理クラスのパラメータ
 	//--------------------------------------------------------------------------------------
 	struct Goal_Parametor {
-		Team team;					//チームタイプ
+		team::TeamType team;					//チームタイプ
 		float itemHiderTime;		//アイテム再配置までの時間
 		Vec3 timeDrawPosition;		//時間表示場所
 		Vec3 dunkPositionOffset;	//ダンクをする位置のオフセット
 		Vec3 dunkBallPositionOffset;
 		std::vector<Vec3> firePositionOffsets;	//ファイヤーポジションオフセット
 
-		Goal_Parametor(const Team& team);
+		Goal_Parametor(const team::TeamType& team);
 	};
 
 	//--------------------------------------------------------------------------------------
@@ -84,12 +83,12 @@ namespace basecross {
 		/// <param name="playerNumber">プレイヤーナンバー</param>
 		/// <param name="itemId">アイテムID</param>
 		/// <param name="hidePosition">隠す場所</param>
-		void SuccessGoal(Team team, int playerNumber, int itemId, const Vec3& hidePosition);
+		void SuccessGoal(team::TeamType team, int playerNumber, int itemId, const Vec3& hidePosition);
 
 		/// <summary>
 		/// ポイント加算の通知を行う
 		/// </summary>
-		void AddPoint(const Team& team);
+		void AddPoint(const team::TeamType& team);
 
 		/// <summary>
 		/// 再配置までのカウントダウン
@@ -121,13 +120,13 @@ namespace basecross {
 		/// チームタイプの設定
 		/// </summary>
 		/// <param name="team">チームタイプ</param>
-		void SetTeam(const Team& team) noexcept { m_param.team = team; }
+		void SetTeam(const team::TeamType& team) noexcept { m_param.team = team; }
 
 		/// <summary>
 		/// チームタイプの取得
 		/// </summary>
 		/// <returns>チームタイプ</returns>
-		Team GetTeam() const noexcept { return m_param.team; }
+		team::TeamType GetTeam() const noexcept { return m_param.team; }
 
 		/// <summary>
 		/// アイテムを再配置するまでの時間の設定
@@ -158,7 +157,7 @@ namespace basecross {
 		/// </summary>
 		/// <returns>ダンク位置</returns>
 		Vec3 GetDunkPosition() const { return transform->GetPosition() + m_param.dunkPositionOffset; }
-		
+
 		/// <summary>
 		/// オンライン用イベント
 		/// </summary>
@@ -167,5 +166,4 @@ namespace basecross {
 		/// <param name="bytes">データ</param>
 		void OnCustomEventAction(int playerNumber, std::uint8_t eventCode, const std::uint8_t* bytes) override;
 	};
-
 }

@@ -7,20 +7,20 @@ namespace basecross {
 
 	PointManager::PointManager() {
 		// 点数の初期化
-		m_teamScoreMap[Team::East] = 0;
-		m_teamScoreMap[Team::West] = 0;
+		m_teamScoreMap[team::TeamType::East] = 0;
+		m_teamScoreMap[team::TeamType::West] = 0;
 	}
 
-	int PointManager::GetPoint(Team team) {
+	int PointManager::GetPoint(team::TeamType team) {
 		return m_teamScoreMap[team];
 	}
-	void PointManager::AddPoint(Team team) {
+	void PointManager::AddPoint(team::TeamType team) {
 		m_teamScoreMap[team]++;
 	}
 
-	PointManager::WinOrLose PointManager::GetSelfTeamWinOrLose(Team team) {
-		int eastPoint = m_teamScoreMap[Team::East];
-		int westPoint = m_teamScoreMap[Team::West];
+	PointManager::WinOrLose PointManager::GetSelfTeamWinOrLose(team::TeamType team) {
+		int eastPoint = m_teamScoreMap[team::TeamType::East];
+		int westPoint = m_teamScoreMap[team::TeamType::West];
 		if (eastPoint == westPoint) {
 			return WinOrLose::Draw;
 		}
@@ -28,7 +28,7 @@ namespace basecross {
 		// 双方の点数が異なれば勝敗は決まる
 		switch (team)
 		{
-		case Team::East:
+		case team::TeamType::East:
 			if (eastPoint > westPoint) {
 				return WinOrLose::Win;
 			}
@@ -36,7 +36,7 @@ namespace basecross {
 				return WinOrLose::Lose;
 			}
 			break;
-		case Team::West:
+		case team::TeamType::West:
 			if (eastPoint < westPoint) {
 				return WinOrLose::Win;
 			}

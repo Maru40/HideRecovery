@@ -1,10 +1,8 @@
-﻿
-/*!
+﻿/*!
 @file Goal.cpp
 @brief Goalクラス実体
 担当：丸山裕喜
 */
-
 
 #include "stdafx.h"
 #include "Project.h"
@@ -42,18 +40,17 @@
 #include "PlayerInputer.h"
 
 namespace basecross {
-
 	//--------------------------------------------------------------------------------------
 	/// オンライン用データ
 	//--------------------------------------------------------------------------------------
 	struct OnlineGoalData
 	{
-		Team team;
+		team::TeamType team;
 		int playerNumber;
 		int itemId;
 		Vec3 hidePosition;
 
-		OnlineGoalData(Team team,int playerNumber, int itemId,const Vec3& hidePosition) :
+		OnlineGoalData(team::TeamType team, int playerNumber, int itemId, const Vec3& hidePosition) :
 			team(team),
 			playerNumber(playerNumber),
 			itemId(itemId),
@@ -65,7 +62,7 @@ namespace basecross {
 	/// ゴール管理クラスのパラメータ
 	//--------------------------------------------------------------------------------------
 
-	Goal_Parametor::Goal_Parametor(const Team& team) :
+	Goal_Parametor::Goal_Parametor(const team::TeamType& team) :
 		team(team),
 		itemHiderTime(3.0f),
 		timeDrawPosition(Vec3(0.0f, 0.0f, 0.0f)),
@@ -173,7 +170,7 @@ namespace basecross {
 		Online::OnlineManager::RaiseEvent(false, (std::uint8_t*)&data, sizeof(OnlineGoalData), EXECUTE_GOAL_EVENT_CODE);
 	}
 
-	void Goal::SuccessGoal(Team team, int playerNumber, int itemId, const Vec3& hidePosition)
+	void Goal::SuccessGoal(team::TeamType team, int playerNumber, int itemId, const Vec3& hidePosition)
 	{
 		if (GetTeam() != team) {
 			return;
@@ -190,7 +187,7 @@ namespace basecross {
 		PlayAnimation(other);
 	}
 
-	void Goal::AddPoint(const Team& team) {
+	void Goal::AddPoint(const team::TeamType& team) {
 		if (auto& pointManager = PointManager::GetInstance()) {
 			pointManager->AddPoint(team);
 		}
