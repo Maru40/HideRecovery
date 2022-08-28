@@ -23,10 +23,10 @@ namespace basecross {
 		switch (team)
 		{
 		case team::TeamType::Blue:
-			teamStr = L"EastTeam";
+			teamStr = L"BlueTeam";
 			break;
 		case team::TeamType::Red:
-			teamStr = L"WestTeam";
+			teamStr = L"RedTeam";
 			break;
 		}
 
