@@ -57,6 +57,8 @@ namespace basecross {
 		std::weak_ptr<RotationController> m_rotationController;	//回転コントローラー
 		std::weak_ptr<PlayerAnimator> m_animator;				//アニメーター
 
+		std::vector<std::weak_ptr<GameObject>> m_players;
+
 		std::weak_ptr<SoundEmitter> m_soundEmitter;
 
 		Vec3 m_direction = Vec3(0, 0, 1);
