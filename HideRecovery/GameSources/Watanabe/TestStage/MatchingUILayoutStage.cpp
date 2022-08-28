@@ -34,10 +34,10 @@ namespace basecross {
 		ScoreManager::GetInstance()->AddKillCount(0);
 
 		CreateMap(L"WaitStage.csv");
-		PointManager::GetInstance()->AddPoint(team::TeamType::East);
+		PointManager::GetInstance()->AddPoint(team::TeamType::Blue);
 		auto uiBuilder = CreateUI(L"ResultUILayout.csv");
 		auto WinOrLose = uiBuilder->GetUIObject<WinOrLoseUI>(L"WinOrLose");
-		WinOrLose->SetTeam(team::TeamType::East);
+		WinOrLose->SetTeam(team::TeamType::Blue);
 
 		//for (auto gameObject : GetGameObjectVec()) {
 		//	auto playerSpawnPoint = dynamic_pointer_cast<PlayerSpawnPointObject>(gameObject);

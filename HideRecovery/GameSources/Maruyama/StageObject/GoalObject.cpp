@@ -24,11 +24,11 @@ namespace basecross {
 		size_t nextIndex = DataExtracter::TransformDataExtraction(tokens, m_transformData);
 
 		wstring teamType = tokens[nextIndex];
-		if (teamType == L"East") {
-			m_team = team::TeamType::East;
+		if (teamType == L"Blue") {
+			m_team = team::TeamType::Blue;
 		}
-		else if (teamType == L"West") {
-			m_team = team::TeamType::West;
+		else if (teamType == L"Red") {
+			m_team = team::TeamType::Red;
 		}
 		else {
 			throw BaseException(

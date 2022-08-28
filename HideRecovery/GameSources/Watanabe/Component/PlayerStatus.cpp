@@ -69,11 +69,11 @@ namespace basecross {
 		if (auto drawer = GetGameObject()->GetComponent<PlayerObject::DrawComp>(false)) {
 			switch (team)
 			{
-			case team::TeamType::West:
+			case team::TeamType::Red:
 				drawer->SetMultiMeshResource(L"Player_Mesh_Blue");
 				break;
 
-			case team::TeamType::East:
+			case team::TeamType::Blue:
 				drawer->SetMultiMeshResource(L"Player_Mesh_Red");
 				break;
 			}

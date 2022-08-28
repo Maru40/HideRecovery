@@ -12,7 +12,7 @@
 
 namespace basecross {
 	PlayerSpawnPointObject::PlayerSpawnPointObject(const shared_ptr<Stage>& stage)
-		:StageObjectBase(stage, L"PlayerSpawnPoint"), m_id(0), m_team(team::TeamType::East)
+		:StageObjectBase(stage, L"PlayerSpawnPoint"), m_id(0), m_team(team::TeamType::Blue)
 	{}
 
 	PlayerSpawnPointObject::PlayerSpawnPointObject(const shared_ptr<Stage>& stage, const wstring& line)
@@ -22,11 +22,11 @@ namespace basecross {
 		size_t nextIndex = DataExtracter::TransformDataExtraction(tokens, m_transformData);
 
 		wstring teamType = tokens[nextIndex];
-		if (teamType == L"East") {
-			m_team = team::TeamType::East;
+		if (teamType == L"Blue") {
+			m_team = team::TeamType::Blue;
 		}
-		else if (teamType == L"West") {
-			m_team = team::TeamType::West;
+		else if (teamType == L"Red") {
+			m_team = team::TeamType::Red;
 		}
 		else {
 			throw BaseException(

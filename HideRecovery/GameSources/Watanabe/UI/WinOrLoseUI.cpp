@@ -22,10 +22,10 @@ namespace basecross {
 		wstring teamStr = L"";
 		switch (team)
 		{
-		case team::TeamType::East:
+		case team::TeamType::Blue:
 			teamStr = L"EastTeam";
 			break;
-		case team::TeamType::West:
+		case team::TeamType::Red:
 			teamStr = L"WestTeam";
 			break;
 		}
