@@ -43,7 +43,8 @@ namespace basecross {
 	{}
 
 	void HidePlace::Open() {
-		if (auto animator = GetGameObject()->GetComponent<BoxAnimator>(false)) {
+		auto animator = GetGameObject()->GetComponent<BoxAnimator>(false);
+		if (animator && animator->IsCurrentAnimator(BoxAnimationState::State::Close)) {
 			animator->ChangeBoxAnimation(BoxAnimationState::State::Open);
 		}
 
@@ -53,6 +54,7 @@ namespace basecross {
 		}
 
 		item->GetGameObject()->SetActive(true);
+		SetHideItem(nullptr);
 	}
 
 	void HidePlace::Close() {
@@ -67,6 +69,11 @@ namespace basecross {
 
 	void HidePlace::SetHideItem(const std::shared_ptr<HideItem>& item) {
 		m_hideItem = item;
+
+		auto animator = GetGameObject()->GetComponent<BoxAnimator>(false);
+		if (item && animator && animator->IsCurrentAnimator(BoxAnimationState::State::Close)) {
+			item->GetGameObject()->SetActive(false);
+		}
 	}
 
 	std::shared_ptr<HideItem> HidePlace::GetHideItem() const {
