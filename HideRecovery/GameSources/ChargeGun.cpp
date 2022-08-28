@@ -1,5 +1,4 @@
-﻿
-/*!
+﻿/*!
 @file ChargeGun.cpp
 @brief ChargeGunクラス実体
 担当：丸山裕喜
@@ -17,6 +16,7 @@
 
 #include "Itabashi/ObjectMover.h"
 #include "Watanabe/Component/PlayerAnimator.h"
+#include "Watanabe/Effekseer/EfkEffect.h"
 #include "SoundManager.h"
 
 #include "Maruyama/Player/Component/UseWepon.h"
@@ -25,7 +25,6 @@
 #include "GameTimer.h"
 
 namespace basecross {
-
 	ChargeGun::ChargeGun(const std::shared_ptr<GameObject>& objPtr) :
 		WeponBase(objPtr),
 		m_timer(new GameTimer(0.0f)),
@@ -73,7 +72,7 @@ namespace basecross {
 		}
 
 		auto useWeapon = m_useWepon.lock();
-		if (useWeapon && !useWeapon->IsAim()){
+		if (useWeapon && !useWeapon->IsAim()) {
 			return nullptr;
 		}
 
@@ -94,6 +93,13 @@ namespace basecross {
 		//アニメーションの再生
 		PlayAnimation();
 
+		// マズルフラッシュエフェクトの再生
+		if (auto efkComp = GetGameObject()->GetComponent<EfkComponent>(false)) {
+			efkComp->Play(L"Hit", true);
+			// 再生先が先じゃないと反映されない
+			//efkComp->SetPosition(L"Hit", instancePosition);
+		}
+
 		return bulletObject;
 	}
 
@@ -107,7 +113,6 @@ namespace basecross {
 	}
 
 	void ChargeGun::RevisionShotDirection() {
-
 	}
 
 	//--------------------------------------------------------------------------------------

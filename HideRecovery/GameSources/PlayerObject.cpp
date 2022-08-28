@@ -109,9 +109,10 @@ namespace basecross {
 
 		// エフェクトの設定
 		auto efkComp = AddComponent<EfkComponent>();
-		efkComp->SetEffectResource(L"Respawn");
+		efkComp->SetEffectResource(L"Respawn", TransformData(Vec3(0, -0.5f, 0), Vec3(0.3f, 2.0f, 0.3f)));
 		efkComp->SetEffectResource(L"Smoke", TransformData(), true);
-		efkComp->SetEffectResource(L"Hit", TransformData(), true);
+		efkComp->SetEffectResource(L"Hit", TransformData(Vec3(0, 0.5f, 0.5f), Vec3(0.5f), Vec3(0, 180, 0)), true);
+		efkComp->IsSyncGameObject(L"Hit", true);
 
 		// 被弾時のエフェクトを再生を登録
 		playerStatus->AddFuncAddDamage(
