@@ -1042,6 +1042,7 @@
     <Filter Include="Watanabe\StageObject\SkyBox">
       <UniqueIdentifier>{87e2f388-252b-4ee5-8c36-d4f13014cb88}</UniqueIdentifier>
     </Filter>
+
     <Filter Include="Watanabe\Manager\ScoreManager">
       <UniqueIdentifier>{c5983f7f-caf1-4588-8a4a-23e1b709f558}</UniqueIdentifier>
     </Filter>
@@ -1050,6 +1051,10 @@
     </Filter>
     <Filter Include="Itabashi\Component\MainStageTransitioner">
       <UniqueIdentifier>{c192c26c-6dc4-4d27-98b3-cda6e718a55f}</UniqueIdentifier>
+	</Filter>
+    <Filter Include="Maruyama\Camera\CameraForwardController">
+      <UniqueIdentifier>{bf0fd107-9794-46f9-8d17-12f47c070c05}</UniqueIdentifier>
+
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1953,6 +1958,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\SkyBox.h">
       <Filter>Watanabe\StageObject\SkyBox</Filter>
     </ClInclude>
+
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Manager\ScoreManager.h">
       <Filter>Watanabe\Manager\ScoreManager</Filter>
     </ClInclude>
@@ -1961,6 +1967,10 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MainStageTransitioner.h">
       <Filter>Itabashi\Component\MainStageTransitioner</Filter>
+	</ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Camera\Component\CameraForwardController.h">
+      <Filter>Maruyama\Camera\CameraForwardController</Filter>
+
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2762,6 +2772,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\SkyBox.cpp">
       <Filter>Watanabe\StageObject\SkyBox</Filter>
     </ClCompile>
+
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Manager\ScoreManager.cpp">
       <Filter>Watanabe\Manager\ScoreManager</Filter>
     </ClCompile>
@@ -2770,6 +2781,13 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\MainStageTransitioner.cpp">
       <Filter>Itabashi\Component\MainStageTransitioner</Filter>
+	</ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MapCursor.cpp">
+      <Filter>Maruyama\Player\Component\UseOwnArea\Map\Cursor</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Camera\Component\CameraForwardController.cpp">
+      <Filter>Maruyama\Camera\CameraForwardController</Filter>
+
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
