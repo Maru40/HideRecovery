@@ -46,7 +46,7 @@ namespace basecross {
 		auto moveVec2 = PlayerInputer::GetInstance()->GetRSticVec();
 		auto moveVec = Vec3(moveVec2.x, moveVec2.y, 0.0f);
 		auto position = transform->GetPosition();
-		constexpr float Speed = 200.0f;
+		constexpr float Speed = 400.0f;
 		position += moveVec * Speed * App::GetApp()->GetElapsedTime();
 		transform->SetPosition(position);
 	}
