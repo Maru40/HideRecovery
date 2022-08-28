@@ -84,6 +84,10 @@ namespace basecross
 		void OnCreate() override;
 		void OnUpdate2() override;
 
+		void SetCurrentArmRange(const float& range) { m_param.currentArmRange = range; }
+
+		//float GetArmRange() const { return m_param.armRange; }
+
 	private:
 		Vec3 CalculateDirect();
 		Vec3 CalculatePosition(const float& targetLength);
