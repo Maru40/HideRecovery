@@ -38,7 +38,7 @@ namespace basecross {
 		Parametor m_param;	//パラメータ
 
 		std::vector<std::weak_ptr<Item>> m_allFieldItems;		//フィールドにある全てのアイテムを配列に入れる。
-		std::vector<std::weak_ptr<Item>> m_acquisitionItems;
+		std::vector<std::weak_ptr<Item>> m_acquisitionItems;	//獲得したアイテム
 
 		bool m_canAcquisition = false;
 

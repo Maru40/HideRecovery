@@ -139,6 +139,8 @@ namespace Online
 
 		void TeleportInputer();
 
+		void AccessHideInputer();
+
 		void MapCursorMove();
 
 	public:

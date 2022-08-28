@@ -33,6 +33,8 @@
 #include "SpringArmComponent.h"
 #include "PlayerObject.h"
 
+#include "Watanabe/Effekseer/EfkComponent.h"
+
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
@@ -133,20 +135,69 @@ namespace basecross {
 					springArm->OnUpdate2();
 
 					m_camera.lock()->SetUpdateActive(false);
+
+					//エフェクトの再生
+					if (auto efkComp = GetGameObject()->GetComponent<EfkComponent>(false)) {
+						efkComp->Play(L"Respawn");
+					}
+
+					//透過解除
+					if (auto drawer = GetGameObject()->GetComponent<PlayerObject::DrawComp>(false)) {
+						auto diffuse = drawer->GetDiffuse();
+						diffuse.w = 1.0f;
+						drawer->SetDiffuse(diffuse);
+					}
+
+					//当たり判定復活
+					if (auto collision = GetGameObject()->GetComponent<CollisionObb>(false)) {
+						collision->SetUpdateActive(true);
+					}
+
+					//重力復活
+					if (auto gravity = GetGameObject()->GetComponent<Gravity>(false)) {
+						gravity->SetUpdateActive(true);
+					}
 				};
 
 				//カメラを移動させる
 				auto mover = camera->GetGameObject()->GetComponent<ToTargetMove>(false);
 				if (mover) {
 					auto position = GetTeleportPosition();
-					position += -tpsForward;
+					auto playerObject = dynamic_pointer_cast<PlayerObject>(GetGameObject());
+					auto springArm = playerObject->GetArm()->GetComponent<SpringArmComponent>();
+					auto childObject = springArm->GetChildObject();
+					Vec3 offset(0.0f);
+					if (auto lookAt = childObject->GetComponent<LookAtCameraManager>(false)) {
+						offset = lookAt->GetParametor().centerOffset;
+					}
+					
+					position += offset + -tpsForward;
 
 					mover->MoveStart(position, moveEndEvent);
 				}
 			}
 
+			//エフェクトの再生
+			if (auto efkComp = GetGameObject()->GetComponent<EfkComponent>(false)) {
+				efkComp->Play(L"Respawn");
+			}
 
-				//エフェクトの再生
+			//透過
+			if (auto drawer = GetGameObject()->GetComponent<PlayerObject::DrawComp>(false)) {
+				auto diffuse = drawer->GetDiffuse();
+				diffuse.w = 0.0f;
+				drawer->SetDiffuse(diffuse);
+			}
+
+			//当たり判定解除
+			if (auto collision = GetGameObject()->GetComponent<CollisionObb>(false)) {
+				collision->SetUpdateActive(false);
+			}
+
+			//重力解除
+			if (auto gravity = GetGameObject()->GetComponent<Gravity>(false)) {
+				gravity->SetUpdateActive(false);
+			}
 		};
 
 		//アニメーションイベントの登録
@@ -168,8 +219,6 @@ namespace basecross {
 		if (auto animator = GetGameObject()->GetComponent<PlayerAnimator>(false)) {
 			animator->ChangePlayerAnimation(PlayerAnimationState::State::StartTeleport);	//テレポートアニメーション
 		}
-
-			//エフェクトの再生
 	}
 
 	void Teleport::OpenMap() {

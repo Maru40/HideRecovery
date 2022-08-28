@@ -18,6 +18,8 @@
 
 #include "Maruyama/Player/Component/UseWepon.h"
 #include "Maruyama/Player/Component/Teleport.h"
+#include "Maruyama/Player/Component/AccessHidePlace.h"
+
 #include "Watanabe/Component/PlayerAnimator.h"
 
 template<class T>
@@ -565,6 +567,14 @@ namespace Online
 		}
 	}
 
+	void PlayerOnlineController::AccessHideInputer() {
+		if (PlayerInputer::GetInstance()->IsDecision()) {
+			if (auto accessHide = GetGameObject()->GetComponent<AccessHidePlace>(false)) {
+				accessHide->Access();
+			}
+		}
+	}
+
 	void PlayerOnlineController::MapCursorMove() {
 		
 	}
@@ -618,6 +628,8 @@ namespace Online
 		TryAim();
 
 		TeleportInputer();
+
+		AccessHideInputer();
 
 		MapCursorMove();
 	}

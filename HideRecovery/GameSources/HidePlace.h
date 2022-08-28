@@ -10,6 +10,8 @@
 
 namespace basecross {
 
+	class HideItem;
+
 	//--------------------------------------------------------------------------------------
 	/// パラメータ
 	//--------------------------------------------------------------------------------------
@@ -32,12 +34,18 @@ namespace basecross {
 	private:
 		Parametor m_param = Parametor();
 
+		std::weak_ptr<HideItem> m_hideItem;
+
 	public:
 		HidePlace(const std::shared_ptr<GameObject>& objPtr);
 
 		HidePlace(const std::shared_ptr<GameObject>& objPtr, const Parametor& parametor);
 
 	public:
+		void Open();
+
+		void Close();
+
 		//--------------------------------------------------------------------------------------
 		/// アクセッサ
 		//--------------------------------------------------------------------------------------
@@ -47,6 +55,10 @@ namespace basecross {
 		/// </summary>
 		/// <returns>隠す場所</returns>
 		Vec3 GetHidePosition() const { return transform->GetPosition() + m_param.hidePositionOffset; }
+
+		void SetHideItem(const std::shared_ptr<HideItem>& item);
+
+		std::shared_ptr<HideItem> GetHideItem() const;
 	};
 
 }

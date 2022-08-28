@@ -145,6 +145,8 @@ namespace basecross {
 		auto itemHiderEvent = [weakObjectHider, hidePlace]() {
 			auto hider = weakObjectHider.lock();
 			hider->Appear(hidePlace->GetHidePosition());
+
+			hidePlace->SetHideItem(hider->GetGameObject()->GetComponent<HideItem>(false));
 		};
 
 		//カウントダウンスタート

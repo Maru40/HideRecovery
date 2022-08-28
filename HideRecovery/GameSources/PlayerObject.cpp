@@ -50,6 +50,8 @@
 
 #include "EyeSearchRange.h"
 
+#include "Maruyama/Player/Component/AccessHidePlace.h"
+
 namespace basecross {
 	PlayerObject::PlayerObject(const std::shared_ptr<Stage>& stage) :
 		GameObject(stage)
@@ -109,6 +111,7 @@ namespace basecross {
 		//AddComponent<FieldMap>();
 		//AddComponent<Teleport>();
 		AddComponent<EyeSearchRange>();
+		AddComponent<AccessHidePlace>();
 
 		// エフェクトの設定
 		auto efkComp = AddComponent<EfkComponent>();

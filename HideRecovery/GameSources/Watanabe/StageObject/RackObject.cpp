@@ -34,9 +34,10 @@ namespace basecross {
 		drawComp->SetOwnShadowActive(true);
 
 		auto animator = AddComponent<BoxAnimator>();
+		animator->ChangeBoxAnimation(BoxAnimationState::State::Close);
 		 
 		// 隠せるオブジェクトにする
-		AddComponent<HidePlace>(HidePlace::Parametor(Vec3(0.0f, 0.15f, 0.0f)));
+		AddComponent<HidePlace>(HidePlace::Parametor(Vec3(0.0f, 0.35f, 0.0f)));
 
 		//constexpr float fScale = 0.75f;
 		//transform->SetScale(Vec3(fScale));

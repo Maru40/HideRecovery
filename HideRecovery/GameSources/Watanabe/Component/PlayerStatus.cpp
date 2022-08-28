@@ -11,6 +11,9 @@
 #include "PlayerObject.h"
 #include "Maruyama/Player/Component/PlayerDeader.h"
 
+#include "ItemBag.h"
+#include "HideItem.h"
+
 namespace basecross {
 	PlayerStatus::PlayerStatus(const shared_ptr<GameObject>& owner)
 		:Component(owner), m_status(10), m_team(team::TeamType(0)),
@@ -70,11 +73,11 @@ namespace basecross {
 			switch (team)
 			{
 			case team::TeamType::Red:
-				drawer->SetMultiMeshResource(L"Player_Mesh_Blue");
+				drawer->SetMultiMeshResource(L"Player_Mesh_Red");
 				break;
 
 			case team::TeamType::Blue:
-				drawer->SetMultiMeshResource(L"Player_Mesh_Red");
+				drawer->SetMultiMeshResource(L"Player_Mesh_Blue");
 				break;
 			}
 		}

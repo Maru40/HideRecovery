@@ -4,7 +4,8 @@
 #include "BoxAnimationState.h"
 
 namespace basecross {
-	class BoxAnimator :public Animator {
+	class BoxAnimator :public Animator 
+	{
 	public:
 		BoxAnimator(const shared_ptr<GameObject>& owner);
 
@@ -15,5 +16,7 @@ namespace basecross {
 		/// </summary>
 		/// <param name="state">変更するアニメーションのステート</param>
 		void ChangeBoxAnimation(BoxAnimationState::State state);
+
+		bool IsCurrentAnimator(const BoxAnimationState::State& state) const;
 	};
 }

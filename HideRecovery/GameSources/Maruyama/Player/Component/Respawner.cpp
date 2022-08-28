@@ -69,6 +69,16 @@ namespace basecross {
 			animator->ChangePlayerAnimation(PlayerAnimationState::State::Wait);
 		}
 
+		//d—Í‚ð‚Â‚¯‚é
+		if (auto gravity = GetGameObject()->GetComponent<Gravity>(false)) {
+			gravity->SetUpdateActive(true);
+		}
+
+		//“–‚½‚è”»’è‚ð‚Â‚¯‚é
+		if (auto collision = GetGameObject()->GetComponent<CollisionObb>(false)) {
+			collision->SetUpdateActive(true);
+		}
+
 		if (auto efkComp = GetGameObject()->GetComponent<EfkComponent>(false)) {
 			efkComp->Play(L"Respawn");
 		}

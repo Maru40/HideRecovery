@@ -17,6 +17,8 @@
 
 #include "VelocityManager.h"
 #include "UseWepon.h"
+#include "ItemBag.h"
+#include "HideItem.h"
 
 namespace basecross {
 
@@ -79,6 +81,7 @@ namespace basecross {
 		auto useWeapon = GetGameObject()->GetComponent<UseWepon>(false);
 		auto animator = m_animator.lock();
 
+		//アニメーション遷移
 		if (animator && useWeapon) {
 			//IsAimなら
 			if (useWeapon->IsAim()) {
@@ -89,8 +92,28 @@ namespace basecross {
 			}
 		}
 
+		//速度リセット
 		if (auto velocityManager = GetGameObject()->GetComponent<VelocityManager>(false)) {
-			velocityManager->ResetAll();
+			velocityManager->ResetAll();	
+		}
+
+		//アイテムを落とす。
+		if (auto itemBag = GetGameObject()->GetComponent<ItemBag>(false)) {
+			auto hideItem = itemBag->GetHideItem();
+			if (hideItem) {
+				hideItem->GetGameObject()->GetComponent<Transform>()->SetPosition(transform->GetPosition());
+				hideItem->GetGameObject()->SetActive(true);
+			}
+		}
+
+		//重力を消す
+		if (auto gravity = GetGameObject()->GetComponent<Gravity>(false)) {
+			gravity->SetUpdateActive(false);
+		}
+
+		//当たり判定を消す
+		if (auto collision = GetGameObject()->GetComponent<CollisionObb>(false)) {
+			collision-> SetUpdateActive(false);
 		}
 
 		m_updateFunction = [&]() { ObserveAnimation(); };	//更新処理設定

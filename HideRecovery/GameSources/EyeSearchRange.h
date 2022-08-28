@@ -37,11 +37,8 @@ namespace basecross {
 		float height; //索敵範囲(高さ)
 		float rad;    //索敵範囲(角度)
 
-		/// <summary>
-		/// コンストラクタ
-		/// </summary>
 		EyeSearchRangeParametor()
-			:EyeSearchRangeParametor(20.0f,3.0f,XMConvertToRadians(30.0f))
+			:EyeSearchRangeParametor(20.0f, 3.0f, XMConvertToRadians(30.0f))
 		{}
 
 		/// <summary>
@@ -60,7 +57,6 @@ namespace basecross {
 		{}
 	};
 
-
 	//------------------------------------------------------------------------------------------------
 	/// 視界範囲をコントロールするコンポーネント
 	//------------------------------------------------------------------------------------------------
@@ -77,6 +73,11 @@ namespace basecross {
 		/// <returns>範囲内ならtrue</returns>
 		bool IsRange(const std::shared_ptr<GameObject>& target);
 
+		/// <summary>
+		/// ターゲットが自分を中心に球体状の範囲内にいるかどうか判断
+		/// </summary>
+		/// <param name="targetPosition">索敵ターゲットの位置</param>
+		/// <returns>範囲内ならtrue</returns>
 		bool IsRange(const Vec3& targetPosition);
 
 		/// <summary>
