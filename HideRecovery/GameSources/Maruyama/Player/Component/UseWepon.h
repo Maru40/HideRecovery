@@ -113,6 +113,8 @@ namespace basecross {
 		/// <returns>回転する向き</returns>
 		Vec3 CalculateRotationDirection();
 
+		void SearchPlayers();
+
 	public:
 		//--------------------------------------------------------------------------------------
 		/// アクセッサ

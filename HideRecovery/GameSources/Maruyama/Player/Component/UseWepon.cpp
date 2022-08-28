@@ -181,25 +181,25 @@ namespace basecross {
 		auto camera = GetStage()->GetView()->GetTargetCamera();
 		auto baseDirection = camera->GetAt() - camera->GetEye();
 		auto selfTeamMember = GetGameObject()->GetComponent<I_TeamMember>(false);
-		auto eye = GetGameObject()->GetComponent<EyeSearchRange>(false);
+		//auto eye = GetGameObject()->GetComponent<EyeSearchRange>(false);
 
 		Vec3 resultVec = baseDirection;
 
 		//playerの検索
 		if (m_players.size() == 0) {
-			auto players = maru::Utility::FindGameObjects<PlayerObject>(GetStage());
-			for (auto player : players) {
-				auto teamMember = player->GetComponent<I_TeamMember>(false);
-				if (!teamMember) {
-					continue;
-				}
-
-				if (teamMember->GetTeam() != selfTeamMember->GetTeam()) {	//同じチームでないなら
-					m_players.push_back(player);
-				}
-			}
+			SearchPlayers();	//playerを検索
 		}
 
+		auto cameraObject = camera->GetCameraObject();
+		cameraObject->GetComponent<Transform>()->SetForward(baseDirection);
+		auto eye = cameraObject->GetComponent<EyeSearchRange>(false);
+		if (!eye) {
+			eye = cameraObject->AddComponent<EyeSearchRange>();
+			constexpr float height = 20.0f;
+			eye->SetEyeHeight(height);
+		}
+
+		//距離管理データ
 		struct Data {
 			std::weak_ptr<GameObject> object;
 			Vec3 toTargetVec;
@@ -223,11 +223,30 @@ namespace basecross {
 		}
 
 		if (datas.size() != 0) {
-			std::sort(datas.begin(), datas.end(), [](const Data left, const Data right) { return left.GetToTargetLength() < right.GetToTargetLength(); });
+			std::sort(
+				datas.begin(), datas.end(), 
+				[](const Data left, const Data right) { return left.GetToTargetLength() < right.GetToTargetLength(); }
+			);
+
 			resultVec = datas[0].toTargetVec;
 		}
 
 		return resultVec;
+	}
+
+	void UseWepon::SearchPlayers() {
+		auto selfTeamMember = GetGameObject()->GetComponent<I_TeamMember>(false);
+		auto players = maru::Utility::FindGameObjects<PlayerObject>(GetStage());
+		for (auto player : players) {
+			auto teamMember = player->GetComponent<I_TeamMember>(false);
+			if (!teamMember) {
+				continue;
+			}
+
+			if (teamMember->GetTeam() != selfTeamMember->GetTeam()) {	//同じチームでないなら
+				m_players.push_back(player);
+			}
+		}
 	}
 
 	//--------------------------------------------------------------------------------------
