@@ -113,6 +113,8 @@ namespace basecross {
 		efkComp->SetEffectResource(L"Smoke", TransformData(), true);
 		efkComp->SetEffectResource(L"Hit", TransformData(Vec3(0, 0.5f, 0.5f), Vec3(0.5f), Vec3(0, 180, 0)), true);
 		efkComp->IsSyncGameObject(L"Hit", true);
+		efkComp->SetEffectResource(L"Tackle");
+		efkComp->IsSyncGameObject(L"Tackle", true);
 
 		// 被弾時のエフェクトを再生を登録
 		playerStatus->AddFuncAddDamage(

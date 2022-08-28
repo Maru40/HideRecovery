@@ -290,6 +290,7 @@ namespace basecross
 		EfkEffectResource::RegisterEffectResource(L"Smoke", dir + L"Smoke.efk");
 		EfkEffectResource::RegisterEffectResource(L"Hit", dir + L"Hit.efk");
 		EfkEffectResource::RegisterEffectResource(L"Bullet", dir + L"Bullet.efk");
+		EfkEffectResource::RegisterEffectResource(L"Tackle", dir + L"Tackle.efk");
 	}
 
 	void LoadStage::OnCreate()
