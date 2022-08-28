@@ -11,6 +11,9 @@
 #include "PlayerObject.h"
 #include "Maruyama/Player/Component/PlayerDeader.h"
 
+#include "ItemBag.h"
+#include "HideItem.h"
+
 namespace basecross {
 	PlayerStatus::PlayerStatus(const shared_ptr<GameObject>& owner)
 		:Component(owner), m_status(10), m_team(team::TeamType(0)),
@@ -36,6 +39,15 @@ namespace basecross {
 		if (m_status.hp <= 0) {
 			if (auto deader = GetGameObject()->GetComponent<PlayerDeader>(false)) {
 				deader->StartDead();
+			}
+
+			//アイテムを落とす。
+			if (auto itemBag = GetGameObject()->GetComponent<ItemBag>(false)) {
+				auto hideItem = itemBag->GetHideItem();
+				if (hideItem) {
+					hideItem->GetGameObject()->GetComponent<Transform>()->SetPosition(transform->GetPosition());
+					hideItem->GetGameObject()->SetActive(true);
+				}
 			}
 
 			m_status.hp = 0;
@@ -70,11 +82,11 @@ namespace basecross {
 			switch (team)
 			{
 			case team::TeamType::Red:
-				drawer->SetMultiMeshResource(L"Player_Mesh_Blue");
+				drawer->SetMultiMeshResource(L"Player_Mesh_Red");
 				break;
 
 			case team::TeamType::Blue:
-				drawer->SetMultiMeshResource(L"Player_Mesh_Red");
+				drawer->SetMultiMeshResource(L"Player_Mesh_Blue");
 				break;
 			}
 		}
