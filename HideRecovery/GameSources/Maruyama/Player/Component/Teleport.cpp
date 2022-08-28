@@ -130,6 +130,7 @@ namespace basecross {
 					auto springArm = playerObject->GetArm()->GetComponent<SpringArmComponent>();
 					springArm->GetGameObject()->GetComponent<Transform>()->SetPosition(GetTeleportPosition());
 					springArm->SetCurrentArmRange(springArm->GetArmRange());
+					springArm->OnUpdate2();
 
 					m_camera.lock()->SetUpdateActive(false);
 				};
