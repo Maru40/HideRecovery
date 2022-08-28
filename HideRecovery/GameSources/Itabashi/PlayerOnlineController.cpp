@@ -559,7 +559,7 @@ namespace Online
 
 		if (PlayerInputer::GetInstance()->IsDesitionDown()) {
 			auto teleport = GetGameObject()->GetComponent<Teleport>(false);
-			if (teleport) {
+			if (teleport && teleport->IsTeleport()) {
 				teleport->StartTeleport();
 			}
 		}

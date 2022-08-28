@@ -48,6 +48,8 @@
 #include "Maruyama/Player/Component/Teleport.h"
 #include "Maruyama/Player/Component/FieldMap.h"
 
+#include "EyeSearchRange.h"
+
 namespace basecross {
 	PlayerObject::PlayerObject(const std::shared_ptr<Stage>& stage) :
 		GameObject(stage)
@@ -105,7 +107,8 @@ namespace basecross {
 		auto useWeapon = AddComponent<UseWepon>(chargeGun);
 		AddComponent<GoalAnimationController>();
 		//AddComponent<FieldMap>();
-		AddComponent<Teleport>();
+		//AddComponent<Teleport>();
+		AddComponent<EyeSearchRange>();
 
 		// エフェクトの設定
 		auto efkComp = AddComponent<EfkComponent>();

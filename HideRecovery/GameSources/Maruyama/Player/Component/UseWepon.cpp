@@ -23,6 +23,9 @@
 #include "RotationController.h"
 #include "VelocityManager.h"
 #include "MaruUtility.h"
+#include "EyeSearchRange.h"
+
+#include "Itabashi/GamePlayerManager.h"
 
 namespace basecross {
 
@@ -138,7 +141,7 @@ namespace basecross {
 		}
 
 		if (m_isUseCamera) {
-			m_direction = camera->GetAt() - camera->GetEye();
+			m_direction = CalculateRotationDirection();
 		}
 
 		rotationController->SetDirect(m_direction);
@@ -172,6 +175,59 @@ namespace basecross {
 
 		isAim->AddFunction(true, trueFunction);
 		isAim->AddFunction(false, falseFunction);
+	}
+
+	Vec3 UseWepon::CalculateRotationDirection() {
+		auto camera = GetStage()->GetView()->GetTargetCamera();
+		auto baseDirection = camera->GetAt() - camera->GetEye();
+		auto selfTeamMember = GetGameObject()->GetComponent<I_TeamMember>(false);
+		auto eye = GetGameObject()->GetComponent<EyeSearchRange>(false);
+
+		Vec3 resultVec = baseDirection;
+
+		//playerの検索
+		if (m_players.size() == 0) {
+			auto players = maru::Utility::FindGameObjects<PlayerObject>(GetStage());
+			for (auto player : players) {
+				auto teamMember = player->GetComponent<I_TeamMember>(false);
+				if (!teamMember) {
+					continue;
+				}
+
+				if (teamMember->GetTeam() != selfTeamMember->GetTeam()) {	//同じチームでないなら
+					m_players.push_back(player);
+				}
+			}
+		}
+
+		struct Data {
+			std::weak_ptr<GameObject> object;
+			Vec3 toTargetVec;
+
+			Data(const std::shared_ptr<GameObject>& object, const Vec3& toTargetVec) :
+				object(object),
+				toTargetVec(toTargetVec)
+			{}
+
+			float GetToTargetLength() const { return toTargetVec.length(); }
+		};
+
+		//一番近い敵をターゲットにする。
+		std::vector<Data> datas;
+		for (auto& player : m_players) {
+			if (eye->IsInEyeRange(player.lock())) {
+				auto toTargetVec = maru::Utility::CalcuToTargetVec(GetGameObject(), player.lock());
+
+				datas.push_back(Data(player.lock(), toTargetVec));
+			}
+		}
+
+		if (datas.size() != 0) {
+			std::sort(datas.begin(), datas.end(), [](const Data left, const Data right) { return left.GetToTargetLength() < right.GetToTargetLength(); });
+			resultVec = datas[0].toTargetVec;
+		}
+
+		return resultVec;
 	}
 
 	//--------------------------------------------------------------------------------------

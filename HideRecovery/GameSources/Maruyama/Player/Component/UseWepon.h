@@ -57,6 +57,8 @@ namespace basecross {
 		std::weak_ptr<RotationController> m_rotationController;	//回転コントローラー
 		std::weak_ptr<PlayerAnimator> m_animator;				//アニメーター
 
+		std::vector<std::weak_ptr<GameObject>> m_players;
+
 		std::weak_ptr<SoundEmitter> m_soundEmitter;
 
 		Vec3 m_direction = Vec3(0, 0, 1);
@@ -104,6 +106,12 @@ namespace basecross {
 		/// エイム状態を切り替えたときに呼び出したい処理の設定
 		/// </summary>
 		void SettingReactiveIsAim();
+
+		/// <summary>
+		/// 回転する向きを計算して返す。
+		/// </summary>
+		/// <returns>回転する向き</returns>
+		Vec3 CalculateRotationDirection();
 
 	public:
 		//--------------------------------------------------------------------------------------

@@ -17,6 +17,8 @@ namespace basecross {
 		Vec3 m_targetPosition;  //目的地
 		float m_speed;          //移動スピード
 
+		std::function<void()> m_endFunction = nullptr;
+
 	public:
 
 		ToTargetMove(const std::shared_ptr<GameObject>& obj):
@@ -38,7 +40,7 @@ namespace basecross {
 		void OnUpdate() override;
 
 		void MoveStart() { MoveStart(m_targetPosition); }
-		void MoveStart(const Vec3& targetPosition);
+		void MoveStart(const Vec3& targetPosition, const std::function<void()>& endFunction = nullptr);
 
 
 		//アクセッサ

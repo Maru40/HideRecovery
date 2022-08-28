@@ -28,6 +28,10 @@
 
 #include "CameraHelper.h"
 #include "Maruyama/Camera/Component/CameraForwardController.h"
+#include "ToTargetMove.h"
+#include "LookAtCameraManager.h"
+#include "SpringArmComponent.h"
+#include "PlayerObject.h"
 
 namespace basecross {
 
@@ -43,12 +47,14 @@ namespace basecross {
 
 	void Teleport::OnCreate() {
 		//カメラの生成
-		//auto cameraObject = GetStage()->AddGameObject<GameObject>();
-		//auto camera = cameraObject->AddComponent<VirtualCamera>(11);
-		//camera->SetUpdateActive(false);
-		//cameraObject->AddComponent<CameraForwardController>(camera);
+		auto cameraObject = GetStage()->AddGameObject<GameObject>();
+		auto camera = cameraObject->AddComponent<VirtualCamera>(11);
+		camera->SetUpdateActive(false);
+		cameraObject->AddComponent<CameraForwardController>(camera);
+		auto mover = cameraObject->AddComponent<ToTargetMove>();
+		//mover->SetUpdateActive(false);
 
-		//m_camera = camera;
+		m_camera = camera;
 	}
 
 	void Teleport::OnLateStart() {
@@ -78,7 +84,7 @@ namespace basecross {
 		auto exit = [&, animator]() {
 			auto fadeManager = ScreenFadeManager::GetInstance(GetStage());
 
-			const bool IsFade = true;
+			const bool IsFade = false;
 			if (IsFade) {
 				//フェード終了イベント
 				auto endEvent = [&, fadeManager, animator]() {
@@ -107,17 +113,36 @@ namespace basecross {
 				cameraTrans->SetPosition(tpsCameraTrans->GetPosition());
 				auto forwardController = camera->GetGameObject()->GetComponent<CameraForwardController>(false);
 				if (forwardController) {
-
+					forwardController->SetDirection(tpsForward);
 				}
-
-				//カメラを移動させる
-				
+				camera->SetUpdateActive(true);
 
 				//移動しきったら、演出開始
+				auto moveEndEvent = [&, animator, tpsCamera, tpsCameraTrans, cameraTrans]() {
+					animator->ChangePlayerAnimation(PlayerAnimationState::State::EndTeleport);
+					GetGameObject()->GetComponent<Transform>()->SetPosition(GetTeleportPosition());	//テレポート
+					
+					//tpsCameraTrans->SetPosition(cameraTrans->GetPosition());
+					//tpsCamera->SetAt(GetTeleportPosition());
+					//tpsCamera->SetEye(cameraTrans->GetPosition());
+					//auto tpsCameraObject = tpsCamera->GetCameraObject();
+					auto playerObject = dynamic_pointer_cast<PlayerObject>(GetGameObject());
+					auto springArm = playerObject->GetArm()->GetComponent<SpringArmComponent>();
+					springArm->GetGameObject()->GetComponent<Transform>()->SetPosition(GetTeleportPosition());
+					springArm->SetCurrentArmRange(springArm->GetArmRange());
+					springArm->OnUpdate2();
 
+					m_camera.lock()->SetUpdateActive(false);
+				};
 
-				//演出が終わったら操作開始
+				//カメラを移動させる
+				auto mover = camera->GetGameObject()->GetComponent<ToTargetMove>(false);
+				if (mover) {
+					auto position = GetTeleportPosition();
+					position += -tpsForward;
 
+					mover->MoveStart(position, moveEndEvent);
+				}
 			}
 
 
@@ -176,6 +201,9 @@ namespace basecross {
 		return GetFieldMap()->IsMapDraw();	//現在はマップが開いているなら飛べる。
 	}
 
+	void Teleport::SetTeleportCamera(const std::shared_ptr<VirtualCamera> camera) {
+		m_camera = camera;
+	}
 
 	std::shared_ptr<VirtualCamera> Teleport::GetTeleportCamera() const {
 		return m_camera.lock();
