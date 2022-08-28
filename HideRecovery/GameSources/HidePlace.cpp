@@ -61,6 +61,13 @@ namespace basecross {
 		if (auto animator = GetGameObject()->GetComponent<BoxAnimator>(false)) {
 			animator->ChangeBoxAnimation(BoxAnimationState::State::Close);
 		}
+
+		auto item = GetHideItem();
+		if (!item) {
+			return;
+		}
+
+		item->GetGameObject()->SetActive(false);
 	}
 
 	//--------------------------------------------------------------------------------------
