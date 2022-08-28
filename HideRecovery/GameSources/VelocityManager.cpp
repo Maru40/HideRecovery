@@ -52,7 +52,9 @@ namespace basecross {
 		//d—Í•ª‰ÁŽZ‚·‚éB
 		auto gravity = GetGameObject()->GetComponent<Gravity>(false);
 		if (gravity && gravity->GetUpdateActive()) {
-			m_param.velocity.y += gravity->GetGravityVelocity().y; //- m_param.velocity.y;
+			//m_param.velocity.y += gravity->GetGravityVelocity().y; //- m_param.velocity.y;
+			constexpr float power = 60.0f;
+			AddForce(gravity->GetGravityVelocity() * power);
 		}
 
 		m_param.velocity += m_param.force * delta; //—Í‚ð‰Á‚¦‚é
