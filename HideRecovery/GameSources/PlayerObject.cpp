@@ -48,6 +48,8 @@
 #include "Maruyama/Player/Component/Teleport.h"
 #include "Maruyama/Player/Component/FieldMap.h"
 
+#include "EyeSearchRange.h"
+
 namespace basecross {
 
 	PlayerObject::PlayerObject(const std::shared_ptr<Stage>& stage):
@@ -107,6 +109,7 @@ namespace basecross {
 		AddComponent<GoalAnimationController>();
 		//AddComponent<FieldMap>();
 		//AddComponent<Teleport>();
+		AddComponent<EyeSearchRange>();
 
 		constexpr float ScaleValue = 1.0f;
 		transform->SetScale(Vec3(ScaleValue));
