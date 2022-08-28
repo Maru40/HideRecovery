@@ -33,14 +33,19 @@ namespace basecross {
 			trans->SetPosition(m_targetPosition);
 
 			m_isMoveEnd = true;
+
+			if (m_endFunction) {
+				m_endFunction();
+			}
 		}
 	}
 
-	void ToTargetMove::MoveStart(const Vec3& targetPosition)
+	void ToTargetMove::MoveStart(const Vec3& targetPosition, const std::function<void()>& endFunction)
 	{
 		m_targetPosition = targetPosition;
 		m_isMove = true;
 		m_isMoveEnd = false;
+		m_endFunction = endFunction;
 	}
 
 }
