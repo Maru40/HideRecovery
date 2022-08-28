@@ -17,7 +17,7 @@ namespace basecross {
 
 	BulletBase_Parametor::BulletBase_Parametor() :
 		moveDirect(Vec3::Forward()),
-		moveSpeed(30.0f),
+		moveSpeed(50.0f),
 		maxRange(30.0f),
 		damageData(1, nullptr)
 	{}
