@@ -106,7 +106,7 @@ namespace basecross {
 		auto useWeapon = AddComponent<UseWepon>(chargeGun);
 		AddComponent<GoalAnimationController>();
 		//AddComponent<FieldMap>();
-		AddComponent<Teleport>();
+		//AddComponent<Teleport>();
 
 		constexpr float ScaleValue = 1.0f;
 		transform->SetScale(Vec3(ScaleValue));
