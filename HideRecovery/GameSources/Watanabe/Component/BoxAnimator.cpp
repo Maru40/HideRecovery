@@ -16,4 +16,11 @@ namespace basecross {
 	void BoxAnimator::ChangeBoxAnimation(BoxAnimationState::State state) {
 		ChangeAnimation(BoxAnimationState::BoxAnimationState2wstring(state));
 	}
+
+	bool BoxAnimator::IsCurrentAnimator(const BoxAnimationState::State& state) const {
+		auto drawer = GetGameObject()->GetComponent<PNTBoneModelDraw>();
+		auto strState = BoxAnimationState::BoxAnimationState2wstring(state);
+
+		return strState == drawer->GetCurrentAnimation();
+	}
 }
