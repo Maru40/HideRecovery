@@ -20,5 +20,8 @@ namespace basecross {
 
 		void OnCreate()override;
 		void OnUpdate()override;
+
+		team::TeamType GetTeamType() { return m_team; }
+		int GetID() { return m_id; }
 	};
 }

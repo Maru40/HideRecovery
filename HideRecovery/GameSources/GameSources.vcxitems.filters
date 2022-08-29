@@ -1983,6 +1983,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\MatchingSyncPlayerObject.h">
       <Filter>Watanabe\Component\MatchingSyncPlayerObject</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\AccessHidePlace.h">
+      <Filter>Maruyama\Player\Component\AccessHidePlace</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2806,6 +2809,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\MatchingSyncPlayerObject.cpp">
       <Filter>Watanabe\Component\MatchingSyncPlayerObject</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\AccessHidePlace.cpp">
+      <Filter>Maruyama\Player\Component\AccessHidePlace</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

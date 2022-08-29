@@ -8,6 +8,7 @@
 #include "Watanabe/DebugClass/Debug.h"
 #include "Watanabe/UI/UIObjects.h"
 #include "Watanabe/Component/MatchingUIController.h"
+#include "Watanabe/Component/MatchingSyncPlayerObject.h"
 
 namespace basecross
 {
@@ -30,7 +31,6 @@ namespace basecross
 		debugObject->Log(L"OnlineMatchStage");
 
 		auto gameObject = AddGameObject<GameObject>();
-
 		auto onlineMatching = gameObject->AddComponent<Online::OnlineMatching>();
 		auto matchStageRoomer = gameObject->AddComponent<MatchStageRoomer>();
 		auto matchStageTransitioner = gameObject->AddComponent<MatchStageTransitioner>();
@@ -39,6 +39,15 @@ namespace basecross
 		CreateMap(L"WaitStage.csv");
 		auto uiBuilder = CreateUI(L"MatchingUILayout.csv");
 		gameObject->AddComponent<MatchingUIController>(uiBuilder);
+
+		// スポーンオブジェクトを取得
+		vector<shared_ptr<PlayerSpawnPointObject>> spawnPointObjects;
+		for (auto gameObject : GetGameObjectVec()) {
+			if (auto spawnObject = dynamic_pointer_cast<PlayerSpawnPointObject>(gameObject)) {
+				spawnPointObjects.push_back(spawnObject);
+			}
+		}
+		gameObject->AddComponent<MatchingSyncPlayerObject>(spawnPointObjects);
 
 		SimpleSoundManager::ChangeBGM(L"MatchingStageBGM", 0.1f);
 	}

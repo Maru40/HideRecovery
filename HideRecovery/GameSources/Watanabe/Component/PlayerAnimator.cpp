@@ -14,7 +14,6 @@
 #include "MaruUtility.h"
 
 namespace basecross {
-
 	//--------------------------------------------------------------------------------------
 	/// 遷移データ
 	//--------------------------------------------------------------------------------------
@@ -64,7 +63,7 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 
 	PlayerAnimator::PlayerAnimator(const shared_ptr<GameObject>& owner) :
-		Animator(owner), 
+		Animator(owner),
 		m_waitTransitionSpeed(0.1f),
 		m_walkTransitionSpeed(5.0f),
 		m_beforeAnimationTime(0.0f)
@@ -109,10 +108,10 @@ namespace basecross {
 				PlayerAnimationState::PlayerAnimationState2wstring(PlayerAnimationState::State::Dash),
 			};
 
-;			auto isTransition = [&, velocityManager]() { 
+			;			auto isTransition = [&, velocityManager]() {
 				auto velocity = velocityManager->GetVelocity();
 				velocity.y = 0;
-				return velocity.length() < m_waitTransitionSpeed; 
+				return velocity.length() < m_waitTransitionSpeed;
 			};
 
 			for (const auto& state : states) {
@@ -198,6 +197,10 @@ namespace basecross {
 		auto& datas = m_transitionDatasMap.at(currentAnimation);
 
 		for (auto& data : datas) {
+			if (!data.isTransition) {
+				continue;
+			}
+
 			if (data.isTransition()) {
 				if ((IsCurretAnimationState(PlayerAnimationState::State::Dead) || IsCurretAnimationState(PlayerAnimationState::State::GSDead)) &&
 					data.transitionState != PlayerAnimationState::State::Wait)
@@ -321,11 +324,11 @@ namespace basecross {
 		m_animationEventsMap[PlayerAnimationState::PlayerAnimationState2wstring(state)].push_back(animationEvent);
 	}
 
-	void PlayerAnimator::AddTimeEvent(const PlayerAnimationState::State& state, const float time, const std::function<void()>& timeEvent){
+	void PlayerAnimator::AddTimeEvent(const PlayerAnimationState::State& state, const float time, const std::function<void()>& timeEvent) {
 		AddTimeEvent(state, TimeAnimationEvent(time, timeEvent));
 	}
 
-	void PlayerAnimator::AddTimeEvent(const PlayerAnimationState::State& state, const TimeAnimationEvent& timeEvent){
+	void PlayerAnimator::AddTimeEvent(const PlayerAnimationState::State& state, const TimeAnimationEvent& timeEvent) {
 		m_timeEventsMap[PlayerAnimationState::PlayerAnimationState2wstring(state)].push_back(timeEvent);
 	}
 }

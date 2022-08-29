@@ -90,6 +90,11 @@ namespace basecross
 		ResourceLoadData(L"BlueContianerTx", L"Contianer/BlueContianerTx.png"),
 		ResourceLoadData(L"YellowContianerTx", L"Contianer/YellowContianerTx.png"),
 
+		// プレイヤーのテクスチャ
+		ResourceLoadData(L"BlueHeroTx", L"Player/BlueHeroTx.png"),
+		ResourceLoadData(L"RedHeroTx", L"Player/RedHeroTx.png"),
+		ResourceLoadData(L"NormalHeroTx", L"Player/NormalHeroTx.png"),
+
 		//デバッグテクスチャ
 		ResourceLoadData(L"Number_TX", L"Number.png"),
 		ResourceLoadData(L"NumberWhite_TX", L"Number_White.png"),
