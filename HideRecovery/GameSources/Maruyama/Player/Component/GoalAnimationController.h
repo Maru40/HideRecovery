@@ -64,8 +64,8 @@ namespace basecross {
 	private:
 		Parametor m_param;		//パラメータ
 
-		std::weak_ptr<Goal> m_goal;
-		std::weak_ptr<GameObject> m_ball;
+		std::weak_ptr<Goal> m_goal;						//ゴール
+		std::weak_ptr<GameObject> m_ball;				//ボール
 		std::unique_ptr<TaskList<TaskEnum>> m_taskList;	//タスク管理
 
 	public:
@@ -125,6 +125,11 @@ namespace basecross {
 		void SetGoal(const std::shared_ptr<Goal>& goal) { m_goal = goal; }
 
 		std::shared_ptr<Goal> GetGoal() const { return m_goal.lock(); }
+
+		/// <summary>
+		/// ゴールアニメーション再生中
+		/// </summary>
+		bool IsGoalAnimation() const;	
 	};
 
 }
