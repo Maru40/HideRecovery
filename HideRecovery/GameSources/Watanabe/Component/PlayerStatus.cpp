@@ -73,11 +73,11 @@ namespace basecross {
 			switch (team)
 			{
 			case team::TeamType::Red:
-				drawer->SetMultiMeshResource(L"Player_Mesh_Red");
+				drawer->SetTextureResource(L"RedHeroTx");
 				break;
 
 			case team::TeamType::Blue:
-				drawer->SetMultiMeshResource(L"Player_Mesh_Blue");
+				drawer->SetTextureResource(L"BlueHeroTx");
 				break;
 			}
 		}

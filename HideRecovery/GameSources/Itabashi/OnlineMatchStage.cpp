@@ -8,13 +8,14 @@
 #include "Watanabe/DebugClass/Debug.h"
 #include "Watanabe/UI/UIObjects.h"
 #include "Watanabe/Component/MatchingUIController.h"
+#include "Watanabe/Component/MatchingSyncPlayerObject.h"
 
 namespace basecross
 {
 	void OnlineMatchStage::OnCreate()
 	{
-		const Vec3 eye(0.0f, 3.0f, 20.0f);
-		const Vec3 at(0.0f);
+		const Vec3 eye(0.0f, 1.0f, 5.0f);
+		const Vec3 at(0, 1.0f, 0);
 		auto PtrView = CreateView<SingleView>();
 		//ビューのカメラの設定
 		auto PtrCamera = ObjectFactory::Create<Camera>();
@@ -30,7 +31,6 @@ namespace basecross
 		debugObject->Log(L"OnlineMatchStage");
 
 		auto gameObject = AddGameObject<GameObject>();
-
 		auto onlineMatching = gameObject->AddComponent<Online::OnlineMatching>();
 		auto matchStageRoomer = gameObject->AddComponent<MatchStageRoomer>();
 		auto matchStageTransitioner = gameObject->AddComponent<MatchStageTransitioner>();
@@ -39,6 +39,21 @@ namespace basecross
 		CreateMap(L"WaitStage.csv");
 		auto uiBuilder = CreateUI(L"MatchingUILayout.csv");
 		gameObject->AddComponent<MatchingUIController>(uiBuilder);
+
+		// スポーンオブジェクトを取得
+		vector<shared_ptr<PlayerSpawnPointObject>> spawnPointObjects;
+		for (auto gameObject : GetGameObjectVec()) {
+			if (auto spawnObject = dynamic_pointer_cast<PlayerSpawnPointObject>(gameObject)) {
+				spawnPointObjects.push_back(spawnObject);
+			}
+		}
+		// IDでソート
+		sort(spawnPointObjects.begin(), spawnPointObjects.end(),
+			[](const shared_ptr<PlayerSpawnPointObject>& a, const shared_ptr<PlayerSpawnPointObject>& b) {
+				return a->GetID() < b->GetID();
+			}
+		);
+		gameObject->AddComponent<MatchingSyncPlayerObject>(spawnPointObjects, onlineMatching);
 
 		SimpleSoundManager::ChangeBGM(L"MatchingStageBGM", 0.1f);
 	}
