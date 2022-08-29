@@ -14,8 +14,8 @@ namespace basecross
 {
 	void OnlineMatchStage::OnCreate()
 	{
-		const Vec3 eye(0.0f, 3.0f, 20.0f);
-		const Vec3 at(0.0f);
+		const Vec3 eye(0.0f, 1.0f, 5.0f);
+		const Vec3 at(0, 1.0f, 0);
 		auto PtrView = CreateView<SingleView>();
 		//ビューのカメラの設定
 		auto PtrCamera = ObjectFactory::Create<Camera>();
@@ -48,8 +48,6 @@ namespace basecross
 			}
 		}
 		gameObject->AddComponent<MatchingSyncPlayerObject>(spawnPointObjects, onlineMatching);
-
-		onlineMatching->GetPlayerCount();
 
 		SimpleSoundManager::ChangeBGM(L"MatchingStageBGM", 0.1f);
 	}
