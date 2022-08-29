@@ -619,11 +619,11 @@ namespace Online
 
 		TryAquisition();
 
-		TryItemHide();
+		//TryItemHide();
 
 		Shot();
 
-		TryTackle();
+		//TryTackle();
 
 		TryAim();
 
