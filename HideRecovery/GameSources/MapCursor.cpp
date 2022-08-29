@@ -24,6 +24,7 @@ namespace basecross {
 
 	MapCursor::MapCursor(const std::shared_ptr<GameObject>& objPtr) :
 		Component(objPtr)
+		//m_moveRangeLate(0.5f)
 	{}
 
 	void MapCursor::OnCreate() {
@@ -89,11 +90,11 @@ namespace basecross {
 		auto sprite = m_sprite.lock();
 
 		auto rect = FieldMap::GetInstance()->GetRect();
-		auto mapTextureScale = FieldMap::GetInstance()->GetMapTextureScale();
+		auto halfMapTextureScale = FieldMap::GetInstance()->GetMapTextureScale() * 0.5f;
 		auto startPosition = GetTarget()->GetComponent<Transform>()->GetPosition();
 		float xRate = startPosition.x / (rect.width * 0.5f);
 		float yRate = startPosition.z / (rect.depth * 0.5f);
-		transform->SetPosition(Vec3(mapTextureScale.x * xRate, mapTextureScale.y * yRate, 0.0f));
+		transform->SetPosition(Vec3(halfMapTextureScale.x * xRate, halfMapTextureScale.y * yRate, 0.0f));
 	}
 
 	void MapCursor::OnDrawFalse() {
