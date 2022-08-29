@@ -13,6 +13,7 @@ namespace basecross {
 	/// 前方宣言
 	//--------------------------------------------------------------------------------------
 	class I_TeamMember;
+	struct CollisionPair;
 
 	//--------------------------------------------------------------------------------------
 	/// 自陣エリアのパラメータ
@@ -52,6 +53,10 @@ namespace basecross {
 		void SettingGoal();
 
 	public:
+		void OnCollisionEnter(const CollisionPair& pair) override;
+
+		void OnCollisionExit(const CollisionPair& pair) override;
+
 		/// <summary>
 		/// 自陣エリア内にいるかどうか判断
 		/// </summary>

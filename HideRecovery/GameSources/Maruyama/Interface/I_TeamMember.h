@@ -34,6 +34,8 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 	class I_TeamMember
 	{
+		bool m_isInArea = true;	//自陣にいるかどうか
+
 		std::weak_ptr<OwnArea> m_ownArea;
 
 	public:
@@ -42,6 +44,18 @@ namespace basecross {
 		//--------------------------------------------------------------------------------------
 		/// アクセッサ
 		//--------------------------------------------------------------------------------------
+
+		/// <summary>
+		/// 自陣エリアにいるかどうかの設定
+		/// </summary>
+		/// <param name="isInArea">自陣エリア内かどうか</param>
+		void SetIsInArea(const bool isInArea) noexcept { m_isInArea = isInArea; }
+
+		/// <summary>
+		/// 自陣エリアにいるかどうか
+		/// </summary>
+		/// <returns>自陣エリアにいるならtrue</returns>
+		bool IsInArea() const noexcept { return m_isInArea; }
 
 		/// <summary>
 		/// 自陣エリアの設定

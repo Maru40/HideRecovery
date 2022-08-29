@@ -21,21 +21,12 @@ namespace basecross {
 
 	public:
 
-		ToTargetMove(const std::shared_ptr<GameObject>& obj):
-			ToTargetMove(
-				obj,
-				Vec3(0.0f),
-				2.0f)
-		{}
+		ToTargetMove(const std::shared_ptr<GameObject>& obj);
 
 		ToTargetMove(const std::shared_ptr<GameObject>& obj,
 			const Vec3& m_targetPosition,
 			const float speed
-		):
-			Component(obj),
-			m_targetPosition(m_targetPosition),
-			m_speed(speed)
-		{}
+		);
 
 		void OnUpdate() override;
 
