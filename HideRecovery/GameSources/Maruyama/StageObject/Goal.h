@@ -26,10 +26,11 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 	struct Goal_Parametor {
 		team::TeamType team;					//チームタイプ
-		float itemHiderTime;		//アイテム再配置までの時間
-		Vec3 timeDrawPosition;		//時間表示場所
-		Vec3 dunkPositionOffset;	//ダンクをする位置のオフセット
+		float itemHiderTime;			//アイテム再配置までの時間
+		Vec3 timeDrawPosition;			//時間表示場所
+		Vec3 dunkPositionOffset;		//ダンクをする位置のオフセット
 		Vec3 dunkBallPositionOffset;
+		Vec3 countDrawPositionOffset;	//カウントダウンを表示するオフセット
 		std::vector<Vec3> firePositionOffsets;	//ファイヤーポジションオフセット
 
 		Goal_Parametor(const team::TeamType& team);
@@ -49,9 +50,9 @@ namespace basecross {
 
 		std::weak_ptr<SplashMessageUI> m_splashMessageUI;		//スプラッシュメッセージ
 		std::vector<std::weak_ptr<I_Performable>> m_fireEffets; //エフェクト表示用クラス
-		 //残り時間表示クラス
+		std::weak_ptr<RelocationCountBP> m_relocationCount;		//残り時間表示クラス
 
-		std::unique_ptr<GameTimer> m_timer;	//タイム管理クラス
+		std::unique_ptr<GameTimer> m_timer;						//タイム管理クラス
 
 		std::weak_ptr<SoundEmitter> m_soundEmitter;
 
@@ -60,6 +61,7 @@ namespace basecross {
 	public:
 		Goal(const std::shared_ptr<GameObject>& objPtr, const Parametor& parametor);
 
+		void OnCreate() override;
 		void OnLateStart() override;
 		void OnUpdate() override;
 

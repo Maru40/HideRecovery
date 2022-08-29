@@ -69,7 +69,8 @@ namespace basecross {
 		itemHiderTime(3.0f),
 		timeDrawPosition(Vec3(0.0f, 0.0f, 0.0f)),
 		dunkPositionOffset(Vec3(0.0f, 3.0f, 0.0f)),
-		dunkBallPositionOffset(Vec3(0.0f, 1.85f, -0.5f))
+		dunkBallPositionOffset(Vec3(0.0f, 1.85f, -0.5f)),
+		countDrawPositionOffset(Vec3(0.0f, 5.0f, 0.0f))
 	{
 		constexpr float fOffset = +1.0f;
 		constexpr float fOffsetY = -0.5f;
@@ -91,6 +92,12 @@ namespace basecross {
 		m_timer(new GameTimer(0)),
 		m_goalEffectSoundClip(L"GoalEffectSE", false, 0.5f)
 	{}
+
+	void Goal::OnCreate() {
+		//カウントダウンの生成
+		auto relocationCount = GetStage()->Instantiate<RelocationCountBP>(m_param.countDrawPositionOffset, Quat::Identity());
+		m_relocationCount = relocationCount;
+	}
 
 	void Goal::OnLateStart() {
 		SettingPerformable();
