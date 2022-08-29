@@ -36,6 +36,8 @@
 #include "TackleAttack.h"
 #include "Maruyama/Player/Component/GoalAnimationController.h"
 #include "Maruyama/Interface/I_TeamMember.h"
+#include "Watanabe/UI/SplashMessageUI.h"
+#include "Watanabe/BoardPoly/RelocationCountBP.h"
 
 #include "PlayerInputer.h"
 
@@ -119,6 +121,12 @@ namespace basecross {
 	{
 		auto otherTrans = other->GetComponent<Transform>();
 
+		if (!m_splashMessageUI.lock()) {	//スプラッシュメッセージの取得
+			m_splashMessageUI = maru::Utility::FindGameObject<SplashMessageUI>(GetStage());
+		}
+
+		auto splash = m_splashMessageUI.lock();	//スプラッシュの取得
+
 		//タックル状態なら状態をリセット
 		if (auto tackle = other->GetComponent<TackleAttack>(false)) {
 			tackle->ForceTaskReset();
@@ -142,17 +150,19 @@ namespace basecross {
 		std::weak_ptr<Operator::ObjectHider> weakObjectHider = item->GetGameObject()->GetComponent<Operator::ObjectHider>();
 
 		//アイテム再配置イベント
-		auto itemHiderEvent = [weakObjectHider, hidePlace]() {
+		auto itemHiderEvent = [weakObjectHider, hidePlace, splash]() {
 			auto hider = weakObjectHider.lock();
 			hider->Appear(hidePlace->GetHidePosition());
 
 			hidePlace->SetHideItem(hider->GetGameObject()->GetComponent<HideItem>(false));
+			splash->SetMessage(SplashMessageUI::MessageType::Relocation);
 		};
 
 		//カウントダウンスタート
 		StartCountDown(itemHiderEvent);
 
-		Debug::GetInstance()->Log(L"SuccessGoal");
+		//ゴール通知
+
 
 		return hidePlace->GetHidePosition();
 	}

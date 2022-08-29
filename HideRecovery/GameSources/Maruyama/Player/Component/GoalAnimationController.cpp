@@ -77,6 +77,7 @@ namespace basecross {
 			[&]() { ExitAnimationEvent(); }
 		);
 
+		//ボールをゴールした瞬間のタイムイベント
 		auto timeEvent = [&]() {
 			if (!m_ball.lock()) {
 				return;
@@ -99,9 +100,7 @@ namespace basecross {
 	}
 
 	void GoalAnimationController::OnUpdate() {
-		//if (PlayerInputer::GetInstance()->IsRightDown()) {
-		//	GetGameObject()->GetComponent<PlayerAnimator>()->ChangePlayerAnimation(PlayerAnimationState::State::Goal1);
-		//}
+		m_taskList->UpdateTask();
 	}
 
 	void GoalAnimationController::StartAnimationEvent() {
@@ -129,8 +128,9 @@ namespace basecross {
 	}
 
 	bool GoalAnimationController::UpdateAnimationEvent() {
-		m_taskList->UpdateTask();
-		return m_taskList->IsEnd();
+		//m_taskList->UpdateTask();
+		//return m_taskList->IsEnd();
+		return true;
 	}
 
 	void GoalAnimationController::ExitAnimationEvent() {
@@ -141,8 +141,6 @@ namespace basecross {
 		if (auto velocityManager = GetGameObject()->GetComponent<VelocityManager>(false)) {
 			velocityManager->ResetAll();
 		}
-
-		//m_taskList->ForceStop();
 	}
 
 	void GoalAnimationController::DefineTask() {
@@ -204,5 +202,14 @@ namespace basecross {
 		for (auto& task : tasks) {
 			m_taskList->AddTask(task);
 		}
+	}
+
+	bool GoalAnimationController::IsGoalAnimation() const {
+		auto animator = GetGameObject()->GetComponent<PlayerAnimator>(false);
+		if (!animator) {
+			return false;
+		}
+
+		return animator->IsCurretAnimationState(PlayerAnimationState::State::Goal1);
 	}
 }

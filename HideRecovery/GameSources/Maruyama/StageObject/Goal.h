@@ -18,6 +18,8 @@ namespace basecross {
 	class I_Performable;
 	struct CollisionPair;
 	class Item;
+	class SplashMessageUI;
+	class RelocationCountBP;
 
 	//--------------------------------------------------------------------------------------
 	/// ゴール管理クラスのパラメータ
@@ -45,6 +47,7 @@ namespace basecross {
 	private:
 		Parametor m_param;					//パラメータ
 
+		std::weak_ptr<SplashMessageUI> m_splashMessageUI;		//スプラッシュメッセージ
 		std::vector<std::weak_ptr<I_Performable>> m_fireEffets; //エフェクト表示用クラス
 		 //残り時間表示クラス
 
