@@ -44,5 +44,11 @@ namespace basecross {
 		/// </summary>
 		/// <param name="type">メッセージタイプ</param>
 		void SetMessage(MessageType type);
+
+		/// <summary>
+		/// 色を設定する
+		/// </summary>
+		/// <param name="color">色</param>
+		void SetColor(const Col4& color);
 	};
 }

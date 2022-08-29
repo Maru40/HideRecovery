@@ -84,7 +84,7 @@ namespace basecross {
 		}
 
 		//弾の生成
-		Vec3 instancePosition = transform->GetPosition() + GetBulletInstanceOffset();
+		Vec3 instancePosition = transform->GetPosition() + maru::Utility::ConvertForwardOffset(transform->GetForward(), GetBulletInstanceOffset());
 		auto bulletObject = InstantiateBullet<ChargeBulletObject>(instancePosition, transform->GetQuaternion());
 		if (auto bullet = bulletObject->GetComponent<ChargeBullet>(false)) {
 			bullet->Shot(GetGameObject(), direct);
