@@ -13,8 +13,7 @@ namespace basecross {
 	{
 		vector<wstring> tokens = DataExtracter::DelimitData(line);
 		auto nextIndex = DataExtracter::RectTransformDataExtraction(tokens, m_rectTransformData);
-		// 仮で入れる
-		m_team = team::TeamType::Blue;
+
 		wstring teamType = tokens[nextIndex];
 		if (teamType == L"Blue") {
 			m_team = team::TeamType::Blue;

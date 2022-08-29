@@ -33,5 +33,7 @@ namespace basecross {
 		void OnCreate()override;
 		void OnUpdate()override;
 		void SetNumber(int num);
+
+		void SetColor(const Col4& color);
 	};
 }

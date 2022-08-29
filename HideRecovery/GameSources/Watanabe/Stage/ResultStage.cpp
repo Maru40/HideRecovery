@@ -35,19 +35,11 @@ namespace basecross {
 
 		CreateMap(L"WaitStage.csv");
 
-		UIObjectCSVBuilder uiBuilder;
-		uiBuilder.Register<TimerUI>(L"TimerUI");
-		uiBuilder.Register<HPGaugeUI>(L"HPGaugeUI");
-		uiBuilder.Register<PointUI>(L"PointUI");
-		uiBuilder.Register<SimpleSprite>(L"SimpleSprite");
-		uiBuilder.Register<WinOrLoseUI>(L"WinOrLoseUI");
-		auto dir = App::GetApp()->GetDataDirWString();
-		auto path = dir + L"MapDatas/";
-		uiBuilder.Build(GetThis<Stage>(), path + L"ResultUILayout.csv");
+		auto uiBuilder = CreateUI(L"ResultUILayout.csv");
 
 		// 勝敗表示のUIオブジェクトを取得し、チームデータをセット
 		//（チームをセットしたあとに表示される）
-		auto winOrLose = uiBuilder.GetUIObject<WinOrLoseUI>(L"WinOrLose");
+		auto winOrLose = uiBuilder->GetUIObject<WinOrLoseUI>(L"WinOrLose");
 		winOrLose->SetTeam(team::TeamType::Blue); // 仮でデータセット
 
 		// 1ゲーム終了したのでインスタンスを破棄（リセット）

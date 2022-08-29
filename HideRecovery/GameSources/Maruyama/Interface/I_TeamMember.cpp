@@ -1,4 +1,3 @@
-
 /*!
 @file I_TeamMember.cpp
 @brief I_TeamMemberクラス実体
@@ -13,6 +12,16 @@
 #include "Maruyama/Player/Component/OwnArea.h"
 
 namespace basecross {
+	Col4 team::GetTeamColor(team::TeamType teamType) {
+		switch (teamType)
+		{
+		case team::TeamType::Blue:
+			return BLUETEAM_COLOR;
+		case team::TeamType::Red:
+			return REDTEAM_COLOR;
+		}
+		return Col4(1);
+	}
 
 	//--------------------------------------------------------------------------------------
 	/// アクセッサ
@@ -22,8 +31,7 @@ namespace basecross {
 		m_ownArea = area;
 	}
 
-	std::shared_ptr<OwnArea> I_TeamMember::GetOwnArea() const { 
+	std::shared_ptr<OwnArea> I_TeamMember::GetOwnArea() const {
 		return m_ownArea.lock();
 	}
-
 }

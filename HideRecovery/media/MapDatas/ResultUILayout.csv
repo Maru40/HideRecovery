@@ -6,9 +6,9 @@ PointUI,BluePoint,300,100,0.8,0.8,0,Blue,
 PointUI,RedPoint,-300,100,0.8,0.8,0,Red,
 SimpleSprite,RedLabel,-300,200,0.5,0.5,0,SpriteData,Red
 SimpleSprite,BlueLabel,300,200,0.5,0.5,0,SpriteData,Blue
-ScoreUI,P1Score,-740,300,1,1,0,0,
-ScoreUI,P2Score,-740,0,1,1,0,1,
-ScoreUI,P3Score,-740,-300,1,1,0,2,
-ScoreUI,P4Score,740,300,1,1,0,3,
-ScoreUI,P5Score,740,0,1,1,0,4,
-ScoreUI,P6Score,740,-300,1,1,0,5,
+ScoreUI,Red1Score,-740,300,1,1,0,1,Red
+ScoreUI,Red2Score,-740,0,1,1,0,2,Red
+ScoreUI,Red3Score,-740,-300,1,1,0,3,Red
+ScoreUI,Blue1Score,740,300,1,1,0,1,Blue
+ScoreUI,Blue2Score,740,0,1,1,0,2,Blue
+ScoreUI,Blue3Score,740,-300,1,1,0,3,Blue
