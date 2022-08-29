@@ -28,6 +28,7 @@
 #include "Itabashi/GamePlayerManager.h"
 
 #include "Maruyama/Player/Component/Teleport.h"
+#include "SpringArmComponent.h"
 
 namespace basecross {
 
@@ -143,15 +144,45 @@ namespace basecross {
 		}
 
 		if (m_isUseCamera) {
-			m_direction = CalculateRotationDirection();
-			AssistCameraRotation(m_direction);
+			AssistCameraRotation(CalculateRotationDirection());
+			auto baseDirection = camera->GetAt() - camera->GetEye();
+			baseDirection.y = 0;
+			m_direction = baseDirection;
 		}
 
 		rotationController->SetDirect(m_direction);
 	}
 
 	void UseWepon::AssistCameraRotation(const Vec3& direction) {
+		auto player = dynamic_pointer_cast<PlayerObject>(GetGameObject());
+		if (!player) {
+			return;
+		}
 
+		auto delta = App::GetApp()->GetElapsedTime();
+		auto springArm = player->GetArm()->GetComponent<SpringArmComponent>();
+		auto camera = springArm->GetChildObject();
+		
+		auto cameraForward = transform->GetPosition() - camera->GetComponent<Transform>()->GetPosition();
+		cameraForward.y = 0;
+		auto selfForward = direction;
+		selfForward.y = 0;
+
+		auto newDot = dot(cameraForward.GetNormalized(), selfForward.GetNormalized());
+		auto newRad = acosf(newDot);
+		auto newDegree = XMConvertToDegrees(newRad);
+		auto newCross = cross(cameraForward.GetNormalized(), selfForward.GetNormalized());
+
+		if (newDegree <= 1.0f) {	//アシストしない角度
+			return;
+		}
+
+		auto rad = springArm->GetRadXZ();
+		constexpr float Speed = 3.0f;
+
+		rad += -newCross.y * delta * Speed;
+
+		springArm->SetRadXZ(rad);
 	}
 
 	void UseWepon::SettingReactiveIsAim() {
@@ -187,7 +218,8 @@ namespace basecross {
 	Vec3 UseWepon::CalculateRotationDirection() {
 		auto camera = GetStage()->GetView()->GetTargetCamera();
 		auto baseDirection = camera->GetAt() - camera->GetEye();
-		return baseDirection;
+		baseDirection.y = 0;
+		//return baseDirection;
 		auto selfTeamMember = GetGameObject()->GetComponent<I_TeamMember>(false);
 
 		Vec3 resultVec = baseDirection;
@@ -203,7 +235,7 @@ namespace basecross {
 		if (!eye) {
 			eye = cameraObject->AddComponent<EyeSearchRange>();
 			constexpr float Height = 20.0f;
-			constexpr float Degree = 40.0f;
+			constexpr float Degree = 10.0f;
 			eye->SetEyeHeight(Height);
 			eye->SetEyeDegree(Degree);
 		}
@@ -222,9 +254,18 @@ namespace basecross {
 		};
 
 		//一番近い敵をターゲットにする。
+		auto eyeParam = eye->GetParametor();
 		std::vector<Data> datas;
 		for (auto& player : m_players) {
-			if (eye->IsInEyeRange(player.lock())) {
+			auto status = player.lock()->GetComponent<PlayerStatus>(false);
+			if (status && status->IsDead()) {
+				continue;
+			}
+
+			if (eye->IsRange(player.lock()) && 
+				eye->IsRad(baseDirection, transform->GetPosition(), player.lock()->GetComponent<Transform>()->GetPosition(), eyeParam.rad) &&
+				eye->IsRay(player.lock())
+			) {
 				auto toTargetVec = maru::Utility::CalcuToTargetVec(GetGameObject(), player.lock());
 
 				datas.push_back(Data(player.lock(), toTargetVec));
