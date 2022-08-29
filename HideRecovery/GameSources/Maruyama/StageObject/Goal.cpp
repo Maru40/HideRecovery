@@ -123,8 +123,6 @@ namespace basecross {
 		//残り時間を渡す。
 		auto relocationCount = m_relocationCount.lock();
 		float leftTime = m_timer->GetLeftTime();
-
-		
 	}
 
 	Vec3 Goal::GoalProcess(const std::shared_ptr<GameObject>& other, const std::shared_ptr<Item>& item)
