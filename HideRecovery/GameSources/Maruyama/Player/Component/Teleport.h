@@ -25,6 +25,7 @@ namespace basecross {
 	{
 		float maxRangeLate;	//テレポートできる最大距離
 		Vec3 position;		//テレポートする位置
+		bool isTeleporting;	//テレポート中かどうか
 
 		Teleport_Parametor();
 	};
@@ -99,6 +100,12 @@ namespace basecross {
 		/// </summary>
 		/// <returns>テレポートできるならtrue</returns>
 		bool IsTeleport() const;
+
+		/// <summary>
+		/// テレポート中かどうか
+		/// </summary>
+		/// <returns>テレポート中かどうか</returns>
+		bool IsTeleporting() const;
 
 		/// <summary>
 		/// テレポートカメラの設定

@@ -47,7 +47,8 @@ namespace basecross {
 
 	Teleport_Parametor::Teleport_Parametor() :
 		maxRangeLate(0.5f),
-		position(Vec3(0.0f))
+		position(Vec3(0.0f)),
+		isTeleporting(false)
 	{}
 
 	//--------------------------------------------------------------------------------------
@@ -220,6 +221,16 @@ namespace basecross {
 			nullptr,
 			exit
 		);
+
+		animator->AddAnimationEvent(
+			PlayerAnimationState::State::EndTeleport,
+			nullptr,
+			nullptr,
+			[&]() { 
+				m_param.isTeleporting = false; 
+
+			}
+		);
 	}
 
 	void Teleport::StartTeleport() {
@@ -232,6 +243,8 @@ namespace basecross {
 		if (auto animator = GetGameObject()->GetComponent<PlayerAnimator>(false)) {
 			animator->ChangePlayerAnimation(PlayerAnimationState::State::StartTeleport);	//テレポートアニメーション
 		}
+
+		m_param.isTeleporting = true;
 	}
 
 	void Teleport::OpenMap() {
@@ -274,6 +287,10 @@ namespace basecross {
 		}
 
 		return GetFieldMap()->IsMapDraw();	//現在はマップが開いているなら飛べる。
+	}
+
+	bool Teleport::IsTeleporting() const {
+		return m_param.isTeleporting;
 	}
 
 	void Teleport::SetTeleportCamera(const std::shared_ptr<VirtualCamera> camera) {
