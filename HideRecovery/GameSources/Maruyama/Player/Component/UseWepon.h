@@ -98,6 +98,12 @@ namespace basecross {
 		void RotationUpdate();
 
 		/// <summary>
+		/// アシストで回転カメラを回転させる
+		/// </summary>
+		/// <param name="direction">向かせたい方向</param>
+		void AssistCameraRotation(const Vec3& direction);
+
+		/// <summary>
 		/// アニメーション更新
 		/// </summary>
 		void AnimationUpdate();

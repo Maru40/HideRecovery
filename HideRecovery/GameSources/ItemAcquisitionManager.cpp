@@ -20,8 +20,11 @@
 #include "ItemBag.h"
 
 #include "RotationController.h"
+#include "HideItem.h"
+#include "Maruyama/Interface/I_TeamMember.h"
 
 #include "Watanabe/Component/PlayerAnimator.h"
+#include "Watanabe/UI/SplashMessageUI.h"
 
 namespace basecross {
 
@@ -91,10 +94,31 @@ namespace basecross {
 		}
 	}
 
+	void ItemAcquisitionManager::HideItemAcquisitionEvent(const std::shared_ptr<GameObject>& other) {
+		auto selfTeamMember = GetGameObject()->GetComponent<I_TeamMember>(false);
+		auto otherTeamMember = other->GetComponent<I_TeamMember>(false);
+		if (!selfTeamMember && !otherTeamMember) {
+			return;
+		}
+
+		//スプラッシュメッセージがあるかどうか
+		auto splashMessageUI = m_splashMessageUI.lock();
+		if (!splashMessageUI) {
+			splashMessageUI = maru::Utility::FindGameObject<SplashMessageUI>(GetStage());
+			m_splashMessageUI = splashMessageUI;
+		}
+
+		if (selfTeamMember->GetTeam() == otherTeamMember->GetTeam()) {
+			splashMessageUI->SetMessage(SplashMessageUI::MessageType::GetBall);
+		}
+		else {
+			splashMessageUI->SetMessage(SplashMessageUI::MessageType::StolenBall);
+		}
+	}
+
 	void ItemAcquisitionManager::ItemAcquisition(const std::shared_ptr<Item>& item) {
 
-		if (!item)
-		{
+		if (!item) {
 			return;
 		}
 
@@ -110,6 +134,7 @@ namespace basecross {
 
 		//アイテムを獲得された状態にする。
 		item->GetGameObject()->SetActive(false);
+		//HideItemAcquisitionEvent(GetGameObject());	//隠すアイテムの時に呼び出すイベント
 
 		//アニメーションを再生
 		auto itemPosition = item->GetGameObject()->GetComponent<Transform>()->GetPosition();

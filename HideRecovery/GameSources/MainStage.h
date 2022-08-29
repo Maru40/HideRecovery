@@ -16,8 +16,8 @@ namespace basecross {
 	class MainStage : public GameStageBase {
 		static wstring sm_loadMapName;  //読み込むマップ名
 
-		std::shared_ptr<GameStartUI> m_gameStartUI;
-		std::shared_ptr<GameFinishUI> m_gameFinishUI;
+		//std::shared_ptr<GameStartUI> m_gameStartUI;
+		//std::shared_ptr<GameFinishUI> m_gameFinishUI;
 
 		/// <summary>
 		/// ビューの作成
@@ -48,8 +48,8 @@ namespace basecross {
 		/// <returns></returns>
 		static wstring GetLoadMapName();
 
-		std::shared_ptr<GameStartUI> GetGameStartUI();
-		std::shared_ptr<GameFinishUI> GetGameFinishUI();
+		//std::shared_ptr<GameStartUI> GetGameStartUI();
+		//std::shared_ptr<GameFinishUI> GetGameFinishUI();
 	};
 }
 //end basecross
