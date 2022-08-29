@@ -45,6 +45,7 @@ namespace basecross
 		ResourceLoadData(L"FiledMap_TX", L"FiledMap_TX.png"),
 
 		ResourceLoadData(L"Cursor_TX", L"Cursor.png"),
+		ResourceLoadData(L"Reticle_TX", L"Reticle.png"),
 
 		//ResourceLoadData(L"gauge", L"Gauge.png"),
 		//ResourceLoadData(L"clear", L"StageClear.png"),
