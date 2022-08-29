@@ -1,7 +1,7 @@
-/*!
+ï»¿/*!
 @file Respawner.cpp
-@brief RespawnerƒNƒ‰ƒXÀ‘Ì
-’S“–FŠÛR—TŠì
+@brief Respawnerã‚¯ãƒ©ã‚¹å®Ÿä½“
+æ‹…å½“ï¼šä¸¸å±±è£•å–œ
 */
 
 #include "stdafx.h"
@@ -20,10 +20,11 @@
 #include "Maruyama/Player/Component/UseWepon.h"
 
 #include "MaruUtility.h"
+#include "Itabashi/OnlineTransformSynchronization.h"
 
 namespace basecross {
 	//--------------------------------------------------------------------------------------
-	/// ƒŠƒXƒ|[ƒ“‚ğ‚³‚¹‚éƒNƒ‰ƒX‚Ìƒpƒ‰ƒ[ƒ^
+	/// ãƒªã‚¹ãƒãƒ¼ãƒ³ã‚’ã•ã›ã‚‹ã‚¯ãƒ©ã‚¹ã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
 	//--------------------------------------------------------------------------------------
 
 	Respawner_Parametor::Respawner_Parametor() :
@@ -31,7 +32,7 @@ namespace basecross {
 	{}
 
 	//--------------------------------------------------------------------------------------
-	/// ƒŠƒXƒ|[ƒ“‚ğ‚³‚¹‚éƒNƒ‰ƒX–{‘Ì
+	/// ãƒªã‚¹ãƒãƒ¼ãƒ³ã‚’ã•ã›ã‚‹ã‚¯ãƒ©ã‚¹æœ¬ä½“
 	//--------------------------------------------------------------------------------------
 
 	Respawner::Respawner(const std::shared_ptr<GameObject>& objPtr) :
@@ -69,18 +70,23 @@ namespace basecross {
 			animator->ChangePlayerAnimation(PlayerAnimationState::State::Wait);
 		}
 
-		//d—Í‚ğ‚Â‚¯‚é
+		//é‡åŠ›ã‚’ã¤ã‘ã‚‹
 		if (auto gravity = GetGameObject()->GetComponent<Gravity>(false)) {
 			gravity->SetUpdateActive(true);
 		}
 
-		//“–‚½‚è”»’è‚ğ‚Â‚¯‚é
+		//å½“ãŸã‚Šåˆ¤å®šã‚’ã¤ã‘ã‚‹
 		if (auto collision = GetGameObject()->GetComponent<CollisionObb>(false)) {
 			collision->SetUpdateActive(true);
 		}
 
 		if (auto efkComp = GetGameObject()->GetComponent<EfkComponent>(false)) {
 			efkComp->Play(L"Respawn");
+		}
+
+		if (auto onlineTransitioner = GetGameObject()->GetComponent<Online::OnlineTransformSynchronization>(false))
+		{
+			onlineTransitioner->SetUpdateActive(true);
 		}
 	}
 
@@ -89,6 +95,6 @@ namespace basecross {
 	}
 
 	bool Respawner::IsRespawn() {
-		return GetSpawnPoint() ? true : false;	//ƒXƒ|[ƒ“ƒ|ƒCƒ“ƒg‚ª‚ ‚é‚È‚çtrue
+		return GetSpawnPoint() ? true : false;	//ã‚¹ãƒãƒ¼ãƒ³ãƒã‚¤ãƒ³ãƒˆãŒã‚ã‚‹ãªã‚‰true
 	}
 }
