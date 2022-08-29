@@ -9,6 +9,7 @@
 #include "Watanabe/UI/UIObjects.h"
 #include "Watanabe/Component/MatchingUIController.h"
 #include "Watanabe/Component/MatchingSyncPlayerObject.h"
+#include "Watanabe/Effekseer/EfkEffect.h"
 
 namespace basecross
 {
@@ -27,6 +28,7 @@ namespace basecross
 		//デフォルトのライティングを指定
 		PtrMultiLight->SetDefaultLighting();
 
+		AddGameObject<EfkInterface>();
 		auto debugObject = AddGameObject<Debug>();
 		debugObject->Log(L"OnlineMatchStage");
 

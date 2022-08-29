@@ -5,6 +5,7 @@
 
 #include "Watanabe/DebugClass/Debug.h"
 #include "Watanabe/UI/UIObjects.h"
+#include "Watanabe/Effekseer/EfkEffect.h"
 
 #include "../Manager/PointManager.h"
 #include "../Manager/TimeManager.h"
@@ -12,8 +13,8 @@
 
 namespace basecross {
 	void ResultStage::CreateViewLight() {
-		const Vec3 eye(0.0f, 3.0f, 20.0f);
-		const Vec3 at(0.0f);
+		const Vec3 eye(0.0f, 1.0f, 5.0f);
+		const Vec3 at(0, 1.0f, 0);
 		auto PtrView = CreateView<SingleView>();
 		//ビューのカメラの設定
 		auto PtrCamera = ObjectFactory::Create<Camera>();
@@ -28,27 +29,20 @@ namespace basecross {
 
 	void ResultStage::OnCreate() {
 		CreateViewLight();
+		AddGameObject<EfkInterface>();
 		AddGameObject<Debug>();
 		Debug::GetInstance()->Log(L"ResultStage");
 		Debug::GetInstance()->Log(L"A : マッチング画面へ");
 		Debug::GetInstance()->Log(L"B : タイトル画面へ");
 
 		CreateMap(L"WaitStage.csv");
+		auto uiBuilder = CreateUI(L"ResultUILayout.csv");
 
-		UIObjectCSVBuilder uiBuilder;
-		uiBuilder.Register<TimerUI>(L"TimerUI");
-		uiBuilder.Register<HPGaugeUI>(L"HPGaugeUI");
-		uiBuilder.Register<PointUI>(L"PointUI");
-		uiBuilder.Register<SimpleSprite>(L"SimpleSprite");
-		uiBuilder.Register<WinOrLoseUI>(L"WinOrLoseUI");
-		auto dir = App::GetApp()->GetDataDirWString();
-		auto path = dir + L"MapDatas/";
-		uiBuilder.Build(GetThis<Stage>(), path + L"ResultUILayout.csv");
-
-		// 勝敗表示のUIオブジェクトを取得し、チームデータをセット
-		//（チームをセットしたあとに表示される）
-		auto winOrLose = uiBuilder.GetUIObject<WinOrLoseUI>(L"WinOrLose");
-		winOrLose->SetTeam(team::TeamType::Blue); // 仮でデータセット
+		auto effectObject = AddGameObject<GameObject>();
+		effectObject->GetComponent<Transform>()->SetPosition(Vec3(0, 5, 0));
+		auto efkComp = effectObject->AddComponent<EfkComponent>();
+		efkComp->SetEffectResource(L"Confetti");
+		efkComp->PlayLoop(L"Confetti");
 
 		// 1ゲーム終了したのでインスタンスを破棄（リセット）
 		PointManager::DeleteInstance();

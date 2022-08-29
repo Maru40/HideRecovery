@@ -8,8 +8,8 @@
 #include "../DebugClass/Debug.h"
 
 namespace basecross {
-	ScoreUI::ScoreUI(const shared_ptr<Stage>& stage, int playerNumber)
-		:UIObjectBase(stage, L"ScoreUI"), m_playerNumber(playerNumber)
+	ScoreUI::ScoreUI(const shared_ptr<Stage>& stage, int playerNumber, team::TeamType teamType)
+		:UIObjectBase(stage, L"ScoreUI"), m_playerNumber(playerNumber), m_teamType(teamType)
 	{}
 
 	ScoreUI::ScoreUI(const shared_ptr<Stage>& stage, const wstring& line)
@@ -18,6 +18,21 @@ namespace basecross {
 		vector<wstring> tokens = DataExtracter::DelimitData(line);
 		size_t nextIndex = DataExtracter::RectTransformDataExtraction(tokens, m_rectTransformData);
 		m_playerNumber = stoi(tokens[nextIndex]);
+
+		wstring teamType = tokens[nextIndex + 1];
+		if (teamType == L"Blue") {
+			m_teamType = team::TeamType::Blue;
+		}
+		else if (teamType == L"Red") {
+			m_teamType = team::TeamType::Red;
+		}
+		else {
+			throw BaseException(
+				L"Teamが不正な値です。",
+				L"team::TeamType : " + teamType,
+				L"PointUI::PointUI()"
+			);
+		}
 	}
 
 	void ScoreUI::OnCreate() {
@@ -34,10 +49,33 @@ namespace basecross {
 
 		// データの適用
 		auto playerNumberUI = uiBuilder->GetUIObject<Numbers>(L"PlayerNumber");
-		playerNumberUI->SetNumber(m_playerNumber + 1);
+		playerNumberUI->SetNumber(m_playerNumber);
 		auto killCountNumber = uiBuilder->GetUIObject<Numbers>(L"KillCountNumber");
 		killCountNumber->SetNumber(scoreData.KillCount);
 		auto goalCountNumber = uiBuilder->GetUIObject<Numbers>(L"GoalCountNumber");
 		goalCountNumber->SetNumber(scoreData.GoalCount);
+
+		// チーム別に変更
+		wstring teamStr = L"";
+		switch (m_teamType)
+		{
+		case team::TeamType::Blue:
+			teamStr = L"Blue";
+			break;
+		case team::TeamType::Red:
+			teamStr = L"Red";
+			break;
+		}
+		auto label = uiBuilder->GetUIObject<SimpleSprite>(L"PlayerLabel");
+		label->ChangeSprite(SimpleSprite::Type::SpriteData, teamStr);
+
+		// 色の変更
+		const auto TeamColor = team::GetTeamColor(m_teamType);
+		// プレイヤーのラベル
+		//auto playerLabel = uiBuilder->GetUIObject<SimpleSprite>(L"PlayerLabel");
+		//playerLabel->GetDrawComponent()->SetDiffuse(TeamColor);
+		//playerNumberUI->SetColor(TeamColor);
+		auto frameUI = uiBuilder->GetUIObject<SimpleSprite>(L"Background");
+		frameUI->GetDrawComponent()->SetDiffuse(TeamColor);
 	}
 }

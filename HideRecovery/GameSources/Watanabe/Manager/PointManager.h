@@ -32,6 +32,18 @@ namespace basecross {
 		/// <param name="team">チーム</param>
 		/// <returns>勝敗</returns>
 		WinOrLose GetSelfTeamWinOrLose(team::TeamType team);
+
+		/// <summary>
+		/// 引き分けか
+		/// </summary>
+		/// <returns>trueなら引き分け</returns>
+		bool IsDraw();
+
+		/// <summary>
+		/// 勝者を取得
+		/// </summary>
+		/// <returns>勝者</returns>
+		team::TeamType GetWinner();
 	private:
 		PointManager();
 		~PointManager() {}

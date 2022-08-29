@@ -138,11 +138,16 @@ namespace basecross {
 			return;
 
 		int place = static_cast<int>(pow(10, m_numbers.size() - 1));
-		for (auto& number : m_numbers)
-		{
+		for (auto& number : m_numbers) {
 			int value = num / place % 10;
 			place /= 10;
 			number->SetValue(value); // 数字を更新
+		}
+	}
+
+	void Numbers::SetColor(const Col4& color) {
+		for (auto& number : m_numbers) {
+			number->GetDrawComponent()->SetDiffuse(color);
 		}
 	}
 }

@@ -3,6 +3,7 @@
 #include "PlayerAnimator.h"
 #include "VelocityManager.h"
 #include "../DebugClass/Debug.h"
+#include "../Effekseer/EfkEffect.h"
 
 namespace basecross {
 	MatchingSyncPlayerObject::MatchingSyncPlayerObject(const shared_ptr<GameObject>& owner,
@@ -51,11 +52,19 @@ namespace basecross {
 
 		gameObject->AddComponent<VelocityManager>();
 
+		// エフェクトの設定
+		auto efkComp = gameObject->AddComponent<EfkComponent>();
+		efkComp->SetEffectResource(L"Respawn", TransformData(Vec3(0, -0.5f, 0), Vec3(0.3f, 2.0f, 0.3f)));
+
 		return gameObject;
 	}
 
 	void MatchingSyncPlayerObject::OnJoinRoomEventAction(int playerNumber, const std::vector<int>& playerNumbers, const ExitGames::LoadBalancing::Player& player) {
 		for (int i = 0; i < playerNumbers.size(); i++) {
+			auto efkComp = m_players[i]->GetComponent<EfkComponent>(false);
+			if (efkComp && !m_players[i]->IsActive()) {
+				efkComp->Play(L"Respawn");
+			}
 			m_players[i]->SetActive(true);
 		}
 	}
