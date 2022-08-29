@@ -553,7 +553,7 @@ namespace Online
 	}
 
 	void PlayerOnlineController::TeleportInputer() {
-		if (PlayerInputer::GetInstance()->IsLeftDown()) {
+		if (PlayerInputer::GetInstance()->IsOpenMap()) {
 			auto teleport = GetGameObject()->GetComponent<Teleport>(false);
 			if (!teleport) {
 				return;
