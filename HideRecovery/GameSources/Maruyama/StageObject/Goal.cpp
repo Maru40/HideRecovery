@@ -37,6 +37,7 @@
 #include "Maruyama/Player/Component/GoalAnimationController.h"
 #include "Maruyama/Interface/I_TeamMember.h"
 #include "Watanabe/UI/SplashMessageUI.h"
+#include "Watanabe/BoardPoly/RelocationCountBP.h"
 
 #include "PlayerInputer.h"
 

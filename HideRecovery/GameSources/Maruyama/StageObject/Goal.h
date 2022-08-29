@@ -19,6 +19,7 @@ namespace basecross {
 	struct CollisionPair;
 	class Item;
 	class SplashMessageUI;
+	class RelocationCountBP;
 
 	//--------------------------------------------------------------------------------------
 	/// ゴール管理クラスのパラメータ
