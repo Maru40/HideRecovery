@@ -23,7 +23,10 @@ namespace basecross {
 
 	struct Teleport_Parametor 
 	{
-		Vec3 position;	//テレポートする位置
+		float maxRangeLate;	//テレポートできる最大距離
+		Vec3 position;		//テレポートする位置
+
+		Teleport_Parametor();
 	};
 
 	//--------------------------------------------------------------------------------------

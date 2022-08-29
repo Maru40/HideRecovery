@@ -42,6 +42,15 @@
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
+	/// テレポート機能のパラメータ
+	//--------------------------------------------------------------------------------------
+
+	Teleport_Parametor::Teleport_Parametor() :
+		maxRangeLate(0.5f),
+		position(Vec3(0.0f))
+	{}
+
+	//--------------------------------------------------------------------------------------
 	/// テレポート本体
 	//--------------------------------------------------------------------------------------
 
@@ -214,11 +223,6 @@ namespace basecross {
 	}
 
 	void Teleport::StartTeleport() {
-		auto teamMember = GetGameObject()->GetComponent<I_TeamMember>(false);
-		if (teamMember && !teamMember->IsInArea()) {
-			return;
-		}
-
 		//テレポート場所を設定
 		SetTeleportPosition(GetFieldMap()->GetMapCursor()->GetCursorFiledPosition());
 
@@ -256,6 +260,19 @@ namespace basecross {
 	}
 
 	bool Teleport::IsTeleport() const {
+		auto teamMember = GetGameObject()->GetComponent<I_TeamMember>(false);
+		if (teamMember && !teamMember->IsInArea()) {
+			return false;
+		}
+
+		//距離がありすぎるならテレポートしない
+		auto teleportPosition = GetFieldMap()->GetMapCursor()->GetCursorFiledPosition();
+		auto toTeleportPosition = teleportPosition - transform->GetPosition();
+		auto maxRange = GetFieldMap()->GetRect().depth * m_param.maxRangeLate;
+		if (toTeleportPosition.length() > maxRange) {
+			return false;
+		}
+
 		return GetFieldMap()->IsMapDraw();	//現在はマップが開いているなら飛べる。
 	}
 
