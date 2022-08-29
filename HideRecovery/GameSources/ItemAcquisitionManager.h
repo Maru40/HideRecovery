@@ -14,6 +14,7 @@ namespace basecross {
 	/// 前方宣言
 	//--------------------------------------------------------------------------------------
 	class Item;
+	class SplashMessageUI;
 
 	//--------------------------------------------------------------------------------------
 	/// パラメータ
@@ -39,6 +40,8 @@ namespace basecross {
 
 		std::vector<std::weak_ptr<Item>> m_allFieldItems;		//フィールドにある全てのアイテムを配列に入れる。
 		std::vector<std::weak_ptr<Item>> m_acquisitionItems;	//獲得したアイテム
+
+		std::weak_ptr<SplashMessageUI> m_splashMessageUI;
 
 		bool m_canAcquisition = false;
 
@@ -66,6 +69,11 @@ namespace basecross {
 		void Input_ItemAcquisition();
 
 	public:
+
+		/// <summary>
+		/// 隠すアイテムをゲットしたときのイベント
+		/// </summary>
+		void HideItemAcquisitionEvent(const std::shared_ptr<GameObject>& other);
 
 		/// <summary>
 		/// 実際にアイテムを獲得する処理
