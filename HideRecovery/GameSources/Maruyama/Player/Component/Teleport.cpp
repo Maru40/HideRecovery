@@ -35,6 +35,10 @@
 
 #include "Watanabe/Effekseer/EfkComponent.h"
 
+#include "Maruyama/Interface/I_TeamMember.h"
+
+#include "Watanabe/DebugClass/Debug.h"
+
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
@@ -210,6 +214,11 @@ namespace basecross {
 	}
 
 	void Teleport::StartTeleport() {
+		auto teamMember = GetGameObject()->GetComponent<I_TeamMember>(false);
+		if (teamMember && !teamMember->IsInArea()) {
+			return;
+		}
+
 		//テレポート場所を設定
 		SetTeleportPosition(GetFieldMap()->GetMapCursor()->GetCursorFiledPosition());
 
