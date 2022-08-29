@@ -1,5 +1,6 @@
 ﻿#include "stdafx.h"
 #include "OnlineMatching.h"
+#include <random>
 
 namespace basecross
 {
@@ -90,5 +91,48 @@ namespace Online
 	{
 		std::fill_n(m_playerNumbers, MAX_PLAYER_NUM, 0);
 	}
+
+	void OnlineMatching::ShuffleTeam()
+	{
+		int count = GetPlayerCount();
+		
+		int team1Count = count / 2;
+		int team2Count = count - team1Count;
+
+		std::random_device rd;
+		std::default_random_engine eng(rd());
+
+		if (eng() % 2 == 0)
+		{
+			std::swap(team1Count, team2Count);
+		}
+
+		std::vector<int> gameNumbers;
+		Reset();
+
+		for (int i = 0; i < team1Count; ++i)
+		{
+			gameNumbers.push_back(i);
+		}
+
+		for (int i = 0; i < team2Count; ++i)
+		{
+			gameNumbers.push_back(i + 3);
+		}
+
+		auto& players = OnlineManager::GetCurrentlyJoinedRoom().getPlayers();
+
+		for (int i = 0; i < players.getSize(); ++i)
+		{
+			unsigned int index = eng() % gameNumbers.size();
+
+			m_playerNumbers[gameNumbers[index]] = players.getElementAt(i)->getNumber();
+
+			gameNumbers.erase(gameNumbers.begin() + index);
+		}
+
+		OnlineManager::RaiseEvent(false, (std::uint8_t*)m_playerNumbers, sizeof(m_playerNumbers), EXECUTE_UPDATE_PLAYER_NUMBERS);
+	}
+
 }
 }
