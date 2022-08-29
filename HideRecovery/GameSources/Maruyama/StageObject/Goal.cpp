@@ -153,7 +153,7 @@ namespace basecross {
 		}
 
 		//再配置場所の取得
-		auto hidePlaces = maru::Utility::FindComponents<HidePlace>();
+		auto hidePlaces = maru::Utility::FindComponents<HidePlace>(GetStage());
 		auto hidePlace = maru::MyRandom::RandomArray(hidePlaces);
 		std::weak_ptr<Operator::ObjectHider> weakObjectHider = item->GetGameObject()->GetComponent<Operator::ObjectHider>();
 

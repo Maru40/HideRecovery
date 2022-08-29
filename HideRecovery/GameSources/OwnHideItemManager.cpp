@@ -178,7 +178,7 @@ namespace basecross {
 	}
 
 	std::shared_ptr<HidePlace> OwnHideItemManager::SearchNearHidePlace() const {
-		auto hidePlaces = maru::Utility::FindComponents<HidePlace>();
+		auto hidePlaces = maru::Utility::FindComponents<HidePlace>(GetStage());
 
 		for (auto& hidePlace : hidePlaces) {
 			auto toHidePraceVec = maru::Utility::CalcuToTargetVec(GetGameObject(), hidePlace->GetGameObject());

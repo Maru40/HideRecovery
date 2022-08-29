@@ -505,8 +505,7 @@ namespace basecross {
 			/// </summary>
 			template<class T,
 				enable_if_t<is_base_of_v<Component, T>, std::nullptr_t> = nullptr >
-				static vector<ex_weak_ptr<T>> FindExWeakPtrComponents() {
-				auto stage = GetStage();
+				static vector<ex_weak_ptr<T>> FindExWeakPtrComponents(const std::shared_ptr<Stage>& stage) {
 
 				vector<ex_weak_ptr<T>> returnObjs;
 

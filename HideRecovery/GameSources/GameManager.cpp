@@ -71,7 +71,7 @@ namespace basecross {
 
 	bool GameManager::IsGameClear() {
 		if (m_generators.size() == 0) {
-			m_generators = maru::Utility::FindExWeakPtrComponents<GeneratorBase>();
+			m_generators = maru::Utility::FindExWeakPtrComponents<GeneratorBase>(GetStage());
 			return false;
 		}
 

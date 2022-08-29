@@ -68,7 +68,7 @@ namespace basecross {
 		//--------------------------------------------------------------------------------------
 
 		bool Stator_Hero::IsInEyeRangeTarget(const TransitionMember& member) {
-			auto targets = maru::Utility::FindComponents<Targeted>();
+			auto targets = maru::Utility::FindComponents<Targeted>(GetStage());
 			auto eye = GetGameObject()->GetComponent<EyeSearchRange>(false);
 			if (!eye) {
 				return false;

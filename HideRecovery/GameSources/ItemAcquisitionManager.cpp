@@ -55,7 +55,7 @@ namespace basecross {
 
 	void ItemAcquisitionManager::OnLateStart() {
 		//アイテムを取得する。
-		m_allFieldItems = maru::Utility::ConvertArraySharedToWeak(maru::Utility::FindComponents<Item>());
+		m_allFieldItems = maru::Utility::ConvertArraySharedToWeak(maru::Utility::FindComponents<Item>(GetStage()));
 	}
 
 	void ItemAcquisitionManager::OnUpdate() {
