@@ -43,6 +43,7 @@ namespace basecross
 		if (PlayerInputer::IsDecision() && Online::OnlineManager::GetLocalPlayer().getIsMasterClient() && onlineMatching->GetPlayerCount() > 0)
 		{
 			Online::OnlineManager::GetCurrentlyJoinedRoom().setIsOpen(false);
+			onlineMatching->ShuffleTeam();
 			GoToMainStage();
 			Online::OnlineManager::RaiseEvent(false, nullptr, 0, TO_MAINSTAGE_EVENT_CODE);
 			return;

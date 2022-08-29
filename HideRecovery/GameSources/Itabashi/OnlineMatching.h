@@ -42,6 +42,8 @@ namespace Online
 
 		void Reset();
 
+		void ShuffleTeam();
+
 		static int GetPlayerNumberToGameNumber(int gameNumber) { return m_playerNumbers[gameNumber]; }
 	};
 }
