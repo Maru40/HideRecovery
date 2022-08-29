@@ -47,6 +47,12 @@ namespace basecross
 				spawnPointObjects.push_back(spawnObject);
 			}
 		}
+		// IDでソート
+		sort(spawnPointObjects.begin(), spawnPointObjects.end(),
+			[](const shared_ptr<PlayerSpawnPointObject>& a, const shared_ptr<PlayerSpawnPointObject>& b) {
+				return a->GetID() < b->GetID();
+			}
+		);
 		gameObject->AddComponent<MatchingSyncPlayerObject>(spawnPointObjects, onlineMatching);
 
 		SimpleSoundManager::ChangeBGM(L"MatchingStageBGM", 0.1f);
