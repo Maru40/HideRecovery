@@ -19,6 +19,8 @@
 #include "Maruyama/Player/Component/UseWepon.h"
 #include "Maruyama/Player/Component/Teleport.h"
 #include "Maruyama/Player/Component/AccessHidePlace.h"
+#include "Maruyama/Player/Component/Teleport.h"
+#include "Maruyama/Player/Component/GoalAnimationController.h"
 
 #include "Watanabe/Component/PlayerAnimator.h"
 
@@ -156,6 +158,11 @@ namespace Online
 
 		if (!objectMover || !tackleAttack || tackleAttack->IsTackle() || animator->IsCurretAnimationState(PlayerAnimationState::State::Goal1))
 		{
+			return;
+		}
+
+		auto teleport = GetGameObject()->GetComponent<Teleport>(false);
+		if (teleport && teleport->IsTeleporting()) {
 			return;
 		}
 
@@ -507,6 +514,16 @@ namespace Online
 	void PlayerOnlineController::TryAim()
 	{
 		auto useWeapon = m_useWepon.lock();
+
+		auto teleport = GetGameObject()->GetComponent<Teleport>(false);
+		if (teleport && teleport->IsTeleporting()) {
+			return;
+		}
+
+		auto goal = GetGameObject()->GetComponent<GoalAnimationController>(false);
+		if (goal && goal->IsGoalAnimation()) {
+			return;
+		}
 
 		if (!useWeapon)
 		{
