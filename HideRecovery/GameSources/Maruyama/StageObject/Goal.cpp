@@ -95,8 +95,8 @@ namespace basecross {
 
 	void Goal::OnCreate() {
 		//カウントダウンの生成
-		auto relocationCount = GetStage()->Instantiate<RelocationCountBP>(m_param.countDrawPositionOffset, Quat::Identity());
-		m_relocationCount = relocationCount;
+		//auto relocationCount = GetStage()->Instantiate<RelocationCountBP>(m_param.countDrawPositionOffset, Quat::Identity());
+		//m_relocationCount = relocationCount;
 	}
 
 	void Goal::OnLateStart() {
@@ -121,7 +121,10 @@ namespace basecross {
 		m_timer->UpdateTimer();
 
 		//残り時間を渡す。
+		auto relocationCount = m_relocationCount.lock();
 		float leftTime = m_timer->GetLeftTime();
+
+		
 	}
 
 	Vec3 Goal::GoalProcess(const std::shared_ptr<GameObject>& other, const std::shared_ptr<Item>& item)
