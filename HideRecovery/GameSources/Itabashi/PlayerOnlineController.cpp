@@ -216,6 +216,7 @@ namespace Online
 
 		if (localPlayer.getIsMasterClient() && !item->GetItemOwner())
 		{
+			acquisitionManager->HideItemAcquisitionEvent(GetGameObject());
 			acquisitionManager->ItemAcquisition(item);
 			OnlineManager::RaiseEvent(false, (std::uint8_t*)&ItemOwnerShipData(itemId, m_playerNumber), sizeof(ItemOwnerShipData), EXECUTE_ACQUISITION_EVENT_CODE);
 			return;
@@ -250,6 +251,7 @@ namespace Online
 
 			if (otherAcquisitionManager)
 			{
+				otherAcquisitionManager->HideItemAcquisitionEvent(GetGameObject());
 				otherAcquisitionManager->ItemAcquisition(item);
 			}
 		}
@@ -271,6 +273,7 @@ namespace Online
 			return;
 		}
 
+		acquisitionManager->HideItemAcquisitionEvent(GetGameObject());
 		acquisitionManager->ItemAcquisition(Item::StageFindToItemId(GetStage(), ownerShipData.itemId));
 	}
 
