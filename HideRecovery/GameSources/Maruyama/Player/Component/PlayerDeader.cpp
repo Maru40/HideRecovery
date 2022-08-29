@@ -1,8 +1,8 @@
-
+ï»¿
 /*!
 @file PlayerDeader.cpp
-@brief PlayerDeaderƒNƒ‰ƒXÀ‘Ì
-’S“–FŠÛR—TŠì
+@brief PlayerDeaderã‚¯ãƒ©ã‚¹å®Ÿä½“
+æ‹…å½“ï¼šä¸¸å±±è£•å–œ
 */
 
 #include "stdafx.h"
@@ -19,6 +19,7 @@
 #include "UseWepon.h"
 #include "ItemBag.h"
 #include "HideItem.h"
+#include "Itabashi/OnlineTransformSynchronization.h"
 
 namespace basecross {
 
@@ -29,6 +30,7 @@ namespace basecross {
 
 	void PlayerDeader::OnLateStart() {
 		m_animator = GetGameObject()->GetComponent<PlayerAnimator>(false);
+		m_onlineTransformSynchonization = GetGameObject()->GetComponent<Online::OnlineTransformSynchronization>();
 
 		auto animator = m_animator.lock();
 		if (animator) {
@@ -60,20 +62,25 @@ namespace basecross {
 			return;
 		}
 
-		//ƒAƒjƒ[ƒVƒ‡ƒ“‚ª€–Só‘Ô‚Å‚È‚¢‚È‚çŠÄ‹‚µ‚È‚¢
+		//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ãŒæ­»äº¡çŠ¶æ…‹ã§ãªã„ãªã‚‰ç›£è¦–ã—ãªã„
 		if (!animator->IsCurretAnimationState(PlayerAnimationState::State::Dead) && 
 			!animator->IsCurretAnimationState(PlayerAnimationState::State::GSDead))
 		{
 			return;
 		}
 
-		if (animator->IsTargetAnimationEnd()) {	//ƒAƒjƒ[ƒVƒ‡ƒ“‚ªI—¹‚µ‚½‚ç
-			//ƒŠƒXƒ|[ƒ“ˆ—‚ªƒAƒ^ƒbƒ`‚³‚ê‚Ä‚¢‚é‚È‚ç
+		if (auto velocityManager = GetGameObject()->GetComponent<VelocityManager>(false))
+		{
+			velocityManager->ResetAll();
+		}
+
+		if (animator->IsTargetAnimationEnd()) {	//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ãŒçµ‚äº†ã—ãŸã‚‰
+			//ãƒªã‚¹ãƒãƒ¼ãƒ³å‡¦ç†ãŒã‚¢ã‚¿ãƒƒãƒã•ã‚Œã¦ã„ã‚‹ãªã‚‰
 			if (auto respawner = GetGameObject()->GetComponent<Respawner>(false)) {
 				respawner->StartRespawn();
 			}
 
-			m_updateFunction = nullptr;	//XV‚ğ‚â‚ß‚éB
+			m_updateFunction = nullptr;	//æ›´æ–°ã‚’ã‚„ã‚ã‚‹ã€‚
 		}
 	}
 
@@ -81,42 +88,51 @@ namespace basecross {
 		auto useWeapon = GetGameObject()->GetComponent<UseWepon>(false);
 		auto animator = m_animator.lock();
 
-		//ƒAƒjƒ[ƒVƒ‡ƒ“‘JˆÚ
+		auto onlineTransform = m_onlineTransformSynchonization.lock();
+		onlineTransform->SetUpdateActive(false);
+
+		//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³é·ç§»
 		if (animator && useWeapon) {
-			//IsAim‚È‚ç
+			//IsAimãªã‚‰
 			if (useWeapon->IsAim()) {
 				animator->ChangePlayerAnimation(PlayerAnimationState::State::GSDead);
 			}
 			else {
 				animator->ChangePlayerAnimation(PlayerAnimationState::State::Dead);
 			}
+
+			useWeapon->SetIsAim(false);
 		}
 
-		//‘¬“xƒŠƒZƒbƒg
+		//é€Ÿåº¦ãƒªã‚»ãƒƒãƒˆ
 		if (auto velocityManager = GetGameObject()->GetComponent<VelocityManager>(false)) {
 			velocityManager->ResetAll();	
 		}
 
-		//ƒAƒCƒeƒ€‚ğ—‚Æ‚·B
-		if (auto itemBag = GetGameObject()->GetComponent<ItemBag>(false)) {
+		//ã‚¢ã‚¤ãƒ†ãƒ ã‚’è½ã¨ã™ã€‚
+		if (auto itemBag = GetGameObject()->GetComponent<ItemBag>(false)) 
+		{
 			auto hideItem = itemBag->GetHideItem();
-			if (hideItem) {
+			if (hideItem)
+			{
+				auto item = hideItem->GetItem();
+				itemBag->RemoveItem(item);
 				hideItem->GetGameObject()->GetComponent<Transform>()->SetPosition(transform->GetPosition());
 				hideItem->GetGameObject()->SetActive(true);
 			}
 		}
 
-		//d—Í‚ğÁ‚·
+		//é‡åŠ›ã‚’æ¶ˆã™
 		if (auto gravity = GetGameObject()->GetComponent<Gravity>(false)) {
 			gravity->SetUpdateActive(false);
 		}
 
-		//“–‚½‚è”»’è‚ğÁ‚·
+		//å½“ãŸã‚Šåˆ¤å®šã‚’æ¶ˆã™
 		if (auto collision = GetGameObject()->GetComponent<CollisionObb>(false)) {
 			collision-> SetUpdateActive(false);
 		}
 
-		m_updateFunction = [&]() { ObserveAnimation(); };	//XVˆ—İ’è
+		m_updateFunction = [&]() { ObserveAnimation(); };	//æ›´æ–°å‡¦ç†è¨­å®š
 	}
 
 	bool PlayerDeader::IsDead() {

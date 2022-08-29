@@ -1,8 +1,8 @@
-
+ï»¿
 /*!
 @file PlayerDeader.h
-@brief PlayerDeader‚È‚Ç
-’S“–FŠÛR—TŠì
+@brief PlayerDeaderãªã©
+æ‹…å½“ï¼šä¸¸å±±è£•å–œ
 */
 
 #pragma once
@@ -10,20 +10,25 @@
 
 namespace basecross {
 
+namespace Online
+{
+	class OnlineTransformSynchronization;
+}
+
 	//--------------------------------------------------------------------------------------
-	/// ‘O•ûéŒ¾
+	/// å‰æ–¹å®£è¨€
 	//--------------------------------------------------------------------------------------
 	class PlayerAnimator;
 
 	//--------------------------------------------------------------------------------------
-	/// ƒvƒŒƒCƒ„[‚Ì€–SŠÇ—‚·‚éƒNƒ‰ƒX‚Ìƒpƒ‰ƒ[ƒ^
+	/// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æ­»äº¡ç®¡ç†ã™ã‚‹ã‚¯ãƒ©ã‚¹ã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
 	//--------------------------------------------------------------------------------------
 	struct PlayerDeader_Parametor {
 		
 	};
 
 	//--------------------------------------------------------------------------------------
-	/// ƒvƒŒƒCƒ„[‚Ì€–SŠÇ—‚·‚éƒNƒ‰ƒX
+	/// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æ­»äº¡ç®¡ç†ã™ã‚‹ã‚¯ãƒ©ã‚¹
 	//--------------------------------------------------------------------------------------
 	class PlayerDeader : public Component
 	{
@@ -31,8 +36,9 @@ namespace basecross {
 		using Parametor = PlayerDeader_Parametor;
 
 	private:
-		std::weak_ptr<PlayerAnimator> m_animator;	//ƒAƒjƒ[ƒ^[
-		std::function<void()> m_updateFunction;		//XVˆ—
+		std::weak_ptr<PlayerAnimator> m_animator;	//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚¿ãƒ¼
+		std::function<void()> m_updateFunction;		//æ›´æ–°å‡¦ç†
+		std::weak_ptr<Online::OnlineTransformSynchronization> m_onlineTransformSynchonization;
 
 	public:
 		PlayerDeader(const std::shared_ptr<GameObject>& objPtr);
@@ -42,20 +48,20 @@ namespace basecross {
 
 	private:
 		/// <summary>
-		/// ƒAƒjƒ[ƒVƒ‡ƒ“ŠÄ‹’†
+		/// ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ç›£è¦–ä¸­
 		/// </summary>
 		void ObserveAnimation();
 
 	public:
 		/// <summary>
-		/// €–SŠJn
+		/// æ­»äº¡é–‹å§‹
 		/// </summary>
 		void StartDead();
 
 		/// <summary>
-		/// €–S‚Å‚«‚éó‘Ô‚©‚Ç‚¤‚©
+		/// æ­»äº¡ã§ãã‚‹çŠ¶æ…‹ã‹ã©ã†ã‹
 		/// </summary>
-		/// <returns>€–S‚Å‚«‚é‚È‚çtrue</returns>
+		/// <returns>æ­»äº¡ã§ãã‚‹ãªã‚‰true</returns>
 		bool IsDead();
 	};
 
