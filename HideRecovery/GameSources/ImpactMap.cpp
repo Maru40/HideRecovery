@@ -54,6 +54,20 @@ namespace basecross {
 			return startPosition;
 		}
 
+		bool Rect::IsInRect(const Vec3& position) {
+			auto rectStartPosition = CalculateStartPosition();
+
+			if (position.x > rectStartPosition.x &&
+				position.x < rectStartPosition.x + this->width &&
+				position.z > rectStartPosition.z &&
+				position.z < rectStartPosition.z + this->depth
+			) {
+				return true;
+			}
+
+			return false;
+		}
+
 		//--------------------------------------------------------------------------------------
 		///	Factory_‰e‹¿ƒ}ƒbƒv
 		//--------------------------------------------------------------------------------------
