@@ -69,6 +69,11 @@ namespace basecross {
 			return;
 		}
 
+		if (auto velocityManager = GetGameObject()->GetComponent<VelocityManager>(false))
+		{
+			velocityManager->ResetAll();
+		}
+
 		if (animator->IsTargetAnimationEnd()) {	//アニメーションが終了したら
 			//リスポーン処理がアタッチされているなら
 			if (auto respawner = GetGameObject()->GetComponent<Respawner>(false)) {
