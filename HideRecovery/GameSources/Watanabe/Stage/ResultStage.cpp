@@ -37,10 +37,10 @@ namespace basecross {
 
 		auto uiBuilder = CreateUI(L"ResultUILayout.csv");
 
+		PointManager::GetInstance()->AddPoint(team::TeamType::Blue);
 		// 勝敗表示のUIオブジェクトを取得し、チームデータをセット
 		//（チームをセットしたあとに表示される）
 		auto winOrLose = uiBuilder->GetUIObject<WinOrLoseUI>(L"WinOrLose");
-		winOrLose->SetTeam(team::TeamType::Blue); // 仮でデータセット
 
 		// 1ゲーム終了したのでインスタンスを破棄（リセット）
 		PointManager::DeleteInstance();

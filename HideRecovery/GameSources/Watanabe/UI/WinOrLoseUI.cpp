@@ -16,6 +16,48 @@ namespace basecross {
 		DataExtracter::RectTransformDataExtraction(tokens, m_rectTransformData);
 	}
 	void WinOrLoseUI::OnCreate() {
+		wstring winOrLoseStr = L"";
+		if (PointManager::GetInstance()->IsDraw()) {
+			winOrLoseStr = L"Draw";
+		}
+		else {
+			winOrLoseStr = L"Win";
+		}
+
+		const auto& stage = GetStage();
+		// 先に勝敗を表示
+		auto wolSpriteData = SpriteDataManager::GetInstance()->GetSpriteData(winOrLoseStr);
+		auto winOrLoseSprite = stage->AddGameObject<SimpleSprite>(SimpleSprite::Type::SpriteData, winOrLoseStr);
+		winOrLoseSprite->SetParent(GetThis<WinOrLoseUI>());
+
+		// Draw以外ならチームも表示
+		if (winOrLoseStr != L"Draw") {
+			auto winner = PointManager::GetInstance()->GetWinner();
+			wstring teamStr = L"";
+			switch (winner)
+			{
+			case team::TeamType::Blue:
+				teamStr = L"BlueTeam";
+				break;
+			case team::TeamType::Red:
+				teamStr = L"RedTeam";
+				break;
+			}
+			// チーム表示
+			auto teamSpriteData = SpriteDataManager::GetInstance()->GetSpriteData(teamStr);
+			auto teamSprite = stage->AddGameObject<SimpleSprite>(SimpleSprite::Type::SpriteData, teamStr);
+			teamSprite->SetParent(GetThis<WinOrLoseUI>());
+			teamSprite->GetDrawComponent()->SetDiffuse(team::GetTeamColor(winner));
+
+			// それぞれのスプライトサイズのXの半分の値を計算
+			auto halfTeamSprite = teamSpriteData.size.x / 2.0f;
+			auto halfWinOrLoseSprite = wolSpriteData.size.x / 2.0f;
+
+			auto rectTrans = teamSprite->GetComponent<RectTransform>();
+			rectTrans->SetPosition(Vec2(-halfWinOrLoseSprite, 0));
+			rectTrans = winOrLoseSprite->GetComponent<RectTransform>();
+			rectTrans->SetPosition(Vec2(halfTeamSprite, 0));
+		}
 	}
 
 	void WinOrLoseUI::SetTeam(team::TeamType team) {
@@ -58,12 +100,9 @@ namespace basecross {
 			auto spriteData = SpriteDataManager::GetInstance()->GetSpriteData(teamStr);
 			auto teamSprite = stage->AddGameObject<SimpleSprite>(SimpleSprite::Type::SpriteData, teamStr);
 			teamSprite->SetParent(GetThis<WinOrLoseUI>());
+			teamSprite->GetDrawComponent()->SetDiffuse(team::GetTeamColor(team));
 			auto rectTrans = teamSprite->GetComponent<RectTransform>();
-			rectTrans->SetPosition(Vec2(0.0f, +spriteData.size.y / 2.0f));
-
-			// 勝敗表示
-			rectTrans = winOrLoseSprite->GetComponent<RectTransform>();
-			rectTrans->SetPosition(Vec2(0.0f, -spriteData.size.y / 2.0f));
+			rectTrans->SetPosition(Vec2(0.0f, spriteData.size.y));
 		}
 	}
 }

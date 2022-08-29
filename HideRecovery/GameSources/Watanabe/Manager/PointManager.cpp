@@ -49,4 +49,20 @@ namespace basecross {
 		// ここまで実行されないが一応
 		return WinOrLose::Draw;
 	}
+
+	bool PointManager::IsDraw() {
+		int bluePoint = m_teamScoreMap[team::TeamType::Blue];
+		int redPoint = m_teamScoreMap[team::TeamType::Red];
+		return bluePoint == redPoint;
+	}
+	team::TeamType PointManager::GetWinner() {
+		int bluePoint = m_teamScoreMap[team::TeamType::Blue];
+		int redPoint = m_teamScoreMap[team::TeamType::Red];
+		if (bluePoint < redPoint) {
+			return team::TeamType::Red;
+		}
+		else {
+			return team::TeamType::Blue;
+		}
+	}
 }
