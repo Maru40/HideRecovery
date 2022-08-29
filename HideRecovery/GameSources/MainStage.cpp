@@ -67,6 +67,8 @@
 #include "Watanabe/UI/SplashMessageUI.h"
 #include "Watanabe/UI/UIObjectCSVBuilder.h"
 
+#include "Maruyama/UI/Reticle.h"
+
 using namespace basecross::Enemy;
 
 namespace basecross {
@@ -135,6 +137,8 @@ namespace basecross {
 			// UIレイアウトの読み込み
 			auto gameUIBuilder = CreateUI(L"GameUILayout.csv");
 			auto splash = gameUIBuilder->GetUIObject<SplashMessageUI>(L"SplashMessage");
+
+			//AddGameObject<GameObject>()->AddComponent<Reticle>();
 
 			//m_gameStartUI = AddGameObject<GameStartUI>();
 			//m_gameFinishUI = AddGameObject<GameFinishUI>();

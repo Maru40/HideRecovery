@@ -77,6 +77,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\UseWepon.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\StageObject\Goal.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\StageObject\GoalObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\UI\Reticle.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)OccupancyManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)SelfImpactNodeManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\ObjectMover.h" />
@@ -395,6 +396,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\UseWepon.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\StageObject\Goal.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\StageObject\GoalObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\UI\Reticle.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)OccupancyManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)OriginalMeshToonObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)FadeSprite.cpp" />

@@ -66,6 +66,8 @@ namespace basecross {
 
 		EyeSearchRangeParametor m_param;                //視界範囲パラメータ
 
+	public:
+
 		/// <summary>
 		/// ターゲットが自分を中心に球体状の範囲内にいるかどうか判断
 		/// </summary>
@@ -250,6 +252,19 @@ namespace basecross {
 			}
 
 			return false;
+		}
+
+
+		bool IsRad(const Vec3& selfForward, const Vec3& selfPosition, const Vec3& targetPosition, const float radian) {
+			auto forward = selfForward;
+			forward.y = 0.0f;
+			auto toVec = targetPosition - selfPosition;
+			toVec.y = 0.0f;
+
+			auto newDot = dot(forward.GetNormalized(), toVec.GetNormalized());
+			auto newRad = acosf(newDot);
+			//索敵範囲に入っていたら。
+			return newRad <= radian ? true : false;
 		}
 
 	};

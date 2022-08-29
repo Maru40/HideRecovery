@@ -1063,6 +1063,12 @@
     <Filter Include="Watanabe\Component\MatchingSyncPlayerObject">
       <UniqueIdentifier>{e672e2fd-f7f0-4508-93b4-43c96bc540ab}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\UI">
+      <UniqueIdentifier>{cb2499b1-f710-4fe8-a15c-33a950fd1c32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\UI\Reticle">
+      <UniqueIdentifier>{583cb0b2-7a30-42a5-bb39-56c46a19c214}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1986,6 +1992,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\AccessHidePlace.h">
       <Filter>Maruyama\Player\Component\AccessHidePlace</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\UI\Reticle.h">
+      <Filter>Maruyama\UI\Reticle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2812,6 +2821,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\AccessHidePlace.cpp">
       <Filter>Maruyama\Player\Component\AccessHidePlace</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\UI\Reticle.cpp">
+      <Filter>Maruyama\UI\Reticle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

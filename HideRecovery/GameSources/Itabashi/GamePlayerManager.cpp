@@ -17,6 +17,7 @@
 #include "MainStage.h"
 #include "Watanabe/UI/UIObjects.h"
 #include "Watanabe/BoardPoly/HPGaugeBP.h"
+#include "Maruyama/UI/Reticle.h"
 
 namespace basecross
 {
@@ -70,6 +71,8 @@ namespace basecross
 
 			return playerObject;
 		}
+
+		playerObject->AddComponent<Reticle>();
 
 		auto sp = playerObject->GetArm()->GetComponent<SpringArmComponent>();
 		auto& tpsCamera = sp->GetChildObject();

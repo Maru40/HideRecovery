@@ -88,6 +88,19 @@ namespace basecross
 
 		//float GetArmRange() const { return m_param.armRange; }
 
+		void SetRadXZ(const float rad) noexcept {
+			m_param.radXZ = rad;
+			m_param.armVec.x = cosf(m_param.radXZ);
+			m_param.armVec.z = sinf(m_param.radXZ);
+
+			if (abs(m_param.radXZ) >= XM_2PI) {
+				//一回転したら0に戻す
+				m_param.radXZ = 0.0f;
+			}
+		}
+
+		float GetRadXZ() const noexcept { return m_param.radXZ; }
+
 	private:
 		Vec3 CalculateDirect();
 		Vec3 CalculatePosition(const float& targetLength);
