@@ -14,5 +14,7 @@ namespace basecross {
 		m_rectTransform->SetRotation(m_rectTransformData.Rotation);
 
 		AddTag(m_uiName);
+
+		SetDrawLayer(2);
 	}
 }

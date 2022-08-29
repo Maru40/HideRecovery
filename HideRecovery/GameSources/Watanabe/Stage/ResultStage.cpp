@@ -5,6 +5,7 @@
 
 #include "Watanabe/DebugClass/Debug.h"
 #include "Watanabe/UI/UIObjects.h"
+#include "Watanabe/Effekseer/EfkEffect.h"
 
 #include "../Manager/PointManager.h"
 #include "../Manager/TimeManager.h"
@@ -28,6 +29,7 @@ namespace basecross {
 
 	void ResultStage::OnCreate() {
 		CreateViewLight();
+		AddGameObject<EfkInterface>();
 		AddGameObject<Debug>();
 		Debug::GetInstance()->Log(L"ResultStage");
 		Debug::GetInstance()->Log(L"A : マッチング画面へ");
@@ -35,6 +37,12 @@ namespace basecross {
 
 		CreateMap(L"WaitStage.csv");
 		auto uiBuilder = CreateUI(L"ResultUILayout.csv");
+
+		auto effectObject = AddGameObject<GameObject>();
+		effectObject->GetComponent<Transform>()->SetPosition(Vec3(0, 5, 0));
+		auto efkComp = effectObject->AddComponent<EfkComponent>();
+		efkComp->SetEffectResource(L"Confetti");
+		efkComp->PlayLoop(L"Confetti");
 
 		// 1ゲーム終了したのでインスタンスを破棄（リセット）
 		PointManager::DeleteInstance();

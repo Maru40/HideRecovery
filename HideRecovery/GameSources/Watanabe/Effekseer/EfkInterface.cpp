@@ -43,7 +43,7 @@ namespace basecross {
 		m_Manager->SetMaterialLoader(m_Renderer->CreateMaterialLoader());
 		m_Manager->SetCurveLoader(Effekseer::MakeRefPtr<Effekseer::CurveLoader>());
 		// レイヤーを前面に（要修正）
-		SetDrawLayer(2);
+		SetDrawLayer(1);
 	}
 
 	void EfkInterface::OnUpdate() {
