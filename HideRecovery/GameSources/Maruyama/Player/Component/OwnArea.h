@@ -8,6 +8,8 @@
 #include "stdafx.h"
 #include "Maruyama/Interface/I_TeamMember.h"
 
+#include "ImpactMap.h"
+
 namespace basecross {
 	//--------------------------------------------------------------------------------------
 	/// 前方宣言
@@ -21,6 +23,7 @@ namespace basecross {
 	struct OwnArea_Parametor {
 		team::TeamType team;		//チーム
 		float radius;	//エリア範囲の半径
+		maru::Rect rect;	//エリア範囲
 
 		OwnArea_Parametor(const team::TeamType& team, const float radius);
 	};
@@ -49,8 +52,10 @@ namespace basecross {
 		void OnCreate() override;
 		void OnLateStart() override;
 
+		void OnUpdate() override;
+
 	private:
-		void SettingGoal();
+		void SearchPlayers();
 
 	public:
 		void OnCollisionEnter(const CollisionPair& pair) override;
