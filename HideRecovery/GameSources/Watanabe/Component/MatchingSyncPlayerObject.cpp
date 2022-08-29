@@ -1,13 +1,13 @@
 ﻿#include "stdafx.h"
 #include "MatchingSyncPlayerObject.h"
-#include "Itabashi/OnlineMatching.h"
 #include "PlayerAnimator.h"
 #include "VelocityManager.h"
 
 namespace basecross {
 	MatchingSyncPlayerObject::MatchingSyncPlayerObject(const shared_ptr<GameObject>& owner,
-		const vector<shared_ptr<PlayerSpawnPointObject>>& pointObjects)
-		:Online::OnlineComponent(owner), m_spawnPoints(pointObjects)
+		const vector<shared_ptr<PlayerSpawnPointObject>>& pointObjects,
+		shared_ptr<Online::OnlineMatching> onlineMatching)
+		:Online::OnlineComponent(owner), m_spawnPoints(pointObjects), m_onlineMatching(onlineMatching)
 	{}
 
 	void MatchingSyncPlayerObject::OnCreate() {
@@ -54,5 +54,13 @@ namespace basecross {
 		}
 	}
 	void MatchingSyncPlayerObject::OnJoinRoom() {
+		auto playerCount = m_onlineMatching->GetPlayerCount();
+		for (int i = 0; i < playerCount; i++) {
+			auto spawnPoint = m_spawnPoints[i];
+			auto player = CreatePlayerModel();
+			auto playerTrans = player->GetComponent<Transform>();
+			auto spawnTrans = spawnPoint->GetComponent<Transform>();
+			playerTrans->SetPosition(spawnTrans->GetPosition());
+		}
 	}
 }

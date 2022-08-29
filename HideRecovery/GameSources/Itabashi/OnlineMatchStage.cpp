@@ -47,7 +47,9 @@ namespace basecross
 				spawnPointObjects.push_back(spawnObject);
 			}
 		}
-		gameObject->AddComponent<MatchingSyncPlayerObject>(spawnPointObjects);
+		gameObject->AddComponent<MatchingSyncPlayerObject>(spawnPointObjects, onlineMatching);
+
+		onlineMatching->GetPlayerCount();
 
 		SimpleSoundManager::ChangeBGM(L"MatchingStageBGM", 0.1f);
 	}
