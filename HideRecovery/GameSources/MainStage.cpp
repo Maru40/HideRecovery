@@ -64,6 +64,9 @@
 #include "Watanabe/Manager/TimeManager.h"
 #include "Itabashi/MainStageTransitioner.h"
 
+#include "Watanabe/UI/SplashMessageUI.h"
+#include "Watanabe/UI/UIObjectCSVBuilder.h"
+
 using namespace basecross::Enemy;
 
 namespace basecross {
@@ -128,11 +131,13 @@ namespace basecross {
 
 			//Mapの読み込み
 			CreateMap(sm_loadMapName);
-			// UIレイアウトの読み込み
-			CreateUI(L"GameUILayout.csv");
 
-			m_gameStartUI = AddGameObject<GameStartUI>();
-			m_gameFinishUI = AddGameObject<GameFinishUI>();
+			// UIレイアウトの読み込み
+			auto gameUIBuilder = CreateUI(L"GameUILayout.csv");
+			auto splash = gameUIBuilder->GetUIObject<SplashMessageUI>(L"SplashMessage");
+
+			//m_gameStartUI = AddGameObject<GameStartUI>();
+			//m_gameFinishUI = AddGameObject<GameFinishUI>();
 			//隠すアイテムの設定
 			//Instantiate<HideItemObject>(Vec3(0.0f, 0.0f, 0.0f), Quat::Identity());
 
@@ -152,21 +157,7 @@ namespace basecross {
 	}
 
 	void MainStage::OnUpdate() {
-		// デバッグ用
-		const auto& keyBoard = App::GetApp()->GetMyInputDevice()->GetKeyBoard();
-		if (keyBoard.IsInputDown(KeyCode::Alpha1)) {
-			m_gameStartUI->Start();
-			Debug::GetInstance()->Log(L"StartUI");
-		}
-		if (keyBoard.IsInputDown(KeyCode::Alpha2)) {
-			m_gameFinishUI->Start();
-			Debug::GetInstance()->Log(L"FinishUI");
-		}
-		if (keyBoard.IsInputDown(KeyCode::Alpha0)) {
-			m_gameStartUI->Reset();
-			m_gameFinishUI->Reset();
-			Debug::GetInstance()->Log(L"ResetUI");
-		}
+
 	}
 
 	void MainStage::SetLoadMapName(const wstring& name) {
@@ -177,11 +168,11 @@ namespace basecross {
 		return sm_loadMapName;
 	}
 
-	std::shared_ptr<GameStartUI> MainStage::GetGameStartUI() {
-		return m_gameStartUI;
-	}
-	std::shared_ptr<GameFinishUI> MainStage::GetGameFinishUI() {
-		return m_gameFinishUI;
-	}
+	//std::shared_ptr<GameStartUI> MainStage::GetGameStartUI() {
+	//	return m_gameStartUI;
+	//}
+	//std::shared_ptr<GameFinishUI> MainStage::GetGameFinishUI() {
+	//	return m_gameFinishUI;
+	//}
 }
 //end basecross
