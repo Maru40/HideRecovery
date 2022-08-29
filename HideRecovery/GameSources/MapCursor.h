@@ -34,6 +34,8 @@ namespace basecross {
 	private:
 		void MoveCursor();
 
+		Vec3 MoveClamp(const Vec3& position);
+
 	public:
 		void SetTarget(const std::shared_ptr<GameObject>& target) { m_target = target; }
 
