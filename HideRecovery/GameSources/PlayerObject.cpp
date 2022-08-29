@@ -69,8 +69,9 @@ namespace basecross {
 		);
 
 		auto draw = AddComponent<DrawComp>();
-		draw->SetMultiMeshResource(L"Player_Mesh_Red");
+		draw->SetMultiMeshResource(L"Player_Mesh");
 		draw->SetMeshToTransformMatrix(spanMat);
+		draw->SetModelTextureEnabled(false);
 		SetAlphaActive(true);
 		//draw->SetDiffuse(Col4(0.0f, 0.0f, 1.0f, 1.0f));
 
@@ -132,7 +133,7 @@ namespace basecross {
 			}
 		);
 		auto shadowmap = AddComponent<Shadowmap>();
-		shadowmap->SetMultiMeshResource(L"Player_Mesh_Red");
+		shadowmap->SetMultiMeshResource(L"Player_Mesh");
 		shadowmap->SetMeshToTransformMatrix(spanMat);
 
 		constexpr float ScaleValue = 1.0f;

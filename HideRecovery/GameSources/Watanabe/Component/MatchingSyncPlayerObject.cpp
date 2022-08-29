@@ -32,10 +32,8 @@ namespace basecross {
 		);
 		auto gameObject = GetStage()->AddGameObject<GameObject>();
 		auto drawComp = gameObject->AddComponent<PNTBoneModelDraw>();
-		drawComp->SetMultiMeshResource(L"Player_Mesh_Red");
+		drawComp->SetMultiMeshResource(L"Player_Mesh");
 		drawComp->SetMeshToTransformMatrix(spanMat);
-		drawComp->SetModelTextureEnabled(false);
-		drawComp->SetTextureResource(L"NormalHeroTx");
 
 		auto animator = gameObject->AddComponent<PlayerAnimator>();
 		animator->ChangePlayerAnimation(PlayerAnimationState::State::Wait);

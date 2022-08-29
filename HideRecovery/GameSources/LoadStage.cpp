@@ -93,7 +93,6 @@ namespace basecross
 		// プレイヤーのテクスチャ
 		ResourceLoadData(L"BlueHeroTx", L"Player/BlueHeroTx.png"),
 		ResourceLoadData(L"RedHeroTx", L"Player/RedHeroTx.png"),
-		ResourceLoadData(L"NormalHeroTx", L"Player/NormalHeroTx.png"),
 
 		//デバッグテクスチャ
 		ResourceLoadData(L"Number_TX", L"Number.png"),
@@ -153,8 +152,7 @@ namespace basecross
 		//ModelResourceLoadData(L"tree_dead3",  L"tree_dead3.bmf", ModelType::Static,  L"Tree\\"),
 
 		//ModelResourceLoadData(L"Player_Mesh",  L"Character04.bmf", ModelType::BoneMulti,  L"Player\\"),
-		ModelResourceLoadData(L"Player_Mesh_Blue",  L"Hero.bmf", ModelType::BoneMulti,  L"Player\\"),
-		ModelResourceLoadData(L"Player_Mesh_Red",  L"Black.bmf", ModelType::BoneMulti,  L"Player\\"),
+		ModelResourceLoadData(L"Player_Mesh",  L"Hero.bmf", ModelType::BoneMulti,  L"Player\\"),
 
 		ModelResourceLoadData(L"Ball_Model",  L"Ball.bmf", ModelType::BoneMulti,  L"Ball\\"),
 		ModelResourceLoadData(L"Box_Model", L"Box.bmf", ModelType::BoneMulti, L"Box\\"),
