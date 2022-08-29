@@ -23,8 +23,6 @@ namespace basecross {
 
 	FieldMap_Parametor::FieldMap_Parametor() :
 		rect(maru::Rect(Vec3(0.0f), 100.0f, 200.0f))
-		//width(100.0f), 
-		//depth(200.0f)
 	{}
 
 	//--------------------------------------------------------------------------------------
