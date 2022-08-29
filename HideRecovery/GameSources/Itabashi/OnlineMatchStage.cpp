@@ -10,6 +10,9 @@
 #include "Watanabe/Component/MatchingUIController.h"
 #include "Watanabe/Component/MatchingSyncPlayerObject.h"
 #include "Watanabe/Effekseer/EfkEffect.h"
+#include "Watanabe/Manager/PointManager.h"
+#include "Watanabe/Manager/TimeManager.h"
+#include "Watanabe/Manager/ScoreManager.h"
 
 namespace basecross
 {
@@ -31,6 +34,11 @@ namespace basecross
 		AddGameObject<EfkInterface>();
 		auto debugObject = AddGameObject<Debug>();
 		debugObject->Log(L"OnlineMatchStage");
+
+		// 明示的にインスタンスを生成
+		PointManager::CreateInstance();
+		TimeManager::CreateInstance();
+		ScoreManager::CreateInstance();
 
 		auto gameObject = AddGameObject<GameObject>();
 		auto onlineMatching = gameObject->AddComponent<Online::OnlineMatching>();
