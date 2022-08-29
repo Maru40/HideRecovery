@@ -115,6 +115,8 @@ namespace basecross {
 		else {
 			splashMessageUI->SetMessage(SplashMessageUI::MessageType::StolenBall);
 		}
+
+		splashMessageUI->SetColor(team::GetTeamColor(otherTeamMember->GetTeam()));
 	}
 
 	void ItemAcquisitionManager::ItemAcquisition(const std::shared_ptr<Item>& item) {
