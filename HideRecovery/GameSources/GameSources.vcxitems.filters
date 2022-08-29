@@ -1060,6 +1060,9 @@
     <Filter Include="Maruyama\Player\Component\AccessHidePlace">
       <UniqueIdentifier>{15de02f4-c11f-4def-8966-1f39c7665943}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\Component\MatchingSyncPlayerObject">
+      <UniqueIdentifier>{e672e2fd-f7f0-4508-93b4-43c96bc540ab}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1977,8 +1980,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Camera\Component\CameraForwardController.h">
       <Filter>Maruyama\Camera\CameraForwardController</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\AccessHidePlace.h">
-      <Filter>Maruyama\Player\Component\AccessHidePlace</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\MatchingSyncPlayerObject.h">
+      <Filter>Watanabe\Component\MatchingSyncPlayerObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2801,8 +2804,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Camera\Component\CameraForwardController.cpp">
       <Filter>Maruyama\Camera\CameraForwardController</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\AccessHidePlace.cpp">
-      <Filter>Maruyama\Player\Component\AccessHidePlace</Filter>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\MatchingSyncPlayerObject.cpp">
+      <Filter>Watanabe\Component\MatchingSyncPlayerObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
