@@ -35,7 +35,21 @@
 
 #include "Watanabe/Effekseer/EfkComponent.h"
 
+#include "Maruyama/Interface/I_TeamMember.h"
+
+#include "Watanabe/DebugClass/Debug.h"
+
 namespace basecross {
+
+	//--------------------------------------------------------------------------------------
+	/// テレポート機能のパラメータ
+	//--------------------------------------------------------------------------------------
+
+	Teleport_Parametor::Teleport_Parametor() :
+		maxRangeLate(0.5f),
+		position(Vec3(0.0f)),
+		isTeleporting(false)
+	{}
 
 	//--------------------------------------------------------------------------------------
 	/// テレポート本体
@@ -207,6 +221,16 @@ namespace basecross {
 			nullptr,
 			exit
 		);
+
+		animator->AddAnimationEvent(
+			PlayerAnimationState::State::EndTeleport,
+			nullptr,
+			nullptr,
+			[&]() { 
+				m_param.isTeleporting = false; 
+
+			}
+		);
 	}
 
 	void Teleport::StartTeleport() {
@@ -219,6 +243,8 @@ namespace basecross {
 		if (auto animator = GetGameObject()->GetComponent<PlayerAnimator>(false)) {
 			animator->ChangePlayerAnimation(PlayerAnimationState::State::StartTeleport);	//テレポートアニメーション
 		}
+
+		m_param.isTeleporting = true;
 	}
 
 	void Teleport::OpenMap() {
@@ -247,7 +273,24 @@ namespace basecross {
 	}
 
 	bool Teleport::IsTeleport() const {
+		auto teamMember = GetGameObject()->GetComponent<I_TeamMember>(false);
+		if (teamMember && !teamMember->IsInArea()) {
+			return false;
+		}
+
+		//距離がありすぎるならテレポートしない
+		auto teleportPosition = GetFieldMap()->GetMapCursor()->GetCursorFiledPosition();
+		auto toTeleportPosition = teleportPosition - transform->GetPosition();
+		auto maxRange = GetFieldMap()->GetRect().depth * m_param.maxRangeLate;
+		if (toTeleportPosition.length() > maxRange) {
+			return false;
+		}
+
 		return GetFieldMap()->IsMapDraw();	//現在はマップが開いているなら飛べる。
+	}
+
+	bool Teleport::IsTeleporting() const {
+		return m_param.isTeleporting;
 	}
 
 	void Teleport::SetTeleportCamera(const std::shared_ptr<VirtualCamera> camera) {

@@ -48,6 +48,12 @@ namespace basecross {
 			/// </summary>
 			/// <returns>開始位置</returns>
 			Vec3 CalculateStartPosition() const;
+
+			/// <summary>
+			/// 四角形内にいるかどうか
+			/// </summary>
+			/// <returns>四角形内ならtrue</returns>
+			bool IsInRect(const Vec3& position);
 		};
 
 

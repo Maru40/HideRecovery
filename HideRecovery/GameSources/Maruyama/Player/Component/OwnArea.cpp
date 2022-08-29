@@ -36,26 +36,46 @@ namespace basecross {
 	{}
 
 	void OwnArea::OnCreate() {
+		auto& rect = m_param.rect;
+		auto scale = transform->GetScale();
+
+		rect.centerPosition = transform->GetPosition();
+		rect.width = scale.x;
+		rect.depth = scale.z;
 	}
 
 	void OwnArea::OnLateStart() {
-		//SettingGoal();
+
 	}
 
-	void OwnArea::SettingGoal() {
-		//仮で一番近いゴールをチームに設定。
-		float minRange = FLT_MAX;
-		std::shared_ptr<Goal> nearGoal;
-		auto goals = maru::Utility::FindComponents<Goal>(GetStage());
-		for (auto& goal : goals) {
-			auto toVec = maru::Utility::CalcuToTargetVec(goal->GetGameObject(), GetGameObject());
-			if (toVec.length() < minRange) {
-				minRange = toVec.length();
-				nearGoal = goal;
-			}
+	void OwnArea::OnUpdate() {
+		if (m_members.size() == 0) {
+			SearchPlayers();
 		}
 
-		nearGoal->SetTeam(GetTeam());
+		for (auto& weakMember : m_members) {
+			auto member = weakMember.lock();
+			if (!member) {
+				continue;
+			}
+
+			//自陣エリア内なら...
+			member->SetIsInArea(IsInArea(member));
+		}
+	}
+
+	void OwnArea::SearchPlayers() {
+		auto players = maru::Utility::FindGameObjects<PlayerObject>(GetStage());
+		for (auto& player : players) {
+			auto teamMember = player->GetComponent<I_TeamMember>();
+			if (!teamMember) {
+				continue;
+			}
+
+			if (teamMember->GetTeam() == GetTeam()) {	//同じチームメンバーなら
+				AddMember(teamMember);
+			}
+		}
 	}
 
 	void OwnArea::OnCollisionEnter(const CollisionPair& pair) {
@@ -89,8 +109,10 @@ namespace basecross {
 	}
 
 	bool OwnArea::IsInArea(const std::shared_ptr<GameObject>& member) {
-		auto toObjectVec = maru::Utility::CalcuToTargetVec(GetGameObject(), member);
-		return toObjectVec.length() < GetRadius();	//半径内ならtrue
+		auto memberTrans = member->GetComponent<Transform>();
+		auto position = memberTrans->GetPosition();
+
+		return m_param.rect.IsInRect(position);
 	}
 
 	//--------------------------------------------------------------------------------------

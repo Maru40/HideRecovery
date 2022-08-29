@@ -24,6 +24,8 @@
 #include "TimeHelper.h"
 #include "GameTimer.h"
 
+#include "Maruyama/Player/Component/Teleport.h"
+
 namespace basecross {
 	ChargeGun::ChargeGun(const std::shared_ptr<GameObject>& objPtr) :
 		WeponBase(objPtr),
@@ -73,6 +75,11 @@ namespace basecross {
 
 		auto useWeapon = m_useWepon.lock();
 		if (useWeapon && !useWeapon->IsAim()) {
+			return nullptr;
+		}
+
+		auto teleport = GetGameObject()->GetComponent<Teleport>(false);
+		if (teleport && teleport->IsTeleporting()) {
 			return nullptr;
 		}
 

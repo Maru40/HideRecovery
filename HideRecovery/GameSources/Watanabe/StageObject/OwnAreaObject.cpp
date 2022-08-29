@@ -67,9 +67,9 @@ namespace basecross {
 			}
 		}
 
-		auto col = AddComponent<CollisionObb>();
-		col->SetFixed(true);
-		col->SetAfterCollision(AfterCollision::None);
+		//auto col = AddComponent<CollisionObb>();
+		//col->SetFixed(true);
+		//col->SetAfterCollision(AfterCollision::None);
 
 		AddComponent<OwnArea>(OwnArea::Parametor(m_team, m_areaRadius));
 	}

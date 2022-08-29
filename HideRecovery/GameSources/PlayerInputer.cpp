@@ -163,6 +163,11 @@ namespace basecross
 			App::GetApp()->GetMyInputDevice()->GetXInputGamePad().IsInputDown(XInputCode::Up);
 	}
 
+	bool PlayerInputer::IsOpenMap() {
+		return App::GetApp()->GetMyInputDevice()->GetKeyBoard().IsInputDown(KeyCode::M) ||
+			App::GetApp()->GetMyInputDevice()->GetXInputGamePad().IsInputDown(XInputCode::Y);
+	}
+
 	bool PlayerInputer::IsDownChoices()
 	{
 		return App::GetApp()->GetMyInputDevice()->GetKeyBoard().IsInputDown(KeyCode::DownArrow) ||

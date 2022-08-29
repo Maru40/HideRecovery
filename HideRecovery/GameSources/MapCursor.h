@@ -19,6 +19,8 @@ namespace basecross {
 
 	class MapCursor : public Component
 	{
+		//float m_moveRangeLate;	//ˆÚ“®§ŒÀ”ÍˆÍ
+
 		std::weak_ptr<GameObject> m_target;
 		std::weak_ptr<SpriteObject> m_sprite;
 
@@ -33,6 +35,8 @@ namespace basecross {
 
 	private:
 		void MoveCursor();
+
+		Vec3 MoveClamp(const Vec3& position);
 
 	public:
 		void SetTarget(const std::shared_ptr<GameObject>& target) { m_target = target; }

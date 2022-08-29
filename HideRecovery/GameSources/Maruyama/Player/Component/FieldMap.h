@@ -81,6 +81,11 @@ namespace basecross {
 		float GetDepth() const noexcept { return m_param.rect.depth; }
 
 		maru::Rect GetRect() const { return m_param.rect; }
+
+		/// <summary>
+		/// テクスチャマップのスケールを返す。
+		/// </summary>
+		Vec3 GetMapTextureScale() const { return m_builderParam.scale; };
 	};
 
 }

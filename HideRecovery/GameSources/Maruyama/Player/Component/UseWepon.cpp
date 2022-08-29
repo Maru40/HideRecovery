@@ -27,6 +27,8 @@
 
 #include "Itabashi/GamePlayerManager.h"
 
+#include "Maruyama/Player/Component/Teleport.h"
+
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
