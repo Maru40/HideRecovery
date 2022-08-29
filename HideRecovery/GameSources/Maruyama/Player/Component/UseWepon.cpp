@@ -142,9 +142,14 @@ namespace basecross {
 
 		if (m_isUseCamera) {
 			m_direction = CalculateRotationDirection();
+			AssistCameraRotation(m_direction);
 		}
 
 		rotationController->SetDirect(m_direction);
+	}
+
+	void UseWepon::AssistCameraRotation(const Vec3& direction) {
+
 	}
 
 	void UseWepon::SettingReactiveIsAim() {
