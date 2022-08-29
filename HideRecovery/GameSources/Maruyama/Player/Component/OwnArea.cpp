@@ -14,6 +14,8 @@
 
 #include "MaruUtility.h"
 
+#include "Watanabe/DebugClass/Debug.h"
+
 namespace basecross {
 	//--------------------------------------------------------------------------------------
 	/// 自陣エリアのパラメータ
@@ -54,6 +56,32 @@ namespace basecross {
 		}
 
 		nearGoal->SetTeam(GetTeam());
+	}
+
+	void OwnArea::OnCollisionEnter(const CollisionPair& pair) {
+		auto other = pair.m_Dest.lock()->GetGameObject();
+		auto teamMember = other->GetComponent<I_TeamMember>(false);
+		if(!teamMember){
+			return;
+		}
+
+		if (teamMember->GetTeam() == GetTeam()) {	//同じチームメンバーなら
+			teamMember->SetIsInArea(true);
+			Debug::GetInstance()->Log(L"InArea");
+		}
+	}
+
+	void OwnArea::OnCollisionExit(const CollisionPair& pair) {
+		auto other = pair.m_Dest.lock()->GetGameObject();
+		auto teamMember = other->GetComponent<I_TeamMember>(false);
+		if (!teamMember) {
+			return;
+		}
+
+		if (teamMember->GetTeam() == GetTeam()) {	//同じチームメンバーなら
+			teamMember->SetIsInArea(false);
+			Debug::GetInstance()->Log(L"OutArea");
+		}
 	}
 
 	bool OwnArea::IsInArea(const std::shared_ptr<I_TeamMember>& member) {
