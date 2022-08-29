@@ -251,7 +251,7 @@ namespace Online
 
 			if (otherAcquisitionManager)
 			{
-				otherAcquisitionManager->HideItemAcquisitionEvent(GetGameObject());
+				otherAcquisitionManager->HideItemAcquisitionEvent(onlineController->GetGameObject());
 				otherAcquisitionManager->ItemAcquisition(item);
 			}
 		}
