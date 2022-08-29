@@ -25,6 +25,7 @@
 
 #include "Watanabe/Component/PlayerAnimator.h"
 #include "Watanabe/UI/SplashMessageUI.h"
+#include "Itabashi/PlayerOnlineController.h"
 
 namespace basecross {
 
@@ -95,7 +96,7 @@ namespace basecross {
 	}
 
 	void ItemAcquisitionManager::HideItemAcquisitionEvent(const std::shared_ptr<GameObject>& other) {
-		auto selfTeamMember = GetGameObject()->GetComponent<I_TeamMember>(false);
+		auto selfTeamMember = Online::PlayerOnlineController::GetLocalOnlineController()->GetGameObject()->GetComponent<I_TeamMember>(false);
 		auto otherTeamMember = other->GetComponent<I_TeamMember>(false);
 		if (!selfTeamMember && !otherTeamMember) {
 			return;
