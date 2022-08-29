@@ -12,8 +12,8 @@
 
 namespace basecross {
 	void ResultStage::CreateViewLight() {
-		const Vec3 eye(0.0f, 3.0f, 20.0f);
-		const Vec3 at(0.0f);
+		const Vec3 eye(0.0f, 1.0f, 5.0f);
+		const Vec3 at(0, 1.0f, 0);
 		auto PtrView = CreateView<SingleView>();
 		//ビューのカメラの設定
 		auto PtrCamera = ObjectFactory::Create<Camera>();
@@ -34,13 +34,7 @@ namespace basecross {
 		Debug::GetInstance()->Log(L"B : タイトル画面へ");
 
 		CreateMap(L"WaitStage.csv");
-
 		auto uiBuilder = CreateUI(L"ResultUILayout.csv");
-
-		PointManager::GetInstance()->AddPoint(team::TeamType::Blue);
-		// 勝敗表示のUIオブジェクトを取得し、チームデータをセット
-		//（チームをセットしたあとに表示される）
-		auto winOrLose = uiBuilder->GetUIObject<WinOrLoseUI>(L"WinOrLose");
 
 		// 1ゲーム終了したのでインスタンスを破棄（リセット）
 		PointManager::DeleteInstance();

@@ -1,11 +1,11 @@
 className,UIName,PosX,PosY,ScaleX,ScaleY,Rot,,
 SimpleSprite,ToTitle,650,-450,1,1,0,SpriteData,ToTitle
 SimpleSprite,ToContinue,-650,-450,1,1,0,SpriteData,ToContinue
-WinOrLoseUI,WinOrLose,0,300,1,1,0,,
-PointUI,BluePoint,300,100,0.8,0.8,0,Blue,
-PointUI,RedPoint,-300,100,0.8,0.8,0,Red,
-SimpleSprite,RedLabel,-300,200,0.5,0.5,0,SpriteData,Red
-SimpleSprite,BlueLabel,300,200,0.5,0.5,0,SpriteData,Blue
+WinOrLoseUI,WinOrLose,0,400,0.9,0.9,0,,
+PointUI,BluePoint,200,200,0.8,0.8,0,Blue,
+PointUI,RedPoint,-200,200,0.8,0.8,0,Red,
+SimpleSprite,RedLabel,-200,290,0.4,0.4,0,SpriteData,Red
+SimpleSprite,BlueLabel,200,290,0.4,0.4,0,SpriteData,Blue
 ScoreUI,Red1Score,-740,300,1,1,0,1,Red
 ScoreUI,Red2Score,-740,0,1,1,0,2,Red
 ScoreUI,Red3Score,-740,-300,1,1,0,3,Red
