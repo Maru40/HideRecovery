@@ -54,6 +54,8 @@ namespace basecross
 
 		static bool IsDownChoices();
 
+		static bool IsOpenMap();
+
 		/// <summary>
 		/// アイテム獲得ボタン
 		/// </summary>
