@@ -187,6 +187,7 @@ namespace basecross {
 	Vec3 UseWepon::CalculateRotationDirection() {
 		auto camera = GetStage()->GetView()->GetTargetCamera();
 		auto baseDirection = camera->GetAt() - camera->GetEye();
+		return baseDirection;
 		auto selfTeamMember = GetGameObject()->GetComponent<I_TeamMember>(false);
 
 		Vec3 resultVec = baseDirection;
