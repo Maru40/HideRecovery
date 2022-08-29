@@ -48,4 +48,9 @@ namespace basecross {
 		m_timer.Reset();
 		m_isStart = true;
 	}
+
+	void SplashMessageUI::SetColor(const Col4& color) {
+		m_sprite->GetDrawComponent()->SetDiffuse(color);
+	}
+
 }
