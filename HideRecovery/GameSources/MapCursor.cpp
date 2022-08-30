@@ -23,6 +23,7 @@
 #include "Maruyama/Player/Component/Teleport.h"
 #include "Maruyama/Interface/I_TeamMember.h"
 #include "TeleportCursorUI.h"
+#include "GameManager.h"
 
 namespace basecross {
 
@@ -52,9 +53,10 @@ namespace basecross {
 			transform->SetPosition(m_beforePosition);
 		}
 		
-		//自陣エリア外なら
+		//自陣エリア外なら、またゲーム中でないなら
 		auto teamMember = m_teamMember.lock();
-		if (teamMember && !teamMember->IsInArea()) {
+		auto gameManager = GameManager::GetInstance();
+		if ((teamMember && !teamMember->IsInArea()) || (gameManager && gameManager->GetCurrentState() != GameManager::State::Game)) {
 			m_teleportUIObject.lock()->SetDrawActive(false);
 			SetMapCursorPositionConnectTargetPosition();
 		}
