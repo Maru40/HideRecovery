@@ -42,6 +42,8 @@ namespace basecross {
 		rect.centerPosition = transform->GetPosition();
 		rect.width = scale.x;
 		rect.depth = scale.z;
+
+		CreateMapOutCollisions(GetGameObject());
 	}
 
 	void OwnArea::OnLateStart() {
@@ -76,6 +78,51 @@ namespace basecross {
 				AddMember(teamMember);
 			}
 		}
+	}
+
+	void OwnArea::CreateMapOutCollisions(const std::shared_ptr<GameObject>& object) {
+		auto objectTrans = object->GetComponent<Transform>();
+		auto position = objectTrans->GetPosition();
+		auto scale = objectTrans->GetScale();
+		auto halfScale = scale * 0.5f;
+
+		constexpr float Width = 0.5f;
+		//‰œs¶¬
+		auto forwardPosition = position + (Vec3::Forward() * halfScale.z);
+		CreateMapOutCollision(forwardPosition, Vec3::Forward(), scale.x, Width);
+
+		//Žè‘O‘¤¶¬
+		auto backPosition = position + (-Vec3::Forward() * halfScale.z);
+		CreateMapOutCollision(backPosition, -Vec3::Forward(), scale.x, Width);
+
+		//‰E‘¤
+		auto rightPosition = position + (Vec3::Right() * halfScale.x);
+		CreateMapOutCollision(rightPosition, Vec3::Right(), scale.z, Width);
+
+		//¶‘¤
+		auto leftPosition = position + (-Vec3::Right() * halfScale.x);
+		CreateMapOutCollision(leftPosition, -Vec3::Right(), scale.z, Width);
+	}
+
+	void OwnArea::CreateMapOutCollision(const Vec3& startPosition, const Vec3& forward, const float& length, const float& width, const float& height) {
+		const float MoveForwardRange = width * 1.5f;
+		auto halfHeight = height * 0.5f;
+		auto direct = maru::Utility::ConvertForwardOffset(forward, Vec3::Right());
+		auto position = startPosition + (direct.GetNormalized() * MoveForwardRange);
+		position.y += halfHeight;
+		auto object = GetStage()->Instantiate<GameObject>(position, Quat::Identity());
+		auto collision = object->AddComponent<CollisionObb>();
+		//object->AddTag(L"T_Obstacle");
+
+		constexpr float depth = 1.0f;
+		auto objectTrans = object->GetComponent<Transform>();
+		objectTrans->SetScale(Vec3(length - width, height, depth));
+		objectTrans->SetForward(forward);
+
+		collision->SetFixed(true);
+		//collision->SetDrawActive(true);
+
+		m_outCollisonObject.push_back(object);
 	}
 
 	void OwnArea::OnCollisionEnter(const CollisionPair& pair) {

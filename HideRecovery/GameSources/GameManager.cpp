@@ -19,6 +19,7 @@
 
 #include "TaskList.h"
 #include "TeleportUI.h"
+#include "Maruyama/Player/Component/OwnArea.h"
 
 namespace basecross {
 
@@ -106,6 +107,11 @@ namespace basecross {
 			auto teleportUI = maru::Utility::FindComponent<TeleportUI>(GetStage());
 			if (teleportUI) {
 				teleportUI->SetUpdateActive(true);
+			}
+
+			auto ownerAreas = maru::Utility::FindComponents<OwnArea>(GetStage());
+			for (auto area : ownerAreas) {
+				area->SetOutCollisionActive(false);
 			}
 		}
 			break;

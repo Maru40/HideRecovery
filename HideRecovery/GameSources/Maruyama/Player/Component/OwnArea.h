@@ -41,6 +41,8 @@ namespace basecross {
 
 		std::vector<std::weak_ptr<I_TeamMember>> m_members;	//エリアに所属しているメンバー一覧
 
+		std::vector<std::weak_ptr<GameObject>> m_outCollisonObject;
+
 	public:
 		/// <summary>
 		/// コンストラクタ
@@ -56,6 +58,22 @@ namespace basecross {
 
 	private:
 		void SearchPlayers();
+
+		/// <summary>
+		/// 外側のコリジョンを複数生成する関数
+		/// </summary>
+		/// <param name="objects">生成するベースとなる床オブジェクト</param>
+		void CreateMapOutCollisions(const std::shared_ptr<GameObject>& object);
+
+		/// <summary>
+		/// 外側のコリジョンを生成する
+		/// </summary>
+		/// <param name="startPosition">生成スタート場所</param>
+		/// <param name="forward">向き</param>
+		/// <param name="length">長さ</param>
+		/// <param name="width">横幅</param>
+		/// <param name="height">高さ</param>
+		void CreateMapOutCollision(const Vec3& startPosition, const Vec3& forward, const float& length, const float& width, const float& height = 15.0f);
 
 	public:
 		void OnCollisionEnter(const CollisionPair& pair) override;
@@ -115,5 +133,13 @@ namespace basecross {
 		/// </summary>
 		/// <param name="member">削除するメンバー</param>
 		bool RemoveMember(const std::shared_ptr<I_TeamMember>& member);
+
+		void SetOutCollisionActive(const bool isActive) {
+			for (auto object : m_outCollisonObject) {
+				if (object.lock()) {
+					object.lock()->SetActive(isActive);
+				}
+			}
+		}
 	};
 }

@@ -42,6 +42,10 @@
 #include "OwnArea.h"
 #include "GameManager.h"
 
+#include "UtilityObstacle.h"
+
+#include "MaruHitHelper.h"
+
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
@@ -247,6 +251,20 @@ namespace basecross {
 	}
 
 	void Teleport::StartTeleport(const Vec3& teleportPosition) {
+		//障害物がテレポート先にあるならテレポートできない
+		auto underTeleportPosition = teleportPosition;
+		auto upperTeleportPosition = teleportPosition;
+		underTeleportPosition.y += 1.0f;
+		upperTeleportPosition.y += 10.0f;
+		if (maru::UtilityObstacle::IsRayObstacle(
+			upperTeleportPosition,
+			underTeleportPosition,
+			GetStage()->GetGameObjectVec()
+		)) {
+			//ダメな音を出す。
+			return;
+		}
+
 		//テレポート場所を設定
 		SetTeleportPosition(teleportPosition);
 
