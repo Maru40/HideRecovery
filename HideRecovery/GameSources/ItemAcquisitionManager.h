@@ -45,6 +45,7 @@ namespace basecross {
 
 		std::weak_ptr<SoundEmitter> m_soundEmitter;
 		SoundClip m_getBallSoundClip;
+		SoundClip m_stolenBallSoundClip;
 
 		bool m_canAcquisition = false;
 

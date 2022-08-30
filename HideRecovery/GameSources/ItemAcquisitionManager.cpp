@@ -52,7 +52,8 @@ namespace basecross {
 	ItemAcquisitionManager::ItemAcquisitionManager(const std::shared_ptr<GameObject>& objPtr, const Parametor& param) :
 		Component(objPtr), 
 		m_param(param),
-		m_getBallSoundClip(L"GetBallSE", false, 0.5f)
+		m_getBallSoundClip(L"GetBallSE", false, 0.5f),
+		m_stolenBallSoundClip(L"StolenBallSE", false, 0.5f)
 	{}
 
 	void ItemAcquisitionManager::OnLateStart() {
@@ -120,6 +121,7 @@ namespace basecross {
 		}
 		else {
 			splashMessageUI->SetMessage(SplashMessageUI::MessageType::StolenBall);
+			m_soundEmitter.lock()->PlaySoundClip(m_stolenBallSoundClip);
 		}
 
 		splashMessageUI->SetColor(team::GetTeamColor(otherTeamMember->GetTeam()));
