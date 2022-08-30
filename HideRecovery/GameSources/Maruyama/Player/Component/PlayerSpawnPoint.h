@@ -68,5 +68,7 @@ namespace basecross {
 		int GetID() const noexcept { return m_param.id; }
 
 		Vec3 GetWorldPosition() const { return transform->GetWorldPosition(); }
+
+		Quat GetQuaternion()const { return transform->GetQuaternion(); }
 	};
 }

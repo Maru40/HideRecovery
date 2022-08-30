@@ -11,6 +11,8 @@ namespace basecross {
 		shared_ptr<CountDownUI> m_countDown;
 		// 「Start」の文字表示用
 		shared_ptr<SimpleSprite> m_strStart;
+		// 目的表示
+		shared_ptr<SimpleSprite> m_objectiveStr;
 		// 消えるまでのタイマー
 		TimeCounter m_invisibleTimer;
 

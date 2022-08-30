@@ -31,3 +31,5 @@ AButton,Shape_TX,384,0,128,128
 BButton,Shape_TX,256,128,128,128
 YButton,Shape_TX,384,128,128,128
 PreparingTeam,Message_TX,0,1180,440,100
+Remaining60s,RemainingTime_TX,0,0,370,128
+Remaining30s,RemainingTime_TX,370,0,475,128

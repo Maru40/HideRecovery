@@ -22,4 +22,5 @@ cbuffer ParametersBuffer : register(b0)
     float Ratio : packoffset(c14.x);
     float Threshold : packoffset(c14.y);
     uint IsBackground : packoffset(c14.z);
+    uint UseGradientTextureFlg : packoffset(c14.w);
 };

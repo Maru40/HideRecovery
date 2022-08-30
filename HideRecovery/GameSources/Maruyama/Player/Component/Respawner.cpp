@@ -57,6 +57,7 @@ namespace basecross {
 
 	void Respawner::Respawn() {
 		transform->SetPosition(GetSpawnPoint()->GetWorldPosition());
+		transform->SetQuaternion(GetSpawnPoint()->GetQuaternion());
 
 		if (auto status = GetGameObject()->GetComponent<PlayerStatus>(false)) {
 			status->Respawn();

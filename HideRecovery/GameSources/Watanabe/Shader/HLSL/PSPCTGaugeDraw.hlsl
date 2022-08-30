@@ -27,10 +27,19 @@ float4 main(PSPCTInput input) : SV_TARGET
         alpha = smoothstep(remapRatio, remapRatio + Threshold, gradient.x);
         alpha = 1 - alpha;
 
+        // ゲージの色
+        float4 gaugeColor = Diffuse;
+        // 色付きグラデーションテクスチャがある場合
+        if (UseGradientTextureFlg)
+        {
+            // Ratioと元に色を取得
+            gaugeColor = g_colorTexture.Sample(g_sampler, float2(Ratio, 0.0f));
+        }
+
         // ゲージ部分の色
-        float4 mainColor = alpha > 0.0f ? float4(Diffuse.xyz, 1.0f) : float4(0.0f, 0.0f, 0.0f, (float) IsBackground);
+        float4 mainColor = alpha > 0.0f ? float4(gaugeColor.xyz, 1.0f) : float4(0.0f, 0.0f, 0.0f, (float) IsBackground);
         return mainColor;
     }
-    return float4(1, 0, 0, 0);
+    return float4(0, 0, 0, 0);
 
 }

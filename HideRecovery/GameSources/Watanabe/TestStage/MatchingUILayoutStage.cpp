@@ -9,6 +9,8 @@
 #include "../Manager/ScoreManager.h"
 #include "../BoardPoly/HPGaugeBP.h"
 #include "../StageObject/StageObjects.h"
+#include "../UI/UIObjects.h"
+#include "../UI/GameStartUI.h"
 #include "Maruyama/Player/Component/PlayerSpawnPoint.h"
 #include "VillainPlayerObject.h"
 
@@ -35,7 +37,8 @@ namespace basecross {
 
 		CreateMap(L"WaitStage.csv");
 		PointManager::GetInstance()->AddPoint(team::TeamType::Blue);
-		auto uiBuilder = CreateUI(L"MatchingUILayout.csv");
+		auto uiBuilder = CreateUI(L"GameUILayout.csv");
+
 		//auto WinOrLose = uiBuilder->GetUIObject<WinOrLoseUI>(L"WinOrLose");
 
 		//for (auto gameObject : GetGameObjectVec()) {
