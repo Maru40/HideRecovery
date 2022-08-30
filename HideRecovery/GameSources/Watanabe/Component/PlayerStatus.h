@@ -46,6 +46,7 @@ namespace basecross {
 		std::weak_ptr<SoundEmitter> m_soundEmitter;
 
 		SoundClip m_damageSoundClip;
+		SoundClip m_inAreaSoundClip;
 
 	public:
 		PlayerStatus(const shared_ptr<GameObject>& owner);

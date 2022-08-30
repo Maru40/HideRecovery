@@ -21,12 +21,19 @@
 namespace basecross {
 	PlayerStatus::PlayerStatus(const shared_ptr<GameObject>& owner)
 		:Component(owner), m_status(10), m_team(team::TeamType(0)),
-		m_damageSoundClip(L"PlayerDamageSE", false, 0.75f)
+		m_damageSoundClip(L"PlayerDamageSE", false, 0.75f),
+		m_inAreaSoundClip(L"AlertSE_00", false, 0.05f)
 	{}
 
 	void PlayerStatus::OnLateStart()
 	{
 		m_soundEmitter = GetGameObject()->GetComponent<SoundEmitter>(false);
+
+		AddReactiveIsInAreaEvent(true, [&]() { 
+			if (auto soundEmitter = m_soundEmitter.lock()) {
+				soundEmitter->PlaySoundClip(m_inAreaSoundClip);
+			}
+		});
 	}
 
 	void PlayerStatus::OnUpdate() {
