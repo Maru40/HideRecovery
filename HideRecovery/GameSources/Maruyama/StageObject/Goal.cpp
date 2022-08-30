@@ -42,6 +42,7 @@
 #include "Watanabe/BoardPoly/GoalBP.h"
 
 #include "PlayerInputer.h"
+#include "MainStage.h"
 
 namespace basecross {
 	//--------------------------------------------------------------------------------------
@@ -104,9 +105,12 @@ namespace basecross {
 	}
 
 	void Goal::OnLateStart() {
-		auto goalBP = GetStage()->Instantiate<GoalBP>();
-		goalBP->GetComponent<Transform>()->SetPosition(transform->GetPosition() + m_param.goalBPOffset);
-		m_goalBP = goalBP;
+		if (auto mainStage = dynamic_pointer_cast<MainStage>(GetStage())) {
+			auto goalBP = GetStage()->Instantiate<GoalBP>();
+			goalBP->GetComponent<Transform>()->SetPosition(transform->GetPosition() + m_param.goalBPOffset);
+			m_goalBP = goalBP;
+		}
+
 		SettingPerformable();
 		m_soundEmitter = GetGameObject()->GetComponent<SoundEmitter>();
 	}
