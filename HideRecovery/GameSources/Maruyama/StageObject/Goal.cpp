@@ -270,6 +270,8 @@ namespace basecross {
 				fire->Start();
 			}
 		}
+
+		m_soundEmitter.lock()->PlaySoundClip(m_goalEffectSoundClip);
 	}
 
 	void Goal::OnCustomEventAction(int playerNumber, std::uint8_t eventCode, const std::uint8_t* bytes)
