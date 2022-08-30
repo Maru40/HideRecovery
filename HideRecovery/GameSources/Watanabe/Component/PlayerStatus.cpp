@@ -14,6 +14,8 @@
 #include "ItemBag.h"
 #include "HideItem.h"
 
+#include "Watanabe/Manager/ScoreManager.h"
+
 namespace basecross {
 	PlayerStatus::PlayerStatus(const shared_ptr<GameObject>& owner)
 		:Component(owner), m_status(10), m_team(team::TeamType(0)),
@@ -22,7 +24,7 @@ namespace basecross {
 
 	void PlayerStatus::OnLateStart()
 	{
-		m_soundEmitter = GetGameObject()->GetComponent<SoundEmitter>();
+		m_soundEmitter = GetGameObject()->GetComponent<SoundEmitter>(false);
 	}
 
 	void PlayerStatus::OnUpdate() {
@@ -37,6 +39,8 @@ namespace basecross {
 
 		// 念のため0にクランプ
 		if (m_status.hp <= 0) {
+
+
 			if (auto deader = GetGameObject()->GetComponent<PlayerDeader>(false)) {
 				deader->StartDead();
 			}
@@ -74,10 +78,12 @@ namespace basecross {
 			{
 			case team::TeamType::Red:
 				drawer->SetTextureResource(L"RedHeroTx");
+				drawer->SetModelTextureEnabled(false);
 				break;
 
 			case team::TeamType::Blue:
 				drawer->SetTextureResource(L"BlueHeroTx");
+				drawer->SetModelTextureEnabled(false);
 				break;
 			}
 		}

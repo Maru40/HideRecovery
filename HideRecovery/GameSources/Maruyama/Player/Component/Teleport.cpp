@@ -82,6 +82,10 @@ namespace basecross {
 
 	void Teleport::SettingFieldMap() {
 		auto fieldMap = FieldMap::GetInstance();
+		if (!fieldMap) {
+			fieldMap = GetStage()->AddGameObject<GameObject>()->AddComponent<FieldMap>();
+		}
+
 		fieldMap->SetMapDraw(false);
 		fieldMap->GetMapCursor()->SetTarget(GetGameObject());
 

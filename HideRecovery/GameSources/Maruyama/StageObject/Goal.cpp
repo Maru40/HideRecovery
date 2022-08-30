@@ -41,7 +41,12 @@
 
 #include "Watanabe/BoardPoly/GoalBP.h"
 
+#include "Watanabe/Manager/PointManager.h"
+#include "Watanabe/Manager/TimeManager.h"
+#include "Watanabe/Manager/ScoreManager.h"
+
 #include "PlayerInputer.h"
+#include "MainStage.h"
 
 namespace basecross {
 	//--------------------------------------------------------------------------------------
@@ -104,9 +109,12 @@ namespace basecross {
 	}
 
 	void Goal::OnLateStart() {
-		auto goalBP = GetStage()->Instantiate<GoalBP>();
-		goalBP->GetComponent<Transform>()->SetPosition(transform->GetPosition() + m_param.goalBPOffset);
-		m_goalBP = goalBP;
+		if (auto mainStage = dynamic_pointer_cast<MainStage>(GetStage())) {
+			auto goalBP = GetStage()->Instantiate<GoalBP>();
+			goalBP->GetComponent<Transform>()->SetPosition(transform->GetPosition() + m_param.goalBPOffset);
+			m_goalBP = goalBP;
+		}
+
 		SettingPerformable();
 		m_soundEmitter = GetGameObject()->GetComponent<SoundEmitter>();
 	}
@@ -173,13 +181,18 @@ namespace basecross {
 			splash->SetMessage(SplashMessageUI::MessageType::Relocation);
 
 			m_soundEmitter.lock()->PlaySoundClip(m_relocationBallSoundClip);
+
+			for (auto& place : maru::Utility::FindComponents<HidePlace>(GetStage())) {
+				place->Close();
+			}
 		};
 
 		//カウントダウンスタート
 		StartCountDown(itemHiderEvent);
 
 		//ゴール通知
-
+		auto playerController = other->GetComponent<Online::PlayerOnlineController>(false);
+		ScoreManager::GetInstance()->AddGoalCount(playerController->GetPlayerNumber());
 
 		return hidePlace->GetHidePosition();
 	}
