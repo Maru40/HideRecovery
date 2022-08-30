@@ -22,6 +22,8 @@
 #include "MaruUtility.h"
 #include "Itabashi/OnlineTransformSynchronization.h"
 
+#include "SpringArmComponent.h"
+
 namespace basecross {
 	//--------------------------------------------------------------------------------------
 	/// リスポーンをさせるクラスのパラメータ
@@ -88,6 +90,21 @@ namespace basecross {
 		if (auto onlineTransitioner = GetGameObject()->GetComponent<Online::OnlineTransformSynchronization>(false))
 		{
 			onlineTransitioner->SetUpdateActive(true);
+		}
+
+
+		//playerのカメラ位置変更
+		auto player = dynamic_pointer_cast<PlayerObject>(GetGameObject());
+		if (player) {
+			auto springArm = player->GetArm()->GetComponent<SpringArmComponent>(false);
+			auto teamMember = GetGameObject()->GetComponent<I_TeamMember>(false);
+			if (springArm && teamMember) {
+				auto rad = springArm->GetRadXZ();
+				auto degree = teamMember->GetTeam() == team::TeamType::Blue ? -90.0f : 90.0f;
+				rad = XMConvertToRadians(degree);
+				springArm->SetRadXZ(rad);
+				springArm->OnUpdate2();
+			}
 		}
 	}
 

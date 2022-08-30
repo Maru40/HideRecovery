@@ -10,6 +10,8 @@
 
 #include "Watanabe/Component/BoxAnimator.h"
 
+#include "MainStage.h"
+
 namespace basecross {
 	RackObject::RackObject(const shared_ptr<Stage>& stage)
 		:StageObjectBase(stage, L"RackObject")
@@ -33,8 +35,10 @@ namespace basecross {
 		drawComp->SetMultiMeshResource(L"Box_Model");
 		drawComp->SetOwnShadowActive(true);
 
-		auto animator = AddComponent<BoxAnimator>();
-		animator->ChangeBoxAnimation(BoxAnimationState::State::Close);
+		if (auto mainStage = dynamic_pointer_cast<MainStage>(GetStage())) {
+			auto animator = AddComponent<BoxAnimator>();
+			animator->ChangeBoxAnimation(BoxAnimationState::State::Close);
+		}
 		 
 		// 隠せるオブジェクトにする
 		AddComponent<HidePlace>(HidePlace::Parametor(Vec3(0.0f, 0.35f, 0.0f)));

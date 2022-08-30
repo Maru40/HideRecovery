@@ -120,7 +120,7 @@ namespace basecross {
 			auto gameFinishUI = AddGameObject<GameFinishUI>();
 			std::weak_ptr<GameFinishUI> weakGameFinishUI = gameFinishUI;
 			onlineGameTimer->AddGameFinishCountEventFunc([weakGameFinishUI]() {weakGameFinishUI.lock()->Start(); });
-			onlineGameTimer->AddGameFinishEventFunc([]() { SimpleSoundManager::OnePlaySE(L"GameStartSE", 0.25f); });
+			onlineGameTimer->AddGameFinishEventFunc([]() { SimpleSoundManager::OnePlaySE(L"GameSetSE", 0.25f); });
 
 			//ステージの設定
 			auto scene = App::GetApp()->GetScene<Scene>();

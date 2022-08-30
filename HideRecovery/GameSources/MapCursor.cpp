@@ -20,21 +20,47 @@
 #include "MaruUtility.h"
 #include "Mathf.h"
 
+#include "Maruyama/Player/Component/Teleport.h"
+#include "Maruyama/Interface/I_TeamMember.h"
+#include "TeleportCursorUI.h"
+
 namespace basecross {
 
 	MapCursor::MapCursor(const std::shared_ptr<GameObject>& objPtr) :
-		Component(objPtr)
+		Component(objPtr),
+		m_beforePosition(Vec3(0.0f))
 		//m_moveRangeLate(0.5f)
 	{}
 
 	void MapCursor::OnCreate() {
 		SettingUnderCircle();
 		SettingCursor();
+		SettingTeleportUI();
 	}
 
 	void MapCursor::OnUpdate() {
-		if (GetDrawActive()) {
+		if (!GetDrawActive() || !GetTarget() || !m_teleport.lock()) {
+			return;
+		}
+
+		//テレポートできるなら
+		if (m_teleport.lock()->CanTeleport()) {
+			m_beforePosition = transform->GetPosition();
 			MoveCursor();
+		}
+		else {
+			transform->SetPosition(m_beforePosition);
+		}
+		
+		//自陣エリア外なら
+		auto teamMember = m_teamMember.lock();
+		if (teamMember && !teamMember->IsInArea()) {
+			m_teleportUIObject.lock()->SetDrawActive(false);
+			SetMapCursorPositionConnectTargetPosition();
+		}
+		else {
+			auto teleportUI = m_teleportUIObject.lock();
+			!teleportUI->GetDrawActive() ? teleportUI->SetDrawActive(true) : false;
 		}
 	}
 
@@ -59,6 +85,17 @@ namespace basecross {
 		m_underCircle = underCircle;
 	}
 
+	void MapCursor::SettingTeleportUI() {
+		auto uiObject = GetStage()->AddGameObject<GameObject>();
+		uiObject->SetParent(GetGameObject());
+		auto teleport = uiObject->AddComponent<TeleportCursorUI>();
+
+		auto uiTrans = uiObject->GetComponent<Transform>();
+		uiTrans->SetPosition(Vec3(-60.0f, -30.0f, 0.0f));
+
+		m_teleportUIObject = uiObject;
+	}
+
 	void MapCursor::MoveCursor() {
 		auto moveVec2 = PlayerInputer::GetInstance()->GetRSticVec();
 		auto moveVec = Vec3(moveVec2.x, moveVec2.y, 0.0f);
@@ -67,6 +104,11 @@ namespace basecross {
 		position += moveVec * Speed * App::GetApp()->GetElapsedTime();
 		position = MoveClamp(position);
 		transform->SetPosition(position);
+
+		auto teleport = m_teleport.lock();
+		if (teleport && !teleport->CanTeleport()) {
+			transform->SetPosition(m_beforePosition);
+		}
 	}
 
 	Vec3 MapCursor::MoveClamp(const Vec3& position) {
@@ -81,6 +123,22 @@ namespace basecross {
 		float y = maru::Mathf::Clamp(position.y, rectStartPosition.z, rectStartPosition.z + rect.depth);
 
 		return Vec3(x, y, position.z);
+	}
+
+	void MapCursor::SetMapCursorPositionConnectTargetPosition() {
+		auto rect = FieldMap::GetInstance()->GetRect();
+		auto halfMapTextureScale = FieldMap::GetInstance()->GetMapTextureScale() * 0.5f;
+		auto startPosition = GetTarget()->GetComponent<Transform>()->GetPosition();
+		float xRate = startPosition.x / (rect.width * 0.5f);
+		float yRate = startPosition.z / (rect.depth * 0.5f);
+		transform->SetPosition(Vec3(halfMapTextureScale.x * xRate, halfMapTextureScale.y * yRate, 0.0f));
+	}
+
+	void MapCursor::SetTarget(const std::shared_ptr<GameObject>& target) { 
+		m_target = target; 
+
+		m_teleport = target->GetComponent<Teleport>(false);
+		m_teamMember = target->GetComponent<I_TeamMember>(false);
 	}
 
 	Vec3 MapCursor::GetCursorFiledPosition() {
@@ -103,19 +161,17 @@ namespace basecross {
 		m_cursor.lock()->SetDrawActive(true);
 		m_underCircle.lock()->SetDrawActive(true);
 
-		auto sprite = m_cursor.lock();
+		if (m_teleport.lock() && m_teleport.lock()->CanTeleport()) {
+			m_teleportUIObject.lock()->SetDrawActive(true);
+		}
 
-		auto rect = FieldMap::GetInstance()->GetRect();
-		auto halfMapTextureScale = FieldMap::GetInstance()->GetMapTextureScale() * 0.5f;
-		auto startPosition = GetTarget()->GetComponent<Transform>()->GetPosition();
-		float xRate = startPosition.x / (rect.width * 0.5f);
-		float yRate = startPosition.z / (rect.depth * 0.5f);
-		transform->SetPosition(Vec3(halfMapTextureScale.x * xRate, halfMapTextureScale.y * yRate, 0.0f));
+		SetMapCursorPositionConnectTargetPosition();
 	}
 
 	void MapCursor::OnDrawFalse() {
 		m_cursor.lock()->SetDrawActive(false);
 		m_underCircle.lock()->SetDrawActive(false);
+		m_teleportUIObject.lock()->SetDrawActive(false);
 	}
 
 }

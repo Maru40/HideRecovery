@@ -7,6 +7,7 @@
 
 #include "SingletonComponent.h"
 #include "Maruyama/Player/Component/FieldMap.h"
+#include "Maruyama/Player/Component/Teleport.h"
 
 namespace basecross
 {
@@ -159,6 +160,14 @@ namespace basecross
 	Vec3 SpringArmComponent::CalculateDirect() {
 		if (FieldMap::GetInstance()->GetMapDraw()) {
 			return m_param.armVec;
+		}
+
+		auto player = m_player.lock();
+		if (player) {
+			auto teleport = player->GetComponent<Teleport>(false);
+			if (teleport && teleport->IsTeleporting()) {
+				return m_param.armVec;
+			}
 		}
 
 		InputYVec();

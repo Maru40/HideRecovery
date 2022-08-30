@@ -178,6 +178,13 @@ namespace Online
 			return;
 		}
 
+		//特定のアニメーション中は移動を禁止する。
+		if (animator->IsCurretAnimationState(PlayerAnimationState::State::PutItem_Floor) ||
+			animator->IsCurretAnimationState(PlayerAnimationState::State::PutItem_HideObject)
+		) {
+			return;
+		}
+
 		auto teleport = GetGameObject()->GetComponent<Teleport>(false);
 		if (teleport && teleport->IsTeleporting()) {
 			return;

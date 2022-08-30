@@ -61,6 +61,8 @@ namespace basecross
 
 		ex_weak_ptr<Transform> m_childTransform;
 
+		std::weak_ptr<GameObject> m_player;
+
 		float m_armRange = 10.0f;
 
 		std::vector<std::wstring> m_hitTags;
@@ -100,6 +102,8 @@ namespace basecross
 		}
 
 		float GetRadXZ() const noexcept { return m_param.radXZ; }
+
+		void SetPlayer(const std::shared_ptr<GameObject>& player) { m_player = player; }
 
 	private:
 		Vec3 CalculateDirect();

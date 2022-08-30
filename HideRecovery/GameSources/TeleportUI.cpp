@@ -13,30 +13,30 @@
 #include "SpriteObject.h"
 
 #include "Watanabe/UI/ButtonUI.h"
-//#include "Watanabe/StageObject/UiO"
-//#include " UIObjectBase.h"
-//#include "SimpleSprite.h"
+#include "Watanabe/Component/Zooming.h"
 
 namespace basecross {
 
 	TeleportUI::TeleportUI(const std::shared_ptr<GameObject>& objPtr) :
-		Component(objPtr)
+		Component(objPtr),
+		m_soundClip(L"AlertSE_00", false, 1.0f)
 	{}
 
 	void TeleportUI::OnCreate() {
+		//m_soundEmitter = GetGameObject()->AddComponent<SoundEmitter>();
+
 		SettingBody();
 		SettingBottun();
 
 		transform->SetPosition(Vec3(450.0f, -500.0f, 0.0f));
 		transform->SetScale(Vec3(0.25f));
-
-		SetUpdateActive(false);
-		SetUpdateActive(true);
 	}
 
 	void TeleportUI::OnEnable() {
 		m_body.lock()->SetDrawActive(true);
 		m_bottun.lock()->SetDrawActive(true);
+
+		//m_soundEmitter.lock()->PlaySoundClip(m_soundClip);
 	}
 
 	void TeleportUI::OnDisable() {
@@ -63,6 +63,7 @@ namespace basecross {
 		bottun->SetParent(GetGameObject());
 
 		bottun->GetComponent<RectTransform>()->SetScale(Vec2(0.7f) * 0.75f);
+		bottun->AddComponent<Zooming>();
 
 		m_bottun = bottun;
 	}

@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0"
-  xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Headers">
       <UniqueIdentifier>{4b0a624a-610d-4bc6-b311-2b02a781cdf9}</UniqueIdentifier>
@@ -2038,6 +2037,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\PCTStaticModelDraw.h">
       <Filter>Itabashi\Component\Graphic</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)TeleportCursorUI.h">
+      <Filter>Maruyama\UI\TeleportCursorUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2882,6 +2884,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\PCTStaticModelDraw.cpp">
       <Filter>Itabashi\Component\Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)TeleportCursorUI.cpp">
+      <Filter>Maruyama\UI\TeleportCursorUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

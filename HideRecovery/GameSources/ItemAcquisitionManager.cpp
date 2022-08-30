@@ -27,6 +27,8 @@
 #include "Watanabe/UI/SplashMessageUI.h"
 #include "Itabashi/PlayerOnlineController.h"
 
+#include "VelocityManager.h"
+
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
@@ -156,6 +158,10 @@ namespace basecross {
 		else {
 			//アイテムが床にないなら
 			animator->ChangePlayerAnimation(PlayerAnimationState::State::PutItem_HideObject);
+		}
+
+		if (auto velocityManager = GetGameObject()->GetComponent<VelocityManager>(false)) {
+			velocityManager->ResetAll();
 		}
 
 		//向きたい方法を設定

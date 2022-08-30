@@ -52,6 +52,9 @@ namespace basecross {
 		std::weak_ptr<TeleportUI> m_teleportUI;
 		std::weak_ptr<I_TeamMember> m_teamMember;
 
+		std::weak_ptr<SoundEmitter> m_soundEmmiter;	
+		SoundClip m_teleportSoundClip;
+
 		Vec3 m_cameraPosition;
 
 	public:

@@ -39,6 +39,7 @@
 #include "TeleportUI.h"
 
 #include "Watanabe/DebugClass/Debug.h"
+#include "OwnArea.h"
 
 namespace basecross {
 
@@ -59,7 +60,8 @@ namespace basecross {
 	Teleport::Teleport(const std::shared_ptr<GameObject>& objPtr) :
 		Component(objPtr),
 		m_param(Parametor()),
-		m_timer(new GameTimer(0))
+		m_timer(new GameTimer(0)),
+		m_teleportSoundClip(L"TeleportSE", false, 0.25f)
 	{}
 
 	void Teleport::OnCreate() {
@@ -67,6 +69,7 @@ namespace basecross {
 
 	void Teleport::OnLateStart() {
 		m_teamMember = GetGameObject()->GetComponent<I_TeamMember>(false);
+		m_soundEmmiter = GetGameObject()->GetComponent<SoundEmitter>(false);
 
 		SettingFieldMap();			//マップテクスチャの設定
 		SettingAnimationEvent();	//アニメーションイベント設定
@@ -97,6 +100,10 @@ namespace basecross {
 		if (!animator) {
 			return;
 		}
+
+		auto start = [&]() {
+
+		};
 
 		//アニメーション終了時に呼ぶイベント
 		auto exit = [&, animator]() {
@@ -175,6 +182,11 @@ namespace basecross {
 					if (auto gravity = GetGameObject()->GetComponent<Gravity>(false)) {
 						gravity->SetUpdateActive(true);
 					}
+
+					//音の再生
+					if (auto soundEmitter = m_soundEmmiter.lock()) {
+						soundEmitter->PlaySoundClip(m_teleportSoundClip);
+					}
 				};
 
 				//カメラを移動させる
@@ -203,23 +215,28 @@ namespace basecross {
 			if (auto gravity = GetGameObject()->GetComponent<Gravity>(false)) {
 				gravity->SetUpdateActive(false);
 			}
+
+			//音の再生
+			if (auto soundEmitter = m_soundEmmiter.lock()) {
+				soundEmitter->PlaySoundClip(m_teleportSoundClip);
+			}
 		};
 
 		//アニメーションイベントの登録
 		animator->AddAnimationEvent(
 			PlayerAnimationState::State::StartTeleport,
-			nullptr,
+			start,
 			nullptr,
 			exit
 		);
 
+		//テレポート終了アニメーションイベント
 		animator->AddAnimationEvent(
 			PlayerAnimationState::State::EndTeleport,
 			nullptr,
 			nullptr,
 			[&]() { 
 				m_param.isTeleporting = false; 
-
 			}
 		);
 	}
@@ -275,9 +292,13 @@ namespace basecross {
 
 		//距離がありすぎるならテレポートしない
 		auto teleportPosition = GetFieldMap()->GetMapCursor()->GetCursorFiledPosition();
-		auto toTeleportPosition = teleportPosition - transform->GetPosition();
-		auto maxRange = GetFieldMap()->GetRect().depth * m_param.maxRangeLate;
-		if (toTeleportPosition.length() > maxRange) {
+		auto ownArea = teamMember->GetOwnArea();
+		auto toTeleportPosition = teleportPosition - ownArea->GetGameObject()->GetComponent<Transform>()->GetPosition();
+		auto centerPosition = ownArea->GetGameObject()->GetComponent<Transform>()->GetPosition();
+		auto fieldMap = FieldMap::GetInstance();
+		auto maxRange = GetFieldMap()->GetDepth() * m_param.maxRangeLate;	//Rect
+		auto rect = maru::Rect(centerPosition, fieldMap->GetWidth(), maxRange * 2.0f);
+		if (!rect.IsInRect(teleportPosition)) {
 			return false;
 		}
 
