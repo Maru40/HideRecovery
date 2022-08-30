@@ -54,14 +54,14 @@ namespace basecross {
 
 		// 仮で色を変える
 		{
-			constexpr float Colf = 0.5f;
+			constexpr float Colf = 0.25f;
 			switch (m_team)
 			{
 			case team::TeamType::Blue:
-				drawComp->SetDiffuse(Col4(0, 0, Colf, 1));
+				drawComp->SetDiffuse(Col4(Colf, Colf, 1.0f, 1));
 				break;
 			case team::TeamType::Red:
-				drawComp->SetDiffuse(Col4(Colf, 0, 0, 1));
+				drawComp->SetDiffuse(Col4(1, Colf, Colf, 1));
 				break;
 			default:
 				break;
