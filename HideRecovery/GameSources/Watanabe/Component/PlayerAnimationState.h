@@ -29,6 +29,12 @@ namespace basecross {
 			StartTeleport,
 			ExcuteTeleport,
 			EndTeleport,
+			Win1 ,
+			Win1Loop,
+			Win2,
+			Win2Loop,
+			Win3,
+			Win3Loop,
 
 		};
 
@@ -83,6 +89,18 @@ namespace basecross {
 				return L"ExcuteTeleport";
 			case PlayerAnimationState::State::EndTeleport:
 				return L"EndTeleport";
+			case PlayerAnimationState::State::Win1 :
+				return L"Win1 ";
+			case PlayerAnimationState::State::Win1Loop:
+				return L"Win1Loop";
+			case PlayerAnimationState::State::Win2:
+				return L"Win2";
+			case PlayerAnimationState::State::Win2Loop:
+				return L"Win2Loop";
+			case PlayerAnimationState::State::Win3:
+				return L"Win3";
+			case PlayerAnimationState::State::Win3Loop:
+				return L"Win3Loop";
 
 			default:
 				break;
