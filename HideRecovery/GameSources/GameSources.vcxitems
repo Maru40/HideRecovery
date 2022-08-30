@@ -78,6 +78,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\StageObject\Goal.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\StageObject\GoalObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\UI\Reticle.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\UI\UILayer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)OccupancyManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)SelfImpactNodeManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\ObjectMover.h" />

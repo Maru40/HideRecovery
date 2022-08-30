@@ -1074,6 +1074,10 @@
     </Filter>
     <Filter Include="Watanabe\BoardPoly\GoalBP">
       <UniqueIdentifier>{8d655bc8-01fb-49f4-b682-08112eaabbcd}</UniqueIdentifier>
+	</Filter>
+    <Filter Include="Maruyama\UI\UILayer">
+      <UniqueIdentifier>{b591c6da-a414-48b6-ab1a-bf43733be813}</UniqueIdentifier>
+
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -2004,8 +2008,13 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\UI\Reticle.h">
       <Filter>Maruyama\UI\Reticle</Filter>
     </ClInclude>
+
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\BoardPoly\GoalBP.h">
       <Filter>Watanabe\BoardPoly\GoalBP</Filter>
+	</ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\UI\UILayer.h">
+      <Filter>Maruyama\UI\UILayer</Filter>
+
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

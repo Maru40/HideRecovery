@@ -65,6 +65,9 @@ namespace basecross {
 		draw->SetMeshToTransformMatrix(spanMat);
 		draw->SetMultiMeshResource(L"Goal");
 
+		auto shadow = AddComponent<Shadowmap>();
+		shadow->SetMultiMeshResource(L"Goal");
+
 		if (m_team == team::TeamType::Blue) {
 			//draw->SetTextureResource();
 			//draw->SetTextureResource(L"RedGoal_TX");

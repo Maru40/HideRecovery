@@ -48,10 +48,11 @@ namespace basecross
 
 		ResourceLoadData(L"Cursor_TX", L"Cursor.png"),
 		ResourceLoadData(L"Reticle_TX", L"Reticle.png"),
+		ResourceLoadData(L"ReticleCnterRed_TX", L"ReticleCtrR.png"),
 
 		ResourceLoadData(L"RedGoal_TX", L"RedGoalTx.png"),
 
-		
+		ResourceLoadData(L"MapCursorUnderCircle_TX", L"MapCursorUnderCircle.png"),
 
 		//ResourceLoadData(L"gauge", L"Gauge.png"),
 		//ResourceLoadData(L"clear", L"StageClear.png"),
@@ -131,7 +132,13 @@ namespace basecross
 		ResourceLoadData(L"TitlePlessedSE", L"TitlePlessedSE.wav"),
 		ResourceLoadData(L"GameStartSE", L"GameStartSE.wav"),
 		ResourceLoadData(L"GoalEffectSE", L"GoalEffectSE.wav"),
-		ResourceLoadData(L"StartCountSE", L"StartCountSE.wav")
+		ResourceLoadData(L"StartCountSE", L"StartCountSE.wav"),
+
+		ResourceLoadData(L"GoalBallSE", L"GoalBallSE.wav"),
+		ResourceLoadData(L"GoalStartSE", L"GoalStartSe.wav"),
+		ResourceLoadData(L"GetBallSE", L"GetBallSE.wav"),
+		ResourceLoadData(L"StolenBallSE", L"StolenBallSE.wav"),
+		ResourceLoadData(L"RelocationBallSE", L"RelocationBallSE.wav"),	//ボール再配置
 	};
 
 	const std::vector<LoadStage::ResourceLoadData> LoadStage::m_bgmResourceLoadDatas =

@@ -68,6 +68,9 @@ namespace basecross {
 		std::weak_ptr<GameObject> m_ball;				//ボール
 		std::unique_ptr<TaskList<TaskEnum>> m_taskList;	//タスク管理
 
+		SoundClip m_goalSoundClip;
+		SoundClip m_goalStartSE;
+
 	public:
 		GoalAnimationController(const std::shared_ptr<GameObject>& objPtr);
 

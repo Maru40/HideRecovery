@@ -3,6 +3,11 @@
 #include "PlayerInputer.h"
 #include "DebugObject.h"
 
+#include "LookAtCameraManager.h"
+
+#include "SingletonComponent.h"
+#include "Maruyama/Player/Component/FieldMap.h"
+
 namespace basecross
 {
 	SpringArmComponent::Parametor::Parametor()
@@ -152,6 +157,10 @@ namespace basecross
 	}
 
 	Vec3 SpringArmComponent::CalculateDirect() {
+		if (FieldMap::GetInstance()->GetMapDraw()) {
+			return m_param.armVec;
+		}
+
 		InputYVec();
 		InputRXVec();
 		return m_param.armVec;

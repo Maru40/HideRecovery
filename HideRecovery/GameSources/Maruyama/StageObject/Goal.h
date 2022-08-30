@@ -57,6 +57,7 @@ namespace basecross {
 		std::weak_ptr<SoundEmitter> m_soundEmitter;
 
 		SoundClip m_goalEffectSoundClip;
+		SoundClip m_relocationBallSoundClip; //ボール再配置SE
 
 	public:
 		Goal(const std::shared_ptr<GameObject>& objPtr, const Parametor& parametor);

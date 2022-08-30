@@ -48,13 +48,13 @@ namespace basecross {
 			animator->ChangeBoxAnimation(BoxAnimationState::State::Open);
 		}
 
-		auto item = GetHideItem();
-		if (!item) {
-			return;
-		}
+		//auto item = GetHideItem();
+		//if (!item) {
+		//	return;
+		//}
 
-		item->GetGameObject()->SetActive(true);
-		SetHideItem(nullptr);
+		//item->GetGameObject()->SetActive(true);
+		//SetHideItem(nullptr);
 	}
 
 	void HidePlace::Close() {
@@ -62,12 +62,12 @@ namespace basecross {
 			animator->ChangeBoxAnimation(BoxAnimationState::State::Close);
 		}
 
-		auto item = GetHideItem();
-		if (!item) {
-			return;
-		}
+		//auto item = GetHideItem();
+		//if (!item) {
+		//	return;
+		//}
 
-		item->GetGameObject()->SetActive(false);
+		//item->GetGameObject()->SetActive(false);
 	}
 
 	//--------------------------------------------------------------------------------------
@@ -77,10 +77,10 @@ namespace basecross {
 	void HidePlace::SetHideItem(const std::shared_ptr<HideItem>& item) {
 		m_hideItem = item;
 
-		auto animator = GetGameObject()->GetComponent<BoxAnimator>(false);
-		if (item && animator && animator->IsCurrentAnimator(BoxAnimationState::State::Close)) {
-			item->GetGameObject()->SetActive(false);
-		}
+		//auto animator = GetGameObject()->GetComponent<BoxAnimator>(false);
+		//if (item && animator && animator->IsCurrentAnimator(BoxAnimationState::State::Close)) {
+		//	item->GetGameObject()->SetActive(false);
+		//}
 	}
 
 	std::shared_ptr<HideItem> HidePlace::GetHideItem() const {

@@ -58,7 +58,9 @@ namespace basecross {
 
 	GoalAnimationController::GoalAnimationController(const std::shared_ptr<GameObject>& objPtr) :
 		Component(objPtr),
-		m_taskList(new TaskList<TaskEnum>())
+		m_taskList(new TaskList<TaskEnum>()),
+		m_goalSoundClip(L"GoalBallSE", false, 0.75f),
+		m_goalStartSE(L"GoalStartSE", false, 8.5f)
 	{}
 
 	void GoalAnimationController::OnLateStart() {
@@ -88,6 +90,10 @@ namespace basecross {
 
 			if (auto goal = m_goal.lock()) {
 				goal->PlayFireEffects();
+			}
+
+			if (auto soundEmmiter = GetGameObject()->GetComponent<SoundEmitter>(false)) {
+				soundEmmiter->PlaySoundClip(m_goalSoundClip);
 			}
 		};
 
@@ -121,6 +127,10 @@ namespace basecross {
 
 		if (auto rotationController = GetGameObject()->GetComponent<RotationController>(false)) {	//回転コントローラー
 			rotationController->SetDirect(m_param.dunkPosition - transform->GetPosition());
+		}
+
+		if (auto soundEmmiter = GetGameObject()->GetComponent<SoundEmitter>(false)) {
+			soundEmmiter->PlaySoundClip(m_goalStartSE);
 		}
 
 		m_taskList->ForceStop();

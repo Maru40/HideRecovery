@@ -20,7 +20,9 @@ namespace basecross {
 	{}
 
 	void Reticle::OnCreate() {
-		auto param = Builder::VertexPCTParametor(Vec3(64.0f, 64.0f, 0.0f), 0.5f, Vec2(512.0f, 512.0f), L"Reticle_TX");
+		//Reticle_TX
+		//ReticleCnterRed_TX
+		auto param = Builder::VertexPCTParametor(Vec3(64.0f, 64.0f, 0.0f), 1.0f, Vec2(512.0f, 512.0f), L"ReticleCnterRed_TX");
 		auto sprite = GetStage()->AddGameObject<SpriteObject>(param);
 		sprite->SetAlphaActive(true);
 

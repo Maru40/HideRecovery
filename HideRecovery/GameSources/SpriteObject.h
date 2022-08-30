@@ -11,6 +11,7 @@
 
 #include "ReactiveBool.h"
 #include "BuilderVertexPCT.h"
+#include "Maruyama/UI/UILayer.h"
 
 namespace basecross {
 
