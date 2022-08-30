@@ -40,6 +40,7 @@
 
 #include "Watanabe/DebugClass/Debug.h"
 #include "OwnArea.h"
+#include "GameManager.h"
 
 namespace basecross {
 
@@ -285,6 +286,11 @@ namespace basecross {
 	}
 
 	bool Teleport::CanTeleport() const {
+		auto gameManager = GameManager::GetInstance();
+		if (gameManager && gameManager->GetCurrentState() != GameManager::State::Game) {
+			return false;	//ゲーム状態でないなら、テレポートできない
+		}
+
 		auto teamMember = GetGameObject()->GetComponent<I_TeamMember>(false);
 		if (teamMember && !teamMember->IsInArea()) {
 			return false;
