@@ -1069,6 +1069,9 @@
     <Filter Include="Maruyama\UI\Reticle">
       <UniqueIdentifier>{583cb0b2-7a30-42a5-bb39-56c46a19c214}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\UI\UILayer">
+      <UniqueIdentifier>{b591c6da-a414-48b6-ab1a-bf43733be813}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1994,6 +1997,9 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\UI\Reticle.h">
       <Filter>Maruyama\UI\Reticle</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\UI\UILayer.h">
+      <Filter>Maruyama\UI\UILayer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
