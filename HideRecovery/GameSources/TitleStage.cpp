@@ -5,6 +5,7 @@
 
 #include "Watanabe/DebugClass/Debug.h"
 #include "Watanabe/UI/UIObjects.h"
+#include "Watanabe/Component/Zooming.h"
 
 namespace basecross {
 	void TitleStage::CreateViewLight() {
@@ -29,23 +30,9 @@ namespace basecross {
 
 		CreateMap(L"StageS2.csv");
 
-		UIObjectCSVBuilder uiBuilder;
-		uiBuilder.Register<SimpleSprite>(L"SimpleSprite");
-		auto dir = App::GetApp()->GetDataDirWString();
-		auto path = dir + L"MapDatas/";
-		uiBuilder.Build(GetThis<Stage>(), path + L"TitleUILayout.csv");
-
-		// GetComponentでnullptrになるためコメントアウト
-		//auto titleLogo = uiBuilder.GetUIObject<SimpleSprite>(L"TitleLogo");
-		//auto drawComp = titleLogo->GetComponent<PCTSpriteDraw>();
-		//if (drawComp) {
-		//	drawComp->SetDiffuse(Col4(0, 1, 1, 1));
-		//}
-		//auto pressA = uiBuilder.GetUIObject<SimpleSprite>(L"PressA");
-		//drawComp = pressA->GetComponent<PCTSpriteDraw>();
-		//if (drawComp) {
-		//	drawComp->SetDiffuse(Col4(0, 0, 0, 1));
-		//}
+		auto uiBuilder = CreateUI(L"TitleUILayout.csv");
+		auto pressA = uiBuilder->GetUIObject(L"Press A");
+		pressA->AddComponent<Zooming>();
 
 		SimpleSoundManager::ChangeBGM(L"TitleStageBGM", 0.1f);
 	}
