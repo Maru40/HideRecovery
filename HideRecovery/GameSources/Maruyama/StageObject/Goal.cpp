@@ -177,6 +177,10 @@ namespace basecross {
 			splash->SetMessage(SplashMessageUI::MessageType::Relocation);
 
 			m_soundEmitter.lock()->PlaySoundClip(m_relocationBallSoundClip);
+
+			for (auto& place : maru::Utility::FindComponents<HidePlace>(GetStage())) {
+				place->Close();
+			}
 		};
 
 		//カウントダウンスタート
