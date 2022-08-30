@@ -13,9 +13,6 @@
 #include "SpriteObject.h"
 
 #include "Watanabe/UI/ButtonUI.h"
-//#include "Watanabe/StageObject/UiO"
-//#include " UIObjectBase.h"
-//#include "SimpleSprite.h"
 
 namespace basecross {
 
