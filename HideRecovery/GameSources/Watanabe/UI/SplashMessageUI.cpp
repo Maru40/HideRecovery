@@ -11,6 +11,8 @@ namespace basecross {
 		{MessageType::StolenBall,MessageData(SimpleSprite::Type::SpriteData,L"StolenBall")},
 		{MessageType::CreateRoom,MessageData(SimpleSprite::Type::SpriteData,L"CreateRoom")},
 		{MessageType::JoinRoom,MessageData(SimpleSprite::Type::SpriteData,L"JoinRoom")},
+		{MessageType::Remaining60s,MessageData(SimpleSprite::Type::SpriteData,L"Remaining60s")},
+		{MessageType::Remaining30s,MessageData(SimpleSprite::Type::SpriteData,L"Remaining30s")},
 	};
 
 	SplashMessageUI::SplashMessageUI(const shared_ptr<Stage>& stage)
@@ -29,6 +31,7 @@ namespace basecross {
 		m_sprite = GetStage()->AddGameObject<SimpleSprite>(SimpleSprite::Type::SpriteData, L"StolenBall");
 		m_sprite->SetParent(GetThis<SplashMessageUI>());
 		m_sprite->SetActive(false);
+		m_defaultColor = GetColor();
 	}
 
 	void SplashMessageUI::OnUpdate() {
@@ -37,6 +40,7 @@ namespace basecross {
 
 		if (m_timer.Count()) {
 			m_isStart = false;
+			SetColor(m_defaultColor);
 			m_sprite->SetActive(false);
 		}
 	}
@@ -53,4 +57,7 @@ namespace basecross {
 		m_sprite->GetDrawComponent()->SetDiffuse(color);
 	}
 
+	Col4 SplashMessageUI::GetColor() {
+		return m_sprite->GetDrawComponent()->GetDiffuse();
+	}
 }

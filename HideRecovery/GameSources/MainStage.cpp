@@ -136,7 +136,20 @@ namespace basecross {
 
 			// UIレイアウトの読み込み
 			auto gameUIBuilder = CreateUI(L"GameUILayout.csv");
-			auto splash = gameUIBuilder->GetUIObject<SplashMessageUI>(L"SplashMessage");
+			auto remainingTime = gameUIBuilder->GetUIObject<SplashMessageUI>(L"RemainingTime");
+
+			TimeManager::GetInstance()->AddEvent(60,
+				[remainingTime]() {
+					remainingTime->SetColor(Col4(1, 1, 1, 0.5f));
+					remainingTime->SetMessage(SplashMessageUI::MessageType::Remaining60s);
+				}
+			);
+			TimeManager::GetInstance()->AddEvent(30,
+				[remainingTime]() {
+					remainingTime->SetColor(Col4(1, 1, 1, 0.5f));
+					remainingTime->SetMessage(SplashMessageUI::MessageType::Remaining30s);
+				}
+			);
 
 			//AddGameObject<GameObject>()->AddComponent<Reticle>();
 
@@ -161,7 +174,6 @@ namespace basecross {
 	}
 
 	void MainStage::OnUpdate() {
-
 	}
 
 	void MainStage::SetLoadMapName(const wstring& name) {

@@ -44,6 +44,7 @@ namespace basecross
 		ResourceLoadData(L"Frame_TX",L"Frame_TX.png"),
 		ResourceLoadData(L"Shape_TX",L"Shape_TX.png"),
 		ResourceLoadData(L"Objective_TX",L"Objective_TX.png"),
+		ResourceLoadData(L"RemainingTime_TX",L"RemainingTime_TX.png"),
 
 		ResourceLoadData(L"FiledMap_TX", L"FiledMap_TX.png"),
 

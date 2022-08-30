@@ -37,8 +37,8 @@ namespace basecross {
 
 		CreateMap(L"WaitStage.csv");
 		PointManager::GetInstance()->AddPoint(team::TeamType::Blue);
-		//auto uiBuilder = CreateUI(L"MatchingUILayout.csv");
-		AddGameObject<GameStartUI>()->Start();
+		auto uiBuilder = CreateUI(L"GameUILayout.csv");
+
 		//auto WinOrLose = uiBuilder->GetUIObject<WinOrLoseUI>(L"WinOrLose");
 
 		//for (auto gameObject : GetGameObjectVec()) {

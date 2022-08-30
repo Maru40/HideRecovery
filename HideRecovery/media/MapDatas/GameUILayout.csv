@@ -6,3 +6,4 @@ PointUI,RedPoint,-270,400,0.7,0.7,0,Red,
 SimpleSprite,TeamBlue,275,480,0.5,0.5,0,SpriteData,Blue
 SimpleSprite,TeamRed,-265,480,0.5,0.5,0,SpriteData,Red
 SplashMessageUI,SplashMessage,0,200,0.8,0.8,0,3,
+SplashMessageUI,RemainingTime,0,0,1,1,0,3,
