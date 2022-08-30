@@ -101,6 +101,9 @@ namespace basecross
 			}
 		}
 
+		void SetSpeedXZ(const float speed) { m_param.speedXZ = speed; }
+		float GetSpeedXZ() const { return m_param.speedXZ; }
+
 		float GetRadXZ() const noexcept { return m_param.radXZ; }
 
 		void SetPlayer(const std::shared_ptr<GameObject>& player) { m_player = player; }
