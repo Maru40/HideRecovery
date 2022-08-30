@@ -83,8 +83,8 @@ namespace basecross
 
 		playerObject->AddComponent<Reticle>();
 
-		auto sp = playerObject->GetArm()->GetComponent<SpringArmComponent>();
-		auto& tpsCamera = sp->GetChildObject();
+		auto springArm = playerObject->GetArm()->GetComponent<SpringArmComponent>();
+		auto& tpsCamera = springArm->GetChildObject();
 
 		tpsCamera->AddComponent<VirtualCamera>(10);
 		tpsCamera->AddComponent<LookAtCameraManager>(playerObject, LookAtCameraManager::Parametor());
@@ -125,6 +125,14 @@ namespace basecross
 
 			teamMember->AddReactiveIsInAreaEvent(true, trueFunc);
 			teamMember->AddReactiveIsInAreaEvent(false, falseFunc);
+		}
+
+		if (springArm && teamMember) {
+			auto rad = springArm->GetRadXZ();
+			auto degree = teamMember->GetTeam() == team::TeamType::Blue ? -90.0f : 90.0f;
+			rad = XMConvertToRadians(degree);
+			springArm->SetRadXZ(rad);
+			springArm->OnUpdate2();
 		}
 
 		return playerObject;
