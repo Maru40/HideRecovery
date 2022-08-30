@@ -28,21 +28,35 @@ namespace basecross {
 	{}
 
 	void MapCursor::OnCreate() {
-		auto param = Builder::VertexPCTParametor(Vec3(64.0f, 128.0f, 0.0f) * 0.5f, Vec2(64.0f, 128.0f), L"Cursor_TX");
-		param.pivot = Builder::UIPivot::Down;
-		auto cursor = GetStage()->AddGameObject<SpriteObject>(param);
-		cursor->SetParent(GetGameObject());
-		cursor->GetComponent<Transform>()->SetPosition(Vec3(0.0f));
-
-		auto pos = cursor->GetComponent<Transform>()->GetPosition();
-		cursor->SetDrawLayer(UI::Layer::MAP_CURSOR);
-		m_sprite = cursor;
+		SettingUnderCircle();
+		SettingCursor();
 	}
 
 	void MapCursor::OnUpdate() {
 		if (GetDrawActive()) {
 			MoveCursor();
 		}
+	}
+
+	void MapCursor::SettingCursor() {
+		auto param = Builder::VertexPCTParametor(Vec3(64.0f, 128.0f, 0.0f) * 0.5f, Vec2(64.0f, 128.0f), L"Cursor_TX");
+		param.pivot = Builder::UIPivot::Down;
+		auto cursor = GetStage()->AddGameObject<SpriteObject>(param);
+		cursor->SetParent(GetGameObject());
+		cursor->GetComponent<Transform>()->SetPosition(Vec3(0.0f));
+
+		cursor->SetDrawLayer(UI::Layer::MAP_CURSOR);
+		m_cursor = cursor;
+	}
+
+	void MapCursor::SettingUnderCircle() {
+		auto param = Builder::VertexPCTParametor(Vec3(128.0f, 64.0f, 0.0f) * 0.5f, Vec2(512.0f, 256.0f), L"MapCursorUnderCircle_TX");
+		auto underCircle = GetStage()->AddGameObject<SpriteObject>(param);
+		underCircle->SetParent(GetGameObject());
+		underCircle->GetComponent<Transform>()->SetPosition(Vec3(0.0f));
+
+		underCircle->SetDrawLayer(UI::Layer::MAP_CURSOR);
+		m_underCircle = underCircle;
 	}
 
 	void MapCursor::MoveCursor() {
@@ -70,7 +84,7 @@ namespace basecross {
 	}
 
 	Vec3 MapCursor::GetCursorFiledPosition() {
-		auto sprite = m_sprite.lock();
+		auto sprite = m_cursor.lock();
 		auto spriteTrans = sprite->GetComponent<Transform>();
 
 		auto rect = FieldMap::GetInstance()->GetRect();
@@ -86,9 +100,10 @@ namespace basecross {
 	}
 
 	void MapCursor::OnDrawActive() {
-		m_sprite.lock()->SetDrawActive(true);
+		m_cursor.lock()->SetDrawActive(true);
+		m_underCircle.lock()->SetDrawActive(true);
 
-		auto sprite = m_sprite.lock();
+		auto sprite = m_cursor.lock();
 
 		auto rect = FieldMap::GetInstance()->GetRect();
 		auto halfMapTextureScale = FieldMap::GetInstance()->GetMapTextureScale() * 0.5f;
@@ -99,7 +114,8 @@ namespace basecross {
 	}
 
 	void MapCursor::OnDrawFalse() {
-		m_sprite.lock()->SetDrawActive(false);
+		m_cursor.lock()->SetDrawActive(false);
+		m_underCircle.lock()->SetDrawActive(false);
 	}
 
 }

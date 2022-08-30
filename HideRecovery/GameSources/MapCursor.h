@@ -22,7 +22,8 @@ namespace basecross {
 		//float m_moveRangeLate;	//ˆÚ“®§ŒÀ”ÍˆÍ
 
 		std::weak_ptr<GameObject> m_target;
-		std::weak_ptr<SpriteObject> m_sprite;
+		std::weak_ptr<SpriteObject> m_cursor;		//
+		std::weak_ptr<SpriteObject> m_underCircle;	//‰º‚Ì‰~
 
 	public:
 		MapCursor(const std::shared_ptr<GameObject>& objPtr);
@@ -34,6 +35,9 @@ namespace basecross {
 		void OnDrawFalse() override;
 
 	private:
+		void SettingCursor();
+		void SettingUnderCircle();
+
 		void MoveCursor();
 
 		Vec3 MoveClamp(const Vec3& position);
