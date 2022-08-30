@@ -8,5 +8,7 @@
 #include "RackObject.h"
 #include "SkyBox.h"
 
+#include "../BoardPoly/GoalBP.h"
+
 #include "HideItemObject.h"
 #include "Maruyama/StageObject/GoalObject.h"

@@ -21,5 +21,6 @@ namespace basecross {
 
 	void GoalMessageUI::Reset() {
 		m_sprite->SetActive(false);
+		m_sprite->AddComponent<LifeSpan>()->Reset();
 	}
 }

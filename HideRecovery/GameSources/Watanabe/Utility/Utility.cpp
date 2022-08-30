@@ -129,6 +129,23 @@ namespace basecross {
 			return color / 255.0f;
 		}
 
+		Vec2 ConvertVec2to01(const Vec2& vec) {
+			if (vec.x == vec.y) {
+				return Vec2(1.0f);
+			}
+			else if (vec.x > vec.y) {
+				float rate = vec.y / vec.x;
+				return Vec2(1.0f, rate);
+			}
+			else {
+				float rate = vec.x / vec.y;
+				return Vec2(rate, 1.0f);
+			}
+
+			// ここには来ない
+			return Vec2(1.0f);
+		}
+
 		Vec3 ChangeVectorLength(const Vec3& vector, float length) {
 			auto vec = vector;
 			auto normalizedVec = vec.normalize();
