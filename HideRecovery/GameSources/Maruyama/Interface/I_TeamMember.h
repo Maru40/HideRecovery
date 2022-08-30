@@ -9,6 +9,8 @@
 
 #include "Watanabe/Utility/Utility.h"
 
+#include "ReactiveBool.h"
+
 namespace basecross {
 	//--------------------------------------------------------------------------------------
 	/// 前方宣言
@@ -41,7 +43,7 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 	class I_TeamMember
 	{
-		bool m_isInArea = true;	//自陣にいるかどうか
+		maru::ReactiveBool m_isInArea = true;	//自陣にいるかどうか
 
 		std::weak_ptr<OwnArea> m_ownArea;
 
@@ -62,7 +64,11 @@ namespace basecross {
 		/// 自陣エリアにいるかどうか
 		/// </summary>
 		/// <returns>自陣エリアにいるならtrue</returns>
-		bool IsInArea() const noexcept { return m_isInArea; }
+		bool IsInArea() const noexcept { return m_isInArea.GetValue(); }
+
+		void AddReactiveIsInAreaEvent(const bool b, const std::function<void()>& func) {
+			m_isInArea.AddFunction(b, func);
+		}
 
 		/// <summary>
 		/// 自陣エリアの設定
