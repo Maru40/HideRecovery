@@ -129,7 +129,9 @@ namespace basecross
 		ResourceLoadData(L"TitlePlessedSE", L"TitlePlessedSE.wav"),
 		ResourceLoadData(L"GameStartSE", L"GameStartSE.wav"),
 		ResourceLoadData(L"GoalEffectSE", L"GoalEffectSE.wav"),
-		ResourceLoadData(L"StartCountSE", L"StartCountSE.wav")
+		ResourceLoadData(L"StartCountSE", L"StartCountSE.wav"),
+
+		ResourceLoadData(L"GoalBallSE", L"GoalBallSE.wav"),
 	};
 
 	const std::vector<LoadStage::ResourceLoadData> LoadStage::m_bgmResourceLoadDatas =
