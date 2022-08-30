@@ -39,6 +39,7 @@
 #include "TeleportUI.h"
 
 #include "Watanabe/DebugClass/Debug.h"
+#include "OwnArea.h"
 
 namespace basecross {
 
@@ -291,7 +292,8 @@ namespace basecross {
 
 		//距離がありすぎるならテレポートしない
 		auto teleportPosition = GetFieldMap()->GetMapCursor()->GetCursorFiledPosition();
-		auto toTeleportPosition = teleportPosition - transform->GetPosition();
+		auto ownArea = teamMember->GetOwnArea();
+		auto toTeleportPosition = teleportPosition - ownArea->GetGameObject()->GetComponent<Transform>()->GetPosition();
 		auto maxRange = GetFieldMap()->GetRect().depth * m_param.maxRangeLate;
 		if (toTeleportPosition.length() > maxRange) {
 			return false;
