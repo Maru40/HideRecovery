@@ -11,8 +11,44 @@
 #include "../Manager/TimeManager.h"
 #include "../Manager/ScoreManager.h"
 #include "Itabashi/OnlineManager.h"
+#include "Watanabe/Component/PlayerAnimator.h"
+#include "Watanabe/Component/MatchingSyncPlayerObject.h"
+#include "Watanabe/Component/PlayerStatus.h"
+
+#include "Maruyama/Interface/I_TeamMember.h"
+#include "VelocityManager.h"
 
 namespace basecross {
+
+	std::shared_ptr<GameObject> PlayerCreate(const std::shared_ptr<Stage>& stage) {
+		Mat4x4 spanMat;
+		const float fScale = 0.8f;
+		Vec3 scale = Vec3(fScale);
+		spanMat.affineTransformation(
+			scale,
+			Vec3(0.0f, 0.0f, 0.0f),
+			Vec3(0.0f, XM_PI, 0.0f),
+			Vec3(0.0f, -0.55f, 0.0f)
+		);
+		auto gameObject = stage->AddGameObject<StageObjectBase>(L"PlayerModel");
+		auto drawComp = gameObject->AddComponent<PNTBoneModelDraw>();
+		drawComp->SetMultiMeshResource(L"Player_Mesh");
+		drawComp->SetMeshToTransformMatrix(spanMat);
+
+		auto shadow = gameObject->AddComponent<Shadowmap>();
+		shadow->SetMultiMeshResource(L"Player_Mesh");
+		shadow->SetMeshToTransformMatrix(spanMat);
+
+		auto animator = gameObject->AddComponent<PlayerAnimator>();
+		animator->ChangePlayerAnimation(PlayerAnimationState::State::Wait);
+		// PlayerAnimatorで参照しているため使用しないが必要
+		gameObject->AddComponent<VelocityManager>();
+
+		gameObject->AddComponent<PlayerStatus>();
+
+		return gameObject;
+	}
+
 	void ResultStage::CreateViewLight() {
 		const Vec3 eye(0.0f, 1.0f, 5.0f);
 		const Vec3 at(0, 1.0f, 0);
@@ -52,6 +88,9 @@ namespace basecross {
 		efkComp->SetEffectResource(L"Confetti");
 		efkComp->PlayLoop(L"Confetti");
 
+		//playerの生成
+		CreatePlayers(PointManager::GetInstance()->GetWinner());
+
 		// 1ゲーム終了したのでインスタンスを破棄（リセット）
 		PointManager::DeleteInstance();
 		TimeManager::DeleteInstance();
@@ -74,5 +113,37 @@ namespace basecross {
 	}
 
 	void ResultStage::OnDestroy() {
+	}
+
+	void ResultStage::CreatePlayers(const team::TeamType winerType) {
+		if (PointManager::GetInstance()->IsDraw()) {
+			return;
+		}
+
+		struct Data {
+			Vec3 position;
+			PlayerAnimationState::State state;
+
+			Data(const Vec3& position, const PlayerAnimationState::State& state):
+				position(position),
+				state(state)
+			{}
+		};
+
+		Data datas[] = {
+			Data(Vec3(+0.0f, 0.1f, 0.0f), PlayerAnimationState::State::Win1),
+			Data(Vec3(-1.0f, 0.1f, 0.0f), PlayerAnimationState::State::Win2),
+			Data(Vec3(+1.0f, 0.1f, 0.0f), PlayerAnimationState::State::Win3),
+		};
+
+		for (auto& data : datas) {
+			auto player = PlayerCreate(GetThis<Stage>());
+			player->GetComponent<Transform>()->SetPosition(data.position);
+			auto teamMember = player->GetComponent<I_TeamMember>(false);
+			teamMember->SetTeam(winerType);
+
+			auto animator = player->GetComponent<PlayerAnimator>(false);
+			animator->ChangePlayerAnimation(data.state);
+		}
 	}
 }
