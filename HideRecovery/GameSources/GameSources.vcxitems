@@ -78,6 +78,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\UseWepon.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\StageObject\Goal.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\StageObject\GoalObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Stage\MapShotStage.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\UI\Reticle.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\UI\UILayer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)OccupancyManager.h" />
@@ -403,6 +404,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\UseWepon.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\StageObject\Goal.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\StageObject\GoalObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Stage\MapShotStage.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\UI\Reticle.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)OccupancyManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)OriginalMeshToonObject.cpp" />

@@ -14,6 +14,7 @@
 #include "Watanabe/TestStage/WatanabeStage.h"
 #include "Watanabe/TestStage/MatchingUILayoutStage.h"
 #include "Itabashi/OnlineMatchStage.h"
+#include "Maruyama/Stage/MapShotStage.h"	
 
 class LoadStage;
 
@@ -86,6 +87,9 @@ namespace basecross {
 		else if (event->m_MsgStr == L"ToMatchingStage")
 		{
 			ResetActiveStage<OnlineMatchStage>();
+		}
+		else if (event->m_MsgStr == L"MapShotStage") {
+			ResetActiveStage<MapShotStage>();
 		}
 	}
 }
