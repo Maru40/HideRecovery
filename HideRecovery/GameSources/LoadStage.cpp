@@ -46,10 +46,11 @@ namespace basecross
 
 		ResourceLoadData(L"Cursor_TX", L"Cursor.png"),
 		ResourceLoadData(L"Reticle_TX", L"Reticle.png"),
+		ResourceLoadData(L"ReticleCnterRed_TX", L"ReticleCtrR.png"),
 
 		ResourceLoadData(L"RedGoal_TX", L"RedGoalTx.png"),
 
-		
+		ResourceLoadData(L"MapCursorUnderCircle_TX", L"MapCursorUnderCircle.png"),
 
 		//ResourceLoadData(L"gauge", L"Gauge.png"),
 		//ResourceLoadData(L"clear", L"StageClear.png"),
