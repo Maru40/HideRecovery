@@ -160,7 +160,10 @@ namespace basecross {
 	void MapCursor::OnDrawActive() {
 		m_cursor.lock()->SetDrawActive(true);
 		m_underCircle.lock()->SetDrawActive(true);
-		m_teleportUIObject.lock()->SetDrawActive(true);
+
+		if (m_teleport.lock() && m_teleport.lock()->CanTeleport()) {
+			m_teleportUIObject.lock()->SetDrawActive(true);
+		}
 
 		SetMapCursorPositionConnectTargetPosition();
 	}
