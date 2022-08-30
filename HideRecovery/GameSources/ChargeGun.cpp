@@ -17,6 +17,7 @@
 #include "Itabashi/ObjectMover.h"
 #include "Watanabe/Component/PlayerAnimator.h"
 #include "Watanabe/Effekseer/EfkEffect.h"
+#include "Watanabe/Component/PlayerStatus.h"
 #include "SoundManager.h"
 
 #include "Maruyama/Player/Component/UseWepon.h"
@@ -40,6 +41,7 @@ namespace basecross {
 	void ChargeGun::OnLateStart() {
 		m_useWepon = GetGameObject()->GetComponent<UseWepon>(false);
 		m_soundEmitter = GetGameObject()->GetComponent<SoundEmitter>(false);
+		m_teamType = GetGameObject()->GetComponent<PlayerStatus>()->GetTeam();
 	}
 
 	void ChargeGun::OnUpdate() {
@@ -93,6 +95,7 @@ namespace basecross {
 		//弾の生成
 		Vec3 instancePosition = transform->GetPosition() + maru::Utility::ConvertForwardOffset(transform->GetForward(), GetBulletInstanceOffset());
 		auto bulletObject = InstantiateBullet<ChargeBulletObject>(instancePosition, transform->GetQuaternion());
+		bulletObject->SetTeamType(m_teamType); // チームを設定
 		if (auto bullet = bulletObject->GetComponent<ChargeBullet>(false)) {
 			bullet->Shot(GetGameObject(), direct);
 		}

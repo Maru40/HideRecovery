@@ -1,5 +1,4 @@
-﻿
-/*!
+﻿/*!
 @file ChargeGun.h
 @brief ChargeGunなど
 担当：丸山裕喜
@@ -9,6 +8,7 @@
 #include "stdafx.h"
 
 #include "WeponBase.h"
+#include "Maruyama/Interface/I_TeamMember.h"
 
 namespace basecross {
 	//--------------------------------------------------------------------------------------
@@ -30,6 +30,7 @@ namespace basecross {
 
 		SoundClip m_shotSoundClip;
 
+		team::TeamType m_teamType;
 	public:
 		ChargeGun(const std::shared_ptr<GameObject>& objPtr);
 
@@ -66,5 +67,4 @@ namespace basecross {
 		/// <returns>撃てる状態ならtrue</returns>
 		bool IsShot() const;
 	};
-
 }
