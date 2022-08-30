@@ -63,6 +63,7 @@ namespace basecross
 
 		auto transform = playerObject->GetComponent<Transform>();
 		transform->SetPosition(spawnPoint->GetWorldPosition());
+		transform->SetQuaternion(spawnPoint->GetQuaternion());
 
 		if (playerNumber != Online::OnlineManager::GetLocalPlayer().getNumber())
 		{
