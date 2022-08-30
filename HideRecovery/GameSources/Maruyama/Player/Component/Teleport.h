@@ -1,8 +1,8 @@
-
+ï»¿
 /*!
 @file Teleport.h
-@brief Teleport‚È‚Ç
-’S“–FŠÛR—TŠì
+@brief Teleportãªã©
+æ‹…å½“ï¼šä¸¸å±±è£•å–œ
 */
 
 #pragma once
@@ -11,27 +11,28 @@
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
-	/// ‘O•ûéŒ¾
+	/// å‰æ–¹å®£è¨€
 	//--------------------------------------------------------------------------------------
 	class FieldMap;
 	class GameTimer;
 	class VirtualCamera;
+	class ToTargetMove;
 
 	//--------------------------------------------------------------------------------------
-	/// ƒeƒŒƒ|[ƒg‹@”\‚Ìƒpƒ‰ƒ[ƒ^
+	/// ãƒ†ãƒ¬ãƒãƒ¼ãƒˆæ©Ÿèƒ½ã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
 	//--------------------------------------------------------------------------------------
 
 	struct Teleport_Parametor 
 	{
-		float maxRangeLate;	//ƒeƒŒƒ|[ƒg‚Å‚«‚éÅ‘å‹——£
-		Vec3 position;		//ƒeƒŒƒ|[ƒg‚·‚éˆÊ’u
-		bool isTeleporting;	//ƒeƒŒƒ|[ƒg’†‚©‚Ç‚¤‚©
+		float maxRangeLate;	//ãƒ†ãƒ¬ãƒãƒ¼ãƒˆã§ãã‚‹æœ€å¤§è·é›¢
+		Vec3 position;		//ãƒ†ãƒ¬ãƒãƒ¼ãƒˆã™ã‚‹ä½ç½®
+		bool isTeleporting;	//ãƒ†ãƒ¬ãƒãƒ¼ãƒˆä¸­ã‹ã©ã†ã‹
 
 		Teleport_Parametor();
 	};
 
 	//--------------------------------------------------------------------------------------
-	/// ƒeƒŒƒ|[ƒg‹@”\
+	/// ãƒ†ãƒ¬ãƒãƒ¼ãƒˆæ©Ÿèƒ½
 	//--------------------------------------------------------------------------------------
 	class Teleport : public Component
 	{
@@ -39,12 +40,15 @@ namespace basecross {
 		using Parametor = Teleport_Parametor;
 
 	private:
-		Parametor m_param;						//ƒpƒ‰ƒ[ƒ^
+		Parametor m_param;						//ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
 
-		std::weak_ptr<FieldMap> m_fieldMap;		//ƒ}ƒbƒv
-		std::unique_ptr<GameTimer> m_timer;		//ƒ^ƒCƒ}[
+		std::weak_ptr<FieldMap> m_fieldMap;		//ãƒãƒƒãƒ—
+		std::unique_ptr<GameTimer> m_timer;		//ã‚¿ã‚¤ãƒãƒ¼
 
-		std::weak_ptr<VirtualCamera> m_camera;	//ƒJƒƒ‰
+		std::weak_ptr<VirtualCamera> m_camera;	//ã‚«ãƒ¡ãƒ©
+		std::weak_ptr<ToTargetMove> m_toTargetMove;
+
+		Vec3 m_cameraPosition;
 
 	public:
 		Teleport(const std::shared_ptr<GameObject>& objPtr);
@@ -59,65 +63,73 @@ namespace basecross {
 
 	public:
 		/// <summary>
-		/// ƒeƒŒƒ|[ƒgŠJn
+		/// ãƒ†ãƒ¬ãƒãƒ¼ãƒˆé–‹å§‹
 		/// </summary>
 		void StartTeleport();
 
+		void StartTeleport(const Vec3& teleportPosition);
+
 		/// <summary>
-		/// ƒ}ƒbƒv‚ğŠJ‚­B
+		/// ãƒãƒƒãƒ—ã‚’é–‹ãã€‚
 		/// </summary>
 		void OpenMap();
 
 		/// <summary>
-		/// ƒ}ƒbƒv‚ğ•Â‚¶‚é
+		/// ãƒãƒƒãƒ—ã‚’é–‰ã˜ã‚‹
 		/// </summary>
 		void CloseMap();
 
 		//--------------------------------------------------------------------------------------
-		/// ƒAƒNƒZƒbƒT
+		/// ã‚¢ã‚¯ã‚»ãƒƒã‚µ
 		//--------------------------------------------------------------------------------------
 
 		/// <summary>
-		/// ƒeƒŒƒ|[ƒgˆÊ’u‚Ìİ’è
+		/// ãƒ†ãƒ¬ãƒãƒ¼ãƒˆä½ç½®ã®è¨­å®š
 		/// </summary>
-		/// <param name="position">ƒeƒŒƒ|[ƒgˆÊ’u‚Ìİ’è</param>
+		/// <param name="position">ãƒ†ãƒ¬ãƒãƒ¼ãƒˆä½ç½®ã®è¨­å®š</param>
 		void SetTeleportPosition(const Vec3& position) noexcept { m_param.position = position; }
 
 		/// <summary>
-		/// ƒeƒŒƒ|[ƒgˆÊ’u‚Ìæ“¾
+		/// ãƒ†ãƒ¬ãƒãƒ¼ãƒˆä½ç½®ã®å–å¾—
 		/// </summary>
-		/// <returns>ƒeƒŒƒ|[ƒgˆÊ’u</returns>
+		/// <returns>ãƒ†ãƒ¬ãƒãƒ¼ãƒˆä½ç½®</returns>
 		Vec3 GetTeleportPosition() const noexcept { return m_param.position; }
 
 		/// <summary>
-		/// ƒtƒB[ƒ‹ƒhƒ}ƒbƒv‚Ìæ“¾
+		/// ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ãƒãƒƒãƒ—ã®å–å¾—
 		/// </summary>
-		/// <returns>ƒtƒB[ƒ‹ƒhƒ}ƒbƒv</returns>
+		/// <returns>ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ãƒãƒƒãƒ—</returns>
 		std::shared_ptr<FieldMap> GetFieldMap() const;
 
 		/// <summary>
-		/// ƒeƒŒƒ|[ƒg‚Å‚«‚é‚©‚Ç‚¤‚©
+		/// ãƒ†ãƒ¬ãƒãƒ¼ãƒˆã§ãã‚‹ã‹ã©ã†ã‹
 		/// </summary>
-		/// <returns>ƒeƒŒƒ|[ƒg‚Å‚«‚é‚È‚çtrue</returns>
-		bool IsTeleport() const;
+		/// <returns>ãƒ†ãƒ¬ãƒãƒ¼ãƒˆã§ãã‚‹ãªã‚‰true</returns>
+		bool CanTeleport() const;
 
 		/// <summary>
-		/// ƒeƒŒƒ|[ƒg’†‚©‚Ç‚¤‚©
+		/// ãƒ†ãƒ¬ãƒãƒ¼ãƒˆä¸­ã‹ã©ã†ã‹
 		/// </summary>
-		/// <returns>ƒeƒŒƒ|[ƒg’†‚©‚Ç‚¤‚©</returns>
+		/// <returns>ãƒ†ãƒ¬ãƒãƒ¼ãƒˆä¸­ã‹ã©ã†ã‹</returns>
 		bool IsTeleporting() const;
 
 		/// <summary>
-		/// ƒeƒŒƒ|[ƒgƒJƒƒ‰‚Ìİ’è
+		/// ãƒ†ãƒ¬ãƒãƒ¼ãƒˆã‚«ãƒ¡ãƒ©ã®è¨­å®š
 		/// </summary>
-		/// <param name="camera">ƒJƒƒ‰‚Ìİ’è</param>
+		/// <param name="camera">ã‚«ãƒ¡ãƒ©ã®è¨­å®š</param>
 		void SetTeleportCamera(const std::shared_ptr<VirtualCamera> camera);
 
 		/// <summary>
-		/// ƒeƒŒƒ|[ƒgƒJƒƒ‰‚Ìæ“¾
+		/// ãƒ†ãƒ¬ãƒãƒ¼ãƒˆã‚«ãƒ¡ãƒ©ã®å–å¾—
 		/// </summary>
-		/// <returns>ƒeƒŒƒ|[ƒgƒJƒƒ‰</returns>
+		/// <returns>ãƒ†ãƒ¬ãƒãƒ¼ãƒˆã‚«ãƒ¡ãƒ©</returns>
 		std::shared_ptr<VirtualCamera> GetTeleportCamera() const;
+
+		void SetToTargetMove(const std::shared_ptr<ToTargetMove>& toTargetMove) { m_toTargetMove = toTargetMove; }
+
+		std::shared_ptr<ToTargetMove> GetToTargetMove() const { return m_toTargetMove.lock(); }
+
+		void SetCameraPosition(const Vec3& cameraPosition) { m_cameraPosition = cameraPosition; }
 	};
 
 }
