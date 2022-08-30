@@ -25,3 +25,7 @@ JoinRoom,Message_TX,0,1060,1024,120
 KillCount,ScoreLabel_TX,0,0,76,64
 GoalCount,ScoreLabel_TX,0,64,128,64
 Player,Team_TX,0,495,600,205
+Tryangle,Shape_TX,0,0,256,256
+ButtonBack,Shape_TX,256,0,128,128
+AButton,Shape_TX,384,0,128,128
+Bbutton,Shape_TX,256,128,128,128
