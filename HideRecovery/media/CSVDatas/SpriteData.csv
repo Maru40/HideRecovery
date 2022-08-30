@@ -30,3 +30,4 @@ ButtonBack,Shape_TX,256,0,128,128
 AButton,Shape_TX,384,0,128,128
 BButton,Shape_TX,256,128,128,128
 YButton,Shape_TX,384,128,128,128
+PreparingTeam,Message_TX,0,1180,440,100
