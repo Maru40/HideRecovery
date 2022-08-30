@@ -69,6 +69,8 @@
 #include "Maruyama/UI/Reticle.h"
 #include "TeleportUI.h"
 
+#include "GameManager.h"
+
 using namespace basecross::Enemy;
 
 namespace basecross {
@@ -116,6 +118,8 @@ namespace basecross {
 			gameStartUI->AddTimeUpEventFunc([]() {SimpleSoundManager::OnePlaySE(L"GameStartSE", 0.25f); });
 			std::weak_ptr<OnlineGameTimer> weakOnlineGameTimer = onlineGameTimer;
 			gameStartUI->AddTimeUpEventFunc([weakOnlineGameTimer]() {weakOnlineGameTimer.lock()->GameTimerStart(); });
+			//ゲーム状態にする
+			gameStartUI->AddTimeUpEventFunc([]() { if (auto gameManager = GameManager::GetInstance()) { gameManager->ChangeState(GameManager::State::Game); } });	
 
 			auto gameFinishUI = AddGameObject<GameFinishUI>();
 			std::weak_ptr<GameFinishUI> weakGameFinishUI = gameFinishUI;
