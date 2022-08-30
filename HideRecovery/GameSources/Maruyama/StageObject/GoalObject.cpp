@@ -65,6 +65,16 @@ namespace basecross {
 		draw->SetMeshToTransformMatrix(spanMat);
 		draw->SetMultiMeshResource(L"Goal");
 
+		if (m_team == team::TeamType::Blue) {
+			//draw->SetTextureResource();
+			//draw->SetTextureResource(L"RedGoal_TX");
+			//draw->SetModelTextureEnabled(false);
+		}
+		else {
+			draw->SetTextureResource(L"RedGoal_TX");
+			draw->SetModelTextureEnabled(false);
+		}
+
 		//SetAlphaActive(true);
 	}
 }
