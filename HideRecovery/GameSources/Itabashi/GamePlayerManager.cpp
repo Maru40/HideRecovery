@@ -21,6 +21,7 @@
 #include "Maruyama/Camera/Component/CameraForwardController.h"
 #include "TeleportUI.h"
 #include "ToTargetMove.h"
+#include "GameManager.h"
 
 namespace basecross
 {
@@ -116,6 +117,11 @@ namespace basecross
 		auto teleportUI = GetStage()->AddGameObject<GameObject>()->AddComponent<TeleportUI>();
 		if (teamMember) {
 			auto trueFunc = [teleportUI]() {
+				auto gameManager = GameManager::GetInstance();
+				if (gameManager && gameManager->GetCurrentState() != GameManager::State::Game) {
+					return;
+				}
+
 				teleportUI->GetGameObject()->SetUpdateActive(true);
 			};
 
