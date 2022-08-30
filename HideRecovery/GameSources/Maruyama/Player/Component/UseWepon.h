@@ -26,6 +26,9 @@ namespace basecross {
 	/// ウェポンを使用するクラスのパラメータ
 	//--------------------------------------------------------------------------------------
 	struct UseWepon_Parametor {
+		float defaultCameraSpeed;
+		float aimCameraSpeed;
+		float assitPower;
 		std::unique_ptr<maru::ReactiveBool> isAim;	//Aim中かどうか
 
 		UseWepon_Parametor();
@@ -83,6 +86,7 @@ namespace basecross {
 
 		virtual ~UseWepon() = default;
 
+		void OnCreate() override;
 		void OnLateStart() override;
 		void OnUpdate() override;
 
@@ -120,6 +124,8 @@ namespace basecross {
 		Vec3 CalculateRotationDirection();
 
 		void SearchPlayers();
+
+		void ChangeCameraSpeed(const float speed);
 
 	public:
 		//--------------------------------------------------------------------------------------
