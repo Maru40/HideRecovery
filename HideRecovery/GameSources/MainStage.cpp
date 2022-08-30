@@ -56,7 +56,6 @@
 #include "Watanabe/Effekseer/EfkEffect.h"
 
 #include "Itabashi/OnlineTestRoom.h"
-#include "Itabashi/OnlinePlayerManager.h"
 #include "GameManagerObject.h"
 #include "Itabashi/GamePlayerManager.h"
 #include "Itabashi/OnlineGameTimer.h"
