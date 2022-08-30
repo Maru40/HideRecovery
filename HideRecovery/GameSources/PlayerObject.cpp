@@ -151,6 +151,7 @@ namespace basecross {
 		cameraMover->SetMinRotX(-XM_PIDIV4);
 		cameraMover->SetMaxRotX(XM_PIDIV4);
 		auto springArmComponent = springArm->AddComponent<SpringArmComponent>();
+		springArmComponent->SetPlayer(GetThis<GameObject>());
 
 		m_arm = springArm;
 
