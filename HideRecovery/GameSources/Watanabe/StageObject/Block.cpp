@@ -47,13 +47,21 @@ namespace basecross {
 		switch (m_blockType)
 		{
 		case BlockType::Wall:
-			drawComp->SetMeshResource(L"DEFAULT_CUBE");
+		{
+			vector<VertexPositionNormalTexture> vertices;
+			vector<uint16_t> indices;
+
+			// スケールに応じたUVを持つCubeを設定
+			AdvMeshUtil::CreateCube(15.0f, m_transformData.Scale, vertices, indices);
+			m_meshRes = MeshResource::CreateMeshResource(vertices, indices, true);
+			drawComp->SetMeshResource(m_meshRes);
 			drawComp->SetTextureResource(L"Wall01_TX");
 
 			if (m_isReactCamera) {
 				AddTag(L"T_Obstacle");
 				AddTag(L"Wall");
 			}
+		}
 			break;
 		case BlockType::Floor:
 		{
