@@ -30,6 +30,8 @@ namespace basecross {
 
 		transform->SetPosition(Vec3(450.0f, -500.0f, 0.0f));
 		transform->SetScale(Vec3(0.25f));
+
+		SetUpdateActive(false);
 	}
 
 	void TeleportUI::OnEnable() {
