@@ -41,7 +41,7 @@ namespace basecross {
 	{}
 
 	void GameManager::OnCreate() {
-		ChangeState(State::Game);
+		//ChangeState(State::Game);
 	}
 
 	void GameManager::OnUpdate() {
@@ -52,7 +52,7 @@ namespace basecross {
 			break;
 
 		case State::Game:
-			CheckClear();
+			//CheckClear();
 			break;
 
 		case State::Clear:
