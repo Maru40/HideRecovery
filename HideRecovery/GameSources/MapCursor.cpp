@@ -91,7 +91,7 @@ namespace basecross {
 		auto teleport = uiObject->AddComponent<TeleportCursorUI>();
 
 		auto uiTrans = uiObject->GetComponent<Transform>();
-		uiTrans->SetPosition(Vec3(-50.0f, -30.0f, 0.0f));
+		uiTrans->SetPosition(Vec3(-60.0f, -30.0f, 0.0f));
 
 		m_teleportUIObject = uiObject;
 	}
