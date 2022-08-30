@@ -114,6 +114,8 @@ namespace basecross {
 		AddComponent<EyeSearchRange>();
 		AddComponent<AccessHidePlace>();
 
+		AddComponent<Teleport>();	//テレポートの生成
+
 		// エフェクトの設定
 		auto efkComp = AddComponent<EfkComponent>();
 		efkComp->SetEffectResource(L"Respawn", TransformData(Vec3(0, -0.5f, 0), Vec3(0.3f, 2.0f, 0.3f)));

@@ -18,6 +18,8 @@
 #include "Watanabe/UI/UIObjects.h"
 #include "Watanabe/BoardPoly/HPGaugeBP.h"
 #include "Maruyama/UI/Reticle.h"
+#include "Maruyama/Camera/Component/CameraForwardController.h"
+#include "ToTargetMove.h"
 
 namespace basecross
 {
@@ -69,6 +71,11 @@ namespace basecross
 			auto playerStatus = playerObject->GetComponent<PlayerStatus>();
 			GetStage()->AddGameObject<HPGaugeBP>(playerStatus);
 
+			auto teleport = playerObject->GetComponent<Teleport>();
+			auto cameraObject = GetStage()->AddGameObject<GameObject>();
+			auto toTargetMove = cameraObject->AddComponent<ToTargetMove>();
+			teleport->SetToTargetMove(toTargetMove);
+
 			return playerObject;
 		}
 
@@ -81,8 +88,15 @@ namespace basecross
 		tpsCamera->AddComponent<LookAtCameraManager>(playerObject, LookAtCameraManager::Parametor());
 
 		onlineController->SetCamera(GetStage()->GetView()->GetTargetCamera());
+		auto teleport = playerObject->GetComponent<Teleport>();
 
-		playerObject->AddComponent<Teleport>();	//テレポートの生成
+		auto cameraObject = GetStage()->AddGameObject<GameObject>();
+		auto camera = cameraObject->AddComponent<VirtualCamera>(11);
+		camera->SetUpdateActive(false);
+		cameraObject->AddComponent<CameraForwardController>(camera);
+		auto toTargetMove = cameraObject->AddComponent<ToTargetMove>();
+		teleport->SetTeleportCamera(camera);
+		teleport->SetToTargetMove(toTargetMove);
 
 		auto useWeapon = playerObject->GetComponent<UseWepon>();
 		useWeapon->SetIsUseCamera(true);
