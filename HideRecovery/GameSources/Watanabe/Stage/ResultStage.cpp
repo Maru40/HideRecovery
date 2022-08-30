@@ -35,10 +35,11 @@ namespace basecross {
 		Debug::GetInstance()->Log(L"ResultStage");
 		Debug::GetInstance()->Log(L"A : マッチング画面へ");
 		Debug::GetInstance()->Log(L"B : タイトル画面へ");
+		PointManager::GetInstance()->AddPoint(team::TeamType::Blue);
+		PointManager::GetInstance()->AddPoint(team::TeamType::Red);
 
 		CreateMap(L"WaitStage.csv");
 		auto uiBuilder = CreateUI(L"ResultUILayout.csv");
-
 		// ラベルの色変更
 		auto redLabel = uiBuilder->GetUIObject<SimpleSprite>(L"RedLabel");
 		redLabel->GetDrawComponent()->SetDiffuse(team::REDTEAM_COLOR);
@@ -51,11 +52,6 @@ namespace basecross {
 		auto efkComp = effectObject->AddComponent<EfkComponent>();
 		efkComp->SetEffectResource(L"Confetti");
 		efkComp->PlayLoop(L"Confetti");
-
-		// 1ゲーム終了したのでインスタンスを破棄（リセット）
-		PointManager::DeleteInstance();
-		TimeManager::DeleteInstance();
-		ScoreManager::DeleteInstance();
 
 		Online::OnlineManager::Disconnect();
 	}
@@ -74,5 +70,9 @@ namespace basecross {
 	}
 
 	void ResultStage::OnDestroy() {
+		// リザルトを抜ける際にインスタンスを破棄（リセット）
+		PointManager::DeleteInstance();
+		TimeManager::DeleteInstance();
+		ScoreManager::DeleteInstance();
 	}
 }

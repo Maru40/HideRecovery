@@ -6,6 +6,7 @@
 #include "../UI/Numbers.h"
 #include "../UI/UIObjectCSVBuilder.h"
 #include "../DebugClass/Debug.h"
+#include "MaruUtility.h"
 
 namespace basecross {
 	ScoreUI::ScoreUI(const shared_ptr<Stage>& stage, int playerNumber, team::TeamType teamType)
@@ -33,10 +34,11 @@ namespace basecross {
 				L"PointUI::PointUI()"
 			);
 		}
+		m_gamePlayerNumber = stoi(tokens[nextIndex + 2]);
 	}
 
 	void ScoreUI::OnCreate() {
-		const auto scoreData = ScoreManager::GetInstance()->GetScoreData(m_playerNumber);
+		const auto scoreData = ScoreManager::GetInstance()->GetScoreData(m_gamePlayerNumber);
 		const auto& stage = GetStage();
 
 		// UIパーツ生成
@@ -71,10 +73,6 @@ namespace basecross {
 
 		// 色の変更
 		const auto TeamColor = team::GetTeamColor(m_teamType);
-		// プレイヤーのラベル
-		//auto playerLabel = uiBuilder->GetUIObject<SimpleSprite>(L"PlayerLabel");
-		//playerLabel->GetDrawComponent()->SetDiffuse(TeamColor);
-		//playerNumberUI->SetColor(TeamColor);
 		auto frameUI = uiBuilder->GetUIObject<SimpleSprite>(L"Background");
 		frameUI->GetDrawComponent()->SetDiffuse(TeamColor);
 	}
