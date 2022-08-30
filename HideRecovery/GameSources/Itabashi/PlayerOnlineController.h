@@ -13,6 +13,7 @@ namespace basecross
 	class TackleAttack;
 	class ChargeBullet;
 	class UseWepon;
+	class Teleport;
 
 	struct DamageData;
 
@@ -53,6 +54,7 @@ namespace Online
 		static constexpr std::uint8_t EXECUTE_BULLET_DESTROY_EVENT_CODE = 11;
 		static constexpr std::uint8_t EXECUTE_AIM_STATE_CHANGE_EVENT_CODE = 12;
 		static constexpr std::uint8_t EXECUTE_CAMERA_FORWARD_EVENT_CODE = 13;
+		static constexpr std::uint8_t EXECUTE_TELEPORT_EVENT_CODE = 14;
 
 	private:
 
@@ -81,6 +83,8 @@ namespace Online
 		std::weak_ptr<UseWepon> m_useWepon;
 
 		std::weak_ptr<Camera> m_camera;
+
+		std::weak_ptr<Teleport> m_teleport;
 
 		/// <summary>
 		/// 対応するプレイヤー番号
@@ -139,6 +143,8 @@ namespace Online
 
 		void TeleportInputer();
 
+		void ExecuteTeleportEvent(int playerNumber, const Vec3& teleportPosition, const Vec3& cameraPosition);
+
 		void AccessHideInputer();
 
 		void MapCursorMove();
@@ -172,6 +178,9 @@ namespace Online
 
 		void SetCamera(const std::shared_ptr<Camera>& camera) { m_camera = camera; }
 		std::shared_ptr<Camera> GetCamera() const { return m_camera.lock(); }
+
+		void SetTeleport(const std::shared_ptr<Teleport>& teleport) { m_teleport = teleport; }
+		std::shared_ptr<Teleport> GetTeleport() const { return m_teleport.lock(); }
 
 		static std::shared_ptr<PlayerOnlineController> GetPlayerOnlineController(int playerNumber);
 

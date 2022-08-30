@@ -23,6 +23,10 @@
 #include "Maruyama/Player/Component/GoalAnimationController.h"
 
 #include "Watanabe/Component/PlayerAnimator.h"
+#include "SpringArmComponent.h"
+#include "LookAtCameraManager.h"
+#include "Maruyama/Player/Component/FieldMap.h"
+#include "MapCursor.h"
 
 template<class T>
 T ConvertByteData(const std::uint8_t* bytes)
@@ -85,6 +89,19 @@ namespace Online
 			attackerPlayerNumber(attackerPlayerNumber),
 			damagedPlayerNumber(damagedPlayerNumber),
 			damage(damage)
+		{
+
+		}
+	};
+
+	struct OnlineTeleportData
+	{
+		Vec3 teleportPosition;
+		Vec3 cameraPosition;
+
+		OnlineTeleportData(const Vec3& teleportPosition, const Vec3& cameraPosition) :
+			teleportPosition(teleportPosition),
+			cameraPosition(cameraPosition)
 		{
 
 		}
@@ -570,21 +587,67 @@ namespace Online
 	}
 
 	void PlayerOnlineController::TeleportInputer() {
+
+		auto teleport = m_teleport.lock();
+
+		if (!teleport)
+		{
+			return;
+		}
+
+		if (teleport->IsTeleporting())
+		{
+			auto velocityManager = m_velocityManager.lock();
+			velocityManager->ResetAll();
+			return;
+		}
+
 		if (PlayerInputer::GetInstance()->IsOpenMap()) {
-			auto teleport = GetGameObject()->GetComponent<Teleport>(false);
-			if (!teleport) {
-				return;
-			}
 
 			teleport->OpenMap();
+			return;
 		}
 
 		if (PlayerInputer::GetInstance()->IsDesitionDown()) {
-			auto teleport = GetGameObject()->GetComponent<Teleport>(false);
-			if (teleport && teleport->IsTeleport()) {
+
+			if (teleport->CanTeleport())
+			{
+				auto position = teleport->GetFieldMap()->GetMapCursor()->GetCursorFiledPosition();
+				auto playerObject = dynamic_pointer_cast<PlayerObject>(GetGameObject());
+				auto springArm = playerObject->GetArm()->GetComponent<SpringArmComponent>();
+				auto childObject = springArm->GetChildObject();
+				Vec3 offset(0.0f);
+				if (auto lookAt = childObject->GetComponent<LookAtCameraManager>(false))
+				{
+					offset = lookAt->GetParametor().centerOffset;
+				}
+
+				auto& tpsCamera = GetStage()->GetView()->GetTargetCamera();
+				auto tpsAt = tpsCamera->GetAt();
+				auto tpsForward = tpsAt - tpsCamera->GetEye();
+
+				position += offset + -tpsForward;
+
+				teleport->SetCameraPosition(position);
+
 				teleport->StartTeleport();
+				OnlineManager::RaiseEvent(false, (std::uint8_t*)&OnlineTeleportData(teleport->GetTeleportPosition(), position),
+					sizeof(OnlineTeleportData), EXECUTE_TELEPORT_EVENT_CODE);
 			}
 		}
+	}
+
+	void PlayerOnlineController::ExecuteTeleportEvent(int playerNumber, const Vec3& teleportPosition, const Vec3& cameraPosition)
+	{
+		if (m_playerNumber != playerNumber)
+		{
+			return;
+		}
+
+		auto teleport = m_teleport.lock();
+
+		teleport->SetCameraPosition(cameraPosition);
+		teleport->StartTeleport(teleportPosition);
 	}
 
 	void PlayerOnlineController::AccessHideInputer() {
@@ -617,6 +680,8 @@ namespace Online
 
 		m_tackleAttack = owner->GetComponent<TackleAttack>();
 		m_useWepon = owner->GetComponent<UseWepon>();
+
+		m_teleport = owner->GetComponent<Teleport>(false);
 	}
 
 	void PlayerOnlineController::OnUpdate()
@@ -635,6 +700,17 @@ namespace Online
 
 		UpdateCameraForward();
 
+		TeleportInputer();
+
+		auto teleporter = m_teleport.lock();
+
+		if (teleporter->IsTeleporting())
+		{
+			auto useWeapon = m_useWepon.lock();
+			useWeapon->SetIsAim(false);
+			return;
+		}
+
 		Move();
 
 		TryAquisition();
@@ -646,8 +722,6 @@ namespace Online
 		//TryTackle();
 
 		TryAim();
-
-		TeleportInputer();
 
 		AccessHideInputer();
 
@@ -719,6 +793,13 @@ namespace Online
 		if (eventCode == EXECUTE_TACKLE_EVENT_CODE)
 		{
 			ExecuteTackle(playerNumber);
+			return;
+		}
+
+		if (eventCode == EXECUTE_TELEPORT_EVENT_CODE)
+		{
+			auto data = ConvertByteData<OnlineTeleportData>(bytes);
+			ExecuteTeleportEvent(playerNumber, data.teleportPosition, data.cameraPosition);
 			return;
 		}
 
