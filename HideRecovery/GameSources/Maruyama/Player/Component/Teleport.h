@@ -17,6 +17,8 @@ namespace basecross {
 	class GameTimer;
 	class VirtualCamera;
 	class ToTargetMove;
+	class TeleportUI;
+	class I_TeamMember;
 
 	//--------------------------------------------------------------------------------------
 	/// テレポート機能のパラメータ
@@ -47,6 +49,8 @@ namespace basecross {
 
 		std::weak_ptr<VirtualCamera> m_camera;	//カメラ
 		std::weak_ptr<ToTargetMove> m_toTargetMove;
+		std::weak_ptr<TeleportUI> m_teleportUI;
+		std::weak_ptr<I_TeamMember> m_teamMember;
 
 		Vec3 m_cameraPosition;
 
@@ -130,6 +134,8 @@ namespace basecross {
 		std::shared_ptr<ToTargetMove> GetToTargetMove() const { return m_toTargetMove.lock(); }
 
 		void SetCameraPosition(const Vec3& cameraPosition) { m_cameraPosition = cameraPosition; }
+
+		std::shared_ptr<TeleportUI> GetTeleportUI() const;
 	};
 
 }
