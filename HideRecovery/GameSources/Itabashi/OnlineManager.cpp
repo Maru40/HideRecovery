@@ -11,7 +11,7 @@ namespace Online
 		OnlineManager::AddCallBacks(this);
 	}
 
-	OnlineComponent::~OnlineComponent()
+	void OnlineComponent::OnDestroy()
 	{
 		OnlineManager::RemoveCallBacks(this);
 	}
