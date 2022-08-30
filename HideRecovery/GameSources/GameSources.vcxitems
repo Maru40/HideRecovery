@@ -253,6 +253,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)WaitTimer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WallEvasion.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WallObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\BoardPoly\GoalBP.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\BoardPoly\HPGaugeBP.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\BoardPoly\RelocationCountBP.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\Animator.h" />
@@ -542,6 +543,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)WaitTimer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WallEvasion.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WallObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\BoardPoly\GoalBP.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\BoardPoly\HPGaugeBP.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\BoardPoly\RelocationCountBP.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\Animator.cpp" />

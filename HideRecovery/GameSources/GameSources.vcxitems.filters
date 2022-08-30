@@ -1072,6 +1072,9 @@
     <Filter Include="Watanabe\UI\ButtonUI">
       <UniqueIdentifier>{e3d58e57-372c-4912-8fa4-ae5e98928439}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\BoardPoly\GoalBP">
+      <UniqueIdentifier>{8d655bc8-01fb-49f4-b682-08112eaabbcd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2001,6 +2004,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\UI\Reticle.h">
       <Filter>Maruyama\UI\Reticle</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\BoardPoly\GoalBP.h">
+      <Filter>Watanabe\BoardPoly\GoalBP</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2833,6 +2839,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\UI\Reticle.cpp">
       <Filter>Maruyama\UI\Reticle</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\BoardPoly\GoalBP.cpp">
+      <Filter>Watanabe\BoardPoly\GoalBP</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
