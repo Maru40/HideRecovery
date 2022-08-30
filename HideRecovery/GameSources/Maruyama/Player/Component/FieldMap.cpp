@@ -12,6 +12,7 @@
 
 #include "SpriteObject.h"
 #include "MapCursor.h"
+#include "Maruyama/UI/UILayer.h"
 
 namespace basecross {
 
@@ -46,8 +47,9 @@ namespace basecross {
 	void FieldMap::SettingDraw() {
 		//マップテクスチャの生成
 		auto builder = Builder::BuilderVertexPCT(m_builderParam);
-		auto mapTextrue = GetStage()->AddGameObject<SpriteObject>(m_builderParam);
-		m_mapTexture = mapTextrue;
+		auto mapTexture = GetStage()->AddGameObject<SpriteObject>(m_builderParam);
+		mapTexture->SetDrawLayer(UI::Layer::MAP);
+		m_mapTexture = mapTexture;
 
 		//カーソル生成
 		auto cursor = GetStage()->AddGameObject<GameObject>()->AddComponent<MapCursor>();
