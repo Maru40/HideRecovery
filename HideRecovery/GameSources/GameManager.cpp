@@ -18,6 +18,7 @@
 #include "SoundManager.h"
 
 #include "TaskList.h"
+#include "TeleportUI.h"
 
 namespace basecross {
 
@@ -101,6 +102,12 @@ namespace basecross {
 			break;
 
 		case State::Game:
+		{
+			auto teleportUI = maru::Utility::FindComponent<TeleportUI>(GetStage());
+			if (teleportUI) {
+				teleportUI->SetUpdateActive(true);
+			}
+		}
 			break;
 
 		case State::Clear:
