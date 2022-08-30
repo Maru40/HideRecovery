@@ -35,6 +35,7 @@ namespace basecross {
 		cursor->GetComponent<Transform>()->SetPosition(Vec3(0.0f));
 
 		auto pos = cursor->GetComponent<Transform>()->GetPosition();
+		cursor->SetDrawLayer(UI::Layer::MAP_CURSOR);
 		m_sprite = cursor;
 	}
 
