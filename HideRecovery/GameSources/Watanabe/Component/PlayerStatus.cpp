@@ -22,7 +22,7 @@ namespace basecross {
 
 	void PlayerStatus::OnLateStart()
 	{
-		m_soundEmitter = GetGameObject()->GetComponent<SoundEmitter>();
+		m_soundEmitter = GetGameObject()->GetComponent<SoundEmitter>(false);
 	}
 
 	void PlayerStatus::OnUpdate() {
@@ -74,10 +74,12 @@ namespace basecross {
 			{
 			case team::TeamType::Red:
 				drawer->SetTextureResource(L"RedHeroTx");
+				drawer->SetModelTextureEnabled(false);
 				break;
 
 			case team::TeamType::Blue:
 				drawer->SetTextureResource(L"BlueHeroTx");
+				drawer->SetModelTextureEnabled(false);
 				break;
 			}
 		}
