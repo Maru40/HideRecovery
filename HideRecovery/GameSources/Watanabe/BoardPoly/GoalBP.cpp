@@ -49,9 +49,9 @@ namespace basecross {
 		drawComp->SetTextureResource(spriteData.useTextureKey);
 		drawComp->SetDiffuse(Col4(1.0f, 0.5f, 0, 1));
 
-		auto billBoard = gameObject->AddComponent<BillBoard>();
-		billBoard->SetRotationOffset(
-			Utility::ConvertDegVecToRadVec(Vec3(0, 180, 0)));
+		//auto billBoard = gameObject->AddComponent<BillBoard>();
+		//billBoard->SetRotationOffset(
+		//	Utility::ConvertDegVecToRadVec(Vec3(0, 180, 0)));
 
 		gameObject->SetAlphaActive(true);
 		return gameObject;
@@ -69,6 +69,10 @@ namespace basecross {
 		triangleTrans->SetPosition(Vec3(0, -1.0f / 2.0f, 0));
 		triangleTrans->SetScale(Vec3(0.5f));
 		triangle->SetParent(GetThis<GoalBP>());
+
+		auto billBoard = AddComponent<BillBoard>();
+		billBoard->SetRotationOffset(
+			Utility::ConvertDegVecToRadVec(Vec3(0, 180, 0)));
 	}
 	void GoalBP::OnUpdate() {
 	}
