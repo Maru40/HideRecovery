@@ -1075,6 +1075,9 @@
     <Filter Include="Watanabe\BoardPoly\GoalBP">
       <UniqueIdentifier>{8d655bc8-01fb-49f4-b682-08112eaabbcd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\Component\Zooming">
+      <UniqueIdentifier>{90aec67a-0274-41b8-bc7c-d523b198c97e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2007,6 +2010,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\BoardPoly\GoalBP.h">
       <Filter>Watanabe\BoardPoly\GoalBP</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\Zooming.h">
+      <Filter>Watanabe\Component\Zooming</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2842,6 +2848,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\BoardPoly\GoalBP.cpp">
       <Filter>Watanabe\BoardPoly\GoalBP</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\Zooming.cpp">
+      <Filter>Watanabe\Component\Zooming</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
