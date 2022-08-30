@@ -43,6 +43,9 @@ namespace basecross {
 
 		std::weak_ptr<SplashMessageUI> m_splashMessageUI;
 
+		std::weak_ptr<SoundEmitter> m_soundEmitter;
+		SoundClip m_getBallSoundClip;
+
 		bool m_canAcquisition = false;
 
 	public:

@@ -50,12 +50,16 @@ namespace basecross {
 	{}
 
 	ItemAcquisitionManager::ItemAcquisitionManager(const std::shared_ptr<GameObject>& objPtr, const Parametor& param) :
-		Component(objPtr), m_param(param)
+		Component(objPtr), 
+		m_param(param),
+		m_getBallSoundClip(L"GetBallSE", false, 0.5f)
 	{}
 
 	void ItemAcquisitionManager::OnLateStart() {
 		//アイテムを取得する。
 		m_allFieldItems = maru::Utility::ConvertArraySharedToWeak(maru::Utility::FindComponents<Item>(GetStage()));
+
+		m_soundEmitter = GetGameObject()->GetComponent<SoundEmitter>(false);
 	}
 
 	void ItemAcquisitionManager::OnUpdate() {
@@ -111,6 +115,8 @@ namespace basecross {
 
 		if (selfTeamMember->GetTeam() == otherTeamMember->GetTeam()) {
 			splashMessageUI->SetMessage(SplashMessageUI::MessageType::GetBall);
+			m_soundEmitter.lock()->PlaySoundClip(m_getBallSoundClip);
+
 		}
 		else {
 			splashMessageUI->SetMessage(SplashMessageUI::MessageType::StolenBall);
