@@ -86,6 +86,11 @@ namespace basecross
 
 		m_direction = m_childTransform->GetPosition();
 		m_direction.normalize();
+
+		auto lookAt = m_childObject->GetComponent<LookAtCameraManager>(false);
+		if (lookAt) {
+			m_defaultCenterOffset = lookAt->GetParametor().centerOffset;
+		}
 	}
 
 	void SpringArmComponent::OnCreate() {
@@ -154,7 +159,9 @@ namespace basecross
 		
 		//m_childTransform->SetPosition(transform->GetPosition() + CalculateDirect() * maxHitData.length);
 		//m_childTransform->SetPosition(CalculatePosition(maxHitData.length));
-		m_childTransform->SetPosition(transform->GetPosition() + CalculateDirect() * CalculateArmRange(maxHitData.length));
+		auto armRange = CalculateArmRange(maxHitData.length);
+		m_childTransform->SetPosition(transform->GetPosition() + CalculateDirect() * armRange);
+		CheckLookAt(armRange);
 	}
 
 	Vec3 SpringArmComponent::CalculateDirect() {
@@ -263,6 +270,69 @@ namespace basecross
 		if (m_param.radY <= m_param.minY)  //â∫å¿Çí¥Ç¶ÇΩÇÁ
 		{
 			m_param.radY = m_param.minY;
+		}
+	}
+
+	void SpringArmComponent::CheckLookAt(const float armRange) {
+		if (!m_childObject) {
+			return;
+		}
+
+		constexpr float MaxSub = 0.95f;
+		auto subRange = m_armRange - armRange;
+		auto rate = subRange / m_armRange;	//íZÇ≠Ç»ÇÈÇŸÇ«çÇÇ≠Ç»ÇÈÅB
+
+		auto lookAt = m_childObject->GetComponent<LookAtCameraManager>(false);
+		if (!lookAt) {
+			return;
+		}
+
+		if (m_defaultCenterOffset == Vec3(0)) {
+			m_defaultCenterOffset = lookAt->GetParametor().centerOffset;
+		}
+
+		if (m_armRange == armRange) {
+			return;
+		}
+
+		auto sub = MaxSub * rate;
+		auto param = lookAt->GetParametor();
+		param.centerOffset.y = m_defaultCenterOffset.y - sub;
+		lookAt->SetParametor(param);
+
+		auto player = m_player.lock();
+		if (!player) {
+			return;
+		}
+
+		auto teleport = player->GetComponent<Teleport>(false);
+		auto draw = player->GetComponent<PlayerObject::DrawComp>(false);
+		if (draw && teleport) {
+			auto diffuse = draw->GetDiffuse();
+			float diffuseRate = (armRange / m_armRange);
+
+			//äÆëSÇ…è¡Ç∑
+			constexpr float VanishRate = 0.2f;
+			if (diffuseRate < VanishRate) {
+				if (!teleport->IsTeleporting()) {
+					draw->SetDrawActive(false);
+				}
+			}
+			else {
+				if (!teleport->IsTeleporting()) {
+					draw->SetDrawActive(true);
+				}
+			}
+
+			//îñÇ≠Ç∑ÇÈ
+			if (diffuseRate < 0.75f) {
+				diffuse.w = 1.0f * diffuseRate;
+				draw->SetDiffuse(diffuse);
+			}
+			else {
+				diffuse.w = 1.0f;
+				draw->SetDiffuse(diffuse);
+			}
 		}
 	}
 }

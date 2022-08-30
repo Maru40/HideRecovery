@@ -16,11 +16,27 @@
 #include "Watanabe/DebugClass/Debug.h"
 #include "Itabashi/OnlineManager.h"
 
+#include "StageMapCSV.h"
+
 namespace basecross {
 
 	ChargeBullet::ChargeBullet(const std::shared_ptr<GameObject>& objPtr)
 		:BulletBase(objPtr)
 	{}
+
+	void ChargeBullet::OnCreate() {
+		constexpr int BulletSpeedIndex = 1;
+		constexpr int MaxRangeIndex = 3;
+		
+		auto bulletSpeedStr = StageMapCSV::GetWstringData(L"ShotParametor", L"CSVDatas\\", L"ShotDatas.csv", BulletSpeedIndex);
+		auto maxRangeStr = StageMapCSV::GetWstringData(L"ShotParametor", L"CSVDatas\\", L"ShotDatas.csv", MaxRangeIndex);
+
+		auto bulletSpeed = static_cast<float>(_wtof(bulletSpeedStr.c_str()));
+		auto maxRange = static_cast<float>(_wtof(maxRangeStr.c_str()));
+
+		SetMoveSpeed(bulletSpeed);
+		SetMaxRange(maxRange);
+	}
 
 	void ChargeBullet::OnUpdate() {
 		BulletBase::OnUpdate();

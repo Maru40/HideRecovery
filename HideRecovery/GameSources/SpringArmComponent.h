@@ -64,6 +64,7 @@ namespace basecross
 		std::weak_ptr<GameObject> m_player;
 
 		float m_armRange = 10.0f;
+		Vec3 m_defaultCenterOffset = Vec3(0.0f);
 
 		std::vector<std::wstring> m_hitTags;
 
@@ -101,6 +102,9 @@ namespace basecross
 			}
 		}
 
+		void SetSpeedXZ(const float speed) { m_param.speedXZ = speed; }
+		float GetSpeedXZ() const { return m_param.speedXZ; }
+
 		float GetRadXZ() const noexcept { return m_param.radXZ; }
 
 		void SetPlayer(const std::shared_ptr<GameObject>& player) { m_player = player; }
@@ -113,5 +117,7 @@ namespace basecross
 		void InputYVec();
 		void InputRXVec();
 		void CheckRimitY();
+
+		void CheckLookAt(const float armRange);
 	};
 }

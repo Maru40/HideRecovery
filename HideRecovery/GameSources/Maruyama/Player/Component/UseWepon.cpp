@@ -30,6 +30,8 @@
 #include "Maruyama/Player/Component/Teleport.h"
 #include "SpringArmComponent.h"
 
+#include "StageMapCSV.h"
+
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
@@ -41,6 +43,9 @@ namespace basecross {
 	{}
 
 	UseWepon_Parametor::UseWepon_Parametor(const bool isAim) :
+		defaultCameraSpeed(0.0f),
+		aimCameraSpeed(0.0f),
+		assitPower(3.0f),
 		isAim(new maru::ReactiveBool(isAim))
 	{}
 
@@ -63,7 +68,26 @@ namespace basecross {
 		m_readyArmsSoundClip(L"ReadyArmsSE", false, 0.75f)
 	{}
 
+	void UseWepon::OnCreate() {
+		constexpr int AimCameraSpeedIndex = 5;
+		auto aimSpeedStr = StageMapCSV::GetWstringData(L"ShotParametor", L"CSVDatas\\", L"ShotDatas.csv", AimCameraSpeedIndex);
+		auto aimSpeed = static_cast<float>(_wtof(aimSpeedStr.c_str()));
+		m_param.aimCameraSpeed = aimSpeed;
+
+
+		constexpr int AssitPowerIndex = 8;
+		auto assistPowerStr = StageMapCSV::GetWstringData(L"ShotParametor", L"CSVDatas\\", L"ShotDatas.csv", AssitPowerIndex);
+		auto assistPower = static_cast<float>(_wtof(assistPowerStr.c_str()));
+		m_param.assitPower = assistPower;
+	}
+
 	void UseWepon::OnLateStart() {
+		auto player = dynamic_pointer_cast<PlayerObject>(GetGameObject());
+		if (player) {
+			auto springArm = player->GetArm()->GetComponent<SpringArmComponent>(false);
+			m_param.defaultCameraSpeed = springArm->GetSpeedXZ();
+		}
+
 		m_rotationController = GetGameObject()->GetComponent<RotationController>(false);
 		m_velocityManager = GetGameObject()->GetComponent<VelocityManager>(false);
 		m_animator = GetGameObject()->GetComponent<PlayerAnimator>(false);
@@ -178,9 +202,8 @@ namespace basecross {
 		}
 
 		auto rad = springArm->GetRadXZ();
-		constexpr float Speed = 3.0f;
 
-		rad += -newCross.y * delta * Speed;
+		rad += -newCross.y * delta * m_param.assitPower;
 
 		springArm->SetRadXZ(rad);
 	}
@@ -198,6 +221,8 @@ namespace basecross {
 				animator->ChangePlayerAnimation(PlayerAnimationState::State::GunSet2);
 				m_soundEmitter.lock()->PlaySoundClip(m_readyArmsSoundClip);
 			}
+
+			ChangeCameraSpeed(m_param.aimCameraSpeed);
 		};
 
 		auto falseFunction = [&]() {	//Aim状態でなくなった時
@@ -206,9 +231,11 @@ namespace basecross {
 				return;
 			}
 
-			if (auto animator = GetGameObject()->GetComponent<PlayerAnimator>(false)) {
+			if (auto animator = GetGameObject()->GetComponent<PlayerAnimator>(false)) {	//アニメーションの遷移
 				animator->ChangePlayerAnimation(PlayerAnimationState::State::GunEnd2);
 			}
+
+			ChangeCameraSpeed(m_param.defaultCameraSpeed);
 		};
 
 		isAim->AddFunction(true, trueFunction);
@@ -235,9 +262,17 @@ namespace basecross {
 		if (!eye) {
 			eye = cameraObject->AddComponent<EyeSearchRange>();
 			constexpr float Height = 20.0f;
-			constexpr float Degree = 10.0f;
 			eye->SetEyeHeight(Height);
-			eye->SetEyeDegree(Degree);
+
+			constexpr int AssistRangeIndex = 6;
+			auto assistRangeStr = StageMapCSV::GetWstringData(L"ShotParametor", L"CSVDatas\\", L"ShotDatas.csv", AssistRangeIndex);
+			auto assistRange = static_cast<float>(_wtof(assistRangeStr.c_str()));
+			eye->SetEyeLength(assistRange);
+
+			constexpr int AssistDegreeIndex = 7;
+			auto assistDegreeStr = StageMapCSV::GetWstringData(L"ShotParametor", L"CSVDatas\\", L"ShotDatas.csv", AssistDegreeIndex);
+			auto assistDegree = static_cast<float>(_wtof(assistDegreeStr.c_str()));
+			eye->SetEyeDegree(assistDegree);
 		}
 
 		//距離管理データ
@@ -297,6 +332,20 @@ namespace basecross {
 				m_players.push_back(player);
 			}
 		}
+	}
+
+	void UseWepon::ChangeCameraSpeed(const float speed) {
+		auto player = dynamic_pointer_cast<PlayerObject>(GetGameObject());
+		if (!player) {
+			return;
+		}
+
+		auto springArm = player->GetArm()->GetComponent<SpringArmComponent>(false);
+		if (!springArm) {
+			return;
+		}
+
+		springArm->SetSpeedXZ(speed);
 	}
 
 	//--------------------------------------------------------------------------------------
