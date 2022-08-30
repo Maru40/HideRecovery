@@ -10,12 +10,14 @@ namespace basecross {
 
 	void MatchingUIController::OnCreate() {
 		m_builder->GetUIObject(L"GameStart")->SetActive(false);
+		m_builder->GetUIObject(L"AButton")->SetActive(false);
 		m_builder->GetUIObject(L"WaitHost")->SetActive(false);
 	}
 
 	void MatchingUIController::OnCreateRoom() {
 		m_builder->GetUIObject(L"Matching")->SetActive(false);
 		m_builder->GetUIObject(L"GameStart")->SetActive(true);
+		m_builder->GetUIObject(L"AButton")->SetActive(true);
 		m_builder->GetUIObject<SplashMessageUI>(L"SplashMessage")
 			->SetMessage(SplashMessageUI::MessageType::CreateRoom);
 	}

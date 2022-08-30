@@ -125,6 +125,8 @@ namespace basecross {
 		 */
 		Col4 ConvertColorZeroToOne(const Col4& color);
 
+		Vec2 ConvertVec2to01(const Vec2& vec);
+
 		/**
 		 * @brief ベクトルの長さを変更する
 		 *

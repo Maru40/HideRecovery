@@ -253,6 +253,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)WaitTimer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WallEvasion.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WallObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\BoardPoly\GoalBP.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\BoardPoly\HPGaugeBP.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\BoardPoly\RelocationCountBP.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\Animator.h" />
@@ -295,6 +296,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Stage\ResultStage.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\MatchingUILayoutStage.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\WatanabeStage.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\ButtonUI.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\CountDownUI.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\GameFinishUI.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\GameStartUI.h" />
@@ -541,6 +543,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)WaitTimer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WallEvasion.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WallObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\BoardPoly\GoalBP.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\BoardPoly\HPGaugeBP.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\BoardPoly\RelocationCountBP.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\Animator.cpp" />
@@ -577,6 +580,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Stage\ResultStage.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\MatchingUILayoutStage.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\WatanabeStage.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\ButtonUI.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\CountDownUI.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\GameFinishUI.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\GameStartUI.cpp" />

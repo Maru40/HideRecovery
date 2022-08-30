@@ -41,6 +41,8 @@ namespace basecross
 		ResourceLoadData(L"WinOrLose_TX",L"WinOrLose_TX.png"),
 		ResourceLoadData(L"ScoreLabel_TX",L"ScoreLabel_TX.png"),
 		ResourceLoadData(L"Frame_TX",L"Frame_TX.png"),
+		ResourceLoadData(L"Shape_TX",L"Shape_TX.png"),
+		ResourceLoadData(L"Objective_TX",L"Objective_TX.png"),
 
 		ResourceLoadData(L"FiledMap_TX", L"FiledMap_TX.png"),
 

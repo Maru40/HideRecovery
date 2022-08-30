@@ -85,7 +85,6 @@ namespace basecross {
 				return it->second;
 			}
 			return nullptr;
-
 		}
 		void AddMakedBehavior(type_index TypeIndex, const shared_ptr<Behavior>& Ptr) {
 			//mapに追加もしくは更新
@@ -156,8 +155,7 @@ namespace basecross {
 		@return	なし
 		*/
 		//--------------------------------------------------------------------------------------
-		void SetDrawActive(bool b,bool isParent = true) { 
-
+		void SetDrawActive(bool b, bool isParent = true) {
 			if (isParent)
 			{
 				m_DrawActive = b;
@@ -213,7 +211,7 @@ namespace basecross {
 			m_AlphaActive = b;
 		}
 
-		void SetActive(bool b)
+		virtual void SetActive(bool b)
 		{
 			SetUpdateActive(b);
 			SetDrawActive(b);
@@ -333,7 +331,7 @@ namespace basecross {
 		@return	タグのセット
 		*/
 		//--------------------------------------------------------------------------------------
-		const set<wstring>& GetTagSet() const{
+		const set<wstring>& GetTagSet() const {
 			return m_TagSet;
 		}
 		//--------------------------------------------------------------------------------------
@@ -342,7 +340,7 @@ namespace basecross {
 		@return	タグのセット
 		*/
 		//--------------------------------------------------------------------------------------
-		set<wstring>& GetTagSet(){
+		set<wstring>& GetTagSet() {
 			return m_TagSet;
 		}
 		//--------------------------------------------------------------------------------------
@@ -581,7 +579,7 @@ namespace basecross {
 		//--------------------------------------------------------------------------------------
 		template<typename T, typename... Ts,
 			std::enable_if_t<std::is_constructible_v<T, std::shared_ptr<GameObject>&, Ts...>, std::nullptr_t> = nullptr>
-		shared_ptr<T> AddComponent(Ts&&... params) {
+			shared_ptr<T> AddComponent(Ts&&... params) {
 			type_index t_index = type_index(typeid(T));
 			auto Ptr = SearchDynamicComponent<T>();
 			//指定の型のコンポーネントが見つかった
@@ -658,7 +656,7 @@ namespace basecross {
 				it++;
 			}
 		}
-		
+
 		//登録されたコンポーネントをまとめて削除
 		void RemoveComponents() {
 			for (auto& function : m_removeComponentFunctions) {
@@ -739,7 +737,7 @@ namespace basecross {
 		*/
 		//--------------------------------------------------------------------------------------
 		void ComponentUpdate();
-		
+
 		void ComponentUpdate2();
 		//--------------------------------------------------------------------------------------
 		/*!
@@ -867,7 +865,7 @@ namespace basecross {
 		/// <param name="object">関数を呼び出すオブジェクト</param>
 		/// <param name="action">呼び出す関数</param>
 		template<class T>
-		void AddAction(const std::shared_ptr<T>& object, void(T::* action)(),const float invokeTime)
+		void AddAction(const std::shared_ptr<T>& object, void(T::* action)(), const float invokeTime)
 		{
 			itbs::Utility::ActionData actionData;
 			actionData.action.AddFunc(object, action);
@@ -965,7 +963,7 @@ namespace basecross {
 	struct ParticleSprite {
 		bool m_Active;				//アクティブかどうか
 		bsm::Col4 m_Color;				//色（透けさせる場合はaを0にする）
-		bsm::Vec2 m_LocalScale;		//ローカルスケーリング（Zは1.0固定）		
+		bsm::Vec2 m_LocalScale;		//ローカルスケーリング（Zは1.0固定）
 		bsm::Quat m_LocalQt;		//ローカル回転。手動のときのみ使用
 		bsm::Vec3 m_LocalPos;			//ローカル位置
 		bsm::Vec2 m_UVLeftTop;		//UVの左上
@@ -1162,7 +1160,7 @@ namespace basecross {
 		@return	なし
 		*/
 		//--------------------------------------------------------------------------------------
-		virtual void OnCreate() override{}
+		virtual void OnCreate() override {}
 		//--------------------------------------------------------------------------------------
 		/*!
 		@brief 描画
@@ -1175,7 +1173,6 @@ namespace basecross {
 		struct Impl;
 		unique_ptr<Impl> pImpl;
 	};
-
 
 	//--------------------------------------------------------------------------------------
 	///	マルチエフェクト （マルチパーティクル）
@@ -1272,7 +1269,7 @@ namespace basecross {
 		@param[in]	AddType	加算描画するかどうか
 		*/
 		//--------------------------------------------------------------------------------------
-		explicit ParticleManager(const shared_ptr<Stage>& StagePtr,bool AddType);
+		explicit ParticleManager(const shared_ptr<Stage>& StagePtr, bool AddType);
 		//--------------------------------------------------------------------------------------
 		/*!
 		@brief	デストラクタ
@@ -1360,13 +1357,11 @@ namespace basecross {
 		unique_ptr<Impl> pImpl;
 	};
 
-
-
 	struct CellIndex;
 	//--------------------------------------------------------------------------------------
 	//	ステージのセルマップで使用するセル構造体
 	//--------------------------------------------------------------------------------------
-	struct CellPiece{
+	struct CellPiece {
 		CellIndex m_Index;
 		CellIndex m_ParentIndex;
 		int m_Cost = 0;
@@ -1395,8 +1390,8 @@ namespace basecross {
 		@param[in]	DefaultCost	デフォルトのコスト
 		*/
 		//--------------------------------------------------------------------------------------
-		StageCellMap(const shared_ptr<Stage>& StagePtr,const bsm::Vec3& MiniPos,
-			float PieceSize, UINT PieceCountX, UINT PieceCountZ,int DefaultCost = 1);
+		StageCellMap(const shared_ptr<Stage>& StagePtr, const bsm::Vec3& MiniPos,
+			float PieceSize, UINT PieceCountX, UINT PieceCountZ, int DefaultCost = 1);
 		//--------------------------------------------------------------------------------------
 		/*!
 		@brief	デストラクタ
@@ -1426,7 +1421,7 @@ namespace basecross {
 		@return	セルが検索出来たらtrue
 		*/
 		//--------------------------------------------------------------------------------------
-		bool FindCell(const bsm::Vec3& Pos,CellIndex& ret);
+		bool FindCell(const bsm::Vec3& Pos, CellIndex& ret);
 		//--------------------------------------------------------------------------------------
 		/*!
 		@brief	位置情報から一番近いセルを検索する
@@ -1444,7 +1439,7 @@ namespace basecross {
 		@return	AABBが検索出来たらtrue
 		*/
 		//--------------------------------------------------------------------------------------
-		bool FindAABB(const CellIndex& Index,AABB& ret);
+		bool FindAABB(const CellIndex& Index, AABB& ret);
 		//--------------------------------------------------------------------------------------
 		/*!
 		@brief	セルインデックスから一番近いAABBを検索する
@@ -1680,7 +1675,7 @@ namespace basecross {
 		//--------------------------------------------------------------------------------------
 		template<typename T, typename... Ts,
 			std::enable_if_t<std::is_constructible_v<T, std::shared_ptr<Stage>&, Ts...>, std::nullptr_t> = nullptr>
-		shared_ptr<T> AddGameObject(Ts&&... params) {
+			shared_ptr<T> AddGameObject(Ts&&... params) {
 			try {
 				auto Ptr = ObjectFactory::Create<T>(GetThis<Stage>(), params...);
 				PushBackGameObject(Ptr);
@@ -1693,8 +1688,8 @@ namespace basecross {
 			}
 		}
 
-		template<class T,class... Ts,
-			std::enable_if_t<std::is_constructible_v<T,std::shared_ptr<Stage>&,Ts...>,std::nullptr_t> = nullptr>
+		template<class T, class... Ts,
+			std::enable_if_t<std::is_constructible_v<T, std::shared_ptr<Stage>&, Ts...>, std::nullptr_t> = nullptr>
 			shared_ptr<T> AddUIObject(Ts&&... params)
 		{
 			try {
@@ -1719,9 +1714,9 @@ namespace basecross {
 		}
 
 		template<class T,
-			std::enable_if_t<std::is_base_of_v<UIObject,T> && std::is_constructible_v<T,std::shared_ptr<Stage>&>,
+			std::enable_if_t<std::is_base_of_v<UIObject, T>&& std::is_constructible_v<T, std::shared_ptr<Stage>&>,
 			std::nullptr_t> = nullptr>
-		std::shared_ptr<T>  Instantiate()
+			std::shared_ptr<T>  Instantiate()
 		{
 			try {
 				auto Ptr = ObjectFactory::InstantiateCreate<T>(GetThis<Stage>(), Vec3(), Quat::Identity(), m_canvas);
@@ -1735,10 +1730,10 @@ namespace basecross {
 		}
 
 		template<class T,
-			std::enable_if_t<std::is_base_of_v<GameObject,T> && !std::is_base_of_v<UIObject, T>
-			&& std::is_constructible_v<T,std::shared_ptr<Stage>&>,
+			std::enable_if_t<std::is_base_of_v<GameObject, T> && !std::is_base_of_v<UIObject, T>
+			&& std::is_constructible_v<T, std::shared_ptr<Stage>&>,
 			std::nullptr_t> = nullptr>
-		std::shared_ptr<T>  Instantiate()
+			std::shared_ptr<T>  Instantiate()
 		{
 			try {
 				auto Ptr = ObjectFactory::Create<T>(GetThis<Stage>());
@@ -1752,9 +1747,9 @@ namespace basecross {
 		}
 
 		template<class T,
-			std::enable_if_t<std::is_base_of_v<UIObject,T> && std::is_constructible_v<T,std::shared_ptr<Stage>&>,
+			std::enable_if_t<std::is_base_of_v<UIObject, T>&& std::is_constructible_v<T, std::shared_ptr<Stage>&>,
 			std::nullptr_t> = nullptr>
-		std::shared_ptr<T>  Instantiate(const bsm::Vec3& position,const bsm::Quat& rotation,const std::shared_ptr<UIObject>& parent = nullptr)
+			std::shared_ptr<T>  Instantiate(const bsm::Vec3& position, const bsm::Quat& rotation, const std::shared_ptr<UIObject>& parent = nullptr)
 		{
 			try {
 				auto Ptr = ObjectFactory::InstantiateCreate<T>(GetThis<Stage>(), position, rotation, parent);
@@ -1768,10 +1763,10 @@ namespace basecross {
 		}
 
 		template<class T,
-			std::enable_if_t<std::is_base_of_v<GameObject,T> && !std::is_base_of_v<UIObject, T>
-			&& std::is_constructible_v<T,std::shared_ptr<Stage>&>,
+			std::enable_if_t<std::is_base_of_v<GameObject, T> && !std::is_base_of_v<UIObject, T>
+			&& std::is_constructible_v<T, std::shared_ptr<Stage>&>,
 			std::nullptr_t> = nullptr>
-		std::shared_ptr<T>  Instantiate(const bsm::Vec3& position,const bsm::Quat& rotation,const std::shared_ptr<GameObject>& parent = nullptr)
+			std::shared_ptr<T>  Instantiate(const bsm::Vec3& position, const bsm::Quat& rotation, const std::shared_ptr<GameObject>& parent = nullptr)
 		{
 			try {
 				auto Ptr = ObjectFactory::InstantiateCreate<T>(GetThis<Stage>(), position, rotation, parent);
@@ -1956,7 +1951,7 @@ namespace basecross {
 		@return	なし
 		*/
 		//--------------------------------------------------------------------------------------
-		void GetUsedTagObjectVec(const wstring& Tag,vector<shared_ptr<GameObject>>& ObjVec) const {
+		void GetUsedTagObjectVec(const wstring& Tag, vector<shared_ptr<GameObject>>& ObjVec) const {
 			for (auto& v : GetGameObjectVec()) {
 				if (v->FindTag(Tag)) {
 					ObjVec.push_back(v);
@@ -1972,7 +1967,7 @@ namespace basecross {
 		*/
 		//--------------------------------------------------------------------------------------
 		template<typename T>
-		void GetUsedDynamicCompoentVec(vector<shared_ptr<T>>& CompVec) const{
+		void GetUsedDynamicCompoentVec(vector<shared_ptr<T>>& CompVec) const {
 			for (auto& v : GetGameObjectVec()) {
 				auto ptr = v->GetDynamicComponent<T>(false);
 				if (ptr) {
@@ -2284,7 +2279,6 @@ namespace basecross {
 		unique_ptr<Impl> pImpl;
 	};
 
-
 	//--------------------------------------------------------------------------------------
 	///	シーン親クラス
 	//--------------------------------------------------------------------------------------
@@ -2353,8 +2347,8 @@ namespace basecross {
 		*/
 		//--------------------------------------------------------------------------------------
 		template<typename T, typename... Ts,
-		    std::enable_if_t<std::is_constructible_v<T,Ts...>,std::nullptr_t> = nullptr>
-		shared_ptr<T> ResetActiveStage(Ts&&... params) {
+			std::enable_if_t<std::is_constructible_v<T, Ts...>, std::nullptr_t> = nullptr>
+			shared_ptr<T> ResetActiveStage(Ts&&... params) {
 			auto ActStagePtr = GetActiveStage(false);
 			if (ActStagePtr) {
 				//破棄を伝える
@@ -2557,7 +2551,6 @@ namespace basecross {
 		unique_ptr<Impl> pImpl;
 	};
 
-
 	//--------------------------------------------------------------------------------------
 	//	ゲームオブジェクトクリエーターXML(親)
 	//--------------------------------------------------------------------------------------
@@ -2672,12 +2665,5 @@ namespace basecross {
 		struct Impl;
 		unique_ptr<Impl> pImpl;
 	};
-
-
-
-
-
-
-
 }
 //end basecross

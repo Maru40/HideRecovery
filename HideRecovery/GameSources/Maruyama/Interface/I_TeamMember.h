@@ -24,9 +24,9 @@ namespace basecross {
 			Red
 		};
 
-		// 各チームの色
-		const Col4 REDTEAM_COLOR = Utility::ConvertColorZeroToOne(Col4(243.0f, 17.0f, 67.0f, 255.0f));
-		const Col4 BLUETEAM_COLOR = Utility::ConvertColorZeroToOne(Col4(0.0f, 150.0f, 226.0f, 255.0f));
+		// 各チームの色（あいまいになることがあるのでbasecross::で明示する）
+		const Col4 REDTEAM_COLOR = basecross::Utility::ConvertColorZeroToOne(Col4(243.0f, 17.0f, 67.0f, 255.0f));
+		const Col4 BLUETEAM_COLOR = basecross::Utility::ConvertColorZeroToOne(Col4(0.0f, 150.0f, 226.0f, 255.0f));
 
 		/// <summary>
 		/// チームの色を取得

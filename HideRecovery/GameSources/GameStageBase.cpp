@@ -115,6 +115,7 @@ namespace basecross {
 		uiBuilder->Register<ScoreUI>(L"ScoreUI");
 		uiBuilder->Register<WinOrLoseUI>(L"WinOrLoseUI");
 		uiBuilder->Register<Numbers>(L"Numbers");
+		uiBuilder->Register<ButtonUI>(L"ButtonUI");
 		auto dir = App::GetApp()->GetDataDirWString();
 		auto path = dir + L"MapDatas/";
 		uiBuilder->Build(GetThis<Stage>(), path + fileName);

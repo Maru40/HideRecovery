@@ -39,6 +39,13 @@ namespace basecross {
 		CreateMap(L"WaitStage.csv");
 		auto uiBuilder = CreateUI(L"ResultUILayout.csv");
 
+		// ラベルの色変更
+		auto redLabel = uiBuilder->GetUIObject<SimpleSprite>(L"RedLabel");
+		redLabel->GetDrawComponent()->SetDiffuse(team::REDTEAM_COLOR);
+		auto blueLabel = uiBuilder->GetUIObject<SimpleSprite>(L"BlueLabel");
+		blueLabel->GetDrawComponent()->SetDiffuse(team::BLUETEAM_COLOR);
+
+		// 紙吹雪エフェクト
 		auto effectObject = AddGameObject<GameObject>();
 		effectObject->GetComponent<Transform>()->SetPosition(Vec3(0, 5, 0));
 		auto efkComp = effectObject->AddComponent<EfkComponent>();

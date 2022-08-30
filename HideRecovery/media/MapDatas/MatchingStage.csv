@@ -1,0 +1,19 @@
+name, PosX, PosY, PosZ, ScaleX, ScaleY, ScaleZ, RotX, RotY, RotZ
+Block,-17,2,-19.75001,7.500002,5,10,0,0,0,Wall,True
+Block,0,9.5,-26,100,20,2,0,0,0,Wall,True
+Block,0,0.5,-14.50003,10,2,1,0,0,0,Wall,False
+Block,33.3,0.7,-3.000003,4,2,25,0,0,0,Wall,False
+Block,17,2,-19.75001,7.500002,5,10,0,0,0,Wall,True
+Block,-28.8,2,16.8,5,5,15,0,0,0,Wall,True
+Block,0,-0.5,0,100,0.1,50,0,0,0,Floor,True
+Block,51,9.5,0,2,20,50,0,0,0,Wall,True
+Block,-51,9.5,0,2,20,50,0,0,0,Wall,True
+Block,28.8,2,16.8,5,5,15,0,0,0,Wall,True
+Block,-33.3,0.7,-3.000003,4,2,25,0,0,0,Wall,False
+Goal,0,0,-5.44,1,1,1,0,0,0,Blue
+PlayerSpawnPoint,3.78,0.1,-2.27,1,1,1,0,335,0,Blue,4
+PlayerSpawnPoint,-3.78,0.1,-2.27,1,1,1,0,25,0,Red,5
+PlayerSpawnPoint,-2.28,0.1,-2.27,1,1,1,0,15,0,Red,3
+PlayerSpawnPoint,-0.78,0.1,-2.27,1,1,1,0,7.999999,0,Red,1
+PlayerSpawnPoint,2.28,0.1,-2.27,1,1,1,0,345,0,Blue,2
+PlayerSpawnPoint,0.78,0.1,-2.27,1,1,1,0,352,0,Blue,0

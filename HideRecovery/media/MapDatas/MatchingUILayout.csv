@@ -2,5 +2,8 @@ className,UIName,PosX,PosY,ScaleX,ScaleY,Rot,,
 SimpleSprite,Matching,0,0,1.2,1.2,0,SpriteData,Matching
 SimpleSprite,ToTitle,750,-480,0.7,0.7,0,SpriteData,ToTitle
 SimpleSprite,WaitHost,0,-350,1,1,0,SpriteData,WaitHost
-SimpleSprite,GameStart,0,-350,1,1,0,SpriteData,GameStart
+SimpleSprite,GameStart,50,-350,1,1,0,SpriteData,GameStart
 SplashMessageUI,SplashMessage,0,200,0.8,0.8,0,3,
+ButtonUI,AButton,-350,-350,1,1,0,A,
+ButtonUI,BButton,540,-482,0.5,0.5,0,B,
+SimpleSprite,Label,0,450,1.3,1.3,0,SpriteData,PreparingTeam

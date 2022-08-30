@@ -11,7 +11,7 @@ namespace basecross {
 
 	void HPGaugeBP::OnCreate() {
 		Vec2 origin(0.0f);
-		auto size = Vec2(1, 0.2f);
+		auto size = Vec2(1, 0.1f);
 		// テクスチャ座標でUVを定義
 		vector<Vec2> uvs, uv = {
 			origin,
