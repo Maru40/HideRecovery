@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0"
-  xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Headers">
       <UniqueIdentifier>{4b0a624a-610d-4bc6-b311-2b02a781cdf9}</UniqueIdentifier>
@@ -1085,6 +1084,9 @@
     <Filter Include="Watanabe\Component\Zooming">
       <UniqueIdentifier>{90aec67a-0274-41b8-bc7c-d523b198c97e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\Camera">
+      <UniqueIdentifier>{4c31a5a9-4406-434d-a459-8a6766e51987}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2023,6 +2025,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\Zooming.h">
       <Filter>Watanabe\Component\Zooming</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Camera\TitleCamera.h">
+      <Filter>Watanabe\Camera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2861,6 +2866,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\Zooming.cpp">
       <Filter>Watanabe\Component\Zooming</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Camera\TitleCamera.cpp">
+      <Filter>Watanabe\Camera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

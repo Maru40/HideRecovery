@@ -6,14 +6,15 @@
 #include "Watanabe/DebugClass/Debug.h"
 #include "Watanabe/UI/UIObjects.h"
 #include "Watanabe/Component/Zooming.h"
+#include "Watanabe/Camera/TitleCamera.h"
 
 namespace basecross {
 	void TitleStage::CreateViewLight() {
 		const Vec3 eye(20.0f, 20.0f, -20.0f);
-		const Vec3 at(5.0f);
+		const Vec3 at(0, 5.0f, 0);
 		auto PtrView = CreateView<SingleView>();
 		//ビューのカメラの設定
-		auto PtrCamera = ObjectFactory::Create<Camera>();
+		auto PtrCamera = ObjectFactory::Create<TitleCamera>(eye, at);
 		PtrView->SetCamera(PtrCamera);
 		PtrCamera->SetEye(eye);
 		PtrCamera->SetAt(at);
