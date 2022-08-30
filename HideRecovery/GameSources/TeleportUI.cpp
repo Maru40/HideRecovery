@@ -13,6 +13,7 @@
 #include "SpriteObject.h"
 
 #include "Watanabe/UI/ButtonUI.h"
+#include "Watanabe/Component/Zooming.h"
 
 namespace basecross {
 
@@ -60,6 +61,7 @@ namespace basecross {
 		bottun->SetParent(GetGameObject());
 
 		bottun->GetComponent<RectTransform>()->SetScale(Vec2(0.7f) * 0.75f);
+		bottun->AddComponent<Zooming>();
 
 		m_bottun = bottun;
 	}
