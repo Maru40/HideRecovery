@@ -27,6 +27,8 @@
 
 #include "Maruyama/Player/Component/Teleport.h"
 
+#include "StageMapCSV.h"
+
 namespace basecross {
 	ChargeGun::ChargeGun(const std::shared_ptr<GameObject>& objPtr) :
 		WeponBase(objPtr),
@@ -35,7 +37,17 @@ namespace basecross {
 	{}
 
 	void ChargeGun::OnCreate() {
-		SetBulletInstanceOffset(Vec3(0.0f, 0.5f, 0.0f));
+		SetBulletInstanceOffset(Vec3(-0.0f, 0.5f, 1.5f));
+
+		constexpr int RapidIndex = 2;
+		auto rapidSpeedStr = StageMapCSV::GetWstringData(L"ShotParametor", L"CSVDatas\\", L"ShotDatas.csv", RapidIndex);
+		auto rapidSpeed = static_cast<float>(_wtof(rapidSpeedStr.c_str()));
+		SetShotIntervalTime(rapidSpeed);
+
+		constexpr int WeightIndex = 4;
+		auto weightStr = StageMapCSV::GetWstringData(L"ShotParametor", L"CSVDatas\\", L"ShotDatas.csv", WeightIndex);
+		auto weight = static_cast<float>(_wtof(weightStr.c_str()));
+		SetWeight(weight);
 	}
 
 	void ChargeGun::OnLateStart() {
