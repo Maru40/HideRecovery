@@ -56,6 +56,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageTransitioner.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\ObjectHider.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineGameTimer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\PCTStaticModelDraw.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MapCursor.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Bullet\Object\BulletObjectBase.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Camera\Component\CameraForwardController.h" />
@@ -369,6 +370,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineMatching.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineMatchStage.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineTestRoom.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\PCTStaticModelDraw.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\PlayerOnlineController.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineTestStage.cpp" />
@@ -615,6 +617,11 @@
     <FxCompile Include="$(MSBuildThisFileDirectory)..\..\Libs\BaseLib\DxShaders\SlimeVS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+    </FxCompile>
+    <FxCompile Include="$(MSBuildThisFileDirectory)Itabashi\PSPCTStaticModel.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
     </FxCompile>
     <FxCompile Include="$(MSBuildThisFileDirectory)ToonPS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>

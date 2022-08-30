@@ -1085,6 +1085,12 @@
     <Filter Include="Watanabe\Component\Zooming">
       <UniqueIdentifier>{90aec67a-0274-41b8-bc7c-d523b198c97e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Itabashi\Component\Graphic">
+      <UniqueIdentifier>{fbdc1a9a-fc43-497b-b496-cd5d5202ff75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Itabashi\Shader">
+      <UniqueIdentifier>{e3458c1c-0030-483b-ac57-f53713464413}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2023,6 +2029,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\Zooming.h">
       <Filter>Watanabe\Component\Zooming</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\PCTStaticModelDraw.h">
+      <Filter>Itabashi\Component\Graphic</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2862,6 +2871,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\Zooming.cpp">
       <Filter>Watanabe\Component\Zooming</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\PCTStaticModelDraw.cpp">
+      <Filter>Itabashi\Component\Graphic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)HitStopManager.cpp">
@@ -2904,6 +2916,9 @@
     </FxCompile>
     <FxCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\HLSL\PSPCTGaugeDraw.hlsl">
       <Filter>Watanabe\Shader\PCTGaugeDraw\HLSL</Filter>
+    </FxCompile>
+    <FxCompile Include="$(MSBuildThisFileDirectory)Itabashi\PSPCTStaticModel.hlsl">
+      <Filter>Itabashi\Shader</Filter>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
