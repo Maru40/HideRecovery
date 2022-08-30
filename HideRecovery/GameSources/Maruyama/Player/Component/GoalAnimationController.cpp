@@ -60,7 +60,7 @@ namespace basecross {
 		Component(objPtr),
 		m_taskList(new TaskList<TaskEnum>()),
 		m_goalSoundClip(L"GoalBallSE", false, 0.75f),
-		m_goalStartSE(L"GoalStartSE", false, 0.75f)
+		m_goalStartSE(L"GoalStartSE", false, 8.5f)
 	{}
 
 	void GoalAnimationController::OnLateStart() {

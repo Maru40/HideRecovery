@@ -90,7 +90,8 @@ namespace basecross {
 		OnlineComponent(objPtr),
 		m_param(parametor),
 		m_timer(new GameTimer(0)),
-		m_goalEffectSoundClip(L"GoalEffectSE", false, 0.5f)
+		m_goalEffectSoundClip(L"GoalEffectSE", false, 0.5f),
+		m_relocationBallSoundClip(L"RelocationBallSE", false, 8.0f)
 	{}
 
 	void Goal::OnCreate() {
@@ -158,12 +159,14 @@ namespace basecross {
 		std::weak_ptr<Operator::ObjectHider> weakObjectHider = item->GetGameObject()->GetComponent<Operator::ObjectHider>();
 
 		//アイテム再配置イベント
-		auto itemHiderEvent = [weakObjectHider, hidePlace, splash]() {
+		auto itemHiderEvent = [&, weakObjectHider, hidePlace, splash]() {
 			auto hider = weakObjectHider.lock();
 			hider->Appear(hidePlace->GetHidePosition());
 
 			hidePlace->SetHideItem(hider->GetGameObject()->GetComponent<HideItem>(false));
 			splash->SetMessage(SplashMessageUI::MessageType::Relocation);
+
+			m_soundEmitter.lock()->PlaySoundClip(m_relocationBallSoundClip);
 		};
 
 		//カウントダウンスタート
