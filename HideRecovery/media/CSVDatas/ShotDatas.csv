@@ -1,2 +1,2 @@
-name,BulletSpeed,RapidSpeed,MaxRange,Weight
-ShotParametor,80,0.1,50,5
+name,BulletSpeed,RapidSpeed,MaxRange,Weight,AimCameraSpeed,AssitRange,AssitDegree,AssitPower
+ShotParametor,80,0.1,50,5,1,40,15,3
