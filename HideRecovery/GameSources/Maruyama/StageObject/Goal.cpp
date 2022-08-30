@@ -39,6 +39,8 @@
 #include "Watanabe/UI/SplashMessageUI.h"
 #include "Watanabe/BoardPoly/RelocationCountBP.h"
 
+#include "Watanabe/BoardPoly/GoalBP.h"
+
 #include "PlayerInputer.h"
 
 namespace basecross {
@@ -70,6 +72,7 @@ namespace basecross {
 		timeDrawPosition(Vec3(0.0f, 0.0f, 0.0f)),
 		dunkPositionOffset(Vec3(0.0f, 3.0f, 0.0f)),
 		dunkBallPositionOffset(Vec3(0.0f, 1.85f, -0.5f)),
+		goalBPOffset(Vec3(0.0f, 3.0f, 0.0f)),
 		countDrawPositionOffset(Vec3(0.0f, 5.0f, 0.0f))
 	{
 		constexpr float fOffset = +1.0f;
@@ -101,6 +104,9 @@ namespace basecross {
 	}
 
 	void Goal::OnLateStart() {
+		auto goalBP = GetStage()->Instantiate<GoalBP>();
+		goalBP->GetComponent<Transform>()->SetPosition(transform->GetPosition() + m_param.goalBPOffset);
+		m_goalBP = goalBP;
 		SettingPerformable();
 		m_soundEmitter = GetGameObject()->GetComponent<SoundEmitter>();
 	}
