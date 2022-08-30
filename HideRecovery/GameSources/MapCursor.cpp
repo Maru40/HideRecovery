@@ -22,6 +22,7 @@
 
 #include "Maruyama/Player/Component/Teleport.h"
 #include "Maruyama/Interface/I_TeamMember.h"
+#include "TeleportCursorUI.h"
 
 namespace basecross {
 
@@ -34,6 +35,7 @@ namespace basecross {
 	void MapCursor::OnCreate() {
 		SettingUnderCircle();
 		SettingCursor();
+		SettingTeleportUI();
 	}
 
 	void MapCursor::OnUpdate() {
@@ -53,7 +55,12 @@ namespace basecross {
 		//Ž©wƒGƒŠƒAŠO‚È‚ç
 		auto teamMember = m_teamMember.lock();
 		if (teamMember && !teamMember->IsInArea()) {
+			m_teleportUIObject.lock()->SetDrawActive(false);
 			SetMapCursorPositionConnectTargetPosition();
+		}
+		else {
+			auto teleportUI = m_teleportUIObject.lock();
+			!teleportUI->GetDrawActive() ? teleportUI->SetDrawActive(true) : false;
 		}
 	}
 
@@ -76,6 +83,17 @@ namespace basecross {
 
 		underCircle->SetDrawLayer(UI::Layer::MAP_CURSOR);
 		m_underCircle = underCircle;
+	}
+
+	void MapCursor::SettingTeleportUI() {
+		auto uiObject = GetStage()->AddGameObject<GameObject>();
+		uiObject->SetParent(GetGameObject());
+		auto teleport = uiObject->AddComponent<TeleportCursorUI>();
+
+		auto uiTrans = uiObject->GetComponent<Transform>();
+		uiTrans->SetPosition(Vec3(-50.0f, -30.0f, 0.0f));
+
+		m_teleportUIObject = uiObject;
 	}
 
 	void MapCursor::MoveCursor() {
@@ -142,6 +160,7 @@ namespace basecross {
 	void MapCursor::OnDrawActive() {
 		m_cursor.lock()->SetDrawActive(true);
 		m_underCircle.lock()->SetDrawActive(true);
+		m_teleportUIObject.lock()->SetDrawActive(true);
 
 		SetMapCursorPositionConnectTargetPosition();
 	}
@@ -149,6 +168,7 @@ namespace basecross {
 	void MapCursor::OnDrawFalse() {
 		m_cursor.lock()->SetDrawActive(false);
 		m_underCircle.lock()->SetDrawActive(false);
+		m_teleportUIObject.lock()->SetDrawActive(false);
 	}
 
 }

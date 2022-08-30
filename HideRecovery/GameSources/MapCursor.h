@@ -18,6 +18,7 @@ namespace basecross {
 	class SpriteObject;
 	class Teleport;
 	class I_TeamMember;
+	class TeleportCursorUI;
 
 	class MapCursor : public Component
 	{
@@ -26,6 +27,7 @@ namespace basecross {
 		std::weak_ptr<GameObject> m_target;
 		std::weak_ptr<SpriteObject> m_cursor;		//
 		std::weak_ptr<SpriteObject> m_underCircle;	//‰º‚Ì‰~
+		std::weak_ptr<GameObject> m_teleportUIObject;
 
 		std::weak_ptr<Teleport> m_teleport;
 		std::weak_ptr<I_TeamMember> m_teamMember;
@@ -44,6 +46,7 @@ namespace basecross {
 	private:
 		void SettingCursor();
 		void SettingUnderCircle();
+		void SettingTeleportUI();
 
 		void MoveCursor();
 
