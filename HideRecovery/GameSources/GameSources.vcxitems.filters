@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0"
+  xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Headers">
       <UniqueIdentifier>{4b0a624a-610d-4bc6-b311-2b02a781cdf9}</UniqueIdentifier>
@@ -1087,6 +1088,12 @@
     <Filter Include="Watanabe\Camera">
       <UniqueIdentifier>{4c31a5a9-4406-434d-a459-8a6766e51987}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Itabashi\Component\Graphic">
+      <UniqueIdentifier>{fbdc1a9a-fc43-497b-b496-cd5d5202ff75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Itabashi\Shader">
+      <UniqueIdentifier>{e3458c1c-0030-483b-ac57-f53713464413}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2028,6 +2035,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Camera\TitleCamera.h">
       <Filter>Watanabe\Camera</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\PCTStaticModelDraw.h">
+      <Filter>Itabashi\Component\Graphic</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2870,6 +2880,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Camera\TitleCamera.cpp">
       <Filter>Watanabe\Camera</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\PCTStaticModelDraw.cpp">
+      <Filter>Itabashi\Component\Graphic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)HitStopManager.cpp">
@@ -2912,6 +2925,9 @@
     </FxCompile>
     <FxCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\HLSL\PSPCTGaugeDraw.hlsl">
       <Filter>Watanabe\Shader\PCTGaugeDraw\HLSL</Filter>
+    </FxCompile>
+    <FxCompile Include="$(MSBuildThisFileDirectory)Itabashi\PSPCTStaticModel.hlsl">
+      <Filter>Itabashi\Shader</Filter>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
