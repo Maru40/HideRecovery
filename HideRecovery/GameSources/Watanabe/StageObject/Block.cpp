@@ -61,11 +61,11 @@ namespace basecross {
 			vector<uint16_t> indices;
 
 			// スケールに応じたUVを持つCubeを設定
-			AdvMeshUtil::CreateCube(4.0f, m_transformData.Scale, vertices, indices);
+			AdvMeshUtil::CreateCube(10.0f, m_transformData.Scale, vertices, indices);
 			m_meshRes = MeshResource::CreateMeshResource(vertices, indices, true);
 			drawComp->SetMeshResource(m_meshRes);
 			drawComp->SetTextureResource(L"Floor_TX");
-			drawComp->SetDiffuse(Col4(0.3f));
+			drawComp->SetDiffuse(Col4(0.5f));
 
 			AddTag(L"Floor");
 
