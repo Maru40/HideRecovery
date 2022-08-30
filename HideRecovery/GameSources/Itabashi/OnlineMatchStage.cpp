@@ -18,8 +18,8 @@ namespace basecross
 {
 	void OnlineMatchStage::OnCreate()
 	{
-		const Vec3 eye(0.0f, 1.0f, 6.0f);
-		const Vec3 at(0, 1.0f, 0);
+		const Vec3 eye(0.0f, 0.5f, 5.0f);
+		const Vec3 at(0, 0.5f, 0);
 		auto PtrView = CreateView<SingleView>();
 		//ビューのカメラの設定
 		auto PtrCamera = ObjectFactory::Create<Camera>();
