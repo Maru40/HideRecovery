@@ -16,6 +16,8 @@
 
 #include "Watanabe/Manager/ScoreManager.h"
 
+#include "Itabashi/PlayerOnlineController.h"
+
 namespace basecross {
 	PlayerStatus::PlayerStatus(const shared_ptr<GameObject>& owner)
 		:Component(owner), m_status(10), m_team(team::TeamType(0)),
@@ -39,7 +41,11 @@ namespace basecross {
 
 		// 念のため0にクランプ
 		if (m_status.hp <= 0) {
-
+			//キルカウントを加算
+			auto playerController = damage.attacker->GetComponent<Online::PlayerOnlineController>(false);
+			if (playerController) {
+				ScoreManager::GetInstance()->AddKillCount(playerController->GetPlayerNumber());
+			}
 
 			if (auto deader = GetGameObject()->GetComponent<PlayerDeader>(false)) {
 				deader->StartDead();
