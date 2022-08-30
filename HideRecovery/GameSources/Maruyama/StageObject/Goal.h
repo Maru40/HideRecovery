@@ -20,6 +20,7 @@ namespace basecross {
 	class Item;
 	class SplashMessageUI;
 	class RelocationCountBP;
+	class GoalBP;
 
 	//--------------------------------------------------------------------------------------
 	/// ゴール管理クラスのパラメータ
@@ -31,6 +32,7 @@ namespace basecross {
 		Vec3 dunkPositionOffset;		//ダンクをする位置のオフセット
 		Vec3 dunkBallPositionOffset;
 		Vec3 countDrawPositionOffset;	//カウントダウンを表示するオフセット
+		Vec3 goalBPOffset;
 		std::vector<Vec3> firePositionOffsets;	//ファイヤーポジションオフセット
 
 		Goal_Parametor(const team::TeamType& team);
@@ -51,6 +53,7 @@ namespace basecross {
 		std::weak_ptr<SplashMessageUI> m_splashMessageUI;		//スプラッシュメッセージ
 		std::vector<std::weak_ptr<I_Performable>> m_fireEffets; //エフェクト表示用クラス
 		std::weak_ptr<RelocationCountBP> m_relocationCount;		//残り時間表示クラス
+		std::weak_ptr<GoalBP> m_goalBP;
 
 		std::unique_ptr<GameTimer> m_timer;						//タイム管理クラス
 

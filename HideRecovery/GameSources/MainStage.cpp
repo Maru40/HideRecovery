@@ -68,6 +68,7 @@
 #include "Watanabe/UI/UIObjectCSVBuilder.h"
 
 #include "Maruyama/UI/Reticle.h"
+#include "TeleportUI.h"
 
 using namespace basecross::Enemy;
 

@@ -19,6 +19,7 @@
 #include "Watanabe/BoardPoly/HPGaugeBP.h"
 #include "Maruyama/UI/Reticle.h"
 #include "Maruyama/Camera/Component/CameraForwardController.h"
+#include "TeleportUI.h"
 #include "ToTargetMove.h"
 
 namespace basecross
@@ -109,6 +110,21 @@ namespace basecross
 		}
 
 		auto soundListener = playerObject->AddComponent<SoundListener>();
+
+		auto teamMember = playerObject->GetComponent<I_TeamMember>(false);
+		auto teleportUI = GetStage()->AddGameObject<GameObject>()->AddComponent<TeleportUI>();
+		if (teamMember) {
+			auto trueFunc = [teleportUI]() {
+				teleportUI->GetGameObject()->SetUpdateActive(true);
+			};
+
+			auto falseFunc = [teleportUI]() {
+				teleportUI->GetGameObject()->SetUpdateActive(false);
+			};
+
+			teamMember->AddReactiveIsInAreaEvent(true, trueFunc);
+			teamMember->AddReactiveIsInAreaEvent(false, falseFunc);
+		}
 
 		return playerObject;
 	}

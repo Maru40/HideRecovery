@@ -54,6 +54,8 @@ namespace basecross
 
 		ResourceLoadData(L"MapCursorUnderCircle_TX", L"MapCursorUnderCircle.png"),
 
+		ResourceLoadData(L"TeleportUI_TX", L"TeleportUI_TX.png"),
+
 		//ResourceLoadData(L"gauge", L"Gauge.png"),
 		//ResourceLoadData(L"clear", L"StageClear.png"),
 		//ResourceLoadData(L"Circle_TX", L"Circle.png"),

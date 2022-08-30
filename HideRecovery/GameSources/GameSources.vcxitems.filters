@@ -1074,10 +1074,15 @@
     </Filter>
     <Filter Include="Watanabe\BoardPoly\GoalBP">
       <UniqueIdentifier>{8d655bc8-01fb-49f4-b682-08112eaabbcd}</UniqueIdentifier>
-	</Filter>
+    </Filter>
     <Filter Include="Maruyama\UI\UILayer">
       <UniqueIdentifier>{b591c6da-a414-48b6-ab1a-bf43733be813}</UniqueIdentifier>
-
+    </Filter>
+    <Filter Include="Maruyama\UI\TeleportUI">
+      <UniqueIdentifier>{9b3d4a2c-f4a1-4bbb-95d2-7b5a21a68be5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\UI\TeleportCursorUI">
+      <UniqueIdentifier>{84a330d7-b6c2-4e03-8a0e-7fc5c9e6ee23}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -2008,13 +2013,14 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\UI\Reticle.h">
       <Filter>Maruyama\UI\Reticle</Filter>
     </ClInclude>
-
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\BoardPoly\GoalBP.h">
       <Filter>Watanabe\BoardPoly\GoalBP</Filter>
-	</ClInclude>
+    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\UI\UILayer.h">
       <Filter>Maruyama\UI\UILayer</Filter>
-
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)TeleportUI.h">
+      <Filter>Maruyama\UI\TeleportUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2851,6 +2857,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\BoardPoly\GoalBP.cpp">
       <Filter>Watanabe\BoardPoly\GoalBP</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)TeleportUI.cpp">
+      <Filter>Maruyama\UI\TeleportUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

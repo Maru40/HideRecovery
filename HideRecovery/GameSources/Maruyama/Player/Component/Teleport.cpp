@@ -36,6 +36,7 @@
 #include "Watanabe/Effekseer/EfkComponent.h"
 
 #include "Maruyama/Interface/I_TeamMember.h"
+#include "TeleportUI.h"
 
 #include "Watanabe/DebugClass/Debug.h"
 
@@ -65,12 +66,18 @@ namespace basecross {
 	}
 
 	void Teleport::OnLateStart() {
+		m_teamMember = GetGameObject()->GetComponent<I_TeamMember>(false);
+
 		SettingFieldMap();			//マップテクスチャの設定
 		SettingAnimationEvent();	//アニメーションイベント設定
 	}
 
 	void Teleport::OnUpdate() {
 		m_timer->UpdateTimer();
+
+		if (!m_teleportUI.lock()) {
+			m_teleportUI = maru::Utility::FindComponent<TeleportUI>(GetStage());
+		}
 	}
 
 	void Teleport::SettingFieldMap() {
@@ -283,6 +290,10 @@ namespace basecross {
 
 	std::shared_ptr<VirtualCamera> Teleport::GetTeleportCamera() const {
 		return m_camera.lock();
+	}
+
+	std::shared_ptr<TeleportUI> Teleport::GetTeleportUI() const {
+		return m_teleportUI.lock();
 	}
 
 
