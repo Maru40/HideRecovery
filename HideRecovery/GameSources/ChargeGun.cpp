@@ -33,7 +33,8 @@ namespace basecross {
 	ChargeGun::ChargeGun(const std::shared_ptr<GameObject>& objPtr) :
 		WeponBase(objPtr),
 		m_timer(new GameTimer(0.0f)),
-		m_shotSoundClip(L"Shot_SE", false, 0.5f)
+		m_shotSoundClip(L"Shot_SE", false, 0.5f),
+		m_teamType(team::TeamType(0))
 	{}
 
 	void ChargeGun::OnCreate() {
