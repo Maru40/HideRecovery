@@ -100,6 +100,7 @@ namespace basecross
 		ResourceLoadData(L"RelocationBallSE", L"RelocationBallSE.wav"),	//ボール再配置
 		ResourceLoadData(L"TeleportSE", L"TeleportSE.wav"),
 		ResourceLoadData(L"GameSetSE", L"GameSetSE.wav"),
+		ResourceLoadData(L"AlertSE_00", L"AlertSe00.wav"),
 	};
 
 	const std::vector<LoadStage::ResourceLoadData> LoadStage::m_bgmResourceLoadDatas =
