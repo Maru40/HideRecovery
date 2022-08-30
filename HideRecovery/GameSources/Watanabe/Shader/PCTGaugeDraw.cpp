@@ -91,8 +91,6 @@ namespace basecross {
 				// グラデーションテクスチャ
 				pD3D11DeviceContext->PSSetShaderResources(1, 1,
 					m_gaugeGradientTex.lock()->GetShaderResourceView().GetAddressOf());
-				// フラグをオンに
-				sb.RatioAndThresholdEtc.w = 1.0f;
 			}
 			//サンプラーを設定
 			RenderState->SetSamplerState(pD3D11DeviceContext, GetSamplerState(), 0);
@@ -138,6 +136,9 @@ namespace basecross {
 		// 割合やしきい値を設定
 		// フラグはここで設定できるものだけ設定
 		spCb.RatioAndThresholdEtc =
-			Vec4(m_rate, m_threshold, m_isBackground ? 1.0f : 0.0f, 0);
+			Vec4(m_rate, m_threshold, m_isBackground ? 1.0f : 0.0f, 0.0f);
+		if (m_gaugeGradientTex.lock()) {
+			spCb.RatioAndThresholdEtc.w = 1.0f;
+		}
 	}
 }

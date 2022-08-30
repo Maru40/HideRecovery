@@ -50,6 +50,8 @@ namespace basecross {
 		ptrDraw->SetTextureResource(TextureKey);
 		ptrDraw->SetGaugeColor(Col4(0, 1, 0, 1));
 		ptrDraw->IsBackground(true);
+		ptrDraw->SetGaugeGradientTexture(L"HPColorGauge_TX");
+
 		SetAlphaActive(true);
 	}
 	void HPGaugeUI::OnUpdate() {

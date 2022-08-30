@@ -33,7 +33,7 @@ namespace basecross {
 		drawComp->SetMeshResource(m_meshRes);
 		drawComp->SetTextureResource(L"HPGauge_TX");
 		drawComp->IsBackground(true);
-		drawComp->SetGaugeColor(Col4(0, 1, 0, 1));
+		drawComp->SetGaugeGradientTexture(L"HPColorGauge_TX");
 
 		auto billBoard = AddComponent<BillBoard>();
 		billBoard->SetRotationOffset(
