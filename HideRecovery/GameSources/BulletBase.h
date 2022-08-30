@@ -84,6 +84,8 @@ namespace basecross {
 		/// <returns>ˆÚ“®•ûŒü</returns>
 		Vec3 GetMoveDirect() const noexcept { return m_param.moveDirect; }
 
+		void SetMoveSpeed(const float speed) noexcept { m_param.moveSpeed = speed; }
+
 		/// <summary>
 		/// ˆÚ“®Å‘å‹——£‚Ìİ’è
 		/// </summary>
