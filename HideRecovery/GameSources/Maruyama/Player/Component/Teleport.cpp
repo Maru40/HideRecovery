@@ -1,8 +1,8 @@
-
+ï»¿
 /*!
 @file Teleport.cpp
-@brief TeleportƒNƒ‰ƒXÀ‘Ì
-’S“–FŠÛR—TŠì
+@brief Teleportã‚¯ãƒ©ã‚¹å®Ÿä½“
+æ‹…å½“ï¼šä¸¸å±±è£•å–œ
 */
 
 #include "stdafx.h"
@@ -42,7 +42,7 @@
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
-	/// ƒeƒŒƒ|[ƒg‹@”\‚Ìƒpƒ‰ƒ[ƒ^
+	/// ãƒ†ãƒ¬ãƒãƒ¼ãƒˆæ©Ÿèƒ½ã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
 	//--------------------------------------------------------------------------------------
 
 	Teleport_Parametor::Teleport_Parametor() :
@@ -52,7 +52,7 @@ namespace basecross {
 	{}
 
 	//--------------------------------------------------------------------------------------
-	/// ƒeƒŒƒ|[ƒg–{‘Ì
+	/// ãƒ†ãƒ¬ãƒãƒ¼ãƒˆæœ¬ä½“
 	//--------------------------------------------------------------------------------------
 
 	Teleport::Teleport(const std::shared_ptr<GameObject>& objPtr) :
@@ -62,20 +62,11 @@ namespace basecross {
 	{}
 
 	void Teleport::OnCreate() {
-		//ƒJƒƒ‰‚Ì¶¬
-		auto cameraObject = GetStage()->AddGameObject<GameObject>();
-		auto camera = cameraObject->AddComponent<VirtualCamera>(11);
-		camera->SetUpdateActive(false);
-		cameraObject->AddComponent<CameraForwardController>(camera);
-		auto mover = cameraObject->AddComponent<ToTargetMove>();
-		//mover->SetUpdateActive(false);
-
-		m_camera = camera;
 	}
 
 	void Teleport::OnLateStart() {
-		SettingFieldMap();			//ƒ}ƒbƒvƒeƒNƒXƒ`ƒƒ‚Ìİ’è
-		SettingAnimationEvent();	//ƒAƒjƒ[ƒVƒ‡ƒ“ƒCƒxƒ“ƒgİ’è
+		SettingFieldMap();			//ãƒãƒƒãƒ—ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®è¨­å®š
+		SettingAnimationEvent();	//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚¤ãƒ™ãƒ³ãƒˆè¨­å®š
 	}
 
 	void Teleport::OnUpdate() {
@@ -96,125 +87,114 @@ namespace basecross {
 			return;
 		}
 
-		//ƒAƒjƒ[ƒVƒ‡ƒ“I—¹‚ÉŒÄ‚ÔƒCƒxƒ“ƒg
+		//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³çµ‚äº†æ™‚ã«å‘¼ã¶ã‚¤ãƒ™ãƒ³ãƒˆ
 		auto exit = [&, animator]() {
 			auto fadeManager = ScreenFadeManager::GetInstance(GetStage());
 
 			const bool IsFade = false;
 			if (IsFade) {
-				//ƒtƒF[ƒhI—¹ƒCƒxƒ“ƒg
+				//ãƒ•ã‚§ãƒ¼ãƒ‰çµ‚äº†ã‚¤ãƒ™ãƒ³ãƒˆ
 				auto endEvent = [&, fadeManager, animator]() {
 					animator->ChangePlayerAnimation(PlayerAnimationState::State::EndTeleport);
-					GetGameObject()->GetComponent<Transform>()->SetPosition(GetTeleportPosition());	//ƒeƒŒƒ|[ƒg
+					GetGameObject()->GetComponent<Transform>()->SetPosition(GetTeleportPosition());	//ãƒ†ãƒ¬ãƒãƒ¼ãƒˆ
 					
 					if (fadeManager) {
 						fadeManager->FadeStart(FadeType::In);
 					}
 				};
 
-				//ƒtƒF[ƒhŠJnƒCƒxƒ“ƒg
+				//ãƒ•ã‚§ãƒ¼ãƒ‰é–‹å§‹ã‚¤ãƒ™ãƒ³ãƒˆ
 				if (fadeManager) {
 					fadeManager->FadeStart(FadeType::Out, endEvent);
 				}
 			}
 			else {
-				//ƒJƒƒ‰‚ğ¡‚ÌƒJƒƒ‰‚É‡‚í‚¹‚éB
-				auto tpsCamera = GetStage()->GetView()->GetTargetCamera();
-				auto tpsCameraTrans = tpsCamera->GetCameraObject()->GetComponent<Transform>();
-				auto tpsAt = tpsCamera->GetAt();
-				auto tpsForward = tpsAt - tpsCamera->GetEye();
 
 				auto camera = m_camera.lock();
-				auto cameraTrans = camera->GetGameObject()->GetComponent<Transform>();
-				cameraTrans->SetPosition(tpsCameraTrans->GetPosition());
-				auto forwardController = camera->GetGameObject()->GetComponent<CameraForwardController>(false);
-				if (forwardController) {
-					forwardController->SetDirection(tpsForward);
-				}
-				camera->SetUpdateActive(true);
 
-				//ˆÚ“®‚µ‚«‚Á‚½‚çA‰‰oŠJn
-				auto moveEndEvent = [&, animator, tpsCamera, tpsCameraTrans, cameraTrans]() {
+				if (camera)
+				{
+					//ã‚«ãƒ¡ãƒ©ã‚’ä»Šã®ã‚«ãƒ¡ãƒ©ã«åˆã‚ã›ã‚‹ã€‚
+					auto& tpsCamera = GetStage()->GetView()->GetTargetCamera();
+					auto tpsCameraTrans = tpsCamera->GetCameraObject()->GetComponent<Transform>();
+					auto tpsAt = tpsCamera->GetAt();
+					auto tpsForward = tpsAt - tpsCamera->GetEye();
+
+					auto cameraTrans = camera->GetGameObject()->GetComponent<Transform>();
+					cameraTrans->SetPosition(tpsCameraTrans->GetPosition());
+					auto forwardController = camera->GetGameObject()->GetComponent<CameraForwardController>(false);
+					if (forwardController) {
+						forwardController->SetDirection(tpsForward);
+					}
+					camera->SetUpdateActive(true);
+				}
+
+				//ç§»å‹•ã—ãã£ãŸã‚‰ã€æ¼”å‡ºé–‹å§‹
+				auto moveEndEvent = [&, animator]() {
 					animator->ChangePlayerAnimation(PlayerAnimationState::State::EndTeleport);
-					GetGameObject()->GetComponent<Transform>()->SetPosition(GetTeleportPosition());	//ƒeƒŒƒ|[ƒg
-					
-					//tpsCameraTrans->SetPosition(cameraTrans->GetPosition());
-					//tpsCamera->SetAt(GetTeleportPosition());
-					//tpsCamera->SetEye(cameraTrans->GetPosition());
-					//auto tpsCameraObject = tpsCamera->GetCameraObject();
+					GetGameObject()->GetComponent<Transform>()->SetPosition(GetTeleportPosition());	//ãƒ†ãƒ¬ãƒãƒ¼ãƒˆ
+
 					auto playerObject = dynamic_pointer_cast<PlayerObject>(GetGameObject());
 					auto springArm = playerObject->GetArm()->GetComponent<SpringArmComponent>();
 					springArm->GetGameObject()->GetComponent<Transform>()->SetPosition(GetTeleportPosition());
 					springArm->SetCurrentArmRange(springArm->GetArmRange());
 					springArm->OnUpdate2();
 
-					m_camera.lock()->SetUpdateActive(false);
+					auto camera = m_camera.lock();
 
-					//ƒGƒtƒFƒNƒg‚ÌÄ¶
+					if (camera)
+					{
+						camera->SetUpdateActive(false);
+					}
+
+					//ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®å†ç”Ÿ
 					if (auto efkComp = GetGameObject()->GetComponent<EfkComponent>(false)) {
 						efkComp->Play(L"Respawn");
 					}
 
-					//“§‰ß‰ğœ
-					if (auto drawer = GetGameObject()->GetComponent<PlayerObject::DrawComp>(false)) {
-						auto diffuse = drawer->GetDiffuse();
-						diffuse.w = 1.0f;
-						drawer->SetDiffuse(diffuse);
-					}
+					//è¡¨ç¤º
+					GetGameObject()->SetDrawActive(true);
 
-					//“–‚½‚è”»’è•œŠˆ
+					//å½“ãŸã‚Šåˆ¤å®šå¾©æ´»
 					if (auto collision = GetGameObject()->GetComponent<CollisionObb>(false)) {
 						collision->SetUpdateActive(true);
 					}
 
-					//d—Í•œŠˆ
+					//é‡åŠ›å¾©æ´»
 					if (auto gravity = GetGameObject()->GetComponent<Gravity>(false)) {
 						gravity->SetUpdateActive(true);
 					}
 				};
 
-				//ƒJƒƒ‰‚ğˆÚ“®‚³‚¹‚é
-				auto mover = camera->GetGameObject()->GetComponent<ToTargetMove>(false);
+				//ã‚«ãƒ¡ãƒ©ã‚’ç§»å‹•ã•ã›ã‚‹
+				auto mover = m_toTargetMove.lock();
 				if (mover) {
-					auto position = GetTeleportPosition();
-					auto playerObject = dynamic_pointer_cast<PlayerObject>(GetGameObject());
-					auto springArm = playerObject->GetArm()->GetComponent<SpringArmComponent>();
-					auto childObject = springArm->GetChildObject();
-					Vec3 offset(0.0f);
-					if (auto lookAt = childObject->GetComponent<LookAtCameraManager>(false)) {
-						offset = lookAt->GetParametor().centerOffset;
-					}
-					
-					position += offset + -tpsForward;
 
-					mover->MoveStart(position, moveEndEvent);
+					mover->MoveStart(m_cameraPosition, moveEndEvent);
 				}
+
 			}
 
-			//ƒGƒtƒFƒNƒg‚ÌÄ¶
+			//ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®å†ç”Ÿ
 			if (auto efkComp = GetGameObject()->GetComponent<EfkComponent>(false)) {
 				efkComp->Play(L"Respawn");
 			}
 
-			//“§‰ß
-			if (auto drawer = GetGameObject()->GetComponent<PlayerObject::DrawComp>(false)) {
-				auto diffuse = drawer->GetDiffuse();
-				diffuse.w = 0.0f;
-				drawer->SetDiffuse(diffuse);
-			}
+			//éè¡¨ç¤º
+			GetGameObject()->SetDrawActive(false);
 
-			//“–‚½‚è”»’è‰ğœ
+			//å½“ãŸã‚Šåˆ¤å®šè§£é™¤
 			if (auto collision = GetGameObject()->GetComponent<CollisionObb>(false)) {
 				collision->SetUpdateActive(false);
 			}
 
-			//d—Í‰ğœ
+			//é‡åŠ›è§£é™¤
 			if (auto gravity = GetGameObject()->GetComponent<Gravity>(false)) {
 				gravity->SetUpdateActive(false);
 			}
 		};
 
-		//ƒAƒjƒ[ƒVƒ‡ƒ“ƒCƒxƒ“ƒg‚Ì“o˜^
+		//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚¤ãƒ™ãƒ³ãƒˆã®ç™»éŒ²
 		animator->AddAnimationEvent(
 			PlayerAnimationState::State::StartTeleport,
 			nullptr,
@@ -234,14 +214,18 @@ namespace basecross {
 	}
 
 	void Teleport::StartTeleport() {
-		//ƒeƒŒƒ|[ƒgêŠ‚ğİ’è
-		SetTeleportPosition(GetFieldMap()->GetMapCursor()->GetCursorFiledPosition());
+		StartTeleport(GetFieldMap()->GetMapCursor()->GetCursorFiledPosition());
+	}
 
-		//ƒ}ƒbƒv‚ğ•Â‚¶‚é
+	void Teleport::StartTeleport(const Vec3& teleportPosition) {
+		//ãƒ†ãƒ¬ãƒãƒ¼ãƒˆå ´æ‰€ã‚’è¨­å®š
+		SetTeleportPosition(teleportPosition);
+
+		//ãƒãƒƒãƒ—ã‚’é–‰ã˜ã‚‹
 		CloseMap();
 
 		if (auto animator = GetGameObject()->GetComponent<PlayerAnimator>(false)) {
-			animator->ChangePlayerAnimation(PlayerAnimationState::State::StartTeleport);	//ƒeƒŒƒ|[ƒgƒAƒjƒ[ƒVƒ‡ƒ“
+			animator->ChangePlayerAnimation(PlayerAnimationState::State::StartTeleport);	//ãƒ†ãƒ¬ãƒãƒ¼ãƒˆã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
 		}
 
 		m_param.isTeleporting = true;
@@ -249,7 +233,7 @@ namespace basecross {
 
 	void Teleport::OpenMap() {
 		auto fieldMap = GetFieldMap();
-		if (fieldMap->GetMapDraw()) {	//ƒ}ƒbƒv‚ªŠJ‚¢‚Ä‚¢‚é‚È‚çClose‚·‚éB
+		if (fieldMap->GetMapDraw()) {	//ãƒãƒƒãƒ—ãŒé–‹ã„ã¦ã„ã‚‹ãªã‚‰Closeã™ã‚‹ã€‚
 			CloseMap();
 			return;
 		}
@@ -265,20 +249,20 @@ namespace basecross {
 	}
 
 	//--------------------------------------------------------------------------------------
-	/// ƒAƒNƒZƒbƒT
+	/// ã‚¢ã‚¯ã‚»ãƒƒã‚µ
 	//--------------------------------------------------------------------------------------
 
 	std::shared_ptr<FieldMap> Teleport::GetFieldMap() const {
 		return m_fieldMap.lock();
 	}
 
-	bool Teleport::IsTeleport() const {
+	bool Teleport::CanTeleport() const {
 		auto teamMember = GetGameObject()->GetComponent<I_TeamMember>(false);
 		if (teamMember && !teamMember->IsInArea()) {
 			return false;
 		}
 
-		//‹——£‚ª‚ ‚è‚·‚¬‚é‚È‚çƒeƒŒƒ|[ƒg‚µ‚È‚¢
+		//è·é›¢ãŒã‚ã‚Šã™ãã‚‹ãªã‚‰ãƒ†ãƒ¬ãƒãƒ¼ãƒˆã—ãªã„
 		auto teleportPosition = GetFieldMap()->GetMapCursor()->GetCursorFiledPosition();
 		auto toTeleportPosition = teleportPosition - transform->GetPosition();
 		auto maxRange = GetFieldMap()->GetRect().depth * m_param.maxRangeLate;
@@ -286,7 +270,7 @@ namespace basecross {
 			return false;
 		}
 
-		return GetFieldMap()->IsMapDraw();	//Œ»İ‚Íƒ}ƒbƒv‚ªŠJ‚¢‚Ä‚¢‚é‚È‚ç”ò‚×‚éB
+		return GetFieldMap()->IsMapDraw();	//ç¾åœ¨ã¯ãƒãƒƒãƒ—ãŒé–‹ã„ã¦ã„ã‚‹ãªã‚‰é£›ã¹ã‚‹ã€‚
 	}
 
 	bool Teleport::IsTeleporting() const {
