@@ -60,7 +60,8 @@ namespace basecross {
 		}
 		else {
 			auto teleportUI = m_teleportUIObject.lock();
-			!teleportUI->GetDrawActive() ? teleportUI->SetDrawActive(true) : false;
+			//テレポートできて、テレポートUIが非表示なら、表示する。
+			m_teleport.lock()->CanTeleport() && !teleportUI->GetDrawActive() ? teleportUI->SetDrawActive(true) : false;
 		}
 	}
 
@@ -166,6 +167,7 @@ namespace basecross {
 		}
 
 		SetMapCursorPositionConnectTargetPosition();
+		m_beforePosition = transform->GetPosition();
 	}
 
 	void MapCursor::OnDrawFalse() {
