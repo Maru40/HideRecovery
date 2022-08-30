@@ -14,6 +14,8 @@
 #include "ItemBag.h"
 #include "HideItem.h"
 
+#include "Watanabe/Manager/ScoreManager.h"
+
 namespace basecross {
 	PlayerStatus::PlayerStatus(const shared_ptr<GameObject>& owner)
 		:Component(owner), m_status(10), m_team(team::TeamType(0)),
@@ -37,6 +39,8 @@ namespace basecross {
 
 		// 念のため0にクランプ
 		if (m_status.hp <= 0) {
+
+
 			if (auto deader = GetGameObject()->GetComponent<PlayerDeader>(false)) {
 				deader->StartDead();
 			}
