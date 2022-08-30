@@ -294,8 +294,11 @@ namespace basecross {
 		auto teleportPosition = GetFieldMap()->GetMapCursor()->GetCursorFiledPosition();
 		auto ownArea = teamMember->GetOwnArea();
 		auto toTeleportPosition = teleportPosition - ownArea->GetGameObject()->GetComponent<Transform>()->GetPosition();
-		auto maxRange = GetFieldMap()->GetRect().depth * m_param.maxRangeLate;
-		if (toTeleportPosition.length() > maxRange) {
+		auto centerPosition = ownArea->GetGameObject()->GetComponent<Transform>()->GetPosition();
+		auto fieldMap = FieldMap::GetInstance();
+		auto maxRange = GetFieldMap()->GetDepth() * m_param.maxRangeLate;	//Rect
+		auto rect = maru::Rect(centerPosition, fieldMap->GetWidth(), maxRange * 2.0f);
+		if (!rect.IsInRect(teleportPosition)) {
 			return false;
 		}
 
