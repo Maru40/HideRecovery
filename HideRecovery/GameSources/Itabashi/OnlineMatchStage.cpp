@@ -18,7 +18,7 @@ namespace basecross
 {
 	void OnlineMatchStage::OnCreate()
 	{
-		const Vec3 eye(0.0f, 1.0f, 5.0f);
+		const Vec3 eye(0.0f, 1.0f, 6.0f);
 		const Vec3 at(0, 1.0f, 0);
 		auto PtrView = CreateView<SingleView>();
 		//ビューのカメラの設定
@@ -46,7 +46,7 @@ namespace basecross
 		auto matchStageTransitioner = gameObject->AddComponent<MatchStageTransitioner>();
 
 		// マップとUIの生成
-		CreateMap(L"WaitStage.csv");
+		CreateMap(L"MatchingStage.csv");
 		auto uiBuilder = CreateUI(L"MatchingUILayout.csv");
 		gameObject->AddComponent<MatchingUIController>(uiBuilder);
 
@@ -63,7 +63,7 @@ namespace basecross
 				return a->GetID() < b->GetID();
 			}
 		);
-		gameObject->AddComponent<MatchingSyncPlayerObject>(spawnPointObjects, onlineMatching);
+		gameObject->AddComponent<MatchingSyncPlayerObject>(spawnPointObjects);
 
 		SimpleSoundManager::ChangeBGM(L"MatchingStageBGM", 0.1f);
 	}
