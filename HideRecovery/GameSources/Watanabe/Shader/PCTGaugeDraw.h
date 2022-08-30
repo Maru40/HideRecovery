@@ -42,6 +42,8 @@ namespace basecross {
 		Col4 m_emissive;
 		// デフューズ色
 		Col4 m_diffuse;
+		// 割合に応じたゲージの色にするときにグラデーションテクスチャ
+		weak_ptr<TextureResource> m_gaugeGradientTex;
 	public:
 		explicit PCTGaugeDraw(const shared_ptr<GameObject>& owner);
 
@@ -81,7 +83,7 @@ namespace basecross {
 		 *
 		 * @param meshRes メッシュリソース
 		 */
-		void SetMeshResouce(const shared_ptr<MeshResource>& meshRes) {
+		void SetMeshResource(const shared_ptr<MeshResource>& meshRes) {
 			m_meshResource = meshRes;
 		}
 
@@ -90,8 +92,17 @@ namespace basecross {
 		 *
 		 * @param key キー
 		 */
-		void SetTextureResouce(const wstring& key) {
+		void SetTextureResource(const wstring& key) {
 			m_textureResource = App::GetApp()->GetResource<TextureResource>(key);
+		}
+
+		/**
+		 * @brief グラデーションテクスチャの設定
+		 *
+		 * @param key
+		 */
+		void SetGaugeGradientTexture(const wstring& key) {
+			m_gaugeGradientTex = App::GetApp()->GetResource<TextureResource>(key);
 		}
 	private:
 		/**

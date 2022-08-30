@@ -10,7 +10,13 @@ namespace basecross {
 		:DrawComponent(gameObjectPtr),
 		m_rate(0.0f), m_threshold(0.01f), m_isBackground(false),
 		m_diffuse(Col4(1)), m_emissive(Col4(0))
-	{}
+	{
+		//パイプラインステートをデフォルトの３D
+		SetBlendState(BlendState::Opaque);
+		SetDepthStencilState(DepthStencilState::Default);
+		SetRasterizerState(RasterizerState::CullBack);
+		SetSamplerState(SamplerState::LinearClamp);
+	}
 
 	void PCTGaugeDraw::OnCreate() {
 	}
@@ -20,11 +26,10 @@ namespace basecross {
 			if (!(GetBlendState() == BlendState::AlphaBlend || GetBlendState() == BlendState::Additive)) {
 				SetBlendState(BlendState::AlphaBlend);
 			}
-			SetRasterizerState(RasterizerState::CullNone);
+			SetRasterizerState(RasterizerState::DoubleDraw);
 		}
 		//メッシュリソースの取得
 		if (m_meshResource) {
-			//シェーダの設定
 			DrawMesh(m_meshResource->GetMashData());
 		}
 		//後始末
@@ -81,6 +86,14 @@ namespace basecross {
 		if (shTex) {
 			// ゲージ用テクスチャ
 			pD3D11DeviceContext->PSSetShaderResources(0, 1, shTex->GetShaderResourceView().GetAddressOf());
+			// グラデーションテクスチャがセットされている場合は読み込みを行う
+			if (m_gaugeGradientTex.lock()) {
+				// グラデーションテクスチャ
+				pD3D11DeviceContext->PSSetShaderResources(1, 1,
+					m_gaugeGradientTex.lock()->GetShaderResourceView().GetAddressOf());
+				// フラグをオンに
+				sb.RatioAndThresholdEtc.w = 1.0f;
+			}
 			//サンプラーを設定
 			RenderState->SetSamplerState(pD3D11DeviceContext, GetSamplerState(), 0);
 		}
