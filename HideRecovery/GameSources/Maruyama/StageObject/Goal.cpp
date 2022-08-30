@@ -41,6 +41,10 @@
 
 #include "Watanabe/BoardPoly/GoalBP.h"
 
+#include "Watanabe/Manager/PointManager.h"
+#include "Watanabe/Manager/TimeManager.h"
+#include "Watanabe/Manager/ScoreManager.h"
+
 #include "PlayerInputer.h"
 #include "MainStage.h"
 
@@ -187,7 +191,8 @@ namespace basecross {
 		StartCountDown(itemHiderEvent);
 
 		//ゴール通知
-
+		auto playerController = other->GetComponent<Online::PlayerOnlineController>(false);
+		ScoreManager::GetInstance()->AddGoalCount(playerController->GetPlayerNumber());
 
 		return hidePlace->GetHidePosition();
 	}
