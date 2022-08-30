@@ -19,7 +19,6 @@
 #include "VelocityManager.h"
 
 namespace basecross {
-
 	std::shared_ptr<GameObject> PlayerCreate(const std::shared_ptr<Stage>& stage) {
 		Mat4x4 spanMat;
 		const float fScale = 0.8f;
@@ -71,8 +70,6 @@ namespace basecross {
 		Debug::GetInstance()->Log(L"ResultStage");
 		Debug::GetInstance()->Log(L"A : マッチング画面へ");
 		Debug::GetInstance()->Log(L"B : タイトル画面へ");
-		PointManager::GetInstance()->AddPoint(team::TeamType::Blue);
-		PointManager::GetInstance()->AddPoint(team::TeamType::Red);
 
 		CreateMap(L"WaitStage.csv");
 		auto uiBuilder = CreateUI(L"ResultUILayout.csv");
@@ -124,7 +121,7 @@ namespace basecross {
 			Vec3 position;
 			PlayerAnimationState::State state;
 
-			Data(const Vec3& position, const PlayerAnimationState::State& state):
+			Data(const Vec3& position, const PlayerAnimationState::State& state) :
 				position(position),
 				state(state)
 			{}
