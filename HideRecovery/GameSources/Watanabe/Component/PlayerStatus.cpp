@@ -44,6 +44,12 @@ namespace basecross {
 			return;
 		}
 
+		//同チームなら攻撃しない
+		auto attackerMember = damage.attacker->GetComponent<I_TeamMember>(false);
+		if (attackerMember && attackerMember->GetTeam() == GetTeam()) {
+			return;
+		}
+
 		m_status.hp -= damage.value;
 
 		// 念のため0にクランプ
