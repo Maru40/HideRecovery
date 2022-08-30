@@ -1081,6 +1081,12 @@
     <Filter Include="Maruyama\UI\TeleportCursorUI">
       <UniqueIdentifier>{84a330d7-b6c2-4e03-8a0e-7fc5c9e6ee23}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Itabashi\Component\Graphic">
+      <UniqueIdentifier>{fbdc1a9a-fc43-497b-b496-cd5d5202ff75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Itabashi\Shader">
+      <UniqueIdentifier>{e3458c1c-0030-483b-ac57-f53713464413}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2016,6 +2022,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)TeleportUI.h">
       <Filter>Maruyama\UI\TeleportUI</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\PCTStaticModelDraw.h">
+      <Filter>Itabashi\Component\Graphic</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2852,6 +2861,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)TeleportUI.cpp">
       <Filter>Maruyama\UI\TeleportUI</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\PCTStaticModelDraw.cpp">
+      <Filter>Itabashi\Component\Graphic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)HitStopManager.cpp">
@@ -2894,6 +2906,9 @@
     </FxCompile>
     <FxCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\HLSL\PSPCTGaugeDraw.hlsl">
       <Filter>Watanabe\Shader\PCTGaugeDraw\HLSL</Filter>
+    </FxCompile>
+    <FxCompile Include="$(MSBuildThisFileDirectory)Itabashi\PSPCTStaticModel.hlsl">
+      <Filter>Itabashi\Shader</Filter>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
