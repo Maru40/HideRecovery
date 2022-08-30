@@ -57,41 +57,7 @@ namespace basecross
 		ResourceLoadData(L"MapCursorUnderCircle_TX", L"MapCursorUnderCircle.png"),
 
 		ResourceLoadData(L"TeleportUI_TX", L"TeleportUI_TX.png"),
-
-		//ResourceLoadData(L"gauge", L"Gauge.png"),
-		//ResourceLoadData(L"clear", L"StageClear.png"),
-		//ResourceLoadData(L"Circle_TX", L"Circle.png"),
-		//ResourceLoadData(L"Rock_TX", L"RockTX.png"),
 		ResourceLoadData(L"Point_TX", L"Point.png"),
-		//ResourceLoadData(L"Segment_TX", L"Segment.png"),
-
-		//Effect
-		//ResourceLoadData(L"Clear_TX", L"Clear_TX.png"),
-		//ResourceLoadData(L"SquareSpriteAlpha_TX", L"SquareSpriteAlpha.png"),
-
-		//StageSelect
-		//ResourceLoadData(L"RB_TX", L"RB.png"),
-		//ResourceLoadData(L"RBBack_TX", L"RBBack.png"),
-		//ResourceLoadData(L"LB_TX", L"LB.png"),
-		//ResourceLoadData(L"LBBack_TX", L"LBBack.png"),
-		//ResourceLoadData(L"Stage_TX", L"Stage.png"),
-		//ResourceLoadData(L"SelectBack_TX", L"SelectBack.png"),
-		//ResourceLoadData(L"StageSelectMenuBack_TX", L"StageSelectMenuBack.png"),
-		//ResourceLoadData(L"StageSelectMenuBack2_TX", L"StageSelectMenuBack2.png"),
-
-		//BoostTX
-		//ResourceLoadData(L"Boost_TX", L"Boost_TX.png"),
-		//ResourceLoadData(L"LineH_TX", L"LineH.png"),
-		//ResourceLoadData(L"LineV_TX", L"LineV.png"),
-		//ResourceLoadData(L"Aura_TX", L"Aura_TX.png"),
-
-		//Stage
-		//ResourceLoadData(L"StageS1_TX", L"StageS1.png"),
-		//ResourceLoadData(L"StageS2_TX", L"StageS1.png"),
-		//ResourceLoadData(L"StageM1_TX", L"StageM1.png"),
-		//ResourceLoadData(L"StageM2_TX", L"StageM2.png"),
-		//ResourceLoadData(L"StageL1_TX", L"StageL1.png"),
-		//ResourceLoadData(L"StageL2_TX", L"StageL2.png"),
 
 		//RampTex
 		ResourceLoadData(L"Ramp_Rock_TX", L"RampTex_Rock.png"),
@@ -117,17 +83,6 @@ namespace basecross
 	const std::vector<LoadStage::ResourceLoadData> LoadStage::m_seResourceLoadDatas =
 
 	{
-		//ResourceLoadData(L"HideSE", L"HideSE.wav"),
-		//ResourceLoadData(L"SlimePressing_SE", L"Slime_Pressing.wav"),
-		//ResourceLoadData(L"SlimePressed_SE", L"Slime_Pressed.wav"),
-		//ResourceLoadData(L"Clear_SE", L"AS_ClearSE.wav"),
-		//ResourceLoadData(L"Back_SE", L"AS_BackSE.wav"),
-		//ResourceLoadData(L"Next_SE", L"AS_NextSE.wav"),
-		//ResourceLoadData(L"CursorSE", L"AS_CursorSE.wav"),
-		//ResourceLoadData(L"EnterSE", L"AS_CursorSelect.wav"),
-		//ResourceLoadData(L"PlayerWalk", L"AS_PlayerWalk.wav"),
-		//ResourceLoadData(L"PlayerTackle", L"AS_PlayerTackle.wav"),
-		//ResourceLoadData(L"JettPomp", L"AS_JettPomp.wav"),
 		ResourceLoadData(L"Shot_SE", L"ShotSE.wav"),
 
 		ResourceLoadData(L"ReadyArmsSE", L"ReadyArmsSE.wav"),
@@ -143,14 +98,12 @@ namespace basecross
 		ResourceLoadData(L"GetBallSE", L"GetBallSE.wav"),
 		ResourceLoadData(L"StolenBallSE", L"StolenBallSE.wav"),
 		ResourceLoadData(L"RelocationBallSE", L"RelocationBallSE.wav"),	//ボール再配置
+		ResourceLoadData(L"TeleportSE", L"TeleportSE.wav"),
+		ResourceLoadData(L"GameSetSE", L"GameSetSE.wav"),
 	};
 
 	const std::vector<LoadStage::ResourceLoadData> LoadStage::m_bgmResourceLoadDatas =
 	{
-		//ResourceLoadData(L"Title_BGM_01", L"AS_SelectBGM1.wav"),
-		//ResourceLoadData(L"Select_BGM_01", L"AS_SelectBGM1.wav"),
-		//ResourceLoadData(L"Game_BGM_01", L"AS_GameBGM1.wav"),
-		//ResourceLoadData(L"Title_BGM_01", L"AS_TitleBGM1.wav"),
 		ResourceLoadData(L"GameStageBGM", L"GameStageBGM.wav"),
 		ResourceLoadData(L"TitleStageBGM", L"TitleStageBGM.wav"),
 		ResourceLoadData(L"MatchingStageBGM", L"MatchingStageBGM.wav")
@@ -158,39 +111,12 @@ namespace basecross
 
 	const std::vector<LoadStage::ModelResourceLoadData> LoadStage::m_modelResourceLoadDatas =
 	{
-		//Handy
-		//ModelResourceLoadData(L"Handy_Walk",  L"Handy_Walk2.bmf", ModelType::Bone,  L"Handy\\"),rock.001.bmf/tree_2
-
-		//ModelResourceLoadData(L"rock",  L"rock.bmf", ModelType::Static,  L"Rook\\"),
-		//ModelResourceLoadData(L"rock001",  L"rock001.bmf", ModelType::Static,  L"Rook\\"),
-		//ModelResourceLoadData(L"rock005",  L"rock.005.bmf", ModelType::Static,  L"Rook\\"),
-		//ModelResourceLoadData(L"rock007",  L"rock007.bmf", ModelType::Static,  L"Rook\\"),
-		//ModelResourceLoadData(L"tree_2",  L"tree_2.bmf", ModelType::Static,  L"Tree\\"),
-		//ModelResourceLoadData(L"tree_dead2",  L"tree_dead2.bmf", ModelType::Static,  L"Tree\\"),
-		//ModelResourceLoadData(L"tree_dead3",  L"tree_dead3.bmf", ModelType::Static,  L"Tree\\"),
-
-		//ModelResourceLoadData(L"Player_Mesh",  L"Character04.bmf", ModelType::BoneMulti,  L"Player\\"),
 		ModelResourceLoadData(L"Player_Mesh",  L"Hero.bmf", ModelType::BoneMulti,  L"Player\\"),
 
 		ModelResourceLoadData(L"Ball_Model",  L"Ball.bmf", ModelType::BoneMulti,  L"Ball\\"),
 		ModelResourceLoadData(L"Box_Model", L"Box.bmf", ModelType::BoneMulti, L"Box\\"),
 
 		ModelResourceLoadData(L"SkyBox_Model", L"SkyBox.bmf", ModelType::Static, L"SkyBox\\"),
-
-		//ModelResourceLoadData(L"Player_Idle",  L"Player_Animation_Idol.bmf", ModelType::BoneMulti,  L"Player\\"),
-		//ModelResourceLoadData(L"Player_WalkStart",  L"Player_Animation_Walk_Start.bmf", ModelType::BoneMulti,  L"Player\\"),
-		//ModelResourceLoadData(L"Player_Walk",  L"Player_Animation_Walk.bmf", ModelType::BoneMulti,  L"Player\\"),
-		//ModelResourceLoadData(L"Player_WalkEnd",  L"Player_Animation_Walk_End.bmf", ModelType::BoneMulti,  L"Player\\"),
-		//ModelResourceLoadData(L"Player_Tackle",  L"Player_Animation_Tackle.bmf", ModelType::BoneMulti,  L"Player\\"),
-		//ModelResourceLoadData(L"Player_TackleEnd",  L"Player_Animation_Tackle_End.bmf", ModelType::BoneMulti,  L"Player\\"),
-		//ModelResourceLoadData(L"Player_Aim",  L"Player_Animation_Aim.bmf", ModelType::BoneMulti,  L"Player\\"),
-		//ModelResourceLoadData(L"Player_Shot",  L"Player_Animation_Shot.bmf", ModelType::BoneMulti,  L"Player\\"),
-		//ModelResourceLoadData(L"Player_Damage",  L"Player_Animation_Damage.bmf", ModelType::BoneMulti,  L"Player\\"),
-		//ModelResourceLoadData(L"Player_Death",  L"Player_Animation_Dead.bmf", ModelType::BoneMulti,  L"Player\\"),
-		//ModelResourceLoadData(L"Player_WinIdle",  L"Player_Animation_Win_Idle.bmf", ModelType::BoneMulti,  L"Player\\"),
-		//ModelResourceLoadData(L"Player_WinMove",  L"Player_Animation_Win.bmf", ModelType::BoneMulti,  L"Player\\"),
-
-		//ModelResourceLoadData(L"Player_Mesh",  L"Player_Mesh.bmf", ModelType::BoneMulti,  L"Player\\"),
 
 		ModelResourceLoadData(L"rack",  L"tana.bmf", ModelType::Static,  L"StageObject\\"),
 		ModelResourceLoadData(L"Container",  L"Container.bmf", ModelType::StaticMulti,  L"StageObject\\"),
