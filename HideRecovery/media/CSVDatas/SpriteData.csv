@@ -28,4 +28,5 @@ Player,Team_TX,0,495,600,205
 Tryangle,Shape_TX,0,0,256,256
 ButtonBack,Shape_TX,256,0,128,128
 AButton,Shape_TX,384,0,128,128
-Bbutton,Shape_TX,256,128,128,128
+BButton,Shape_TX,256,128,128,128
+YButton,Shape_TX,384,128,128,128

@@ -60,19 +60,19 @@ namespace basecross {
 		// PlayerAnimatorで参照しているため使用しないが必要
 		gameObject->AddComponent<VelocityManager>();
 
-		auto testComp = gameObject->AddComponent<TestComponent>();
-		testComp->SetOnUpdateFunction(
-			[this, gameObject]() {
-				auto anime = gameObject->GetComponent<PlayerAnimator>();
-				const auto& input = App::GetApp()->GetMyInputDevice()->GetXInputGamePad();
-				if (input.IsInputDown(XInputCode::Y)) {
-					anime->ChangePlayerAnimation(PlayerAnimationState::State::PutItem_Floor);
-				}
-				if (input.IsInputDown(XInputCode::X)) {
-					anime->ChangePlayerAnimation(PlayerAnimationState::State::GunSet2);
-				}
-			}
-		);
+		//auto testComp = gameObject->AddComponent<TestComponent>();
+		//testComp->SetOnUpdateFunction(
+		//	[this, gameObject]() {
+		//		auto anime = gameObject->GetComponent<PlayerAnimator>();
+		//		const auto& input = App::GetApp()->GetMyInputDevice()->GetXInputGamePad();
+		//		if (input.IsInputDown(XInputCode::Y)) {
+		//			anime->ChangePlayerAnimation(PlayerAnimationState::State::PutItem_Floor);
+		//		}
+		//		if (input.IsInputDown(XInputCode::X)) {
+		//			anime->ChangePlayerAnimation(PlayerAnimationState::State::GunSet2);
+		//		}
+		//	}
+		//);
 
 		// エフェクトの設定
 		auto efkComp = gameObject->AddComponent<EfkComponent>();
