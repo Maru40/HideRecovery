@@ -16,7 +16,7 @@
 
 namespace basecross {
 	void MapShotStage::CreateViewLight() {
-		const Vec3 eye(0.0f, 252.4f, 0.001f);
+		const Vec3 eye(0.0f, 252.4f, -0.001f);
 		const Vec3 at(0, 0.0f, 0);
 		auto PtrView = CreateView<SingleView>();
 		//ƒrƒ…[‚ÌƒJƒƒ‰‚Ìİ’è
