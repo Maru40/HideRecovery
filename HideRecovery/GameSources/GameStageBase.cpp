@@ -45,7 +45,6 @@
 #include "Watanabe/UI/UIObjects.h"
 
 #include "Itabashi/OnlineTestRoom.h"
-#include "Itabashi/OnlinePlayerManager.h"
 
 #include "Maruyama/StageObject/GoalObject.h"
 #include "Itabashi/GamePlayerManager.h"

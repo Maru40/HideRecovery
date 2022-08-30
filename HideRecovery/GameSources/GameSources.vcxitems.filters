@@ -751,9 +751,6 @@
     <Filter Include="Watanabe\Shader\AdvBaseDraw">
       <UniqueIdentifier>{c83a64e8-1f5b-4e32-ad40-12671ad0c201}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Itabashi\Online\OnlinePlayerManager">
-      <UniqueIdentifier>{913a3f2a-aa29-46d1-b17e-989d106e3c4d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Maruyama\Enemy\Component\AI\Director\CoordinatorBase">
       <UniqueIdentifier>{6e74b68c-51e8-430f-a9e2-11dac5c26112}</UniqueIdentifier>
     </Filter>
@@ -1722,9 +1719,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\AdvBaseDraw.h">
       <Filter>Watanabe\Shader\AdvBaseDraw</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlinePlayerManager.h">
-      <Filter>Itabashi\Online\OnlinePlayerManager</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)AIImpacter.h">
       <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\AIImpacter</Filter>
     </ClInclude>
@@ -2584,9 +2578,6 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\AdvBaseDraw.cpp">
       <Filter>Watanabe\Shader\AdvBaseDraw</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlinePlayerManager.cpp">
-      <Filter>Itabashi\Online\OnlinePlayerManager</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)AIImpacter.cpp">
       <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\AIImpacter</Filter>
