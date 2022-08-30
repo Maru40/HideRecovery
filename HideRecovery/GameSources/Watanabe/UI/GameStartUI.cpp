@@ -1,10 +1,11 @@
 ﻿#include "stdafx.h"
 #include "GameStartUI.h"
 #include "../Component/LifeSpan.h"
+#include "../Utility/Utility.h"
 
 namespace basecross {
 	GameStartUI::GameStartUI(const shared_ptr<Stage>& stage)
-		:GameObject(stage), m_isStart(false), m_invisibleTimer(1)
+		:GameObject(stage), m_isStart(false), m_invisibleTimer(3)
 	{}
 
 	void GameStartUI::OnCreate() {
@@ -12,17 +13,26 @@ namespace basecross {
 
 		const auto& stage = GetStage();
 		m_countDown = stage->AddGameObject<CountDownUI>(countTime);
-		m_countDown->SetActive(false);
-
-		m_strStart = stage->AddGameObject<SimpleSprite>(
-			SimpleSprite::Type::SpriteData, L"Start");
-		m_strStart->SetActive(false);
-
 		m_countDown->SetScale(2);
 		m_countDown->SetColor(Col4(1, 0.5f, 0, 1));
-
-		m_strStart->GetComponent<Transform>()->SetScale(Vec3(2));
-		m_strStart->GetDrawComponent()->SetDiffuse(Col4(1, 0.5f, 0, 1));
+		{
+			m_strStart = stage->AddGameObject<SimpleSprite>(
+				SimpleSprite::Type::SpriteData, L"Start");
+			auto startSpriteData = SpriteDataManager::GetInstance()->GetSpriteData(L"Start");
+			auto trans = m_strStart->GetComponent<RectTransform>();
+			trans->SetScale(Vec2(2.0f));
+			m_strStart->GetDrawComponent()->SetDiffuse(Col4(1, 0.5f, 0, 1));
+		}
+		{
+			m_objectiveStr = stage->AddGameObject<SimpleSprite>(SimpleSprite::Type::Texture, L"Objective_TX");
+			auto trans = m_objectiveStr->GetComponent<RectTransform>();
+			trans->SetScale(Vec2(0.75f));
+			auto objectiveTexSize = Utility::GetTextureSize(L"Objective_TX");
+			trans->SetPosition(Vec2(0, -objectiveTexSize.y));
+		}
+		m_countDown->SetDrawActive(false);
+		m_strStart->SetDrawActive(false);
+		m_objectiveStr->SetDrawActive(false);
 	}
 	void GameStartUI::OnUpdate() {
 		if (!m_isStart)
@@ -38,9 +48,11 @@ namespace basecross {
 
 		if (m_countDown->IsTimeUp()) {
 			m_strStart->SetDrawActive(true);
+			m_objectiveStr->SetDrawActive(true);
 			if (m_invisibleTimer.Count()) {
-				m_strStart->SetActive(false);
-				m_countDown->SetActive(false);
+				m_strStart->SetDrawActive(false);
+				m_countDown->SetDrawActive(false);
+				m_objectiveStr->SetDrawActive(false);
 			}
 		}
 
@@ -50,14 +62,14 @@ namespace basecross {
 	void GameStartUI::Start() {
 		m_isStart = true;
 		m_isBeforeTimeUp = false;
-		m_countDown->SetActive(true);
+		m_countDown->SetDrawActive(true);
 		m_countDown->Start();
 	}
 
 	void GameStartUI::Reset() {
 		m_isStart = false;
 		m_isBeforeTimeUp = false;
-		m_countDown->SetActive(true);
+		m_countDown->SetDrawActive(true);
 		m_countDown->Reset();
 		m_invisibleTimer.Reset();
 	}

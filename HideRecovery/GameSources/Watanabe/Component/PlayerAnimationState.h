@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "stdafx.h"
 
 namespace basecross {
@@ -29,7 +29,6 @@ namespace basecross {
 			StartTeleport,
 			ExcuteTeleport,
 			EndTeleport,
-
 		};
 
 		wstring static PlayerAnimationState2wstring(const PlayerAnimationState::State& state) {
