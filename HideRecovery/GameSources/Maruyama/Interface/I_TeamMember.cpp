@@ -23,6 +23,18 @@ namespace basecross {
 		return Col4(1);
 	}
 
+	wstring team::GetTeamTypeString(team::TeamType teamType) {
+		switch (teamType)
+		{
+		case team::TeamType::Blue:
+			return L"Blue";
+		case team::TeamType::Red:
+			return L"Red";
+		}
+		// デフォルト値
+		return L"Blue";
+	}
+
 	//--------------------------------------------------------------------------------------
 	/// アクセッサ
 	//--------------------------------------------------------------------------------------
