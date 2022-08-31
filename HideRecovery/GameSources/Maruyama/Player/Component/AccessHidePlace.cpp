@@ -25,7 +25,30 @@ namespace basecross {
 	}
 
 	void AccessHidePlace::OnUpdate() {
+		int index = 0;
+		for (auto& weakPlace : m_allHidePlaces) {
+			auto place = weakPlace.lock();
+			if (!place) {
+				continue;
+			}
 
+			if (place->IsOpen()) {
+				place->SetDrawUI(false);
+				continue;
+			}
+
+			auto toVec = maru::Utility::CalcuToTargetVec(GetGameObject(), place->GetGameObject());
+			auto selfPosition = transform->GetPosition();
+			auto placePosition = place->GetGameObject()->GetComponent<Transform>()->GetPosition();
+			float range = GetRange();
+			float length = toVec.length();
+			bool isDraw = toVec.length() < GetRange();
+			
+			if (isDraw != place->IsDrawUI()) {
+				place->SetDrawUI(isDraw);
+			}
+			index++;
+		}
 	}
 
 	void AccessHidePlace::Access() {

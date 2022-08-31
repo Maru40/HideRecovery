@@ -11,12 +11,15 @@
 namespace basecross {
 
 	class HideItem;
+	class OpenBoard;
 
 	//--------------------------------------------------------------------------------------
 	/// パラメータ
 	//--------------------------------------------------------------------------------------
 	struct HidePlace_Parametor {
 		Vec3 hidePositionOffset;	//隠す場所のオフセット
+		Vec3 boardUIPositionOffset;	//UI表示の位置オフセット
+		bool isOpen;
 
 		HidePlace_Parametor();
 
@@ -43,6 +46,7 @@ namespace basecross {
 		std::weak_ptr<SoundEmitter> m_soundEmitter;
 		SoundClip m_openSoundClip;
 
+		std::weak_ptr<OpenBoard> m_boardUIObject;
 
 	public:
 		HidePlace(const std::shared_ptr<GameObject>& objPtr);
@@ -51,6 +55,9 @@ namespace basecross {
 
 		void OnCreate() override;
 		void OnLateStart() override;
+
+	private:
+		void CreateBoard();
 
 	public:
 		void Open();
@@ -76,6 +83,12 @@ namespace basecross {
 		static void CountReset() { m_objectCount = 1; }
 
 		static std::shared_ptr<HidePlace> GetStageHidePlace(int objectId);
+
+		void SetDrawUI(const bool isActive);
+
+		bool IsDrawUI() const;
+
+		bool IsOpen() const { return m_param.isOpen; };
 	};
 
 }

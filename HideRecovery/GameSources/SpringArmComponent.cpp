@@ -9,6 +9,8 @@
 #include "Maruyama/Player/Component/FieldMap.h"
 #include "Maruyama/Player/Component/Teleport.h"
 
+#include "StageMapCSV.h"
+
 namespace basecross
 {
 	SpringArmComponent::Parametor::Parametor()
@@ -99,6 +101,11 @@ namespace basecross
 		m_param.armVec.x = cosf(m_param.radXZ);
 		m_param.armVec.z = sinf(m_param.radXZ);
 		m_param.currentArmRange = m_armRange;
+
+		constexpr int speedIndex = 9;
+		auto speedStr = StageMapCSV::GetWstringData(L"ShotParametor", L"CSVDatas\\", L"ShotDatas.csv", speedIndex);
+		auto speed = static_cast<float>(_wtof(speedStr.c_str()));
+		m_param.speedXZ = speed;
 	}
 
 	void SpringArmComponent::OnUpdate2()

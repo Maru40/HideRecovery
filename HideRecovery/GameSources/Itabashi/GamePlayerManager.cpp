@@ -26,6 +26,8 @@
 #include "ToTargetMove.h"
 #include "GameManager.h"
 
+#include "Maruyama/Player/Component/AccessHidePlace.h"
+
 namespace basecross
 {
 	GamePlayerManager::GamePlayerManager(const std::shared_ptr<GameObject>& owner) :
@@ -162,6 +164,8 @@ namespace basecross
 			springArm->SetRadXZ(rad);
 			springArm->OnUpdate2();
 		}
+
+		playerObject->AddComponent<AccessHidePlace>();
 
 		return playerObject;
 	}
