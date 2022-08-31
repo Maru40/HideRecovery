@@ -1096,6 +1096,9 @@
     <Filter Include="Maruyama\Stage\MapShotStage">
       <UniqueIdentifier>{293ff4ca-28fb-49bc-b492-f950c275cb6c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\UI\HoldButtonUI">
+      <UniqueIdentifier>{66789215-53a5-45b3-a5ec-a3c355baec12}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2046,6 +2049,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Stage\MapShotStage.h">
       <Filter>Maruyama\Stage\MapShotStage</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\HoldButtonUI.h">
+      <Filter>Watanabe\UI\HoldButtonUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2896,6 +2902,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Stage\MapShotStage.cpp">
       <Filter>Maruyama\Stage\MapShotStage</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\HoldButtonUI.cpp">
+      <Filter>Watanabe\UI\HoldButtonUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
