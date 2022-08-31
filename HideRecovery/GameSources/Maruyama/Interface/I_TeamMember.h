@@ -23,7 +23,8 @@ namespace basecross {
 		/// </summary>
 		enum class TeamType {
 			Blue,
-			Red
+			Red,
+			Neutral
 		};
 
 		// 各チームの色（あいまいになることがあるのでbasecross::で明示する）

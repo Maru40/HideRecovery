@@ -17,8 +17,8 @@
 
 namespace basecross {
 	void MatchingUILayoutStage::CreateViewLight() {
-		const Vec3 eye(0.0f, 5.0f, 10.0f);
-		const Vec3 at(0.0f);
+		const Vec3 eye(0.0f, 10.0f, 20.0f);
+		const Vec3 at(3.0f);
 		auto PtrView = CreateView<SingleView>();
 		//ビューのカメラの設定
 		auto PtrCamera = ObjectFactory::Create<Camera>();
@@ -38,7 +38,7 @@ namespace basecross {
 
 		CreateMap(L"WaitStage.csv");
 		PointManager::GetInstance()->AddPoint(team::TeamType::Blue);
-		auto uiBuilder = CreateUI(L"GameUILayout.csv");
+		//auto uiBuilder = CreateUI(L"GameUILayout.csv");
 
 		//auto WinOrLose = uiBuilder->GetUIObject<WinOrLoseUI>(L"WinOrLose");
 

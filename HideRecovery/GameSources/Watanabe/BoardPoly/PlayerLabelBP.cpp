@@ -83,6 +83,8 @@ namespace basecross {
 				drawComp->SetDiffuse(team::BLUETEAM_COLOR);
 			}
 		}
+
+		GetComponent<Transform>()->SetScale(Vec3(0.7f));
 	}
 
 	void PlayerLabelBP::OnUpdate() {
