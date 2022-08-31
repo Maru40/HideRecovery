@@ -175,11 +175,6 @@ namespace basecross {
 	}
 
 	void MainStage::OnUpdate() {
-		if (App::GetApp()->GetMyInputDevice()->GetKeyBoard().IsInputDown(KeyCode::J)) {
-			for (auto& hidePlace : maru::Utility::FindComponents<HidePlace>()) {
-				hidePlace->Open();
-			}
-		}
 	}
 
 	void MainStage::SetLoadMapName(const wstring& name) {

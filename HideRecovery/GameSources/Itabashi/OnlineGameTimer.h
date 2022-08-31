@@ -12,6 +12,7 @@ namespace basecross
 		static constexpr std::uint8_t GAMETIMER_START_CHECK_EVENT_CODE = 200;
 		static constexpr std::uint8_t GAMETIMER_START_OK_EVENT_CODE = 201;
 		static constexpr std::uint8_t GAMETIMER_START_EVENT_CODE = 202;
+		static constexpr std::uint8_t START_ITEM_RANDOM_EVENT_CODE = 203;
 
 	private:
 
@@ -42,6 +43,10 @@ namespace basecross
 		void GameCountStart();
 
 		void TimeSkipToFinish();
+
+		void StartItemRandom();
+
+		void StartItemRandomEvent(int itemId, int HidePlaceId);
 
 	public:
 		OnlineGameTimer(const std::shared_ptr<GameObject>& owner);
