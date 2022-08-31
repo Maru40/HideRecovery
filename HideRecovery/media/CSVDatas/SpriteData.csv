@@ -16,8 +16,8 @@ GetBall,Message_TX,0,580,900,120
 StolenBall,Message_TX,0,700,800,120
 Matching,Message_TX,0,820,700,120
 Win,WinOrLose_TX,0,0,280,140
-Lose,WinOrLose_TX,0,128,415,140
-Draw,WinOrLose_TX,0,256,420,140
+Lose,WinOrLose_TX,0,140,415,140
+Draw,WinOrLose_TX,0,280,420,140
 10,Numbers_TX,1028,0,172,128
 CreateRoom,Message_TX,0,940,1024,120
 JoinRoom,Message_TX,0,1060,1024,120
