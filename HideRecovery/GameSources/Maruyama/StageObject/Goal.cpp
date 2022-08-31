@@ -52,13 +52,13 @@ namespace basecross {
 		team::TeamType team;
 		int playerNumber;
 		int itemId;
-		Vec3 hidePosition;
+		int hidePlaceId;
 
-		OnlineGoalData(team::TeamType team, int playerNumber, int itemId, const Vec3& hidePosition) :
+		OnlineGoalData(team::TeamType team, int playerNumber, int itemId, int hidePlaceId) :
 			team(team),
 			playerNumber(playerNumber),
 			itemId(itemId),
-			hidePosition(hidePosition)
+			hidePlaceId(hidePlaceId)
 		{}
 	};
 
@@ -132,7 +132,7 @@ namespace basecross {
 		float leftTime = m_timer->GetLeftTime();
 	}
 
-	Vec3 Goal::GoalProcess(const std::shared_ptr<GameObject>& other, const std::shared_ptr<Item>& item)
+	Vec3 Goal::GoalProcess(const std::shared_ptr<GameObject>& other, const std::shared_ptr<Item>& item, const std::shared_ptr<HidePlace>& hidePlace)
 	{
 		auto otherTrans = other->GetComponent<Transform>();
 
@@ -160,8 +160,6 @@ namespace basecross {
 		}
 
 		//再配置場所の取得
-		auto hidePlaces = maru::Utility::FindComponents<HidePlace>(GetStage());
-		auto hidePlace = maru::MyRandom::RandomArray(hidePlaces);
 		std::weak_ptr<Operator::ObjectHider> weakObjectHider = item->GetGameObject()->GetComponent<Operator::ObjectHider>();
 
 		//アイテム再配置イベント
@@ -193,13 +191,16 @@ namespace basecross {
 
 		itemBag->RemoveItem(item);
 
-		auto hidePosition = GoalProcess(other, item);
+		auto hidePlaces = maru::Utility::FindComponents<HidePlace>(GetStage());
+		auto hidePlace = maru::MyRandom::RandomArray(hidePlaces);
 
-		auto data = OnlineGoalData(m_param.team, onlineController->GetPlayerNumber(), item->GetItemId(), hidePosition);
+		auto hidePosition = GoalProcess(other, item, hidePlace);
+
+		auto data = OnlineGoalData(m_param.team, onlineController->GetPlayerNumber(), item->GetItemId(), hidePlace->GetObjectId());
 		Online::OnlineManager::RaiseEvent(false, (std::uint8_t*)&data, sizeof(OnlineGoalData), EXECUTE_GOAL_EVENT_CODE);
 	}
 
-	void Goal::SuccessGoal(team::TeamType team, int playerNumber, int itemId, const Vec3& hidePosition)
+	void Goal::SuccessGoal(team::TeamType team, int playerNumber, int itemId, int hidePlaceId)
 	{
 		if (GetTeam() != team) {
 			return;
@@ -211,7 +212,11 @@ namespace basecross {
 		auto item = itemBag->GetItem(itemId);
 		itemBag->RemoveItem(item);
 
-		GoalProcess(other, item);
+		auto hidePlaces = maru::Utility::FindComponents<HidePlace>(GetStage());
+
+		std::shared_ptr<HidePlace> hidePlace = HidePlace::GetStageHidePlace(hidePlaceId);
+
+		GoalProcess(other, item, hidePlace);
 
 		PlayAnimation(other);
 	}
@@ -288,7 +293,7 @@ namespace basecross {
 		if (eventCode == EXECUTE_GOAL_EVENT_CODE)
 		{
 			auto data = *(OnlineGoalData*)bytes;
-			SuccessGoal(data.team, data.playerNumber, data.itemId, data.hidePosition);
+			SuccessGoal(data.team, data.playerNumber, data.itemId, data.hidePlaceId);
 			return;
 		}
 	}
