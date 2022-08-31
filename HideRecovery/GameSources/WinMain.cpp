@@ -11,8 +11,8 @@ using namespace basecross;
 LRESULT CALLBACK	WndProc(HWND, UINT, WPARAM, LPARAM);
 
 //定数
-const wchar_t* pClassName = L"HideRecovery";
-const wchar_t* pWndTitle = L"HideRecovery";
+const wchar_t* pClassName = L"SCRAMBLE BALL";
+const wchar_t* pWndTitle = L"SCRAMBLE BALL";
 
 
 //--------------------------------------------------------------------------------------
