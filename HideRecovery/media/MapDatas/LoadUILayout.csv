@@ -1,0 +1,3 @@
+className,UIName,PosX,PosY,ScaleX,ScaleY,Rot,,
+SimpleSprite,Background,0,0,1,1,0,Texture,LoadingBG_TX
+SimpleSprite,Loading,400,-420,1,1,0,Texture,Loading_TX

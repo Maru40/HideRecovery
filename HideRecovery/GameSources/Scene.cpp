@@ -14,7 +14,7 @@
 #include "Watanabe/TestStage/WatanabeStage.h"
 #include "Watanabe/TestStage/MatchingUILayoutStage.h"
 #include "Itabashi/OnlineMatchStage.h"
-#include "Maruyama/Stage/MapShotStage.h"	
+#include "Maruyama/Stage/MapShotStage.h"
 
 class LoadStage;
 
