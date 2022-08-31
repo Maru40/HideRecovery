@@ -14,6 +14,8 @@
 #include "MapCursor.h"
 #include "Maruyama/UI/UILayer.h"
 
+#include "Maruyama/Interface/I_TeamMember.h"
+
 namespace basecross {
 
 	std::weak_ptr<FieldMap>  maru::SingletonComponent<FieldMap>::sm_instance;
@@ -61,6 +63,18 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 
 	void FieldMap::SetMapDraw(const bool isDraw) {
+		auto teamMember = GetMapCursor()->GetTarget()->GetComponent<I_TeamMember>(false);
+		if (!teamMember) {
+			return;
+		}
+
+		if (teamMember->GetTeam() == team::TeamType::Red) {
+			GetMapTexture()->GetComponent<Transform>()->SetRotation(Vec3(0.0f, 0.0f, XM_PI));
+		}
+		else {
+			GetMapTexture()->GetComponent<Transform>()->SetRotation(Vec3(0.0f, 0.0f, 0.0f));
+		}
+
 		GetMapTexture()->SetDrawActive(isDraw);
 		GetMapCursor()->SetDrawActive(isDraw);
 	}
@@ -72,5 +86,13 @@ namespace basecross {
 	std::shared_ptr<SpriteObject> FieldMap::GetMapTexture() const { return m_mapTexture.lock(); }
 
 	std::shared_ptr<MapCursor> FieldMap::GetMapCursor() const { return m_cursor.lock(); }
+
+	void FieldMap::SetTeamMember(const std::shared_ptr<I_TeamMember>& teamMember) {
+		m_teamMember = teamMember;
+	}
+
+	std::shared_ptr<I_TeamMember> FieldMap::GetTeamMember() const {
+		return m_teamMember.lock();
+	}
 
 }

@@ -25,7 +25,6 @@ namespace basecross {
 	}
 
 	void AccessHidePlace::OnUpdate() {
-		int index = 0;
 		for (auto& weakPlace : m_allHidePlaces) {
 			auto place = weakPlace.lock();
 			if (!place) {
@@ -47,7 +46,6 @@ namespace basecross {
 			if (isDraw != place->IsDrawUI()) {
 				place->SetDrawUI(isDraw);
 			}
-			index++;
 		}
 	}
 

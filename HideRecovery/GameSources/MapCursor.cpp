@@ -129,12 +129,20 @@ namespace basecross {
 	}
 
 	void MapCursor::SetMapCursorPositionConnectTargetPosition() {
+		auto teamMember = GetTarget()->GetComponent<I_TeamMember>(false);
+		int value = 1;
+		if (teamMember->GetTeam() == team::TeamType::Red) {
+			value = -1;
+		}
+
 		auto rect = FieldMap::GetInstance()->GetRect();
 		auto halfMapTextureScale = FieldMap::GetInstance()->GetMapTextureScale() * 0.5f;
 		auto startPosition = GetTarget()->GetComponent<Transform>()->GetPosition();
 		float xRate = startPosition.x / (rect.width * 0.5f);
 		float yRate = startPosition.z / (rect.depth * 0.5f);
-		transform->SetPosition(Vec3(halfMapTextureScale.x * xRate, halfMapTextureScale.y * yRate, 0.0f));
+		auto position = Vec3(halfMapTextureScale.x * xRate, halfMapTextureScale.y * yRate, 0.0f);
+
+		transform->SetPosition(position * value);
 	}
 
 	void MapCursor::SetTarget(const std::shared_ptr<GameObject>& target) { 
@@ -145,6 +153,12 @@ namespace basecross {
 	}
 
 	Vec3 MapCursor::GetCursorFiledPosition() {
+		auto teamMember = GetTarget()->GetComponent<I_TeamMember>(false);
+		int value = 1;
+		if (teamMember->GetTeam() == team::TeamType::Red) {
+			value = -1;
+		}
+
 		auto sprite = m_cursor.lock();
 		auto spriteTrans = sprite->GetComponent<Transform>();
 
@@ -157,7 +171,7 @@ namespace basecross {
 		float yRate = startPosition.y / (mapTextureScale.y * 0.5f);
 		auto position = (Vec3(halfWidth * xRate, 0.1f, halfDepth * yRate));
 
-		return position;
+		return position * value;
 	}
 
 	void MapCursor::OnDrawActive() {
