@@ -1,7 +1,7 @@
-/*!
+ï»¿/*!
 @file ChargeBulletObject.cpp
-@brief ChargeBulletObject‚ÌƒNƒ‰ƒXÀ‘Ì
-’S“–FŠÛR—TŠì
+@brief ChargeBulletObjectã®ã‚¯ãƒ©ã‚¹å®Ÿä½“
+æ‹…å½“ï¼šä¸¸å±±è£•å–œ
 */
 
 #include "stdafx.h"
@@ -12,6 +12,7 @@
 #include "ChargeBullet.h"
 
 #include "Watanabe/Effekseer/EfkEffect.h"
+#include "Watanabe/Component/LifeSpan.h"
 
 namespace basecross {
 	ChargeBulletObject::ChargeBulletObject(const std::shared_ptr<Stage>& stage)
@@ -36,6 +37,9 @@ namespace basecross {
 
 		auto collision = AddComponent<CollisionObb>();
 		collision->SetAfterCollision(AfterCollision::None);
+
+		auto lifeSpan = AddComponent<LifeSpan>();
+		lifeSpan->SetLifeTime(1.0f);
 	}
 
 	void ChargeBulletObject::SettingEffect() {
