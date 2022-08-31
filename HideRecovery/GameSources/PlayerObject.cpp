@@ -112,7 +112,7 @@ namespace basecross {
 		//AddComponent<FieldMap>();
 		//AddComponent<Teleport>();
 		AddComponent<EyeSearchRange>();
-		AddComponent<AccessHidePlace>();
+		//AddComponent<AccessHidePlace>();
 
 		AddComponent<Teleport>();	//テレポートの生成
 
