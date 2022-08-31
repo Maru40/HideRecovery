@@ -1,4 +1,4 @@
-/*!
+ï»¿/*!
 @file MainStage.h
 @brief MainStage
 */
@@ -11,16 +11,16 @@
 
 namespace basecross {
 	//--------------------------------------------------------------------------------------
-	/// ƒƒCƒ“ƒXƒe[ƒW
+	/// ãƒ¡ã‚¤ãƒ³ã‚¹ãƒ†ãƒ¼ã‚¸
 	//--------------------------------------------------------------------------------------
 	class MainStage : public GameStageBase {
-		static wstring sm_loadMapName;  //“Ç‚İ‚Şƒ}ƒbƒv–¼
+		static wstring sm_loadMapName;  //èª­ã¿è¾¼ã‚€ãƒãƒƒãƒ—å
 
 		//std::shared_ptr<GameStartUI> m_gameStartUI;
 		//std::shared_ptr<GameFinishUI> m_gameFinishUI;
 
 		/// <summary>
-		/// ƒrƒ…[‚Ìì¬
+		/// ãƒ“ãƒ¥ãƒ¼ã®ä½œæˆ
 		/// </summary>
 		void CreateViewLight();
 
@@ -33,17 +33,17 @@ namespace basecross {
 		virtual void OnUpdate() override;
 
 		//--------------------------------------------------------------------------------------
-		///	ƒAƒNƒZƒbƒT
+		///	ã‚¢ã‚¯ã‚»ãƒƒã‚µ
 		//--------------------------------------------------------------------------------------
 
 		/// <summary>
-		/// “Ç‚İ‚Şƒ}ƒbƒv–¼‚Ìİ’è
+		/// èª­ã¿è¾¼ã‚€ãƒãƒƒãƒ—åã®è¨­å®š
 		/// </summary>
-		/// <param name="name">“Ç‚İ‚Şƒ}ƒbƒv–¼</param>
+		/// <param name="name">èª­ã¿è¾¼ã‚€ãƒãƒƒãƒ—å</param>
 		static void SetLoadMapName(const wstring& name);
 
 		/// <summary>
-		/// “Ç‚İ‚Şƒ}ƒbƒv–¼‚Ìæ“¾
+		/// èª­ã¿è¾¼ã‚€ãƒãƒƒãƒ—åã®å–å¾—
 		/// </summary>
 		/// <returns></returns>
 		static wstring GetLoadMapName();

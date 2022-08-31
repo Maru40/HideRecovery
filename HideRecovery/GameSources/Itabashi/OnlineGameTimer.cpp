@@ -100,12 +100,6 @@ namespace basecross
 
 		TimeManager::GetInstance()->UpdateTime();
 
-		// デバッグ用
-		if (App::GetApp()->GetMyInputDevice()->GetKeyBoard().IsInputDown(itbs::Input::KeyCode::X))
-		{
-			TimeSkipToFinish();
-		}
-
 		auto timeCounter = TimeManager::GetInstance()->GetTimer();
 
 		bool isFinishCount = timeCounter.GetElaspedTime() >= FINISH_COUNT_ELAPSED_TIME;
