@@ -36,10 +36,16 @@ namespace basecross {
 
 		std::weak_ptr<HideItem> m_hideItem;
 
+		std::weak_ptr<SoundEmitter> m_soundEmitter;
+		SoundClip m_openSoundClip;
+
 	public:
 		HidePlace(const std::shared_ptr<GameObject>& objPtr);
 
 		HidePlace(const std::shared_ptr<GameObject>& objPtr, const Parametor& parametor);
+
+		void OnCreate();
+		void OnLateStart();
 
 	public:
 		void Open();

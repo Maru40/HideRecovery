@@ -101,6 +101,8 @@ namespace basecross
 		ResourceLoadData(L"TeleportSE", L"TeleportSE.wav"),
 		ResourceLoadData(L"GameSetSE", L"GameSetSE.wav"),
 		ResourceLoadData(L"AlertSE_00", L"AlertSe00.wav"),
+
+		ResourceLoadData(L"OpenBoxSE", L"OpenBoxSe.wav"),
 	};
 
 	const std::vector<LoadStage::ResourceLoadData> LoadStage::m_bgmResourceLoadDatas =
