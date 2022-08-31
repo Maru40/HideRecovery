@@ -85,6 +85,8 @@ namespace basecross
 		ResourceLoadData(L"SquareSprite_TX", L"SquareSprite.png"),
 
 		ResourceLoadData(L"Open_TX", L"Open_TX.png"),
+
+		ResourceLoadData(L"FieldMapBox_TX", L"FiledMapBox_TX.png"),
 	};
 
 	const std::vector<LoadStage::ResourceLoadData> LoadStage::m_seResourceLoadDatas =

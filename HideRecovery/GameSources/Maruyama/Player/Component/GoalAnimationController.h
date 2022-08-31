@@ -76,6 +76,8 @@ namespace basecross {
 		void OnLateStart() override;
 		void OnUpdate() override;
 
+		void OnDisable() override;
+
 	private:
 		/// <summary>
 		/// 開始アニメーションイベント
