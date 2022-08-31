@@ -1,4 +1,3 @@
-
 /*!
 @file GoalAnimationController.cpp
 @brief GoalAnimationControllerクラス実体
@@ -29,9 +28,10 @@
 #include "HideItemObject.h"
 #include "PlayerInputer.h"
 #include "Maruyama/StageObject/Goal.h"
+#include "MainStage.h"
+#include "Watanabe/UI/UIObjects.h"
 
 namespace basecross {
-
 	//--------------------------------------------------------------------------------------
 	/// ゴール中のアニメーションコントローラーのパラメータ
 	//--------------------------------------------------------------------------------------
@@ -94,6 +94,13 @@ namespace basecross {
 
 			if (auto soundEmmiter = GetGameObject()->GetComponent<SoundEmitter>(false)) {
 				soundEmmiter->PlaySoundClip(m_goalSoundClip);
+			}
+
+			auto mainStage = GetGameObject()->GetTypeStage<MainStage>(false);
+			if (mainStage) {
+				auto splashMessage = mainStage->GetUIObjectCSVBuilder()->GetUIObject<SplashMessageUI>(L"SplashMessage");
+				splashMessage->SetMessage(SplashMessageUI::MessageType::Goal);
+				splashMessage->SetColor(Col4(1, 0.5f, 0, 1));
 			}
 		};
 
@@ -166,7 +173,7 @@ namespace basecross {
 			if (animator) {
 				animator->ChangeBallAnimation(BallAnimationState::State::Goal);
 			}
-		};	
+		};
 		m_taskList->DefineTask(TaskEnum::PreliminaryJump, std::make_shared<Task::Wait>(m_param.preliminaryJumpParam));
 
 		//ダンク位置まで移動
@@ -175,11 +182,9 @@ namespace basecross {
 
 		//ダンク後の待機
 		m_param.dunkAfterWaitParam->start = [&]() {
-
 		};
 
 		m_param.dunkAfterWaitParam->exit = [&]() {
-			
 		};
 		m_taskList->DefineTask(TaskEnum::DunkWait, std::make_shared<Task::Wait>(m_param.dunkAfterWaitParam));
 

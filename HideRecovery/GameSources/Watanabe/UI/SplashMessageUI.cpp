@@ -13,6 +13,7 @@ namespace basecross {
 		{MessageType::JoinRoom,MessageData(SimpleSprite::Type::SpriteData,L"JoinRoom")},
 		{MessageType::Remaining60s,MessageData(SimpleSprite::Type::SpriteData,L"Remaining60s")},
 		{MessageType::Remaining30s,MessageData(SimpleSprite::Type::SpriteData,L"Remaining30s")},
+		{MessageType::Goal,MessageData(SimpleSprite::Type::SpriteData,L"Goal")},
 	};
 
 	SplashMessageUI::SplashMessageUI(const shared_ptr<Stage>& stage)
@@ -40,7 +41,6 @@ namespace basecross {
 
 		if (m_timer.Count()) {
 			m_isStart = false;
-			SetColor(m_defaultColor);
 			m_sprite->SetActive(false);
 		}
 	}
@@ -51,6 +51,7 @@ namespace basecross {
 		m_sprite->SetActive(true);
 		m_timer.Reset();
 		m_isStart = true;
+		SetColor(m_defaultColor);
 	}
 
 	void SplashMessageUI::SetColor(const Col4& color) {
