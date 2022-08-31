@@ -68,6 +68,7 @@
 
 #include "Maruyama/UI/Reticle.h"
 #include "TeleportUI.h"
+#include "HidePlace.h"
 
 #include "GameManager.h"
 
@@ -90,6 +91,9 @@ namespace basecross {
 	}
 
 	void MainStage::OnCreate() {
+
+		HidePlace::CountReset();
+
 		try {
 			AddGameObject<EfkInterface>();
 			AddGameObject<Debug>();
@@ -178,6 +182,13 @@ namespace basecross {
 	}
 
 	void MainStage::OnUpdate() {
+		if (App::GetApp()->GetMyInputDevice()->GetKeyBoard().IsInputDown(KeyCode::J))
+		{
+			for (auto& hidePlace : maru::Utility::FindComponents<HidePlace>())
+			{
+				hidePlace->Open();
+			}
+		}
 	}
 
 	void MainStage::SetLoadMapName(const wstring& name) {

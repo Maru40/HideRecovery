@@ -1,8 +1,8 @@
-
+ï»¿
 /*!
 @file HidePlace.h
-@brief HidePlace‚È‚Ç
-’S“–FŠÛR—TŠì
+@brief HidePlaceãªã©
+æ‹…å½“ï¼šä¸¸å±±è£•å–œ
 */
 
 #include "stdafx.h"
@@ -18,8 +18,10 @@
 
 namespace basecross {
 
+	int HidePlace::m_objectCount = 1;
+
 	//--------------------------------------------------------------------------------------
-	/// ƒpƒ‰ƒ[ƒ^
+	/// ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
 	//--------------------------------------------------------------------------------------
 
 	HidePlace_Parametor::HidePlace_Parametor():
@@ -31,7 +33,7 @@ namespace basecross {
 	{}
 
 	//--------------------------------------------------------------------------------------
-	/// ‰B‚·êŠ
+	/// éš ã™å ´æ‰€
 	//--------------------------------------------------------------------------------------
 
 	HidePlace::HidePlace(const std::shared_ptr<GameObject>& objPtr) :
@@ -70,8 +72,14 @@ namespace basecross {
 		//item->GetGameObject()->SetActive(false);
 	}
 
+	void HidePlace::OnCreate()
+	{
+		m_objectId = m_objectCount;
+		++m_objectCount;
+	}
+
 	//--------------------------------------------------------------------------------------
-	/// ƒAƒNƒZƒbƒT
+	/// ã‚¢ã‚¯ã‚»ãƒƒã‚µ
 	//--------------------------------------------------------------------------------------
 
 	void HidePlace::SetHideItem(const std::shared_ptr<HideItem>& item) {
@@ -87,4 +95,20 @@ namespace basecross {
 		return m_hideItem.lock();
 	}
 
+	std::shared_ptr<HidePlace> HidePlace::GetStageHidePlace(int objectId)
+	{
+		for (auto& gameObject : App::GetApp()->GetScene<Scene>()->GetActiveStage()->GetGameObjectVec())
+		{
+			auto hidePlace = gameObject->GetComponent<HidePlace>(false);
+
+			if (!hidePlace || hidePlace->GetObjectId() != objectId)
+			{
+				continue;
+			}
+
+			return hidePlace;
+		}
+
+		return nullptr;
+	}
 }
