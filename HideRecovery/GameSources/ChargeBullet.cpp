@@ -59,7 +59,9 @@ namespace basecross {
 			return;
 		}
 
-		if (!Online::OnlineManager::GetLocalPlayer().getIsMasterClient())
+		auto chargeBullet = other->GetComponent<ChargeBullet>(false);
+
+		if (!Online::OnlineManager::GetLocalPlayer().getIsMasterClient() || chargeBullet)
 		{
 			return;
 		}
