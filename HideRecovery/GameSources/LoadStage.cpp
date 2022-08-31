@@ -247,6 +247,7 @@ namespace basecross
 		EfkEffectResource::RegisterEffectResource(L"BlueBullet", dir + L"BlueBullet.efk");
 		EfkEffectResource::RegisterEffectResource(L"RedBullet", dir + L"RedBullet.efk");
 		EfkEffectResource::RegisterEffectResource(L"Tackle", dir + L"Tackle.efk");
+		EfkEffectResource::RegisterEffectResource(L"HasBall", dir + L"HasBall.efk");
 	}
 
 	void LoadStage::OnCreate()
