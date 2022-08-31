@@ -68,7 +68,7 @@
 
 #include "Maruyama/UI/Reticle.h"
 #include "TeleportUI.h"
-
+#include "Maruyama/Interface/I_TeamMember.h"
 #include "GameManager.h"
 
 using namespace basecross::Enemy;
@@ -119,7 +119,7 @@ namespace basecross {
 			std::weak_ptr<OnlineGameTimer> weakOnlineGameTimer = onlineGameTimer;
 			gameStartUI->AddTimeUpEventFunc([weakOnlineGameTimer]() {weakOnlineGameTimer.lock()->GameTimerStart(); });
 			//ゲーム状態にする
-			gameStartUI->AddTimeUpEventFunc([]() { if (auto gameManager = GameManager::GetInstance()) { gameManager->ChangeState(GameManager::State::Game); } });	
+			gameStartUI->AddTimeUpEventFunc([]() { if (auto gameManager = GameManager::GetInstance()) { gameManager->ChangeState(GameManager::State::Game); } });
 
 			auto gameFinishUI = AddGameObject<GameFinishUI>();
 			std::weak_ptr<GameFinishUI> weakGameFinishUI = gameFinishUI;
@@ -141,7 +141,12 @@ namespace basecross {
 			// UIレイアウトの読み込み
 			auto gameUIBuilder = CreateUI(L"GameUILayout.csv");
 			auto remainingTime = gameUIBuilder->GetUIObject<SplashMessageUI>(L"RemainingTime");
+			auto teamRed = gameUIBuilder->GetUIObject<SimpleSprite>(L"TeamRed");
+			teamRed->GetDrawComponent()->SetDiffuse(team::REDTEAM_COLOR);
+			auto teamBlue = gameUIBuilder->GetUIObject<SimpleSprite>(L"TeamBlue");
+			teamBlue->GetDrawComponent()->SetDiffuse(team::BLUETEAM_COLOR);
 
+			// 残り時間表示のイベント登録
 			TimeManager::GetInstance()->AddEvent(60,
 				[remainingTime]() {
 					remainingTime->SetColor(Col4(1, 1, 1, 0.5f));
@@ -154,16 +159,6 @@ namespace basecross {
 					remainingTime->SetMessage(SplashMessageUI::MessageType::Remaining30s);
 				}
 			);
-
-			//AddGameObject<GameObject>()->AddComponent<Reticle>();
-
-			//m_gameStartUI = AddGameObject<GameStartUI>();
-			//m_gameFinishUI = AddGameObject<GameFinishUI>();
-			//隠すアイテムの設定
-			//Instantiate<HideItemObject>(Vec3(0.0f, 0.0f, 0.0f), Quat::Identity());
-
-			//デバッグ
-			//AddGameObject<DebugObject>();
 
 			Debug::GetInstance()->Log(L"入力------------------------------");
 			Debug::GetInstance()->Log(L"X  : 置く");
