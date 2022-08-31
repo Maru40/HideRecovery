@@ -79,12 +79,15 @@ namespace basecross {
 		auto blueLabel = uiBuilder->GetUIObject<SimpleSprite>(L"BlueLabel");
 		blueLabel->GetDrawComponent()->SetDiffuse(team::BLUETEAM_COLOR);
 
-		// 紙吹雪エフェクト
-		auto effectObject = AddGameObject<GameObject>();
-		effectObject->GetComponent<Transform>()->SetPosition(Vec3(0, 5, 0));
-		auto efkComp = effectObject->AddComponent<EfkComponent>();
-		efkComp->SetEffectResource(L"Confetti");
-		efkComp->PlayLoop(L"Confetti");
+		// 引き分け以外に生成
+		if (!PointManager::GetInstance()->IsDraw()) {
+			// 紙吹雪エフェクト
+			auto effectObject = AddGameObject<GameObject>();
+			effectObject->GetComponent<Transform>()->SetPosition(Vec3(0, 5, 0));
+			auto efkComp = effectObject->AddComponent<EfkComponent>();
+			efkComp->SetEffectResource(L"Confetti");
+			efkComp->PlayLoop(L"Confetti");
+		}
 
 		//playerの生成
 		CreatePlayers(PointManager::GetInstance()->GetWinner());
