@@ -46,7 +46,7 @@ namespace basecross
 		auto matchStageTransitioner = gameObject->AddComponent<MatchStageTransitioner>();
 
 		// マップとUIの生成
-		CreateMap(L"MatchingStage.csv");
+		CreateMap(L"WaitStage.csv");
 		auto uiBuilder = CreateUI(L"MatchingUILayout.csv");
 		gameObject->AddComponent<MatchingUIController>(uiBuilder);
 

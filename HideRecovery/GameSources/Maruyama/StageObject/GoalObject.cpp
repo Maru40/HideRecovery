@@ -30,6 +30,9 @@ namespace basecross {
 		else if (teamType == L"Red") {
 			m_team = team::TeamType::Red;
 		}
+		else if (teamType == L"Neutral") {
+			m_team = team::TeamType::Neutral;
+		}
 		else {
 			throw BaseException(
 				L"BlockTypeが不正な値です。",
@@ -73,8 +76,12 @@ namespace basecross {
 			//draw->SetTextureResource(L"RedGoal_TX");
 			//draw->SetModelTextureEnabled(false);
 		}
-		else {
+		else if (m_team == team::TeamType::Red) {
 			draw->SetTextureResource(L"RedGoal_TX");
+			draw->SetModelTextureEnabled(false);
+		}
+		else {
+			draw->SetTextureResource(L"GoalTx");
 			draw->SetModelTextureEnabled(false);
 		}
 

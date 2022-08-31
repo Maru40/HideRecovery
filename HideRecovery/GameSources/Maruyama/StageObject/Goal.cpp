@@ -160,6 +160,7 @@ namespace basecross {
 			goalAnimationController->SetDunkPosition(GetDunkPosition());
 			goalAnimationController->SetDunkBallPosition(transform->GetPosition() + m_param.dunkBallPositionOffset);
 			goalAnimationController->SetGoal(GetThis<Goal>());
+			goalAnimationController->SetGoalPerson(other);
 		}
 
 		//ポイント加算

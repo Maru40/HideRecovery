@@ -55,6 +55,7 @@ namespace basecross
 		ResourceLoadData(L"ReticleCnterRed_TX", L"ReticleCtrR.png"),
 
 		ResourceLoadData(L"RedGoal_TX", L"RedGoalTx.png"),
+		ResourceLoadData(L"GoalTx", L"GoalTx.png"),
 
 		ResourceLoadData(L"MapCursorUnderCircle_TX", L"MapCursorUnderCircle.png"),
 

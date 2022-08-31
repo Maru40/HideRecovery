@@ -10,7 +10,7 @@ namespace basecross {
 	{}
 
 	void HPGaugeBP::OnCreate() {
-		auto size = Vec2(1, 0.1f);
+		auto size = Vec2(0.7f, 0.05f);
 		Col4 color(1.0f);
 		Vec2 halfSize = size / 2.0f;
 		// 頂点のデータ (番号は左上から右下まで)
