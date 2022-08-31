@@ -57,7 +57,7 @@ namespace basecross {
 			//キルカウントを加算
 			auto playerController = damage.attacker->GetComponent<Online::PlayerOnlineController>(false);
 			if (playerController) {
-				ScoreManager::GetInstance()->AddKillCount(playerController->GetPlayerNumber());
+				ScoreManager::GetInstance()->AddKillCount(playerController->GetGamePlayerNumber());
 			}
 
 			if (auto deader = GetGameObject()->GetComponent<PlayerDeader>(false)) {

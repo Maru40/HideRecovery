@@ -192,7 +192,7 @@ namespace basecross {
 
 		//ゴール通知
 		auto playerController = other->GetComponent<Online::PlayerOnlineController>(false);
-		ScoreManager::GetInstance()->AddGoalCount(playerController->GetPlayerNumber());
+		ScoreManager::GetInstance()->AddGoalCount(playerController->GetGamePlayerNumber());
 
 		return hidePlace->GetHidePosition();
 	}
