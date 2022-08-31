@@ -94,8 +94,8 @@ namespace basecross {
 			fieldMap = GetStage()->AddGameObject<GameObject>()->AddComponent<FieldMap>();
 		}
 
-		fieldMap->SetMapDraw(false);
 		fieldMap->GetMapCursor()->SetTarget(GetGameObject());
+		fieldMap->SetMapDraw(false);
 
 		m_fieldMap = fieldMap;
 	}

@@ -20,6 +20,7 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 	class SpriteObject;
 	class MapCursor;
+	class I_TeamMember;
 
 	//--------------------------------------------------------------------------------------
 	/// フィールドマップのパラメータ
@@ -45,6 +46,8 @@ namespace basecross {
 
 		std::weak_ptr<SpriteObject> m_mapTexture;		//マップテクスチャ
 		std::weak_ptr<MapCursor> m_cursor;				//カーソル
+
+		std::weak_ptr<I_TeamMember> m_teamMember;
 
 	public:
 		FieldMap(const std::shared_ptr<GameObject>& objPtr);
@@ -86,6 +89,10 @@ namespace basecross {
 		/// テクスチャマップのスケールを返す。
 		/// </summary>
 		Vec3 GetMapTextureScale() const { return m_builderParam.scale; };
+
+		void SetTeamMember(const std::shared_ptr<I_TeamMember>& teamMember);
+
+		std::shared_ptr<I_TeamMember> GetTeamMember() const;
 	};
 
 }
