@@ -59,6 +59,8 @@ namespace basecross
 		ResourceLoadData(L"TeleportUI_TX", L"TeleportUI_TX.png"),
 		ResourceLoadData(L"Point_TX", L"Point.png"),
 
+		ResourceLoadData(L"AButton_TX", L"AButton.png"),
+
 		//RampTex
 		ResourceLoadData(L"Ramp_Rock_TX", L"RampTex_Rock.png"),
 
@@ -78,6 +80,8 @@ namespace basecross
 
 		ResourceLoadData(L"Arrow_TX", L"Arrow.png"),
 		ResourceLoadData(L"SquareSprite_TX", L"SquareSprite.png"),
+
+		ResourceLoadData(L"Open_TX", L"Open_TX.png"),
 	};
 
 	const std::vector<LoadStage::ResourceLoadData> LoadStage::m_seResourceLoadDatas =
