@@ -1,8 +1,8 @@
-
+ï»¿
 /*!
 @file HidePlace.h
-@brief HidePlace‚È‚Ç
-’S“–FŠÛR—TŠì
+@brief HidePlaceãªã©
+æ‹…å½“ï¼šä¸¸å±±è£•å–œ
 */
 
 #pragma once
@@ -13,10 +13,10 @@ namespace basecross {
 	class HideItem;
 
 	//--------------------------------------------------------------------------------------
-	/// ƒpƒ‰ƒ[ƒ^
+	/// ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
 	//--------------------------------------------------------------------------------------
 	struct HidePlace_Parametor {
-		Vec3 hidePositionOffset;	//‰B‚·êŠ‚ÌƒIƒtƒZƒbƒg
+		Vec3 hidePositionOffset;	//éš ã™å ´æ‰€ã®ã‚ªãƒ•ã‚»ãƒƒãƒˆ
 
 		HidePlace_Parametor();
 
@@ -24,7 +24,7 @@ namespace basecross {
 	};
 
 	//--------------------------------------------------------------------------------------
-	/// ‰B‚·êŠ
+	/// éš ã™å ´æ‰€
 	//--------------------------------------------------------------------------------------
 	class HidePlace : public Component
 	{
@@ -36,6 +36,10 @@ namespace basecross {
 
 		std::weak_ptr<HideItem> m_hideItem;
 
+		static int m_objectCount;
+
+		int m_objectId = 0;
+
 	public:
 		HidePlace(const std::shared_ptr<GameObject>& objPtr);
 
@@ -46,19 +50,27 @@ namespace basecross {
 
 		void Close();
 
+		void OnCreate() override;
+
 		//--------------------------------------------------------------------------------------
-		/// ƒAƒNƒZƒbƒT
+		/// ã‚¢ã‚¯ã‚»ãƒƒã‚µ
 		//--------------------------------------------------------------------------------------
 
 		/// <summary>
-		/// ‰B‚·êŠ‚Ìæ“¾
+		/// éš ã™å ´æ‰€ã®å–å¾—
 		/// </summary>
-		/// <returns>‰B‚·êŠ</returns>
+		/// <returns>éš ã™å ´æ‰€</returns>
 		Vec3 GetHidePosition() const { return transform->GetPosition() + m_param.hidePositionOffset; }
 
 		void SetHideItem(const std::shared_ptr<HideItem>& item);
 
 		std::shared_ptr<HideItem> GetHideItem() const;
+
+		int GetObjectId() const { return m_objectId; }
+
+		static void CountReset() { m_objectCount = 1; }
+
+		static std::shared_ptr<HidePlace> GetStageHidePlace(int objectId);
 	};
 
 }
