@@ -41,13 +41,30 @@ namespace basecross {
 	{}
 
 	HidePlace::HidePlace(const std::shared_ptr<GameObject>& objPtr, const Parametor& parametor) :
-		Component(objPtr), m_param(parametor)
+		Component(objPtr),
+		m_param(parametor),
+		m_openSoundClip(L"OpenBoxSE", false, 0.5f)
 	{}
+
+	void HidePlace::OnCreate() {
+		GetGameObject()->AddComponent<SoundEmitter>();
+
+		m_objectId = m_objectCount;
+		++m_objectCount;
+	}
+
+	void HidePlace::OnLateStart() {
+		m_soundEmitter = GetGameObject()->GetComponent<SoundEmitter>();
+	}
 
 	void HidePlace::Open() {
 		auto animator = GetGameObject()->GetComponent<BoxAnimator>(false);
 		if (animator && animator->IsCurrentAnimator(BoxAnimationState::State::Close)) {
 			animator->ChangeBoxAnimation(BoxAnimationState::State::Open);
+		}
+
+		if (auto soundEmitter = m_soundEmitter.lock()) {
+			soundEmitter->PlaySoundClip(m_openSoundClip);
 		}
 
 		//auto item = GetHideItem();
@@ -70,12 +87,6 @@ namespace basecross {
 		//}
 
 		//item->GetGameObject()->SetActive(false);
-	}
-
-	void HidePlace::OnCreate()
-	{
-		m_objectId = m_objectCount;
-		++m_objectCount;
 	}
 
 	//--------------------------------------------------------------------------------------

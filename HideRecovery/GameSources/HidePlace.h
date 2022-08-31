@@ -40,17 +40,22 @@ namespace basecross {
 
 		int m_objectId = 0;
 
+		std::weak_ptr<SoundEmitter> m_soundEmitter;
+		SoundClip m_openSoundClip;
+
+
 	public:
 		HidePlace(const std::shared_ptr<GameObject>& objPtr);
 
 		HidePlace(const std::shared_ptr<GameObject>& objPtr, const Parametor& parametor);
 
+		void OnCreate() override;
+		void OnLateStart() override;
+
 	public:
 		void Open();
 
 		void Close();
-
-		void OnCreate() override;
 
 		//--------------------------------------------------------------------------------------
 		/// アクセッサ
