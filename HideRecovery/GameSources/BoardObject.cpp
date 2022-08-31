@@ -33,7 +33,7 @@ namespace basecross {
 			drawComp->SetTextureResource(m_paramPtr->texture);
 		}
 		drawComp->SetDepthStencilState(DepthStencilState::Read);
-		drawComp->SetBlendState(BlendState::Additive);
+		//drawComp->SetBlendState(BlendState::Additive);
 
 		SetAlphaActive(true);
 	}

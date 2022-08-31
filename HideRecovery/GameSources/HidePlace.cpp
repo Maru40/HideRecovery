@@ -16,6 +16,8 @@
 #include "Itabashi/Item.h"
 #include "HideItem.h"
 
+#include "OpenBoard.h"
+
 namespace basecross {
 
 	int HidePlace::m_objectCount = 1;
@@ -29,7 +31,9 @@ namespace basecross {
 	{}
 
 	HidePlace_Parametor::HidePlace_Parametor(const Vec3& hidePositionOffset):
-		hidePositionOffset(hidePositionOffset)
+		hidePositionOffset(hidePositionOffset),
+		boardUIPositionOffset(Vec3(0.0f, 1.5f, 0.0f)),
+		isOpen(false)
 	{}
 
 	//--------------------------------------------------------------------------------------
@@ -51,10 +55,21 @@ namespace basecross {
 
 		m_objectId = m_objectCount;
 		++m_objectCount;
+
+		CreateBoard();
 	}
 
 	void HidePlace::OnLateStart() {
 		m_soundEmitter = GetGameObject()->GetComponent<SoundEmitter>();
+	}
+
+	void HidePlace::CreateBoard() {
+		auto board = GetStage()->AddGameObject<GameObject>()->AddComponent<OpenBoard>();
+		auto boardTrans = board->GetGameObject()->GetComponent<Transform>();
+		boardTrans->SetPosition(transform->GetPosition() + m_param.boardUIPositionOffset);
+
+		board->SetUpdateActive(false);
+		m_boardUIObject = board;
 	}
 
 	void HidePlace::Open() {
@@ -67,13 +82,7 @@ namespace basecross {
 			soundEmitter->PlaySoundClip(m_openSoundClip);
 		}
 
-		//auto item = GetHideItem();
-		//if (!item) {
-		//	return;
-		//}
-
-		//item->GetGameObject()->SetActive(true);
-		//SetHideItem(nullptr);
+		m_param.isOpen = true;
 	}
 
 	void HidePlace::Close() {
@@ -81,12 +90,7 @@ namespace basecross {
 			animator->ChangeBoxAnimation(BoxAnimationState::State::Close);
 		}
 
-		//auto item = GetHideItem();
-		//if (!item) {
-		//	return;
-		//}
-
-		//item->GetGameObject()->SetActive(false);
+		m_param.isOpen = false;
 	}
 
 	//--------------------------------------------------------------------------------------
@@ -95,11 +99,6 @@ namespace basecross {
 
 	void HidePlace::SetHideItem(const std::shared_ptr<HideItem>& item) {
 		m_hideItem = item;
-
-		//auto animator = GetGameObject()->GetComponent<BoxAnimator>(false);
-		//if (item && animator && animator->IsCurrentAnimator(BoxAnimationState::State::Close)) {
-		//	item->GetGameObject()->SetActive(false);
-		//}
 	}
 
 	std::shared_ptr<HideItem> HidePlace::GetHideItem() const {
@@ -121,5 +120,13 @@ namespace basecross {
 		}
 
 		return nullptr;
+	}
+
+	void HidePlace::SetDrawUI(const bool isActive) {
+		m_boardUIObject.lock()->SetUpdateActive(isActive);
+	}
+
+	bool HidePlace::IsDrawUI() const {
+		return m_boardUIObject.lock()->GetUpdateActive();
 	}
 }
