@@ -1,5 +1,4 @@
-﻿
-/*!
+﻿/*!
 @file PlayerObject.h
 @brief PlayerObjectなど
 担当：丸山裕喜
@@ -9,7 +8,6 @@
 #include "stdafx.h"
 
 namespace basecross {
-
 	//--------------------------------------------------------------------------------------
 	/// プレイヤーオブジェクト
 	//--------------------------------------------------------------------------------------
@@ -28,5 +26,4 @@ namespace basecross {
 
 		std::shared_ptr<GameObject> GetArm() const { return m_arm.lock(); }
 	};
-
 }

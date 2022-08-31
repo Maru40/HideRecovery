@@ -6,7 +6,8 @@
 #include "Watanabe/Effekseer/EfkEffect.h"
 #include "Watanabe/Utility/CSVLoad.h"
 #include "Watanabe/DebugClass/Debug.h"
-#include "Watanabe/UI/SimpleSprite.h"
+#include "Watanabe/UI/UIObjects.h"
+#include "Watanabe/StageObject/StageObjects.h"
 
 namespace basecross
 {
@@ -45,6 +46,7 @@ namespace basecross
 		ResourceLoadData(L"Shape_TX",L"Shape_TX.png"),
 		ResourceLoadData(L"Objective_TX",L"Objective_TX.png"),
 		ResourceLoadData(L"RemainingTime_TX",L"RemainingTime_TX.png"),
+		ResourceLoadData(L"CircleGauge_TX",L"CircleGauge_TX.png"),
 
 		ResourceLoadData(L"FiledMap_TX", L"FiledMap_TX.png"),
 
@@ -132,8 +134,8 @@ namespace basecross
 
 	void LoadStage::CreateViewLight()
 	{
-		const Vec3 eye(0.0f, 5.0f, -5.0f);
-		const Vec3 at(0.0f);
+		const Vec3 eye(0.0f, 10.0f, 20.0f);
+		const Vec3 at(3.0f);
 		auto PtrView = CreateView<SingleView>();
 		//ビューのカメラの設定
 		auto PtrCamera = ObjectFactory::Create<Camera>();
@@ -247,6 +249,7 @@ namespace basecross
 		EfkEffectResource::RegisterEffectResource(L"BlueBullet", dir + L"BlueBullet.efk");
 		EfkEffectResource::RegisterEffectResource(L"RedBullet", dir + L"RedBullet.efk");
 		EfkEffectResource::RegisterEffectResource(L"Tackle", dir + L"Tackle.efk");
+		EfkEffectResource::RegisterEffectResource(L"HasBall", dir + L"HasBall.efk");
 	}
 
 	void LoadStage::OnCreate()
@@ -264,8 +267,13 @@ namespace basecross
 		wstring mediaDir = app->GetDataDirWString();
 		wstring dir = mediaDir + L"Textures/";
 		app->RegisterTexture(L"Loading_TX", dir + L"Loading_TX.png");
-		// 「Now Loading...」の表示（要調整）
-		//AddGameObject<SimpleSprite>(SimpleSprite::Type::Texture, L"Loading_TX");
+		app->RegisterTexture(L"LoadingBG_TX", dir + L"LoadingBG_TX.png");
+
+		// 「Now Loading...」の表示
+		auto uiBuilder = UIObjectCSVBuilder::Create();
+		uiBuilder->Register<SimpleSprite>(L"SimpleSprite");
+		auto path = mediaDir + L"MapDatas/";
+		uiBuilder->Build(GetThis<Stage>(), path + L"LoadUILayout.csv");
 
 		m_stageBackColor = App::GetApp()->GetScene<Scene>()->GetClearColor();
 

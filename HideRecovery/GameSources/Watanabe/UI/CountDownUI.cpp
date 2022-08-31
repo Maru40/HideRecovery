@@ -14,14 +14,14 @@ namespace basecross {
 
 	void CountDownUI::OnCreate() {
 		m_number = GetStage()->AddGameObject<NumberSprite>();
-		// 切り捨ての関係上+1
-		m_presentTime = m_startTime + 1;
+		m_number->SetValue(m_startTime);
+		m_presentTime = m_startTime;
 
 		m_number->SetActive(false);
 	}
 
 	void CountDownUI::OnUpdate() {
-		if (m_presentTime <= 1.0f) {
+		if (m_presentTime <= 0.0f) {
 			m_isTimeUp = true;
 			m_number->SetActive(false);
 			return;
@@ -30,7 +30,7 @@ namespace basecross {
 		float delta = App::GetApp()->GetElapsedTime();
 		// 現在時間を1～m_startTimeの間でクランプ
 		float displayNum = Utility::Clamp(m_presentTime, 1.0f, m_startTime);
-		m_number->SetValue((int)floorf(displayNum));
+		m_number->SetValue((int)ceilf(m_presentTime));
 		m_presentTime -= delta;
 	}
 

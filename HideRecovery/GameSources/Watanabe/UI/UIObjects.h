@@ -10,3 +10,4 @@
 #include "SplashMessageUI.h"
 #include "ScoreUI.h"
 #include "ButtonUI.h"
+#include "HoldButtonUI.h"

@@ -17,6 +17,9 @@
 #include "MainStage.h"
 #include "Watanabe/UI/UIObjects.h"
 #include "Watanabe/BoardPoly/HPGaugeBP.h"
+#include "Watanabe/BoardPoly/PlayerLabelBP.h"
+#include "Watanabe/Component/PlayerStatus.h"
+#include "Watanabe/Component/SyncObject.h"
 #include "Maruyama/UI/Reticle.h"
 #include "Maruyama/Camera/Component/CameraForwardController.h"
 #include "TeleportUI.h"
@@ -67,12 +70,23 @@ namespace basecross
 		transform->SetPosition(spawnPoint->GetWorldPosition());
 		transform->SetQuaternion(spawnPoint->GetQuaternion());
 
+		auto playerStatus = playerObject->GetComponent<PlayerStatus>();
+		auto playerTeam = playerStatus->GetTeam();
+		auto playerOnlineController = playerObject->GetComponent<Online::PlayerOnlineController>();
+		auto playerGameNumber = playerOnlineController->GetGamePlayerNumber();
+
 		if (playerNumber != Online::OnlineManager::GetLocalPlayer().getNumber())
 		{
 			// 他プレイヤーは板ポリHPゲージをつける
 			//（位置の同期はHPGaugeBP内で設定してある）
-			auto playerStatus = playerObject->GetComponent<PlayerStatus>();
 			GetStage()->AddGameObject<HPGaugeBP>(playerStatus);
+			// (playerNumber % 3) + 1で1～6が 1,2,3 1,2,3になる
+			auto label = GetStage()->AddGameObject<PlayerLabelBP>(
+				team::GetTeamTypeString(playerTeam), (playerGameNumber % 3) + 1);
+
+			auto syncComp = label->AddComponent<SyncObject>();
+			syncComp->SetTarget(transform);
+			syncComp->SetOffsetPosition(Vec3(0, 1.7f, 0));
 
 			auto teleport = playerObject->GetComponent<Teleport>();
 			auto cameraObject = GetStage()->AddGameObject<GameObject>();
@@ -81,7 +95,6 @@ namespace basecross
 
 			return playerObject;
 		}
-
 		playerObject->AddComponent<Reticle>();
 
 		auto springArm = playerObject->GetArm()->GetComponent<SpringArmComponent>();
@@ -109,6 +122,15 @@ namespace basecross
 		if (mainStage) {
 			auto hpGauge = mainStage->GetUIObjectCSVBuilder()->GetUIObject<HPGaugeUI>(L"HPGauge");
 			hpGauge->SetPlayerStatus(playerObject->GetComponent<PlayerStatus>());
+
+			auto playerLabel = mainStage->GetUIObjectCSVBuilder()->GetUIObject<SimpleSprite>(L"PlayerLabel");
+			auto playerNumber = mainStage->GetUIObjectCSVBuilder()->GetUIObject<Numbers>(L"PlayerNumber");
+			Col4 teamColor = team::GetTeamColor(playerStatus->GetTeam());
+			playerLabel->GetDrawComponent()->SetDiffuse(teamColor);
+			playerNumber->SetColor(teamColor);
+
+			playerLabel->ChangeSprite(SimpleSprite::Type::SpriteData, team::GetTeamTypeString(playerStatus->GetTeam()));
+			playerNumber->SetNumber((playerGameNumber % 3) + 1);
 		}
 
 		auto soundListener = playerObject->AddComponent<SoundListener>();

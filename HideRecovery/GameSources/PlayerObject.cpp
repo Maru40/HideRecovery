@@ -37,6 +37,7 @@
 
 #include "ChargeGun.h"
 #include "Watanabe/Component/PlayerStatus.h"
+#include "Watanabe/Component/HoldBallEffectEmitter.h"
 
 #include "TackleAttack.h"
 #include "CollisionAction.h"
@@ -85,8 +86,9 @@ namespace basecross {
 		auto gravity = AddComponent<Gravity>();
 		gravity->SetGravity(Vec3(0.0f, -4.8f, 0.0f));
 
-		AddComponent<ItemBag>();
+		auto itemBag = AddComponent<ItemBag>();
 		AddComponent<ItemAcquisitionManager>();
+		AddComponent<HoldBallEffectEmitter>(itemBag);
 		//AddComponent<OwnHideItemManager>();
 
 		//AddComponent<PlayerAnimationCtrl>();
@@ -126,6 +128,8 @@ namespace basecross {
 		efkComp->IsSyncGameObject(L"MuzzleFlash", true);
 		efkComp->SetEffectResource(L"Tackle");
 		efkComp->IsSyncGameObject(L"Tackle", true);
+		efkComp->SetEffectResource(L"HasBall", TransformData(Vec3(0, 0.5f, 0), Vec3(0.5f)));
+		efkComp->IsSyncGameObject(L"HasBall", true);
 
 		// 被弾時のエフェクトを再生を登録
 		playerStatus->AddFuncAddDamage(

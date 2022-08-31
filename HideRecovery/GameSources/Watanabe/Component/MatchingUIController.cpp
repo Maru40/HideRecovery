@@ -1,6 +1,7 @@
 ﻿#include "stdafx.h"
 #include "MatchingUIController.h"
 #include "../UI/SplashMessageUI.h"
+#include "../UI/HoldButtonUI.h"
 #include "Zooming.h"
 #include "../DebugClass/Debug.h"
 
@@ -30,13 +31,22 @@ namespace basecross {
 		// 親子関係を設定
 		gameStart->SetParent(parent);
 		aButton->SetParent(parent);
-		parent->AddComponent<Zooming>();
+		//parent->AddComponent<Zooming>();
+
+		auto holdA = m_builder->GetUIObject<HoldButtonUI>(L"HoldA");
+		holdA->SetParent(aButton);
+		auto transitioner = GetGameObject()->GetComponent<MatchStageTransitioner>(false);
+		if (transitioner) {
+			holdA->SetTransitioner(transitioner);
+		}
+		holdA->SetDrawActive(false);
 	}
 
 	void MatchingUIController::OnCreateRoom() {
 		m_builder->GetUIObject(L"Matching")->SetDrawActive(false);
 		m_builder->GetUIObject(L"GameStart")->SetDrawActive(true);
 		m_builder->GetUIObject(L"AButton")->SetDrawActive(true);
+		m_builder->GetUIObject(L"HoldA")->SetDrawActive(true);
 		m_builder->GetUIObject<SplashMessageUI>(L"SplashMessage")
 			->SetMessage(SplashMessageUI::MessageType::CreateRoom);
 	}

@@ -36,6 +36,13 @@ namespace basecross {
 		/// <param name="teamType">チームタイプ</param>
 		/// <returns>チームの色</returns>
 		Col4 GetTeamColor(TeamType teamType);
+
+		/// <summary>
+		/// Enumを文字列に変換
+		/// </summary>
+		/// <param name="teamType">チームタイプ</param>
+		/// <returns>チームタイプの文字列</returns>
+		wstring GetTeamTypeString(TeamType teamType);
 	}
 
 	//--------------------------------------------------------------------------------------

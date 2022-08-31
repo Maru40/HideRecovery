@@ -55,29 +55,30 @@
 #include "Watanabe/DebugClass/Debug.h"
 #include "Watanabe/Effekseer/EfkEffect.h"
 
-#include "Itabashi/OnlineTestRoom.h"
 #include "GameManagerObject.h"
 #include "Itabashi/GamePlayerManager.h"
-#include "Itabashi/OnlineGameTimer.h"
-#include "Watanabe/UI/GameStartUI.h"
-#include "Watanabe/Manager/TimeManager.h"
 #include "Itabashi/MainStageTransitioner.h"
+#include "Itabashi/OnlineGameTimer.h"
+#include "Itabashi/OnlineTestRoom.h"
+#include "Watanabe/Manager/TimeManager.h"
+#include "Watanabe/UI/GameStartUI.h"
 
 #include "Watanabe/UI/SplashMessageUI.h"
 #include "Watanabe/UI/UIObjectCSVBuilder.h"
 
+#include "HidePlace.h"
 #include "Maruyama/UI/Reticle.h"
 #include "TeleportUI.h"
-#include "HidePlace.h"
 
 #include "GameManager.h"
+#include "Maruyama/Interface/I_TeamMember.h"
 
 using namespace basecross::Enemy;
 
 namespace basecross {
-	//wstring MainStage::sm_loadMapName = L"StageS1_Copy.csv";
+	// wstring MainStage::sm_loadMapName = L"StageS1_Copy.csv";
 	wstring MainStage::sm_loadMapName = L"StageS2.csv";
-	//wstring MainStage::sm_loadMapName = L"TestOwnArea.csv";
+	// wstring MainStage::sm_loadMapName = L"TestOwnArea.csv";
 
 	void MainStage::CreateViewLight() {
 		CreateStartCamera(sm_loadMapName);
@@ -91,7 +92,6 @@ namespace basecross {
 	}
 
 	void MainStage::OnCreate() {
-
 		HidePlace::CountReset();
 
 		try {
@@ -99,7 +99,7 @@ namespace basecross {
 			AddGameObject<Debug>();
 			Debug::GetInstance()->Log(L"MainStage");
 			// スカイボックス
-			//AddGameObject<Skybox2>();
+			// AddGameObject<Skybox2>();
 
 			//ビューとライトの作成
 			CreateViewLight();
@@ -117,17 +117,17 @@ namespace basecross {
 
 			auto gameStartUI = AddGameObject<GameStartUI>();
 			std::weak_ptr<GameStartUI> weakgameStartUI = gameStartUI;
-			onlineGameTimer->AddGameStartCountFunc([weakgameStartUI]() {weakgameStartUI.lock()->Start(); });
-			gameStartUI->AddTimeUpEventFunc([]() {SimpleSoundManager::ChangeBGM(L"GameStageBGM", 0.05f); });
-			gameStartUI->AddTimeUpEventFunc([]() {SimpleSoundManager::OnePlaySE(L"GameStartSE", 0.25f); });
+			onlineGameTimer->AddGameStartCountFunc([weakgameStartUI]() { weakgameStartUI.lock()->Start(); });
+			gameStartUI->AddTimeUpEventFunc([]() { SimpleSoundManager::ChangeBGM(L"GameStageBGM", 0.05f); });
+			gameStartUI->AddTimeUpEventFunc([]() { SimpleSoundManager::OnePlaySE(L"GameStartSE", 0.25f); });
 			std::weak_ptr<OnlineGameTimer> weakOnlineGameTimer = onlineGameTimer;
-			gameStartUI->AddTimeUpEventFunc([weakOnlineGameTimer]() {weakOnlineGameTimer.lock()->GameTimerStart(); });
+			gameStartUI->AddTimeUpEventFunc([weakOnlineGameTimer]() { weakOnlineGameTimer.lock()->GameTimerStart(); });
 			//ゲーム状態にする
-			gameStartUI->AddTimeUpEventFunc([]() { if (auto gameManager = GameManager::GetInstance()) { gameManager->ChangeState(GameManager::State::Game); } });	
+			gameStartUI->AddTimeUpEventFunc([]() { if (auto gameManager = GameManager::GetInstance()) { gameManager->ChangeState(GameManager::State::Game); } });
 
 			auto gameFinishUI = AddGameObject<GameFinishUI>();
 			std::weak_ptr<GameFinishUI> weakGameFinishUI = gameFinishUI;
-			onlineGameTimer->AddGameFinishCountEventFunc([weakGameFinishUI]() {weakGameFinishUI.lock()->Start(); });
+			onlineGameTimer->AddGameFinishCountEventFunc([weakGameFinishUI]() { weakGameFinishUI.lock()->Start(); });
 			onlineGameTimer->AddGameFinishEventFunc([]() { SimpleSoundManager::OnePlaySE(L"GameSetSE", 0.25f); });
 
 			//ステージの設定
@@ -136,38 +136,31 @@ namespace basecross {
 
 			// BGMの再生
 
-			//Generatorの生成
-			//AddGameObject<EnemyGeneratorObject>();
+			// Generatorの生成
+			// AddGameObject<EnemyGeneratorObject>();
 
-			//Mapの読み込み
+			// Mapの読み込み
 			CreateMap(sm_loadMapName);
 
 			// UIレイアウトの読み込み
 			auto gameUIBuilder = CreateUI(L"GameUILayout.csv");
 			auto remainingTime = gameUIBuilder->GetUIObject<SplashMessageUI>(L"RemainingTime");
+			auto teamRed = gameUIBuilder->GetUIObject<SimpleSprite>(L"TeamRed");
+			teamRed->GetDrawComponent()->SetDiffuse(team::REDTEAM_COLOR);
+			auto teamBlue = gameUIBuilder->GetUIObject<SimpleSprite>(L"TeamBlue");
+			teamBlue->GetDrawComponent()->SetDiffuse(team::BLUETEAM_COLOR);
 
+			// 残り時間表示のイベント登録
 			TimeManager::GetInstance()->AddEvent(60,
 				[remainingTime]() {
 					remainingTime->SetColor(Col4(1, 1, 1, 0.5f));
 					remainingTime->SetMessage(SplashMessageUI::MessageType::Remaining60s);
-				}
-			);
+				});
 			TimeManager::GetInstance()->AddEvent(30,
 				[remainingTime]() {
 					remainingTime->SetColor(Col4(1, 1, 1, 0.5f));
 					remainingTime->SetMessage(SplashMessageUI::MessageType::Remaining30s);
-				}
-			);
-
-			//AddGameObject<GameObject>()->AddComponent<Reticle>();
-
-			//m_gameStartUI = AddGameObject<GameStartUI>();
-			//m_gameFinishUI = AddGameObject<GameFinishUI>();
-			//隠すアイテムの設定
-			//Instantiate<HideItemObject>(Vec3(0.0f, 0.0f, 0.0f), Quat::Identity());
-
-			//デバッグ
-			//AddGameObject<DebugObject>();
+				});
 
 			Debug::GetInstance()->Log(L"入力------------------------------");
 			Debug::GetInstance()->Log(L"X  : 置く");
@@ -182,10 +175,8 @@ namespace basecross {
 	}
 
 	void MainStage::OnUpdate() {
-		if (App::GetApp()->GetMyInputDevice()->GetKeyBoard().IsInputDown(KeyCode::J))
-		{
-			for (auto& hidePlace : maru::Utility::FindComponents<HidePlace>())
-			{
+		if (App::GetApp()->GetMyInputDevice()->GetKeyBoard().IsInputDown(KeyCode::J)) {
+			for (auto& hidePlace : maru::Utility::FindComponents<HidePlace>()) {
 				hidePlace->Open();
 			}
 		}
@@ -199,11 +190,11 @@ namespace basecross {
 		return sm_loadMapName;
 	}
 
-	//std::shared_ptr<GameStartUI> MainStage::GetGameStartUI() {
+	// std::shared_ptr<GameStartUI> MainStage::GetGameStartUI() {
 	//	return m_gameStartUI;
-	//}
-	//std::shared_ptr<GameFinishUI> MainStage::GetGameFinishUI() {
+	// }
+	// std::shared_ptr<GameFinishUI> MainStage::GetGameFinishUI() {
 	//	return m_gameFinishUI;
-	//}
+	// }
 }
-//end basecross
+// end basecross
