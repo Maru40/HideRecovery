@@ -30,7 +30,7 @@ namespace basecross {
 		// 親子関係を設定
 		gameStart->SetParent(parent);
 		aButton->SetParent(parent);
-		parent->AddComponent<Zooming>();
+		//parent->AddComponent<Zooming>();
 	}
 
 	void MatchingUIController::OnCreateRoom() {

@@ -1,15 +1,15 @@
 ﻿#include "stdafx.h"
 #include "MatchStageTransitioner.h"
 #include "OnlineMatching.h"
+#include "InputHelper.h"
 #include "PlayerInputer.h"
 #include "Scene.h"
 
 namespace basecross
 {
 	MatchStageTransitioner::MatchStageTransitioner(const std::shared_ptr<GameObject>& owner) :
-		OnlineComponent(owner)
+		OnlineComponent(owner), m_holdTimer(3)
 	{
-
 	}
 
 	void MatchStageTransitioner::GoToMainStage()
@@ -40,13 +40,27 @@ namespace basecross
 			return;
 		}
 
-		if (PlayerInputer::IsDecision() && Online::OnlineManager::GetLocalPlayer().getIsMasterClient() && onlineMatching->GetPlayerCount() > 0)
+		if (Online::OnlineManager::GetLocalPlayer().getIsMasterClient() && onlineMatching->GetPlayerCount() > 0)
 		{
-			Online::OnlineManager::GetCurrentlyJoinedRoom().setIsOpen(false);
-			onlineMatching->ShuffleTeam();
-			GoToMainStage();
-			Online::OnlineManager::RaiseEvent(false, nullptr, 0, TO_MAINSTAGE_EVENT_CODE);
-			return;
+			const auto& gamePad = App::GetApp()->GetMyInputDevice()->GetXInputGamePad();
+			// Aボタンが押されたら
+			if (gamePad.IsInputPush(XInputCode::A))
+			{
+				// 何秒か押し続けて遷移
+				if (m_holdTimer.Count())
+				{
+					Online::OnlineManager::GetCurrentlyJoinedRoom().setIsOpen(false);
+					onlineMatching->ShuffleTeam();
+					GoToMainStage();
+					Online::OnlineManager::RaiseEvent(false, nullptr, 0, TO_MAINSTAGE_EVENT_CODE);
+					m_holdTimer.Reset();
+					return;
+				}
+			}
+			else
+			{
+				m_holdTimer.Reset();
+			}
 		}
 	}
 
