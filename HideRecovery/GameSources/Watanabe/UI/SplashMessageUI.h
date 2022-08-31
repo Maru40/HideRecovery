@@ -17,7 +17,8 @@ namespace basecross {
 			CreateRoom,		// 部屋を作成した
 			JoinRoom,		// 部屋に参加した
 			Remaining60s,	// 残り60秒
-			Remaining30s	// 残り30秒
+			Remaining30s,	// 残り30秒
+			Goal,			// ゴール
 		};
 	private:
 		struct MessageData {
