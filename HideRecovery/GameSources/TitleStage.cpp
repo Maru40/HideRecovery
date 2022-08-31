@@ -35,7 +35,7 @@ namespace basecross {
 		auto pressA = uiBuilder->GetUIObject(L"Press A");
 		pressA->AddComponent<Zooming>();
 
-		SimpleSoundManager::ChangeBGM(L"TitleStageBGM", 0.1f);
+		//SimpleSoundManager::ChangeBGM(L"TitleStageBGM", 0.1f);
 	}
 	void TitleStage::OnUpdate() {
 		// マッチング画面への遷移処理

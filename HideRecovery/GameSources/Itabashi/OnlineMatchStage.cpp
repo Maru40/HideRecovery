@@ -65,7 +65,7 @@ namespace basecross
 		);
 		gameObject->AddComponent<MatchingSyncPlayerObject>(spawnPointObjects);
 
-		SimpleSoundManager::ChangeBGM(L"MatchingStageBGM", 0.1f);
+		//SimpleSoundManager::ChangeBGM(L"MatchingStageBGM", 0.1f);
 	}
 
 	void OnlineMatchStage::OnUpdate()
