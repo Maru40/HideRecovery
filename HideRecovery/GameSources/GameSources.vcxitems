@@ -82,6 +82,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\UI\Reticle.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\UI\UILayer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)OccupancyManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)OpenBoard.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)SelfImpactNodeManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\ObjectMover.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineTestRoom.h" />
@@ -407,6 +408,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Stage\MapShotStage.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\UI\Reticle.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)OccupancyManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)OpenBoard.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)OriginalMeshToonObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)FadeSprite.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)GraphAstar.cpp" />

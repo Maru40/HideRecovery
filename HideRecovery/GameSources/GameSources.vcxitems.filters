@@ -1096,6 +1096,9 @@
     <Filter Include="Maruyama\Stage\MapShotStage">
       <UniqueIdentifier>{293ff4ca-28fb-49bc-b492-f950c275cb6c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Player\Component\ItemAcquisitionManager\BoardUI">
+      <UniqueIdentifier>{1b5db4ab-f4c6-48a3-bed4-8e0ab3884316}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2046,6 +2049,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Stage\MapShotStage.h">
       <Filter>Maruyama\Stage\MapShotStage</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)OpenBoard.h">
+      <Filter>Maruyama\Player\Component\ItemAcquisitionManager\BoardUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2896,6 +2902,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Stage\MapShotStage.cpp">
       <Filter>Maruyama\Stage\MapShotStage</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)OpenBoard.cpp">
+      <Filter>Maruyama\Player\Component\ItemAcquisitionManager\BoardUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
