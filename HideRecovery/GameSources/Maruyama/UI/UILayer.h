@@ -13,7 +13,9 @@ namespace basecross {
 	{
 		namespace Layer {
 			constexpr int MAP = 2;
-			constexpr int MAP_CURSOR = 3;
+			constexpr int MAP_BOX = 3;
+			constexpr int MAP_CURSOR = 4;
+
 		}
 	}
 }

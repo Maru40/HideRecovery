@@ -44,11 +44,12 @@ namespace basecross {
 
 	void FieldMap::OnLateStart() {
 		SettingDraw();
+		SettingBoxDraw();
 	}
 
 	void FieldMap::SettingDraw() {
 		//マップテクスチャの生成
-		auto builder = Builder::BuilderVertexPCT(m_builderParam);
+		//auto builder = Builder::BuilderVertexPCT(m_builderParam);
 		auto mapTexture = GetStage()->AddGameObject<SpriteObject>(m_builderParam);
 		mapTexture->SetDrawLayer(UI::Layer::MAP);
 		m_mapTexture = mapTexture;
@@ -56,6 +57,15 @@ namespace basecross {
 		//カーソル生成
 		auto cursor = GetStage()->AddGameObject<GameObject>()->AddComponent<MapCursor>();
 		m_cursor = cursor;
+	}
+
+	void FieldMap::SettingBoxDraw() {
+		//マップテクスチャの生成
+		auto param = Builder::VertexPCTParametor(Vec3(256.0f, 512.0f, 0.0f) * 2.0f, Vec2(512.0f, 1024.0f), L"FieldMapBox_TX");
+		//auto builder = Builder::BuilderVertexPCT(m_builderParam);
+		auto mapTexture = GetStage()->AddGameObject<SpriteObject>(param);
+		mapTexture->SetDrawLayer(UI::Layer::MAP_BOX);
+		m_mapBoxTexture = mapTexture;
 	}
 
 	//--------------------------------------------------------------------------------------
@@ -70,11 +80,14 @@ namespace basecross {
 
 		if (teamMember->GetTeam() == team::TeamType::Red) {
 			GetMapTexture()->GetComponent<Transform>()->SetRotation(Vec3(0.0f, 0.0f, XM_PI));
+			GetMapBoxTexture()->GetComponent<Transform>()->SetScale(Vec3(-1.0f, 1.0f, 1.0f));
 		}
 		else {
 			GetMapTexture()->GetComponent<Transform>()->SetRotation(Vec3(0.0f, 0.0f, 0.0f));
+			GetMapBoxTexture()->GetComponent<Transform>()->SetScale(Vec3(1.0f, 1.0f, 1.0f));
 		}
 
+		GetMapBoxTexture()->SetDrawActive(isDraw);
 		GetMapTexture()->SetDrawActive(isDraw);
 		GetMapCursor()->SetDrawActive(isDraw);
 	}
@@ -84,6 +97,8 @@ namespace basecross {
 	bool FieldMap::IsMapDraw() const { return GetMapDraw(); }
 
 	std::shared_ptr<SpriteObject> FieldMap::GetMapTexture() const { return m_mapTexture.lock(); }
+
+	std::shared_ptr<SpriteObject> FieldMap::GetMapBoxTexture() const { return m_mapBoxTexture.lock(); }
 
 	std::shared_ptr<MapCursor> FieldMap::GetMapCursor() const { return m_cursor.lock(); }
 

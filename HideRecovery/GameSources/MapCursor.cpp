@@ -142,7 +142,7 @@ namespace basecross {
 		float yRate = startPosition.z / (rect.depth * 0.5f);
 		auto position = Vec3(halfMapTextureScale.x * xRate, halfMapTextureScale.y * yRate, 0.0f);
 
-		transform->SetPosition(position * value);
+		transform->SetPosition(position * (float)value);
 	}
 
 	void MapCursor::SetTarget(const std::shared_ptr<GameObject>& target) { 
@@ -171,7 +171,7 @@ namespace basecross {
 		float yRate = startPosition.y / (mapTextureScale.y * 0.5f);
 		auto position = (Vec3(halfWidth * xRate, 0.1f, halfDepth * yRate));
 
-		return position * value;
+		return position * (float)value;
 	}
 
 	void MapCursor::OnDrawActive() {

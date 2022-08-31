@@ -49,6 +49,8 @@ namespace basecross {
 
 		std::weak_ptr<I_TeamMember> m_teamMember;
 
+		std::weak_ptr<SpriteObject> m_mapBoxTexture;
+
 	public:
 		FieldMap(const std::shared_ptr<GameObject>& objPtr);
 		FieldMap(const std::shared_ptr<GameObject>& objPtr, const Builder::VertexPCTParametor builderParam);
@@ -57,6 +59,7 @@ namespace basecross {
 
 	private:
 		void SettingDraw();
+		void SettingBoxDraw();
 
 	public:
 		void SetMapDraw(const bool isDraw);
@@ -66,6 +69,8 @@ namespace basecross {
 		bool IsMapDraw() const;
 
 		std::shared_ptr<SpriteObject> GetMapTexture() const;
+
+		std::shared_ptr<SpriteObject> GetMapBoxTexture() const;
 
 		std::shared_ptr<MapCursor> GetMapCursor() const;
 
