@@ -30,7 +30,7 @@ namespace basecross {
 			auto objectiveTexSize = Utility::GetTextureSize(L"Objective_TX");
 			trans->SetPosition(Vec2(0, -objectiveTexSize.y));
 		}
-		m_countDown->SetDrawActive(false);
+		m_countDown->SetActive(false);
 		m_strStart->SetDrawActive(false);
 		m_objectiveStr->SetDrawActive(false);
 	}
@@ -51,7 +51,7 @@ namespace basecross {
 			m_objectiveStr->SetDrawActive(true);
 			if (m_invisibleTimer.Count()) {
 				m_strStart->SetDrawActive(false);
-				m_countDown->SetDrawActive(false);
+				m_countDown->SetActive(false);
 				m_objectiveStr->SetDrawActive(false);
 			}
 		}
@@ -62,14 +62,14 @@ namespace basecross {
 	void GameStartUI::Start() {
 		m_isStart = true;
 		m_isBeforeTimeUp = false;
-		m_countDown->SetDrawActive(true);
+		m_countDown->SetActive(true);
 		m_countDown->Start();
 	}
 
 	void GameStartUI::Reset() {
 		m_isStart = false;
 		m_isBeforeTimeUp = false;
-		m_countDown->SetDrawActive(true);
+		m_countDown->SetActive(true);
 		m_countDown->Reset();
 		m_invisibleTimer.Reset();
 	}
