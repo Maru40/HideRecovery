@@ -116,6 +116,10 @@ namespace basecross {
 		m_taskList->UpdateTask();
 	}
 
+	void GoalAnimationController::OnDisable() {
+		ExitAnimationEvent();
+	}
+
 	void GoalAnimationController::StartAnimationEvent() {
 		m_param.startPosition = transform->GetPosition();	//ŠJnˆÊ’u‚Ìİ’è
 
@@ -206,6 +210,8 @@ namespace basecross {
 	}
 
 	void GoalAnimationController::SelectTask() {
+		SetUpdateActive(true);
+
 		TaskEnum tasks[] = {
 			TaskEnum::PreliminaryJump,
 			TaskEnum::DunkMove,

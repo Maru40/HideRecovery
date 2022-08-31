@@ -183,6 +183,10 @@ namespace basecross {
 			for (auto& place : maru::Utility::FindComponents<HidePlace>(GetStage())) {
 				place->Close();
 			}
+
+			for (auto& animationController : maru::Utility::FindComponents<GoalAnimationController>(GetStage())) {
+				animationController->SetUpdateActive(false);
+			}
 		};
 
 		//カウントダウンスタート
