@@ -1,4 +1,3 @@
-
 /*!
 @file GoalAnimationController.h
 @brief GoalAnimationControllerなど
@@ -9,7 +8,6 @@
 #include "stdafx.h"
 
 namespace basecross {
-
 	//--------------------------------------------------------------------------------------
 	/// 前方宣言
 	//--------------------------------------------------------------------------------------
@@ -39,7 +37,7 @@ namespace basecross {
 		std::shared_ptr<Task::Wait_Parametor> dunkAfterWaitParam;		//ダンク後の待機
 		std::shared_ptr<Task::ReturnJump_Parametor> returnJumpParam;	//ダンク後の元の位置に戻る処理
 		std::shared_ptr<Task::Wait_Parametor> endWaitParam;				//着地後の硬直
-			
+
 		GoalAnimationController_Parametor();
 
 		float GetJumpRad() const;
@@ -67,6 +65,7 @@ namespace basecross {
 		std::weak_ptr<Goal> m_goal;						//ゴール
 		std::weak_ptr<GameObject> m_ball;				//ボール
 		std::unique_ptr<TaskList<TaskEnum>> m_taskList;	//タスク管理
+		std::weak_ptr<GameObject> m_goalPerson;			// ゴールした人
 
 		SoundClip m_goalSoundClip;
 		SoundClip m_goalStartSE;
@@ -129,10 +128,11 @@ namespace basecross {
 
 		std::shared_ptr<Goal> GetGoal() const { return m_goal.lock(); }
 
+		void SetGoalPerson(const std::shared_ptr<GameObject>& obj) { m_goalPerson = obj; }
+
 		/// <summary>
 		/// ゴールアニメーション再生中
 		/// </summary>
-		bool IsGoalAnimation() const;	
+		bool IsGoalAnimation() const;
 	};
-
 }

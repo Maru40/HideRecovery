@@ -97,7 +97,7 @@ namespace basecross {
 			}
 
 			auto mainStage = GetGameObject()->GetTypeStage<MainStage>(false);
-			if (mainStage) {
+			if (mainStage && m_goalPerson.lock() != GetGameObject()) {
 				auto splashMessage = mainStage->GetUIObjectCSVBuilder()->GetUIObject<SplashMessageUI>(L"SplashMessage");
 				splashMessage->SetMessage(SplashMessageUI::MessageType::Goal);
 				splashMessage->SetColor(Col4(1, 0.5f, 0, 1));
