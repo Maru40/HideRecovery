@@ -8,7 +8,7 @@
 namespace basecross
 {
 	MatchStageTransitioner::MatchStageTransitioner(const std::shared_ptr<GameObject>& owner) :
-		OnlineComponent(owner), m_holdTimer(3)
+		OnlineComponent(owner), m_holdTimer(2) // 長押し時間
 	{
 	}
 
