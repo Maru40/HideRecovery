@@ -23,16 +23,20 @@ namespace basecross {
 	class GoalBP;
 	class HidePlace;
 
+	namespace Operator {
+		class ObjectHider;
+	}
+
 	//--------------------------------------------------------------------------------------
 	/// ゴール管理クラスのパラメータ
 	//--------------------------------------------------------------------------------------
 	struct Goal_Parametor {
 		team::TeamType team;					//チームタイプ
-		float itemHiderTime;			//アイテム再配置までの時間
-		Vec3 timeDrawPosition;			//時間表示場所
-		Vec3 dunkPositionOffset;		//ダンクをする位置のオフセット
+		float itemHiderTime;					//アイテム再配置までの時間
+		Vec3 timeDrawPosition;					//時間表示場所
+		Vec3 dunkPositionOffset;				//ダンクをする位置のオフセット
 		Vec3 dunkBallPositionOffset;
-		Vec3 countDrawPositionOffset;	//カウントダウンを表示するオフセット
+		Vec3 countDrawPositionOffset;			//カウントダウンを表示するオフセット
 		Vec3 goalBPOffset;
 		std::vector<Vec3> firePositionOffsets;	//ファイヤーポジションオフセット
 
@@ -110,6 +114,11 @@ namespace basecross {
 		/// アニメーション再生
 		/// </summary>
 		void PlayAnimation(const std::shared_ptr<GameObject>& other);
+
+		/// <summary>
+		/// アイテム再配置処理
+		/// </summary>
+		void GoalItemRelocation(const std::shared_ptr<Operator::ObjectHider>& hider, const std::shared_ptr<HidePlace>& hidePlace);
 
 		/// <summary>
 		/// 当たり判定をとるかどうか
