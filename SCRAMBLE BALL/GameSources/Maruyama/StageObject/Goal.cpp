@@ -259,7 +259,7 @@ namespace basecross {
 
 		//アニメーションコントローラーをfalseにする。(無理やりだから、将来的に変える。)
 		for (auto& animationController : maru::Utility::FindComponents<GoalAnimationController>(GetStage())) {
-			animationController->SetUpdateActive(false);
+			//animationController->SetUpdateActive(false);
 		}
 	}
 
