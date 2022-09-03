@@ -235,7 +235,7 @@ namespace basecross {
 	}
 
 	bool GoalAnimationController::IsGoalAnimation() const {
-		return m_taskList->IsEnd();
+		return !m_taskList->IsEnd();
 
 		auto animator = GetGameObject()->GetComponent<PlayerAnimator>(false);
 		if (!animator) {
