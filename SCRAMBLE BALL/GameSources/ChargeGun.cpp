@@ -89,7 +89,8 @@ namespace basecross {
 		}
 
 		auto useWeapon = m_useWepon.lock();
-		if (useWeapon && !useWeapon->IsAim()) {
+		if (useWeapon && !useWeapon->IsShot()) {
+			//useWeapon->SetIsAim(true);
 			return nullptr;
 		}
 

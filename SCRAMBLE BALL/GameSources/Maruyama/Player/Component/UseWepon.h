@@ -30,6 +30,7 @@ namespace basecross {
 		float aimCameraSpeed;
 		float assitPower;
 		std::unique_ptr<maru::ReactiveBool> isAim;	//Aim中かどうか
+		bool isShot = false;
 
 		UseWepon_Parametor();
 
@@ -169,6 +170,10 @@ namespace basecross {
 		void SetIsUseCamera(bool isUseCamera) { m_isUseCamera = isUseCamera; }
 
 		bool IsUseCamera() const { return m_isUseCamera; }
+
+		void SetIsShot(const bool isShot) { m_param.isShot = isShot; }
+
+		bool IsShot() const { return m_param.isShot; }
 	};
 
 }

@@ -94,6 +94,24 @@ namespace basecross {
 		m_soundEmitter = GetGameObject()->GetComponent<SoundEmitter>(false);
 
 		SettingReactiveIsAim();
+
+		if (auto animator = GetGameObject()->GetComponent<PlayerAnimator>(false)) {	//アニメーションの遷移
+			animator->AddAnimationEvent(
+				PlayerAnimationState::State::GunSet2,
+				nullptr,
+				nullptr,
+				[&]() { SetIsShot(true); }
+			);
+		}
+
+		if (auto animator = GetGameObject()->GetComponent<PlayerAnimator>(false)) {	//アニメーションの遷移
+			animator->AddAnimationEvent(
+				PlayerAnimationState::State::GunEnd2,
+				[&]() { SetIsShot(false); },
+				nullptr,
+				nullptr
+			);
+		}
 	}
 
 	void UseWepon::OnUpdate() {
