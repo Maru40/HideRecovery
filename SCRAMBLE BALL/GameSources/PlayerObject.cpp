@@ -84,7 +84,7 @@ namespace basecross {
 		AddComponent<RotationController>();
 		//AddComponent<PlayerController>();
 		auto gravity = AddComponent<Gravity>();
-		gravity->SetGravity(Vec3(0.0f, -4.8f, 0.0f));
+		gravity->SetGravity(Vec3(0.0f, -9.8f * 3.0f, 0.0f));
 
 		auto itemBag = AddComponent<ItemBag>();
 		AddComponent<ItemAcquisitionManager>();

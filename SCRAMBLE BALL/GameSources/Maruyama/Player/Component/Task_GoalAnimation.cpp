@@ -24,8 +24,8 @@ namespace basecross {
 		ReturnJump_Parametor::ReturnJump_Parametor() :
 			returnDirect(Vec3(0.0f)),
 			jumpRad(XMConvertToRadians(65.0f)),
-			jumpUpPower(850.0f),
-			jumpHorizontalPower(450.0f)
+			jumpUpPower(550.0f),
+			jumpHorizontalPower(180.0f)
 		{}
 
 		//--------------------------------------------------------------------------------------
@@ -38,6 +38,10 @@ namespace basecross {
 		{}
 
 		void ReturnJump::OnStart() {
+			if (auto gravity = GetOwner()->GetComponent<Gravity>(false)) {
+				gravity->SetGravityVerocityZero();
+			}
+
 			if (auto velocityManager = GetOwner()->GetComponent<VelocityManager>(false)) {
 				velocityManager->AddForce(CalculateJumpVec().GetNormalized() * GetParametor()->jumpHorizontalPower);
 				velocityManager->AddForce(Vec3::Up() * GetParametor()->jumpUpPower);
@@ -50,17 +54,18 @@ namespace basecross {
 
 		void ReturnJump::OnExit() {
 			if (auto gravity = GetOwner()->GetComponent<Gravity>(false)) {
-				gravity->SetGravityVerocityZero();
 				gravity->SetUpdateActive(true);
 			}
 		}
 
 		Vec3 ReturnJump::CalculateJumpVec() {
 			Vec3 direction = GetParametor()->returnDirect;
-			direction.y = 0;
+			direction.y = 0.0f;
 
 			Vec3 right = GetOwner()->GetComponent<Transform>()->GetRight();
-			auto resultVec = maru::Mathf::RotationRadianVec(direction, GetParametor()->jumpRad, right);
+			float jumpRad = GetParametor()->jumpRad;
+			auto resultVec = maru::Mathf::RotationRadianVec(direction, jumpRad, right);
+			resultVec.y = 0.0f;
 
 			return resultVec;
 		}

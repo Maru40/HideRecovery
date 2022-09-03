@@ -170,23 +170,12 @@ namespace basecross {
 
 		//再配置場所の取得
 		std::weak_ptr<Operator::ObjectHider> weakObjectHider = item->GetGameObject()->GetComponent<Operator::ObjectHider>();
+		std::weak_ptr<HidePlace> weakHidePlace = hidePlace;
 
 		//アイテム再配置イベント
-		auto itemHiderEvent = [&, weakObjectHider, hidePlace, splash]() {
-			auto hider = weakObjectHider.lock();
-			hider->Appear(hidePlace->GetHidePosition());
-
-			hidePlace->SetHideItem(hider->GetGameObject()->GetComponent<HideItem>(false));
-			splash->SetMessage(SplashMessageUI::MessageType::Relocation);
-
-			m_soundEmitter.lock()->PlaySoundClip(m_relocationBallSoundClip);
-
-			for (auto& place : maru::Utility::FindComponents<HidePlace>(GetStage())) {
-				place->Close();
-			}
-
-			for (auto& animationController : maru::Utility::FindComponents<GoalAnimationController>(GetStage())) {
-				animationController->SetUpdateActive(false);
+		auto itemHiderEvent = [&, weakObjectHider, weakHidePlace]() {
+			if (weakObjectHider.lock() && weakHidePlace.lock()) {
+				GoalItemRelocation(weakObjectHider.lock(), weakHidePlace.lock());
 			}
 		};
 
@@ -250,13 +239,28 @@ namespace basecross {
 	}
 
 	void Goal::PlayAnimation(const std::shared_ptr<GameObject>& other) {
-		auto animator = other->GetComponent<PlayerAnimator>();
-		if (!animator) {
-			return;
+		if (auto animator = other->GetComponent<PlayerAnimator>()) {
+			animator->ChangePlayerAnimation(PlayerAnimationState::State::Goal1);
+		}
+	}
+
+	void Goal::GoalItemRelocation(const std::shared_ptr<Operator::ObjectHider>& hider, const std::shared_ptr<HidePlace>& hidePlace) {
+		hider->Appear(hidePlace->GetHidePosition());
+
+		auto splash = m_splashMessageUI.lock();
+		splash->SetMessage(SplashMessageUI::MessageType::Relocation);		//
+
+		m_soundEmitter.lock()->PlaySoundClip(m_relocationBallSoundClip);	//音の再生
+
+		//HidePlaceをClose状態にする処理。
+		for (auto& place : maru::Utility::FindComponents<HidePlace>(GetStage())) {	
+			place->Close();
 		}
 
-		//ゴールを決めるアニメーションに変更
-		animator->ChangePlayerAnimation(PlayerAnimationState::State::Goal1);
+		//アニメーションコントローラーをfalseにする。(無理やりだから、将来的に変える。)
+		for (auto& animationController : maru::Utility::FindComponents<GoalAnimationController>(GetStage())) {
+			//animationController->SetUpdateActive(false);
+		}
 	}
 
 	bool Goal::IsCollision(const CollisionPair& pair) const {

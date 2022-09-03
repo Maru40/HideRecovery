@@ -402,7 +402,7 @@ namespace basecross {
 						if (auto velocityManager = ShSrc->GetGameObject()->GetComponent<VelocityManager>(false)) {
 							auto velocity = velocityManager->GetVelocity();
 							velocity.y = 0;
-							velocityManager->SetVelocity(velocity);
+							//velocityManager->SetVelocity(velocity);
 						}
 					}
 				}
@@ -425,7 +425,7 @@ namespace basecross {
 						if (auto velocityManager = ShSrc->GetGameObject()->GetComponent<VelocityManager>(false)) {
 							auto velocity = velocityManager->GetVelocity();
 							velocity.y = 0;
-							velocityManager->SetVelocity(velocity);
+							//velocityManager->SetVelocity(velocity);
 						}
 					}
 				}

@@ -45,9 +45,9 @@ namespace basecross {
 
 		preliminaryJumpParam(std::make_shared<Task::Wait::Parametor>(0.0f)),
 		dunkMoveParam(std::make_shared<Task::ToTargetMove::Parametor>(3.0f, 0.1f, Task::ToTargetMove_MoveType::Lerp)),
-		dunkAfterWaitParam(std::make_shared<Task::Wait::Parametor>(0.65f)),
+		dunkAfterWaitParam(std::make_shared<Task::Wait::Parametor>(0.5f)),
 		returnJumpParam(std::make_shared<Task::ReturnJump_Parametor>()),
-		endWaitParam(std::make_shared<Task::Wait::Parametor>(0.5f))
+		endWaitParam(std::make_shared<Task::Wait::Parametor>(0.8f))
 	{}
 
 	float GoalAnimationController_Parametor::GetJumpRad() const { return XMConvertToRadians(jumpDegree); }
@@ -117,6 +117,12 @@ namespace basecross {
 	}
 
 	void GoalAnimationController::OnDisable() {
+		//仮実装
+		auto animator = GetGameObject()->GetComponent<PlayerAnimator>(false);
+		if (!animator->IsCurretAnimationState(PlayerAnimationState::State::Wait)) {
+			animator->ChangePlayerAnimation(PlayerAnimationState::State::Wait);
+		}
+
 		ExitAnimationEvent();
 	}
 
@@ -128,18 +134,22 @@ namespace basecross {
 
 		m_param.returnJumpParam->returnDirect = transform->GetPosition() - m_param.dunkPosition;
 
-		if (auto gravity = GetGameObject()->GetComponent<Gravity>(false)) {							//重力の解除
+		//重力の解除
+		if (auto gravity = GetGameObject()->GetComponent<Gravity>(false)) {							
 			gravity->SetUpdateActive(false);
 		}
 
-		if (auto velocityManager = GetGameObject()->GetComponent<VelocityManager>(false)) {			//速度停止
+		//速度リセット
+		if (auto velocityManager = GetGameObject()->GetComponent<VelocityManager>(false)) {			
 			velocityManager->ResetAll();
 		}
 
-		if (auto rotationController = GetGameObject()->GetComponent<RotationController>(false)) {	//回転コントローラー
+		//回転コントローラー
+		if (auto rotationController = GetGameObject()->GetComponent<RotationController>(false)) {	
 			rotationController->SetDirect(m_param.dunkPosition - transform->GetPosition());
 		}
 
+		//音を鳴らす
 		if (auto soundEmmiter = GetGameObject()->GetComponent<SoundEmitter>(false)) {
 			soundEmmiter->PlaySoundClip(m_goalStartSE);
 		}
@@ -161,6 +171,10 @@ namespace basecross {
 
 		if (auto velocityManager = GetGameObject()->GetComponent<VelocityManager>(false)) {
 			velocityManager->ResetAll();
+		}
+
+		if (auto ball = m_ball.lock()) {
+			GetStage()->RemoveGameObject<GameObject>(ball);
 		}
 	}
 
@@ -200,11 +214,6 @@ namespace basecross {
 			if (auto animator = GetGameObject()->GetComponent<PlayerAnimator>(false)) {
 				animator->ChangePlayerAnimation(PlayerAnimationState::State::Wait);
 			}
-
-			auto ball = m_ball.lock();
-			if (ball) {
-				GetStage()->RemoveGameObject<GameObject>(ball);
-			}
 		};
 		m_taskList->DefineTask(TaskEnum::EndWait, std::make_shared<Task::Wait>(m_param.endWaitParam));
 	}
@@ -226,6 +235,8 @@ namespace basecross {
 	}
 
 	bool GoalAnimationController::IsGoalAnimation() const {
+		return m_taskList->IsEnd();
+
 		auto animator = GetGameObject()->GetComponent<PlayerAnimator>(false);
 		if (!animator) {
 			return false;

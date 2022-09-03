@@ -28,9 +28,6 @@ namespace basecross {
 			float maxSpeed;           //最大スピード
 			bool isDeseleration;      //減速中かどうか
 
-			/// <summary>
-			/// コンストラクタ
-			/// </summary>
 			Parametor();
 
 			/// <summary>
@@ -65,6 +62,11 @@ namespace basecross {
 		/// 減速処理
 		/// </summary>
 		void Deseleration();
+
+		/// <summary>
+		/// 重力処理更新
+		/// </summary>
+		void GravityUpdate();
 
 	public:
 		//--------------------------------------------------------------------------------------

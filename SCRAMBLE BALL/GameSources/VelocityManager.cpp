@@ -11,6 +11,11 @@
 #include "Mathf.h"
 #include "UtilityVelocity.h"
 
+#include "PlayerInputer.h"
+#include "MaruUtility.h"
+#include "HideItem.h"
+#include "Maruyama/Interface/I_TeamMember.h"
+#include "Maruyama/StageObject/Goal.h"
 #include "Watanabe/DebugClass/Debug.h"
 
 namespace basecross {
@@ -49,13 +54,7 @@ namespace basecross {
 		auto delta = App::GetApp()->GetElapsedTime();
 		m_param.beforeVelocity = m_param.velocity; //前フレームの速度を保存
 
-		//重力分加算する。
-		auto gravity = GetGameObject()->GetComponent<Gravity>(false);
-		if (gravity && gravity->GetUpdateActive()) {
-			//m_param.velocity.y += gravity->GetGravityVelocity().y; //- m_param.velocity.y;
-			constexpr float power = 60.0f;
-			AddForce(gravity->GetGravityVelocity() * power);
-		}
+		GravityUpdate();
 
 		m_param.velocity += m_param.force * delta; //力を加える
 
@@ -68,6 +67,23 @@ namespace basecross {
 		ResetForce();
 
 		Deseleration();	//減速処理
+
+		////デバッグ
+		//if (PlayerInputer::GetInstance()->IsRightDown()) {
+		//	transform->SetPosition(maru::Utility::FindComponent<HideItem>()->GetGameObject()->GetComponent<Transform>()->GetPosition() + Vec3::Up());
+		//}
+
+		////デバッグ
+		//if (PlayerInputer::GetInstance()->IsLeftDown()) {
+		//	auto goals = maru::Utility::FindComponents<Goal>();
+		//	Vec3 position;
+		//	for (auto goal : goals) {
+		//		if (goal->GetTeam() != GetGameObject()->GetComponent<I_TeamMember>()->GetTeam()) {
+		//			position = goal->GetGameObject()->GetComponent<Transform>()->GetPosition();
+		//		}
+		//	}
+		//	transform->SetPosition(position + Vec3::Right());
+		//}
 	}
 
 	void VelocityManager::Move() {
@@ -99,6 +115,28 @@ namespace basecross {
 		}
 	}
 
+	void VelocityManager::GravityUpdate() {
+		//重力分加算する。
+		auto delta = App::GetApp()->GetElapsedTime();
+		auto gravity = GetGameObject()->GetComponent<Gravity>(false);
+		if (!gravity) {
+			m_param.velocity.y += m_param.force.y * delta;
+			return;
+		}
+
+		if (m_param.force.y != 0.0f) {
+			Debug::GetInstance()->Log(m_param.force);
+		}
+
+		auto gravityVelocity = gravity->GetGravityVelocity();
+		gravityVelocity.y += m_param.force.y * delta;
+		gravity->SetGravityVerocity(gravityVelocity);
+		m_param.velocity.y = gravityVelocity.y;
+
+		//y軸のForceのリセット
+		m_param.force.y = 0;
+	}
+
 	//--------------------------------------------------------------------------------------
 	///	アクセッサ
 	//--------------------------------------------------------------------------------------
@@ -128,6 +166,10 @@ namespace basecross {
 	}
 
     void VelocityManager::AddForce(const Vec3& force) noexcept {
+		if (force.y != 0) {
+			int d = 0;
+		}
+
         m_param.force += force;
     }
 
