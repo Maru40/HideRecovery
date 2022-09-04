@@ -30,11 +30,11 @@ namespace basecross {
 		float aimCameraSpeed;
 		float assitPower;
 		std::unique_ptr<maru::ReactiveBool> isAim;	//Aim中かどうか
-		bool isShot = false;
+		std::unique_ptr<maru::ReactiveBool> canShot;	//撃てる状態かどうか
 
 		UseWepon_Parametor();
 
-		UseWepon_Parametor(const bool isAim);
+		UseWepon_Parametor(const bool isAim, const bool isShot);
 
 		/// <summary>
 		/// コピーコンストラクタ
@@ -119,6 +119,11 @@ namespace basecross {
 		void SettingReactiveIsAim();
 
 		/// <summary>
+		/// 撃てる状態になったときに呼び出したい処理の登録
+		/// </summary>
+		void SettingReactiveCanShot();
+
+		/// <summary>
 		/// 回転する向きを計算して返す。
 		/// </summary>
 		/// <returns>回転する向き</returns>
@@ -146,6 +151,18 @@ namespace basecross {
 		bool IsAim() const;
 
 		/// <summary>
+		/// 撃てるかどうか
+		/// </summary>
+		/// <param name="isShot">撃てるならtrue</param>
+		void SetCanShot(const bool canShot);
+
+		/// <summary>
+		/// 撃てるかどうか
+		/// </summary>
+		/// <returns>撃てるならtrue</returns>
+		bool CanShot() const;
+
+		/// <summary>
 		/// 武器の設定
 		/// </summary>
 		/// <param name="wepon">武器</param>
@@ -171,9 +188,6 @@ namespace basecross {
 
 		bool IsUseCamera() const { return m_isUseCamera; }
 
-		void SetIsShot(const bool isShot) { m_param.isShot = isShot; }
-
-		bool IsShot() const { return m_param.isShot; }
 	};
 
 }

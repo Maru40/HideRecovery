@@ -166,10 +166,6 @@ namespace basecross {
 	}
 
     void VelocityManager::AddForce(const Vec3& force) noexcept {
-		if (force.y != 0) {
-			int d = 0;
-		}
-
         m_param.force += force;
     }
 

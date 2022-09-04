@@ -39,18 +39,22 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 
 	UseWepon_Parametor::UseWepon_Parametor() :
-		UseWepon_Parametor(false)
+		UseWepon_Parametor(false, false)
 	{}
 
-	UseWepon_Parametor::UseWepon_Parametor(const bool isAim) :
+	UseWepon_Parametor::UseWepon_Parametor(const bool isAim, const bool canShot) :
 		defaultCameraSpeed(0.0f),
 		aimCameraSpeed(0.0f),
 		assitPower(3.0f),
-		isAim(new maru::ReactiveBool(isAim))
+		isAim(new maru::ReactiveBool(isAim)),
+		canShot(new maru::ReactiveBool(canShot))
 	{}
 
 	UseWepon_Parametor::UseWepon_Parametor(const UseWepon_Parametor& parametor) :
-		UseWepon_Parametor(parametor.isAim->GetValue())
+		UseWepon_Parametor(
+			parametor.isAim->GetValue(),
+			parametor.canShot->GetValue()
+		)
 	{}
 
 	//--------------------------------------------------------------------------------------
@@ -100,14 +104,14 @@ namespace basecross {
 				PlayerAnimationState::State::GunSet2,
 				nullptr,
 				nullptr,
-				[&]() { SetIsShot(true); }
+				[&]() { SetCanShot(true); }
 			);
 		}
 
 		if (auto animator = GetGameObject()->GetComponent<PlayerAnimator>(false)) {	//アニメーションの遷移
 			animator->AddAnimationEvent(
 				PlayerAnimationState::State::GunEnd2,
-				[&]() { SetIsShot(false); },
+				[&]() { SetCanShot(false); },
 				nullptr,
 				nullptr
 			);
@@ -229,7 +233,10 @@ namespace basecross {
 	void UseWepon::SettingReactiveIsAim() {
 		auto& isAim = m_param.isAim;
 
-		auto trueFunction = [&]() {		//Aim状態になった時
+		//Aim状態になった時
+		auto trueFunction = [&]() {		
+			ChangeCameraSpeed(m_param.aimCameraSpeed);
+
 			auto status = GetGameObject()->GetComponent<PlayerStatus>(false);
 			if (status && status->IsDead()) {
 				return;
@@ -239,11 +246,12 @@ namespace basecross {
 				animator->ChangePlayerAnimation(PlayerAnimationState::State::GunSet2);
 				m_soundEmitter.lock()->PlaySoundClip(m_readyArmsSoundClip);
 			}
-
-			ChangeCameraSpeed(m_param.aimCameraSpeed);
 		};
 
-		auto falseFunction = [&]() {	//Aim状態でなくなった時
+		//Aim状態でなくなった時
+		auto falseFunction = [&]() {	
+			ChangeCameraSpeed(m_param.defaultCameraSpeed);
+
 			auto status = GetGameObject()->GetComponent<PlayerStatus>(false);
 			if (status && status->IsDead()) {
 				return;
@@ -252,12 +260,14 @@ namespace basecross {
 			if (auto animator = GetGameObject()->GetComponent<PlayerAnimator>(false)) {	//アニメーションの遷移
 				animator->ChangePlayerAnimation(PlayerAnimationState::State::GunEnd2);
 			}
-
-			ChangeCameraSpeed(m_param.defaultCameraSpeed);
 		};
 
 		isAim->AddFunction(true, trueFunction);
 		isAim->AddFunction(false, falseFunction);
+	}
+
+	void UseWepon::SettingReactiveCanShot() {
+		auto& canShot = m_param.canShot;
 	}
 
 	Vec3 UseWepon::CalculateRotationDirection() {
@@ -370,11 +380,13 @@ namespace basecross {
 	/// アクセッサ
 	//--------------------------------------------------------------------------------------
 
-	void UseWepon::SetIsAim(const bool isAim) { 
-		*m_param.isAim = isAim; 
-	}
+	void UseWepon::SetIsAim(const bool isAim) { *m_param.isAim = isAim; }
 
 	bool UseWepon::IsAim() const { return m_param.isAim->GetValue(); }
+
+	void UseWepon::SetCanShot(const bool isShot) { *m_param.canShot = isShot; }
+
+	bool UseWepon::CanShot() const { return m_param.canShot->GetValue(); }
 
 	void UseWepon::SetWepon(const std::shared_ptr<WeponBase>& wepon) noexcept { m_wepon = wepon; }
 
