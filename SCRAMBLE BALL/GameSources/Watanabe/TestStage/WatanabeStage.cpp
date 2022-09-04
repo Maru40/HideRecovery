@@ -22,7 +22,6 @@
 #include "MaruUtility.h"
 #include "../Utility/CSVLoad.h"
 #include "../Component/PlayerAnimator.h"
-#include "PlayerAnimationCtrl.h"
 #include "../UI/Numbers.h"
 #include "../UI/CountDownUI.h"
 #include "../UI/SimpleSprite.h"
@@ -110,7 +109,7 @@ namespace basecross {
 		//	testDraw->SetMultiMeshResource(L"Player_Mesh");
 		//	//testDraw->SetMeshResource(L"rack");
 		//}
-		player->RemoveComponent<PlayerAnimationCtrl>();
+		//player->RemoveComponent<PlayerAnimationCtrl>();
 		player->AddComponent<PlayerAnimator>();
 		m_obj = player;
 

@@ -13,7 +13,7 @@
 #include "EnemyMainStateMachine.h"
 #include "Stator_Hero.h"
 
-#include "AIImpacter.h"
+#include "Maruyama/Enemy/Component/ImpactMap/AIImpacter.h"
 #include "SelfImpactNodeManager.h"
 
 #include "Watanabe/Component/PlayerStatus.h"

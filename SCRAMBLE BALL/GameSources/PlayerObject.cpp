@@ -25,8 +25,6 @@
 #include "ItemAcquisitionManager.h"
 //#include "OwnHideItemManager.h"
 
-#include "AnimationCtrl.h"
-#include "PlayerAnimationCtrl.h"
 #include "VelocityManager.h"
 #include "Itabashi/ObjectMover.h"
 #include "Itabashi/PlayerOnlineController.h"

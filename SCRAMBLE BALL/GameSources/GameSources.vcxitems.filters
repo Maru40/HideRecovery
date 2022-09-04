@@ -1096,7 +1096,6 @@
     <Filter Include="Maruyama\Stage\MapShotStage">
       <UniqueIdentifier>{293ff4ca-28fb-49bc-b492-f950c275cb6c}</UniqueIdentifier>
     </Filter>
-
     <Filter Include="Watanabe\UI\HoldButtonUI">
       <UniqueIdentifier>{66789215-53a5-45b3-a5ec-a3c355baec12}</UniqueIdentifier>
     </Filter>
@@ -1105,10 +1104,9 @@
     </Filter>
     <Filter Include="Watanabe\BoardPoly\PlayerLabelBP">
       <UniqueIdentifier>{7da0a3a2-a08d-436b-9bf9-b000fb423b93}</UniqueIdentifier>
-	</Filter>
+    </Filter>
     <Filter Include="Maruyama\Player\Component\ItemAcquisitionManager\BoardUI">
       <UniqueIdentifier>{1b5db4ab-f4c6-48a3-bed4-8e0ab3884316}</UniqueIdentifier>
-
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1129,9 +1127,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)DelegateSystem.h">
       <Filter>Patch\Utility\DelegateSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)ActionTimer.h">
-      <Filter>Patch\Utility\ActionTimer</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)AnimationHelper.h">
       <Filter>Patch\basecross\AnimationHelper</Filter>
@@ -1405,9 +1400,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Utility_EnemyStator.h">
       <Filter>Maruyama\Enemy\StatorUtility</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)ActiveSkillBase.h">
-      <Filter>Maruyama\Enemy\Component\Base\Skill\ActiveSkillBase</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)PassiveSkillBase.h">
       <Filter>Maruyama\Enemy\Component\Base\Skill\PassiveSkillBase</Filter>
@@ -1694,12 +1686,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)ChaseState_TargetSeek.h">
       <Filter>Maruyama\Enemy\Component\EachEnemy\Common\Stator\State\Chase\TargetSeek</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)PlayerAnimationCtrl.h">
-      <Filter>Maruyama\Player\Component\PlayerAnimationCtrl</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)AnimationCtrl.h">
-      <Filter>Maruyama\Player\Component\PlayerAnimationCtrl</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)TitleStage.h">
       <Filter>Maruyama\Stage\TitleStage</Filter>
     </ClInclude>
@@ -1747,9 +1733,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\AdvBaseDraw.h">
       <Filter>Watanabe\Shader\AdvBaseDraw</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)AIImpacter.h">
-      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\AIImpacter</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)CoordinatorBase.h">
       <Filter>Maruyama\Enemy\Component\AI\Director\CoordinatorBase</Filter>
@@ -2060,7 +2043,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Stage\MapShotStage.h">
       <Filter>Maruyama\Stage\MapShotStage</Filter>
     </ClInclude>
-
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\HoldButtonUI.h">
       <Filter>Watanabe\UI\HoldButtonUI</Filter>
     </ClInclude>
@@ -2069,10 +2051,24 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\BoardPoly\PlayerLabelBP.h">
       <Filter>Watanabe\BoardPoly\PlayerLabelBP</Filter>
-	</ClInclude>
+    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)OpenBoard.h">
       <Filter>Maruyama\Player\Component\ItemAcquisitionManager\BoardUI</Filter>
-
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\Utility\ActionTimer.h">
+      <Filter>Patch\Utility\ActionTimer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Skill\ActiveSkillBase.h">
+      <Filter>Maruyama\Enemy\Component\Base\Skill\ActiveSkillBase</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\ImpactMap\AIImpacter.h">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\AIImpacter</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\AnimationCtrl.h">
+      <Filter>Maruyama\Player\Component\PlayerAnimationCtrl</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\PlayerAnimationCtrl.h">
+      <Filter>Maruyama\Player\Component\PlayerAnimationCtrl</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2087,9 +2083,6 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)InputHelper.cpp">
       <Filter>Patch\Input\InputHelper</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)ActionTimer.cpp">
-      <Filter>Patch\Utility\ActionTimer</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)BezierTransitioner.cpp">
       <Filter>Patch\basecross\BezierTransitioner</Filter>
@@ -2318,9 +2311,6 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Utility_EnemyStator.cpp">
       <Filter>Maruyama\Enemy\StatorUtility</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)ActiveSkillBase.cpp">
-      <Filter>Maruyama\Enemy\Component\Base\Skill\ActiveSkillBase</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)PassiveSkillBase.cpp">
       <Filter>Maruyama\Enemy\Component\Base\Skill\PassiveSkillBase</Filter>
@@ -2595,9 +2585,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)ChaseState_TargetSeek.cpp">
       <Filter>Maruyama\Enemy\Component\EachEnemy\Common\Stator\State\Chase\TargetSeek</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)PlayerAnimationCtrl.cpp">
-      <Filter>Maruyama\Player\Component\PlayerAnimationCtrl</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)TitleStage.cpp">
       <Filter>Maruyama\Stage\TitleStage</Filter>
     </ClCompile>
@@ -2636,9 +2623,6 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\AdvBaseDraw.cpp">
       <Filter>Watanabe\Shader\AdvBaseDraw</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)AIImpacter.cpp">
-      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\AIImpacter</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)CoordinatorBase.cpp">
       <Filter>Maruyama\Enemy\Component\AI\Director\CoordinatorBase</Filter>
@@ -2925,7 +2909,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Stage\MapShotStage.cpp">
       <Filter>Maruyama\Stage\MapShotStage</Filter>
     </ClCompile>
-
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\HoldButtonUI.cpp">
       <Filter>Watanabe\UI\HoldButtonUI</Filter>
     </ClCompile>
@@ -2934,10 +2917,21 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\BoardPoly\PlayerLabelBP.cpp">
       <Filter>Watanabe\BoardPoly\PlayerLabelBP</Filter>
-	</ClCompile>
+    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)OpenBoard.cpp">
       <Filter>Maruyama\Player\Component\ItemAcquisitionManager\BoardUI</Filter>
-
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\Utility\ActionTimer.cpp">
+      <Filter>Patch\Utility\ActionTimer</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Skill\ActiveSkillBase.cpp">
+      <Filter>Maruyama\Enemy\Component\Base\Skill\ActiveSkillBase</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\ImpactMap\AIImpacter.cpp">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\AIImpacter</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\PlayerAnimationCtrl.cpp">
+      <Filter>Maruyama\Player\Component\PlayerAnimationCtrl</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
