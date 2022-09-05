@@ -10,19 +10,19 @@
 
 #include "Utility_EnemyStator.h"
 
-#include "EyeSearchRange.h"
+#include "Maruyama/Enemy/Component/EyeSearchRange.h"
 #include "TargetManager.h"
 #include "VelocityManager.h"
 
 #include "GraphBase.h"
-#include "StateEdgeBase.h"
-#include "StateNodeBase.h"
+#include "Maruyama/Enemy/StateMachine/StateNodeBase.h"
+#include "Maruyama/Enemy/StateMachine/StateEdgeBase.h"
 #include "MaruAnimationHelper.h"
-#include "AnimationMainStateMachine.h"
+#include "Maruyama/Enemy/Component/Animation/AnimationMainStateMachine.h"
 
 #include "GameStageBase.h"
 
-#include "DebugObject.h"
+#include "Maruyama/Debug/Object/DebugObject.h"
 
 namespace basecross {
 	namespace Enemy {

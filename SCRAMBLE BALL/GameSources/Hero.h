@@ -9,7 +9,7 @@
 #include "stdafx.h"
 #include "Project.h"
 
-#include "EnemyBase.h"
+#include "Maruyama/Enemy/Component/EnemyBase.h"
 
 namespace basecross {
 	namespace Enemy {

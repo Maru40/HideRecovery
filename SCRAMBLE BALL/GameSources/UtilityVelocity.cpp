@@ -11,7 +11,6 @@
 #include "UtilityVelocity.h"
 
 #include "Mathf.h"
-#include "DebugObject.h"
 
 namespace basecross {
 

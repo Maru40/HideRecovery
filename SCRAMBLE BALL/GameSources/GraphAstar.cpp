@@ -10,15 +10,15 @@
 #include "Heuristic.h"
 #include "SparseGraph.h"
 #include "NavGraphNode.h"
-#include "AstarEdge.h"
-#include "UtilityAstar.h"
+#include "Maruyama/Enemy/Astar/AstarEdge.h"
+#include "Maruyama/Enemy/Astar/UtilityAstar.h"
 #include "GraphAstar.h"
 #include "Mathf.h"
 #include "MyRandom.h"
 
-#include "CollisionAction.h"
+#include "Maruyama/Utility/Component/CollisionAction.h"
 
-#include "DebugObject.h"
+#include "Maruyama/Debug/Object/DebugObject.h"
 
 namespace basecross {
 

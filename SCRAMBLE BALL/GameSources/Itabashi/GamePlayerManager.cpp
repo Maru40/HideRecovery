@@ -24,7 +24,7 @@
 #include "Maruyama/Camera/Component/CameraForwardController.h"
 #include "TeleportUI.h"
 #include "ToTargetMove.h"
-#include "GameManager.h"
+#include "Maruyama/Utility/SingletonComponent/GameManager.h"
 
 #include "Maruyama/Player/Component/AccessHidePlace.h"
 

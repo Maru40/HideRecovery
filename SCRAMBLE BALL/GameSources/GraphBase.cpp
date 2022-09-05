@@ -10,8 +10,8 @@
 
 #include "GraphBase.h"
 
-#include "StateNodeBase.h"
-#include "StateEdgeBase.h"
+#include "Maruyama/Enemy/StateMachine/StateNodeBase.h"
+#include "Maruyama/Enemy/StateMachine/StateEdgeBase.h"
 
 #include "GraphNodeBase.h"
 #include "GraphStateNode.h"

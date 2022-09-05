@@ -1,7 +1,7 @@
 #include"SpringArmComponent.h"
 
 #include "PlayerInputer.h"
-#include "DebugObject.h"
+#include "Maruyama/Debug/Object/DebugObject.h"
 
 #include "LookAtCameraManager.h"
 

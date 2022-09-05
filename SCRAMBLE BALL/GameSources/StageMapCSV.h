@@ -8,13 +8,12 @@
 #include "stdafx.h"
 
 #include "LoadData.h"
-#include "DebugObject.h"
 
 #include "StageObjectBase.h"
 
 #include "OriginalMeshStageObject.h"
 #include "OriginalMeshToonObject.h"
-#include "CollisionObject.h"
+#include "Maruyama/Utility/Object/CollisionObject.h"
 
 namespace basecross {
 

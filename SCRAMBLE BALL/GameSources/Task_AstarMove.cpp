@@ -20,7 +20,7 @@
 #include "VelocityManager.h"
 #include "RotationController.h"
 
-#include "FieldImpactMap.h"
+#include "Maruyama/Enemy/Component/ImpactMap/FieldImpactMap.h"
 
 namespace basecross {
 

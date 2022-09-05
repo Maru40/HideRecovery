@@ -8,7 +8,7 @@
 #include "stdafx.h"
 
 #include "StageObjectBase.h"
-#include "CollisionObject.h"
+#include "Maruyama/Utility/Object/CollisionObject.h"
 
 namespace basecross {
 

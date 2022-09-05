@@ -10,7 +10,7 @@
 
 #include "I_Impact.h"
 
-#include "EyeSearchRange.h"
+#include "Maruyama/Enemy/Component/EyeSearchRange.h"
 #include "NavGraphNode.h"
 
 namespace basecross {

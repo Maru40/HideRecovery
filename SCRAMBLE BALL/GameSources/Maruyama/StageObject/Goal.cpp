@@ -31,9 +31,9 @@
 #include "Watanabe/StageObject/FireworksObject.h"
 #include "Watanabe/Component/BallAnimator.h"
 
-#include "GameTimer.h"
+#include "Maruyama/Utility/Timer/GameTimer.h"
 
-#include "TackleAttack.h"
+#include "Maruyama/Player/Component/TackleAttack.h"
 #include "Maruyama/Player/Component/GoalAnimationController.h"
 #include "Maruyama/Interface/I_TeamMember.h"
 #include "Watanabe/UI/SplashMessageUI.h"

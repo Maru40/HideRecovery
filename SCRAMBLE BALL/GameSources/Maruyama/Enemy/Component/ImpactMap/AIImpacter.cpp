@@ -18,14 +18,14 @@
 #include "SingletonComponent.h"
 #include "FieldImpactMap.h"
 
-#include "EyeSearchRange.h"
+#include "Maruyama/Enemy/Component/EyeSearchRange.h"
 #include "NavGraphNode.h"
 
 #include "ImpactManager.h"
 #include "I_Impact.h"
 
-#include "TimeHelper.h"
-#include "GameTimer.h"
+#include "Maruyama/Utility/Timer/TimeHelper.h"
+#include "Maruyama/Utility/Timer/GameTimer.h"
 
 #include "TupleSpace.h"
 

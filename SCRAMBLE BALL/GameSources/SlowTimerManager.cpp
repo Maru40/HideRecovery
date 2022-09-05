@@ -8,9 +8,9 @@
 #include "Project.h"
 
 #include "SlowTimerManager.h"
-#include "GameTimer.h"
+#include "Maruyama/Utility/Timer/GameTimer.h"
 
-#include "TimeHelper.h"
+#include "Maruyama/Utility/Timer/TimeHelper.h"
 
 namespace basecross {
 

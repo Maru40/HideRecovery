@@ -9,10 +9,10 @@
 
 #include "ParticleManager.h"
 
-#include "BoardObject.h"
+#include "Maruyama/UI/Object/BoardObject.h"
 #include "VelocityManager.h"
-#include "BillBoard.h"
-#include "BillBoard_Ex.h"
+#include "Maruyama/Utility/Component/BillBoard.h"
+#include "Maruyama/Utility/Component/BillBoard_Ex.h"
 
 #include "MyRandom.h"
 #include "MaruUtility.h"
@@ -21,8 +21,8 @@
 #include "Action.h"
 #include "TimerDestroy.h"
 
-#include "TimeHelper.h"
-#include "GameTimer.h"
+#include "Maruyama/Utility/Timer/TimeHelper.h"
+#include "Maruyama/Utility/Timer/GameTimer.h"
 
 #include "UtilityObstacle.h"
 

@@ -10,19 +10,19 @@
 
 #include "SingletonComponent.h"
 #include "NavGraphNode.h"
-#include "AstarEdge.h"
+#include "Maruyama/Enemy/Astar/AstarEdge.h"
 #include "SparseGraph.h"
 #include "GraphAstar.h"
 #include "ImpactMap.h"
 
-#include "AstarNodeDraw.h"
-#include "AstarEdgeDraw.h"
+#include "Maruyama/Enemy/Astar/Debug/AstarEdgeDraw.h"
+#include "Maruyama/Enemy/Astar/Debug/AstarNodeDraw.h"
 
 #include "PlayerInputer.h"
 
-#include "EyeSearchRange.h"
+#include "Maruyama/Enemy/Component/EyeSearchRange.h"
 
-#include "UtilityAstar.h"
+#include "Maruyama/Enemy/Astar/UtilityAstar.h"
 #include "I_Impact.h"
 #include "Heuristic.h"
 

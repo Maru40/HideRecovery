@@ -12,7 +12,7 @@
 #include "PlayerObject.h"
 #include "VillainPlayerObject.h"
 #include "HeroPlayerObject.h"
-#include "GameManagerObject.h"
+#include "Maruyama/Utility/SingletonComponent/GameManager.h"
 #include "SlowTimerManager.h"
 
 #include "MainCamera.h"
@@ -29,12 +29,12 @@
 
 #include "UtilityStartCamera.h"
 
-#include "EnemyObjectBase.h"
+#include "Maruyama/Enemy/Object/EnemyObjectBase.h"
 
 #include "OriginalMeshToonObject.h"
 #include "ToonPNTStaticModelDraw.h"
 
-#include "FieldImpactMap.h"
+#include "Maruyama/Enemy/Component/ImpactMap/FieldImpactMap.h"
 
 #include "ItemAcquisitionManager.h"
 

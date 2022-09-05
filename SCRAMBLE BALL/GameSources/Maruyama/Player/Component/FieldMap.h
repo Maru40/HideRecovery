@@ -8,7 +8,7 @@
 #pragma once
 #include "stdafx.h"
 
-#include "BuilderVertexPCT.h"
+#include "Maruyama/UI/BuilderVertexPCT.h"
 #include "SingletonComponent.h"
 
 #include "ImpactMap.h"

@@ -7,7 +7,7 @@
 #pragma once
 #include "stdafx.h"
 
-#include "StateNodeBase.h"
+#include "Maruyama/Enemy/StateMachine/StateNodeBase.h"
 
 namespace basecross {
 

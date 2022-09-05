@@ -23,7 +23,7 @@
 #include "Maruyama/Player/Component/Teleport.h"
 #include "Maruyama/Interface/I_TeamMember.h"
 #include "TeleportCursorUI.h"
-#include "GameManager.h"
+#include "Maruyama/Utility/SingletonComponent/GameManager.h"
 
 namespace basecross {
 

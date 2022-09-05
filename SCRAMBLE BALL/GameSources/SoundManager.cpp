@@ -9,7 +9,7 @@
 
 #include "SoundManager.h"
 
-#include "DebugObject.h"
+#include "Maruyama/Debug/Object/DebugObject.h"
 
 namespace basecross {
 

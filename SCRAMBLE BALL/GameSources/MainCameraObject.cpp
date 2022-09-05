@@ -13,12 +13,11 @@
 #include "LookAtCameraManager.h"
 #include "SeekTarget.h"
 
-#include "TimeHelper.h"
-#include "GameTimer.h"
-#include "CameraShake.h"
+#include "Maruyama/Utility/Timer/GameTimer.h"
+#include "Maruyama/Camera/Component/CameraShake.h"
 
-#include "TimeHelper.h"
-#include "GameTimer.h"
+#include "Maruyama/Utility/Timer/TimeHelper.h"
+#include "Maruyama/Utility/Timer/GameTimer.h"
 
 #include "GameStageBase.h"
 
@@ -29,9 +28,7 @@
 #include "MaruHitHelper.h"
 #include "Mathf.h"
 
-#include "CameraRayAlphaManager.h"
-
-#include "DebugObject.h"
+#include "Maruyama/Camera/Component/CameraRayAlphaManager.h"
 
 namespace basecross {
 

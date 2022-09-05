@@ -10,8 +10,6 @@
 
 #include "MaruHitHelper.h"
 
-#include "DebugObject.h"
-
 namespace basecross {
 	namespace maru {
 

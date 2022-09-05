@@ -33,12 +33,12 @@
 #include "Watanabe/Component/PlayerAnimator.h"
 #include "Watanabe/Effekseer/EfkEffect.h"
 
-#include "ChargeGun.h"
+#include "Maruyama/Player/Component/ChargeGun.h"
 #include "Watanabe/Component/PlayerStatus.h"
 #include "Watanabe/Component/HoldBallEffectEmitter.h"
 
-#include "TackleAttack.h"
-#include "CollisionAction.h"
+#include "Maruyama/Player/Component/TackleAttack.h"
+#include "Maruyama/Utility/Component/CollisionAction.h"
 
 #include "Maruyama/Player/Component/Respawner.h"
 #include "Maruyama/Player/Component/PlayerDeader.h"
@@ -47,7 +47,7 @@
 #include "Maruyama/Player/Component/Teleport.h"
 #include "Maruyama/Player/Component/FieldMap.h"
 
-#include "EyeSearchRange.h"
+#include "Maruyama/Enemy/Component/EyeSearchRange.h"
 
 #include "Maruyama/Player/Component/AccessHidePlace.h"
 

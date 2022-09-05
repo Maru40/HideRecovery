@@ -8,7 +8,7 @@
 #include "stdafx.h"
 #include "Project.h"
 
-#include "DebugNumber.h"
+#include "Maruyama/Debug/Component/DebugNumber.h"
 #include "NumberObject.h"
 
 namespace basecross {

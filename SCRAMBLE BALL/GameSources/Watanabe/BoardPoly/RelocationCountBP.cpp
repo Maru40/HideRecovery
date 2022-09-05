@@ -1,6 +1,6 @@
 ﻿#include "stdafx.h"
 #include "RelocationCountBP.h"
-#include "BillBoard.h"
+#include "Maruyama/Utility/Component/BillBoard.h"
 #include "../Utility/Utility.h"
 
 namespace basecross {

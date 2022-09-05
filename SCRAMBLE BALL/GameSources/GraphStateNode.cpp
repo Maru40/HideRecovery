@@ -11,7 +11,7 @@
 #include "GraphNodeBase.h"
 #include "GraphStateNode.h"
 
-#include "StateNodeBase.h"
+#include "Maruyama/Enemy/StateMachine/StateNodeBase.h"
 
 namespace basecross {
 

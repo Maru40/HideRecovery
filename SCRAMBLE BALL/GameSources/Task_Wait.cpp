@@ -8,8 +8,8 @@
 #include "stdafx.h"
 #include "Project.h"
 
-#include "TimeHelper.h"
-#include "GameTimer.h"
+#include "Maruyama/Utility/Timer/TimeHelper.h"
+#include "Maruyama/Utility/Timer/GameTimer.h"
 #include "TaskList.h"
 #include "Task_Wait.h"
 

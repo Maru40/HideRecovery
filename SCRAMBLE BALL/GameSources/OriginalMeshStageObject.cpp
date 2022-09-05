@@ -14,7 +14,7 @@
 #include "StageMapCSV.h"
 
 #include "ToonPNTStaticModelDraw.h"
-#include "CollisionObject.h"
+#include "Maruyama/Utility/Object/CollisionObject.h"
 
 #include "MaruUtility.h"
 

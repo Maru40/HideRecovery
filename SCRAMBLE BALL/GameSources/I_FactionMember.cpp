@@ -10,9 +10,9 @@
 
 #include "I_FactionMember.h"
 
-#include "EnemyBase.h"
-#include "CoordinatorBase.h"
-#include "FactionCoordinator.h"
+#include "Maruyama/Enemy/Component/EnemyBase.h"
+#include "Maruyama/Enemy/AIDirector/CombatCoordinator.h"
+#include "Maruyama/Enemy/AIDirector/FactionCoordinator.h"
 
 namespace basecross {
 

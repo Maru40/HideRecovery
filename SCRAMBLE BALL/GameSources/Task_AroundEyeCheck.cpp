@@ -14,6 +14,8 @@
 #include "RotationController.h"
 #include "VelocityManager.h"
 
+#include "Maruyama/Debug/Object/DebugObject.h"
+
 #include "Mathf.h"
 
 namespace basecross {

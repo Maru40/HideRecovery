@@ -8,7 +8,7 @@
 #include "stdafx.h"
 #include "Project.h"
 
-#include "EnemyBase.h"
+#include "Maruyama/Enemy/Component/EnemyBase.h"
 #include "TargetManager.h"
 
 #include "Task_PlowlingMove.h"

@@ -9,11 +9,11 @@
 #include "HideItem.h"
 #include "Item.h"
 #include "VelocityManager.h"
-#include "ChargeGun.h"
-#include "ChargeBulletObject.h"
+#include "Maruyama/Player/Component/ChargeGun.h"
+#include "Maruyama/Bullet/Object/ChargeBulletObject.h"
 #include "Watanabe/Component/PlayerStatus.h"
-#include "TackleAttack.h"
-#include "ChargeBullet.h"
+#include "Maruyama/Player/Component/TackleAttack.h"
+#include "Maruyama/Bullet/Component/ChargeBullet.h"
 #include <random>
 
 #include "Maruyama/Player/Component/UseWepon.h"

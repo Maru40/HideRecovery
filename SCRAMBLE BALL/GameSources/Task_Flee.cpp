@@ -10,15 +10,14 @@
 #include "TaskList.h"
 #include "Task_Flee.h"
 
-#include "EnemyBase.h"
-#include "GameTimer.h"
+#include "Maruyama/Enemy/Component/EnemyBase.h"
+#include "Maruyama/Utility/Timer/TimeHelper.h"
+#include "Maruyama/Utility/Timer/GameTimer.h"
 
 #include "TargetManager.h"
 #include "UtilityVelocity.h"
 #include "VelocityManager.h"
 #include "RotationController.h"
-
-#include "DebugObject.h"
 
 namespace basecross {
 	namespace Enemy {

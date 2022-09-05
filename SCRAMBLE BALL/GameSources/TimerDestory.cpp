@@ -8,8 +8,7 @@
 #include "Project.h"
 
 #include "TimerDestroy.h"
-
-#include "GameTimer.h"
+#include "Maruyama/Utility/Timer/GameTimer.h"
 
 namespace basecross {
 

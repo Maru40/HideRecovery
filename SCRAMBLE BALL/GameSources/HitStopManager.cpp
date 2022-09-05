@@ -7,12 +7,11 @@
 #include "stdafx.h"
 #include "Project.h"
 
-#include "TimeHelper.h"
-#include "GameTimer.h"
+#include "Maruyama/Utility/Timer/TimeHelper.h"
+#include "Maruyama/Utility/Timer/GameTimer.h"
 #include "HitStopManager.h"
 
 #include "PlayerInputer.h"
-#include "DebugObject.h"
 
 namespace basecross {
 

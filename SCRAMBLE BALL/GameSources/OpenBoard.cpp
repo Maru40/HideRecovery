@@ -11,12 +11,12 @@
 
 #include "Watanabe/UI/ButtonUI.h"
 
-#include "BuilderVertexPCT.h"
-#include "BoardObject.h"
+#include "Maruyama/UI/BuilderVertexPCT.h"
+#include "Maruyama/UI/Object/BoardObject.h"
 
 #include "Watanabe/Manager/SpriteDataManager.h"
 
-#include "BillBoard.h"
+#include "Maruyama/Utility/Component/BillBoard.h"
 
 namespace basecross {
 

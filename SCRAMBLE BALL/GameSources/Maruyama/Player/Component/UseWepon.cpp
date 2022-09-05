@@ -23,7 +23,7 @@
 #include "RotationController.h"
 #include "VelocityManager.h"
 #include "MaruUtility.h"
-#include "EyeSearchRange.h"
+#include "Maruyama/Enemy/Component/EyeSearchRange.h"
 
 #include "Itabashi/GamePlayerManager.h"
 

@@ -10,7 +10,7 @@
 #include "Project.h"
 #include "Mathf.h"
 
-#include "TimeHelper.h"
+#include "Maruyama/Utility/Timer/TimeHelper.h"
 
 namespace basecross {
 

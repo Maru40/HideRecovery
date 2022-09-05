@@ -11,17 +11,17 @@
 #include "ImpactManager.h"
 
 #include "SingletonComponent.h"
-#include "FieldImpactMap.h"
+#include "Maruyama/Enemy/Component/ImpactMap/FieldImpactMap.h"
 #include "ImpactMap.h"
 
 #include "GraphAstar.h"
 #include "SparseGraph.h"
 
 #include "MaruUtility.h"
-#include "UtilityAstar.h"
+#include "Maruyama/Enemy/Astar/UtilityAstar.h"
 #include "UtilityObstacle.h"
 
-#include "EyeSearchRange.h"
+#include "Maruyama/Enemy/Component/EyeSearchRange.h"
 
 namespace basecross {
 

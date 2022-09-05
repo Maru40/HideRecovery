@@ -12,8 +12,8 @@
 
 #include "NavGraphNode.h"
 
-#include "TimeHelper.h"
-#include "GameTimer.h"
+#include "Maruyama/Utility/Timer/TimeHelper.h"
+#include "Maruyama/Utility/Timer/GameTimer.h"
 
 #include "ImpactMap.h"
 

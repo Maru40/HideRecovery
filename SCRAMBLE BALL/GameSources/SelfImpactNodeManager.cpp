@@ -14,11 +14,11 @@
 #include "ImpactMap.h"
 #include "GraphAstar.h"
 #include "SparseGraph.h"
-#include "AstarEdge.h"
+#include "Maruyama/Enemy/Astar/AstarEdge.h"
 #include "NavGraphNode.h"
 
 #include "MaruUtility.h"
-#include "UtilityAstar.h"
+#include "Maruyama/Enemy/Astar/UtilityAstar.h"
 
 namespace basecross {
 

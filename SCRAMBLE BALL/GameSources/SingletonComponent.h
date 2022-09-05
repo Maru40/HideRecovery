@@ -8,7 +8,7 @@
 #pragma once
 #include "stdafx.h"
 
-#include "DebugObject.h"
+#include "Maruyama/Debug/Object/DebugObject.h"
 #include "MaruUtility.h"
 
 namespace basecross {

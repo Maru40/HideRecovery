@@ -17,7 +17,7 @@
 
 #include "MaruUtility.h"
 
-#include "CollisionObject.h"
+#include "Maruyama/Utility/Object/CollisionObject.h"
 
 namespace basecross {
 

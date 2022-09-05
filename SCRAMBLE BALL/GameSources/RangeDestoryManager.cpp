@@ -10,7 +10,8 @@
 
 #include "RangeDestroyManager.h"
 
-#include "GameTimer.h"
+#include "Maruyama/Utility/Timer/TimeHelper.h"
+#include "Maruyama/Utility/Timer/GameTimer.h"
 
 namespace basecross {
 

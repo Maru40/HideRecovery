@@ -8,7 +8,7 @@
 
 #include "LookAtCameraManager.h"
 
-#include "TimeHelper.h"
+#include "Maruyama/Utility/Timer/TimeHelper.h"
 
 namespace basecross {
 

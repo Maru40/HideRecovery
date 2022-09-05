@@ -8,10 +8,8 @@
 #include "stdafx.h"
 #include "Project.h"
 
-#include "TimeHelper.h"
+#include "Maruyama/Utility/Timer/TimeHelper.h"
 #include "WaitTimer.h"
-
-#include "DebugObject.h"
 
 namespace basecross {
 

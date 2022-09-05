@@ -16,7 +16,7 @@
 #include "NumbersObject.h"
 #include "NumbersCtrl.h"
 
-#include "BillBoard_Ex.h"
+#include "Maruyama/Utility/Component/BillBoard_Ex.h"
 
 namespace basecross {
 
