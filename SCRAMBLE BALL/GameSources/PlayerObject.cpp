@@ -10,8 +10,8 @@
 #include "PlayerObject.h"
 
 #include "PlayerMover.h"
-#include "RotationController.h"
-#include "PlayerController.h"
+#include "Maruyama/Utility/Component/RotationController.h"
+//#include "PlayerController.h"
 
 #include "CameraHelper.h"
 #include "CameraRotater.h"
@@ -45,7 +45,7 @@
 #include "Maruyama/Player/Component/UseWepon.h"
 #include "Maruyama/Player/Component/GoalAnimationController.h"
 #include "Maruyama/Player/Component/Teleport.h"
-#include "Maruyama/UI/FieldMap.h"
+#include "Maruyama/UI/2D/Component/FieldMap.h"
 
 #include "Maruyama/Enemy/Component/EyeSearchRange.h"
 

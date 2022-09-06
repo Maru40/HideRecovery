@@ -15,8 +15,8 @@
 
 #include "SoundManager.h"
 
-#include "TaskList.h"
-#include "TeleportUI.h"
+#include "Maruyama/TaskList/TaskList.h"
+#include "Maruyama/UI/2D/Component/TeleportUI.h"
 #include "Maruyama/Player/Component/OwnArea.h"
 
 namespace basecross {

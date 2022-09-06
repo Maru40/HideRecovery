@@ -8,7 +8,7 @@
 #pragma once
 #include "stdafx.h"
 
-#include "SeekTarget.h"
+#include "Maruyama/Utility/Component/SeekTarget.h"
 
 namespace basecross {
 

@@ -8,23 +8,22 @@
 #include "stdafx.h"
 #include "Project.h"
 
-#include "TaskList.h"
+#include "Maruyama/TaskList/TaskList.h"
 #include "Maruyama/Enemy/Component/EnemyBase.h"
-#include "TargetManager.h"
-#include "SeekTarget.h"
+#include "Maruyama/Utility/Component/TargetManager.h"
+#include "Maruyama/Utility/Component/SeekTarget.h"
 #include "Maruyama/Enemy/StateMachine/EnemyStateNodeBase.h"
-#include "TaskList.h"
 #include "ChaseState_TargetSeek.h"
 
-#include "Task_MovePositions.h"
-#include "Task_AroundEyeCheck.h"
+#include "Maruyama/TaskList/CommonTasks/Task_MovePositions.h"
+#include "Maruyama/TaskList/CommonTasks/Task_AroundEyeCheck.h"
 #include "ChaseState_AstarSeek.h"
 
 #include "Maruyama/Enemy/StateMachine/EnemyMainStateMachine.h"
 #include "EnemyStateNode_Chase.h"
 
 #include "GameStageBase.h"
-#include "RotationController.h"
+#include "Maruyama/Utility/Component/RotationController.h"
 #include "Maruyama/Utility/UtilityObstacle.h"
 #include "Maruyama/Enemy/Component/EyeSearchRange.h"
 

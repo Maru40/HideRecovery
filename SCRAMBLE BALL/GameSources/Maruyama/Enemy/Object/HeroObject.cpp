@@ -14,7 +14,7 @@
 #include "Maruyama/Enemy/Component/Stator/Stator_Hero.h"
 
 #include "Maruyama/Enemy/ImpactMap/AIImpacter.h"
-#include "SelfImpactNodeManager.h"
+#include "Maruyama/Enemy/ImpactMap/SelfImpactNodeManager.h"
 
 #include "Watanabe/Component/PlayerStatus.h"
 

@@ -23,7 +23,7 @@
 #include "Maruyama/Enemy/Component/Stator/StatorBase.h"
 #include "Maruyama/Enemy/Component/Stator/EnemyStatorBase.h"
 
-#include "TargetManager.h"
+#include "Maruyama/Utility/Component/TargetManager.h"
 
 namespace basecross {
 

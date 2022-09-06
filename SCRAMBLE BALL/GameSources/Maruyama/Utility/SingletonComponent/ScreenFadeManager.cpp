@@ -12,7 +12,7 @@
 
 #include "../Component/FadeSprite.h"
 
-#include "SpriteObject.h"
+#include "Maruyama/UI/2D/Object/SpriteObject.h"
 
 #include "Maruyama/Utility/Timer/TimeHelper.h"
 #include "Maruyama/Utility/Timer/GameTimer.h"

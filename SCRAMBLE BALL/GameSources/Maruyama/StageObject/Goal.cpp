@@ -19,7 +19,7 @@
 
 #include "Maruyama/Utility/Utility.h"
 #include "HidePlace.h"
-#include "MyRandom.h"
+#include "Maruyama/Utility/Random.h"
 
 #include "Itabashi/ObjectHider.h"
 #include "Itabashi/OnlineManager.h"

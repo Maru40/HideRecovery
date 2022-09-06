@@ -5,8 +5,8 @@
 
 #include "Maruyama/Camera/Component/LookAtCameraManager.h"
 
-#include "SingletonComponent.h"
-#include "Maruyama/UI/FieldMap.h"
+#include "Maruyama/Utility/SingletonComponent/SingletonComponent.h"
+#include "Maruyama/UI/2D/Component/FieldMap.h"
 #include "Maruyama/Player/Component/Teleport.h"
 
 #include "StageMapCSV.h"

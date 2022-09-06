@@ -13,8 +13,8 @@
 #include "Maruyama/Enemy/Astar/AstarEdge.h"
 #include "Maruyama/Enemy/Astar/UtilityAstar.h"
 #include "GraphAstar.h"
-#include "Mathf.h"
-#include "MyRandom.h"
+#include "Maruyama/Utility/Mathf.h"
+#include "Maruyama/Utility/Random.h"
 
 #include "Maruyama/Utility/Component/CollisionAction.h"
 

@@ -11,7 +11,7 @@
 #include "PlayerObject.h"
 #include "VillainPlayerObject.h"
 
-#include "OwnHideItemManager.h"
+#include "Maruyama/Player/Component/OwnHideItemManager.h"
 
 namespace basecross {
 

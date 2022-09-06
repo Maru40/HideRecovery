@@ -11,7 +11,7 @@
 #include "FactionCoordinator.h"
 
 #include "Maruyama/Interface/I_FactionMember.h"
-#include "SingletonComponent.h"
+#include "Maruyama/Utility/SingletonComponent/SingletonComponent.h"
 #include "EnemyAIDirector.h"
 
 #include "Maruyama/Enemy/Component/EnemyBase.h"
@@ -19,7 +19,7 @@
 #include "PatrolCoordinator.h"
 #include "CombatCoordinator.h"
 
-#include "TargetManager.h"
+#include "Maruyama/Utility/Component/TargetManager.h"
 #include "Maruyama/Enemy/Component/Stator/StatorBase.h"
 #include "Maruyama/Enemy/Component/Stator/EnemyStatorBase.h"
 

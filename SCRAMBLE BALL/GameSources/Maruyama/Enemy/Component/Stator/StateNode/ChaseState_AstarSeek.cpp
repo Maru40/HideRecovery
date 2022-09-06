@@ -7,20 +7,20 @@
 #include "stdafx.h"
 #include "Project.h"
 
-#include "TaskList.h"
-#include "Task_MovePositions.h"
-#include "Task_AroundEyeCheck.h"
+#include "Maruyama/TaskList/TaskList.h"
+#include "Maruyama/TaskList/CommonTasks/Task_MovePositions.h"
+#include "Maruyama/TaskList/CommonTasks/Task_AroundEyeCheck.h"
 
 #include "Maruyama/Enemy/Component/EnemyBase.h"
 #include "Maruyama/Enemy/StateMachine/EnemyStateNodeBase.h"
 #include "ChaseState_AstarSeek.h"
 
-#include "SingletonComponent.h"
+#include "Maruyama/Utility/SingletonComponent/SingletonComponent.h"
 #include "Maruyama/Enemy/ImpactMap/ImpactMap.h"
 
-#include "TargetManager.h"
+#include "Maruyama/Utility/Component/TargetManager.h"
 #include "VelocityManager.h"
-#include "RotationController.h"
+#include "Maruyama/Utility/Component/RotationController.h"
 
 #include "Maruyama/Enemy/ImpactMap/FieldImpactMap.h"
 

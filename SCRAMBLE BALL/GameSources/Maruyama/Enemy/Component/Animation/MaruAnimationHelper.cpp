@@ -13,8 +13,8 @@
 #include "Maruyama/Utility/Timer/TimeHelper.h"
 #include "Maruyama/Utility/Timer/GameTimer.h"
 
-#include "TaskList.h"
-#include "SeekTarget.h"
+#include "Maruyama/TaskList/TaskList.h"
+#include "Maruyama/Utility/Component/SeekTarget.h"
 
 namespace basecross {
 

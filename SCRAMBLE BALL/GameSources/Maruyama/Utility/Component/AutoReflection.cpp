@@ -12,7 +12,7 @@
 #include "VelocityManager.h"
 
 #include "Maruyama/Utility/Utility.h"
-#include "UtilityVelocity.h"
+#include "Maruyama/Utility/UtilityVelocity.h"
 #include "Maruyama/Utility/UtilityObstacle.h"
 
 namespace basecross {

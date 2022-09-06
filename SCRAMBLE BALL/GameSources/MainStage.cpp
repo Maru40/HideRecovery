@@ -9,20 +9,9 @@
 #include "MainStage.h"
 #include "PlayerInputer.h"
 
-#include "WallObject.h"
+#include "Maruyama/Utility/SingletonComponent/SoundManager.h"
 
-#include "OriginalMeshStageObject.h"
-
-#include "ParticleManager.h"
-
-#include "SoundManager.h"
-
-#include "Mathf.h"
-
-#include "TaskList.h"
-
-#include "NumbersObject.h"
-#include "NumbersCtrl.h"
+#include "Maruyama/Utility/Mathf.h"
 
 #include "CameraHelper.h"
 
@@ -44,8 +33,8 @@
 #include "Watanabe/UI/UIObjectCSVBuilder.h"
 
 #include "Maruyama/StageObject/HidePlace.h"
-#include "Maruyama/UI/Reticle.h"
-#include "TeleportUI.h"
+#include "Maruyama/UI/2D/Component/Reticle.h"
+#include "Maruyama/UI/2D/Component/TeleportUI.h"
 
 #include "Maruyama/Utility/SingletonComponent/GameManager.h"
 #include "Maruyama/Utility/Object/GameManagerObject.h"

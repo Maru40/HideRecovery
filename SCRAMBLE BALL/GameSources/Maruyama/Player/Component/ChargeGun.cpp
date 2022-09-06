@@ -18,7 +18,7 @@
 #include "Watanabe/Component/PlayerAnimator.h"
 #include "Watanabe/Effekseer/EfkEffect.h"
 #include "Watanabe/Component/PlayerStatus.h"
-#include "SoundManager.h"
+#include "Maruyama/Utility/SingletonComponent/SoundManager.h"
 
 #include "Maruyama/Player/Component/UseWepon.h"
 

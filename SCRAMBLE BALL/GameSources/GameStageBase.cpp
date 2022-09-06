@@ -13,25 +13,24 @@
 #include "VillainPlayerObject.h"
 #include "Maruyama/Player/Object/HeroPlayerObject.h"
 #include "Maruyama/Utility/SingletonComponent/GameManager.h"
-#include "SlowTimerManager.h"
+#include "Maruyama/Utility/SingletonComponent/SlowTimerManager.h"
 
 #include "Maruyama/Camera/MainCamera.h"
 #include "Maruyama/Camera/MainCameraObject.h"
-#include "StartCamera.h"
+#include "Maruyama/Camera/StartCamera.h"
 
 #include "StageMapCSV.h"
-#include "WallObject.h"
-#include "OriginalMeshStageObject.h"
+#include "Maruyama/StageObject/OriginalMeshStageObject.h"
 
-#include "SingletonComponent.h"
+#include "Maruyama/Utility/SingletonComponent/SingletonComponent.h"
 #include "Maruyama/Enemy/ImpactMap/ImpactMap.h"
 
-#include "UtilityStartCamera.h"
+#include "Maruyama/Camera/UtilityStartCamera.h"
 
 #include "Maruyama/Enemy/Object/EnemyObjectBase.h"
 
-#include "OriginalMeshToonObject.h"
-#include "ToonPNTStaticModelDraw.h"
+#include "Maruyama/StageObject/OriginalMeshToonObject.h"
+#include "Maruyama/Shader/Toon/ToonPNTStaticModelDraw.h"
 
 #include "Maruyama/Enemy/ImpactMap/FieldImpactMap.h"
 

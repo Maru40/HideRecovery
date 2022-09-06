@@ -10,7 +10,7 @@
 
 #include "ChargeBullet.h"
 
-#include "RangeDestroyManager.h"
+#include "Maruyama/Utility/Component/RangeDestroyManager.h"
 
 #include "Watanabe/Component/PlayerStatus.h"
 #include "Watanabe/DebugClass/Debug.h"

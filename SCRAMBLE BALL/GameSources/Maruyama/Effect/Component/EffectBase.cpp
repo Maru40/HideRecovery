@@ -13,7 +13,7 @@
 //ボード系
 #include "Maruyama/Utility/Component/BillBoard.h"
 #include "Maruyama/UI/BuilderVertexPCT.h"
-#include "Maruyama/UI/Object/BoardObject.h"
+#include "Maruyama/UI/3D/Object/BoardObject.h"
 
 //オーラ系
 #include "../Object/AuraObjectBase.h"

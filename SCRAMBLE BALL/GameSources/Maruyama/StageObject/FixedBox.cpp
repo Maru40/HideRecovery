@@ -9,8 +9,8 @@
 
 #include "FixedBox.h"
 
-#include "PNTToonDraw.h"
-#include "ToonPNTStaticModelDraw.h"
+#include "Maruyama/Shader/Toon/PNTToonDraw.h"
+#include "Maruyama/Shader/Toon/ToonPNTStaticModelDraw.h"
 
 namespace basecross {
 

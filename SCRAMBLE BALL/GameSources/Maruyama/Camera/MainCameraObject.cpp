@@ -7,11 +7,11 @@
 #include "stdafx.h"
 #include "Project.h"
 
-#include "SeekTPS.h"
+#include "Maruyama/Camera/Component/SeekTPS.h"
 #include "MainCameraObject.h"
-#include "ToTargetMove.h"
+#include "Maruyama/Utility/Component/ToTargetMove.h"
 #include "Maruyama/Camera/Component/LookAtCameraManager.h"
-#include "SeekTarget.h"
+#include "Maruyama/Utility/Component/SeekTarget.h"
 
 #include "Maruyama/Utility/Timer/GameTimer.h"
 #include "Maruyama/Camera/Component/CameraShake.h"
@@ -26,7 +26,7 @@
 #include "Maruyama/Utility/Utility.h"
 #include "Maruyama/Utility/UtilityObstacle.h"
 #include "Maruyama/Utility/MaruHitHelper.h"
-#include "Mathf.h"
+#include "Maruyama/Utility/Mathf.h"
 
 #include "Maruyama/Camera/Component/CameraRayAlphaManager.h"
 

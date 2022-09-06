@@ -10,7 +10,7 @@
 #include "HideItemObject.h"
 
 #include "HideItem.h"
-#include "Targeted.h"
+#include "Maruyama/Utility/Component/Targeted.h"
 #include "Itabashi/ObjectHider.h"
 #include "Itabashi/Item.h"
 #include "Watanabe/Utility/DataExtracter.h"

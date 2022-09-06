@@ -10,7 +10,7 @@
 
 #include "Maruyama/Enemy/StateMachine/EnemyStateNodeBase.h"
 
-#include "SeekTarget.h"
+#include "Maruyama/Utility/Component/SeekTarget.h"
 
 namespace basecross {
 

@@ -13,7 +13,7 @@
 #include "CameraShake.h"
 
 #include "GameStageBase.h"
-#include "MyRandom.h"
+#include "Maruyama/Utility/Random.h"
 #include "Maruyama/Utility/Utility.h"
 
 #include "PlayerInputer.h"

@@ -19,7 +19,7 @@
 #include "PlayerInputer.h"
 #include "ItemBag.h"
 
-#include "RotationController.h"
+#include "Maruyama/Utility/Component/RotationController.h"
 #include "Maruyama/Item/HideItem.h"
 #include "Maruyama/Interface/I_TeamMember.h"
 

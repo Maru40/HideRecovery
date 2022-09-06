@@ -9,10 +9,10 @@
 #include "EnemyObjectBase.h"
 
 #include "Maruyama/Player/Component/ItemBag.h"
-#include "RotationController.h"
+#include "Maruyama/Utility/Component/RotationController.h"
 #include "VelocityManager.h"
-#include "TargetManager.h"
-#include "SeekTarget.h"
+#include "Maruyama/Utility/Component/TargetManager.h"
+#include "Maruyama/Utility/Component/SeekTarget.h"
 
 #include "Maruyama/Enemy/Component/EyeSearchRange.h"
 

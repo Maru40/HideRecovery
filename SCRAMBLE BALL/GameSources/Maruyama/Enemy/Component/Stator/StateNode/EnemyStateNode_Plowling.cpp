@@ -10,22 +10,22 @@
 
 #include "Maruyama/Utility/Timer/TimeHelper.h"
 #include "Maruyama/Utility/Timer/GameTimer.h"
-#include "TargetManager.h"
-#include "TaskList.h"
-#include "Task_Wait.h"
+#include "Maruyama/Utility/Component/TargetManager.h"
+#include "Maruyama/TaskList/TaskList.h"
+#include "Maruyama/TaskList/CommonTasks/Task_Wait.h"
 #include "Maruyama/Enemy/StateMachine/EnemyStateNodeBase.h"
 #include "EnemyStateNode_Plowling.h"
 
-#include "UtilityVelocity.h"
+#include "Maruyama/Utility/UtilityVelocity.h"
 #include "VelocityManager.h"
 #include "Maruyama/Enemy/Component/EnemyBase.h"
 
-#include "Task_PlowlingMove.h"
+#include "Maruyama/TaskList/CommonTasks/Task_PlowlingMove.h"
 
-#include "SingletonComponent.h"
+#include "Maruyama/Utility/SingletonComponent/SingletonComponent.h"
 #include "Maruyama/Enemy/ImpactMap/ImpactMap.h"
 #include "Maruyama/Enemy/Astar/GraphAstar.h"
-#include "SparseGraph.h"
+#include "Maruyama/Enemy/Astar/SparseGraph.h"
 #include "Maruyama/Enemy/Astar/UtilityAstar.h"
 
 #include "Maruyama/Enemy/ImpactMap/FieldImpactMap.h"

@@ -20,7 +20,7 @@
 #include "Watanabe/Component/PlayerAnimator.h"
 #include "Watanabe/Component/PlayerStatus.h"
 
-#include "RotationController.h"
+#include "Maruyama/Utility/Component/RotationController.h"
 #include "VelocityManager.h"
 #include "Maruyama/Utility/Utility.h"
 #include "Maruyama/Enemy/Component/EyeSearchRange.h"

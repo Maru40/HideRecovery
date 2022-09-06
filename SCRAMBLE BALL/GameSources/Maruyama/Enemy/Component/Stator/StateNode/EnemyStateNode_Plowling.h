@@ -8,7 +8,7 @@
 #pragma once
 #include "stdafx.h"
 
-#include "Task_PlowlingMove.h"
+#include "Maruyama/TaskList/CommonTasks/Task_PlowlingMove.h"
 
 namespace basecross {
 

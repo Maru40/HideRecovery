@@ -23,13 +23,13 @@
 
 #include "Maruyama/Utility/SingletonComponent/GameManager.h"
 
-#include "TaskList.h"
-#include "Task_Wait.h"
-#include "Task_PlowlingMove.h"
-#include "Task_ToTargetMove.h"
+#include "Maruyama/TaskList/TaskList.h"
+#include "Maruyama/TaskList/CommonTasks/Task_Wait.h"
+#include "Maruyama/TaskList/CommonTasks/Task_PlowlingMove.h"
+#include "Maruyama/TaskList/CommonTasks/Task_ToTargetMove.h"
 
-#include "Targeted.h"
-#include "TargetManager.h"
+#include "Maruyama/Utility/Component/Targeted.h"
+#include "Maruyama/Utility/Component/TargetManager.h"
 
 #include "Maruyama/Interface/I_FactionMember.h"
 #include "Maruyama/Enemy/AIDirector/FactionCoordinator.h"

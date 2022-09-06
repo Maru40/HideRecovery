@@ -8,7 +8,7 @@
 #include "stdafx.h"
 #include "Project.h"
 
-#include "SingletonComponent.h"
+#include "Maruyama/Utility/SingletonComponent/SingletonComponent.h"
 #include "EffectManager.h"
 
 #include "EffectBase.h"

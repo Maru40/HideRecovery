@@ -8,10 +8,10 @@
 #include "stdafx.h"
 #include "Project.h"
 
-#include "SingletonComponent.h"
+#include "Maruyama/Utility/SingletonComponent/SingletonComponent.h"
 #include "Maruyama/Enemy/Astar/NavGraphNode.h"
 #include "Maruyama/Enemy/Astar/AstarEdge.h"
-#include "SparseGraph.h"
+#include "Maruyama/Enemy/Astar/SparseGraph.h"
 #include "Maruyama/Enemy/Astar/GraphAstar.h"
 #include "ImpactMap.h"
 

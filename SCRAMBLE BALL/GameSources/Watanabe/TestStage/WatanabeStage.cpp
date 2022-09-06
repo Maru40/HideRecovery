@@ -17,7 +17,7 @@
 #include "Maruyama/Camera/Component/LookAtCameraManager.h"
 #include "../Component/TestComponent.h"
 #include "Itabashi/ObjectMover.h"
-#include "RotationController.h"
+#include "Maruyama/Utility/Component/RotationController.h"
 #include "PlayerInputer.h"
 #include "Maruyama/Utility/Utility.h"
 #include "../Utility/CSVLoad.h"

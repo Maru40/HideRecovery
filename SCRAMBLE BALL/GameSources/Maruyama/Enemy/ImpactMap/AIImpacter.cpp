@@ -15,7 +15,7 @@
 #include "PlayerInputer.h"
 
 #include "ImpactMap.h"
-#include "SingletonComponent.h"
+#include "Maruyama/Utility/SingletonComponent/SingletonComponent.h"
 #include "FieldImpactMap.h"
 
 #include "Maruyama/Enemy/Component/EyeSearchRange.h"
@@ -27,7 +27,7 @@
 #include "Maruyama/Utility/Timer/TimeHelper.h"
 #include "Maruyama/Utility/Timer/GameTimer.h"
 
-#include "TupleSpace.h"
+#include "../AIDirector/TupleSpace.h"
 
 namespace basecross {
 

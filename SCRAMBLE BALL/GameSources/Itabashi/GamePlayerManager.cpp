@@ -20,10 +20,10 @@
 #include "Watanabe/BoardPoly/PlayerLabelBP.h"
 #include "Watanabe/Component/PlayerStatus.h"
 #include "Watanabe/Component/SyncObject.h"
-#include "Maruyama/UI/Reticle.h"
+#include "Maruyama/UI/2D/Component/Reticle.h"
 #include "Maruyama/Camera/Component/CameraForwardController.h"
-#include "TeleportUI.h"
-#include "ToTargetMove.h"
+#include "Maruyama/UI/2D/Component/TeleportUI.h"
+#include "Maruyama/Utility/Component/ToTargetMove.h"
 #include "Maruyama/Utility/SingletonComponent/GameManager.h"
 
 #include "Maruyama/Player/Component/AccessHidePlace.h"

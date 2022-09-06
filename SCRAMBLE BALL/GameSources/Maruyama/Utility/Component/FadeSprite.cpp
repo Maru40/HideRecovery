@@ -7,10 +7,10 @@
 #include "stdafx.h"
 #include "Project.h"
 
-#include "SingletonComponent.h"
+#include "Maruyama/Utility/SingletonComponent/SingletonComponent.h"
 #include "FadeSprite.h"
 
-#include "SpriteObject.h"
+#include "Maruyama/UI/2D/Object/SpriteObject.h"
 
 #include "Maruyama/Utility/Timer/TimeHelper.h"
 #include "Maruyama/Utility/Timer/GameTimer.h"

@@ -1,11 +1,11 @@
 ﻿#include "stdafx.h"
 #include "PlayerOnlineController.h"
 #include "ObjectMover.h"
-#include "RotationController.h"
+#include "Maruyama/Utility/Component/RotationController.h"
 #include "PlayerInputer.h"
 #include "Maruyama/Utility/Utility.h"
 #include "Maruyama/Player/Component/ItemAcquisitionManager.h"
-#include "OwnHideItemManager.h"
+#include "Maruyama/Player/Component/OwnHideItemManager.h"
 #include "Maruyama/Item/HideItem.h"
 #include "Item.h"
 #include "VelocityManager.h"
@@ -25,8 +25,8 @@
 #include "Watanabe/Component/PlayerAnimator.h"
 #include "SpringArmComponent.h"
 #include "Maruyama/Camera/Component/LookAtCameraManager.h"
-#include "Maruyama/UI/FieldMap.h"
-#include "Maruyama/UI/MapCursor.h"
+#include "Maruyama/UI/2D/Component/FieldMap.h"
+#include "Maruyama/UI/2D/Component/MapCursor.h"
 
 template<class T>
 T ConvertByteData(const std::uint8_t* bytes)

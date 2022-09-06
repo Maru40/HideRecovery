@@ -11,8 +11,8 @@
 
 #include "StageObjectBase.h"
 
-#include "OriginalMeshStageObject.h"
-#include "OriginalMeshToonObject.h"
+#include "Maruyama/StageObject/OriginalMeshStageObject.h"
+#include "Maruyama/StageObject/OriginalMeshToonObject.h"
 #include "Maruyama/Utility/Object/CollisionObject.h"
 
 namespace basecross {

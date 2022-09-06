@@ -16,7 +16,7 @@
 #include "Itabashi/Item.h"
 #include "Maruyama/Item/HideItem.h"
 
-#include "OpenBoard.h"
+#include "Maruyama/UI/3D/Component/OpenBoard.h"
 
 namespace basecross {
 

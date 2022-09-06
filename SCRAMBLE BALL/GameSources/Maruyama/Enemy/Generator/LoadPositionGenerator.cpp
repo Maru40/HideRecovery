@@ -9,7 +9,7 @@
 #include "stdafx.h"
 #include "Project.h"
 
-#include "MyRandom.h"
+#include "Maruyama/Utility/Random.h"
 #include "LoadPositionGenerator.h"
 
 namespace basecross {

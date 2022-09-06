@@ -8,8 +8,8 @@
 #include "stdafx.h"
 
 #include "VelocityManager.h"
-#include "Mathf.h"
-#include "UtilityVelocity.h"
+#include "Maruyama/Utility/Mathf.h"
+#include "Maruyama/Utility/UtilityVelocity.h"
 
 #include "PlayerInputer.h"
 #include "Maruyama/Utility/Utility.h"

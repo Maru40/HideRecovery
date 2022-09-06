@@ -9,7 +9,7 @@
 #include "stdafx.h"
 
 #include "GeneratorBase.h"
-#include "MyRandom.h"
+#include "Maruyama/Utility/Random.h"
 
 namespace basecross {
 
