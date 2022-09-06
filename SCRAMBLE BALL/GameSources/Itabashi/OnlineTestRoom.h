@@ -3,7 +3,7 @@
 #include "PlayerOnlineController.h"
 #include "CameraHelper.h"
 #include "SpringArmComponent.h"
-#include "LookAtCameraManager.h"
+#include "Maruyama/Camera/Component/LookAtCameraManager.h"
 
 namespace basecross
 {

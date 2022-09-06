@@ -11,7 +11,7 @@
 
 #include "GraphAstar.h"
 
-#include "UtilityObstacle.h"
+#include "Maruyama/Utility/UtilityObstacle.h"
 
 namespace basecross {
 

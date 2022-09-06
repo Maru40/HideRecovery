@@ -10,9 +10,6 @@
 
 #include "BillBoard_Ex.h"
 
-#include "GameStageBase.h"
-#include "MainCameraObject.h"
-
 namespace basecross {
 
 	BillBoard_Ex::BillBoard_Ex(const std::shared_ptr<GameObject>& objPtr)

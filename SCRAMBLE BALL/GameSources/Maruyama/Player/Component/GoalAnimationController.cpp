@@ -25,7 +25,7 @@
 #include "RotationController.h"
 #include "Watanabe/Component/BallAnimator.h"
 
-#include "HideItemObject.h"
+#include "Maruyama/Item/HideItemObject.h"
 #include "PlayerInputer.h"
 #include "Maruyama/StageObject/Goal.h"
 #include "MainStage.h"

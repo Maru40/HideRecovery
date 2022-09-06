@@ -8,7 +8,7 @@
 #pragma once
 #include "stdafx.h"
 
-#include "ImpactMap.h"
+#include "Maruyama/Enemy/ImpactMap/ImpactMap.h"
 
 namespace basecross {
 

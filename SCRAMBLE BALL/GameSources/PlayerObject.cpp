@@ -19,10 +19,10 @@
 #include "ChasingTarget.h"
 #include "SpringArmComponent.h"
 
-#include "LookAtCameraManager.h"
+#include "Maruyama/Camera/Component/LookAtCameraManager.h"
 
-#include "ItemBag.h"
-#include "ItemAcquisitionManager.h"
+#include "Maruyama/Player/Component/ItemBag.h"
+#include "Maruyama/Player/Component/ItemAcquisitionManager.h"
 //#include "OwnHideItemManager.h"
 
 #include "VelocityManager.h"
@@ -45,7 +45,7 @@
 #include "Maruyama/Player/Component/UseWepon.h"
 #include "Maruyama/Player/Component/GoalAnimationController.h"
 #include "Maruyama/Player/Component/Teleport.h"
-#include "Maruyama/Player/Component/FieldMap.h"
+#include "Maruyama/UI/FieldMap.h"
 
 #include "Maruyama/Enemy/Component/EyeSearchRange.h"
 

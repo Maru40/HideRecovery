@@ -25,10 +25,10 @@
 
 #include "GameStageBase.h"
 #include "RotationController.h"
-#include "UtilityObstacle.h"
+#include "Maruyama/Utility/UtilityObstacle.h"
 #include "Maruyama/Enemy/Component/EyeSearchRange.h"
 
-#include "I_FactionMember.h"
+#include "Maruyama/Interface/I_FactionMember.h"
 #include "Maruyama/Enemy/AIDirector/FactionCoordinator.h"
 
 namespace basecross {

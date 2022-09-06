@@ -10,8 +10,8 @@
 
 #include "AccessHidePlace.h"
 
-#include "MaruUtility.h"
-#include "HidePlace.h"
+#include "Maruyama/Utility/Utility.h"
+#include "Maruyama/StageObject/HidePlace.h"
 
 namespace basecross {
 

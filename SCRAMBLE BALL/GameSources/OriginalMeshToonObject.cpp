@@ -15,7 +15,7 @@
 
 #include "ToonPNTStaticModelDraw.h"
 
-#include "MaruUtility.h"
+#include "Maruyama/Utility/Utility.h"
 
 #include "Maruyama/Utility/Object/CollisionObject.h"
 

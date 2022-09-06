@@ -9,10 +9,10 @@
 #include "Project.h"
 
 #include "SingletonComponent.h"
-#include "NavGraphNode.h"
+#include "Maruyama/Enemy/Astar/NavGraphNode.h"
 #include "Maruyama/Enemy/Astar/AstarEdge.h"
 #include "SparseGraph.h"
-#include "GraphAstar.h"
+#include "Maruyama/Enemy/Astar/GraphAstar.h"
 #include "ImpactMap.h"
 
 #include "Maruyama/Enemy/Astar/Debug/AstarEdgeDraw.h"
@@ -23,8 +23,8 @@
 #include "Maruyama/Enemy/Component/EyeSearchRange.h"
 
 #include "Maruyama/Enemy/Astar/UtilityAstar.h"
-#include "I_Impact.h"
-#include "Heuristic.h"
+#include "Maruyama/Interface/I_Impact.h"
+#include "Maruyama/Enemy/Astar/Heuristic.h"
 
 namespace basecross {
 

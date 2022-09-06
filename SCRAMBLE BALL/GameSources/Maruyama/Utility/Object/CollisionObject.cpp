@@ -10,8 +10,8 @@
 #include "CollisionObject.h"
 
 #include "StageMapCSV.h"
-#include "MaruUtility.h"
-#include "MaruAction.h"
+#include "Maruyama/Utility/Utility.h"
+#include "Maruyama/Utility/MaruAction.h"
 
 namespace basecross {
 

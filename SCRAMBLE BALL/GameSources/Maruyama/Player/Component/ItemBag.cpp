@@ -9,12 +9,12 @@
 
 #include "ItemBag.h"
 
-#include "ItemBase.h"
-#include "HideItem.h"
+#include "Maruyama/Player/Component/ItemBag.h"
+#include "Maruyama/Item/HideItem.h"
 
-#include "MaruUtility.h"
+#include "Maruyama/Utility/Utility.h"
 
-#include "HideItemObject.h"
+#include "Maruyama/Item/HideItemObject.h"
 #include "Itabashi/Item.h"
 
 namespace basecross {

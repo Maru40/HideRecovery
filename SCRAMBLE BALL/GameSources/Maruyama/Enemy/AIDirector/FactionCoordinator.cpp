@@ -10,7 +10,7 @@
 
 #include "FactionCoordinator.h"
 
-#include "I_FactionMember.h"
+#include "Maruyama/Interface/I_FactionMember.h"
 #include "SingletonComponent.h"
 #include "EnemyAIDirector.h"
 

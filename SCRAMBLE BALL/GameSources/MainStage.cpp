@@ -26,9 +26,8 @@
 
 #include "CameraHelper.h"
 
-#include "HideItemObject.h"
+#include "Maruyama/Item/HideItemObject.h"
 
-#include "HeroPlayerObject.h"
 #include "VillainPlayerObject.h"
 #include "Watanabe/DebugClass/Debug.h"
 #include "Watanabe/Effekseer/EfkEffect.h"
@@ -44,7 +43,7 @@
 #include "Watanabe/UI/SplashMessageUI.h"
 #include "Watanabe/UI/UIObjectCSVBuilder.h"
 
-#include "HidePlace.h"
+#include "Maruyama/StageObject/HidePlace.h"
 #include "Maruyama/UI/Reticle.h"
 #include "TeleportUI.h"
 

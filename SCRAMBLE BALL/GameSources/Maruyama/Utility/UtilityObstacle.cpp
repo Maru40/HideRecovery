@@ -8,7 +8,7 @@
 #include "Project.h"
 
 #include "UtilityObstacle.h"
-#include "MaruUtility.h"
+#include "Utility.h"
 #include "MaruHitHelper.h"
 
 namespace basecross {

@@ -8,7 +8,7 @@
 #pragma once
 #include "stdafx.h"
 
-#include "I_FactionMember.h"
+#include "Maruyama/Interface/I_FactionMember.h"
 
 namespace basecross {
 

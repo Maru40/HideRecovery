@@ -10,12 +10,12 @@
 
 #include "OccupancyManager.h"
 
-#include "NavGraphNode.h"
+#include "Maruyama/Enemy/Astar/NavGraphNode.h"
 
 #include "Maruyama/Utility/Timer/TimeHelper.h"
 #include "Maruyama/Utility/Timer/GameTimer.h"
 
-#include "ImpactMap.h"
+#include "Maruyama/Enemy/ImpactMap/ImpactMap.h"
 
 namespace basecross {
 

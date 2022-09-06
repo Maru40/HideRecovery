@@ -14,10 +14,10 @@
 #include "TargetManager.h"
 #include "VelocityManager.h"
 
-#include "GraphBase.h"
+#include "Maruyama/Enemy/Astar/GraphBase.h"
 #include "Maruyama/Enemy/StateMachine/StateNodeBase.h"
 #include "Maruyama/Enemy/StateMachine/StateEdgeBase.h"
-#include "MaruAnimationHelper.h"
+#include "Maruyama/Enemy/Component/Animation/MaruAnimationHelper.h"
 #include "Maruyama/Enemy/Component/Animation/AnimationMainStateMachine.h"
 
 #include "GameStageBase.h"

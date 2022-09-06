@@ -8,7 +8,7 @@
 
 #include "EnemyObjectBase.h"
 
-#include "ItemBag.h"
+#include "Maruyama/Player/Component/ItemBag.h"
 #include "RotationController.h"
 #include "VelocityManager.h"
 #include "TargetManager.h"

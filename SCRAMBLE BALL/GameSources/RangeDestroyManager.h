@@ -7,7 +7,7 @@
 #pragma once
 #include "stdafx.h"
 
-#include "MaruAction.h"
+#include "Maruyama/Utility/MaruAction.h"
 
 namespace basecross {
 

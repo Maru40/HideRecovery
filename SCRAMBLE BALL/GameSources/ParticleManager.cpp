@@ -15,7 +15,7 @@
 #include "Maruyama/Utility/Component/BillBoard_Ex.h"
 
 #include "MyRandom.h"
-#include "MaruUtility.h"
+#include "Maruyama/Utility/Utility.h"
 #include "Mathf.h"
 
 #include "Action.h"
@@ -24,10 +24,10 @@
 #include "Maruyama/Utility/Timer/TimeHelper.h"
 #include "Maruyama/Utility/Timer/GameTimer.h"
 
-#include "UtilityObstacle.h"
+#include "Maruyama/Utility/UtilityObstacle.h"
 
 #include "RangeDestroyManager.h"
-#include "MaruHitHelper.h"
+#include "Maruyama/Utility/MaruHitHelper.h"
 
 namespace basecross {
 

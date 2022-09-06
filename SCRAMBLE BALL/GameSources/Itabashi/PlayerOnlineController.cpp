@@ -3,10 +3,10 @@
 #include "ObjectMover.h"
 #include "RotationController.h"
 #include "PlayerInputer.h"
-#include "MaruUtility.h"
-#include "ItemAcquisitionManager.h"
+#include "Maruyama/Utility/Utility.h"
+#include "Maruyama/Player/Component/ItemAcquisitionManager.h"
 #include "OwnHideItemManager.h"
-#include "HideItem.h"
+#include "Maruyama/Item/HideItem.h"
 #include "Item.h"
 #include "VelocityManager.h"
 #include "Maruyama/Player/Component/ChargeGun.h"
@@ -24,9 +24,9 @@
 
 #include "Watanabe/Component/PlayerAnimator.h"
 #include "SpringArmComponent.h"
-#include "LookAtCameraManager.h"
-#include "Maruyama/Player/Component/FieldMap.h"
-#include "MapCursor.h"
+#include "Maruyama/Camera/Component/LookAtCameraManager.h"
+#include "Maruyama/UI/FieldMap.h"
+#include "Maruyama/UI/MapCursor.h"
 
 template<class T>
 T ConvertByteData(const std::uint8_t* bytes)

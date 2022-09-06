@@ -13,14 +13,14 @@
 #include "Maruyama/Utility/Component/CollisionAction.h"
 #include "Itabashi/Item.h"
 
-#include "MaruUtility.h"
-#include "MaruAction.h"
+#include "Maruyama/Utility/Utility.h"
+#include "Maruyama/Utility/MaruAction.h"
 
 #include "PlayerInputer.h"
 #include "ItemBag.h"
 
 #include "RotationController.h"
-#include "HideItem.h"
+#include "Maruyama/Item/HideItem.h"
 #include "Maruyama/Interface/I_TeamMember.h"
 
 #include "Watanabe/Component/PlayerAnimator.h"

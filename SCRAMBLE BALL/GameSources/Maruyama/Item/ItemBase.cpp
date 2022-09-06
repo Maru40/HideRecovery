@@ -8,7 +8,7 @@
 #include "stdafx.h"
 #include "Project.h"
 
-#include "HideItem.h"
+#include "Maruyama/Item/HideItem.h"
 #include "ItemBase.h"
 
 namespace basecross {

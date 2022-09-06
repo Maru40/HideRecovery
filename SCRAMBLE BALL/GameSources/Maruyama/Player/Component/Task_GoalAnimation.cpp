@@ -11,7 +11,7 @@
 #include "Task_GoalAnimation.h"
 
 #include "VelocityManager.h"
-#include "MaruUtility.h"
+#include "Maruyama/Utility/Utility.h"
 #include "Mathf.h"
 
 namespace basecross {

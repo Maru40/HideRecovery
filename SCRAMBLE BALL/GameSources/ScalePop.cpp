@@ -10,7 +10,7 @@
 #include "ScalePop.h"
 
 #include "Maruyama/Utility/Timer/TimeHelper.h"
-#include "MaruUtility.h"
+#include "Maruyama/Utility/Utility.h"
 #include "Mathf.h"
 
 namespace basecross {

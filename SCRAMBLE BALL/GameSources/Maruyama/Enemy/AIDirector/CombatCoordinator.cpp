@@ -13,7 +13,7 @@
 #include "Maruyama/Enemy/Component/EnemyBase.h"
 #include "FactionCoordinator.h"
 
-#include "MaruUtility.h"
+#include "Maruyama/Utility/Utility.h"
 
 namespace basecross {
 

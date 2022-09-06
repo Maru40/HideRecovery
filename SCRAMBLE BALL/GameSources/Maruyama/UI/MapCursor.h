@@ -11,7 +11,7 @@
 #include "Maruyama/UI/BuilderVertexPCT.h"
 #include "SingletonComponent.h"
 
-#include "ImpactMap.h"
+#include "Maruyama/Enemy/ImpactMap/ImpactMap.h"
 
 namespace basecross {
 

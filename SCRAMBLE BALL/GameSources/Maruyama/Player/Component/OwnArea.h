@@ -8,7 +8,7 @@
 #include "stdafx.h"
 #include "Maruyama/Interface/I_TeamMember.h"
 
-#include "ImpactMap.h"
+#include "Maruyama/Enemy/ImpactMap/ImpactMap.h"
 
 namespace basecross {
 	//--------------------------------------------------------------------------------------

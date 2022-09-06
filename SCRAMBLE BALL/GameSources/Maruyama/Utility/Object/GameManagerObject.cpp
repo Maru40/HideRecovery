@@ -11,10 +11,10 @@
 #include "../SingletonComponent/GameManager.h"
 #include "SlowTimerManager.h"
 #include "SoundManager.h"
-#include "HitStopManager.h"
+#include "Maruyama/Utility/SingletonComponent/HitStopManager.h"
 
 #include "SingletonComponent.h"
-#include "ImpactMap.h"
+#include "Maruyama/Enemy/ImpactMap/ImpactMap.h"
 
 #include "Maruyama/Enemy/AIDirector/EnemyAIDirector.h"
 
@@ -26,7 +26,7 @@
 #include "Maruyama/Utility/SingletonComponent/ScreenFadeManager.h"
 
 #include "TaskList.h"
-#include "Maruyama/Player/Component/FieldMap.h"
+#include "Maruyama/UI/FieldMap.h"
 
 namespace basecross {
 

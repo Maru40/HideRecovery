@@ -10,7 +10,7 @@
 
 #include "AIImpacter.h"
 
-#include "MaruUtility.h"
+#include "Maruyama/Utility/Utility.h"
 
 #include "PlayerInputer.h"
 
@@ -19,10 +19,10 @@
 #include "FieldImpactMap.h"
 
 #include "Maruyama/Enemy/Component/EyeSearchRange.h"
-#include "NavGraphNode.h"
+#include "Maruyama/Enemy/Astar/NavGraphNode.h"
 
 #include "ImpactManager.h"
-#include "I_Impact.h"
+#include "Maruyama/Interface/I_Impact.h"
 
 #include "Maruyama/Utility/Timer/TimeHelper.h"
 #include "Maruyama/Utility/Timer/GameTimer.h"

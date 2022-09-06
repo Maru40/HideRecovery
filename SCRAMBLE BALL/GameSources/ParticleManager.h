@@ -7,9 +7,9 @@
 #pragma once
 #include "stdafx.h"
 
-#include "HitStopManager.h"
+#include "Maruyama/Utility/SingletonComponent/HitStopManager.h"
 
-#include "ReactiveBool.h"
+#include "Maruyama/Utility/ReactiveBool.h"
 #include "Maruyama/UI/BuilderVertexPCT.h"
 
 namespace basecross {

@@ -8,7 +8,7 @@
 #include "stdafx.h"
 #include "Project.h"
 
-#include "GraphBase.h"
+#include "Maruyama/Enemy/Astar/GraphBase.h"
 #include "MaruAnimationHelper.h"
 #include "AnimationMainStateMachine.h"
 

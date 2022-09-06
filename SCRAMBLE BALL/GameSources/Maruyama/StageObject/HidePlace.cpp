@@ -12,9 +12,9 @@
 
 #include "Watanabe/Component/BoxAnimator.h"
 
-#include "ItemBag.h"
+#include "Maruyama/Player/Component/ItemBag.h"
 #include "Itabashi/Item.h"
-#include "HideItem.h"
+#include "Maruyama/Item/HideItem.h"
 
 #include "OpenBoard.h"
 

@@ -1,7 +1,7 @@
 #include"PlayerMover.h"
 #include"PlayerInputer.h"
 
-#include "MaruUtility.h"
+#include "Maruyama/Utility/Utility.h"
 
 #include "VelocityManager.h"
 

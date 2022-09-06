@@ -19,7 +19,7 @@
 #include "../Object/AuraObjectBase.h"
 #include "AuraBase.h"
 
-#include "MaruUtility.h"
+#include "Maruyama/Utility/Utility.h"
 
 namespace basecross {
 	namespace Effect {

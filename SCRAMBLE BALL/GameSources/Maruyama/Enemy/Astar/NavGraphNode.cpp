@@ -10,8 +10,8 @@
 
 #include "NavGraphNode.h"
 
-#include "MaruAction.h"
-#include "ReactiveProperty.h"
+#include "Maruyama/Utility/MaruAction.h"
+#include "Maruyama/Utility/ReactiveProperty.h"
 
 namespace basecross {
 

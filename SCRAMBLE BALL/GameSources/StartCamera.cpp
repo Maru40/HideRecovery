@@ -12,8 +12,7 @@
 
 #include "GameStageBase.h"
 
-#include "MaruUtility.h"
-
+#include "Maruyama/Utility/Utility.h"
 #include "PlayerInputer.h"
 
 namespace basecross {

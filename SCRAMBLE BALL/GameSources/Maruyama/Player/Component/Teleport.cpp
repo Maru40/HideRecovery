@@ -16,12 +16,12 @@
 #include "Maruyama/Utility/SingletonComponent/ScreenFadeManager.h"
 #include "Maruyama/Utility/Component/FadeSprite.h"
 
-#include "FieldMap.h"
+#include "Maruyama/UI/FieldMap.h"
 
 #include "Watanabe/DebugClass/Debug.h"
 #include "PlayerInputer.h"
 #include "SpriteObject.h"
-#include "MapCursor.h"
+#include "Maruyama/UI/MapCursor.h"
 
 #include "Maruyama/Utility/Timer/TimeHelper.h"
 #include "Maruyama/Utility/Timer/GameTimer.h"
@@ -29,7 +29,7 @@
 #include "CameraHelper.h"
 #include "Maruyama/Camera/Component/CameraForwardController.h"
 #include "ToTargetMove.h"
-#include "LookAtCameraManager.h"
+#include "Maruyama/Camera/Component/LookAtCameraManager.h"
 #include "SpringArmComponent.h"
 #include "PlayerObject.h"
 
@@ -42,9 +42,9 @@
 #include "OwnArea.h"
 #include "Maruyama/Utility/SingletonComponent/GameManager.h"
 
-#include "UtilityObstacle.h"
+#include "Maruyama/Utility/UtilityObstacle.h"
 
-#include "MaruHitHelper.h"
+#include "Maruyama/Utility/MaruHitHelper.h"
 
 namespace basecross {
 

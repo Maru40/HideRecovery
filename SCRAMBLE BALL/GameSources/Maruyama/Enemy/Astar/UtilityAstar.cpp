@@ -4,11 +4,11 @@
 */
 
 #include "UtilityAstar.h"
-#include "MaruUtility.h"
+#include "Maruyama/Utility/Utility.h"
 
 #include "AstarEdge.h"
 #include "SparseGraph.h"
-#include "UtilityObstacle.h"
+#include "Maruyama/Utility/UtilityObstacle.h"
 
 namespace basecross {
 

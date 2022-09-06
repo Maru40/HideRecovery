@@ -7,9 +7,9 @@
 #include "Project.h"
 
 #include "EyeSearchRange.h"
-#include "MaruUtility.h"
+#include "Maruyama/Utility/Utility.h"
 
-#include "UtilityObstacle.h"
+#include "Maruyama/Utility/UtilityObstacle.h"
 
 namespace basecross {
 

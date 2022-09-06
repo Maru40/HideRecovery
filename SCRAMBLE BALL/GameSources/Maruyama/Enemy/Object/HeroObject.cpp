@@ -8,12 +8,12 @@
 
 #include "HeroObject.h"
 
-#include "Hero.h"
+#include "Maruyama/Enemy/Component/Hero.h"
 
 #include "Maruyama/Enemy/StateMachine/EnemyMainStateMachine.h"
 #include "Maruyama/Enemy/Component/Stator/Stator_Hero.h"
 
-#include "Maruyama/Enemy/Component/ImpactMap/AIImpacter.h"
+#include "Maruyama/Enemy/ImpactMap/AIImpacter.h"
 #include "SelfImpactNodeManager.h"
 
 #include "Watanabe/Component/PlayerStatus.h"

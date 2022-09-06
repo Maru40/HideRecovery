@@ -5,7 +5,7 @@
 
 #include "stdafx.h"
 #include "RackObject.h"
-#include "HidePlace.h"
+#include "Maruyama/StageObject/HidePlace.h"
 #include "../Utility/DataExtracter.h"
 
 #include "Watanabe/Component/BoxAnimator.h"

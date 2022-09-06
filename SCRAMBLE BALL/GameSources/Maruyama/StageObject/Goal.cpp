@@ -9,15 +9,15 @@
 
 #include "Goal.h"
 
-#include "ItemBag.h"
+#include "Maruyama/Player/Component/ItemBag.h"
 #include "Maruyama/Interface/I_TeamMember.h"
 
-#include "HideItem.h"
+#include "Maruyama/Item/HideItem.h"
 #include "Itabashi/Item.h"
 
 #include "Watanabe/DebugClass/Debug.h"
 
-#include "MaruUtility.h"
+#include "Maruyama/Utility/Utility.h"
 #include "HidePlace.h"
 #include "MyRandom.h"
 

@@ -9,7 +9,7 @@
 #include "stdafx.h"
 
 #include "MaruAnimationHelper.h"
-#include "GraphBase.h"
+#include "Maruyama/Enemy/Astar/GraphBase.h"
 
 namespace basecross {
 

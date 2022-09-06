@@ -10,14 +10,14 @@
 
 #include "SelfImpactNodeManager.h"
 
-#include "I_Impact.h"
-#include "ImpactMap.h"
-#include "GraphAstar.h"
+#include "Maruyama/Interface/I_Impact.h"
+#include "Maruyama/Enemy/ImpactMap/ImpactMap.h"
+#include "Maruyama/Enemy/Astar/GraphAstar.h"
 #include "SparseGraph.h"
 #include "Maruyama/Enemy/Astar/AstarEdge.h"
-#include "NavGraphNode.h"
+#include "Maruyama/Enemy/Astar/NavGraphNode.h"
 
-#include "MaruUtility.h"
+#include "Maruyama/Utility/Utility.h"
 #include "Maruyama/Enemy/Astar/UtilityAstar.h"
 
 namespace basecross {

@@ -11,10 +11,10 @@
 #include "SoleImpactMap.h"
 
 #include "PlayerInputer.h"
-#include "GraphAstar.h"
+#include "Maruyama/Enemy/Astar/GraphAstar.h"
 
-#include "I_Impact.h"
-#include "ImpactManager.h"
+#include "Maruyama/Interface/I_Impact.h"
+#include "Maruyama/Enemy/ImpactMap/ImpactManager.h"
 
 namespace basecross {
 

@@ -11,21 +11,20 @@
 
 #include "PlayerObject.h"
 #include "VillainPlayerObject.h"
-#include "HeroPlayerObject.h"
+#include "Maruyama/Player/Object/HeroPlayerObject.h"
 #include "Maruyama/Utility/SingletonComponent/GameManager.h"
 #include "SlowTimerManager.h"
 
-#include "MainCamera.h"
-#include "MainCameraObject.h"
+#include "Maruyama/Camera/MainCamera.h"
+#include "Maruyama/Camera/MainCameraObject.h"
 #include "StartCamera.h"
 
 #include "StageMapCSV.h"
 #include "WallObject.h"
 #include "OriginalMeshStageObject.h"
-#include "FixedBox.h"
 
 #include "SingletonComponent.h"
-#include "ImpactMap.h"
+#include "Maruyama/Enemy/ImpactMap/ImpactMap.h"
 
 #include "UtilityStartCamera.h"
 
@@ -34,12 +33,12 @@
 #include "OriginalMeshToonObject.h"
 #include "ToonPNTStaticModelDraw.h"
 
-#include "Maruyama/Enemy/Component/ImpactMap/FieldImpactMap.h"
+#include "Maruyama/Enemy/ImpactMap/FieldImpactMap.h"
 
-#include "ItemAcquisitionManager.h"
+#include "Maruyama/Player/Component/ItemAcquisitionManager.h"
 
-#include "HidePlace.h"
-#include "HideItemObject.h"
+#include "Maruyama/StageObject/HidePlace.h"
+#include "Maruyama/Item/HideItemObject.h"
 
 #include "Watanabe/StageObject/StageObjects.h"
 #include "Watanabe/UI/UIObjects.h"

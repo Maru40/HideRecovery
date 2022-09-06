@@ -11,15 +11,15 @@
 #include "ImpactManager.h"
 
 #include "SingletonComponent.h"
-#include "Maruyama/Enemy/Component/ImpactMap/FieldImpactMap.h"
+#include "Maruyama/Enemy/ImpactMap/FieldImpactMap.h"
 #include "ImpactMap.h"
 
-#include "GraphAstar.h"
+#include "Maruyama/Enemy/Astar/GraphAstar.h"
 #include "SparseGraph.h"
 
-#include "MaruUtility.h"
+#include "Maruyama/Utility/Utility.h"
 #include "Maruyama/Enemy/Astar/UtilityAstar.h"
-#include "UtilityObstacle.h"
+#include "Maruyama/Utility/UtilityObstacle.h"
 
 #include "Maruyama/Enemy/Component/EyeSearchRange.h"
 

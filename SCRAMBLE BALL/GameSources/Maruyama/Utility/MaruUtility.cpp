@@ -7,7 +7,7 @@
 
 #include "stdafx.h"
 #include "Project.h"
-#include "MaruUtility.h"
+#include "Utility.h"
 #include "Mathf.h"
 
 #include "Maruyama/Debug/Object/ArrowObject.h"

@@ -14,13 +14,13 @@
 #include "Task_MovePositions.h"
 
 #include "SingletonComponent.h"
-#include "ImpactMap.h"
+#include "Maruyama/Enemy/ImpactMap/ImpactMap.h"
 
 #include "TargetManager.h"
 #include "VelocityManager.h"
 #include "RotationController.h"
 
-#include "Maruyama/Enemy/Component/ImpactMap/FieldImpactMap.h"
+#include "Maruyama/Enemy/ImpactMap/FieldImpactMap.h"
 
 namespace basecross {
 

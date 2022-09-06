@@ -9,7 +9,7 @@
 #include "stdafx.h"
 
 #include "Maruyama/Debug/Object/DebugObject.h"
-#include "MaruUtility.h"
+#include "Maruyama/Utility/Utility.h"
 
 namespace basecross {
 

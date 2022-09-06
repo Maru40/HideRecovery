@@ -7,7 +7,7 @@
 #include "Project.h"
 
 #include "TactileCtrl.h"
-#include "MaruUtility.h"
+#include "Maruyama/Utility/Utility.h"
 
 namespace basecross {
 

@@ -9,7 +9,7 @@
 #include "stdafx.h"
 #include "Project.h"
 
-#include "GraphEdgeBase.h"
+#include "Maruyama/Enemy/Astar/GraphEdgeBase.h"
 
 namespace basecross {
 

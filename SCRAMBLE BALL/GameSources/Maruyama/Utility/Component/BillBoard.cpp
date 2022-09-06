@@ -9,7 +9,7 @@
 #include "Project.h"
 #include "BillBoard.h"
 
-#include "MaruUtility.h"
+#include "Maruyama/Utility/Utility.h"
 #include "Mathf.h"
 
 namespace basecross {

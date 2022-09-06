@@ -9,7 +9,7 @@
 #include "stdafx.h"
 
 #include "Trigger.h"
-#include "I_BrackBoard.h"
+#include "Maruyama/Interface/I_BrackBoard.h"
 
 #include "EnemyStatorBase.h"
 

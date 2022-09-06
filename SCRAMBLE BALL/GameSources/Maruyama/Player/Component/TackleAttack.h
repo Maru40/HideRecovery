@@ -10,7 +10,7 @@
 
 #include "AttackBase.h"
 #include "TaskList.h"
-#include "I_Damaged.h"
+#include "Maruyama/Interface/I_Damaged.h"
 
 namespace basecross {
 	//--------------------------------------------------------------------------------------

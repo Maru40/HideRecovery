@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include "stdafx.h"
-#include "ItemBag.h"
+#include "Maruyama/Player/Component/ItemBag.h"
 #include "Watanabe/Effekseer/EfkEffect.h"
 
 namespace basecross {

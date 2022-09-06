@@ -31,7 +31,7 @@
 #include "Targeted.h"
 #include "TargetManager.h"
 
-#include "I_FactionMember.h"
+#include "Maruyama/Interface/I_FactionMember.h"
 #include "Maruyama/Enemy/AIDirector/FactionCoordinator.h"
 #include "Maruyama/Enemy/AIDirector/PatrolCoordinator.h"
 

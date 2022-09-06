@@ -16,7 +16,7 @@
 #include "ToonPNTStaticModelDraw.h"
 #include "Maruyama/Utility/Object/CollisionObject.h"
 
-#include "MaruUtility.h"
+#include "Maruyama/Utility/Utility.h"
 
 namespace basecross {
 

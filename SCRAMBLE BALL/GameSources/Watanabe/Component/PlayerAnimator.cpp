@@ -11,7 +11,7 @@
 #include "PlayerInputer.h"
 #include "Maruyama/Player/Component/GoalAnimationController.h"
 #include "Maruyama/StageObject/Goal.h"
-#include "MaruUtility.h"
+#include "Maruyama/Utility/Utility.h"
 
 namespace basecross {
 	//--------------------------------------------------------------------------------------

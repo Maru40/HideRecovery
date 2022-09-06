@@ -8,10 +8,10 @@
 #include "stdafx.h"
 #include "Project.h"
 
-#include "GeneratorBase.h"
+#include "Maruyama/Enemy/Generator/GeneratorBase.h"
 #include "GameManager.h"
 
-#include "MaruUtility.h"
+#include "Maruyama/Utility/Utility.h"
 
 #include "SoundManager.h"
 

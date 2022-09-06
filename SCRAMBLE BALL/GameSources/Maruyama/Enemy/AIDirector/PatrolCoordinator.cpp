@@ -13,11 +13,11 @@
 #include "Maruyama/Enemy/Component/EnemyBase.h"
 #include "FactionCoordinator.h"
 
-#include "MaruUtility.h"
+#include "Maruyama/Utility/Utility.h"
 
 #include "Watanabe/DebugClass/Debug.h"
 
-#include "I_FactionMember.h"
+#include "Maruyama/Interface/I_FactionMember.h"
 
 #include "Maruyama/Enemy/StateMachine/EnemyMainStateMachine.h"
 #include "Maruyama/Enemy/Component/Stator/StatorBase.h"

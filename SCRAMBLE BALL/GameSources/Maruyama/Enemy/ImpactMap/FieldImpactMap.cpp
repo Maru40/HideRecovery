@@ -19,10 +19,10 @@
 #include "Maruyama/Utility/Timer/TimeHelper.h"
 #include "Maruyama/Utility/Timer/GameTimer.h"
 
-#include "NavGraphNode.h"
+#include "Maruyama/Enemy/Astar/NavGraphNode.h"
 
-#include "MaruAction.h"
-#include "MaruUtility.h"
+#include "Maruyama/Utility/MaruAction.h"
+#include "Maruyama/Utility/Utility.h"
 
 #include "OccupancyManager.h"
 

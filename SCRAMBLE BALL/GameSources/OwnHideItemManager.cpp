@@ -12,12 +12,12 @@
 
 #include "PlayerInputer.h"
 
-#include "ItemBag.h"
-#include "HideItem.h"
+#include "Maruyama/Player/Component/ItemBag.h"
+#include "Maruyama/Item/HideItem.h"
 
-#include "HidePlace.h"
+#include "Maruyama/StageObject/HidePlace.h"
 
-#include "MaruUtility.h"
+#include "Maruyama/Utility/Utility.h"
 
 #include "Maruyama/Utility/Timer/TimeHelper.h"
 #include "Maruyama/Utility/Timer/GameTimer.h"

@@ -10,7 +10,7 @@
 
 #include "GraphNodeBase.h"
 
-#include "I_Impact.h"
+#include "Maruyama/Interface/I_Impact.h"
 
 namespace basecross {
 

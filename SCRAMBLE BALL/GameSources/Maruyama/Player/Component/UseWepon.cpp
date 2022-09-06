@@ -12,7 +12,7 @@
 
 #include "WeponBase.h"
 
-#include "ReactiveBool.h"
+#include "Maruyama/Utility/ReactiveBool.h"
 
 #include "PlayerInputer.h"
 
@@ -22,7 +22,7 @@
 
 #include "RotationController.h"
 #include "VelocityManager.h"
-#include "MaruUtility.h"
+#include "Maruyama/Utility/Utility.h"
 #include "Maruyama/Enemy/Component/EyeSearchRange.h"
 
 #include "Itabashi/GamePlayerManager.h"

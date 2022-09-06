@@ -3,10 +3,10 @@
 #include "PlayerInputer.h"
 #include "Maruyama/Debug/Object/DebugObject.h"
 
-#include "LookAtCameraManager.h"
+#include "Maruyama/Camera/Component/LookAtCameraManager.h"
 
 #include "SingletonComponent.h"
-#include "Maruyama/Player/Component/FieldMap.h"
+#include "Maruyama/UI/FieldMap.h"
 #include "Maruyama/Player/Component/Teleport.h"
 
 #include "StageMapCSV.h"

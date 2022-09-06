@@ -19,7 +19,7 @@
 #include "Watanabe/Effekseer/EfkEffect.h"
 #include "Maruyama/Player/Component/UseWepon.h"
 
-#include "MaruUtility.h"
+#include "Maruyama/Utility/Utility.h"
 #include "Itabashi/OnlineTransformSynchronization.h"
 
 #include "SpringArmComponent.h"

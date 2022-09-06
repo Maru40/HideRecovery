@@ -11,7 +11,7 @@
 
 #include "SinScaling.h"
 
-#include "MaruAction.h"
+#include "Maruyama/Utility/MaruAction.h"
 #include "SelectSprite.h"
 
 #include "SeekTarget.h"

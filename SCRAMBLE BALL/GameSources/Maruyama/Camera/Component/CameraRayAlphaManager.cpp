@@ -10,7 +10,7 @@
 
 #include "CameraRayAlphaManager.h"
 
-#include "MaruHitHelper.h"
+#include "Maruyama/Utility/MaruHitHelper.h"
 
 namespace basecross {
 

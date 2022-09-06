@@ -11,7 +11,7 @@
 #include "I_Impact.h"
 
 #include "Maruyama/Enemy/Component/EyeSearchRange.h"
-#include "NavGraphNode.h"
+#include "Maruyama/Enemy/Astar/NavGraphNode.h"
 
 namespace basecross {
 

@@ -14,10 +14,10 @@
 
 #include "PlayerInputer.h"
 
-#include "Maruyama/Player/Component/FieldMap.h"
+#include "Maruyama/UI/FieldMap.h"
 #include "Watanabe/DebugClass/Debug.h"
 
-#include "MaruUtility.h"
+#include "Maruyama/Utility/Utility.h"
 #include "Mathf.h"
 
 #include "Maruyama/Player/Component/Teleport.h"

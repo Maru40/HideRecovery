@@ -23,12 +23,12 @@
 #include "Task_PlowlingMove.h"
 
 #include "SingletonComponent.h"
-#include "ImpactMap.h"
-#include "GraphAstar.h"
+#include "Maruyama/Enemy/ImpactMap/ImpactMap.h"
+#include "Maruyama/Enemy/Astar/GraphAstar.h"
 #include "SparseGraph.h"
 #include "Maruyama/Enemy/Astar/UtilityAstar.h"
 
-#include "Maruyama/Enemy/Component/ImpactMap/FieldImpactMap.h"
+#include "Maruyama/Enemy/ImpactMap/FieldImpactMap.h"
 #include "Maruyama/Utility/Timer/GameTimer.h"
 
 namespace basecross {

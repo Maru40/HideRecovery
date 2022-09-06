@@ -7,7 +7,7 @@
 #include "stdafx.h"
 #include "Project.h"
 
-#include "MaruAction.h"
+#include "Maruyama/Utility/MaruAction.h"
 #include "SelectSprite.h"
 
 namespace basecross {

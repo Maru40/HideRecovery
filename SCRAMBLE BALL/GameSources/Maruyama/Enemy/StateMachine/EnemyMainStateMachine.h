@@ -11,7 +11,7 @@
 
 #include "StateNodeBase.h"
 #include "StateEdgeBase.h"
-#include "GraphBase.h"
+#include "Maruyama/Enemy/Astar/GraphBase.h"
 
 namespace basecross {
 
