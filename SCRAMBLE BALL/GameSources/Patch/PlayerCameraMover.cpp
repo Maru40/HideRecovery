@@ -1,5 +1,5 @@
 #include"PlayerCameraMover.h"
-#include"PlayerInputer.h"
+#include"Patch/PlayerInputer.h"
 
 namespace basecross
 {

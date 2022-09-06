@@ -18,7 +18,7 @@
 #include "Maruyama/Enemy/Astar/Debug/AstarEdgeDraw.h"
 #include "Maruyama/Enemy/Astar/Debug/AstarNodeDraw.h"
 
-#include "PlayerInputer.h"
+#include "Patch/PlayerInputer.h"
 
 #include "Maruyama/Enemy/Component/EyeSearchRange.h"
 

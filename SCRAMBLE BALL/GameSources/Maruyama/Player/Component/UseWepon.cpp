@@ -14,7 +14,7 @@
 
 #include "Maruyama/Utility/ReactiveBool.h"
 
-#include "PlayerInputer.h"
+#include "Patch/PlayerInputer.h"
 
 #include "Itabashi/ObjectMover.h"
 #include "Watanabe/Component/PlayerAnimator.h"
@@ -28,7 +28,7 @@
 #include "Itabashi/GamePlayerManager.h"
 
 #include "Maruyama/Player/Component/Teleport.h"
-#include "SpringArmComponent.h"
+#include "Patch/SpringArmComponent.h"
 
 #include "StageMapCSV.h"
 

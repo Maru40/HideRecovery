@@ -19,18 +19,18 @@
 #include "Maruyama/UI/2D/Component/FieldMap.h"
 
 #include "Watanabe/DebugClass/Debug.h"
-#include "PlayerInputer.h"
+#include "Patch/PlayerInputer.h"
 #include "Maruyama/UI/2D/Object/SpriteObject.h"
 #include "Maruyama/UI/2D/Component/MapCursor.h"
 
 #include "Maruyama/Utility/Timer/TimeHelper.h"
 #include "Maruyama/Utility/Timer/GameTimer.h"
 
-#include "CameraHelper.h"
+#include "Patch/CameraHelper.h"
 #include "Maruyama/Camera/Component/CameraForwardController.h"
 #include "Maruyama/Utility/Component/ToTargetMove.h"
 #include "Maruyama/Camera/Component/LookAtCameraManager.h"
-#include "SpringArmComponent.h"
+#include "Patch/SpringArmComponent.h"
 #include "PlayerObject.h"
 
 #include "Watanabe/Effekseer/EfkComponent.h"

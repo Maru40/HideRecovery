@@ -12,7 +12,7 @@
 
 #include "Maruyama/Utility/Utility.h"
 
-#include "PlayerInputer.h"
+#include "Patch/PlayerInputer.h"
 
 #include "ImpactMap.h"
 #include "Maruyama/Utility/SingletonComponent/SingletonComponent.h"

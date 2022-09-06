@@ -13,7 +13,7 @@
 
 #include "Watanabe/Component/PlayerAnimator.h"
 
-#include "PlayerInputer.h"
+#include "Patch/PlayerInputer.h"
 #include "VelocityManager.h"
 
 #include "Itabashi/ObjectMover.h"

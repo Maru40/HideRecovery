@@ -14,7 +14,7 @@
 #include "StageMapCSV.h"
 #include "ImpactMap.h"
 
-#include "PlayerInputer.h"
+#include "Patch/PlayerInputer.h"
 
 #include "Maruyama/Utility/Timer/TimeHelper.h"
 #include "Maruyama/Utility/Timer/GameTimer.h"

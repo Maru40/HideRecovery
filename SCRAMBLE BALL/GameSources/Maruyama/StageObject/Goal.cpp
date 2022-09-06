@@ -45,7 +45,7 @@
 #include "Watanabe/Manager/TimeManager.h"
 #include "Watanabe/Manager/ScoreManager.h"
 
-#include "PlayerInputer.h"
+#include "Patch/PlayerInputer.h"
 #include "MainStage.h"
 
 namespace basecross {

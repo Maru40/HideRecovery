@@ -7,13 +7,13 @@
 #include "Project.h"
 
 #include "MainStage.h"
-#include "PlayerInputer.h"
+#include "Patch/PlayerInputer.h"
 
 #include "Maruyama/Utility/SingletonComponent/SoundManager.h"
 
 #include "Maruyama/Utility/Mathf.h"
 
-#include "CameraHelper.h"
+#include "Patch/CameraHelper.h"
 
 #include "Maruyama/Item/HideItemObject.h"
 

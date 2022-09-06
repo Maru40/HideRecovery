@@ -5,7 +5,7 @@
 */
 #pragma once
 #include "stdafx.h"
-#include "InputHelper.h"
+#include "Patch/InputHelper.h"
 
 namespace basecross {
 

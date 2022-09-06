@@ -8,7 +8,7 @@
 
 #include "VelocityManager.h"
 
-#include "PlayerInputer.h"
+#include "Patch/PlayerInputer.h"
 #include "Maruyama/Player/Component/GoalAnimationController.h"
 #include "Maruyama/StageObject/Goal.h"
 #include "Maruyama/Utility/Utility.h"

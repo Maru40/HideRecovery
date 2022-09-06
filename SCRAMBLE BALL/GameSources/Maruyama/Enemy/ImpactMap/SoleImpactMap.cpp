@@ -10,7 +10,7 @@
 
 #include "SoleImpactMap.h"
 
-#include "PlayerInputer.h"
+#include "Patch/PlayerInputer.h"
 #include "Maruyama/Enemy/Astar/GraphAstar.h"
 
 #include "Maruyama/Interface/I_Impact.h"

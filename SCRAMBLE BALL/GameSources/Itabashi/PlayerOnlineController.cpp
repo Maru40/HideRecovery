@@ -2,7 +2,7 @@
 #include "PlayerOnlineController.h"
 #include "ObjectMover.h"
 #include "Maruyama/Utility/Component/RotationController.h"
-#include "PlayerInputer.h"
+#include "Patch/PlayerInputer.h"
 #include "Maruyama/Utility/Utility.h"
 #include "Maruyama/Player/Component/ItemAcquisitionManager.h"
 #include "Maruyama/Player/Component/OwnHideItemManager.h"
@@ -23,7 +23,7 @@
 #include "Maruyama/Player/Component/GoalAnimationController.h"
 
 #include "Watanabe/Component/PlayerAnimator.h"
-#include "SpringArmComponent.h"
+#include "Patch/SpringArmComponent.h"
 #include "Maruyama/Camera/Component/LookAtCameraManager.h"
 #include "Maruyama/UI/2D/Component/FieldMap.h"
 #include "Maruyama/UI/2D/Component/MapCursor.h"

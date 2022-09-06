@@ -26,7 +26,7 @@
 #include "Watanabe/Component/BallAnimator.h"
 
 #include "Maruyama/Item/HideItemObject.h"
-#include "PlayerInputer.h"
+#include "Patch/PlayerInputer.h"
 #include "Maruyama/StageObject/Goal.h"
 #include "MainStage.h"
 #include "Watanabe/UI/UIObjects.h"

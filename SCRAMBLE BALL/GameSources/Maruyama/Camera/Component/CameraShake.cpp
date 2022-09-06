@@ -16,7 +16,7 @@
 #include "Maruyama/Utility/Random.h"
 #include "Maruyama/Utility/Utility.h"
 
-#include "PlayerInputer.h"
+#include "Patch/PlayerInputer.h"
 
 namespace basecross {
 

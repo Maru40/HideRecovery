@@ -13,11 +13,11 @@
 #include "Maruyama/Utility/Component/RotationController.h"
 //#include "PlayerController.h"
 
-#include "CameraHelper.h"
-#include "CameraRotater.h"
-#include "PlayerCameraMover.h"
-#include "ChasingTarget.h"
-#include "SpringArmComponent.h"
+#include "Patch/CameraHelper.h"
+#include "Patch/CameraRotater.h"
+#include "Patch/PlayerCameraMover.h"
+#include "Patch/ChasingTarget.h"
+#include "Patch/SpringArmComponent.h"
 
 #include "Maruyama/Camera/Component/LookAtCameraManager.h"
 

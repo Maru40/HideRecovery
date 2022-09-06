@@ -6,7 +6,7 @@
 #pragma once
 #include "stdafx.h"
 #include "Itabashi/Utility/ActionTimer.h"
-#include "ex_weak_ptr.h"
+#include "Patch/ex_weak_ptr.h"
 
 using namespace itbs::Utility;
 

@@ -11,7 +11,7 @@
 #include "Maruyama/Utility/Timer/GameTimer.h"
 #include "HitStopManager.h"
 
-#include "PlayerInputer.h"
+#include "Patch/PlayerInputer.h"
 
 namespace basecross {
 

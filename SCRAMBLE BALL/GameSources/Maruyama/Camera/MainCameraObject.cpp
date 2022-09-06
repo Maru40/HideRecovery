@@ -21,7 +21,7 @@
 
 #include "GameStageBase.h"
 
-#include "PlayerInputer.h"
+#include "Patch/PlayerInputer.h"
 
 #include "Maruyama/Utility/Utility.h"
 #include "Maruyama/Utility/UtilityObstacle.h"

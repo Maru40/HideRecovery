@@ -1116,62 +1116,14 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)ProjectBehavior.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)InputHelper.h">
-      <Filter>Patch\Input\InputHelper</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)ex_weak_ptr.h">
-      <Filter>Patch\Utility\ex_weak_ptr</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)DelegateSystem.h">
       <Filter>Patch\Utility\DelegateSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)AnimationHelper.h">
-      <Filter>Patch\basecross\AnimationHelper</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)BezierTransitioner.h">
-      <Filter>Patch\basecross\BezierTransitioner</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)CameraHelper.h">
-      <Filter>Patch\basecross\CameraHelper</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)FontHelper.h">
-      <Filter>Patch\basecross\FontHelper</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)MessageWindow.h">
-      <Filter>Patch\basecross\MessageWindow</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)UIHelper.h">
-      <Filter>Patch\basecross\UIHelper</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)SoundHelper.h">
-      <Filter>Patch\basecross\SoundHelper</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)SaveHelper.h">
-      <Filter>Patch\basecross\SaveHelper</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Bezier.h">
-      <Filter>Patch\Mathf\Bezier</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Trigger.h">
       <Filter>Patch\Utility\Trigger</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)BasecrossInputer.h">
-      <Filter>Patch\Input\BasecrossInputer</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)WindowSetting.h">
-      <Filter>Patch</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)StructIOFileStream.h">
       <Filter>Patch\Utility\StructIOFileStream</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)MathHelper.h">
-      <Filter>Patch\Mathf\MyMath</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Random.h">
-      <Filter>Patch\Mathf\Random</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)GameSaveManager.h">
-      <Filter>Patch\basecross\GameSaveManager</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Character.h">
       <Filter>DefaultFiles\Character</Filter>
@@ -1181,9 +1133,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)LoadStage.h">
       <Filter>Maruyama\Stage\LoadStage</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)PlayerInputer.h">
-      <Filter>Patch\Inputer</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)MainStage.h">
       <Filter>Maruyama\Stage\MainStage</Filter>
@@ -1208,18 +1157,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)LoadCSV.h">
       <Filter>Maruyama\Utility\Load\LoadCSV</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)CameraRotater.h">
-      <Filter>Patch\basecross\CameraHelper\CameraRotate</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)PlayerCameraMover.h">
-      <Filter>Patch\basecross\CameraHelper\PlayerCameraMover</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)ChasingTarget.h">
-      <Filter>Patch\basecross\CameraHelper\ChasingTarget</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)SpringArmComponent.h">
-      <Filter>Patch\basecross\CameraHelper\SpringArmComponent</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)PlayerObject.h">
       <Filter>Maruyama\Player\Object\PlayerObjectBase</Filter>
@@ -2064,6 +2001,69 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\WeponBase.h">
       <Filter>Maruyama\Player\Component\Wepon</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Patch\BezierTransitioner.h">
+      <Filter>Patch\basecross\BezierTransitioner</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Patch\AnimationHelper.h">
+      <Filter>Patch\basecross\AnimationHelper</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Patch\CameraHelper.h">
+      <Filter>Patch\basecross\CameraHelper</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Patch\FontHelper.h">
+      <Filter>Patch\basecross\FontHelper</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Patch\GameSaveManager.h">
+      <Filter>Patch\basecross\GameSaveManager</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Patch\SaveHelper.h">
+      <Filter>Patch\basecross\SaveHelper</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Patch\SoundHelper.h">
+      <Filter>Patch\basecross\SoundHelper</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Patch\UIHelper.h">
+      <Filter>Patch\basecross\UIHelper</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Patch\BasecrossInputer.h">
+      <Filter>Patch\Input\BasecrossInputer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Patch\InputHelper.h">
+      <Filter>Patch\Input\InputHelper</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Patch\PlayerInputer.h">
+      <Filter>Patch\Inputer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Patch\Bezier.h">
+      <Filter>Patch\Mathf\Bezier</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Patch\MathHelper.h">
+      <Filter>Patch\Mathf\MyMath</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Patch\Random.h">
+      <Filter>Patch\Mathf\Random</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Patch\ex_weak_ptr.h">
+      <Filter>Patch\Utility\ex_weak_ptr</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Patch\MessageWindow.h">
+      <Filter>Patch\basecross\MessageWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Patch\SpringArmComponent.h">
+      <Filter>Patch\basecross\CameraHelper\SpringArmComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Patch\PlayerCameraMover.h">
+      <Filter>Patch\basecross\CameraHelper\PlayerCameraMover</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Patch\ChasingTarget.h">
+      <Filter>Patch\basecross\CameraHelper\ChasingTarget</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Patch\CameraRotater.h">
+      <Filter>Patch\basecross\CameraHelper\CameraRotate</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Patch\WindowSetting.h">
+      <Filter>Patch\Utility</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2075,42 +2075,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectBehavior.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)InputHelper.cpp">
-      <Filter>Patch\Input\InputHelper</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)BezierTransitioner.cpp">
-      <Filter>Patch\basecross\BezierTransitioner</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)CameraHelper.cpp">
-      <Filter>Patch\basecross\CameraHelper</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)FontHelper.cpp">
-      <Filter>Patch\basecross\FontHelper</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)MessageWindow.cpp">
-      <Filter>Patch\basecross\MessageWindow</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)UIHelper.cpp">
-      <Filter>Patch\basecross\UIHelper</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)SoundHelper.cpp">
-      <Filter>Patch\basecross\SoundHelper</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Bezier.cpp">
-      <Filter>Patch\Mathf\Bezier</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)BasecrossInputer.cpp">
-      <Filter>Patch\Input\BasecrossInputer</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)MathHelper.cpp">
-      <Filter>Patch\Mathf\MyMath</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Random.cpp">
-      <Filter>Patch\Mathf\Random</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)GameSaveManager.cpp">
-      <Filter>Patch\basecross\GameSaveManager</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Character.cpp">
       <Filter>DefaultFiles\Character</Filter>
     </ClCompile>
@@ -2119,9 +2083,6 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)LoadStage.cpp">
       <Filter>Maruyama\Stage\LoadStage</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)PlayerInputer.cpp">
-      <Filter>Patch\Inputer</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)MainStage.cpp">
       <Filter>Maruyama\Stage\MainStage</Filter>
@@ -2143,15 +2104,6 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)LoadCSV.cpp">
       <Filter>Maruyama\Utility\Load\LoadCSV</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)CameraRotater.cpp">
-      <Filter>Patch\basecross\CameraHelper\CameraRotate</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)PlayerCameraMover.cpp">
-      <Filter>Patch\basecross\CameraHelper\PlayerCameraMover</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)SpringArmComponent.cpp">
-      <Filter>Patch\basecross\CameraHelper\SpringArmComponent</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)PlayerObject.cpp">
       <Filter>Maruyama\Player\Object\PlayerObjectBase</Filter>
@@ -2929,6 +2881,54 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\WeponBase.cpp">
       <Filter>Maruyama\Player\Component\Wepon</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Patch\BezierTransitioner.cpp">
+      <Filter>Patch\basecross\BezierTransitioner</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Patch\CameraHelper.cpp">
+      <Filter>Patch\basecross\CameraHelper</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Patch\FontHelper.cpp">
+      <Filter>Patch\basecross\FontHelper</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Patch\GameSaveManager.cpp">
+      <Filter>Patch\basecross\GameSaveManager</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Patch\SoundHelper.cpp">
+      <Filter>Patch\basecross\SoundHelper</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Patch\UIHelper.cpp">
+      <Filter>Patch\basecross\UIHelper</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Patch\BasecrossInputer.cpp">
+      <Filter>Patch\Input\BasecrossInputer</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Patch\InputHelper.cpp">
+      <Filter>Patch\Input\InputHelper</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Patch\PlayerInputer.cpp">
+      <Filter>Patch\Inputer</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Patch\Bezier.cpp">
+      <Filter>Patch\Mathf\Bezier</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Patch\MathHelper.cpp">
+      <Filter>Patch\Mathf\MyMath</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Patch\Random.cpp">
+      <Filter>Patch\Mathf\Random</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Patch\MessageWindow.cpp">
+      <Filter>Patch\basecross\MessageWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Patch\SpringArmComponent.cpp">
+      <Filter>Patch\basecross\CameraHelper\SpringArmComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Patch\PlayerCameraMover.cpp">
+      <Filter>Patch\basecross\CameraHelper\PlayerCameraMover</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Patch\CameraRotater.cpp">
+      <Filter>Patch\basecross\CameraHelper\CameraRotate</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

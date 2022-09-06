@@ -6,7 +6,7 @@
 #include "stdafx.h"
 #include "PlayerStatus.h"
 
-#include "PlayerInputer.h"
+#include "Patch/PlayerInputer.h"
 
 #include "PlayerObject.h"
 #include "Maruyama/Player/Component/PlayerDeader.h"

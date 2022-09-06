@@ -11,7 +11,7 @@
 #include "PlayerController.h"
 
 #include "Maruyama/Utility/Component/RotationController.h"
-#include "PlayerInputer.h"
+#include "Patch/PlayerInputer.h"
 #include "Maruyama/Utility/Utility.h"
 
 namespace basecross {

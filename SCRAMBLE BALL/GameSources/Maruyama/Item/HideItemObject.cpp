@@ -16,7 +16,7 @@
 #include "Watanabe/Utility/DataExtracter.h"
 #include "Watanabe/Component/BallAnimator.h"
 
-#include "PlayerInputer.h"
+#include "Patch/PlayerInputer.h"
 
 namespace basecross {
 	HideItemObject::HideItemObject(const std::shared_ptr<Stage>& stage) :

@@ -22,7 +22,7 @@
 #include "Maruyama/Utility/Utility.h"
 #include "Itabashi/OnlineTransformSynchronization.h"
 
-#include "SpringArmComponent.h"
+#include "Patch/SpringArmComponent.h"
 
 namespace basecross {
 	//--------------------------------------------------------------------------------------

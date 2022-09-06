@@ -12,7 +12,7 @@
 
 #include "Maruyama/UI/2D/Object/SpriteObject.h"
 
-#include "PlayerInputer.h"
+#include "Patch/PlayerInputer.h"
 
 #include "Maruyama/UI/2D/Component/FieldMap.h"
 #include "Watanabe/DebugClass/Debug.h"

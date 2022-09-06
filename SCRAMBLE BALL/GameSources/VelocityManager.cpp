@@ -11,7 +11,7 @@
 #include "Maruyama/Utility/Mathf.h"
 #include "Maruyama/Utility/UtilityVelocity.h"
 
-#include "PlayerInputer.h"
+#include "Patch/PlayerInputer.h"
 #include "Maruyama/Utility/Utility.h"
 #include "Maruyama/Item/HideItem.h"
 #include "Maruyama/Interface/I_TeamMember.h"
