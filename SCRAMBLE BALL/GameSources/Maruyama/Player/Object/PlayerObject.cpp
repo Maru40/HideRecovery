@@ -42,7 +42,7 @@
 
 #include "Maruyama/Player/Component/Respawner.h"
 #include "Maruyama/Player/Component/PlayerDeader.h"
-#include "Maruyama/Player/Component/UseWepon.h"
+#include "Maruyama/Player/Component/UseWeapon.h"
 #include "Maruyama/Player/Component/GoalAnimationController.h"
 #include "Maruyama/Player/Component/Teleport.h"
 #include "Maruyama/UI/2D/Component/FieldMap.h"
@@ -50,6 +50,7 @@
 #include "Maruyama/Enemy/Component/EyeSearchRange.h"
 
 #include "Maruyama/Player/Component/AccessHidePlace.h"
+#include "Maruyama/Player/Component/HeightDestroy.h"
 
 namespace basecross {
 	PlayerObject::PlayerObject(const std::shared_ptr<Stage>& stage) :
@@ -105,9 +106,9 @@ namespace basecross {
 		auto playerStatus = AddComponent<PlayerStatus>();
 		AddComponent<TackleAttack>();
 
-		AddComponent<Respawner>();
+		auto respawner = AddComponent<Respawner>();
 		AddComponent<PlayerDeader>();
-		auto useWeapon = AddComponent<UseWepon>(chargeGun);
+		auto useWeapon = AddComponent<UseWeapon>(chargeGun);
 		AddComponent<GoalAnimationController>();
 		//AddComponent<FieldMap>();
 		//AddComponent<Teleport>();
@@ -115,6 +116,9 @@ namespace basecross {
 		//AddComponent<AccessHidePlace>();
 
 		AddComponent<Teleport>();	//テレポートの生成
+		auto heightDestory = AddComponent<HeightDestroy>();
+		std::weak_ptr<Respawner> weakRespawner = respawner;
+		heightDestory->AddDestroyAction([weakRespawner]() { weakRespawner.lock()->StartRespawn(); });
 
 		// エフェクトの設定
 		auto efkComp = AddComponent<EfkComponent>();

@@ -16,7 +16,7 @@
 #include "Watanabe/Component/PlayerStatus.h"
 
 #include "VelocityManager.h"
-#include "UseWepon.h"
+#include "UseWeapon.h"
 #include "ItemBag.h"
 #include "Maruyama/Item/HideItem.h"
 #include "Itabashi/OnlineTransformSynchronization.h"
@@ -85,7 +85,7 @@ namespace basecross {
 	}
 
 	void PlayerDeader::StartDead() {
-		auto useWeapon = GetGameObject()->GetComponent<UseWepon>(false);
+		auto useWeapon = GetGameObject()->GetComponent<UseWeapon>(false);
 		auto animator = m_animator.lock();
 
 		auto onlineTransform = m_onlineTransformSynchonization.lock();

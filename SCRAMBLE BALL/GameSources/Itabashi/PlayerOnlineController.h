@@ -12,7 +12,7 @@ namespace basecross
 	class PlayerStatus;
 	class TackleAttack;
 	class ChargeBullet;
-	class UseWepon;
+	class UseWeapon;
 	class Teleport;
 
 	struct DamageData;
@@ -80,7 +80,7 @@ namespace Online
 
 		std::weak_ptr<TackleAttack> m_tackleAttack;
 
-		std::weak_ptr<UseWepon> m_useWepon;
+		std::weak_ptr<UseWeapon> m_useWepon;
 
 		std::weak_ptr<Camera> m_camera;
 

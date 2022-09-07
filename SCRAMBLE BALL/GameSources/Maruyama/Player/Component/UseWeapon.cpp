@@ -1,14 +1,14 @@
 ﻿
 /*!
-@file UseWepon.cpp
-@brief UseWeponクラス実体
+@file UseWeapon.cpp
+@brief UseWeaponクラス実体
 担当：丸山裕喜
 */
 
 #include "stdafx.h"
 #include "Project.h"
 
-#include "UseWepon.h"
+#include "UseWeapon.h"
 
 #include "WeponBase.h"
 
@@ -38,11 +38,11 @@ namespace basecross {
 	/// ウェポンを使用するクラスのパラメータ
 	//--------------------------------------------------------------------------------------
 
-	UseWepon_Parametor::UseWepon_Parametor() :
-		UseWepon_Parametor(false, false)
+	UseWeapon_Parametor::UseWeapon_Parametor() :
+		UseWeapon_Parametor(false, false)
 	{}
 
-	UseWepon_Parametor::UseWepon_Parametor(const bool isAim, const bool canShot) :
+	UseWeapon_Parametor::UseWeapon_Parametor(const bool isAim, const bool canShot) :
 		defaultCameraSpeed(0.0f),
 		aimCameraSpeed(0.0f),
 		assitPower(3.0f),
@@ -50,8 +50,8 @@ namespace basecross {
 		canShot(new maru::ReactiveBool(canShot))
 	{}
 
-	UseWepon_Parametor::UseWepon_Parametor(const UseWepon_Parametor& parametor) :
-		UseWepon_Parametor(
+	UseWeapon_Parametor::UseWeapon_Parametor(const UseWeapon_Parametor& parametor) :
+		UseWeapon_Parametor(
 			parametor.isAim->GetValue(),
 			parametor.canShot->GetValue()
 		)
@@ -61,18 +61,18 @@ namespace basecross {
 	/// ウェポンを使用するクラス本体
 	//--------------------------------------------------------------------------------------
 
-	UseWepon::UseWepon(const std::shared_ptr<GameObject>& objPtr) :
-		UseWepon(objPtr, nullptr)
+	UseWeapon::UseWeapon(const std::shared_ptr<GameObject>& objPtr) :
+		UseWeapon(objPtr, nullptr)
 	{}
 
-	UseWepon::UseWepon(const std::shared_ptr<GameObject>& objPtr, const std::shared_ptr<WeponBase>& wepon) :
+	UseWeapon::UseWeapon(const std::shared_ptr<GameObject>& objPtr, const std::shared_ptr<WeponBase>& wepon) :
 		Component(objPtr),
 		m_param(Parametor()),
 		m_wepon(wepon),
 		m_readyArmsSoundClip(L"ReadyArmsSE", false, 0.75f)
 	{}
 
-	void UseWepon::OnCreate() {
+	void UseWeapon::OnCreate() {
 		constexpr int AimCameraSpeedIndex = 5;
 		auto aimSpeedStr = StageMapCSV::GetWstringData(L"ShotParametor", L"CSVDatas\\", L"ShotDatas.csv", AimCameraSpeedIndex);
 		auto aimSpeed = static_cast<float>(_wtof(aimSpeedStr.c_str()));
@@ -85,7 +85,7 @@ namespace basecross {
 		m_param.assitPower = assistPower;
 	}
 
-	void UseWepon::OnLateStart() {
+	void UseWeapon::OnLateStart() {
 		auto player = dynamic_pointer_cast<PlayerObject>(GetGameObject());
 		if (player) {
 			auto springArm = player->GetArm()->GetComponent<SpringArmComponent>(false);
@@ -118,18 +118,18 @@ namespace basecross {
 		}
 	}
 
-	void UseWepon::OnUpdate() {
+	void UseWeapon::OnUpdate() {
 		if (IsAim()) {
 			AimUpdate();
 		}
 	}
 
-	void UseWepon::AimUpdate() {
+	void UseWeapon::AimUpdate() {
 		RotationUpdate();
 		AnimationUpdate();
 	}
 
-	void UseWepon::AnimationUpdate() {
+	void UseWeapon::AnimationUpdate() {
 		auto velocityManager = m_velocityManager.lock();
 		auto animator = m_animator.lock();
 		if (!velocityManager || !animator) {
@@ -182,7 +182,7 @@ namespace basecross {
 		animator->ChangePlayerAnimation(state);
 	}
 
-	void UseWepon::RotationUpdate() {
+	void UseWeapon::RotationUpdate() {
 		auto camera = GetStage()->GetView()->GetTargetCamera();
 		auto rotationController = m_rotationController.lock();
 		if (!camera || !rotationController) {
@@ -199,7 +199,7 @@ namespace basecross {
 		rotationController->SetDirect(m_direction);
 	}
 
-	void UseWepon::AssistCameraRotation(const Vec3& direction) {
+	void UseWeapon::AssistCameraRotation(const Vec3& direction) {
 		auto player = dynamic_pointer_cast<PlayerObject>(GetGameObject());
 		if (!player) {
 			return;
@@ -219,7 +219,8 @@ namespace basecross {
 		auto newDegree = XMConvertToDegrees(newRad);
 		auto newCross = cross(cameraForward.GetNormalized(), selfForward.GetNormalized());
 
-		if (newDegree <= 1.0f) {	//アシストしない角度
+		constexpr float AssistDegree = 1.0f;
+		if (newDegree <= AssistDegree) {	//アシストしない角度
 			return;
 		}
 
@@ -230,7 +231,7 @@ namespace basecross {
 		springArm->SetRadXZ(rad);
 	}
 
-	void UseWepon::SettingReactiveIsAim() {
+	void UseWeapon::SettingReactiveIsAim() {
 		auto& isAim = m_param.isAim;
 
 		//Aim状態になった時
@@ -266,11 +267,11 @@ namespace basecross {
 		isAim->AddFunction(false, falseFunction);
 	}
 
-	void UseWepon::SettingReactiveCanShot() {
+	void UseWeapon::SettingReactiveCanShot() {
 		auto& canShot = m_param.canShot;
 	}
 
-	Vec3 UseWepon::CalculateRotationDirection() {
+	Vec3 UseWeapon::CalculateRotationDirection() {
 		auto camera = GetStage()->GetView()->GetTargetCamera();
 		auto baseDirection = camera->GetAt() - camera->GetEye();
 		baseDirection.y = 0;
@@ -347,7 +348,7 @@ namespace basecross {
 		return resultVec;
 	}
 
-	void UseWepon::SearchPlayers() {
+	void UseWeapon::SearchPlayers() {
 		auto selfTeamMember = GetGameObject()->GetComponent<I_TeamMember>(false);
 		auto players = maru::Utility::FindGameObjects<PlayerObject>(GetStage());
 		for (auto player : players) {
@@ -362,7 +363,7 @@ namespace basecross {
 		}
 	}
 
-	void UseWepon::ChangeCameraSpeed(const float speed) {
+	void UseWeapon::ChangeCameraSpeed(const float speed) {
 		auto player = dynamic_pointer_cast<PlayerObject>(GetGameObject());
 		if (!player) {
 			return;
@@ -380,19 +381,19 @@ namespace basecross {
 	/// アクセッサ
 	//--------------------------------------------------------------------------------------
 
-	void UseWepon::SetIsAim(const bool isAim) { *m_param.isAim = isAim; }
+	void UseWeapon::SetIsAim(const bool isAim) { *m_param.isAim = isAim; }
 
-	bool UseWepon::IsAim() const { return m_param.isAim->GetValue(); }
+	bool UseWeapon::IsAim() const { return m_param.isAim->GetValue(); }
 
-	void UseWepon::SetCanShot(const bool isShot) { *m_param.canShot = isShot; }
+	void UseWeapon::SetCanShot(const bool isShot) { *m_param.canShot = isShot; }
 
-	bool UseWepon::CanShot() const { return m_param.canShot->GetValue(); }
+	bool UseWeapon::CanShot() const { return m_param.canShot->GetValue(); }
 
-	void UseWepon::SetWepon(const std::shared_ptr<WeponBase>& wepon) noexcept { m_wepon = wepon; }
+	void UseWeapon::SetWepon(const std::shared_ptr<WeponBase>& wepon) noexcept { m_wepon = wepon; }
 
-	std::shared_ptr<WeponBase> UseWepon::GetWepon() const noexcept { return m_wepon.lock(); }
+	std::shared_ptr<WeponBase> UseWeapon::GetWepon() const noexcept { return m_wepon.lock(); }
 
-	float UseWepon::GetWeaponWeight() const noexcept {
+	float UseWeapon::GetWeaponWeight() const noexcept {
 		auto weapon = GetWepon();
 		return weapon ? weapon->GetWeight() : 0.0f;	//武器があるなら武器の重さを返す。
 	}

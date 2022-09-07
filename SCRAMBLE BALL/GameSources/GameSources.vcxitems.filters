@@ -847,9 +847,6 @@
     <Filter Include="Watanabe\Utility\TimeCounter">
       <UniqueIdentifier>{58fee1e5-7785-48cc-80a9-ba305df7349e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Maruyama\Player\Component\UseWepon">
-      <UniqueIdentifier>{38306d85-3742-4018-9700-889e103e9207}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Watanabe\Manager">
       <UniqueIdentifier>{854239b7-08c3-4a50-800b-ec9485b65b13}</UniqueIdentifier>
     </Filter>
@@ -1102,6 +1099,12 @@
     <Filter Include="Maruyama\Utility\Delegate">
       <UniqueIdentifier>{35a9d5b6-4461-47ed-aebb-618b4618df86}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Player\Component\HeightDestroy">
+      <UniqueIdentifier>{f998e967-de68-45ca-8786-ba09cd669b98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Player\Component\UseWeapon">
+      <UniqueIdentifier>{38306d85-3742-4018-9700-889e103e9207}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1275,8 +1278,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\TimeCounter.h">
       <Filter>Watanabe\Utility\TimeCounter</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\UseWepon.h">
-      <Filter>Maruyama\Player\Component\UseWepon</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\UseWeapon.h">
+      <Filter>Maruyama\Player\Component\UseWeapon</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Manager\SpriteDataManager.h">
       <Filter>Watanabe\Manager\SpriteDataManager</Filter>
@@ -2058,6 +2061,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Object\PlayerObject.h">
       <Filter>Maruyama\Player\Object\PlayerObjectBase</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\HeightDestroy.h">
+      <Filter>Maruyama\Player\Component\HeightDestroy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2216,8 +2222,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Utility\TimeCounter.cpp">
       <Filter>Watanabe\Utility\TimeCounter</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\UseWepon.cpp">
-      <Filter>Maruyama\Player\Component\UseWepon</Filter>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\UseWeapon.cpp">
+      <Filter>Maruyama\Player\Component\UseWeapon</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Manager\SpriteDataManager.cpp">
       <Filter>Watanabe\Manager\SpriteDataManager</Filter>
@@ -2329,9 +2335,6 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Camera\Component\CameraForwardController.cpp">
       <Filter>Maruyama\Camera\CameraForwardController</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)MapCursor.cpp">
-      <Filter>Maruyama\Player\Component\UseOwnArea\Map\Cursor</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Camera\Component\CameraForwardController.cpp">
       <Filter>Maruyama\Camera\CameraForwardController</Filter>
@@ -2920,6 +2923,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Object\PlayerObject.cpp">
       <Filter>Maruyama\Player\Object\PlayerObjectBase</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\HeightDestory.cpp">
+      <Filter>Maruyama\Player\Component\HeightDestroy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

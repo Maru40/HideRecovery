@@ -1,7 +1,7 @@
 ﻿
 /*!
-@file UseWepon.h
-@brief UseWeponなど
+@file UseWeapon.h
+@brief UseWeaponなど
 担当：丸山裕喜
 */
 
@@ -25,32 +25,32 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 	/// ウェポンを使用するクラスのパラメータ
 	//--------------------------------------------------------------------------------------
-	struct UseWepon_Parametor {
+	struct UseWeapon_Parametor {
 		float defaultCameraSpeed;
 		float aimCameraSpeed;
 		float assitPower;
 		std::unique_ptr<maru::ReactiveBool> isAim;	//Aim中かどうか
 		std::unique_ptr<maru::ReactiveBool> canShot;	//撃てる状態かどうか
 
-		UseWepon_Parametor();
+		UseWeapon_Parametor();
 
-		UseWepon_Parametor(const bool isAim, const bool isShot);
+		UseWeapon_Parametor(const bool isAim, const bool isShot);
 
 		/// <summary>
 		/// コピーコンストラクタ
 		/// </summary>
-		UseWepon_Parametor(const UseWepon_Parametor& parametor);
+		UseWeapon_Parametor(const UseWeapon_Parametor& parametor);
 
-		virtual ~UseWepon_Parametor() = default;
+		virtual ~UseWeapon_Parametor() = default;
 	};
 
 	//--------------------------------------------------------------------------------------
 	/// ウェポンを使用するクラス
 	//--------------------------------------------------------------------------------------
-	class UseWepon : public Component
+	class UseWeapon : public Component
 	{
 	public:
-		using Parametor = UseWepon_Parametor;
+		using Parametor = UseWeapon_Parametor;
 
 	private:
 		Parametor m_param;					//パラメータ
@@ -76,16 +76,16 @@ namespace basecross {
 		/// コンストラクタ
 		/// </summary>
 		/// <param name="objPtr">このクラスを所有するゲームオブジェクト</param>
-		UseWepon(const std::shared_ptr<GameObject>& objPtr);
+		UseWeapon(const std::shared_ptr<GameObject>& objPtr);
 
 		/// <summary>
 		/// コンストラクタ
 		/// </summary>
 		/// <param name="objPtr">このクラスを所有するゲームオブジェクト</param>
 		/// <param name="wepon">武器</param>
-		UseWepon(const std::shared_ptr<GameObject>& objPtr, const std::shared_ptr<WeponBase>& wepon);
+		UseWeapon(const std::shared_ptr<GameObject>& objPtr, const std::shared_ptr<WeponBase>& wepon);
 
-		virtual ~UseWepon() = default;
+		virtual ~UseWeapon() = default;
 
 		void OnCreate() override;
 		void OnLateStart() override;

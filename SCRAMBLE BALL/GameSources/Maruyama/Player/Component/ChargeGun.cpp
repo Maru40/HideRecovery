@@ -20,7 +20,7 @@
 #include "Watanabe/Component/PlayerStatus.h"
 #include "Maruyama/Utility/SingletonComponent/SoundManager.h"
 
-#include "Maruyama/Player/Component/UseWepon.h"
+#include "Maruyama/Player/Component/UseWeapon.h"
 
 #include "Maruyama/Utility/Timer/TimeHelper.h"
 #include "Maruyama/Utility/Timer/GameTimer.h"
@@ -52,7 +52,7 @@ namespace basecross {
 	}
 
 	void ChargeGun::OnLateStart() {
-		m_useWepon = GetGameObject()->GetComponent<UseWepon>(false);
+		m_useWepon = GetGameObject()->GetComponent<UseWeapon>(false);
 		m_soundEmitter = GetGameObject()->GetComponent<SoundEmitter>(false);
 		m_teamType = GetGameObject()->GetComponent<PlayerStatus>()->GetTeam();
 	}
@@ -142,7 +142,7 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 
 	bool ChargeGun::IsShot() const {
-		if (auto useWepon = GetGameObject()->GetComponent<UseWepon>(false)) {
+		if (auto useWepon = GetGameObject()->GetComponent<UseWeapon>(false)) {
 			return useWepon->IsAim();
 		}
 

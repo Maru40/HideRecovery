@@ -1,7 +1,7 @@
 ﻿#include "stdafx.h"
 #include "ObjectMover.h"
 #include "VelocityManager.h"
-#include "Maruyama/Player/Component/UseWepon.h"
+#include "Maruyama/Player/Component/UseWeapon.h"
 
 #include "Maruyama/Utility/Utility.h"
 
@@ -19,7 +19,7 @@ namespace Operator
 	}
 
 	void ObjectMover::OnLateStart() {
-		m_useWepon = GetGameObject()->GetComponent<UseWepon>(false);
+		m_useWepon = GetGameObject()->GetComponent<UseWeapon>(false);
 	}
 
 	Vec3 ObjectMover::NormalMove(const Vec2& moveDirection) {

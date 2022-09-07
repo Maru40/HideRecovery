@@ -17,9 +17,11 @@
 #include "Watanabe/Component/PlayerStatus.h"
 #include "Watanabe/Component/PlayerAnimator.h"
 #include "Watanabe/Effekseer/EfkEffect.h"
-#include "Maruyama/Player/Component/UseWepon.h"
+#include "Maruyama/Player/Component/UseWeapon.h"
 
 #include "Maruyama/Utility/Utility.h"
+#include "Maruyama/Player/Component/GoalAnimationController.h"
+#include "VelocityManager.h"
 #include "Itabashi/OnlineTransformSynchronization.h"
 
 #include "Patch/SpringArmComponent.h"
@@ -61,11 +63,15 @@ namespace basecross {
 		transform->SetPosition(GetSpawnPoint()->GetWorldPosition());
 		transform->SetQuaternion(GetSpawnPoint()->GetQuaternion());
 
+		if (auto goalAnimationController = GetGameObject()->GetComponent<GoalAnimationController>(false)) {
+			goalAnimationController->ForceReset();
+		}
+
 		if (auto status = GetGameObject()->GetComponent<PlayerStatus>(false)) {
 			status->Respawn();
 		}
 
-		if (auto useWeapon = GetGameObject()->GetComponent<UseWepon>(false)) {
+		if (auto useWeapon = GetGameObject()->GetComponent<UseWeapon>(false)) {
 			useWeapon->SetIsAim(false);
 		}
 
@@ -75,7 +81,13 @@ namespace basecross {
 
 		//重力をつける
 		if (auto gravity = GetGameObject()->GetComponent<Gravity>(false)) {
+			gravity->SetGravityVerocityZero();
 			gravity->SetUpdateActive(true);
+		}
+
+		//速度リセット
+		if (auto velocityManager = GetGameObject()->GetComponent<VelocityManager>(false)) {
+			velocityManager->ResetAll();
 		}
 
 		//当たり判定をつける
@@ -109,6 +121,10 @@ namespace basecross {
 	}
 
 	void Respawner::StartRespawn() {
+		if (!m_timer->IsTimeUp()) {
+			return;
+		}
+
 		m_timer->ResetTimer(m_param.time);
 	}
 
