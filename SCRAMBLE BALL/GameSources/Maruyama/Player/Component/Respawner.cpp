@@ -21,6 +21,7 @@
 
 #include "Maruyama/Utility/Utility.h"
 #include "Maruyama/Player/Component/GoalAnimationController.h"
+#include "VelocityManager.h"
 #include "Itabashi/OnlineTransformSynchronization.h"
 
 #include "Patch/SpringArmComponent.h"
@@ -80,7 +81,13 @@ namespace basecross {
 
 		//重力をつける
 		if (auto gravity = GetGameObject()->GetComponent<Gravity>(false)) {
+			gravity->SetGravityVerocityZero();
 			gravity->SetUpdateActive(true);
+		}
+
+		//速度リセット
+		if (auto velocityManager = GetGameObject()->GetComponent<VelocityManager>(false)) {
+			velocityManager->ResetAll();
 		}
 
 		//当たり判定をつける
