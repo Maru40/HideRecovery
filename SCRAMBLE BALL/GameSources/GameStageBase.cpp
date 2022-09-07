@@ -9,8 +9,8 @@
 #include "GameStageBase.h"
 #include "Patch/PlayerInputer.h"
 
-#include "PlayerObject.h"
-#include "VillainPlayerObject.h"
+#include "Maruyama/Player/Object/PlayerObject.h"
+#include "Maruyama/Player/Object/VillainPlayerObject.h"
 #include "Maruyama/Player/Object/HeroPlayerObject.h"
 #include "Maruyama/Utility/SingletonComponent/GameManager.h"
 #include "Maruyama/Utility/SingletonComponent/SlowTimerManager.h"
@@ -19,7 +19,7 @@
 #include "Maruyama/Camera/MainCameraObject.h"
 #include "Maruyama/Camera/StartCamera.h"
 
-#include "StageMapCSV.h"
+#include "Maruyama/Load/StageMapCSV.h"
 #include "Maruyama/StageObject/OriginalMeshStageObject.h"
 
 #include "Maruyama/Utility/SingletonComponent/SingletonComponent.h"

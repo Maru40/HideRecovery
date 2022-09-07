@@ -11,7 +11,7 @@
 
 #include "OriginalMeshStageObject.h"
 
-#include "StageMapCSV.h"
+#include "Maruyama/Load/StageMapCSV.h"
 
 #include "Maruyama/Shader/Toon/ToonPNTStaticModelDraw.h"
 #include "Maruyama/Utility/Object/CollisionObject.h"

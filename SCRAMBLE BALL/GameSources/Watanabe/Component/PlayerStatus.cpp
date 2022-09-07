@@ -8,7 +8,7 @@
 
 #include "Patch/PlayerInputer.h"
 
-#include "PlayerObject.h"
+#include "Maruyama/Player/Object/PlayerObject.h"
 #include "Maruyama/Player/Component/PlayerDeader.h"
 
 #include "Maruyama/Player/Component/ItemBag.h"

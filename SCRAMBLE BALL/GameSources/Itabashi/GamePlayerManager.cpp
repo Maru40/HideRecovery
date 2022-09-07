@@ -1,7 +1,7 @@
 ﻿#include "stdafx.h"
 #include "GamePlayerManager.h"
 #include "OnlineMatching.h"
-#include "VillainPlayerObject.h"
+#include "Maruyama/Player/Object/VillainPlayerObject.h"
 #include "PlayerOnlineController.h"
 #include "OnlineTransformSynchronization.h"
 #include "Maruyama/Player/Component/PlayerSpawnPoint.h"

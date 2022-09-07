@@ -17,7 +17,7 @@
 
 #include "Maruyama/Item/HideItemObject.h"
 
-#include "VillainPlayerObject.h"
+#include "Maruyama/Player/Object/VillainPlayerObject.h"
 #include "Watanabe/DebugClass/Debug.h"
 #include "Watanabe/Effekseer/EfkEffect.h"
 

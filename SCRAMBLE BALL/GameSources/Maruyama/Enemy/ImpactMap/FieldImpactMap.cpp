@@ -11,7 +11,7 @@
 #include "Maruyama/Utility/SingletonComponent/SingletonComponent.h"
 #include "FieldImpactMap.h"
 
-#include "StageMapCSV.h"
+#include "Maruyama/Load/StageMapCSV.h"
 #include "ImpactMap.h"
 
 #include "Patch/PlayerInputer.h"

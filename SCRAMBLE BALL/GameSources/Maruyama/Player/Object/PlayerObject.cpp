@@ -9,7 +9,7 @@
 
 #include "PlayerObject.h"
 
-#include "PlayerMover.h"
+#include "Patch/PlayerMover.h"
 #include "Maruyama/Utility/Component/RotationController.h"
 //#include "PlayerController.h"
 

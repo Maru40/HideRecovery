@@ -8,7 +8,6 @@
 
 #include "stdafx.h"
 #include "Project.h"
-#include "DelegateSystem.h"
 
 namespace basecross {
 

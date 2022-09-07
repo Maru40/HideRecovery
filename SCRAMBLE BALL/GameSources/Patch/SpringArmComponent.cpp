@@ -9,7 +9,7 @@
 #include "Maruyama/UI/2D/Component/FieldMap.h"
 #include "Maruyama/Player/Component/Teleport.h"
 
-#include "StageMapCSV.h"
+#include "Maruyama/Load/StageMapCSV.h"
 
 namespace basecross
 {

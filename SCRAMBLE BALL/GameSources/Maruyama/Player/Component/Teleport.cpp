@@ -31,7 +31,7 @@
 #include "Maruyama/Utility/Component/ToTargetMove.h"
 #include "Maruyama/Camera/Component/LookAtCameraManager.h"
 #include "Patch/SpringArmComponent.h"
-#include "PlayerObject.h"
+#include "Maruyama/Player/Object/PlayerObject.h"
 
 #include "Watanabe/Effekseer/EfkComponent.h"
 

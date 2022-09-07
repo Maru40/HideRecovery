@@ -8,7 +8,7 @@
 #pragma once
 #include "stdafx.h"
 
-#include "Trigger.h"
+#include "Patch/Trigger.h"
 #include "Maruyama/Interface/I_BrackBoard.h"
 
 #include "EnemyStatorBase.h"

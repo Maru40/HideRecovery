@@ -97,9 +97,6 @@
     <Filter Include="Maruyama\Utility">
       <UniqueIdentifier>{97530142-577c-4f02-9a1a-bd32584c224f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Maruyama\Utility\MyDelegate">
-      <UniqueIdentifier>{35a9d5b6-4461-47ed-aebb-618b4618df86}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Maruyama\Stage\GameStageBase">
       <UniqueIdentifier>{989c0c7b-929f-4576-babb-b2561458ce74}</UniqueIdentifier>
     </Filter>
@@ -426,9 +423,6 @@
     </Filter>
     <Filter Include="DefaultFiles">
       <UniqueIdentifier>{4a1f0453-9cf0-45c4-9256-de5f30304f85}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="DefaultFiles\Character">
-      <UniqueIdentifier>{b307591f-0cb0-4556-9270-ea0fdde975e0}</UniqueIdentifier>
     </Filter>
     <Filter Include="DefaultFiles\Scene">
       <UniqueIdentifier>{3c6f8669-8753-4024-b15a-9f5fa70f5b3f}</UniqueIdentifier>
@@ -1105,6 +1099,9 @@
     <Filter Include="Maruyama\Utility\Component\Destroy\TimerDestroy">
       <UniqueIdentifier>{fc7a94ba-4140-430a-9a49-6e4202ff6061}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Utility\Delegate">
+      <UniqueIdentifier>{35a9d5b6-4461-47ed-aebb-618b4618df86}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1116,53 +1113,14 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)ProjectBehavior.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)DelegateSystem.h">
-      <Filter>Patch\Utility\DelegateSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Trigger.h">
-      <Filter>Patch\Utility\Trigger</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)StructIOFileStream.h">
-      <Filter>Patch\Utility\StructIOFileStream</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Character.h">
-      <Filter>DefaultFiles\Character</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Scene.h">
       <Filter>DefaultFiles\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)LoadStage.h">
-      <Filter>Maruyama\Stage\LoadStage</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)MainStage.h">
       <Filter>Maruyama\Stage\MainStage</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)MyDelegate.h">
-      <Filter>Maruyama\Utility\MyDelegate</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)PlayerMover.h">
-      <Filter>Patch\PlayerMover</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)StageObjectBase.h">
-      <Filter>Maruyama\StageObject\StageObjectBase</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)VelocityManager.h">
       <Filter>Maruyama\Utility\Component\VelocityManager</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)LoadData.h">
-      <Filter>Maruyama\Utility\Load\LoadData</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)StageMapCSV.h">
-      <Filter>Maruyama\Utility\Load\StageMapCsv</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)LoadCSV.h">
-      <Filter>Maruyama\Utility\Load\LoadCSV</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)PlayerObject.h">
-      <Filter>Maruyama\Player\Object\PlayerObjectBase</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)VillainPlayerObject.h">
-      <Filter>Maruyama\Player\Object\VillainPlayerObject</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Effekseer\EfkComponent.h">
       <Filter>Watanabe\Effekseer</Filter>
@@ -1181,9 +1139,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\WatanabeStage.h">
       <Filter>Watanabe\TestStage</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)TitleStage.h">
-      <Filter>Maruyama\Stage\TitleStage</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\PlayerOnlineController.h">
       <Filter>Itabashi\Online\PlayerOnlineController</Filter>
@@ -2064,6 +2019,45 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Patch\WindowSetting.h">
       <Filter>Patch\Utility</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Patch\StructIOFileStream.h">
+      <Filter>Patch\Utility\StructIOFileStream</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Patch\Trigger.h">
+      <Filter>Patch\Utility\Trigger</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Patch\DelegateSystem.h">
+      <Filter>Patch\Utility\DelegateSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Patch\PlayerMover.h">
+      <Filter>Patch\PlayerMover</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Stage\TitleStage.h">
+      <Filter>Maruyama\Stage\TitleStage</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Delegate.h">
+      <Filter>Maruyama\Utility\Delegate</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Load\StageMapCSV.h">
+      <Filter>Maruyama\Utility\Load\StageMapCsv</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Load\LoadData.h">
+      <Filter>Maruyama\Utility\Load\LoadData</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Load\LoadCSV.h">
+      <Filter>Maruyama\Utility\Load\LoadCSV</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Stage\LoadStage.h">
+      <Filter>Maruyama\Stage\LoadStage</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\StageObject\StageObjectBase.h">
+      <Filter>Maruyama\StageObject\StageObjectBase</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Object\VillainPlayerObject.h">
+      <Filter>Maruyama\Player\Object\VillainPlayerObject</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Object\PlayerObject.h">
+      <Filter>Maruyama\Player\Object\PlayerObjectBase</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2075,41 +2069,14 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectBehavior.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Character.cpp">
-      <Filter>DefaultFiles\Character</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Scene.cpp">
       <Filter>DefaultFiles\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)LoadStage.cpp">
-      <Filter>Maruyama\Stage\LoadStage</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)MainStage.cpp">
       <Filter>Maruyama\Stage\MainStage</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)PlayerMover.cpp">
-      <Filter>Patch\PlayerMover</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)StageObjectBase.cpp">
-      <Filter>Maruyama\StageObject\StageObjectBase</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)VelocityManager.cpp">
       <Filter>Maruyama\Utility\Component\VelocityManager</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)LoadData.cpp">
-      <Filter>Maruyama\Utility\Load\LoadData</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)StageMapCSV.cpp">
-      <Filter>Maruyama\Utility\Load\StageMapCsv</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)LoadCSV.cpp">
-      <Filter>Maruyama\Utility\Load\LoadCSV</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)PlayerObject.cpp">
-      <Filter>Maruyama\Player\Object\PlayerObjectBase</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)VillainPlayerObject.cpp">
-      <Filter>Maruyama\Player\Object\VillainPlayerObject</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Effekseer\EfkComponent.cpp">
       <Filter>Watanabe\Effekseer</Filter>
@@ -2125,9 +2092,6 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\WatanabeStage.cpp">
       <Filter>Watanabe\TestStage</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)TitleStage.cpp">
-      <Filter>Maruyama\Stage\TitleStage</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\PlayerOnlineController.cpp">
       <Filter>Itabashi\Online\PlayerOnlineController</Filter>
@@ -2929,6 +2893,33 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Patch\CameraRotater.cpp">
       <Filter>Patch\basecross\CameraHelper\CameraRotate</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Patch\PlayerMover.cpp">
+      <Filter>Patch\PlayerMover</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Stage\TitleStage.cpp">
+      <Filter>Maruyama\Stage\TitleStage</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Load\StageMapCSV.cpp">
+      <Filter>Maruyama\Utility\Load\StageMapCsv</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Load\LoadData.cpp">
+      <Filter>Maruyama\Utility\Load\LoadData</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Load\LoadCSV.cpp">
+      <Filter>Maruyama\Utility\Load\LoadCSV</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Stage\LoadStage.cpp">
+      <Filter>Maruyama\Stage\LoadStage</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\StageObject\StageObjectBase.cpp">
+      <Filter>Maruyama\StageObject\StageObjectBase</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Object\VillainPlayerObject.cpp">
+      <Filter>Maruyama\Player\Object\VillainPlayerObject</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Object\PlayerObject.cpp">
+      <Filter>Maruyama\Player\Object\PlayerObjectBase</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

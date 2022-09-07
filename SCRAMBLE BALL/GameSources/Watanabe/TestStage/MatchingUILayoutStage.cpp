@@ -12,7 +12,7 @@
 #include "../UI/UIObjects.h"
 #include "../UI/GameStartUI.h"
 #include "Maruyama/Player/Component/PlayerSpawnPoint.h"
-#include "VillainPlayerObject.h"
+#include "Maruyama/Player/Object/VillainPlayerObject.h"
 #include "Watanabe/BoardPoly/PlayerLabelBP.h"
 
 namespace basecross {

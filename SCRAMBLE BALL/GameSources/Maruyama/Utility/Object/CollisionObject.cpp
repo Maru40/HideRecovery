@@ -9,7 +9,7 @@
 
 #include "CollisionObject.h"
 
-#include "StageMapCSV.h"
+#include "Maruyama/Load/StageMapCSV.h"
 #include "Maruyama/Utility/Utility.h"
 #include "Maruyama/Utility/MaruAction.h"
 

@@ -16,7 +16,7 @@
 #include "Watanabe/DebugClass/Debug.h"
 #include "Itabashi/OnlineManager.h"
 
-#include "StageMapCSV.h"
+#include "Maruyama/Load/StageMapCSV.h"
 
 namespace basecross {
 

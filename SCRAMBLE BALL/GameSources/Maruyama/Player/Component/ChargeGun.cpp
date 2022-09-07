@@ -27,7 +27,7 @@
 
 #include "Maruyama/Player/Component/Teleport.h"
 
-#include "StageMapCSV.h"
+#include "Maruyama/Load/StageMapCSV.h"
 
 namespace basecross {
 	ChargeGun::ChargeGun(const std::shared_ptr<GameObject>& objPtr) :

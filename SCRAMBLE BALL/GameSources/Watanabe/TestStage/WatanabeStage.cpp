@@ -8,7 +8,7 @@
 #include "../StageObject/RackObject.h"
 #include "../Shader/BoneModelDraw.h"
 #include "Maruyama/Player/Object/HeroPlayerObject.h"
-#include "VillainPlayerObject.h"
+#include "Maruyama/Player/Object/VillainPlayerObject.h"
 #include "Patch/CameraHelper.h"
 #include "Itabashi/PlayerOnlineController.h"
 #include "Itabashi/OnlineTransformSynchronization.h"

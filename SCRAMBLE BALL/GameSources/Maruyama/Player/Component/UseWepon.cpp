@@ -30,7 +30,7 @@
 #include "Maruyama/Player/Component/Teleport.h"
 #include "Patch/SpringArmComponent.h"
 
-#include "StageMapCSV.h"
+#include "Maruyama/Load/StageMapCSV.h"
 
 namespace basecross {
 

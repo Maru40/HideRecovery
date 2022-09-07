@@ -10,8 +10,7 @@
 
 #include "GeneratorBase.h"
 #include "Maruyama/Utility/Random.h"
-
-#include "StageMapCSV.h"
+#include "Maruyama/Load/StageMapCSV.h"
 
 namespace basecross {
 

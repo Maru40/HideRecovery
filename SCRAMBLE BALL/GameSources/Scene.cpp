@@ -7,9 +7,9 @@
 #include "Project.h"
 
 #include "MainStage.h"
-#include "LoadStage.h"
+#include "Maruyama/Stage/LoadStage.h"
 #include "Watanabe/Stage/ResultStage.h"
-#include "TitleStage.h"
+#include "Watanabe/Stage/TitleStage.h"
 //#include "StageSelect.h"
 #include "Watanabe/TestStage/WatanabeStage.h"
 #include "Watanabe/TestStage/MatchingUILayoutStage.h"

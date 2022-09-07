@@ -9,7 +9,7 @@
 
 #include "LoadData.h"
 
-#include "StageObjectBase.h"
+#include "Maruyama/StageObject/StageObjectBase.h"
 
 #include "Maruyama/StageObject/OriginalMeshStageObject.h"
 #include "Maruyama/StageObject/OriginalMeshToonObject.h"
