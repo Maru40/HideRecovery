@@ -13,7 +13,7 @@
 #include "Patch/SpringArmComponent.h"
 #include "Patch/CameraHelper.h"
 #include "Maruyama/Camera/Component/LookAtCameraManager.h"
-#include "Maruyama/Player/Component/UseWepon.h"
+#include "Maruyama/Player/Component/UseWeapon.h"
 #include "MainStage.h"
 #include "Watanabe/UI/UIObjects.h"
 #include "Watanabe/BoardPoly/HPGaugeBP.h"
@@ -116,7 +116,7 @@ namespace basecross
 		teleport->SetTeleportCamera(camera);
 		teleport->SetToTargetMove(toTargetMove);
 
-		auto useWeapon = playerObject->GetComponent<UseWepon>();
+		auto useWeapon = playerObject->GetComponent<UseWeapon>();
 		useWeapon->SetIsUseCamera(true);
 
 		// 自身のHPゲージにステータスコンポーネントをセット

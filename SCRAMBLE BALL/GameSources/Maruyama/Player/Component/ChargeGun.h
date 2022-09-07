@@ -15,7 +15,7 @@ namespace basecross {
 	///	前方宣言
 	//--------------------------------------------------------------------------------------
 	class ChargeBulletObject;
-	class UseWepon;
+	class UseWeapon;
 	class GameTimer;
 
 	//--------------------------------------------------------------------------------------
@@ -23,7 +23,7 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 	class ChargeGun : public WeponBase
 	{
-		std::weak_ptr<UseWepon> m_useWepon;
+		std::weak_ptr<UseWeapon> m_useWepon;
 		std::weak_ptr<SoundEmitter> m_soundEmitter;
 
 		std::unique_ptr<GameTimer> m_timer;

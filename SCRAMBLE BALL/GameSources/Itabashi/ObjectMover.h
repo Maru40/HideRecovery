@@ -4,7 +4,7 @@
 namespace basecross
 {
 	class VelocityManager;
-	class UseWepon;
+	class UseWeapon;
 
 namespace Operator
 {
@@ -13,7 +13,7 @@ namespace Operator
 		std::weak_ptr<Transform> m_transform;
 		std::weak_ptr<Camera> m_camera;
 		std::weak_ptr<VelocityManager> m_velocityManager;
-		std::weak_ptr<UseWepon> m_useWepon;
+		std::weak_ptr<UseWeapon> m_useWepon;
 
 		bool m_isCameraAffected = true;
 		bool m_isAim = false;

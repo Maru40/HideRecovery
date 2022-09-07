@@ -137,7 +137,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\UseOwnArea.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineMatching.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineMatchStage.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\UseWepon.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\UseWeapon.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\WeponBase.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Object\HeroPlayerObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Object\PlayerObject.h" />
@@ -453,7 +453,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\Task_GoalAnimation.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\Teleport.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\UseOwnArea.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\UseWepon.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\UseWeapon.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\WeponBase.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Object\HeroPlayerObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Object\PlayerObject.cpp" />

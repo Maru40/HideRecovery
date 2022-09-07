@@ -16,7 +16,7 @@
 #include "Maruyama/Bullet/Component/ChargeBullet.h"
 #include <random>
 
-#include "Maruyama/Player/Component/UseWepon.h"
+#include "Maruyama/Player/Component/UseWeapon.h"
 #include "Maruyama/Player/Component/Teleport.h"
 #include "Maruyama/Player/Component/AccessHidePlace.h"
 #include "Maruyama/Player/Component/Teleport.h"
@@ -686,7 +686,7 @@ namespace Online
 		m_playerStatus = owner->GetComponent<PlayerStatus>();
 
 		m_tackleAttack = owner->GetComponent<TackleAttack>();
-		m_useWepon = owner->GetComponent<UseWepon>();
+		m_useWepon = owner->GetComponent<UseWeapon>();
 
 		m_teleport = owner->GetComponent<Teleport>(false);
 	}

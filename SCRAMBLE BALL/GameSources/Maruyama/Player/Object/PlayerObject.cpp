@@ -42,7 +42,7 @@
 
 #include "Maruyama/Player/Component/Respawner.h"
 #include "Maruyama/Player/Component/PlayerDeader.h"
-#include "Maruyama/Player/Component/UseWepon.h"
+#include "Maruyama/Player/Component/UseWeapon.h"
 #include "Maruyama/Player/Component/GoalAnimationController.h"
 #include "Maruyama/Player/Component/Teleport.h"
 #include "Maruyama/UI/2D/Component/FieldMap.h"
@@ -107,7 +107,7 @@ namespace basecross {
 
 		AddComponent<Respawner>();
 		AddComponent<PlayerDeader>();
-		auto useWeapon = AddComponent<UseWepon>(chargeGun);
+		auto useWeapon = AddComponent<UseWeapon>(chargeGun);
 		AddComponent<GoalAnimationController>();
 		//AddComponent<FieldMap>();
 		//AddComponent<Teleport>();
