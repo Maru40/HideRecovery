@@ -121,6 +121,10 @@ namespace basecross {
 	}
 
 	void Respawner::StartRespawn() {
+		if (!m_timer->IsTimeUp()) {
+			return;
+		}
+
 		m_timer->ResetTimer(m_param.time);
 	}
 

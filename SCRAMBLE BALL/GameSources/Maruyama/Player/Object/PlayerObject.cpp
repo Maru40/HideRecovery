@@ -106,7 +106,7 @@ namespace basecross {
 		auto playerStatus = AddComponent<PlayerStatus>();
 		AddComponent<TackleAttack>();
 
-		AddComponent<Respawner>();
+		auto respawner = AddComponent<Respawner>();
 		AddComponent<PlayerDeader>();
 		auto useWeapon = AddComponent<UseWeapon>(chargeGun);
 		AddComponent<GoalAnimationController>();
@@ -116,6 +116,9 @@ namespace basecross {
 		//AddComponent<AccessHidePlace>();
 
 		AddComponent<Teleport>();	//テレポートの生成
+		auto heightDestory = AddComponent<HeightDestroy>();
+		std::weak_ptr<Respawner> weakRespawner = respawner;
+		heightDestory->AddDestroyAction([weakRespawner]() { weakRespawner.lock()->StartRespawn(); });
 
 		// エフェクトの設定
 		auto efkComp = AddComponent<EfkComponent>();
