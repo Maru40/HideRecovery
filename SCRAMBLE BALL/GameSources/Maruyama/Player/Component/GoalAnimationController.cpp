@@ -244,4 +244,8 @@ namespace basecross {
 
 		return animator->IsCurretAnimationState(PlayerAnimationState::State::Goal1);
 	}
+
+	void GoalAnimationController::ForceReset() {
+		m_taskList->ForceStop();
+	}
 }

@@ -136,5 +136,10 @@ namespace basecross {
 		/// ゴールアニメーション再生中
 		/// </summary>
 		bool IsGoalAnimation() const;
+
+		/// <summary>
+		/// 強制リセット
+		/// </summary>
+		void ForceReset();
 	};
 }

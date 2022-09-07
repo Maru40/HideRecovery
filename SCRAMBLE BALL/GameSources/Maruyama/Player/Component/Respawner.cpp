@@ -20,6 +20,7 @@
 #include "Maruyama/Player/Component/UseWepon.h"
 
 #include "Maruyama/Utility/Utility.h"
+#include "Maruyama/Player/Component/GoalAnimationController.h"
 #include "Itabashi/OnlineTransformSynchronization.h"
 
 #include "Patch/SpringArmComponent.h"
@@ -60,6 +61,10 @@ namespace basecross {
 	void Respawner::Respawn() {
 		transform->SetPosition(GetSpawnPoint()->GetWorldPosition());
 		transform->SetQuaternion(GetSpawnPoint()->GetQuaternion());
+
+		if (auto goalAnimationController = GetGameObject()->GetComponent<GoalAnimationController>(false)) {
+			goalAnimationController->ForceReset();
+		}
 
 		if (auto status = GetGameObject()->GetComponent<PlayerStatus>(false)) {
 			status->Respawn();
