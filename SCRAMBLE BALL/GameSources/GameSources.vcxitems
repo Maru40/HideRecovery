@@ -15,6 +15,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)GameStageBase.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)HeightDestroy.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\GamePlayerManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\Item.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MainStageTransitioner.h" />
@@ -334,6 +335,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)GameStageBase.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)HeightDestory.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\GamePlayerManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\Item.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\MainStageTransitioner.cpp" />
