@@ -6,8 +6,8 @@
 #include "../Effekseer/EfkEffect.h"
 #include "Itabashi/OnlineMatching.h"
 #include "TestComponent.h"
-#include "InputHelper.h"
-#include "PlayerInputer.h"
+#include "Patch/InputHelper.h"
+#include "Patch/PlayerInputer.h"
 
 namespace basecross {
 	MatchingSyncPlayerObject::MatchingSyncPlayerObject(const shared_ptr<GameObject>& owner,

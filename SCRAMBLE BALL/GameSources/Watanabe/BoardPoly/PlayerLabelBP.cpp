@@ -1,7 +1,7 @@
 ﻿#include "stdafx.h"
 #include "PlayerLabelBP.h"
 #include "../Utility/Utility.h"
-#include "BillBoard.h"
+#include "Maruyama/Utility/Component/BillBoard.h"
 #include "Maruyama/Interface/I_TeamMember.h"
 
 namespace basecross {

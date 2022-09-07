@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include "stdafx.h"
-#include "StageObjectBase.h"
+#include "Maruyama/StageObject/StageObjectBase.h"
 
 namespace basecross {
 	class GoalBP :public StageObjectBase {

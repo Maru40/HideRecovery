@@ -9,17 +9,17 @@
 
 #include "Goal.h"
 
-#include "ItemBag.h"
+#include "Maruyama/Player/Component/ItemBag.h"
 #include "Maruyama/Interface/I_TeamMember.h"
 
-#include "HideItem.h"
+#include "Maruyama/Item/HideItem.h"
 #include "Itabashi/Item.h"
 
 #include "Watanabe/DebugClass/Debug.h"
 
-#include "MaruUtility.h"
+#include "Maruyama/Utility/Utility.h"
 #include "HidePlace.h"
-#include "MyRandom.h"
+#include "Maruyama/Utility/Random.h"
 
 #include "Itabashi/ObjectHider.h"
 #include "Itabashi/OnlineManager.h"
@@ -31,9 +31,9 @@
 #include "Watanabe/StageObject/FireworksObject.h"
 #include "Watanabe/Component/BallAnimator.h"
 
-#include "GameTimer.h"
+#include "Maruyama/Utility/Timer/GameTimer.h"
 
-#include "TackleAttack.h"
+#include "Maruyama/Player/Component/TackleAttack.h"
 #include "Maruyama/Player/Component/GoalAnimationController.h"
 #include "Maruyama/Interface/I_TeamMember.h"
 #include "Watanabe/UI/SplashMessageUI.h"
@@ -45,7 +45,7 @@
 #include "Watanabe/Manager/TimeManager.h"
 #include "Watanabe/Manager/ScoreManager.h"
 
-#include "PlayerInputer.h"
+#include "Patch/PlayerInputer.h"
 #include "MainStage.h"
 
 namespace basecross {

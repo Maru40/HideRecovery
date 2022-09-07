@@ -11,18 +11,18 @@
 
 #include "PlayerSpawnPoint.h"
 
-#include "TimeHelper.h"
-#include "GameTimer.h"
+#include "Maruyama/Utility/Timer/TimeHelper.h"
+#include "Maruyama/Utility/Timer/GameTimer.h"
 
 #include "Watanabe/Component/PlayerStatus.h"
 #include "Watanabe/Component/PlayerAnimator.h"
 #include "Watanabe/Effekseer/EfkEffect.h"
 #include "Maruyama/Player/Component/UseWepon.h"
 
-#include "MaruUtility.h"
+#include "Maruyama/Utility/Utility.h"
 #include "Itabashi/OnlineTransformSynchronization.h"
 
-#include "SpringArmComponent.h"
+#include "Patch/SpringArmComponent.h"
 
 namespace basecross {
 	//--------------------------------------------------------------------------------------

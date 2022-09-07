@@ -9,24 +9,24 @@
 
 #include "GoalAnimationController.h"
 
-#include "TaskList.h"
+#include "Maruyama/TaskList/TaskList.h"
 
-#include "TimeHelper.h"
-#include "GameTimer.h"
-#include "Task_Wait.h"
+#include "Maruyama/Utility/Timer/TimeHelper.h"
+#include "Maruyama/Utility/Timer/GameTimer.h"
+#include "Maruyama/TaskList/CommonTasks/Task_Wait.h"
 
-#include "Task_ToTargetMove.h"
+#include "Maruyama/TaskList/CommonTasks/Task_ToTargetMove.h"
 
 #include "Task_GoalAnimation.h"
 
 #include "Watanabe/Component/PlayerAnimator.h"
 
 #include "VelocityManager.h"
-#include "RotationController.h"
+#include "Maruyama/Utility/Component/RotationController.h"
 #include "Watanabe/Component/BallAnimator.h"
 
-#include "HideItemObject.h"
-#include "PlayerInputer.h"
+#include "Maruyama/Item/HideItemObject.h"
+#include "Patch/PlayerInputer.h"
 #include "Maruyama/StageObject/Goal.h"
 #include "MainStage.h"
 #include "Watanabe/UI/UIObjects.h"

@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include "stdafx.h"
-#include "StageObjectBase.h"
+#include "Maruyama/StageObject/StageObjectBase.h"
 #include "../Component/PlayerStatus.h"
 #include "../Shader/PCTGaugeDraw.h"
 

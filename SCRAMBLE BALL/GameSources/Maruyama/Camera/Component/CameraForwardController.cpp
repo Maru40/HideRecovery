@@ -8,7 +8,7 @@
 
 #include "CameraForwardController.h"
 
-#include "CameraHelper.h"
+#include "Patch/CameraHelper.h"
 
 namespace basecross {
 

@@ -2,7 +2,7 @@
 #include "stdafx.h"
 #include "Itabashi/OnlineManager.h"
 #include "../StageObject/PlayerSpawnPointObject.h"
-#include "StageObjectBase.h"
+#include "Maruyama/StageObject/StageObjectBase.h"
 
 namespace basecross {
 	class MatchingSyncPlayerObject :public Online::OnlineComponent {

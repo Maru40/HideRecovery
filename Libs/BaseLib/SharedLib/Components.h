@@ -5,7 +5,7 @@
 */
 #pragma once
 #include "stdafx.h"
-#include "ex_weak_ptr.h"
+#include "Patch/ex_weak_ptr.h"
 
 namespace basecross {
 

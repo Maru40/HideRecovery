@@ -6,13 +6,13 @@
 #include "stdafx.h"
 #include "PlayerStatus.h"
 
-#include "PlayerInputer.h"
+#include "Patch/PlayerInputer.h"
 
-#include "PlayerObject.h"
+#include "Maruyama/Player/Object/PlayerObject.h"
 #include "Maruyama/Player/Component/PlayerDeader.h"
 
-#include "ItemBag.h"
-#include "HideItem.h"
+#include "Maruyama/Player/Component/ItemBag.h"
+#include "Maruyama/Item/HideItem.h"
 
 #include "Watanabe/Manager/ScoreManager.h"
 

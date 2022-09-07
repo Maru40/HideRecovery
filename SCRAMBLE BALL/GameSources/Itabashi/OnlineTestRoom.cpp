@@ -1,7 +1,7 @@
 ﻿#include "stdafx.h"
 #include "OnlineTestRoom.h"
 #include "OnlineManager.h"
-#include "PlayerObject.h"
+#include "Maruyama/Player/Object/PlayerObject.h"
 
 namespace basecross
 {

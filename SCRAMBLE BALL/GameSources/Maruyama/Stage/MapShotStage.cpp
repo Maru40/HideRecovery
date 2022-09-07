@@ -1,7 +1,7 @@
 #include "stdafx.h"
 
 #include "MapShotStage.h"
-#include "PlayerInputer.h"
+#include "Patch/PlayerInputer.h"
 #include "Scene.h"
 
 #include "Watanabe/DebugClass/Debug.h"
@@ -9,8 +9,7 @@
 #include "Watanabe/Component/Zooming.h"
 #include "Watanabe/Camera/TitleCamera.h"
 
-#include "PlayerInputer.h"
-#include "MaruUtility.h"
+#include "Maruyama/Utility/Utility.h"
 
 #include "Maruyama/Player/Component/OwnArea.h"
 

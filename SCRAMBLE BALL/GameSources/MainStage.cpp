@@ -7,55 +7,21 @@
 #include "Project.h"
 
 #include "MainStage.h"
-#include "PlayerInputer.h"
+#include "Patch/PlayerInputer.h"
 
-#include "EnemyObjectBase.h"
-#include "WallObject.h"
+#include "Maruyama/Utility/SingletonComponent/SoundManager.h"
 
-#include "DebugObject.h"
+#include "Maruyama/Utility/Mathf.h"
 
-#include "OriginalMeshStageObject.h"
+#include "Patch/CameraHelper.h"
 
-#include "ArrowObject.h"
+#include "Maruyama/Item/HideItemObject.h"
 
-#include "ParticleManager.h"
-
-#include "SoundManager.h"
-
-#include "Mathf.h"
-
-#include "EnemyObjectBase.h"
-
-#include "EffectBase.h"
-
-#include "BoardObject.h"
-#include "BillBoard_Ex.h"
-
-#include "AuraObjectBase.h"
-#include "AuraBase.h"
-
-#include "EffectManager.h"
-
-#include "EnemyBase.h"
-
-#include "TaskList.h"
-
-#include "EnemyGeneratorObject.h"
-
-#include "DebugNumber.h"
-#include "NumbersObject.h"
-#include "NumbersCtrl.h"
-
-#include "CameraHelper.h"
-
-#include "HideItemObject.h"
-
-#include "HeroPlayerObject.h"
-#include "VillainPlayerObject.h"
+#include "Maruyama/Player/Object/VillainPlayerObject.h"
 #include "Watanabe/DebugClass/Debug.h"
 #include "Watanabe/Effekseer/EfkEffect.h"
 
-#include "GameManagerObject.h"
+#include "Maruyama/Utility/SingletonComponent/GameManager.h"
 #include "Itabashi/GamePlayerManager.h"
 #include "Itabashi/MainStageTransitioner.h"
 #include "Itabashi/OnlineGameTimer.h"
@@ -66,14 +32,13 @@
 #include "Watanabe/UI/SplashMessageUI.h"
 #include "Watanabe/UI/UIObjectCSVBuilder.h"
 
-#include "HidePlace.h"
-#include "Maruyama/UI/Reticle.h"
-#include "TeleportUI.h"
+#include "Maruyama/StageObject/HidePlace.h"
+#include "Maruyama/UI/2D/Component/Reticle.h"
+#include "Maruyama/UI/2D/Component/TeleportUI.h"
 
-#include "GameManager.h"
+#include "Maruyama/Utility/SingletonComponent/GameManager.h"
+#include "Maruyama/Utility/Object/GameManagerObject.h"
 #include "Maruyama/Interface/I_TeamMember.h"
-
-using namespace basecross::Enemy;
 
 namespace basecross {
 	// wstring MainStage::sm_loadMapName = L"StageS1_Copy.csv";

@@ -12,39 +12,41 @@
 
 #include "Watanabe/Component/PlayerAnimator.h"
 
-#include "SingletonComponent.h"
-#include "ScreenFadeManager.h"
-#include "FadeSprite.h"
+#include "Maruyama/Utility/SingletonComponent/SingletonComponent.h"
+#include "Maruyama/Utility/SingletonComponent/ScreenFadeManager.h"
+#include "Maruyama/Utility/Component/FadeSprite.h"
 
-#include "FieldMap.h"
+#include "Maruyama/UI/2D/Component/FieldMap.h"
 
 #include "Watanabe/DebugClass/Debug.h"
-#include "PlayerInputer.h"
-#include "SpriteObject.h"
-#include "MapCursor.h"
+#include "Patch/PlayerInputer.h"
+#include "Maruyama/UI/2D/Object/SpriteObject.h"
+#include "Maruyama/UI/2D/Component/MapCursor.h"
 
-#include "TimeHelper.h"
-#include "GameTimer.h"
+#include "Maruyama/Utility/Timer/TimeHelper.h"
+#include "Maruyama/Utility/Timer/GameTimer.h"
 
-#include "CameraHelper.h"
+#include "Patch/CameraHelper.h"
 #include "Maruyama/Camera/Component/CameraForwardController.h"
-#include "ToTargetMove.h"
-#include "LookAtCameraManager.h"
-#include "SpringArmComponent.h"
-#include "PlayerObject.h"
+#include "Maruyama/Utility/Component/ToTargetMove.h"
+#include "Maruyama/Camera/Component/LookAtCameraManager.h"
+#include "Patch/SpringArmComponent.h"
+#include "Maruyama/Player/Object/PlayerObject.h"
 
 #include "Watanabe/Effekseer/EfkComponent.h"
 
 #include "Maruyama/Interface/I_TeamMember.h"
-#include "TeleportUI.h"
+#include "Maruyama/Player/Component/Teleport.h"
 
 #include "Watanabe/DebugClass/Debug.h"
 #include "OwnArea.h"
-#include "GameManager.h"
+#include "Maruyama/Utility/SingletonComponent/GameManager.h"
 
-#include "UtilityObstacle.h"
+#include "Maruyama/Utility/Utility.h"
+#include "Maruyama/Utility/UtilityObstacle.h"
+#include "Maruyama/UI/2D/Component/TeleportUI.h"
 
-#include "MaruHitHelper.h"
+#include "Maruyama/Utility/MaruHitHelper.h"
 
 namespace basecross {
 

@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include "stdafx.h"
-#include "StageObjectBase.h"
+#include "Maruyama/StageObject/StageObjectBase.h"
 #include "../Manager/SpriteDataManager.h"
 
 namespace basecross {

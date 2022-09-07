@@ -1,9 +1,9 @@
 ﻿#pragma once
-#include "PlayerObject.h"
+#include "Maruyama/Player/Object/PlayerObject.h"
 #include "PlayerOnlineController.h"
-#include "CameraHelper.h"
-#include "SpringArmComponent.h"
-#include "LookAtCameraManager.h"
+#include "Patch/CameraHelper.h"
+#include "Patch/SpringArmComponent.h"
+#include "Maruyama/Camera/Component/LookAtCameraManager.h"
 
 namespace basecross
 {

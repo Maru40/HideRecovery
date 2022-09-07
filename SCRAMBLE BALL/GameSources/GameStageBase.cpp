@@ -7,39 +7,37 @@
 #include "Project.h"
 
 #include "GameStageBase.h"
-#include "PlayerInputer.h"
+#include "Patch/PlayerInputer.h"
 
-#include "PlayerObject.h"
-#include "VillainPlayerObject.h"
-#include "HeroPlayerObject.h"
-#include "GameManagerObject.h"
-#include "SlowTimerManager.h"
+#include "Maruyama/Player/Object/PlayerObject.h"
+#include "Maruyama/Player/Object/VillainPlayerObject.h"
+#include "Maruyama/Player/Object/HeroPlayerObject.h"
+#include "Maruyama/Utility/SingletonComponent/GameManager.h"
+#include "Maruyama/Utility/SingletonComponent/SlowTimerManager.h"
 
-#include "MainCamera.h"
-#include "MainCameraObject.h"
-#include "StartCamera.h"
+#include "Maruyama/Camera/MainCamera.h"
+#include "Maruyama/Camera/MainCameraObject.h"
+#include "Maruyama/Camera/StartCamera.h"
 
-#include "StageMapCSV.h"
-#include "WallObject.h"
-#include "OriginalMeshStageObject.h"
-#include "FixedBox.h"
+#include "Maruyama/Load/StageMapCSV.h"
+#include "Maruyama/StageObject/OriginalMeshStageObject.h"
 
-#include "SingletonComponent.h"
-#include "ImpactMap.h"
+#include "Maruyama/Utility/SingletonComponent/SingletonComponent.h"
+#include "Maruyama/Enemy/ImpactMap/ImpactMap.h"
 
-#include "UtilityStartCamera.h"
+#include "Maruyama/Camera/UtilityStartCamera.h"
 
-#include "EnemyObjectBase.h"
+#include "Maruyama/Enemy/Object/EnemyObjectBase.h"
 
-#include "OriginalMeshToonObject.h"
-#include "ToonPNTStaticModelDraw.h"
+#include "Maruyama/StageObject/OriginalMeshToonObject.h"
+#include "Maruyama/Shader/Toon/ToonPNTStaticModelDraw.h"
 
-#include "FieldImpactMap.h"
+#include "Maruyama/Enemy/ImpactMap/FieldImpactMap.h"
 
-#include "ItemAcquisitionManager.h"
+#include "Maruyama/Player/Component/ItemAcquisitionManager.h"
 
-#include "HidePlace.h"
-#include "HideItemObject.h"
+#include "Maruyama/StageObject/HidePlace.h"
+#include "Maruyama/Item/HideItemObject.h"
 
 #include "Watanabe/StageObject/StageObjects.h"
 #include "Watanabe/UI/UIObjects.h"

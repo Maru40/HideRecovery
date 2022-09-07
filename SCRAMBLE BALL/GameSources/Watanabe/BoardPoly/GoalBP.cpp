@@ -1,6 +1,6 @@
 ﻿#include "stdafx.h"
 #include "GoalBP.h"
-#include "BillBoard.h"
+#include "Maruyama/Utility/Component/BillBoard.h"
 #include "../Manager/SpriteDataManager.h"
 #include "../Utility/Utility.h"
 #include "../DebugClass/Debug.h"

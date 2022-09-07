@@ -97,9 +97,6 @@
     <Filter Include="Maruyama\Utility">
       <UniqueIdentifier>{97530142-577c-4f02-9a1a-bd32584c224f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Maruyama\Utility\MyDelegate">
-      <UniqueIdentifier>{35a9d5b6-4461-47ed-aebb-618b4618df86}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Maruyama\Stage\GameStageBase">
       <UniqueIdentifier>{989c0c7b-929f-4576-babb-b2561458ce74}</UniqueIdentifier>
     </Filter>
@@ -168,9 +165,6 @@
     </Filter>
     <Filter Include="Maruyama\Utility\MaruUtility\Mathf">
       <UniqueIdentifier>{88ce11ec-adec-4bcf-b05d-34544cb332f2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Maruyama\Utility\MaruUtility\MyRandom">
-      <UniqueIdentifier>{2f8b6b50-8043-4367-9121-8cf56ec35fb7}</UniqueIdentifier>
     </Filter>
     <Filter Include="Maruyama\Utility\MaruUtility\Objstacle">
       <UniqueIdentifier>{82d29b23-3296-4053-bb09-d56714f41e1f}</UniqueIdentifier>
@@ -259,12 +253,6 @@
     <Filter Include="Maruyama\Utility\TaskList\CommonTasks\Camera">
       <UniqueIdentifier>{1eae3a96-e70d-42dc-bcf4-8bee0ed14531}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Maruyama\Utility\TaskList\CommonTasks\Camera\Task_CameraAtMove">
-      <UniqueIdentifier>{53e99a4b-0182-437d-82ba-782f76b0baaf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Maruyama\Utility\TaskList\CommonTasks\Task_ToTargetMove">
-      <UniqueIdentifier>{aafb0a04-f6db-4343-9b90-34ee636b8def}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Maruyama\Utility\MaruUtility\Singleton">
       <UniqueIdentifier>{442ee39c-8b24-43aa-9710-7b6bc8523e84}</UniqueIdentifier>
     </Filter>
@@ -294,9 +282,6 @@
     </Filter>
     <Filter Include="Maruyama\Enemy\Component\Base\Stator">
       <UniqueIdentifier>{e75a6404-d504-44e7-b1b1-b4b1016061a0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Maruyama\Camera\Seek\SeekTarget\OffsetsManager">
-      <UniqueIdentifier>{1e57a21b-210c-43a3-8723-c6520c7a2c8b}</UniqueIdentifier>
     </Filter>
     <Filter Include="Maruyama\Enemy\Component\Base\Skill">
       <UniqueIdentifier>{03df0e4c-0f45-42b6-a059-53e6243f3f31}</UniqueIdentifier>
@@ -367,9 +352,6 @@
     <Filter Include="Maruyama\EffectManager">
       <UniqueIdentifier>{e0e2bdb5-108a-4a69-9c00-f46dcd5f3568}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Maruyama\Utility\ScaleParent">
-      <UniqueIdentifier>{1914b50a-1e10-4a8f-bb0a-9c3359255a9e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Maruyama\Utility\Component\AutoReflection">
       <UniqueIdentifier>{d70a3575-5a77-4dbf-93ff-245cac979ce1}</UniqueIdentifier>
     </Filter>
@@ -400,9 +382,6 @@
     <Filter Include="Maruyama\Utility\Component\CameraRayAlphaManager">
       <UniqueIdentifier>{d49fa8b9-0f60-4d52-a2e7-d85f6e8d4ce8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Maruyama\Utility\Component\RangeDestroyManager">
-      <UniqueIdentifier>{49e934c7-cdde-4852-ad9b-5e32b5dc7c45}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Maruyama\Utility\DebugOjbect\DebugNumber">
       <UniqueIdentifier>{934379cf-b76b-40b4-8fdc-a9b236e80c95}</UniqueIdentifier>
     </Filter>
@@ -430,38 +409,11 @@
     <Filter Include="Maruyama\Utility\Component\TargetManager\ToTargetMove">
       <UniqueIdentifier>{9b57c3c6-c70d-420b-a7bb-02f8794bab17}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Maruyama\Utility\DebugOjbect\DebugNumber\Object">
-      <UniqueIdentifier>{e859ed25-7461-4faf-bb8d-c0629c8825b9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Patch\Inputer">
       <UniqueIdentifier>{78650b2c-6e8b-4bbb-ad1e-962334dc6f80}</UniqueIdentifier>
     </Filter>
     <Filter Include="Patch\PlayerMover">
       <UniqueIdentifier>{723a541d-21f6-4603-b20e-fda6093bf9d4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Maruyama\Enemy\Component\CommonTask">
-      <UniqueIdentifier>{ec802e63-b569-43d1-8bf4-5c1367dcbc34}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Maruyama\Enemy\Component\CommonTask\AroundEyeCheck">
-      <UniqueIdentifier>{b5dcb2c1-1fd1-4d71-8c92-5bf8c084cdc0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Maruyama\Enemy\Component\CommonTask\MovePositoins">
-      <UniqueIdentifier>{4c9b593c-7455-45a1-844f-ad2b9db1743c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Maruyama\Enemy\Component\CommonTask\PlowlingMove">
-      <UniqueIdentifier>{132473b4-14e3-4173-977e-a89ee0bf11af}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Maruyama\Enemy\Component\CommonTask\Flee">
-      <UniqueIdentifier>{bcb6a9c8-e51b-4770-a041-f2b78663b943}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Maruyama\Enemy\Component\CommonTask\AstarEvade">
-      <UniqueIdentifier>{9eae34f5-1cbe-4487-b7e8-ca2c98fec293}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Maruyama\Enemy\Component\CommonTask\AstarMove">
-      <UniqueIdentifier>{30aa4d4a-5f1c-4aae-bd5a-efe6433b4c37}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Maruyama\Enemy\Component\CommonTask\Wait">
-      <UniqueIdentifier>{af501d51-4324-4f56-adac-81a329a2dbce}</UniqueIdentifier>
     </Filter>
     <Filter Include="Maruyama\Enemy\Component\Targeted">
       <UniqueIdentifier>{3e5f6fb8-5c7f-49eb-a673-a05916aefe82}</UniqueIdentifier>
@@ -471,9 +423,6 @@
     </Filter>
     <Filter Include="DefaultFiles">
       <UniqueIdentifier>{4a1f0453-9cf0-45c4-9256-de5f30304f85}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="DefaultFiles\Character">
-      <UniqueIdentifier>{b307591f-0cb0-4556-9270-ea0fdde975e0}</UniqueIdentifier>
     </Filter>
     <Filter Include="DefaultFiles\Scene">
       <UniqueIdentifier>{3c6f8669-8753-4024-b15a-9f5fa70f5b3f}</UniqueIdentifier>
@@ -1096,7 +1045,6 @@
     <Filter Include="Maruyama\Stage\MapShotStage">
       <UniqueIdentifier>{293ff4ca-28fb-49bc-b492-f950c275cb6c}</UniqueIdentifier>
     </Filter>
-
     <Filter Include="Watanabe\UI\HoldButtonUI">
       <UniqueIdentifier>{66789215-53a5-45b3-a5ec-a3c355baec12}</UniqueIdentifier>
     </Filter>
@@ -1105,10 +1053,54 @@
     </Filter>
     <Filter Include="Watanabe\BoardPoly\PlayerLabelBP">
       <UniqueIdentifier>{7da0a3a2-a08d-436b-9bf9-b000fb423b93}</UniqueIdentifier>
-	</Filter>
+    </Filter>
     <Filter Include="Maruyama\Player\Component\ItemAcquisitionManager\BoardUI">
       <UniqueIdentifier>{1b5db4ab-f4c6-48a3-bed4-8e0ab3884316}</UniqueIdentifier>
-
+    </Filter>
+    <Filter Include="Maruyama\Utility\TaskList\CommonTasks\Wait">
+      <UniqueIdentifier>{af501d51-4324-4f56-adac-81a329a2dbce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Utility\TaskList\CommonTasks\AroundEyeCheck">
+      <UniqueIdentifier>{b5dcb2c1-1fd1-4d71-8c92-5bf8c084cdc0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Utility\TaskList\CommonTasks\AstarEvade">
+      <UniqueIdentifier>{9eae34f5-1cbe-4487-b7e8-ca2c98fec293}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Utility\TaskList\CommonTasks\AstarMove">
+      <UniqueIdentifier>{30aa4d4a-5f1c-4aae-bd5a-efe6433b4c37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Utility\TaskList\CommonTasks\Flee">
+      <UniqueIdentifier>{bcb6a9c8-e51b-4770-a041-f2b78663b943}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Utility\TaskList\CommonTasks\MovePositoins">
+      <UniqueIdentifier>{4c9b593c-7455-45a1-844f-ad2b9db1743c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Utility\TaskList\CommonTasks\PlowlingMove">
+      <UniqueIdentifier>{132473b4-14e3-4173-977e-a89ee0bf11af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Utility\TaskList\CommonTasks\Camera\CameraAtMove">
+      <UniqueIdentifier>{53e99a4b-0182-437d-82ba-782f76b0baaf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Utility\TaskList\CommonTasks\ToTargetMove">
+      <UniqueIdentifier>{aafb0a04-f6db-4343-9b90-34ee636b8def}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Utility\MaruUtility\Random">
+      <UniqueIdentifier>{2f8b6b50-8043-4367-9121-8cf56ec35fb7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Utility\DebugOjbect\DebugNumber\NumberObject">
+      <UniqueIdentifier>{e859ed25-7461-4faf-bb8d-c0629c8825b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Utility\Component\ScaleParent">
+      <UniqueIdentifier>{1914b50a-1e10-4a8f-bb0a-9c3359255a9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Utility\Component\Destroy\RangeDestroyManager">
+      <UniqueIdentifier>{49e934c7-cdde-4852-ad9b-5e32b5dc7c45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Utility\Component\Destroy\TimerDestroy">
+      <UniqueIdentifier>{fc7a94ba-4140-430a-9a49-6e4202ff6061}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Utility\Delegate">
+      <UniqueIdentifier>{35a9d5b6-4461-47ed-aebb-618b4618df86}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1121,551 +1113,14 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)ProjectBehavior.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)InputHelper.h">
-      <Filter>Patch\Input\InputHelper</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)ex_weak_ptr.h">
-      <Filter>Patch\Utility\ex_weak_ptr</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)DelegateSystem.h">
-      <Filter>Patch\Utility\DelegateSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)ActionTimer.h">
-      <Filter>Patch\Utility\ActionTimer</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)AnimationHelper.h">
-      <Filter>Patch\basecross\AnimationHelper</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)BezierTransitioner.h">
-      <Filter>Patch\basecross\BezierTransitioner</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)CameraHelper.h">
-      <Filter>Patch\basecross\CameraHelper</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)FontHelper.h">
-      <Filter>Patch\basecross\FontHelper</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)MessageWindow.h">
-      <Filter>Patch\basecross\MessageWindow</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)UIHelper.h">
-      <Filter>Patch\basecross\UIHelper</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)SoundHelper.h">
-      <Filter>Patch\basecross\SoundHelper</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)SaveHelper.h">
-      <Filter>Patch\basecross\SaveHelper</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Bezier.h">
-      <Filter>Patch\Mathf\Bezier</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Trigger.h">
-      <Filter>Patch\Utility\Trigger</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)BasecrossInputer.h">
-      <Filter>Patch\Input\BasecrossInputer</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)WindowSetting.h">
-      <Filter>Patch</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)StructIOFileStream.h">
-      <Filter>Patch\Utility\StructIOFileStream</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)MathHelper.h">
-      <Filter>Patch\Mathf\MyMath</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Random.h">
-      <Filter>Patch\Mathf\Random</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)GameSaveManager.h">
-      <Filter>Patch\basecross\GameSaveManager</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Character.h">
-      <Filter>DefaultFiles\Character</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Scene.h">
       <Filter>DefaultFiles\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)LoadStage.h">
-      <Filter>Maruyama\Stage\LoadStage</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)FoundManager.h">
-      <Filter>Maruyama\Utility\Component\FoundManager</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)PlayerInputer.h">
-      <Filter>Patch\Inputer</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)MaruUtility.h">
-      <Filter>Maruyama\Utility\MaruUtility</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Mathf.h">
-      <Filter>Maruyama\Utility\MaruUtility\Mathf</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)UtilityObstacle.h">
-      <Filter>Maruyama\Utility\MaruUtility\Objstacle</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)WallObject.h">
-      <Filter>Maruyama\StageObject\WallObject</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)DebugObject.h">
-      <Filter>Maruyama\Utility\DebugOjbect</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)EnemyBase.h">
-      <Filter>Maruyama\Enemy\Component\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)GameTimer.h">
-      <Filter>Maruyama\Utility\Timer\GameTimer</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)GameStageBase.h">
-      <Filter>Maruyama\Stage\GameStageBase</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)MainCamera.h">
-      <Filter>Maruyama\Camera\MainCamera</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)MainStage.h">
       <Filter>Maruyama\Stage\MainStage</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)MainCameraObject.h">
-      <Filter>Maruyama\Camera\MainCamera\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)MyDelegate.h">
-      <Filter>Maruyama\Utility\MyDelegate</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)MyRandom.h">
-      <Filter>Maruyama\Utility\MaruUtility\MyRandom</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)SeekTPS.h">
-      <Filter>Maruyama\Camera\Seek\SeekTPS</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)ToTargetMove.h">
-      <Filter>Maruyama\Utility\Component\TargetManager\ToTargetMove</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)GameManagerObject.h">
-      <Filter>Maruyama\GameManager\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)EyeSearchRange.h">
-      <Filter>Maruyama\Enemy\Component\EyeSearchRange</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)BoardObject.h">
-      <Filter>Maruyama\Utility\BoardObject</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)BuilderVertexPCT.h">
-      <Filter>Maruyama\Utility\Component\Builder</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)EnemyMainStateMachine.h">
-      <Filter>Maruyama\Enemy\Component\EnemyMainStateMachine</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)GameManager.h">
-      <Filter>Maruyama\GameManager\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)GraphBase.h">
-      <Filter>Maruyama\Enemy\Component\EnemyMainStateMachine\GraphBase</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)RandomPositionGenerator.h">
-      <Filter>Maruyama\Generator\Component\RandomPositionGenerator</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)I_BrackBoard.h">
-      <Filter>Maruyama\Interface\I_BrackBoard</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)PlayerMover.h">
-      <Filter>Patch\PlayerMover</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)SlowTimerManager.h">
-      <Filter>Maruyama\Utility\SingletonComponent\SlowTimerManager</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)OriginalMeshStageObject.h">
-      <Filter>Maruyama\StageObject\OriginalMeshStageObject</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)StageObjectBase.h">
-      <Filter>Maruyama\StageObject\StageObjectBase</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)RotationController.h">
-      <Filter>Maruyama\Utility\Component\RotationController</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)TargetManager.h">
-      <Filter>Maruyama\Utility\Component\TargetManager</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)VelocityManager.h">
       <Filter>Maruyama\Utility\Component\VelocityManager</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)LoadData.h">
-      <Filter>Maruyama\Utility\Load\LoadData</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)StageMapCSV.h">
-      <Filter>Maruyama\Utility\Load\StageMapCsv</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)MaruHitHelper.h">
-      <Filter>Maruyama\Utility\MaruUtility\MaruHitHelper</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)UtilityVelocity.h">
-      <Filter>Maruyama\Utility\MaruUtility\Velocity</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)WaitTimer.h">
-      <Filter>Maruyama\Utility\Timer\WaitTimter</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)GeneratorBase.h">
-      <Filter>Maruyama\Generator\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)SeekTarget.h">
-      <Filter>Maruyama\Camera\Seek\SeekTarget</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)FixedBox.h">
-      <Filter>Maruyama\StageObject\FixedBox</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Task_CameraAtMove.h">
-      <Filter>Maruyama\Utility\TaskList\CommonTasks\Camera\Task_CameraAtMove</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)TaskList.h">
-      <Filter>Maruyama\Utility\TaskList</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)MulchTaskList.h">
-      <Filter>Maruyama\Utility\TaskList\MulchTaskList</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Task_ToTargetMove.h">
-      <Filter>Maruyama\Utility\TaskList\CommonTasks\Task_ToTargetMove</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Task_Wait.h">
-      <Filter>Maruyama\Enemy\Component\CommonTask\Wait</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)CameraShake.h">
-      <Filter>Maruyama\Camera\Shake</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)SingletonComponent.h">
-      <Filter>Maruyama\Utility\MaruUtility\Singleton</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)TimeHelper.h">
-      <Filter>Maruyama\Utility\Timer\TimeHelper</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)HitStopManager.h">
-      <Filter>Maruyama\Utility\Component\HitStopManager</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)SoundManager.h">
-      <Filter>Maruyama\Utility\SingletonComponent\SoundManager</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)CollisionAction.h">
-      <Filter>Maruyama\Utility\Component\CollisionAction</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)I_Damaged.h">
-      <Filter>Maruyama\Interface\I_Damaged</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)EnemyStatusBase.h">
-      <Filter>Maruyama\Enemy\Component\Base\Status</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)ImpactMap.h">
-      <Filter>Maruyama\Enemy\Component\ImpactMap</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)NavGraphNode.h">
-      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\NavGraphNode</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)AstarEdge.h">
-      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\AstarEdge</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)SparseGraph.h">
-      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\SparseGraph</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Heuristic.h">
-      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\Heuristic</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)UtilityAstar.h">
-      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\UtilityAstar</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)MaruAction.h">
-      <Filter>Maruyama\Utility\MaruUtility\Action</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)NumberObject.h">
-      <Filter>Maruyama\Utility\DebugOjbect\DebugNumber\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)NumbersObject.h">
-      <Filter>Maruyama\Utility\DebugOjbect\NumbersObject</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)NumbersCtrl.h">
-      <Filter>Maruyama\Utility\DebugOjbect\NumbersCtrl</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)ArrowObject.h">
-      <Filter>Maruyama\Utility\DebugOjbect\ArrowObject</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)BillBoard.h">
-      <Filter>Maruyama\Utility\Component\BillBoard</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)AstarEdgeDraw.h">
-      <Filter>Maruyama\Utility\DebugOjbect\AstarEdgeDraw</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)AstarNodeDraw.h">
-      <Filter>Maruyama\Utility\DebugOjbect\AstarNodeDraw</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Task_MovePositions.h">
-      <Filter>Maruyama\Enemy\Component\CommonTask\MovePositoins</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Task_AroundEyeCheck.h">
-      <Filter>Maruyama\Enemy\Component\CommonTask\AroundEyeCheck</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)StatorBase.h">
-      <Filter>Maruyama\Enemy\Component\Base\Stator</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Utility_EnemyStator.h">
-      <Filter>Maruyama\Enemy\StatorUtility</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)ActiveSkillBase.h">
-      <Filter>Maruyama\Enemy\Component\Base\Skill\ActiveSkillBase</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)PassiveSkillBase.h">
-      <Filter>Maruyama\Enemy\Component\Base\Skill\PassiveSkillBase</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)SkillBase.h">
-      <Filter>Maruyama\Enemy\Component\Base\Skill</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)TimerDestroy.h">
-      <Filter>Maruyama\Utility\Component\Destroy</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)EnemyAIDirector.h">
-      <Filter>Maruyama\Enemy\Component\AI\Director</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)FactionCoordinator.h">
-      <Filter>Maruyama\Enemy\Component\AI\Director\FactionCoordinator</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)CombatCoordinator.h">
-      <Filter>Maruyama\Enemy\Component\AI\Director\FactionCoordinator\Fanction\CombatCoordinator</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Task_Flee.h">
-      <Filter>Maruyama\Enemy\Component\CommonTask\Flee</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Task_AstarEvade.h">
-      <Filter>Maruyama\Enemy\Component\CommonTask\AstarEvade</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Task_AstarMove.h">
-      <Filter>Maruyama\Enemy\Component\CommonTask\AstarMove</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)AnimatorBase.h">
-      <Filter>Maruyama\Enemy\Component\Base\Animator</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)AnimationMainStateMachine.h">
-      <Filter>Maruyama\Enemy\Component\Base\Animator\AnimationMainStateMachine</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)StateNodeBase.h">
-      <Filter>Maruyama\Enemy\Component\EnemyMainStateMachine\NodeBase\StateNode</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)EnemyStateNodeBase.h">
-      <Filter>Maruyama\Enemy\Component\EnemyMainStateMachine\NodeBase\StateNode</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)StateEdgeBase.h">
-      <Filter>Maruyama\Enemy\Component\EnemyMainStateMachine\EdgeBase\StateEdge</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)GraphEdgeBase.h">
-      <Filter>Maruyama\Enemy\Component\EnemyMainStateMachine\EdgeBase</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)GraphNodeBase.h">
-      <Filter>Maruyama\Enemy\Component\EnemyMainStateMachine\NodeBase</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)GraphStateNode.h">
-      <Filter>Maruyama\Enemy\Component\EnemyMainStateMachine\NodeBase\StateNode\GraphStateNode</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)MaruAnimationHelper.h">
-      <Filter>Maruyama\Enemy\Component\Base\Animation</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)SubAnimatorBase.h">
-      <Filter>Maruyama\Enemy\Component\Base\Animator\SubAnimatorBase</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)StartCamera.h">
-      <Filter>Maruyama\Camera\StartCamera</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)UtilityStartCamera.h">
-      <Filter>Maruyama\Camera\StartCamera\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)GraphAstar.h">
-      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\GraphAstar</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)I_KnockBack.h">
-      <Filter>Maruyama\Interface\I_KnockBack</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)ReactiveBool.h">
-      <Filter>Maruyama\Utility\ReactiveBool</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)PNTToonDraw.h">
-      <Filter>Maruyama\Shader\ToonShader\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)ToonPNTStaticModelDraw.h">
-      <Filter>Maruyama\Shader\ToonShader\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)ParticleManager.h">
-      <Filter>Maruyama\Utility\Effect\ParticleManager</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)SinScaling.h">
-      <Filter>Sources\SinScaling</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)FadeSprite.h">
-      <Filter>Maruyama\Utility\Component\FadeSprite</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)BillBoard_Ex.h">
-      <Filter>Maruyama\Utility\Component\BillBoard\Ex</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)OriginalMeshToonObject.h">
-      <Filter>Maruyama\StageObject\OriginalMeshStageObject\OriginalMeshToomObject</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)AuraBase.h">
-      <Filter>Maruyama\Utility\Effect\Aura</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)AuraObjectBase.h">
-      <Filter>Maruyama\Utility\Effect\Aura\AuraObject</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)EffectManager.h">
-      <Filter>Maruyama\EffectManager</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)ScaleParent.h">
-      <Filter>Maruyama\Utility\ScaleParent</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)AutoReflection.h">
-      <Filter>Maruyama\Utility\Component\AutoReflection</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)ScalePop.h">
-      <Filter>Maruyama\Utility\Component\ScalePop</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)ScaleFade.h">
-      <Filter>Maruyama\Utility\Component\ScaleFade</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)CollisionObject.h">
-      <Filter>Maruyama\Utility\Component\CollisionObject</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Targeted.h">
-      <Filter>Maruyama\Enemy\Component\Targeted</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)WallEvasion.h">
-      <Filter>Maruyama\Utility\Component\WallEvasion</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)TactileCtrl.h">
-      <Filter>Maruyama\Utility\Component\WallEvasion\Tactile</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)TactileObject.h">
-      <Filter>Maruyama\Utility\Component\WallEvasion\Tactile</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)LoadPositionGenerator.h">
-      <Filter>Maruyama\Generator\Component\LoadPositionGenerator</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)ReactiveProperty.h">
-      <Filter>Maruyama\Utility\Component\ReactiveProperty</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)LoadCSV.h">
-      <Filter>Maruyama\Utility\Load\LoadCSV</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)CameraRayAlphaManager.h">
-      <Filter>Maruyama\Utility\Component\CameraRayAlphaManager</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)RangeDestroyManager.h">
-      <Filter>Maruyama\Utility\Component\RangeDestroyManager</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)DebugNumber.h">
-      <Filter>Maruyama\Utility\DebugOjbect\DebugNumber</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)ScreenFadeManager.h">
-      <Filter>Maruyama\Utility\Component\FadeSprite\ScreenFadeManager</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)ImpactManager.h">
-      <Filter>Maruyama\Enemy\Component\ImpactMap\ImpactManager</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)I_Impact.h">
-      <Filter>Maruyama\Enemy\Component\ImpactMap\Intarfase\I_Impact</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)FieldImpactMap.h">
-      <Filter>Maruyama\Enemy\Component\ImpactMap\FieldImpactMap</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)SoleImpactMap.h">
-      <Filter>Maruyama\Enemy\Component\ImpactMap\SoleImpactMap</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Task_PlowlingMove.h">
-      <Filter>Maruyama\Enemy\Component\CommonTask\PlowlingMove</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)EnemyObjectBase.h">
-      <Filter>Maruyama\Enemy\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)EffectBase.h">
-      <Filter>Maruyama\Utility\Effect</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)LookAtCameraManager.h">
-      <Filter>Maruyama\Camera\LookAtCameraManager</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)SpriteObject.h">
-      <Filter>Maruyama\Utility\SpriteObject</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)SelectSprite.h">
-      <Filter>Maruyama\Utility\SelectSprite</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)SelecterSprite.h">
-      <Filter>Maruyama\Utility\SelectSprite\Selecter</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)PlayerController.h">
-      <Filter>Maruyama\Player\Component\PlayerController</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)HeroObject.h">
-      <Filter>Maruyama\Enemy\Object\HeroObject</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)EnemyStatorBase.h">
-      <Filter>Maruyama\Enemy\Component\EachEnemy\Common\Stator</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)EnemyStateNode_Plowling.h">
-      <Filter>Maruyama\Enemy\Component\EachEnemy\Common\Stator\State\Plowling</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Stator_Hero.h">
-      <Filter>Maruyama\Enemy\Component\EachEnemy\Hero\Stator</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Hero.h">
-      <Filter>Maruyama\Enemy\Component\EachEnemy\Hero</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)EnemyGeneratorObject.h">
-      <Filter>Maruyama\Generator\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)CameraRotater.h">
-      <Filter>Patch\basecross\CameraHelper\CameraRotate</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)PlayerCameraMover.h">
-      <Filter>Patch\basecross\CameraHelper\PlayerCameraMover</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)ChasingTarget.h">
-      <Filter>Patch\basecross\CameraHelper\ChasingTarget</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)SpringArmComponent.h">
-      <Filter>Patch\basecross\CameraHelper\SpringArmComponent</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)HideItem.h">
-      <Filter>Maruyama\Item\Component\HideItem</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)HideItemObject.h">
-      <Filter>Maruyama\Item\Object\HideItemObject</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)ItemBag.h">
-      <Filter>Maruyama\Player\Component\ItemBag</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)ItemBase.h">
-      <Filter>Maruyama\Item\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)ItemAcquisitionManager.h">
-      <Filter>Maruyama\Player\Component\ItemAcquisitionManager</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)OwnHideItemManager.h">
-      <Filter>Maruyama\Player\Component\OwnHideItemManager</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)HidePlace.h">
-      <Filter>Maruyama\StageObject\HidePlaceObject\HidePlace</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)PlayerObject.h">
-      <Filter>Maruyama\Player\Object\PlayerObjectBase</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)HeroPlayerObject.h">
-      <Filter>Maruyama\Player\Object\HeroPlayerObject</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)VillainPlayerObject.h">
-      <Filter>Maruyama\Player\Object\VillainPlayerObject</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)ImpactDataDraw.h">
-      <Filter>Maruyama\Utility\DebugOjbect\AstarNodeDraw\ImpactDataDraw</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Villain.h">
-      <Filter>Maruyama\Enemy\Component\EachEnemy\Villain</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Stator_Villain.h">
-      <Filter>Maruyama\Enemy\Component\EachEnemy\Villain\Stator</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)VillainEnemyObject.h">
-      <Filter>Maruyama\Enemy\Object\VillainObject</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Effekseer\EfkComponent.h">
       <Filter>Watanabe\Effekseer</Filter>
@@ -1685,24 +1140,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\WatanabeStage.h">
       <Filter>Watanabe\TestStage</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)EnemyStateNode_Chase.h">
-      <Filter>Maruyama\Enemy\Component\EachEnemy\Common\Stator\State\Chase</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)ChaseState_AstarSeek.h">
-      <Filter>Maruyama\Enemy\Component\EachEnemy\Common\Stator\State\Chase\AstarSeek</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)ChaseState_TargetSeek.h">
-      <Filter>Maruyama\Enemy\Component\EachEnemy\Common\Stator\State\Chase\TargetSeek</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)PlayerAnimationCtrl.h">
-      <Filter>Maruyama\Player\Component\PlayerAnimationCtrl</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)AnimationCtrl.h">
-      <Filter>Maruyama\Player\Component\PlayerAnimationCtrl</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)TitleStage.h">
-      <Filter>Maruyama\Stage\TitleStage</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\PlayerOnlineController.h">
       <Filter>Itabashi\Online\PlayerOnlineController</Filter>
     </ClInclude>
@@ -1717,9 +1154,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\Block.h">
       <Filter>Watanabe\StageObject\Block</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\RackObject.h">
-      <Filter>Watanabe\StageObject\RackObject</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\AdvMeshUtil.h">
       <Filter>Watanabe\Utility\AdvMeshUtil</Filter>
@@ -1748,21 +1182,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\AdvBaseDraw.h">
       <Filter>Watanabe\Shader\AdvBaseDraw</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)AIImpacter.h">
-      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\AIImpacter</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)CoordinatorBase.h">
-      <Filter>Maruyama\Enemy\Component\AI\Director\CoordinatorBase</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)PatrolCoordinator.h">
-      <Filter>Maruyama\Enemy\Component\AI\Director\FactionCoordinator\Fanction\PatrolCoordinator</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)TupleSpace.h">
-      <Filter>Maruyama\Enemy\Component\AI\TupleSpace</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)I_FactionMember.h">
-      <Filter>Maruyama\Enemy\Component\AI\Director\FactionCoordinator\I_FactionMember</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\TestComponent.h">
       <Filter>Watanabe\Component\TestComponent</Filter>
     </ClInclude>
@@ -1784,38 +1203,14 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\ObjectHider.h">
       <Filter>Itabashi\Component\ObjectHider</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)SelfImpactNodeManager.h">
-      <Filter>Maruyama\Enemy\Component\ImpactMap\SelfImpactNodeManager</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)OccupancyManager.h">
-      <Filter>Maruyama\Enemy\Component\ImpactMap\ImpactManager\ImpactDataManager\OccupancyManager</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\PlayerStatus.h">
       <Filter>Watanabe\Component\PlayerStatus</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)BulletBase.h">
-      <Filter>Maruyama\Player\Component\Wepon\Bullet\Component</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\OwnAreaObject.h">
       <Filter>Watanabe\StageObject\OwnAreaObject</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\PlayerSpawnPointObject.h">
       <Filter>Watanabe\StageObject\PlayerSpawnPoint</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)WeponBase.h">
-      <Filter>Maruyama\Player\Component\Wepon</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)ChargeGun.h">
-      <Filter>Maruyama\Player\Component\Wepon\ChargeGun</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)ChargeBullet.h">
-      <Filter>Maruyama\Player\Component\Wepon\Bullet\Component\ChargeBullet</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)AttackBase.h">
-      <Filter>Maruyama\Player\Component\AttackBase</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)TackleAttack.h">
-      <Filter>Maruyama\Player\Component\AttackBase\TackleAttack</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Interface\I_TeamMember.h">
       <Filter>Maruyama\Interface\I_TeamMember</Filter>
@@ -1891,9 +1286,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Manager\TimeManager.h">
       <Filter>Watanabe\Manager\TimeManager</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)ChargeBulletObject.h">
-      <Filter>Maruyama\Player\Component\Wepon\Bullet\Object\ChargeBulletObject</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Bullet\Object\BulletObjectBase.h">
       <Filter>Maruyama\Player\Component\Wepon\Bullet\Object</Filter>
@@ -1991,12 +1383,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\BoxAnimationState.h">
       <Filter>Watanabe\Component\BoxAnimator</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\FieldMap.h">
-      <Filter>Maruyama\Player\Component\UseOwnArea\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)MapCursor.h">
-      <Filter>Maruyama\Player\Component\UseOwnArea\Map\Cursor</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\MatchingUIController.h">
       <Filter>Watanabe\Component\MatchingUIController</Filter>
     </ClInclude>
@@ -2033,17 +1419,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\ButtonUI.h">
       <Filter>Watanabe\UI\ButtonUI</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\UI\Reticle.h">
-      <Filter>Maruyama\UI\Reticle</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\BoardPoly\GoalBP.h">
       <Filter>Watanabe\BoardPoly\GoalBP</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\UI\UILayer.h">
-      <Filter>Maruyama\UI\UILayer</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)TeleportUI.h">
-      <Filter>Maruyama\UI\TeleportUI</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\Zooming.h">
       <Filter>Watanabe\Component\Zooming</Filter>
@@ -2054,13 +1431,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\PCTStaticModelDraw.h">
       <Filter>Itabashi\Component\Graphic</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)TeleportCursorUI.h">
-      <Filter>Maruyama\UI\TeleportCursorUI</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Stage\MapShotStage.h">
       <Filter>Maruyama\Stage\MapShotStage</Filter>
     </ClInclude>
-
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\HoldButtonUI.h">
       <Filter>Watanabe\UI\HoldButtonUI</Filter>
     </ClInclude>
@@ -2069,10 +1442,621 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\BoardPoly\PlayerLabelBP.h">
       <Filter>Watanabe\BoardPoly\PlayerLabelBP</Filter>
-	</ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)OpenBoard.h">
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\Utility\ActionTimer.h">
+      <Filter>Patch\Utility\ActionTimer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Skill\ActiveSkillBase.h">
+      <Filter>Maruyama\Enemy\Component\Base\Skill\ActiveSkillBase</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\AnimationCtrl.h">
+      <Filter>Maruyama\Player\Component\PlayerAnimationCtrl</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\PlayerAnimationCtrl.h">
+      <Filter>Maruyama\Player\Component\PlayerAnimationCtrl</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Animation\AnimationMainStateMachine.h">
+      <Filter>Maruyama\Enemy\Component\Base\Animator\AnimationMainStateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Animation\SubAnimatorBase.h">
+      <Filter>Maruyama\Enemy\Component\Base\Animator\SubAnimatorBase</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Animation\AnimatorBase.h">
+      <Filter>Maruyama\Enemy\Component\Base\Animator</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Debug\Object\ArrowObject.h">
+      <Filter>Maruyama\Utility\DebugOjbect\ArrowObject</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\AstarEdge.h">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\AstarEdge</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\UtilityAstar.h">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\UtilityAstar</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\Debug\AstarEdgeDraw.h">
+      <Filter>Maruyama\Utility\DebugOjbect\AstarEdgeDraw</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\Debug\AstarNodeDraw.h">
+      <Filter>Maruyama\Utility\DebugOjbect\AstarNodeDraw</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\AttackBase.h">
+      <Filter>Maruyama\Player\Component\AttackBase</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\TackleAttack.h">
+      <Filter>Maruyama\Player\Component\AttackBase\TackleAttack</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Effect\Component\AuraBase.h">
+      <Filter>Maruyama\Utility\Effect\Aura</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Effect\Component\EffectBase.h">
+      <Filter>Maruyama\Utility\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Effect\Component\EffectManager.h">
+      <Filter>Maruyama\EffectManager</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Effect\Object\AuraObjectBase.h">
+      <Filter>Maruyama\Utility\Effect\Aura\AuraObject</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Component\AutoReflection.h">
+      <Filter>Maruyama\Utility\Component\AutoReflection</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Component\BillBoard_Ex.h">
+      <Filter>Maruyama\Utility\Component\BillBoard\Ex</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Component\BillBoard.h">
+      <Filter>Maruyama\Utility\Component\BillBoard</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\UI\BuilderVertexPCT.h">
+      <Filter>Maruyama\Utility\Component\Builder</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Bullet\Component\BulletBase.h">
+      <Filter>Maruyama\Player\Component\Wepon\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Bullet\Component\ChargeBullet.h">
+      <Filter>Maruyama\Player\Component\Wepon\Bullet\Component\ChargeBullet</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Camera\Component\CameraRayAlphaManager.h">
+      <Filter>Maruyama\Utility\Component\CameraRayAlphaManager</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Camera\Component\CameraShake.h">
+      <Filter>Maruyama\Camera\Shake</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Bullet\Object\ChargeBulletObject.h">
+      <Filter>Maruyama\Player\Component\Wepon\Bullet\Object\ChargeBulletObject</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\ChargeGun.h">
+      <Filter>Maruyama\Player\Component\Wepon\ChargeGun</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Stator\StateNode\ChaseState_TargetSeek.h">
+      <Filter>Maruyama\Enemy\Component\EachEnemy\Common\Stator\State\Chase\TargetSeek</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Stator\StateNode\ChaseState_AstarSeek.h">
+      <Filter>Maruyama\Enemy\Component\EachEnemy\Common\Stator\State\Chase\AstarSeek</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Stator\StateNode\EnemyStateNode_Chase.h">
+      <Filter>Maruyama\Enemy\Component\EachEnemy\Common\Stator\State\Chase</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Stator\StateNode\EnemyStateNode_Plowling.h">
+      <Filter>Maruyama\Enemy\Component\EachEnemy\Common\Stator\State\Plowling</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Component\CollisionAction.h">
+      <Filter>Maruyama\Utility\Component\CollisionAction</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Object\CollisionObject.h">
+      <Filter>Maruyama\Utility\Component\CollisionObject</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\CoordinatorBase.h">
+      <Filter>Maruyama\Enemy\Component\AI\Director\CoordinatorBase</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\CombatCoordinator.h">
+      <Filter>Maruyama\Enemy\Component\AI\Director\FactionCoordinator\Fanction\CombatCoordinator</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\FactionCoordinator.h">
+      <Filter>Maruyama\Enemy\Component\AI\Director\FactionCoordinator</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\PatrolCoordinator.h">
+      <Filter>Maruyama\Enemy\Component\AI\Director\FactionCoordinator\Fanction\PatrolCoordinator</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\EnemyAIDirector.h">
+      <Filter>Maruyama\Enemy\Component\AI\Director</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Debug\Object\DebugObject.h">
+      <Filter>Maruyama\Utility\DebugOjbect</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Debug\Component\DebugNumber.h">
+      <Filter>Maruyama\Utility\DebugOjbect\DebugNumber</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\EnemyBase.h">
+      <Filter>Maruyama\Enemy\Component\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Villain.h">
+      <Filter>Maruyama\Enemy\Component\EachEnemy\Villain</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Generator\EnemyGeneratorObject.h">
+      <Filter>Maruyama\Generator\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Object\EnemyObjectBase.h">
+      <Filter>Maruyama\Enemy\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Object\HeroObject.h">
+      <Filter>Maruyama\Enemy\Object\HeroObject</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Object\VillainEnemyObject.h">
+      <Filter>Maruyama\Enemy\Object\VillainObject</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Stator\EnemyStatorBase.h">
+      <Filter>Maruyama\Enemy\Component\EachEnemy\Common\Stator\State</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Stator\Stator_Villain.h">
+      <Filter>Maruyama\Enemy\Component\EachEnemy\Villain\Stator</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Stator\Stator_Hero.h">
+      <Filter>Maruyama\Enemy\Component\EachEnemy\Hero\Stator</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\EyeSearchRange.h">
+      <Filter>Maruyama\Enemy\Component\EyeSearchRange</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Stator\StatorBase.h">
+      <Filter>Maruyama\Enemy\Component\Base\Stator</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\StateMachine\EnemyStateNodeBase.h">
+      <Filter>Maruyama\Enemy\Component\EnemyMainStateMachine\NodeBase\StateNode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\StateMachine\StateNodeBase.h">
+      <Filter>Maruyama\Enemy\Component\EnemyMainStateMachine\NodeBase\StateNode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\StateMachine\EnemyMainStateMachine.h">
+      <Filter>Maruyama\Enemy\Component\EnemyMainStateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\EnemyStatusBase.h">
+      <Filter>Maruyama\Enemy\Component\Base\Status</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Component\FadeSprite.h">
+      <Filter>Maruyama\Utility\Component\FadeSprite</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Component\FoundManager.h">
+      <Filter>Maruyama\Utility\Component\FoundManager</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\ScreenFadeManager.h">
+      <Filter>Maruyama\Utility\Component\FadeSprite\ScreenFadeManager</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\GameManager.h">
+      <Filter>Maruyama\GameManager\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Object\GameManagerObject.h">
+      <Filter>Maruyama\GameManager\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Timer\TimeHelper.h">
+      <Filter>Maruyama\Utility\Timer\TimeHelper</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Timer\GameTimer.h">
+      <Filter>Maruyama\Utility\Timer\GameTimer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Generator\GeneratorBase.h">
+      <Filter>Maruyama\Generator\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Generator\RandomPositionGenerator.h">
+      <Filter>Maruyama\Generator\Component\RandomPositionGenerator</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Generator\LoadPositionGenerator.h">
+      <Filter>Maruyama\Generator\Component\LoadPositionGenerator</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\GraphAstar.h">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\GraphAstar</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\GraphBase.h">
+      <Filter>Maruyama\Enemy\Component\EnemyMainStateMachine\GraphBase</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\GraphEdgeBase.h">
+      <Filter>Maruyama\Enemy\Component\EnemyMainStateMachine\EdgeBase</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\StateMachine\StateEdgeBase.h">
+      <Filter>Maruyama\Enemy\Component\EnemyMainStateMachine\EdgeBase\StateEdge</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\StageObject\FixedBox.h">
+      <Filter>Maruyama\StageObject\FixedBox</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\GraphNodeBase.h">
+      <Filter>Maruyama\Enemy\Component\EnemyMainStateMachine\NodeBase</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\NavGraphNode.h">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\NavGraphNode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\Heuristic.h">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\Heuristic</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Hero.h">
+      <Filter>Maruyama\Enemy\Component\EachEnemy\Hero</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Object\HeroPlayerObject.h">
+      <Filter>Maruyama\Player\Object\HeroPlayerObject</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Item\HideItem.h">
+      <Filter>Maruyama\Item\Component\HideItem</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Item\HideItemObject.h">
+      <Filter>Maruyama\Item\Object\HideItemObject</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\StageObject\HidePlace.h">
+      <Filter>Maruyama\StageObject\HidePlaceObject\HidePlace</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\RackObject.h">
+      <Filter>Watanabe\StageObject\RackObject</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\HitStopManager.h">
+      <Filter>Maruyama\Utility\Component\HitStopManager</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Interface\I_BrackBoard.h">
+      <Filter>Maruyama\Interface\I_BrackBoard</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Interface\I_Damaged.h">
+      <Filter>Maruyama\Interface\I_Damaged</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Interface\I_KnockBack.h">
+      <Filter>Maruyama\Interface\I_KnockBack</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Interface\I_Impact.h">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Intarfase\I_Impact</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Interface\I_FactionMember.h">
+      <Filter>Maruyama\Enemy\Component\AI\Director\FactionCoordinator\I_FactionMember</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\Debug\ImpactDataDraw.h">
+      <Filter>Maruyama\Utility\DebugOjbect\AstarNodeDraw\ImpactDataDraw</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\AIImpacter.h">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\AIImpacter</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\ImpactMap.h">
+      <Filter>Maruyama\Enemy\Component\ImpactMap</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\ImpactManager.h">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\ImpactManager</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\FieldImpactMap.h">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\FieldImpactMap</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)GameStageBase.h">
+      <Filter>Maruyama\Stage\GameStageBase</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\ItemAcquisitionManager.h">
+      <Filter>Maruyama\Player\Component\ItemAcquisitionManager</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\ItemBag.h">
+      <Filter>Maruyama\Player\Component\ItemBag</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Item\ItemBase.h">
+      <Filter>Maruyama\Item\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Camera\Component\LookAtCameraManager.h">
+      <Filter>Maruyama\Camera\LookAtCameraManager</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Camera\MainCameraObject.h">
+      <Filter>Maruyama\Camera\MainCamera\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Camera\MainCamera.h">
+      <Filter>Maruyama\Camera\MainCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\MaruAction.h">
+      <Filter>Maruyama\Utility\MaruUtility\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\ReactiveBool.h">
+      <Filter>Maruyama\Utility\ReactiveBool</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\ReactiveProperty.h">
+      <Filter>Maruyama\Utility\Component\ReactiveProperty</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Animation\MaruAnimationHelper.h">
+      <Filter>Maruyama\Enemy\Component\Base\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\MaruHitHelper.h">
+      <Filter>Maruyama\Utility\MaruUtility\MaruHitHelper</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\UtilityObstacle.h">
+      <Filter>Maruyama\Utility\MaruUtility\Objstacle</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Utility.h">
+      <Filter>Maruyama\Utility\MaruUtility</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Mathf.h">
+      <Filter>Maruyama\Utility\MaruUtility\Mathf</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\TaskList.h">
+      <Filter>Maruyama\Utility\TaskList</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\MulchTaskList.h">
+      <Filter>Maruyama\Utility\TaskList\MulchTaskList</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\Task_AroundEyeCheck.h">
+      <Filter>Maruyama\Utility\TaskList\CommonTasks\AroundEyeCheck</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\Task_AstarEvade.h">
+      <Filter>Maruyama\Utility\TaskList\CommonTasks\AstarEvade</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\Task_AstarMove.h">
+      <Filter>Maruyama\Utility\TaskList\CommonTasks\AstarMove</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\Task_CameraAtMove.h">
+      <Filter>Maruyama\Utility\TaskList\CommonTasks\Camera\CameraAtMove</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\Task_Flee.h">
+      <Filter>Maruyama\Utility\TaskList\CommonTasks\Flee</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\Task_MovePositions.h">
+      <Filter>Maruyama\Utility\TaskList\CommonTasks\MovePositoins</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\Task_PlowlingMove.h">
+      <Filter>Maruyama\Utility\TaskList\CommonTasks\PlowlingMove</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\Task_ToTargetMove.h">
+      <Filter>Maruyama\Utility\TaskList\CommonTasks\ToTargetMove</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\Task_Wait.h">
+      <Filter>Maruyama\Utility\TaskList\CommonTasks\Wait</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Random.h">
+      <Filter>Maruyama\Utility\MaruUtility\Random</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\UI\3D\Component\NumbersCtrl.h">
+      <Filter>Maruyama\Utility\DebugOjbect\NumbersCtrl</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\UI\3D\Object\NumbersObject.h">
+      <Filter>Maruyama\Utility\DebugOjbect\NumbersObject</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\UI\3D\Object\NumberObject.h">
+      <Filter>Maruyama\Utility\DebugOjbect\DebugNumber\NumberObject</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\UI\3D\Object\BoardObject.h">
+      <Filter>Maruyama\Utility\BoardObject</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\OccupancyManager.h">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\ImpactManager\ImpactDataManager\OccupancyManager</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\UI\3D\Component\OpenBoard.h">
       <Filter>Maruyama\Player\Component\ItemAcquisitionManager\BoardUI</Filter>
-
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\StageObject\OriginalMeshStageObject.h">
+      <Filter>Maruyama\StageObject\OriginalMeshStageObject</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\StageObject\OriginalMeshToonObject.h">
+      <Filter>Maruyama\StageObject\OriginalMeshStageObject\OriginalMeshToomObject</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\OwnHideItemManager.h">
+      <Filter>Maruyama\Player\Component\OwnHideItemManager</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Effect\Component\ParticleManager.h">
+      <Filter>Maruyama\Utility\Effect\ParticleManager</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Skill\PassiveSkillBase.h">
+      <Filter>Maruyama\Enemy\Component\Base\Skill\PassiveSkillBase</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\PlayerController.h">
+      <Filter>Maruyama\Player\Component\PlayerController</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Component\RangeDestroyManager.h">
+      <Filter>Maruyama\Utility\Component\Destroy\RangeDestroyManager</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Component\RotationController.h">
+      <Filter>Maruyama\Utility\Component\RotationController</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Component\ScalePop.h">
+      <Filter>Maruyama\Utility\Component\ScalePop</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Component\ScaleFade.h">
+      <Filter>Maruyama\Utility\Component\ScaleFade</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Component\ScaleParent.h">
+      <Filter>Maruyama\Utility\Component\ScaleParent</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Component\SeekTarget.h">
+      <Filter>Maruyama\Camera\Seek\SeekTarget</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Camera\Component\SeekTPS.h">
+      <Filter>Maruyama\Camera\Seek\SeekTPS</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\UI\2D\Component\SelecterSprite.h">
+      <Filter>Maruyama\Utility\SelectSprite\Selecter</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\UI\2D\Component\SelectSprite.h">
+      <Filter>Maruyama\Utility\SelectSprite</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\SelfImpactNodeManager.h">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\SelfImpactNodeManager</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\SingletonComponent.h">
+      <Filter>Maruyama\Utility\MaruUtility\Singleton</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\SlowTimerManager.h">
+      <Filter>Maruyama\Utility\SingletonComponent\SlowTimerManager</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\SoundManager.h">
+      <Filter>Maruyama\Utility\SingletonComponent\SoundManager</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Component\SinScaling.h">
+      <Filter>Sources\SinScaling</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Skill\SkillBase.h">
+      <Filter>Maruyama\Enemy\Component\Base\Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\SoleImpactMap.h">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\SoleImpactMap</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\SparseGraph.h">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\SparseGraph</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\UI\2D\Object\SpriteObject.h">
+      <Filter>Maruyama\Utility\SpriteObject</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Camera\StartCamera.h">
+      <Filter>Maruyama\Camera\StartCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Camera\UtilityStartCamera.h">
+      <Filter>Maruyama\Camera\StartCamera\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Component\TactileCtrl.h">
+      <Filter>Maruyama\Utility\Component\WallEvasion\Tactile</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Object\TactileObject.h">
+      <Filter>Maruyama\Utility\Component\WallEvasion\Tactile</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Component\WallEvasion.h">
+      <Filter>Maruyama\Utility\Component\WallEvasion</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Component\Targeted.h">
+      <Filter>Maruyama\Enemy\Component\Targeted</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Component\TargetManager.h">
+      <Filter>Maruyama\Utility\Component\TargetManager</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\UI\2D\Component\TeleportUI.h">
+      <Filter>Maruyama\UI\TeleportUI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\UI\2D\Component\TeleportCursorUI.h">
+      <Filter>Maruyama\UI\TeleportCursorUI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\UI\2D\Component\FieldMap.h">
+      <Filter>Maruyama\Player\Component\UseOwnArea\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\UI\2D\Component\Reticle.h">
+      <Filter>Maruyama\UI\Reticle</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\UI\2D\Component\MapCursor.h">
+      <Filter>Maruyama\Player\Component\UseOwnArea\Map\Cursor</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\UI\2D\UILayer.h">
+      <Filter>Maruyama\UI\UILayer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Component\TimerDestroy.h">
+      <Filter>Maruyama\Utility\Component\Destroy\TimerDestroy</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Shader\Toon\PNTToonDraw.h">
+      <Filter>Maruyama\Shader\ToonShader\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Shader\Toon\ToonPNTStaticModelDraw.h">
+      <Filter>Maruyama\Shader\ToonShader\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Component\ToTargetMove.h">
+      <Filter>Maruyama\Utility\Component\TargetManager\ToTargetMove</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\TupleSpace.h">
+      <Filter>Maruyama\Enemy\Component\AI\TupleSpace</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Stator\Utility_EnemyStator.h">
+      <Filter>Maruyama\Enemy\StatorUtility</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Timer\WaitTimer.h">
+      <Filter>Maruyama\Utility\Timer\WaitTimter</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\UtilityVelocity.h">
+      <Filter>Maruyama\Utility\MaruUtility\Velocity</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\StageObject\WallObject.h">
+      <Filter>Maruyama\StageObject\WallObject</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\WeponBase.h">
+      <Filter>Maruyama\Player\Component\Wepon</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Patch\BezierTransitioner.h">
+      <Filter>Patch\basecross\BezierTransitioner</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Patch\AnimationHelper.h">
+      <Filter>Patch\basecross\AnimationHelper</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Patch\CameraHelper.h">
+      <Filter>Patch\basecross\CameraHelper</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Patch\FontHelper.h">
+      <Filter>Patch\basecross\FontHelper</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Patch\GameSaveManager.h">
+      <Filter>Patch\basecross\GameSaveManager</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Patch\SaveHelper.h">
+      <Filter>Patch\basecross\SaveHelper</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Patch\SoundHelper.h">
+      <Filter>Patch\basecross\SoundHelper</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Patch\UIHelper.h">
+      <Filter>Patch\basecross\UIHelper</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Patch\BasecrossInputer.h">
+      <Filter>Patch\Input\BasecrossInputer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Patch\InputHelper.h">
+      <Filter>Patch\Input\InputHelper</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Patch\PlayerInputer.h">
+      <Filter>Patch\Inputer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Patch\Bezier.h">
+      <Filter>Patch\Mathf\Bezier</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Patch\MathHelper.h">
+      <Filter>Patch\Mathf\MyMath</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Patch\Random.h">
+      <Filter>Patch\Mathf\Random</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Patch\ex_weak_ptr.h">
+      <Filter>Patch\Utility\ex_weak_ptr</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Patch\MessageWindow.h">
+      <Filter>Patch\basecross\MessageWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Patch\SpringArmComponent.h">
+      <Filter>Patch\basecross\CameraHelper\SpringArmComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Patch\PlayerCameraMover.h">
+      <Filter>Patch\basecross\CameraHelper\PlayerCameraMover</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Patch\ChasingTarget.h">
+      <Filter>Patch\basecross\CameraHelper\ChasingTarget</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Patch\CameraRotater.h">
+      <Filter>Patch\basecross\CameraHelper\CameraRotate</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Patch\WindowSetting.h">
+      <Filter>Patch\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Patch\StructIOFileStream.h">
+      <Filter>Patch\Utility\StructIOFileStream</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Patch\Trigger.h">
+      <Filter>Patch\Utility\Trigger</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Patch\DelegateSystem.h">
+      <Filter>Patch\Utility\DelegateSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Patch\PlayerMover.h">
+      <Filter>Patch\PlayerMover</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Stage\TitleStage.h">
+      <Filter>Maruyama\Stage\TitleStage</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Delegate.h">
+      <Filter>Maruyama\Utility\Delegate</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Load\StageMapCSV.h">
+      <Filter>Maruyama\Utility\Load\StageMapCsv</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Load\LoadData.h">
+      <Filter>Maruyama\Utility\Load\LoadData</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Load\LoadCSV.h">
+      <Filter>Maruyama\Utility\Load\LoadCSV</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Stage\LoadStage.h">
+      <Filter>Maruyama\Stage\LoadStage</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\StageObject\StageObjectBase.h">
+      <Filter>Maruyama\StageObject\StageObjectBase</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Object\VillainPlayerObject.h">
+      <Filter>Maruyama\Player\Object\VillainPlayerObject</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Object\PlayerObject.h">
+      <Filter>Maruyama\Player\Object\PlayerObjectBase</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2085,488 +2069,14 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectBehavior.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)InputHelper.cpp">
-      <Filter>Patch\Input\InputHelper</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)ActionTimer.cpp">
-      <Filter>Patch\Utility\ActionTimer</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)BezierTransitioner.cpp">
-      <Filter>Patch\basecross\BezierTransitioner</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)CameraHelper.cpp">
-      <Filter>Patch\basecross\CameraHelper</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)FontHelper.cpp">
-      <Filter>Patch\basecross\FontHelper</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)MessageWindow.cpp">
-      <Filter>Patch\basecross\MessageWindow</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)UIHelper.cpp">
-      <Filter>Patch\basecross\UIHelper</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)SoundHelper.cpp">
-      <Filter>Patch\basecross\SoundHelper</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Bezier.cpp">
-      <Filter>Patch\Mathf\Bezier</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)BasecrossInputer.cpp">
-      <Filter>Patch\Input\BasecrossInputer</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)MathHelper.cpp">
-      <Filter>Patch\Mathf\MyMath</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Random.cpp">
-      <Filter>Patch\Mathf\Random</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)GameSaveManager.cpp">
-      <Filter>Patch\basecross\GameSaveManager</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Character.cpp">
-      <Filter>DefaultFiles\Character</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Scene.cpp">
       <Filter>DefaultFiles\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)LoadStage.cpp">
-      <Filter>Maruyama\Stage\LoadStage</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)FoundManager.cpp">
-      <Filter>Maruyama\Utility\Component\FoundManager</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)PlayerInputer.cpp">
-      <Filter>Patch\Inputer</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)MaruUtility.cpp">
-      <Filter>Maruyama\Utility\MaruUtility</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Mathf.cpp">
-      <Filter>Maruyama\Utility\MaruUtility\Mathf</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)UtilityObstacle.cpp">
-      <Filter>Maruyama\Utility\MaruUtility\Objstacle</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)WallObject.cpp">
-      <Filter>Maruyama\StageObject\WallObject</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)DebugObject.cpp">
-      <Filter>Maruyama\Utility\DebugOjbect</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)GameTimer.cpp">
-      <Filter>Maruyama\Utility\Timer\GameTimer</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)GameStageBase.cpp">
-      <Filter>Maruyama\Stage\GameStageBase</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)MainCamera.cpp">
-      <Filter>Maruyama\Camera\MainCamera</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)MainStage.cpp">
       <Filter>Maruyama\Stage\MainStage</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)MainCameraObject.cpp">
-      <Filter>Maruyama\Camera\MainCamera\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)MyRandom.cpp">
-      <Filter>Maruyama\Utility\MaruUtility\MyRandom</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)SeekTPS.cpp">
-      <Filter>Maruyama\Camera\Seek\SeekTPS</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)ToTargetMove.cpp">
-      <Filter>Maruyama\Utility\Component\TargetManager\ToTargetMove</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)GameManagerObject.cpp">
-      <Filter>Maruyama\GameManager\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)EyeSearchRange.cpp">
-      <Filter>Maruyama\Enemy\Component\EyeSearchRange</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)BoardObject.cpp">
-      <Filter>Maruyama\Utility\BoardObject</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)BuilderVertexPCT.cpp">
-      <Filter>Maruyama\Utility\Component\Builder</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)GameManager.cpp">
-      <Filter>Maruyama\GameManager\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)RandomPosiitonGenerator.cpp">
-      <Filter>Maruyama\Generator\Component\RandomPositionGenerator</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)PlayerMover.cpp">
-      <Filter>Patch\PlayerMover</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)SlowTimerManager.cpp">
-      <Filter>Maruyama\Utility\SingletonComponent\SlowTimerManager</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)OriginalMeshStageObject.cpp">
-      <Filter>Maruyama\StageObject\OriginalMeshStageObject</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)StageObjectBase.cpp">
-      <Filter>Maruyama\StageObject\StageObjectBase</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)RotationController.cpp">
-      <Filter>Maruyama\Utility\Component\RotationController</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)TargetManager.cpp">
-      <Filter>Maruyama\Utility\Component\TargetManager</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)VelocityManager.cpp">
       <Filter>Maruyama\Utility\Component\VelocityManager</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)LoadData.cpp">
-      <Filter>Maruyama\Utility\Load\LoadData</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)StageMapCSV.cpp">
-      <Filter>Maruyama\Utility\Load\StageMapCsv</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)MaruHitHelper.cpp">
-      <Filter>Maruyama\Utility\MaruUtility\MaruHitHelper</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)UtilityVelocity.cpp">
-      <Filter>Maruyama\Utility\MaruUtility\Velocity</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)WaitTimer.cpp">
-      <Filter>Maruyama\Utility\Timer\WaitTimter</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)GeneratorBase.cpp">
-      <Filter>Maruyama\Generator\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)SeekTarget.cpp">
-      <Filter>Maruyama\Camera\Seek\SeekTarget</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)FixedBox.cpp">
-      <Filter>Maruyama\StageObject\FixedBox</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Task_CameraAtMove.cpp">
-      <Filter>Maruyama\Utility\TaskList\CommonTasks\Camera\Task_CameraAtMove</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Task_ToTargetMove.cpp">
-      <Filter>Maruyama\Utility\TaskList\CommonTasks\Task_ToTargetMove</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Task_Wait.cpp">
-      <Filter>Maruyama\Enemy\Component\CommonTask\Wait</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)CameraShake.cpp">
-      <Filter>Maruyama\Camera\Shake</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)SingletonComponent.cpp">
-      <Filter>Maruyama\Utility\MaruUtility\Singleton</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)SoundManager.cpp">
-      <Filter>Maruyama\Utility\SingletonComponent\SoundManager</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)CollisionAction.cpp">
-      <Filter>Maruyama\Utility\Component\CollisionAction</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)I_Damaged.cpp">
-      <Filter>Maruyama\Interface\I_Damaged</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)EnemyStatusBase.cpp">
-      <Filter>Maruyama\Enemy\Component\Base\Status</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)NavGraphNode.cpp">
-      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\NavGraphNode</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)AstarEdge.cpp">
-      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\AstarEdge</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)SparseGraph.cpp">
-      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\SparseGraph</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Heuristic.cpp">
-      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\Heuristic</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)UtilityAstar.cpp">
-      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\UtilityAstar</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)MaruAction.cpp">
-      <Filter>Maruyama\Utility\MaruUtility\Action</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)NumberObject.cpp">
-      <Filter>Maruyama\Utility\DebugOjbect\DebugNumber\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)NumbersObject.cpp">
-      <Filter>Maruyama\Utility\DebugOjbect\NumbersObject</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)NumbersCtrl.cpp">
-      <Filter>Maruyama\Utility\DebugOjbect\NumbersCtrl</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)ArrowObject.cpp">
-      <Filter>Maruyama\Utility\DebugOjbect\ArrowObject</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)BillBoard.cpp">
-      <Filter>Maruyama\Utility\Component\BillBoard</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)AstarEdgeDraw.cpp">
-      <Filter>Maruyama\Utility\DebugOjbect\AstarEdgeDraw</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)AstarNodeDraw.cpp">
-      <Filter>Maruyama\Utility\DebugOjbect\AstarNodeDraw</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Task_MovePositions.cpp">
-      <Filter>Maruyama\Enemy\Component\CommonTask\MovePositoins</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Task_AroundEyeCheck.cpp">
-      <Filter>Maruyama\Enemy\Component\CommonTask\AroundEyeCheck</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)StatorBase.cpp">
-      <Filter>Maruyama\Enemy\Component\Base\Stator</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Utility_EnemyStator.cpp">
-      <Filter>Maruyama\Enemy\StatorUtility</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)ActiveSkillBase.cpp">
-      <Filter>Maruyama\Enemy\Component\Base\Skill\ActiveSkillBase</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)PassiveSkillBase.cpp">
-      <Filter>Maruyama\Enemy\Component\Base\Skill\PassiveSkillBase</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)SkilBase.cpp">
-      <Filter>Maruyama\Enemy\Component\Base\Skill</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)TimerDestory.cpp">
-      <Filter>Maruyama\Utility\Component\Destroy</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)EnemyAIDirector.cpp">
-      <Filter>Maruyama\Enemy\Component\AI\Director</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)FactionCoordinator.cpp">
-      <Filter>Maruyama\Enemy\Component\AI\Director\FactionCoordinator</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)CombatCoordinator.cpp">
-      <Filter>Maruyama\Enemy\Component\AI\Director\FactionCoordinator\Fanction\CombatCoordinator</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Task_Flee.cpp">
-      <Filter>Maruyama\Enemy\Component\CommonTask\Flee</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Task_AstarEvade.cpp">
-      <Filter>Maruyama\Enemy\Component\CommonTask\AstarEvade</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Task_AstarMove.cpp">
-      <Filter>Maruyama\Enemy\Component\CommonTask\AstarMove</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)AnimatorBase.cpp">
-      <Filter>Maruyama\Enemy\Component\Base\Animator</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)AnimationMainStateMachine.cpp">
-      <Filter>Maruyama\Enemy\Component\Base\Animator\AnimationMainStateMachine</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)GraphBase.cpp">
-      <Filter>Maruyama\Enemy\Component\EnemyMainStateMachine\GraphBase</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)GraphNodeBase.cpp">
-      <Filter>Maruyama\Enemy\Component\EnemyMainStateMachine\NodeBase</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)GraphStateNode.cpp">
-      <Filter>Maruyama\Enemy\Component\EnemyMainStateMachine\NodeBase\StateNode\GraphStateNode</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)MaruAnimationHelper.cpp">
-      <Filter>Maruyama\Enemy\Component\Base\Animation</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)SubAnimatorBase.cpp">
-      <Filter>Maruyama\Enemy\Component\Base\Animator\SubAnimatorBase</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)StartCamera.cpp">
-      <Filter>Maruyama\Camera\StartCamera</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)UtilityStartCamera.cpp">
-      <Filter>Maruyama\Camera\StartCamera\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)GraphAstar.cpp">
-      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\GraphAstar</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)I_KnockBack.cpp">
-      <Filter>Maruyama\Interface\I_KnockBack</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)ReactiveBool.cpp">
-      <Filter>Maruyama\Utility\ReactiveBool</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)PNTToonDraw.cpp">
-      <Filter>Maruyama\Shader\ToonShader\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)ToonPNTStaticModelDraw.cpp">
-      <Filter>Maruyama\Shader\ToonShader\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)ParticleManager.cpp">
-      <Filter>Maruyama\Utility\Effect\ParticleManager</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)SinScaling.cpp">
-      <Filter>Sources\SinScaling</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)FadeSprite.cpp">
-      <Filter>Maruyama\Utility\Component\FadeSprite</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)BillBoard_Ex.cpp">
-      <Filter>Maruyama\Utility\Component\BillBoard\Ex</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)OriginalMeshToonObject.cpp">
-      <Filter>Maruyama\StageObject\OriginalMeshStageObject\OriginalMeshToomObject</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)AuraBase.cpp">
-      <Filter>Maruyama\Utility\Effect\Aura</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)AuraObjectBase.cpp">
-      <Filter>Maruyama\Utility\Effect\Aura\AuraObject</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)EffectManager.cpp">
-      <Filter>Maruyama\EffectManager</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)ScaleParent.cpp">
-      <Filter>Maruyama\Utility\ScaleParent</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)AutoReflection.cpp">
-      <Filter>Maruyama\Utility\Component\AutoReflection</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)ScalePop.cpp">
-      <Filter>Maruyama\Utility\Component\ScalePop</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)ScaleFade.cpp">
-      <Filter>Maruyama\Utility\Component\ScaleFade</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)CollisionObject.cpp">
-      <Filter>Maruyama\Utility\Component\CollisionObject</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Targeted.cpp">
-      <Filter>Maruyama\Enemy\Component\Targeted</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)WallEvasion.cpp">
-      <Filter>Maruyama\Utility\Component\WallEvasion</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)TactileCtrl.cpp">
-      <Filter>Maruyama\Utility\Component\WallEvasion\Tactile</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)TactileObject.cpp">
-      <Filter>Maruyama\Utility\Component\WallEvasion\Tactile</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)LoadPositionGenerator.cpp">
-      <Filter>Maruyama\Generator\Component\LoadPositionGenerator</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)ReactiveProperty.cpp">
-      <Filter>Maruyama\Utility\Component\ReactiveProperty</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)LoadCSV.cpp">
-      <Filter>Maruyama\Utility\Load\LoadCSV</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)CameraRayAlphaManager.cpp">
-      <Filter>Maruyama\Utility\Component\CameraRayAlphaManager</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)RangeDestoryManager.cpp">
-      <Filter>Maruyama\Utility\Component\RangeDestroyManager</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)DebugNumber.cpp">
-      <Filter>Maruyama\Utility\DebugOjbect\DebugNumber</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)ScreenFadeManager.cpp">
-      <Filter>Maruyama\Utility\Component\FadeSprite\ScreenFadeManager</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)ImpactMap.cpp">
-      <Filter>Maruyama\Enemy\Component\ImpactMap</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)ImpactManager.cpp">
-      <Filter>Maruyama\Enemy\Component\ImpactMap\ImpactManager</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)I_Impact.cpp">
-      <Filter>Maruyama\Enemy\Component\ImpactMap\Intarfase\I_Impact</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)FieldImpactMap.cpp">
-      <Filter>Maruyama\Enemy\Component\ImpactMap\FieldImpactMap</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)SoleImpactMap.cpp">
-      <Filter>Maruyama\Enemy\Component\ImpactMap\SoleImpactMap</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Task_PlowlingMove.cpp">
-      <Filter>Maruyama\Enemy\Component\CommonTask\PlowlingMove</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)EffectBase.cpp">
-      <Filter>Maruyama\Utility\Effect</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)LookAtCameraManager.cpp">
-      <Filter>Maruyama\Camera\LookAtCameraManager</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)SpriteObject.cpp">
-      <Filter>Maruyama\Utility\SpriteObject</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)SelectSprite.cpp">
-      <Filter>Maruyama\Utility\SelectSprite</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)SelecterSprite.cpp">
-      <Filter>Maruyama\Utility\SelectSprite\Selecter</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)PlayerController.cpp">
-      <Filter>Maruyama\Player\Component\PlayerController</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)HeroObject.cpp">
-      <Filter>Maruyama\Enemy\Object\HeroObject</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)EnemyStatorBase.cpp">
-      <Filter>Maruyama\Enemy\Component\EachEnemy\Common\Stator</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)EnemyStateNode_Plowling.cpp">
-      <Filter>Maruyama\Enemy\Component\EachEnemy\Common\Stator\State\Plowling</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Stator_Hero.cpp">
-      <Filter>Maruyama\Enemy\Component\EachEnemy\Hero\Stator</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Hero.cpp">
-      <Filter>Maruyama\Enemy\Component\EachEnemy\Hero</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)EnemyGeneratorObject.cpp">
-      <Filter>Maruyama\Generator\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)CameraRotater.cpp">
-      <Filter>Patch\basecross\CameraHelper\CameraRotate</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)PlayerCameraMover.cpp">
-      <Filter>Patch\basecross\CameraHelper\PlayerCameraMover</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)SpringArmComponent.cpp">
-      <Filter>Patch\basecross\CameraHelper\SpringArmComponent</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)HideItem.cpp">
-      <Filter>Maruyama\Item\Component\HideItem</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)HideItemObject.cpp">
-      <Filter>Maruyama\Item\Object\HideItemObject</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)ItemBag.cpp">
-      <Filter>Maruyama\Player\Component\ItemBag</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)ItemAcquisitionManager.cpp">
-      <Filter>Maruyama\Player\Component\ItemAcquisitionManager</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)ItemBase.cpp">
-      <Filter>Maruyama\Item\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)OwnHideItemManager.cpp">
-      <Filter>Maruyama\Player\Component\OwnHideItemManager</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)HidePlace.cpp">
-      <Filter>Maruyama\StageObject\HidePlaceObject\HidePlace</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)PlayerObject.cpp">
-      <Filter>Maruyama\Player\Object\PlayerObjectBase</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)HeroPlayerObject.cpp">
-      <Filter>Maruyama\Player\Object\HeroPlayerObject</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)VillainPlayerObject.cpp">
-      <Filter>Maruyama\Player\Object\VillainPlayerObject</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)ImpactDataDraw.cpp">
-      <Filter>Maruyama\Utility\DebugOjbect\AstarNodeDraw\ImpactDataDraw</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Villain.cpp">
-      <Filter>Maruyama\Enemy\Component\EachEnemy\Villain</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Stator_Villain.cpp">
-      <Filter>Maruyama\Enemy\Component\EachEnemy\Villain\Stator</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)VillainEnemyObject.cpp">
-      <Filter>Maruyama\Enemy\Object\VillainObject</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Effekseer\EfkComponent.cpp">
       <Filter>Watanabe\Effekseer</Filter>
@@ -2583,24 +2093,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\WatanabeStage.cpp">
       <Filter>Watanabe\TestStage</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)EnemyObjectBase.cpp">
-      <Filter>Maruyama\Enemy\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)EnemyStateNode_Chase.cpp">
-      <Filter>Maruyama\Enemy\Component\EachEnemy\Common\Stator\State\Chase</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)ChaseState_AstarSeek.cpp">
-      <Filter>Maruyama\Enemy\Component\EachEnemy\Common\Stator\State\Chase\AstarSeek</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)ChaseState_TargetSeek.cpp">
-      <Filter>Maruyama\Enemy\Component\EachEnemy\Common\Stator\State\Chase\TargetSeek</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)PlayerAnimationCtrl.cpp">
-      <Filter>Maruyama\Player\Component\PlayerAnimationCtrl</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)TitleStage.cpp">
-      <Filter>Maruyama\Stage\TitleStage</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\PlayerOnlineController.cpp">
       <Filter>Itabashi\Online\PlayerOnlineController</Filter>
     </ClCompile>
@@ -2615,9 +2107,6 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\Block.cpp">
       <Filter>Watanabe\StageObject\Block</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\RackObject.cpp">
-      <Filter>Watanabe\StageObject\RackObject</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Utility\AdvMeshUtil.cpp">
       <Filter>Watanabe\Utility\AdvMeshUtil</Filter>
@@ -2637,21 +2126,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\AdvBaseDraw.cpp">
       <Filter>Watanabe\Shader\AdvBaseDraw</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)AIImpacter.cpp">
-      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\AIImpacter</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)CoordinatorBase.cpp">
-      <Filter>Maruyama\Enemy\Component\AI\Director\CoordinatorBase</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)PatrolCoordinator.cpp">
-      <Filter>Maruyama\Enemy\Component\AI\Director\FactionCoordinator\Fanction\PatrolCoordinator</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)TupleSpace.cpp">
-      <Filter>Maruyama\Enemy\Component\AI\TupleSpace</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)I_FactionMember.cpp">
-      <Filter>Maruyama\Enemy\Component\AI\Director\FactionCoordinator\I_FactionMember</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\TestComponent.cpp">
       <Filter>Watanabe\Component\TestComponent</Filter>
     </ClCompile>
@@ -2670,35 +2144,14 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\ObjectHider.cpp">
       <Filter>Itabashi\Component\ObjectHider</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)SelfImpactNodeManager.cpp">
-      <Filter>Maruyama\Enemy\Component\ImpactMap\SelfImpactNodeManager</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)OccupancyManager.cpp">
-      <Filter>Maruyama\Enemy\Component\ImpactMap\ImpactManager\ImpactDataManager\OccupancyManager</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\PlayerStatus.cpp">
       <Filter>Watanabe\Component\PlayerStatus</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)BulletBase.cpp">
-      <Filter>Maruyama\Player\Component\Wepon\Bullet\Component</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\OwnAreaObject.cpp">
       <Filter>Watanabe\StageObject\OwnAreaObject</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\PlayerSpawnPointObject.cpp">
       <Filter>Watanabe\StageObject\PlayerSpawnPoint</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)WeponBase.cpp">
-      <Filter>Maruyama\Player\Component\Wepon</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)ChargeGun.cpp">
-      <Filter>Maruyama\Player\Component\Wepon\ChargeGun</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)ChargeBullet.cpp">
-      <Filter>Maruyama\Player\Component\Wepon\Bullet\Component\ChargeBullet</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)TackleAttack.cpp">
-      <Filter>Maruyama\Player\Component\AttackBase\TackleAttack</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Interface\I_TeamMember.cpp">
       <Filter>Maruyama\Interface\I_TeamMember</Filter>
@@ -2774,9 +2227,6 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Manager\TimeManager.cpp">
       <Filter>Watanabe\Manager\TimeManager</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)ChargeBulletObject.cpp">
-      <Filter>Maruyama\Player\Component\Wepon\Bullet\Object\ChargeBulletObject</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Interface\I_TaskLister.cpp">
       <Filter>Maruyama\Interface\I_TaskLister</Filter>
@@ -2856,9 +2306,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\BoxAnimator.cpp">
       <Filter>Watanabe\Component\BoxAnimator</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\FieldMap.cpp">
-      <Filter>Maruyama\Player\Component\UseOwnArea\Map</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\MatchingUIController.cpp">
       <Filter>Watanabe\Component\MatchingUIController</Filter>
     </ClCompile>
@@ -2880,9 +2327,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\MainStageTransitioner.cpp">
       <Filter>Itabashi\Component\MainStageTransitioner</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)MapCursor.cpp">
-      <Filter>Maruyama\Player\Component\UseOwnArea\Map\Cursor</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Camera\Component\CameraForwardController.cpp">
       <Filter>Maruyama\Camera\CameraForwardController</Filter>
     </ClCompile>
@@ -2901,14 +2345,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\ButtonUI.cpp">
       <Filter>Watanabe\UI\ButtonUI</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\UI\Reticle.cpp">
-      <Filter>Maruyama\UI\Reticle</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\BoardPoly\GoalBP.cpp">
       <Filter>Watanabe\BoardPoly\GoalBP</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)TeleportUI.cpp">
-      <Filter>Maruyama\UI\TeleportUI</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\Zooming.cpp">
       <Filter>Watanabe\Component\Zooming</Filter>
@@ -2919,13 +2357,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\PCTStaticModelDraw.cpp">
       <Filter>Itabashi\Component\Graphic</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)TeleportCursorUI.cpp">
-      <Filter>Maruyama\UI\TeleportCursorUI</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Stage\MapShotStage.cpp">
       <Filter>Maruyama\Stage\MapShotStage</Filter>
     </ClCompile>
-
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\HoldButtonUI.cpp">
       <Filter>Watanabe\UI\HoldButtonUI</Filter>
     </ClCompile>
@@ -2934,18 +2368,558 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\BoardPoly\PlayerLabelBP.cpp">
       <Filter>Watanabe\BoardPoly\PlayerLabelBP</Filter>
-	</ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)OpenBoard.cpp">
-      <Filter>Maruyama\Player\Component\ItemAcquisitionManager\BoardUI</Filter>
-
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)HitStopManager.cpp">
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\Utility\ActionTimer.cpp">
+      <Filter>Patch\Utility\ActionTimer</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Skill\ActiveSkillBase.cpp">
+      <Filter>Maruyama\Enemy\Component\Base\Skill\ActiveSkillBase</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\PlayerAnimationCtrl.cpp">
+      <Filter>Maruyama\Player\Component\PlayerAnimationCtrl</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Animation\AnimationMainStateMachine.cpp">
+      <Filter>Maruyama\Enemy\Component\Base\Animator\AnimationMainStateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Animation\SubAnimatorBase.cpp">
+      <Filter>Maruyama\Enemy\Component\Base\Animator\SubAnimatorBase</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Animation\AnimatorBase.cpp">
+      <Filter>Maruyama\Enemy\Component\Base\Animator</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Debug\Object\ArrowObject.cpp">
+      <Filter>Maruyama\Utility\DebugOjbect\ArrowObject</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\AstarEdge.cpp">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\AstarEdge</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\UtilityAstar.cpp">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\UtilityAstar</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\Debug\AstarEdgeDraw.cpp">
+      <Filter>Maruyama\Utility\DebugOjbect\AstarEdgeDraw</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\Debug\AstarNodeDraw.cpp">
+      <Filter>Maruyama\Utility\DebugOjbect\AstarNodeDraw</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\TackleAttack.cpp">
+      <Filter>Maruyama\Player\Component\AttackBase\TackleAttack</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Effect\Component\AuraBase.cpp">
+      <Filter>Maruyama\Utility\Effect\Aura</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Effect\Component\EffectBase.cpp">
+      <Filter>Maruyama\Utility\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Effect\Component\EffectManager.cpp">
+      <Filter>Maruyama\EffectManager</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Effect\Object\AuraObjectBase.cpp">
+      <Filter>Maruyama\Utility\Effect\Aura\AuraObject</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Component\AutoReflection.cpp">
+      <Filter>Maruyama\Utility\Component\AutoReflection</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Component\BillBoard_Ex.cpp">
+      <Filter>Maruyama\Utility\Component\BillBoard\Ex</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Component\BillBoard.cpp">
+      <Filter>Maruyama\Utility\Component\BillBoard</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\UI\BuilderVertexPCT.cpp">
+      <Filter>Maruyama\Utility\Component\Builder</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Bullet\Component\BulletBase.cpp">
+      <Filter>Maruyama\Player\Component\Wepon\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Bullet\Component\ChargeBullet.cpp">
+      <Filter>Maruyama\Player\Component\Wepon\Bullet\Component\ChargeBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Camera\Component\CameraRayAlphaManager.cpp">
+      <Filter>Maruyama\Utility\Component\CameraRayAlphaManager</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Camera\Component\CameraShake.cpp">
+      <Filter>Maruyama\Camera\Shake</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Bullet\Object\ChargeBulletObject.cpp">
+      <Filter>Maruyama\Player\Component\Wepon\Bullet\Object\ChargeBulletObject</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\ChargeGun.cpp">
+      <Filter>Maruyama\Player\Component\Wepon\ChargeGun</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Stator\StateNode\ChaseState_TargetSeek.cpp">
+      <Filter>Maruyama\Enemy\Component\EachEnemy\Common\Stator\State\Chase\TargetSeek</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Stator\StateNode\ChaseState_AstarSeek.cpp">
+      <Filter>Maruyama\Enemy\Component\EachEnemy\Common\Stator\State\Chase\AstarSeek</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Stator\StateNode\EnemyStateNode_Chase.cpp">
+      <Filter>Maruyama\Enemy\Component\EachEnemy\Common\Stator\State\Chase</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Stator\StateNode\EnemyStateNode_Plowling.cpp">
+      <Filter>Maruyama\Enemy\Component\EachEnemy\Common\Stator\State\Plowling</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Component\CollisionAction.cpp">
+      <Filter>Maruyama\Utility\Component\CollisionAction</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Object\CollisionObject.cpp">
+      <Filter>Maruyama\Utility\Component\CollisionObject</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\CoordinatorBase.cpp">
+      <Filter>Maruyama\Enemy\Component\AI\Director\CoordinatorBase</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\CombatCoordinator.cpp">
+      <Filter>Maruyama\Enemy\Component\AI\Director\FactionCoordinator\Fanction\CombatCoordinator</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\FactionCoordinator.cpp">
+      <Filter>Maruyama\Enemy\Component\AI\Director\FactionCoordinator</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\PatrolCoordinator.cpp">
+      <Filter>Maruyama\Enemy\Component\AI\Director\FactionCoordinator\Fanction\PatrolCoordinator</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\EnemyAIDirector.cpp">
+      <Filter>Maruyama\Enemy\Component\AI\Director</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Debug\Object\DebugObject.cpp">
+      <Filter>Maruyama\Utility\DebugOjbect</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Debug\Component\DebugNumber.cpp">
+      <Filter>Maruyama\Utility\DebugOjbect\DebugNumber</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Villain.cpp">
+      <Filter>Maruyama\Enemy\Component\EachEnemy\Villain</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Generator\EnemyGeneratorObject.cpp">
+      <Filter>Maruyama\Generator\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Object\EnemyObjectBase.cpp">
+      <Filter>Maruyama\Enemy\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Object\HeroObject.cpp">
+      <Filter>Maruyama\Enemy\Object\HeroObject</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Object\VillainEnemyObject.cpp">
+      <Filter>Maruyama\Enemy\Object\VillainObject</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Stator\EnemyStatorBase.cpp">
+      <Filter>Maruyama\Enemy\Component\EachEnemy\Common\Stator\State</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Stator\Stator_Villain.cpp">
+      <Filter>Maruyama\Enemy\Component\EachEnemy\Villain\Stator</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Stator\Stator_Hero.cpp">
+      <Filter>Maruyama\Enemy\Component\EachEnemy\Hero\Stator</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\EyeSearchRange.cpp">
+      <Filter>Maruyama\Enemy\Component\EyeSearchRange</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Stator\StatorBase.cpp">
+      <Filter>Maruyama\Enemy\Component\Base\Stator</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\EnemyStatusBase.cpp">
+      <Filter>Maruyama\Enemy\Component\Base\Status</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Component\FadeSprite.cpp">
+      <Filter>Maruyama\Utility\Component\FadeSprite</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Component\FoundManager.cpp">
+      <Filter>Maruyama\Utility\Component\FoundManager</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\ScreenFadeManager.cpp">
+      <Filter>Maruyama\Utility\Component\FadeSprite\ScreenFadeManager</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\GameManager.cpp">
+      <Filter>Maruyama\GameManager\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Object\GameManagerObject.cpp">
+      <Filter>Maruyama\GameManager\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Timer\TimeHelper.cpp">
+      <Filter>Maruyama\Utility\Timer\TimeHelper</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Timer\GameTimer.cpp">
+      <Filter>Maruyama\Utility\Timer\GameTimer</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Generator\GeneratorBase.cpp">
+      <Filter>Maruyama\Generator\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Generator\RandomPosiitonGenerator.cpp">
+      <Filter>Maruyama\Generator\Component\RandomPositionGenerator</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Generator\LoadPositionGenerator.cpp">
+      <Filter>Maruyama\Generator\Component\LoadPositionGenerator</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\GraphAstar.cpp">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\GraphAstar</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\GraphBase.cpp">
+      <Filter>Maruyama\Enemy\Component\EnemyMainStateMachine\GraphBase</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\StageObject\FixedBox.cpp">
+      <Filter>Maruyama\StageObject\FixedBox</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\GraphNodeBase.cpp">
+      <Filter>Maruyama\Enemy\Component\EnemyMainStateMachine\NodeBase</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\NavGraphNode.cpp">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\NavGraphNode</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\Heuristic.cpp">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\Heuristic</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Hero.cpp">
+      <Filter>Maruyama\Enemy\Component\EachEnemy\Hero</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Object\HeroPlayerObject.cpp">
+      <Filter>Maruyama\Player\Object\HeroPlayerObject</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Item\HideItem.cpp">
+      <Filter>Maruyama\Item\Component\HideItem</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Item\HideItemObject.cpp">
+      <Filter>Maruyama\Item\Object\HideItemObject</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\StageObject\HidePlace.cpp">
+      <Filter>Maruyama\StageObject\HidePlaceObject\HidePlace</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\RackObject.cpp">
+      <Filter>Watanabe\StageObject\RackObject</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\HitStopManager.cpp">
       <Filter>Maruyama\Utility\Component\HitStopManager</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)TimeHelper.cpp">
-      <Filter>Maruyama\Utility\Timer\TimeHelper</Filter>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Interface\I_Damaged.cpp">
+      <Filter>Maruyama\Interface\I_Damaged</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Interface\I_KnockBack.cpp">
+      <Filter>Maruyama\Interface\I_KnockBack</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Interface\I_Impact.cpp">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Intarfase\I_Impact</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Interface\I_FactionMember.cpp">
+      <Filter>Maruyama\Enemy\Component\AI\Director\FactionCoordinator\I_FactionMember</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\Debug\ImpactDataDraw.cpp">
+      <Filter>Maruyama\Utility\DebugOjbect\AstarNodeDraw\ImpactDataDraw</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\AIImpacter.cpp">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\AIImpacter</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\ImpactMap.cpp">
+      <Filter>Maruyama\Enemy\Component\ImpactMap</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\ImpactManager.cpp">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\ImpactManager</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\FieldImpactMap.cpp">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\FieldImpactMap</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)GameStageBase.cpp">
+      <Filter>Maruyama\Stage\GameStageBase</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\ItemAcquisitionManager.cpp">
+      <Filter>Maruyama\Player\Component\ItemAcquisitionManager</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\ItemBag.cpp">
+      <Filter>Maruyama\Player\Component\ItemBag</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Item\ItemBase.cpp">
+      <Filter>Maruyama\Item\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Camera\Component\LookAtCameraManager.cpp">
+      <Filter>Maruyama\Camera\LookAtCameraManager</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Camera\MainCameraObject.cpp">
+      <Filter>Maruyama\Camera\MainCamera\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Camera\MainCamera.cpp">
+      <Filter>Maruyama\Camera\MainCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\MaruAction.cpp">
+      <Filter>Maruyama\Utility\MaruUtility\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\ReactiveBool.cpp">
+      <Filter>Maruyama\Utility\ReactiveBool</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\ReactiveProperty.cpp">
+      <Filter>Maruyama\Utility\Component\ReactiveProperty</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Animation\MaruAnimationHelper.cpp">
+      <Filter>Maruyama\Enemy\Component\Base\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\MaruHitHelper.cpp">
+      <Filter>Maruyama\Utility\MaruUtility\MaruHitHelper</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\UtilityObstacle.cpp">
+      <Filter>Maruyama\Utility\MaruUtility\Objstacle</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\MaruUtility.cpp">
+      <Filter>Maruyama\Utility\MaruUtility</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Mathf.cpp">
+      <Filter>Maruyama\Utility\MaruUtility\Mathf</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\Task_AroundEyeCheck.cpp">
+      <Filter>Maruyama\Utility\TaskList\CommonTasks\AroundEyeCheck</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\Task_AstarEvade.cpp">
+      <Filter>Maruyama\Utility\TaskList\CommonTasks\AstarEvade</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\Task_AstarMove.cpp">
+      <Filter>Maruyama\Utility\TaskList\CommonTasks\AstarMove</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\Task_CameraAtMove.cpp">
+      <Filter>Maruyama\Utility\TaskList\CommonTasks\Camera\CameraAtMove</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\Task_Flee.cpp">
+      <Filter>Maruyama\Utility\TaskList\CommonTasks\Flee</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\Task_MovePositions.cpp">
+      <Filter>Maruyama\Utility\TaskList\CommonTasks\MovePositoins</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\Task_PlowlingMove.cpp">
+      <Filter>Maruyama\Utility\TaskList\CommonTasks\PlowlingMove</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\Task_ToTargetMove.cpp">
+      <Filter>Maruyama\Utility\TaskList\CommonTasks\ToTargetMove</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\Task_Wait.cpp">
+      <Filter>Maruyama\Utility\TaskList\CommonTasks\Wait</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\MaruRandom.cpp">
+      <Filter>Maruyama\Utility\MaruUtility\Random</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\UI\3D\Component\NumbersCtrl.cpp">
+      <Filter>Maruyama\Utility\DebugOjbect\NumbersCtrl</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\UI\3D\Object\NumbersObject.cpp">
+      <Filter>Maruyama\Utility\DebugOjbect\NumbersObject</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\UI\3D\Object\NumberObject.cpp">
+      <Filter>Maruyama\Utility\DebugOjbect\DebugNumber\NumberObject</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\UI\3D\Object\BoardObject.cpp">
+      <Filter>Maruyama\Utility\BoardObject</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\OccupancyManager.cpp">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\ImpactManager\ImpactDataManager\OccupancyManager</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\UI\3D\Component\OpenBoard.cpp">
+      <Filter>Maruyama\Player\Component\ItemAcquisitionManager\BoardUI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\StageObject\OriginalMeshStageObject.cpp">
+      <Filter>Maruyama\StageObject\OriginalMeshStageObject</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\StageObject\OriginalMeshToonObject.cpp">
+      <Filter>Maruyama\StageObject\OriginalMeshStageObject\OriginalMeshToomObject</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\OwnHideItemManager.cpp">
+      <Filter>Maruyama\Player\Component\OwnHideItemManager</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Effect\Component\ParticleManager.cpp">
+      <Filter>Maruyama\Utility\Effect\ParticleManager</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Skill\PassiveSkillBase.cpp">
+      <Filter>Maruyama\Enemy\Component\Base\Skill\PassiveSkillBase</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\PlayerController.cpp">
+      <Filter>Maruyama\Player\Component\PlayerController</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Component\RangeDestoryManager.cpp">
+      <Filter>Maruyama\Utility\Component\Destroy\RangeDestroyManager</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Component\RotationController.cpp">
+      <Filter>Maruyama\Utility\Component\RotationController</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Component\ScalePop.cpp">
+      <Filter>Maruyama\Utility\Component\ScalePop</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Component\ScaleFade.cpp">
+      <Filter>Maruyama\Utility\Component\ScaleFade</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Component\ScaleParent.cpp">
+      <Filter>Maruyama\Utility\Component\ScaleParent</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Component\SeekTarget.cpp">
+      <Filter>Maruyama\Camera\Seek\SeekTarget</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Camera\Component\SeekTPS.cpp">
+      <Filter>Maruyama\Camera\Seek\SeekTPS</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\UI\2D\Component\SelecterSprite.cpp">
+      <Filter>Maruyama\Utility\SelectSprite\Selecter</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\UI\2D\Component\SelectSprite.cpp">
+      <Filter>Maruyama\Utility\SelectSprite</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\SelfImpactNodeManager.cpp">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\SelfImpactNodeManager</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\SingletonComponent.cpp">
+      <Filter>Maruyama\Utility\MaruUtility\Singleton</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\SlowTimerManager.cpp">
+      <Filter>Maruyama\Utility\SingletonComponent\SlowTimerManager</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\SoundManager.cpp">
+      <Filter>Maruyama\Utility\SingletonComponent\SoundManager</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Component\SinScaling.cpp">
+      <Filter>Sources\SinScaling</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Skill\SkilBase.cpp">
+      <Filter>Maruyama\Enemy\Component\Base\Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\SoleImpactMap.cpp">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\SoleImpactMap</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\SparseGraph.cpp">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\SparseGraph</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\UI\2D\Object\SpriteObject.cpp">
+      <Filter>Maruyama\Utility\SpriteObject</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Camera\StartCamera.cpp">
+      <Filter>Maruyama\Camera\StartCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Camera\UtilityStartCamera.cpp">
+      <Filter>Maruyama\Camera\StartCamera\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Component\TactileCtrl.cpp">
+      <Filter>Maruyama\Utility\Component\WallEvasion\Tactile</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Object\TactileObject.cpp">
+      <Filter>Maruyama\Utility\Component\WallEvasion\Tactile</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Component\WallEvasion.cpp">
+      <Filter>Maruyama\Utility\Component\WallEvasion</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Component\Targeted.cpp">
+      <Filter>Maruyama\Enemy\Component\Targeted</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Component\TargetManager.cpp">
+      <Filter>Maruyama\Utility\Component\TargetManager</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\UI\2D\Component\TeleportUI.cpp">
+      <Filter>Maruyama\UI\TeleportUI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\UI\2D\Component\TeleportCursorUI.cpp">
+      <Filter>Maruyama\UI\TeleportCursorUI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\UI\2D\Component\FieldMap.cpp">
+      <Filter>Maruyama\Player\Component\UseOwnArea\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\UI\2D\Component\Reticle.cpp">
+      <Filter>Maruyama\UI\Reticle</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\UI\2D\Component\MapCursor.cpp">
+      <Filter>Maruyama\Player\Component\UseOwnArea\Map\Cursor</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Component\TimerDestory.cpp">
+      <Filter>Maruyama\Utility\Component\Destroy\TimerDestroy</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Shader\Toon\PNTToonDraw.cpp">
+      <Filter>Maruyama\Shader\ToonShader\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Shader\Toon\ToonPNTStaticModelDraw.cpp">
+      <Filter>Maruyama\Shader\ToonShader\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Component\ToTargetMove.cpp">
+      <Filter>Maruyama\Utility\Component\TargetManager\ToTargetMove</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\TupleSpace.cpp">
+      <Filter>Maruyama\Enemy\Component\AI\TupleSpace</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Stator\Utility_EnemyStator.cpp">
+      <Filter>Maruyama\Enemy\StatorUtility</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Timer\WaitTimer.cpp">
+      <Filter>Maruyama\Utility\Timer\WaitTimter</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\UtilityVelocity.cpp">
+      <Filter>Maruyama\Utility\MaruUtility\Velocity</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\StageObject\WallObject.cpp">
+      <Filter>Maruyama\StageObject\WallObject</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\WeponBase.cpp">
+      <Filter>Maruyama\Player\Component\Wepon</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Patch\BezierTransitioner.cpp">
+      <Filter>Patch\basecross\BezierTransitioner</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Patch\CameraHelper.cpp">
+      <Filter>Patch\basecross\CameraHelper</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Patch\FontHelper.cpp">
+      <Filter>Patch\basecross\FontHelper</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Patch\GameSaveManager.cpp">
+      <Filter>Patch\basecross\GameSaveManager</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Patch\SoundHelper.cpp">
+      <Filter>Patch\basecross\SoundHelper</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Patch\UIHelper.cpp">
+      <Filter>Patch\basecross\UIHelper</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Patch\BasecrossInputer.cpp">
+      <Filter>Patch\Input\BasecrossInputer</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Patch\InputHelper.cpp">
+      <Filter>Patch\Input\InputHelper</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Patch\PlayerInputer.cpp">
+      <Filter>Patch\Inputer</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Patch\Bezier.cpp">
+      <Filter>Patch\Mathf\Bezier</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Patch\MathHelper.cpp">
+      <Filter>Patch\Mathf\MyMath</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Patch\Random.cpp">
+      <Filter>Patch\Mathf\Random</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Patch\MessageWindow.cpp">
+      <Filter>Patch\basecross\MessageWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Patch\SpringArmComponent.cpp">
+      <Filter>Patch\basecross\CameraHelper\SpringArmComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Patch\PlayerCameraMover.cpp">
+      <Filter>Patch\basecross\CameraHelper\PlayerCameraMover</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Patch\CameraRotater.cpp">
+      <Filter>Patch\basecross\CameraHelper\CameraRotate</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Patch\PlayerMover.cpp">
+      <Filter>Patch\PlayerMover</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Stage\TitleStage.cpp">
+      <Filter>Maruyama\Stage\TitleStage</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Load\StageMapCSV.cpp">
+      <Filter>Maruyama\Utility\Load\StageMapCsv</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Load\LoadData.cpp">
+      <Filter>Maruyama\Utility\Load\LoadData</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Load\LoadCSV.cpp">
+      <Filter>Maruyama\Utility\Load\LoadCSV</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Stage\LoadStage.cpp">
+      <Filter>Maruyama\Stage\LoadStage</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\StageObject\StageObjectBase.cpp">
+      <Filter>Maruyama\StageObject\StageObjectBase</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Object\VillainPlayerObject.cpp">
+      <Filter>Maruyama\Player\Object\VillainPlayerObject</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Object\PlayerObject.cpp">
+      <Filter>Maruyama\Player\Object\PlayerObjectBase</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2954,12 +2928,6 @@
     </FxCompile>
     <FxCompile Include="$(MSBuildThisFileDirectory)..\..\Libs\BaseLib\DxShaders\SlimePS.hlsl">
       <Filter>Maruyama\Shader\SlimeShader</Filter>
-    </FxCompile>
-    <FxCompile Include="$(MSBuildThisFileDirectory)ToonVS.hlsl">
-      <Filter>Maruyama\Shader\ToonShader</Filter>
-    </FxCompile>
-    <FxCompile Include="$(MSBuildThisFileDirectory)ToonPS.hlsl">
-      <Filter>Maruyama\Shader\ToonShader</Filter>
     </FxCompile>
     <FxCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\HLSL\VSBoneModelDraw.hlsl">
       <Filter>Watanabe\Shader\BoneModelDraw\HLSL</Filter>
@@ -2985,6 +2953,12 @@
     <FxCompile Include="$(MSBuildThisFileDirectory)Itabashi\PSPCTStaticModel.hlsl">
       <Filter>Itabashi\Shader</Filter>
     </FxCompile>
+    <FxCompile Include="$(MSBuildThisFileDirectory)Maruyama\Shader\Toon\ToonPS.hlsl">
+      <Filter>Maruyama\Shader\ToonShader</Filter>
+    </FxCompile>
+    <FxCompile Include="$(MSBuildThisFileDirectory)Maruyama\Shader\Toon\ToonVS.hlsl">
+      <Filter>Maruyama\Shader\ToonShader</Filter>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)..\..\Libs\BaseLib\DxShaders\SlimeParametors.hlsli">
@@ -2992,12 +2966,6 @@
     </None>
     <None Include="$(MSBuildThisFileDirectory)..\..\Libs\BaseLib\DxShaders\SlimeFunctions.hlsli">
       <Filter>Maruyama\Shader\SlimeShader</Filter>
-    </None>
-    <None Include="$(MSBuildThisFileDirectory)ToonParametors.hlsli">
-      <Filter>Maruyama\Shader\ToonShader</Filter>
-    </None>
-    <None Include="$(MSBuildThisFileDirectory)ToonFunctions.hlsli">
-      <Filter>Maruyama\Shader\ToonShader</Filter>
     </None>
     <None Include="$(MSBuildThisFileDirectory)Watanabe\Shader\HLSL\IncDraw.hlsli">
       <Filter>Watanabe\Shader</Filter>
@@ -3007,6 +2975,12 @@
     </None>
     <None Include="$(MSBuildThisFileDirectory)Watanabe\Shader\HLSL\INCPCTGaugeDraw.hlsli">
       <Filter>Watanabe\Shader\PCTGaugeDraw\HLSL</Filter>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Maruyama\Shader\Toon\ToonFunctions.hlsli">
+      <Filter>Maruyama\Shader\ToonShader</Filter>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Maruyama\Shader\Toon\ToonParametors.hlsli">
+      <Filter>Maruyama\Shader\ToonShader</Filter>
     </None>
   </ItemGroup>
 </Project>

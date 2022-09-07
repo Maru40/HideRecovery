@@ -7,22 +7,21 @@
 #include "../StageObject/Block.h"
 #include "../StageObject/RackObject.h"
 #include "../Shader/BoneModelDraw.h"
-#include "HeroPlayerObject.h"
-#include "VillainPlayerObject.h"
-#include "CameraHelper.h"
+#include "Maruyama/Player/Object/HeroPlayerObject.h"
+#include "Maruyama/Player/Object/VillainPlayerObject.h"
+#include "Patch/CameraHelper.h"
 #include "Itabashi/PlayerOnlineController.h"
 #include "Itabashi/OnlineTransformSynchronization.h"
-#include "SpringArmComponent.h"
-#include "CameraHelper.h"
-#include "LookAtCameraManager.h"
+#include "Patch/SpringArmComponent.h"
+#include "Patch/CameraHelper.h"
+#include "Maruyama/Camera/Component/LookAtCameraManager.h"
 #include "../Component/TestComponent.h"
 #include "Itabashi/ObjectMover.h"
-#include "RotationController.h"
-#include "PlayerInputer.h"
-#include "MaruUtility.h"
+#include "Maruyama/Utility/Component/RotationController.h"
+#include "Patch/PlayerInputer.h"
+#include "Maruyama/Utility/Utility.h"
 #include "../Utility/CSVLoad.h"
 #include "../Component/PlayerAnimator.h"
-#include "PlayerAnimationCtrl.h"
 #include "../UI/Numbers.h"
 #include "../UI/CountDownUI.h"
 #include "../UI/SimpleSprite.h"
@@ -35,7 +34,7 @@
 #include "../UI/TimerUI.h"
 #include "../StageObject/OwnAreaObject.h"
 
-#include "HideItemObject.h"
+#include "Maruyama/Item/HideItemObject.h"
 #include "Maruyama/StageObject/GoalObject.h"
 
 #include "../UI/HPGaugeUI.h"
@@ -110,7 +109,7 @@ namespace basecross {
 		//	testDraw->SetMultiMeshResource(L"Player_Mesh");
 		//	//testDraw->SetMeshResource(L"rack");
 		//}
-		player->RemoveComponent<PlayerAnimationCtrl>();
+		//player->RemoveComponent<PlayerAnimationCtrl>();
 		player->AddComponent<PlayerAnimator>();
 		m_obj = player;
 

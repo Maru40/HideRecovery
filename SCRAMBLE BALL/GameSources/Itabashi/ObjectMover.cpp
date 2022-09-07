@@ -3,7 +3,7 @@
 #include "VelocityManager.h"
 #include "Maruyama/Player/Component/UseWepon.h"
 
-#include "MaruUtility.h"
+#include "Maruyama/Utility/Utility.h"
 
 namespace basecross
 {

@@ -12,7 +12,7 @@
 #include "Maruyama/Interface/I_TeamMember.h"
 #include "Maruyama/StageObject/Goal.h"
 
-#include "MaruUtility.h"
+#include "Maruyama/Utility/Utility.h"
 
 #include "Watanabe/DebugClass/Debug.h"
 

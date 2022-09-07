@@ -1,8 +1,8 @@
 ﻿#include "stdafx.h"
 #include "MatchStageTransitioner.h"
 #include "OnlineMatching.h"
-#include "InputHelper.h"
-#include "PlayerInputer.h"
+#include "Patch/InputHelper.h"
+#include "Patch/PlayerInputer.h"
 #include "Scene.h"
 
 namespace basecross

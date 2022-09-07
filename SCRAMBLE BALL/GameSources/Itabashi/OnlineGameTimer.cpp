@@ -2,10 +2,10 @@
 #include "OnlineGameTimer.h"
 #include "Watanabe/Manager/TimeManager.h"
 #include "Itabashi/Item.h"
-#include "HideItem.h"
-#include "HidePlace.h"
-#include "MaruUtility.h"
-#include "MyRandom.h"
+#include "Maruyama/Item/HideItem.h"
+#include "Maruyama/StageObject/HidePlace.h"
+#include "Maruyama/Utility/Utility.h"
+#include "Maruyama/Utility/Random.h"
 #include "ObjectHider.h"
 
 namespace basecross

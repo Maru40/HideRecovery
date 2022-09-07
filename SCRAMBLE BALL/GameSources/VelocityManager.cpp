@@ -8,12 +8,12 @@
 #include "stdafx.h"
 
 #include "VelocityManager.h"
-#include "Mathf.h"
-#include "UtilityVelocity.h"
+#include "Maruyama/Utility/Mathf.h"
+#include "Maruyama/Utility/UtilityVelocity.h"
 
-#include "PlayerInputer.h"
-#include "MaruUtility.h"
-#include "HideItem.h"
+#include "Patch/PlayerInputer.h"
+#include "Maruyama/Utility/Utility.h"
+#include "Maruyama/Item/HideItem.h"
 #include "Maruyama/Interface/I_TeamMember.h"
 #include "Maruyama/StageObject/Goal.h"
 #include "Watanabe/DebugClass/Debug.h"

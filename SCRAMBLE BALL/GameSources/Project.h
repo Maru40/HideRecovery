@@ -9,5 +9,4 @@
 #include "ProjectShader.h"
 #include "ProjectBehavior.h"
 #include "Scene.h"
-#include "Character.h"
-#include "PlayerObject.h"
+#include "Maruyama/Player/Object/PlayerObject.h"

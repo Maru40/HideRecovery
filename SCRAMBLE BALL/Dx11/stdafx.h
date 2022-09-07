@@ -123,7 +123,7 @@ using namespace DirectX;
 using namespace Microsoft::WRL;
 using namespace Microsoft::WRL::Details;
 
-#include"WindowSetting.h"
+#include"Patch/WindowSetting.h"
 
 #include "../../Libs/BaseLib/Dx11Lib/Common.h"
 #include "../../Libs/BaseLib/Dx11FullLib/FullCommon.h"
@@ -131,5 +131,5 @@ using namespace basecross::bsm;
 
 #include "resource.h"
 
-#include "UIHelper.h"
-#include "SoundHelper.h"
+#include "Patch/UIHelper.h"
+#include "Patch/SoundHelper.h"

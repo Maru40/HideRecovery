@@ -1,9 +1,9 @@
 ﻿#include "stdafx.h"
 #include "MatchingUILayoutStage.h"
 #include "../DebugClass/Debug.h"
-#include "InputHelper.h"
+#include "Patch/InputHelper.h"
 #include "Scene.h"
-#include "PlayerInputer.h"
+#include "Patch/PlayerInputer.h"
 #include "../UI/UIObjects.h"
 #include "../Manager/PointManager.h"
 #include "../Manager/ScoreManager.h"
@@ -12,7 +12,7 @@
 #include "../UI/UIObjects.h"
 #include "../UI/GameStartUI.h"
 #include "Maruyama/Player/Component/PlayerSpawnPoint.h"
-#include "VillainPlayerObject.h"
+#include "Maruyama/Player/Object/VillainPlayerObject.h"
 #include "Watanabe/BoardPoly/PlayerLabelBP.h"
 
 namespace basecross {

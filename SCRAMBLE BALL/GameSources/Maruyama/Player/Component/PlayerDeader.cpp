@@ -18,7 +18,7 @@
 #include "VelocityManager.h"
 #include "UseWepon.h"
 #include "ItemBag.h"
-#include "HideItem.h"
+#include "Maruyama/Item/HideItem.h"
 #include "Itabashi/OnlineTransformSynchronization.h"
 
 namespace basecross {

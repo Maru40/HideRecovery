@@ -1,6 +1,6 @@
 ﻿#include "stdafx.h"
 #include "HPGaugeBP.h"
-#include "BillBoard.h"
+#include "Maruyama/Utility/Component/BillBoard.h"
 #include "../Component/SyncObject.h"
 #include "../Utility/Utility.h"
 

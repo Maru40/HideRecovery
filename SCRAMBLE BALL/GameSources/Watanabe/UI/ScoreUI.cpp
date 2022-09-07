@@ -6,7 +6,7 @@
 #include "../UI/Numbers.h"
 #include "../UI/UIObjectCSVBuilder.h"
 #include "../DebugClass/Debug.h"
-#include "MaruUtility.h"
+#include "Maruyama/Utility/Utility.h"
 
 namespace basecross {
 	ScoreUI::ScoreUI(const shared_ptr<Stage>& stage, int playerNumber, team::TeamType teamType)
