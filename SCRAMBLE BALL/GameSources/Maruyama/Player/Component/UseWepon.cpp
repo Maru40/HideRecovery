@@ -219,7 +219,8 @@ namespace basecross {
 		auto newDegree = XMConvertToDegrees(newRad);
 		auto newCross = cross(cameraForward.GetNormalized(), selfForward.GetNormalized());
 
-		if (newDegree <= 1.0f) {	//アシストしない角度
+		constexpr float AssistDegree = 1.0f;
+		if (newDegree <= AssistDegree) {	//アシストしない角度
 			return;
 		}
 
