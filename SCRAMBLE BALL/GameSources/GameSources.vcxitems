@@ -15,7 +15,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)GameStageBase.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)HeightDestroy.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\GamePlayerManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\Item.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MainStageTransitioner.h" />
@@ -122,6 +121,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\BuffController.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\ChargeGun.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\GoalAnimationController.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\HeightDestroy.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\ItemAcquisitionManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\ItemBag.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\OwnArea.h" />
@@ -335,7 +335,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)GameStageBase.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)HeightDestory.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\GamePlayerManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\Item.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\MainStageTransitioner.cpp" />
@@ -440,6 +439,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\BuffController.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\ChargeGun.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\GoalAnimationController.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\HeightDestory.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\ItemAcquisitionManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\ItemBag.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\OwnArea.cpp" />

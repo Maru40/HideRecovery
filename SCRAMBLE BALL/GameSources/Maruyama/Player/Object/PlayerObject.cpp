@@ -50,6 +50,7 @@
 #include "Maruyama/Enemy/Component/EyeSearchRange.h"
 
 #include "Maruyama/Player/Component/AccessHidePlace.h"
+#include "Maruyama/Player/Component/HeightDestroy.h"
 
 namespace basecross {
 	PlayerObject::PlayerObject(const std::shared_ptr<Stage>& stage) :
