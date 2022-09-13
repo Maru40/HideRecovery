@@ -1105,6 +1105,9 @@
     <Filter Include="Maruyama\Player\Component\UseWeapon">
       <UniqueIdentifier>{38306d85-3742-4018-9700-889e103e9207}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Enemy\BehaviorTree">
+      <UniqueIdentifier>{d53d1062-574d-4b7e-84b2-f7c847bda85c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2064,6 +2067,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\HeightDestroy.h">
       <Filter>Maruyama\Player\Component\HeightDestroy</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\BehaviorTree.h">
+      <Filter>Maruyama\Enemy\BehaviorTree</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2926,6 +2932,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\HeightDestory.cpp">
       <Filter>Maruyama\Player\Component\HeightDestroy</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\BehaviorTree.cpp">
+      <Filter>Maruyama\Enemy\BehaviorTree</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
