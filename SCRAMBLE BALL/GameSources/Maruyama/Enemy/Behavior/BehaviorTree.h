@@ -9,6 +9,8 @@
 #include "stdafx.h"
 #include "Project.h"
 
+#include "Maruyama/Enemy/Astar/SparseGraph.h"
+
 enum class TestEnumTask : std::uint8_t
 {
 	Task
@@ -24,6 +26,8 @@ namespace basecross {
 			//--------------------------------------------------------------------------------------
 			class I_Decorator {
 			public:
+				virtual ~I_Decorator() = default;
+
 				/// <summary>
 				/// 遷移できるかどうか
 				/// </summary>
@@ -36,6 +40,8 @@ namespace basecross {
 			//--------------------------------------------------------------------------------------
 			class I_PriorityController {
 			public:
+				virtual ~I_PriorityController() = default;
+
 				/// <summary>
 				/// 優先度の取得
 				/// </summary>
@@ -50,8 +56,9 @@ namespace basecross {
 				float m_priority = 0;
 
 			public:
-				float GetPriority() const override { return m_priority; }
+				virtual ~PriorityControllerBase() = default;
 
+				float GetPriority() const override { return m_priority; }
 			};
 
 			//--------------------------------------------------------------------------------------
@@ -59,6 +66,8 @@ namespace basecross {
 			//--------------------------------------------------------------------------------------
 			class I_Node {
 			public:
+				virtual ~I_Node() = default;
+
 				/// <summary>
 				/// インデックスのセット
 				/// </summary>
@@ -97,6 +106,8 @@ namespace basecross {
 				std::vector<std::shared_ptr<I_Decorator>> m_decorators;	//デコレータ配列
 
 			public:
+				virtual ~NodeBase() = default;
+
 				void SetIndex(const int index) noexcept override { m_index = index; }
 
 				int GetIndex() const noexcept override { return m_index; }
@@ -113,6 +124,8 @@ namespace basecross {
 			//--------------------------------------------------------------------------------------
 			class I_Task : public NodeBase {
 			public:
+				virtual ~I_Task() = default;
+
 				virtual void OnStart() = 0;
 				virtual bool OnUpdate() = 0;
 				virtual void OnExit() = 0;
@@ -128,10 +141,9 @@ namespace basecross {
 				Selecter_TransitionNodeData(
 					const std::shared_ptr<I_PriorityController>& priorityController,
 					const std::shared_ptr<I_Node>& node
-				) :
-					priorityController(priorityController),
-					node(node)
-				{}
+				);
+
+				virtual ~Selecter_TransitionNodeData() = default;
 			};
 
 			//--------------------------------------------------------------------------------------
@@ -142,6 +154,8 @@ namespace basecross {
 				using TransitionNodeData = Selecter_TransitionNodeData;
 
 			public:
+				virtual ~I_Selecter() = default;
+
 				/// <summary>
 				/// 手前のノードの設定
 				/// </summary>
@@ -185,10 +199,12 @@ namespace basecross {
 			class SelecterBase : public I_Selecter
 			{
 				std::weak_ptr<I_Node> m_fromNode;									//自分の手前に存在するノード
-				std::vector<std::shared_ptr<TransitionNodeData>> m_transitionNodes;	//自分の遷移先ノード群(優先度)
+				std::vector<std::shared_ptr<TransitionNodeData>> m_transitionDatas;	//自分の遷移先ノード群(優先度)
 
 			public:
-				SelecterBase(const std::shared_ptr<I_Node>& fromNode);
+				SelecterBase(const std::shared_ptr<I_Node>& fromNode);	//コンストラクタ
+
+				virtual ~SelecterBase() = default;	//デストラクタ
 
 				void SetFromNode(const std::shared_ptr<I_Node>& node) { m_fromNode = node; }
 				
@@ -198,7 +214,7 @@ namespace basecross {
 					const std::shared_ptr<I_PriorityController>& priorityController,
 					const std::shared_ptr<I_Node>& node
 				) {
-					m_transitionNodes.push_back(std::make_shared<TransitionNodeData>(priorityController, node));
+					m_transitionDatas.push_back(std::make_shared<TransitionNodeData>(priorityController, node));
 				}
 
 				std::shared_ptr<I_Node> GetFirstPriorityNode() const;
@@ -212,6 +228,8 @@ namespace basecross {
 			//--------------------------------------------------------------------------------------
 			class I_Edge {
 			public:
+				virtual ~I_Edge() = default;
+
 				/// <summary>
 				/// 手間のノードを設定
 				/// </summary>
@@ -246,6 +264,8 @@ namespace basecross {
 				std::weak_ptr<I_Node> m_toNode;		//自分の先のノード
 
 			public:
+				virtual ~EdgeBase() = default;
+
 				EdgeBase(const std::shared_ptr<I_Node>& fromNode, const std::shared_ptr<I_Node>& toNode) :
 					m_fromNode(fromNode),
 					m_toNode(toNode)
@@ -284,6 +304,7 @@ namespace basecross {
 				}
 
 			public:
+				virtual ~BehaviorTree() = default;
 
 				/// <summary>
 				/// セレクターの追加
@@ -291,8 +312,25 @@ namespace basecross {
 				/// <param name="type">ノードタイプ</param>
 				/// <param name="selecter">セレクター</param>
 				void AddSelecter(const EnumType type, const std::shared_ptr<I_Selecter>& selecter) {
-					m_selecter[type] = selecter;
+					m_selecterMap[type] = selecter;
 					AddNode(type, selecter);
+				}
+
+				/// <summary>
+				/// セレクターの取得
+				/// </summary>
+				/// <returns>セレクター</returns>
+				std::shared_ptr<I_Selecter> GetSelecter(const EnumType type) const {
+					return HasSelecter(type) ? m_selecterMap.at(type) : nullptr;	//持っていないならnullptrを返す。
+				}
+
+				/// <summary>
+				/// 指定したタイプのSelecterを持っているかどうか
+				/// </summary>
+				/// <param name="type">指定タイプ</param>
+				/// <returns>持っているならtrue</returns>
+				bool HasSelecter(const EnumType type) {
+					return static_cast<int>(m_selecterMap.count(type)) != 0;	//0でなかったら
 				}
 
 				/// <summary>
@@ -321,12 +359,42 @@ namespace basecross {
 				}
 
 				/// <summary>
+				/// タスクが定義されているかどうか
+				/// </summary>
+				/// <param name="type">タスクタイプ</param>
+				/// <returns>タスクが定義されていたらtrue</returns>
+				bool HasTask(const EnumType type) const {
+					return static_cast<int>(m_taskMap.count(type)) != 0;
+				}
+
+				/// <summary>
 				/// エッジの追加
 				/// </summary>
 				/// <param name="fromType"></param>
 				/// <param name="toType"></param>
 				void AddEdge(const EnumType fromType, const EnumType toType) {
-					m_edgesMap[fromType].push_back(std::make_shared<I_Edge>());
+					AddEdge<EdgeBase>(fromType, toType);
+				}
+
+				/// <summary>
+				/// エッジの追加
+				/// </summary>
+				template<class T, class... Ts,
+					std::enable_if_t<std::is_constructible_v<T, std::shared_ptr<I_Edge>&, Ts...>, std::nullptr_t> = nullptr>
+				void AddEdge(Ts&&... params) {
+					std::shared_ptr<I_Edge> newEdge = std::make_shared<T>(params...);
+
+					std::shared_ptr<I_Node> fromNode = newEdge->GetFromNode();
+					std::shared_ptr<I_Node> toNode = newEdge->GetToNode();
+					
+					auto type = static_cast<EnumType>(fromNode->GetIndex());
+					//そのセレクターがあるなら、タスクに先のノード情報を設定
+					if (auto selecter = GetSelecter(type)) {
+						selecter->SetFromNode(fromNode);
+						selecter->AddTransitionNode(toNode);
+					}
+
+					m_edgesMap[fromType].push_back(newEdge);
 				}
 
 				/// <summary>
