@@ -20,265 +20,21 @@ namespace basecross {
 	namespace maru {
 
 		namespace Behavior {
-
 			//--------------------------------------------------------------------------------------
-			/// デコレータのインターフェース
+			/// 前方宣言
 			//--------------------------------------------------------------------------------------
-			class I_Decorator {
-			public:
-				virtual ~I_Decorator() = default;
+			class I_Node;
+			class NodeBase;
 
-				/// <summary>
-				/// 遷移できるかどうか
-				/// </summary>
-				/// <returns>遷移できるならtrue</returns>
-				virtual bool CanTransition() const = 0;
-			};
+			class I_Edge;
+			class EdgeBase;
 
-			//--------------------------------------------------------------------------------------
-			/// 優先度管理のインターフェース
-			//--------------------------------------------------------------------------------------
-			class I_PriorityController {
-			public:
-				virtual ~I_PriorityController() = default;
+			class I_Decorator;
+			class I_PriorityController;
+			class I_Task;
 
-				/// <summary>
-				/// 優先度の取得
-				/// </summary>
-				/// <returns>優先度</returns>
-				virtual float GetPriority() const = 0;
-			};
-
-			//--------------------------------------------------------------------------------------
-			/// 優先度管理の基底クラス
-			//--------------------------------------------------------------------------------------
-			class PriorityControllerBase : public I_PriorityController {
-				float m_priority = 0;
-
-			public:
-				virtual ~PriorityControllerBase() = default;
-
-				float GetPriority() const override { return m_priority; }
-			};
-
-			//--------------------------------------------------------------------------------------
-			/// ビヘイビアノードのインターフェース
-			//--------------------------------------------------------------------------------------
-			class I_Node {
-			public:
-				virtual ~I_Node() = default;
-
-				/// <summary>
-				/// インデックスのセット
-				/// </summary>
-				virtual void SetIndex(const int index) noexcept = 0;
-
-				/// <summary>
-				/// インデックスの取得
-				/// </summary>
-				/// <returns></returns>
-				virtual int GetIndex() const noexcept = 0;
-
-				/// <summary>
-				/// 遷移できるかどうか
-				/// </summary>
-				/// <returns>遷移できるならtrue</returns>
-				virtual bool CanTransition() const = 0;
-
-				/// <summary>
-				/// デコレータの追加
-				/// </summary>
-				virtual void AddDecorator(const std::shared_ptr<I_Decorator>& decorator) = 0;
-
-				/// <summary>
-				/// デコレータがあるかどうか
-				/// </summary>
-				/// <returns>デコレータがEmptyならtrue</returns>
-				virtual bool IsDecoratorEmpty() const = 0;
-			};
-
-			//--------------------------------------------------------------------------------------
-			/// ビヘイビアノードの基底クラス
-			//--------------------------------------------------------------------------------------
-			class NodeBase : public I_Node
-			{
-				int m_index = 0;										//ノードインデックス
-				std::vector<std::shared_ptr<I_Decorator>> m_decorators;	//デコレータ配列
-
-			public:
-				virtual ~NodeBase() = default;
-
-				void SetIndex(const int index) noexcept override { m_index = index; }
-
-				int GetIndex() const noexcept override { return m_index; }
-
-				bool CanTransition() const override;
-
-				void AddDecorator(const std::shared_ptr<I_Decorator>& decorator) override;
-
-				bool IsDecoratorEmpty() const override;
-			};
-
-			//--------------------------------------------------------------------------------------
-			/// ビヘイビアタスクのインターフェース
-			//--------------------------------------------------------------------------------------
-			class I_Task : public NodeBase {
-			public:
-				virtual ~I_Task() = default;
-
-				virtual void OnStart() = 0;
-				virtual bool OnUpdate() = 0;
-				virtual void OnExit() = 0;
-			};
-
-			//--------------------------------------------------------------------------------------
-			/// ビヘイビアセレクターの遷移先ノードデータ
-			//--------------------------------------------------------------------------------------
-			struct Selecter_TransitionNodeData {
-				std::shared_ptr<I_PriorityController> priorityController;	//優先度コントローラー
-				std::weak_ptr<I_Node> node;									//ノード
-
-				Selecter_TransitionNodeData(
-					const std::shared_ptr<I_PriorityController>& priorityController,
-					const std::shared_ptr<I_Node>& node
-				);
-
-				virtual ~Selecter_TransitionNodeData() = default;
-			};
-
-			//--------------------------------------------------------------------------------------
-			/// ビヘイビアセレクターのインターフェース
-			//--------------------------------------------------------------------------------------
-			class I_Selecter : public NodeBase {
-			public:
-				using TransitionNodeData = Selecter_TransitionNodeData;
-
-			public:
-				virtual ~I_Selecter() = default;
-
-				/// <summary>
-				/// 手前のノードの設定
-				/// </summary>
-				/// <param name="node">手前のノード</param>
-				virtual void SetFromNode(const std::shared_ptr<I_Node>& node) = 0;
-
-				/// <summary>
-				/// 手前のノードの取得
-				/// </summary>
-				/// <returns>手前のノード</returns>
-				virtual std::shared_ptr<I_Node> GetFromNode() const = 0;
-
-				/// <summary>
-				/// 遷移先ノードの追加
-				/// </summary>
-				/// <param name="priorityController">優先度管理</param>
-				/// <param name="node">遷移先ノード</param>
-				virtual void AddTransitionNode(
-					const std::shared_ptr<I_PriorityController>& priorityController,
-					const std::shared_ptr<I_Node>& node
-				) = 0;
-
-				/// <summary>
-				/// 一番優先度高いノードの取得
-				/// </summary>
-				/// <returns></returns>
-				virtual std::shared_ptr<I_Node> GetFirstPriorityNode() const = 0;
-
-				/// <summary>
-				/// 遷移先ノードが空かどうか
-				/// </summary>
-				/// <returns>遷移先ノードが空ならtrue</returns>
-				virtual bool IsEmptyTransitionNodes() const = 0;
-
-			};
-
-			//--------------------------------------------------------------------------------------
-			/// ビヘイビアセレクターの基底クラス
-			//--------------------------------------------------------------------------------------
-
-			class SelecterBase : public I_Selecter
-			{
-				std::weak_ptr<I_Node> m_fromNode;									//自分の手前に存在するノード
-				std::vector<std::shared_ptr<TransitionNodeData>> m_transitionDatas;	//自分の遷移先ノード群(優先度)
-
-			public:
-				SelecterBase(const std::shared_ptr<I_Node>& fromNode);	//コンストラクタ
-
-				virtual ~SelecterBase() = default;	//デストラクタ
-
-				void SetFromNode(const std::shared_ptr<I_Node>& node) { m_fromNode = node; }
-				
-				std::shared_ptr<I_Node> GetFromNode() const { return m_fromNode.lock(); }
-
-				void AddTransitionNode(
-					const std::shared_ptr<I_PriorityController>& priorityController,
-					const std::shared_ptr<I_Node>& node
-				) {
-					m_transitionDatas.push_back(std::make_shared<TransitionNodeData>(priorityController, node));
-				}
-
-				std::shared_ptr<I_Node> GetFirstPriorityNode() const;
-
-				bool IsEmptyTransitionNodes() const;
-
-			};
-
-			//--------------------------------------------------------------------------------------
-			/// ビヘイビアのエッジインターフェース
-			//--------------------------------------------------------------------------------------
-			class I_Edge {
-			public:
-				virtual ~I_Edge() = default;
-
-				/// <summary>
-				/// 手間のノードを設定
-				/// </summary>
-				/// <param name="node">手前のノード</param>
-				virtual void SetFromNode(const std::shared_ptr<I_Node>& node) = 0;
-
-				/// <summary>
-				/// 手前のノードを取得
-				/// </summary>
-				/// <returns>手前のノード</returns>
-				virtual std::shared_ptr<I_Node> GetFromNode() const = 0;
-
-				/// <summary>
-				/// 先のノードの設定
-				/// </summary>
-				/// <param name="node">先のノード</param>
-				virtual void SetToNode(const std::shared_ptr<I_Node>& node) = 0;
-
-				/// <summary>
-				/// 先のノードを取得
-				/// </summary>
-				/// <returns>先のノード</returns>
-				virtual std::shared_ptr<I_Node> GetToNode() const = 0;
-			};
-
-			//--------------------------------------------------------------------------------------
-			/// ビヘイビアのエッジの基底クラス
-			//--------------------------------------------------------------------------------------
-			class EdgeBase : public I_Edge
-			{
-				std::weak_ptr<I_Node> m_fromNode;	//自分の手前のノード
-				std::weak_ptr<I_Node> m_toNode;		//自分の先のノード
-
-			public:
-				virtual ~EdgeBase() = default;
-
-				EdgeBase(const std::shared_ptr<I_Node>& fromNode, const std::shared_ptr<I_Node>& toNode) :
-					m_fromNode(fromNode),
-					m_toNode(toNode)
-				{ }
-
-				void SetFromNode(const std::shared_ptr<I_Node>& node) override { m_fromNode = node; }
-
-				std::shared_ptr<I_Node> GetFromNode() const override { return m_fromNode.lock(); }
-
-				void SetToNode(const std::shared_ptr<I_Node>& node) override { m_toNode = node; }
-
-				std::shared_ptr<I_Node> GetToNode() const override { return m_toNode.lock(); }
-			};
+			class I_Selecter;
+			class I_SelecterBase;
 
 			//--------------------------------------------------------------------------------------
 			/// ビヘイビア
@@ -286,12 +42,17 @@ namespace basecross {
 			template<class EnumType>
 			class BehaviorTree
 			{
+			public:
+				using EdgesMap = std::unordered_map<EnumType, std::vector<std::shared_ptr<I_Edge>>>;
+
+			private:
 				EnumType m_currentType = EnumType(0);	//現在のタスク
 
-				std::unordered_map<EnumType, std::shared_ptr<I_Selecter>> m_selecterMap;		//定義したセレクター
-				std::unordered_map<EnumType, std::shared_ptr<I_Task>> m_taskMap;				//定義したタスク
-				std::unordered_map<EnumType, std::shared_ptr<I_Node>> m_nodeMap;				//定義したノード
-				std::unordered_map<EnumType, std::vector<std::shared_ptr<I_Edge>>> m_edgesMap;	//定義したエッジ
+				std::unordered_map<EnumType, std::shared_ptr<I_Node>> m_nodeMap;			//定義したノード
+				std::unordered_map<EnumType, std::shared_ptr<I_Selecter>> m_selecterMap;	//定義したセレクター
+				std::unordered_map<EnumType, std::shared_ptr<I_Task>> m_taskMap;			//定義したタスク
+
+				EdgesMap m_edgesMap;	//遷移エッジ
 
 			private:
 				/// <summary>
@@ -299,12 +60,24 @@ namespace basecross {
 				/// </summary>
 				/// <param name="type">ノードタイプ</param>
 				/// <param name="node">ノード</param>
-				void AddNode(const EnumType type, const std::shared_ptr<I_Node>& node) {
+				int AddNode(const EnumType type, const std::shared_ptr<I_Node>& node) override {
+					int index = SparseGraph::AddNode(node);
 					m_nodeMap[type] = node;
+
+					return index;
 				}
 
 			public:
 				virtual ~BehaviorTree() = default;
+
+				/// <summary>
+				/// 指定したタイプのSelecterを持っているかどうか
+				/// </summary>
+				/// <param name="type">指定タイプ</param>
+				/// <returns>持っているならtrue</returns>
+				bool HasSelecter(const EnumType type) {
+					return static_cast<int>(m_selecterMap.count(type)) != 0;	//0でなかったら
+				}
 
 				/// <summary>
 				/// セレクターの追加
@@ -325,12 +98,12 @@ namespace basecross {
 				}
 
 				/// <summary>
-				/// 指定したタイプのSelecterを持っているかどうか
+				/// タスクが定義されているかどうか
 				/// </summary>
-				/// <param name="type">指定タイプ</param>
-				/// <returns>持っているならtrue</returns>
-				bool HasSelecter(const EnumType type) {
-					return static_cast<int>(m_selecterMap.count(type)) != 0;	//0でなかったら
+				/// <param name="type">タスクタイプ</param>
+				/// <returns>タスクが定義されていたらtrue</returns>
+				bool HasTask(const EnumType type) const {
+					return static_cast<int>(m_taskMap.count(type)) != 0;
 				}
 
 				/// <summary>
@@ -359,15 +132,6 @@ namespace basecross {
 				}
 
 				/// <summary>
-				/// タスクが定義されているかどうか
-				/// </summary>
-				/// <param name="type">タスクタイプ</param>
-				/// <returns>タスクが定義されていたらtrue</returns>
-				bool HasTask(const EnumType type) const {
-					return static_cast<int>(m_taskMap.count(type)) != 0;
-				}
-
-				/// <summary>
 				/// エッジの追加
 				/// </summary>
 				/// <param name="fromType"></param>
@@ -388,14 +152,20 @@ namespace basecross {
 					std::shared_ptr<I_Node> toNode = newEdge->GetToNode();
 					
 					auto type = static_cast<EnumType>(fromNode->GetIndex());
+
 					//そのセレクターがあるなら、タスクに先のノード情報を設定
 					if (auto selecter = GetSelecter(type)) {
 						selecter->SetFromNode(fromNode);
 						selecter->AddTransitionNode(toNode);
 					}
 
+					auto fromType = static_cast<EnumType>(fromNode->GetIndex());
 					m_edgesMap[fromType].push_back(newEdge);
 				}
+
+				//void AddEdge(const std::shared_ptr<I_Edge>& edge) override {
+
+				//}
 
 				/// <summary>
 				/// 空の状態かどうか
