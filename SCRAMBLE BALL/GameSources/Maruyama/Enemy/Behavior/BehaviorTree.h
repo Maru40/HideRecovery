@@ -163,10 +163,6 @@ namespace basecross {
 					m_edgesMap[fromType].push_back(newEdge);
 				}
 
-				//void AddEdge(const std::shared_ptr<I_Edge>& edge) override {
-
-				//}
-
 				/// <summary>
 				/// ‹ó‚Ìó‘Ô‚©‚Ç‚¤‚©
 				/// </summary>
