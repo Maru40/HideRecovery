@@ -197,7 +197,7 @@ namespace basecross {
 		/// </summary>
 		/// <param name="node">追加したいノード</param>
 		/// <returns>追加したノードのインデックス</returns>
-		int AddNode(const std::shared_ptr<NodeType>& node) {
+		virtual int AddNode(const std::shared_ptr<NodeType>& node) {
 			m_nodes.push_back(node);
 			return m_nextNodeIndex++;
 			//return (int)m_nodes.size() - 1;
@@ -256,7 +256,7 @@ namespace basecross {
 		/// エッジの追加
 		/// </summary>
 		/// <param name="edge">追加したいエッジ</param>
-		void AddEdge(const std::shared_ptr<EdgeType>& edge) {
+		virtual void AddEdge(const std::shared_ptr<EdgeType>& edge) {
 			m_edges[edge->GetFrom()].push_back(edge);
 		}
 
