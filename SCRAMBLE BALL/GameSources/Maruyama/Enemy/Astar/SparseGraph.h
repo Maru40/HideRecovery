@@ -186,7 +186,7 @@ namespace basecross {
 		int GetNextFreeNodeIndex() {
 			//見つかった場合は別のインデックスにしなければならない
 			if (m_edges.find(m_nextNodeIndex) != m_edges.end()) {
-				m_nextNodeIndex = CalucNextFreeNodeIndex();
+				m_nextNodeIndex = CalculateNextFreeNodeIndex();
 			}
 
 			return m_nextNodeIndex;
@@ -393,7 +393,7 @@ namespace basecross {
 		/// 現在空きのあるノードのインデックスを探し出す。
 		/// </summary>
 		/// <returns>空きのインデックス</returns>
-		int CalucNextFreeNodeIndex() {
+		int CalculateNextFreeNodeIndex() {
 			int index = (int)m_edges.size();  //ループが最後までいったら最後のノードの次が空きノードになる。
 			if (index == 0) {
 				return ++index;
