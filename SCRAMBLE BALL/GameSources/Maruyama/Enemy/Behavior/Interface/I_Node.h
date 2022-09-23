@@ -34,8 +34,20 @@ namespace basecross {
 				/// <summary>
 				/// インデックスの取得
 				/// </summary>
-				/// <returns></returns>
+				/// <returns>インデックス</returns>
 				virtual int GetIndex() const noexcept = 0;
+
+				/// <summary>
+				/// タイプの設定
+				/// </summary>
+				template<class EnumType>
+				void SetType(const EnumType type) { SetIndex(static_cast<int>(type)); }
+
+				/// <summary>
+				/// タイプの取得
+				/// </summary>
+				template<class EnumType>
+				EnumType GetType() const { return static_cast<EnumType>(GetIndex()); }
 
 				/// <summary>
 				/// 遷移できるかどうか
