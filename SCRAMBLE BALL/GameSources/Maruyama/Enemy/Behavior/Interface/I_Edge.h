@@ -49,6 +49,18 @@ namespace basecross {
 				/// </summary>
 				/// <returns>先のノード</returns>
 				virtual std::shared_ptr<I_Node> GetToNode() const = 0;
+
+				/// <summary>
+				/// 優先度の設定
+				/// </summary>
+				/// <param name="priority">優先度</param>
+				virtual void SetPriority(const float priority) noexcept = 0;
+
+				/// <summary>
+				/// 優先度の取得
+				/// </summary>
+				/// <returns>優先度</returns>
+				virtual float GetPriority() const noexcept = 0;
 			};
 
 			//--------------------------------------------------------------------------------------
@@ -58,6 +70,8 @@ namespace basecross {
 			{
 				std::weak_ptr<I_Node> m_fromNode;	//自分の手前のノード
 				std::weak_ptr<I_Node> m_toNode;		//自分の先のノード
+
+				float m_priority;
 
 			public:
 				virtual ~EdgeBase() = default;
@@ -74,6 +88,10 @@ namespace basecross {
 				void SetToNode(const std::shared_ptr<I_Node>& node) override { m_toNode = node; }
 
 				std::shared_ptr<I_Node> GetToNode() const override { return m_toNode.lock(); }
+
+				void SetPriority(const float priority) noexcept { m_priority = priority; }
+
+				float GetPriority() const noexcept { return m_priority; }
 			};
 
 		}
