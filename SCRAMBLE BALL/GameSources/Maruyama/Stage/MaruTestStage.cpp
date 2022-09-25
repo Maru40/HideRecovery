@@ -33,6 +33,8 @@
 
 #include "Maruyama/Utility/Object/GameManagerObject.h"
 
+#include "Maruyama/Enemy/Behavior/Tester/Tester_Behavior.h"
+
 namespace basecross {
 
 	void MaruTestStage::CreateViewLight() {
@@ -52,7 +54,7 @@ namespace basecross {
 
 	void MaruTestStage::OnCreate() {
 		CreateViewLight();
-		AddGameObject<Debug>();
+		auto log = AddGameObject<Debug>();
 		Debug::GetInstance()->Log(L"MapShotStage");
 
 		CreateMap(L"StageS2.csv");
@@ -62,11 +64,13 @@ namespace basecross {
 		AddGameObject<GameManagerObject>();
 		
 		//// プレイヤーを見るようなカメラを設定
-		auto player = Instantiate<TestPlayerObject>(Vec3(0.0f, 1.0f, 0.0f), Quat::Identity());
+		auto player = Instantiate<TestPlayerObject>(Vec3(0.0f, 1.0f, -5.0f), Quat::Identity());
 		auto sp = player->GetArm()->GetComponent<SpringArmComponent>();
 		auto& tpsCamera = sp->GetChildObject();
 		tpsCamera->AddComponent<VirtualCamera>(10);
 		tpsCamera->AddComponent<LookAtCameraManager>(player, LookAtCameraManager::Parametor());	
+
+		AddGameObject<GameObject>()->AddComponent<maru::Behavior::TesterTree>();
 	}
 
 	void MaruTestStage::OnUpdate() {
