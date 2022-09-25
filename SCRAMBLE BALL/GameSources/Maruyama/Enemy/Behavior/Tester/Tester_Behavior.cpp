@@ -13,6 +13,8 @@
 
 #include "Maruyama/Utility/Timer/GameTimer.h"
 
+#include "Watanabe/DebugClass/Debug.h"
+
 namespace basecross {
 	namespace maru {
 
@@ -45,40 +47,55 @@ namespace basecross {
 			}
 
 			void TesterTree::CreateEdge() {
-				m_behaviorTree->AddEdge(BehaviorType::First, BehaviorType::Selecter2, std::make_shared<PriorityControllerBase>(0.0f));
+				m_behaviorTree->AddEdge(BehaviorType::First, BehaviorType::Selecter2, std::make_shared<PriorityControllerBase>(2.0f));
 				m_behaviorTree->AddEdge(BehaviorType::First, BehaviorType::Task1, std::make_shared<PriorityControllerBase>(1.0f));
 
-				m_behaviorTree->AddEdge(BehaviorType::Selecter2, BehaviorType::Task2, std::make_shared<PriorityControllerBase>(0.0f));
+				m_behaviorTree->AddEdge(BehaviorType::Selecter2, BehaviorType::Task2, std::make_shared<PriorityControllerBase>(2.0f));
 				m_behaviorTree->AddEdge(BehaviorType::Selecter2, BehaviorType::Task3, std::make_shared<PriorityControllerBase>(1.0f));
 			}
 
 
 			namespace Task {
-				TesterTaskFirst::TesterTaskFirst() : m_timer(new GameTimer(0.0f)) {}
-				void TesterTaskFirst::OnStart() { m_timer->ResetTimer(3.0f); };
+				TesterTaskFirst::TesterTaskFirst() : 
+					m_timer(new GameTimer(0.0f)) 
+				{}
+				void TesterTaskFirst::OnStart() { 
+					m_timer->ResetTimer(3.0f); 
+					Debug::GetInstance()->Log(L"Start::First");
+				};
 				bool TesterTaskFirst::OnUpdate() { 
 					m_timer->UpdateTimer();
 					return m_timer->IsTimeUp();
 				};
-				void TesterTaskFirst::OnExit() {};
+				void TesterTaskFirst::OnExit() { Debug::GetInstance()->Log(L"Exit::First"); };
 
 
-				TesterTaskSecond::TesterTaskSecond() : m_timer(new GameTimer(0.0f)) {}
-				void TesterTaskSecond::OnStart() { m_timer->ResetTimer(3.0f); };
+				TesterTaskSecond::TesterTaskSecond() : 
+					m_timer(new GameTimer(0.0f)) 
+				{}
+				void TesterTaskSecond::OnStart() { 
+					m_timer->ResetTimer(3.0f); 
+					Debug::GetInstance()->Log(L"Start::Second");
+				};
 				bool TesterTaskSecond::OnUpdate() { 
 					m_timer->UpdateTimer();
 					return m_timer->IsTimeUp();
 				};
-				void TesterTaskSecond::OnExit() {};
+				void TesterTaskSecond::OnExit() { Debug::GetInstance()->Log(L"Exit::Second"); };
 
 
-				TesterTaskThird::TesterTaskThird() : m_timer(new GameTimer(0.0f)) {}
-				void TesterTaskThird::OnStart() { m_timer->ResetTimer(3.0f); };
+				TesterTaskThird::TesterTaskThird() :
+					m_timer(new GameTimer(0.0f)) 
+				{}
+				void TesterTaskThird::OnStart() { 
+					m_timer->ResetTimer(3.0f); 
+					Debug::GetInstance()->Log(L"Start::Third");
+				};
 				bool TesterTaskThird::OnUpdate() {
 					m_timer->UpdateTimer();
 					return m_timer->IsTimeUp();
 				};
-				void TesterTaskThird::OnExit() {};
+				void TesterTaskThird::OnExit() { Debug::GetInstance()->Log(L"Exit::Third"); };
 			}
 			   
 		}

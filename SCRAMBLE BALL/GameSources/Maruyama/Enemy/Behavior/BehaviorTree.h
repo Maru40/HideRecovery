@@ -70,6 +70,7 @@ namespace basecross {
 				/// <param name="type">ノードタイプ</param>
 				/// <param name="node">ノード</param>
 				std::shared_ptr<I_Node> AddNode(const EnumType type, const std::shared_ptr<I_Node>& node) {
+					node->SetIndex(static_cast<int>(type));
 					m_nodeMap[type] = node;
 
 					return node;
@@ -95,6 +96,8 @@ namespace basecross {
 				/// </summary>
 				/// <returns>現在のタスクタイプ</returns>
 				EnumType GetCurrentType() const { return m_currentNode.lock() ? m_currentNode.lock()->GetType<EnumType>() : EnumType(0); }
+
+				void SetCurrentNode(const std::shared_ptr<I_Node>& node) { m_currentNode = node; }
 
 				std::shared_ptr<I_Node> GetCurrentNode() const { return m_currentNode.lock(); }
 
@@ -241,6 +244,53 @@ namespace basecross {
 				/// <returns>開始ノード</returns>
 				EnumType GetFirstNodeType() const { return m_firstNodeType; }
 
+			private:
+				/// <summary>
+				/// ノードの更新
+				/// </summary>
+				/// <returns>ノードの更新が終了したならtrue</returns>
+				bool TaskUpdate() {
+					auto currentTask = GetCurrentTask();
+					if (currentTask) {
+						return currentTask->OnUpdate();
+					}
+
+					return true;
+				}
+
+				/// <summary>
+				/// 再起処理をして、遷移先のノードを取得する。
+				/// </summary>
+				/// <returns>一番優先度の高いノード</returns>
+				std::shared_ptr<I_Node> Recursive_TransitionNode(const std::shared_ptr<I_Node>& node) {
+					//エッジが存在しないならnodeを生成する。
+					auto type = node->GetType<EnumType>();
+					if (!HasEdges(node->GetType<EnumType>())) {	
+						return node;
+					}
+
+					//一番優先順位の高いノードを取得する。
+					return Recursive_TransitionNode(CalculateFirstPriorityNode(node->GetType<EnumType>()));
+				}
+
+				/// <summary>
+				/// 遷移処理
+				/// </summary>
+				void Transition() {
+					if (auto currentTask = GetCurrentTask()) {	//タスクの終了イベントを呼び出す。
+						currentTask->OnExit();
+					}
+					
+					//優先度の一番高いノードに遷移
+					auto node = Recursive_TransitionNode(GetNode(m_firstNodeType));
+
+					SetCurrentNode(node);	//カレントノードの設定
+
+					if (auto currentTask = GetCurrentTask()) {	//タスクの開始イベントを呼び出す。
+						currentTask->OnStart();
+					}
+				}
+
 			public:
 				/// <summary>
 				/// 更新処理
@@ -256,41 +306,6 @@ namespace basecross {
 					if (isEndTaskUpdate) {
 						Transition();	//遷移
 					}
-				}
-
-			private:
-				/// <summary>
-				/// ノードの更新
-				/// </summary>
-				/// <returns>ノードの更新が終了したならtrue</returns>
-				bool TaskUpdate() {
-					auto currentTask = GetCurrentTask();
-					if (currentTask) {
-						return currentTask->OnUpdate();
-					}
-
-					return true;
-				}
-
-				//再起処理をして、遷移先のノードを取得する。
-				std::shared_ptr<I_Node> Recursive_TransitionNode(const std::shared_ptr<I_Node>& node) {
-					//エッジが存在しないならnodeを生成する。
-					if (!HasEdges(node->GetType<EnumType>())) {	
-						return node;
-					}
-
-					//一番優先順位の高いノードを取得する。
-					return Recursive_TransitionNode(CalculateFirstPriorityNode(node->GetType<EnumType>()));
-				}
-
-				/// <summary>
-				/// 遷移処理
-				/// </summary>
-				void Transition() {
-					//優先度の一番高いノードに遷移
-					auto node = Recursive_TransitionNode(GetNode(m_firstNodeType));
-
-					m_currentNode = node;
 				}
 
 			};

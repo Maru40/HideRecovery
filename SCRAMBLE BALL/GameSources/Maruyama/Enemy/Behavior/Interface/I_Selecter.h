@@ -94,14 +94,14 @@ namespace basecross {
 			public:
 				virtual ~SelecterBase() = default;	//デストラクタ
 
-				void SetFromNode(const std::shared_ptr<I_Node>& node) { m_fromNode = node; }
+				void SetFromNode(const std::shared_ptr<I_Node>& node) override { m_fromNode = node; }
 
-				std::shared_ptr<I_Node> GetFromNode() const { return m_fromNode.lock(); }
+				std::shared_ptr<I_Node> GetFromNode() const override { return m_fromNode.lock(); }
 
 				void AddTransitionNode(
 					const std::shared_ptr<I_PriorityController>& priorityController,
 					const std::shared_ptr<I_Node>& node
-				) {
+				) override {
 					m_transitionDatas.push_back(std::make_shared<TransitionNodeData>(priorityController, node));
 				}
 
@@ -109,9 +109,9 @@ namespace basecross {
 				/// 最優先のノードを取得
 				/// </summary>
 				/// <returns>最優先ノード</returns>
-				std::shared_ptr<I_Node> GetFirstPriorityNode() const;
+				std::shared_ptr<I_Node> GetFirstPriorityNode() const override;
 
-				bool IsEmptyTransitionNodes() const;
+				bool IsEmptyTransitionNodes() const override;
 
 			};
 
