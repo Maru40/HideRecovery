@@ -122,7 +122,15 @@ namespace basecross {
 					};
 					std::sort(edges.begin(), edges.end(), sortEvent);
 
-					return edges[0]->GetToNode();	//優先順位の高いノードを取得
+					//並べ替えたノードが遷移できるかどうかを判断する。
+					for (const auto& edge : edges) {
+						if (edge->GetToNode()->CanTransition()) {	//遷移できるなら、そのノードを返す。
+							return edge->GetToNode();
+						}
+					}
+
+					return nullptr;	//どこにも遷移できないならnullptrを返す。(将来的にはこのノード先の優先度を下げて、もう一度検索させるといいかも。)
+					//return edges[0]->GetToNode();	//優先順位の高いノードを取得
 				}
 
 				/// <summary>
@@ -263,8 +271,11 @@ namespace basecross {
 				/// </summary>
 				/// <returns>一番優先度の高いノード</returns>
 				std::shared_ptr<I_Node> Recursive_TransitionNode(const std::shared_ptr<I_Node>& node) {
+					if (!node) {	//ノードがnullptrなら
+						return nullptr;
+					}
+
 					//エッジが存在しないならnodeを生成する。
-					auto type = node->GetType<EnumType>();
 					if (!HasEdges(node->GetType<EnumType>())) {	
 						return node;
 					}
