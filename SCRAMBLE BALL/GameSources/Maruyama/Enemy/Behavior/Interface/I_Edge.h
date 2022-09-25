@@ -18,6 +18,7 @@ namespace basecross {
 			/// 前方宣言
 			//--------------------------------------------------------------------------------------
 			class I_Node;
+			class I_PriorityController;
 
 			//--------------------------------------------------------------------------------------
 			/// ビヘイビアのエッジインターフェース
@@ -54,13 +55,17 @@ namespace basecross {
 				/// 優先度の設定
 				/// </summary>
 				/// <param name="priority">優先度</param>
-				virtual void SetPriority(const float priority) noexcept = 0;
+				virtual void SetPriority(const float priority) = 0;
 
 				/// <summary>
 				/// 優先度の取得
 				/// </summary>
 				/// <returns>優先度</returns>
-				virtual float GetPriority() const noexcept = 0;
+				virtual float GetPriority() const = 0;
+
+				virtual void SetPriorityController(const std::shared_ptr<I_PriorityController>& priorityController) = 0;
+
+				virtual std::shared_ptr<I_PriorityController> GetPriorityContorller() = 0;
 			};
 
 			//--------------------------------------------------------------------------------------
@@ -70,16 +75,21 @@ namespace basecross {
 			{
 				std::weak_ptr<I_Node> m_fromNode;	//自分の手前のノード
 				std::weak_ptr<I_Node> m_toNode;		//自分の先のノード
-
-				float m_priority;
+				std::shared_ptr<I_PriorityController> m_priorityContorller;	//優先度管理
 
 			public:
-				virtual ~EdgeBase() = default;
+				EdgeBase(
+					const std::shared_ptr<I_Node>& fromNode, 
+					const std::shared_ptr<I_Node>& toNode
+				);
 
-				EdgeBase(const std::shared_ptr<I_Node>& fromNode, const std::shared_ptr<I_Node>& toNode) :
-					m_fromNode(fromNode),
-					m_toNode(toNode)
-				{ }
+				EdgeBase(
+					const std::shared_ptr<I_Node>& fromNode,
+					const std::shared_ptr<I_Node>& toNode,
+					const std::shared_ptr<I_PriorityController> priorityController
+				);
+
+				virtual ~EdgeBase() = default;
 
 				void SetFromNode(const std::shared_ptr<I_Node>& node) override { m_fromNode = node; }
 
@@ -89,9 +99,13 @@ namespace basecross {
 
 				std::shared_ptr<I_Node> GetToNode() const override { return m_toNode.lock(); }
 
-				void SetPriority(const float priority) noexcept { m_priority = priority; }
+				void SetPriority(const float priority) override;
 
-				float GetPriority() const noexcept { return m_priority; }
+				float GetPriority() const override;
+
+				virtual void SetPriorityController(const std::shared_ptr<I_PriorityController>& priorityController) override;
+
+				virtual std::shared_ptr<I_PriorityController> GetPriorityContorller() override;
 			};
 
 		}
