@@ -15,6 +15,7 @@
 #include "Watanabe/TestStage/MatchingUILayoutStage.h"
 #include "Itabashi/OnlineMatchStage.h"
 #include "Maruyama/Stage/MapShotStage.h"
+#include "Maruyama/Stage/MaruTestStage.h"
 
 class LoadStage;
 
@@ -67,7 +68,7 @@ namespace basecross {
 			//ResetActiveStage<GameStage>();
 		}
 		else if (event->m_MsgStr == L"ToLoadStage") {
-			ResetActiveStage<LoadStage>(L"ToTitleStage");
+			ResetActiveStage<LoadStage>(L"ToMainStage");
 		}
 		else if (event->m_MsgStr == L"ToMainStage") {
 			ResetActiveStage<MainStage>();
@@ -90,6 +91,9 @@ namespace basecross {
 		}
 		else if (event->m_MsgStr == L"MapShotStage") {
 			ResetActiveStage<MapShotStage>();
+		}
+		else if (event->m_MsgStr == L"MaruTestStage") {
+			ResetActiveStage<MaruTestStage>();
 		}
 	}
 }
