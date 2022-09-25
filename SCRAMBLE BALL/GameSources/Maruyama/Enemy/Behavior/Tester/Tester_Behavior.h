@@ -88,7 +88,7 @@ namespace basecross {
 					void OnExit() override ;
 				};
 
-				class TesterTaskSecond : public I_Task 
+				class TesterTaskSecond : public I_Task
 				{
 					std::unique_ptr<GameTimer> m_timer;
 
