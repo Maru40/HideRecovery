@@ -92,8 +92,6 @@ namespace basecross {
 				std::vector<std::shared_ptr<TransitionNodeData>> m_transitionDatas;	//自分の遷移先ノード群(優先度)
 
 			public:
-				SelecterBase(const std::shared_ptr<I_Node>& fromNode);	//コンストラクタ
-
 				virtual ~SelecterBase() = default;	//デストラクタ
 
 				void SetFromNode(const std::shared_ptr<I_Node>& node) { m_fromNode = node; }
@@ -107,6 +105,10 @@ namespace basecross {
 					m_transitionDatas.push_back(std::make_shared<TransitionNodeData>(priorityController, node));
 				}
 
+				/// <summary>
+				/// 最優先のノードを取得
+				/// </summary>
+				/// <returns>最優先ノード</returns>
 				std::shared_ptr<I_Node> GetFirstPriorityNode() const;
 
 				bool IsEmptyTransitionNodes() const;

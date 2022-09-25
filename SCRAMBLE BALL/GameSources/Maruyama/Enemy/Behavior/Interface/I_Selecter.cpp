@@ -45,10 +45,6 @@ namespace basecross {
 				return leftData->priorityController->GetPriority() < rightData->priorityController->GetPriority();
 			}
 
-			SelecterBase::SelecterBase(const std::shared_ptr<I_Node>& fromNode) :
-				m_fromNode(fromNode)
-			{}
-
 			std::shared_ptr<I_Node> SelecterBase::GetFirstPriorityNode() const {
 				if (IsEmptyTransitionNodes()) {	//‘JˆÚæƒm[ƒh‚ª‹ó‚È‚çnullptr
 					return nullptr;
