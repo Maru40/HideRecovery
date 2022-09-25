@@ -68,7 +68,7 @@ namespace basecross {
 			//ResetActiveStage<GameStage>();
 		}
 		else if (event->m_MsgStr == L"ToLoadStage") {
-			ResetActiveStage<LoadStage>(L"ToMainStage");
+			ResetActiveStage<LoadStage>(L"ToTitleStage");
 		}
 		else if (event->m_MsgStr == L"ToMainStage") {
 			ResetActiveStage<MainStage>();
