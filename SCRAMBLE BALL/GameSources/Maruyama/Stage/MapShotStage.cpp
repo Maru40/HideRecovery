@@ -42,6 +42,7 @@ namespace basecross {
 
 		//SimpleSoundManager::ChangeBGM(L"TitleStageBGM", 0.1f);
 
+		//シャドーを消したり、エリアを上部にあげて、Depthの解消
 		for (auto& obj : maru::Utility::FindGameObjects<StageObjectBase>(GetThis<Stage>())) {
 			auto shadow = obj->GetComponent<Shadowmap>(false);
 			if (shadow) {
@@ -66,7 +67,7 @@ namespace basecross {
 		}
 	}
 	void MapShotStage::OnUpdate() {
-		// マッチング画面への遷移処理
+		//デバッグカメラ移動の処理
 		const auto& inputDevice = App::GetApp()->GetMyInputDevice();
 		const auto& pad = inputDevice->GetXInputGamePad();
 
