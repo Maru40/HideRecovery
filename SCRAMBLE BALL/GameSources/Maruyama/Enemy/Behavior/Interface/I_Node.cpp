@@ -21,6 +21,10 @@ namespace basecross {
 			//--------------------------------------------------------------------------------------
 
 			bool NodeBase::CanTransition() const {
+				if (!IsActive()) {	//非アクティブなら遷移できないため、false
+					return false;
+				}
+
 				if (IsDecoratorEmpty()) {	//デコレータがないなら、常にtrue
 					return true;
 				}

@@ -26,6 +26,10 @@ namespace basecross {
 			public:
 				virtual ~I_Node() = default;
 
+				virtual void SetIsActive(const bool isActive) noexcept = 0;
+
+				virtual bool IsActive() const noexcept = 0;
+
 				/// <summary>
 				/// インデックスのセット
 				/// </summary>
@@ -72,11 +76,16 @@ namespace basecross {
 			//--------------------------------------------------------------------------------------
 			class NodeBase : public I_Node
 			{
+				bool m_isActive = true;									//アクティブ状態かどうか
 				int m_index = 0;										//ノードインデックス
 				std::vector<std::shared_ptr<I_Decorator>> m_decorators;	//デコレータ配列
 
 			public:
 				virtual ~NodeBase() = default;
+
+				virtual void SetIsActive(const bool isActive) noexcept override { m_isActive = isActive; };
+
+				virtual bool IsActive() const noexcept override { return m_isActive; };
 
 				void SetIndex(const int index) noexcept override { m_index = index; }
 
