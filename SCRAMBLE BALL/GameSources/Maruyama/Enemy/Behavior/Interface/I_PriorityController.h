@@ -21,11 +21,19 @@ namespace basecross {
 			public:
 				virtual ~I_PriorityController() = default;
 
+				virtual void SetPriority(const float priority) = 0;
+
 				/// <summary>
 				/// —Dæ“x‚Ìæ“¾
 				/// </summary>
 				/// <returns>—Dæ“x</returns>
 				virtual float GetPriority() const = 0;
+
+				/// <summary>
+				/// —Dæ“x‚ÌŒvZ‚ğ‚·‚é
+				/// </summary>
+				/// <returns>ŒvZ‚µ‚½—Dæ“x</returns>
+				virtual float CalculatePriority() = 0;
 			};
 
 			//--------------------------------------------------------------------------------------
@@ -35,9 +43,16 @@ namespace basecross {
 				float m_priority = 0;
 
 			public:
+				PriorityControllerBase();
+				PriorityControllerBase(const float priority);
+
 				virtual ~PriorityControllerBase() = default;
 
+				void SetPriority(const float priority) override { m_priority = priority; };
+
 				float GetPriority() const override { return m_priority; }
+
+				float CalculatePriority() override { return m_priority; }	//–{—ˆ‚Íƒˆ‰¼‘zŠÖ”‚É‚·‚é—\’è
 			};
 
 		}

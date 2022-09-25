@@ -13,7 +13,13 @@ namespace basecross {
 
 		namespace Behavior {
 
+			PriorityControllerBase::PriorityControllerBase() :
+				PriorityControllerBase(0.0f)
+			{}
 
+			PriorityControllerBase::PriorityControllerBase(const float priority) :
+				m_priority(priority)
+			{}
 
 		}
 	}
