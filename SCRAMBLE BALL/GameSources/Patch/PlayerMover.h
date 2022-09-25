@@ -12,7 +12,7 @@ namespace basecross
 
 		float m_dashUseWeight;
 
-		bool m_isCameraAffected = false;
+		bool m_isCameraAffected = true;
 
 		ex_weak_ptr<Camera> m_camera;
 
