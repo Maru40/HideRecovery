@@ -69,11 +69,10 @@ namespace basecross {
 				/// </summary>
 				/// <param name="type">ノードタイプ</param>
 				/// <param name="node">ノード</param>
-				int AddNode(const EnumType type, const std::shared_ptr<I_Node>& node) override {
-					int index = SparseGraph::AddNode(node);
+				std::shared_ptr<I_Node> AddNode(const EnumType type, const std::shared_ptr<I_Node>& node) {
 					m_nodeMap[type] = node;
 
-					return index;
+					return node;
 				}
 
 				void Union(const std::shared_ptr<I_Edge>& edge) {
@@ -83,7 +82,7 @@ namespace basecross {
 					//そのセレクターがあるなら、タスクに先のノード情報を設定
 					if (auto selecter = GetSelecter(fromNode->GetType<EnumType>())) {
 						selecter->SetFromNode(fromNode);
-						selecter->AddTransitionNode(toNode);
+						selecter->AddTransitionNode(edge->GetPriorityContorller(), toNode);
 					}
 				}
 
@@ -102,7 +101,7 @@ namespace basecross {
 				bool HasNode(const EnumType type) const { return static_cast<int>(m_nodeMap.count(type)) != 0; }
 
 				std::shared_ptr<I_Node> GetNode(const EnumType type) const {
-					return m_nodeMap.count(type) != 0 : m_nodeMap.at(type) ? nullptr;
+					return m_nodeMap.count(type) != 0 ? m_nodeMap.at(type) : nullptr;
 				}
 
 				/// <summary>
@@ -110,13 +109,13 @@ namespace basecross {
 				/// </summary>
 				/// <param name="type">開始ノード</param>
 				/// <returns>最優先の遷移先ノード</returns>
-				std::shared_ptr<I_Node> CalculatePriorityNode(const EnumType type) {
+				std::shared_ptr<I_Node> CalculateFirstPriorityNode(const EnumType type) {
 					//初期ノードがから伸びるエッジを取得
-					std::vector<std::shared_ptr<I_Edge>> edges = GetEdges(node->GetType<EnumType>());
+					std::vector<std::shared_ptr<I_Edge>> edges = GetEdges(type);
 
-					//優先度順に並び変える
+					////優先度順に並び変える
 					auto sortEvent = [](const std::shared_ptr<I_Edge>& right, const std::shared_ptr<I_Edge>& left) {
-						right->GetPriority() < left->GetPriority();	//優先順位が低い順にソート
+						return right->GetPriority() < left->GetPriority();	//優先順位が低い順にソート
 					};
 					std::sort(edges.begin(), edges.end(), sortEvent);
 
@@ -128,7 +127,7 @@ namespace basecross {
 				/// </summary>
 				/// <param name="type">指定タイプ</param>
 				/// <returns>持っているならtrue</returns>
-				bool HasSelecter(const EnumType type) { return static_cast<int>(m_selecterMap.count(type)) != 0; }
+				bool HasSelecter(const EnumType type) const { return static_cast<int>(m_selecterMap.count(type)) != 0; }
 
 				/// <summary>
 				/// セレクターの追加
@@ -162,7 +161,7 @@ namespace basecross {
 				/// </summary>
 				/// <param name="type">ノードタイプ</param>
 				/// <param name="node">タスク</param>
-				void AddTask(const EnumType type, std::shared_ptr<I_Task>& task) {
+				void AddTask(const EnumType type, const std::shared_ptr<I_Task>& task) {
 					m_taskMap[type] = task;
 					AddNode(type, task);
 				}
@@ -185,23 +184,23 @@ namespace basecross {
 				/// <summary>
 				/// エッジの追加
 				/// </summary>
-				/// <param name="fromType"></param>
-				/// <param name="toType"></param>
-				void AddEdge(const EnumType fromType, const EnumType toType) {
-					AddEdge<EdgeBase>(fromType, toType);
+				template<class T, class... Ts,
+					std::enable_if_t<std::is_constructible_v<T, Ts...>, std::nullptr_t> = nullptr>
+				void AddEdge(Ts&&... params) {
+					std::shared_ptr<I_Edge> newEdge = std::make_shared<T>(params...);
+					Union(newEdge);
+
+					auto fromType = newEdge->GetFromNode()->GetType<EnumType>();
+					m_edgesMap[fromType].push_back(newEdge);
 				}
 
 				/// <summary>
 				/// エッジの追加
 				/// </summary>
-				template<class T, class... Ts,
-					std::enable_if_t<std::is_constructible_v<T, std::shared_ptr<I_Edge>&, Ts...>, std::nullptr_t> = nullptr>
-				void AddEdge(Ts&&... params) {
-					std::shared_ptr<I_Edge> newEdge = std::make_shared<T>(params...);
-					Union(newEdge);
-
-					auto fromType = static_cast<EnumType>(newEdge->GetFromNode()->GetIndex());
-					m_edgesMap[fromType].push_back(newEdge);
+				/// <param name="fromType"></param>
+				/// <param name="toType"></param>
+				void AddEdge(const EnumType fromType, const EnumType toType, const std::shared_ptr<I_PriorityController>& priorityController) {
+					AddEdge<EdgeBase>(GetNode(fromType), GetNode(toType), priorityController);
 				}
 
 				/// <summary>
@@ -281,7 +280,7 @@ namespace basecross {
 					}
 
 					//一番優先順位の高いノードを取得する。
-					return Recursive_TransitionNode(CalculatePriorityNode(node->GetType<EnumType>()));
+					return Recursive_TransitionNode(CalculateFirstPriorityNode(node->GetType<EnumType>()));
 				}
 
 				/// <summary>
