@@ -20,6 +20,17 @@ namespace basecross {
 			/// 前方宣言
 			//--------------------------------------------------------------------------------------
 			class I_PriorityController;
+			template<class EnumType>
+			class BehaviorTree;
+
+			//--------------------------------------------------------------------------------------
+			/// ビヘイビアセレクターのセレクトタイプ
+			//--------------------------------------------------------------------------------------
+			enum class SelectType {
+				Priority,
+				Sequence,
+				Random,
+			};
 
 			//--------------------------------------------------------------------------------------
 			/// ビヘイビアセレクターの遷移先ノードデータ
@@ -46,6 +57,10 @@ namespace basecross {
 			public:
 				virtual ~I_Selecter() = default;
 
+				virtual void SetSelectType(const SelectType type) = 0;
+				
+				virtual SelectType GetSelectType() const = 0;
+
 				/// <summary>
 				/// 手前のノードの設定
 				/// </summary>
@@ -69,9 +84,9 @@ namespace basecross {
 				) = 0;
 
 				/// <summary>
-				/// 一番優先度高いノードの取得
+				/// 最優先のノードを取得
 				/// </summary>
-				/// <returns></returns>
+				/// <returns>最優先ノード</returns>
 				virtual std::shared_ptr<I_Node> GetFirstPriorityNode() const = 0;
 
 				/// <summary>
@@ -88,11 +103,16 @@ namespace basecross {
 
 			class SelecterBase : public I_Selecter
 			{
+				SelectType m_selectType;
 				std::weak_ptr<I_Node> m_fromNode;									//自分の手前に存在するノード
 				std::vector<std::shared_ptr<TransitionNodeData>> m_transitionDatas;	//自分の遷移先ノード群(優先度)
 
 			public:
 				virtual ~SelecterBase() = default;	//デストラクタ
+
+				void SetSelectType(const SelectType type) { m_selectType = type; }
+
+				SelectType GetSelectType() const { return m_selectType; }
 
 				void SetFromNode(const std::shared_ptr<I_Node>& node) override { m_fromNode = node; }
 
@@ -105,10 +125,6 @@ namespace basecross {
 					m_transitionDatas.push_back(std::make_shared<TransitionNodeData>(priorityController, node));
 				}
 
-				/// <summary>
-				/// 最優先のノードを取得
-				/// </summary>
-				/// <returns>最優先ノード</returns>
 				std::shared_ptr<I_Node> GetFirstPriorityNode() const override;
 
 				bool IsEmptyTransitionNodes() const override;
