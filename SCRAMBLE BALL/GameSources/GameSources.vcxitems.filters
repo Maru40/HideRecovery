@@ -1138,6 +1138,12 @@
     <Filter Include="Maruyama\Player\Object\TestPlayerObject">
       <UniqueIdentifier>{f2572acd-962c-400e-80c7-0fc2d5d79484}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Enemy\Component\EachEnemy\Common\BehaviorTree">
+      <UniqueIdentifier>{7d5ff49c-ce96-439e-8f67-a85def37bf90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\Component\EachEnemy\Common\BehaviorTree\Base">
+      <UniqueIdentifier>{4b28ed5e-20bb-4d7a-a009-c5cf3e19c383}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2127,6 +2133,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Object\TestPlayerObject.h">
       <Filter>Maruyama\Player\Object\TestPlayerObject</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\BehaviorTree\EnemyBehaviorTree.h">
+      <Filter>Maruyama\Enemy\Component\EachEnemy\Common\BehaviorTree</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\BehaviorTree\BehaviorTreeComponentBase.h">
+      <Filter>Maruyama\Enemy\Component\EachEnemy\Common\BehaviorTree\Base</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -3019,6 +3031,12 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Object\TestPlayerObject.cpp">
       <Filter>Maruyama\Player\Object\TestPlayerObject</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\BehaviorTree\EnemyBehaviorTree.cpp">
+      <Filter>Maruyama\Enemy\Component\EachEnemy\Common\BehaviorTree</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\BehaviorTree\BehaviorTreeComponentBase.cpp">
+      <Filter>Maruyama\Enemy\Component\EachEnemy\Common\BehaviorTree\Base</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
