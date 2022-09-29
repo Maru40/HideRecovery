@@ -326,7 +326,7 @@ namespace basecross {
 				/// 遷移するときの判断開始位置のノードを取得する。
 				/// </summary>
 				std::shared_ptr<I_Node> GetTransitionStartNode() {
-					if (m_sequenceStack.size() == 0) {
+					if (m_sequenceStack.size() == 0) {	
 						return GetNode(m_firstNodeType);
 					}
 					
