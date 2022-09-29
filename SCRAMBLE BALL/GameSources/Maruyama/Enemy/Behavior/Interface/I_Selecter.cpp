@@ -10,6 +10,8 @@
 
 #include "I_PriorityController.h"
 
+#include "Maruyama/Enemy/StateMachine/EnemyMainStateMachine.h"
+
 namespace basecross {
 	namespace maru {
 
@@ -29,7 +31,7 @@ namespace basecross {
 			{}
 
 			//--------------------------------------------------------------------------------------
-			/// ビヘイビアセレクターの基底クラス
+			/// ソート用の完全隠蔽関数
 			//--------------------------------------------------------------------------------------
 
 			/// <summary>
@@ -45,6 +47,22 @@ namespace basecross {
 				return leftData->priorityController->GetPriority() < rightData->priorityController->GetPriority();
 			}
 
+			//--------------------------------------------------------------------------------------
+			/// ビヘイビアセレクターの基底クラス
+			//--------------------------------------------------------------------------------------
+
+			void SelecterBase::OnStart() {
+
+			}
+
+			bool SelecterBase::OnUpdate() {
+				return true;
+			}
+
+			void SelecterBase::OnExit() {
+
+			}
+				
 			std::shared_ptr<I_Node> SelecterBase::GetFirstPriorityNode() const {
 				if (IsEmptyTransitionNodes()) {	//遷移先ノードが空ならnullptr
 					return nullptr;
@@ -59,6 +77,17 @@ namespace basecross {
 			bool SelecterBase::IsEmptyTransitionNodes() const {
 				return static_cast<int>(m_transitionDatas.size()) == 0;
 			}
+
+			std::shared_ptr<I_Node> SelecterBase::GetCurrentNode() const {
+				auto currentTransitionData = m_currentTransitionData.lock();
+				if (!currentTransitionData) {
+					return nullptr;
+				}
+
+				return currentTransitionData->node.lock();
+			}
+
+			
 
 		}
 	}

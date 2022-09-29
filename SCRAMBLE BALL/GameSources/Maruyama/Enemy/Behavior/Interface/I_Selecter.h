@@ -12,6 +12,9 @@
 #include "I_Node.h"
 
 namespace basecross {
+	template<class node_type, class EnumType, class TransitionMember>
+	class EnemyMainStateMachine;
+
 	namespace maru {
 
 		namespace Behavior {
@@ -57,8 +60,20 @@ namespace basecross {
 			public:
 				virtual ~I_Selecter() = default;
 
+				virtual void OnStart() = 0;
+				virtual bool OnUpdate() = 0;
+				virtual void OnExit() = 0;
+
+				/// <summary>
+				/// セレクトタイプの設定
+				/// </summary>
+				/// <param name="type">セレクトタイプ</param>
 				virtual void SetSelectType(const SelectType type) = 0;
 				
+				/// <summary>
+				/// セレクトタイプの取得
+				/// </summary>
+				/// <returns>セレクトタイプ</returns>
 				virtual SelectType GetSelectType() const = 0;
 
 				/// <summary>
@@ -103,12 +118,25 @@ namespace basecross {
 
 			class SelecterBase : public I_Selecter
 			{
-				SelectType m_selectType;
+			public:
+				//using StateMachine = EnemyMainStateMachine<>
+
+			private:
+
+				SelectType m_selectType;											//セレクトタイプ
 				std::weak_ptr<I_Node> m_fromNode;									//自分の手前に存在するノード
 				std::vector<std::shared_ptr<TransitionNodeData>> m_transitionDatas;	//自分の遷移先ノード群(優先度)
 
+				std::weak_ptr<TransitionNodeData> m_currentTransitionData;			//現在使用中のデータ
+
+				//std::unique_ptr<>	//ステーター
+
 			public:
 				virtual ~SelecterBase() = default;	//デストラクタ
+
+				void OnStart() override;
+				bool OnUpdate() override;
+				void OnExit() override;
 
 				void SetSelectType(const SelectType type) { m_selectType = type; }
 
@@ -128,6 +156,10 @@ namespace basecross {
 				std::shared_ptr<I_Node> GetFirstPriorityNode() const override;
 
 				bool IsEmptyTransitionNodes() const override;
+
+				std::shared_ptr<I_Node> GetCurrentNode() const;
+
+			private:
 
 			};
 
