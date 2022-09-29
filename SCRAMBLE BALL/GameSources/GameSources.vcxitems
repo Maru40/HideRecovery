@@ -227,6 +227,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\SingletonComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\SlowTimerManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\SoundManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\StateMachine\EdgeBase.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\StateMachine\NodeBase.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\StateMachine\StateMachine.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Timer\GameTimer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Timer\TimeHelper.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Timer\WaitTimer.h" />
@@ -552,6 +555,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\SingletonComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\SlowTimerManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\SoundManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\StateMachine\EdgeBase.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\StateMachine\NodeBase.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\StateMachine\StateMachine.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Timer\GameTimer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Timer\TimeHelper.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Timer\WaitTimer.cpp" />

@@ -1144,6 +1144,15 @@
     <Filter Include="Maruyama\Enemy\Component\EachEnemy\Common\BehaviorTree\Base">
       <UniqueIdentifier>{4b28ed5e-20bb-4d7a-a009-c5cf3e19c383}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Utility\StateMachine">
+      <UniqueIdentifier>{e2ecf030-8f29-48e6-beb2-045f64c32d9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Utility\StateMachine\NodeBase">
+      <UniqueIdentifier>{b29ef0e6-d593-43c3-ac9e-0e0bf718de18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Utility\StateMachine\EdgeBase">
+      <UniqueIdentifier>{24421d0b-02f1-4380-bf79-05ec7e4b28c7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2139,6 +2148,15 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\BehaviorTree\BehaviorTreeComponentBase.h">
       <Filter>Maruyama\Enemy\Component\EachEnemy\Common\BehaviorTree\Base</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\StateMachine\StateMachine.h">
+      <Filter>Maruyama\Utility\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\StateMachine\NodeBase.h">
+      <Filter>Maruyama\Utility\StateMachine\NodeBase</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\StateMachine\EdgeBase.h">
+      <Filter>Maruyama\Utility\StateMachine\EdgeBase</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -3037,6 +3055,15 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\BehaviorTree\BehaviorTreeComponentBase.cpp">
       <Filter>Maruyama\Enemy\Component\EachEnemy\Common\BehaviorTree\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\StateMachine\StateMachine.cpp">
+      <Filter>Maruyama\Utility\StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\StateMachine\NodeBase.cpp">
+      <Filter>Maruyama\Utility\StateMachine\NodeBase</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\StateMachine\EdgeBase.cpp">
+      <Filter>Maruyama\Utility\StateMachine\EdgeBase</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
