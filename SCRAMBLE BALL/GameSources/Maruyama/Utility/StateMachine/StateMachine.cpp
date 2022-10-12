@@ -10,7 +10,13 @@
 
 #include "StateMachine.h"
 
-#include "Maruyama/Enemy/Astar/GraphBase.h"
+#include "GraphBase_Ex.h"
+
+#include "NodeBase.h"
+#include "Node_StateMachine.h"
+
+#include "EdgeBase.h"
+#include "Edge_StateMachine.h"
 
 namespace basecross {
 
