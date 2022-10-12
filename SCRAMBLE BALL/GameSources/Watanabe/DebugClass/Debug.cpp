@@ -13,7 +13,7 @@ namespace basecross {
 		// 以下設定
 		m_maxLogCount(18),
 		m_isDisplayForCount(true),
-		m_isActive(true),
+		m_isActive(false),
 		m_defaultRect(10, 10, 500, 400)
 	{}
 
