@@ -13,6 +13,7 @@
 
 #include "Maruyama/Utility/Timer/GameTimer.h"
 
+#include "Maruyama/Utility/Utility.h"
 #include "Watanabe/DebugClass/Debug.h"
 
 namespace basecross {
