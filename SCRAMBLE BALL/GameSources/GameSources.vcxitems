@@ -228,7 +228,10 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\SlowTimerManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\SoundManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\StateMachine\EdgeBase.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\StateMachine\Edge_StateMachine.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\StateMachine\GraphBase_Ex.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\StateMachine\NodeBase.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\StateMachine\Node_StateMachine.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\StateMachine\StateMachine.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Timer\GameTimer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Timer\TimeHelper.h" />
@@ -556,7 +559,10 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\SlowTimerManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\SoundManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\StateMachine\EdgeBase.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\StateMachine\Edge_StateMachine.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\StateMachine\GraphBase_Ex.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\StateMachine\NodeBase.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\StateMachine\Node_StateMachine.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\StateMachine\StateMachine.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Timer\GameTimer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Timer\TimeHelper.cpp" />
