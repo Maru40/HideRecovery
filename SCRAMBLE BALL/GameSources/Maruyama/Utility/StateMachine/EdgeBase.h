@@ -21,10 +21,18 @@ namespace basecross {
 		//--------------------------------------------------------------------------------------
 		class I_Edge {
 			virtual void SetFromIndex(const int index) noexcept = 0;
+
 			virtual int GetFromIndex() const noexcept = 0;
 
+			template<class EnumType>
+			EnumType GetFromType() const { return static_cast<EnumType>(GetFromIndex()); }
+
 			virtual void SetToIndex(const int index) noexcept = 0;
+
 			virtual int GetToIndex() const noexcept = 0;
+
+			template<class EnumType>
+			EnumType GetToType() const { return static_cast<EnumType>(GetToIndex()); }
 		};
 
 		//--------------------------------------------------------------------------------------
