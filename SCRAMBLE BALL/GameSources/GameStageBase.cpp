@@ -97,7 +97,13 @@ namespace basecross {
 		AddGameObject<SkyBox>(Vec3(500));
 
 		//フィールドの影響マップの生成
-		//AddGameObject<GameObject>()->AddComponent<maru::FieldImpactMap>(maru::Utility::ConvertArrayType<GameObject>(m_floors));
+		for (auto block : maru::Utility::FindGameObjects<Block>(GetThis<Stage>())) {
+			if (block->GetName() == L"Floor") {	//床の取得
+				m_floors.push_back(block);
+				break;
+			}
+		}
+		AddGameObject<GameObject>()->AddComponent<maru::FieldImpactMap>(maru::Utility::ConvertArrayType<GameObject>(m_floors));
 		//外側コリジョン設定
 		//CreateMapOutCollisions(m_floors);
 	}

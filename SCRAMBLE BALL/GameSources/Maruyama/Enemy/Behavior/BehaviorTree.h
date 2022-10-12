@@ -61,6 +61,8 @@ namespace basecross {
 				std::unordered_map<EnumType, std::shared_ptr<I_Selecter>> m_selecterMap;	//定義したセレクター
 				std::unordered_map<EnumType, std::shared_ptr<I_Task>> m_taskMap;			//定義したタスク
 
+				std::stack<std::weak_ptr<I_Selecter>> m_sequenceStack;	//シーケンスを登録するスタック
+
 				EdgesMap m_edgesMap;	//遷移エッジ
 
 			private:
@@ -122,7 +124,16 @@ namespace basecross {
 					};
 					std::sort(edges.begin(), edges.end(), sortEvent);
 
-					return edges[0]->GetToNode();	//優先順位の高いノードを取得
+					//並べ替えたノードが遷移できるかどうかを判断する。
+					for (const auto& edge : edges) {
+						if (edge->GetToNode()->CanTransition()) {		//遷移できるなら、そのノードを返す。
+							SelectSelecterAdjust(edge->GetToNode());	//Selecterの時の追加処理をする。
+							return edge->GetToNode();
+						}
+					}
+
+					return nullptr;	//どこにも遷移できないならnullptrを返す。(将来的にはこのノード先の優先度を下げて、もう一度検索させるといいかも。)
+					//return edges[0]->GetToNode();	//優先順位の高いノードを取得
 				}
 
 				/// <summary>
@@ -137,7 +148,7 @@ namespace basecross {
 				/// </summary>
 				/// <param name="type">ノードタイプ</param>
 				/// <param name="selecter">セレクター</param>
-				void AddSelecter(const EnumType type, const std::shared_ptr<I_Selecter>& selecter) {
+				void AddSelecter(const EnumType type, const std::shared_ptr<I_Selecter>& selecter = std::make_shared<SelecterBase>()) {
 					m_selecterMap[type] = selecter;
 					AddNode(type, selecter);
 				}
@@ -148,6 +159,41 @@ namespace basecross {
 				/// <returns>セレクター</returns>
 				std::shared_ptr<I_Selecter> GetSelecter(const EnumType type) const {
 					return HasSelecter(type) ? m_selecterMap.at(type) : nullptr;	//持っていないならnullptrを返す。
+				}
+
+				/// <summary>
+				/// シーケンスセレクターを選択したときに呼び出すイベント
+				/// </summary>
+				/// <param name="selecter">セレクター</param>
+				void SelectSequenceEvent(const std::shared_ptr<I_Selecter>& selecter) {
+					m_sequenceStack.push(selecter);
+				}
+
+				/// <summary>
+				/// セレクターを選択したときの対処
+				/// </summary>
+				/// <param name="node">選択したノード</param>
+				void SelectSelecterAdjust(const std::shared_ptr<I_Node>& node) {
+					auto selecter = std::dynamic_pointer_cast<I_Selecter>(node);
+					if (!selecter) {
+						return;
+					}
+
+					//それぞれのタイプ別に処理を呼び出す。
+					switch (selecter->GetSelectType())
+					{
+					case SelectType::Priority:
+							//現在は何もしない
+						break;
+
+					case SelectType::Random:
+							//現在は何もしない
+						break;
+
+					case SelectType::Sequence:
+						SelectSequenceEvent(selecter);
+						break;
+					} 
 				}
 
 				/// <summary>
@@ -263,14 +309,28 @@ namespace basecross {
 				/// </summary>
 				/// <returns>一番優先度の高いノード</returns>
 				std::shared_ptr<I_Node> Recursive_TransitionNode(const std::shared_ptr<I_Node>& node) {
+					if (!node) {	//ノードがnullptrなら
+						return nullptr;
+					}
+
 					//エッジが存在しないならnodeを生成する。
-					auto type = node->GetType<EnumType>();
 					if (!HasEdges(node->GetType<EnumType>())) {	
 						return node;
 					}
 
 					//一番優先順位の高いノードを取得する。
 					return Recursive_TransitionNode(CalculateFirstPriorityNode(node->GetType<EnumType>()));
+				}
+
+				/// <summary>
+				/// 遷移するときの判断開始位置のノードを取得する。
+				/// </summary>
+				std::shared_ptr<I_Node> GetTransitionStartNode() {
+					if (m_sequenceStack.size() == 0) {	
+						return GetNode(m_firstNodeType);
+					}
+					
+					return m_sequenceStack.top().lock();
 				}
 
 				/// <summary>
@@ -282,8 +342,7 @@ namespace basecross {
 					}
 					
 					//優先度の一番高いノードに遷移
-					auto node = Recursive_TransitionNode(GetNode(m_firstNodeType));
-
+					auto node = Recursive_TransitionNode(GetTransitionStartNode());
 					SetCurrentNode(node);	//カレントノードの設定
 
 					if (auto currentTask = GetCurrentTask()) {	//タスクの開始イベントを呼び出す。

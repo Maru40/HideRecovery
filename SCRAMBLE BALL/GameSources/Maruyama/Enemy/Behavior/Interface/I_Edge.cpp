@@ -8,6 +8,7 @@
 
 #include "I_Edge.h"
 
+#include "I_Node.h"
 #include "I_PriorityController.h"
 
 namespace basecross {
@@ -33,9 +34,15 @@ namespace basecross {
 				m_priorityContorller(priorityController)
 			{ }
 
-			void EdgeBase::SetPriority(const float priority) { ; }
+			void EdgeBase::SetPriority(const float priority) { m_priorityContorller->SetPriority(priority); }
 
-			float EdgeBase::GetPriority() const { return m_priorityContorller->GetPriority(); }
+			float EdgeBase::GetPriority() const { 
+				//if (!GetToNode()->CanTransition()) {	
+				//	return FLT_MAX;	//‘JˆÚ‚Å‚«‚È‚¢‚Ì‚È‚çA—Dæ‡ˆÊ‚ðÅ’á’l‚Æ‚µ‚Ä•Ô‚·B
+				//}
+
+				return m_priorityContorller->GetPriority();
+			}
 
 			void EdgeBase::SetPriorityController(const std::shared_ptr<I_PriorityController>& priorityController) {
 				m_priorityContorller = priorityController;

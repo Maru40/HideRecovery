@@ -21,6 +21,10 @@ namespace basecross {
 			public:
 				virtual ~I_PriorityController() = default;
 
+				/// <summary>
+				/// —Dæ“x‚Ìİ’è
+				/// </summary>
+				/// <param name="priority">—Dæ“x</param>
 				virtual void SetPriority(const float priority) = 0;
 
 				/// <summary>
