@@ -183,11 +183,11 @@ namespace basecross {
 					switch (selecter->GetSelectType())
 					{
 					case SelectType::Priority:
-						//åªç›ÇÕâΩÇ‡ÇµÇ»Ç¢
+							//åªç›ÇÕâΩÇ‡ÇµÇ»Ç¢
 						break;
 
 					case SelectType::Random:
-						//åªç›ÇÕâΩÇ‡ÇµÇ»Ç¢
+							//åªç›ÇÕâΩÇ‡ÇµÇ»Ç¢
 						break;
 
 					case SelectType::Sequence:
