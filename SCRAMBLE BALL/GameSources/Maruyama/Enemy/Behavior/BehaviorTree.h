@@ -99,12 +99,30 @@ namespace basecross {
 				/// <returns>現在のタスクタイプ</returns>
 				EnumType GetCurrentType() const { return m_currentNode.lock() ? m_currentNode.lock()->GetType<EnumType>() : EnumType(0); }
 
+				/// <summary>
+				/// 現在のノードを設定
+				/// </summary>
+				/// <param name="node">現在のノード</param>
 				void SetCurrentNode(const std::shared_ptr<I_Node>& node) { m_currentNode = node; }
 
+				/// <summary>
+				/// 現在のノードを取得
+				/// </summary>
+				/// <returns>現在のノード</returns>
 				std::shared_ptr<I_Node> GetCurrentNode() const { return m_currentNode.lock(); }
 
+				/// <summary>
+				/// そのノードが存在するかどうか
+				/// </summary>
+				/// <param name="type">確認したいタイプ</param>
+				/// <returns>ノードが存在するならtrue</returns>
 				bool HasNode(const EnumType type) const { return static_cast<int>(m_nodeMap.count(type)) != 0; }
 
+				/// <summary>
+				/// ノードの取得
+				/// </summary>
+				/// <param name="type">ノードのタイプ</param>
+				/// <returns>取得したノード</returns>
 				std::shared_ptr<I_Node> GetNode(const EnumType type) const {
 					return m_nodeMap.count(type) != 0 ? m_nodeMap.at(type) : nullptr;
 				}
@@ -118,11 +136,11 @@ namespace basecross {
 					//初期ノードがから伸びるエッジを取得
 					std::vector<std::shared_ptr<I_Edge>> edges = GetEdges(type);
 
-					////優先度順に並び変える
+					//優先度順に並び変える
 					auto sortEvent = [](const std::shared_ptr<I_Edge>& right, const std::shared_ptr<I_Edge>& left) {
 						return right->GetPriority() < left->GetPriority();	//優先順位が低い順にソート
 					};
-					std::sort(edges.begin(), edges.end(), sortEvent);
+					std::sort(edges.begin(), edges.end(), sortEvent);		//ソート処理
 
 					//並べ替えたノードが遷移できるかどうかを判断する。
 					for (const auto& edge : edges) {
