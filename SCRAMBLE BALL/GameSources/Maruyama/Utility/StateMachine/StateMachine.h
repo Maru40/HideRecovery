@@ -127,7 +127,6 @@ namespace basecross {
 				}
 
 				m_graph->AddNode(type, node);
-				//AddNode(type, node);
 			}
 
 			/// <summary>
