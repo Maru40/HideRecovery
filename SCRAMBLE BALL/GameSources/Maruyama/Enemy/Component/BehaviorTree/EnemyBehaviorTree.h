@@ -16,11 +16,12 @@ namespace basecross {
 	namespace Enemy {
 
 		enum class EnemyBehaviorTreeType {
-			FirstSelecter,
-			ChaseSelecter,
-			AttackSelecter,
+			FirstSelecter,	//初期セレクター
 
-			ChaseTask,
+			ButtleSelecter,	//バトルセレクター
+				AttackSelecter,	//攻撃セレクター
+
+
 		};
 
 		class EnemyBehaviorTree : public BehaviorTreeComponentBase<EnemyBehaviorTreeType>

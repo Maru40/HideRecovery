@@ -20,7 +20,12 @@ namespace basecross {
 		{}
 
 		void EnemyBehaviorTree::CreateNode() {
+			//初回セレクター
 			m_behaviorTree->AddSelecter(BehaviorType::FirstSelecter);
+
+			//バトルセレクター
+			m_behaviorTree->AddSelecter(BehaviorType::ButtleSelecter);
+
 
 		}
 
