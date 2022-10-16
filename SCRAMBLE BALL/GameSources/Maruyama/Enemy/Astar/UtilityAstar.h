@@ -46,6 +46,14 @@ namespace basecross {
 		static std::shared_ptr<NavGraphNode> SearchNearNode(const GraphAstar& astar, const Vec3& targetPos);
 
 		/// <summary>
+		/// ターゲットから一番近くのノードを検索する。
+		/// </summary>
+		/// <param name="graph">グラフの参照</param>
+		/// <param name="targetPos">ターゲットのポジション</param>
+		/// <returns>ターゲットから一番近いノード</returns>
+		static std::shared_ptr<NavGraphNode> SearchNearNode(const std::shared_ptr<const GraphAstar::GraphType>& graph, const Vec3& targetPos);
+
+		/// <summary>
 		/// 自分のノードから伸びるノードで一番ターゲットに近いノードの選択
 		/// </summary>
 		/// <param name="astar">Astarの参照</param>

@@ -21,12 +21,15 @@ namespace basecross {
 
 	std::shared_ptr<NavGraphNode> UtilityAstar::SearchNearNode(const GraphAstar& astar, const Vec3& targetPos)
 	{
-		const auto& graph = astar.GetGraph();	//グラフの取得
+		return SearchNearNode(astar.GetGraph(), targetPos);
+	}
+
+	std::shared_ptr<NavGraphNode> UtilityAstar::SearchNearNode(const std::shared_ptr<const GraphAstar::GraphType>& graph, const Vec3& targetPos) {
 		const auto& nodes = graph->GetNodes();	//ノード配列の取得
 
 		float minRange = 10000.0f;
 		std::shared_ptr<NavGraphNode> minNode = nullptr;  //一番距離が短いノード
-		
+
 		//検索開始
 		auto objects = maru::Utility::GetStage()->GetGameObjectVec();
 		for (const auto& node : nodes) {
