@@ -11,6 +11,7 @@
 #include "Maruyama/Enemy/Behavior/BehaviorTree.h"
 
 namespace basecross {
+
 	namespace Enemy {
 
 
