@@ -12,6 +12,7 @@
 #include "Maruyama/Enemy/Astar/NavGraphNode.h"
 #include "Maruyama/Enemy/Astar/AstarEdge.h"
 #include "Maruyama/Enemy/Astar/SparseGraph.h"
+#include "Maruyama/Enemy/Astar/AstarGraph.h"
 #include "Maruyama/Enemy/Astar/GraphAstar.h"
 #include "ImpactMap.h"
 
@@ -143,7 +144,7 @@ namespace basecross {
 		}
 
 		std::shared_ptr<GraphAstar> Factory_ImpactMap::CreateGraphAstar() {
-			std::shared_ptr<GraphAstar> astar(new GraphAstar(std::make_shared<SparseGraph<NavGraphNode, AstarEdge>>(true)));
+			std::shared_ptr<GraphAstar> astar(new GraphAstar(std::make_shared<GraphAstar::GraphType>(true)));
 			CreateNodes(astar);  //ノードの生成
 			CreateEdges(astar);  //エッジの生成
 
@@ -183,7 +184,7 @@ namespace basecross {
 		ImpactMap::ImpactMap(const std::shared_ptr<Stage>& stage, const Factory_Parametor& parametor) :
 			m_stage(stage),
 			m_param(parametor), 
-			m_astar(new GraphAstar(std::make_shared<SparseGraph<NavGraphNode, AstarEdge>>(true)))
+			m_astar(new GraphAstar(std::make_shared<GraphAstar::GraphType>(true)))
 		{
 			CreateImpactData();
 		}
