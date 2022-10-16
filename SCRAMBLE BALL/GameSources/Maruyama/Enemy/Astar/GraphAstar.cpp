@@ -291,15 +291,16 @@ namespace basecross {
 		return resultPositions;
 	}
 
-	int GraphAstar::AddNode(const Vec3& position) {
-		//ƒm[ƒh‚Ì¶¬
-		auto index = m_baseGraph->GetNextFreeNodeIndex();
-		auto newNode = std::make_shared<NavGraphNode>(index, position);
+	//int GraphAstar::AddNode(const Vec3& position) {
+	//	return AddNode(position);
+	//	////ƒm[ƒh‚Ì¶¬
+	//	//auto index = m_baseGraph->GetNextFreeNodeIndex();
+	//	//auto newNode = std::make_shared<NavGraphNode>(index, position);
 
-		m_baseGraph->AddNode(newNode);
+	//	//m_baseGraph->AddNode(newNode);
 
-		return index++;
-	}
+	//	//return index++;
+	//}
 
 	int GraphAstar::AddNode(const Vec3& position,
 		const vector<shared_ptr<GameObject>>& obstacleObjs, const vector<shared_ptr<GameObject>>& excluteObjs)
