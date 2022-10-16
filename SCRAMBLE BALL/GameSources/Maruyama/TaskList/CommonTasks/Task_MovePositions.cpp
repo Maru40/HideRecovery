@@ -53,10 +53,11 @@ namespace basecross {
 		if (IsEnd()) {
 			return;
 		}
-		ChangeMoveTargetPosition(m_paramPtr->positions[m_index]);
-		SelectTask();
 
-		if (m_paramPtr->isSetInitializePosition) {
+		ChangeMoveTargetPosition(m_paramPtr->positions[m_index]);	//移動場所の変更
+		SelectTask();	//タスクの選択
+
+		if (m_paramPtr->isSetInitializePosition) {	//初回時に瞬間移動するかどうか
 			GetOwner()->GetComponent<Transform>()->SetPosition(m_paramPtr->positions[m_index]);
 		}
 	}
@@ -90,6 +91,7 @@ namespace basecross {
 		if (IsEnd()) {
 			return;
 		}
+
 		ChangeMoveTargetPosition(m_paramPtr->positions[m_index]);
 	}
 
