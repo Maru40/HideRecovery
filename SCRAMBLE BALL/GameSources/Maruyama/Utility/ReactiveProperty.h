@@ -72,6 +72,12 @@ namespace basecross {
 		T GetValue() const noexcept { return value; }
 
 		/// <summary>
+		/// 本体データの参照を取得
+		/// </summary>
+		/// <returns>本体データの参照</returns>
+		T& GetRefValue() noexcept { return value; }
+
+		/// <summary>
 		/// 本体データの生ポインタを取得
 		/// </summary>
 		/// <returns>本体データの生ポインタ</returns>
