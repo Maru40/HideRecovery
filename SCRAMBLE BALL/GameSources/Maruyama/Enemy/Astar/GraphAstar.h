@@ -49,6 +49,7 @@ namespace basecross {
 	};
 
 
+
 	//--------------------------------------------------------------------------------------
 	///	Astarの管理をするグラフ
 	//--------------------------------------------------------------------------------------
@@ -64,8 +65,8 @@ namespace basecross {
 		GraphMap m_graphMap;								//グラフのエリアインデックスごとに分けたマップ
 		std::shared_ptr<Heuristic> m_heuristic = nullptr;	//ヒュースリックの数値を計算するクラス。
 
-		std::map<int, OpenData> m_openDataMap;             //オープンデータのMap
-		std::stack<std::shared_ptr<NavGraphNode>> m_route; //生成したルート
+		std::map<int, OpenData> m_openDataMap;				//オープンデータのMap
+		std::stack<std::shared_ptr<NavGraphNode>> m_route;	//生成したルート
 
 		bool m_isRouteEnd = true;        //ルートの最後に来たかどうか？
 
