@@ -148,6 +148,8 @@ namespace basecross {
 			CreateNodes(astar);  //ノードの生成
 			CreateEdges(astar);  //エッジの生成
 
+			astar->SettingGraphMapCenterPositions();	//それぞれのエリアのグラフの中心位置を設定する。
+
 			return astar;
 		}
 
