@@ -47,6 +47,8 @@ namespace basecross {
 			int areaIndex;					//エリアインデックス
 
 			ImpactData();
+			ImpactData(const int areaIndex);
+
 			virtual ~ImpactData();
 		};
 
