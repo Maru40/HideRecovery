@@ -56,11 +56,13 @@ namespace basecross {
 	{
 	public:
 		using GraphType = SparseGraph<NavGraphNode, AstarEdge>;
+		using GraphMap = std::unordered_map<int, std::shared_ptr<GraphType>>;
 
 	private:
 
-		std::shared_ptr<GraphType> m_baseGraph = nullptr;  //グラフのデータ
-		std::shared_ptr<Heuristic> m_heuristic = nullptr;  //ヒュースリックの数値を計算する。
+		std::shared_ptr<GraphType> m_baseGraph = nullptr;	//グラフのデータ
+		GraphMap m_graphMap;								//グラフのエリアインデックスごとに分けたマップ
+		std::shared_ptr<Heuristic> m_heuristic = nullptr;	//ヒュースリックの数値を計算するクラス。
 
 		std::map<int, OpenData> m_openDataMap;             //オープンデータのMap
 		std::stack<std::shared_ptr<NavGraphNode>> m_route; //生成したルート
@@ -184,6 +186,24 @@ namespace basecross {
 		}
 
 		/// <summary>
+		/// エリアごとに分けたグラフの取得
+		/// </summary>
+		/// <param name="areaIndex">エリアインデックス</param>
+		/// <returns>エリアごとに分けたグラフ</returns>
+		const std::shared_ptr<const GraphType> GetGraph(const int areaIndex) const {
+			return m_graphMap.at(areaIndex);
+		}
+
+		/// <summary>
+		/// グラフが登録されているかどうか
+		/// </summary>
+		/// <param name="areaIndex">エリアインデックス</param>
+		/// <returns>グラフ</returns>
+		bool HasGraph(const int areaIndex) const {
+			return m_graphMap.count(areaIndex) != 0;	//0でないならtrue
+		}
+
+		/// <summary>
 		/// ルートの取得
 		/// </summary>
 		/// <returns>ルート</returns>
@@ -217,10 +237,17 @@ namespace basecross {
 			auto index = m_baseGraph->GetNextFreeNodeIndex();
 			auto newNode = std::make_shared<NavGraphNode>(index, params...);
 
-			m_baseGraph->AddNode(newNode);
-
+			m_baseGraph->AddNode(newNode);	//ベースグラフに登録
+			AddAreaGraphNode(newNode);		//エリアインデックスごとのマップに登録する。
+			
 			return index++;
 		}
+
+		/// <summary>
+		/// エリアインデックスごとに分けたエリアマップに登録する。
+		/// </summary>
+		/// <param name="node">登録するノード</param>
+		void AddAreaGraphNode(const std::shared_ptr<NavGraphNode>& node);
 
 		/// <summary>
 		/// ノードの追加

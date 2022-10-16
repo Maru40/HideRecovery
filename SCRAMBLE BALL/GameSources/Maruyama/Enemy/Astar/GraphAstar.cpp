@@ -76,15 +76,17 @@ namespace basecross {
 	}
 
 	void GraphAstar::SearchAstarStart(const std::shared_ptr<GameObject>& self, const std::shared_ptr<GameObject>& target) {
-		auto selfNearNode = UtilityAstar::SearchNearNode(*this, self);
-		auto targetNearNode = UtilityAstar::SearchNearNode(*this, target);
-		SearchAstarStart(selfNearNode, targetNearNode);
+		//auto selfNearNode = UtilityAstar::SearchNearNode(*this, self);
+		//auto targetNearNode = UtilityAstar::SearchNearNode(*this, target);
+		//SearchAstarStart(selfNearNode, targetNearNode);
+		SearchAstarStart(self->GetComponent<Transform>()->GetPosition(), target->GetComponent<Transform>()->GetPosition());
 	}
 
 	void GraphAstar::SearchAstarStart(const std::shared_ptr<GameObject>& self, const Vec3& targetPos) {
-		auto selfNearNode = UtilityAstar::SearchNearNode(*this, self);
-		auto targetNearNode = UtilityAstar::SearchNearNode(*this, targetPos);
-		SearchAstarStart(selfNearNode, targetNearNode);
+		//auto selfNearNode = UtilityAstar::SearchNearNode(*this, self);
+		//auto targetNearNode = UtilityAstar::SearchNearNode(*this, targetPos);
+		//SearchAstarStart(selfNearNode, targetNearNode);
+		SearchAstarStart(self->GetComponent<Transform>()->GetPosition(), targetPos);
 	}
 
 	void GraphAstar::SearchAstarStart(const Vec3& selfPos, const Vec3& targetPos) {
@@ -291,16 +293,12 @@ namespace basecross {
 		return resultPositions;
 	}
 
-	//int GraphAstar::AddNode(const Vec3& position) {
-	//	return AddNode(position);
-	//	////ノードの生成
-	//	//auto index = m_baseGraph->GetNextFreeNodeIndex();
-	//	//auto newNode = std::make_shared<NavGraphNode>(index, position);
-
-	//	//m_baseGraph->AddNode(newNode);
-
-	//	//return index++;
-	//}
+	void GraphAstar::AddAreaGraphNode(const std::shared_ptr<NavGraphNode>& node) {
+		//エリアインデックスごとのマップに登録する。
+		int areaIndex = node->GetAreaIndex();
+		auto areaGraph = HasGraph(areaIndex) ? m_graphMap[areaIndex] : m_graphMap[areaIndex] = std::make_shared<GraphType>(true);
+		areaGraph->AddNode(node);
+	}
 
 	int GraphAstar::AddNode(const Vec3& position,
 		const vector<shared_ptr<GameObject>>& obstacleObjs, const vector<shared_ptr<GameObject>>& excluteObjs)
