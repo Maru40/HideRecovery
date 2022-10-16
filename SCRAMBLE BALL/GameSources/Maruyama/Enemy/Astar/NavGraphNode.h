@@ -140,6 +140,18 @@ namespace basecross {
 		/// <param name="action">呼び出したいイベント</param>
 		void AddSubscribeImpactData(const std::function<bool()>& whereAction, const std::function<void()>& action);
 
+		/// <summary>
+		/// エリアインデックスの設定
+		/// </summary>
+		/// <param name="index">エリアインデックス</param>
+		void SetAreaIndex(const int index) noexcept;
+
+		/// <summary>
+		/// エリアインデックスの取得
+		/// </summary>
+		/// <returns>エリアインデックス</returns>
+		int GetAreaIndex() const noexcept;
+
 		//--------------------------------------------------------------------------------------
 		///	オペレータ
 		//--------------------------------------------------------------------------------------

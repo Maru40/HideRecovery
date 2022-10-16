@@ -67,6 +67,14 @@ namespace basecross {
 		m_impactData->AddSubscribe(whereAction, action);
 	}
 
+	void NavGraphNode::SetAreaIndex(const int index) noexcept {
+		m_impactData->GetRefValue().areaIndex = index;
+	}
+
+	int NavGraphNode::GetAreaIndex() const noexcept {
+		return m_impactData->GetValue().areaIndex;
+	}
+
 	//--------------------------------------------------------------------------------------
 	///	オペレータ
 	//--------------------------------------------------------------------------------------
