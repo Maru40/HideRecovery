@@ -78,8 +78,6 @@ namespace basecross {
 				/// <param name="width">‰¡‚Ìƒm[ƒh”</param>
 				/// <param name="depth">c‚Ìƒm[ƒh”</param>
 				AreaNodeCount(const int width, const int depth);
-
-				int SumCount() const { return width + depth; }
 			};
 
 			//--------------------------------------------------------------------------------------
