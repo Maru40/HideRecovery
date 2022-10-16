@@ -23,6 +23,10 @@ namespace basecross {
 			EnemyObjectBase(const std::shared_ptr<Stage>& stage);
 
 			void OnCreate() override;
+
+		protected:
+
+			void CreateModel();
 		};
 	}
 }
