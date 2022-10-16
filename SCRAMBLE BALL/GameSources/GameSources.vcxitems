@@ -51,10 +51,10 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\FactionCoordinator.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\PatrolCoordinator.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\TupleSpace.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\AstarDebug\AstarEdgeDraw.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\AstarDebug\AstarNodeDraw.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\AstarDebug\ImpactDataDraw.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\AstarEdge.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\Debug\AstarEdgeDraw.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\Debug\AstarNodeDraw.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\Debug\ImpactDataDraw.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\GraphAstar.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\GraphBase.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\GraphEdgeBase.h" />
@@ -396,10 +396,10 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\FactionCoordinator.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\PatrolCoordinator.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\TupleSpace.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\AstarDebug\AstarEdgeDraw.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\AstarDebug\AstarNodeDraw.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\AstarDebug\ImpactDataDraw.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\AstarEdge.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\Debug\AstarEdgeDraw.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\Debug\AstarNodeDraw.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\Debug\ImpactDataDraw.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\GraphAstar.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\GraphBase.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\GraphNodeBase.cpp" />

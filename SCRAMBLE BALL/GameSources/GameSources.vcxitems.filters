@@ -1530,12 +1530,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\UtilityAstar.h">
       <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\UtilityAstar</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\Debug\AstarEdgeDraw.h">
-      <Filter>Maruyama\Utility\DebugOjbect\AstarEdgeDraw</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\Debug\AstarNodeDraw.h">
-      <Filter>Maruyama\Utility\DebugOjbect\AstarNodeDraw</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\AttackBase.h">
       <Filter>Maruyama\Player\Component\AttackBase</Filter>
     </ClInclude>
@@ -1616,9 +1610,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\EnemyAIDirector.h">
       <Filter>Maruyama\Enemy\Component\AI\Director</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Debug\Object\DebugObject.h">
-      <Filter>Maruyama\Utility\DebugOjbect</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Debug\Component\DebugNumber.h">
       <Filter>Maruyama\Utility\DebugOjbect\DebugNumber</Filter>
@@ -1757,9 +1748,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Interface\I_FactionMember.h">
       <Filter>Maruyama\Enemy\Component\AI\Director\FactionCoordinator\I_FactionMember</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\Debug\ImpactDataDraw.h">
-      <Filter>Maruyama\Utility\DebugOjbect\AstarNodeDraw\ImpactDataDraw</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\AIImpacter.h">
       <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\AIImpacter</Filter>
@@ -2172,6 +2160,18 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\StateMachine\Node_StateMachine.h">
       <Filter>Maruyama\Utility\StateMachine\NodeBase</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\AstarDebug\ImpactDataDraw.h">
+      <Filter>Maruyama\Utility\DebugOjbect\AstarNodeDraw\ImpactDataDraw</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\AstarDebug\AstarNodeDraw.h">
+      <Filter>Maruyama\Utility\DebugOjbect\AstarNodeDraw</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Debug\Object\DebugObject.h">
+      <Filter>Maruyama\Utility\DebugOjbect</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\AstarDebug\AstarEdgeDraw.h">
+      <Filter>Maruyama\Utility\DebugOjbect\AstarEdgeDraw</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2507,12 +2507,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\UtilityAstar.cpp">
       <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\UtilityAstar</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\Debug\AstarEdgeDraw.cpp">
-      <Filter>Maruyama\Utility\DebugOjbect\AstarEdgeDraw</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\Debug\AstarNodeDraw.cpp">
-      <Filter>Maruyama\Utility\DebugOjbect\AstarNodeDraw</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\TackleAttack.cpp">
       <Filter>Maruyama\Player\Component\AttackBase\TackleAttack</Filter>
     </ClCompile>
@@ -2590,9 +2584,6 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\EnemyAIDirector.cpp">
       <Filter>Maruyama\Enemy\Component\AI\Director</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Debug\Object\DebugObject.cpp">
-      <Filter>Maruyama\Utility\DebugOjbect</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Debug\Component\DebugNumber.cpp">
       <Filter>Maruyama\Utility\DebugOjbect\DebugNumber</Filter>
@@ -2710,9 +2701,6 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Interface\I_FactionMember.cpp">
       <Filter>Maruyama\Enemy\Component\AI\Director\FactionCoordinator\I_FactionMember</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\Debug\ImpactDataDraw.cpp">
-      <Filter>Maruyama\Utility\DebugOjbect\AstarNodeDraw\ImpactDataDraw</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\AIImpacter.cpp">
       <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\AIImpacter</Filter>
@@ -3088,6 +3076,18 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\StateMachine\Node_StateMachine.cpp">
       <Filter>Maruyama\Utility\StateMachine\NodeBase</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\AstarDebug\ImpactDataDraw.cpp">
+      <Filter>Maruyama\Utility\DebugOjbect\AstarNodeDraw\ImpactDataDraw</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\AstarDebug\AstarNodeDraw.cpp">
+      <Filter>Maruyama\Utility\DebugOjbect\AstarNodeDraw</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Debug\Object\DebugObject.cpp">
+      <Filter>Maruyama\Utility\DebugOjbect</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\AstarDebug\AstarEdgeDraw.cpp">
+      <Filter>Maruyama\Utility\DebugOjbect\AstarEdgeDraw</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
