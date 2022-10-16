@@ -1165,6 +1165,9 @@
     <Filter Include="Maruyama\Enemy\Component\EachEnemy\Common\BehaviorTree\Task\SearchBall">
       <UniqueIdentifier>{af9b27fe-b382-47bb-96ee-e702b0e54e20}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Enemy\Component\ImpactMap\Astar\GraphAstar\AstarGraph">
+      <UniqueIdentifier>{14a9c097-f3a6-472a-bb80-3c3755b9d5e6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2181,6 +2184,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\BehaviorTree\Task\Task_SearchBall.h">
       <Filter>Maruyama\Enemy\Component\EachEnemy\Common\BehaviorTree\Task\SearchBall</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\AstarGraph.h">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\GraphAstar\AstarGraph</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -3100,6 +3106,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\BehaviorTree\Task\Task_SearchBall.cpp">
       <Filter>Maruyama\Enemy\Component\EachEnemy\Common\BehaviorTree\Task\SearchBall</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\AstarGraph.cpp">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\GraphAstar\AstarGraph</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
