@@ -28,6 +28,28 @@ namespace basecross {
 				virtual void OnExit() = 0;
 			};
 
+			//--------------------------------------------------------------------------------------
+			/// ビヘイビアタスクの基底クラス
+			//--------------------------------------------------------------------------------------
+			template<class OwnerType>
+			class TaskBase : public I_Task
+			{
+				std::weak_ptr<OwnerType> m_owner;	//オーナー
+
+			public:
+				TaskBase(const std::shared_ptr<OwnerType>& owner) :
+					m_owner(owner)
+				{}
+
+				virtual ~TaskBase() = default;
+
+				/// <summary>
+				/// オーナーの取得
+				/// </summary>
+				/// <returns>オーナー</returns>
+				std::shared_ptr<OwnerType> GetOwner() const { return m_owner.lock(); }
+			};
+
 		}
 	}
 }
