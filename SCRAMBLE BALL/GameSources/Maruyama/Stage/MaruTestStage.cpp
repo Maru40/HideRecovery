@@ -35,6 +35,8 @@
 
 #include "Maruyama/Enemy/Behavior/Tester/Tester_Behavior.h"
 
+#include "Maruyama/Enemy/Object/AIPlayerObject.h"
+
 namespace basecross {
 
 	void MaruTestStage::CreateViewLight() {
@@ -71,6 +73,8 @@ namespace basecross {
 		tpsCamera->AddComponent<LookAtCameraManager>(player, LookAtCameraManager::Parametor());	
 
 		AddGameObject<GameObject>()->AddComponent<maru::Behavior::TesterTree>();
+
+		auto enemy = Instantiate<Enemy::AIPlayerObject>(Vec3(0.0f, 1.0f, -6.0f), Quat::Identity());
 	}
 
 	void MaruTestStage::OnUpdate() {
