@@ -48,7 +48,7 @@ namespace basecross {
 			std::shared_ptr<ImpactMap> m_impactMap = nullptr;			//影響マップ本体
 			std::vector<std::weak_ptr<GameObject>> m_floors;			//影響マップ展開する床データ配列
 			//std::vector<OccupancyUpdateData> m_occupancyUpdateDatas;	//占有値更新データ
-			std::unique_ptr<OccupancyManager> m_occupancyManager;
+			std::unique_ptr<OccupancyManager> m_occupancyManager;		//占有値管理クラス
 
 		public:
 			/// <summary>
