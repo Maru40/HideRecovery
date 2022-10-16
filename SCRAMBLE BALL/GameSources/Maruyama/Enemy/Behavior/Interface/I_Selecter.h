@@ -132,6 +132,9 @@ namespace basecross {
 				//std::unique_ptr<>	//ステーター
 
 			public:
+				SelecterBase();
+				SelecterBase(const SelectType selectType);
+
 				virtual ~SelecterBase() = default;	//デストラクタ
 
 				void OnStart() override;

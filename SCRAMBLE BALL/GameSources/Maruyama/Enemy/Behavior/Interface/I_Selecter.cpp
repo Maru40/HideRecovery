@@ -51,6 +51,14 @@ namespace basecross {
 			/// ビヘイビアセレクターの基底クラス
 			//--------------------------------------------------------------------------------------
 
+			SelecterBase::SelecterBase() :
+				SelecterBase(SelectType::Priority)
+			{}
+
+			SelecterBase::SelecterBase(const SelectType selectType) :
+				m_selectType(selectType)
+			{}
+
 			void SelecterBase::OnStart() {
 
 			}
