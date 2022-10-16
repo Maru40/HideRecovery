@@ -15,8 +15,8 @@
 #include "Maruyama/Enemy/Astar/GraphAstar.h"
 #include "ImpactMap.h"
 
-#include "Maruyama/Enemy/Astar/Debug/AstarEdgeDraw.h"
-#include "Maruyama/Enemy/Astar/Debug/AstarNodeDraw.h"
+#include "Maruyama/Enemy/Astar/AstarDebug/AstarEdgeDraw.h"
+#include "Maruyama/Enemy/Astar/AstarDebug/AstarNodeDraw.h"
 
 #include "Patch/PlayerInputer.h"
 
@@ -72,13 +72,32 @@ namespace basecross {
 		///	Factory_影響マップ
 		//--------------------------------------------------------------------------------------
 
+		//AreaNodeCount-------------------------------------------------------------------------
+
+		Factory_ImpactMap_Parametor::AreaNodeCount::AreaNodeCount() :
+			AreaNodeCount(5, 5)
+		{}
+
+		Factory_ImpactMap_Parametor::AreaNodeCount::AreaNodeCount(const int width, const int depth) :
+			width(width), 
+			depth(depth)
+		{}
+
 		//Factoryパラメータ---------------------------------------------------------------------
 
 		Factory_ImpactMap_Parametor::Factory_ImpactMap_Parametor()
 			: Factory_ImpactMap_Parametor(Rect(), 5.0f)
 		{}
-		Factory_ImpactMap_Parametor::Factory_ImpactMap_Parametor(const Rect& rect, const float& intervalRange)
-			: rect(rect), intervalRange(intervalRange), createHeight(0.0f)
+
+		Factory_ImpactMap_Parametor::Factory_ImpactMap_Parametor(const Rect& rect, const float intervalRange)
+			: Factory_ImpactMap_Parametor(rect, intervalRange, AreaNodeCount())
+		{}
+
+		Factory_ImpactMap_Parametor::Factory_ImpactMap_Parametor(const Rect& rect, const float intervalRange, const AreaNodeCount areaNodeCount) :
+			rect(rect), 
+			intervalRange(intervalRange), 
+			areaNodeCount(areaNodeCount), 
+			createHeight(0.0f)
 		{}
 
 		//Factory本体---------------------------------------------------------------------------
@@ -87,7 +106,16 @@ namespace basecross {
 			: m_param(parametor)
 		{}
 
-		void Factory_ImpactMap::CreateNode(const std::shared_ptr<GraphAstar>& astar) {
+		int Factory_ImpactMap::CalculateAreaIndex(const int widthCount, const int depthCount) {
+			int width = widthCount / m_param.areaNodeCount.width;
+			int depth = depthCount / m_param.areaNodeCount.depth;
+
+			return width + (depth * 2);
+		}
+
+		void Factory_ImpactMap::CreateNodes(const std::shared_ptr<GraphAstar>& astar) {
+			using AreaNodeCount = Parametor::AreaNodeCount;
+
 			const maru::Rect& rect = m_param.rect;
 			const Vec3& startPosition = rect.CalculateStartPosition();
 			const float& intervalRange = m_param.intervalRange;
@@ -105,19 +133,19 @@ namespace basecross {
 					auto offset = Vec3(widthOffset, m_param.createHeight, depthOffset);
 
 					auto position = startPosition + offset;
-					astar->AddNode(position); //ノードの追加
+					astar->AddNode(position, ImpactData(CalculateAreaIndex(i, j))); //ノードの追加
 				}
 			}
 		}
 
-		void Factory_ImpactMap::CreateEdge(const std::shared_ptr<GraphAstar>& astar) {
+		void Factory_ImpactMap::CreateEdges(const std::shared_ptr<GraphAstar>& astar) {
 			astar->AddEdges();
 		}
 
 		std::shared_ptr<GraphAstar> Factory_ImpactMap::CreateGraphAstar() {
 			std::shared_ptr<GraphAstar> astar(new GraphAstar(std::make_shared<SparseGraph<NavGraphNode, AstarEdge>>(true)));
-			CreateNode(astar);  //ノードの生成
-			CreateEdge(astar);  //エッジの生成
+			CreateNodes(astar);  //ノードの生成
+			CreateEdges(astar);  //エッジの生成
 
 			return astar;
 		}
@@ -129,13 +157,13 @@ namespace basecross {
 
 		void Factory_ImpactMap::AddNodes(const std::shared_ptr<GraphAstar>& astar, const Parametor& parametor) {
 			m_param = parametor;
-			CreateNode(astar);
+			CreateNodes(astar);
 		}
 
 		void Factory_ImpactMap::AddEdges(const std::shared_ptr<GraphAstar>& astar, const Parametor& parametor) {
 			m_param = parametor;
 			astar->ClearEdges(); //エッジのクリア
-			CreateEdge(astar);   //エッジの生成
+			CreateEdges(astar);   //エッジの生成
 		}
 
 		void Factory_ImpactMap::AddNodesEdges(const std::shared_ptr<GraphAstar>& astar, const Parametor& parametor) {
@@ -143,7 +171,6 @@ namespace basecross {
 			AddNodes(astar, parametor);
 			AddEdges(astar, parametor);
 		}
-
 
 		//--------------------------------------------------------------------------------------
 		/// 影響マップ
@@ -299,7 +326,7 @@ namespace basecross {
 
 		void ImpactMap::CreateDebugDraw(const bool isDraw) {
 			//デバッグドローの追加
-			return;
+			//return;
 			m_nodeDraw = GetStage()->AddGameObject<GameObject>()->AddComponent<AstarNodeDraw>(m_astar);
 			m_edgeDraw = GetStage()->AddGameObject<GameObject>()->AddComponent<AstarEdgeDraw>(m_astar);
 			SetIsDebugDraw(isDraw);

@@ -62,13 +62,35 @@ namespace basecross {
 		//--------------------------------------------------------------------------------------
 		struct Factory_ImpactMap_Parametor 
 		{
-			Rect rect;            //範囲の四角形データ
-			float intervalRange;  //ウェイポイントを置く間隔
-			float createHeight;   //生成する場所の高さ
+			//--------------------------------------------------------------------------------------
+			///	エリア分けのノード数構造体
+			//--------------------------------------------------------------------------------------
+			struct AreaNodeCount
+			{
+				int width;	//横のノード数
+				int depth;	//縦のノード数
 
-			/// <summary>
-			/// コンストラクタ
-			/// </summary>
+				AreaNodeCount();
+
+				/// <summary>
+				/// コンストラクタ
+				/// </summary>
+				/// <param name="width">横のノード数</param>
+				/// <param name="depth">縦のノード数</param>
+				AreaNodeCount(const int width, const int depth);
+
+				int SumCount() const { return width + depth; }
+			};
+
+			//--------------------------------------------------------------------------------------
+			///	メンバー変数
+			//--------------------------------------------------------------------------------------
+
+			Rect rect;						//範囲の四角形データ
+			float intervalRange;			//ウェイポイントを置く間隔
+			AreaNodeCount areaNodeCount;	//エリアの区切りのノード数
+			float createHeight;				//生成する場所の高さ
+
 			Factory_ImpactMap_Parametor();
 
 			/// <summary>
@@ -76,9 +98,16 @@ namespace basecross {
 			/// </summary>
 			/// <param name="rect">生成する四角形範囲</param>
 			/// <param name="intervalRange">ウェイポイントを置く間隔</param>
-			Factory_ImpactMap_Parametor(const Rect& rect, const float& intervalRange);
-		};
+			Factory_ImpactMap_Parametor(const Rect& rect, const float intervalRange);
 
+			/// <summary>
+			/// コンストラクタ
+			/// </summary>
+			/// <param name="rect">生成する四角形範囲</param>
+			/// <param name="intervalRange">ウェイポイントを置く間隔</param>
+			/// <param name="areaRangeCount">エリア区切りのノード数</param>
+			Factory_ImpactMap_Parametor(const Rect& rect, const float intervalRange, const AreaNodeCount areaNodeCount);
+		};
 
 		//--------------------------------------------------------------------------------------
 		///	Factory_影響マップ
@@ -99,17 +128,26 @@ namespace basecross {
 			Factory_ImpactMap(const Parametor& parametor);
 
 		private:
+
 			/// <summary>
-			/// ノードの生成
+			/// エリアインデックスの計算
+			/// </summary>
+			/// <param name="widthCount">横のカウント</param>
+			/// <param name="depthCount">縦のカウント</param>
+			/// <returns>エリアインデックス</returns>
+			int CalculateAreaIndex(const int widthCount, const int depthCount);
+			
+			/// <summary>
+			/// ノードを全て生成
 			/// </summary>
 			/// <param name="astar">ノードを生成するGraphAstarのポインタ</param>
-			void CreateNode(const std::shared_ptr<GraphAstar>& astar);
+			void CreateNodes(const std::shared_ptr<GraphAstar>& astar);
 
 			/// <summary>
 			/// エッジの生成
 			/// </summary>
 			/// <param name="astar">エッジを生成するGraphAstarのポインタ</param>
-			void CreateEdge(const std::shared_ptr<GraphAstar>& astar);
+			void CreateEdges(const std::shared_ptr<GraphAstar>& astar);
 
 		public:
 			/// <summary>
@@ -170,12 +208,14 @@ namespace basecross {
 		{
 		public:
 			using Factory_Parametor = Factory_ImpactMap_Parametor;
+			//using GraphAstarMap = std::unordered_map<int, std::shared_ptr<GraphAstar>>;
 
 		private:
-			Factory_Parametor m_param = Factory_Parametor();  //パラメータ
+			Factory_Parametor m_param = Factory_Parametor();	//パラメータ
 
-			std::weak_ptr<Stage> m_stage;                     //自分の所属するステージ
-			std::shared_ptr<GraphAstar> m_astar = nullptr;    //Astarを管理するクラス。
+			std::weak_ptr<Stage> m_stage;						//自分の所属するステージ。
+			//GraphAstarMap m_astarMap;							//Astarを管理するマップ。
+			std::shared_ptr<GraphAstar> m_astar = nullptr;		//Astarを管理するクラス。
 
 			//デバック用----------------------------------------------------------------
 
