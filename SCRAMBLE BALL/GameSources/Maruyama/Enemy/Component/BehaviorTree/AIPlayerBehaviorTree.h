@@ -1,6 +1,6 @@
 /*!
-@file EnemyBehaviorTree.h
-@brief EnemyBehaviorTreeÇ»Ç«
+@file AIPlayerBehaviorTree.h
+@brief AIPlayerBehaviorTreeÇ»Ç«
 íSìñé“ÅFä€éR óTäÏ
 */
 
@@ -24,7 +24,7 @@ namespace basecross {
 
 		};
 
-		class EnemyBehaviorTree : public BehaviorTreeComponentBase<EnemyBehaviorTreeType>
+		class AIPlayerBehaviorTree : public BehaviorTreeComponentBase<EnemyBehaviorTreeType>
 		{
 		public:
 			using BehaviorType = EnemyBehaviorTreeType;
@@ -32,7 +32,7 @@ namespace basecross {
 		private:
 
 		public:
-			EnemyBehaviorTree(const std::shared_ptr<GameObject>& objPtr);
+			AIPlayerBehaviorTree(const std::shared_ptr<GameObject>& objPtr);
 
 		private:
 			void CreateNode() override;

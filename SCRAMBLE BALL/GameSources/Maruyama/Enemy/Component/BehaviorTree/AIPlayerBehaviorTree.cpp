@@ -1,12 +1,12 @@
 /*!
-@file EnemyBehaviorTree.cpp
-@brief EnemyBehaviorTreeなど実体
+@file AIPlayerBehaviorTree.cpp
+@brief AIPlayerBehaviorTreeなど実体
 */
 
 #include "stdafx.h"
 #include "Project.h"
 
-#include "EnemyBehaviorTree.h"
+#include "AIPlayerBehaviorTree.h"
 
 #include "Maruyama/Enemy/Behavior/BehaviorTree.h"
 
@@ -15,11 +15,11 @@
 namespace basecross {
 	namespace Enemy {
 
-		EnemyBehaviorTree::EnemyBehaviorTree(const std::shared_ptr<GameObject>& objPtr) :
+		AIPlayerBehaviorTree::AIPlayerBehaviorTree(const std::shared_ptr<GameObject>& objPtr) :
 			BehaviorTreeComponentBase(objPtr)
 		{}
 
-		void EnemyBehaviorTree::CreateNode() {
+		void AIPlayerBehaviorTree::CreateNode() {
 			//初回セレクター
 			m_behaviorTree->AddSelecter(BehaviorType::FirstSelecter);
 
@@ -29,7 +29,7 @@ namespace basecross {
 
 		}
 
-		void EnemyBehaviorTree::CreateEdge() {
+		void AIPlayerBehaviorTree::CreateEdge() {
 
 		}
 
