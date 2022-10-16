@@ -157,6 +157,12 @@ namespace basecross {
 		void LoopSearchAstar(const std::shared_ptr<NavGraphNode>& initialNode, const std::shared_ptr<NavGraphNode>& targetNode);
 
 	public:
+
+		/// <summary>
+		/// それぞれのグラフの中心位置を設定する。
+		/// </summary>
+		void SettingGraphMapCenterPositions();
+
 		//--------------------------------------------------------------------------------------
 		///	アクセッサ
 		//--------------------------------------------------------------------------------------

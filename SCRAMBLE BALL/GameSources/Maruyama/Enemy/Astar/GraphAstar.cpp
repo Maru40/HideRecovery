@@ -170,6 +170,12 @@ namespace basecross {
 		//-----------------------------------------------------
 	}
 
+	void GraphAstar::SettingGraphMapCenterPositions() {
+		for (auto pair : m_graphMap) {
+			pair.second->CalculateCenterPosition();
+		}
+	}
+
 	std::shared_ptr<NavGraphNode> GraphAstar::CalculateCreateOpenDataBaseNode(const std::shared_ptr<NavGraphNode>& initialNode) {
 		if (m_openDataMap.size() == 0) {
 			return initialNode;
