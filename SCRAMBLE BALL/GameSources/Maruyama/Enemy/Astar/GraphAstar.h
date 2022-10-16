@@ -7,6 +7,8 @@
 #pragma once
 #include "stdafx.h"
 
+#include "AstarGraph.h"
+
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
@@ -18,6 +20,7 @@ namespace basecross {
 
 	template<class node_type, class edge_type>
 	class SparseGraph;
+	class AstarGraph;
 
 	//--------------------------------------------------------------------------------------
 	///	オープンデータ
@@ -48,15 +51,13 @@ namespace basecross {
 		float GetSumRange() const;
 	};
 
-
-
 	//--------------------------------------------------------------------------------------
 	///	Astarの管理をするグラフ
 	//--------------------------------------------------------------------------------------
 	class GraphAstar
 	{
 	public:
-		using GraphType = SparseGraph<NavGraphNode, AstarEdge>;
+		using GraphType = AstarGraph;
 		using GraphMap = std::unordered_map<int, std::shared_ptr<GraphType>>;
 
 	private:

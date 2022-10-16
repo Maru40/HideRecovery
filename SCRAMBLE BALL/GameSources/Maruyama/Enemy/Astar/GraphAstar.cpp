@@ -9,6 +9,7 @@
 
 #include "Heuristic.h"
 #include "SparseGraph.h"
+#include "AstarGraph.h"
 #include "NavGraphNode.h"
 #include "Maruyama/Enemy/Astar/AstarEdge.h"
 #include "Maruyama/Enemy/Astar/UtilityAstar.h"
@@ -307,7 +308,7 @@ namespace basecross {
 		auto index = m_baseGraph->GetNextFreeNodeIndex();
 		auto newNode = make_shared<NavGraphNode>(index, position);
 
-		auto edges = UtilityAstar::CreateAdjacendEdges(m_baseGraph, newNode, obstacleObjs, excluteObjs);
+		auto edges = UtilityAstar::CreateAdjacendEdges<NavGraphNode, AstarEdge>(m_baseGraph, newNode, obstacleObjs, excluteObjs);
 
 		//現在はエッジが作成されたときのみ生成するようにする。(繋がってないノードを対象にした場合に処理が止まってしまうため。)
 		//改善され次第外す。
