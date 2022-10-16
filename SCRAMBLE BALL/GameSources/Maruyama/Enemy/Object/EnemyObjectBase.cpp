@@ -17,7 +17,7 @@
 #include "Maruyama/Enemy/Component/EyeSearchRange.h"
 
 #include "Maruyama/Enemy/Behavior/BehaviorTree.h"
-#include "Maruyama/Enemy/Component/BehaviorTree/EnemyBehaviorTree.h"
+#include "Maruyama/Enemy/Component/BehaviorTree/AIPlayerBehaviorTree.h"
 
 namespace basecross {
 	namespace Enemy {
@@ -39,7 +39,7 @@ namespace basecross {
 			AddComponent<EyeSearchRange>();
 			AddComponent<SeekTarget>(nullptr);
 
-			AddComponent<EnemyBehaviorTree>();
+			AddComponent<AIPlayerBehaviorTree>();
 		}
 
 	}
