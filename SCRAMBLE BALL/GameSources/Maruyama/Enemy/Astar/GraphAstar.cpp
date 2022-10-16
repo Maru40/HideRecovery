@@ -189,7 +189,7 @@ namespace basecross {
 
 	bool GraphAstar::CreateOpenData(const ex_weak_ptr<NavGraphNode>& baseNode, const std::shared_ptr<GraphType>& graph) {
 		//bool isArriveTargetNode = false;  //ターゲットノードにたどり着いたかどうか
-		auto edges = graph->GetEdges(baseNode->GetIndex());
+		auto edges = graph->GetEdges(baseNode->GetIndex());	//エッジの取得
 
 		for (auto& edge : edges) {
 			auto node = graph->GetNode(edge->GetTo());
@@ -197,16 +197,16 @@ namespace basecross {
 				continue;
 			}
 
-			auto toNodeVec = baseNode->GetPosition() - node->GetPosition();
+			auto toNodeVec = baseNode->GetPosition() - node->GetPosition();	//ノードへのベクトルを取得
 			auto range = toNodeVec.length();
-			auto heuristic = m_heuristic->CalculateHeuristicRange(node);
+			auto heuristic = m_heuristic->CalculateHeuristicRange(node);	//ヒュースリック距離の取得
 
-			auto newData = OpenData(node, range, heuristic);
+			auto newData = OpenData(node, range, heuristic);	//新規オープンデータの生成
 			m_openDataMap[node->GetIndex()] = newData;
 
-			//heuristicが限りなく小さかったらターゲットにたどり着いた。
+			//heuristicが限りなく小さかったらターゲットにたどり着いたため、終了。
 			constexpr float NearRange = 0.1f;
-			if (newData.heuristic < NearRange) {
+			if (newData.heuristic < NearRange) {	
 				return true;
 			}
 		}
