@@ -128,7 +128,7 @@ namespace basecross {
 		/// <param name="newNode">新規ノード</param>
 		/// <returns>生成したエッジ群</returns>
 		template<class NodeType, class EdgeType>
-		static vector<std::shared_ptr<EdgeType>> CreateAdjacendEdges(const std::shared_ptr<SparseGraph<NodeType, EdgeType>>& graph,
+		static vector<std::shared_ptr<EdgeType>> CreateAdjacendEdges(const std::shared_ptr<GraphAstar::GraphType>& graph,
 			const std::shared_ptr<NodeType>& newNode
 		) 
 		{
@@ -168,7 +168,7 @@ namespace basecross {
 		/// <param name="excluteObjs">障害物から省くオブジェクト配列</param>
 		/// <returns>生成されたエッジの配列</returns>
 		template<class NodeClass, class EdgeClass>
-		static vector<std::shared_ptr<AstarEdge>> CreateAdjacendEdges(std::shared_ptr<SparseGraph<NodeClass, EdgeClass>>& graph, const std::shared_ptr<NavGraphNode>& newNode,
+		static vector<std::shared_ptr<AstarEdge>> CreateAdjacendEdges(std::shared_ptr<GraphAstar::GraphType>& graph, const std::shared_ptr<NavGraphNode>& newNode,
 			const vector<shared_ptr<GameObject>>& obstacleObjs, const vector<shared_ptr<GameObject>>& excluteObjs)
 		{
 			//使わない。
