@@ -1159,6 +1159,12 @@
     <Filter Include="Maruyama\Utility\StateMachine\EdgeBase\Edge_StateMachine">
       <UniqueIdentifier>{274722dc-4f71-4623-aa6f-27ce04d88c7b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Enemy\Component\EachEnemy\Common\BehaviorTree\Task">
+      <UniqueIdentifier>{149ba4b0-015b-4dac-9eed-96edafec919e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\Component\EachEnemy\Common\BehaviorTree\Task\SearchBall">
+      <UniqueIdentifier>{af9b27fe-b382-47bb-96ee-e702b0e54e20}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2136,7 +2142,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Object\TestPlayerObject.h">
       <Filter>Maruyama\Player\Object\TestPlayerObject</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\BehaviorTree\EnemyBehaviorTree.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\BehaviorTree\AIPlayerBehaviorTree.h">
       <Filter>Maruyama\Enemy\Component\EachEnemy\Common\BehaviorTree</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\BehaviorTree\BehaviorTreeComponentBase.h">
@@ -2171,6 +2177,9 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\AstarDebug\AstarEdgeDraw.h">
       <Filter>Maruyama\Utility\DebugOjbect\AstarEdgeDraw</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\BehaviorTree\Task\Task_SearchBall.h">
+      <Filter>Maruyama\Enemy\Component\EachEnemy\Common\BehaviorTree\Task\SearchBall</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -3053,7 +3062,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Object\TestPlayerObject.cpp">
       <Filter>Maruyama\Player\Object\TestPlayerObject</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\BehaviorTree\EnemyBehaviorTree.cpp">
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\BehaviorTree\AIPlayerBehaviorTree.cpp">
       <Filter>Maruyama\Enemy\Component\EachEnemy\Common\BehaviorTree</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\BehaviorTree\BehaviorTreeComponentBase.cpp">
@@ -3088,6 +3097,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\AstarDebug\AstarEdgeDraw.cpp">
       <Filter>Maruyama\Utility\DebugOjbect\AstarEdgeDraw</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\BehaviorTree\Task\Task_SearchBall.cpp">
+      <Filter>Maruyama\Enemy\Component\EachEnemy\Common\BehaviorTree\Task\SearchBall</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
