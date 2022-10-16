@@ -22,10 +22,15 @@ namespace basecross {
 		//--------------------------------------------------------------------------------------
 
 		ImpactData::ImpactData():
-			dangerValue(1.0f), 
+			ImpactData(1)
+		{}
+
+		ImpactData::ImpactData(const int areaIndex) :
+			dangerValue(1.0f),
 			occupancyValue(0.5f),
 			occupancyType(OccupancyType::Empty),
-			occupacyRecoverySpeed(30.0f)
+			occupacyRecoverySpeed(30.0f),
+			areaIndex(areaIndex)
 		{}
 
 		ImpactData::~ImpactData() {};

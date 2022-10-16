@@ -44,8 +44,11 @@ namespace basecross {
 			float occupancyValue;			//占有値(0.0f ～　1.0f : 0.5fが確認前、0.0fが確認済み、1.0fは発見直後)
 			OccupancyType occupancyType;	//占有タイプ
 			float occupacyRecoverySpeed;	//占有値の回復時間
+			int areaIndex;					//エリアインデックス
 
 			ImpactData();
+			ImpactData(const int areaIndex);
+
 			virtual ~ImpactData();
 		};
 

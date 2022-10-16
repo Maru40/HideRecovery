@@ -208,7 +208,19 @@ namespace basecross {
 		/// </summary>
 		/// <param name="position">追加したいノードのポジション</param>
 		/// <returns>追加したノードのインデックス</returns>
-		int AddNode(const Vec3& position);
+		//int AddNode(const Vec3& position);
+
+		template<class... Ts,
+			std::enable_if_t<std::is_constructible_v<NavGraphNode, int, Ts...>, std::nullptr_t> = nullptr>
+		int AddNode(Ts&&... params) {
+			//ノードの生成
+			auto index = m_baseGraph->GetNextFreeNodeIndex();
+			auto newNode = std::make_shared<NavGraphNode>(index, params...);
+
+			m_baseGraph->AddNode(newNode);
+
+			return index++;
+		}
 
 		/// <summary>
 		/// ノードの追加
