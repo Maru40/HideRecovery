@@ -57,6 +57,8 @@ namespace basecross {
 			m_isDigraph(digraph)
 		{}
 
+		virtual ~SparseGraph() = default;
+
 		/// <summary>
 		/// 指定されたインデックスのノードを返す
 		/// </summary>
