@@ -88,9 +88,6 @@ namespace basecross {
 				}
 
 				std::vector<Vec3> SearchBall::CalculateMovePositions() {
-					//デバッグ
-					//return { Vec3(0.0f, 1.0f, -6.0f), Vec3(5.0f, 1.0f, -6.0f), Vec3(-5.0f, 1.0f, -6.0f), Vec3(0.0f, 1.0f, -6.0f) };
-
 					auto startPosition = m_transform.lock()->GetPosition();
 					auto endPosition = CalculateMoveTargetPosition();
 
@@ -107,7 +104,7 @@ namespace basecross {
 				}
 
 				void SearchBall::InitializeParametor() {
-
+					m_param.movePositionsParam->moveParamPtr->speed = 10.0f;
 				}
 
 			}
