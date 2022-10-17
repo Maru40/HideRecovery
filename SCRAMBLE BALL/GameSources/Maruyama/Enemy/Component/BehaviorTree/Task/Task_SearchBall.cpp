@@ -16,6 +16,9 @@
 #include "Maruyama/Utility/SingletonComponent/SingletonComponent.h"
 #include "Maruyama/Enemy/ImpactMap/FieldImpactMap.h"
 
+#include "Maruyama/Item/HideItem.h"
+#include "Maruyama/StageObject/HidePlace.h"
+
 #include "Watanabe/DebugClass/Debug.h"
 
 namespace basecross {
@@ -86,16 +89,21 @@ namespace basecross {
 
 				std::vector<Vec3> SearchBall::CalculateMovePositions() {
 					//デバッグ
-					return { Vec3(0.0f, 1.0f, -6.0f), Vec3(5.0f, 1.0f, -6.0f), Vec3(-5.0f, 1.0f, -6.0f), Vec3(0.0f, 1.0f, -6.0f) };
+					//return { Vec3(0.0f, 1.0f, -6.0f), Vec3(5.0f, 1.0f, -6.0f), Vec3(-5.0f, 1.0f, -6.0f), Vec3(0.0f, 1.0f, -6.0f) };
 
 					auto startPosition = m_transform.lock()->GetPosition();
 					auto endPosition = CalculateMoveTargetPosition();
 
-					return FieldImpactMap::GetInstance()->GetRoutePositons(startPosition, endPosition);
+					auto areaIndex = FieldImpactMap::GetInstance()->SearchNearAreaIndex(startPosition);
+					return FieldImpactMap::GetInstance()->GetRoutePositions(startPosition, endPosition, areaIndex);
 				}
 
 				Vec3 SearchBall::CalculateMoveTargetPosition() {
-					return Vec3(0.0f);
+					auto hidePlace = maru::Utility::FindComponent<HidePlace>();
+
+					auto position = hidePlace->GetGameObject()->GetComponent<Transform>()->GetPosition();
+					Debug::GetInstance()->Log(position);
+					return position;
 				}
 
 				void SearchBall::InitializeParametor() {
