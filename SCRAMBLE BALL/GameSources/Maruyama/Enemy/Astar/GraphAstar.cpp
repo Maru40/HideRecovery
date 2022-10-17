@@ -98,7 +98,7 @@ namespace basecross {
 		auto selfNearNode = UtilityAstar::SearchNearNode(*this, selfPos);
 		auto targetNearNode = UtilityAstar::SearchNearNode(*this, targetPos);
 
-		SearchAstarStart(selfNearNode, targetNearNode);
+		SearchAstarStart(selfNearNode, targetNearNode, m_baseGraph);
 	}
 
 	void GraphAstar::SearchAstarStart(const Vec3& selfPosition, const Vec3& targetPosition, const int areaIndex) {
@@ -109,7 +109,7 @@ namespace basecross {
 		bool isObstacleConfirmation = (areaIndex == targetAreaIndex);	//エリアが同じなら、障害物判定を行う。
 		auto targetNearNode = UtilityAstar::SearchNearNode(graph, targetPosition, isObstacleConfirmation);
 
-		SearchAstarStart(selfNearNode, targetNearNode);
+		SearchAstarStart(selfNearNode, targetNearNode, m_baseGraph);
 	}
 
 	std::vector<Vec3> GraphAstar::CalculateRandomRoute(const Vec3& selfPosition) {
@@ -123,12 +123,26 @@ namespace basecross {
 
 		auto selfNode = UtilityAstar::SearchNearNode(*this, selfPosition);
 		auto targetNode = m_baseGraph->GetArrayNumberNode(ramdomValue);
-		SearchAstarStart(selfNode, targetNode);
+		SearchAstarStart(selfNode, targetNode, m_baseGraph);
 
 		return GetRoutePositions();
 	}
 
-	void GraphAstar::SearchAstarStart(const std::shared_ptr<NavGraphNode>& selfNearNode, const std::shared_ptr<NavGraphNode>& targetNearNode) {
+	std::vector<int> GraphAstar::SearchAreaIndexRoute(const Vec3& selfPosition, const Vec3& targetPosition) {
+		auto selfNode = SearchNearAreaNode(selfPosition);
+		auto targetNode = SearchNearAreaNode(targetPosition);
+
+		SearchAstarStart(selfNode, targetNode, m_areaIndexGraph);
+
+		return GetRouteAreaIndex();
+	}
+
+	//サーチ本体
+	void GraphAstar::SearchAstarStart(
+		const std::shared_ptr<NavGraphNode>& selfNearNode, 
+		const std::shared_ptr<NavGraphNode>& targetNearNode,
+		const std::shared_ptr<GraphType>& graph
+	) {
 		if (selfNearNode == nullptr || targetNearNode == nullptr) {
 			DebugObject::AddString(L"GraphAstar::SearchAstarStart(), nodeがnullです");
 			return;
@@ -150,14 +164,18 @@ namespace basecross {
 		}
 
 		//ループして処理を行う。
-		LoopSearchAstar(selfNearNode, targetNearNode);
+		LoopSearchAstar(selfNearNode, targetNearNode, graph);
 	}
 
-	void GraphAstar::LoopSearchAstar(const std::shared_ptr<NavGraphNode>& initialNode, const std::shared_ptr<NavGraphNode>& targetNode) {
+	void GraphAstar::LoopSearchAstar(
+		const std::shared_ptr<NavGraphNode>& initialNode, 
+		const std::shared_ptr<NavGraphNode>& targetNode, 
+		const std::shared_ptr<GraphType>& baseGraph
+	) {
 		int tempIndex = 0;
 		int maxTempIndex = 1000;
 		//グラフの中身コピー
-		auto graph = CreateCopyGraph();
+		auto graph = CreateCopyGraph(baseGraph);
 		m_openDataMap.clear();
 		m_debugIndices.clear();
 		m_openDataMap[initialNode->GetIndex()] = OpenData(initialNode, 0, m_heuristic->CalculateHeuristicRange(targetNode));
@@ -178,17 +196,6 @@ namespace basecross {
 		m_route.push(targetNode);
 		m_openDataMap[targetNode->GetIndex()].isActive = false;
 		CreateRoute(initialNode, targetNode, graph);
-
-		//デバッグ---------------------------------------------
-
-		//ループの上限を超えたことを伝える。
-		//if (tempIndex >= maxTempIndex) {
-		//	DebugObject::sm_wss << endl << L"serchOver" << endl;
-		//	m_debugIndices;
-		//}
-
-		//DebugDraw(); //生成したRouteを表示する。
-		//-----------------------------------------------------
 	}
 
 	void GraphAstar::SettingGraphMapCenterPositions() {
@@ -197,22 +204,27 @@ namespace basecross {
 			auto graph = pair.second;
 			auto centerPosition = graph->CalculateCenterPosition();	//中心位置を設定する。
 
-			m_areaIndexGraph->AddNode(std::make_shared<NavGraphNode>(index, centerPosition));	//エリアインデックスグラフにも追加
+			//本来は専用の別関数で行いたい処理。
+			m_areaIndexGraph->AddNode(std::make_shared<NavGraphNode>(index, centerPosition, maru::ImpactData(index)));	//エリアインデックスグラフにも追加。
 		}
 
-		AddEdges(m_areaIndexGraph);
+		AddEdges(m_areaIndexGraph);	//上記と同じく別の関数の処理で行いたい処理。
 	}
 
 	int GraphAstar::SearchNearAreaIndex(const Vec3& position) {
-		int result = 0;
+		return SearchNearAreaNode(position)->GetAreaIndex();
+	}
+
+	std::shared_ptr<NavGraphNode> GraphAstar::SearchNearAreaNode(const Vec3& position) {
+		std::shared_ptr<NavGraphNode> result = nullptr;
+
 		float minRange = FLT_MAX;
-		for (auto pair : m_graphMap) {
-			auto centerPosition = pair.second->GetCenterPosition();
-			auto toVec = position - pair.second->GetCenterPosition();
-			float range = toVec.length();
-			if (toVec.length() < minRange) {	//距離が近いなら
-				minRange = toVec.length();
-				result = pair.first;
+		for (auto node : m_areaIndexGraph->GetNodes()) {
+			auto toVec = position - node->GetPosition();
+			auto range = toVec.length();
+			if (range < minRange) {
+				minRange = range;
+				result = node;
 			}
 		}
 
@@ -306,16 +318,20 @@ namespace basecross {
 		CreateRoute(initialNode, resultData->node.GetShard(), graph);
 	}
 
-	//将来的に拡張(Nodeのポインタ参照を切り替えたい。)
 	std::shared_ptr<GraphAstar::GraphType> GraphAstar::CreateCopyGraph() {
+		return CreateCopyGraph(m_baseGraph);
+	}
+
+	//将来的に拡張(Nodeのポインタ参照を切り替えたい。)
+	std::shared_ptr<GraphAstar::GraphType> GraphAstar::CreateCopyGraph(const std::shared_ptr<GraphType>& baseGraph) {
 		auto graph = std::make_shared<GraphType>(true);
 
 		int index = 0;
-		for (auto& baseNode : m_baseGraph->GetNodes()) {
-			graph->SetNodes(m_baseGraph->GetNodesCopy());
-		}
+		//for (auto& baseNode : m_baseGraph->GetNodes()) {
+		graph->SetNodes(baseGraph->GetNodesCopy());
+		//}
 
-		graph->SetEdgesMap(m_baseGraph->GetEdgesMapCopy());
+		graph->SetEdgesMap(baseGraph->GetEdgesMapCopy());
 		return graph;
 	}
 
@@ -345,6 +361,20 @@ namespace basecross {
 		}
 
 		return resultPositions;
+	}
+
+	std::vector<int> GraphAstar::GetRouteAreaIndex() const {
+		std::vector<int> resultIndices;
+		auto copyRoute = m_route;
+		while (!copyRoute.empty()) {
+			auto top = copyRoute.top();
+
+			resultIndices.push_back(top->GetAreaIndex());
+
+			copyRoute.pop();
+		}
+
+		return resultIndices;
 	}
 
 	void GraphAstar::AddAreaGraphNode(const std::shared_ptr<NavGraphNode>& node) {
