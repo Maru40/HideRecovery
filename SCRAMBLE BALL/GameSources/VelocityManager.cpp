@@ -125,7 +125,7 @@ namespace basecross {
 		}
 
 		if (m_param.force.y != 0.0f) {
-			Debug::GetInstance()->Log(m_param.force);
+			//Debug::GetInstance()->Log(m_param.force);
 		}
 
 		auto gravityVelocity = gravity->GetGravityVelocity();

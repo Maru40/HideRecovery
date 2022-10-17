@@ -21,6 +21,8 @@
 
 #include "Maruyama/Debug/Object/DebugObject.h"
 
+#include "Watanabe/DebugClass/Debug.h"
+
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
@@ -42,8 +44,10 @@ namespace basecross {
 	///	GraphAstarの本体
 	//--------------------------------------------------------------------------------------
 
-	GraphAstar::GraphAstar(const std::shared_ptr<GraphType>& graph)
-		:m_baseGraph(graph), m_heuristic(new Heuristic())
+	GraphAstar::GraphAstar(const std::shared_ptr<GraphType>& graph) :
+		m_baseGraph(graph),
+		m_areaIndexGraph(new AstarGraph(true)),
+		m_heuristic(new Heuristic())
 	{}
 
 	Vec3 GraphAstar::CalucTargetNode(const std::shared_ptr<GameObject>& objPtr) {
@@ -97,6 +101,17 @@ namespace basecross {
 		SearchAstarStart(selfNearNode, targetNearNode);
 	}
 
+	void GraphAstar::SearchAstarStart(const Vec3& selfPosition, const Vec3& targetPosition, const int areaIndex) {
+		auto graph = GetGraph(areaIndex);
+
+		auto selfNearNode = UtilityAstar::SearchNearNode(graph, selfPosition);
+		int targetAreaIndex = SearchNearAreaIndex(targetPosition);
+		bool isObstacleConfirmation = (areaIndex == targetAreaIndex);	//エリアが同じなら、障害物判定を行う。
+		auto targetNearNode = UtilityAstar::SearchNearNode(graph, targetPosition, isObstacleConfirmation);
+
+		SearchAstarStart(selfNearNode, targetNearNode);
+	}
+
 	std::vector<Vec3> GraphAstar::CalculateRandomRoute(const Vec3& selfPosition) {
 		if (m_baseGraph->GetNodes().size() == 0) {
 			DebugObject::AddString(L"GraphAstar::CalculateRandomRoute(), GraphNodeが存在しません。");
@@ -118,6 +133,12 @@ namespace basecross {
 			DebugObject::AddString(L"GraphAstar::SearchAstarStart(), nodeがnullです");
 			return;
 		}
+
+		Debug::GetInstance()->Log(L"StartNode");
+		Debug::GetInstance()->Log(selfNearNode->GetIndex());
+		Debug::GetInstance()->Log(L"TargetNode");
+		Debug::GetInstance()->Log(targetNearNode->GetIndex());
+		Debug::GetInstance()->Log(L"----------");
 
 		ResetAstar();
 
@@ -172,8 +193,30 @@ namespace basecross {
 
 	void GraphAstar::SettingGraphMapCenterPositions() {
 		for (auto pair : m_graphMap) {
-			pair.second->CalculateCenterPosition();
+			auto index = pair.first;
+			auto graph = pair.second;
+			auto centerPosition = graph->CalculateCenterPosition();	//中心位置を設定する。
+
+			m_areaIndexGraph->AddNode(std::make_shared<NavGraphNode>(index, centerPosition));	//エリアインデックスグラフにも追加
 		}
+
+		AddEdges(m_areaIndexGraph);
+	}
+
+	int GraphAstar::SearchNearAreaIndex(const Vec3& position) {
+		int result = 0;
+		float minRange = FLT_MAX;
+		for (auto pair : m_graphMap) {
+			auto centerPosition = pair.second->GetCenterPosition();
+			auto toVec = position - pair.second->GetCenterPosition();
+			float range = toVec.length();
+			if (toVec.length() < minRange) {	//距離が近いなら
+				minRange = toVec.length();
+				result = pair.first;
+			}
+		}
+
+		return result;
 	}
 
 	std::shared_ptr<NavGraphNode> GraphAstar::CalculateCreateOpenDataBaseNode(const std::shared_ptr<NavGraphNode>& initialNode) {
@@ -293,7 +336,11 @@ namespace basecross {
 		std::vector<Vec3> resultPositions;
 		auto copyRoute = m_route;
 		while (!copyRoute.empty()) {
-			resultPositions.push_back(copyRoute.top()->GetPosition());
+			auto top = copyRoute.top();
+			
+			resultPositions.push_back(top->GetPosition());
+			Debug::GetInstance()->Log(top->GetIndex());
+			
 			copyRoute.pop();
 		}
 
@@ -303,6 +350,16 @@ namespace basecross {
 	void GraphAstar::AddAreaGraphNode(const std::shared_ptr<NavGraphNode>& node) {
 		//エリアインデックスごとのマップに登録する。
 		int areaIndex = node->GetAreaIndex();
+		//std::shared_ptr<GraphType> areaGraph = nullptr;
+
+		//if (HasGraph(areaIndex)) {
+		//	areaGraph = m_graphMap[areaIndex];
+		//}
+		//else {
+		//	areaGraph = std::make_shared<GraphType>(true);
+		//	m_graphMap[areaIndex] = areaGraph;
+		//}
+
 		auto areaGraph = HasGraph(areaIndex) ? m_graphMap[areaIndex] : m_graphMap[areaIndex] = std::make_shared<GraphType>(true);
 		areaGraph->AddNode(node);
 	}
@@ -335,15 +392,23 @@ namespace basecross {
 	}
 
 	void GraphAstar::AddEdges() {
+		AddEdges(m_baseGraph);
+
+		for (auto& pair : m_graphMap) {
+			AddEdges(pair.second);
+		}
+	}
+
+	void GraphAstar::AddEdges(const std::shared_ptr<GraphAstar::GraphType>& graph) {
 		maru::Action<void()> actions;
 
-		auto nodes = m_baseGraph->GetNodes();
+		auto nodes = graph->GetNodes();
 		for (auto& node : nodes) {
-			auto edges = UtilityAstar::CreateAdjacendEdges<NavGraphNode, AstarEdge>(m_baseGraph, node);
+			auto edges = UtilityAstar::CreateAdjacendEdges<NavGraphNode, AstarEdge>(graph, node);
 			//エッジが一つもなかったらノードを削除
 			if (edges.size() == 0) {
 				//ノードの削除をまとめる。
-				actions.AddFunction([&, this]() {m_baseGraph->RemoveNode(node->GetIndex()); });
+				actions.AddFunction([&, this]() {graph->RemoveNode(node->GetIndex()); });
 			}
 		}
 

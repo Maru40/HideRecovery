@@ -16,6 +16,11 @@
 #include "Maruyama/Utility/SingletonComponent/SingletonComponent.h"
 #include "Maruyama/Enemy/ImpactMap/FieldImpactMap.h"
 
+#include "Maruyama/Item/HideItem.h"
+#include "Maruyama/StageObject/HidePlace.h"
+
+#include "Watanabe/DebugClass/Debug.h"
+
 namespace basecross {
 	namespace maru {
 
@@ -23,8 +28,21 @@ namespace basecross {
 
 			namespace Task {
 
+				//--------------------------------------------------------------------------------------
+				///	ボールを探すタスクパラメータ
+				//--------------------------------------------------------------------------------------
+
+				SearchBall_Parametor::SearchBall_Parametor() :
+					movePositionsParam(new Task_MovePositions_Parametor())
+				{}
+
+				//--------------------------------------------------------------------------------------
+				///	ボールを探すタスク
+				//--------------------------------------------------------------------------------------
+
 				SearchBall::SearchBall(const std::shared_ptr<Enemy::EnemyBase>& owner) :
 					TaskBase(owner),
+					m_param(Parametor()),
 					m_taskList(new TaskList<TaskEnum>())
 				{
 					InitializeParametor();
@@ -37,6 +55,8 @@ namespace basecross {
 					SelectTask();	//タスクの選択
 
 					m_param.movePositionsParam->positions = CalculateMovePositions();	//徘徊移動先を設定
+
+					Debug::GetInstance()->Log(L"SearchStart");
 				}
 
 				bool SearchBall::OnUpdate() {
@@ -47,6 +67,8 @@ namespace basecross {
 
 				void SearchBall::OnExit() {
 					m_taskList->ForceStop();
+
+					Debug::GetInstance()->Log(L"SearchEnd");
 				}
 
 				void SearchBall::DefineTask() {
@@ -66,14 +88,22 @@ namespace basecross {
 				}
 
 				std::vector<Vec3> SearchBall::CalculateMovePositions() {
+					//デバッグ
+					//return { Vec3(0.0f, 1.0f, -6.0f), Vec3(5.0f, 1.0f, -6.0f), Vec3(-5.0f, 1.0f, -6.0f), Vec3(0.0f, 1.0f, -6.0f) };
+
 					auto startPosition = m_transform.lock()->GetPosition();
 					auto endPosition = CalculateMoveTargetPosition();
 
-					return FieldImpactMap::GetInstance()->GetRoutePositons(startPosition, endPosition);
+					auto areaIndex = FieldImpactMap::GetInstance()->SearchNearAreaIndex(startPosition);
+					return FieldImpactMap::GetInstance()->GetRoutePositions(startPosition, endPosition, areaIndex);
 				}
 
 				Vec3 SearchBall::CalculateMoveTargetPosition() {
-					return Vec3(0.0f);
+					auto hidePlace = maru::Utility::FindComponent<HidePlace>();
+
+					auto position = hidePlace->GetGameObject()->GetComponent<Transform>()->GetPosition();
+					Debug::GetInstance()->Log(position);
+					return position;
 				}
 
 				void SearchBall::InitializeParametor() {

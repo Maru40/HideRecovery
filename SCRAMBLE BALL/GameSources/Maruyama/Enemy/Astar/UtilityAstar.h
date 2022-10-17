@@ -50,8 +50,9 @@ namespace basecross {
 		/// </summary>
 		/// <param name="graph">グラフの参照</param>
 		/// <param name="targetPos">ターゲットのポジション</param>
+		/// <param name="isObstacleConfirmation">障害物判定を行うかどうか</param> 
 		/// <returns>ターゲットから一番近いノード</returns>
-		static std::shared_ptr<NavGraphNode> SearchNearNode(const std::shared_ptr<const GraphAstar::GraphType>& graph, const Vec3& targetPos);
+		static std::shared_ptr<NavGraphNode> SearchNearNode(const std::shared_ptr<const GraphAstar::GraphType>& graph, const Vec3& targetPos, const bool isObstacleConfirmation = true);
 
 		/// <summary>
 		/// 自分のノードから伸びるノードで一番ターゲットに近いノードの選択

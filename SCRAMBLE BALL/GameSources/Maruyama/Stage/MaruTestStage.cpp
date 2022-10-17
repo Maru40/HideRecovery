@@ -35,6 +35,8 @@
 
 #include "Maruyama/Enemy/Behavior/Tester/Tester_Behavior.h"
 
+#include "Maruyama/Enemy/Object/AIPlayerObject.h"
+
 namespace basecross {
 
 	void MaruTestStage::CreateViewLight() {
@@ -64,13 +66,15 @@ namespace basecross {
 		AddGameObject<GameManagerObject>();
 		
 		//// プレイヤーを見るようなカメラを設定
-		auto player = Instantiate<TestPlayerObject>(Vec3(0.0f, 1.0f, -5.0f), Quat::Identity());
+		auto player = Instantiate<TestPlayerObject>(Vec3(0.0f, 1.0f, -7.0f), Quat::Identity());
 		auto sp = player->GetArm()->GetComponent<SpringArmComponent>();
 		auto& tpsCamera = sp->GetChildObject();
 		tpsCamera->AddComponent<VirtualCamera>(10);
 		tpsCamera->AddComponent<LookAtCameraManager>(player, LookAtCameraManager::Parametor());	
 
-		AddGameObject<GameObject>()->AddComponent<maru::Behavior::TesterTree>();
+		//AddGameObject<GameObject>()->AddComponent<maru::Behavior::TesterTree>();
+
+		auto enemy = Instantiate<Enemy::AIPlayerObject>(Vec3(-30.0f, 1.0f, -6.0f), Quat::Identity());
 	}
 
 	void MaruTestStage::OnUpdate() {

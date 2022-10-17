@@ -19,6 +19,8 @@
 #include "Maruyama/Enemy/Behavior/BehaviorTree.h"
 #include "Maruyama/Enemy/Component/BehaviorTree/AIPlayerBehaviorTree.h"
 
+#include "Maruyama/Enemy/Component/EnemyBase.h"
+
 namespace basecross {
 	namespace Enemy {
 
@@ -29,8 +31,11 @@ namespace basecross {
 		void EnemyObjectBase::OnCreate() {
 			AddTag(L"T_Enemy");
 
+			CreateModel();
+
 			AddComponent<ItemBag>();
 
+			AddComponent<EnemyBase>();
 			AddComponent<CollisionObb>();
 			AddComponent<RotationController>();
 			AddComponent<Gravity>();
@@ -39,7 +44,12 @@ namespace basecross {
 			AddComponent<EyeSearchRange>();
 			AddComponent<SeekTarget>(nullptr);
 
-			AddComponent<AIPlayerBehaviorTree>();
+			//AddComponent<AIPlayerBehaviorTree>();
+		}
+
+		void EnemyObjectBase::CreateModel() {
+			auto draw = AddComponent<PNTStaticDraw>();
+			draw->SetMeshResource(L"DEFAULT_CUBE");
 		}
 
 	}

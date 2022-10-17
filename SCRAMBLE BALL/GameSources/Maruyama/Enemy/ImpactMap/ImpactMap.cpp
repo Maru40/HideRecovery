@@ -148,7 +148,7 @@ namespace basecross {
 			CreateNodes(astar);  //ノードの生成
 			CreateEdges(astar);  //エッジの生成
 
-			astar->SettingGraphMapCenterPositions();	//それぞれのエリアのグラフの中心位置を設定する。
+			//astar->SettingGraphMapCenterPositions();	//それぞれのエリアのグラフの中心位置を設定する。
 
 			return astar;
 		}
@@ -239,6 +239,13 @@ namespace basecross {
 
 		std::vector<Vec3> ImpactMap::GetRoutePositons(const Vec3& selfPosition, const Vec3& targetPosition) {
 			m_astar->SearchAstarStart(selfPosition, targetPosition);
+			auto positions = m_astar->GetRoutePositions();
+			m_astar->ResetAstar();
+			return positions;
+		}
+
+		std::vector<Vec3> ImpactMap::GetRoutePositions(const Vec3& selfPosition, const Vec3& targetPosition, const int areaIndex) {
+			m_astar->SearchAstarStart(selfPosition, targetPosition, areaIndex);
 			auto positions = m_astar->GetRoutePositions();
 			m_astar->ResetAstar();
 			return positions;

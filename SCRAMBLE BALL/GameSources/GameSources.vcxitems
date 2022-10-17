@@ -107,6 +107,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\OccupancyManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\SelfImpactNodeManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\SoleImpactMap.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Object\AIPlayerObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Object\EnemyObjectBase.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Object\HeroObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Object\VillainEnemyObject.h" />
@@ -452,6 +453,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\OccupancyManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\SelfImpactNodeManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\SoleImpactMap.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Object\AIPlayerObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Object\EnemyObjectBase.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Object\HeroObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Object\VillainEnemyObject.cpp" />

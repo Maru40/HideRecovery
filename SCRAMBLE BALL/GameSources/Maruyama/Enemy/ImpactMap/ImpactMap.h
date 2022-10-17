@@ -290,6 +290,8 @@ namespace basecross {
 			/// <returns>検索したポジションの配列</returns>
 			std::vector<Vec3> GetRoutePositons(const Vec3& selfPosition, const Vec3& targetPosition);
 
+			std::vector<Vec3> GetRoutePositions(const Vec3& selfPosition, const Vec3& targetPosition, const int areaIndex);
+
 			/// <summary>
 			/// 自分の視界内のノードを取得
 			/// </summary>

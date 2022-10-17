@@ -1168,6 +1168,9 @@
     <Filter Include="Maruyama\Enemy\Component\ImpactMap\Astar\GraphAstar\AstarGraph">
       <UniqueIdentifier>{14a9c097-f3a6-472a-bb80-3c3755b9d5e6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Enemy\Object\AIPlayerObject">
+      <UniqueIdentifier>{1810d54f-9b9e-4bf5-8a6b-d2de3fa9e5f1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2187,6 +2190,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\AstarGraph.h">
       <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\GraphAstar\AstarGraph</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Object\AIPlayerObject.h">
+      <Filter>Maruyama\Enemy\Object\AIPlayerObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -3109,6 +3115,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\AstarGraph.cpp">
       <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\GraphAstar\AstarGraph</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Object\AIPlayerObject.cpp">
+      <Filter>Maruyama\Enemy\Object\AIPlayerObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
