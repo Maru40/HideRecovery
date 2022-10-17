@@ -20,6 +20,8 @@
 #include "Maruyama/Utility/Timer/GameTimer.h"
 
 #include "Maruyama/Enemy/Astar/NavGraphNode.h"
+#include "Maruyama/Enemy/Astar/AstarEdge.h"
+#include "Maruyama/Enemy/Astar/GraphAstar.h"
 
 #include "Maruyama/Utility/MaruAction.h"
 #include "Maruyama/Utility/Utility.h"
@@ -72,7 +74,9 @@ namespace basecross {
 			const float IntervalRange = m_param.intervalRange; //影響マップの各ノードの距離
 			SettingImpactMap(m_floors, IntervalRange);
 
-			m_impactMap->CreateDebugDraw(false); //デバッグデータの生成
+			m_impactMap->CreateDebugDraw(false);		//デバッグデータの生成
+
+			m_impactMap->GetGraphAstar()->SettingGraphMapCenterPositions();	//それぞれのエリアのグラフの中心位置を設定する。
 		}
 
 		void FieldImpactMap::OnUpdate() {
@@ -94,8 +98,16 @@ namespace basecross {
 			return m_impactMap->GetRoutePositons(selfPosition, targetPosition);
 		}
 
+		std::vector<Vec3> FieldImpactMap::GetRoutePositions(const Vec3& selfPosition, const Vec3& targetPosition, const int areaIndex) {
+			return m_impactMap->GetRoutePositions(selfPosition, targetPosition, areaIndex);
+		}
+
 		std::shared_ptr<ImpactMap> FieldImpactMap::GetImpactMap() const {
 			return m_impactMap;
+		}
+
+		int FieldImpactMap::SearchNearAreaIndex(const Vec3& position) const {
+			return m_impactMap->GetGraphAstar()->SearchNearAreaIndex(position);
 		}
 
 		void FieldImpactMap::AddOccupancyUpdateData(const std::shared_ptr<NavGraphNode>& node) {

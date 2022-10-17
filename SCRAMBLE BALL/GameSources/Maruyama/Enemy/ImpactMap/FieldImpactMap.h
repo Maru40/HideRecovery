@@ -89,10 +89,26 @@ namespace basecross {
 			std::vector<Vec3> GetRoutePositons(const Vec3& selfPosition, const Vec3& targetPosition);
 
 			/// <summary>
+			/// 検索したルートを全て取得する。
+			/// </summary>
+			/// <param name="selfPosition">自分自身のポジション</param>
+			/// <param name="targetPosition">目的地</param>
+			/// <param name="areaIndex">エリアインデックス</param>
+			/// <returns></returns>
+			std::vector<Vec3> GetRoutePositions(const Vec3& selfPosition, const Vec3& targetPosition, const int areaIndex);
+
+			/// <summary>
 			/// 影響マップデータを取得
 			/// </summary>
 			/// <returns>影響マップデータ</returns>
 			std::shared_ptr<ImpactMap> GetImpactMap() const;
+
+			/// <summary>
+			/// 一番近いエリアインデックスを取得する。
+			/// </summary>
+			/// <param name="position">自分自身の位置</param>
+			/// <returns>一番近いエリアインデックス</returns>
+			int SearchNearAreaIndex(const Vec3& position) const;
 
 			/// <summary>
 			/// ノードの配置間隔距離を取得
