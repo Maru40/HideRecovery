@@ -64,6 +64,9 @@ namespace basecross {
 
 		std::shared_ptr<GraphType> m_baseGraph = nullptr;	//グラフのデータ
 		GraphMap m_graphMap;								//グラフのエリアインデックスごとに分けたマップ
+		
+		std::shared_ptr<GraphType> m_areaIndexGraph;		//エリアインデックス用のグラフ生成
+
 		std::shared_ptr<Heuristic> m_heuristic = nullptr;	//ヒュースリックの数値を計算するクラス。
 
 		std::map<int, OpenData> m_openDataMap;				//オープンデータのMap
@@ -79,6 +82,8 @@ namespace basecross {
 		/// </summary>
 		/// <param name="graph">グラフデータ</param>
 		GraphAstar(const std::shared_ptr<GraphType>& graph);
+
+		virtual ~GraphAstar() = default;
 
 		/// <summary>
 		/// 最短ノードの中で今欲しいノードの場所を取得する。
@@ -107,6 +112,8 @@ namespace basecross {
 		/// <param name="selfPos">開始のポジション</param>
 		/// <param name="targetPos">ターゲットのポジション</param>
 		void SearchAstarStart(const Vec3& selfPos, const Vec3& targetPos);
+
+		void SearchAstarStart(const Vec3& selfPosition, const Vec3& targetPosition, const int areaIndex);
 
 		/// <summary>
 		/// ランダムなルートを計測
@@ -162,6 +169,13 @@ namespace basecross {
 		/// それぞれのグラフの中心位置を設定する。
 		/// </summary>
 		void SettingGraphMapCenterPositions();
+
+		/// <summary>
+		/// 一番近いエリアのインデックスを取得する。
+		/// </summary>
+		/// <param name="position">自分のポジション</param>
+		/// <returns>一番近いエリアのインデックス</returns>
+		int SearchNearAreaIndex(const Vec3& position);
 
 		//--------------------------------------------------------------------------------------
 		///	アクセッサ
@@ -283,6 +297,12 @@ namespace basecross {
 		/// エッジの追加
 		/// </summary>
 		void AddEdges();
+
+		/// <summary>
+		/// エッジの追加
+		/// </summary>
+		/// <param name="graph">追加したいグラフ</param>
+		void AddEdges(const std::shared_ptr<GraphAstar::GraphType>& graph);
 
 		/// <summary>
 		/// ノードの全てクリア
