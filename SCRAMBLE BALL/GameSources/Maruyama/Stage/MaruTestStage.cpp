@@ -66,7 +66,7 @@ namespace basecross {
 		AddGameObject<GameManagerObject>();
 		
 		//// プレイヤーを見るようなカメラを設定
-		auto player = Instantiate<TestPlayerObject>(Vec3(0.0f, 1.0f, -5.0f), Quat::Identity());
+		auto player = Instantiate<TestPlayerObject>(Vec3(0.0f, 1.0f, -7.0f), Quat::Identity());
 		auto sp = player->GetArm()->GetComponent<SpringArmComponent>();
 		auto& tpsCamera = sp->GetChildObject();
 		tpsCamera->AddComponent<VirtualCamera>(10);
@@ -74,7 +74,7 @@ namespace basecross {
 
 		//AddGameObject<GameObject>()->AddComponent<maru::Behavior::TesterTree>();
 
-		auto enemy = Instantiate<Enemy::AIPlayerObject>(Vec3(0.0f, 1.0f, -6.0f), Quat::Identity());
+		auto enemy = Instantiate<Enemy::AIPlayerObject>(Vec3(-30.0f, 1.0f, -6.0f), Quat::Identity());
 	}
 
 	void MaruTestStage::OnUpdate() {
