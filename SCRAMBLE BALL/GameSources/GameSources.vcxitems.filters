@@ -1533,9 +1533,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Animation\AnimatorBase.h">
       <Filter>Maruyama\Enemy\Component\Base\Animator</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Debug\Object\ArrowObject.h">
-      <Filter>Maruyama\Utility\DebugOjbect\ArrowObject</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\AstarEdge.h">
       <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\AstarEdge</Filter>
     </ClInclude>
@@ -1622,9 +1619,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\EnemyAIDirector.h">
       <Filter>Maruyama\Enemy\Component\AI\Director</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Debug\Component\DebugNumber.h">
-      <Filter>Maruyama\Utility\DebugOjbect\DebugNumber</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\EnemyBase.h">
       <Filter>Maruyama\Enemy\Component\Base</Filter>
@@ -2178,9 +2172,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\AstarDebug\AstarNodeDraw.h">
       <Filter>Maruyama\Utility\DebugOjbect\AstarNodeDraw</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Debug\Object\DebugObject.h">
-      <Filter>Maruyama\Utility\DebugOjbect</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\AstarDebug\AstarEdgeDraw.h">
       <Filter>Maruyama\Utility\DebugOjbect\AstarEdgeDraw</Filter>
     </ClInclude>
@@ -2192,6 +2183,15 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Object\AIPlayerObject.h">
       <Filter>Maruyama\Enemy\Object\AIPlayerObject</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\DebugClass\Component\DebugNumber.h">
+      <Filter>Maruyama\Utility\DebugOjbect\DebugNumber</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\DebugClass\Object\DebugObject.h">
+      <Filter>Maruyama\Utility\DebugOjbect</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\DebugClass\Object\ArrowObject.h">
+      <Filter>Maruyama\Utility\DebugOjbect\ArrowObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2519,9 +2519,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Animation\AnimatorBase.cpp">
       <Filter>Maruyama\Enemy\Component\Base\Animator</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Debug\Object\ArrowObject.cpp">
-      <Filter>Maruyama\Utility\DebugOjbect\ArrowObject</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\AstarEdge.cpp">
       <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\AstarEdge</Filter>
     </ClCompile>
@@ -2605,9 +2602,6 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\EnemyAIDirector.cpp">
       <Filter>Maruyama\Enemy\Component\AI\Director</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Debug\Component\DebugNumber.cpp">
-      <Filter>Maruyama\Utility\DebugOjbect\DebugNumber</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Villain.cpp">
       <Filter>Maruyama\Enemy\Component\EachEnemy\Villain</Filter>
@@ -3104,9 +3098,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\AstarDebug\AstarNodeDraw.cpp">
       <Filter>Maruyama\Utility\DebugOjbect\AstarNodeDraw</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Debug\Object\DebugObject.cpp">
-      <Filter>Maruyama\Utility\DebugOjbect</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\AstarDebug\AstarEdgeDraw.cpp">
       <Filter>Maruyama\Utility\DebugOjbect\AstarEdgeDraw</Filter>
     </ClCompile>
@@ -3118,6 +3109,15 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Object\AIPlayerObject.cpp">
       <Filter>Maruyama\Enemy\Object\AIPlayerObject</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\DebugClass\Component\DebugNumber.cpp">
+      <Filter>Maruyama\Utility\DebugOjbect\DebugNumber</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\DebugClass\Object\DebugObject.cpp">
+      <Filter>Maruyama\Utility\DebugOjbect</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\DebugClass\Object\ArrowObject.cpp">
+      <Filter>Maruyama\Utility\DebugOjbect\ArrowObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
