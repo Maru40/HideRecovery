@@ -32,7 +32,8 @@ namespace basecross {
 	OpenData::OpenData()
 		:OpenData(nullptr, 0, 0)
 	{}
-	OpenData::OpenData(const std::shared_ptr<NavGraphNode>& node, const float& range, const float& heuristic)
+
+	OpenData::OpenData(const std::shared_ptr<NavGraphNode>& node, const float range, const float heuristic)
 		:node(node), range(range), heuristic(heuristic), isActive(true)
 	{}
 
@@ -177,6 +178,7 @@ namespace basecross {
 		//グラフの中身コピー
 		auto graph = CreateCopyGraph(baseGraph);
 		m_openDataMap.clear();
+		m_closeDataMap.clear();
 		m_debugIndices.clear();
 		m_heuristic->SetTargetNode(targetNode);  //ヒューリスティック関数に目標ノードを設定
 		//m_openDataMap[initialNode->GetIndex()] = OpenData(initialNode, 0, m_heuristic->CalculateHeuristicRange(targetNode));

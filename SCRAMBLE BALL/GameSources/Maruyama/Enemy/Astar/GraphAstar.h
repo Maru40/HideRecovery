@@ -42,7 +42,7 @@ namespace basecross {
 		/// <param name="node">ノード</param>
 		/// <param name="range">実距離</param>
 		/// <param name="heuristic">ヒュースリック距離</param>
-		OpenData(const std::shared_ptr<NavGraphNode>& node, const float& range, const float& heuristic);
+		OpenData(const std::shared_ptr<NavGraphNode>& node, const float range, const float heuristic);
 
 		/// <summary>
 		/// 実距離とヒュースリック距離の合計を返す
@@ -70,6 +70,7 @@ namespace basecross {
 		std::shared_ptr<Heuristic> m_heuristic = nullptr;	//ヒュースリックの数値を計算するクラス。
 
 		std::map<int, OpenData> m_openDataMap;				//オープンデータのMap
+		std::map<int, OpenData> m_closeDataMap;				//クローズデータMap
 		std::stack<std::shared_ptr<NavGraphNode>> m_route;	//生成したルート
 
 		bool m_isRouteEnd = true;        //ルートの最後に来たかどうか？
