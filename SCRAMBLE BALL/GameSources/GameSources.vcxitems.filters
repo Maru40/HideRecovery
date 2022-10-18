@@ -1171,6 +1171,9 @@
     <Filter Include="Maruyama\Enemy\Object\AIPlayerObject">
       <UniqueIdentifier>{1810d54f-9b9e-4bf5-8a6b-d2de3fa9e5f1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Enemy\Component\ImpactMap\Astar\GraphAstar\OpenDataHandler">
+      <UniqueIdentifier>{50e6c0a7-8e6b-4970-b63e-7e8066280e3d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2193,6 +2196,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\DebugClass\Object\ArrowObject.h">
       <Filter>Maruyama\Utility\DebugOjbect\ArrowObject</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\OpenDataHandler.h">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\GraphAstar\OpenDataHandler</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -3118,6 +3124,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\DebugClass\Object\ArrowObject.cpp">
       <Filter>Maruyama\Utility\DebugOjbect\ArrowObject</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\OpenDataHandler.cpp">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\GraphAstar\OpenDataHandler</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
