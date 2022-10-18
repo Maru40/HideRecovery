@@ -10,8 +10,8 @@
 #include "Maruyama/Enemy/Astar/GraphAstar.h"
 #include "AstarEdgeDraw.h"
 
-#include "Maruyama/Debug/Object/DebugObject.h"
-#include "Maruyama/Debug/Object/ArrowObject.h"
+#include "Maruyama/DebugClass/Object/DebugObject.h"
+#include "Maruyama/DebugClass/Object/ArrowObject.h"
 
 namespace basecross {
 
