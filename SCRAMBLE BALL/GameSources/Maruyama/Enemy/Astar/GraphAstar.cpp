@@ -19,7 +19,7 @@
 
 #include "Maruyama/Utility/Component/CollisionAction.h"
 
-#include "Maruyama/Debug/Object/DebugObject.h"
+#include "Maruyama/DebugClass/Object/DebugObject.h"
 
 #include "Watanabe/DebugClass/Debug.h"
 
@@ -114,7 +114,7 @@ namespace basecross {
 
 	std::vector<Vec3> GraphAstar::CalculateRandomRoute(const Vec3& selfPosition) {
 		if (m_baseGraph->GetNodes().size() == 0) {
-			DebugObject::AddString(L"GraphAstar::CalculateRandomRoute(), GraphNodeが存在しません。");
+			//DebugObject::AddString(L"GraphAstar::CalculateRandomRoute(), GraphNodeが存在しません。");
 			return vector<Vec3>();
 		}
 
@@ -144,7 +144,7 @@ namespace basecross {
 		const std::shared_ptr<GraphType>& graph
 	) {
 		if (selfNearNode == nullptr || targetNearNode == nullptr) {
-			DebugObject::AddString(L"GraphAstar::SearchAstarStart(), nodeがnullです");
+			//DebugObject::AddString(L"GraphAstar::SearchAstarStart(), nodeがnullです");
 			return;
 		}
 
@@ -475,8 +475,8 @@ namespace basecross {
 		//生成したRouteを表示する。
 		auto copyRoute = m_route;
 		while (!copyRoute.empty()) {
-			DebugObject::AddValue(copyRoute.top()->GetIndex(), false);
-			DebugObject::AddString(L",", false);
+			//DebugObject::AddValue(copyRoute.top()->GetIndex(), false);
+			//DebugObject::AddString(L",", false);
 			copyRoute.pop();
 		}
 	}
