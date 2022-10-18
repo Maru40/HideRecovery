@@ -111,6 +111,14 @@ namespace basecross {
 			int SearchNearAreaIndex(const Vec3& position) const;
 
 			/// <summary>
+			/// ターゲットへのエリア単位の大まかなルートを検索
+			/// </summary>
+			/// <param name="startPosition">開始位置</param>
+			/// <param name="targetPosition">ターゲット位置</param>
+			/// <returns>ターゲットへのエリア単位の大まかなルート</returns>
+			std::vector<int> SearchAreaIndexRoute(const Vec3& startPosition, const Vec3& targetPosition);
+
+			/// <summary>
 			/// ノードの配置間隔距離を取得
 			/// </summary>
 			/// <returns>ノードの配置間隔距離</returns>
