@@ -129,7 +129,7 @@ namespace basecross {
 		std::vector<Vec3> CalculateRandomRoute(const Vec3& selfPosition);
 
 		/// <summary>
-		/// エリアインデックスルートをインデックス配列で返す。
+		/// ターゲットへのエリア単位の大まかなルートを検索
 		/// </summary>
 		std::vector<int> SearchAreaIndexRoute(const Vec3& selfPosition, const Vec3& targetPosition);
 

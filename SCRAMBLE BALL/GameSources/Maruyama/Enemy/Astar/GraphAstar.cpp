@@ -156,7 +156,7 @@ namespace basecross {
 
 		ResetAstar();
 
-		m_heuristic->SetTargetNode(targetNearNode);  //ヒューリスティック関数に目標ノードを設定
+		//m_heuristic->SetTargetNode(targetNearNode);  //ヒューリスティック関数に目標ノードを設定
 
 		if (selfNearNode->GetPosition() == targetNearNode->GetPosition()) {
 			m_route.push(selfNearNode);
@@ -178,7 +178,10 @@ namespace basecross {
 		auto graph = CreateCopyGraph(baseGraph);
 		m_openDataMap.clear();
 		m_debugIndices.clear();
-		m_openDataMap[initialNode->GetIndex()] = OpenData(initialNode, 0, m_heuristic->CalculateHeuristicRange(targetNode));
+		m_heuristic->SetTargetNode(targetNode);  //ヒューリスティック関数に目標ノードを設定
+		//m_openDataMap[initialNode->GetIndex()] = OpenData(initialNode, 0, m_heuristic->CalculateHeuristicRange(targetNode));
+		m_openDataMap[initialNode->GetIndex()] = OpenData(initialNode, 0, m_heuristic->CalculateHeuristicRange(initialNode));
+
 		//強制終了のバグなくなったら消す。
 		while (tempIndex < maxTempIndex) {
 			//オープンデータ生成用の基準ノードの生成。
@@ -196,6 +199,54 @@ namespace basecross {
 		m_route.push(targetNode);
 		m_openDataMap[targetNode->GetIndex()].isActive = false;
 		CreateRoute(initialNode, targetNode, graph);
+	}
+
+	std::shared_ptr<NavGraphNode> GraphAstar::CalculateCreateOpenDataBaseNode(const std::shared_ptr<NavGraphNode>& initialNode) {
+		if (m_openDataMap.size() == 0) {
+			return initialNode;
+		}
+
+		OpenData resultData(nullptr, FLT_MAX, FLT_MAX);
+		for (const auto& pair : m_openDataMap) {
+			if (!pair.second.node->IsActive()) {	//ノードがクローズでないなら、continue
+				continue;
+			}
+
+			//値が小さい場合
+			if (pair.second.GetSumRange() < resultData.GetSumRange()) {
+				resultData = pair.second;  //Result候補に入れる。
+			}
+		}
+
+		return resultData.node.GetShard() == nullptr ? initialNode : resultData.node.GetShard();
+	}
+
+	bool GraphAstar::CreateOpenData(const ex_weak_ptr<NavGraphNode>& baseNode, const std::shared_ptr<GraphType>& graph) {
+		//bool isArriveTargetNode = false;  //ターゲットノードにたどり着いたかどうか
+		auto edges = graph->GetEdges(baseNode->GetIndex());	//エッジの取得
+
+		for (auto& edge : edges) {
+			auto node = graph->GetNode(edge->GetTo());
+			if (!node->IsActive()) {	//ノードがクローズなら処理をしない。
+				continue;
+			}
+
+			auto toNodeVec = node->GetPosition() - baseNode->GetPosition();	//ベースノードからの実コストを取得
+			auto range = toNodeVec.length();
+			auto heuristic = m_heuristic->CalculateHeuristicRange(node);	//ヒュースリック距離の取得
+
+			auto newData = OpenData(node, range, heuristic);	//新規オープンデータの生成
+			m_openDataMap[node->GetIndex()] = newData;
+
+			//heuristicが限りなく小さかったらターゲットにたどり着いたため、終了。
+			constexpr float NearRange = 0.1f;
+			if (newData.heuristic < NearRange) {	
+				return true;
+			}
+		}
+
+		baseNode->SetIsActive(false);
+		return false;
 	}
 
 	void GraphAstar::SettingGraphMapCenterPositions() {
@@ -229,54 +280,6 @@ namespace basecross {
 		}
 
 		return result;
-	}
-
-	std::shared_ptr<NavGraphNode> GraphAstar::CalculateCreateOpenDataBaseNode(const std::shared_ptr<NavGraphNode>& initialNode) {
-		if (m_openDataMap.size() == 0) {
-			return initialNode;
-		}
-
-		OpenData resultData(nullptr, FLT_MAX, FLT_MAX);
-		for (const auto& pair : m_openDataMap) {
-			if (!pair.second.node->IsActive()) {
-				continue;
-			}
-
-			//値が小さい場合
-			if (pair.second.GetSumRange() < resultData.GetSumRange()) {
-				resultData = pair.second;  //Result候補に入れる。
-			}
-		}
-
-		return resultData.node.GetShard() == nullptr ? initialNode : resultData.node.GetShard();
-	}
-
-	bool GraphAstar::CreateOpenData(const ex_weak_ptr<NavGraphNode>& baseNode, const std::shared_ptr<GraphType>& graph) {
-		//bool isArriveTargetNode = false;  //ターゲットノードにたどり着いたかどうか
-		auto edges = graph->GetEdges(baseNode->GetIndex());	//エッジの取得
-
-		for (auto& edge : edges) {
-			auto node = graph->GetNode(edge->GetTo());
-			if (!node->IsActive()) {
-				continue;
-			}
-
-			auto toNodeVec = baseNode->GetPosition() - node->GetPosition();	//ノードへのベクトルを取得
-			auto range = toNodeVec.length();
-			auto heuristic = m_heuristic->CalculateHeuristicRange(node);	//ヒュースリック距離の取得
-
-			auto newData = OpenData(node, range, heuristic);	//新規オープンデータの生成
-			m_openDataMap[node->GetIndex()] = newData;
-
-			//heuristicが限りなく小さかったらターゲットにたどり着いたため、終了。
-			constexpr float NearRange = 0.1f;
-			if (newData.heuristic < NearRange) {	
-				return true;
-			}
-		}
-
-		baseNode->SetIsActive(false);
-		return false;
 	}
 
 	void GraphAstar::CreateRoute(
