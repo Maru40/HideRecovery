@@ -25,31 +25,31 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 	///	オープンデータ
 	//--------------------------------------------------------------------------------------
-	struct OpenData {
-		ex_weak_ptr<NavGraphNode> node;  //ノードのポインタ
-		float range;            //実距離
-		float heuristic;        //ヒュースリック距離
-		bool isActive = true;   //Active状態かどうか
+	//struct OpenData {
+	//	ex_weak_ptr<NavGraphNode> node;  //ノードのポインタ
+	//	float range;            //実距離
+	//	float heuristic;        //ヒュースリック距離
+	//	bool isActive = true;   //Active状態かどうか
 
-		/// <summary>
-		/// コンストラクタ
-		/// </summary>
-		OpenData();
+	//	/// <summary>
+	//	/// コンストラクタ
+	//	/// </summary>
+	//	OpenData();
 
-		/// <summary>
-		/// コンストラクタ
-		/// </summary>
-		/// <param name="node">ノード</param>
-		/// <param name="range">実距離</param>
-		/// <param name="heuristic">ヒュースリック距離</param>
-		OpenData(const std::shared_ptr<NavGraphNode>& node, const float range, const float heuristic);
+	//	/// <summary>
+	//	/// コンストラクタ
+	//	/// </summary>
+	//	/// <param name="node">ノード</param>
+	//	/// <param name="range">実距離</param>
+	//	/// <param name="heuristic">ヒュースリック距離</param>
+	//	OpenData(const std::shared_ptr<NavGraphNode>& node, const float range, const float heuristic);
 
-		/// <summary>
-		/// 実距離とヒュースリック距離の合計を返す
-		/// </summary>
-		/// <returns>合計値</returns>
-		float GetSumRange() const;
-	};
+	//	/// <summary>
+	//	/// 実距離とヒュースリック距離の合計を返す
+	//	/// </summary>
+	//	/// <returns>合計値</returns>
+	//	float GetSumRange() const;
+	//};
 
 	//--------------------------------------------------------------------------------------
 	///	Astarの管理をするグラフ
@@ -69,8 +69,8 @@ namespace basecross {
 
 		std::shared_ptr<Heuristic> m_heuristic = nullptr;	//ヒュースリックの数値を計算するクラス。
 
-		std::map<int, OpenData> m_openDataMap;				//オープンデータのMap
-		std::map<int, OpenData> m_closeDataMap;				//クローズデータMap
+		//std::map<int, OpenData> m_openDataMap;				//オープンデータのMap
+		//std::map<int, OpenData> m_closeDataMap;				//クローズデータMap
 		std::stack<std::shared_ptr<NavGraphNode>> m_route;	//生成したルート
 
 		bool m_isRouteEnd = true;        //ルートの最後に来たかどうか？

@@ -17,6 +17,8 @@
 #include "Maruyama/Utility/Mathf.h"
 #include "Maruyama/Utility/Random.h"
 
+#include "OpenDataHandler.h"
+
 #include "Maruyama/Utility/Component/CollisionAction.h"
 
 #include "Maruyama/DebugClass/Object/DebugObject.h"
@@ -25,21 +27,23 @@
 
 namespace basecross {
 
+	class OpenDataHandle;
+
 	//--------------------------------------------------------------------------------------
 	///	オープンデータ
 	//--------------------------------------------------------------------------------------
 
-	OpenData::OpenData()
-		:OpenData(nullptr, 0, 0)
-	{}
+	//OpenData::OpenData()
+	//	:OpenData(nullptr, 0, 0)
+	//{}
 
-	OpenData::OpenData(const std::shared_ptr<NavGraphNode>& node, const float range, const float heuristic)
-		:node(node), range(range), heuristic(heuristic), isActive(true)
-	{}
+	//OpenData::OpenData(const std::shared_ptr<NavGraphNode>& node, const float range, const float heuristic)
+	//	:node(node), range(range), heuristic(heuristic), isActive(true)
+	//{}
 
-	float OpenData::GetSumRange() const {
-		return range + heuristic;
-	}
+	//float OpenData::GetSumRange() const {
+	//	return range + heuristic;
+	//}
 
 	//--------------------------------------------------------------------------------------
 	///	GraphAstarの本体
@@ -173,82 +177,91 @@ namespace basecross {
 		const std::shared_ptr<NavGraphNode>& targetNode, 
 		const std::shared_ptr<GraphType>& baseGraph
 	) {
-		int tempIndex = 0;
-		int maxTempIndex = 1000;
-		//グラフの中身コピー
-		auto graph = CreateCopyGraph(baseGraph);
-		m_openDataMap.clear();
-		m_closeDataMap.clear();
-		m_debugIndices.clear();
-		m_heuristic->SetTargetNode(targetNode);  //ヒューリスティック関数に目標ノードを設定
-		//m_openDataMap[initialNode->GetIndex()] = OpenData(initialNode, 0, m_heuristic->CalculateHeuristicRange(targetNode));
-		m_openDataMap[initialNode->GetIndex()] = OpenData(initialNode, 0, m_heuristic->CalculateHeuristicRange(initialNode));
 
-		//強制終了のバグなくなったら消す。
-		while (tempIndex < maxTempIndex) {
-			//オープンデータ生成用の基準ノードの生成。
-			auto baseNode = CalculateCreateOpenDataBaseNode(initialNode);
-			m_debugIndices.push_back(baseNode->GetIndex());
-			//オープンデータの生成。ターゲットノードにたどり着いたらtrueを返す。
-			if (CreateOpenData(baseNode, graph)) {
-				break;
-			}
 
-			tempIndex++;
-		}
+		//int tempIndex = 0;
+		//int maxTempIndex = 1000;
+		////グラフの中身コピー
+		//auto graph = CreateCopyGraph(baseGraph);
+		//m_openDataMap.clear();
+		//m_closeDataMap.clear();
+		//m_debugIndices.clear();
+		//m_heuristic->SetTargetNode(targetNode);  //ヒューリスティック関数に目標ノードを設定
+		////m_openDataMap[initialNode->GetIndex()] = OpenData(initialNode, 0, m_heuristic->CalculateHeuristicRange(targetNode));
+		//m_openDataMap[initialNode->GetIndex()] = OpenData(initialNode, 0, m_heuristic->CalculateHeuristicRange(initialNode));
 
-		//オープンデータから最短経路を取得
-		m_route.push(targetNode);
-		m_openDataMap[targetNode->GetIndex()].isActive = false;
-		CreateRoute(initialNode, targetNode, graph);
+		////強制終了のバグなくなったら消す。
+		//while (tempIndex < maxTempIndex) {
+		//	//オープンデータ生成用の基準ノードの生成。
+		//	auto baseNode = CalculateCreateOpenDataBaseNode(initialNode);
+		//	m_debugIndices.push_back(baseNode->GetIndex());
+		//	//オープンデータの生成。ターゲットノードにたどり着いたらtrueを返す。
+		//	if (CreateOpenData(baseNode, graph)) {
+		//		break;
+		//	}
+
+		//	tempIndex++;
+		//}
+
+		////オープンデータから最短経路を取得
+		//m_route.push(targetNode);
+		//m_openDataMap[targetNode->GetIndex()].isActive = false;
+		//CreateRoute(initialNode, targetNode, graph);
+
+		auto openDataHandler = OpenDataHandler();
+		openDataHandler.StartSearchAstar(initialNode, targetNode, baseGraph);
+		m_route = openDataHandler.GetRoute();
 	}
 
 	std::shared_ptr<NavGraphNode> GraphAstar::CalculateCreateOpenDataBaseNode(const std::shared_ptr<NavGraphNode>& initialNode) {
-		if (m_openDataMap.size() == 0) {
-			return initialNode;
-		}
+		//if (m_openDataMap.size() == 0) {
+		//	return initialNode;
+		//}
 
-		OpenData resultData(nullptr, FLT_MAX, FLT_MAX);
-		for (const auto& pair : m_openDataMap) {
-			if (!pair.second.node->IsActive()) {	//ノードがクローズでないなら、continue
-				continue;
-			}
+		//OpenData resultData(nullptr, FLT_MAX, FLT_MAX);
+		//for (const auto& pair : m_openDataMap) {
+		//	if (!pair.second.node->IsActive()) {	//ノードがクローズでないなら、continue
+		//		continue;
+		//	}
 
-			//値が小さい場合
-			if (pair.second.GetSumRange() < resultData.GetSumRange()) {
-				resultData = pair.second;  //Result候補に入れる。
-			}
-		}
+		//	//値が小さい場合
+		//	if (pair.second.GetSumRange() < resultData.GetSumRange()) {
+		//		resultData = pair.second;  //Result候補に入れる。
+		//	}
+		//}
 
-		return resultData.node.GetShard() == nullptr ? initialNode : resultData.node.GetShard();
+		//return resultData.node.GetShard() == nullptr ? initialNode : resultData.node.GetShard();
+		return nullptr;
 	}
 
 	bool GraphAstar::CreateOpenData(const ex_weak_ptr<NavGraphNode>& baseNode, const std::shared_ptr<GraphType>& graph) {
-		//bool isArriveTargetNode = false;  //ターゲットノードにたどり着いたかどうか
-		auto edges = graph->GetEdges(baseNode->GetIndex());	//エッジの取得
+		////bool isArriveTargetNode = false;  //ターゲットノードにたどり着いたかどうか
+		//auto edges = graph->GetEdges(baseNode->GetIndex());	//エッジの取得
 
-		for (auto& edge : edges) {
-			auto node = graph->GetNode(edge->GetTo());
-			if (!node->IsActive()) {	//ノードがクローズなら処理をしない。
-				continue;
-			}
+		//for (auto& edge : edges) {
+		//	auto node = graph->GetNode(edge->GetTo());
+		//	if (!node->IsActive()) {	//ノードがクローズなら処理をしない。
+		//		continue;
+		//	}
 
-			auto toNodeVec = node->GetPosition() - baseNode->GetPosition();	//ベースノードからの実コストを取得
-			auto range = toNodeVec.length();
-			auto heuristic = m_heuristic->CalculateHeuristicRange(node);	//ヒュースリック距離の取得
+		//	auto toNodeVec = node->GetPosition() - baseNode->GetPosition();	//ベースノードからの実コストを取得
+		//	auto range = toNodeVec.length();
+		//	auto heuristic = m_heuristic->CalculateHeuristicRange(node);	//ヒュースリック距離の取得
 
-			auto newData = OpenData(node, range, heuristic);	//新規オープンデータの生成
-			m_openDataMap[node->GetIndex()] = newData;
+		//	auto newData = OpenData(node, range, heuristic);	//新規オープンデータの生成
+		//	m_openDataMap[node->GetIndex()] = newData;
 
-			//heuristicが限りなく小さかったらターゲットにたどり着いたため、終了。
-			constexpr float NearRange = 0.1f;
-			if (newData.heuristic < NearRange) {	
-				return true;
-			}
-		}
+		//	//heuristicが限りなく小さかったらターゲットにたどり着いたため、終了。
+		//	constexpr float NearRange = 0.1f;
+		//	if (newData.heuristic < NearRange) {	
+		//		return true;
+		//	}
+		//}
 
-		baseNode->SetIsActive(false);
-		return false;
+		//baseNode->SetIsActive(false);
+		//return false;
+
+		return true;
 	}
 
 	void GraphAstar::SettingGraphMapCenterPositions() {
@@ -289,38 +302,38 @@ namespace basecross {
 		const std::shared_ptr<NavGraphNode>& targetNode,
 		const std::shared_ptr<GraphType>& graph)
 	{
-		auto edges = graph->GetEdges(targetNode->GetIndex());
+		//auto edges = graph->GetEdges(targetNode->GetIndex());
 
-		auto resultData = new OpenData(nullptr, FLT_MAX, FLT_MAX);
-		auto savePtr = resultData;
-		//ノードの中で一番近い物を取得
-		for (auto& edge : edges) {
-			auto node = graph->GetNode(edge->GetTo());
-			//ノードが存在しない、または、データが非アクティブなら、処理を飛ばす。
-			if (m_openDataMap.count(node->GetIndex()) == 0 || !m_openDataMap[node->GetIndex()].isActive) {
-				continue;
-			}
+		//auto resultData = new OpenData(nullptr, FLT_MAX, FLT_MAX);
+		//auto savePtr = resultData;
+		////ノードの中で一番近い物を取得
+		//for (auto& edge : edges) {
+		//	auto node = graph->GetNode(edge->GetTo());
+		//	//ノードが存在しない、または、データが非アクティブなら、処理を飛ばす。
+		//	if (m_openDataMap.count(node->GetIndex()) == 0 || !m_openDataMap[node->GetIndex()].isActive) {
+		//		continue;
+		//	}
 
-			auto& data = m_openDataMap[node->GetIndex()];
-			if (data.GetSumRange() < resultData->GetSumRange()) {
-				resultData = &data;
-			}
-		}
+		//	auto& data = m_openDataMap[node->GetIndex()];
+		//	if (data.GetSumRange() < resultData->GetSumRange()) {
+		//		resultData = &data;
+		//	}
+		//}
 
-		if (resultData->node.GetShard() == nullptr) {
-			return;
-		}
+		//if (resultData->node.GetShard() == nullptr) {
+		//	return;
+		//}
 
-		//初期ノードなら
-		if (resultData->node == initialNode) {
-			return; //処理をやめる。
-		}
+		////初期ノードなら
+		//if (resultData->node == initialNode) {
+		//	return; //処理をやめる。
+		//}
 
-		m_route.push(resultData->node.GetShard());
-		resultData->isActive = false;
-		delete savePtr;
+		//m_route.push(resultData->node.GetShard());
+		//resultData->isActive = false;
+		//delete savePtr;
 
-		CreateRoute(initialNode, resultData->node.GetShard(), graph);
+		//CreateRoute(initialNode, resultData->node.GetShard(), graph);
 	}
 
 	std::shared_ptr<GraphAstar::GraphType> GraphAstar::CreateCopyGraph() {
@@ -459,9 +472,9 @@ namespace basecross {
 	}
 
 	void GraphAstar::ResetAstar() {
-		m_isRouteEnd = false;
-		m_openDataMap.clear();
-		maru::Utility::StackClear(m_route);
+		//m_isRouteEnd = false;
+		//m_openDataMap.clear();
+		//maru::Utility::StackClear(m_route);
 	}
 
 	void GraphAstar::ResetAll() {
