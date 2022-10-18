@@ -37,9 +37,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Camera\MainCameraObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Camera\StartCamera.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Camera\UtilityStartCamera.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Debug\Component\DebugNumber.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Debug\Object\ArrowObject.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Debug\Object\DebugObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\DebugClass\Component\DebugNumber.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\DebugClass\Object\ArrowObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\DebugClass\Object\DebugObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Effect\Component\AuraBase.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Effect\Component\EffectBase.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Effect\Component\EffectManager.h" />
@@ -385,9 +385,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Camera\MainCameraObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Camera\StartCamera.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Camera\UtilityStartCamera.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Debug\Component\DebugNumber.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Debug\Object\ArrowObject.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Debug\Object\DebugObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\DebugClass\Component\DebugNumber.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\DebugClass\Object\ArrowObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\DebugClass\Object\DebugObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Effect\Component\AuraBase.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Effect\Component\EffectBase.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Effect\Component\EffectManager.cpp" />

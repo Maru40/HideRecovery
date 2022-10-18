@@ -14,7 +14,7 @@
 #include "Maruyama/Utility/Component/RotationController.h"
 #include "VelocityManager.h"
 
-#include "Maruyama/Debug/Object/DebugObject.h"
+#include "Maruyama/DebugClass/Object/DebugObject.h"
 
 #include "Maruyama/Utility/Mathf.h"
 

@@ -8,7 +8,7 @@
 #include "stdafx.h"
 #include "Project.h"
 
-#include "Maruyama/Debug/Component/DebugNumber.h"
+#include "Maruyama/DebugClass/Component/DebugNumber.h"
 #include "NumbersCtrl.h"
 #include "../Object/NumberObject.h"
 

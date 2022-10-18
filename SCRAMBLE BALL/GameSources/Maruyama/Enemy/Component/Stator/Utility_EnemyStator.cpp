@@ -22,7 +22,7 @@
 
 #include "GameStageBase.h"
 
-#include "Maruyama/Debug/Object/DebugObject.h"
+#include "Maruyama/DebugClass/Object/DebugObject.h"
 
 namespace basecross {
 	namespace Enemy {

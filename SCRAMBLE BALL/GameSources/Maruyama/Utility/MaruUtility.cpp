@@ -10,7 +10,7 @@
 #include "Utility.h"
 #include "Mathf.h"
 
-#include "Maruyama/Debug/Object/ArrowObject.h"
+#include "Maruyama/DebugClass/Object/ArrowObject.h"
 
 namespace basecross {
 

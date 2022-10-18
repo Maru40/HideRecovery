@@ -49,6 +49,8 @@ namespace basecross {
 				public:
 					using Parametor = SearchBall_Parametor;
 
+					std::queue<int> m_areaRoute;	//確認するエリアルート
+
 				private:
 					Parametor m_param;								//パラメータ
 					
@@ -71,6 +73,10 @@ namespace basecross {
 
 					void SelectTask();
 
+					void NextRoute();
+
+					std::queue<int> CalculateMoveAreaRouteQueue();
+
 					/// <summary>
 					/// 徘徊する場所の配列を取得
 					/// </summary>
@@ -87,6 +93,10 @@ namespace basecross {
 					/// パラメータの初期化
 					/// </summary>
 					void InitializeParametor();
+
+				public:
+
+					bool IsEnd() const;
 				};
 
 			}

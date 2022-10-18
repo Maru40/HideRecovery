@@ -170,6 +170,17 @@ namespace basecross {
 			}
 
 			/// <summary>
+			/// キューのクリア
+			/// </summary>
+			/// <param name="clearQueue">クリアしたいキュー</param>
+			template<class T>
+			static void QueueClear(std::queue<T>& clearQueue) {
+				while (!clearQueue.empty()) {
+					clearQueue.pop();
+				}
+			}
+
+			/// <summary>
 			/// Rayを飛ばしたとき、障害物があったらtrueを返す。
 			/// </summary>
 			/// <param name="startObj">Rayの開始位置のオブジェクト</param>

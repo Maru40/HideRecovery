@@ -113,6 +113,12 @@ namespace basecross {
 		/// <param name="targetPos">ターゲットのポジション</param>
 		void SearchAstarStart(const Vec3& selfPos, const Vec3& targetPos);
 
+		/// <summary>
+		/// 自分ノードとエッジから、どのルートが一番近いか検索
+		/// </summary>
+		/// <param name="selfPos">開始のポジション</param>
+		/// <param name="targetPos">ターゲットのポジション</param>
+		/// <param name="areaIndex">エリアインデックス</param>
 		void SearchAstarStart(const Vec3& selfPosition, const Vec3& targetPosition, const int areaIndex);
 
 		/// <summary>
@@ -122,13 +128,22 @@ namespace basecross {
 		/// <returns>生成したルートを返す</returns>
 		std::vector<Vec3> CalculateRandomRoute(const Vec3& selfPosition);
 
+		/// <summary>
+		/// ターゲットへのエリア単位の大まかなルートを検索
+		/// </summary>
+		std::vector<int> SearchAreaIndexRoute(const Vec3& selfPosition, const Vec3& targetPosition);
+
 	private:
 		/// <summary>
 		/// Route構築開始
 		/// </summary>
 		/// <param name="selfNearNode">自分自身のノード</param>
 		/// <param name="targetNearNode">たどり着きたいノード</param>
-		void SearchAstarStart(const std::shared_ptr<NavGraphNode>& selfNearNode, const std::shared_ptr<NavGraphNode>& targetNearNode);
+		void SearchAstarStart(
+			const std::shared_ptr<NavGraphNode>& selfNearNode, 
+			const std::shared_ptr<NavGraphNode>& targetNearNode,
+			const std::shared_ptr<GraphType>& graph
+		);
 
 		/// <summary>
 		/// オープンデータ生成の基準となるノードを生成。
@@ -161,7 +176,11 @@ namespace basecross {
 		/// ループして探索経路を測る。
 		/// </summary>
 		/// <param name="initialNode">初期スタートノード</param>
-		void LoopSearchAstar(const std::shared_ptr<NavGraphNode>& initialNode, const std::shared_ptr<NavGraphNode>& targetNode);
+		void LoopSearchAstar(
+			const std::shared_ptr<NavGraphNode>& initialNode, 
+			const std::shared_ptr<NavGraphNode>& targetNode,
+			const std::shared_ptr<GraphType>& baseGraph
+		);
 
 	public:
 
@@ -177,6 +196,13 @@ namespace basecross {
 		/// <returns>一番近いエリアのインデックス</returns>
 		int SearchNearAreaIndex(const Vec3& position);
 
+		/// <summary>
+		/// 一番近いエリアのノードを取得
+		/// </summary>
+		/// <param name="position">自分のポジション</param>
+		/// <returns>一番近いエリアのポジション</returns>
+		std::shared_ptr<NavGraphNode> SearchNearAreaNode(const Vec3& position);
+
 		//--------------------------------------------------------------------------------------
 		///	アクセッサ
 		//--------------------------------------------------------------------------------------
@@ -186,6 +212,13 @@ namespace basecross {
 		/// </summary>
 		/// <returns>グラフのコピー</returns>
 		std::shared_ptr<GraphType> CreateCopyGraph();
+
+		/// <summary>
+		/// グラフのコピーを返す
+		/// </summary>
+		/// <param name="areaIndex">コピーしたいグラフ</param>
+		/// <returns>グラフのコピー</returns>
+		std::shared_ptr<GraphType> CreateCopyGraph(const std::shared_ptr<GraphType>& baseGraph);
 
 		/// <summary>
 		/// 検索したルートの最後まで来たらtrue
@@ -244,6 +277,8 @@ namespace basecross {
 		/// </summary>
 		/// <returns>ルートのポジション群を返す</returns>
 		std::vector<Vec3> GetRoutePositions() const;
+
+		std::vector<int> GetRouteAreaIndex() const;
 
 		/// <summary>
 		/// ノードの追加
