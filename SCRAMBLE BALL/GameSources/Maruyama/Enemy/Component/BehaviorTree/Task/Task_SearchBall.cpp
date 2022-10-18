@@ -54,6 +54,7 @@ namespace basecross {
 				void SearchBall::OnStart() {
 					SelectTask();	//タスクの選択
 
+					CalculateMoveAreaRouteQueue();	//徘徊エリアルートの取得
 					m_param.movePositionsParam->positions = CalculateMovePositions();	//徘徊移動先を設定
 
 					Debug::GetInstance()->Log(L"SearchStart");
@@ -62,7 +63,11 @@ namespace basecross {
 				bool SearchBall::OnUpdate() {
 					m_taskList->UpdateTask();
 
-					return m_taskList->IsEnd();
+					if (m_taskList->IsEnd()) {
+						NextRoute();
+					}
+
+					return IsEnd();
 				}
 
 				void SearchBall::OnExit() {
@@ -87,11 +92,42 @@ namespace basecross {
 					}
 				}
 
+				void SearchBall::NextRoute() {
+					if (m_areaRoute.empty()) {
+						return;
+					}
+
+					m_param.movePositionsParam->positions = CalculateMovePositions();	//新しいポジションに変更
+
+					SelectTask();				//タスクの再始動
+				}
+
+				std::queue<int> SearchBall::CalculateMoveAreaRouteQueue() {
+					maru::Utility::QueueClear(m_areaRoute);
+
+					auto startPosition = m_transform.lock()->GetPosition();
+					auto targetPosition = CalculateMoveTargetPosition();
+
+					auto routes = FieldImpactMap::GetInstance()->SearchAreaIndexRoute(startPosition, targetPosition);
+
+					m_areaRoute.push(FieldImpactMap::GetInstance()->SearchNearAreaIndex(startPosition));	//最初の自分自身のノードを省くため。
+					for (const auto& route : routes) {
+						m_areaRoute.push(route);
+					}
+
+					return m_areaRoute;
+				}
+
 				std::vector<Vec3> SearchBall::CalculateMovePositions() {
+					if (m_areaRoute.empty()) {
+						return std::vector<Vec3>();
+					}
+
 					auto startPosition = m_transform.lock()->GetPosition();
 					auto endPosition = CalculateMoveTargetPosition();
 
-					auto areaIndex = FieldImpactMap::GetInstance()->SearchNearAreaIndex(startPosition);
+					int areaIndex = m_areaRoute.front();
+					m_areaRoute.pop();
 					return FieldImpactMap::GetInstance()->GetRoutePositions(startPosition, endPosition, areaIndex);
 				}
 
@@ -106,6 +142,8 @@ namespace basecross {
 				void SearchBall::InitializeParametor() {
 					m_param.movePositionsParam->moveParamPtr->speed = 10.0f;
 				}
+
+				bool SearchBall::IsEnd() const { return m_areaRoute.empty() && m_taskList->IsEnd(); }
 
 			}
 		}
