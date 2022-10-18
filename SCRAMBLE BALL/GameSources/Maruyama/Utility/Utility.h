@@ -605,6 +605,57 @@ namespace basecross {
 			}
 
 			/// <summary>
+			/// 配列にそのデータが登録されているかを判断
+			/// </summary>
+			/// <param name="tList">登録されているか確認したい配列</param>
+			/// <param name="value">登録されているか確認したいデータ</param>
+			/// <returns>すでに登録されているならtrue</returns>
+			template<class ArrayType, class DataType>
+			static bool IsRegister(const ArrayType& tList, const DataType& value) {
+				auto iter = tList.begin();
+				while (iter != tList.end()) {
+					if (*iter == value) {
+						return true;
+					}
+				}
+
+				return false;
+			}
+
+			/// <summary>
+			/// 配列から、指定したデータと同じデータを取得する。
+			/// </summary>
+			/// <returns>同じ要素が存在しているならtrue</returns>
+			template<class ArrayType, class DataType>
+			static DataType FindSomeArrayDataPtr(const ArrayType& tArray, const DataType& value) {
+				auto iter = tArray.begin();
+				while (iter != tArray.end()) {
+					if (*iter == value) {
+						return *iter;
+					}
+				}
+
+				return nullptr;
+			}
+
+			/// <summary>
+			/// 配列から、指定したデータと同じデータを取得する。
+			/// </summary>
+			/// <returns>同じ要素が存在しているならtrue</returns>
+			template<class ArrayType, class DataType>
+			static bool FindSomeArrayData(const ArrayType& tArray, const DataType& value, DataType& result) {
+				auto iter = tArray.begin();
+				while (iter != tArray.end()) {
+					if (*iter == value) {
+						result = *iter;
+						return true;
+					}
+				}
+
+				return false;
+			}
+
+			/// <summary>
 			/// すでに配列に入っているか判断
 			/// </summary>
 			/// <returns>すでに同じものが入っているならtrue</returns>
