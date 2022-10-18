@@ -77,7 +77,8 @@ namespace basecross {
 		);
 
 		auto draw = AddComponent<DrawComp>();
-		draw->SetMultiMeshResource(L"Player_Mesh");
+		//draw->SetMultiMeshResource(L"Player_Mesh");
+		draw->SetMeshResource(L"DEFAULT_CUBE");
 		draw->SetMeshToTransformMatrix(spanMat);
 		draw->SetModelTextureEnabled(false);
 		//SetAlphaActive(true);
