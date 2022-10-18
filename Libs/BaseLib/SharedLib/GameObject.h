@@ -579,7 +579,7 @@ namespace basecross {
 		//--------------------------------------------------------------------------------------
 		template<typename T, typename... Ts,
 			std::enable_if_t<std::is_constructible_v<T, std::shared_ptr<GameObject>&, Ts...>, std::nullptr_t> = nullptr>
-			shared_ptr<T> AddComponent(Ts&&... params) {
+		shared_ptr<T> AddComponent(Ts&&... params) {
 			type_index t_index = type_index(typeid(T));
 			auto Ptr = SearchDynamicComponent<T>();
 			//指定の型のコンポーネントが見つかった
