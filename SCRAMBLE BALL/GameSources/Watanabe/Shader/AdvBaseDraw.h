@@ -137,8 +137,6 @@ namespace basecross {
 				for (auto texture : GetAllTextureResource()) {
 					// 一枚目は上でセットしているので0番目を1にセットする
 					pD3D11DeviceContext->PSSetShaderResources(index, 1, texture.lock()->GetShaderResourceView().GetAddressOf());
-					// サンプラーを設定
-					RenderState->SetSamplerState(pD3D11DeviceContext, GetSamplerState(), index);
 					index++;
 				}
 			}
@@ -367,8 +365,6 @@ namespace basecross {
 						for (auto texture : GetAllTextureResource()) {
 							// 一枚目は上でセットしているので0番目を1にセットする
 							pD3D11DeviceContext->PSSetShaderResources(index + 1, 1, texture.lock()->GetShaderResourceView().GetAddressOf());
-							// サンプラーを設定
-							RenderState->SetSamplerState(pD3D11DeviceContext, GetSamplerState(), index + 1);
 							index++;
 						}
 					}
