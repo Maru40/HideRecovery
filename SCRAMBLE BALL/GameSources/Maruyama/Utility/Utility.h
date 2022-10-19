@@ -617,6 +617,8 @@ namespace basecross {
 					if (*iter == value) {
 						return true;
 					}
+
+					iter++;
 				}
 
 				return false;
@@ -633,6 +635,8 @@ namespace basecross {
 					if (*iter == value) {
 						return *iter;
 					}
+
+					iter++;
 				}
 
 				return nullptr;
@@ -650,6 +654,8 @@ namespace basecross {
 						result = *iter;
 						return true;
 					}
+
+					iter++;
 				}
 
 				return false;
