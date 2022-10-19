@@ -38,36 +38,6 @@ namespace basecross {
 		m_areaIndexGraph(new AstarGraph(true))
 	{}
 
-	Vec3 GraphAstar::CalucTargetNode(const std::shared_ptr<GameObject>& objPtr) {
-		if (m_route.size() == 0) {
-			m_isRouteEnd = true;
-		}
-
-		if (m_isRouteEnd) {
-			return Vec3(0.0f);
-		}
-
-		//オブジェクトが探索ノードの近くにいたら、次のノードに切り替える。
-		float nearRange = 2.0f;  //近くと判断される距離
-
-		auto transform = objPtr->GetComponent<Transform>();
-		auto objPosition = transform->GetPosition();
-
-		auto nodePosition = m_route.top()->GetPosition();  //現在の目標ノードのポジションを取得
-
-		auto toNode = nodePosition - objPosition;
-		if (toNode.length() <= nearRange) {  //ノードの近くまで来たら。
-			m_route.pop();
-		}
-
-		//ノードインデックスがショートを超えたら
-		if (m_route.size() == 0) {
-			m_isRouteEnd = true;//機能をoffにする。
-		}
-
-		return nodePosition;
-	}
-
 	void GraphAstar::SearchAstarStart(const std::shared_ptr<GameObject>& self, const std::shared_ptr<GameObject>& target) {
 		SearchAstarStart(self->GetComponent<Transform>()->GetPosition(), target->GetComponent<Transform>()->GetPosition());
 	}

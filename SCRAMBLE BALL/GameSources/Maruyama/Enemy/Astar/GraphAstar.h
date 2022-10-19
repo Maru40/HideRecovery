@@ -54,13 +54,6 @@ namespace basecross {
 		virtual ~GraphAstar() = default;
 
 		/// <summary>
-		/// 最短ノードの中で今欲しいノードの場所を取得する。
-		/// </summary>
-		/// <param name="objPtr">現在この処理を行っているオブジェクト</param>
-		/// <returns>現在向かうべきノードのポジション</returns>
-		Vec3 CalucTargetNode(const std::shared_ptr<GameObject>& objPtr);
-
-		/// <summary>
 		/// 自分ノードとエッジから、どのルートが一番近いか検索
 		/// </summary>
 		/// <param name="self">開始のオブジェクト</param>
