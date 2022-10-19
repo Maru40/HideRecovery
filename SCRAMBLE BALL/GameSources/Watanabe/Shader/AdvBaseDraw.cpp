@@ -14,7 +14,7 @@ namespace basecross {
 		//オリジナルメッシュを使うかどうか
 		bool m_UseOriginalMeshResource;
 		//テクスチャリソース
-		weak_ptr<TextureResource> m_TextureResource;
+		vector<weak_ptr<TextureResource>> m_TextureResources;
 		//エミッシブ色
 		Col4 m_Emissive;
 		// デフューズ色
@@ -234,21 +234,35 @@ namespace basecross {
 		this->SetMeshResource(App::GetApp()->GetResource<MeshResource>(MeshKey));
 	}
 
-	void AdvBaseDraw::SetTextureResource(const shared_ptr<TextureResource>& TextureRes) {
-		pImpl->m_TextureResource = TextureRes;
+	void AdvBaseDraw::SetTextureResource(const shared_ptr<TextureResource>& TextureRes, size_t index) {
+		if (pImpl->m_TextureResources.size() >= index) {
+			pImpl->m_TextureResources.push_back(TextureRes);
+		}
+		else {
+			pImpl->m_TextureResources[index] = TextureRes;
+		}
 	}
 
-	void AdvBaseDraw::SetTextureResource(const wstring& TextureKey) {
-		this->SetTextureResource(App::GetApp()->GetResource<TextureResource>(TextureKey));
+	void AdvBaseDraw::SetTextureResource(const wstring& TextureKey, size_t index) {
+		this->SetTextureResource(App::GetApp()->GetResource<TextureResource>(TextureKey), index);
 	}
 
-	shared_ptr<TextureResource> AdvBaseDraw::GetTextureResource() const {
+	shared_ptr<TextureResource> AdvBaseDraw::GetTextureResource(size_t index) const {
+		// インデックスが要素より大きければnullを返す
+		if (pImpl->m_TextureResources.size() >= index) {
+			return nullptr;
+		}
+
 		//テクスチャがなければnullを返す
-		auto shptr = pImpl->m_TextureResource.lock();
+		auto shptr = pImpl->m_TextureResources[index].lock();
 		if (shptr) {
 			return shptr;
 		}
 		return nullptr;
+	}
+
+	vector<weak_ptr<TextureResource>> AdvBaseDraw::GetAllTextureResource() const {
+		return pImpl->m_TextureResources;
 	}
 
 	shared_ptr<MultiMeshResource> AdvBaseDraw::GetMultiMeshResource() const {
