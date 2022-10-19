@@ -35,7 +35,9 @@ namespace basecross {
 		// 床を生成
 		CreateFloor();
 		// プレイヤーを生成
-		CreatePlayer();
+		//CreatePlayer();
+		// 静的オブジェクト
+		CreateSphere();
 		// 念のためSkyBoxを生成
 		AddGameObject<SkyBox>(Vec3(100, 100, 100));
 	}
@@ -60,6 +62,20 @@ namespace basecross {
 		player->AddComponent<VelocityManager>();
 
 		return player;
+	}
+
+	shared_ptr<GameObject> TestShaderStage::CreateSphere() {
+		auto sphere = AddGameObject<GameObject>();
+		auto drawComp = sphere->AddComponent<PNTStaticDraw>();
+		drawComp->SetMeshResource(L"DEFAULT_SPHERE");
+
+		auto shadow = sphere->AddComponent<Shadowmap>();
+		shadow->SetMeshResource(L"DEFAULT_SPHERE");
+
+		auto transComp = sphere->GetComponent<Transform>();
+		transComp->SetPosition(Vec3(0, 0.5, 0));
+
+		return sphere;
 	}
 
 	shared_ptr<GameObject> TestShaderStage::CreateFloor() {
