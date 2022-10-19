@@ -2205,6 +2205,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\TestShaderStage.h">
       <Filter>Watanabe\TestStage\TestShaderStage</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\StaticModelDraw.h">
+      <Filter>Watanabe\Shader\ModelDraw</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -3133,6 +3136,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\TestShaderStage.cpp">
       <Filter>Watanabe\TestStage\TestShaderStage</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\StaticModelDraw.cpp">
+      <Filter>Watanabe\Shader\ModelDraw</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

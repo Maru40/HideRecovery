@@ -315,6 +315,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\MySpriteBaseDraw.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\PCTGaugeDraw.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\PCTGaugeSprite.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\StaticModelDraw.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\Block.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\Container.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\FireworksObject.h" />
@@ -629,6 +630,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\MySpriteBaseDraw.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\PCTGaugeDraw.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\PCTGaugeSprite.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\StaticModelDraw.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\Block.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\Container.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\FireworksObject.cpp" />
