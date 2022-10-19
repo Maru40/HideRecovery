@@ -1177,6 +1177,9 @@
     <Filter Include="Watanabe\TestStage\WatanabeStage">
       <UniqueIdentifier>{0f76430f-8c57-4948-8095-fb889d09cdcd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\TestStage\TestShaderStage">
+      <UniqueIdentifier>{b6353766-d0ed-44c0-8fd6-8dd04dc7db36}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2199,6 +2202,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\WatanabeStage.h">
       <Filter>Watanabe\TestStage\WatanabeStage</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\TestShaderStage.h">
+      <Filter>Watanabe\TestStage\TestShaderStage</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -3124,6 +3130,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\WatanabeStage.cpp">
       <Filter>Watanabe\TestStage\WatanabeStage</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\TestShaderStage.cpp">
+      <Filter>Watanabe\TestStage\TestShaderStage</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
