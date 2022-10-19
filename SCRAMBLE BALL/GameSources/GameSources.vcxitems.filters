@@ -1171,6 +1171,12 @@
     <Filter Include="Maruyama\Enemy\Object\AIPlayerObject">
       <UniqueIdentifier>{1810d54f-9b9e-4bf5-8a6b-d2de3fa9e5f1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\TestStage\MatchingUILayoutStage">
+      <UniqueIdentifier>{86633793-2bc2-4280-8fae-eb2f85f24693}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\TestStage\WatanabeStage">
+      <UniqueIdentifier>{0f76430f-8c57-4948-8095-fb889d09cdcd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1205,9 +1211,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\DebugClass\Debug.h">
       <Filter>Watanabe\DebugClass</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\WatanabeStage.h">
-      <Filter>Watanabe\TestStage</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\PlayerOnlineController.h">
       <Filter>Itabashi\Online\PlayerOnlineController</Filter>
@@ -1403,9 +1406,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\UIObjects.h">
       <Filter>Watanabe\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\MatchingUILayoutStage.h">
-      <Filter>Watanabe\TestStage</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\UIObjectCSVBuilder.h">
       <Filter>Watanabe\UI\UIObjectCSVBuilder</Filter>
@@ -2193,6 +2193,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\DebugClass\Object\ArrowObject.h">
       <Filter>Maruyama\Utility\DebugOjbect\ArrowObject</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\MatchingUILayoutStage.h">
+      <Filter>Watanabe\TestStage\MatchingUILayoutStage</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\WatanabeStage.h">
+      <Filter>Watanabe\TestStage\WatanabeStage</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2224,9 +2230,6 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\DebugClass\Debug.cpp">
       <Filter>Watanabe\DebugClass</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\WatanabeStage.cpp">
-      <Filter>Watanabe\TestStage</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\PlayerOnlineController.cpp">
       <Filter>Itabashi\Online\PlayerOnlineController</Filter>
@@ -2401,9 +2404,6 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\UIObjectBase.cpp">
       <Filter>Watanabe\UI\UIObjectBase</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\MatchingUILayoutStage.cpp">
-      <Filter>Watanabe\TestStage</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\UIObjectCSVBuilder.cpp">
       <Filter>Watanabe\UI\UIObjectCSVBuilder</Filter>
@@ -3118,6 +3118,12 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\DebugClass\Object\ArrowObject.cpp">
       <Filter>Maruyama\Utility\DebugOjbect\ArrowObject</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\MatchingUILayoutStage.cpp">
+      <Filter>Watanabe\TestStage\MatchingUILayoutStage</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\WatanabeStage.cpp">
+      <Filter>Watanabe\TestStage\WatanabeStage</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
