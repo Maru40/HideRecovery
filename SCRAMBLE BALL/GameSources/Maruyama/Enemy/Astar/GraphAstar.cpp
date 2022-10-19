@@ -237,16 +237,8 @@ namespace basecross {
 	void GraphAstar::AddAreaGraphNode(const std::shared_ptr<NavGraphNode>& node) {
 		//エリアインデックスごとのマップに登録する。
 		int areaIndex = node->GetAreaIndex();
-		//std::shared_ptr<GraphType> areaGraph = nullptr;
 
-		//if (HasGraph(areaIndex)) {
-		//	areaGraph = m_graphMap[areaIndex];
-		//}
-		//else {
-		//	areaGraph = std::make_shared<GraphType>(true);
-		//	m_graphMap[areaIndex] = areaGraph;
-		//}
-
+		//登録済みなら、その値をもらい、登録されていないなら、登録するして追加する。
 		auto areaGraph = HasGraph(areaIndex) ? m_graphMap[areaIndex] : m_graphMap[areaIndex] = std::make_shared<GraphType>(true);
 		areaGraph->AddNode(node);
 	}
