@@ -134,6 +134,11 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Update="E:\Document\U_22_2022\Project\SCRAMBLE BALL\GameSources\Maruyama\Enemy\Astar\OpenDataHandlercpp">
+      <FileType>Document</FileType>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
     <None Update="D:\Document\TGS2022\α\CrushProject\CrushProject\GameSources\..\..\Libs\BaseLib\DxShaders\SlimeFunctions.hlsli">
       <FileType>Document</FileType>
     </None>

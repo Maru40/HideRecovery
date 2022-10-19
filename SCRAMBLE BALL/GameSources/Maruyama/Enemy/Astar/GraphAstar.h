@@ -23,35 +23,6 @@ namespace basecross {
 	class AstarGraph;
 
 	//--------------------------------------------------------------------------------------
-	///	オープンデータ
-	//--------------------------------------------------------------------------------------
-	struct OpenData {
-		ex_weak_ptr<NavGraphNode> node;  //ノードのポインタ
-		float range;            //実距離
-		float heuristic;        //ヒュースリック距離
-		bool isActive = true;   //Active状態かどうか
-
-		/// <summary>
-		/// コンストラクタ
-		/// </summary>
-		OpenData();
-
-		/// <summary>
-		/// コンストラクタ
-		/// </summary>
-		/// <param name="node">ノード</param>
-		/// <param name="range">実距離</param>
-		/// <param name="heuristic">ヒュースリック距離</param>
-		OpenData(const std::shared_ptr<NavGraphNode>& node, const float& range, const float& heuristic);
-
-		/// <summary>
-		/// 実距離とヒュースリック距離の合計を返す
-		/// </summary>
-		/// <returns>合計値</returns>
-		float GetSumRange() const;
-	};
-
-	//--------------------------------------------------------------------------------------
 	///	Astarの管理をするグラフ
 	//--------------------------------------------------------------------------------------
 	class GraphAstar
@@ -67,12 +38,7 @@ namespace basecross {
 		
 		std::shared_ptr<GraphType> m_areaIndexGraph;		//エリアインデックス用のグラフ生成
 
-		std::shared_ptr<Heuristic> m_heuristic = nullptr;	//ヒュースリックの数値を計算するクラス。
-
-		std::map<int, OpenData> m_openDataMap;				//オープンデータのMap
 		std::stack<std::shared_ptr<NavGraphNode>> m_route;	//生成したルート
-
-		bool m_isRouteEnd = true;        //ルートの最後に来たかどうか？
 
 		std::vector<int> m_debugIndices; //デバッグ用のインデックス
 
@@ -84,13 +50,6 @@ namespace basecross {
 		GraphAstar(const std::shared_ptr<GraphType>& graph);
 
 		virtual ~GraphAstar() = default;
-
-		/// <summary>
-		/// 最短ノードの中で今欲しいノードの場所を取得する。
-		/// </summary>
-		/// <param name="objPtr">現在この処理を行っているオブジェクト</param>
-		/// <returns>現在向かうべきノードのポジション</returns>
-		Vec3 CalucTargetNode(const std::shared_ptr<GameObject>& objPtr);
 
 		/// <summary>
 		/// 自分ノードとエッジから、どのルートが一番近いか検索
@@ -145,43 +104,6 @@ namespace basecross {
 			const std::shared_ptr<GraphType>& graph
 		);
 
-		/// <summary>
-		/// オープンデータ生成の基準となるノードを生成。
-		/// </summary>
-		/// <param name="initialNode">初期ノード</param>
-		/// <returns>基準のノード</returns>
-		std::shared_ptr<NavGraphNode> CalculateCreateOpenDataBaseNode(const std::shared_ptr<NavGraphNode>& initialNode);
-
-		/// <summary>
-		/// オープンデータの生成
-		/// </summary>
-		/// <param name="baseNode">基準となるノード</param>
-		/// <param name="graph">グラフデータ</param>
-		/// <returns></returns>
-		bool CreateOpenData(const ex_weak_ptr<NavGraphNode>& baseNode, const std::shared_ptr<GraphType>& graph);
-
-		/// <summary>
-		/// 最短ルートの生成
-		/// </summary>
-		/// <param name="initialNode">初期ノード</param>
-		/// <param name="targetNode">たどり着きたいノード</param>
-		/// <param name="graph">グラフデータ</param>
-		void CreateRoute(
-			const std::shared_ptr<NavGraphNode>& initialNode, 
-			const std::shared_ptr<NavGraphNode>& targetNode,
-			const std::shared_ptr<GraphType>& graph
-		);
-
-		/// <summary>
-		/// ループして探索経路を測る。
-		/// </summary>
-		/// <param name="initialNode">初期スタートノード</param>
-		void LoopSearchAstar(
-			const std::shared_ptr<NavGraphNode>& initialNode, 
-			const std::shared_ptr<NavGraphNode>& targetNode,
-			const std::shared_ptr<GraphType>& baseGraph
-		);
-
 	public:
 
 		/// <summary>
@@ -219,18 +141,6 @@ namespace basecross {
 		/// <param name="areaIndex">コピーしたいグラフ</param>
 		/// <returns>グラフのコピー</returns>
 		std::shared_ptr<GraphType> CreateCopyGraph(const std::shared_ptr<GraphType>& baseGraph);
-
-		/// <summary>
-		/// 検索したルートの最後まで来たらtrue
-		/// </summary>
-		/// <returns>最後まで来たらtrue</returns>
-		bool IsRouteEnd() {
-			if (m_route.size() == 0) {
-				m_isRouteEnd = true;
-			}
-
-			return m_isRouteEnd;
-		}
 
 		/// <summary>
 		/// グラフの取得
@@ -278,14 +188,10 @@ namespace basecross {
 		/// <returns>ルートのポジション群を返す</returns>
 		std::vector<Vec3> GetRoutePositions() const;
 
-		std::vector<int> GetRouteAreaIndex() const;
-
 		/// <summary>
-		/// ノードの追加
+		/// エリアごとのルートをエリアインデックス配列で受け取る。
 		/// </summary>
-		/// <param name="position">追加したいノードのポジション</param>
-		/// <returns>追加したノードのインデックス</returns>
-		//int AddNode(const Vec3& position);
+		std::vector<int> GetRouteAreaIndex() const;
 
 		template<class... Ts,
 			std::enable_if_t<std::is_constructible_v<NavGraphNode, int, Ts...>, std::nullptr_t> = nullptr>
@@ -357,16 +263,27 @@ namespace basecross {
 		/// <summary>
 		/// 全てリセット
 		/// </summary>
-		void ResetAll();
-
+		void ResetAllAstar();
 
 	private:
 		//デバッグ処理-------------------------------------------------------
 
 		/// <summary>
-		/// デバッグ表示
+		/// デバッグでノードのインデックスを表示する。
 		/// </summary>
-		void DebugDraw();
+		/// <param name="node">表示したいノード</param>
+		/// <param name="description">説明文</param>
+		void DebugNodeIndexDraw(const std::shared_ptr<NavGraphNode>& node, const std::wstring& description = L"");
+
+		/// <summary>
+		/// デバッグで、開始ノードと目標ノードのインデックス表示をする。
+		/// </summary>
+		void DebugStartAndEndIndexDraw(const std::shared_ptr<NavGraphNode>& startNode, const std::shared_ptr<NavGraphNode>& targetNode);
+
+		/// <summary>
+		/// デバッグで、ルートインデックスの表示
+		/// </summary>
+		void DebugRouteIndexDraw();
 
 	};
 }

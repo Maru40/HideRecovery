@@ -186,12 +186,13 @@ namespace basecross {
 		ImpactMap::ImpactMap(const std::shared_ptr<Stage>& stage, const Factory_Parametor& parametor) :
 			m_stage(stage),
 			m_param(parametor), 
+			m_areaGraphAstar(new GraphAstar(std::make_shared<GraphAstar::GraphType>(true))),
 			m_astar(new GraphAstar(std::make_shared<GraphAstar::GraphType>(true)))
 		{
 			CreateImpactData();
 		}
 
-		ImpactMap::~ImpactMap() {
+		ImpactMap::~ImpactMap() {	//デストラクタ
 			if (auto stage = GetStage()) {	
 				if (m_nodeDraw) {
 					stage->RemoveGameObject<GameObject>(m_nodeDraw->GetGameObject());
@@ -314,6 +315,10 @@ namespace basecross {
 
 		ImpactMap::Factory_Parametor ImpactMap::GetFactoryParametor() const noexcept {
 			return m_param;
+		}
+
+		std::shared_ptr<GraphAstar> ImpactMap::GetAreaGraphAstar() const noexcept {
+			return m_areaGraphAstar;
 		}
 
 		std::shared_ptr<GraphAstar> ImpactMap::GetGraphAstar() const noexcept {

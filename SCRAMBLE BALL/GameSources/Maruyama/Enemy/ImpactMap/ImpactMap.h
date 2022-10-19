@@ -213,12 +213,13 @@ namespace basecross {
 
 			std::weak_ptr<Stage> m_stage;						//自分の所属するステージ。
 			//GraphAstarMap m_astarMap;							//Astarを管理するマップ。
-			std::shared_ptr<GraphAstar> m_astar = nullptr;		//Astarを管理するクラス。
+			std::shared_ptr<GraphAstar> m_areaGraphAstar;		//エリア間のグラフ管理クラス
+			std::shared_ptr<GraphAstar> m_astar = nullptr;		//エリア内の細かいグラフ管理クラス
 
 			//デバック用----------------------------------------------------------------
 
-			ex_weak_ptr<AstarNodeDraw> m_nodeDraw = nullptr;  //ノードの見た目
-			ex_weak_ptr<AstarEdgeDraw> m_edgeDraw = nullptr;  //エッジの見た目
+			ex_weak_ptr<AstarNodeDraw> m_nodeDraw = nullptr;	//ノードの見た目
+			ex_weak_ptr<AstarEdgeDraw> m_edgeDraw = nullptr;	//エッジの見た目
 
 			//--------------------------------------------------------------------------
 
@@ -322,6 +323,11 @@ namespace basecross {
 			/// </summary>
 			/// <returns></returns>
 			Factory_Parametor GetFactoryParametor() const noexcept;
+
+			/// <summary>
+			/// エリア間のAstarグラフを取得する。
+			/// </summary>
+			std::shared_ptr<GraphAstar> GetAreaGraphAstar() const noexcept;
 
 			/// <summary>
 			/// Astar用のグラフを取得
