@@ -54,9 +54,6 @@ namespace basecross {
 	{
 		using DataPtrList = std::list<std::shared_ptr<OpenData>>;
 
-		DataPtrList m_openDataList;		//オープンデータマップ
-		DataPtrList m_closeDataList;	//クローズデータマップ
-
 		std::shared_ptr<Heuristic> m_heuristic;	//ヒュースリックの数値を計算するクラス。
 
 		std::stack<std::shared_ptr<NavGraphNode>> m_route;	//生成したルート
@@ -72,7 +69,7 @@ namespace basecross {
 		/// オープンデータを生成するための基準となるオープンデータを検索(一番期待値の高いノードを取得する。)
 		/// </summary>
 		/// <returns>オープンデータを生成するための開始ノード</returns>
-		std::shared_ptr<OpenData> FindSearchBaseOpenData();
+		std::shared_ptr<OpenData> FindSearchBaseOpenData(DataPtrList& openDataList);
 
 		/// <summary>
 		/// オープンデータを生成する。
@@ -80,7 +77,12 @@ namespace basecross {
 		/// <param name="baseNode">ベースとなるノード</param>
 		/// <param name="graph">グラフの参照</param>
 		/// <returns>オープンデータ</returns>
-		bool CreateOpenDatas(const std::shared_ptr<OpenData>& openData, const std::shared_ptr<AstarGraph>& graph);
+		bool CreateOpenDatas(
+			DataPtrList& openDataList,
+			DataPtrList& closeDataList,
+			const std::shared_ptr<OpenData>& openData, 
+			const std::shared_ptr<AstarGraph>& graph
+		);
 
 		/// <summary>
 		/// 最短ルートの生成
@@ -145,11 +147,6 @@ namespace basecross {
 		/// <param name="openData">追加したいオープンデータ</param>
 		/// <returns></returns>
 		bool AddOpenData(DataPtrList& openDataList, DataPtrList& closeDataList, const std::shared_ptr<OpenData>& openData);
-
-		/// <summary>
-		/// データをクリアする(使用前にこの関数を利用して初期化を推奨)
-		/// </summary>
-		void Clear();
 
 		std::stack<std::shared_ptr<NavGraphNode>> GetRoute();
 
