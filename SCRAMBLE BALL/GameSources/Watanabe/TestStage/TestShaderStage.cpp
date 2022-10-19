@@ -52,6 +52,8 @@ namespace basecross {
 		auto player = AddGameObject<GameObject>();
 		auto drawComp = player->AddComponent<BoneModelDraw>();
 		drawComp->SetMultiMeshResource(L"Player_Mesh");
+		// トゥーンシェーダー用のランプテクスチャ
+		drawComp->SetTextureResource(L"ToonTex_TX", 0);
 
 		auto shadow = player->AddComponent<Shadowmap>();
 		shadow->SetMultiMeshResource(L"Player_Mesh");
