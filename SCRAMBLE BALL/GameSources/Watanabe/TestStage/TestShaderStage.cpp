@@ -6,7 +6,10 @@
 #include "stdafx.h"
 #include "TestShaderStage.h"
 
+#include "../Component/PlayerAnimator.h"
 #include "../DebugClass/Debug.h"
+#include "VelocityManager.h"
+#include "../StageObject/SkyBox.h"
 
 namespace basecross {
 	void TestShaderStage::CreateViewLight() {
@@ -28,8 +31,47 @@ namespace basecross {
 		CreateViewLight();
 		AddGameObject<Debug>();
 		Debug::GetInstance()->Log(L"TestShaderStage");
+
+		// 床を生成
+		CreateFloor();
+		// プレイヤーを生成
+		CreatePlayer();
+		// 念のためSkyBoxを生成
+		AddGameObject<SkyBox>(Vec3(100, 100, 100));
 	}
 
 	void TestShaderStage::OnUpdate() {
+	}
+
+	shared_ptr<GameObject> TestShaderStage::CreatePlayer() {
+		auto player = AddGameObject<GameObject>();
+		auto drawComp = player->AddComponent<PNTBoneModelDraw>();
+		drawComp->SetMultiMeshResource(L"Player_Mesh");
+
+		auto shadow = player->AddComponent<Shadowmap>();
+		shadow->SetMultiMeshResource(L"Player_Mesh");
+
+		auto animator = player->AddComponent<PlayerAnimator>();
+		animator->ChangePlayerAnimation(
+			PlayerAnimationState::State::Wait
+		);
+
+		// PlayerAnimatorが参照している
+		player->AddComponent<VelocityManager>();
+
+		return player;
+	}
+
+	shared_ptr<GameObject> TestShaderStage::CreateFloor() {
+		auto box = AddGameObject<GameObject>();
+		auto drawComp = box->AddComponent<PNTStaticDraw>();
+		drawComp->SetMeshResource(L"DEFAULT_CUBE");
+		drawComp->SetOwnShadowActive(true);
+
+		auto transComp = box->GetComponent<Transform>();
+		transComp->SetScale(Vec3(10, 1, 10));
+		transComp->SetPosition(Vec3(0, -0.5, 0));
+
+		return box;
 	}
 }
