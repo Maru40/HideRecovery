@@ -40,7 +40,7 @@ namespace basecross {
 
 		std::stack<std::shared_ptr<NavGraphNode>> m_route;	//生成したルート
 
-		bool m_isRouteEnd = true;        //ルートの最後に来たかどうか？
+		//bool m_isRouteEnd = true;        //ルートの最後に来たかどうか？
 
 		std::vector<int> m_debugIndices; //デバッグ用のインデックス
 
@@ -106,16 +106,6 @@ namespace basecross {
 			const std::shared_ptr<GraphType>& graph
 		);
 
-		/// <summary>
-		/// ループして探索経路を測る。
-		/// </summary>
-		/// <param name="initialNode">初期スタートノード</param>
-		void LoopSearchAstar(
-			const std::shared_ptr<NavGraphNode>& initialNode, 
-			const std::shared_ptr<NavGraphNode>& targetNode,
-			const std::shared_ptr<GraphType>& baseGraph
-		);
-
 	public:
 
 		/// <summary>
@@ -153,18 +143,6 @@ namespace basecross {
 		/// <param name="areaIndex">コピーしたいグラフ</param>
 		/// <returns>グラフのコピー</returns>
 		std::shared_ptr<GraphType> CreateCopyGraph(const std::shared_ptr<GraphType>& baseGraph);
-
-		/// <summary>
-		/// 検索したルートの最後まで来たらtrue
-		/// </summary>
-		/// <returns>最後まで来たらtrue</returns>
-		bool IsRouteEnd() {
-			if (m_route.size() == 0) {
-				m_isRouteEnd = true;
-			}
-
-			return m_isRouteEnd;
-		}
 
 		/// <summary>
 		/// グラフの取得
@@ -212,14 +190,10 @@ namespace basecross {
 		/// <returns>ルートのポジション群を返す</returns>
 		std::vector<Vec3> GetRoutePositions() const;
 
-		std::vector<int> GetRouteAreaIndex() const;
-
 		/// <summary>
-		/// ノードの追加
+		/// エリアごとのルートをエリアインデックス配列で受け取る。
 		/// </summary>
-		/// <param name="position">追加したいノードのポジション</param>
-		/// <returns>追加したノードのインデックス</returns>
-		//int AddNode(const Vec3& position);
+		std::vector<int> GetRouteAreaIndex() const;
 
 		template<class... Ts,
 			std::enable_if_t<std::is_constructible_v<NavGraphNode, int, Ts...>, std::nullptr_t> = nullptr>
@@ -291,8 +265,7 @@ namespace basecross {
 		/// <summary>
 		/// 全てリセット
 		/// </summary>
-		void ResetAll();
-
+		void ResetAllAstar();
 
 	private:
 		//デバッグ処理-------------------------------------------------------
