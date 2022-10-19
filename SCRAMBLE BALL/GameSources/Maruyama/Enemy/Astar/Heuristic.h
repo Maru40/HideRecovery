@@ -29,6 +29,8 @@ namespace basecross {
 		/// <param name="node">目的地に設定したノード</param>
 		Heuristic(const std::shared_ptr<NavGraphNode>& node);
 
+		virtual ~Heuristic() = default;
+
 		/// <summary>
 		/// 渡されたノードからターゲットノードまでの距離を測って返す。
 		/// </summary>
