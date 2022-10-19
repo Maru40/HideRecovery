@@ -7,8 +7,6 @@
 #pragma once
 #include "stdafx.h"
 
-#include <forward_list>
-
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
@@ -59,7 +57,7 @@ namespace basecross {
 		DataPtrList m_openDataList;		//オープンデータマップ
 		DataPtrList m_closeDataList;	//クローズデータマップ
 
-		std::unique_ptr<Heuristic> m_heuristic;	//ヒュースリックの数値を計算するクラス。
+		std::shared_ptr<Heuristic> m_heuristic;	//ヒュースリックの数値を計算するクラス。
 
 		std::stack<std::shared_ptr<NavGraphNode>> m_route;	//生成したルート
 
@@ -96,6 +94,14 @@ namespace basecross {
 			const std::shared_ptr<AstarGraph>& graph,
 			const DataPtrList& openDataList
 		);
+
+		/// <summary>
+		/// オープンデータの取得
+		/// </summary>
+		/// <param name="openDataList">オープンデータリスト</param>
+		/// <param name="node">確認したいノード</param>
+		/// <returns>同じデータがあるならそのデータを返す</returns>
+		std::shared_ptr<OpenData> FindSomeOpenData(const DataPtrList& dataList, const std::shared_ptr<NavGraphNode>& node);
 
 		/// <summary>
 		/// オープンデータの取得
@@ -144,6 +150,8 @@ namespace basecross {
 		/// データをクリアする(使用前にこの関数を利用して初期化を推奨)
 		/// </summary>
 		void Clear();
+
+		std::stack<std::shared_ptr<NavGraphNode>> GetRoute();
 
 	};
 
