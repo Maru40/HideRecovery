@@ -331,6 +331,8 @@ namespace basecross {
 	}
 
 	void GraphAstar::DebugStartAndEndIndexDraw(const std::shared_ptr<NavGraphNode>& startNode, const std::shared_ptr<NavGraphNode>& targetNode) {
+		Debug::GetInstance()->Log(L"--------------------");
+
 		DebugNodeIndexDraw(startNode,  L"StartNode : ");
 		DebugNodeIndexDraw(targetNode, L"TargetNode: ");
 
