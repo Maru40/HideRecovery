@@ -140,7 +140,7 @@ namespace basecross {
 				}
 
 				void SearchBall::InitializeParametor() {
-					m_param.movePositionsParam->moveParamPtr->speed = 10.0f;
+					//m_param.movePositionsParam->moveParamPtr->speed = 10.0f;
 				}
 
 				bool SearchBall::IsEnd() const { return m_areaRoute.empty() && m_taskList->IsEnd(); }
