@@ -11,6 +11,8 @@
 #include "VelocityManager.h"
 #include "../StageObject/SkyBox.h"
 
+#include "../Shader/BoneModelDraw.h"
+
 namespace basecross {
 	void TestShaderStage::CreateViewLight() {
 		const Vec3 eye(5.0f, 5.0f, -5.0f);
@@ -35,9 +37,9 @@ namespace basecross {
 		// 床を生成
 		CreateFloor();
 		// プレイヤーを生成
-		//CreatePlayer();
+		CreatePlayer();
 		// 静的オブジェクト
-		CreateSphere();
+		//CreateSphere();
 		// 念のためSkyBoxを生成
 		AddGameObject<SkyBox>(Vec3(100, 100, 100));
 	}
@@ -47,19 +49,20 @@ namespace basecross {
 
 	shared_ptr<GameObject> TestShaderStage::CreatePlayer() {
 		auto player = AddGameObject<GameObject>();
-		auto drawComp = player->AddComponent<PNTBoneModelDraw>();
+		auto drawComp = player->AddComponent<BoneModelDraw>();
 		drawComp->SetMultiMeshResource(L"Player_Mesh");
 
 		auto shadow = player->AddComponent<Shadowmap>();
 		shadow->SetMultiMeshResource(L"Player_Mesh");
 
-		auto animator = player->AddComponent<PlayerAnimator>();
-		animator->ChangePlayerAnimation(
-			PlayerAnimationState::State::Wait
-		);
+		// アニメータが対応していないためコメントアウト
+		//auto animator = player->AddComponent<PlayerAnimator>();
+		//animator->ChangePlayerAnimation(
+		//	PlayerAnimationState::State::Wait
+		//);
 
-		// PlayerAnimatorが参照している
-		player->AddComponent<VelocityManager>();
+		//// PlayerAnimatorが参照している
+		//player->AddComponent<VelocityManager>();
 
 		return player;
 	}
