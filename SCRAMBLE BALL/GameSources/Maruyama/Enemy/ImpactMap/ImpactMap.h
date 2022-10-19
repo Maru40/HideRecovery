@@ -218,8 +218,8 @@ namespace basecross {
 
 			//デバック用----------------------------------------------------------------
 
-			ex_weak_ptr<AstarNodeDraw> m_nodeDraw = nullptr;  //ノードの見た目
-			ex_weak_ptr<AstarEdgeDraw> m_edgeDraw = nullptr;  //エッジの見た目
+			ex_weak_ptr<AstarNodeDraw> m_nodeDraw = nullptr;	//ノードの見た目
+			ex_weak_ptr<AstarEdgeDraw> m_edgeDraw = nullptr;	//エッジの見た目
 
 			//--------------------------------------------------------------------------
 
