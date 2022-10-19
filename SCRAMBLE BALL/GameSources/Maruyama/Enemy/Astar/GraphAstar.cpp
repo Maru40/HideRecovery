@@ -305,7 +305,7 @@ namespace basecross {
 	void GraphAstar::ResetAstar() {
 		//m_isRouteEnd = false;
 		//m_openDataMap.clear();
-		//maru::Utility::StackClear(m_route);
+		maru::Utility::StackClear(m_route);
 	}
 
 	void GraphAstar::ResetAll() {
