@@ -103,7 +103,8 @@ namespace basecross {
 	{
 		auto edges = graph->GetEdges(targetNode->GetIndex());
 
-		auto resultData = new OpenData(nullptr, FLT_MAX, FLT_MAX);
+		//auto resultData = new OpenData(nullptr, FLT_MAX, FLT_MAX);
+		auto resultData = std::make_shared<OpenData>(nullptr, FLT_MAX, FLT_MAX);
 		//ノードの中で一番近い物を取得
 		for (auto& edge : edges) {
 			const auto& node = graph->GetNode(edge->GetTo());
@@ -115,18 +116,16 @@ namespace basecross {
 
 			//一番小さいデータを取り出す。
 			if (someOpenData->GetSumRange() < resultData->GetSumRange()) {
-				resultData = someOpenData.get();
+				resultData = someOpenData;
 			}
 		}
 
 		if (resultData->node.lock() == nullptr) {	//リザルトがnullptrなら
-			delete resultData;	//メモリ解放
 			return;
 		}
 
 		//初期ノードなら
 		if (resultData->node.lock() == startNode) {
-			delete resultData;	//メモリ解放
 			return; //処理をやめる。
 		}
 
@@ -134,8 +133,6 @@ namespace basecross {
 		resultData->isActive = false;
 
 		CreateRoute(startNode, resultData->node.lock(), graph, openDataList);
-
-		delete resultData;		//メモリ解放
 	}
 
 	std::shared_ptr<OpenData> OpenDataHandler::FindSomeOpenData(const DataPtrList& dataList, const std::shared_ptr<NavGraphNode>& node) {
