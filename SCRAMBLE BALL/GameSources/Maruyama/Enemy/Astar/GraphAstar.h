@@ -40,8 +40,6 @@ namespace basecross {
 
 		std::stack<std::shared_ptr<NavGraphNode>> m_route;	//生成したルート
 
-		//bool m_isRouteEnd = true;        //ルートの最後に来たかどうか？
-
 		std::vector<int> m_debugIndices; //デバッグ用のインデックス
 
 	public:
