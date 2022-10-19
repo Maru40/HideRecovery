@@ -10,6 +10,7 @@
 #include "../DebugClass/Debug.h"
 #include "VelocityManager.h"
 #include "../StageObject/SkyBox.h"
+#include "../Component/TestComponent.h"
 
 #include "../Shader/BoneModelDraw.h"
 
@@ -54,6 +55,15 @@ namespace basecross {
 
 		auto shadow = player->AddComponent<Shadowmap>();
 		shadow->SetMultiMeshResource(L"Player_Mesh");
+
+		// テスト用の回転処理を実装
+		auto testComp = player->AddComponent<TestComponent>();
+		testComp->SetOnUpdateFunction(
+			[player](float delta) {
+				auto util = player->GetBehavior<UtilBehavior>();
+				util->RotToHead(Vec3(cosf(delta), 0, sinf(delta)), 2 * delta);
+			}
+		);
 
 		// アニメータが対応していないためコメントアウト
 		//auto animator = player->AddComponent<PlayerAnimator>();

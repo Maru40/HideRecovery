@@ -85,7 +85,7 @@ namespace basecross {
 		auto testComp = player->AddComponent<TestComponent>();
 		// テスト用にプレイヤーの移動処理を実装
 		testComp->SetOnUpdateFunction(
-			[player, stage]() {
+			[player, stage](float delta) {
 				auto objectMover = player->GetComponent<Operator::ObjectMover>();
 				if (!objectMover)
 					return;
