@@ -83,7 +83,7 @@ namespace basecross {
 
 			auto newData = std::make_shared<OpenData>(node, range, heuristicRange);	//新規オープンデータの生成
 
-			auto isResult = AddOpenData(openDataList, closeDataList, newData);	//オープンデータの追加をする。
+			auto isResult = AddOpenData(openDataList, closeDataList, newData);		//オープンデータの追加をする。
 			
 			//オープンデータの追加に失敗したらその後の処理をしない
 			if (!isResult) {
@@ -167,41 +167,6 @@ namespace basecross {
 		return false;
 	}
 
-	bool OpenDataHandler::StartSearchAstar(
-		const std::shared_ptr<NavGraphNode>& startNode,
-		const std::shared_ptr<NavGraphNode>& targetNode,
-		const std::shared_ptr<AstarGraph>& graph
-	) {
-		//オープンデータリストとクローズデータリストを生成
-		auto openDataList = DataPtrList();
-		auto closeDataList = DataPtrList();
-
-		//初期オープンデータを生成
-		m_heuristic->SetTargetNode(targetNode);
-		openDataList.push_back(std::make_shared<OpenData>(startNode, 0.0f, m_heuristic->CalculateHeuristicRange(startNode)));
-
-		//ループ回数が安定するまで、最大ループ回数を設定
-		int tempIndex = 0;
-		int maxTempIndex = 1000;
-		while (tempIndex < maxTempIndex) {
-			//オープンデータ生成用の基準ノードの生成。
-			auto baseOpenData = FindSearchBaseOpenData(openDataList);
-			//オープンデータの生成。ターゲットノードにたどり着いたらtrueを返す。
-			if (CreateOpenDatas(openDataList, closeDataList, baseOpenData, graph)) {
-				break;
-			}
-
-			tempIndex++;
-		}
-
-		//オープンデータから最短経路を取得
-		m_route.push(targetNode);
-		FindSomeOpenData(openDataList, targetNode)->isActive = false;
-		CreateRoute(startNode, targetNode, graph, openDataList);
-
-		return true;
-	}
-
 	bool OpenDataHandler::AddOpenData(DataPtrList& openDataList, DataPtrList& closeDataList, const std::shared_ptr<OpenData>& openData) {
 		auto someOpenData = FindSomeOpenData(openDataList, openData);	//オープンデータリストからオープンデータと同じデータを探す。
 		auto someCloseData = FindSomeOpenData(closeDataList, openData);	//クローズデータリストからオープンデータと同じデータを探す。
@@ -227,6 +192,39 @@ namespace basecross {
 
 		//どの条件にも当てはまらないなら、追加をしない。
 		return false;
+	}
+
+	bool OpenDataHandler::StartSearchAstar(
+		const std::shared_ptr<NavGraphNode>& startNode,
+		const std::shared_ptr<NavGraphNode>& targetNode,
+		const std::shared_ptr<AstarGraph>& graph
+	) {
+		//オープンデータリストとクローズデータリストを生成
+		auto openDataList = DataPtrList();
+		auto closeDataList = DataPtrList();
+
+		//初期オープンデータを生成
+		m_heuristic->SetTargetNode(targetNode);
+		openDataList.push_back(std::make_shared<OpenData>(startNode, 0.0f, m_heuristic->CalculateHeuristicRange(startNode)));
+
+		//オープンデータが存在する限りループする。
+		while (openDataList.size() != 0) {	
+			//オープンデータ生成用の基準ノードの生成。
+			auto baseOpenData = FindSearchBaseOpenData(openDataList);
+			//オープンデータの生成。ターゲットノードにたどり着いたらtrueを返す。
+			if (CreateOpenDatas(openDataList, closeDataList, baseOpenData, graph)) {
+				break;
+			}
+		}
+
+		bool isSearchSuccess = (openDataList.size() != 0);	//オープンデータが存在するなら、検索成功
+
+		//オープンデータから最短経路を取得
+		m_route.push(targetNode);
+		FindSomeOpenData(openDataList, targetNode)->isActive = false;
+		CreateRoute(startNode, targetNode, graph, openDataList);
+
+		return isSearchSuccess;
 	}
 
 	std::stack<std::shared_ptr<NavGraphNode>> OpenDataHandler::GetRoute() {

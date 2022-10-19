@@ -121,6 +121,14 @@ namespace basecross {
 		/// <returns>登録されていたらtrue</returns>
 		bool IsRegisterData(const DataPtrList& dataList, const std::shared_ptr<OpenData>& openData);
 
+		/// <summary>
+		/// オープンデータの追加
+		/// </summary>
+		/// <param name="openDatas">追加したいオープンデータの配列</param>
+		/// <param name="openData">追加したいオープンデータ</param>
+		/// <returns></returns>
+		bool AddOpenData(DataPtrList& openDataList, DataPtrList& closeDataList, const std::shared_ptr<OpenData>& openData);
+
 	public:
 
 		/// <summary>
@@ -139,14 +147,6 @@ namespace basecross {
 		//--------------------------------------------------------------------------------------
 		///	アクセッサ
 		//--------------------------------------------------------------------------------------
-
-		/// <summary>
-		/// オープンデータの追加
-		/// </summary>
-		/// <param name="openDatas">追加したいオープンデータの配列</param>
-		/// <param name="openData">追加したいオープンデータ</param>
-		/// <returns></returns>
-		bool AddOpenData(DataPtrList& openDataList, DataPtrList& closeDataList, const std::shared_ptr<OpenData>& openData);
 
 		std::stack<std::shared_ptr<NavGraphNode>> GetRoute();
 
