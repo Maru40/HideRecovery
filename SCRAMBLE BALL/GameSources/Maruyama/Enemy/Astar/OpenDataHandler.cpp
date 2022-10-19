@@ -119,12 +119,14 @@ namespace basecross {
 			}
 		}
 
-		if (resultData->node.lock() == nullptr) {
+		if (resultData->node.lock() == nullptr) {	//リザルトがnullptrなら
+			delete resultData;	//メモリ解放
 			return;
 		}
 
 		//初期ノードなら
 		if (resultData->node.lock() == startNode) {
+			delete resultData;	//メモリ解放
 			return; //処理をやめる。
 		}
 
@@ -132,6 +134,8 @@ namespace basecross {
 		resultData->isActive = false;
 
 		CreateRoute(startNode, resultData->node.lock(), graph, openDataList);
+
+		delete resultData;		//メモリ解放
 	}
 
 	std::shared_ptr<OpenData> OpenDataHandler::FindSomeOpenData(const DataPtrList& dataList, const std::shared_ptr<NavGraphNode>& node) {
