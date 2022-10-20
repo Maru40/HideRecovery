@@ -52,7 +52,9 @@ namespace basecross {
 				}
 
 				void SearchBall::OnStart() {
-					SelectTask();	//タスクの選択
+					SelectTask();					//タスクの選択
+
+						//ターゲットの計算
 
 					CalculateMoveAreaRouteQueue();	//徘徊エリアルートの取得
 					m_param.movePositionsParam->positions = CalculateMovePositions();	//徘徊移動先を設定
