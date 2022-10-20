@@ -11,8 +11,10 @@
 #include "VelocityManager.h"
 #include "../StageObject/SkyBox.h"
 #include "../Component/TestComponent.h"
+#include "../Camera/TitleCamera.h"
 
 #include "../Shader/BoneModelDraw.h"
+#include "../Shader/StaticModelDraw.h"
 
 namespace basecross {
 	void TestShaderStage::CreateViewLight() {
@@ -20,10 +22,9 @@ namespace basecross {
 		const Vec3 at(0.0f);
 		auto PtrView = CreateView<SingleView>();
 		//ビューのカメラの設定
-		auto PtrCamera = ObjectFactory::Create<Camera>();
+		auto PtrCamera = ObjectFactory::Create<TitleCamera>(eye, at);
 		PtrView->SetCamera(PtrCamera);
-		PtrCamera->SetEye(eye);
-		PtrCamera->SetAt(at);
+		PtrCamera->SetSpeed(-0.5f);
 		//マルチライトの作成
 		auto PtrMultiLight = CreateLight<MultiLight>();
 		//デフォルトのライティングを指定
@@ -40,7 +41,7 @@ namespace basecross {
 		// プレイヤーを生成
 		CreatePlayer();
 		// 静的オブジェクト
-		//CreateSphere();
+		CreateSphere();
 		// 念のためSkyBoxを生成
 		AddGameObject<SkyBox>(Vec3(100, 100, 100));
 	}
@@ -67,28 +68,28 @@ namespace basecross {
 			}
 		);
 
-		// アニメータが対応していないためコメントアウト
-		//auto animator = player->AddComponent<PlayerAnimator>();
-		//animator->ChangePlayerAnimation(
-		//	PlayerAnimationState::State::Wait
-		//);
-
-		//// PlayerAnimatorが参照している
-		//player->AddComponent<VelocityManager>();
+		auto transComp = player->GetComponent<Transform>();
+		transComp->SetPosition(Vec3(-1, 0, 0));
 
 		return player;
 	}
 
 	shared_ptr<GameObject> TestShaderStage::CreateSphere() {
 		auto sphere = AddGameObject<GameObject>();
-		auto drawComp = sphere->AddComponent<PNTStaticDraw>();
+		auto drawComp = sphere->AddComponent<StaticModelDraw>();
 		drawComp->SetMeshResource(L"DEFAULT_SPHERE");
+		// 今現在テクスチャが無いとトゥーンシェーダーが実行されない
+		drawComp->SetTextureResource(L"Floor_TX", 0);
+		// トゥーンシェーダー用のランプテクスチャ
+		drawComp->SetTextureResource(L"ToonTex_TX", 1);
+
+		auto tex = drawComp->GetAllTextureResource();
 
 		auto shadow = sphere->AddComponent<Shadowmap>();
 		shadow->SetMeshResource(L"DEFAULT_SPHERE");
 
 		auto transComp = sphere->GetComponent<Transform>();
-		transComp->SetPosition(Vec3(0, 0.5, 0));
+		transComp->SetPosition(Vec3(1, 0.5, 0));
 
 		return sphere;
 	}
