@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0"
-  xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Headers">
       <UniqueIdentifier>{4b0a624a-610d-4bc6-b311-2b02a781cdf9}</UniqueIdentifier>
@@ -1184,6 +1183,9 @@
     <Filter Include="Watanabe\TestStage\TestShaderStage">
       <UniqueIdentifier>{b6353766-d0ed-44c0-8fd6-8dd04dc7db36}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\Stage\ResultStage">
+      <UniqueIdentifier>{eff7db8b-3a7b-47b5-bf5b-5ded9037b0f4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1431,9 +1433,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\StageObjects.h">
       <Filter>Watanabe\StageObject</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Stage\ResultStage.h">
-      <Filter>Watanabe\Stage</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\SplashMessageUI.h">
       <Filter>Watanabe\UI\SplashMessageUI</Filter>
@@ -2215,6 +2214,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\StaticModelDraw.h">
       <Filter>Watanabe\Shader\ModelDraw</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Stage\ResultStage.h">
+      <Filter>Watanabe\Stage\ResultStage</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2432,9 +2434,6 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\BallAnimator.cpp">
       <Filter>Watanabe\Component\BallAnimator</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Stage\ResultStage.cpp">
-      <Filter>Watanabe\Stage</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\SplashMessageUI.cpp">
       <Filter>Watanabe\UI\SplashMessageUI</Filter>
@@ -3149,6 +3148,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\StaticModelDraw.cpp">
       <Filter>Watanabe\Shader\ModelDraw</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Stage\ResultStage.cpp">
+      <Filter>Watanabe\Stage\ResultStage</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
