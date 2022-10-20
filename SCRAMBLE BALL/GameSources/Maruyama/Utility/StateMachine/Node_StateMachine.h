@@ -55,6 +55,10 @@ namespace basecross {
 			std::weak_ptr<OwnerType> m_owner;	//オーナー
 
 		public:
+			NodeBase_StateMachine(const std::shared_ptr<OwnerType>& owner) :
+				NodeBase_StateMachine(0, owner)
+			{}
+
 			NodeBase_StateMachine(const int index, const std::shared_ptr<OwnerType>& owner):
 				NodeBase(index),
 				m_owner(owner)
@@ -84,6 +88,10 @@ namespace basecross {
 			std::vector<ChangeComponentParametor> m_changeParams;	//コンポーネント変更用のパラメータ配列
 
 		public:
+			NodeBase_StateMachine_Ex(const std::shared_ptr<OwnerType>& owner):
+				NodeBase_StateMachine_Ex(0, owner)
+			{}
+
 			NodeBase_StateMachine_Ex(const int index, const std::shared_ptr<OwnerType>& owner):
 				NodeBase_StateMachine<OwnerType>(index, owner)
 			{}
