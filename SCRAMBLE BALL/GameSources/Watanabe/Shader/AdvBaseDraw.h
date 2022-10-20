@@ -7,7 +7,7 @@
 #include "stdafx.h"
 
 namespace basecross {
-	enum TextureType {
+	enum class TextureType {
 		Default,
 		ToonRamp,
 		Normal
@@ -145,6 +145,8 @@ namespace basecross {
 					const auto& texture = textureMap.second;
 					pD3D11DeviceContext->PSSetShaderResources(index, 1, texture.lock()->GetShaderResourceView().GetAddressOf());
 				}
+				//サンプラーを設定
+				RenderState->SetSamplerState(pD3D11DeviceContext, GetSamplerState(), 0);
 			}
 			else {
 				// シェーダーリソースもクリア
