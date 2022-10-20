@@ -87,7 +87,7 @@ namespace basecross {
 		/// <summary>
 		/// ターゲットへのエリア単位の大まかなルートを検索
 		/// </summary>
-		std::vector<int> SearchAreaIndexRoute(const Vec3& selfPosition, const Vec3& targetPosition);
+		std::vector<int> SearchAreaRouteIndices(const Vec3& selfPosition, const Vec3& targetPosition);
 
 	private:
 		/// <summary>
@@ -105,6 +105,7 @@ namespace basecross {
 
 		/// <summary>
 		/// それぞれのグラフの中心位置を設定する。
+		/// (現在はImpactMapから生成しているが、他の方法を検討中)
 		/// </summary>
 		void SettingGraphMapCenterPositions();
 

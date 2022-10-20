@@ -108,7 +108,7 @@ namespace basecross {
 					auto startPosition = m_transform.lock()->GetPosition();
 					auto targetPosition = CalculateMoveTargetPosition();
 
-					auto routes = FieldImpactMap::GetInstance()->SearchAreaIndexRoute(startPosition, targetPosition);
+					auto routes = FieldImpactMap::GetInstance()->SearchAreaRouteIndices(startPosition, targetPosition);
 
 					m_areaRoute.push(FieldImpactMap::GetInstance()->SearchNearAreaIndex(startPosition));	//最初の自分自身のノードを省くため。
 					for (const auto& route : routes) {

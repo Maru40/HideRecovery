@@ -110,8 +110,8 @@ namespace basecross {
 			return m_impactMap->GetGraphAstar()->SearchNearAreaIndex(position);
 		}
 
-		std::vector<int> FieldImpactMap::SearchAreaIndexRoute(const Vec3& startPosition, const Vec3& targetPosition) {
-			return m_impactMap->GetGraphAstar()->SearchAreaIndexRoute(startPosition, targetPosition);
+		std::vector<int> FieldImpactMap::SearchAreaRouteIndices(const Vec3& startPosition, const Vec3& targetPosition) {
+			return m_impactMap->GetGraphAstar()->SearchAreaRouteIndices(startPosition, targetPosition);
 		}
 
 		void FieldImpactMap::AddOccupancyUpdateData(const std::shared_ptr<NavGraphNode>& node) {

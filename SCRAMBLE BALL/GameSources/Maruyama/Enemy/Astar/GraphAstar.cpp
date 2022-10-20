@@ -80,7 +80,7 @@ namespace basecross {
 		return GetRoutePositions();
 	}
 
-	std::vector<int> GraphAstar::SearchAreaIndexRoute(const Vec3& selfPosition, const Vec3& targetPosition) {
+	std::vector<int> GraphAstar::SearchAreaRouteIndices(const Vec3& selfPosition, const Vec3& targetPosition) {
 		auto selfNode = SearchNearAreaNode(selfPosition);
 		auto targetNode = SearchNearAreaNode(targetPosition);
 
