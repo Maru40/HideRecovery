@@ -13,6 +13,8 @@
 
 namespace basecross {
 
+	//ビヘイビアが適切なため、現在使用していない。
+
 	namespace maru {
 		template<class EnumType, class OwnerType, class TransitionStructMember>
 		class StateMachine;
