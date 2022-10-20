@@ -206,15 +206,20 @@ namespace basecross {
 		{
 		public:
 			using Factory_Parametor = Factory_ImpactMap_Parametor;
-			//using GraphAstarMap = std::unordered_map<int, std::shared_ptr<GraphAstar>>;
+			using GraphAstarMap = std::unordered_map<int, std::shared_ptr<GraphAstar>>;
+			
 
 		private:
 			Factory_Parametor m_param = Factory_Parametor();	//パラメータ
 
 			std::weak_ptr<Stage> m_stage;						//自分の所属するステージ。
-			//GraphAstarMap m_astarMap;							//Astarを管理するマップ。
-			std::shared_ptr<GraphAstar> m_areaGraphAstar;		//エリア間のグラフ管理クラス
-			std::shared_ptr<GraphAstar> m_astar = nullptr;		//エリア内の細かいグラフ管理クラス
+			//std::shared_ptr<GraphAstar> m_areaGraphAstar;		//エリア間のグラフ管理クラス
+			//std::shared_ptr<GraphAstar> m_inAreaGraphAstar;		//エリア内の細かいグラフ管理クラス
+
+			std::shared_ptr<GraphAstar> m_baseAstar;			//Astar管理をするグラフを渡す。(一番親のグラフ)
+			//GraphAstarMap m_childAstarMap;						//Astarの子クラスを管理するクラス。
+
+			//GraphAstarMap m_astarMap;	//グラフのマップ(0をエリア、1をエリア内、2をさらに細かく分けた場合などに使う。)
 
 			//デバック用----------------------------------------------------------------
 
@@ -325,12 +330,7 @@ namespace basecross {
 			Factory_Parametor GetFactoryParametor() const noexcept;
 
 			/// <summary>
-			/// エリア間のAstarグラフを取得する。
-			/// </summary>
-			std::shared_ptr<GraphAstar> GetAreaGraphAstar() const noexcept;
-
-			/// <summary>
-			/// Astar用のグラフを取得
+			/// Astar用のグラフを取得(将来的に削除)
 			/// </summary>
 			/// <returns></returns>
 			std::shared_ptr<GraphAstar> GetGraphAstar() const noexcept;
