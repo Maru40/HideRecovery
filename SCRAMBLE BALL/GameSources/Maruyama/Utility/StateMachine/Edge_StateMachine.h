@@ -143,6 +143,14 @@ namespace basecross {
 				return m_priority;
 			}
 
+			_NODISCARD EnumType GetFromType() const noexcept {
+				return static_cast<EnumType>(EdgeBase::GetFromIndex());
+			}
+
+			_NODISCARD EnumType GetToType() const noexcept {
+				return static_cast<EnumType>(EdgeBase::GetToIndex());
+			}
+
 			/// <summary>
 			/// XVI—¹‚É‘JˆÚ”»’f‚·‚é‚©‚Ç‚¤‚©‚ğİ’è
 			/// </summary>
