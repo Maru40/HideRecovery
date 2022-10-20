@@ -40,8 +40,6 @@ namespace basecross {
 
 		std::stack<std::shared_ptr<NavGraphNode>> m_route;	//生成したルート
 
-		std::vector<int> m_debugIndices; //デバッグ用のインデックス
-
 	public:
 		/// <summary>
 		/// コンストラクタ
