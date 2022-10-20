@@ -1186,6 +1186,15 @@
     <Filter Include="Watanabe\Stage\ResultStage">
       <UniqueIdentifier>{eff7db8b-3a7b-47b5-bf5b-5ded9037b0f4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\Stage\AdvStageBase">
+      <UniqueIdentifier>{2a534e17-aaa1-4b60-970f-2e71bf312547}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\Utility\AdvRenderer">
+      <UniqueIdentifier>{d5bcce4f-725f-4d34-9d86-29e594e12789}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\Shader\PostProcess">
+      <UniqueIdentifier>{28154e25-6a94-4bb9-ac93-8ac47a7b4856}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2217,6 +2226,15 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Stage\ResultStage.h">
       <Filter>Watanabe\Stage\ResultStage</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Stage\AdvStageBase.h">
+      <Filter>Watanabe\Stage\AdvStageBase</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\AdvRenderer.h">
+      <Filter>Watanabe\Utility\AdvRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\PostProcess.h">
+      <Filter>Watanabe\Shader\PostProcess</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -3151,6 +3169,15 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Stage\ResultStage.cpp">
       <Filter>Watanabe\Stage\ResultStage</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Stage\AdvStageBase.cpp">
+      <Filter>Watanabe\Stage\AdvStageBase</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Utility\AdvRenderer.cpp">
+      <Filter>Watanabe\Utility\AdvRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\PostProcess.cpp">
+      <Filter>Watanabe\Shader\PostProcess</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
