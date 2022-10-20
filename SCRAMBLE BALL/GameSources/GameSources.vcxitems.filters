@@ -1177,6 +1177,9 @@
     <Filter Include="Maruyama\Enemy\Component\ImpactMap\Astar\NavGraphNode\AstarNavGraphNode">
       <UniqueIdentifier>{63db5895-8265-452f-b0ed-3ab51c38333f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Enemy\Component\EachEnemy\Common\Stator\State\SearchBall">
+      <UniqueIdentifier>{09e9ec99-82e6-41fd-8e0f-589ebe35ce7e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2205,6 +2208,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\AstarNavGraphNode.h">
       <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\NavGraphNode\AstarNavGraphNode</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Stator\State\EnemyStateNode_SearchBall.h">
+      <Filter>Maruyama\Enemy\Component\EachEnemy\Common\Stator\State\SearchBall</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -3136,6 +3142,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\AstarNavGraphNode.cpp">
       <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\NavGraphNode\AstarNavGraphNode</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Stator\State\EnemyStateNode_SearchBall.cpp">
+      <Filter>Maruyama\Enemy\Component\EachEnemy\Common\Stator\State\SearchBall</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
