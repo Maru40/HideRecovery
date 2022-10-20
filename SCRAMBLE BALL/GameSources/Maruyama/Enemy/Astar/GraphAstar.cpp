@@ -35,7 +35,7 @@ namespace basecross {
 
 	GraphAstar::GraphAstar(const std::shared_ptr<GraphType>& graph) :
 		m_baseGraph(graph),
-		m_areaIndexGraph(new AstarGraph(true))
+		m_areaGraph(new AstarGraph(true))
 	{}
 
 	void GraphAstar::SearchAstarStart(const std::shared_ptr<GameObject>& self, const std::shared_ptr<GameObject>& target) {
@@ -84,7 +84,7 @@ namespace basecross {
 		auto selfNode = SearchNearAreaNode(selfPosition);
 		auto targetNode = SearchNearAreaNode(targetPosition);
 
-		SearchAstarStart(selfNode, targetNode, m_areaIndexGraph);
+		SearchAstarStart(selfNode, targetNode, m_areaGraph);
 
 		return GetRouteAreaIndex();
 	}
@@ -122,10 +122,10 @@ namespace basecross {
 			auto centerPosition = graph->CalculateCenterPosition();	//中心位置を設定する。
 
 			//本来は専用の別関数で行いたい処理。
-			m_areaIndexGraph->AddNode(std::make_shared<NavGraphNode>(index, centerPosition, maru::ImpactData(index)));	//エリアインデックスグラフにも追加。
+			m_areaGraph->AddNode(std::make_shared<NavGraphNode>(index, centerPosition, maru::ImpactData(index)));	//エリアインデックスグラフにも追加。
 		}
 
-		AddEdges(m_areaIndexGraph);	//上記と同じく別の関数の処理で行いたい処理。
+		AddEdges(m_areaGraph);	//上記と同じく別の関数の処理で行いたい処理。
 	}
 
 	int GraphAstar::SearchNearAreaIndex(const Vec3& position) {
@@ -136,7 +136,7 @@ namespace basecross {
 		std::shared_ptr<NavGraphNode> result = nullptr;
 
 		float minRange = FLT_MAX;
-		for (auto node : m_areaIndexGraph->GetNodes()) {
+		for (auto node : m_areaGraph->GetNodes()) {
 			auto toVec = position - node->GetPosition();
 			auto range = toVec.length();
 			if (range < minRange) {

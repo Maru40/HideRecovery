@@ -33,10 +33,9 @@ namespace basecross {
 
 	private:
 
-		std::shared_ptr<GraphType> m_baseGraph = nullptr;	//グラフのデータ
+		std::shared_ptr<GraphType> m_areaGraph = nullptr;	//エリアインデックス用のグラフ生成
+		std::shared_ptr<GraphType> m_baseGraph = nullptr;	//グラフのデータ(エリア内のグラフデータ)
 		GraphMap m_graphMap;								//グラフのエリアインデックスごとに分けたマップ
-		
-		std::shared_ptr<GraphType> m_areaIndexGraph;		//エリアインデックス用のグラフ生成
 
 		std::stack<std::shared_ptr<NavGraphNode>> m_route;	//生成したルート
 
