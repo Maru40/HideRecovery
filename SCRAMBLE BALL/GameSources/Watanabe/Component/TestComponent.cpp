@@ -8,11 +8,12 @@ namespace basecross {
 	}
 	void TestComponent::OnUpdate() {
 		if (m_fOnUpdate)
-			m_fOnUpdate();
+			m_fOnUpdate(m_delta);
+		m_delta += App::GetApp()->GetElapsedTime();
 	}
 
-	void TestComponent::SetOnCreateFunction(Func func) { m_fOnCreate = func; }
-	void TestComponent::SetOnUpdateFunction(Func func) { m_fOnUpdate = func; }
+	void TestComponent::SetOnCreateFunction(CreateFunc func) { m_fOnCreate = func; }
+	void TestComponent::SetOnUpdateFunction(UpdateFunc func) { m_fOnUpdate = func; }
 
 	void TestComponent::ResetOnCreateFunction() { m_fOnCreate = nullptr; }
 	void TestComponent::ResetOnUpdateFunction() { m_fOnUpdate = nullptr; }

@@ -13,5 +13,6 @@ namespace basecross {
 
 		void OnCreate()override;
 		void OnUpdate()override;
+		void SetSpeed(float speed) { m_speed = speed; }
 	};
 }

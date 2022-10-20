@@ -13,8 +13,8 @@ namespace basecross {
 		shared_ptr<MeshResource> m_OriginalMeshResource;
 		//オリジナルメッシュを使うかどうか
 		bool m_UseOriginalMeshResource;
-		//テクスチャリソース
-		weak_ptr<TextureResource> m_TextureResource;
+		//テクスチャリソース（キー,リソース）
+		map<TextureType, weak_ptr<TextureResource>> m_TextureResources;
 		//エミッシブ色
 		Col4 m_Emissive;
 		// デフューズ色
@@ -234,21 +234,24 @@ namespace basecross {
 		this->SetMeshResource(App::GetApp()->GetResource<MeshResource>(MeshKey));
 	}
 
-	void AdvBaseDraw::SetTextureResource(const shared_ptr<TextureResource>& TextureRes) {
-		pImpl->m_TextureResource = TextureRes;
+	void AdvBaseDraw::SetTextureResource(const shared_ptr<TextureResource>& TextureRes, TextureType type) {
+		pImpl->m_TextureResources[type] = TextureRes;
 	}
 
-	void AdvBaseDraw::SetTextureResource(const wstring& TextureKey) {
-		this->SetTextureResource(App::GetApp()->GetResource<TextureResource>(TextureKey));
+	void AdvBaseDraw::SetTextureResource(const wstring& TextureKey, TextureType type) {
+		this->SetTextureResource(App::GetApp()->GetResource<TextureResource>(TextureKey), type);
 	}
 
-	shared_ptr<TextureResource> AdvBaseDraw::GetTextureResource() const {
-		//テクスチャがなければnullを返す
-		auto shptr = pImpl->m_TextureResource.lock();
-		if (shptr) {
-			return shptr;
+	shared_ptr<TextureResource> AdvBaseDraw::GetTextureResource(TextureType type) const {
+		// テクスチャがなければnullを返す
+		if (pImpl->m_TextureResources.count(type) == 0) {
+			return nullptr;
 		}
-		return nullptr;
+		return pImpl->m_TextureResources[type].lock();
+	}
+
+	map<TextureType, weak_ptr<TextureResource>> AdvBaseDraw::GetAllTextureResource() const {
+		return pImpl->m_TextureResources;
 	}
 
 	shared_ptr<MultiMeshResource> AdvBaseDraw::GetMultiMeshResource() const {

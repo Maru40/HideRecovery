@@ -7,6 +7,12 @@
 #include "stdafx.h"
 
 namespace basecross {
+	enum class TextureType {
+		Default,
+		ToonRamp,
+		Normal
+	};
+
 	struct AdvConstants {
 		// ワールド行列
 		Mat4x4 World;
@@ -39,7 +45,11 @@ namespace basecross {
 			Diffuse = Col4(1.0f, 1.0f, 1.0f, 1.0f);
 		};
 	};
+
 	class AdvBaseDraw : public DrawComponent {
+	private:
+		struct Impl;
+		unique_ptr<Impl> pImpl;
 	protected:
 		explicit AdvBaseDraw(const shared_ptr<GameObject>& GameObjectPtr);
 		virtual ~AdvBaseDraw();
@@ -129,8 +139,13 @@ namespace basecross {
 			RenderState->SetDepthStencilState(pD3D11DeviceContext, GetDepthStencilState());
 			// テクスチャとサンプラー
 			if (shTex) {
-				pD3D11DeviceContext->PSSetShaderResources(0, 1, shTex->GetShaderResourceView().GetAddressOf());
-				// サンプラーを設定
+				// いずれはまとめてセットしたい
+				for (const auto& textureMap : GetAllTextureResource()) {
+					const int& index = static_cast<size_t>(textureMap.first);
+					const auto& texture = textureMap.second;
+					pD3D11DeviceContext->PSSetShaderResources(index, 1, texture.lock()->GetShaderResourceView().GetAddressOf());
+				}
+				//サンプラーを設定
 				RenderState->SetSamplerState(pD3D11DeviceContext, GetSamplerState(), 0);
 			}
 			else {
@@ -353,6 +368,12 @@ namespace basecross {
 					if (IsModelTextureEnabled()) {
 						// モデルのテクスチャが有効
 						pD3D11DeviceContext->PSSetShaderResources(0, 1, m.m_TextureResource->GetShaderResourceView().GetAddressOf());
+						// いずれはまとめてセットしたい
+						for (const auto& textureMap : GetAllTextureResource()) {
+							const int& index = static_cast<size_t>(textureMap.first);
+							const auto& texture = textureMap.second;
+							pD3D11DeviceContext->PSSetShaderResources(index, 1, texture.lock()->GetShaderResourceView().GetAddressOf());
+						}
 					}
 					else {
 						// モデルのテクスチャが無効
@@ -466,17 +487,22 @@ namespace basecross {
 		/// テクスチャリソースの設定
 		/// </summary>
 		/// <param name="extureRes">テクスチャリソース</param>
-		void SetTextureResource(const shared_ptr<TextureResource>& textureRes);
+		/// <param name="type">テクスチャタイプ</param>
+		void SetTextureResource(const shared_ptr<TextureResource>& textureRes, TextureType type = TextureType::Default);
 		/// <summary>
 		/// テクスチャリソースの設定
 		/// </summary>
 		/// <param name="textureKey">登録されているテクスチャキー</param>
-		void SetTextureResource(const wstring& textureKey);
+		/// <param name="type">テクスチャタイプ</param>
+		void SetTextureResource(const wstring& textureKey, TextureType type = TextureType::Default);
+
 		/// <summary>
 		/// テクスチャリソースの取得
 		/// </summary>
+		/// <param name="type">テクスチャタイプ</param>
 		/// <returns>テクスチャリソース</returns>
-		shared_ptr<TextureResource> GetTextureResource() const;
+		shared_ptr<TextureResource> GetTextureResource(TextureType type = TextureType::Default) const;
+		map<TextureType, weak_ptr<TextureResource>> GetAllTextureResource() const;
 		/// <summary>
 		/// マルチメッシュリソースを得る
 		/// </summary>
@@ -739,8 +765,5 @@ namespace basecross {
 		/// <param name="RetIndex">衝突していた場合の三角形の位置</param>
 		/// <returns>衝突していたらtrue</returns>
 		bool HitTestSkinedMeshSphereTriangles(const SPHERE& StartSp, const SPHERE& EndSp, Vec3& HitPoint, TRIANGLE& RetTri, size_t& RetIndex);
-	private:
-		struct Impl;
-		unique_ptr<Impl> pImpl;
 	};
 }

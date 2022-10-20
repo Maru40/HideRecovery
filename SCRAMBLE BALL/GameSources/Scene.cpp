@@ -12,7 +12,7 @@
 #include "Watanabe/Stage/TitleStage.h"
 //#include "StageSelect.h"
 #include "Watanabe/TestStage/WatanabeStage.h"
-#include "Watanabe/TestStage/MatchingUILayoutStage.h"
+#include "Watanabe/TestStage/TestShaderStage.h"
 #include "Itabashi/OnlineMatchStage.h"
 #include "Maruyama/Stage/MapShotStage.h"
 #include "Maruyama/Stage/MaruTestStage.h"
@@ -68,13 +68,13 @@ namespace basecross {
 			//ResetActiveStage<GameStage>();
 		}
 		else if (event->m_MsgStr == L"ToLoadStage") {
-			ResetActiveStage<LoadStage>(L"ToTitleStage");
+			ResetActiveStage<LoadStage>(L"ToWatanabeStage");
 		}
 		else if (event->m_MsgStr == L"ToMainStage") {
 			ResetActiveStage<MainStage>();
 		}
 		else if (event->m_MsgStr == L"ToWatanabeStage") {
-			ResetActiveStage<MatchingUILayoutStage>();
+			ResetActiveStage<TestShaderStage>();
 		}
 		else if (event->m_MsgStr == L"ToResultStage") {
 			ResetActiveStage<ResultStage>();

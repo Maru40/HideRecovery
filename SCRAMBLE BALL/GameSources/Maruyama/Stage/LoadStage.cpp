@@ -64,6 +64,9 @@ namespace basecross
 
 		ResourceLoadData(L"AButton_TX", L"AButton.png"),
 
+		// トゥーンシェーダー用のランプテクスチャ
+		ResourceLoadData(L"ToonTex_TX", L"ToonTex.png"),
+
 		//RampTex
 		ResourceLoadData(L"Ramp_Rock_TX", L"RampTex_Rock.png"),
 

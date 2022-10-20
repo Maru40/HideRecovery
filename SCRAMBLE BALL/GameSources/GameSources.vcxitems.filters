@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0"
+  xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Headers">
       <UniqueIdentifier>{4b0a624a-610d-4bc6-b311-2b02a781cdf9}</UniqueIdentifier>
@@ -1174,6 +1175,15 @@
     <Filter Include="Maruyama\Enemy\Component\ImpactMap\Astar\GraphAstar\OpenDataHandler">
       <UniqueIdentifier>{50e6c0a7-8e6b-4970-b63e-7e8066280e3d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\TestStage\MatchingUILayoutStage">
+      <UniqueIdentifier>{86633793-2bc2-4280-8fae-eb2f85f24693}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\TestStage\WatanabeStage">
+      <UniqueIdentifier>{0f76430f-8c57-4948-8095-fb889d09cdcd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\TestStage\TestShaderStage">
+      <UniqueIdentifier>{b6353766-d0ed-44c0-8fd6-8dd04dc7db36}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1208,9 +1218,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\DebugClass\Debug.h">
       <Filter>Watanabe\DebugClass</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\WatanabeStage.h">
-      <Filter>Watanabe\TestStage</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\PlayerOnlineController.h">
       <Filter>Itabashi\Online\PlayerOnlineController</Filter>
@@ -1406,9 +1413,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\UIObjects.h">
       <Filter>Watanabe\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\MatchingUILayoutStage.h">
-      <Filter>Watanabe\TestStage</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\UIObjectCSVBuilder.h">
       <Filter>Watanabe\UI\UIObjectCSVBuilder</Filter>
@@ -2199,6 +2203,18 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\OpenDataHandler.h">
       <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\GraphAstar\OpenDataHandler</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\MatchingUILayoutStage.h">
+      <Filter>Watanabe\TestStage\MatchingUILayoutStage</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\WatanabeStage.h">
+      <Filter>Watanabe\TestStage\WatanabeStage</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\TestShaderStage.h">
+      <Filter>Watanabe\TestStage\TestShaderStage</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\StaticModelDraw.h">
+      <Filter>Watanabe\Shader\ModelDraw</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2230,9 +2246,6 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\DebugClass\Debug.cpp">
       <Filter>Watanabe\DebugClass</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\WatanabeStage.cpp">
-      <Filter>Watanabe\TestStage</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\PlayerOnlineController.cpp">
       <Filter>Itabashi\Online\PlayerOnlineController</Filter>
@@ -2407,9 +2420,6 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\UIObjectBase.cpp">
       <Filter>Watanabe\UI\UIObjectBase</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\MatchingUILayoutStage.cpp">
-      <Filter>Watanabe\TestStage</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\UIObjectCSVBuilder.cpp">
       <Filter>Watanabe\UI\UIObjectCSVBuilder</Filter>
@@ -3127,6 +3137,18 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\OpenDataHandler.cpp">
       <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\GraphAstar\OpenDataHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\MatchingUILayoutStage.cpp">
+      <Filter>Watanabe\TestStage\MatchingUILayoutStage</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\WatanabeStage.cpp">
+      <Filter>Watanabe\TestStage\WatanabeStage</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\TestShaderStage.cpp">
+      <Filter>Watanabe\TestStage\TestShaderStage</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\StaticModelDraw.cpp">
+      <Filter>Watanabe\Shader\ModelDraw</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
