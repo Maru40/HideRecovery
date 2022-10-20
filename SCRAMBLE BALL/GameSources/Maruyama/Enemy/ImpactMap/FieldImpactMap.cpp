@@ -71,8 +71,8 @@ namespace basecross {
 
 			m_impactMap->ClearNodes();  //ノードのクリア
 			m_impactMap->ClearEdges();  //エッジのクリア
-			const float IntervalRange = m_param.intervalRange; //影響マップの各ノードの距離
-			SettingImpactMap(m_floors, IntervalRange);
+			const float IntervalRange = m_param.intervalRange;	//影響マップの各ノードの距離
+			SettingImpactMap(m_floors, IntervalRange);			//影響マップのセッティング
 
 			m_impactMap->CreateDebugDraw(false);		//デバッグデータの生成
 
