@@ -1174,6 +1174,9 @@
     <Filter Include="Maruyama\Enemy\Component\ImpactMap\Astar\GraphAstar\OpenDataHandler">
       <UniqueIdentifier>{50e6c0a7-8e6b-4970-b63e-7e8066280e3d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Enemy\Component\ImpactMap\Astar\NavGraphNode\AstarNavGraphNode">
+      <UniqueIdentifier>{63db5895-8265-452f-b0ed-3ab51c38333f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2199,6 +2202,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\OpenDataHandler.h">
       <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\GraphAstar\OpenDataHandler</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\AstarNavGraphNode.h">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\NavGraphNode\AstarNavGraphNode</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -3127,6 +3133,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\OpenDataHandler.cpp">
       <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\GraphAstar\OpenDataHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\AstarNavGraphNode.cpp">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\NavGraphNode\AstarNavGraphNode</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
