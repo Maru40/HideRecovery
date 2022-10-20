@@ -39,6 +39,8 @@ namespace basecross {
 			m_behaviorTree->AddSelecter(BehaviorType::ButtleSelecter);
 			//攻撃セレクター
 			m_behaviorTree->AddSelecter(BehaviorType::AttackSelecter);
+
+
 		}
 
 		void AIPlayerBehaviorTree::CreateEdge() {
