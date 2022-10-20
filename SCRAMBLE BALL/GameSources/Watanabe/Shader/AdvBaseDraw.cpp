@@ -13,8 +13,8 @@ namespace basecross {
 		shared_ptr<MeshResource> m_OriginalMeshResource;
 		//オリジナルメッシュを使うかどうか
 		bool m_UseOriginalMeshResource;
-		//テクスチャリソース
-		vector<weak_ptr<TextureResource>> m_TextureResources;
+		//テクスチャリソース（キー,リソース）
+		map<TextureType, weak_ptr<TextureResource>> m_TextureResources;
 		//エミッシブ色
 		Col4 m_Emissive;
 		// デフューズ色
@@ -234,34 +234,23 @@ namespace basecross {
 		this->SetMeshResource(App::GetApp()->GetResource<MeshResource>(MeshKey));
 	}
 
-	void AdvBaseDraw::SetTextureResource(const shared_ptr<TextureResource>& TextureRes, size_t index) {
-		if (pImpl->m_TextureResources.size() >= index) {
-			pImpl->m_TextureResources.push_back(TextureRes);
-		}
-		else {
-			pImpl->m_TextureResources[index] = TextureRes;
-		}
+	void AdvBaseDraw::SetTextureResource(const shared_ptr<TextureResource>& TextureRes, TextureType type) {
+		pImpl->m_TextureResources[type] = TextureRes;
 	}
 
-	void AdvBaseDraw::SetTextureResource(const wstring& TextureKey, size_t index) {
-		this->SetTextureResource(App::GetApp()->GetResource<TextureResource>(TextureKey), index);
+	void AdvBaseDraw::SetTextureResource(const wstring& TextureKey, TextureType type) {
+		this->SetTextureResource(App::GetApp()->GetResource<TextureResource>(TextureKey), type);
 	}
 
-	shared_ptr<TextureResource> AdvBaseDraw::GetTextureResource(size_t index) const {
-		// インデックスが要素より大きければnullを返す
-		if (pImpl->m_TextureResources.size() <= index) {
+	shared_ptr<TextureResource> AdvBaseDraw::GetTextureResource(TextureType type) const {
+		// テクスチャがなければnullを返す
+		if (pImpl->m_TextureResources.count(type) == 0) {
 			return nullptr;
 		}
-
-		//テクスチャがなければnullを返す
-		auto shptr = pImpl->m_TextureResources[index].lock();
-		if (shptr) {
-			return shptr;
-		}
-		return nullptr;
+		return pImpl->m_TextureResources[type].lock();
 	}
 
-	vector<weak_ptr<TextureResource>> AdvBaseDraw::GetAllTextureResource() const {
+	map<TextureType, weak_ptr<TextureResource>> AdvBaseDraw::GetAllTextureResource() const {
 		return pImpl->m_TextureResources;
 	}
 

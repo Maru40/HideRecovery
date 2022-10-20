@@ -54,7 +54,7 @@ namespace basecross {
 		auto drawComp = player->AddComponent<BoneModelDraw>();
 		drawComp->SetMultiMeshResource(L"Player_Mesh");
 		// トゥーンシェーダー用のランプテクスチャ
-		drawComp->SetTextureResource(L"ToonTex_TX", 0);
+		drawComp->SetTextureResource(L"ToonTex_TX", TextureType::ToonRamp);
 
 		auto shadow = player->AddComponent<Shadowmap>();
 		shadow->SetMultiMeshResource(L"Player_Mesh");
@@ -79,9 +79,9 @@ namespace basecross {
 		auto drawComp = sphere->AddComponent<StaticModelDraw>();
 		drawComp->SetMeshResource(L"DEFAULT_SPHERE");
 		// 今現在テクスチャが無いとトゥーンシェーダーが実行されない
-		drawComp->SetTextureResource(L"Floor_TX", 0);
+		drawComp->SetTextureResource(L"Floor_TX");
 		// トゥーンシェーダー用のランプテクスチャ
-		drawComp->SetTextureResource(L"ToonTex_TX", 1);
+		drawComp->SetTextureResource(L"ToonTex_TX", TextureType::ToonRamp);
 
 		auto tex = drawComp->GetAllTextureResource();
 

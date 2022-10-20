@@ -7,6 +7,12 @@
 #include "stdafx.h"
 
 namespace basecross {
+	enum TextureType {
+		Default,
+		ToonRamp,
+		Normal
+	};
+
 	struct AdvConstants {
 		// ワールド行列
 		Mat4x4 World;
@@ -39,6 +45,7 @@ namespace basecross {
 			Diffuse = Col4(1.0f, 1.0f, 1.0f, 1.0f);
 		};
 	};
+
 	class AdvBaseDraw : public DrawComponent {
 	private:
 		struct Impl;
@@ -133,10 +140,10 @@ namespace basecross {
 			// テクスチャとサンプラー
 			if (shTex) {
 				// いずれはまとめてセットしたい
-				size_t index = 0;
-				for (auto texture : GetAllTextureResource()) {
+				for (const auto& textureMap : GetAllTextureResource()) {
+					const int& index = static_cast<size_t>(textureMap.first);
+					const auto& texture = textureMap.second;
 					pD3D11DeviceContext->PSSetShaderResources(index, 1, texture.lock()->GetShaderResourceView().GetAddressOf());
-					index++;
 				}
 			}
 			else {
@@ -360,11 +367,10 @@ namespace basecross {
 						// モデルのテクスチャが有効
 						pD3D11DeviceContext->PSSetShaderResources(0, 1, m.m_TextureResource->GetShaderResourceView().GetAddressOf());
 						// いずれはまとめてセットしたい
-						size_t index = 0;
-						for (auto texture : GetAllTextureResource()) {
-							// 一枚目は上でセットしているので0番目を1にセットする
-							pD3D11DeviceContext->PSSetShaderResources(index + 1, 1, texture.lock()->GetShaderResourceView().GetAddressOf());
-							index++;
+						for (const auto& textureMap : GetAllTextureResource()) {
+							const int& index = static_cast<size_t>(textureMap.first);
+							const auto& texture = textureMap.second;
+							pD3D11DeviceContext->PSSetShaderResources(index, 1, texture.lock()->GetShaderResourceView().GetAddressOf());
 						}
 					}
 					else {
@@ -479,21 +485,22 @@ namespace basecross {
 		/// テクスチャリソースの設定
 		/// </summary>
 		/// <param name="extureRes">テクスチャリソース</param>
-		/// <param name="index">インデックス</param>
-		void SetTextureResource(const shared_ptr<TextureResource>& textureRes, size_t index);
+		/// <param name="type">テクスチャタイプ</param>
+		void SetTextureResource(const shared_ptr<TextureResource>& textureRes, TextureType type = TextureType::Default);
 		/// <summary>
 		/// テクスチャリソースの設定
 		/// </summary>
 		/// <param name="textureKey">登録されているテクスチャキー</param>
-		/// <param name="index">インデックス</param>
-		void SetTextureResource(const wstring& textureKey, size_t index);
+		/// <param name="type">テクスチャタイプ</param>
+		void SetTextureResource(const wstring& textureKey, TextureType type = TextureType::Default);
+
 		/// <summary>
 		/// テクスチャリソースの取得
 		/// </summary>
-		/// <param name="index">インデックス</param>
+		/// <param name="type">テクスチャタイプ</param>
 		/// <returns>テクスチャリソース</returns>
-		shared_ptr<TextureResource> GetTextureResource(size_t index = 0) const;
-		vector<weak_ptr<TextureResource>> GetAllTextureResource() const;
+		shared_ptr<TextureResource> GetTextureResource(TextureType type = TextureType::Default) const;
+		map<TextureType, weak_ptr<TextureResource>> GetAllTextureResource() const;
 		/// <summary>
 		/// マルチメッシュリソースを得る
 		/// </summary>
