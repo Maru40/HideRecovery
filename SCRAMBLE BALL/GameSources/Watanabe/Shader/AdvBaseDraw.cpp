@@ -249,7 +249,7 @@ namespace basecross {
 
 	shared_ptr<TextureResource> AdvBaseDraw::GetTextureResource(size_t index) const {
 		// インデックスが要素より大きければnullを返す
-		if (pImpl->m_TextureResources.size() >= index) {
+		if (pImpl->m_TextureResources.size() <= index) {
 			return nullptr;
 		}
 

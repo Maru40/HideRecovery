@@ -135,7 +135,6 @@ namespace basecross {
 				// いずれはまとめてセットしたい
 				size_t index = 0;
 				for (auto texture : GetAllTextureResource()) {
-					// 一枚目は上でセットしているので0番目を1にセットする
 					pD3D11DeviceContext->PSSetShaderResources(index, 1, texture.lock()->GetShaderResourceView().GetAddressOf());
 					index++;
 				}
