@@ -39,12 +39,11 @@ namespace basecross {
 		///	ターゲットの近くまでAstarを利用して移動するタスク
 		//--------------------------------------------------------------------------------------
 
-		MoveAstar::MoveAstar(const std::shared_ptr<Enemy::EnemyBase>& owner, const std::function<Parametor()>& getBlackBoardFunc) :
-			TaskNodeBase_WithBlackBoard(owner, getBlackBoardFunc),
-			//m_param(parametor),
+		MoveAstar::MoveAstar(const std::shared_ptr<Enemy::EnemyBase>& owner, const Parametor* paramPtr) :
+			TaskNodeBase(owner),
+			m_param(paramPtr),
 			m_taskList(new TaskList<TaskEnum>())
 		{
-			InitializeParametor();
 			DefineTask();
 
 			m_transform = GetOwner()->GetGameObject()->GetComponent<Transform>();
@@ -52,11 +51,10 @@ namespace basecross {
 		}
 
 		void MoveAstar::OnStart() {
-			auto param = GetBlackBoard();
 			SelectTask();	//タスクの選択
 
 			CalculateMoveAreaRouteQueue();	//徘徊エリアルートの取得
-			param.movePositionsParam->positions = CalculateMovePositions();	//徘徊移動先を設定
+			m_param->movePositionsParam->positions = CalculateMovePositions();	//徘徊移動先を設定
 
 			Debug::GetInstance()->Log(L"SearchStart");
 		}
@@ -78,10 +76,9 @@ namespace basecross {
 		}
 
 		void MoveAstar::DefineTask() {
-			auto param = GetBlackBoard();
 			auto ownerObject = GetOwner()->GetGameObject();
 
-			m_taskList->DefineTask(TaskEnum::Move, std::make_shared<Task_MovePositions>(ownerObject, param.movePositionsParam));
+			m_taskList->DefineTask(TaskEnum::Move, std::make_shared<Task_MovePositions>(ownerObject, m_param->movePositionsParam));
 		}
 
 		void MoveAstar::SelectTask() {
@@ -99,8 +96,7 @@ namespace basecross {
 				return;
 			}
 
-			auto& param = GetRefBlackBoard();
-			param.movePositionsParam->positions = CalculateMovePositions();	//新しいポジションに変更
+			m_param->movePositionsParam->positions = CalculateMovePositions();	//新しいポジションに変更
 
 			SelectTask();				//タスクの再始動
 		}
@@ -153,12 +149,6 @@ namespace basecross {
 			}
 
 			return targetManager->GetTargetPosition();	//基本ターゲット管理からの取得で検索できるようにする。
-		}
-
-		void MoveAstar::InitializeParametor() {
-			auto& param = GetRefBlackBoard();
-
-			param.movePositionsParam->moveParamPtr->speed = 10.0f;
 		}
 
 		//--------------------------------------------------------------------------------------

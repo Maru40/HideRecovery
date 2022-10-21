@@ -42,13 +42,13 @@ namespace basecross {
 		//--------------------------------------------------------------------------------------
 		///	ターゲットの近くまでAstarを利用して移動するタスク
 		//--------------------------------------------------------------------------------------
-		class MoveAstar : public basecross::TaskNodeBase_WithBlackBoard<Enemy::EnemyBase, MoveAstar_Parametor>
+		class MoveAstar : public basecross::TaskNodeBase<Enemy::EnemyBase>
 		{
 		public:
 			using Parametor = MoveAstar_Parametor;
 
 		private:
-			//const Parametor* m_param;						//パラメータ
+			const Parametor* m_param;						//パラメータ
 
 			std::unique_ptr<TaskList<TaskEnum>> m_taskList;	//タスクリスト
 
@@ -58,7 +58,7 @@ namespace basecross {
 			std::weak_ptr<TargetManager> m_targetManager;
 
 		public:
-			MoveAstar(const std::shared_ptr<Enemy::EnemyBase>& owner, const std::function<Parametor()>& getBlackBoardFunc);
+			MoveAstar(const std::shared_ptr<Enemy::EnemyBase>& owner, const Parametor* paramPtr);
 
 			virtual ~MoveAstar() = default;
 
@@ -93,11 +93,6 @@ namespace basecross {
 			/// </summary>
 			/// <returns>徘徊移動先を取得</returns>
 			Vec3 CalculateMoveTargetPosition();
-
-			/// <summary>
-			/// パラメータの初期化
-			/// </summary>
-			void InitializeParametor();
 
 		public:
 
