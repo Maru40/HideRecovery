@@ -9,6 +9,7 @@
 #include "stdafx.h"
 #include "Project.h"
 
+#include "Watanabe/DebugClass/Debug.h"
 #include "Maruyama/DebugClass/Object/DebugObject.h"
 
 namespace basecross {
@@ -118,23 +119,31 @@ namespace basecross {
 		}
 	};
 
-	template<class T, class TaskList>
-	class TaskNodeBase_OwnTaskList : public TaskNodeBase<T>
+	template<class OwnerType, class BlackBoard>
+	class TaskNodeBase_WithBlackBoard : public TaskNodeBase<OwnerType>
 	{
-		std::weak_ptr<TaskList> m_taskList;	//タスクリスト
+		std::function<BlackBoard()> m_getBlackBoardFunction = nullptr;
 
 	public:
-		TaskNodeBase_OwnTaskList(const std::shared_ptr<T>& owner, const std::shared_ptr<TaskList>& taskList):
-			TaskNodeBase(owner), m_taskList(taskList)
+		TaskNodeBase_WithBlackBoard(
+			const std::shared_ptr<OwnerType>& owner,
+			const std::function<BlackBoard()>& getBlackBoardFunction
+		) :
+			TaskNodeBase<OwnerType>(owner),
+			m_getBlackBoardFunction(getBlackBoardFunction)
 		{}
 
 		/// <summary>
-		/// タスクリストの取得
+		/// ブラックボードの取得
 		/// </summary>
-		/// <returns>タスクリスト</returns>
-		std::shared_ptr<TaskList> GetTaskList() const {
-			return m_taskList.lock();
-		}
+		/// <returns>ブラックボード</returns>
+		BlackBoard GetBlackBoard() const { return m_getBlackBoardFunction(); }
+
+		/// <summary>
+		/// ブラックボードの参照を取得
+		/// </summary>
+		/// <returns>ブラックボードの参照</returns>
+		BlackBoard& GetRefBlackBoard() { return m_getBlackBoardFunction(); }
 	};
 
 	//--------------------------------------------------------------------------------------
@@ -308,7 +317,8 @@ namespace basecross {
 		/// <param name="type">タスクの種類</param>
 		void AddTask(const EnumType type) {
 			if (!m_defineTaskMap.count(type)) {
-				DebugObject::AddString(L"タスクが登録されていません");
+				Debug::GetInstance()->Log(L"タスクが登録されていません。");
+				//DebugObject::AddString(L"タスクが登録されていません");
 				return;
 			}
 

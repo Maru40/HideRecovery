@@ -113,6 +113,8 @@ namespace basecross {
 				m_transitionStruct(member)
 			{}
 
+			virtual ~StateMachine() = default;
+
 			/// <summary>
 			/// ノードの追加
 			/// </summary>
@@ -151,8 +153,8 @@ namespace basecross {
 			/// </summary>
 			/// <param name="type">ノードタイプ</param>
 			/// <returns>ノード</returns>
-			std::shared_ptr<NodeType> GetNode(const EnumType type) {
-				m_graph->GetNode(type);
+			std::shared_ptr<NodeType> GetNode(const EnumType type) const {
+				return m_graph->GetNode(type);
 			}
 
 			/// <summary>
@@ -167,7 +169,7 @@ namespace basecross {
 			/// 現在使用中のノードに設定しているエッジを取得
 			/// </summary>
 			/// <returns>エッジの取得</returns>
-			GraphBase::EdgeVector GetCurrentNodeEdges() const {
+			auto GetCurrentNodeEdges() const {
 				return m_graph->GetEdges(m_currentNodeType);
 			}
 
@@ -260,8 +262,8 @@ namespace basecross {
 			/// トリガーのリセット
 			/// </summary>
 			void TriggerReset() {
-				EdgeVectorMap edgesMap = GetEdgesMap();
-				for (std::pair<EnumType, EdgeVector> edgePair : edgesMap) {
+				auto edgesMap = m_graph->GetEdgesMap();
+				for (auto& edgePair : edgesMap) {
 					for (auto& edge : edgePair.second) {
 						edge->IsTransition(m_transitionStruct);
 					}

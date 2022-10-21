@@ -60,6 +60,14 @@ namespace basecross {
 		virtual ~SparseGraph() = default;
 
 		/// <summary>
+		/// ノードの数を取得する。
+		/// </summary>
+		/// <returns>ノードの数</returns>
+		int GetNumNode() const noexcept {
+			return m_nodes.size();
+		}
+
+		/// <summary>
 		/// 指定されたインデックスのノードを返す
 		/// </summary>
 		/// <param name="index">欲しいノードのインデックス</param>

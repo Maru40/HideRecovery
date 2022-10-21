@@ -23,6 +23,7 @@ namespace basecross {
 
 		public:
 			NodeBase();
+
 			NodeBase(const int index);
 
 			virtual ~NodeBase() = default;

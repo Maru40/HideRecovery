@@ -148,8 +148,6 @@ namespace basecross {
 			CreateNodes(astar);  //ノードの生成
 			CreateEdges(astar);  //エッジの生成
 
-			//astar->SettingGraphMapCenterPositions();	//それぞれのエリアのグラフの中心位置を設定する。
-
 			return astar;
 		}
 
@@ -186,8 +184,7 @@ namespace basecross {
 		ImpactMap::ImpactMap(const std::shared_ptr<Stage>& stage, const Factory_Parametor& parametor) :
 			m_stage(stage),
 			m_param(parametor), 
-			m_areaGraphAstar(new GraphAstar(std::make_shared<GraphAstar::GraphType>(true))),
-			m_astar(new GraphAstar(std::make_shared<GraphAstar::GraphType>(true)))
+			m_baseAstar(new GraphAstar(std::make_shared<GraphAstar::GraphType>(true)))
 		{
 			CreateImpactData();
 		}
@@ -207,7 +204,7 @@ namespace basecross {
 		void ImpactMap::CreateImpactData() {
 			auto factory = Factory_ImpactMap(m_param);
 			auto astar = factory.CreateGraphAstar();
-			m_astar = astar;
+			m_baseAstar = astar;
 		}
 
 		void ImpactMap::CreateImpactData(const Factory_Parametor& parametor) {
@@ -217,38 +214,39 @@ namespace basecross {
 
 		void ImpactMap::AddNodes(const Factory_Parametor& parametor) {
 			auto factory = Factory_ImpactMap(parametor);
-			factory.AddNodes(m_astar, parametor);
+			factory.AddNodes(m_baseAstar, parametor);
 		}
 
 		void ImpactMap::AddEdges(const Factory_Parametor& parametor) {
 			auto factory = Factory_ImpactMap(parametor);
-			factory.AddEdges(m_astar, parametor);
+			factory.AddEdges(m_baseAstar, parametor);
 		}
 
 		void ImpactMap::AddImpactData(const Factory_Parametor& parametor) {
+			//現在はこの関数からほとんどのノードを生成している。
 			AddNodes(parametor);
 			AddEdges(parametor);
 		}
 
 		void ImpactMap::ClearNodes() {
-			m_astar->ClearNodes();
+			m_baseAstar->ClearNodes();
 		}
 
 		void ImpactMap::ClearEdges() {
-			m_astar->ClearEdges();
+			m_baseAstar->ClearEdges();
 		}
 
 		std::vector<Vec3> ImpactMap::GetRoutePositons(const Vec3& selfPosition, const Vec3& targetPosition) {
-			m_astar->SearchAstarStart(selfPosition, targetPosition);
-			auto positions = m_astar->GetRoutePositions();
-			m_astar->ResetAstar();
+			m_baseAstar->SearchAstarStart(selfPosition, targetPosition);
+			auto positions = m_baseAstar->GetRoutePositions();
+			m_baseAstar->ResetAstar();
 			return positions;
 		}
 
 		std::vector<Vec3> ImpactMap::GetRoutePositions(const Vec3& selfPosition, const Vec3& targetPosition, const int areaIndex) {
-			m_astar->SearchAstarStart(selfPosition, targetPosition, areaIndex);
-			auto positions = m_astar->GetRoutePositions();
-			m_astar->ResetAstar();
+			m_baseAstar->SearchAstarStart(selfPosition, targetPosition, areaIndex);
+			auto positions = m_baseAstar->GetRoutePositions();
+			m_baseAstar->ResetAstar();
 			return positions;
 		}
 
@@ -271,7 +269,7 @@ namespace basecross {
 			auto impacterPosition = impacterTrans->GetPosition();
 			auto forward = impacterTrans->GetForward();
 
-			auto graph = m_astar->CreateCopyGraph();	//グラフのコピー
+			auto graph = m_baseAstar->CreateCopyGraph();	//グラフのコピー
 
 			auto nextNode = selfNode;
 			while (true) {
@@ -286,14 +284,14 @@ namespace basecross {
 
 					//ノードが視界内なら
 					if (eye->IsInEyeRange(toNode->GetPosition())) {
-						nodes.push_back(m_astar->GetGraph()->GetNode(toNode->GetIndex()));
+						nodes.push_back(m_baseAstar->GetGraph()->GetNode(toNode->GetIndex()));
 						currentAddNodes.push_back(toNode);
 						toNode->SetIsActive(false);	//ノードを非アクティブにする。
 					}
 					
 					auto currentPosition = currentNode->GetPosition();
 					auto direct = currentPosition + forward;
-					nextNode = UtilityAstar::CalculateTargetDirectNode(*m_astar.get(), currentNode, direct);
+					nextNode = UtilityAstar::CalculateTargetDirectNode(*m_baseAstar.get(), currentNode, direct);
 				}
 
 				//追加が一度もされないなら
@@ -317,14 +315,9 @@ namespace basecross {
 			return m_param;
 		}
 
-		std::shared_ptr<GraphAstar> ImpactMap::GetAreaGraphAstar() const noexcept {
-			return m_areaGraphAstar;
-		}
-
 		std::shared_ptr<GraphAstar> ImpactMap::GetGraphAstar() const noexcept {
-			return m_astar;
+			return m_baseAstar;
 		}
-
 
 		//デバッグ-------------------------------------------------------------------------------------------
 
@@ -342,8 +335,8 @@ namespace basecross {
 		void ImpactMap::CreateDebugDraw(const bool isDraw) {
 			//デバッグドローの追加
 			//return;
-			m_nodeDraw = GetStage()->AddGameObject<GameObject>()->AddComponent<AstarNodeDraw>(m_astar);
-			m_edgeDraw = GetStage()->AddGameObject<GameObject>()->AddComponent<AstarEdgeDraw>(m_astar);
+			m_nodeDraw = GetStage()->AddGameObject<GameObject>()->AddComponent<AstarNodeDraw>(m_baseAstar);
+			m_edgeDraw = GetStage()->AddGameObject<GameObject>()->AddComponent<AstarEdgeDraw>(m_baseAstar);
 			SetIsDebugDraw(isDraw);
 		}
 

@@ -94,6 +94,7 @@ namespace basecross {
 			case MoveType::SeekVelocity:
 				VelocityMove();
 				break;
+
 			case MoveType::ArriveVelocity:
 				VelocityMove();
 				break;

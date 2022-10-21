@@ -1064,9 +1064,6 @@
     <Filter Include="Maruyama\Utility\TaskList\CommonTasks\AstarEvade">
       <UniqueIdentifier>{9eae34f5-1cbe-4487-b7e8-ca2c98fec293}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Maruyama\Utility\TaskList\CommonTasks\AstarMove">
-      <UniqueIdentifier>{30aa4d4a-5f1c-4aae-bd5a-efe6433b4c37}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Maruyama\Utility\TaskList\CommonTasks\Flee">
       <UniqueIdentifier>{bcb6a9c8-e51b-4770-a041-f2b78663b943}</UniqueIdentifier>
     </Filter>
@@ -1175,6 +1172,7 @@
     <Filter Include="Maruyama\Enemy\Component\ImpactMap\Astar\GraphAstar\OpenDataHandler">
       <UniqueIdentifier>{50e6c0a7-8e6b-4970-b63e-7e8066280e3d}</UniqueIdentifier>
     </Filter>
+
     <Filter Include="Watanabe\TestStage\MatchingUILayoutStage">
       <UniqueIdentifier>{86633793-2bc2-4280-8fae-eb2f85f24693}</UniqueIdentifier>
     </Filter>
@@ -1183,6 +1181,19 @@
     </Filter>
     <Filter Include="Watanabe\TestStage\TestShaderStage">
       <UniqueIdentifier>{b6353766-d0ed-44c0-8fd6-8dd04dc7db36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\Component\ImpactMap\Astar\NavGraphNode\AstarNavGraphNode">
+      <UniqueIdentifier>{63db5895-8265-452f-b0ed-3ab51c38333f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\Component\EachEnemy\Common\Stator\State\SearchBall">
+      <UniqueIdentifier>{09e9ec99-82e6-41fd-8e0f-589ebe35ce7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Utility\TaskList\CommonTasks\MoveAstar">
+      <UniqueIdentifier>{30aa4d4a-5f1c-4aae-bd5a-efe6433b4c37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Utility\TaskList\CommonTasks\TargetChase">
+      <UniqueIdentifier>{7b39b6bc-5534-4d52-bd4f-be82491cd13d}</UniqueIdentifier>
+
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1831,9 +1842,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\Task_AstarEvade.h">
       <Filter>Maruyama\Utility\TaskList\CommonTasks\AstarEvade</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\Task_AstarMove.h">
-      <Filter>Maruyama\Utility\TaskList\CommonTasks\AstarMove</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\Task_CameraAtMove.h">
       <Filter>Maruyama\Utility\TaskList\CommonTasks\Camera\CameraAtMove</Filter>
     </ClInclude>
@@ -2203,6 +2211,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\OpenDataHandler.h">
       <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\GraphAstar\OpenDataHandler</Filter>
     </ClInclude>
+
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\MatchingUILayoutStage.h">
       <Filter>Watanabe\TestStage\MatchingUILayoutStage</Filter>
     </ClInclude>
@@ -2214,6 +2223,19 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\StaticModelDraw.h">
       <Filter>Watanabe\Shader\ModelDraw</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\AstarNavGraphNode.h">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\NavGraphNode\AstarNavGraphNode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Stator\State\EnemyStateNode_SearchBall.h">
+      <Filter>Maruyama\Enemy\Component\EachEnemy\Common\Stator\State\SearchBall</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\MoveAstar.h">
+      <Filter>Maruyama\Utility\TaskList\CommonTasks\MoveAstar</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\TargetSeek.h">
+      <Filter>Maruyama\Utility\TaskList\CommonTasks\TargetChase</Filter>
+
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2796,9 +2818,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\Task_AstarEvade.cpp">
       <Filter>Maruyama\Utility\TaskList\CommonTasks\AstarEvade</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\Task_AstarMove.cpp">
-      <Filter>Maruyama\Utility\TaskList\CommonTasks\AstarMove</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\Task_CameraAtMove.cpp">
       <Filter>Maruyama\Utility\TaskList\CommonTasks\Camera\CameraAtMove</Filter>
     </ClCompile>
@@ -3138,6 +3157,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\OpenDataHandler.cpp">
       <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\GraphAstar\OpenDataHandler</Filter>
     </ClCompile>
+
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\MatchingUILayoutStage.cpp">
       <Filter>Watanabe\TestStage\MatchingUILayoutStage</Filter>
     </ClCompile>
@@ -3149,6 +3169,19 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\StaticModelDraw.cpp">
       <Filter>Watanabe\Shader\ModelDraw</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\AstarNavGraphNode.cpp">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\NavGraphNode\AstarNavGraphNode</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Stator\State\EnemyStateNode_SearchBall.cpp">
+      <Filter>Maruyama\Enemy\Component\EachEnemy\Common\Stator\State\SearchBall</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\MoveAstar.cpp">
+      <Filter>Maruyama\Utility\TaskList\CommonTasks\MoveAstar</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\TargetSeek.cpp">
+      <Filter>Maruyama\Utility\TaskList\CommonTasks\TargetChase</Filter>
+
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

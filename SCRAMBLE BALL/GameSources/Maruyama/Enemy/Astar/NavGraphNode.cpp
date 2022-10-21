@@ -35,6 +35,7 @@ namespace basecross {
 		: GraphNodeBase(index), m_position(position), m_impactData(new ReactiveProperty<ImpactData>(impactData)), m_parent(parent) 
 	{}
 
+	//コピーコンストラクタ
 	NavGraphNode::NavGraphNode(const NavGraphNode& node) :
 		NavGraphNode(node.GetIndex(), node.GetPosition(), node.GetImpactData(), node.GetParent())
 	{}

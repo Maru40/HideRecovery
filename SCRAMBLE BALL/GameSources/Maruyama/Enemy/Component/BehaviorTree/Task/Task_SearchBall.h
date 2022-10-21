@@ -16,10 +16,23 @@ namespace basecross {
 	template<class T>
 	class TaskList;
 
+	class TargetManager;
+	class VelocityManager;
+
 	struct Task_MovePositions_Parametor;
 
 	namespace Enemy {
 		class EnemyBase;
+	}
+
+	namespace Task {
+		struct MoveAstar_Parametor;
+		struct ToTargetMove_Parametor;
+		struct Wait_Parametor;
+	}
+
+	namespace TaskListNode {
+		struct TargetSeek_Parametor;
 	}
 
 	namespace maru {
@@ -29,16 +42,25 @@ namespace basecross {
 			namespace Task {
 
 				enum class TaskEnum {
-					Move,
+					MoveAstar,			//Astarを利用してターゲットの近くまで移動する。
+					ArriveParamSetting,	//ターゲットへの最後の移動のパラメータセッティング
+					MoveArrive,			//ターゲットが視界内なら到着行動
+										//アイテムを空ける。
+					Wait,				//待機
 				};
 
 				//--------------------------------------------------------------------------------------
 				///	ボールを探すタスクパラメータ
 				//--------------------------------------------------------------------------------------
 				struct SearchBall_Parametor {
-					std::shared_ptr<Task_MovePositions_Parametor> movePositionsParam;
+					basecross::Task::MoveAstar_Parametor* moveAstarParam;
+					//std::shared_ptr<basecross::Task::ToTargetMove_Parametor> toTargetMoveParam;
+					TaskListNode::TargetSeek_Parametor* targetSeekParam;
+					std::shared_ptr<basecross::Task::Wait_Parametor> waitParam;
 
 					SearchBall_Parametor();
+
+					virtual ~SearchBall_Parametor();
 				};
 
 				//--------------------------------------------------------------------------------------
@@ -49,14 +71,14 @@ namespace basecross {
 				public:
 					using Parametor = SearchBall_Parametor;
 
-					std::queue<int> m_areaRoute;	//確認するエリアルート
-
 				private:
 					Parametor m_param;								//パラメータ
 					
 					std::unique_ptr<TaskList<TaskEnum>> m_taskList;	//タスクリスト
 
 					std::weak_ptr<Transform> m_transform;
+					std::weak_ptr<TargetManager> m_targetManager;
+					std::weak_ptr<VelocityManager> m_velocityManager;
 
 				public:
 					SearchBall(const std::shared_ptr<Enemy::EnemyBase>& owner);
@@ -69,25 +91,15 @@ namespace basecross {
 
 				private:
 
+					/// <summary>
+					/// ターゲットの取得
+					/// </summary>
+					/// <returns>ターゲット</returns>
+					std::shared_ptr<GameObject> CalculateTarget();
+
 					void DefineTask();
 
 					void SelectTask();
-
-					void NextRoute();
-
-					std::queue<int> CalculateMoveAreaRouteQueue();
-
-					/// <summary>
-					/// 徘徊する場所の配列を取得
-					/// </summary>
-					/// <returns>徘徊する場所の配列</returns>
-					std::vector<Vec3> CalculateMovePositions();
-
-					/// <summary>
-					/// 徘徊移動先の目的地を取得
-					/// </summary>
-					/// <returns>徘徊移動先を取得</returns>
-					Vec3 CalculateMoveTargetPosition();
 
 					/// <summary>
 					/// パラメータの初期化

@@ -33,14 +33,11 @@ namespace basecross {
 
 	private:
 
-		std::shared_ptr<GraphType> m_baseGraph = nullptr;	//グラフのデータ
+		std::shared_ptr<GraphType> m_areaGraph = nullptr;	//エリアインデックス用のグラフ生成
+		std::shared_ptr<GraphType> m_baseGraph = nullptr;	//グラフのデータ(エリア内のグラフデータ)
 		GraphMap m_graphMap;								//グラフのエリアインデックスごとに分けたマップ
-		
-		std::shared_ptr<GraphType> m_areaIndexGraph;		//エリアインデックス用のグラフ生成
 
 		std::stack<std::shared_ptr<NavGraphNode>> m_route;	//生成したルート
-
-		std::vector<int> m_debugIndices; //デバッグ用のインデックス
 
 	public:
 		/// <summary>
@@ -90,7 +87,7 @@ namespace basecross {
 		/// <summary>
 		/// ターゲットへのエリア単位の大まかなルートを検索
 		/// </summary>
-		std::vector<int> SearchAreaIndexRoute(const Vec3& selfPosition, const Vec3& targetPosition);
+		std::vector<int> SearchAreaRouteIndices(const Vec3& selfPosition, const Vec3& targetPosition);
 
 	private:
 		/// <summary>
@@ -108,6 +105,7 @@ namespace basecross {
 
 		/// <summary>
 		/// それぞれのグラフの中心位置を設定する。
+		/// (現在はImpactMapから生成しているが、他の方法を検討中)
 		/// </summary>
 		void SettingGraphMapCenterPositions();
 
