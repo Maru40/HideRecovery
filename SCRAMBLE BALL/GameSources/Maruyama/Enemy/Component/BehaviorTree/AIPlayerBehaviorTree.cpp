@@ -33,7 +33,7 @@ namespace basecross {
 			//徘徊セレクター
 			m_behaviorTree->AddSelecter(BehaviorType::PlowlingSelecter);
 			//ボール探しタスク
-			m_behaviorTree->AddTask(BehaviorType::SearchBallTask, std::make_shared<Task::SearchBall>(owner));
+			m_behaviorTree->AddTask(BehaviorType::SearchBallTask, std::make_shared<maru::Behavior::Task::SearchBall>(owner));
 
 			//バトルセレクター
 			m_behaviorTree->AddSelecter(BehaviorType::ButtleSelecter);
