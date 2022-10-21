@@ -313,9 +313,11 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Manager\TimeManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\AdvBaseDraw.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\BoneModelDraw.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\IPostEffect.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\MySpriteBaseDraw.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\PCTGaugeDraw.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\PCTGaugeSprite.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\PostEffect\OutlinePostEffect.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\PostProcess.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\RenderTexture.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\StaticModelDraw.h" />
@@ -636,6 +638,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\MySpriteBaseDraw.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\PCTGaugeDraw.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\PCTGaugeSprite.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\PostEffect\OutlinePostEffect.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\PostProcess.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\RenderTexture.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\StaticModelDraw.cpp" />
@@ -742,12 +745,19 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
     </FxCompile>
+    <FxCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\PostEffect\HLSL\CS_Outline.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Compute</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Compute</ShaderType>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)..\..\Libs\BaseLib\DxShaders\SlimeFunctions.hlsli" />
     <None Include="$(MSBuildThisFileDirectory)..\..\Libs\BaseLib\DxShaders\SlimeParametors.hlsli" />
     <None Include="$(MSBuildThisFileDirectory)Maruyama\Shader\Toon\ToonFunctions.hlsli" />
     <None Include="$(MSBuildThisFileDirectory)Maruyama\Shader\Toon\ToonParametors.hlsli" />
+    <None Include="$(MSBuildThisFileDirectory)Watanabe\Shader\HLSL\AdvStageBase.hlsli" />
     <None Include="$(MSBuildThisFileDirectory)Watanabe\Shader\HLSL\IncDraw.hlsli" />
     <None Include="$(MSBuildThisFileDirectory)Watanabe\Shader\HLSL\INCPCTGaugeDraw.hlsli" />
     <None Include="$(MSBuildThisFileDirectory)Watanabe\Shader\HLSL\INCPCTGaugeSprite.hlsli" />

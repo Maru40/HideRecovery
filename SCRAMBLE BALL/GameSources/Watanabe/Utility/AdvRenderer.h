@@ -11,6 +11,7 @@ namespace basecross {
 
 		ComPtr<ID3D11Texture2D>		m_DepthStencil;		//深度ステンシルバッファ
 		ComPtr<ID3D11DepthStencilView>	m_DepthStencilView;	//深度ステンシルビュー
+		ComPtr<ID3D11DepthStencilView>	m_DepthStencilViewReadOnly;	//深度ステンシルビュー(読み取り専用)
 
 		ComPtr<ID3D11ShaderResourceView> m_depthSrv;
 		ComPtr<ID3D11ShaderResourceView> m_stencilSrv;

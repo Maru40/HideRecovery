@@ -3,9 +3,10 @@
 #include "../Shader/PostProcess.h"
 
 namespace basecross {
-	IMPLEMENT_DX11_CONSTANT_BUFFER(LPPStageCB)
+	IMPLEMENT_DX11_CONSTANT_BUFFER(AdvStageCB)
 
 		shared_ptr<AdvRenderer> AdvStageBase::m_advRender;
+	shared_ptr<PostProcess> AdvStageBase::m_postProcess;
 
 	void AdvStageBase::UpdateStageCB() {
 		AdvStageConstruct stageConstant;
@@ -41,7 +42,7 @@ namespace basecross {
 		auto Dev = App::GetApp()->GetDeviceResources();
 		auto pD3D11DeviceContext = Dev->GetD3DDeviceContext();
 
-		auto* constantBuffer = LPPStageCB::GetPtr()->GetBuffer();
+		auto* constantBuffer = AdvStageCB::GetPtr()->GetBuffer();
 
 		//コンスタントバッファの更新
 		pD3D11DeviceContext->UpdateSubresource(constantBuffer, 0, nullptr, &stageConstant, 0, 0);
@@ -54,16 +55,11 @@ namespace basecross {
 	}
 
 	void AdvStageBase::DrawPostProcess() {
-		for (auto& ptr : GetGameObjectVec()) {
-			auto postProcess = ptr->GetComponent<PostProcess>(false);
-
-			if (postProcess) {
-				postProcess->OnPostDraw();
-			}
-		}
+		GetPostProcess()->OnPostDraw();
 	}
 
 	void AdvStageBase::DrawStringSprite() {
+		// StringSpriteは基本Debugでしか使わないのでDrawStage時に変数に入れたい
 		for (auto& ptr : GetGameObjectVec()) {
 			auto stringSprite = ptr->GetComponent<StringSprite>(false);
 
@@ -73,12 +69,19 @@ namespace basecross {
 		}
 	}
 
-	const std::shared_ptr<AdvRenderer>& AdvStageBase::GetAdvRenderer() {
+	const shared_ptr<AdvRenderer>& AdvStageBase::GetAdvRenderer() {
 		if (!m_advRender) {
-			m_advRender = std::make_shared<AdvRenderer>();
+			m_advRender = make_shared<AdvRenderer>();
 		}
 
 		return m_advRender;
+	}
+
+	const shared_ptr<PostProcess>& AdvStageBase::GetPostProcess() {
+		if (!m_postProcess) {
+			m_postProcess = make_shared<PostProcess>();
+		}
+		return m_postProcess;
 	}
 
 	void AdvStageBase::RenderStage() {
@@ -88,9 +91,9 @@ namespace basecross {
 		render->RenderMain();
 		Stage::DrawStage();
 
-		render->RenderPostProcessing();
-		UpdateStageCB();
-		DrawPostProcess();
+		//render->RenderPostProcessing();
+		//UpdateStageCB();
+		//DrawPostProcess();
 
 		//render->RenderMain();
 		//DrawSprite();

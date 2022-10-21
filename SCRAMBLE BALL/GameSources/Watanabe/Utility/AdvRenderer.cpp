@@ -51,6 +51,15 @@ namespace basecross {
 			L"AdvRenderer::AdvRenderer()"
 		);
 
+		descDSV.Flags = D3D11_DSV_READ_ONLY_DEPTH | D3D11_DSV_READ_ONLY_STENCIL;
+
+		ThrowIfFailed(
+			pD3D11Device->CreateDepthStencilView(m_DepthStencil.Get(), &descDSV, m_DepthStencilViewReadOnly.GetAddressOf()),
+			L"DX11深度ステンシルビューの作成に失敗しました。",
+			L"pD3D11Device->CreateDepthStencilView(m_DepthStencil.Get(), &descDSV, m_DepthStencilViewReadOnly.GetAddressOf())",
+			L"LightPrePassRenderTarget::LightPrePassRenderTarget()"
+		);
+
 		D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc;
 		srvDesc.Format = DXGI_FORMAT_R24_UNORM_X8_TYPELESS;
 		srvDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
@@ -115,6 +124,7 @@ namespace basecross {
 		pD3D11DeviceContext->ClearRenderTargetView(m_mainRenderTarget.GetRenderTargetView(), Color);
 		//通常の深度バッファとステンシルバッファのクリア
 		pD3D11DeviceContext->ClearDepthStencilView(m_DepthStencilView.Get(), D3D11_CLEAR_DEPTH, 1.0f, 0);
+		pD3D11DeviceContext->ClearDepthStencilView(m_DepthStencilViewReadOnly.Get(), D3D11_CLEAR_DEPTH, 1.0f, 0);
 
 		App::GetApp()->GetDeviceResources()->GetDefaultRenderTarget()->ClearViews(color);
 	}
@@ -152,20 +162,17 @@ namespace basecross {
 		pD3D11DeviceContext->GSSetShader(nullptr, nullptr, 0);
 		//ブレンドは指定しない
 		pD3D11DeviceContext->OMSetBlendState(nullptr, nullptr, 0xffffffff);
-		pD3D11DeviceContext->OMSetDepthStencilState(RenderStatePtr->GetDepthDefault(), 0);
+		//pD3D11DeviceContext->OMSetDepthStencilState(RenderStatePtr->GetDepthDefault(), 0);
 	}
 
 	void AdvRenderer::RenderMain() {
 		auto pD3D11DeviceContext = App::GetApp()->GetDeviceResources()->GetD3DDeviceContext();
 		auto RenderStatePtr = App::GetApp()->GetDeviceResources()->GetRenderState();
 
-		ID3D11RenderTargetView* rtvs[] = {
-			m_mainRenderTarget.GetRenderTargetView()
-		};
+		//ID3D11RenderTargetView* pV = m_mainRenderTarget.GetRenderTargetView();
+		//pD3D11DeviceContext->OMSetRenderTargets(1, &pV, m_DepthStencilView.Get());
 
-		pD3D11DeviceContext->OMSetRenderTargets(_countof(rtvs), rtvs, m_DepthStencilView.Get());
-
-		pD3D11DeviceContext->OMSetDepthStencilState(RenderStatePtr->GetDepthDefault(), 0);
+		//pD3D11DeviceContext->OMSetDepthStencilState(RenderStatePtr->GetDepthNone(), 0);
 	}
 
 	void AdvRenderer::RenderPostProcessing() {
@@ -190,9 +197,9 @@ namespace basecross {
 
 		ID3D11RenderTargetView* rtvs[] = { App::GetApp()->GetDeviceResources()->GetDefaultRenderTarget()->GetRenderTargetView() };
 
-		pD3D11DeviceContext->OMSetRenderTargets(_countof(rtvs), rtvs, m_DepthStencilView.Get());
+		pD3D11DeviceContext->OMSetRenderTargets(_countof(rtvs), rtvs, m_DepthStencilViewReadOnly.Get());
 
-		ID3D11ShaderResourceView* srvs[] = { m_mainRenderTarget.GetShaderResourceView() };
+		ID3D11ShaderResourceView* srvs[] = { m_mainRenderTarget.GetShaderResourceView(),m_depthSrv.Get() };
 
 		pD3D11DeviceContext->PSSetShaderResources(0, _countof(srvs), srvs);
 

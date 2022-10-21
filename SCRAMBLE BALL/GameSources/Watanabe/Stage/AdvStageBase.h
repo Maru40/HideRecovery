@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include "stdafx.h"
 #include "../Utility/AdvRenderer.h"
+#include "../Shader/PostProcess.h"
 
 namespace basecross {
 	struct AdvStageConstruct
@@ -14,10 +15,11 @@ namespace basecross {
 		Col4 lightAmbient;
 	};
 
-	DECLARE_DX11_CONSTANT_BUFFER(LPPStageCB, AdvStageConstruct)
+	DECLARE_DX11_CONSTANT_BUFFER(AdvStageCB, AdvStageConstruct)
 
 	class AdvStageBase :public Stage {
 		static shared_ptr<AdvRenderer> m_advRender;
+		static shared_ptr<PostProcess> m_postProcess;
 
 		Col4 m_lightAmbient = Col4(0.1f, 0.1f, 0.1f, 1.0f);
 
@@ -42,6 +44,7 @@ namespace basecross {
 		Col4 GetLightAmbient() const { return m_lightAmbient; }
 
 		static const shared_ptr<AdvRenderer>& GetAdvRenderer();
+		static const shared_ptr<PostProcess>& GetPostProcess();
 
 		void RenderStage() override;
 		void DrawStage() override;

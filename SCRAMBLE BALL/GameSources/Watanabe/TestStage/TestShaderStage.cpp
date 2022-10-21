@@ -13,6 +13,8 @@
 #include "../Component/TestComponent.h"
 #include "../Camera/TitleCamera.h"
 
+#include "../Shader/PostEffect/OutlinePostEffect.h"
+
 #include "../Shader/BoneModelDraw.h"
 #include "../Shader/StaticModelDraw.h"
 
@@ -25,6 +27,8 @@ namespace basecross {
 		auto PtrCamera = ObjectFactory::Create<TitleCamera>(eye, at);
 		PtrView->SetCamera(PtrCamera);
 		PtrCamera->SetSpeed(-0.5f);
+		//PtrCamera->SetNear(5);
+		//PtrCamera->SetFar(10);
 		//マルチライトの作成
 		auto PtrMultiLight = CreateLight<MultiLight>();
 		//デフォルトのライティングを指定
@@ -44,6 +48,8 @@ namespace basecross {
 		CreateSphere();
 		// 念のためSkyBoxを生成
 		AddGameObject<SkyBox>(Vec3(100, 100, 100));
+
+		GetPostProcess()->AddPostEffect<OutlinePostEffect>();
 	}
 
 	void TestShaderStage::OnUpdate() {
