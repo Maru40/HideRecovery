@@ -12,6 +12,7 @@
 
 #include "Maruyama/TaskList/TaskList.h"
 #include "Maruyama/TaskList/CommonTasks/Task_MovePositions.h"
+#include "Maruyama/TaskList/CommonTasks/MoveAstar.h"
 
 #include "Maruyama/Utility/SingletonComponent/SingletonComponent.h"
 #include "Maruyama/Enemy/ImpactMap/FieldImpactMap.h"
@@ -33,8 +34,13 @@ namespace basecross {
 				//--------------------------------------------------------------------------------------
 
 				SearchBall_Parametor::SearchBall_Parametor() :
+					moveAstarParam(new basecross::Task::MoveAstar::Parametor()),
 					movePositionsParam(new Task_MovePositions_Parametor())
 				{}
+
+				SearchBall_Parametor::~SearchBall_Parametor() {
+					delete(moveAstarParam);
+				}
 
 				//--------------------------------------------------------------------------------------
 				///	ボールを探すタスク
@@ -81,12 +87,12 @@ namespace basecross {
 				void SearchBall::DefineTask() {
 					auto ownerObject = GetOwner()->GetGameObject();
 
-					m_taskList->DefineTask(TaskEnum::Move, std::make_shared<Task_MovePositions>(ownerObject, m_param.movePositionsParam));
+					m_taskList->DefineTask(TaskEnum::MoveAstar, std::make_shared<Task_MovePositions>(ownerObject, m_param.movePositionsParam));
 				}
 
 				void SearchBall::SelectTask() {
 					TaskEnum tasks[] = {
-						TaskEnum::Move,
+						TaskEnum::MoveAstar,
 					};
 
 					for (const auto& task : tasks) {

@@ -22,6 +22,10 @@ namespace basecross {
 		class EnemyBase;
 	}
 
+	namespace Task {
+		struct MoveAstar_Parametor;
+	}
+
 	namespace maru {
 
 		namespace Behavior {
@@ -29,16 +33,20 @@ namespace basecross {
 			namespace Task {
 
 				enum class TaskEnum {
-					Move,
+					MoveAstar,	//Astarを利用してターゲットの近くまで移動する。
+					MoveArrive,	//ターゲットが視界内なら到着行動
 				};
 
 				//--------------------------------------------------------------------------------------
 				///	ボールを探すタスクパラメータ
 				//--------------------------------------------------------------------------------------
 				struct SearchBall_Parametor {
+					basecross::Task::MoveAstar_Parametor* moveAstarParam;
 					std::shared_ptr<Task_MovePositions_Parametor> movePositionsParam;
 
 					SearchBall_Parametor();
+
+					virtual ~SearchBall_Parametor();
 				};
 
 				//--------------------------------------------------------------------------------------
