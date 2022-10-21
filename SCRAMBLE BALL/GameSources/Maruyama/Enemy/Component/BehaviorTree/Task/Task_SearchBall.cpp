@@ -34,8 +34,7 @@ namespace basecross {
 				//--------------------------------------------------------------------------------------
 
 				SearchBall_Parametor::SearchBall_Parametor() :
-					moveAstarParam(new basecross::Task::MoveAstar::Parametor()),
-					movePositionsParam(new Task_MovePositions_Parametor())
+					moveAstarParam(new basecross::Task::MoveAstar::Parametor())
 				{}
 
 				SearchBall_Parametor::~SearchBall_Parametor() {
@@ -62,18 +61,11 @@ namespace basecross {
 
 						//ターゲットの計算
 
-					CalculateMoveAreaRouteQueue();	//徘徊エリアルートの取得
-					m_param.movePositionsParam->positions = CalculateMovePositions();	//徘徊移動先を設定
-
 					Debug::GetInstance()->Log(L"SearchStart");
 				}
 
 				bool SearchBall::OnUpdate() {
 					m_taskList->UpdateTask();
-
-					if (m_taskList->IsEnd()) {
-						NextRoute();
-					}
 
 					return IsEnd();
 				}
@@ -87,12 +79,20 @@ namespace basecross {
 				void SearchBall::DefineTask() {
 					auto ownerObject = GetOwner()->GetGameObject();
 
-					m_taskList->DefineTask(TaskEnum::MoveAstar, std::make_shared<Task_MovePositions>(ownerObject, m_param.movePositionsParam));
+					//Astar移動
+					m_taskList->DefineTask(
+						TaskEnum::MoveAstar,
+						std::make_shared<basecross::Task::MoveAstar>(GetOwner(), m_param.moveAstarParam)
+					);
+
+					//目的地についたら時の到着移動
+
 				}
 
 				void SearchBall::SelectTask() {
 					TaskEnum tasks[] = {
 						TaskEnum::MoveAstar,
+						TaskEnum::MoveArrive,
 					};
 
 					for (const auto& task : tasks) {
@@ -100,58 +100,11 @@ namespace basecross {
 					}
 				}
 
-				void SearchBall::NextRoute() {
-					if (m_areaRoute.empty()) {
-						return;
-					}
-
-					m_param.movePositionsParam->positions = CalculateMovePositions();	//新しいポジションに変更
-
-					SelectTask();				//タスクの再始動
-				}
-
-				std::queue<int> SearchBall::CalculateMoveAreaRouteQueue() {
-					maru::Utility::QueueClear(m_areaRoute);
-
-					auto startPosition = m_transform.lock()->GetPosition();
-					auto targetPosition = CalculateMoveTargetPosition();
-
-					auto routes = FieldImpactMap::GetInstance()->SearchAreaRouteIndices(startPosition, targetPosition);
-
-					m_areaRoute.push(FieldImpactMap::GetInstance()->SearchNearAreaIndex(startPosition));	//最初の自分自身のノードを省くため。
-					for (const auto& route : routes) {
-						m_areaRoute.push(route);
-					}
-
-					return m_areaRoute;
-				}
-
-				std::vector<Vec3> SearchBall::CalculateMovePositions() {
-					if (m_areaRoute.empty()) {
-						return std::vector<Vec3>();
-					}
-
-					auto startPosition = m_transform.lock()->GetPosition();
-					auto endPosition = CalculateMoveTargetPosition();
-
-					int areaIndex = m_areaRoute.front();
-					m_areaRoute.pop();
-					return FieldImpactMap::GetInstance()->GetRoutePositions(startPosition, endPosition, areaIndex);
-				}
-
-				Vec3 SearchBall::CalculateMoveTargetPosition() {
-					auto hidePlace = maru::Utility::FindComponent<HidePlace>();
-
-					auto position = hidePlace->GetGameObject()->GetComponent<Transform>()->GetPosition();
-					Debug::GetInstance()->Log(position);
-					return position;
-				}
-
 				void SearchBall::InitializeParametor() {
-					m_param.movePositionsParam->moveParamPtr->speed = 10.0f;
+					m_param.moveAstarParam->movePositionsParam->moveParamPtr->speed = 10.0f;
 				}
 
-				bool SearchBall::IsEnd() const { return m_areaRoute.empty() && m_taskList->IsEnd(); }
+				bool SearchBall::IsEnd() const { return m_taskList->IsEnd(); }
 
 			}
 		}

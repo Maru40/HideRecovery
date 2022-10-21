@@ -42,7 +42,6 @@ namespace basecross {
 				//--------------------------------------------------------------------------------------
 				struct SearchBall_Parametor {
 					basecross::Task::MoveAstar_Parametor* moveAstarParam;
-					std::shared_ptr<Task_MovePositions_Parametor> movePositionsParam;
 
 					SearchBall_Parametor();
 
@@ -56,8 +55,6 @@ namespace basecross {
 				{
 				public:
 					using Parametor = SearchBall_Parametor;
-
-					std::queue<int> m_areaRoute;	//確認するエリアルート
 
 				private:
 					Parametor m_param;								//パラメータ
@@ -80,22 +77,6 @@ namespace basecross {
 					void DefineTask();
 
 					void SelectTask();
-
-					void NextRoute();
-
-					std::queue<int> CalculateMoveAreaRouteQueue();
-
-					/// <summary>
-					/// 徘徊する場所の配列を取得
-					/// </summary>
-					/// <returns>徘徊する場所の配列</returns>
-					std::vector<Vec3> CalculateMovePositions();
-
-					/// <summary>
-					/// 徘徊移動先の目的地を取得
-					/// </summary>
-					/// <returns>徘徊移動先を取得</returns>
-					Vec3 CalculateMoveTargetPosition();
 
 					/// <summary>
 					/// パラメータの初期化
