@@ -1180,6 +1180,9 @@
     <Filter Include="Maruyama\Utility\TaskList\CommonTasks\MoveAstar">
       <UniqueIdentifier>{30aa4d4a-5f1c-4aae-bd5a-efe6433b4c37}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Utility\TaskList\CommonTasks\TargetChase">
+      <UniqueIdentifier>{7b39b6bc-5534-4d52-bd4f-be82491cd13d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2211,6 +2214,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\MoveAstar.h">
       <Filter>Maruyama\Utility\TaskList\CommonTasks\MoveAstar</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\TargetSeek.h">
+      <Filter>Maruyama\Utility\TaskList\CommonTasks\TargetChase</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -3145,6 +3151,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\MoveAstar.cpp">
       <Filter>Maruyama\Utility\TaskList\CommonTasks\MoveAstar</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\TargetSeek.cpp">
+      <Filter>Maruyama\Utility\TaskList\CommonTasks\TargetChase</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -173,6 +173,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Stage\MapShotStage.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Stage\MaruTestStage.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\MoveAstar.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\TargetSeek.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\Task_AroundEyeCheck.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\Task_AstarEvade.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\Task_CameraAtMove.h" />
@@ -513,6 +514,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Stage\MapShotStage.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Stage\MaruTestStage.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\MoveAstar.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\TargetSeek.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\Task_AroundEyeCheck.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\Task_AstarEvade.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\Task_CameraAtMove.cpp" />
