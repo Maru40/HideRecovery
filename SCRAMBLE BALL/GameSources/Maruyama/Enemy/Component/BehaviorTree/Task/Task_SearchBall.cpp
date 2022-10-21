@@ -10,9 +10,16 @@
 
 #include "Maruyama/Enemy/Component/EnemyBase.h"
 
+#include "Maruyama/Utility/Timer/GameTimer.h"
+#include "Maruyama/Utility/Component/TargetManager.h"
+#include "VelocityManager.h"
+
 #include "Maruyama/TaskList/TaskList.h"
 #include "Maruyama/TaskList/CommonTasks/Task_MovePositions.h"
 #include "Maruyama/TaskList/CommonTasks/MoveAstar.h"
+#include "Maruyama/TaskList/CommonTasks/Task_ToTargetMove.h"
+#include "Maruyama/TaskList/CommonTasks/TargetSeek.h"
+#include "Maruyama/TaskList/CommonTasks/Task_Wait.h"
 
 #include "Maruyama/Utility/SingletonComponent/SingletonComponent.h"
 #include "Maruyama/Enemy/ImpactMap/FieldImpactMap.h"
@@ -34,11 +41,15 @@ namespace basecross {
 				//--------------------------------------------------------------------------------------
 
 				SearchBall_Parametor::SearchBall_Parametor() :
-					moveAstarParam(new basecross::Task::MoveAstar::Parametor())
+					moveAstarParam(new basecross::Task::MoveAstar::Parametor()),
+					//toTargetMoveParam(new basecross::Task::ToTargetMove::Parametor()),
+					targetSeekParam(new TaskListNode::TargetSeek::Parametor()),
+					waitParam(new basecross::Task::Wait::Parametor(1.0f))
 				{}
 
 				SearchBall_Parametor::~SearchBall_Parametor() {
 					delete(moveAstarParam);
+					delete(targetSeekParam);
 				}
 
 				//--------------------------------------------------------------------------------------
@@ -53,13 +64,16 @@ namespace basecross {
 					InitializeParametor();
 					DefineTask();
 
-					m_transform = GetOwner()->GetGameObject()->GetComponent<Transform>();
+					auto object = GetOwner()->GetGameObject();
+					m_transform = object->GetComponent<Transform>();
+					m_targetManager = object->GetComponent<TargetManager>();
+					m_velocityManager = object->GetComponent<VelocityManager>();
 				}
 
 				void SearchBall::OnStart() {
-					SelectTask();					//タスクの選択
+					SelectTask();		//タスクの選択
 
-						//ターゲットの計算
+					CalculateTarget();	//ターゲットの計算
 
 					Debug::GetInstance()->Log(L"SearchStart");
 				}
@@ -76,6 +90,20 @@ namespace basecross {
 					Debug::GetInstance()->Log(L"SearchEnd");
 				}
 
+				std::shared_ptr<GameObject> SearchBall::CalculateTarget() {
+					auto targetManager = m_targetManager.lock();
+					if (!targetManager) {	//ターゲット管理が存在しないなら処理をしない
+						return nullptr;
+					}
+
+					//本来はAIDirectorにアクセスして、ターゲットを確定させる。
+
+					//デバッグで隠し場所を検索する。
+					auto hidePlace = maru::Utility::FindComponent<HidePlace>();
+					targetManager->SetTarget(hidePlace->GetGameObject());
+					return hidePlace->GetGameObject();
+				}
+
 				void SearchBall::DefineTask() {
 					auto ownerObject = GetOwner()->GetGameObject();
 
@@ -85,14 +113,37 @@ namespace basecross {
 						std::make_shared<basecross::Task::MoveAstar>(GetOwner(), m_param.moveAstarParam)
 					);
 
-					//目的地についたら時の到着移動
+					//目的地の近くについたら時の到着移動
+					m_taskList->DefineTask(
+						TaskEnum::MoveArrive,
+						std::make_shared<TaskListNode::TargetSeek>(ownerObject, m_param.targetSeekParam)
+					);
 
+					//待機
+					m_param.waitParam->start = [&]() {	//開始イベント
+						Debug::GetInstance()->Log(L"WaitStart"); 
+						if (auto velocityManager = m_velocityManager.lock()) {
+							velocityManager->StartDeseleration();
+						}
+					};
+
+					m_param.waitParam->exit = [&]() {	//終了イベント
+						if (auto velocityManager = m_velocityManager.lock()) {
+							velocityManager->SetIsDeseleration(false);
+						}
+					};
+
+					m_taskList->DefineTask(
+						TaskEnum::Wait,
+						std::make_shared<basecross::Task::Wait>(m_param.waitParam)
+					);
 				}
 
 				void SearchBall::SelectTask() {
 					TaskEnum tasks[] = {
 						TaskEnum::MoveAstar,
 						TaskEnum::MoveArrive,
+						TaskEnum::Wait,
 					};
 
 					for (const auto& task : tasks) {
@@ -101,7 +152,16 @@ namespace basecross {
 				}
 
 				void SearchBall::InitializeParametor() {
-					m_param.moveAstarParam->movePositionsParam->moveParamPtr->speed = 10.0f;
+					constexpr float MoveSpeed = 10.0f;
+					constexpr float NearTargetRange = 1.5f;
+
+					//Astarで目標の近くまで移動するパラメータ
+					m_param.moveAstarParam->movePositionsParam->moveParamPtr->speed = MoveSpeed;
+
+					//ターゲットムーブの設定
+					m_param.targetSeekParam->toTargetMoveParam->speed = MoveSpeed;
+					m_param.targetSeekParam->toTargetMoveParam->moveType = basecross::Task::ToTargetMove::MoveType::ArriveVelocity;
+					m_param.targetSeekParam->toTargetMoveParam->targetNearRange = NearTargetRange;
 				}
 
 				bool SearchBall::IsEnd() const { return m_taskList->IsEnd(); }

@@ -16,6 +16,9 @@ namespace basecross {
 	template<class T>
 	class TaskList;
 
+	class TargetManager;
+	class VelocityManager;
+
 	struct Task_MovePositions_Parametor;
 
 	namespace Enemy {
@@ -24,6 +27,12 @@ namespace basecross {
 
 	namespace Task {
 		struct MoveAstar_Parametor;
+		struct ToTargetMove_Parametor;
+		struct Wait_Parametor;
+	}
+
+	namespace TaskListNode {
+		struct TargetSeek_Parametor;
 	}
 
 	namespace maru {
@@ -33,8 +42,11 @@ namespace basecross {
 			namespace Task {
 
 				enum class TaskEnum {
-					MoveAstar,	//Astarを利用してターゲットの近くまで移動する。
-					MoveArrive,	//ターゲットが視界内なら到着行動
+					MoveAstar,			//Astarを利用してターゲットの近くまで移動する。
+					ArriveParamSetting,	//ターゲットへの最後の移動のパラメータセッティング
+					MoveArrive,			//ターゲットが視界内なら到着行動
+										//アイテムを空ける。
+					Wait,				//待機
 				};
 
 				//--------------------------------------------------------------------------------------
@@ -42,6 +54,9 @@ namespace basecross {
 				//--------------------------------------------------------------------------------------
 				struct SearchBall_Parametor {
 					basecross::Task::MoveAstar_Parametor* moveAstarParam;
+					//std::shared_ptr<basecross::Task::ToTargetMove_Parametor> toTargetMoveParam;
+					TaskListNode::TargetSeek_Parametor* targetSeekParam;
+					std::shared_ptr<basecross::Task::Wait_Parametor> waitParam;
 
 					SearchBall_Parametor();
 
@@ -62,6 +77,8 @@ namespace basecross {
 					std::unique_ptr<TaskList<TaskEnum>> m_taskList;	//タスクリスト
 
 					std::weak_ptr<Transform> m_transform;
+					std::weak_ptr<TargetManager> m_targetManager;
+					std::weak_ptr<VelocityManager> m_velocityManager;
 
 				public:
 					SearchBall(const std::shared_ptr<Enemy::EnemyBase>& owner);
@@ -73,6 +90,12 @@ namespace basecross {
 					void OnExit() override;
 
 				private:
+
+					/// <summary>
+					/// ターゲットの取得
+					/// </summary>
+					/// <returns>ターゲット</returns>
+					std::shared_ptr<GameObject> CalculateTarget();
 
 					void DefineTask();
 
