@@ -33,21 +33,22 @@ namespace basecross {
 		//--------------------------------------------------------------------------------------
 		///	ターゲットの近くまでAstarを利用して移動するタスクパラメータ
 		//--------------------------------------------------------------------------------------
-		struct MoveNearPosition_Parametor {
+		struct MoveAstar_Parametor {
 			std::shared_ptr<Task_MovePositions_Parametor> movePositionsParam;
 
-			MoveNearPosition_Parametor();
+			MoveAstar_Parametor();
 		};
 
 		//--------------------------------------------------------------------------------------
 		///	ターゲットの近くまでAstarを利用して移動するタスク
 		//--------------------------------------------------------------------------------------
-		class MoveAstar : public basecross::TaskNodeBase<Enemy::EnemyBase>
+		class MoveAstar : public basecross::TaskNodeBase_WithBlackBoard<Enemy::EnemyBase, MoveAstar_Parametor>
 		{
-			using Parametor = MoveNearPosition_Parametor;
+		public:
+			using Parametor = MoveAstar_Parametor;
 
 		private:
-			Parametor m_param;								//パラメータ
+			//const Parametor* m_param;						//パラメータ
 
 			std::unique_ptr<TaskList<TaskEnum>> m_taskList;	//タスクリスト
 
@@ -57,7 +58,7 @@ namespace basecross {
 			std::weak_ptr<TargetManager> m_targetManager;
 
 		public:
-			MoveAstar(const std::shared_ptr<Enemy::EnemyBase>& owner);
+			MoveAstar(const std::shared_ptr<Enemy::EnemyBase>& owner, const std::function<Parametor()>& getBlackBoardFunc);
 
 			virtual ~MoveAstar() = default;
 
