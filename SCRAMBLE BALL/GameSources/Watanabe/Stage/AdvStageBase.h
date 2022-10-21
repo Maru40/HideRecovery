@@ -46,5 +46,6 @@ namespace basecross {
 		void RenderStage() override;
 		void DrawStage() override;
 		void DrawSprite();
+		void DrawStringSprite();
 	};
 }

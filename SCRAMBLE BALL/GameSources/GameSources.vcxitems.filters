@@ -1195,6 +1195,12 @@
     <Filter Include="Watanabe\Shader\PostProcess">
       <UniqueIdentifier>{28154e25-6a94-4bb9-ac93-8ac47a7b4856}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\Shader\RenderTexture">
+      <UniqueIdentifier>{4fff7ee0-3018-406c-82ad-f3451de98764}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\Shader\Main">
+      <UniqueIdentifier>{2b0e178e-08bb-407f-a164-dd6f95533dc5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2235,6 +2241,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\PostProcess.h">
       <Filter>Watanabe\Shader\PostProcess</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\RenderTexture.h">
+      <Filter>Watanabe\Shader\RenderTexture</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -3179,6 +3188,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\PostProcess.cpp">
       <Filter>Watanabe\Shader\PostProcess</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\RenderTexture.cpp">
+      <Filter>Watanabe\Shader\RenderTexture</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="$(MSBuildThisFileDirectory)..\..\Libs\BaseLib\DxShaders\SlimeVS.hlsl">
@@ -3216,6 +3228,12 @@
     </FxCompile>
     <FxCompile Include="$(MSBuildThisFileDirectory)Maruyama\Shader\Toon\ToonVS.hlsl">
       <Filter>Maruyama\Shader\ToonShader</Filter>
+    </FxCompile>
+    <FxCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\HLSL\VS_Main.hlsl">
+      <Filter>Watanabe\Shader\Main</Filter>
+    </FxCompile>
+    <FxCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\HLSL\PS_Main.hlsl">
+      <Filter>Watanabe\Shader\Main</Filter>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>

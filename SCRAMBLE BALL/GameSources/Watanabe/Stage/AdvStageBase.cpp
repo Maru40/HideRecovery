@@ -63,6 +63,16 @@ namespace basecross {
 		}
 	}
 
+	void AdvStageBase::DrawStringSprite() {
+		for (auto& ptr : GetGameObjectVec()) {
+			auto stringSprite = ptr->GetComponent<StringSprite>(false);
+
+			if (stringSprite) {
+				stringSprite->OnDraw();
+			}
+		}
+	}
+
 	const std::shared_ptr<AdvRenderer>& AdvStageBase::GetAdvRenderer() {
 		if (!m_advRender) {
 			m_advRender = std::make_shared<AdvRenderer>();
@@ -73,14 +83,33 @@ namespace basecross {
 
 	void AdvStageBase::RenderStage() {
 		const auto& render = GetAdvRenderer();
+
+		render->StartRenderTarget();
+		render->RenderMain();
+		Stage::DrawStage();
+
+		render->RenderPostProcessing();
+		UpdateStageCB();
+		DrawPostProcess();
+
+		//render->RenderMain();
+		//DrawSprite();
+
+		render->PassRenderMain();
+
+		// StringSpriteは現在のレンダーターゲットに書き込まれるため
+		// 最後に描画
+		DrawStringSprite();
 	}
 
 	void AdvStageBase::DrawStage() {
+		//レイヤーの取得と設定
+		set<int> DrawLayers;
 		//Spriteかそうでないかを分離
 		for (auto& ptr : GetGameObjectVec()) {
 			if (ptr->IsDrawActive()) {
 				//描画レイヤーに登録
-				m_drawLayers.insert(ptr->GetDrawLayer());
+				DrawLayers.insert(ptr->GetDrawLayer());
 				//Spriteかその派生クラスなら分離
 				if (ptr->GetComponent<SpriteBaseDraw>(false) || ptr->IsSpriteDraw()) {
 					m_spriteVec.push_back(ptr);
@@ -135,8 +164,29 @@ namespace basecross {
 		GetParticleManager(false)->OnPreDraw();
 		//パーティクルの描画準備（加算）
 		GetParticleManager(true)->OnPreDraw();
+		//スプライトオブジェクトの描画準備
+		for (auto& ptr : m_spriteVec) {
+			ptr->OnPreDraw();
+		}
 
-		for (auto it = m_drawLayers.begin(); it != m_drawLayers.end(); it++) {
+		//--------------------------------------------------------
+		//スプライトをZ座標距離でソート
+		//以下は、オブジェクトを引数に取りboolを返すラムダ式
+		//--------------------------------------------------------
+		auto funcSprite = [&](shared_ptr<GameObject>& Left, shared_ptr<GameObject>& Right)->bool {
+			auto PtrLeftTrans = Left->GetComponent<Transform>();
+			auto PtrRightTrans = Right->GetComponent<Transform>();
+
+			auto LeftPos = PtrLeftTrans->GetWorldMatrix().transInMatrix();
+			auto RightPos = PtrRightTrans->GetWorldMatrix().transInMatrix();
+
+			float LeftZ = LeftPos.z;
+			float RightZ = RightPos.z;
+			return (LeftZ > RightZ);
+		};
+		std::sort(m_spriteVec.begin(), m_spriteVec.end(), funcSprite);
+
+		for (auto it = DrawLayers.begin(); it != DrawLayers.end(); it++) {
 			int Tgt = *it;
 			//3Dノーマルオブジェクトの描画
 			for (auto& ptr : m_object3DNormalVec) {
@@ -157,6 +207,12 @@ namespace basecross {
 			GetParticleManager(false)->OnDraw();
 			//加算処理
 			GetParticleManager(true)->OnDraw();
+			//スプライトオブジェクトの描画
+			for (auto& ptr : m_spriteVec) {
+				if (ptr->GetDrawLayer() == Tgt) {
+					ptr->OnDraw();
+				}
+			}
 		}
 		//ステージのDraw();
 		OnDraw();
@@ -164,6 +220,7 @@ namespace basecross {
 		//ワーク配列は毎ターンごとに初期化されるが、
 		//最大値は減らないので2回目のターン以降は高速に動作する
 		m_object3DVec.clear();
+		m_spriteVec.clear();
 		m_object3DNormalVec.clear();
 		m_object3DAlphaVec.clear();
 	}
