@@ -9,6 +9,7 @@
 #include "stdafx.h"
 #include "Project.h"
 
+#include "Watanabe/DebugClass/Debug.h"
 #include "Maruyama/DebugClass/Object/DebugObject.h"
 
 namespace basecross {
@@ -316,7 +317,8 @@ namespace basecross {
 		/// <param name="type">タスクの種類</param>
 		void AddTask(const EnumType type) {
 			if (!m_defineTaskMap.count(type)) {
-				DebugObject::AddString(L"タスクが登録されていません");
+				Debug::GetInstance()->Log(L"タスクが登録されていません。");
+				//DebugObject::AddString(L"タスクが登録されていません");
 				return;
 			}
 
