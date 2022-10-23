@@ -33,7 +33,8 @@ namespace basecross {
 			~PatrolCoordinator() = default;
 
 			void OnStart() override;
-			void OnUpdate() override;
+			bool OnUpdate() override;
+			void OnExit() override {}
 
 		private:
 			/// <summary>

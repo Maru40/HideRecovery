@@ -52,10 +52,12 @@ namespace basecross {
 
 		}
 
-		void PatrolCoordinator::OnUpdate() {
+		bool PatrolCoordinator::OnUpdate() {
 			PatrolControl();
 
-			ObserveTuple_FindTarget();
+			//ObserveTuple_FindTarget();
+
+			return false;
 		}
 
 		void PatrolCoordinator::PatrolControl() {

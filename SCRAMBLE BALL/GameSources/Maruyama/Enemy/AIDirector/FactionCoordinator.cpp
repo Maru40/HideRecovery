@@ -43,10 +43,12 @@ namespace basecross {
 			auto patrol = CreateFaction<PatrolCoordinator>(m_patrols, GetThis<FactionCoordinator>(), patrolMembers);
 		}
 
-		void FactionCoordinator::OnUpdate() {
+		bool FactionCoordinator::OnUpdate() {
 			for (auto& coordinator : m_allCoordinators) {
 				coordinator->OnUpdate();
 			}
+
+			return false;
 		}
 
 		void FactionCoordinator::OnExit() {
