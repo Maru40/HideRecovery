@@ -28,6 +28,8 @@
 #include "Maruyama/TaskList/TaskList.h"
 #include "Maruyama/UI/2D/Component/FieldMap.h"
 
+#include "Maruyama/Utility/SingletonComponent/ShareClassManager.h"
+
 namespace basecross {
 
 	GameManagerObject::GameManagerObject(const std::shared_ptr<Stage>& stage)
@@ -44,6 +46,7 @@ namespace basecross {
 		AddComponent<EffectManager>();
 		AddComponent<ScreenFadeManager>();
 		AddComponent<FieldMap>();
+		AddComponent<ShareClassManager>();
 	}
 
 }
