@@ -88,6 +88,18 @@ namespace basecross {
 			std::shared_ptr<T> GetAssignedFaction() const { return dynamic_pointer_cast<T>(m_param.assignedFaction.lock()); }
 
 			/// <summary>
+			/// ターゲットの設定
+			/// </summary>
+			/// <param name="target">ターゲット</param>
+			virtual void SetTarget(const std::shared_ptr<GameObject>& target) = 0;
+
+			/// <summary>
+			/// ターゲットの取得
+			/// </summary>
+			/// <returns>ターゲット</returns>
+			virtual std::shared_ptr<GameObject> GetTarget() const = 0;
+
+			/// <summary>
 			/// パラメータ設定
 			/// </summary>
 			/// <param name="param">パラメータ</param>
