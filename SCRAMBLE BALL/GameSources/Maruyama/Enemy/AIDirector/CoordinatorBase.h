@@ -57,7 +57,7 @@ namespace basecross {
 			virtual ~CoordinatorBase() = default;
 
 			virtual void OnStart() {}
-			virtual void OnUpdate() {}
+			virtual bool OnUpdate() = 0;
 			virtual void OnExit() {}
 
 		public:
