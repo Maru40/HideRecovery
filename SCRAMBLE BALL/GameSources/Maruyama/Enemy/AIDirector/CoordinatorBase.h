@@ -17,6 +17,8 @@ namespace basecross {
 		//--------------------------------------------------------------------------------------
 		/// 前方宣言
 		//--------------------------------------------------------------------------------------
+		class I_FactionMember;
+
 		namespace Tuple {
 			class TupleSpace;
 		}
@@ -56,8 +58,21 @@ namespace basecross {
 			
 			virtual ~CoordinatorBase() = default;
 
+			/// <summary>
+			/// 生成時に呼び出す処理
+			/// </summary>
+			virtual void OnCreate() {}
+
+			/// <summary>
+			/// 開始時に呼び出す処理(現在は生成時に呼び出している。)
+			/// </summary>
 			virtual void OnStart() {}
+
 			virtual bool OnUpdate() = 0;
+
+			/// <summary>
+			/// 終了時に呼び出したい処理
+			/// </summary>
 			virtual void OnExit() {}
 
 		public:
@@ -103,7 +118,7 @@ namespace basecross {
 
 			template<class T>
 			std::shared_ptr<T> GetThis() {
-				auto Ptr = dynamic_pointer_cast<T>(shared_from_this());
+				auto Ptr = std::dynamic_pointer_cast<T>(shared_from_this());
 				if (Ptr) {
 					return Ptr;
 				}
@@ -159,6 +174,19 @@ namespace basecross {
 
 			virtual ~HereOwnerCoordinatorBase() = default;
 
+			virtual void OnCreate() override {  
+				for (const std::weak_ptr<MemberType>& member : GetMembers()) {
+					SettingMember(member.lock());
+				}
+			}
+
+		protected:
+
+			virtual void SettingMember(const std::shared_ptr<I_FactionMember>& member) {
+				member->SetFactionCoordinator(GetOwner());
+				member->SetAssignFaction(GetThis<CoordinatorBase<MemberType>>());
+			}
+
 		public:
 			//--------------------------------------------------------------------------------------
 			/// アクセッサ
@@ -169,6 +197,15 @@ namespace basecross {
 			/// </summary>
 			/// <returns>所有者</returns>
 			std::shared_ptr<OwnerType> GetOwner() const noexcept { return m_owner.lock(); } 
+
+			/// <summary>
+			/// メンバーの追加
+			/// </summary>
+			/// <param name="member">追加したいメンバー</param>
+			virtual void AddMember(const std::shared_ptr<MemberType>& member) override {
+				CoordinatorBase::AddMember(member);
+				SettingMember(member);
+			}
 		};
 
 	}
