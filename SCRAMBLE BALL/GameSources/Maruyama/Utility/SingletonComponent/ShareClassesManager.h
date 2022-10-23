@@ -11,6 +11,31 @@
 
 namespace basecross {
 
+	//--------------------------------------------------------------------------------------
+	/// 現在使用不可
+	//--------------------------------------------------------------------------------------
+	class I_ShareClass
+	{
+	public:
+			
+	};
+
+	//--------------------------------------------------------------------------------------
+	/// 現在使用不可
+	//--------------------------------------------------------------------------------------
+	template<class T>
+	class ShareCalss : public I_ShareClass
+	{
+		std::vector<std::weak_ptr<T>> m_shareClasses;	//シェアクラスの配列
+	public:
+		void AddShareClass(const std::shared_ptr<T>& shareClass) noexcept { m_shareClasses.push_back(shareClass); }
+
+		std::vector<std::weak_ptr<T>> GetShareClasses() const noexcept { return m_shareClasses; }
+	};
+
+	//--------------------------------------------------------------------------------------
+	/// クラスのシェアを管理するクラス
+	//--------------------------------------------------------------------------------------
 	class ShareClassesManager : public maru::SingletonComponent<ShareClassesManager>
 	{
 	public:
@@ -65,8 +90,32 @@ namespace basecross {
 		template<class T>
 		ShareClassVector GetShareClasses() const noexcept {
 			auto index = type_index(typeid(T));
-			return HasShareType(index) ? m_shareClassesMap.at(index) : ShareClassVector();	//タイプを持っていたらそのオブジェクトのタイプを返す。
+			return HasShareType(index) ? m_shareClassesMap.at(index) : ShareClassVector();
 		}
+
+		/// <summary>
+		/// シェアクラスをテンプレートの型にキャストして取得する。
+		/// </summary>
+		template<class T>
+		std::vector<std::weak_ptr<T>> GetCastShareClasses() const {
+			std::vector<std::weak_ptr<T>> result;
+			auto index = type_index(typeid(T));
+
+			if (!HasShareType(index)) {	//存在しないなら、空の配列を返す。
+				return result;
+			}
+
+			//キャストして配列に入れる。
+			for (auto& shareClass : m_shareClassesMap.at(index)) {
+				auto tPtr = std::dynamic_pointer_cast<T>(shareClass.lock());
+				if (tPtr) {	//キャストに成功したら配列にpushback
+					result.push_back(tPtr);
+				}
+			}
+
+			return result;
+		}
+
 	};
 
 }
