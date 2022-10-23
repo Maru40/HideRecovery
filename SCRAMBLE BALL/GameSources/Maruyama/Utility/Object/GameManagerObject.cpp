@@ -28,7 +28,7 @@
 #include "Maruyama/TaskList/TaskList.h"
 #include "Maruyama/UI/2D/Component/FieldMap.h"
 
-#include "Maruyama/Utility/SingletonComponent/ShareClassManager.h"
+#include "Maruyama/Utility/SingletonComponent/ShareClassesManager.h"
 
 namespace basecross {
 
@@ -46,7 +46,7 @@ namespace basecross {
 		AddComponent<EffectManager>();
 		AddComponent<ScreenFadeManager>();
 		AddComponent<FieldMap>();
-		AddComponent<ShareClassManager>();
+		AddComponent<ShareClassesManager>();
 	}
 
 }

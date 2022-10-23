@@ -2241,7 +2241,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\PatrolCoordinator\HidePlacePatrol.h">
       <Filter>Maruyama\Enemy\Component\AI\Director\FactionCoordinator\Fanction\PatrolCoordinator\HidePlacePatrol</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\ShareClassManager.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\ShareClassesManager.h">
       <Filter>Maruyama\Utility\SingletonComponent\ShareClassManager</Filter>
     </ClInclude>
   </ItemGroup>
@@ -3191,7 +3191,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\PatrolCoordinator\HidePlacePatrol.cpp">
       <Filter>Maruyama\Enemy\Component\AI\Director\FactionCoordinator\Fanction\PatrolCoordinator\HidePlacePatrol</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\ShareClassManager.cpp">
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\ShareClassesManager.cpp">
       <Filter>Maruyama\Utility\SingletonComponent\ShareClassManager</Filter>
     </ClCompile>
   </ItemGroup>

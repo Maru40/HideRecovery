@@ -232,7 +232,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\GameManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\HitStopManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\ScreenFadeManager.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\ShareClassManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\ShareClassesManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\SingletonComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\SlowTimerManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\SoundManager.h" />
@@ -574,7 +574,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\GameManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\HitStopManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\ScreenFadeManager.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\ShareClassManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\ShareClassesManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\SingletonComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\SlowTimerManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\SoundManager.cpp" />
