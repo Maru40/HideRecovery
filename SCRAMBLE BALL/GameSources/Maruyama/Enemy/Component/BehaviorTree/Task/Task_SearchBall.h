@@ -23,6 +23,7 @@ namespace basecross {
 
 	namespace Enemy {
 		class EnemyBase;
+		class I_FactionMember;
 	}
 
 	namespace Task {
@@ -79,6 +80,7 @@ namespace basecross {
 					std::weak_ptr<Transform> m_transform;
 					std::weak_ptr<TargetManager> m_targetManager;
 					std::weak_ptr<VelocityManager> m_velocityManager;
+					std::weak_ptr<Enemy::I_FactionMember> m_factionMember;
 
 				public:
 					SearchBall(const std::shared_ptr<Enemy::EnemyBase>& owner);

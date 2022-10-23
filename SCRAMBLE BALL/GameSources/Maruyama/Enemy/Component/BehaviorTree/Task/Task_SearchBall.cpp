@@ -23,6 +23,11 @@
 
 #include "Maruyama/Utility/SingletonComponent/SingletonComponent.h"
 #include "Maruyama/Enemy/ImpactMap/FieldImpactMap.h"
+#include "Maruyama/Enemy/AIDirector/EnemyAIDirector.h"
+
+#include "Maruyama/Interface/I_FactionMember.h"
+#include "Maruyama/Enemy/AIDirector/FactionCoordinator.h"
+#include "Maruyama/Enemy/AIDirector/PatrolCoordinator.h"
 
 #include "Maruyama/Item/HideItem.h"
 #include "Maruyama/StageObject/HidePlace.h"
@@ -68,6 +73,7 @@ namespace basecross {
 					m_transform = object->GetComponent<Transform>();
 					m_targetManager = object->GetComponent<TargetManager>();
 					m_velocityManager = object->GetComponent<VelocityManager>();
+					m_factionMember = object->GetComponent<Enemy::I_FactionMember>();
 				}
 
 				void SearchBall::OnStart() {
@@ -97,6 +103,16 @@ namespace basecross {
 					}
 
 					//本来はAIDirectorにアクセスして、ターゲットを確定させる。
+					auto aiDirector = Enemy::AIDirector::GetInstance();
+					auto factionMembmer = m_factionMember.lock();
+					auto patrolCoordinator = factionMembmer->GetAssignedFaction<Enemy::PatrolCoordinator>();	//パトロールコーディネーターの取得
+
+					if (!patrolCoordinator) {	//パトロール中でなかったら処理を飛ばす。
+						return nullptr;
+					}
+
+					//パトロールコーディネータからターゲットを取得
+
 
 					//デバッグで隠し場所を検索する。
 					auto hidePlace = maru::Utility::FindComponent<HidePlace>();
