@@ -50,6 +50,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\EnemyAIDirector.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\FactionCoordinator.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\PatrolCoordinator.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\PatrolCoordinator\HidePlacePatrol.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\TupleSpace.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\AstarDebug\AstarEdgeDraw.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\AstarDebug\AstarNodeDraw.h" />
@@ -231,6 +232,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\GameManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\HitStopManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\ScreenFadeManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\ShareClassManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\SingletonComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\SlowTimerManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\SoundManager.h" />
@@ -404,6 +406,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\EnemyAIDirector.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\FactionCoordinator.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\PatrolCoordinator.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\PatrolCoordinator\HidePlacePatrol.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\TupleSpace.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\AstarDebug\AstarEdgeDraw.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\AstarDebug\AstarNodeDraw.cpp" />
@@ -571,6 +574,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\GameManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\HitStopManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\ScreenFadeManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\ShareClassManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\SingletonComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\SlowTimerManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\SoundManager.cpp" />

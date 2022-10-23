@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0"
-  xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Headers">
       <UniqueIdentifier>{4b0a624a-610d-4bc6-b311-2b02a781cdf9}</UniqueIdentifier>
@@ -1172,7 +1171,6 @@
     <Filter Include="Maruyama\Enemy\Component\ImpactMap\Astar\GraphAstar\OpenDataHandler">
       <UniqueIdentifier>{50e6c0a7-8e6b-4970-b63e-7e8066280e3d}</UniqueIdentifier>
     </Filter>
-
     <Filter Include="Watanabe\TestStage\MatchingUILayoutStage">
       <UniqueIdentifier>{86633793-2bc2-4280-8fae-eb2f85f24693}</UniqueIdentifier>
     </Filter>
@@ -1193,7 +1191,12 @@
     </Filter>
     <Filter Include="Maruyama\Utility\TaskList\CommonTasks\TargetChase">
       <UniqueIdentifier>{7b39b6bc-5534-4d52-bd4f-be82491cd13d}</UniqueIdentifier>
-
+    </Filter>
+    <Filter Include="Maruyama\Enemy\Component\AI\Director\FactionCoordinator\Fanction\PatrolCoordinator\HidePlacePatrol">
+      <UniqueIdentifier>{e4a47593-7059-4f9d-8482-5485c63571f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Utility\SingletonComponent\ShareClassManager">
+      <UniqueIdentifier>{63b74b6a-768d-4196-949b-995982b98065}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -2211,7 +2214,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\OpenDataHandler.h">
       <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\GraphAstar\OpenDataHandler</Filter>
     </ClInclude>
-
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\MatchingUILayoutStage.h">
       <Filter>Watanabe\TestStage\MatchingUILayoutStage</Filter>
     </ClInclude>
@@ -2235,7 +2237,12 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\TargetSeek.h">
       <Filter>Maruyama\Utility\TaskList\CommonTasks\TargetChase</Filter>
-
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\PatrolCoordinator\HidePlacePatrol.h">
+      <Filter>Maruyama\Enemy\Component\AI\Director\FactionCoordinator\Fanction\PatrolCoordinator\HidePlacePatrol</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\ShareClassManager.h">
+      <Filter>Maruyama\Utility\SingletonComponent\ShareClassManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -3157,7 +3164,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\OpenDataHandler.cpp">
       <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\GraphAstar\OpenDataHandler</Filter>
     </ClCompile>
-
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\MatchingUILayoutStage.cpp">
       <Filter>Watanabe\TestStage\MatchingUILayoutStage</Filter>
     </ClCompile>
@@ -3181,7 +3187,12 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\TargetSeek.cpp">
       <Filter>Maruyama\Utility\TaskList\CommonTasks\TargetChase</Filter>
-
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\PatrolCoordinator\HidePlacePatrol.cpp">
+      <Filter>Maruyama\Enemy\Component\AI\Director\FactionCoordinator\Fanction\PatrolCoordinator\HidePlacePatrol</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\ShareClassManager.cpp">
+      <Filter>Maruyama\Utility\SingletonComponent\ShareClassManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
