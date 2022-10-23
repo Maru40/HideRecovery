@@ -16,6 +16,8 @@ namespace basecross {
 
 	namespace Enemy {
 
+		class I_FactionMember;
+
 		namespace AICoordinator {
 
 			namespace Patrol {
@@ -43,14 +45,21 @@ namespace basecross {
 
 					HidePlacePatrol(const std::shared_ptr<FactionCoordinator>& owner, const std::vector<std::weak_ptr<EnemyBase>>& members);
 
+					virtual ~HidePlacePatrol() = default;
+
 					void OnStart() override;
 
 					bool OnUpdate() override;
 
-					void OnExit() override {}
+					void OnExit() override;
 
 				private:
-
+					/// <summary>
+					/// すでにメンバーがターゲット指定しているかどうか
+					/// </summary>
+					/// <param name="target">確認したいターゲット</param>
+					/// <returns>すでに別のメンバーがターゲットに指定していたらtrue</returns>
+					bool IsSomeMemberTarget(const std::shared_ptr<GameObject>& target);
 
 				public:
 					/// <summary>

@@ -39,24 +39,52 @@ namespace basecross {
 				{}
 
 				void HidePlacePatrol::OnStart() {
-					
+					PatrolCoordinator::OnStart();
+
+
 				}
 
 				bool HidePlacePatrol::OnUpdate() {
 					return IsEnd();
 				}
 
+				void HidePlacePatrol::OnExit() {
+
+				}
+
+				bool HidePlacePatrol::IsSomeMemberTarget(const std::shared_ptr<GameObject>& target) {
+					for (auto& weakMember : GetMembers()) {
+						auto member = weakMember.lock();
+						if (member->GetTarget() == target) {
+							return true;
+						}
+					}
+
+					return false;
+				}
+
 				std::shared_ptr<GameObject> HidePlacePatrol::SearchTarget(const std::shared_ptr<I_FactionMember>& member) {
 					//探しものがないなら、処理を終了。
-					auto hidePlaces = ShareClassesManager::GetInstance()->GetShareClasses<HidePlace>();
+					auto hidePlaces = ShareClassesManager::GetInstance()->GetCastShareClasses<HidePlace>();
 					if (hidePlaces.size() == 0) {
 						return nullptr;
 					}
 
-					//メンバーの取得
-					for (auto& member : GetMembers()) {
-						member.lock()->GetTarget();
+					//同じターゲット以外を探す。
+					for (auto& weakHidePlace : hidePlaces) {
+						auto hidePlace = weakHidePlace.lock();
+						//nullptrまたは、すでにOpenなら対象にならない。
+						if (hidePlace == nullptr || hidePlace->IsOpen()) {
+							continue;
+						}
+
+						//他のメンバーがターゲットにしていなかったら
+						if (!IsSomeMemberTarget(hidePlace->GetGameObject())) {
+							return hidePlace->GetGameObject();	//そのターゲットを返す。
+						}
 					}
+
+					return nullptr;
 				}
 
 				bool HidePlacePatrol::IsEnd() const {
