@@ -65,7 +65,7 @@ namespace basecross {
 		template<class T>
 		ShareClassVector GetShareClasses() const noexcept {
 			auto index = type_index(typeid(T));
-			return HasShareType(index) ? m_shareClassesMap.at(index) : nullptr;	//タイプを持っていたらそのオブジェクトのタイプを返す。
+			return HasShareType(index) ? m_shareClassesMap.at(index) : ShareClassVector();	//タイプを持っていたらそのオブジェクトのタイプを返す。
 		}
 	};
 
