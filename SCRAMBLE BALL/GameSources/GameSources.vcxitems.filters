@@ -3194,6 +3194,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\ShareClassesManager.cpp">
       <Filter>Maruyama\Utility\SingletonComponent\ShareClassManager</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\EnemyBase.cpp">
+      <Filter>Maruyama\Enemy\Component\Base</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="$(MSBuildThisFileDirectory)..\..\Libs\BaseLib\DxShaders\SlimeVS.hlsl">
