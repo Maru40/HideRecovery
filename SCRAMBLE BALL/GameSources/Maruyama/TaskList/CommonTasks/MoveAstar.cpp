@@ -55,8 +55,6 @@ namespace basecross {
 
 			CalculateMoveAreaRouteQueue();	//œpœjƒGƒŠƒAƒ‹[ƒg‚ÌŽæ“¾
 			m_param->movePositionsParam->positions = CalculateMovePositions();	//œpœjˆÚ“®æ‚ðÝ’è
-
-			Debug::GetInstance()->Log(L"SearchStart");
 		}
 
 		bool MoveAstar::OnUpdate() {
@@ -71,8 +69,6 @@ namespace basecross {
 
 		void MoveAstar::OnExit() {
 			m_taskList->ForceStop();
-
-			Debug::GetInstance()->Log(L"SearchEnd");
 		}
 
 		void MoveAstar::DefineTask() {

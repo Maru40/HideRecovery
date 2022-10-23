@@ -138,7 +138,6 @@ namespace basecross {
 
 					//待機
 					m_param.waitParam->start = [&]() {	//開始イベント
-						Debug::GetInstance()->Log(L"WaitStart"); 
 						if (auto velocityManager = m_velocityManager.lock()) {
 							velocityManager->StartDeseleration();
 						}
