@@ -37,33 +37,6 @@ namespace basecross {
 			HereOwnerCoordinatorBase(owner, members)
 		{}
 
-		void PatrolCoordinator::OnStart() {
-			//メンバーにグループ調整者やタイプを伝える。
-			for (auto& member : GetMembers()) {
-				if (auto iFactionMember = member.lock()->GetGameObject()->GetComponent<I_FactionMember>(false)) {
-					//将来的にデータでまとめる。
-					iFactionMember->SetFactionType(FactionType::Patrol);
-					iFactionMember->SetFactionCoordinator(GetOwner());
-					iFactionMember->SetAssignFaction(GetThis<PatrolCoordinator>());
-				}
-			}
-
-			//メンバーの目的地をそれぞれ変更
-
-		}
-
-		bool PatrolCoordinator::OnUpdate() {
-			PatrolControl();
-
-			//ObserveTuple_FindTarget();
-
-			return false;
-		}
-
-		void PatrolCoordinator::PatrolControl() {
-			
-		}
-
 		void PatrolCoordinator::ObserveTuple_FindTarget() {
 			auto tupleSpace = GetTupleSpace();
 			auto tuple = tupleSpace->Take<Tuple::FindTarget>();

@@ -32,15 +32,7 @@ namespace basecross {
 
 			~PatrolCoordinator() = default;
 
-			void OnStart() override;
-			bool OnUpdate() override;
-			void OnExit() override {}
-
 		private:
-			/// <summary>
-			/// パトロールする場所のコントロール
-			/// </summary>
-			void PatrolControl();
 
 			/// <summary>
 			/// ターゲット発見の通知を受け取ったときにする処理
