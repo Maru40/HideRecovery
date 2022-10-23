@@ -28,6 +28,7 @@
 #include "Maruyama/Interface/I_FactionMember.h"
 #include "Maruyama/Enemy/AIDirector/FactionCoordinator.h"
 #include "Maruyama/Enemy/AIDirector/PatrolCoordinator.h"
+#include "Maruyama/Enemy/AIDirector/PatrolCoordinator/HidePlacePatrol.h"
 
 #include "Maruyama/Item/HideItem.h"
 #include "Maruyama/StageObject/HidePlace.h"
@@ -97,6 +98,8 @@ namespace basecross {
 				}
 
 				std::shared_ptr<GameObject> SearchBall::CalculateTarget() {
+					using HidePlacePtrol = Enemy::AICoordinator::Patrol::HidePlacePatrol;
+
 					auto targetManager = m_targetManager.lock();
 					if (!targetManager) {	//ターゲット管理が存在しないなら処理をしない
 						return nullptr;
@@ -105,19 +108,17 @@ namespace basecross {
 					//本来はAIDirectorにアクセスして、ターゲットを確定させる。
 					auto aiDirector = Enemy::AIDirector::GetInstance();
 					auto factionMembmer = m_factionMember.lock();
-					auto patrolCoordinator = factionMembmer->GetAssignedFaction<Enemy::PatrolCoordinator>();	//パトロールコーディネーターの取得
+					auto patrolCoordinator = factionMembmer->GetAssignedFaction<HidePlacePtrol>();	//パトロールコーディネーターの取得
 
 					if (!patrolCoordinator) {	//パトロール中でなかったら処理を飛ばす。
 						return nullptr;
 					}
 
 					//パトロールコーディネータからターゲットを取得
+					auto target = patrolCoordinator->SearchTarget(factionMembmer);
+					targetManager->SetTarget(target);
 
-
-					//デバッグで隠し場所を検索する。
-					auto hidePlace = maru::Utility::FindComponent<HidePlace>();
-					targetManager->SetTarget(hidePlace->GetGameObject());
-					return hidePlace->GetGameObject();
+					return target;
 				}
 
 				void SearchBall::DefineTask() {
