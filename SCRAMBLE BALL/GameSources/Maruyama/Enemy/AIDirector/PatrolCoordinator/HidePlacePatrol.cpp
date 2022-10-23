@@ -19,6 +19,8 @@
 
 #include "Maruyama/Utility/Utility.h"
 
+#include "Maruyama/Utility/SingletonComponent/ShareClassesManager.h"
+
 namespace basecross {
 
 	namespace Enemy {
@@ -34,23 +36,32 @@ namespace basecross {
 				HidePlacePatrol::HidePlacePatrol(const std::shared_ptr<FactionCoordinator>& owner, const std::vector<std::weak_ptr<EnemyBase>>& members) :
 					PatrolCoordinator(owner, members),
 					m_param(Parametor())
-				{
-					m_hidePlaces = maru::Utility::FindWeakPtrComponents<HidePlace>();
-				}
+				{}
 
 				void HidePlacePatrol::OnStart() {
 					
 				}
 
 				bool HidePlacePatrol::OnUpdate() {
-					//探しものがないなら、検索。
-					if (m_hidePlaces.size() == 0) {
-						m_hidePlaces = maru::Utility::FindWeakPtrComponents<HidePlace>();
+					return IsEnd();
+				}
+
+				std::shared_ptr<GameObject> HidePlacePatrol::SearchTarget(const std::shared_ptr<I_FactionMember>& member) {
+					//探しものがないなら、処理を終了。
+					auto hidePlaces = ShareClassesManager::GetInstance()->GetShareClasses<HidePlace>();
+					if (hidePlaces.size() == 0) {
+						return nullptr;
 					}
 
+					//メンバーの取得
+					for (auto& member : GetMembers()) {
+						member.lock()->GetTarget();
+					}
+				}
 
-
-					return false;
+				bool HidePlacePatrol::IsEnd() const {
+					auto hidePlaces = ShareClassesManager::GetInstance()->GetShareClasses<HidePlace>();
+					return hidePlaces.size() == 0;	//隠し場所が0なら処理が終了
 				}
 
 			}

@@ -38,8 +38,6 @@ namespace basecross {
 				private:
 					Parametor m_param;
 
-					std::vector<std::weak_ptr<HidePlace>> m_hidePlaces;	//隠し場所全て。
-
 				public:
 					HidePlacePatrol(const std::shared_ptr<FactionCoordinator>& owner);
 
@@ -55,12 +53,18 @@ namespace basecross {
 
 
 				public:
+					/// <summary>
+					/// メンバーからパトロールターゲットの検索を依頼された時の処理
+					/// </summary>
+					/// <param name="member">検索依頼を出したメンバー</param>
+					/// <returns>パトロールターゲット</returns>
+					std::shared_ptr<GameObject> SearchTarget(const std::shared_ptr<I_FactionMember>& member);
 
 					//--------------------------------------------------------------------------------------
 					/// アクセッサ
 					//--------------------------------------------------------------------------------------
 
-					
+					bool IsEnd() const;
 
 				};
 
