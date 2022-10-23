@@ -15,7 +15,7 @@ namespace basecross {
 		//--------------------------------------------------------------------------------------
 		/// 前方宣言
 		//--------------------------------------------------------------------------------------
-		enum class FactionType;
+		//enum class FactionType;
 		class EnemyBase;
 		template<class T>
 		class CoordinatorBase;
@@ -26,7 +26,7 @@ namespace basecross {
 		//--------------------------------------------------------------------------------------
 		struct I_FactionMember_Parametor
 		{
-			FactionType factionType = FactionType(0);					//グループタイプ
+			//FactionType factionType = FactionType(0);					//グループタイプ
 			std::weak_ptr<FactionCoordinator> factionCoordinator;		//グループ調整者
 			std::weak_ptr<CoordinatorBase<EnemyBase>> assignedFaction;	//アサインしたグループ
 		};
@@ -44,17 +44,17 @@ namespace basecross {
 		public:
 			virtual ~I_FactionMember() = default;
 
-			/// <summary>
-			/// グループタイプの設定
-			/// </summary>
-			/// <param name="type">グループタイプ</param>
-			void SetFactionType(const FactionType& type) noexcept { m_param.factionType = type; }
+			///// <summary>
+			///// グループタイプの設定
+			///// </summary>
+			///// <param name="type">グループタイプ</param>
+			//void SetFactionType(const FactionType& type) noexcept { m_param.factionType = type; }
 
-			/// <summary>
-			/// グループタイプの取得
-			/// </summary>
-			/// <returns>グループタイプ</returns>
-			FactionType GetFactionType() const noexcept { m_param.factionType; }
+			///// <summary>
+			///// グループタイプの取得
+			///// </summary>
+			///// <returns>グループタイプ</returns>
+			//FactionType GetFactionType() const noexcept { m_param.factionType; }
 
 			/// <summary>
 			/// グループ調整者の設定
