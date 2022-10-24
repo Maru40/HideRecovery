@@ -111,6 +111,14 @@ namespace Online
 	/// </summary>
 	class OnlineManager : public ExitGames::LoadBalancing::Listener
 	{
+	public:
+		/// <summary>
+		/// 無効なオンラインプレイヤー番号
+		/// </summary>
+		static constexpr int INVALID_ONLINE_PLAYER_NUMBER = 0;
+
+	private:
+
 		/// <summary>
 		/// 自分自身のインスタンス
 		/// </summary>

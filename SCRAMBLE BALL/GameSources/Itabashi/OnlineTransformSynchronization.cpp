@@ -38,7 +38,7 @@ namespace Online
 		auto transform = m_transform.lock();
 		int localNumber = OnlineManager::GetLocalPlayer().getNumber();
 
-		if (!transform || m_playerNumber == 0 || m_playerNumber != localNumber)
+		if (!transform || m_onlinePlayerNumber == OnlineManager::INVALID_ONLINE_PLAYER_NUMBER || m_onlinePlayerNumber != localNumber)
 		{
 			return;
 		}
@@ -59,7 +59,7 @@ namespace Online
 	{
 		auto transform = m_transform.lock();
 
-		if (!transform || m_playerNumber != playerNumber || eventCode != EVENT_CODE)
+		if (!transform || m_onlinePlayerNumber != playerNumber || eventCode != EVENT_CODE)
 		{
 			return;
 		}

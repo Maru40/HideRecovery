@@ -41,10 +41,10 @@ namespace basecross
 		auto playerObject = GetStage()->AddGameObject<VillainPlayerObject>();
 
 		auto onlineController = playerObject->GetComponent<Online::PlayerOnlineController>();
-		onlineController->SetPlayerNumber(playerNumber);
+		onlineController->SetOnlinePlayerNumber(playerNumber);
 
 		auto onlineTransform = playerObject->GetComponent<Online::OnlineTransformSynchronization>();
-		onlineTransform->SetPlayerNumber(playerNumber);
+		onlineTransform->SetOnlinePlayerNumber(playerNumber);
 
 		std::shared_ptr<PlayerSpawnPoint> spawnPoint;
 

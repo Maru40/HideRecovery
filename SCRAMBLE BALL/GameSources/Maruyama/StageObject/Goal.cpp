@@ -203,7 +203,7 @@ namespace basecross {
 
 		auto hidePosition = GoalProcess(other, item, hidePlace);
 
-		auto data = OnlineGoalData(m_param.team, onlineController->GetPlayerNumber(), item->GetItemId(), hidePlace->GetObjectId());
+		auto data = OnlineGoalData(m_param.team, onlineController->GetOnlinePlayerNumber(), item->GetItemId(), hidePlace->GetObjectId());
 		Online::OnlineManager::RaiseEvent(false, (std::uint8_t*)&data, sizeof(OnlineGoalData), EXECUTE_GOAL_EVENT_CODE);
 	}
 

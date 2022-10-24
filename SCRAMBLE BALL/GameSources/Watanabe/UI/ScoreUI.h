@@ -6,7 +6,7 @@
 namespace basecross {
 	class ScoreUI :public UIObjectBase {
 		// 表記としてのプレイヤー番号
-		int m_playerNumber;
+		int m_onlinePlayerNumber;
 		// 処理内のプレイヤー番号
 		int m_gamePlayerNumber;
 		team::TeamType m_teamType;

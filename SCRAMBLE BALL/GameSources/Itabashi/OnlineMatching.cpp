@@ -89,7 +89,7 @@ namespace Online
 
 	void OnlineMatching::Reset()
 	{
-		std::fill_n(m_playerNumbers, MAX_PLAYER_NUM, 0);
+		std::fill_n(m_playerNumbers, MAX_PLAYER_NUM, OnlineManager::INVALID_ONLINE_PLAYER_NUMBER);
 	}
 
 	void OnlineMatching::ShuffleTeam()

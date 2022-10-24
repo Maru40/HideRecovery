@@ -59,12 +59,9 @@ namespace Online
 		/// アイテムの取得を実行するオンラインイベントコード
 		/// </summary>
 		static constexpr std::uint8_t EXECUTE_ACQUISITION_EVENT_CODE = 3;
-		static constexpr std::uint8_t TRY_ITEM_HIDE_EVENT_CODE = 4;
-		static constexpr std::uint8_t EXECUTE_ITEM_HIDE_EVENT_CODE = 5;
 		static constexpr std::uint8_t EXECUTE_MOVE_EVENT_CODE = 6;
 		static constexpr std::uint8_t EXECUTE_SHOT_EVENT_CODE = 7;
 		static constexpr std::uint8_t EXECUTE_DAMAGE_EVENT_CODE = 8;
-		static constexpr std::uint8_t EXECUTE_TACKLE_EVENT_CODE = 9;
 		static constexpr std::uint8_t EXECUTE_BULLET_DESTROY_EVENT_CODE = 11;
 		static constexpr std::uint8_t EXECUTE_AIM_STATE_CHANGE_EVENT_CODE = 12;
 		static constexpr std::uint8_t EXECUTE_CAMERA_FORWARD_EVENT_CODE = 13;
@@ -103,7 +100,7 @@ namespace Online
 		/// <summary>
 		/// 対応するプレイヤー番号
 		/// </summary>
-		int m_playerNumber = 0;
+		int m_onlinePlayerNumber = OnlineManager::INVALID_ONLINE_PLAYER_NUMBER;
 
 		int m_gamePlayerNumber = 0;
 
@@ -136,12 +133,6 @@ namespace Online
 		/// </summary>
 		/// <param name="ownerShipData">アイテム取得情報</param>
 		void ExecuteAcquisitionEvent(const ItemOwnerShipData& ownerShipData);
-
-		void TryItemHide();
-
-		void TryItemHideEvent(int playerNumber);
-
-		void ExecuteItemHideEvent(int playerNumber, const Vec3& position);
 
 		/// <summary>
 		/// 弾を撃つ
@@ -179,9 +170,6 @@ namespace Online
 		/// <param name="damage">ダメージ量</param>
 		void ExecuteDamagedEvent(int attackerPlayerNumber, int damagedPlayerNumber, int damage);
 
-		void TryTackle();
-
-		void ExecuteTackle(int playerNumber);
 		/// <summary>
 		/// エイムを試す
 		/// </summary>
@@ -211,8 +199,6 @@ namespace Online
 
 		void AccessHideInputer();
 
-		void MapCursorMove();
-
 	public:
 
 		PlayerOnlineController(const std::shared_ptr<GameObject>& owner);
@@ -229,12 +215,12 @@ namespace Online
 		/// 対応するプレイヤー番号の設定
 		/// </summary>
 		/// <param name="playerNumber">プレイヤー番号</param>
-		void SetPlayerNumber(int playerNumber) { m_playerNumber = playerNumber; }
+		void SetOnlinePlayerNumber(int playerNumber) { m_onlinePlayerNumber = playerNumber; }
 		/// <summary>
 		/// 対応するプレイヤー番号の取得
 		/// </summary>
 		/// <returns>プレイヤー番号</returns>
-		int GetPlayerNumber() const { return m_playerNumber; }
+		int GetOnlinePlayerNumber() const { return m_onlinePlayerNumber; }
 
 		void SetGamePlayerNumber(int gamePlayerNumber) { m_gamePlayerNumber = gamePlayerNumber; }
 

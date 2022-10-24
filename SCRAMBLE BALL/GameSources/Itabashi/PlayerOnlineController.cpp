@@ -119,7 +119,7 @@ namespace Online
 		{
 			auto controller = gameObject->GetComponent<PlayerOnlineController>(false);
 
-			if (controller && controller->GetPlayerNumber() == playerNumber)
+			if (controller && controller->GetOnlinePlayerNumber() == playerNumber)
 			{
 				return controller;
 			}
@@ -152,7 +152,7 @@ namespace Online
 
 	void PlayerOnlineController::ExecuteCameraForward(int playerNumber, const Vec3& cameraForward)
 	{
-		if (m_playerNumber != playerNumber)
+		if (m_onlinePlayerNumber != playerNumber)
 		{
 			return;
 		}
@@ -214,7 +214,7 @@ namespace Online
 
 	void PlayerOnlineController::ExecuteMove(int playerNumber, const Vec3& moveVector, const Vec3& forward)
 	{
-		if (m_playerNumber != playerNumber)
+		if (m_onlinePlayerNumber != playerNumber)
 		{
 			return;
 		}
@@ -250,7 +250,7 @@ namespace Online
 		{
 			acquisitionManager->HideItemAcquisitionEvent(GetGameObject());
 			acquisitionManager->ItemAcquisition(item);
-			OnlineManager::RaiseEvent(false, (std::uint8_t*)&ItemOwnerShipData(itemId, m_playerNumber), sizeof(ItemOwnerShipData), EXECUTE_ACQUISITION_EVENT_CODE);
+			OnlineManager::RaiseEvent(false, (std::uint8_t*)&ItemOwnerShipData(itemId, m_onlinePlayerNumber), sizeof(ItemOwnerShipData), EXECUTE_ACQUISITION_EVENT_CODE);
 			return;
 		}
 
@@ -262,7 +262,7 @@ namespace Online
 		auto& localPlayer = OnlineManager::GetLocalPlayer();
 
 		// 自分がマスターで無いか、対応したプレイヤーではないなら
-		if (!localPlayer.getIsMasterClient() || m_playerNumber != localPlayer.getNumber())
+		if (!localPlayer.getIsMasterClient() || m_onlinePlayerNumber != localPlayer.getNumber())
 		{
 			return;
 		}
@@ -296,7 +296,7 @@ namespace Online
 	void PlayerOnlineController::ExecuteAcquisitionEvent(const ItemOwnerShipData& ownerShipData)
 	{
 		// 取得したのが自分ではないのなら
-		if (m_playerNumber != ownerShipData.playerNumber)
+		if (m_onlinePlayerNumber != ownerShipData.playerNumber)
 		{
 			return;
 		}
@@ -310,73 +310,6 @@ namespace Online
 
 		acquisitionManager->HideItemAcquisitionEvent(GetGameObject());
 		acquisitionManager->ItemAcquisition(Item::StageFindToItemId(GetStage(), ownerShipData.itemId));
-	}
-
-	void PlayerOnlineController::TryItemHide()
-	{
-		if (!PlayerInputer::IsPutHideItem())
-		{
-			return;
-		}
-
-		auto hideItemManager = m_hideItemManager.lock();
-
-		if (!hideItemManager || !hideItemManager->CanPut())
-		{
-			return;
-		}
-
-		auto& localPlayer = OnlineManager::GetLocalPlayer();
-		int localNumber = localPlayer.getNumber();
-
-		if (localPlayer.getIsMasterClient())
-		{
-			auto position = hideItemManager->PutHideItem();
-			OnlineManager::RaiseEvent(false, (std::uint8_t*)&HideItemOnlineData(localNumber, position), sizeof(HideItemOnlineData), EXECUTE_ITEM_HIDE_EVENT_CODE);
-			return;
-		}
-
-		OnlineManager::RaiseEvent(false, (std::uint8_t*)&localNumber, sizeof(int), TRY_ITEM_HIDE_EVENT_CODE);
-	}
-
-	void PlayerOnlineController::TryItemHideEvent(int playerNumber)
-	{
-		auto& localPlayer = OnlineManager::GetLocalPlayer();
-
-		if (!localPlayer.getIsMasterClient() || m_playerNumber != localPlayer.getNumber())
-		{
-			return;
-		}
-
-		auto onlineController = GetPlayerOnlineController(playerNumber);
-
-		if (!onlineController)
-		{
-			return;
-		}
-
-		auto hideItemManager = onlineController->m_hideItemManager.lock();
-
-		if (hideItemManager && hideItemManager->CanPut())
-		{
-			auto position = hideItemManager->PutHideItem();
-			OnlineManager::RaiseEvent(false, (std::uint8_t*)&HideItemOnlineData(playerNumber, position), sizeof(HideItemOnlineData), EXECUTE_ITEM_HIDE_EVENT_CODE);
-		}
-	}
-
-	void PlayerOnlineController::ExecuteItemHideEvent(int playerNumber, const Vec3& position)
-	{
-		if (m_playerNumber != playerNumber)
-		{
-			return;
-		}
-
-		auto hideItemManager = m_hideItemManager.lock();
-
-		if (hideItemManager)
-		{
-			hideItemManager->PutHideItem(position);
-		}
 	}
 
 	void PlayerOnlineController::Shot()
@@ -421,7 +354,7 @@ namespace Online
 
 	void PlayerOnlineController::ExecuteShot(int playerNumber, const Vec3& bulletPosition, const Vec3& bulletDirection, int instanceId)
 	{
-		if (playerNumber != m_playerNumber)
+		if (playerNumber != m_onlinePlayerNumber)
 		{
 			return;
 		}
@@ -486,7 +419,7 @@ namespace Online
 
 		auto attackerOnlineController = damageData.attacker->GetComponent<PlayerOnlineController>();
 		auto damagedOnlineController = playerStatus->GetGameObject()->GetComponent<PlayerOnlineController>();
-		OnlineDamageData data(attackerOnlineController->GetPlayerNumber(), damagedOnlineController->GetPlayerNumber(), damageData.value);
+		OnlineDamageData data(attackerOnlineController->GetOnlinePlayerNumber(), damagedOnlineController->GetOnlinePlayerNumber(), damageData.value);
 
 		OnlineManager::RaiseEvent(false, (std::uint8_t*)&data, sizeof(OnlineDamageData), EXECUTE_DAMAGE_EVENT_CODE);
 	}
@@ -495,7 +428,7 @@ namespace Online
 	{
 		auto playerStatus = m_playerStatus.lock();
 
-		if (!playerStatus || m_playerNumber != damagedPlayerNumber)
+		if (!playerStatus || m_onlinePlayerNumber != damagedPlayerNumber)
 		{
 			return;
 		}
@@ -503,42 +436,6 @@ namespace Online
 		auto attackerOnlineController = GetPlayerOnlineController(attackerPlayerNumber);
 
 		playerStatus->AddDamage(DamageData(damage, attackerOnlineController->GetGameObject()));
-	}
-
-	void PlayerOnlineController::TryTackle()
-	{
-		if (!PlayerInputer::IsTackle())
-		{
-			return;
-		}
-
-		auto tackleAttack = m_tackleAttack.lock();
-
-		if (!tackleAttack || tackleAttack->IsTackle())
-		{
-			return;
-		}
-		
-		tackleAttack->ForceStartAttack();
-
-		OnlineManager::RaiseEvent(false, (uint8_t*)&m_playerNumber, sizeof(int), EXECUTE_TACKLE_EVENT_CODE);
-	}
-
-	void PlayerOnlineController::ExecuteTackle(int playerNumber)
-	{
-		if (m_playerNumber != playerNumber)
-		{
-			return;
-		}
-
-		auto tackleAttack = m_tackleAttack.lock();
-
-		if (!tackleAttack)
-		{
-			return;
-		}
-
-		tackleAttack->StartAttack();
 	}
 
 	void PlayerOnlineController::TryAim()
@@ -586,7 +483,7 @@ namespace Online
 
 	void PlayerOnlineController::ExecuteAimEvent(int playerNumber, bool isAim)
 	{
-		if (m_playerNumber != playerNumber)
+		if (m_onlinePlayerNumber != playerNumber)
 		{
 			return;
 		}
@@ -658,7 +555,7 @@ namespace Online
 
 	void PlayerOnlineController::ExecuteTeleportEvent(int playerNumber, const Vec3& teleportPosition, const Vec3& cameraPosition)
 	{
-		if (m_playerNumber != playerNumber)
+		if (m_onlinePlayerNumber != playerNumber)
 		{
 			return;
 		}
@@ -675,10 +572,6 @@ namespace Online
 				accessHide->Access();
 			}
 		}
-	}
-
-	void PlayerOnlineController::MapCursorMove() {
-		
 	}
 
 	void PlayerOnlineController::OnLateStart()
@@ -705,7 +598,7 @@ namespace Online
 
 	void PlayerOnlineController::OnUpdate()
 	{
-		if (m_playerNumber == 0 || m_playerNumber != OnlineManager::GetLocalPlayer().getNumber())
+		if (m_onlinePlayerNumber == 0 || m_onlinePlayerNumber != OnlineManager::GetLocalPlayer().getNumber())
 		{
 			return;
 		}
@@ -734,22 +627,17 @@ namespace Online
 
 		TryAquisition();
 
-		//TryItemHide();
-
 		Shot();
-
-		//TryTackle();
 
 		TryAim();
 
 		AccessHideInputer();
-
-		MapCursorMove();
 	}
 
 	void PlayerOnlineController::OnCustomEventAction(int playerNumber, std::uint8_t eventCode, const std::uint8_t* bytes)
 	{
-		if (m_playerNumber == 0)
+		// オンラインプレイヤー番号が無効なら
+		if (m_onlinePlayerNumber == OnlineManager::INVALID_ONLINE_PLAYER_NUMBER)
 		{
 			return;
 		}
@@ -775,19 +663,6 @@ namespace Online
 			return;
 		}
 
-		if (eventCode == TRY_ITEM_HIDE_EVENT_CODE)
-		{
-			TryItemHideEvent(playerNumber);
-			return;
-		}
-
-		if (eventCode == EXECUTE_ITEM_HIDE_EVENT_CODE)
-		{
-			auto data = ConvertByteData<HideItemOnlineData>(bytes);
-			ExecuteItemHideEvent(data.playerNumber, data.position);
-			return;
-		}
-
 		if (eventCode == EXECUTE_MOVE_EVENT_CODE)
 		{
 			auto moveData = ConvertByteData<OnlineMoveData>(bytes);
@@ -806,12 +681,6 @@ namespace Online
 		{
 			auto data = ConvertByteData<OnlineDamageData>(bytes);
 			ExecuteDamagedEvent(data.attackerPlayerNumber, data.damagedPlayerNumber, data.damage);
-			return;
-		}
-
-		if (eventCode == EXECUTE_TACKLE_EVENT_CODE)
-		{
-			ExecuteTackle(playerNumber);
 			return;
 		}
 

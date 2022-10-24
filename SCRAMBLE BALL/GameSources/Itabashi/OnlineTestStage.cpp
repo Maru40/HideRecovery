@@ -8,7 +8,7 @@ namespace basecross
 	class TestController : public Component
 	{
 		std::weak_ptr<Transform> m_transform;
-		int m_playerNumber = 0;
+		int m_onlinePlayerNumber = 0;
 
 	public:
 		TestController(const std::shared_ptr<GameObject>& owner) :
@@ -27,7 +27,7 @@ namespace basecross
 			auto transform = m_transform.lock();
 			int localNumber = Online::OnlineManager::GetLocalPlayer().getNumber();
 
-			if (!transform || m_playerNumber == 0 || m_playerNumber != localNumber)
+			if (!transform || m_onlinePlayerNumber == 0 || m_onlinePlayerNumber != localNumber)
 			{
 				return;
 			}
@@ -59,9 +59,9 @@ namespace basecross
 			}
 		}
 
-		void SetPlayerNumber(int playerNumber)
+		void SetOnlinePlayerNumber(int playerNumber)
 		{
-			m_playerNumber = playerNumber;
+			m_onlinePlayerNumber = playerNumber;
 		}
 	};
 
@@ -114,9 +114,9 @@ namespace basecross
 			drawer->SetDiffuse(cols[i]);
 
 			auto testComponent = testObject->AddComponent<TestController>();
-			testComponent->SetPlayerNumber(i + 1);
+			testComponent->SetOnlinePlayerNumber(i + 1);
 			auto onlineTransform = testObject->AddComponent<Online::OnlineTransformSynchronization>();
-			onlineTransform->SetPlayerNumber(i + 1);
+			onlineTransform->SetOnlinePlayerNumber(i + 1);
 		}
 
 		bool connect = Online::OnlineManager::Connect();
