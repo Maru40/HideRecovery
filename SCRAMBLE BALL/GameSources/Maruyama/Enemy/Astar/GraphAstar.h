@@ -157,6 +157,10 @@ namespace basecross {
 			return m_graphMap.at(areaIndex);
 		}
 
+		const std::shared_ptr<const GraphType> GetAreaGraph() const { 
+			return m_areaGraph;
+		}
+
 		/// <summary>
 		/// ƒOƒ‰ƒt‚ª“o˜^‚³‚ê‚Ä‚¢‚é‚©‚Ç‚¤‚©
 		/// </summary>
