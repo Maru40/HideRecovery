@@ -107,13 +107,15 @@ namespace basecross {
 			: m_param(parametor)
 		{}
 
-		int Factory_ImpactMap::CalculateAreaIndex(const int widthCount, const int depthCount) {
+		int Factory_ImpactMap::CalculateAreaIndex(const int widthCount, const int depthCount, const int numLoopDepth) {
+			int maxDepth = (numLoopDepth / m_param.areaNodeCount.depth) + 1;
 			int width = widthCount / m_param.areaNodeCount.width;
 			int depth = depthCount / m_param.areaNodeCount.depth;
 
-			return width + (depth * 2);
+			return (width * maxDepth) + (depth);
 		}
 
+		//パラメータからノードの生成
 		void Factory_ImpactMap::CreateNodes(const std::shared_ptr<GraphAstar>& astar) {
 			using AreaNodeCount = Parametor::AreaNodeCount;
 
@@ -134,13 +136,84 @@ namespace basecross {
 					auto offset = Vec3(widthOffset, m_param.createHeight, depthOffset);
 
 					auto position = startPosition + offset;
-					astar->AddNode(position, ImpactData(CalculateAreaIndex(i, j))); //ノードの追加
+					astar->AddNode(position, ImpactData(CalculateAreaIndex(i, j, (int)numLoopDepth))); //ノードの追加
 				}
 			}
 		}
 
 		void Factory_ImpactMap::CreateEdges(const std::shared_ptr<GraphAstar>& astar) {
 			astar->AddEdges();
+		}
+
+		void Factory_ImpactMap::CreateAreaEdges(
+			const std::shared_ptr<GraphAstar>& astar,
+			const int widthCount,
+			const int depthCount,
+			const int numLoopWidth,
+			const int numLoopDepth
+		) {
+			//int maxDepth = numLoopDepth / m_param.areaNodeCount.depth;
+
+			auto graph = astar->GetReWiritingAreaGraph();
+			int index = (widthCount * numLoopDepth) + depthCount;
+
+			auto leftDepth = numLoopDepth * widthCount;	//手前端
+
+			int right = (index + 1);
+			int left = (index - 1);
+			int upper = index + (numLoopDepth);
+			int bottom = index - numLoopDepth;
+
+			int rightUpper = upper + 1;
+			int rightBottom = bottom + 1;
+			int leftUpper = upper - 1;
+			int leftBottom = bottom - 1;
+
+			int maxIndex = numLoopWidth * numLoopDepth;
+
+			//上が追加できるなら
+			if (upper < maxIndex) {
+				graph->AddEdge(std::make_shared<AstarEdge>(index, upper));
+			}
+
+			//下が追加できるなら
+			if (bottom >= 0) {
+				graph->AddEdge(std::make_shared<AstarEdge>(index, bottom));
+			}
+
+			//右が追加できるなら
+			if (right < numLoopDepth * (widthCount + 1) && right < maxIndex) {
+				graph->AddEdge(std::make_shared<AstarEdge>(index, right));
+			}
+
+			//左が追加できるなら(左が、左端より大きいなら)
+			if (left >= leftDepth) {
+				graph->AddEdge(std::make_shared<AstarEdge>(index, left));
+			}
+
+			//右上が追加できるなら
+			auto maxRightUpper = (leftDepth + numLoopDepth) + numLoopDepth;
+			if (rightUpper < maxIndex && rightUpper < maxRightUpper) {
+ 				graph->AddEdge(std::make_shared<AstarEdge>(index, rightUpper));
+			}
+
+			//右下が追加できるなら
+			auto maxRightBottom = (leftDepth);
+			if (rightBottom >= 0 && rightBottom < maxRightBottom) {
+				graph->AddEdge(std::make_shared<AstarEdge>(index, rightBottom));
+			}
+
+			//左上が追加できるなら
+			auto minLeftUpper = leftDepth + numLoopDepth;
+			if (leftUpper >= minLeftUpper && leftUpper < maxIndex) {
+				graph->AddEdge(std::make_shared<AstarEdge>(index, leftUpper));
+			}
+
+			//左下が追加できるなら
+			auto minLeftBottom = leftDepth - numLoopDepth;
+			if (leftBottom >= 0 && leftBottom >= minLeftBottom) {
+				graph->AddEdge(std::make_shared<AstarEdge>(index, leftBottom));
+			}
 		}
 
 		std::shared_ptr<GraphAstar> Factory_ImpactMap::CreateGraphAstar() {
@@ -163,8 +236,41 @@ namespace basecross {
 
 		void Factory_ImpactMap::AddEdges(const std::shared_ptr<GraphAstar>& astar, const Parametor& parametor) {
 			m_param = parametor;
-			astar->ClearEdges(); //エッジのクリア
-			CreateEdges(astar);   //エッジの生成
+			astar->ClearEdges();	//エッジのクリア
+			CreateEdges(astar);		//エッジの生成
+		}
+
+		void Factory_ImpactMap::AddAreaNodes(const std::shared_ptr<GraphAstar>& astar, const Parametor& parametor) {
+			m_param = parametor;
+			astar->CreateAreaAstarGraph();
+		}
+
+		void Factory_ImpactMap::AddAreaEdges(const std::shared_ptr<GraphAstar>& astar, const Parametor& parametor) {
+			m_param = parametor;
+			auto graph = astar->GetReWiritingAreaGraph();
+
+			using AreaNodeCount = Parametor::AreaNodeCount;
+
+			const maru::Rect& rect = m_param.rect;
+			const Vec3& startPosition = rect.CalculateStartPosition();
+			const float& intervalRange = m_param.intervalRange;
+
+			//基準となる横の大きさと、縦の大きさ
+			int numLoopWidth = static_cast<int>(rect.width / intervalRange);
+			int numLoopDepth = static_cast<int>(rect.depth / intervalRange);
+
+			int width = (numLoopWidth / m_param.areaNodeCount.width) + 1;
+			int depth = (numLoopDepth / m_param.areaNodeCount.depth) + 1;
+
+			//縦と横に指定した数だけノードを生成。
+			for (int i = 0; i < width; i++) {
+				for (int j = 0; j < depth; j++) {
+					CreateAreaEdges(astar, i, j, width, depth);
+				}
+			}
+
+			auto nodes = astar->GetAreaGraph()->GetNodes();
+			auto edges = astar->GetAreaGraph()->GetEdgesMap();
 		}
 
 		void Factory_ImpactMap::AddNodesEdges(const std::shared_ptr<GraphAstar>& astar, const Parametor& parametor) {
@@ -222,10 +328,24 @@ namespace basecross {
 			factory.AddEdges(m_baseAstar, parametor);
 		}
 
+		void ImpactMap::AddAreaNodes(const Factory_Parametor& parametor) {
+			auto factory = Factory_ImpactMap(parametor);
+			factory.AddAreaNodes(m_baseAstar, parametor);
+		}
+
+		void ImpactMap::AddAreaEdges(const Factory_Parametor& parametor) {
+			auto factory = Factory_ImpactMap(parametor);
+			factory.AddAreaEdges(m_baseAstar, parametor);
+		}
+
 		void ImpactMap::AddImpactData(const Factory_Parametor& parametor) {
 			//現在はこの関数からほとんどのノードを生成している。
 			AddNodes(parametor);
 			AddEdges(parametor);
+
+			//仮でArea用のノードやエッジも制作(代案検討中)
+			AddAreaNodes(parametor);
+			AddAreaEdges(parametor);
 		}
 
 		void ImpactMap::ClearNodes() {
@@ -335,7 +455,7 @@ namespace basecross {
 		void ImpactMap::CreateDebugDraw(const bool isDraw) {
 			//デバッグドローの追加
 			//return;
-			auto graph = m_baseAstar->GetAreaGraph();
+			auto graph = m_baseAstar->GetGraph();
 			m_nodeDraw = GetStage()->AddGameObject<GameObject>()->AddComponent<AstarNodeDraw>(graph);
 			m_edgeDraw = GetStage()->AddGameObject<GameObject>()->AddComponent<AstarEdgeDraw>(graph);
 			SetIsDebugDraw(isDraw);

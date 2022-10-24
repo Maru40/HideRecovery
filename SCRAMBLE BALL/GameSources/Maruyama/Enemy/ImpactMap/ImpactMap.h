@@ -133,7 +133,7 @@ namespace basecross {
 			/// <param name="widthCount">横のカウント</param>
 			/// <param name="depthCount">縦のカウント</param>
 			/// <returns>エリアインデックス</returns>
-			int CalculateAreaIndex(const int widthCount, const int depthCount);
+			int CalculateAreaIndex(const int widthCount, const int depthCount, const int numLoopDepth);
 			
 			/// <summary>
 			/// ノードを全て生成
@@ -146,6 +146,17 @@ namespace basecross {
 			/// </summary>
 			/// <param name="astar">エッジを生成するGraphAstarのポインタ</param>
 			void CreateEdges(const std::shared_ptr<GraphAstar>& astar);
+
+			/// <summary>
+			/// エリアエッジの生成(代案検討中)
+			/// </summary>
+			void CreateAreaEdges(
+				const std::shared_ptr<GraphAstar>& astar,
+				const int widthCount,
+				const int depthCount,
+				const int numLoopWidth,
+				const int numLoopDepth
+			);
 
 		public:
 			/// <summary>
@@ -174,6 +185,20 @@ namespace basecross {
 			/// <param name="astar">影響マップのグラフデータ</param>
 			/// <param name="parametor">生成用のパラメータ</param>
 			void AddEdges(const std::shared_ptr<GraphAstar>& astar, const Parametor& parametor);
+
+			/// <summary>
+			/// 仮でエリアノード生成をする。
+			/// </summary>
+			/// <param name="astar">影響マップのグラフデータ</param>
+			/// <param name="parametor">生成用のパラメータ</param>
+			void AddAreaNodes(const std::shared_ptr<GraphAstar>& astar, const Parametor& parametor);
+
+			/// <summary>
+			/// 仮でエリアエッジ生成をする。
+			/// </summary>
+			/// <param name="astar"></param>
+			/// <param name="parametor"></param>
+			void AddAreaEdges(const std::shared_ptr<GraphAstar>& astar, const Parametor& parametor);
 
 			/// <summary>
 			/// エッジとノードの両方を生成する。
@@ -271,6 +296,18 @@ namespace basecross {
 			/// </summary>
 			/// <param name="parametor">影響マップ生成用のパラメータ</param>
 			void AddEdges(const Factory_Parametor& parametor);
+
+			/// <summary>
+			/// エリアノードの生成(仮で実装、代案考え中)
+			/// </summary>
+			/// <param name="parametor">影響マップ生成用のパラメータ</param>
+			void AddAreaNodes(const Factory_Parametor& parametor);
+
+			/// <summary>
+			/// エリアエッジの生成(仮で実装、代案考え中)
+			/// </summary>
+			/// <param name="parametor">影響マップ生成用のパラメータ</param>
+			void AddAreaEdges(const Factory_Parametor& parametor);
 
 			/// <summary>
 			/// ノードとエッジを追加生成する。
