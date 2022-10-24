@@ -74,7 +74,8 @@ namespace basecross {
 			const float IntervalRange = m_param.intervalRange;	//影響マップの各ノードの距離
 			SettingImpactMap(m_floors, IntervalRange);			//影響マップのセッティング
 
-			m_impactMap->GetGraphAstar()->SettingGraphMapCenterPositions();	//それぞれのエリアのグラフの中心位置を設定する。
+			//m_impactMap->GetGraphAstar()->CreateAreaAstarGraph();	//それぞれのエリアのグラフの中心位置を設定する。
+				//エリアグラフ用のエッジをつなぐ
 
 			m_impactMap->CreateDebugDraw(false);		//デバッグデータの生成
 		}
