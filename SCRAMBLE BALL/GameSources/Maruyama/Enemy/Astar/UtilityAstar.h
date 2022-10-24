@@ -127,10 +127,13 @@ namespace basecross {
 		/// </summary>
 		/// <param name="graph">グラフクラス</param>
 		/// <param name="newNode">新規ノード</param>
+		/// <param name="isRayHit">レイの確認をするかどうか</param>
 		/// <returns>生成したエッジ群</returns>
 		template<class NodeType, class EdgeType>
-		static vector<std::shared_ptr<EdgeType>> CreateAdjacendEdges(const std::shared_ptr<GraphAstar::GraphType>& graph,
-			const std::shared_ptr<NodeType>& newNode
+		static vector<std::shared_ptr<EdgeType>> CreateAdjacendEdges(
+			const std::shared_ptr<GraphAstar::GraphType>& graph,
+			const std::shared_ptr<NodeType>& newNode,
+			const bool isRayHit = true
 		) 
 		{
 			auto nodes = graph->GetNodes();
@@ -148,7 +151,9 @@ namespace basecross {
 
 				//障害物に当たっていなかったら
 				auto objects = maru::Utility::GetStage()->GetGameObjectVec();
-				if(!maru::UtilityObstacle::IsRayObstacle(newNode->GetPosition(), node->GetPosition(), objects)) {
+				if( !isRayHit ||
+					(isRayHit && !maru::UtilityObstacle::IsRayObstacle(newNode->GetPosition(), node->GetPosition(), objects))
+				) {
 					auto fromEdge = std::make_shared<EdgeType>(newNode->GetIndex(), node->GetIndex());
 
 					graph->AddEdge(fromEdge);
