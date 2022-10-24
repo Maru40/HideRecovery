@@ -107,7 +107,7 @@ namespace basecross {
 		/// それぞれのグラフの中心位置を設定する。
 		/// (現在はImpactMapから生成しているが、他の方法を検討中)
 		/// </summary>
-		void SettingGraphMapCenterPositions();
+		void CreateAreaAstarGraph();
 
 		/// <summary>
 		/// 一番近いエリアのインデックスを取得する。
@@ -158,6 +158,14 @@ namespace basecross {
 		}
 
 		const std::shared_ptr<const GraphType> GetAreaGraph() const { 
+			return m_areaGraph;
+		}
+
+		/// <summary>
+		/// 書き換え可能な状態のエリアグラフを取得
+		/// </summary>
+		/// <returns></returns>
+		const std::shared_ptr<GraphType> GetReWiritingAreaGraph() const {
 			return m_areaGraph;
 		}
 

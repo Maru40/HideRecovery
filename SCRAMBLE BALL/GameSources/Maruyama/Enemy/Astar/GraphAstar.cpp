@@ -115,7 +115,8 @@ namespace basecross {
 		m_route = openDataHandler.GetRoute();		//ルートの取得
 	}
 
-	void GraphAstar::SettingGraphMapCenterPositions() {
+	//Area用のAstarGraphの生成
+	void GraphAstar::CreateAreaAstarGraph() {
 		for (auto pair : m_graphMap) {
 			auto index = pair.first;
 			auto graph = pair.second;
@@ -124,8 +125,6 @@ namespace basecross {
 			//本来は専用の別関数で行いたい処理。
 			m_areaGraph->AddNode(std::make_shared<NavGraphNode>(index, centerPosition, maru::ImpactData(index)));	//エリアインデックスグラフにも追加。
 		}
-
-		AddEdges(m_areaGraph, false);	//上記と同じく別の関数の処理で行いたい処理。
 	}
 
 	int GraphAstar::SearchNearAreaIndex(const Vec3& position) {
