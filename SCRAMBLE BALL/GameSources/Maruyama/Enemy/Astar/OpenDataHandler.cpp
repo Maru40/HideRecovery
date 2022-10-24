@@ -221,6 +221,11 @@ namespace basecross {
 
 		//オープンデータから最短経路を取得
 		m_route.push(targetNode);
+
+		if (!isSearchSuccess) {	//サーチが失敗したら処理を飛ばす。
+			return isSearchSuccess;
+		}
+
 		FindSomeOpenData(openDataList, targetNode)->isActive = false;
 		CreateRoute(startNode, targetNode, graph, openDataList);
 
