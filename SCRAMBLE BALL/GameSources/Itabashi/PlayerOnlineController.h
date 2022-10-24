@@ -6,11 +6,9 @@ namespace basecross
 {
 	class RotationController;
 	class ItemAcquisitionManager;
-	class OwnHideItemManager;
 	class VelocityManager;
 	class ChargeGun;
 	class PlayerStatus;
-	class TackleAttack;
 	class ChargeBullet;
 	class UseWeapon;
 	class Teleport;
