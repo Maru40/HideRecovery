@@ -4,6 +4,9 @@
 
 namespace basecross
 {
+	/// <summary>
+	/// オンラインマッチ用ステージ
+	/// </summary>
 	class OnlineMatchStage : public GameStageBase
 	{
 	public:

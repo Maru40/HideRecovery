@@ -245,6 +245,7 @@ namespace Online
 		int itemId = item->GetItemId();
 		auto& localPlayer = OnlineManager::GetLocalPlayer();
 
+		// ホストであり、アイテムに所持者がなければ取得する
 		if (localPlayer.getIsMasterClient() && !item->GetItemOwner())
 		{
 			acquisitionManager->HideItemAcquisitionEvent(GetGameObject());
@@ -260,6 +261,7 @@ namespace Online
 	{
 		auto& localPlayer = OnlineManager::GetLocalPlayer();
 
+		// 自分がマスターで無いか、対応したプレイヤーではないなら
 		if (!localPlayer.getIsMasterClient() || m_playerNumber != localPlayer.getNumber())
 		{
 			return;
@@ -269,6 +271,7 @@ namespace Online
 
 		auto item = Item::StageFindToItemId(GetStage(), itemId);
 
+		// アイテムが見つからなかったかアイテムが既に誰かに所有されているか
 		if (!item || item->GetItemOwner())
 		{
 			return;
@@ -292,6 +295,7 @@ namespace Online
 
 	void PlayerOnlineController::ExecuteAcquisitionEvent(const ItemOwnerShipData& ownerShipData)
 	{
+		// 取得したのが自分ではないのなら
 		if (m_playerNumber != ownerShipData.playerNumber)
 		{
 			return;
@@ -399,6 +403,7 @@ namespace Online
 		
 		auto chargeBullet = bulletObject->GetComponent<ChargeBullet>();
 
+		// ホストが弾の削除の管理を行う
 		if (OnlineManager::GetLocalPlayer().getIsMasterClient())
 		{
 			chargeBullet->AddDestroyEventFunc([&](const std::shared_ptr<GameObject>& gameObject) { BulletDestroyed(gameObject); });
@@ -439,6 +444,7 @@ namespace Online
 
 		auto chargeBullet = bulletObject->GetComponent<ChargeBullet>();
 
+		// ホストが弾の削除の管理を行う
 		if (OnlineManager::GetLocalPlayer().getIsMasterClient())
 		{
 			chargeBullet->AddDestroyEventFunc([&](const std::shared_ptr<GameObject>& gameObject) {BulletDestroyed(gameObject); });
@@ -540,11 +546,15 @@ namespace Online
 		auto useWeapon = m_useWepon.lock();
 
 		auto teleport = GetGameObject()->GetComponent<Teleport>(false);
+
+		// テレポート中ならば
 		if (teleport && teleport->IsTeleporting()) {
 			return;
 		}
 
 		auto goal = GetGameObject()->GetComponent<GoalAnimationController>(false);
+
+		// ゴールアニメーション中ならば
 		if (goal && goal->IsGoalAnimation()) {
 			return;
 		}
@@ -556,6 +566,7 @@ namespace Online
 
 		bool isAim = false;
 
+		// 条件に当てはまればエイム状態にする
 		if (PlayerInputer::GetInstance()->IsAim() && !useWeapon->IsAim())
 		{
 			isAim = true;
@@ -563,6 +574,7 @@ namespace Online
 			OnlineManager::RaiseEvent(false, (std::uint8_t*)&isAim, sizeof(bool), EXECUTE_AIM_STATE_CHANGE_EVENT_CODE);
 		}
 
+		// 条件に当てはまればエイム状態を解除する
 		if (PlayerInputer::GetInstance()->IsAimRelease() && useWeapon->IsAim())
 		{
 			isAim = false;

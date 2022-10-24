@@ -12,9 +12,6 @@ namespace basecross
 	PCTStaticModelDraw::~PCTStaticModelDraw() {}
 
 	void PCTStaticModelDraw::OnCreate() {
-		//ライティングのみだと極端になるので調整
-		//SetEmissive(bsm::Col4(0.5f, 0.5f, 0.5f, 0.0f));
-		//SetDiffuse(bsm::Col4(0.6f, 0.6f, 0.6f, 1.0f));
 	}
 
 	void PCTStaticModelDraw::OnDraw() {

@@ -33,6 +33,7 @@ namespace basecross
 			return;
 		}
 
+		// キャンセルされたら、接続を切りタイトルに戻る
 		if (PlayerInputer::IsCancel())
 		{
 			Online::OnlineManager::Disconnect();

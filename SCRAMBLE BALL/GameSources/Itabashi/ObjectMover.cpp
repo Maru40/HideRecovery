@@ -22,10 +22,11 @@ namespace Operator
 		m_useWepon = GetGameObject()->GetComponent<UseWeapon>(false);
 	}
 
-	Vec3 ObjectMover::NormalMove(const Vec2& moveDirection) {
+	Vec3 ObjectMover::DefaultMove(const Vec2& moveDirection) {
 		auto velocityManager = m_velocityManager.lock();
 		auto useWeapon = m_useWepon.lock();
 
+		// 移動量が0ならば
 		if (moveDirection.lengthSqr() == 0)
 		{
 			if (velocityManager) {
@@ -42,6 +43,7 @@ namespace Operator
 
 		auto camera = m_camera.lock();
 
+		// カメラがあり影響を受けるならば
 		if (camera && m_isCameraAffected)
 		{
 			Vec3 cameraForward = camera->GetAt() - camera->GetEye();
@@ -56,6 +58,8 @@ namespace Operator
 		auto moveForward = m_defaultForward * inputVector.z;
 		auto moveRight = right * inputVector.x;
 		auto moveSpeed = m_moveSpeed;
+
+		// 武器を持っているかつ、エイム中ならば
 		if (useWeapon && useWeapon->IsAim()) {
 			moveSpeed += -useWeapon->GetWeaponWeight();
 		}
@@ -78,7 +82,7 @@ namespace Operator
 	}
 
 	Vec3 ObjectMover::AimMove(const Vec2& moveDirection) {
-		Vec3 resultVec = NormalMove(moveDirection);
+		Vec3 resultVec = DefaultMove(moveDirection);
 
 		return resultVec;
 	}
@@ -89,7 +93,7 @@ namespace Operator
 			return AimMove(moveDirection);
 		}
 		else {
-			return NormalMove(moveDirection);
+			return DefaultMove(moveDirection);
 		}
 	}
 }

@@ -5,6 +5,9 @@ namespace basecross
 {
 	DECLARE_DX11_PIXEL_SHADER(PS_PCTStaticModel)
 
+	/// <summary>
+	/// 法線の影響を受けない描画コンポーネント
+	/// </summary>
 	class PCTStaticModelDraw : public SmBaseDraw {
 	public:
 		//--------------------------------------------------------------------------------------

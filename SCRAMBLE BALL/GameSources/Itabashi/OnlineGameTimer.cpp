@@ -30,11 +30,6 @@ namespace basecross
 
 	}
 
-	bool OnlineGameTimer::IsStartable() const
-	{
-		return m_isStartable;
-	}
-
 	void OnlineGameTimer::StartCheck()
 	{
 		if (!Online::OnlineManager::GetLocalPlayer().getIsMasterClient())
@@ -120,7 +115,7 @@ namespace basecross
 
 	void OnlineGameTimer::OnCreate()
 	{
-		m_isStartable = true;
+		m_canGameStartable = true;
 	}
 
 	void OnlineGameTimer::OnLateStart()
@@ -203,7 +198,7 @@ namespace basecross
 
 		if (eventCode == GAMETIMER_START_CHECK_EVENT_CODE)
 		{
-			if (!IsStartable())
+			if (!m_canGameStartable)
 			{
 				return;
 			}

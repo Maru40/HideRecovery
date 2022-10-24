@@ -30,9 +30,18 @@ namespace Online
 	class PlayerOnlineController : public OnlineComponent
 	{
 	public:
+		/// <summary>
+		/// アイテム取得情報
+		/// </summary>
 		struct ItemOwnerShipData
 		{
+			/// <summary>
+			/// アイテムID
+			/// </summary>
 			int itemId;
+			/// <summary>
+			/// 取得したプレイヤー番号
+			/// </summary>
 			int playerNumber;
 
 			ItemOwnerShipData(int itemId, int playerNumber) :
@@ -42,8 +51,13 @@ namespace Online
 
 			}
 		};
-
+		/// <summary>
+		/// アイテムが取得できるかを問うオンラインイベントコード
+		/// </summary>
 		static constexpr std::uint8_t TRY_ACQUISITION_EVENT_CODE = 2;
+		/// <summary>
+		/// アイテムの取得を実行するオンラインイベントコード
+		/// </summary>
 		static constexpr std::uint8_t EXECUTE_ACQUISITION_EVENT_CODE = 3;
 		static constexpr std::uint8_t TRY_ITEM_HIDE_EVENT_CODE = 4;
 		static constexpr std::uint8_t EXECUTE_ITEM_HIDE_EVENT_CODE = 5;
@@ -107,10 +121,20 @@ namespace Online
 
 		void ExecuteMove(int playerNumber, const Vec3& moveVector, const Vec3& forward);
 
+		/// <summary>
+		/// アイテムの取得を試みる
+		/// </summary>
 		void TryAquisition();
-
+		/// <summary>
+		/// アイテムの取得の問い合わせの時に呼ばれるイベント
+		/// </summary>
+		/// <param name="itemId">取得できるか問い合わせるアイテムID</param>
+		/// <param name="playerNumber">取得したいプレイヤー番号</param>
 		void TryAcquisitionEvent(int itemId, int playerNumber);
-
+		/// <summary>
+		/// 誰かがアイテムを取得した際に呼ばれるイベント
+		/// </summary>
+		/// <param name="ownerShipData">アイテム取得情報</param>
 		void ExecuteAcquisitionEvent(const ItemOwnerShipData& ownerShipData);
 
 		void TryItemHide();
@@ -119,30 +143,70 @@ namespace Online
 
 		void ExecuteItemHideEvent(int playerNumber, const Vec3& position);
 
+		/// <summary>
+		/// 弾を撃つ
+		/// </summary>
 		void Shot();
-
+		/// <summary>
+		/// 誰か(自分以外)が弾を撃った際に呼ばれるイベント
+		/// </summary>
+		/// <param name="playerNumber">撃ったプレイヤー番号</param>
+		/// <param name="bulletPosition">発射位置</param>
+		/// <param name="bulletDirection">発射方向</param>
+		/// <param name="instanceId">弾のID</param>
 		void ExecuteShot(int playerNumber, const Vec3& bulletPosition, const Vec3& bulletDirection, int instanceId);
-
+		/// <summary>
+		/// 弾の削除を行う
+		/// </summary>
+		/// <param name="destroyedGameObject">削除する弾のオブジェクト</param>
 		void BulletDestroyed(const std::shared_ptr<GameObject>& destroyedGameObject);
-
+		/// <summary>
+		/// 弾が削除されたときに呼ばれるイベント
+		/// </summary>
+		/// <param name="bulletInstanceId">削除する弾のID</param>
 		void ExecuteBulletDestroyEvent(int bulletInstanceId);
-
+		/// <summary>
+		/// ダメージを受けた
+		/// </summary>
+		/// <param name="playerStatus">プレイヤーのステータス</param>
+		/// <param name="damageData">ダメージ情報</param>
 		void Damaged(const std::shared_ptr<PlayerStatus>& playerStatus, const DamageData& damageData);
-
+		/// <summary>
+		/// 誰か(自分以外)がダメージを受けた際に呼ばれる
+		/// </summary>
+		/// <param name="attackerPlayerNumber">攻撃者のプレイヤー番号</param>
+		/// <param name="damagedPlayerNumber">ダメージを受けたプレイヤー番号</param>
+		/// <param name="damage">ダメージ量</param>
 		void ExecuteDamagedEvent(int attackerPlayerNumber, int damagedPlayerNumber, int damage);
 
 		void TryTackle();
 
 		void ExecuteTackle(int playerNumber);
-
+		/// <summary>
+		/// エイムを試す
+		/// </summary>
 		void TryAim();
-
+		/// <summary>
+		/// 誰か(自分以外)がエイム状態を変更したときに呼ばれるイベント
+		/// </summary>
+		/// <param name="playerNumber">エイムを変更したプレイヤー番号</param>
+		/// <param name="isAim">エイム中か</param>
 		void ExecuteAimEvent(int playerNumber, bool isAim);
-
+		/// <summary>
+		/// インスタンスIDの発行
+		/// </summary>
+		/// <returns>生成したインスタンスid</returns>
 		int CreateInstanceId() const;
-
+		/// <summary>
+		/// テレポート入力
+		/// </summary>
 		void TeleportInputer();
-
+		/// <summary>
+		/// 誰かがテレポートしたら呼ばれるイベント
+		/// </summary>
+		/// <param name="playerNumber">テレポートしたプレイヤー番号</param>
+		/// <param name="teleportPosition">テレポート位置</param>
+		/// <param name="cameraPosition">カメラ位置</param>
 		void ExecuteTeleportEvent(int playerNumber, const Vec3& teleportPosition, const Vec3& cameraPosition);
 
 		void AccessHideInputer();
@@ -176,14 +240,38 @@ namespace Online
 
 		int GetGamePlayerNumber() const { return m_gamePlayerNumber; }
 
+		/// <summary>
+		/// カメラコンポーネントの設定
+		/// </summary>
+		/// <param name="camera">カメラコンポーネント</param>
 		void SetCamera(const std::shared_ptr<Camera>& camera) { m_camera = camera; }
+		/// <summary>
+		/// カメラコンポーネントの取得
+		/// </summary>
+		/// <returns>カメラコンポーネント</returns>
 		std::shared_ptr<Camera> GetCamera() const { return m_camera.lock(); }
 
+		/// <summary>
+		/// テレポートコンポーネントの設定
+		/// </summary>
+		/// <param name="teleport">テレポートコンポーネント</param>
 		void SetTeleport(const std::shared_ptr<Teleport>& teleport) { m_teleport = teleport; }
+		/// <summary>
+		/// テレポートコンポーネントの取得
+		/// </summary>
+		/// <returns>テレポートコンポーネント</returns>
 		std::shared_ptr<Teleport> GetTeleport() const { return m_teleport.lock(); }
 
+		/// <summary>
+		/// プレイヤー番号に対応したPlayerOnlineControllerを取得
+		/// </summary>
+		/// <param name="playerNumber">プレイヤー番号</param>
+		/// <returns>対応したPlayerOnlineController</returns>
 		static std::shared_ptr<PlayerOnlineController> GetPlayerOnlineController(int playerNumber);
-
+		/// <summary>
+		/// ローカルPlayerOnlineControllerを取得
+		/// </summary>
+		/// <returns>ローカルPlayerOnlineController</returns>
 		static std::shared_ptr<PlayerOnlineController> GetLocalOnlineController() { return GetPlayerOnlineController(Online::OnlineManager::GetLocalPlayer().getNumber()); }
 	};
 }

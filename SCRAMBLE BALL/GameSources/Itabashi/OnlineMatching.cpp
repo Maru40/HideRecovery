@@ -23,7 +23,7 @@ namespace Online
 
 		for (auto& number : m_playerNumbers)
 		{
-			if (isAdd)
+			if (isAdd) // 追加なら
 			{
 				if (number == 0)
 				{
@@ -31,7 +31,7 @@ namespace Online
 					break;
 				}
 			}
-			else
+			else // 削除なら
 			{
 				if (number == playerNumber)
 				{

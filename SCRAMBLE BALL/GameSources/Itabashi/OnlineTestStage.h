@@ -3,6 +3,9 @@
 
 namespace basecross
 {
+	/// <summary>
+	/// オンラインテスト用ステージ
+	/// </summary>
 	class OnlineTestStage : public Stage
 	{
 	public:
