@@ -41,7 +41,7 @@ namespace basecross {
 
 	Vec3 AstarEdgeDraw::CalculateCreateScale(const Vec3& startPosition, const Vec3& endPosition) const {
 		constexpr float SCALE_ADJUST = 0.8f;
-		constexpr float SCALE_Y = 0.2f;
+		constexpr float SCALE_Y = 0.25f;
 		constexpr float SCALE_Z = 1.0f;
 		auto toVec = endPosition - startPosition;
 		auto scale = Vec3(toVec.length() * SCALE_ADJUST, SCALE_Y, SCALE_Z);
@@ -96,6 +96,8 @@ namespace basecross {
 		for (int i = 0; i < numNode; i++) {
 			auto edges = graph->GetEdges(i);
 			for (const auto& edge : edges) {
+				auto fromIndex = edge->GetFrom();
+				auto toIndex = edge->GetTo();
 				auto startPosition = graph->GetNode(edge->GetFrom())->GetPosition();
 				auto endPosition = graph->GetNode(edge->GetTo())->GetPosition();
 
