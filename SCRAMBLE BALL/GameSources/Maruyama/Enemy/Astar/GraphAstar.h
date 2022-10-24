@@ -239,13 +239,13 @@ namespace basecross {
 		/// <summary>
 		/// エッジの追加
 		/// </summary>
-		void AddEdges();
+		void AddEdges(const bool isRayHit = true);
 
 		/// <summary>
 		/// エッジの追加
 		/// </summary>
 		/// <param name="graph">追加したいグラフ</param>
-		void AddEdges(const std::shared_ptr<GraphAstar::GraphType>& graph);
+		void AddEdges(const std::shared_ptr<GraphAstar::GraphType>& graph, const bool isRayHit = true);
 
 		/// <summary>
 		/// ノードの全てクリア
