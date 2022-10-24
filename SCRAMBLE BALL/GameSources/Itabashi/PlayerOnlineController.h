@@ -81,15 +81,11 @@ namespace Online
 
 		std::weak_ptr<ItemAcquisitionManager> m_acquisitionManager;
 
-		std::weak_ptr<OwnHideItemManager> m_hideItemManager;
-
 		std::weak_ptr<VelocityManager> m_velocityManager;
 
 		std::weak_ptr<ChargeGun> m_chargeGun;
 
 		std::weak_ptr<PlayerStatus> m_playerStatus;
-
-		std::weak_ptr<TackleAttack> m_tackleAttack;
 
 		std::weak_ptr<UseWeapon> m_useWepon;
 

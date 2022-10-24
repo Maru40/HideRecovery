@@ -169,11 +169,10 @@ namespace Online
 	void PlayerOnlineController::Move()
 	{
 		auto objectMover = m_objectMover.lock();
-		auto tackleAttack = m_tackleAttack.lock();
 		auto useWepon = m_useWepon.lock();
 		auto animator = GetGameObject()->GetComponent<PlayerAnimator>(false);
 
-		if (!objectMover || !tackleAttack || tackleAttack->IsTackle() || animator->IsCurretAnimationState(PlayerAnimationState::State::Goal1))
+		if (!objectMover || animator->IsCurretAnimationState(PlayerAnimationState::State::Goal1))
 		{
 			return;
 		}
@@ -581,7 +580,6 @@ namespace Online
 		m_objectMover = owner->GetComponent<Operator::ObjectMover>();
 		m_rotationController = owner->GetComponent<RotationController>();
 		m_acquisitionManager = owner->GetComponent<ItemAcquisitionManager>();
-		m_hideItemManager = owner->GetComponent<OwnHideItemManager>(false);
 		m_velocityManager = owner->GetComponent<VelocityManager>();
 		m_chargeGun = owner->GetComponent<ChargeGun>();
 
@@ -590,7 +588,6 @@ namespace Online
 		playerStatus->AddFuncAddDamage(damageFunc);
 		m_playerStatus = owner->GetComponent<PlayerStatus>();
 
-		m_tackleAttack = owner->GetComponent<TackleAttack>();
 		m_useWepon = owner->GetComponent<UseWeapon>();
 
 		m_teleport = owner->GetComponent<Teleport>(false);
