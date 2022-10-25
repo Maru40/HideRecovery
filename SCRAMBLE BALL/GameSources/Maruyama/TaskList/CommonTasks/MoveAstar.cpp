@@ -134,7 +134,7 @@ namespace basecross {
 
 			int areaIndex = m_areaRoute.front();	//自分自身がいるエリアインデックス
 			m_areaRoute.pop();
-			int targetAreaIndex = !m_areaRoute.empty() ? m_areaRoute.front() : -1;	//目標エリアが別であるならそれを設定(-1は目標ノードが同じエリア)
+			int targetAreaIndex = !m_areaRoute.empty() ? m_areaRoute.front() : areaIndex;
 			return maru::FieldImpactMap::GetInstance()->GetRoutePositions(startPosition, endPosition, areaIndex, targetAreaIndex);
 		}
 
