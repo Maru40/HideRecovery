@@ -96,7 +96,14 @@ namespace basecross {
 		const std::shared_ptr<GraphType>& graph
 	) {
 		if (selfNearNode == nullptr || targetNearNode == nullptr) {
-			Debug::GetInstance()->Log(L"GraphAstar::SearchAstarStart(), node‚ªnull‚Å‚·");
+			if (selfNearNode == nullptr) {
+				Debug::GetInstance()->Log(L"GraphAstar::SearchAstarStart(), startNode‚ªnull‚Å‚·");
+			}
+
+			if (targetNearNode == nullptr) {
+				Debug::GetInstance()->Log(L"GraphAstar::SearchAstarStart(), targetNode‚ªnull‚Å‚·");
+			}
+
 			return;
 		}
 
