@@ -53,15 +53,20 @@ namespace basecross {
 		SearchAstarStart(selfNearNode, targetNearNode, m_baseGraph);
 	}
 
-	void GraphAstar::SearchAstarStart(const Vec3& selfPosition, const Vec3& targetPosition, const int areaIndex) {
+	void GraphAstar::SearchAstarStart(
+		const Vec3& selfPosition, 
+		const Vec3& targetPosition, 
+		const int areaIndex,
+		const int targetAreaIndex
+	) {
 		auto graph = GetGraph(areaIndex);
 
 		auto selfNearNode = UtilityAstar::SearchNearNode(graph, selfPosition);
-		int targetAreaIndex = SearchNearAreaIndex(targetPosition);
+		//int targetAreaIndex = SearchNearAreaIndex(targetPosition);
 		bool isObstacleConfirmation = (areaIndex == targetAreaIndex);	//エリアが同じなら、障害物判定を行う。
 		auto targetNearNode = UtilityAstar::SearchNearNode(graph, targetPosition, isObstacleConfirmation);
 
-		SearchAstarStart(selfNearNode, targetNearNode, m_baseGraph);
+		SearchAstarStart(selfNearNode, targetNearNode, m_baseGraph, targetAreaIndex);
 	}
 
 	std::vector<Vec3> GraphAstar::CalculateRandomRoute(const Vec3& selfPosition) {
@@ -93,7 +98,8 @@ namespace basecross {
 	void GraphAstar::SearchAstarStart(
 		const std::shared_ptr<NavGraphNode>& selfNearNode, 
 		const std::shared_ptr<NavGraphNode>& targetNearNode,
-		const std::shared_ptr<GraphType>& graph
+		const std::shared_ptr<GraphType>& graph,
+		const int targetAreaIndex
 	) {
 		if (selfNearNode == nullptr || targetNearNode == nullptr) {
 			if (selfNearNode == nullptr) {
@@ -117,7 +123,7 @@ namespace basecross {
 		}
 
 		auto openDataHandler = OpenDataHandler();	//検索用のオープンデータを扱うクラスを作成。
-		openDataHandler.StartSearchAstar(selfNearNode, targetNearNode, graph);	//OpenDataを使って最短経路を検索する。
+		openDataHandler.StartSearchAstar(selfNearNode, targetNearNode, graph, targetAreaIndex);	//OpenDataを使って最短経路を検索する。
 
 		m_route = openDataHandler.GetRoute();		//ルートの取得
 	}
