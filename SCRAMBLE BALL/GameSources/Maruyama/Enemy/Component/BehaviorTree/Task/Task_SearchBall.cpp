@@ -81,8 +81,6 @@ namespace basecross {
 					SelectTask();		//タスクの選択
 
 					CalculateTarget();	//ターゲットの計算
-
-					Debug::GetInstance()->Log(L"SearchStart");
 				}
 
 				bool SearchBall::OnUpdate() {
@@ -93,8 +91,6 @@ namespace basecross {
 
 				void SearchBall::OnExit() {
 					m_taskList->ForceStop();
-
-					Debug::GetInstance()->Log(L"SearchEnd");
 				}
 
 				std::shared_ptr<GameObject> SearchBall::CalculateTarget() {
