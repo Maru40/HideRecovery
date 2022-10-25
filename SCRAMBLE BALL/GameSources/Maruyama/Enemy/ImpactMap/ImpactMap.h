@@ -342,7 +342,12 @@ namespace basecross {
 			/// <param name="targetPosition">目的地</param>
 			/// <param name="areaIndex">エリアインデックス</param>
 			/// <returns>検索したルートのポジション</returns>
-			std::vector<Vec3> GetRoutePositions(const Vec3& selfPosition, const Vec3& targetPosition, const int areaIndex);
+			std::vector<Vec3> GetRoutePositions(
+				const Vec3& selfPosition, 
+				const Vec3& targetPosition, 
+				const int areaIndex,
+				const int targetAreaIndex
+			);
 
 			/// <summary>
 			/// 自分の視界内のノードを取得
