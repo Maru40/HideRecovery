@@ -58,6 +58,36 @@ namespace basecross {
 		return left->GetSumRange() < right->GetSumRange();	//合計値が小さい順に並べる。 
 	}
 
+	bool OpenDataHandler::IsAdjacentOtherAreaNode(
+		const std::shared_ptr<AstarGraph>& graph, 
+		const std::shared_ptr<OpenData>& baseOpenData,
+		const int targetAreaIndex,
+		const std::shared_ptr<NavGraphNode>& startNode,
+		const std::shared_ptr<NavGraphNode>& targetNode
+	) {
+		auto baseNode = baseOpenData->node.lock();
+		std::vector<std::shared_ptr<OpenData>> openDatas;
+		float startToTargetRange = (targetNode->GetPosition() - startNode->GetPosition()).length();
+
+		for (auto edge : graph->GetEdges(baseNode->GetIndex())) {
+			auto node = graph->GetNode(edge->GetTo());
+
+			//同じエリアなら
+			if (node->GetAreaIndex() == targetAreaIndex) {
+				auto startToNodeRange = (node->GetPosition() - startNode->GetPosition()).length();
+
+				openDatas.push_back(std::make_shared<OpenData>(nullptr, node, startToTargetRange, startToNodeRange));
+			}
+		}
+
+		
+		auto tempTargetOpenData = std::make_shared<OpenData>(nullptr, targetNode, startToTargetRange, 0.0f);
+		openDatas.push_back(tempTargetOpenData);
+		std::sort(openDatas.begin(), openDatas.end(), &IsSmall_LeftOpenData);
+
+		return openDatas[0] != tempTargetOpenData;	//仮の目標オープンデータでないなら、隣接ノードの方が近い
+	}
+
 	std::shared_ptr<OpenData> OpenDataHandler::FindSearchBaseOpenData(DataPtrList& openDataList) {
 		openDataList.sort(&IsSmall_LeftOpenData);
 
@@ -70,7 +100,8 @@ namespace basecross {
 		const std::shared_ptr<OpenData>& openData,
 		const std::shared_ptr<AstarGraph>& graph,
 		const std::shared_ptr<NavGraphNode>& startNode,
-		const std::shared_ptr<NavGraphNode>& targetNode
+		const std::shared_ptr<NavGraphNode>& targetNode,
+		const int targetAreaIndex
 	) {
 		const auto& baseNode = openData->node.lock();		//基準となるノードを取得
 		auto edges = graph->GetEdges(baseNode->GetIndex());	//エッジの取得
@@ -94,6 +125,12 @@ namespace basecross {
 			if (node == targetNode) {
 				return true;
 			}
+
+			////目標エリアが別なら(0以上なら別)、かつ、隣接ノードに目標エリアがある場合
+			//if (targetAreaIndex >= 0 && IsAdjacentOtherAreaNode(graph, newData, targetAreaIndex, startNode, targetNode)) {
+			//	m_otherAreaNode = node;
+			//	return true;
+			//}
 		}
 
 		return false;
@@ -175,8 +212,11 @@ namespace basecross {
 	bool OpenDataHandler::StartSearchAstar(
 		const std::shared_ptr<NavGraphNode>& startNode,
 		const std::shared_ptr<NavGraphNode>& targetNode,
-		const std::shared_ptr<AstarGraph>& graph
+		const std::shared_ptr<AstarGraph>& graph,
+		const int targetAreaIndex
 	) {
+		m_otherAreaNode.reset();
+
 		//オープンデータリストとクローズデータリストを生成
 		auto openDataList = DataPtrList();
 		auto closeDataList = DataPtrList();
@@ -191,7 +231,7 @@ namespace basecross {
 			auto baseOpenData = FindSearchBaseOpenData(openDataList);
 
 			//オープンデータの生成。ターゲットノードにたどり着いたらtrueを返す。
-			if (CreateOpenDatas(openDataList, closeDataList, baseOpenData, graph, startNode, targetNode)) {
+			if (CreateOpenDatas(openDataList, closeDataList, baseOpenData, graph, startNode, targetNode, targetAreaIndex)) {
 				break;
 			}
 		}
@@ -207,7 +247,8 @@ namespace basecross {
 			openDataList.push_back(closeData);
 		}
 
-		bool isCreateRoute = CreateRoute(openDataList, targetNode);
+		auto lastTargetNode = m_otherAreaNode.lock() ? m_otherAreaNode.lock() : targetNode;	//最終的なターゲットノード
+		bool isCreateRoute = CreateRoute(openDataList, lastTargetNode);
 		if (!isCreateRoute) {
 			Debug::GetInstance()->Log(L"OpenDataHandler::SearchAstar() : Astarルートが検索できませんでした。");
 		}
