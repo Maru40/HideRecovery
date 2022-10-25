@@ -137,8 +137,25 @@ namespace basecross {
 		) 
 		{
 			auto nodes = graph->GetNodes();
-
 			vector<std::shared_ptr<EdgeType>> resultEdge;
+
+			//八方向に近いオブジェクトがあるなら処理をしない
+			//constexpr float NearRange = 2.0f;
+			//Vec3 positions[] = {
+			//	newNode->GetPosition() + ( Vec3::Forward() * NearRange),
+			//	newNode->GetPosition() + (-Vec3::Forward() * NearRange),
+			//	newNode->GetPosition() + ( Vec3::Right() * NearRange),
+			//	newNode->GetPosition() + (-Vec3::Right() * NearRange),
+			//};
+
+			//for (auto& position : positions) {
+			//	auto objects = maru::Utility::GetStage()->GetGameObjectVec();
+			//	if (maru::UtilityObstacle::IsRayObstacle(newNode->GetPosition(), position, objects)) {
+			//		return resultEdge;
+			//	}
+			//}
+
+
 			for (const auto& node : nodes) {
 				if (node == newNode) {  //同じなら処理をしない
 					continue;
@@ -182,6 +199,7 @@ namespace basecross {
 
 			vector<std::shared_ptr<AstarEdge>> reEdges;
 			for (auto& node : nodes) {
+
 				//障害物がなかったらエッジを追加する。
 				if (!maru::Utility::IsRayObstacle(newNode->GetPosition(), node->GetPosition(), obstacleObjs, excluteObjs)) {
 					//双方向にエッジを生成
