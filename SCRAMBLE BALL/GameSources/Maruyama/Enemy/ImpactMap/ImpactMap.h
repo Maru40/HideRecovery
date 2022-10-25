@@ -216,11 +216,13 @@ namespace basecross {
 		{
 			struct Parametor {
 				float intervalRange = 5.0f;  //ノードの間隔距離
-				int numLoopCount = 3;        //生成ループ回数
+				//int numLoopCount = 3;        //生成ループ回数
 			};
 
+			Parametor m_param;
+
 		public:
-			//void AddImpactMap(const std::shared_ptr<GraphAstar>& astar, const Parametor& parametor);
+			void AddImpactMap(const std::shared_ptr<GraphAstar::GraphType>& astar, const Parametor& parametor);
 		};
 
 
