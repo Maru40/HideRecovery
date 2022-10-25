@@ -59,13 +59,14 @@ namespace basecross {
 		const int areaIndex,
 		const int targetAreaIndex
 	) {
-		//auto graph = GetGraph(areaIndex);
-		auto graph = GetGraph();
+		auto graph = GetGraph(areaIndex);
+		auto targetAreaGraph = GetGraph(targetAreaIndex);
 
 		auto selfNearNode = UtilityAstar::SearchNearNode(graph, selfPosition);
 		//int targetAreaIndex = SearchNearAreaIndex(targetPosition);
-		bool isObstacleConfirmation = (areaIndex == targetAreaIndex);	//エリアが同じなら、障害物判定を行う。
-		auto targetNearNode = UtilityAstar::SearchNearNode(graph, targetPosition, isObstacleConfirmation);
+		//bool isObstacleConfirmation = (areaIndex == targetAreaIndex);	//エリアが同じなら、障害物判定を行う。
+		bool isObstacleConfirmation = true;
+		auto targetNearNode = UtilityAstar::SearchNearNode(targetAreaGraph, targetPosition, isObstacleConfirmation);
 
 		SearchAstarStart(selfNearNode, targetNearNode, m_baseGraph, targetAreaIndex);
 	}
