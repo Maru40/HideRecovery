@@ -59,7 +59,8 @@ namespace basecross {
 		const int areaIndex,
 		const int targetAreaIndex
 	) {
-		auto graph = GetGraph(areaIndex);
+		//auto graph = GetGraph(areaIndex);
+		auto graph = GetGraph();
 
 		auto selfNearNode = UtilityAstar::SearchNearNode(graph, selfPosition);
 		//int targetAreaIndex = SearchNearAreaIndex(targetPosition);
