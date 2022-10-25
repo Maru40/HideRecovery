@@ -64,6 +64,11 @@ namespace basecross {
 		return openDataList.front();
 	}
 
+	bool OpenDataHandler::IsOhterAreaTarget(const std::shared_ptr<NavGraphNode>& startNode, const int targetAreaIndex) {
+		//目標エリアが0以上、かつ、目標ノードが目標エリアと違うとき。
+		return (targetAreaIndex >= 0 && targetAreaIndex != startNode->GetAreaIndex());
+	}
+
 	bool OpenDataHandler::CreateOpenDatas(
 		DataPtrList& openDataList,
 		DataPtrList& closeDataList,
@@ -98,8 +103,8 @@ namespace basecross {
 				return true;
 			}
 
-			//目標エリアのノードならotherAreaOpenDatasに登録する。
-			if (targetAreaIndex >= 0 && node->GetAreaIndex() == targetAreaIndex) {
+			//目標エリアが他エリアで、かつ、目標エリアのノードならotherAreaOpenDatasに登録する。
+			if (IsOhterAreaTarget(startNode, targetAreaIndex) && node->GetAreaIndex() == targetAreaIndex) {
 				otherAreaOpenDatas.push_back(newData);
 			}
 		}

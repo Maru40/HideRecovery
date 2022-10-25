@@ -75,6 +75,14 @@ namespace basecross {
 		std::shared_ptr<OpenData> FindSearchBaseOpenData(DataPtrList& openDataList);
 
 		/// <summary>
+		/// 他のエリアが目標になっているかどうか
+		/// </summary>
+		/// <param name="startNode">開始ノード</param>
+		/// <param name="targetAreaIndex">目標エリア</param>
+		/// <returns>他のエリアが目標ならtrue</returns>
+		bool IsOhterAreaTarget(const std::shared_ptr<NavGraphNode>& startNode, const int targetAreaIndex);
+
+		/// <summary>
 		/// オープンデータを生成する。
 		/// </summary>
 		/// <param name="baseNode">ベースとなるノード</param>
