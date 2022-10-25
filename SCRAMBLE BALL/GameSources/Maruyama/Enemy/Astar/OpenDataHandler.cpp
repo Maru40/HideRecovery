@@ -79,6 +79,7 @@ namespace basecross {
 
 			auto toNodeVec = node->GetPosition() - baseNode->GetPosition();			//ベースノードからの実コストを取得
 			auto range = toNodeVec.length();
+			range += openData->range;
 			auto heuristicRange = m_heuristic->CalculateHeuristicRange(node);		//ヒュースリック距離の取得
 
 			auto newData = std::make_shared<OpenData>(node, range, heuristicRange);	//新規オープンデータの生成
@@ -112,6 +113,12 @@ namespace basecross {
 		//ノードの中で一番近い物を取得
 		for (auto& edge : edges) {
 			const auto& node = graph->GetNode(edge->GetTo());
+
+			//初期ノードなら
+			if (node == startNode) {
+				return; //処理をやめる。//同じノードなら処理をやめる。
+			}
+
 			auto someOpenData = FindSomeOpenData(openDataList, node);
 			//ノードが存在しない、または、データが非アクティブなら、処理を飛ばす。
 			if (!someOpenData || !someOpenData->isActive) {
@@ -125,6 +132,11 @@ namespace basecross {
 		}
 
 		if (resultData->node.lock() == nullptr) {	//リザルトがnullptrなら
+			m_route.pop();	//一番トップに今回baseにしたノードが入っているから
+			auto beforeNode = m_route.top();
+			//auto beforeData = FindSomeOpenData(openDataList, beforeNode);
+			
+			CreateRoute(startNode, beforeNode, graph, openDataList);
 			return;
 		}
 
@@ -226,7 +238,13 @@ namespace basecross {
 			return isSearchSuccess;
 		}
 
+		//クローズデータをオープンデータに入れる。
+		for (auto closeData : closeDataList) {
+			//openDataList.push_back(closeData);
+		}
+
 		FindSomeOpenData(openDataList, targetNode)->isActive = false;
+		//CreateRoute(startNode, targetNode, graph, closeDataList);
 		CreateRoute(startNode, targetNode, graph, openDataList);
 
 		return isSearchSuccess;
