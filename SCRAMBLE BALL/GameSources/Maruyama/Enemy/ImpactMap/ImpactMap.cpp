@@ -283,7 +283,7 @@ namespace basecross {
 		///	Factory_影響マップ_フラッドフィルアルゴリズム(現在作成中) 
 		//--------------------------------------------------------------------------------------
 
-		void Factory_ImpactMap_FloodFill::AddImpactMap(const std::shared_ptr<GraphAstar::GraphType>& astar, const Parametor& parametor) {
+		void Factory_ImpactMap_FloodFill::AddImpactMap(const std::shared_ptr<GraphAstar>& astar, const Parametor& parametor) {
 			
 		}
 

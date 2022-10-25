@@ -222,7 +222,7 @@ namespace basecross {
 			Parametor m_param;
 
 		public:
-			void AddImpactMap(const std::shared_ptr<GraphAstar::GraphType>& astar, const Parametor& parametor);
+			void AddImpactMap(const std::shared_ptr<GraphAstar>& astar, const Parametor& parametor);
 		};
 
 
