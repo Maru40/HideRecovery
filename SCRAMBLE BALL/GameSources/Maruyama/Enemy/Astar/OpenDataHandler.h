@@ -20,7 +20,8 @@ namespace basecross {
 	///	オープンデータ
 	//--------------------------------------------------------------------------------------
 	struct OpenData {
-		std::weak_ptr<NavGraphNode> node;  //ノードのポインタ
+		std::weak_ptr<NavGraphNode> parent;	//自分の手前のノード
+		std::weak_ptr<NavGraphNode> node;	//ノードのポインタ
 		float range;            //実距離
 		float heuristic;        //ヒュースリック距離
 		bool isActive = true;
@@ -36,7 +37,7 @@ namespace basecross {
 		/// <param name="node">ノード</param>
 		/// <param name="range">実距離</param>
 		/// <param name="heuristic">ヒュースリック距離</param>
-		OpenData(const std::shared_ptr<NavGraphNode>& node, const float range, const float heuristic);
+		OpenData(const std::shared_ptr<NavGraphNode>& parent, const std::shared_ptr<NavGraphNode>& node, const float range, const float heuristic);
 
 		/// <summary>
 		/// 実距離とヒュースリック距離の合計を返す
@@ -81,7 +82,9 @@ namespace basecross {
 			DataPtrList& openDataList,
 			DataPtrList& closeDataList,
 			const std::shared_ptr<OpenData>& openData, 
-			const std::shared_ptr<AstarGraph>& graph
+			const std::shared_ptr<AstarGraph>& graph,
+			const std::shared_ptr<NavGraphNode>& startNode,
+			const std::shared_ptr<NavGraphNode>& targetNode
 		);
 
 		/// <summary>
