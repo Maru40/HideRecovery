@@ -94,7 +94,7 @@ namespace basecross {
 			//heuristicが限りなく小さかったらターゲットにたどり着いたため、終了。
 			constexpr float NearRange = 0.1f;
 			if (newData->heuristic < NearRange) {
-				return true;
+				return false;
 			}
 		}
 
@@ -116,7 +116,7 @@ namespace basecross {
 
 			//初期ノードなら
 			if (node == startNode) {
-				return; //処理をやめる。//同じノードなら処理をやめる。
+				return; //同じノードなら処理をやめる。
 			}
 
 			auto someOpenData = FindSomeOpenData(openDataList, node);
@@ -223,6 +223,11 @@ namespace basecross {
 		while (openDataList.size() != 0) {	
 			//オープンデータ生成用の基準ノードの生成。
 			auto baseOpenData = FindSearchBaseOpenData(openDataList);
+
+			if (targetNode == baseOpenData->node.lock()) {	//目標ノードなら
+				break;
+			}
+
 			//オープンデータの生成。ターゲットノードにたどり着いたらtrueを返す。
 			if (CreateOpenDatas(openDataList, closeDataList, baseOpenData, graph)) {
 				break;
@@ -240,7 +245,13 @@ namespace basecross {
 
 		//クローズデータをオープンデータに入れる。
 		for (auto closeData : closeDataList) {
-			//openDataList.push_back(closeData);
+			openDataList.push_back(closeData);
+		}
+
+		//デバッグ
+		std::vector<int> openIndices = {};
+		for (auto data : openDataList) {
+			openIndices.push_back(data->node.lock()->GetIndex());
 		}
 
 		FindSomeOpenData(openDataList, targetNode)->isActive = false;
