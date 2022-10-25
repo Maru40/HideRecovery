@@ -88,17 +88,12 @@ namespace basecross {
 		);
 
 		/// <summary>
-		/// 最短ルートの生成
+		/// ルートの生成
 		/// </summary>
-		/// <param name="startNode">開始ノード</param>
+		/// <param name="openDataList">オープンデータリスト</param>
 		/// <param name="targetNode">目標ノード</param>
-		/// <param name="graph">グラフ</param>
-		void OpenDataHandler::CreateRoute(
-			const std::shared_ptr<NavGraphNode>& startNode,
-			const std::shared_ptr<NavGraphNode>& targetNode,
-			const std::shared_ptr<AstarGraph>& graph,
-			const DataPtrList& openDataList
-		);
+		/// <returns>検索が成功したらtrue</returns>
+		bool CreateRoute(const DataPtrList& openDataList, const std::shared_ptr<NavGraphNode>& targetNode);
 
 		/// <summary>
 		/// オープンデータの取得
@@ -151,6 +146,9 @@ namespace basecross {
 		///	アクセッサ
 		//--------------------------------------------------------------------------------------
 
+		/// <summary>
+		/// ルートの取得
+		/// </summary>
 		std::stack<std::shared_ptr<NavGraphNode>> GetRoute();
 
 	};
