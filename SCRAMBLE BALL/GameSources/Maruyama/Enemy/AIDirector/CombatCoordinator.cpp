@@ -23,10 +23,12 @@ namespace basecross {
 			: HereOwnerCoordinatorBase(owner)
 		{}
 
-		void CombatCoordinator::OnUpdate() {
+		bool CombatCoordinator::OnUpdate() {
 			for (const auto& data : m_requestDatas) {
 				CreateOrder(data);
 			}
+
+			return false;
 		}
 
 		void CombatCoordinator::CreateOrder(const Data& data) {

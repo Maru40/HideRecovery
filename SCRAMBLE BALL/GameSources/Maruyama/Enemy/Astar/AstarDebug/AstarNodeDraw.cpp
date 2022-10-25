@@ -71,8 +71,8 @@ namespace basecross {
 	///	Astarノード表示本体
 	//--------------------------------------------------------------------------------------
 
-	AstarNodeDraw::AstarNodeDraw(const std::shared_ptr<GameObject>& objPtr, const std::shared_ptr<GraphAstar>& astar)
-		:Component(objPtr), m_astar(astar)
+	AstarNodeDraw::AstarNodeDraw(const std::shared_ptr<GameObject>& objPtr, const std::shared_ptr<const GraphAstar::GraphType>& astar)
+		:Component(objPtr), m_astarGraph(astar)
 	{}
 
 	void AstarNodeDraw::OnCreate() {
@@ -105,7 +105,7 @@ namespace basecross {
 	}
 
 	void AstarNodeDraw::CreateDrawDatas() {
-		auto graph = m_astar->GetGraph();
+		auto graph = m_astarGraph.lock();
 		auto nodes = graph->GetNodes();
 
 		for (const auto& node : nodes) {
@@ -142,7 +142,7 @@ namespace basecross {
 	}
 
 	void AstarNodeDraw::UpdateNodes() {
-		if (!m_astar) {
+		if (!m_astarGraph.lock()) {
 			return;
 		}
 
@@ -151,7 +151,7 @@ namespace basecross {
 			const auto& number = data.nodeNumber;
 
 			//Graphノードのループ
-			for (const auto& node : m_astar->GetGraph()->GetNodes()) {
+			for (const auto& node : m_astarGraph.lock()->GetNodes()) {
 				//同じインデックスなら
 				int index = static_cast<int>(number->GetComponent<NumbersCtrl>()->GetValue());
 

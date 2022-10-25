@@ -96,7 +96,14 @@ namespace basecross {
 		const std::shared_ptr<GraphType>& graph
 	) {
 		if (selfNearNode == nullptr || targetNearNode == nullptr) {
-			Debug::GetInstance()->Log(L"GraphAstar::SearchAstarStart(), nodeがnullです");
+			if (selfNearNode == nullptr) {
+				Debug::GetInstance()->Log(L"GraphAstar::SearchAstarStart(), startNodeがnullです");
+			}
+
+			if (targetNearNode == nullptr) {
+				Debug::GetInstance()->Log(L"GraphAstar::SearchAstarStart(), targetNodeがnullです");
+			}
+
 			return;
 		}
 
@@ -115,7 +122,8 @@ namespace basecross {
 		m_route = openDataHandler.GetRoute();		//ルートの取得
 	}
 
-	void GraphAstar::SettingGraphMapCenterPositions() {
+	//Area用のAstarGraphの生成
+	void GraphAstar::CreateAreaAstarGraph() {
 		for (auto pair : m_graphMap) {
 			auto index = pair.first;
 			auto graph = pair.second;
@@ -124,8 +132,6 @@ namespace basecross {
 			//本来は専用の別関数で行いたい処理。
 			m_areaGraph->AddNode(std::make_shared<NavGraphNode>(index, centerPosition, maru::ImpactData(index)));	//エリアインデックスグラフにも追加。
 		}
-
-		AddEdges(m_areaGraph);	//上記と同じく別の関数の処理で行いたい処理。
 	}
 
 	int GraphAstar::SearchNearAreaIndex(const Vec3& position) {
@@ -240,20 +246,20 @@ namespace basecross {
 		m_baseGraph->SetNodesParent(parent);
 	}
 
-	void GraphAstar::AddEdges() {
-		AddEdges(m_baseGraph);
+	void GraphAstar::AddEdges(const bool isRayHit) {
+		AddEdges(m_baseGraph, isRayHit);
 
 		for (auto& pair : m_graphMap) {
-			AddEdges(pair.second);
+			AddEdges(pair.second, isRayHit);
 		}
 	}
 
-	void GraphAstar::AddEdges(const std::shared_ptr<GraphAstar::GraphType>& graph) {
+	void GraphAstar::AddEdges(const std::shared_ptr<GraphAstar::GraphType>& graph, const bool isRayHit) {
 		maru::Action<void()> actions;
 
 		auto nodes = graph->GetNodes();
 		for (auto& node : nodes) {
-			auto edges = UtilityAstar::CreateAdjacendEdges<NavGraphNode, AstarEdge>(graph, node);
+			auto edges = UtilityAstar::CreateAdjacendEdges<NavGraphNode, AstarEdge>(graph, node, isRayHit);
 			//エッジが一つもなかったらノードを削除
 			if (edges.size() == 0) {
 				//ノードの削除をまとめる。

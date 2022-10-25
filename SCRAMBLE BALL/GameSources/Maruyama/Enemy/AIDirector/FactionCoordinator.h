@@ -27,12 +27,12 @@ namespace basecross {
 		//--------------------------------------------------------------------------------------
 		/// グループタイプ
 		//--------------------------------------------------------------------------------------
-		enum class FactionType
-		{
-			None,	//所属していない
-			Patrol,	//パトロール
-			Combat,	//戦闘
-		};
+		//enum class FactionType
+		//{
+		//	None,	//所属していない
+		//	Patrol,	//パトロール
+		//	Combat,	//戦闘
+		//};
 
 		//--------------------------------------------------------------------------------------
 		/// グループ調整者
@@ -65,16 +65,22 @@ namespace basecross {
 			virtual ~FactionCoordinator() = default;
 
 			void OnStart() override;
-			void OnUpdate() override;
+			bool OnUpdate() override;
 			void OnExit() override;
 
 		private:
 			/// <summary>
 			/// グループの生成
 			/// </summary>
-			template<class T, class... Ts>
-			std::shared_ptr<T> CreateFaction(std::vector<std::shared_ptr<T>>& addVec, Ts&&... params) {
-				auto faction = std::make_shared<T>(params...);
+			template<class AddVectorType, class T, class... Ts,
+				std::enable_if_t<
+					std::is_base_of_v<AddVectorType, T> &&
+					std::is_constructible_v<T, const std::shared_ptr<FactionCoordinator>&, Ts...>,
+				std::nullptr_t> = nullptr
+			>
+			std::shared_ptr<T> CreateFaction(std::vector<std::shared_ptr<AddVectorType>>& addVec, Ts&&... params) {
+				auto faction = std::make_shared<T>(GetThis<FactionCoordinator>(), params...);
+				faction->OnCreate();
 				faction->OnStart();
 				addVec.push_back(faction);
 				m_allCoordinators.push_back(faction);
@@ -92,9 +98,6 @@ namespace basecross {
 			/// </summary>
 			/// <returns>ディレクター</returns>
 			std::shared_ptr<AIDirector> GetDirector() const noexcept { return m_director.lock(); }
-
-
-
 
 
 			//--------------------------------------------------------------------------------------

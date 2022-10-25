@@ -46,6 +46,7 @@ namespace basecross {
 
 		std::shared_ptr<FactionCoordinator> AIDirector::CreateFaction(const std::vector<std::weak_ptr<EnemyBase>>& assignMembers) {
 			auto coordinator = std::make_shared<FactionCoordinator>(GetThis<AIDirector>(), assignMembers);
+			coordinator->OnCreate();
 			coordinator->OnStart();
 			m_factionCoordinators.push_back(coordinator);
 

@@ -62,7 +62,7 @@ namespace basecross {
 			~CombatCoordinator() = default;
 
 			void OnStart() override {};
-			void OnUpdate() override;
+			bool OnUpdate() override;
 			void OnExit() override {};
 			
 		private:

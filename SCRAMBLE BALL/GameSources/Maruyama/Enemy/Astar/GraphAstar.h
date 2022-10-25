@@ -107,7 +107,7 @@ namespace basecross {
 		/// それぞれのグラフの中心位置を設定する。
 		/// (現在はImpactMapから生成しているが、他の方法を検討中)
 		/// </summary>
-		void SettingGraphMapCenterPositions();
+		void CreateAreaAstarGraph();
 
 		/// <summary>
 		/// 一番近いエリアのインデックスを取得する。
@@ -155,6 +155,18 @@ namespace basecross {
 		/// <returns>エリアごとに分けたグラフ</returns>
 		const std::shared_ptr<const GraphType> GetGraph(const int areaIndex) const {
 			return m_graphMap.at(areaIndex);
+		}
+
+		const std::shared_ptr<const GraphType> GetAreaGraph() const { 
+			return m_areaGraph;
+		}
+
+		/// <summary>
+		/// 書き換え可能な状態のエリアグラフを取得
+		/// </summary>
+		/// <returns></returns>
+		const std::shared_ptr<GraphType> GetReWiritingAreaGraph() const {
+			return m_areaGraph;
 		}
 
 		/// <summary>
@@ -235,13 +247,13 @@ namespace basecross {
 		/// <summary>
 		/// エッジの追加
 		/// </summary>
-		void AddEdges();
+		void AddEdges(const bool isRayHit = true);
 
 		/// <summary>
 		/// エッジの追加
 		/// </summary>
 		/// <param name="graph">追加したいグラフ</param>
-		void AddEdges(const std::shared_ptr<GraphAstar::GraphType>& graph);
+		void AddEdges(const std::shared_ptr<GraphAstar::GraphType>& graph, const bool isRayHit = true);
 
 		/// <summary>
 		/// ノードの全てクリア

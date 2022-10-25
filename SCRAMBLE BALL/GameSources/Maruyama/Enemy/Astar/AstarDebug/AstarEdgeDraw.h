@@ -35,7 +35,7 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 	class AstarEdgeDraw : public Component {
 
-		ex_weak_ptr<GraphAstar> m_astar;   //GraphAstarのポインタ
+		std::weak_ptr<const GraphAstar::GraphType> m_astar;   //GraphAstarのポインタ
 		std::vector<EdgeData> m_edgeDatas; //生成したエッジデータ
 
 		/// <summary>
@@ -86,7 +86,7 @@ namespace basecross {
 		/// </summary>
 		/// <param name="objPtr">このクラスを所有するゲームオブジェクト</param>
 		/// <param name="astar">Astarグラフ</param>
-		AstarEdgeDraw(const std::shared_ptr<GameObject>& objPtr, const std::shared_ptr<GraphAstar>& astar);
+		AstarEdgeDraw(const std::shared_ptr<GameObject>& objPtr, const std::shared_ptr<const GraphAstar::GraphType>& astar);
 
 		void OnCreate() override;
 		void OnUpdate() override;

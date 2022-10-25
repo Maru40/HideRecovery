@@ -23,6 +23,8 @@
 #include "Maruyama/Enemy/Component/Stator/StatorBase.h"
 #include "Maruyama/Enemy/Component/Stator/EnemyStatorBase.h"
 
+#include "PatrolCoordinator/HidePlacePatrol.h"
+
 #include "Watanabe/DebugClass/Debug.h"
 
 namespace basecross {
@@ -38,15 +40,16 @@ namespace basecross {
 		{}
 
 		void FactionCoordinator::OnStart() {
-			//仮でパトロールを作成
-			auto patrolMembers = GetMembers();
-			auto patrol = CreateFaction<PatrolCoordinator>(m_patrols, GetThis<FactionCoordinator>(), patrolMembers);
+			//初めはパトロール設定をする。
+			CreateFaction<PatrolCoordinator, AICoordinator::Patrol::HidePlacePatrol>(m_patrols, GetMembers());
 		}
 
-		void FactionCoordinator::OnUpdate() {
+		bool FactionCoordinator::OnUpdate() {
 			for (auto& coordinator : m_allCoordinators) {
 				coordinator->OnUpdate();
 			}
+
+			return false;
 		}
 
 		void FactionCoordinator::OnExit() {

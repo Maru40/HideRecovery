@@ -55,8 +55,6 @@ namespace basecross {
 
 			CalculateMoveAreaRouteQueue();	//徘徊エリアルートの取得
 			m_param->movePositionsParam->positions = CalculateMovePositions();	//徘徊移動先を設定
-
-			Debug::GetInstance()->Log(L"SearchStart");
 		}
 
 		bool MoveAstar::OnUpdate() {
@@ -71,8 +69,6 @@ namespace basecross {
 
 		void MoveAstar::OnExit() {
 			m_taskList->ForceStop();
-
-			Debug::GetInstance()->Log(L"SearchEnd");
 		}
 
 		void MoveAstar::DefineTask() {
@@ -113,11 +109,17 @@ namespace basecross {
 			//エリアのルートを取得
 			auto areaRouteIndices = fieldImpactMap->SearchAreaRouteIndices(startPosition, targetPosition);
 
+			Debug::GetInstance()->Log(L"AreaRoute-------------------");
+
+			Debug::GetInstance()->Log(fieldImpactMap->SearchNearAreaIndex(startPosition));
+
 			//Astar検索が最初の自分自身のノードを省くため、最初は現在所属しているエリアから検索する。
 			m_areaRoute.push(fieldImpactMap->SearchNearAreaIndex(startPosition));
 			for (const auto& areaRouteIndex : areaRouteIndices) {
 				m_areaRoute.push(areaRouteIndex);
+				Debug::GetInstance()->Log(areaRouteIndex);
 			}
+			Debug::GetInstance()->Log(L"AreaRoute-------------------");
 
 			return m_areaRoute;
 		}

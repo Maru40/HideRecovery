@@ -27,7 +27,7 @@ namespace basecross {
 	///	Astarエッジ表示本体
 	//--------------------------------------------------------------------------------------
 
-	AstarEdgeDraw::AstarEdgeDraw(const std::shared_ptr<GameObject>& objPtr, const std::shared_ptr<GraphAstar>& astar)
+	AstarEdgeDraw::AstarEdgeDraw(const std::shared_ptr<GameObject>& objPtr, const std::shared_ptr<const GraphAstar::GraphType>& astar)
 		:Component(objPtr), m_astar(astar)
 	{}
 
@@ -41,7 +41,7 @@ namespace basecross {
 
 	Vec3 AstarEdgeDraw::CalculateCreateScale(const Vec3& startPosition, const Vec3& endPosition) const {
 		constexpr float SCALE_ADJUST = 0.8f;
-		constexpr float SCALE_Y = 0.2f;
+		constexpr float SCALE_Y = 0.25f;
 		constexpr float SCALE_Z = 1.0f;
 		auto toVec = endPosition - startPosition;
 		auto scale = Vec3(toVec.length() * SCALE_ADJUST, SCALE_Y, SCALE_Z);
@@ -85,7 +85,7 @@ namespace basecross {
 	}
 
 	void AstarEdgeDraw::OnCreate() {
-		auto graph = m_astar->GetGraph();
+		auto graph = m_astar.lock();
 		auto numNode = graph->GetNumNodes();
 
 		DebugObject::AddString(L"ノードの数：", false);
@@ -96,6 +96,8 @@ namespace basecross {
 		for (int i = 0; i < numNode; i++) {
 			auto edges = graph->GetEdges(i);
 			for (const auto& edge : edges) {
+				auto fromIndex = edge->GetFrom();
+				auto toIndex = edge->GetTo();
 				auto startPosition = graph->GetNode(edge->GetFrom())->GetPosition();
 				auto endPosition = graph->GetNode(edge->GetTo())->GetPosition();
 
@@ -119,11 +121,11 @@ namespace basecross {
 	}
 
 	void AstarEdgeDraw::UpdatePosition() {
-		if (!m_astar) {
+		if (!m_astar.lock()) {
 			return;
 		}
 
-		auto graph = m_astar->GetGraph();
+		auto graph = m_astar.lock();
 		auto numNode = graph->GetNumNodes();
 
 		int index = 0;

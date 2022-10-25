@@ -59,11 +59,11 @@ namespace basecross {
 		auto log = AddGameObject<Debug>();
 		Debug::GetInstance()->Log(L"MapShotStage");
 
+		AddGameObject<GameManagerObject>();
+
 		CreateMap(L"StageS2.csv");
 
 		auto cameraObj = Instantiate<CameraObject>();
-
-		AddGameObject<GameManagerObject>();
 		
 		//// プレイヤーを見るようなカメラを設定
 		auto player = Instantiate<TestPlayerObject>(Vec3(0.0f, 1.0f, -7.0f), Quat::Identity());

@@ -16,6 +16,8 @@
 
 #include "Maruyama/Utility/Utility.h"
 
+#include "Watanabe/DebugClass/Debug.h"
+
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
@@ -23,11 +25,11 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 
 	OpenData::OpenData()
-		:OpenData(nullptr, 0, 0)
+		:OpenData(nullptr, nullptr, 0, 0)
 	{}
 
-	OpenData::OpenData(const std::shared_ptr<NavGraphNode>& node, const float range, const float heuristic)
-		: node(node), range(range), heuristic(heuristic), isActive(true)
+	OpenData::OpenData(const std::shared_ptr<NavGraphNode>& parent, const std::shared_ptr<NavGraphNode>& node, const float range, const float heuristic)
+		: parent(parent) ,node(node), range(range), heuristic(heuristic), isActive(true)
 	{}
 
 	float OpenData::GetSumRange() const {
@@ -65,10 +67,12 @@ namespace basecross {
 	bool OpenDataHandler::CreateOpenDatas(
 		DataPtrList& openDataList,
 		DataPtrList& closeDataList,
-		const std::shared_ptr<OpenData>& openData, 
-		const std::shared_ptr<AstarGraph>& graph
+		const std::shared_ptr<OpenData>& openData,
+		const std::shared_ptr<AstarGraph>& graph,
+		const std::shared_ptr<NavGraphNode>& startNode,
+		const std::shared_ptr<NavGraphNode>& targetNode
 	) {
-		const auto& baseNode = openData->node.lock();
+		const auto& baseNode = openData->node.lock();		//基準となるノードを取得
 		auto edges = graph->GetEdges(baseNode->GetIndex());	//エッジの取得
 
 		openDataList.pop_front();			//使用するオープンデータを削除
@@ -79,20 +83,15 @@ namespace basecross {
 
 			auto toNodeVec = node->GetPosition() - baseNode->GetPosition();			//ベースノードからの実コストを取得
 			auto range = toNodeVec.length();
+			range += openData->range;
 			auto heuristicRange = m_heuristic->CalculateHeuristicRange(node);		//ヒュースリック距離の取得
 
-			auto newData = std::make_shared<OpenData>(node, range, heuristicRange);	//新規オープンデータの生成
+			auto newData = std::make_shared<OpenData>(baseNode, node, range, heuristicRange);	//新規オープンデータの生成
 
-			auto isResult = AddOpenData(openDataList, closeDataList, newData);		//オープンデータの追加をする。
-			
-			//オープンデータの追加に失敗したらその後の処理をしない
-			if (!isResult) {
-				continue;
-			}
+			bool isAddData = AddOpenData(openDataList, closeDataList, newData);		//オープンデータの追加をする。
 
-			//heuristicが限りなく小さかったらターゲットにたどり着いたため、終了。
-			constexpr float NearRange = 0.1f;
-			if (newData->heuristic < NearRange) {
+			//目標ノードなら終わらせる
+			if (node == targetNode) {
 				return true;
 			}
 		}
@@ -100,47 +99,26 @@ namespace basecross {
 		return false;
 	}
 
-	void OpenDataHandler::CreateRoute(
-		const std::shared_ptr<NavGraphNode>& startNode,
-		const std::shared_ptr<NavGraphNode>& targetNode,
-		const std::shared_ptr<AstarGraph>& graph,
-		const DataPtrList& openDataList)
-	{
-		auto edges = graph->GetEdges(targetNode->GetIndex());
+	bool OpenDataHandler::CreateRoute(const DataPtrList& openDataList, const std::shared_ptr<NavGraphNode>& targetNode) {
+		int index = 0;
+		constexpr int tempMaxIndex = 10000;
 
-		auto resultData = std::make_shared<OpenData>(nullptr, FLT_MAX, FLT_MAX);
-		//ノードの中で一番近い物を取得
-		for (auto& edge : edges) {
-			const auto& node = graph->GetNode(edge->GetTo());
-			auto someOpenData = FindSomeOpenData(openDataList, node);
-			//ノードが存在しない、または、データが非アクティブなら、処理を飛ばす。
-			if (!someOpenData || !someOpenData->isActive) {
-				continue;
+		auto tempData = FindSomeOpenData(openDataList, targetNode);
+		while (index <= tempMaxIndex) {
+			if (tempData->parent.lock() == nullptr) {
+				break;
 			}
 
-			//一番小さいデータを取り出す。
-			if (someOpenData->GetSumRange() < resultData->GetSumRange()) {
-				resultData = someOpenData;
-			}
+			m_route.push(tempData->node.lock());
+			tempData = FindSomeOpenData(openDataList, tempData->parent.lock());
+			index++;
 		}
 
-		if (resultData->node.lock() == nullptr) {	//リザルトがnullptrなら
-			return;
-		}
-
-		//初期ノードなら
-		if (resultData->node.lock() == startNode) {
-			return; //処理をやめる。
-		}
-
-		m_route.push(resultData->node.lock());
-		resultData->isActive = false;
-
-		CreateRoute(startNode, resultData->node.lock(), graph, openDataList);
+		return index <= tempMaxIndex;		//上限回数を超えたら、失敗
 	}
 
 	std::shared_ptr<OpenData> OpenDataHandler::FindSomeOpenData(const DataPtrList& dataList, const std::shared_ptr<NavGraphNode>& node) {
-		return FindSomeOpenData(dataList, std::make_shared<OpenData>(node, 0.0f, 0.0f));
+		return FindSomeOpenData(dataList, std::make_shared<OpenData>(nullptr ,node, 0.0f, 0.0f));
 	}
 
 	std::shared_ptr<OpenData> OpenDataHandler::FindSomeOpenData(const DataPtrList& dataList, const std::shared_ptr<OpenData>& openData) {
@@ -178,13 +156,13 @@ namespace basecross {
 		}
 
 		//オープンリストに登録されていて、新規データの方が小さい合計値
-		if (someOpenData && IsSmall_LeftOpenData(someOpenData, openData)) {
+		if (someOpenData && !IsSmall_LeftOpenData(someOpenData, openData)) {
 			(*someOpenData) = (*openData);		//オープンデータの中身を更新
 			return true;
 		}
 
 		//クローズリストに登録されていて、新規データの方が小さい合計値
-		if (someCloseData && IsSmall_LeftOpenData(someCloseData, openData)) {
+		if (someCloseData && !IsSmall_LeftOpenData(someCloseData, openData)) {
 			openDataList.push_back(openData);		//オープンデータに登録
 			closeDataList.remove(someCloseData);	//クローズデータから削除
 			return true;
@@ -205,24 +183,34 @@ namespace basecross {
 
 		//初期オープンデータを生成
 		m_heuristic->SetTargetNode(targetNode);
-		openDataList.push_back(std::make_shared<OpenData>(startNode, 0.0f, m_heuristic->CalculateHeuristicRange(startNode)));
+		openDataList.push_back(std::make_shared<OpenData>(nullptr, startNode, 0.0f, m_heuristic->CalculateHeuristicRange(startNode)));
 
 		//オープンデータが存在する限りループする。
 		while (openDataList.size() != 0) {	
 			//オープンデータ生成用の基準ノードの生成。
 			auto baseOpenData = FindSearchBaseOpenData(openDataList);
+
 			//オープンデータの生成。ターゲットノードにたどり着いたらtrueを返す。
-			if (CreateOpenDatas(openDataList, closeDataList, baseOpenData, graph)) {
+			if (CreateOpenDatas(openDataList, closeDataList, baseOpenData, graph, startNode, targetNode)) {
 				break;
 			}
 		}
 
 		bool isSearchSuccess = (openDataList.size() != 0);	//オープンデータが存在するなら、検索成功
 
-		//オープンデータから最短経路を取得
-		m_route.push(targetNode);
-		FindSomeOpenData(openDataList, targetNode)->isActive = false;
-		CreateRoute(startNode, targetNode, graph, openDataList);
+		if (!isSearchSuccess) {	//サーチが失敗したら処理を飛ばす。
+			return isSearchSuccess;
+		}
+
+		//クローズデータをオープンデータに含める。
+		for (auto closeData : closeDataList) {
+			openDataList.push_back(closeData);
+		}
+
+		bool isCreateRoute = CreateRoute(openDataList, targetNode);
+		if (!isCreateRoute) {
+			Debug::GetInstance()->Log(L"OpenDataHandler::SearchAstar() : Astarルートが検索できませんでした。");
+		}
 
 		return isSearchSuccess;
 	}

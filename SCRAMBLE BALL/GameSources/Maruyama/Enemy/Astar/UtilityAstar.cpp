@@ -27,7 +27,7 @@ namespace basecross {
 	std::shared_ptr<NavGraphNode> UtilityAstar::SearchNearNode(const std::shared_ptr<const GraphAstar::GraphType>& graph, const Vec3& targetPos, const bool isObstacleConfirmation) {
 		const auto& nodes = graph->GetNodes();	//ノード配列の取得
 
-		float minRange = 10000.0f;
+		float minRange = FLT_MAX;
 		std::shared_ptr<NavGraphNode> minNode = nullptr;  //一番距離が短いノード
 
 		//検索開始
@@ -36,6 +36,8 @@ namespace basecross {
 			auto pos = node->GetPosition();
 			auto toNode = pos - targetPos;
 			const auto& range = toNode.length();
+
+			int index = node->GetIndex();
 
 			//障害物が合ったらコンティニュ―
 			if (isObstacleConfirmation && maru::UtilityObstacle::IsRayObstacle(targetPos, pos, objects)) {
@@ -47,6 +49,10 @@ namespace basecross {
 				minRange = range;
 				minNode = node;
 			}
+		}
+
+		if (minNode == nullptr) {
+			int i = 0;
 		}
 
 		return minNode;

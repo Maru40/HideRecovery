@@ -23,6 +23,12 @@
 
 #include "Maruyama/Utility/SingletonComponent/SingletonComponent.h"
 #include "Maruyama/Enemy/ImpactMap/FieldImpactMap.h"
+#include "Maruyama/Enemy/AIDirector/EnemyAIDirector.h"
+
+#include "Maruyama/Interface/I_FactionMember.h"
+#include "Maruyama/Enemy/AIDirector/FactionCoordinator.h"
+#include "Maruyama/Enemy/AIDirector/PatrolCoordinator.h"
+#include "Maruyama/Enemy/AIDirector/PatrolCoordinator/HidePlacePatrol.h"
 
 #include "Maruyama/Item/HideItem.h"
 #include "Maruyama/StageObject/HidePlace.h"
@@ -68,14 +74,13 @@ namespace basecross {
 					m_transform = object->GetComponent<Transform>();
 					m_targetManager = object->GetComponent<TargetManager>();
 					m_velocityManager = object->GetComponent<VelocityManager>();
+					m_factionMember = object->GetComponent<Enemy::I_FactionMember>();
 				}
 
 				void SearchBall::OnStart() {
 					SelectTask();		//タスクの選択
 
 					CalculateTarget();	//ターゲットの計算
-
-					Debug::GetInstance()->Log(L"SearchStart");
 				}
 
 				bool SearchBall::OnUpdate() {
@@ -86,22 +91,30 @@ namespace basecross {
 
 				void SearchBall::OnExit() {
 					m_taskList->ForceStop();
-
-					Debug::GetInstance()->Log(L"SearchEnd");
 				}
 
 				std::shared_ptr<GameObject> SearchBall::CalculateTarget() {
+					using HidePlacePtrol = Enemy::AICoordinator::Patrol::HidePlacePatrol;
+
 					auto targetManager = m_targetManager.lock();
 					if (!targetManager) {	//ターゲット管理が存在しないなら処理をしない
 						return nullptr;
 					}
 
 					//本来はAIDirectorにアクセスして、ターゲットを確定させる。
+					auto aiDirector = Enemy::AIDirector::GetInstance();
+					auto factionMembmer = m_factionMember.lock();
+					auto patrolCoordinator = factionMembmer->GetAssignedFaction<HidePlacePtrol>();	//パトロールコーディネーターの取得
 
-					//デバッグで隠し場所を検索する。
-					auto hidePlace = maru::Utility::FindComponent<HidePlace>();
-					targetManager->SetTarget(hidePlace->GetGameObject());
-					return hidePlace->GetGameObject();
+					if (!patrolCoordinator) {	//パトロール中でなかったら処理を飛ばす。
+						return nullptr;
+					}
+
+					//パトロールコーディネータからターゲットを取得
+					auto target = patrolCoordinator->SearchTarget(factionMembmer);
+					targetManager->SetTarget(target);
+
+					return target;
 				}
 
 				void SearchBall::DefineTask() {
@@ -121,7 +134,6 @@ namespace basecross {
 
 					//待機
 					m_param.waitParam->start = [&]() {	//開始イベント
-						Debug::GetInstance()->Log(L"WaitStart"); 
 						if (auto velocityManager = m_velocityManager.lock()) {
 							velocityManager->StartDeseleration();
 						}

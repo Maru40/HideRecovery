@@ -18,6 +18,8 @@
 
 #include "Maruyama/UI/3D/Component/OpenBoard.h"
 
+#include "Maruyama/Utility/SingletonComponent/ShareClassesManager.h"
+
 namespace basecross {
 
 	int HidePlace::m_objectCount = 1;
@@ -57,6 +59,10 @@ namespace basecross {
 		++m_objectCount;
 
 		CreateBoard();
+
+		if (auto shareManager = ShareClassesManager::GetInstance(GetStage())) {
+			shareManager->AddShareClass(GetThis<HidePlace>());
+		}
 	}
 
 	void HidePlace::OnLateStart() {
