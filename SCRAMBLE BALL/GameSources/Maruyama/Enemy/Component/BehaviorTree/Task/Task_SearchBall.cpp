@@ -132,19 +132,26 @@ namespace basecross {
 						std::make_shared<TaskListNode::TargetSeek>(ownerObject, m_param.targetSeekParam)
 					);
 
-					//待機
-					m_param.waitParam->start = [&]() {	//開始イベント
+					//待機行動
+					DefineWaitTask();
+				}
+
+				void SearchBall::DefineWaitTask() {
+					//開始イベント
+					m_param.waitParam->start = [&]() {	
 						if (auto velocityManager = m_velocityManager.lock()) {
 							velocityManager->StartDeseleration();
 						}
 					};
 
-					m_param.waitParam->exit = [&]() {	//終了イベント
+					//終了イベント
+					m_param.waitParam->exit = [&]() {	
 						if (auto velocityManager = m_velocityManager.lock()) {
 							velocityManager->SetIsDeseleration(false);
 						}
 					};
 
+					//タスクの定義
 					m_taskList->DefineTask(
 						TaskEnum::Wait,
 						std::make_shared<basecross::Task::Wait>(m_param.waitParam)

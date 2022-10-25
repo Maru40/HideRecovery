@@ -101,6 +101,11 @@ namespace basecross {
 
 					void DefineTask();
 
+					/// <summary>
+					/// 待機中のタスクの定義
+					/// </summary>
+					void DefineWaitTask();
+
 					void SelectTask();
 
 					/// <summary>
