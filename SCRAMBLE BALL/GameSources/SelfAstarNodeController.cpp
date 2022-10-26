@@ -56,7 +56,7 @@ namespace basecross {
 	}
 
 	void SelfAstarNodeController::UpdateNode() {
-		if (IsUpdateNode()) {
+		if (!IsUpdateNode()) {
 			return;
 		}
 
@@ -80,8 +80,8 @@ namespace basecross {
 		datas.reserve(edges.size());
 
 		//現在のノードを入れる。
-		float range = (GetNode()->GetPosition() - transform->GetPosition()).length();
-		datas.push_back(Data(GetNode(), range));
+		//float range = (GetNode()->GetPosition() - transform->GetPosition()).length();
+		//datas.push_back(Data(GetNode(), range));
 
 		//距離を計ってソート用の配列に代入する。
 		for (auto& edge : edges) {
