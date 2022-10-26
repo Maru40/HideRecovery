@@ -61,14 +61,6 @@ namespace basecross {
 			else {
 				Debug::GetInstance()->Log(L"TaskListNode::OpenBox::Open() : ターゲットがHidePlaceでありません。");
 			}
-
-			//if (!m_accessHidePlace.expired()) {
-			//	m_accessHidePlace.lock()->Access();
-			//	Debug::GetInstance()->Log(L"Open");
-			//}
-			//else {
-			//	Debug::GetInstance()->Log(L"TaskListNode::OpenBox::Open() : 必要コンポーネントが存在しません。");
-			//}
 		}
 
 		void OpenBox::ChangeAnimation() {
