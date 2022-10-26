@@ -19,9 +19,6 @@ float4 main(PSPNTInput input) : SV_TARGET
     Color += input.specular;
     Color.a = Diffuse.a;
 
-    if (Activeflags.x)
-    {
-        Color = g_texture.Sample(g_sampler, input.tex) * Color;
-    }
+    Color = g_texture.Sample(g_sampler, input.tex) * Color;
     return Color;
 }

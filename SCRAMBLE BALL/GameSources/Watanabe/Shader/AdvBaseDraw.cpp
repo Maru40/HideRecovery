@@ -61,6 +61,10 @@ namespace basecross {
 		SetDepthStencilState(DepthStencilState::Default);
 		SetRasterizerState(RasterizerState::CullBack);
 		SetSamplerState(SamplerState::LinearClamp);
+
+		// デフォルトで設定
+		SetTextureResource(L"Default_TX", TextureType::Default);
+		SetTextureResource(L"ToonTex_TX", TextureType::ToonRamp);
 	}
 
 	AdvBaseDraw::~AdvBaseDraw() {}
