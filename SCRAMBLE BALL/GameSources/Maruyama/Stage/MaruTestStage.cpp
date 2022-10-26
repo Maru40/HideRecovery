@@ -82,6 +82,7 @@ namespace basecross {
 
 			Vec3(+basePos.x, 1.0f, basePos.z),
 			Vec3(0.0f, 1.0f, basePos.z),
+
 			//Vec3(-basePos.x, 1.0f, basePos.z),
 		};
 
