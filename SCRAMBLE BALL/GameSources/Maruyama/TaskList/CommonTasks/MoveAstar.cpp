@@ -115,7 +115,8 @@ namespace basecross {
 			SetIsSearchRoute(true);		//検索開始
 			//std::lock_guard<std::mutex> lock(m_mtx);
 			
-			m_velocityManager.lock()->StartDeseleration();		//減速処理開始
+			//減速処理開始
+			m_velocityManager.lock()->StartDeseleration();
 
 			if (m_areaRoute.empty()) {
 				SetIsSearchRoute(false);//検索終了
@@ -126,7 +127,8 @@ namespace basecross {
 
 			SelectTask();				//タスクの再始動
 
-			m_velocityManager.lock()->SetIsDeseleration(false);	//減速処理終了
+			//減速処理終了
+			m_velocityManager.lock()->SetIsDeseleration(false);
 			SetIsSearchRoute(false);	//検索終了
 		}
 
