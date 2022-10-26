@@ -29,6 +29,7 @@ namespace basecross {
 
 			namespace Patrol {
 
+
 				HidePlacePatrol::HidePlacePatrol(const std::shared_ptr<FactionCoordinator>& owner) :
 					HidePlacePatrol(owner, std::vector<std::weak_ptr<EnemyBase>>())
 				{}
@@ -63,14 +64,12 @@ namespace basecross {
 					return false;
 				}
 
-				std::shared_ptr<GameObject> HidePlacePatrol::SearchTarget(const std::shared_ptr<I_FactionMember>& member) {
-					//探しものがないなら、処理を終了。
-					auto hidePlaces = ShareClassesManager::GetInstance()->GetCastShareClasses<HidePlace>();
-					if (hidePlaces.size() == 0) {
-						return nullptr;
-					}
+				std::vector<std::shared_ptr<GameObject>> HidePlacePatrol::SearchOtherTargets(
+					const std::shared_ptr<I_FactionMember>& member,
+					const std::vector<std::weak_ptr<HidePlace>>& hidePlaces
+				) {
+					std::vector<std::shared_ptr<GameObject>> result;
 
-					//同じターゲット以外を探す。
 					for (auto& weakHidePlace : hidePlaces) {
 						auto hidePlace = weakHidePlace.lock();
 						//nullptrまたは、すでにOpenなら対象にならない。
@@ -80,11 +79,40 @@ namespace basecross {
 
 						//他のメンバーがターゲットにしていなかったら
 						if (!IsSomeMemberTarget(hidePlace->GetGameObject())) {
-							return hidePlace->GetGameObject();	//そのターゲットを返す。
+							result.push_back(hidePlace->GetGameObject());	//そのターゲットを返す。
 						}
 					}
 
-					return nullptr;
+					return result;
+				}
+
+				std::shared_ptr<GameObject> HidePlacePatrol::SearchTarget(const std::shared_ptr<I_FactionMember>& member) {
+					//探しものがないなら、処理を終了。
+					auto hidePlaces = ShareClassesManager::GetInstance()->GetCastShareClasses<HidePlace>();
+					if (hidePlaces.size() == 0) {
+						return nullptr;
+					}
+
+					//他のメンバーがターゲットにしていない者のみに絞る。
+					auto otherTargets = SearchOtherTargets(member, hidePlaces);
+
+					//ターゲット候補が0なら、nullptrを返す(ターゲットが存在しない。)
+					if (otherTargets.empty()) {
+						return nullptr;
+					}
+
+					//ターゲット候補の中から一番近いターゲットが手前に来るようにソートする。
+					auto sortFunction = [&](const std::shared_ptr<GameObject>& left, const std::shared_ptr<GameObject>& right) {
+						auto memberPosition = member->GetSelfObject()->GetComponent<Transform>()->GetPosition();
+						auto toLeftRange = (left->GetComponent<Transform>()->GetPosition() - memberPosition).length();
+
+						auto toRightRange = (right->GetComponent<Transform>()->GetPosition() - memberPosition).length();
+
+						return toLeftRange < toRightRange;
+					};
+					std::sort(otherTargets.begin(), otherTargets.end(), sortFunction);
+
+					return otherTargets[0];
 				}
 
 				bool HidePlacePatrol::IsEnd() const {
