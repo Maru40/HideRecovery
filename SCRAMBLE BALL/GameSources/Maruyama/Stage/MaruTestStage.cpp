@@ -57,7 +57,7 @@ namespace basecross {
 	void MaruTestStage::OnCreate() {
 		CreateViewLight();
 		auto log = AddGameObject<Debug>();
-		Debug::GetInstance()->Log(L"MapShotStage");
+		Debug::GetInstance()->Log(L"MaruTestStage");
 
 		AddGameObject<GameManagerObject>();
 
@@ -74,7 +74,29 @@ namespace basecross {
 
 		//AddGameObject<GameObject>()->AddComponent<maru::Behavior::TesterTree>();
 
-		auto enemy = Instantiate<Enemy::AIPlayerObject>(Vec3(-30.0f, 1.0f, -6.0f), Quat::Identity());
+		Vec3 basePos(8.25f, 1.0f, 50.0f);
+		Vec3 positions[] = {
+			Vec3(+basePos.x, 1.0f, -basePos.z),
+			Vec3(0.0f, 1.0f, -basePos.z),
+			Vec3(-basePos.x, 1.0f, -basePos.z),
+
+			Vec3(+basePos.x, 1.0f, basePos.z),
+			Vec3(0.0f, 1.0f, basePos.z),
+
+			//Vec3(-basePos.x, 1.0f, basePos.z),
+		};
+
+		auto index = 0;
+		const Col4 blue(0.0f, 0.0f, 1.0f, 0.0f);
+		const Col4 red(1.0f, 0.0f, 0.0f, 1.0f);
+		for (auto position : positions) {
+			auto enemy = Instantiate<Enemy::AIPlayerObject>(position, Quat::Identity());
+			auto color = index < 3 ? blue : red;
+			enemy->GetComponent<PNTStaticDraw>()->SetDiffuse(color);
+			index++;
+		}
+
+		//auto enemy = Instantiate<Enemy::AIPlayerObject>(Vec3(-30.0f, 1.0f, -6.0f), Quat::Identity());
 	}
 
 	void MaruTestStage::OnUpdate() {

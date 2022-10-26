@@ -1202,6 +1202,9 @@
     <Filter Include="Maruyama\Utility\TaskList\CommonTasks\OpenBox">
       <UniqueIdentifier>{b56a9f38-254e-4d47-918c-e19251e37cf7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Enemy\Component\SelfAstarNodeController">
+      <UniqueIdentifier>{bc3d7f15-4e3e-4cdd-a28c-3c18ef2b3e54}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2251,6 +2254,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\OpenBox.h">
       <Filter>Maruyama\Utility\TaskList\CommonTasks\OpenBox</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)SelfAstarNodeController.h">
+      <Filter>Maruyama\Enemy\Component\SelfAstarNodeController</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -3206,6 +3212,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\OpenBox.cpp">
       <Filter>Maruyama\Utility\TaskList\CommonTasks\OpenBox</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)SelfAstarNodeController.cpp">
+      <Filter>Maruyama\Enemy\Component\SelfAstarNodeController</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

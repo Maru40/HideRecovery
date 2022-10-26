@@ -383,6 +383,18 @@ namespace basecross {
 			return positions;
 		}
 
+		std::vector<Vec3> ImpactMap::GetRoutePositions(
+			const std::shared_ptr<NavGraphNode>& selfNode,
+			const Vec3& targetPosition,
+			const int areaIndex,
+			const int targetAreaIndex
+		) {
+			m_baseAstar->SearchAstarStart(selfNode, targetPosition, areaIndex, targetAreaIndex);
+			auto positions = m_baseAstar->GetRoutePositions();
+			m_baseAstar->ResetAstar();
+			return positions;
+		}
+
 		//©•ª‚Ì‹ŠE“à‚Ìƒm[ƒh‚ğæ“¾
 		std::vector<std::shared_ptr<NavGraphNode>> ImpactMap::GetEyeRangeNodes(const Vec3& selfPosition, const std::shared_ptr<I_Impacter>& impacter) {
 			std::vector<std::shared_ptr<NavGraphNode>> nodes;
