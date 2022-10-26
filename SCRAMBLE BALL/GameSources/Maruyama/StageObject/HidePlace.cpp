@@ -79,6 +79,10 @@ namespace basecross {
 	}
 
 	void HidePlace::Open() {
+		if (IsOpen()) {
+			return;
+		}
+
 		auto animator = GetGameObject()->GetComponent<BoxAnimator>(false);
 		if (animator && animator->IsCurrentAnimator(BoxAnimationState::State::Close)) {
 			animator->ChangeBoxAnimation(BoxAnimationState::State::Open);
