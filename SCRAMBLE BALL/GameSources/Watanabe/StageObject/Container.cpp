@@ -1,6 +1,7 @@
 ﻿#include "stdafx.h"
 #include "Container.h"
 #include "../Utility/DataExtracter.h"
+#include "../Shader/StaticModelDraw.h"
 
 namespace basecross {
 	Container::Container(const shared_ptr<Stage>& stage)
@@ -16,7 +17,7 @@ namespace basecross {
 	}
 
 	void Container::OnCreate() {
-		auto drawComp = AddComponent<PNTStaticModelDraw>();
+		auto drawComp = AddComponent<StaticModelDraw>();
 		drawComp->SetMultiMeshResource(L"Container");
 		drawComp->SetOwnShadowActive(true);
 		// モデルのテクスチャを無効にして、別のテクスチャを使用

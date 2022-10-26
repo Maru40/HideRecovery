@@ -8,6 +8,7 @@
 #include "../Utility/DataExtracter.h"
 #include "../DebugClass/Debug.h"
 #include "../Utility/AdvMeshUtil.h"
+#include "../Shader/StaticModelDraw.h"
 
 #include "Maruyama/Player/Component/OwnArea.h"
 
@@ -38,7 +39,7 @@ namespace basecross {
 	}
 
 	void OwnAreaObject::OnCreate() {
-		auto drawComp = AddComponent<PNTStaticDraw>();
+		auto drawComp = AddComponent<StaticModelDraw>();
 		drawComp->SetSamplerState(SamplerState::LinearWrap);
 		drawComp->SetOwnShadowActive(true);
 

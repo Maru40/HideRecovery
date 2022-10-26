@@ -4,6 +4,7 @@
 #include "VelocityManager.h"
 #include "../DebugClass/Debug.h"
 #include "../Effekseer/EfkEffect.h"
+#include "../Shader/BoneModelDraw.h"
 #include "Itabashi/OnlineMatching.h"
 #include "TestComponent.h"
 #include "Patch/InputHelper.h"
@@ -47,7 +48,7 @@ namespace basecross {
 			Vec3(0.0f, -0.55f, 0.0f)
 		);
 		auto gameObject = GetStage()->AddGameObject<StageObjectBase>(L"PlayerModel");
-		auto drawComp = gameObject->AddComponent<PNTBoneModelDraw>();
+		auto drawComp = gameObject->AddComponent<BoneModelDraw>();
 		drawComp->SetMultiMeshResource(L"Player_Mesh");
 		drawComp->SetMeshToTransformMatrix(spanMat);
 

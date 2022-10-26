@@ -6,6 +6,7 @@
 
 #pragma once
 #include "stdafx.h"
+#include "Watanabe/Shader/BoneModelDraw.h"
 
 namespace basecross {
 	//--------------------------------------------------------------------------------------
@@ -14,7 +15,7 @@ namespace basecross {
 	class PlayerObject : public GameObject
 	{
 	public:
-		using DrawComp = PNTBoneModelDraw;
+		using DrawComp = BoneModelDraw;
 
 	private:
 		std::weak_ptr<GameObject> m_arm;	//アーム

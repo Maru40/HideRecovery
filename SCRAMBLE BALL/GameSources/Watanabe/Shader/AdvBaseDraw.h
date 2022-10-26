@@ -7,8 +7,12 @@
 #include "stdafx.h"
 
 namespace basecross {
+	/// <summary>
+	/// テクスチャの種類
+	/// </summary>
 	enum class TextureType {
 		Default,
+		Shadowmap,
 		ToonRamp,
 		Normal
 	};
@@ -381,6 +385,12 @@ namespace basecross {
 						if (shTex) {
 							// コンポーネントにテクスチャがある
 							pD3D11DeviceContext->PSSetShaderResources(0, 1, shTex->GetShaderResourceView().GetAddressOf());
+							// いずれはまとめてセットしたい
+							for (const auto& textureMap : GetAllTextureResource()) {
+								const int& index = static_cast<size_t>(textureMap.first);
+								const auto& texture = textureMap.second;
+								pD3D11DeviceContext->PSSetShaderResources(index, 1, texture.lock()->GetShaderResourceView().GetAddressOf());
+							}
 						}
 						else {
 							// コンポーネントにテクスチャがない

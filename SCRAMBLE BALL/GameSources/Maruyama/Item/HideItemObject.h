@@ -8,6 +8,7 @@
 #include "stdafx.h"
 
 #include "Maruyama/StageObject/StageObjectBase.h"
+#include "Watanabe/Shader/BoneModelDraw.h"
 
 namespace basecross {
 	//--------------------------------------------------------------------------------------
@@ -16,7 +17,7 @@ namespace basecross {
 	class HideItemObject : public StageObjectBase
 	{
 	public:
-		using DrawComp = PNTBoneModelDraw;
+		using DrawComp = BoneModelDraw;
 
 	private:
 

@@ -3,7 +3,8 @@
 Texture2D g_texture : register(t0);
 SamplerState g_sampler : register(s0);
 
-Texture2D g_toonTexture : register(t1);
+Texture2D g_shadowMap : register(t1);
+Texture2D g_toonTexture : register(t2);
 
 float4 main(PSPNTInput input) : SV_TARGET
 {

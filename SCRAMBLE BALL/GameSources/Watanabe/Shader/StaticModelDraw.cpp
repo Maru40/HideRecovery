@@ -31,12 +31,12 @@ namespace basecross {
 		//メッシュリソースの取得
 		auto PtrMeshResource = GetMeshResource();
 		if (PtrMeshResource) {
-			if (GetOwnShadowActive()) {
-				DrawStatic<VSPNTStaticShadow, PSPNTStaticShadow>(PtrMeshResource->GetMashData());
-			}
-			else {
-				DrawStatic<VSModelDraw, PSModelDraw>(PtrMeshResource->GetMashData());
-			}
+			//if (GetOwnShadowActive()) {
+			//	DrawStatic<VSPNTStaticShadow, PSPNTStaticShadow>(PtrMeshResource->GetMashData());
+			//}
+			//else {
+			DrawStatic<VSModelDraw, PSModelDraw>(PtrMeshResource->GetMashData());
+			//}
 		}
 		//マルチメッシュリソースの取得
 		auto PtrMultiMeshResource = GetMultiMeshResource();
@@ -45,17 +45,17 @@ namespace basecross {
 			auto& vec = PtrMultiMeshResource->GetMeshVec();
 			for (size_t i = 0; i < count; i++) {
 				if (GetMultiMeshIsDraw(i)) {
-					if (GetOwnShadowActive()) {
-						if (GetGameObject()->GetComponent<Shadowmap>(false)) {
-							DrawStatic<VSPNTStaticShadow, PSPNTStaticShadow2>(vec[i]);
-						}
-						else {
-							DrawStatic<VSPNTStaticShadow, PSPNTStaticShadow>(vec[i]);
-						}
-					}
-					else {
-						DrawStatic<VSModelDraw, PSModelDraw>(vec[i]);
-					}
+					//if (GetOwnShadowActive()) {
+					//	if (GetGameObject()->GetComponent<Shadowmap>(false)) {
+					//		DrawStatic<VSPNTStaticShadow, PSPNTStaticShadow2>(vec[i]);
+					//	}
+					//	else {
+					//		DrawStatic<VSPNTStaticShadow, PSPNTStaticShadow>(vec[i]);
+					//	}
+					//}
+					//else {
+					DrawStatic<VSModelDraw, PSModelDraw>(vec[i]);
+					//}
 				}
 			}
 		}

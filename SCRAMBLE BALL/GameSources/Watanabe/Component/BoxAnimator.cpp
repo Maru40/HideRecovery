@@ -18,7 +18,7 @@ namespace basecross {
 	}
 
 	bool BoxAnimator::IsCurrentAnimator(const BoxAnimationState::State& state) const {
-		auto drawer = GetGameObject()->GetComponent<PNTBoneModelDraw>();
+		auto drawer = GetGameObject()->GetComponent<ModelDrawComp>();
 		auto strState = BoxAnimationState::BoxAnimationState2wstring(state);
 
 		return strState == drawer->GetCurrentAnimation();

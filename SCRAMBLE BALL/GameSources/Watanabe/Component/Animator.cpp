@@ -48,29 +48,29 @@ namespace basecross {
 	}
 
 	void Animator::RegisterAnimationClip(AnimationClip clip) {
-		auto drawer = GetGameObject()->GetComponent<PNTBoneModelDraw>();
+		auto drawer = GetGameObject()->GetComponent<ModelDrawComp>();
 		drawer->AddAnimation(clip.name,
 			clip.start, clip.end - clip.start,
 			clip.isLoop, 30);
 	}
 
 	void Animator::ChangeAnimation(wstring key) {
-		auto drawer = GetGameObject()->GetComponent<PNTBoneModelDraw>();
+		auto drawer = GetGameObject()->GetComponent<ModelDrawComp>();
 		drawer->ChangeCurrentAnimation(key);
 	}
 
 	void Animator::OnUpdate() {
-		auto drawer = GetGameObject()->GetComponent<PNTBoneModelDraw>();
+		auto drawer = GetGameObject()->GetComponent<ModelDrawComp>();
 		drawer->UpdateAnimation(App::GetApp()->GetElapsedTime() * GetPlaySpeed());
 	}
 
 	bool Animator::IsTargetAnimationEnd() {
-		auto drawer = GetGameObject()->GetComponent<PNTBoneModelDraw>();
+		auto drawer = GetGameObject()->GetComponent<ModelDrawComp>();
 		return drawer->IsTargetAnimeEnd();
 	}
 
 	float Animator::GetPlaySpeed() {
-		auto drawer = GetGameObject()->GetComponent<PNTBoneModelDraw>();
+		auto drawer = GetGameObject()->GetComponent<ModelDrawComp>();
 		auto keyName = drawer->GetCurrentAnimation();
 
 		return m_animationClipMap[keyName].playSpeed;
