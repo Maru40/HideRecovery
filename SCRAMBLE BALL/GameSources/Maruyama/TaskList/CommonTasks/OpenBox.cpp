@@ -35,7 +35,7 @@ namespace basecross {
 		}
 
 		bool OpenBox::OnUpdate() {
-
+			//将来的にアニメーションが終了するまでを条件とする。
 
 			return true;
 		}
