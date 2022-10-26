@@ -179,7 +179,7 @@ namespace basecross {
 				}
 
 				void SearchBall::InitializeParametor() {
-					constexpr float MoveSpeed = 10.0f;
+					constexpr float MoveSpeed = 5.0f;
 					constexpr float NearTargetRange = 1.5f;
 
 					//Astarで目標の近くまで移動するパラメータ
