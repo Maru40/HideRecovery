@@ -17,6 +17,7 @@
 #include "Maruyama/Enemy/ImpactMap/FieldImpactMap.h"
 
 #include "Maruyama/Utility/Component/TargetManager.h"
+#include "VelocityManager.h"
 
 #include "Maruyama/Item/HideItem.h"
 #include "Maruyama/StageObject/HidePlace.h"
@@ -26,6 +27,8 @@
 namespace basecross {
 
 	namespace Task {
+
+		//std::mutex MoveAstar::m_mtx;
 
 		//--------------------------------------------------------------------------------------
 		///	ターゲットの近くまでAstarを利用して移動するタスクパラメータ
@@ -39,29 +42,50 @@ namespace basecross {
 		///	ターゲットの近くまでAstarを利用して移動するタスク
 		//--------------------------------------------------------------------------------------
 
+
 		MoveAstar::MoveAstar(const std::shared_ptr<Enemy::EnemyBase>& owner, const Parametor* paramPtr) :
 			TaskNodeBase(owner),
 			m_param(paramPtr),
-			m_taskList(new TaskList<TaskEnum>())
+			m_taskList(new TaskList<TaskEnum>()),
+			m_isSearchRoute(false)
 		{
 			DefineTask();
 
 			m_transform = GetOwner()->GetGameObject()->GetComponent<Transform>();
 			m_targetManager = GetOwner()->GetGameObject()->GetComponent<TargetManager>();
+			m_velocityManager = GetOwner()->GetGameObject()->GetComponent<VelocityManager>();
+
+			//CalculateMoveAreaRouteQueue();	//徘徊エリアルートの取得
+			//NextRoute();
 		}
 
 		void MoveAstar::OnStart() {
-			SelectTask();	//タスクの選択
+			//SelectTask();	//タスクの選択
 
 			CalculateMoveAreaRouteQueue();	//徘徊エリアルートの取得
-			m_param->movePositionsParam->positions = CalculateMovePositions();	//徘徊移動先を設定
+			//CalculateMovePositions();		//徘徊移動先を設定
+
+			//SetIsSearchRoute(true);
+			//スレッド生成
+			NextRoute();
+			//std::thread nextRoute([&]() { NextRoute(); });
+			//nextRoute.detach();
 		}
 
 		bool MoveAstar::OnUpdate() {
+			//ルート検索中は他の処理を止める。
+			if (IsSearchRoute()) {
+				return false;
+			}
+
 			m_taskList->UpdateTask();
 
 			if (m_taskList->IsEnd()) {
-				NextRoute();
+				SetIsSearchRoute(true);
+				//NextRoute();
+				//スレッド生成
+				std::thread nextRoute([&]() { NextRoute(); });
+				nextRoute.detach();
 			}
 
 			return IsEnd();
@@ -88,13 +112,22 @@ namespace basecross {
 		}
 
 		void MoveAstar::NextRoute() {
+			SetIsSearchRoute(true);		//検索開始
+			//std::lock_guard<std::mutex> lock(m_mtx);
+			
+			m_velocityManager.lock()->StartDeseleration();		//減速処理開始
+
 			if (m_areaRoute.empty()) {
+				SetIsSearchRoute(false);//検索終了
 				return;
 			}
 
-			m_param->movePositionsParam->positions = CalculateMovePositions();	//新しいポジションに変更
+			CalculateMovePositions();	//新しいポジションに変更
 
 			SelectTask();				//タスクの再始動
+
+			m_velocityManager.lock()->SetIsDeseleration(false);	//減速処理終了
+			SetIsSearchRoute(false);	//検索終了
 		}
 
 		std::queue<int> MoveAstar::CalculateMoveAreaRouteQueue() {
@@ -135,7 +168,10 @@ namespace basecross {
 			int areaIndex = m_areaRoute.front();	//自分自身がいるエリアインデックス
 			m_areaRoute.pop();
 			int targetAreaIndex = !m_areaRoute.empty() ? m_areaRoute.front() : areaIndex;
-			return maru::FieldImpactMap::GetInstance()->GetRoutePositions(startPosition, endPosition, areaIndex, targetAreaIndex);
+			auto positions = maru::FieldImpactMap::GetInstance()->GetRoutePositions(startPosition, endPosition, areaIndex, targetAreaIndex);
+
+			m_param->movePositionsParam->positions = positions;
+			return positions;
 		}
 
 		Vec3 MoveAstar::CalculateMoveTargetPosition() {

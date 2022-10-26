@@ -14,6 +14,7 @@
 namespace basecross {
 
 	class TargetManager;
+	class VelocityManager;
 
 	template<class T>
 	class TaskList;
@@ -56,6 +57,10 @@ namespace basecross {
 
 			std::weak_ptr<Transform> m_transform;			
 			std::weak_ptr<TargetManager> m_targetManager;	
+			std::weak_ptr<VelocityManager> m_velocityManager;
+
+			bool m_isSearchRoute;		//ルートを検索中かどうか
+			//static std::mutex m_mtx;	//ミューテックス
 
 		public:
 			MoveAstar(const std::shared_ptr<Enemy::EnemyBase>& owner, const Parametor* paramPtr);
@@ -93,6 +98,10 @@ namespace basecross {
 			/// </summary>
 			/// <returns>徘徊移動先を取得</returns>
 			Vec3 CalculateMoveTargetPosition();
+
+			void SetIsSearchRoute(const bool isSearchRoute) noexcept { m_isSearchRoute = isSearchRoute; }
+
+			bool IsSearchRoute() const noexcept { return m_isSearchRoute; }
 
 		public:
 
