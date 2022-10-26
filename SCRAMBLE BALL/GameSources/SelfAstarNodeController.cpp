@@ -53,16 +53,6 @@ namespace basecross {
 		}
 
 		UpdateNode();
-
-		//if (HasNode()) {
-		//	wstring str = L"";
-		//	str += L"NodeIndex: ";
-		//	str += std::to_wstring(GetNode()->GetIndex());
-		//	Debug::GetInstance()->Log(str);
-		//}
-		//else {
-		//	Debug::GetInstance()->Log(L"ノードがありません。");
-		//}
 	}
 
 	void SelfAstarNodeController::UpdateNode() {
@@ -84,13 +74,17 @@ namespace basecross {
 			{}
 		};
 
+		auto edges = graph->GetEdges(m_node.lock()->GetIndex());
+
 		std::vector<Data> datas;	//ソート用の配列
+		datas.reserve(edges.size());
+
 		//現在のノードを入れる。
 		float range = (GetNode()->GetPosition() - transform->GetPosition()).length();
 		datas.push_back(Data(GetNode(), range));
 
 		//距離を計ってソート用の配列に代入する。
-		for (auto& edge : graph->GetEdges(m_node.lock()->GetIndex())) {
+		for (auto& edge : edges) {
 			auto node = graph->GetNode(edge->GetTo());
 			float toNodeRange = (node->GetPosition() - transform->GetPosition()).length();
 
@@ -157,5 +151,18 @@ namespace basecross {
 	bool SelfAstarNodeController::HasNode() const noexcept {
 		return !m_node.expired();
 	}
+
+
+
+
+	//if (HasNode()) {
+	//	wstring str = L"";
+	//	str += L"NodeIndex: ";
+	//	str += std::to_wstring(GetNode()->GetIndex());
+	//	Debug::GetInstance()->Log(str);
+	//}
+	//else {
+	//	Debug::GetInstance()->Log(L"ノードがありません。");
+	//}
 
 }

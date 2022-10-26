@@ -34,12 +34,26 @@ namespace basecross {
 	private:
 		void UpdateProccess();
 
+		/// <summary>
+		/// ノードの更新
+		/// </summary>
 		void UpdateNode();
 
+		/// <summary>
+		/// ノードの更新が必要かどうか
+		/// </summary>
+		/// <returns></returns>
 		bool IsUpdateNode();
 
+		/// <summary>
+		/// ノードの初期化
+		/// </summary>
 		void InitializeNode();
 
+		/// <summary>
+		/// 所持ノードが遠すぎるかどうか
+		/// </summary>
+		/// <returns>遠すぎるならtrue</returns>
 		bool IsFarNode();
 
 	public:
