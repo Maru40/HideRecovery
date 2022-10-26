@@ -21,6 +21,8 @@
 
 #include "Maruyama/Enemy/Component/EnemyBase.h"
 
+#include "Maruyama/Player/Component/AccessHidePlace.h"
+
 namespace basecross {
 	namespace Enemy {
 
@@ -43,6 +45,7 @@ namespace basecross {
 			AddComponent<TargetManager>();
 			AddComponent<EyeSearchRange>();
 			AddComponent<SeekTarget>(nullptr);
+			AddComponent<AccessHidePlace>()->SetIsUpdateDrawBoxUI(false);
 
 			//AddComponent<AIPlayerBehaviorTree>();
 		}
