@@ -82,7 +82,14 @@ namespace basecross {
 		/// <summary>
 		/// 実際にアイテムを獲得する処理
 		/// </summary>
+		/// <param name="item">アイテム</param>
 		void ItemAcquisition(const std::shared_ptr<Item>& item);
+
+		/// <summary>
+		/// 実際にアイテムを獲得する処理
+		/// </summary>
+		/// <param name="itemId">アイテムID</param>
+		void ItemAcquisition(int itemId);
 
 
 	private:

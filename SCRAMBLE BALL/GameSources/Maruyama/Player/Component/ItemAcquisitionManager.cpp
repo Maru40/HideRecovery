@@ -171,6 +171,11 @@ namespace basecross {
 		}
 	}
 
+	void ItemAcquisitionManager::ItemAcquisition(int itemId)
+	{
+		ItemAcquisition(Item::StageFindToItemId(GetStage(), itemId));
+	}
+
 	bool ItemAcquisitionManager::IsAcquisitionRange(const std::shared_ptr<Item>& item) {
 		auto toItemVec = maru::Utility::CalcuToTargetVec(GetGameObject(), item->GetGameObject());
 
