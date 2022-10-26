@@ -47,6 +47,8 @@ namespace basecross {
 				}
 
 				bool HidePlacePatrol::OnUpdate() {
+					//検索リクエストがあるなら、処理をする。
+
 					return IsEnd();
 				}
 
