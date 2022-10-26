@@ -29,5 +29,9 @@ namespace basecross {
 			return m_targetManager.lock() ? m_targetManager.lock()->GetTarget() : nullptr;
 		}
 
+		std::shared_ptr<GameObject> EnemyBase::GetSelfObject() const {
+			return GetGameObject();
+		}
+
 	}
 }
