@@ -124,7 +124,7 @@ namespace basecross {
 
 						return toLeftRange < toRightRange;
 					};
-					std::sort(otherTargets.begin(), otherTargets.end(), sortFunction);
+					std::sort(otherTargets.begin(), otherTargets.end(), sortFunction);	//ƒ\[ƒgŽÀ‘•
 
 					return otherTargets[0];
 				}
