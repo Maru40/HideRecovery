@@ -22,6 +22,17 @@ struct PSPNTInput
     float2 tex : TEXCOORD;
 };
 
+struct PSPNTInputShadow
+{
+    float4 position : SV_Position;
+    float3 norm : NORMAL0;
+    float3 lightRay : NORMAL1;
+    float3 lightView : NORMAL2;
+    float4 specular : COLOR;
+    float2 tex : TEXCOORD0;
+    float4 lightSpacePos : POSITION1;
+};
+
 cbuffer ParametersBuffer : register(b0)
 {
     float4x4 World : packoffset(c0);
