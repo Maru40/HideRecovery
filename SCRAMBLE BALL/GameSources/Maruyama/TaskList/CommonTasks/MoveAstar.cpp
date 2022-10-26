@@ -174,7 +174,7 @@ namespace basecross {
 			int areaIndex = m_areaRoute.front();	//自分自身がいるエリアインデックス
 			m_areaRoute.pop();
 			int targetAreaIndex = !m_areaRoute.empty() ? m_areaRoute.front() : areaIndex;
-			auto startNode = m_selfAstarNodeController.lock()->GetNode();
+			auto startNode = m_selfAstarNodeController.lock()->CalculateNode();
 			auto positions = maru::FieldImpactMap::GetInstance()->GetRoutePositions(startNode, endPosition, areaIndex, targetAreaIndex);
 
 			m_param->movePositionsParam->positions = positions;
