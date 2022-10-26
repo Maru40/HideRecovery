@@ -52,11 +52,13 @@ namespace basecross {
 			return;
 		}
 
-		UpdateNode();
+		if (IsUpdateNode()) {
+			UpdateNode();
+		}
 	}
 
 	void SelfAstarNodeController::UpdateNode() {
-		if (IsUpdateNode()) {
+		if (!HasNode()) {
 			return;
 		}
 
@@ -139,6 +141,10 @@ namespace basecross {
 		return farRange < range;
 	}
 
+	std::shared_ptr<NavGraphNode> SelfAstarNodeController::CalculateNode() {
+		UpdateNode();
+		return GetNode();
+	}
 
 	void SelfAstarNodeController::SetNode(const std::shared_ptr<NavGraphNode>& node) noexcept {
 		m_node = node;
