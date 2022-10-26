@@ -46,7 +46,7 @@ namespace basecross {
 					MoveAstar,			//Astarを利用してターゲットの近くまで移動する。
 					ArriveParamSetting,	//ターゲットへの最後の移動のパラメータセッティング
 					MoveArrive,			//ターゲットが視界内なら到着行動
-										//アイテムを空ける。
+					OpenBox,			//アイテムを空ける。
 					Wait,				//待機
 				};
 
