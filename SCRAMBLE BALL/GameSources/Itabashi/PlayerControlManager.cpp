@@ -39,7 +39,7 @@ namespace basecross
 
 	bool PlayerControlManager::TryAquisition(const std::shared_ptr<Item>& item)
 	{
-		if (!item || !item->GetItemOwner())
+		if (!item || item->GetItemOwner())
 		{
 			return false;
 		}
