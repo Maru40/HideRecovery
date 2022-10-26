@@ -18,6 +18,7 @@
 #include "Maruyama/StageObject/HidePlace.h"
 
 #include "Maruyama/Utility/Utility.h"
+#include "Maruyama/Utility/UtilityObstacle.h"
 
 #include "Maruyama/Utility/SingletonComponent/ShareClassesManager.h"
 
@@ -103,10 +104,23 @@ namespace basecross {
 
 					//ターゲット候補の中から一番近いターゲットが手前に来るようにソートする。
 					auto sortFunction = [&](const std::shared_ptr<GameObject>& left, const std::shared_ptr<GameObject>& right) {
+						constexpr float RayCost = 2.0f;
+						auto objects = member->GetSelfObject()->GetStage()->GetGameObjectVec();
 						auto memberPosition = member->GetSelfObject()->GetComponent<Transform>()->GetPosition();
-						auto toLeftRange = (left->GetComponent<Transform>()->GetPosition() - memberPosition).length();
 
-						auto toRightRange = (right->GetComponent<Transform>()->GetPosition() - memberPosition).length();
+						//左側の距離
+						auto leftTrans = left->GetComponent<Transform>();
+						auto toLeftRange = (leftTrans->GetPosition() - memberPosition).length();
+						if (maru::UtilityObstacle::IsRayObstacle(memberPosition, leftTrans->GetPosition(), objects)) {
+							toLeftRange *= RayCost;		//障害物があるならその分コストが上がる。
+						}
+						
+						//右側の距離
+						auto rightTrans = right->GetComponent<Transform>();
+						auto toRightRange = (rightTrans->GetPosition() - memberPosition).length();
+						if (maru::UtilityObstacle::IsRayObstacle(memberPosition, rightTrans->GetPosition(), objects)) {
+							toRightRange *= RayCost;	//障害物があるならその分コストが上がる。
+						}
 
 						return toLeftRange < toRightRange;
 					};
