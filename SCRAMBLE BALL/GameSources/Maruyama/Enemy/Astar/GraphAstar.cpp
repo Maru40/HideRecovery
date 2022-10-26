@@ -60,15 +60,27 @@ namespace basecross {
 		const int targetAreaIndex
 	) {
 		auto graph = GetGraph(areaIndex);
-		auto targetAreaGraph = GetGraph(targetAreaIndex);
 
 		auto selfNearNode = UtilityAstar::SearchNearNode(graph, selfPosition);
+
+		SearchAstarStart(selfNearNode, targetPosition, areaIndex, targetAreaIndex);
+	}
+
+	void GraphAstar::SearchAstarStart(
+		const std::shared_ptr<NavGraphNode>& selfNode,
+		const Vec3& targetPosition,
+		const int areaIndex,
+		const int targetAreaIndex
+	) {
+		auto graph = GetGraph(areaIndex);
+		auto targetAreaGraph = GetGraph(targetAreaIndex);
+
 		//int targetAreaIndex = SearchNearAreaIndex(targetPosition);
 		//bool isObstacleConfirmation = (areaIndex == targetAreaIndex);	//エリアが同じなら、障害物判定を行う。
 		bool isObstacleConfirmation = true;
 		auto targetNearNode = UtilityAstar::SearchNearNode(targetAreaGraph, targetPosition, isObstacleConfirmation);
 
-		SearchAstarStart(selfNearNode, targetNearNode, m_baseGraph, targetAreaIndex);
+		SearchAstarStart(selfNode, targetNearNode, m_baseGraph, targetAreaIndex);
 	}
 
 	std::vector<Vec3> GraphAstar::CalculateRandomRoute(const Vec3& selfPosition) {
