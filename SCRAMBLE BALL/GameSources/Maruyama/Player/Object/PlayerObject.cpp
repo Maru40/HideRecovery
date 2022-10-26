@@ -52,6 +52,8 @@
 #include "Maruyama/Player/Component/AccessHidePlace.h"
 #include "Maruyama/Player/Component/HeightDestroy.h"
 
+#include "Itabashi/PlayerControlManager.h"
+
 namespace basecross {
 	PlayerObject::PlayerObject(const std::shared_ptr<Stage>& stage) :
 		GameObject(stage)
@@ -97,6 +99,7 @@ namespace basecross {
 		objecfMover->SetMoveSpeed(8.5f);
 		//objecfMover->SetMoveSpeed(28.5f);
 		objecfMover->SetAffectedCamera(GetStage()->GetView()->GetTargetCamera());
+		AddComponent<PlayerControlManager>();
 		AddComponent<Online::PlayerOnlineController>();
 		AddComponent<Online::OnlineTransformSynchronization>();
 

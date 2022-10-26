@@ -5,13 +5,13 @@
 namespace basecross
 {
 	class RotationController;
-	class ItemAcquisitionManager;
 	class VelocityManager;
 	class ChargeGun;
 	class PlayerStatus;
 	class ChargeBullet;
 	class UseWeapon;
-	class Teleport;
+
+	class PlayerControlManager;
 
 	struct DamageData;
 
@@ -77,8 +77,6 @@ namespace Online
 		/// </summary>
 		std::weak_ptr<RotationController> m_rotationController;
 
-		std::weak_ptr<ItemAcquisitionManager> m_acquisitionManager;
-
 		std::weak_ptr<VelocityManager> m_velocityManager;
 
 		std::weak_ptr<ChargeGun> m_chargeGun;
@@ -89,7 +87,7 @@ namespace Online
 
 		std::weak_ptr<Camera> m_camera;
 
-		std::weak_ptr<Teleport> m_teleport;
+		std::weak_ptr<PlayerControlManager> m_controlManager;
 
 		/// <summary>
 		/// 対応するプレイヤー番号
@@ -231,16 +229,7 @@ namespace Online
 		/// <returns>カメラコンポーネント</returns>
 		std::shared_ptr<Camera> GetCamera() const { return m_camera.lock(); }
 
-		/// <summary>
-		/// テレポートコンポーネントの設定
-		/// </summary>
-		/// <param name="teleport">テレポートコンポーネント</param>
-		void SetTeleport(const std::shared_ptr<Teleport>& teleport) { m_teleport = teleport; }
-		/// <summary>
-		/// テレポートコンポーネントの取得
-		/// </summary>
-		/// <returns>テレポートコンポーネント</returns>
-		std::shared_ptr<Teleport> GetTeleport() const { return m_teleport.lock(); }
+		std::shared_ptr<PlayerControlManager> GetPlayerControlManager() const { return m_controlManager.lock(); }
 
 		/// <summary>
 		/// プレイヤー番号に対応したPlayerOnlineControllerを取得

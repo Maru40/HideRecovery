@@ -28,6 +28,8 @@
 #include "Maruyama/UI/2D/Component/FieldMap.h"
 #include "Maruyama/UI/2D/Component/MapCursor.h"
 
+#include "PlayerControlManager.h"
+
 template<class T>
 T ConvertByteData(const std::uint8_t* bytes)
 {
@@ -179,8 +181,8 @@ namespace Online
 
 		//特定のアニメーション中は移動を禁止する。
 		if (animator->IsCurretAnimationState(PlayerAnimationState::State::PutItem_Floor) ||
-			animator->IsCurretAnimationState(PlayerAnimationState::State::PutItem_HideObject)
-		) {
+			animator->IsCurretAnimationState(PlayerAnimationState::State::PutItem_HideObject))
+		{
 			return;
 		}
 
@@ -227,33 +229,38 @@ namespace Online
 
 	void PlayerOnlineController::TryAquisition()
 	{
-		auto acquisitionManager = m_acquisitionManager.lock();
+		auto controlManager = m_controlManager.lock();
 
-		if (!acquisitionManager)
+		if (!controlManager)
 		{
 			return;
 		}
 
 		std::shared_ptr<Item> item;
-
-		if (!PlayerInputer::IsItemAcquisition() || !acquisitionManager->IsAcquisition(item))
+		
+		// 取得入力がないか、近くに取得できるアイテムがなかったら
+		if (!PlayerInputer::IsItemAcquisition() || !controlManager->TryFindAquisitionableItem(&item))
 		{
 			return;
 		}
 
 		int itemId = item->GetItemId();
-		auto& localPlayer = OnlineManager::GetLocalPlayer();
 
-		// ホストであり、アイテムに所持者がなければ取得する
-		if (localPlayer.getIsMasterClient() && !item->GetItemOwner())
+
+		// ホストではないのなら
+		if (!OnlineManager::GetLocalPlayer().getIsMasterClient())
 		{
-			acquisitionManager->HideItemAcquisitionEvent(GetGameObject());
-			acquisitionManager->ItemAcquisition(item);
-			OnlineManager::RaiseEvent(false, (std::uint8_t*)&ItemOwnerShipData(itemId, m_onlinePlayerNumber), sizeof(ItemOwnerShipData), EXECUTE_ACQUISITION_EVENT_CODE);
+			int itemId = item->GetItemId();
+			OnlineManager::RaiseEvent(false, (std::uint8_t*)&itemId, sizeof(int), TRY_ACQUISITION_EVENT_CODE);
 			return;
 		}
 
-		OnlineManager::RaiseEvent(false, (std::uint8_t*)&itemId, sizeof(int), TRY_ACQUISITION_EVENT_CODE);
+		if (!controlManager->TryAquisition(item))
+		{
+			return;
+		}
+
+		OnlineManager::RaiseEvent(false, (std::uint8_t*)&ItemOwnerShipData(itemId, m_onlinePlayerNumber), sizeof(ItemOwnerShipData), EXECUTE_ACQUISITION_EVENT_CODE);
 	}
 
 	void PlayerOnlineController::TryAcquisitionEvent(int itemId, int playerNumber)
@@ -266,27 +273,12 @@ namespace Online
 			return;
 		}
 
-		auto acquisitionManager = m_acquisitionManager.lock();
+		auto onlineController = GetPlayerOnlineController(playerNumber);
+		auto controlManager = onlineController->GetPlayerControlManager();
 
-		auto item = Item::StageFindToItemId(GetStage(), itemId);
-
-		// アイテムが見つからなかったかアイテムが既に誰かに所有されているか
-		if (!item || item->GetItemOwner())
+		if (!controlManager->TryAquisition(itemId))
 		{
 			return;
-		}
-
-		auto onlineController = GetPlayerOnlineController(playerNumber);
-
-		if (onlineController)
-		{
-			auto otherAcquisitionManager = onlineController->m_acquisitionManager.lock();
-
-			if (otherAcquisitionManager)
-			{
-				otherAcquisitionManager->HideItemAcquisitionEvent(onlineController->GetGameObject());
-				otherAcquisitionManager->ItemAcquisition(item);
-			}
 		}
 
 		OnlineManager::RaiseEvent(false, (std::uint8_t*)&ItemOwnerShipData(itemId, playerNumber), sizeof(ItemOwnerShipData), EXECUTE_ACQUISITION_EVENT_CODE);
@@ -300,15 +292,14 @@ namespace Online
 			return;
 		}
 
-		auto acquisitionManager = m_acquisitionManager.lock();
+		auto controlManager = m_controlManager.lock();
 
-		if (!acquisitionManager)
+		if (!controlManager)
 		{
 			return;
 		}
 
-		acquisitionManager->HideItemAcquisitionEvent(GetGameObject());
-		acquisitionManager->ItemAcquisition(Item::StageFindToItemId(GetStage(), ownerShipData.itemId));
+		controlManager->TryAquisition(ownerShipData.itemId);
 	}
 
 	void PlayerOnlineController::Shot()
@@ -503,52 +494,28 @@ namespace Online
 
 	void PlayerOnlineController::TeleportInputer() {
 
-		auto teleport = m_teleport.lock();
+		auto controlManager = m_controlManager.lock();
 
-		if (!teleport)
+		if (!controlManager)
 		{
 			return;
 		}
 
-		if (teleport->IsTeleporting())
+		if (PlayerInputer::GetInstance()->IsOpenMap())
 		{
-			auto velocityManager = m_velocityManager.lock();
-			velocityManager->ResetAll();
+			controlManager->TryOpenMap();
 			return;
 		}
 
-		if (PlayerInputer::GetInstance()->IsOpenMap()) {
+		Vec3 teleportPosition;
+		Vec3 cameraPosition;
 
-			teleport->OpenMap();
+		if (PlayerInputer::GetInstance()->IsDesitionDown() && !controlManager->TryTeleport(&teleportPosition, &cameraPosition))
+		{
+			OnlineManager::RaiseEvent(false, (std::uint8_t*)&OnlineTeleportData(teleportPosition, cameraPosition),
+				sizeof(OnlineTeleportData), EXECUTE_TELEPORT_EVENT_CODE);
+
 			return;
-		}
-
-		if (PlayerInputer::GetInstance()->IsDesitionDown()) {
-
-			if (teleport->CanTeleport())
-			{
-				auto position = teleport->GetFieldMap()->GetMapCursor()->GetCursorFiledPosition();
-				auto playerObject = dynamic_pointer_cast<PlayerObject>(GetGameObject());
-				auto springArm = playerObject->GetArm()->GetComponent<SpringArmComponent>();
-				auto childObject = springArm->GetChildObject();
-				Vec3 offset(0.0f);
-				if (auto lookAt = childObject->GetComponent<LookAtCameraManager>(false))
-				{
-					offset = lookAt->GetParametor().centerOffset;
-				}
-
-				auto& tpsCamera = GetStage()->GetView()->GetTargetCamera();
-				auto tpsAt = tpsCamera->GetAt();
-				auto tpsForward = tpsAt - tpsCamera->GetEye();
-
-				position += offset + -tpsForward;
-
-				teleport->SetCameraPosition(position);
-
-				teleport->StartTeleport();
-				OnlineManager::RaiseEvent(false, (std::uint8_t*)&OnlineTeleportData(teleport->GetTeleportPosition(), position),
-					sizeof(OnlineTeleportData), EXECUTE_TELEPORT_EVENT_CODE);
-			}
 		}
 	}
 
@@ -559,10 +526,9 @@ namespace Online
 			return;
 		}
 
-		auto teleport = m_teleport.lock();
+		auto controlManager = m_controlManager.lock();
 
-		teleport->SetCameraPosition(cameraPosition);
-		teleport->StartTeleport(teleportPosition);
+		controlManager->ExecuteTeleport(teleportPosition, cameraPosition);
 	}
 
 	void PlayerOnlineController::AccessHideInputer() {
@@ -579,7 +545,6 @@ namespace Online
 		m_transform = owner->GetComponent<Transform>();
 		m_objectMover = owner->GetComponent<Operator::ObjectMover>();
 		m_rotationController = owner->GetComponent<RotationController>();
-		m_acquisitionManager = owner->GetComponent<ItemAcquisitionManager>();
 		m_velocityManager = owner->GetComponent<VelocityManager>();
 		m_chargeGun = owner->GetComponent<ChargeGun>();
 
@@ -590,7 +555,7 @@ namespace Online
 
 		m_useWepon = owner->GetComponent<UseWeapon>();
 
-		m_teleport = owner->GetComponent<Teleport>(false);
+		m_controlManager = owner->GetComponent<PlayerControlManager>();
 	}
 
 	void PlayerOnlineController::OnUpdate()
@@ -610,15 +575,6 @@ namespace Online
 		UpdateCameraForward();
 
 		TeleportInputer();
-
-		auto teleporter = m_teleport.lock();
-
-		if (teleporter->IsTeleporting())
-		{
-			auto useWeapon = m_useWepon.lock();
-			useWeapon->SetIsAim(false);
-			return;
-		}
 
 		Move();
 
