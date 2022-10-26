@@ -15,6 +15,7 @@ namespace basecross {
 
 	class TargetManager;
 	class VelocityManager;
+	class SelfAstarNodeController;
 
 	template<class T>
 	class TaskList;
@@ -58,7 +59,9 @@ namespace basecross {
 			std::weak_ptr<Transform> m_transform;			
 			std::weak_ptr<TargetManager> m_targetManager;	
 			std::weak_ptr<VelocityManager> m_velocityManager;
+			std::weak_ptr<SelfAstarNodeController> m_selfAstarNodeController;
 
+			bool m_isInitializeSearch;	//初回サーチ限定
 			bool m_isSearchRoute;		//ルートを検索中かどうか
 			//static std::mutex m_mtx;	//ミューテックス
 

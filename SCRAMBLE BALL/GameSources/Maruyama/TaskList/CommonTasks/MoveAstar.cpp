@@ -22,6 +22,8 @@
 #include "Maruyama/Item/HideItem.h"
 #include "Maruyama/StageObject/HidePlace.h"
 
+#include "SelfAstarNodeController.h"
+
 #include "Watanabe/DebugClass/Debug.h"
 
 namespace basecross {
@@ -47,6 +49,7 @@ namespace basecross {
 			TaskNodeBase(owner),
 			m_param(paramPtr),
 			m_taskList(new TaskList<TaskEnum>()),
+			m_isInitializeSearch(true),
 			m_isSearchRoute(false)
 		{
 			DefineTask();
@@ -54,22 +57,23 @@ namespace basecross {
 			m_transform = GetOwner()->GetGameObject()->GetComponent<Transform>();
 			m_targetManager = GetOwner()->GetGameObject()->GetComponent<TargetManager>();
 			m_velocityManager = GetOwner()->GetGameObject()->GetComponent<VelocityManager>();
-
-			//CalculateMoveAreaRouteQueue();	//徘徊エリアルートの取得
-			//NextRoute();
+			m_selfAstarNodeController = GetOwner()->GetGameObject()->GetComponent<SelfAstarNodeController>(false);
 		}
 
 		void MoveAstar::OnStart() {
-			//SelectTask();	//タスクの選択
-
 			CalculateMoveAreaRouteQueue();	//徘徊エリアルートの取得
-			//CalculateMovePositions();		//徘徊移動先を設定
 
-			//SetIsSearchRoute(true);
-			//スレッド生成
-			NextRoute();
-			//std::thread nextRoute([&]() { NextRoute(); });
-			//nextRoute.detach();
+			if (m_isInitializeSearch) {
+				//初回検索のみバグるため、問題解決までの仮処理
+				m_isInitializeSearch = false;
+				NextRoute();
+			}
+			else {
+				SetIsSearchRoute(true);
+				//スレッド生成
+				std::thread nextRoute([&]() { NextRoute(); });
+				nextRoute.detach();
+			}
 		}
 
 		bool MoveAstar::OnUpdate() {
@@ -112,16 +116,16 @@ namespace basecross {
 		}
 
 		void MoveAstar::NextRoute() {
-			SetIsSearchRoute(true);		//検索開始
+			//SetIsSearchRoute(true);		//検索開始
 			//std::lock_guard<std::mutex> lock(m_mtx);
-			
-			//減速処理開始
-			m_velocityManager.lock()->StartDeseleration();
 
 			if (m_areaRoute.empty()) {
 				SetIsSearchRoute(false);//検索終了
 				return;
 			}
+
+			//減速処理開始
+			m_velocityManager.lock()->StartDeseleration();
 
 			CalculateMovePositions();	//新しいポジションに変更
 
@@ -170,7 +174,8 @@ namespace basecross {
 			int areaIndex = m_areaRoute.front();	//自分自身がいるエリアインデックス
 			m_areaRoute.pop();
 			int targetAreaIndex = !m_areaRoute.empty() ? m_areaRoute.front() : areaIndex;
-			auto positions = maru::FieldImpactMap::GetInstance()->GetRoutePositions(startPosition, endPosition, areaIndex, targetAreaIndex);
+			auto startNode = m_selfAstarNodeController.lock()->GetNode();
+			auto positions = maru::FieldImpactMap::GetInstance()->GetRoutePositions(startNode, endPosition, areaIndex, targetAreaIndex);
 
 			m_param->movePositionsParam->positions = positions;
 			return positions;
@@ -181,11 +186,6 @@ namespace basecross {
 			//必要コンポーネントが存在しないなら
 			if (!targetManager || !targetManager->HasTarget()) {
 				Debug::GetInstance()->Log(L"MoveAstar::CalculateMoveTargetPosition() で必要コンポーネントが存在しません。");
-
-				//デバッグでHideを対象にする。
-				auto hidePlace = maru::Utility::FindComponent<HidePlace>();
-				auto position = hidePlace->GetGameObject()->GetComponent<Transform>()->GetPosition();
-				return position;
 				return Vec3(0.0f);
 			}
 
