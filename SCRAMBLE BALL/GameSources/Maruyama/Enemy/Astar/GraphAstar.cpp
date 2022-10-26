@@ -127,7 +127,7 @@ namespace basecross {
 			return;
 		}
 
-		DebugStartAndEndIndexDraw(selfNearNode, targetNearNode);	//開始ノードと終了ノードのデバッグ表示
+		//DebugStartAndEndIndexDraw(selfNearNode, targetNearNode);	//開始ノードと終了ノードのデバッグ表示
 
 		ResetAstar();	//開始前の初期準備
 
@@ -208,7 +208,8 @@ namespace basecross {
 			auto top = copyRoute.top();
 			
 			resultPositions.push_back(top->GetPosition());
-			Debug::GetInstance()->Log(top->GetIndex());
+			//デバッグインデックス表示
+			//Debug::GetInstance()->Log(top->GetIndex());
 			
 			copyRoute.pop();
 		}
