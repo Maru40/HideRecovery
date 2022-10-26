@@ -34,9 +34,6 @@ namespace basecross {
 		// ライティングのみだと極端になるので調整
 		SetEmissive(bsm::Col4(0.5f, 0.5f, 0.5f, 0.0f));
 		SetDiffuse(bsm::Col4(0.6f, 0.6f, 0.6f, 1.0f));
-
-		// デフォルトで設定
-		SetTextureResource(L"ToonTex_TX", TextureType::ToonRamp);
 	}
 
 	void BoneModelDraw::OnDraw() {
@@ -54,10 +51,10 @@ namespace basecross {
 				// 影付き
 				if (GetGameObject()->GetComponent<Shadowmap>(false)) {
 					// シャドウマップがあれば自己影防止用のピクセルシェーダ
-					DrawModel<VSPNTBoneShadow, PSPNTStaticShadow2>(PtrMeshResource->GetMashData());
+					DrawModel<VSBoneModelDrawShadow, PSModelDrawShadow2>(PtrMeshResource->GetMashData());
 				}
 				else {
-					DrawModel<VSPNTBoneShadow, PSPNTStaticShadow>(PtrMeshResource->GetMashData());
+					DrawModel<VSBoneModelDrawShadow, PSModelDrawShadow>(PtrMeshResource->GetMashData());
 				}
 			}
 			else {
@@ -73,10 +70,10 @@ namespace basecross {
 				if (GetMultiMeshIsDraw(i)) {
 					if (GetOwnShadowActive()) {
 						if (GetGameObject()->GetComponent<Shadowmap>(false)) {
-							DrawModel<VSPNTBoneShadow, PSPNTStaticShadow2>(vec[i]);
+							DrawModel<VSBoneModelDrawShadow, PSModelDrawShadow2>(vec[i]);
 						}
 						else {
-							DrawModel<VSPNTBoneShadow, PSPNTStaticShadow>(vec[i]);
+							DrawModel<VSBoneModelDrawShadow, PSModelDrawShadow>(vec[i]);
 						}
 					}
 					else {

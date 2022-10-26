@@ -5,6 +5,7 @@
 
 #pragma once
 #include "stdafx.h"
+#include "../Shader/BoneModelDraw.h"
 
 namespace basecross {
 	/// <summary>
@@ -32,8 +33,8 @@ namespace basecross {
 		/// </summary>
 		float playSpeed;
 
-		AnimationClip():
-			AnimationClip(L"", 0, 0 , false)
+		AnimationClip() :
+			AnimationClip(L"", 0, 0, false)
 		{}
 
 		/// <summary>
@@ -57,6 +58,8 @@ namespace basecross {
 		std::unordered_map<wstring, AnimationClip> m_animationClipMap;
 
 	protected:
+		using ModelDrawComp = BoneModelDraw;
+
 		/// <summary>
 		/// モーションデータを読み込む
 		/// </summary>

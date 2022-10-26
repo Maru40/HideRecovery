@@ -9,6 +9,7 @@
 
 #include "Watanabe/Utility/DataExtracter.h"
 #include "Watanabe/Utility/AdvMeshUtil.h"
+#include "Watanabe/Shader/StaticModelDraw.h"
 
 #include "Goal.h"
 
@@ -64,7 +65,7 @@ namespace basecross {
 			Vec3(0.0f, -0.4f, 0.0f)
 		);
 
-		auto draw = AddComponent<PNTStaticModelDraw>();
+		auto draw = AddComponent<StaticModelDraw>();
 		draw->SetMeshToTransformMatrix(spanMat);
 		draw->SetMultiMeshResource(L"Goal");
 

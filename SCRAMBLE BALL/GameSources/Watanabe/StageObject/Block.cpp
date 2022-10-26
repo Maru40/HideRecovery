@@ -8,6 +8,7 @@
 #include "../Utility/DataExtracter.h"
 #include "../Utility/AdvMeshUtil.h"
 #include "GameStageBase.h"
+#include "../Shader/StaticModelDraw.h"
 
 namespace basecross {
 	Block::Block(const shared_ptr<Stage>& stage, const BlockType blockType)
@@ -40,7 +41,7 @@ namespace basecross {
 	}
 
 	void Block::OnCreate() {
-		auto drawComp = AddComponent<PNTStaticDraw>();
+		auto drawComp = AddComponent<StaticModelDraw>();
 		drawComp->SetSamplerState(SamplerState::LinearWrap);
 		drawComp->SetOwnShadowActive(true);
 
@@ -62,7 +63,7 @@ namespace basecross {
 				AddTag(L"Wall");
 			}
 		}
-			break;
+		break;
 		case BlockType::Floor:
 		{
 			vector<VertexPositionNormalTexture> vertices;

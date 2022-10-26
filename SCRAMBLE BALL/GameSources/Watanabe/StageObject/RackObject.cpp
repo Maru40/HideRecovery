@@ -9,6 +9,7 @@
 #include "../Utility/DataExtracter.h"
 
 #include "Watanabe/Component/BoxAnimator.h"
+#include "Watanabe/Shader/BoneModelDraw.h"
 
 #include "MainStage.h"
 
@@ -30,7 +31,7 @@ namespace basecross {
 		const float colSize = 1.2f;
 		col->SetMakedSize(colSize);
 
-		auto drawComp = AddComponent<PNTBoneModelDraw>();
+		auto drawComp = AddComponent<BoneModelDraw>();
 		//drawComp->SetMeshResource(L"rack");
 		drawComp->SetMultiMeshResource(L"Box_Model");
 		drawComp->SetOwnShadowActive(true);
@@ -39,7 +40,7 @@ namespace basecross {
 			auto animator = AddComponent<BoxAnimator>();
 			animator->ChangeBoxAnimation(BoxAnimationState::State::Close);
 		}
-		 
+
 		// 隠せるオブジェクトにする
 		AddComponent<HidePlace>(HidePlace::Parametor(Vec3(0.0f, 0.35f, 0.0f)));
 
@@ -51,6 +52,5 @@ namespace basecross {
 	}
 
 	void RackObject::OnUpdate() {
-
 	}
 }

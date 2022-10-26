@@ -187,7 +187,7 @@ namespace basecross {
 	}
 
 	void PlayerAnimator::Transition() {
-		auto draw = GetGameObject()->GetComponent<PNTBoneModelDraw>();
+		auto draw = GetGameObject()->GetComponent<ModelDrawComp>();
 		auto currentAnimation = draw->GetCurrentAnimation();
 
 		if (m_transitionDatasMap.count(currentAnimation) == 0) {	//メンバーがないなら処理をしない。
@@ -214,7 +214,7 @@ namespace basecross {
 	}
 
 	void PlayerAnimator::StartEvent() {
-		auto draw = GetGameObject()->GetComponent<PNTBoneModelDraw>();
+		auto draw = GetGameObject()->GetComponent<ModelDrawComp>();
 		auto currentAnimation = draw->GetCurrentAnimation();
 		auto& events = m_animationEventsMap[currentAnimation];
 		for (auto& event : events) {
@@ -225,7 +225,7 @@ namespace basecross {
 	}
 
 	void PlayerAnimator::UpdateEvent() {
-		auto draw = GetGameObject()->GetComponent<PNTBoneModelDraw>();
+		auto draw = GetGameObject()->GetComponent<ModelDrawComp>();
 		auto currentAnimation = draw->GetCurrentAnimation();
 		auto& events = m_animationEventsMap[currentAnimation];
 		for (auto& event : events) {
@@ -236,7 +236,7 @@ namespace basecross {
 	}
 
 	void PlayerAnimator::ExitEvent() {
-		auto draw = GetGameObject()->GetComponent<PNTBoneModelDraw>();
+		auto draw = GetGameObject()->GetComponent<ModelDrawComp>();
 		auto currentAnimation = draw->GetCurrentAnimation();
 		auto& events = m_animationEventsMap[currentAnimation];
 		for (auto& event : events) {
@@ -247,7 +247,7 @@ namespace basecross {
 	}
 
 	void PlayerAnimator::TimeEventUpdate() {
-		auto draw = GetGameObject()->GetComponent<PNTBoneModelDraw>();
+		auto draw = GetGameObject()->GetComponent<ModelDrawComp>();
 		float currentTime = draw->GetCurrentAnimationTime();
 		auto currentAnimation = draw->GetCurrentAnimation();
 		auto& events = m_timeEventsMap[currentAnimation];
@@ -304,7 +304,7 @@ namespace basecross {
 	}
 
 	bool PlayerAnimator::IsCurretAnimationState(const PlayerAnimationState::State& state) const {
-		auto drawer = GetGameObject()->GetComponent<PNTBoneModelDraw>();
+		auto drawer = GetGameObject()->GetComponent<ModelDrawComp>();
 		auto strState = PlayerAnimationState::PlayerAnimationState2wstring(state);
 
 		return strState == drawer->GetCurrentAnimation();

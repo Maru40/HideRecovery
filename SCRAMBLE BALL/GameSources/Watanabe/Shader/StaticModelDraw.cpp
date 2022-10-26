@@ -16,9 +16,6 @@ namespace basecross {
 		// ライティングのみだと極端になるので調整
 		SetEmissive(bsm::Col4(0.5f, 0.5f, 0.5f, 0.0f));
 		SetDiffuse(bsm::Col4(0.6f, 0.6f, 0.6f, 1.0f));
-
-		// デフォルトで設定
-		SetTextureResource(L"ToonTex_TX", TextureType::ToonRamp);
 	}
 
 	void StaticModelDraw::OnDraw() {
@@ -32,7 +29,7 @@ namespace basecross {
 		auto PtrMeshResource = GetMeshResource();
 		if (PtrMeshResource) {
 			if (GetOwnShadowActive()) {
-				DrawStatic<VSPNTStaticShadow, PSPNTStaticShadow>(PtrMeshResource->GetMashData());
+				DrawStatic<VSModelDrawShadow, PSModelDrawShadow>(PtrMeshResource->GetMashData());
 			}
 			else {
 				DrawStatic<VSModelDraw, PSModelDraw>(PtrMeshResource->GetMashData());
@@ -47,10 +44,10 @@ namespace basecross {
 				if (GetMultiMeshIsDraw(i)) {
 					if (GetOwnShadowActive()) {
 						if (GetGameObject()->GetComponent<Shadowmap>(false)) {
-							DrawStatic<VSPNTStaticShadow, PSPNTStaticShadow2>(vec[i]);
+							DrawStatic<VSModelDrawShadow, PSModelDrawShadow2>(vec[i]);
 						}
 						else {
-							DrawStatic<VSPNTStaticShadow, PSPNTStaticShadow>(vec[i]);
+							DrawStatic<VSModelDrawShadow, PSModelDrawShadow>(vec[i]);
 						}
 					}
 					else {

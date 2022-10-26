@@ -30,7 +30,7 @@ namespace basecross {
 			Vec3(0.0f, -0.55f, 0.0f)
 		);
 		auto gameObject = stage->AddGameObject<StageObjectBase>(L"PlayerModel");
-		auto drawComp = gameObject->AddComponent<PNTBoneModelDraw>();
+		auto drawComp = gameObject->AddComponent<BoneModelDraw>();
 		drawComp->SetMultiMeshResource(L"Player_Mesh");
 		drawComp->SetMeshToTransformMatrix(spanMat);
 

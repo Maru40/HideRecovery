@@ -7,8 +7,12 @@
 #include "stdafx.h"
 
 namespace basecross {
+	/// <summary>
+	/// テクスチャの種類
+	/// </summary>
 	enum class TextureType {
 		Default,
+		Shadowmap,
 		ToonRamp,
 		Normal
 	};
@@ -98,22 +102,6 @@ namespace basecross {
 			AdvConstants SmCb;
 			SetConstants(SmCb, data);
 
-			// テクスチャ
-			auto shTex = GetTextureResource();
-			if (shTex) {
-				// テクスチャがある
-				SmCb.ActiveFlg.x = 1;
-			}
-			else {
-				// 描画コンポーネントにはテクスチャがない
-				if (shTex = data.m_TextureResource.lock()) {
-					// テクスチャがある
-					SmCb.ActiveFlg.x = 1;
-				}
-				else {
-					SmCb.ActiveFlg.x = 0;
-				}
-			}
 			// コンスタントバッファの更新
 			pD3D11DeviceContext->UpdateSubresource(CBAdvBaseDraw::GetPtr()->GetBuffer(), 0, nullptr, &SmCb, 0, 0);
 			// コンスタントバッファの設定
@@ -137,49 +125,113 @@ namespace basecross {
 			RenderState->SetBlendState(pD3D11DeviceContext, GetBlendState());
 			// デプスステンシルステート
 			RenderState->SetDepthStencilState(pD3D11DeviceContext, GetDepthStencilState());
-			// テクスチャとサンプラー
-			if (shTex) {
-				// いずれはまとめてセットしたい
+
+			// メッシュ内のマテリアルの配列
+			auto& MatVec = data.m_MaterialExVec;
+			if (MatVec.size() == 0) {
+				// テクスチャとサンプラー
 				for (const auto& textureMap : GetAllTextureResource()) {
+					// セット先
 					const int& index = static_cast<size_t>(textureMap.first);
+					// テクスチャリソース
 					const auto& texture = textureMap.second;
 					pD3D11DeviceContext->PSSetShaderResources(index, 1, texture.lock()->GetShaderResourceView().GetAddressOf());
 				}
 				//サンプラーを設定
 				RenderState->SetSamplerState(pD3D11DeviceContext, GetSamplerState(), 0);
+
+				// 影とサンプラー
+				if (IsOwnShadowActive()) {
+					// シャドウマップのレンダラーターゲット
+					auto ShadowmapPtr = Dev->GetShadowMapRenderTarget();
+					ID3D11ShaderResourceView* pShadowSRV = ShadowmapPtr->GetShaderResourceView();
+					pD3D11DeviceContext->PSSetShaderResources(1, 1, &pShadowSRV);
+					// シャドウマップサンプラー
+					ID3D11SamplerState* pShadowSampler = RenderState->GetComparisonLinear();
+					pD3D11DeviceContext->PSSetSamplers(1, 1, &pShadowSampler);
+				}
+				// ラスタライザステートと描画
+				if (GetRasterizerState() == RasterizerState::DoubleDraw) {
+					// 透明処理用
+					// ラスタライザステート(裏描画)
+					pD3D11DeviceContext->RSSetState(RenderState->GetCullFront());
+					// 描画
+					pD3D11DeviceContext->DrawIndexed(data.m_NumIndicis, 0, 0);
+					// ラスタライザステート（表描画）
+					pD3D11DeviceContext->RSSetState(RenderState->GetCullBack());
+					// 描画
+					pD3D11DeviceContext->DrawIndexed(data.m_NumIndicis, 0, 0);
+				}
+				else {
+					RenderState->SetRasterizerState(pD3D11DeviceContext, GetRasterizerState());
+					// 描画
+					pD3D11DeviceContext->DrawIndexed(data.m_NumIndicis, 0, 0);
+				}
 			}
 			else {
-				// シェーダーリソースもクリア
-				pD3D11DeviceContext->PSSetShaderResources(0, D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT, pNull);
-				// サンプラーもクリア
-				RenderState->SetSamplerAllClear(pD3D11DeviceContext);
-			}
-			// 影とサンプラー
-			if (IsOwnShadowActive()) {
-				// シャドウマップのレンダラーターゲット
-				auto ShadowmapPtr = Dev->GetShadowMapRenderTarget();
-				ID3D11ShaderResourceView* pShadowSRV = ShadowmapPtr->GetShaderResourceView();
-				pD3D11DeviceContext->PSSetShaderResources(1, 1, &pShadowSRV);
-				// シャドウマップサンプラー
-				ID3D11SamplerState* pShadowSampler = RenderState->GetComparisonLinear();
-				pD3D11DeviceContext->PSSetSamplers(1, 1, &pShadowSampler);
-			}
-			// ラスタライザステートと描画
-			if (GetRasterizerState() == RasterizerState::DoubleDraw) {
-				// 透明処理用
-				// ラスタライザステート(裏描画)
-				pD3D11DeviceContext->RSSetState(RenderState->GetCullFront());
-				// 描画
-				pD3D11DeviceContext->DrawIndexed(data.m_NumIndicis, 0, 0);
-				// ラスタライザステート（表描画）
-				pD3D11DeviceContext->RSSetState(RenderState->GetCullBack());
-				// 描画
-				pD3D11DeviceContext->DrawIndexed(data.m_NumIndicis, 0, 0);
-			}
-			else {
-				RenderState->SetRasterizerState(pD3D11DeviceContext, GetRasterizerState());
-				// 描画
-				pD3D11DeviceContext->DrawIndexed(data.m_NumIndicis, 0, 0);
+				for (auto& m : MatVec) {
+					if (IsModelDiffusePriority()) {
+						SmCb.Diffuse = m.m_Diffuse;
+					}
+					if (IsModelEmissivePriority()) {
+						Col4 Em4 = m.m_Emissive;
+						Em4.w = 0.0f;
+						SmCb.Emissive = Em4;
+					}
+					// コンスタントバッファの更新
+					pD3D11DeviceContext->UpdateSubresource(CBSimple::GetPtr()->GetBuffer(), 0, nullptr, &SmCb, 0, 0);
+					// コンスタントバッファの設定
+					ID3D11Buffer* pConstantBuffer = CBSimple::GetPtr()->GetBuffer();
+					ID3D11Buffer* pNullConstantBuffer = nullptr;
+					// 頂点シェーダに渡す
+					pD3D11DeviceContext->VSSetConstantBuffers(0, 1, &pConstantBuffer);
+					// ピクセルシェーダに渡す
+					pD3D11DeviceContext->PSSetConstantBuffers(0, 1, &pConstantBuffer);
+
+					// シェーダにテクスチャの設定がされている
+					// サンプラーの設定
+					RenderState->SetSamplerState(pD3D11DeviceContext, GetSamplerState(), 0);
+					// テクスチャの選択
+					if (IsModelTextureEnabled()) {
+						// モデルのテクスチャが有効
+						pD3D11DeviceContext->PSSetShaderResources(0, 1, m.m_TextureResource->GetShaderResourceView().GetAddressOf());
+						for (const auto& textureMap : GetAllTextureResource()) {
+							// 上でセットしているので無視
+							if (textureMap.first == TextureType::Default) {
+								continue;
+							}
+							const int& index = static_cast<size_t>(textureMap.first);
+							const auto& texture = textureMap.second;
+							pD3D11DeviceContext->PSSetShaderResources(index, 1, texture.lock()->GetShaderResourceView().GetAddressOf());
+						}
+					}
+					else {
+						// モデルのテクスチャが無効
+						for (const auto& textureMap : GetAllTextureResource()) {
+							const int& index = static_cast<size_t>(textureMap.first);
+							const auto& texture = textureMap.second;
+							pD3D11DeviceContext->PSSetShaderResources(index, 1, texture.lock()->GetShaderResourceView().GetAddressOf());
+						}
+					}
+
+					// ラスタライザステートと描画
+					if (GetRasterizerState() == RasterizerState::DoubleDraw) {
+						// 透明処理用
+						// ラスタライザステート(裏描画)
+						pD3D11DeviceContext->RSSetState(RenderState->GetCullFront());
+						// 描画
+						pD3D11DeviceContext->DrawIndexed(m.m_IndexCount, m.m_StartIndex, 0);
+						// ラスタライザステート（表描画）
+						pD3D11DeviceContext->RSSetState(RenderState->GetCullBack());
+						// 描画
+						pD3D11DeviceContext->DrawIndexed(m.m_IndexCount, m.m_StartIndex, 0);
+					}
+					else {
+						RenderState->SetRasterizerState(pD3D11DeviceContext, GetRasterizerState());
+						// 描画
+						pD3D11DeviceContext->DrawIndexed(m.m_IndexCount, m.m_StartIndex, 0);
+					}
+				}
 			}
 		}
 
@@ -335,14 +387,6 @@ namespace basecross {
 			auto& MatVec = data.m_MaterialExVec;
 			size_t MatIndex = 0;
 			for (auto& m : MatVec) {
-				if (m.m_TextureResource) {
-					// テクスチャがある
-					SmCb.ActiveFlg.x = 1;
-				}
-				else {
-					// テクスチャがない
-					SmCb.ActiveFlg.x = 0;
-				}
 				if (IsModelDiffusePriority()) {
 					SmCb.Diffuse = m.m_Diffuse;
 				}
@@ -360,39 +404,28 @@ namespace basecross {
 				pD3D11DeviceContext->VSSetConstantBuffers(0, 1, &pConstantBuffer);
 				// ピクセルシェーダに渡す
 				pD3D11DeviceContext->PSSetConstantBuffers(0, 1, &pConstantBuffer);
-				if (SmCb.ActiveFlg.x) {
-					// シェーダにテクスチャの設定がされている
-					// サンプラーの設定
-					RenderState->SetSamplerState(pD3D11DeviceContext, GetSamplerState(), 0);
-					// テクスチャの選択
-					if (IsModelTextureEnabled()) {
-						// モデルのテクスチャが有効
-						pD3D11DeviceContext->PSSetShaderResources(0, 1, m.m_TextureResource->GetShaderResourceView().GetAddressOf());
-						// いずれはまとめてセットしたい
-						for (const auto& textureMap : GetAllTextureResource()) {
-							const int& index = static_cast<size_t>(textureMap.first);
-							const auto& texture = textureMap.second;
-							pD3D11DeviceContext->PSSetShaderResources(index, 1, texture.lock()->GetShaderResourceView().GetAddressOf());
+				// サンプラーの設定
+				RenderState->SetSamplerState(pD3D11DeviceContext, GetSamplerState(), 0);
+				// テクスチャの選択
+				if (IsModelTextureEnabled()) {
+					// モデルのテクスチャが有効
+					pD3D11DeviceContext->PSSetShaderResources(0, 1, m.m_TextureResource->GetShaderResourceView().GetAddressOf());
+					for (const auto& textureMap : GetAllTextureResource()) {
+						// 上でセットしているので無視
+						if (textureMap.first == TextureType::Default) {
+							continue;
 						}
-					}
-					else {
-						// モデルのテクスチャが無効
-						auto shTex = GetTextureResource();
-						if (shTex) {
-							// コンポーネントにテクスチャがある
-							pD3D11DeviceContext->PSSetShaderResources(0, 1, shTex->GetShaderResourceView().GetAddressOf());
-						}
-						else {
-							// コンポーネントにテクスチャがない
-							SmCb.ActiveFlg.x = 0;
-						}
+						const int& index = static_cast<size_t>(textureMap.first);
+						const auto& texture = textureMap.second;
+						pD3D11DeviceContext->PSSetShaderResources(index, 1, texture.lock()->GetShaderResourceView().GetAddressOf());
 					}
 				}
 				else {
-					// シェーダーリソースもクリア
-					pD3D11DeviceContext->PSSetShaderResources(0, D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT, pNull);
-					// サンプラーもクリア
-					RenderState->SetSamplerAllClear(pD3D11DeviceContext);
+					for (const auto& textureMap : GetAllTextureResource()) {
+						const int& index = static_cast<size_t>(textureMap.first);
+						const auto& texture = textureMap.second;
+						pD3D11DeviceContext->PSSetShaderResources(index, 1, texture.lock()->GetShaderResourceView().GetAddressOf());
+					}
 				}
 				// ラスタライザステートと描画
 				if (GetRasterizerState() == RasterizerState::DoubleDraw) {
