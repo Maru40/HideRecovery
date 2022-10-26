@@ -46,20 +46,20 @@ namespace basecross {
 		// メッシュリソースの取得
 		auto PtrMeshResource = GetMeshResource();
 		if (PtrMeshResource) {
-			//// シェーダの設定
-			//if (IsOwnShadowActive()) {
-			//	// 影付き
-			//	if (GetGameObject()->GetComponent<Shadowmap>(false)) {
-			//		// シャドウマップがあれば自己影防止用のピクセルシェーダ
-			//		DrawModel<VSPNTBoneShadow, PSPNTStaticShadow2>(PtrMeshResource->GetMashData());
-			//	}
-			//	else {
-			//		DrawModel<VSPNTBoneShadow, PSPNTStaticShadow>(PtrMeshResource->GetMashData());
-			//	}
-			//}
-			//else {
-			DrawModel<VSBoneModelDraw, PSModelDraw>(PtrMeshResource->GetMashData());
-			//}
+			// シェーダの設定
+			if (IsOwnShadowActive()) {
+				// 影付き
+				if (GetGameObject()->GetComponent<Shadowmap>(false)) {
+					// シャドウマップがあれば自己影防止用のピクセルシェーダ
+					DrawModel<VSBoneModelDrawShadow, PSModelDrawShadow2>(PtrMeshResource->GetMashData());
+				}
+				else {
+					DrawModel<VSBoneModelDrawShadow, PSModelDrawShadow>(PtrMeshResource->GetMashData());
+				}
+			}
+			else {
+				DrawModel<VSBoneModelDraw, PSModelDraw>(PtrMeshResource->GetMashData());
+			}
 		}
 		// マルチメッシュリソースの取得
 		auto PtrMultiMeshResource = GetMultiMeshResource();
@@ -68,17 +68,17 @@ namespace basecross {
 			auto& vec = PtrMultiMeshResource->GetMeshVec();
 			for (size_t i = 0; i < count; i++) {
 				if (GetMultiMeshIsDraw(i)) {
-					//if (GetOwnShadowActive()) {
-					//	if (GetGameObject()->GetComponent<Shadowmap>(false)) {
-					//		DrawModel<VSPNTBoneShadow, PSPNTStaticShadow2>(vec[i]);
-					//	}
-					//	else {
-					//		DrawModel<VSPNTBoneShadow, PSPNTStaticShadow>(vec[i]);
-					//	}
-					//}
-					//else {
-					DrawModel<VSBoneModelDraw, PSModelDraw>(vec[i]);
-					//}
+					if (GetOwnShadowActive()) {
+						if (GetGameObject()->GetComponent<Shadowmap>(false)) {
+							DrawModel<VSBoneModelDrawShadow, PSModelDrawShadow2>(vec[i]);
+						}
+						else {
+							DrawModel<VSBoneModelDrawShadow, PSModelDrawShadow>(vec[i]);
+						}
+					}
+					else {
+						DrawModel<VSBoneModelDraw, PSModelDraw>(vec[i]);
+					}
 				}
 			}
 		}

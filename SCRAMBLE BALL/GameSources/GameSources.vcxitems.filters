@@ -3223,6 +3223,9 @@
     <FxCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\HLSL\PSModelDrawShadow2.hlsl">
       <Filter>Watanabe\Shader\ModelDraw\HLSL</Filter>
     </FxCompile>
+    <FxCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\HLSL\VSBoneModelDrawShadow.hlsl">
+      <Filter>Watanabe\Shader\BoneModelDraw\HLSL</Filter>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)..\..\Libs\BaseLib\DxShaders\SlimeParametors.hlsli">
