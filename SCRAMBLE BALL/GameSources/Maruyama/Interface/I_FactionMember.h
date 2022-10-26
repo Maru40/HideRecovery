@@ -100,6 +100,12 @@ namespace basecross {
 			virtual std::shared_ptr<GameObject> GetTarget() const = 0;
 
 			/// <summary>
+			/// 自分自身のオブジェクトを取得
+			/// </summary>
+			/// <returns>自分自身のオブジェクト</returns>
+			virtual std::shared_ptr<GameObject> GetSelfObject() const = 0;
+
+			/// <summary>
 			/// パラメータ設定
 			/// </summary>
 			/// <param name="param">パラメータ</param>
