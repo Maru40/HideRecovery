@@ -52,11 +52,13 @@ namespace basecross {
 			return;
 		}
 
-		UpdateNode();
+		if (IsUpdateNode()) {
+			UpdateNode();
+		}
 	}
 
 	void SelfAstarNodeController::UpdateNode() {
-		if (!IsUpdateNode()) {
+		if (!HasNode()) {
 			return;
 		}
 
@@ -80,8 +82,8 @@ namespace basecross {
 		datas.reserve(edges.size());
 
 		//現在のノードを入れる。
-		//float range = (GetNode()->GetPosition() - transform->GetPosition()).length();
-		//datas.push_back(Data(GetNode(), range));
+		float range = (GetNode()->GetPosition() - transform->GetPosition()).length();
+		datas.push_back(Data(GetNode(), range));
 
 		//距離を計ってソート用の配列に代入する。
 		for (auto& edge : edges) {
@@ -139,6 +141,10 @@ namespace basecross {
 		return farRange < range;
 	}
 
+	std::shared_ptr<NavGraphNode> SelfAstarNodeController::CalculateNode() {
+		UpdateNode();
+		return GetNode();
+	}
 
 	void SelfAstarNodeController::SetNode(const std::shared_ptr<NavGraphNode>& node) noexcept {
 		m_node = node;

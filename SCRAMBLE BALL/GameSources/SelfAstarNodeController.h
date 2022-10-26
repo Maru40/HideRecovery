@@ -57,9 +57,15 @@ namespace basecross {
 		bool IsFarNode();
 
 	public:
-		std::shared_ptr<NavGraphNode> GetNode() const noexcept;
+		/// <summary>
+		/// 手動で現在ノードを更新したい時に利用する。
+		/// </summary>
+		/// <returns>現在のノード</returns>
+		std::shared_ptr<NavGraphNode> CalculateNode();
 
 		void SetNode(const std::shared_ptr<NavGraphNode>& node) noexcept;
+
+		std::shared_ptr<NavGraphNode> GetNode() const noexcept;
 
 		bool HasNode() const noexcept;
 
