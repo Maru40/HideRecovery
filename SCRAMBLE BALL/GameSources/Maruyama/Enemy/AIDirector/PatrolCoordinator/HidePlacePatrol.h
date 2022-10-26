@@ -61,6 +61,16 @@ namespace basecross {
 					/// <returns>すでに別のメンバーがターゲットに指定していたらtrue</returns>
 					bool IsSomeMemberTarget(const std::shared_ptr<GameObject>& target);
 
+					/// <summary>
+					/// 他のメンバ―がターゲットにしていない、ターゲット候補を取得
+					/// </summary>
+					/// <param name="member">検索依頼を出したメンバー</param>
+					/// <returns>他のメンバ―がターゲットにしていない、ターゲット候補の配列</returns>
+					std::vector<std::shared_ptr<GameObject>> SearchOtherTargets(
+						const std::shared_ptr<I_FactionMember>& member,
+						const std::vector<std::weak_ptr<HidePlace>>& hidePlaces
+					);
+
 				public:
 					/// <summary>
 					/// メンバーからパトロールターゲットの検索を依頼された時の処理

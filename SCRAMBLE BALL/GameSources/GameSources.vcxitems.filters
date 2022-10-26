@@ -1198,6 +1198,9 @@
     <Filter Include="Maruyama\Utility\SingletonComponent\ShareClassManager">
       <UniqueIdentifier>{63b74b6a-768d-4196-949b-995982b98065}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Utility\TaskList\CommonTasks\OpenBox">
+      <UniqueIdentifier>{b56a9f38-254e-4d47-918c-e19251e37cf7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2244,6 +2247,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\ShareClassesManager.h">
       <Filter>Maruyama\Utility\SingletonComponent\ShareClassManager</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\OpenBox.h">
+      <Filter>Maruyama\Utility\TaskList\CommonTasks\OpenBox</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -3196,6 +3202,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\EnemyBase.cpp">
       <Filter>Maruyama\Enemy\Component\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\OpenBox.cpp">
+      <Filter>Maruyama\Utility\TaskList\CommonTasks\OpenBox</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

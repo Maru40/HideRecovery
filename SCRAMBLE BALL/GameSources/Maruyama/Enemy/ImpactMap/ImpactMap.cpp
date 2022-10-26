@@ -371,8 +371,13 @@ namespace basecross {
 			return positions;
 		}
 
-		std::vector<Vec3> ImpactMap::GetRoutePositions(const Vec3& selfPosition, const Vec3& targetPosition, const int areaIndex) {
-			m_baseAstar->SearchAstarStart(selfPosition, targetPosition, areaIndex);
+		std::vector<Vec3> ImpactMap::GetRoutePositions(
+			const Vec3& selfPosition, 
+			const Vec3& targetPosition, 
+			const int areaIndex,
+			const int targetAreaIndex
+		) {
+			m_baseAstar->SearchAstarStart(selfPosition, targetPosition, areaIndex, targetAreaIndex);
 			auto positions = m_baseAstar->GetRoutePositions();
 			m_baseAstar->ResetAstar();
 			return positions;
@@ -462,7 +467,7 @@ namespace basecross {
 
 		void ImpactMap::CreateDebugDraw(const bool isDraw) {
 			//デバッグドローの追加
-			//return;
+			return;
 			auto graph = m_baseAstar->GetGraph();
 			m_nodeDraw = GetStage()->AddGameObject<GameObject>()->AddComponent<AstarNodeDraw>(graph);
 			m_edgeDraw = GetStage()->AddGameObject<GameObject>()->AddComponent<AstarEdgeDraw>(graph);

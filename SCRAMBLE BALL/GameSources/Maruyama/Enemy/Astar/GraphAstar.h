@@ -75,7 +75,7 @@ namespace basecross {
 		/// <param name="selfPos">開始のポジション</param>
 		/// <param name="targetPos">ターゲットのポジション</param>
 		/// <param name="areaIndex">エリアインデックス</param>
-		void SearchAstarStart(const Vec3& selfPosition, const Vec3& targetPosition, const int areaIndex);
+		void SearchAstarStart(const Vec3& selfPosition, const Vec3& targetPosition, const int areaIndex, const int targetAreaIndex = -1);
 
 		/// <summary>
 		/// ランダムなルートを計測
@@ -98,7 +98,8 @@ namespace basecross {
 		void SearchAstarStart(
 			const std::shared_ptr<NavGraphNode>& selfNearNode, 
 			const std::shared_ptr<NavGraphNode>& targetNearNode,
-			const std::shared_ptr<GraphType>& graph
+			const std::shared_ptr<GraphType>& graph,
+			const int targetAreaIndex = -1
 		);
 
 	public:

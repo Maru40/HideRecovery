@@ -59,6 +59,8 @@ namespace basecross {
 
 		std::stack<std::shared_ptr<NavGraphNode>> m_route;	//生成したルート
 
+		std::weak_ptr<NavGraphNode> m_otherAreaNode;		//別のエリアノード
+
 	public:
 		OpenDataHandler();
 
@@ -73,6 +75,14 @@ namespace basecross {
 		std::shared_ptr<OpenData> FindSearchBaseOpenData(DataPtrList& openDataList);
 
 		/// <summary>
+		/// 他のエリアが目標になっているかどうか
+		/// </summary>
+		/// <param name="startNode">開始ノード</param>
+		/// <param name="targetAreaIndex">目標エリア</param>
+		/// <returns>他のエリアが目標ならtrue</returns>
+		bool IsOhterAreaTarget(const std::shared_ptr<NavGraphNode>& startNode, const int targetAreaIndex);
+
+		/// <summary>
 		/// オープンデータを生成する。
 		/// </summary>
 		/// <param name="baseNode">ベースとなるノード</param>
@@ -84,7 +94,8 @@ namespace basecross {
 			const std::shared_ptr<OpenData>& openData, 
 			const std::shared_ptr<AstarGraph>& graph,
 			const std::shared_ptr<NavGraphNode>& startNode,
-			const std::shared_ptr<NavGraphNode>& targetNode
+			const std::shared_ptr<NavGraphNode>& targetNode,
+			const int targetAreaIndex = -1
 		);
 
 		/// <summary>
@@ -139,7 +150,8 @@ namespace basecross {
 		bool StartSearchAstar(
 			const std::shared_ptr<NavGraphNode>& startNode, 
 			const std::shared_ptr<NavGraphNode>& targetNode,
-			const std::shared_ptr<AstarGraph>& graph
+			const std::shared_ptr<AstarGraph>& graph,
+			const int targetAreaIndex = -1
 		);
 
 		//--------------------------------------------------------------------------------------

@@ -46,7 +46,7 @@ namespace basecross {
 					MoveAstar,			//Astarを利用してターゲットの近くまで移動する。
 					ArriveParamSetting,	//ターゲットへの最後の移動のパラメータセッティング
 					MoveArrive,			//ターゲットが視界内なら到着行動
-										//アイテムを空ける。
+					OpenBox,			//アイテムを空ける。
 					Wait,				//待機
 				};
 
@@ -100,6 +100,11 @@ namespace basecross {
 					std::shared_ptr<GameObject> CalculateTarget();
 
 					void DefineTask();
+
+					/// <summary>
+					/// 待機中のタスクの定義
+					/// </summary>
+					void DefineWaitTask();
 
 					void SelectTask();
 

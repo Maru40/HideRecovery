@@ -41,6 +41,8 @@ namespace basecross {
 			virtual void SetTarget(const std::shared_ptr<GameObject>& target) override;
 			 
 			virtual std::shared_ptr<GameObject> GetTarget() const override;
+
+			virtual std::shared_ptr<GameObject> GetSelfObject() const override;
 		};
 	}
 }

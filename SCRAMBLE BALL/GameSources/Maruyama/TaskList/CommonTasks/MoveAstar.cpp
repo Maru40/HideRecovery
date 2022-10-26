@@ -132,9 +132,10 @@ namespace basecross {
 			auto startPosition = m_transform.lock()->GetPosition();
 			auto endPosition = CalculateMoveTargetPosition();
 
-			int areaIndex = m_areaRoute.front();
+			int areaIndex = m_areaRoute.front();	//自分自身がいるエリアインデックス
 			m_areaRoute.pop();
-			return maru::FieldImpactMap::GetInstance()->GetRoutePositions(startPosition, endPosition, areaIndex);
+			int targetAreaIndex = !m_areaRoute.empty() ? m_areaRoute.front() : areaIndex;
+			return maru::FieldImpactMap::GetInstance()->GetRoutePositions(startPosition, endPosition, areaIndex, targetAreaIndex);
 		}
 
 		Vec3 MoveAstar::CalculateMoveTargetPosition() {

@@ -95,7 +95,12 @@ namespace basecross {
 			/// <param name="targetPosition">目的地</param>
 			/// <param name="areaIndex">エリアインデックス</param>
 			/// <returns></returns>
-			std::vector<Vec3> GetRoutePositions(const Vec3& selfPosition, const Vec3& targetPosition, const int areaIndex);
+			std::vector<Vec3> GetRoutePositions(
+				const Vec3& selfPosition, 
+				const Vec3& targetPosition, 
+				const int areaIndex,
+				const int targetAreaIndex
+			);
 
 			/// <summary>
 			/// 影響マップデータを取得

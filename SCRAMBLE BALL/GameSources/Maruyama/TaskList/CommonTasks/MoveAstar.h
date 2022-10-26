@@ -54,8 +54,8 @@ namespace basecross {
 
 			std::queue<int> m_areaRoute;					//確認するエリアルート
 
-			std::weak_ptr<Transform> m_transform;
-			std::weak_ptr<TargetManager> m_targetManager;
+			std::weak_ptr<Transform> m_transform;			
+			std::weak_ptr<TargetManager> m_targetManager;	
 
 		public:
 			MoveAstar(const std::shared_ptr<Enemy::EnemyBase>& owner, const Parametor* paramPtr);

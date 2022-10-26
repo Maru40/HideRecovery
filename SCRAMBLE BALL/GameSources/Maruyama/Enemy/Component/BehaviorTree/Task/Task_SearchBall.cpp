@@ -19,6 +19,7 @@
 #include "Maruyama/TaskList/CommonTasks/MoveAstar.h"
 #include "Maruyama/TaskList/CommonTasks/Task_ToTargetMove.h"
 #include "Maruyama/TaskList/CommonTasks/TargetSeek.h"
+#include "Maruyama/TaskList/CommonTasks/OpenBox.h"
 #include "Maruyama/TaskList/CommonTasks/Task_Wait.h"
 
 #include "Maruyama/Utility/SingletonComponent/SingletonComponent.h"
@@ -132,19 +133,32 @@ namespace basecross {
 						std::make_shared<TaskListNode::TargetSeek>(ownerObject, m_param.targetSeekParam)
 					);
 
-					//待機
-					m_param.waitParam->start = [&]() {	//開始イベント
+					//ボックスを開く
+					m_taskList->DefineTask(
+						TaskEnum::OpenBox,
+						std::make_shared<TaskListNode::OpenBox>(ownerObject)
+					);
+
+					//待機行動
+					DefineWaitTask();
+				}
+
+				void SearchBall::DefineWaitTask() {
+					//開始イベント
+					m_param.waitParam->start = [&]() {	
 						if (auto velocityManager = m_velocityManager.lock()) {
 							velocityManager->StartDeseleration();
 						}
 					};
 
-					m_param.waitParam->exit = [&]() {	//終了イベント
+					//終了イベント
+					m_param.waitParam->exit = [&]() {	
 						if (auto velocityManager = m_velocityManager.lock()) {
 							velocityManager->SetIsDeseleration(false);
 						}
 					};
 
+					//タスクの定義
 					m_taskList->DefineTask(
 						TaskEnum::Wait,
 						std::make_shared<basecross::Task::Wait>(m_param.waitParam)
@@ -155,6 +169,7 @@ namespace basecross {
 					TaskEnum tasks[] = {
 						TaskEnum::MoveAstar,
 						TaskEnum::MoveArrive,
+						TaskEnum::OpenBox,
 						TaskEnum::Wait,
 					};
 
@@ -164,13 +179,13 @@ namespace basecross {
 				}
 
 				void SearchBall::InitializeParametor() {
-					constexpr float MoveSpeed = 10.0f;
+					constexpr float MoveSpeed = 5.0f;
 					constexpr float NearTargetRange = 1.5f;
 
 					//Astarで目標の近くまで移動するパラメータ
 					m_param.moveAstarParam->movePositionsParam->moveParamPtr->speed = MoveSpeed;
 
-					//ターゲットムーブの設定
+					//目的地の近くまで移動した場合の設定
 					m_param.targetSeekParam->toTargetMoveParam->speed = MoveSpeed;
 					m_param.targetSeekParam->toTargetMoveParam->moveType = basecross::Task::ToTargetMove::MoveType::ArriveVelocity;
 					m_param.targetSeekParam->toTargetMoveParam->targetNearRange = NearTargetRange;
