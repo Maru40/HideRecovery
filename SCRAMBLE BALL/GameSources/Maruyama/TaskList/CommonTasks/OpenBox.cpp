@@ -45,12 +45,30 @@ namespace basecross {
 		}
 
 		void OpenBox::Open() {
-			if (m_accessHidePlace.expired()) {
-				m_accessHidePlace.lock()->Access();
+			auto targetManager = m_targetManager.lock();
+			if (!targetManager || !targetManager->HasTarget()) {
+				Debug::GetInstance()->Log(L"TaskListNode::OpenBox::Open() : 必要コンポーネントが存在しません。");
+				return;
+			}
+
+			auto target = targetManager->GetTarget();
+
+			auto hidePlace = target->GetComponent<HidePlace>(false);
+			if (hidePlace) {
+				hidePlace->Open();
+				Debug::GetInstance()->Log(L"Open");
 			}
 			else {
-				Debug::GetInstance()->Log(L"TaskListNode::OpenBox::Open() : 必要コンポーネントが存在しません。");
+				Debug::GetInstance()->Log(L"TaskListNode::OpenBox::Open() : ターゲットがHidePlaceでありません。");
 			}
+
+			//if (!m_accessHidePlace.expired()) {
+			//	m_accessHidePlace.lock()->Access();
+			//	Debug::GetInstance()->Log(L"Open");
+			//}
+			//else {
+			//	Debug::GetInstance()->Log(L"TaskListNode::OpenBox::Open() : 必要コンポーネントが存在しません。");
+			//}
 		}
 
 		void OpenBox::ChangeAnimation() {
