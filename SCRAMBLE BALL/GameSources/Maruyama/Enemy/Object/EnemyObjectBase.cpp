@@ -23,6 +23,8 @@
 
 #include "Maruyama/Player/Component/AccessHidePlace.h"
 
+#include "SelfAstarNodeController.h"
+
 namespace basecross {
 	namespace Enemy {
 
@@ -46,6 +48,7 @@ namespace basecross {
 			AddComponent<EyeSearchRange>();
 			AddComponent<SeekTarget>(nullptr);
 			AddComponent<AccessHidePlace>()->SetIsUpdateDrawBoxUI(false);
+			AddComponent<SelfAstarNodeController>();
 
 			//AddComponent<AIPlayerBehaviorTree>();
 		}
