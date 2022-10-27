@@ -18,6 +18,8 @@
 
 #include "Patch/PlayerInputer.h"
 
+#include "Itabashi/OnlineStatus.h"
+
 namespace basecross {
 	HideItemObject::HideItemObject(const std::shared_ptr<Stage>& stage) :
 		StageObjectBase(stage, L"HideItem")
@@ -31,14 +33,13 @@ namespace basecross {
 	}
 
 	void HideItemObject::OnCreate() {
-		auto ti = GetThis<GameObject>();
 		SettingModel();
 
-		AddComponent<Operator::ObjectHider>();
-		auto item = AddComponent<Item>();
+		AddComponent<Online::OnlineStatus>();
 
-		// 仮のアイテムID
-		item->SetItemId(100);
+		AddComponent<Operator::ObjectHider>();
+
+		AddComponent<Item>();
 
 		AddComponent<HideItem>();
 		AddComponent<Targeted>();
