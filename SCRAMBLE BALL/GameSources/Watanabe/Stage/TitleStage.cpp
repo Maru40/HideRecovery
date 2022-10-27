@@ -41,7 +41,7 @@ namespace basecross {
 		// マッチング画面への遷移処理
 		const auto& inputDevice = App::GetApp()->GetMyInputDevice();
 		const auto& pad = inputDevice->GetXInputGamePad();
-		if (pad.IsInputDown(XInputCode::A)) {
+		if (PlayerInputer::GetInstance()->IsDesitionDown()) {
 			SimpleSoundManager::OnePlaySE(L"TitlePlessedSE", 0.25f);
 			PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToMatchingStage");
 		}
