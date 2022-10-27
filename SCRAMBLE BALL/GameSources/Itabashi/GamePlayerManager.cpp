@@ -3,6 +3,7 @@
 #include "OnlineMatching.h"
 #include "Maruyama/Player/Object/VillainPlayerObject.h"
 #include "PlayerOnlineController.h"
+#include "PlayerControlManager.h"
 #include "OnlineTransformSynchronization.h"
 #include "Maruyama/Player/Component/PlayerSpawnPoint.h"
 #include "Maruyama/Utility/Utility.h"
@@ -25,7 +26,6 @@
 #include "Maruyama/UI/2D/Component/TeleportUI.h"
 #include "Maruyama/Utility/Component/ToTargetMove.h"
 #include "Maruyama/Utility/SingletonComponent/GameManager.h"
-
 #include "Maruyama/Player/Component/AccessHidePlace.h"
 
 namespace basecross
@@ -105,7 +105,9 @@ namespace basecross
 		tpsCamera->AddComponent<VirtualCamera>(10);
 		tpsCamera->AddComponent<LookAtCameraManager>(playerObject, LookAtCameraManager::Parametor());
 
-		onlineController->SetCamera(GetStage()->GetView()->GetTargetCamera());
+		auto controlManager = playerObject->GetComponent<PlayerControlManager>();
+		controlManager->SetCamera(GetStage()->GetView()->GetTargetCamera());
+
 		auto teleport = playerObject->GetComponent<Teleport>();
 
 		auto cameraObject = GetStage()->AddGameObject<GameObject>();
@@ -118,6 +120,9 @@ namespace basecross
 
 		auto useWeapon = playerObject->GetComponent<UseWeapon>();
 		useWeapon->SetIsUseCamera(true);
+
+		auto accessHidePlace = playerObject->GetComponent<HidePlaceOpener>();
+		accessHidePlace->SetIsDrawUI(true);
 
 		// 自身のHPゲージにステータスコンポーネントをセット
 		auto mainStage = GetGameObject()->GetTypeStage<MainStage>(false);
@@ -164,8 +169,6 @@ namespace basecross
 			springArm->SetRadXZ(rad);
 			springArm->OnUpdate2();
 		}
-
-		playerObject->AddComponent<AccessHidePlace>();
 
 		return playerObject;
 	}
