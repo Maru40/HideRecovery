@@ -12,6 +12,8 @@
 
 #include "MainStage.h"
 
+#include "Itabashi/OnlineStatus.h"
+
 namespace basecross {
 	RackObject::RackObject(const shared_ptr<Stage>& stage)
 		:StageObjectBase(stage, L"RackObject")
@@ -25,6 +27,9 @@ namespace basecross {
 	}
 
 	void RackObject::OnCreate() {
+
+		AddComponent<Online::OnlineStatus>();
+
 		auto col = AddComponent<CollisionObb>();
 		col->SetFixed(true);
 		const float colSize = 1.2f;
