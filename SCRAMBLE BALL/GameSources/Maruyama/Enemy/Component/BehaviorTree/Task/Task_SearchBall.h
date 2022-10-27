@@ -99,6 +99,9 @@ namespace basecross {
 					/// <returns>ターゲット</returns>
 					std::shared_ptr<GameObject> CalculateTarget();
 
+					/// <summary>
+					/// タスクの定義
+					/// </summary>
 					void DefineTask();
 
 					/// <summary>
@@ -106,6 +109,9 @@ namespace basecross {
 					/// </summary>
 					void DefineWaitTask();
 
+					/// <summary>
+					/// タスクの選択
+					/// </summary>
 					void SelectTask();
 
 					/// <summary>
