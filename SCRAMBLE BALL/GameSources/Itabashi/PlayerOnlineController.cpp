@@ -29,6 +29,9 @@
 #include "Maruyama/UI/2D/Component/MapCursor.h"
 
 #include "PlayerControlManager.h"
+#include "Maruyama/StageObject/HidePlace.h"
+
+#include "OnlineStatus.h"
 
 template<class T>
 T ConvertByteData(const std::uint8_t* bytes)
@@ -109,6 +112,19 @@ namespace Online
 		}
 	};
 
+	struct OnlineFindOjbectData
+	{
+		std::uint32_t objectId;
+		int playerNumber;
+
+		OnlineFindOjbectData(std::uint32_t objectId, int playerNumber) :
+			objectId(objectId),
+			playerNumber(playerNumber)
+		{
+
+		}
+	};
+
 	PlayerOnlineController::PlayerOnlineController(const std::shared_ptr<GameObject>& owner) :
 		OnlineComponent(owner)
 	{
@@ -132,24 +148,21 @@ namespace Online
 
 	void PlayerOnlineController::UpdateCameraForward()
 	{
-		auto camera = m_camera.lock();
+		auto controlManager = m_controlManager.lock();
 
-		if (!camera)
+		if (!controlManager)
 		{
 			return;
 		}
 
-		auto forward = camera->GetAt() - camera->GetEye();
-		forward.normalize();
+		Vec3 forward;
 
-		if (m_cameraForward == forward)
+		if (!controlManager->IsUpdateCameraForward(&forward))
 		{
 			return;
 		}
 
-		m_cameraForward = forward;
-
-		OnlineManager::RaiseEvent(false, (std::uint8_t*)&m_cameraForward, sizeof(Vec3), EXECUTE_CAMERA_FORWARD_EVENT_CODE);
+		OnlineManager::RaiseEvent(false, (std::uint8_t*)&forward, sizeof(Vec3), EXECUTE_CAMERA_FORWARD_EVENT_CODE);
 	}
 
 	void PlayerOnlineController::ExecuteCameraForward(int playerNumber, const Vec3& cameraForward)
@@ -159,13 +172,14 @@ namespace Online
 			return;
 		}
 
-		m_cameraForward = cameraForward;
+		auto controlManager = m_controlManager.lock();
 
-		auto objectMover = m_objectMover.lock();
-		auto useWeapon = m_useWepon.lock();
+		if (!controlManager)
+		{
+			return;
+		}
 
-		objectMover->SetDefaultForward(cameraForward);
-		useWeapon->SetDirection(cameraForward);
+		controlManager->ExecuteUpdateCameraForward(cameraForward);
 	}
 
 	void PlayerOnlineController::Move()
@@ -244,14 +258,13 @@ namespace Online
 			return;
 		}
 
-		int itemId = item->GetItemId();
+		std::uint32_t itemId = item->GetGameObject()->GetComponent<OnlineStatus>()->GetInstanceId();
 
 
 		// ホストではないのなら
 		if (!OnlineManager::GetLocalPlayer().getIsMasterClient())
 		{
-			int itemId = item->GetItemId();
-			OnlineManager::RaiseEvent(false, (std::uint8_t*)&itemId, sizeof(int), TRY_ACQUISITION_EVENT_CODE);
+			OnlineManager::RaiseEvent(false, (std::uint8_t*)&itemId, sizeof(std::uint32_t), TRY_ACQUISITION_EVENT_CODE);
 			return;
 		}
 
@@ -260,34 +273,34 @@ namespace Online
 			return;
 		}
 
-		OnlineManager::RaiseEvent(false, (std::uint8_t*)&ItemOwnerShipData(itemId, m_onlinePlayerNumber), sizeof(ItemOwnerShipData), EXECUTE_ACQUISITION_EVENT_CODE);
+		OnlineManager::RaiseEvent(false, (std::uint8_t*)&OnlineFindOjbectData(itemId, m_onlinePlayerNumber), sizeof(OnlineFindOjbectData), EXECUTE_ACQUISITION_EVENT_CODE);
 	}
 
-	void PlayerOnlineController::TryAcquisitionEvent(int itemId, int playerNumber)
+	void PlayerOnlineController::TryAcquisitionEvent(std::uint32_t itemId, int playerNumber)
 	{
 		auto& localPlayer = OnlineManager::GetLocalPlayer();
 
 		// 自分がマスターで無いか、対応したプレイヤーではないなら
-		if (!localPlayer.getIsMasterClient() || m_onlinePlayerNumber != localPlayer.getNumber())
+		if (!localPlayer.getIsMasterClient() || m_onlinePlayerNumber != playerNumber)
 		{
 			return;
 		}
 
-		auto onlineController = GetPlayerOnlineController(playerNumber);
-		auto controlManager = onlineController->GetPlayerControlManager();
+		auto controlManager = m_controlManager.lock();
+		auto item = OnlineStatus::FindOnlineGameObject(itemId)->GetComponent<Item>();
 
-		if (!controlManager->TryAquisition(itemId))
+		if (!controlManager->TryAquisition(item))
 		{
 			return;
 		}
 
-		OnlineManager::RaiseEvent(false, (std::uint8_t*)&ItemOwnerShipData(itemId, playerNumber), sizeof(ItemOwnerShipData), EXECUTE_ACQUISITION_EVENT_CODE);
+		OnlineManager::RaiseEvent(false, (std::uint8_t*)&OnlineFindOjbectData(itemId, playerNumber), sizeof(OnlineFindOjbectData), EXECUTE_ACQUISITION_EVENT_CODE);
 	}
 
-	void PlayerOnlineController::ExecuteAcquisitionEvent(const ItemOwnerShipData& ownerShipData)
+	void PlayerOnlineController::ExecuteAcquisitionEvent(std::uint32_t itemId, int playerNumber)
 	{
 		// 取得したのが自分ではないのなら
-		if (m_onlinePlayerNumber != ownerShipData.playerNumber)
+		if (m_onlinePlayerNumber != playerNumber)
 		{
 			return;
 		}
@@ -299,7 +312,8 @@ namespace Online
 			return;
 		}
 
-		controlManager->TryAquisition(ownerShipData.itemId);
+		auto item = OnlineStatus::FindOnlineGameObject(itemId)->GetComponent<Item>();
+		controlManager->TryAquisition(item);
 	}
 
 	void PlayerOnlineController::Shot()
@@ -430,45 +444,29 @@ namespace Online
 
 	void PlayerOnlineController::TryAim()
 	{
-		auto useWeapon = m_useWepon.lock();
+		auto controlManager = m_controlManager.lock();
 
-		auto teleport = GetGameObject()->GetComponent<Teleport>(false);
-
-		// テレポート中ならば
-		if (teleport && teleport->IsTeleporting()) {
-			return;
-		}
-
-		auto goal = GetGameObject()->GetComponent<GoalAnimationController>(false);
-
-		// ゴールアニメーション中ならば
-		if (goal && goal->IsGoalAnimation()) {
-			return;
-		}
-
-		if (!useWeapon)
+		if (!controlManager)
 		{
 			return;
 		}
 
-		bool isAim = false;
+		bool isUpdate = false;
+		bool isAim = true;
 
-		// 条件に当てはまればエイム状態にする
-		if (PlayerInputer::GetInstance()->IsAim() && !useWeapon->IsAim())
+		if (PlayerInputer::GetInstance()->IsAim() && controlManager->TryUpdateAim(true))
 		{
 			isAim = true;
-			useWeapon->SetIsAim(isAim);
-			OnlineManager::RaiseEvent(false, (std::uint8_t*)&isAim, sizeof(bool), EXECUTE_AIM_STATE_CHANGE_EVENT_CODE);
+			isUpdate = true;
 		}
 
-		// 条件に当てはまればエイム状態を解除する
-		if (PlayerInputer::GetInstance()->IsAimRelease() && useWeapon->IsAim())
+		if (PlayerInputer::GetInstance()->IsAimRelease() && controlManager->TryUpdateAim(false))
 		{
 			isAim = false;
-			useWeapon->SetIsAim(isAim);
-			OnlineManager::RaiseEvent(false, (std::uint8_t*)&isAim, sizeof(bool), EXECUTE_AIM_STATE_CHANGE_EVENT_CODE);
+			isUpdate = true;
 		}
 
+		OnlineManager::RaiseEvent(false, (std::uint8_t*)&isAim, sizeof(bool), EXECUTE_AIM_STATE_CHANGE_EVENT_CODE);
 	}
 
 	void PlayerOnlineController::ExecuteAimEvent(int playerNumber, bool isAim)
@@ -478,9 +476,8 @@ namespace Online
 			return;
 		}
 
-		auto useWeapon = m_useWepon.lock();
-
-		useWeapon->SetIsAim(isAim);
+		auto controlManager = m_controlManager.lock();
+		controlManager->ExecuteUpdateAim(isAim);
 	}
 
 	int PlayerOnlineController::CreateInstanceId() const
@@ -531,12 +528,72 @@ namespace Online
 		controlManager->ExecuteTeleport(teleportPosition, cameraPosition);
 	}
 
-	void PlayerOnlineController::AccessHideInputer() {
-		if (PlayerInputer::GetInstance()->IsDecision()) {
-			if (auto accessHide = GetGameObject()->GetComponent<AccessHidePlace>(false)) {
-				accessHide->Access();
-			}
+	void PlayerOnlineController::OpenHidePlaceInputer()
+	{
+		auto controlManager = m_controlManager.lock();
+
+		if (!PlayerInputer::GetInstance()->IsDecision() || !controlManager)
+		{
+			return;
 		}
+
+		std::shared_ptr<HidePlace> hidePlace = controlManager->GetCanOpenHidePlace();
+
+		if (!hidePlace)
+		{
+			return;
+		}
+
+		auto onlineStatus = hidePlace->GetGameObject()->GetComponent<OnlineStatus>();
+		std::uint32_t instanceId = onlineStatus->GetInstanceId();
+
+		// ホストではないのなら
+		if (!OnlineManager::GetLocalPlayer().getIsMasterClient())
+		{
+			OnlineManager::RaiseEvent(false, (std::uint8_t*)&instanceId, sizeof(std::uint32_t), TRY_OPEN_HIDEPLACE_EVENT_CODE);
+			return;
+		}
+
+		if (!controlManager->TryAccessHidePlace(hidePlace))
+		{
+			return;
+		}
+
+		OnlineManager::RaiseEvent(false, (std::uint8_t*)&OnlineFindOjbectData(instanceId, m_onlinePlayerNumber), sizeof(OnlineFindOjbectData), EXECUTE_OPEN_HIDEPLACE_EVENT_CODE);
+	}
+
+	void PlayerOnlineController::TryOpenHidePlaceEvent(int playerNumber, std::uint32_t instanceId)
+	{
+		auto& localPlayer = OnlineManager::GetLocalPlayer();
+
+		// 自分がホストで無いか、対応したプレイヤーではないなら
+		if (!localPlayer.getIsMasterClient() || m_onlinePlayerNumber != playerNumber)
+		{
+			return;
+		}
+
+		auto controlManager = m_controlManager.lock();
+		auto hidePlace = OnlineStatus::FindOnlineGameObject(instanceId)->GetComponent<HidePlace>();
+
+		if (!controlManager->TryAccessHidePlace(hidePlace))
+		{
+			return;
+		}
+
+		OnlineManager::RaiseEvent(false, (std::uint8_t*)&OnlineFindOjbectData(instanceId, playerNumber), sizeof(OnlineFindOjbectData), EXECUTE_OPEN_HIDEPLACE_EVENT_CODE);
+	}
+
+	void PlayerOnlineController::ExecuteOpenHidePlace(int playerNumber, std::uint32_t instanceId)
+	{
+		if (m_onlinePlayerNumber != playerNumber)
+		{
+			return;
+		}
+
+		auto controlManager = m_controlManager.lock();
+
+		auto onlineGameObject = OnlineStatus::FindOnlineGameObject(instanceId);
+		controlManager->TryAccessHidePlace(onlineGameObject->GetComponent<HidePlace>());
 	}
 
 	void PlayerOnlineController::OnLateStart()
@@ -560,7 +617,7 @@ namespace Online
 
 	void PlayerOnlineController::OnUpdate()
 	{
-		if (m_onlinePlayerNumber == 0 || m_onlinePlayerNumber != OnlineManager::GetLocalPlayer().getNumber())
+		if (m_onlinePlayerNumber == OnlineManager::INVALID_ONLINE_PLAYER_NUMBER || m_onlinePlayerNumber != OnlineManager::GetLocalPlayer().getNumber())
 		{
 			return;
 		}
@@ -584,7 +641,7 @@ namespace Online
 
 		TryAim();
 
-		AccessHideInputer();
+		OpenHidePlaceInputer();
 	}
 
 	void PlayerOnlineController::OnCustomEventAction(int playerNumber, std::uint8_t eventCode, const std::uint8_t* bytes)
@@ -611,8 +668,8 @@ namespace Online
 
 		if (eventCode == EXECUTE_ACQUISITION_EVENT_CODE)
 		{
-			auto ownerShipData = ConvertByteData<ItemOwnerShipData>(bytes);
-			ExecuteAcquisitionEvent(ownerShipData);
+			auto data = ConvertByteData<OnlineFindOjbectData>(bytes);
+			ExecuteAcquisitionEvent(data.objectId, data.playerNumber);
 			return;
 		}
 
@@ -655,6 +712,20 @@ namespace Online
 		{
 			bool isAim = ConvertByteData<bool>(bytes);
 			ExecuteAimEvent(playerNumber, isAim);
+			return;
+		}
+
+		if (eventCode == TRY_OPEN_HIDEPLACE_EVENT_CODE)
+		{
+			std::uint32_t instanceId = ConvertByteData<std::uint32_t>(bytes);
+			TryOpenHidePlaceEvent(playerNumber, instanceId);
+			return;
+		}
+
+		if (eventCode == EXECUTE_OPEN_HIDEPLACE_EVENT_CODE)
+		{
+			auto findGameObjectData = ConvertByteData<OnlineFindOjbectData>(bytes);
+			ExecuteOpenHidePlace(findGameObjectData.playerNumber, findGameObjectData.objectId);
 			return;
 		}
 	}

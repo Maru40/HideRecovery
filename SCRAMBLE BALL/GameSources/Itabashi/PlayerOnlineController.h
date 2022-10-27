@@ -28,27 +28,7 @@ namespace Online
 	class PlayerOnlineController : public OnlineComponent
 	{
 	public:
-		/// <summary>
-		/// アイテム取得情報
-		/// </summary>
-		struct ItemOwnerShipData
-		{
-			/// <summary>
-			/// アイテムID
-			/// </summary>
-			int itemId;
-			/// <summary>
-			/// 取得したプレイヤー番号
-			/// </summary>
-			int playerNumber;
 
-			ItemOwnerShipData(int itemId, int playerNumber) :
-				itemId(itemId),
-				playerNumber(playerNumber)
-			{
-
-			}
-		};
 		/// <summary>
 		/// アイテムが取得できるかを問うオンラインイベントコード
 		/// </summary>
@@ -64,6 +44,9 @@ namespace Online
 		static constexpr std::uint8_t EXECUTE_AIM_STATE_CHANGE_EVENT_CODE = 12;
 		static constexpr std::uint8_t EXECUTE_CAMERA_FORWARD_EVENT_CODE = 13;
 		static constexpr std::uint8_t EXECUTE_TELEPORT_EVENT_CODE = 14;
+
+		static constexpr std::uint8_t TRY_OPEN_HIDEPLACE_EVENT_CODE = 15;
+		static constexpr std::uint8_t EXECUTE_OPEN_HIDEPLACE_EVENT_CODE = 16;
 
 	private:
 
@@ -85,8 +68,6 @@ namespace Online
 
 		std::weak_ptr<UseWeapon> m_useWepon;
 
-		std::weak_ptr<Camera> m_camera;
-
 		std::weak_ptr<PlayerControlManager> m_controlManager;
 
 		/// <summary>
@@ -99,8 +80,6 @@ namespace Online
 		std::unordered_map<int, std::shared_ptr<ChargeBullet>> m_chargeBulletMap;
 
 		Vec3 m_beforeMoveVector = Vec3();
-
-		Vec3 m_cameraForward = Vec3();
 
 		void UpdateCameraForward();
 
@@ -119,12 +98,13 @@ namespace Online
 		/// </summary>
 		/// <param name="itemId">取得できるか問い合わせるアイテムID</param>
 		/// <param name="playerNumber">取得したいプレイヤー番号</param>
-		void TryAcquisitionEvent(int itemId, int playerNumber);
+		void TryAcquisitionEvent(std::uint32_t itemId, int playerNumber);
 		/// <summary>
 		/// 誰かがアイテムを取得した際に呼ばれるイベント
 		/// </summary>
-		/// <param name="ownerShipData">アイテム取得情報</param>
-		void ExecuteAcquisitionEvent(const ItemOwnerShipData& ownerShipData);
+		/// <param name="itemId">取得するアイテムID</param>
+		/// <param name="playerNumber">取得するプレイヤー番号</param>
+		void ExecuteAcquisitionEvent(std::uint32_t itemId, int playerNumber);
 
 		/// <summary>
 		/// 弾を撃つ
@@ -189,7 +169,11 @@ namespace Online
 		/// <param name="cameraPosition">カメラ位置</param>
 		void ExecuteTeleportEvent(int playerNumber, const Vec3& teleportPosition, const Vec3& cameraPosition);
 
-		void AccessHideInputer();
+		void OpenHidePlaceInputer();
+
+		void TryOpenHidePlaceEvent(int playerNumber, std::uint32_t instanceId);
+
+		void ExecuteOpenHidePlace(int playerNumber, std::uint32_t instanceId);
 
 	public:
 
@@ -217,17 +201,6 @@ namespace Online
 		void SetGamePlayerNumber(int gamePlayerNumber) { m_gamePlayerNumber = gamePlayerNumber; }
 
 		int GetGamePlayerNumber() const { return m_gamePlayerNumber; }
-
-		/// <summary>
-		/// カメラコンポーネントの設定
-		/// </summary>
-		/// <param name="camera">カメラコンポーネント</param>
-		void SetCamera(const std::shared_ptr<Camera>& camera) { m_camera = camera; }
-		/// <summary>
-		/// カメラコンポーネントの取得
-		/// </summary>
-		/// <returns>カメラコンポーネント</returns>
-		std::shared_ptr<Camera> GetCamera() const { return m_camera.lock(); }
 
 		std::shared_ptr<PlayerControlManager> GetPlayerControlManager() const { return m_controlManager.lock(); }
 

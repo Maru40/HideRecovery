@@ -7,12 +7,26 @@ namespace basecross
 	class VelocityManager;
 	class ItemAcquisitionManager;
 	class Item;
+	class UseWeapon;
+	class GoalAnimationController;
+	class HidePlaceOpener;
+	class HidePlace;
+
+	namespace Operator
+	{
+		class ObjectMover;
+	}
 
 	/// <summary>
 	/// プレイヤーに対しての操作をまとめたクラス
 	/// </summary>
 	class PlayerControlManager : public Component
 	{
+		/// <summary>
+		/// 前の基準にするカメラ
+		/// </summary>
+		std::weak_ptr<Camera> m_forwardCamera;
+
 		/// <summary>
 		/// テレポート機能コンポーネント
 		/// </summary>
@@ -23,6 +37,27 @@ namespace basecross
 		std::weak_ptr<ItemAcquisitionManager> m_acquisitionManager;
 
 		std::weak_ptr<VelocityManager> m_velocityManager;
+		/// <summary>
+		/// オブジェクトを動かす機能を持ったコンポーネント
+		/// </summary>
+		std::weak_ptr<Operator::ObjectMover> m_objectMover;
+		/// <summary>
+		/// 武器を使う機能を持ったコンポーネント
+		/// </summary>
+		std::weak_ptr<UseWeapon> m_useWeapon;
+		/// <summary>
+		/// ゴールアニメーション用コンポーネント
+		/// </summary>
+		std::weak_ptr<GoalAnimationController> m_goalAnimationController;
+		/// <summary>
+		/// 隠し場所に対して操作するコンポーネント
+		/// </summary>
+		std::weak_ptr<HidePlaceOpener> m_hidePlaceOpener;
+
+		/// <summary>
+		/// 前回のカメラ前方ベクトル
+		/// </summary>
+		Vec3 m_beforeCameraForward = Vec3();
 
 	public:
 		PlayerControlManager(const std::shared_ptr<GameObject>& owner) : Component(owner) {}
@@ -32,6 +67,15 @@ namespace basecross
 		void OnUpdate() override {}
 
 		void OnDraw() override {}
+
+		/// <summary>
+		/// カメラのforwardの更新を試す
+		/// </summary>
+		/// <param name="forward">変更があればそのベクトルが入る</param>
+		/// <returns>変更があればtrue</returns>
+		bool IsUpdateCameraForward(Vec3* forward);
+
+		void ExecuteUpdateCameraForward(const Vec3& forward);
 
 		/// <summary>
 		/// 取得できるアイテムがあるか試す
@@ -46,12 +90,6 @@ namespace basecross
 		/// <param name="item">取得するアイテム</param>
 		/// <returns>成功したらtrue</returns>
 		bool TryAquisition(const std::shared_ptr<Item>& item);
-		/// <summary>
-		/// アイテムの取得を試す
-		/// </summary>
-		/// <param name="itemId">取得アイテムID</param>
-		/// <returns>成功したらtrue</returns>
-		bool TryAquisition(int itemId);
 
 		/// <summary>
 		/// マップの開閉を試す
@@ -61,5 +99,38 @@ namespace basecross
 
 		bool TryTeleport(Vec3* teleportPosition, Vec3* cameraPosition);
 		void ExecuteTeleport(const Vec3& temeportPosition, const Vec3& cameraPosition);
+
+		/// <summary>
+		/// エイム状態の変更を試す
+		/// </summary>
+		/// <param name="isAim">エイム状態ならtrue</param>
+		/// <returns>変更できればtrue</returns>
+		bool TryUpdateAim(bool isAim);
+		/// <summary>
+		/// エイムの更新をする
+		/// </summary>
+		/// <param name="isAim">エイム状態ならtrue</param>
+		void ExecuteUpdateAim(bool isAim);
+
+		std::shared_ptr<HidePlace> GetCanOpenHidePlace() const;
+
+		/// <summary>
+		/// HidePlaceが開けるか試す
+		/// </summary>
+		/// <param name="hidePlace">開くHidePlace</param>
+		/// <returns>開けたならtrue</returns>
+		bool TryAccessHidePlace(const std::shared_ptr<HidePlace>& hidePlace);
+
+		/// <summary>
+		/// 前方カメラコンポーネントの設定
+		/// </summary>
+		/// <param name="camera">前方カメラコンポーネント</param>
+		void SetCamera(const std::shared_ptr<Camera>& camera) { m_forwardCamera = camera; }
+		/// <summary>
+		/// 前方カメラコンポーネントの取得
+		/// </summary>
+		/// <returns>前方カメラコンポーネント</returns>
+		std::shared_ptr<Camera> GetCamera() const { return m_forwardCamera.lock(); }
+
 	};
 }

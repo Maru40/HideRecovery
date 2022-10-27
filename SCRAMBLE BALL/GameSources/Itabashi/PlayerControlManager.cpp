@@ -8,6 +8,11 @@
 #include "VelocityManager.h"
 #include "Maruyama/Player/Component/ItemAcquisitionManager.h"
 #include "Item.h"
+#include "ObjectMover.h"
+#include "Maruyama/Player/Component/UseWeapon.h"
+#include "Maruyama/Player/Component/GoalAnimationController.h"
+#include "Maruyama/Player/Component/AccessHidePlace.h"
+#include "Maruyama/StageObject/HidePlace.h"
 
 namespace basecross
 {
@@ -16,6 +21,48 @@ namespace basecross
 		m_teleport = GetGameObject()->GetComponent<Teleport>();
 		m_velocityManager = GetGameObject()->GetComponent<VelocityManager>();
 		m_acquisitionManager = GetGameObject()->GetComponent<ItemAcquisitionManager>();
+		m_objectMover = GetGameObject()->GetComponent<Operator::ObjectMover>();
+		m_useWeapon = GetGameObject()->GetComponent<UseWeapon>();
+		m_goalAnimationController = GetGameObject()->GetComponent<GoalAnimationController>();
+		m_hidePlaceOpener = GetGameObject()->GetComponent<HidePlaceOpener>();
+	}
+
+	bool PlayerControlManager::IsUpdateCameraForward(Vec3* forward)
+	{
+		auto camera = m_forwardCamera.lock();
+
+		if (!camera)
+		{
+			return false;
+		}
+
+		auto cameraForward = camera->GetAt() - camera->GetEye();
+		cameraForward.normalize();
+
+		if (cameraForward == m_beforeCameraForward)
+		{
+			return false;
+		}
+
+		m_beforeCameraForward = cameraForward;
+
+		if (forward)
+		{
+			*forward = cameraForward;
+		}
+
+		return true;
+	}
+
+	void PlayerControlManager::ExecuteUpdateCameraForward(const Vec3& forward)
+	{
+		m_beforeCameraForward = forward;
+
+		auto objectMover = m_objectMover.lock();
+		auto useWeapon = m_useWeapon.lock();
+
+		objectMover->SetDefaultForward(forward);
+		useWeapon->SetDirection(forward);
 	}
 
 	bool PlayerControlManager::TryFindAquisitionableItem(std::shared_ptr<Item>* findItem)
@@ -55,11 +102,6 @@ namespace basecross
 		acquisitionManager->ItemAcquisition(item);
 
 		return true;
-	}
-
-	bool PlayerControlManager::TryAquisition(int itemId)
-	{
-		return TryAquisition(Item::StageFindToItemId(GetStage(), itemId));
 	}
 
 	bool PlayerControlManager::TryOpenMap()
@@ -129,5 +171,78 @@ namespace basecross
 
 		teleport->SetCameraPosition(cameraPosition);
 		teleport->StartTeleport(teleportPosition);
+	}
+
+	bool PlayerControlManager::TryUpdateAim(bool isAim)
+	{
+		auto useWeapon = m_useWeapon.lock();
+
+		if (!useWeapon)
+		{
+			return false;
+		}
+
+		auto teleport = GetGameObject()->GetComponent<Teleport>(false);
+
+		// テレポート中ならば
+		if (teleport && teleport->IsTeleporting())
+		{
+			return false;
+		}
+
+		auto goalAnimationController = m_goalAnimationController.lock();
+
+		// ゴールアニメーション中ならば
+		if (goalAnimationController && goalAnimationController->IsGoalAnimation()) {
+			return false;
+		}
+
+		// 条件に当てはまればエイム状態にする
+		if (isAim && !useWeapon->IsAim())
+		{
+			useWeapon->SetIsAim(isAim);
+			return true;
+		}
+
+		// 条件に当てはまればエイム状態を解除する
+		if (!isAim && useWeapon->IsAim())
+		{
+			useWeapon->SetIsAim(isAim);
+			return true;
+		}
+
+		return false;
+	}
+
+	void PlayerControlManager::ExecuteUpdateAim(bool isAim)
+	{
+		auto useWeapon = m_useWeapon.lock();
+
+		useWeapon->SetIsAim(isAim);
+	}
+
+	std::shared_ptr<HidePlace> PlayerControlManager::GetCanOpenHidePlace() const
+	{
+		auto hidePlaceOpener = m_hidePlaceOpener.lock();
+		return hidePlaceOpener ? hidePlaceOpener->GetCanOpenaHidePlace() : nullptr;
+	}
+
+	bool PlayerControlManager::TryAccessHidePlace(const std::shared_ptr<HidePlace>& hidePlace)
+	{
+		auto hidePlaceOpener = m_hidePlaceOpener.lock();
+
+		if (!hidePlaceOpener)
+		{
+			return false;
+		}
+
+		if (!hidePlace || hidePlace->IsOpen())
+		{
+			return false;
+		}
+
+		hidePlace->Open();
+
+		return true;
 	}
 }
