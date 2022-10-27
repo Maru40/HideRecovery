@@ -24,7 +24,9 @@ namespace basecross
 		/// <summary>
 		/// メインステージに遷移する
 		/// </summary>
-		void GoToMainStage();
+		void GoToMainStage(std::uint64_t seed);
+
+		_NODISCARD std::uint64_t CreateStageInstanceIdSeed() const;
 
 	public:
 		MatchStageTransitioner(const std::shared_ptr<GameObject>& owner);
