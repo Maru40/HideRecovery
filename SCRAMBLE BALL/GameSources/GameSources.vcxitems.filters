@@ -1171,6 +1171,18 @@
     <Filter Include="Maruyama\Enemy\Object\AIPlayerObject">
       <UniqueIdentifier>{1810d54f-9b9e-4bf5-8a6b-d2de3fa9e5f1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Itabashi\Component\PlayerControlManager">
+      <UniqueIdentifier>{042971cf-f423-42b3-a9f5-1cf3d00b3e35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Itabashi\Patch\UniqueIdCreater">
+      <UniqueIdentifier>{e4cac3a1-e222-49ab-be71-02f999a40634}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Itabashi\Online\OnlineStatus">
+      <UniqueIdentifier>{b46903dd-4397-4ad2-afb0-a9babfb0f9fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Itabashi\Online\OnlineGameItemManager">
+      <UniqueIdentifier>{db1fd80e-8b29-4fb3-88fe-66b7e838fb16}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2193,6 +2205,18 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\DebugClass\Object\ArrowObject.h">
       <Filter>Maruyama\Utility\DebugOjbect\ArrowObject</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\PlayerControlManager.h">
+      <Filter>Itabashi\Component\PlayerControlManager</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\Utility\UniqueIdCreater.h">
+      <Filter>Itabashi\Patch\UniqueIdCreater</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineStatus.h">
+      <Filter>Itabashi\Online\OnlineStatus</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineGameItemManager.h">
+      <Filter>Itabashi\Online\OnlineGameItemManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -3118,6 +3142,15 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\DebugClass\Object\ArrowObject.cpp">
       <Filter>Maruyama\Utility\DebugOjbect\ArrowObject</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\PlayerControlManager.cpp">
+      <Filter>Itabashi\Component\PlayerControlManager</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineStatus.cpp">
+      <Filter>Itabashi\Online\OnlineStatus</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineGameItemManager.cpp">
+      <Filter>Itabashi\Online\OnlineGameItemManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
