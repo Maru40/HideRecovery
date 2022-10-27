@@ -11,7 +11,10 @@
 
 #include "Maruyama/Player/Component/OwnArea.h"
 
+#include "Watanabe/Utility/Utility.h"
+
 namespace basecross {
+
 	Col4 team::GetTeamColor(team::TeamType teamType) {
 		switch (teamType)
 		{
