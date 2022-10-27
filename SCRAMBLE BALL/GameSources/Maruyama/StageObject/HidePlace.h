@@ -39,10 +39,6 @@ namespace basecross {
 
 		std::weak_ptr<HideItem> m_hideItem;
 
-		static int m_objectCount;
-
-		int m_objectId = 0;
-
 		std::weak_ptr<SoundEmitter> m_soundEmitter;
 		SoundClip m_openSoundClip;
 
@@ -77,12 +73,6 @@ namespace basecross {
 		void SetHideItem(const std::shared_ptr<HideItem>& item);
 
 		std::shared_ptr<HideItem> GetHideItem() const;
-
-		int GetObjectId() const { return m_objectId; }
-
-		static void CountReset() { m_objectCount = 1; }
-
-		static std::shared_ptr<HidePlace> GetStageHidePlace(int objectId);
 
 		void SetDrawUI(const bool isActive);
 

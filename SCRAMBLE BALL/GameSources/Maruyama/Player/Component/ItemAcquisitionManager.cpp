@@ -171,11 +171,6 @@ namespace basecross {
 		}
 	}
 
-	void ItemAcquisitionManager::ItemAcquisition(int itemId)
-	{
-		ItemAcquisition(Item::StageFindToItemId(GetStage(), itemId));
-	}
-
 	bool ItemAcquisitionManager::IsAcquisitionRange(const std::shared_ptr<Item>& item) {
 		auto toItemVec = maru::Utility::CalcuToTargetVec(GetGameObject(), item->GetGameObject());
 
@@ -216,13 +211,9 @@ namespace basecross {
 
 		auto animator = GetGameObject()->GetComponent<PlayerAnimator>(false);
 
-		if (!animator)
-		{
-			return false;
-		}
-
 		//アニメーションが置く状態ならできない
-		if (animator->IsCurretAnimationState(PlayerAnimationState::State::PutItem_Floor) || animator->IsCurretAnimationState(PlayerAnimationState::State::PutItem_HideObject))
+		if (!animator || animator->IsCurretAnimationState(PlayerAnimationState::State::PutItem_Floor) ||
+				animator->IsCurretAnimationState(PlayerAnimationState::State::PutItem_HideObject))
 		{
 			return false;
 		}
