@@ -24,10 +24,6 @@ namespace basecross
 		/// ゲームタイマー開始を伝えるオンラインイベントコード
 		/// </summary>
 		static constexpr std::uint8_t GAMETIMER_START_EVENT_CODE       = 202;
-		/// <summary>
-		/// 
-		/// </summary>
-		static constexpr std::uint8_t START_ITEM_RANDOM_EVENT_CODE     = 203;
 
 	private:
 
@@ -76,10 +72,6 @@ namespace basecross
 		/// 強制的にタイムアップにする
 		/// </summary>
 		void TimeSkipToFinish();
-
-		void StartItemRandom();
-
-		void StartItemRandomEvent(int itemId, int HidePlaceId);
 
 	public:
 		OnlineGameTimer(const std::shared_ptr<GameObject>& owner);
