@@ -319,7 +319,14 @@ namespace basecross {
 			/// <param name="view">ビューポインタ</param>
 			/// <param name="position">変換したいポジション</param>
 			/// <returns></returns>
-			Vec3 ConvertWorldToScreen(const shared_ptr<ViewBase>& view, const Vec3& position);
+			static Vec3 ConvertWorldToScreen(const shared_ptr<ViewBase>& view, const Vec3& position);
+
+			/// <summary>
+			/// 色を0.0f ～ 1.0fに変換を行う
+			/// </summary>
+			/// <param name="color">設定する色</param>
+			/// <returns></returns>
+			static Col4 ConvertColorZeroToOne(const Col4& color);
 
 			/// <summary>
 			/// 近くのオブジェクトを探す。

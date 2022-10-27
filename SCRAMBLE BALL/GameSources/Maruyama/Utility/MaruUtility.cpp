@@ -398,6 +398,10 @@ namespace basecross {
 
 			return Vec3(XMVector3TransformCoord(position, mVPS));
 		}
+
+		Col4 Utility::ConvertColorZeroToOne(const Col4& color) {
+			return color / 255.0f;
+		}
 	}
 }
 
