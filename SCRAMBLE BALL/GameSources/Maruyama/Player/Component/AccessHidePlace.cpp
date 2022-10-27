@@ -1,8 +1,8 @@
-
+ï»¿
 /*!
 @file AccessHidePlace.cpp
-@brief AccessHidePlaceƒNƒ‰ƒXÀ‘Ì
-’S“–FŠÛR—TŠì
+@brief AccessHidePlaceã‚¯ãƒ©ã‚¹å®Ÿä½“
+æ‹…å½“ï¼šä¸¸å±±è£•å–œ
 */
 
 #include "stdafx.h"
@@ -15,24 +15,28 @@
 
 namespace basecross {
 
-	AccessHidePlace::AccessHidePlace(const std::shared_ptr<GameObject>& objPtr) :
+	HidePlaceOpener::HidePlaceOpener(const std::shared_ptr<GameObject>& objPtr) :
 		Component(objPtr),
 		m_range(2.0f)
 	{}
 
-	void AccessHidePlace::OnLateStart() {
+	void HidePlaceOpener::OnLateStart() {
 		m_allHidePlaces = maru::Utility::ConvertArraySharedToWeak(maru::Utility::FindComponents<HidePlace>(GetStage()));
 	}
 
-	void AccessHidePlace::OnUpdate() {
+	void HidePlaceOpener::OnUpdate() {
 		for (auto& weakPlace : m_allHidePlaces) {
 			auto place = weakPlace.lock();
 			if (!place) {
 				continue;
 			}
 
-			if (place->IsOpen()) {
-				place->SetDrawUI(false);
+			if (place->IsOpen()) 
+			{
+				if (m_isDrawUI)
+				{
+					place->SetDrawUI(false);
+				}
 				continue;
 			}
 
@@ -43,24 +47,14 @@ namespace basecross {
 			float length = toVec.length();
 			bool isDraw = toVec.length() < GetRange();
 			
-			if (isDraw != place->IsDrawUI()) {
-				place->SetDrawUI(isDraw);
+			if (isDraw != place->IsDrawUI())
+			{
+				if (m_isDrawUI)
+				{
+					place->SetDrawUI(isDraw);
+				}
+				m_canOpenHidePlace = place;
 			}
 		}
 	}
-
-	void AccessHidePlace::Access() {
-		for (auto& weakPlace : m_allHidePlaces) {
-			auto place = weakPlace.lock();
-			if (!place) {
-				continue;
-			}
-
-			auto toVec = maru::Utility::CalcuToTargetVec(GetGameObject(), place->GetGameObject());
-			if (toVec.length() < GetRange()) {
-				place->Open();
-			}
-		}
-	}
-
 }
