@@ -20,6 +20,8 @@
 #include "Maruyama/Enemy/Behavior/BehaviorTree.h"
 #include "Maruyama/Enemy/Component/BehaviorTree/AIPlayerBehaviorTree.h"
 
+#include "Watanabe/Component/PlayerStatus.h"
+
 namespace basecross {
 	namespace Enemy {
 
@@ -30,6 +32,7 @@ namespace basecross {
 		void AIPlayerObject::OnCreate() {
 			EnemyObjectBase::OnCreate();
 
+			AddComponent<PlayerStatus>();
 			AddComponent<AIPlayerBehaviorTree>();
 		}
 
