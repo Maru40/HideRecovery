@@ -75,6 +75,9 @@ namespace basecross {
 					auto teamType = teamMember->GetTeam();
 					enemysMap[teamType].push_back(enemy);
 				}
+				else {
+					enemysMap[team::TeamType::Neutral].push_back(enemy);
+				}
 			}
 
 			return enemysMap;
