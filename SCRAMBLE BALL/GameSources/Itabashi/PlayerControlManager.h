@@ -11,6 +11,8 @@ namespace basecross
 	class GoalAnimationController;
 	class HidePlaceOpener;
 	class HidePlace;
+	class PlayerAnimator;
+	class RotationController;
 
 	namespace Operator
 	{
@@ -53,6 +55,14 @@ namespace basecross
 		/// 隠し場所に対して操作するコンポーネント
 		/// </summary>
 		std::weak_ptr<HidePlaceOpener> m_hidePlaceOpener;
+		/// <summary>
+		/// プレイヤーのアニメーション管理コンポーネント
+		/// </summary>
+		std::weak_ptr<PlayerAnimator> m_playerAnimator;
+		/// <summary>
+		/// オブジェクトの回転制御用コンポーネント
+		/// </summary>
+		std::weak_ptr<RotationController> m_rotationController;
 
 		/// <summary>
 		/// 前回のカメラ前方ベクトル
@@ -76,6 +86,21 @@ namespace basecross
 		bool IsUpdateCameraForward(Vec3* forward);
 
 		void ExecuteUpdateCameraForward(const Vec3& forward);
+
+		/// <summary>
+		/// 移動ができるかを試す
+		/// </summary>
+		/// <param name="inputVector">入力ベクトル</param>
+		/// <param name="outputMoveVector">nullptrでないなら移動量ベクトルをいれる</param>
+		/// <param name="outputForward">nullptrでないなら前方ベクトルを入れる</param>
+		/// <returns>成功したらtrue</returns>
+		bool TryMove(const Vec2& inputVector, Vec3* outputMoveVector, Vec3* outputForward);
+		/// <summary>
+		/// 誰かが移動したら呼ばれるイベント
+		/// </summary>
+		/// <param name="moveVector">移動量ベクトル</param>
+		/// <param name="forward">前方ベクトル</param>
+		void ExecuteMove(const Vec3& moveVector, const Vec3& forward);
 
 		/// <summary>
 		/// アイテムの取得を試す

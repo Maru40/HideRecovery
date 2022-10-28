@@ -184,44 +184,24 @@ namespace Online
 
 	void PlayerOnlineController::Move()
 	{
-		auto objectMover = m_objectMover.lock();
-		auto useWepon = m_useWepon.lock();
-		auto animator = GetGameObject()->GetComponent<PlayerAnimator>(false);
+		auto controlManager = m_controlManager.lock();
 
-		if (!objectMover || animator->IsCurretAnimationState(PlayerAnimationState::State::Goal1))
+		if (!controlManager)
 		{
 			return;
 		}
 
-		//特定のアニメーション中は移動を禁止する。
-		if (animator->IsCurretAnimationState(PlayerAnimationState::State::PutItem_Floor) ||
-			animator->IsCurretAnimationState(PlayerAnimationState::State::PutItem_HideObject))
+		Vec3 moveVector;
+		Vec3 forward;
+
+		if (!controlManager->TryMove(PlayerInputer::GetMoveDirection(), &moveVector, &forward))
 		{
 			return;
-		}
-
-		auto teleport = GetGameObject()->GetComponent<Teleport>(false);
-		if (teleport && teleport->IsTeleporting()) {
-			return;
-		}
-
-		auto moveVector = objectMover->Move(PlayerInputer::GetMoveDirection());
-
-		auto rotationController = m_rotationController.lock();
-
-		auto direction = rotationController->GetDirect();
-
-		if (rotationController && !useWepon->IsAim())	//ローテーションがあり、Aim状態でないなら
-		{
-			auto input = PlayerInputer::GetMoveDirection();
-			direction = maru::Utility::CalcuCameraVec(Vec3(input.x, 0, input.y), GetStage()->GetView()->GetTargetCamera(), GetGameObject());
-
-			rotationController->SetDirect(direction);
 		}
 
 		if (moveVector != m_beforeMoveVector)
 		{
-			OnlineManager::RaiseEvent(false, (std::uint8_t*)&OnlineMoveData(moveVector, direction), sizeof(OnlineMoveData), EXECUTE_MOVE_EVENT_CODE);
+			OnlineManager::RaiseEvent(false, (std::uint8_t*)&OnlineMoveData(moveVector, forward), sizeof(OnlineMoveData), EXECUTE_MOVE_EVENT_CODE);
 		}
 
 		m_beforeMoveVector = moveVector;
@@ -234,11 +214,8 @@ namespace Online
 			return;
 		}
 
-		auto velocityManager = m_velocityManager.lock();
-		auto rotationController = m_rotationController.lock();
-
-		velocityManager->SetVelocity(moveVector / App::GetApp()->GetElapsedTime());
-		rotationController->SetDirect(forward);
+		auto controlManager = m_controlManager.lock();
+		controlManager->ExecuteMove(moveVector, forward);
 	}
 
 	void PlayerOnlineController::Shot()

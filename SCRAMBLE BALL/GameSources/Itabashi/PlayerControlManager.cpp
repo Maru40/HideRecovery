@@ -13,6 +13,8 @@
 #include "Maruyama/Player/Component/GoalAnimationController.h"
 #include "Maruyama/Player/Component/AccessHidePlace.h"
 #include "Maruyama/StageObject/HidePlace.h"
+#include "Watanabe/Component/PlayerAnimator.h"
+#include "Maruyama/Utility/Component/RotationController.h"
 
 namespace basecross
 {
@@ -63,6 +65,66 @@ namespace basecross
 
 		objectMover->SetDefaultForward(forward);
 		useWeapon->SetDirection(forward);
+	}
+
+	bool PlayerControlManager::TryMove(const Vec2& inputVector, Vec3* outputMoveVector, Vec3* outputForward)
+	{
+		auto objectMover = m_objectMover.lock();
+
+		if (!objectMover)
+		{
+			return false;
+		}
+
+		auto animator = GetGameObject()->GetComponent<PlayerAnimator>(false);
+
+		//特定のアニメーション中は移動を禁止する。
+		if (animator->IsCurretAnimationState(PlayerAnimationState::State::Goal1) ||
+			animator->IsCurretAnimationState(PlayerAnimationState::State::PutItem_Floor) ||
+			animator->IsCurretAnimationState(PlayerAnimationState::State::PutItem_HideObject))
+		{
+			return false;
+		}
+
+		auto teleport = GetGameObject()->GetComponent<Teleport>(false);
+		if (teleport && teleport->IsTeleporting()) {
+			return false;
+		}
+		auto useWeapon = m_useWeapon.lock();
+
+		Vec3 moveVector = objectMover->Move(inputVector);
+
+		auto rotationController = m_rotationController.lock();
+
+		auto direction = rotationController->GetDirect();
+
+		if (rotationController && !useWeapon->IsAim())	//ローテーションがあり、Aim状態でないなら
+		{
+			direction = maru::Utility::CalcuCameraVec(Vec3(inputVector.x, 0, inputVector.y), GetStage()->GetView()->GetTargetCamera(), GetGameObject());
+
+			rotationController->SetDirect(direction);
+		}
+
+		if (outputMoveVector)
+		{
+			*outputMoveVector = moveVector;
+		}
+
+		if (outputForward)
+		{
+			*outputForward = direction;
+		}
+
+		return true;
+	}
+
+	void PlayerControlManager::ExecuteMove(const Vec3& moveVector, const Vec3& forward)
+	{
+		auto velocityManager = m_velocityManager.lock();
+		auto rotationController = m_rotationController.lock();
+
+		velocityManager->SetVelocity(moveVector / App::GetApp()->GetElapsedTime());
+		rotationController->SetDirect(forward);
 	}
 
 	bool PlayerControlManager::TryAquisition(const std::shared_ptr<Item>& item)
