@@ -123,10 +123,6 @@ namespace basecross {
 					case SelectType::Random:
 						//åªç›ÇÕâΩÇ‡ÇµÇ»Ç¢
 						break;
-
-					case SelectType::Sequence:
-						SelectSequenceEvent(selecter);
-						break;
 					}
 				}
 
