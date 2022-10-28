@@ -65,25 +65,6 @@ namespace basecross
 		useWeapon->SetDirection(forward);
 	}
 
-	bool PlayerControlManager::TryFindAquisitionableItem(std::shared_ptr<Item>* findItem)
-	{
-		auto acquisitionManager = m_acquisitionManager.lock();
-
-		std::shared_ptr<Item> item;
-
-		if (!acquisitionManager || !acquisitionManager->IsAcquisition(item))
-		{
-			return false;
-		}
-
-		if (findItem)
-		{
-			*findItem = item;
-		}
-
-		return true;
-	}
-
 	bool PlayerControlManager::TryAquisition(const std::shared_ptr<Item>& item)
 	{
 		if (!item || item->GetItemOwner())

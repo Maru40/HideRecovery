@@ -241,81 +241,6 @@ namespace Online
 		rotationController->SetDirect(forward);
 	}
 
-	void PlayerOnlineController::TryAquisition()
-	{
-		auto controlManager = m_controlManager.lock();
-
-		if (!controlManager)
-		{
-			return;
-		}
-
-		std::shared_ptr<Item> item;
-		
-		// 取得入力がないか、近くに取得できるアイテムがなかったら
-		if (!PlayerInputer::IsItemAcquisition() || !controlManager->TryFindAquisitionableItem(&item))
-		{
-			return;
-		}
-
-		std::uint32_t itemId = item->GetGameObject()->GetComponent<OnlineStatus>()->GetInstanceId();
-
-
-		// ホストではないのなら
-		if (!OnlineManager::GetLocalPlayer().getIsMasterClient())
-		{
-			OnlineManager::RaiseEvent(false, (std::uint8_t*)&itemId, sizeof(std::uint32_t), TRY_ACQUISITION_EVENT_CODE);
-			return;
-		}
-
-		if (!controlManager->TryAquisition(item))
-		{
-			return;
-		}
-
-		OnlineManager::RaiseEvent(false, (std::uint8_t*)&OnlineFindOjbectData(itemId, m_onlinePlayerNumber), sizeof(OnlineFindOjbectData), EXECUTE_ACQUISITION_EVENT_CODE);
-	}
-
-	void PlayerOnlineController::TryAcquisitionEvent(std::uint32_t itemId, int playerNumber)
-	{
-		auto& localPlayer = OnlineManager::GetLocalPlayer();
-
-		// 自分がマスターで無いか、対応したプレイヤーではないなら
-		if (!localPlayer.getIsMasterClient() || m_onlinePlayerNumber != playerNumber)
-		{
-			return;
-		}
-
-		auto controlManager = m_controlManager.lock();
-		auto item = OnlineStatus::FindOnlineGameObject(itemId)->GetComponent<Item>();
-
-		if (!controlManager->TryAquisition(item))
-		{
-			return;
-		}
-
-		OnlineManager::RaiseEvent(false, (std::uint8_t*)&OnlineFindOjbectData(itemId, playerNumber), sizeof(OnlineFindOjbectData), EXECUTE_ACQUISITION_EVENT_CODE);
-	}
-
-	void PlayerOnlineController::ExecuteAcquisitionEvent(std::uint32_t itemId, int playerNumber)
-	{
-		// 取得したのが自分ではないのなら
-		if (m_onlinePlayerNumber != playerNumber)
-		{
-			return;
-		}
-
-		auto controlManager = m_controlManager.lock();
-
-		if (!controlManager)
-		{
-			return;
-		}
-
-		auto item = OnlineStatus::FindOnlineGameObject(itemId)->GetComponent<Item>();
-		controlManager->TryAquisition(item);
-	}
-
 	void PlayerOnlineController::Shot()
 	{
 		if (!PlayerInputer::IsShot())
@@ -565,6 +490,15 @@ namespace Online
 		}
 
 		OnlineManager::RaiseEvent(false, (std::uint8_t*)&OnlineFindOjbectData(instanceId, m_onlinePlayerNumber), sizeof(OnlineFindOjbectData), EXECUTE_OPEN_HIDEPLACE_EVENT_CODE);
+
+		auto hideItem = hidePlace->TakeOutHideItem();
+
+		if (!hideItem)
+		{
+			return;
+		}
+
+		controlManager->TryAquisition(hideItem->GetItem());
 	}
 
 	void PlayerOnlineController::TryOpenHidePlaceEvent(int playerNumber, std::uint32_t instanceId)
@@ -586,6 +520,15 @@ namespace Online
 		}
 
 		OnlineManager::RaiseEvent(false, (std::uint8_t*)&OnlineFindOjbectData(instanceId, playerNumber), sizeof(OnlineFindOjbectData), EXECUTE_OPEN_HIDEPLACE_EVENT_CODE);
+
+		auto hideItem = hidePlace->TakeOutHideItem();
+
+		if (!hideItem)
+		{
+			return;
+		}
+
+		controlManager->TryAquisition(hideItem->GetItem());
 	}
 
 	void PlayerOnlineController::ExecuteOpenHidePlace(int playerNumber, std::uint32_t instanceId)
@@ -598,7 +541,17 @@ namespace Online
 		auto controlManager = m_controlManager.lock();
 
 		auto onlineGameObject = OnlineStatus::FindOnlineGameObject(instanceId);
-		controlManager->TryAccessHidePlace(onlineGameObject->GetComponent<HidePlace>());
+		auto hidePlace = onlineGameObject->GetComponent<HidePlace>();
+		controlManager->TryAccessHidePlace(hidePlace);
+
+		auto hideItem = hidePlace->TakeOutHideItem();
+
+		if (!hideItem)
+		{
+			return;
+		}
+
+		controlManager->TryAquisition(hideItem->GetItem());
 	}
 
 	void PlayerOnlineController::OnLateStart()
@@ -640,13 +593,12 @@ namespace Online
 
 		Move();
 
-		TryAquisition();
+		OpenHidePlaceInputer();
 
 		Shot();
 
 		TryAim();
 
-		OpenHidePlaceInputer();
 	}
 
 	void PlayerOnlineController::OnCustomEventAction(int playerNumber, std::uint8_t eventCode, const std::uint8_t* bytes)
@@ -661,20 +613,6 @@ namespace Online
 		{
 			auto cameraForward = ConvertByteData<Vec3>(bytes);
 			ExecuteCameraForward(playerNumber, cameraForward);
-			return;
-		}
-
-		if (eventCode == TRY_ACQUISITION_EVENT_CODE)
-		{
-			int itemId = ConvertByteData<int>(bytes);
-			TryAcquisitionEvent(itemId, playerNumber);
-			return;
-		}
-
-		if (eventCode == EXECUTE_ACQUISITION_EVENT_CODE)
-		{
-			auto data = ConvertByteData<OnlineFindOjbectData>(bytes);
-			ExecuteAcquisitionEvent(data.objectId, data.playerNumber);
 			return;
 		}
 

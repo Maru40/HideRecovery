@@ -29,14 +29,6 @@ namespace Online
 	{
 	public:
 
-		/// <summary>
-		/// アイテムが取得できるかを問うオンラインイベントコード
-		/// </summary>
-		static constexpr std::uint8_t TRY_ACQUISITION_EVENT_CODE = 2;
-		/// <summary>
-		/// アイテムの取得を実行するオンラインイベントコード
-		/// </summary>
-		static constexpr std::uint8_t EXECUTE_ACQUISITION_EVENT_CODE = 3;
 		static constexpr std::uint8_t EXECUTE_MOVE_EVENT_CODE = 6;
 		static constexpr std::uint8_t EXECUTE_SHOT_EVENT_CODE = 7;
 		static constexpr std::uint8_t EXECUTE_DAMAGE_EVENT_CODE = 8;
@@ -89,22 +81,6 @@ namespace Online
 
 		void ExecuteMove(int playerNumber, const Vec3& moveVector, const Vec3& forward);
 
-		/// <summary>
-		/// アイテムの取得を試みる
-		/// </summary>
-		void TryAquisition();
-		/// <summary>
-		/// アイテムの取得の問い合わせの時に呼ばれるイベント
-		/// </summary>
-		/// <param name="itemId">取得できるか問い合わせるアイテムID</param>
-		/// <param name="playerNumber">取得したいプレイヤー番号</param>
-		void TryAcquisitionEvent(std::uint32_t itemId, int playerNumber);
-		/// <summary>
-		/// 誰かがアイテムを取得した際に呼ばれるイベント
-		/// </summary>
-		/// <param name="itemId">取得するアイテムID</param>
-		/// <param name="playerNumber">取得するプレイヤー番号</param>
-		void ExecuteAcquisitionEvent(std::uint32_t itemId, int playerNumber);
 
 		/// <summary>
 		/// 弾を撃つ

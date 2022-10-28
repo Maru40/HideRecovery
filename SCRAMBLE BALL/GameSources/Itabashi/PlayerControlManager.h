@@ -78,13 +78,6 @@ namespace basecross
 		void ExecuteUpdateCameraForward(const Vec3& forward);
 
 		/// <summary>
-		/// 取得できるアイテムがあるか試す
-		/// </summary>
-		/// <param name="findItem">取得できるならそのアイテムが入る</param>
-		/// <returns>取得できるならtrue</returns>
-		bool TryFindAquisitionableItem(std::shared_ptr<Item>* findItem);
-
-		/// <summary>
 		/// アイテムの取得を試す
 		/// </summary>
 		/// <param name="item">取得するアイテム</param>
