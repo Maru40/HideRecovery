@@ -44,12 +44,23 @@ namespace basecross {
 			class I_SelecterBase;
 
 			//--------------------------------------------------------------------------------------
+			/// ビヘイビアのインターフェース
+			//--------------------------------------------------------------------------------------
+			class I_Behavior {
+
+			};
+
+			//--------------------------------------------------------------------------------------
 			/// ビヘイビア
 			//--------------------------------------------------------------------------------------
 			template<class EnumType>
-			class BehaviorTree
+			class BehaviorTree : public I_Behavior
 			{
 			public:
+				using NodeMap = std::unordered_map<EnumType, std::shared_ptr<I_Node>>;
+				using SelecterMap = std::unordered_map<EnumType, std::shared_ptr<I_Selecter>>;
+				using TaskMap = std::unordered_map<EnumType, std::shared_ptr<I_Task>>;
+
 				using EdgesMap = std::unordered_map<EnumType, std::vector<std::shared_ptr<I_Edge>>>;
 
 			private:
@@ -180,7 +191,6 @@ namespace basecross {
 					}
 
 					return nullptr;	//どこにも遷移できないならnullptrを返す。(将来的にはこのノード先の優先度を下げて、もう一度検索させるといいかも。)
-					//return edges[0]->GetToNode();	//優先順位の高いノードを取得
 				}
 
 				/// <summary>
