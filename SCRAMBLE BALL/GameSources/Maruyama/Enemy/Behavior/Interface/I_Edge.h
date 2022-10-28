@@ -63,9 +63,17 @@ namespace basecross {
 				/// <returns>優先度</returns>
 				virtual float GetPriority() const = 0;
 
+				/// <summary>
+				/// 優先順位コントローラーの設定
+				/// </summary>
+				/// <param name="priorityController">優先順位コントローラー</param>
 				virtual void SetPriorityController(const std::shared_ptr<I_PriorityController>& priorityController) = 0;
 
-				virtual std::shared_ptr<I_PriorityController> GetPriorityContorller() = 0;
+				/// <summary>
+				/// 優先順位コントローラーの取得
+				/// </summary>
+				/// <returns>優先順位コントローラー</returns>
+				virtual std::shared_ptr<I_PriorityController> GetPriorityContorller() const = 0;
 			};
 
 			//--------------------------------------------------------------------------------------
@@ -105,7 +113,7 @@ namespace basecross {
 
 				virtual void SetPriorityController(const std::shared_ptr<I_PriorityController>& priorityController) override;
 
-				virtual std::shared_ptr<I_PriorityController> GetPriorityContorller() override;
+				virtual std::shared_ptr<I_PriorityController> GetPriorityContorller() const override;
 			};
 
 		}
