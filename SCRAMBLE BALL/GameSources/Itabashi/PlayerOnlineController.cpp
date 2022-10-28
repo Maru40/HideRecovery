@@ -462,7 +462,7 @@ namespace Online
 	{
 		auto controlManager = m_controlManager.lock();
 
-		if (!PlayerInputer::GetInstance()->IsDecision() || !controlManager)
+		if (!PlayerInputer::GetInstance()->IsDesitionDown() || !controlManager)
 		{
 			return;
 		}
