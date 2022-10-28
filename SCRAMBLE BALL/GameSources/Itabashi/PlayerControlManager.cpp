@@ -15,18 +15,25 @@
 #include "Maruyama/StageObject/HidePlace.h"
 #include "Watanabe/Component/PlayerAnimator.h"
 #include "Maruyama/Utility/Component/RotationController.h"
+#include "Maruyama/Player/Component/WeponBase.h"
+#include "Maruyama/Bullet/Object/BulletObjectBase.h"
 
 namespace basecross
 {
 	void PlayerControlManager::OnLateStart()
 	{
-		m_teleport = GetGameObject()->GetComponent<Teleport>();
-		m_velocityManager = GetGameObject()->GetComponent<VelocityManager>();
-		m_acquisitionManager = GetGameObject()->GetComponent<ItemAcquisitionManager>();
-		m_objectMover = GetGameObject()->GetComponent<Operator::ObjectMover>();
-		m_useWeapon = GetGameObject()->GetComponent<UseWeapon>();
-		m_goalAnimationController = GetGameObject()->GetComponent<GoalAnimationController>();
-		m_hidePlaceOpener = GetGameObject()->GetComponent<HidePlaceOpener>();
+		auto ownerObject = GetGameObject();
+
+		m_transform = ownerObject->GetComponent<Transform>();
+		m_teleport = ownerObject->GetComponent<Teleport>();
+		m_velocityManager = ownerObject->GetComponent<VelocityManager>();
+		m_acquisitionManager = ownerObject->GetComponent<ItemAcquisitionManager>();
+		m_objectMover = ownerObject->GetComponent<Operator::ObjectMover>();
+		m_useWeapon = ownerObject->GetComponent<UseWeapon>();
+		m_goalAnimationController = ownerObject->GetComponent<GoalAnimationController>();
+		m_hidePlaceOpener = ownerObject->GetComponent<HidePlaceOpener>();
+		m_playerAnimator = ownerObject->GetComponent<PlayerAnimator>();
+		m_rotationController = ownerObject->GetComponent<RotationController>();
 	}
 
 	bool PlayerControlManager::IsUpdateCameraForward(Vec3* forward)
@@ -145,6 +152,57 @@ namespace basecross
 		acquisitionManager->ItemAcquisition(item);
 
 		return true;
+	}
+
+	bool PlayerControlManager::TryShot(std::shared_ptr<BulletObjectBase>* outputBulletObject)
+	{
+		auto transform = m_transform.lock();
+		auto useWeapon = m_useWeapon.lock();
+
+		if (!useWeapon)
+		{
+			return false;
+		}
+
+		auto weapon = useWeapon->GetWepon();
+
+		if (!weapon)
+		{
+			return false;
+		}
+
+		auto bulletObject = weapon->Shot(transform->GetForward());
+
+		if (!bulletObject)
+		{
+			return false;
+		}
+
+		if (outputBulletObject)
+		{
+			*outputBulletObject = bulletObject;
+		}
+
+		return true;
+	}
+
+	std::shared_ptr<BulletObjectBase> PlayerControlManager::ExecuteShot(const Vec3& direction)
+	{
+		auto useWeapon = m_useWeapon.lock();
+
+		if (!useWeapon)
+		{
+			return nullptr;
+		}
+
+		auto weapon = useWeapon->GetWepon();
+
+		if (!weapon)
+		{
+			return nullptr;
+		}
+
+		return weapon->Shot(direction);
 	}
 
 	bool PlayerControlManager::TryOpenMap()

@@ -13,6 +13,7 @@ namespace basecross
 	class HidePlace;
 	class PlayerAnimator;
 	class RotationController;
+	class BulletObjectBase;
 
 	namespace Operator
 	{
@@ -24,6 +25,11 @@ namespace basecross
 	/// </summary>
 	class PlayerControlManager : public Component
 	{
+		/// <summary>
+		/// Transformコンポーネント
+		/// </summary>
+		std::weak_ptr<Transform> m_transform;
+
 		/// <summary>
 		/// 前の基準にするカメラ
 		/// </summary>
@@ -108,6 +114,10 @@ namespace basecross
 		/// <param name="item">取得するアイテム</param>
 		/// <returns>成功したらtrue</returns>
 		bool TryAquisition(const std::shared_ptr<Item>& item);
+
+		bool TryShot(std::shared_ptr<BulletObjectBase>* outputBulletObject);
+
+		std::shared_ptr<BulletObjectBase> ExecuteShot(const Vec3& direction);
 
 		/// <summary>
 		/// マップの開閉を試す

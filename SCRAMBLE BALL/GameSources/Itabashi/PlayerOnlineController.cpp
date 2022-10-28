@@ -1,37 +1,17 @@
 ﻿#include "stdafx.h"
 #include "PlayerOnlineController.h"
-#include "ObjectMover.h"
-#include "Maruyama/Utility/Component/RotationController.h"
 #include "Patch/PlayerInputer.h"
-#include "Maruyama/Utility/Utility.h"
-#include "Maruyama/Player/Component/ItemAcquisitionManager.h"
-#include "Maruyama/Player/Component/OwnHideItemManager.h"
 #include "Maruyama/Item/HideItem.h"
 #include "Item.h"
-#include "VelocityManager.h"
-#include "Maruyama/Player/Component/ChargeGun.h"
-#include "Maruyama/Bullet/Object/ChargeBulletObject.h"
+#include "Maruyama/Bullet/Object/BulletObjectBase.h"
 #include "Watanabe/Component/PlayerStatus.h"
-#include "Maruyama/Player/Component/TackleAttack.h"
+#include "Maruyama/Player/Component/WeponBase.h"
 #include "Maruyama/Bullet/Component/ChargeBullet.h"
-#include <random>
-
-#include "Maruyama/Player/Component/UseWeapon.h"
-#include "Maruyama/Player/Component/Teleport.h"
-#include "Maruyama/Player/Component/AccessHidePlace.h"
-#include "Maruyama/Player/Component/Teleport.h"
-#include "Maruyama/Player/Component/GoalAnimationController.h"
-
-#include "Watanabe/Component/PlayerAnimator.h"
-#include "Patch/SpringArmComponent.h"
-#include "Maruyama/Camera/Component/LookAtCameraManager.h"
-#include "Maruyama/UI/2D/Component/FieldMap.h"
-#include "Maruyama/UI/2D/Component/MapCursor.h"
-
 #include "PlayerControlManager.h"
 #include "Maruyama/StageObject/HidePlace.h"
 
 #include "OnlineStatus.h"
+#include "Maruyama/Utility/Component/RangeDestroyManager.h"
 
 template<class T>
 T ConvertByteData(const std::uint8_t* bytes)
@@ -56,29 +36,29 @@ namespace Online
 		}
 	};
 
-	struct HideItemOnlineData
+	struct ShotOnlineData
 	{
-		int playerNumber;
 		Vec3 position;
+		Vec3 direction;
+		std::uint32_t instanceId;
 
-		HideItemOnlineData(int playerNumber, const Vec3& position) :
-			playerNumber(playerNumber),
-			position(position)
+		ShotOnlineData(const Vec3& position, const Vec3& direction, const std::uint32_t instanceId) :
+			position(position),
+			direction(direction),
+			instanceId(instanceId)
 		{
 
 		}
 	};
 
-	struct ShotOnlineData
+	struct BulletDestroyData
 	{
+		std::uint32_t instanceId;
 		Vec3 position;
-		Vec3 direction;
-		int instanceId;
 
-		ShotOnlineData(const Vec3& position, const Vec3& direction, const int instanceId) :
-			position(position),
-			direction(direction),
-			instanceId(instanceId)
+		BulletDestroyData(std::uint32_t instanceId, const Vec3& position) :
+			instanceId(instanceId),
+			position(position)
 		{
 
 		}
@@ -225,96 +205,114 @@ namespace Online
 			return;
 		}
 
-		auto transform = m_transform.lock();
-		auto chargeGun = m_chargeGun.lock();
+		auto controlManager = m_controlManager.lock();
 
-		if (!chargeGun)
+		if (!controlManager)
 		{
 			return;
 		}
 
-		auto bulletObject = chargeGun->Shot(transform->GetForward());
-		if (!bulletObject) {
+		std::shared_ptr<BulletObjectBase> bulletObject;
+
+		if (!controlManager->TryShot(&bulletObject))
+		{
 			return;
 		}
-
-		auto bulletTransform = bulletObject->GetComponent<Transform>();
 		
-		auto chargeBullet = bulletObject->GetComponent<ChargeBullet>();
+		auto bulletOnlineStatus = bulletObject->GetComponent<Online::OnlineStatus>();
 
 		// ホストが弾の削除の管理を行う
 		if (OnlineManager::GetLocalPlayer().getIsMasterClient())
 		{
+			auto chargeBullet = bulletObject->GetComponent<ChargeBullet>();
 			chargeBullet->AddDestroyEventFunc([&](const std::shared_ptr<GameObject>& gameObject) { BulletDestroyed(gameObject); });
 		}
+		else
+		{
+			auto collision = bulletObject->GetComponent<Collision>();
+			collision->SetUpdateActive(false);
+		}
 
-		int instanceId = CreateInstanceId();
+		auto bulletTransform = bulletObject->GetComponent<Transform>();
 
-		m_chargeBulletMap.insert(std::make_pair(instanceId, chargeBullet));
-		chargeBullet->SetInstanceId(instanceId);
+		bulletOnlineStatus->SetCreateInstanceId();
 
-		auto shotData = ShotOnlineData(bulletTransform->GetWorldPosition(), transform->GetForward(), instanceId);
+		m_bulletObjectMap.insert(std::make_pair(bulletOnlineStatus->GetInstanceId(), bulletObject));
+
+		auto shotData = ShotOnlineData(bulletTransform->GetWorldPosition(), transform->GetForward(), bulletOnlineStatus->GetInstanceId());
 
 		OnlineManager::RaiseEvent(false, (std::uint8_t*)&shotData, sizeof(ShotOnlineData), EXECUTE_SHOT_EVENT_CODE);
 	}
 
-	void PlayerOnlineController::ExecuteShot(int playerNumber, const Vec3& bulletPosition, const Vec3& bulletDirection, int instanceId)
+	void PlayerOnlineController::ExecuteShot(int playerNumber, const Vec3& bulletPosition, const Vec3& bulletDirection, std::uint32_t instanceId)
 	{
 		if (playerNumber != m_onlinePlayerNumber)
 		{
 			return;
 		}
 
-		auto chargeGun = m_chargeGun.lock();
+		auto controlManager = m_controlManager.lock();
 
-		if (!chargeGun)
-		{
-			return;
-		}
+		auto bulletObject = controlManager->ExecuteShot(bulletDirection);
 
-		auto bulletObject = chargeGun->Shot(bulletDirection);
 		if (!bulletObject) {
 			return;
 		}
 
 		auto bulletTransform = bulletObject->GetComponent<Transform>();
+		auto bulletOnlineStatus = bulletObject->GetComponent<Online::OnlineStatus>();
 
 		bulletTransform->SetWorldPosition(bulletPosition);
-
-		auto chargeBullet = bulletObject->GetComponent<ChargeBullet>();
 
 		// ホストが弾の削除の管理を行う
 		if (OnlineManager::GetLocalPlayer().getIsMasterClient())
 		{
-			chargeBullet->AddDestroyEventFunc([&](const std::shared_ptr<GameObject>& gameObject) {BulletDestroyed(gameObject); });
+			auto chargeBullet = bulletObject->GetComponent<ChargeBullet>();
+			chargeBullet->AddDestroyEventFunc([&](const std::shared_ptr<GameObject>& gameObject) { BulletDestroyed(gameObject); });
+		}
+		else
+		{
+			auto collision = bulletObject->GetComponent<Collision>();
+			collision->SetUpdateActive(false);
 		}
 
-		m_chargeBulletMap.insert(std::make_pair(instanceId, chargeBullet));
-		chargeBullet->SetInstanceId(instanceId);
+		bulletOnlineStatus->ChangeInstanceId(instanceId);
+
+		m_bulletObjectMap.insert(std::make_pair(bulletOnlineStatus->GetInstanceId(), bulletObject));
 	}
 
 	void PlayerOnlineController::BulletDestroyed(const std::shared_ptr<GameObject>& gameObject)
 	{
-		auto chargeBullet = gameObject->GetComponent<ChargeBullet>();
+		auto onlineStatus = gameObject->GetComponent<OnlineStatus>();
 
-		int instanceId = chargeBullet->GetInstanceId();
+		auto destroyData = BulletDestroyData(onlineStatus->GetInstanceId(), gameObject->GetComponent<Transform>()->GetPosition());
 
-		OnlineManager::RaiseEvent(false, (std::uint8_t*)&instanceId, sizeof(int), EXECUTE_BULLET_DESTROY_EVENT_CODE);
+		OnlineManager::RaiseEvent(false, (std::uint8_t*)&destroyData, sizeof(BulletDestroyData), EXECUTE_BULLET_DESTROY_EVENT_CODE);
 	}
 
-	void PlayerOnlineController::ExecuteBulletDestroyEvent(int bulletInstanceId)
+	void PlayerOnlineController::ExecuteBulletDestroyEvent(std::uint32_t bulletInstanceId, const Vec3& position)
 	{
-		auto find = m_chargeBulletMap.find(bulletInstanceId);
+		auto find = m_bulletObjectMap.find(bulletInstanceId);
 
-		if (find == m_chargeBulletMap.end())
+		if (find == m_bulletObjectMap.end())
 		{
 			return;
 		}
 
-		GetStage()->RemoveGameObject<GameObject>(find->second->GetGameObject());
-		find->second->GetGameObject();
-		m_chargeBulletMap.erase(find);
+		auto bulletObject = find->second.lock();
+		m_bulletObjectMap.erase(bulletInstanceId);
+
+		if (!bulletObject)
+		{
+			return;
+		}
+
+		auto transform = bulletObject->GetComponent<Transform>();
+		transform->SetWorldPosition(position);
+
+		bulletObject->Destroy();
 	}
+
 
 	void PlayerOnlineController::Damaged(const std::shared_ptr<PlayerStatus>& playerStatus, const DamageData& damageData)
 	{
@@ -385,15 +383,6 @@ namespace Online
 
 		auto controlManager = m_controlManager.lock();
 		controlManager->ExecuteUpdateAim(isAim);
-	}
-
-	int PlayerOnlineController::CreateInstanceId() const
-	{
-		std::random_device rd;
-		std::default_random_engine eng(rd());
-		std::uniform_int_distribution<int> distr(0, INT32_MAX);
-
-		return distr(eng);
 	}
 
 	void PlayerOnlineController::TeleportInputer() {
@@ -534,18 +523,11 @@ namespace Online
 	void PlayerOnlineController::OnLateStart()
 	{
 		auto& owner = GetGameObject();
-		m_transform = owner->GetComponent<Transform>();
-		m_objectMover = owner->GetComponent<Operator::ObjectMover>();
-		m_rotationController = owner->GetComponent<RotationController>();
-		m_velocityManager = owner->GetComponent<VelocityManager>();
-		m_chargeGun = owner->GetComponent<ChargeGun>();
 
 		auto playerStatus = owner->GetComponent<PlayerStatus>();
 		auto damageFunc = [&](const std::shared_ptr<PlayerStatus>& playerStatus, const DamageData& damageData) {Damaged(playerStatus, damageData); };
 		playerStatus->AddFuncAddDamage(damageFunc);
 		m_playerStatus = owner->GetComponent<PlayerStatus>();
-
-		m_useWepon = owner->GetComponent<UseWeapon>();
 
 		m_controlManager = owner->GetComponent<PlayerControlManager>();
 	}
@@ -607,6 +589,12 @@ namespace Online
 			return;
 		}
 
+		if (eventCode == EXECUTE_BULLET_DESTROY_EVENT_CODE)
+		{
+			auto data = ConvertByteData<BulletDestroyData>(bytes);
+			ExecuteBulletDestroyEvent(data.instanceId, data.position);
+		}
+
 		if (eventCode == EXECUTE_DAMAGE_EVENT_CODE)
 		{
 			auto data = ConvertByteData<OnlineDamageData>(bytes);
@@ -618,13 +606,6 @@ namespace Online
 		{
 			auto data = ConvertByteData<OnlineTeleportData>(bytes);
 			ExecuteTeleportEvent(playerNumber, data.teleportPosition, data.cameraPosition);
-			return;
-		}
-
-		if (eventCode == EXECUTE_BULLET_DESTROY_EVENT_CODE)
-		{
-			int instanceId = ConvertByteData<int>(bytes);
-			ExecuteBulletDestroyEvent(instanceId);
 			return;
 		}
 

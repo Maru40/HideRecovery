@@ -4,21 +4,11 @@
 
 namespace basecross
 {
-	class RotationController;
-	class VelocityManager;
-	class ChargeGun;
 	class PlayerStatus;
-	class ChargeBullet;
-	class UseWeapon;
 
 	class PlayerControlManager;
 
 	struct DamageData;
-
-namespace Operator
-{
-	class ObjectMover;
-}
 
 namespace Online
 {
@@ -32,7 +22,7 @@ namespace Online
 		static constexpr std::uint8_t EXECUTE_MOVE_EVENT_CODE = 6;
 		static constexpr std::uint8_t EXECUTE_SHOT_EVENT_CODE = 7;
 		static constexpr std::uint8_t EXECUTE_DAMAGE_EVENT_CODE = 8;
-		static constexpr std::uint8_t EXECUTE_BULLET_DESTROY_EVENT_CODE = 11;
+		static constexpr std::uint8_t EXECUTE_BULLET_DESTROY_EVENT_CODE = 9;
 		static constexpr std::uint8_t EXECUTE_AIM_STATE_CHANGE_EVENT_CODE = 12;
 		static constexpr std::uint8_t EXECUTE_CAMERA_FORWARD_EVENT_CODE = 13;
 		static constexpr std::uint8_t EXECUTE_TELEPORT_EVENT_CODE = 14;
@@ -42,23 +32,7 @@ namespace Online
 
 	private:
 
-		std::weak_ptr<Transform> m_transform;
-		/// <summary>
-		/// オブジェクトを動かす用のコンポーネント
-		/// </summary>
-		std::weak_ptr<Operator::ObjectMover> m_objectMover;
-		/// <summary>
-		/// オブジェクトの回転制御用コンポーネント
-		/// </summary>
-		std::weak_ptr<RotationController> m_rotationController;
-
-		std::weak_ptr<VelocityManager> m_velocityManager;
-
-		std::weak_ptr<ChargeGun> m_chargeGun;
-
 		std::weak_ptr<PlayerStatus> m_playerStatus;
-
-		std::weak_ptr<UseWeapon> m_useWepon;
 
 		std::weak_ptr<PlayerControlManager> m_controlManager;
 
@@ -69,16 +43,23 @@ namespace Online
 
 		int m_gamePlayerNumber = 0;
 
-		std::unordered_map<int, std::shared_ptr<ChargeBullet>> m_chargeBulletMap;
+		std::unordered_map<std::uint32_t, std::weak_ptr<GameObject>> m_bulletObjectMap;
 
 		Vec3 m_beforeMoveVector = Vec3();
 
 		void UpdateCameraForward();
 
 		void ExecuteCameraForward(int playerNumber, const Vec3& cameraForward);
-
+		/// <summary>
+		/// 移動処理
+		/// </summary>
 		void Move();
-
+		/// <summary>
+		/// 誰かが移動したら呼ばれるイベント
+		/// </summary>
+		/// <param name="playerNumber">移動したプレイヤー番号</param>
+		/// <param name="moveVector">移動量ベクトル</param>
+		/// <param name="forward">前方ベクトル</param>
 		void ExecuteMove(int playerNumber, const Vec3& moveVector, const Vec3& forward);
 
 
@@ -93,17 +74,16 @@ namespace Online
 		/// <param name="bulletPosition">発射位置</param>
 		/// <param name="bulletDirection">発射方向</param>
 		/// <param name="instanceId">弾のID</param>
-		void ExecuteShot(int playerNumber, const Vec3& bulletPosition, const Vec3& bulletDirection, int instanceId);
-		/// <summary>
-		/// 弾の削除を行う
-		/// </summary>
 		/// <param name="destroyedGameObject">削除する弾のオブジェクト</param>
+		void ExecuteShot(int playerNumber, const Vec3& bulletPosition, const Vec3& bulletDirection, std::uint32_t instanceId);
+
 		void BulletDestroyed(const std::shared_ptr<GameObject>& destroyedGameObject);
 		/// <summary>
 		/// 弾が削除されたときに呼ばれるイベント
 		/// </summary>
 		/// <param name="bulletInstanceId">削除する弾のID</param>
-		void ExecuteBulletDestroyEvent(int bulletInstanceId);
+		void ExecuteBulletDestroyEvent(std::uint32_t bulletInstanceId, const Vec3& position);
+
 		/// <summary>
 		/// ダメージを受けた
 		/// </summary>
@@ -128,11 +108,7 @@ namespace Online
 		/// <param name="playerNumber">エイムを変更したプレイヤー番号</param>
 		/// <param name="isAim">エイム中か</param>
 		void ExecuteAimEvent(int playerNumber, bool isAim);
-		/// <summary>
-		/// インスタンスIDの発行
-		/// </summary>
-		/// <returns>生成したインスタンスid</returns>
-		int CreateInstanceId() const;
+
 		/// <summary>
 		/// テレポート入力
 		/// </summary>
