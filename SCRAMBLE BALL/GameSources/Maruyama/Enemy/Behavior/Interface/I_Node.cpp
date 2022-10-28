@@ -43,6 +43,10 @@ namespace basecross {
 				m_decorators.push_back(decorator);
 			}
 
+			std::vector<std::shared_ptr<I_Decorator>> NodeBase::GetDecorators() const {
+				return m_decorators;
+			}
+
 			bool NodeBase::IsDecoratorEmpty() const {
 				return static_cast<int>(m_decorators.size()) == 0;
 			}
