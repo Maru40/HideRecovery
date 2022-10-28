@@ -52,6 +52,8 @@ namespace basecross
 			}
 
 			m_uniqueIds.erase(id);
+
+			return true;
 		}
 
 		bool ChangeId(T beforeId, T afterId)
@@ -65,6 +67,8 @@ namespace basecross
 
 			m_uniqueIds.insert(afterId);
 			m_uniqueIds.erase(beforeId);
+
+			return true;
 		}
 
 		void SetMinId(T min) { m_min = min; }
