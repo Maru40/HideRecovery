@@ -10,6 +10,10 @@
 
 namespace basecross {
 
+	namespace team {
+		enum class TeamType;
+	}
+
 	namespace Enemy {
 
 		//--------------------------------------------------------------------------------------
@@ -57,6 +61,13 @@ namespace basecross {
 			/// <param name="removeCoordinator">削除したい派閥</param>
 			/// <returns>削除できたらtrue</returns>
 			bool RemoveFaction(const std::shared_ptr<FactionCoordinator>& removeCoordinator);
+
+			/// <summary>
+			/// チームごとにマップに敵を分けて返す。
+			/// </summary>
+			/// <param name="enemys">チームごとに分けたいメンバー</param>
+			/// <returns>マップでチームごとに分けたエネミー配列</returns>
+			std::unordered_map<team::TeamType, std::vector<weak_ptr<EnemyBase>>> DivideTeamType(const std::vector<std::weak_ptr<EnemyBase>>& members);
 
 		public:
 			//--------------------------------------------------------------------------------------

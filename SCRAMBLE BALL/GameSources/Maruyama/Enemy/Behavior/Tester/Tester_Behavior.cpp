@@ -36,9 +36,9 @@ namespace basecross {
 			}
 
 			void TesterTree::CreateNode() {
-				m_behaviorTree->AddSelecter(BehaviorType::First, std::make_shared<Selecter::TesterFirst>());
+				m_behaviorTree->AddSelecter(BehaviorType::First, std::make_shared<SelecterBase>());
 
-				m_behaviorTree->AddSelecter(BehaviorType::Selecter2, std::make_shared<Selecter::TesterSelecterSecond>());
+				m_behaviorTree->AddSelecter(BehaviorType::Selecter2, std::make_shared<SelecterBase>());
 
 				m_behaviorTree->AddTask(BehaviorType::Task1, std::make_shared<Task::TesterTaskFirst>());
 

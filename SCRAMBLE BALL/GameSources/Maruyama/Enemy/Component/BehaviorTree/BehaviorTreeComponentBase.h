@@ -31,6 +31,7 @@ namespace basecross {
 
 			virtual void CreateNode() = 0;
 			virtual void CreateEdge() = 0;
+			virtual void CreateDecorator() = 0;
 
 		public:
 			BehaviorTreeComponentBase(const std::shared_ptr<GameObject>& objPtr) :
@@ -41,6 +42,7 @@ namespace basecross {
 			void OnLateStart() override final {
 				CreateNode();
 				CreateEdge();
+				CreateDecorator();
 			}
 
 			void OnUpdate() override {

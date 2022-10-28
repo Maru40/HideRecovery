@@ -57,5 +57,10 @@ namespace basecross {
 			m_behaviorTree->AddEdge(BehaviorType::ButtleSelecter, BehaviorType::AttackSelecter, std::make_shared<PriorityControllerBase>(0.0f));
 		}
 
+		void AIPlayerBehaviorTree::CreateDecorator() {
+			//徘徊デコレータ
+
+		}
+
 	}
 }

@@ -92,7 +92,9 @@ namespace basecross {
 		for (auto position : positions) {
 			auto enemy = Instantiate<Enemy::AIPlayerObject>(position, Quat::Identity());
 			auto color = index < 3 ? blue : red;
+			auto teamType = index < 3 ? team::TeamType::Blue : team::TeamType::Red;
 			enemy->GetComponent<PNTStaticDraw>()->SetDiffuse(color);
+			enemy->GetComponent<I_TeamMember>(false)->SetTeam(teamType);
 			index++;
 		}
 

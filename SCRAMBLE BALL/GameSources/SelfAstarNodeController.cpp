@@ -97,7 +97,7 @@ namespace basecross {
 		auto sortFunction = [&](const Data& left, const Data& right) {
 			return left.range < right.range;
 		};
-		std::sort(datas.begin(), datas.end(), sortFunction);	//ソート
+		std::sort(datas.begin(), datas.end(), sortFunction);		//ソート
 
 		m_node = !datas.empty() ? datas[0].node.lock() : nullptr;	//配列が存在するなら新規ノードに変更
 	}

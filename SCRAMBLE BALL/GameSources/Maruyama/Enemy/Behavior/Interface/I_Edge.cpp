@@ -48,7 +48,7 @@ namespace basecross {
 				m_priorityContorller = priorityController;
 			}
 
-			std::shared_ptr<I_PriorityController> EdgeBase::GetPriorityContorller() {
+			std::shared_ptr<I_PriorityController> EdgeBase::GetPriorityContorller() const {
 				return m_priorityContorller;
 			}
 

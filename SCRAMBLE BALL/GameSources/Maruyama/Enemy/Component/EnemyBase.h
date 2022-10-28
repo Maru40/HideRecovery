@@ -10,6 +10,9 @@
 
 #include "Maruyama/Interface/I_FactionMember.h"
 
+//#include "Watanabe/Utility/Utility.h"
+//#include "Maruyama/Interface/I_TeamMember.h"
+
 namespace basecross {
 
 	class TargetManager;
@@ -21,7 +24,9 @@ namespace basecross {
 		//--------------------------------------------------------------------------------------
 		class EnemyBase : public Component, public I_FactionMember
 		{
-			std::weak_ptr<TargetManager> m_targetManager;
+			//team::TeamType m_teamType;						//チームタイプ
+
+			std::weak_ptr<TargetManager> m_targetManager;	//ターゲット管理
 
 		public:
 			/// <summary>

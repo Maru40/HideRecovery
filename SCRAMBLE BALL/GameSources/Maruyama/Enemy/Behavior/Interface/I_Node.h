@@ -26,6 +26,15 @@ namespace basecross {
 			public:
 				virtual ~I_Node() = default;
 
+				virtual void OnStart() = 0;
+				virtual bool OnUpdate() = 0;
+				virtual void OnExit() = 0;
+
+				/// <summary>
+				/// 処理が中断されたときに呼び出す処理
+				/// </summary>
+				virtual void OnAbort() {}
+
 				virtual void SetIsActive(const bool isActive) noexcept = 0;
 
 				virtual bool IsActive() const noexcept = 0;
@@ -65,6 +74,12 @@ namespace basecross {
 				virtual void AddDecorator(const std::shared_ptr<I_Decorator>& decorator) = 0;
 
 				/// <summary>
+				/// デコレータ配列の取得
+				/// </summary>
+				/// <returns>デコレータ配列</returns>
+				virtual std::vector<std::shared_ptr<I_Decorator>> GetDecorators() const = 0;
+
+				/// <summary>
 				/// デコレータがあるかどうか
 				/// </summary>
 				/// <returns>デコレータがEmptyならtrue</returns>
@@ -94,6 +109,8 @@ namespace basecross {
 				bool CanTransition() const override;
 
 				void AddDecorator(const std::shared_ptr<I_Decorator>& decorator) override;
+
+				std::vector<std::shared_ptr<I_Decorator>> GetDecorators() const override;
 
 				bool IsDecoratorEmpty() const override;
 			};

@@ -46,6 +46,7 @@ namespace basecross {
 		private:
 			void CreateNode() override;
 			void CreateEdge() override;
+			void CreateDecorator() override;
 		};
 
 	}
