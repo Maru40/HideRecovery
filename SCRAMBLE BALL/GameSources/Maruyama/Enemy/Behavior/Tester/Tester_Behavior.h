@@ -53,26 +53,26 @@ namespace basecross {
 			};
 
 
-			namespace Selecter {
+			//namespace Selecter {
 
-				class TesterFirst : public SelecterBase
-				{
+			//	class TesterFirst : public SelecterBase
+			//	{
 
-				public:
-
-
-				};
+			//	public:
 
 
-				class TesterSelecterSecond : public SelecterBase
-				{
-
-				public:
+			//	};
 
 
-				};
+			//	class TesterSelecterSecond : public SelecterBase
+			//	{
 
-			}
+			//	public:
+
+
+			//	};
+
+			//}
 
 			namespace Task 
 			{
