@@ -466,6 +466,11 @@ namespace Online
 			isUpdate = true;
 		}
 
+		if (!isUpdate)
+		{
+			return;
+		}
+
 		OnlineManager::RaiseEvent(false, (std::uint8_t*)&isAim, sizeof(bool), EXECUTE_AIM_STATE_CHANGE_EVENT_CODE);
 	}
 
