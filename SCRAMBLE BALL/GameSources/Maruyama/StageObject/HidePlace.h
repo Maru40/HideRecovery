@@ -70,9 +70,17 @@ namespace basecross {
 		/// <returns>隠す場所</returns>
 		Vec3 GetHidePosition() const { return transform->GetPosition() + m_param.hidePositionOffset; }
 
-		void SetHideItem(const std::shared_ptr<HideItem>& item);
+		bool PutHideItem(const std::shared_ptr<HideItem>& item);
+
+		_NODISCARD std::shared_ptr<HideItem> TakeOutHideItem();
 
 		std::shared_ptr<HideItem> GetHideItem() const;
+
+		/// <summary>
+		/// 箱に入れることができる状態か
+		/// </summary>
+		/// <returns>できるのならtrue</returns>
+		bool CanPutable() const;
 
 		void SetDrawUI(const bool isActive);
 

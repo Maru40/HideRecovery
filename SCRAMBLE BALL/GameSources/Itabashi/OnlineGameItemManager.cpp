@@ -22,6 +22,20 @@ namespace basecross
 		}
 	};
 
+	/// <summary>
+	/// 配列の要素をランダムに取得する
+	/// </summary>
+	template <class Iterator>
+	auto& GetRandom(Iterator first, Iterator last)
+	{
+		static std::random_device device;
+		static std::mt19937_64 randomEngine(device());
+
+		auto distance = std::distance(first, last);
+
+		return *(first + std::uniform_int_distribution<decltype(distance)>(0, distance - 1)(randomEngine));
+	}
+
 	OnlineGameItemManager::OnlineGameItemManager(const std::shared_ptr<GameObject>& owner) :
 		OnlineComponent(owner)
 	{
@@ -42,11 +56,11 @@ namespace basecross
 	{
 		auto hidePlaces = maru::Utility::FindComponents<HidePlace>();
 
-		auto hidePlace = maru::MyRandom::RandomArray(hidePlaces);
-		auto objectHider = hideItem->GetGameObject()->GetComponent<Operator::ObjectHider>();
+		auto result = std::remove_if(hidePlaces.begin(), hidePlaces.end(),
+			[](const std::shared_ptr<HidePlace>& hidePlace) {return !hidePlace->CanPutable(); });
 
-		objectHider->Hide(hidePlace->GetHidePosition());
-		hidePlace->SetHideItem(hideItem);
+		auto& hidePlace = GetRandom(hidePlaces.begin(), result);
+		hidePlace->PutHideItem(hideItem);
 
 		auto hideItemId = hideItem->GetGameObject()->GetComponent<Online::OnlineStatus>()->GetInstanceId();
 		auto hidePlaceId = hidePlace->GetGameObject()->GetComponent<Online::OnlineStatus>()->GetInstanceId();
@@ -57,12 +71,8 @@ namespace basecross
 	void OnlineGameItemManager::ExecuteRandomHideItem(std::uint32_t hideItemInstanceId, std::uint32_t hidePlaceInstanceId)
 	{
 		auto hidePlace = Online::OnlineStatus::FindOnlineGameObject(hidePlaceInstanceId)->GetComponent<HidePlace>();
-		auto hideItemObject = Online::OnlineStatus::FindOnlineGameObject(hideItemInstanceId);
+		auto hideItem = Online::OnlineStatus::FindOnlineGameObject(hideItemInstanceId)->GetComponent<HideItem>();
 
-		auto hideItem = hideItemObject->GetComponent<HideItem>();
-		auto itemHider = hideItemObject->GetComponent<Operator::ObjectHider>();
-
-		itemHider->Hide(hidePlace->GetHidePosition());
-		hidePlace->SetHideItem(hideItem);
+		hidePlace->PutHideItem(hideItem);
 	}
 }

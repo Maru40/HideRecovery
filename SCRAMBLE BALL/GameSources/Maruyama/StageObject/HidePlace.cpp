@@ -17,6 +17,7 @@
 #include "Maruyama/Item/HideItem.h"
 
 #include "Maruyama/UI/3D/Component/OpenBoard.h"
+#include "Itabashi/ObjectHider.h"
 
 namespace basecross {
 
@@ -92,12 +93,47 @@ namespace basecross {
 	/// アクセッサ
 	//--------------------------------------------------------------------------------------
 
-	void HidePlace::SetHideItem(const std::shared_ptr<HideItem>& item) {
-		m_hideItem = item;
+	bool HidePlace::PutHideItem(const std::shared_ptr<HideItem>& hideItem)
+	{
+		auto oldHideItem = m_hideItem.lock();
+
+		if (oldHideItem)
+		{
+			return false;
+		}
+
+		m_hideItem = hideItem;
+		hideItem->GetItem()->SetItemOwner(GetGameObject(), false);
+		hideItem->GetObjectHider()->Hide(GetHidePosition());
+
+		return true;
+	}
+
+	std::shared_ptr<HideItem> HidePlace::TakeOutHideItem()
+	{
+		auto hideItem = m_hideItem.lock();
+
+		if (!hideItem)
+		{
+			return nullptr;
+		}
+
+		m_hideItem.reset();
+
+		hideItem->GetItem()->ReleaseItemOwner(false);
+		hideItem->GetObjectHider()->Appear();
+
+		return hideItem;
 	}
 
 	std::shared_ptr<HideItem> HidePlace::GetHideItem() const {
 		return m_hideItem.lock();
+	}
+
+	bool HidePlace::CanPutable() const
+	{
+		auto hideItem = m_hideItem.lock();
+		return hideItem == nullptr;
 	}
 
 	void HidePlace::SetDrawUI(const bool isActive) {
