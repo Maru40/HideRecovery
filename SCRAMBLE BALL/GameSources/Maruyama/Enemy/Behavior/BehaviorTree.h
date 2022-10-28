@@ -67,11 +67,12 @@ namespace basecross {
 				EnumType m_firstNodeType = EnumType(0);	//初回ノードタイプ
 				std::weak_ptr<I_Node> m_currentNode;	//現在積まれているタスク
 
-				std::unordered_map<EnumType, std::shared_ptr<I_Node>> m_nodeMap;			//定義したノード
-				std::unordered_map<EnumType, std::shared_ptr<I_Selecter>> m_selecterMap;	//定義したセレクター
-				std::unordered_map<EnumType, std::shared_ptr<I_Task>> m_taskMap;			//定義したタスク
+				NodeMap m_nodeMap;						//定義したノード
+				SelecterMap m_selecterMap;				//定義したセレクター
+				TaskMap m_taskMap;						//定義したタスク
 
 				std::stack<std::weak_ptr<I_Selecter>> m_sequenceStack;	//シーケンスを登録するスタック
+				std::stack<std::weak_ptr<I_Node>> m_currentStack;		//現在積まれているノードスタック
 
 				EdgesMap m_edgesMap;	//遷移エッジ
 
