@@ -30,6 +30,11 @@ namespace basecross {
 				virtual bool OnUpdate() = 0;
 				virtual void OnExit() = 0;
 
+				/// <summary>
+				/// ˆ—‚ª’†’f‚³‚ê‚½‚Æ‚«‚ÉŒÄ‚Ño‚·ˆ—
+				/// </summary>
+				virtual void OnAbort() {}
+
 				virtual void SetIsActive(const bool isActive) noexcept = 0;
 
 				virtual bool IsActive() const noexcept = 0;
