@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0"
-  xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Headers">
       <UniqueIdentifier>{4b0a624a-610d-4bc6-b311-2b02a781cdf9}</UniqueIdentifier>
@@ -1205,6 +1204,12 @@
     <Filter Include="Maruyama\Enemy\Component\SelfAstarNodeController">
       <UniqueIdentifier>{bc3d7f15-4e3e-4cdd-a28c-3c18ef2b3e54}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Enemy\BehaviorTree\Interface\I_Selecter\Task">
+      <UniqueIdentifier>{0a9b795e-1c57-43bd-bfeb-24bc5f3681f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\BehaviorTree\Interface\I_Selecter\Task\Priority">
+      <UniqueIdentifier>{27d8ab97-5ffb-4bdf-a9d0-9a39037414d4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2257,6 +2262,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)SelfAstarNodeController.h">
       <Filter>Maruyama\Enemy\Component\SelfAstarNodeController</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\SelecterTask\Priority.h">
+      <Filter>Maruyama\Enemy\BehaviorTree\Interface\I_Selecter\Task\Priority</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -3215,6 +3223,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)SelfAstarNodeController.cpp">
       <Filter>Maruyama\Enemy\Component\SelfAstarNodeController</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\SelecterTask\Priority.cpp">
+      <Filter>Maruyama\Enemy\BehaviorTree\Interface\I_Selecter\Task\Priority</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
