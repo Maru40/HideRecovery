@@ -23,9 +23,9 @@ namespace basecross {
 			public:
 				virtual ~I_Task() = default;
 
-				virtual void OnStart() = 0;
-				virtual bool OnUpdate() = 0;
-				virtual void OnExit() = 0;
+				//virtual void OnStart() = 0;
+				//virtual bool OnUpdate() = 0;
+				//virtual void OnExit() = 0;
 			};
 
 			//--------------------------------------------------------------------------------------
