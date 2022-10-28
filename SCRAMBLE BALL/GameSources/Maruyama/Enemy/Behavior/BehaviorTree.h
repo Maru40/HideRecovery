@@ -53,7 +53,6 @@ namespace basecross {
 				using EdgesMap = std::unordered_map<EnumType, std::vector<std::shared_ptr<I_Edge>>>;
 
 			private:
-				//EnumType m_currentType = EnumType(0);	//現在のタスク
 				EnumType m_firstNodeType = EnumType(0);	//初回ノードタイプ
 				std::weak_ptr<I_Node> m_currentNode;	//現在積まれているタスク
 
@@ -78,6 +77,10 @@ namespace basecross {
 					return node;
 				}
 
+				/// <summary>
+				/// セレクターとエッジの結合
+				/// </summary>
+				/// <param name="edge"></param>
 				void Union(const std::shared_ptr<I_Edge>& edge) {
 					std::shared_ptr<I_Node> fromNode = edge->GetFromNode();
 					std::shared_ptr<I_Node> toNode = edge->GetToNode();
@@ -89,6 +92,32 @@ namespace basecross {
 					}
 				}
 
+				/// <summary>
+				/// セレクターを選択したときの対処
+				/// </summary>
+				/// <param name="node">選択したノード</param>
+				void SelectSelecterAdjust(const std::shared_ptr<I_Node>& node) {
+					auto selecter = std::dynamic_pointer_cast<I_Selecter>(node);
+					if (!selecter) {
+						return;
+					}
+
+					//それぞれのタイプ別に処理を呼び出す。
+					switch (selecter->GetSelectType())
+					{
+					case SelectType::Priority:
+						//現在は何もしない
+						break;
+
+					case SelectType::Random:
+						//現在は何もしない
+						break;
+
+					case SelectType::Sequence:
+						SelectSequenceEvent(selecter);
+						break;
+					}
+				}
 
 			public:
 				virtual ~BehaviorTree() = default;
@@ -188,33 +217,6 @@ namespace basecross {
 				}
 
 				/// <summary>
-				/// セレクターを選択したときの対処
-				/// </summary>
-				/// <param name="node">選択したノード</param>
-				void SelectSelecterAdjust(const std::shared_ptr<I_Node>& node) {
-					auto selecter = std::dynamic_pointer_cast<I_Selecter>(node);
-					if (!selecter) {
-						return;
-					}
-
-					//それぞれのタイプ別に処理を呼び出す。
-					switch (selecter->GetSelectType())
-					{
-					case SelectType::Priority:
-							//現在は何もしない
-						break;
-
-					case SelectType::Random:
-							//現在は何もしない
-						break;
-
-					case SelectType::Sequence:
-						SelectSequenceEvent(selecter);
-						break;
-					} 
-				}
-
-				/// <summary>
 				/// タスクが定義されているかどうか
 				/// </summary>
 				/// <param name="type">タスクタイプ</param>
@@ -291,6 +293,35 @@ namespace basecross {
 				bool HasEdges(const EnumType type) const { return static_cast<int>(m_edgesMap.count(type)) != 0; }
 
 				/// <summary>
+				/// デコレータの設定
+				/// </summary>
+				/// <param name="type">設定したいノ―ドタイプ</param>
+				/// <param name="decorator">設定したいデコレータ</param>
+				bool AddDecorator(const EnumType type, const std::shared_ptr<I_Decorator>& decorator) {
+					if (!HasNode(type)) {
+						return false;
+					}
+
+					auto node = GetNode(type);
+					node->AddDecorator(decorator);
+
+					return true;
+				}
+
+				/// <summary>
+				/// デコレータの設定
+				/// </summary>
+				template<class T, class... Ts,
+					std::enable_if_t<
+						std::is_constructible_v<T, Ts...> &&	//コンストラクタの引数
+						std::is_base_of_v<I_Decorator, T>,		//基底クラスの制限
+					std::nullptr_t> = nullptr
+				>
+				bool AddDecorator(const EnumType type, Ts&&... params) {
+					return AddDecorator(type, std::make_shared<T>(params...));
+				}
+
+				/// <summary>
 				/// 空の状態かどうか
 				/// </summary>
 				/// <returns>空の状態ならtrue</returns>
@@ -309,6 +340,11 @@ namespace basecross {
 				EnumType GetFirstNodeType() const { return m_firstNodeType; }
 
 			private:
+				//bool (const std::shared_ptr<I_Task>& task) {
+				//	//将来的にはNodeBase側のOnUpdate中にデコレータの判断を行う。
+				//	for(auto )
+				//}
+
 				/// <summary>
 				/// ノードの更新
 				/// </summary>
