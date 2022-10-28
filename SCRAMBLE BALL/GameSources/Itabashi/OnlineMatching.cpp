@@ -122,7 +122,7 @@ namespace Online
 
 		auto& players = OnlineManager::GetCurrentlyJoinedRoom().getPlayers();
 
-		for (int i = 0; i < players.getSize(); ++i)
+		for (unsigned int i = 0; i < players.getSize(); ++i)
 		{
 			unsigned int index = eng() % gameNumbers.size();
 
