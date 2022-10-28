@@ -23,8 +23,6 @@ namespace basecross {
 	{
 		std::vector<std::function<void(const std::shared_ptr<GameObject>&)>> m_destroyEventFuncs;
 
-		int m_instanceId = -1;
-
 	public:
 		ChargeBullet(const std::shared_ptr<GameObject>& objPtr);
 
@@ -40,11 +38,7 @@ namespace basecross {
 		void AddDestroyEventFunc(const std::function<void(const std::shared_ptr<GameObject>&)>& destroyEventFunc)
 		{
 			m_destroyEventFuncs.push_back(destroyEventFunc);
-		}
-		
-		void SetInstanceId(int instanceId) { m_instanceId = instanceId; }
-
-		int GetInstanceId() const { return m_instanceId; }
+		}		
 	};
 
 }

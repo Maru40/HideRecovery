@@ -14,6 +14,8 @@
 #include "Watanabe/Effekseer/EfkEffect.h"
 #include "Watanabe/Component/LifeSpan.h"
 
+#include "Itabashi/OnlineStatus.h"
+
 namespace basecross {
 	ChargeBulletObject::ChargeBulletObject(const std::shared_ptr<Stage>& stage)
 		:BulletObjectBase(stage)
@@ -32,7 +34,9 @@ namespace basecross {
 		SettingEffect();
 	}
 
-	void ChargeBulletObject::OnCreate() {
+	void ChargeBulletObject::OnCreate()
+	{
+		AddComponent<Online::OnlineStatus>();
 		AddComponent<ChargeBullet>();
 
 		auto collision = AddComponent<CollisionObb>();
