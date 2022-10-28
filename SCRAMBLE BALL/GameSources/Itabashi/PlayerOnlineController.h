@@ -169,10 +169,21 @@ namespace Online
 		/// <param name="cameraPosition">カメラ位置</param>
 		void ExecuteTeleportEvent(int playerNumber, const Vec3& teleportPosition, const Vec3& cameraPosition);
 
+		/// <summary>
+		/// 箱を開ける操作関数
+		/// </summary>
 		void OpenHidePlaceInputer();
-
+		/// <summary>
+		/// 誰かが箱を開けるのを試す時に呼ばれるイベント
+		/// </summary>
+		/// <param name="playerNumber">試すプレイヤー番号</param>
+		/// <param name="instanceId">箱のID</param>
 		void TryOpenHidePlaceEvent(int playerNumber, std::uint32_t instanceId);
-
+		/// <summary>
+		/// 誰かが箱を開けたときに呼ばれるイベント
+		/// </summary>
+		/// <param name="playerNumber">開けたプレイヤー番号</param>
+		/// <param name="instanceId">箱のID</param>
 		void ExecuteOpenHidePlace(int playerNumber, std::uint32_t instanceId);
 
 	public:
