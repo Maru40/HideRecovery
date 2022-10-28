@@ -260,7 +260,7 @@ namespace basecross {
 				/// <summary>
 				/// 現在使用中のノードを返す
 				/// </summary>
-				_NODISCARD std::shared_ptr<I_Node> GetCurrentNode() const;
+				_NODISCARD std::shared_ptr<I_Node> GetCurrentNode() const noexcept;
 
 			};
 

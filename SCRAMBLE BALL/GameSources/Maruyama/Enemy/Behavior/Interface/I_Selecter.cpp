@@ -139,6 +139,7 @@ namespace basecross {
 			}
 
 			bool Selecter::OnUpdate() {
+				//カレントノードがあるなら更新を入れる。
 				if (HasCurrentNode()) {
 					return GetCurrentNode()->OnUpdate();
 				}
@@ -155,9 +156,9 @@ namespace basecross {
 			std::shared_ptr<I_Node> Selecter::SearchCurrentNode() const {
 				switch (m_selectType)
 				{
-				case basecross::maru::Behavior::SelectType::Priority:
+				case maru::Behavior::SelectType::Priority:
 					return SearchFirstPriorityNode();
-				case basecross::maru::Behavior::SelectType::Random:
+				case maru::Behavior::SelectType::Random:
 					return SearchRandomNode();
 				}
 
@@ -215,7 +216,7 @@ namespace basecross {
 				return static_cast<int>(m_transitionEdges.size()) == 0;
 			}
 
-			std::shared_ptr<I_Node> Selecter::GetCurrentNode() const {
+			std::shared_ptr<I_Node> Selecter::GetCurrentNode() const noexcept {
 				return m_currentNode.lock();
 			}
 
