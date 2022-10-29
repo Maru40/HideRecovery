@@ -107,7 +107,7 @@ namespace basecross {
 				///	初期ノードのリセット
 				/// </summary>
 				void ResetFirstNode() {
-					for (auto& edge : GetEdges(EnumType(0))) {
+					for (auto& edge : GetEdges(m_firstNodeType)) {
 						edge->GetToNode()->SetState(BehaviorState::Inactive);
 					}
 				}
