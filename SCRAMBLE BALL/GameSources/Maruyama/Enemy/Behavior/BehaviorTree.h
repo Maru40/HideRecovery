@@ -41,7 +41,7 @@ namespace basecross {
 			class I_Task;
 
 			class I_Selecter;
-			class I_SelecterBase;
+			class Selecter;
 
 			//--------------------------------------------------------------------------------------
 			/// ビヘイビアのインターフェース
@@ -71,8 +71,7 @@ namespace basecross {
 				SelecterMap m_selecterMap;				//定義したセレクター
 				TaskMap m_taskMap;						//定義したタスク
 
-				std::stack<std::weak_ptr<I_Selecter>> m_sequenceStack;	//シーケンスを登録するスタック
-				std::stack<std::weak_ptr<I_Node>> m_currentStack;		//現在積まれているノードスタック
+				std::stack<std::weak_ptr<I_Node>> m_currentStack;	//現在積まれているノードスタック
 
 				EdgesMap m_edgesMap;	//遷移エッジ
 
@@ -105,25 +104,11 @@ namespace basecross {
 				}
 
 				/// <summary>
-				/// セレクターを選択したときの対処
+				///	初期ノードのリセット
 				/// </summary>
-				/// <param name="node">選択したノード</param>
-				void SelectSelecterAdjust(const std::shared_ptr<I_Node>& node) {
-					auto selecter = std::dynamic_pointer_cast<I_Selecter>(node);
-					if (!selecter) {
-						return;
-					}
-
-					//それぞれのタイプ別に処理を呼び出す。
-					switch (selecter->GetSelectType())
-					{
-					case SelectType::Priority:
-						//現在は何もしない
-						break;
-
-					case SelectType::Random:
-						//現在は何もしない
-						break;
+				void ResetFirstNode() {
+					for (auto& edge : GetEdges(EnumType(0))) {
+						edge->GetToNode()->SetState(BehaviorState::Inactive);
 					}
 				}
 
@@ -182,7 +167,6 @@ namespace basecross {
 					//並べ替えたノードが遷移できるかどうかを判断する。
 					for (const auto& edge : edges) {
 						if (edge->GetToNode()->CanTransition()) {		//遷移できるなら、そのノードを返す。
-							SelectSelecterAdjust(edge->GetToNode());	//Selecterの時の追加処理をする。
 							return edge->GetToNode();
 						}
 					}
@@ -347,10 +331,6 @@ namespace basecross {
 				EnumType GetFirstNodeType() const { return m_firstNodeType; }
 
 			private:
-				//bool (const std::shared_ptr<I_Task>& task) {
-				//	//将来的にはNodeBase側のOnUpdate中にデコレータの判断を行う。
-				//	for(auto )
-				//}
 
 				/// <summary>
 				/// ノードの更新
@@ -370,14 +350,29 @@ namespace basecross {
 				/// </summary>
 				/// <returns>一番優先度の高いノード</returns>
 				std::shared_ptr<I_Node> Recursive_TransitionNode(const std::shared_ptr<I_Node>& node) {
-					if (!node) {	//ノードがnullptrなら
+					//ノードがnullptrなら処理を終わる
+					if (!node) {	
 						return nullptr;
 					}
 
-					//エッジが存在しないならnodeを生成する。
-					if (!HasEdges(node->GetType<EnumType>())) {	
-						return node;
+					//初期ノードなら、初期化
+					if (node->GetIndex() == 0) {
+						ResetFirstNode();
 					}
+
+					//Taskノードなら、末端ノードとなる。
+					if (HasTask(node->GetType<EnumType>())) {
+						m_currentStack.push(node);	//スタックに積む。
+						return node;				//末端ノードが確定
+					}
+					
+					//エッジが存在しないなら、親ノードに戻る。
+					if (!HasEdges(node->GetType<EnumType>())) {
+						m_currentStack.pop();				//現在のノードをポップ。
+						return m_currentStack.top().lock();	//親ノードを返す。
+					}
+
+					m_currentStack.push(node);		//スタックに積む。
 
 					//一番優先順位の高いノードを取得する。
 					return Recursive_TransitionNode(CalculateFirstPriorityNode(node->GetType<EnumType>()));
@@ -387,11 +382,11 @@ namespace basecross {
 				/// 遷移するときの判断開始位置のノードを取得する。
 				/// </summary>
 				std::shared_ptr<I_Node> GetTransitionStartNode() {
-					if (m_sequenceStack.size() == 0) {	
+					if (m_currentStack.size() == 0) {	
 						return GetNode(m_firstNodeType);
 					}
 					
-					return m_sequenceStack.top().lock();
+					return m_currentStack.top().lock();
 				}
 
 				/// <summary>
@@ -400,6 +395,11 @@ namespace basecross {
 				void Transition() {
 					if (auto currentTask = GetCurrentTask()) {	//タスクの終了イベントを呼び出す。
 						currentTask->OnExit();
+					}
+					
+					//現在のタスクをスタックから外す。
+					if (m_currentStack.size() != 0) {
+						m_currentStack.pop();
 					}
 					
 					//優先度の一番高いノードに遷移
