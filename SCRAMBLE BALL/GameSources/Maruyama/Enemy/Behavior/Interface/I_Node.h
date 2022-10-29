@@ -20,6 +20,17 @@ namespace basecross {
 			class I_Decorator;
 
 			//--------------------------------------------------------------------------------------
+			/// ビヘイビアのノードステート
+			//--------------------------------------------------------------------------------------
+			enum class BehaviorState {
+				Inactive,	//非アクティブ(待機状態)
+				Success,	//成功
+				Failure,	//失敗
+				Running,	//実行中
+				Completed,	//完了
+			};
+
+			//--------------------------------------------------------------------------------------
 			/// ビヘイビアノードのインターフェース
 			//--------------------------------------------------------------------------------------
 			class I_Node {
@@ -63,6 +74,25 @@ namespace basecross {
 				EnumType GetType() const { return static_cast<EnumType>(GetIndex()); }
 
 				/// <summary>
+				/// ステートの設定
+				/// </summary>
+				/// <param name="state">ステート</param>
+				virtual void SetState(const BehaviorState state) noexcept = 0;
+
+				/// <summary>
+				/// ビヘイビアステートの取得
+				/// </summary>
+				/// <returns>ビヘイビアステート</returns>
+				virtual BehaviorState GetState() const noexcept = 0;
+
+				/// <summary>
+				/// 引数で渡したステートかどうか判断
+				/// </summary>
+				/// <param name="state">確認したいステート</param>
+				/// <returns>渡したステート同じならtrue</returns>
+				virtual bool IsState(const BehaviorState state) const noexcept = 0;
+
+				/// <summary>
 				/// 遷移できるかどうか
 				/// </summary>
 				/// <returns>遷移できるならtrue</returns>
@@ -93,6 +123,7 @@ namespace basecross {
 			{
 				bool m_isActive = true;									//アクティブ状態かどうか
 				int m_index = 0;										//ノードインデックス
+				BehaviorState m_state = BehaviorState::Inactive;		//ビヘイビアステート
 				std::vector<std::shared_ptr<I_Decorator>> m_decorators;	//デコレータ配列
 
 			public:
@@ -105,6 +136,12 @@ namespace basecross {
 				void SetIndex(const int index) noexcept override { m_index = index; }
 
 				int GetIndex() const noexcept override { return m_index; }
+
+				void SetState(const BehaviorState state) noexcept override { m_state = state; }
+
+				BehaviorState GetState() const noexcept override { return m_state; }
+
+				bool IsState(const BehaviorState state) const noexcept override { return m_state == state; }
 
 				bool CanTransition() const override;
 
