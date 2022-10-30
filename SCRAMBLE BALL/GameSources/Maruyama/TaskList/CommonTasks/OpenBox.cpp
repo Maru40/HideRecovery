@@ -1,8 +1,8 @@
-
+ï»¿
 /*!
 @file Task_PlowlingMove.cpp
-@brief Task_PlowlingMove‚ÌƒNƒ‰ƒXÀ‘Ì
-’S“–FŠÛR—TŠì
+@brief Task_PlowlingMoveã®ã‚¯ãƒ©ã‚¹å®Ÿä½“
+æ‹…å½“ï¼šä¸¸å±±è£•å–œ
 */
 
 #include "stdafx.h"
@@ -11,11 +11,12 @@
 #include "OpenBox.h"
 
 #include "Maruyama/Utility/Component/TargetManager.h"
-#include "Maruyama/Player/Component/AccessHidePlace.h"
 
 #include "Maruyama/StageObject/HidePlace.h"
 
 #include "Watanabe/DebugClass/Debug.h"
+
+#include "Maruyama/Player/Component/HidePlaceOpener.h"
 
 namespace basecross {
 
@@ -25,17 +26,17 @@ namespace basecross {
 			TaskNodeBase(owner)
 		{
 			m_targetManager = owner->GetComponent<TargetManager>(false);
-			m_accessHidePlace = owner->GetComponent<AccessHidePlace>(false);
+			m_hidePlaceOpener = owner->GetComponent<HidePlaceOpener>(false);
 		}
 
 		void OpenBox::OnStart() {
-			Open();				//ƒ{ƒbƒNƒX‚ğŠJ‚­
+			Open();				//ãƒœãƒƒã‚¯ã‚¹ã‚’é–‹ã
 
-			ChangeAnimation();	//ƒAƒjƒ[ƒVƒ‡ƒ“‚ÌØ‚è‘Ö‚¦
+			ChangeAnimation();	//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®åˆ‡ã‚Šæ›¿ãˆ
 		}
 
 		bool OpenBox::OnUpdate() {
-			//«—ˆ“I‚ÉƒAƒjƒ[ƒVƒ‡ƒ“‚ªI—¹‚·‚é‚Ü‚Å‚ğğŒ‚Æ‚·‚éB
+			//å°†æ¥çš„ã«ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ãŒçµ‚äº†ã™ã‚‹ã¾ã§ã‚’æ¡ä»¶ã¨ã™ã‚‹ã€‚
 
 			return true;
 		}
@@ -45,23 +46,23 @@ namespace basecross {
 		}
 
 		void OpenBox::Open() {
-			//ƒ^[ƒQƒbƒg‚Ì—L–³‚ğŠm”F‚·‚éB
+			//ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®æœ‰ç„¡ã‚’ç¢ºèªã™ã‚‹ã€‚
 			auto targetManager = m_targetManager.lock();
 			if (!targetManager || !targetManager->HasTarget()) {
-				Debug::GetInstance()->Log(L"TaskListNode::OpenBox::Open() : •K—vƒRƒ“ƒ|[ƒlƒ“ƒg‚ª‘¶İ‚µ‚Ü‚¹‚ñB");
+				Debug::GetInstance()->Log(L"TaskListNode::OpenBox::Open() : å¿…è¦ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆãŒå­˜åœ¨ã—ã¾ã›ã‚“ã€‚");
 				return;
 			}
 
 			auto target = targetManager->GetTarget();
 
-			//ƒ^[ƒQƒbƒg‚ªHidePlace‚È‚çOpen‚·‚éB
+			//ã‚¿ãƒ¼ã‚²ãƒƒãƒˆãŒHidePlaceãªã‚‰Openã™ã‚‹ã€‚
 			auto hidePlace = target->GetComponent<HidePlace>(false);
 			if (hidePlace) {
 				hidePlace->Open();
 				Debug::GetInstance()->Log(L"Open");
 			}
 			else {
-				Debug::GetInstance()->Log(L"TaskListNode::OpenBox::Open() : ƒ^[ƒQƒbƒg‚ªHidePlace‚Å‚ ‚è‚Ü‚¹‚ñB");
+				Debug::GetInstance()->Log(L"TaskListNode::OpenBox::Open() : ã‚¿ãƒ¼ã‚²ãƒƒãƒˆãŒHidePlaceã§ã‚ã‚Šã¾ã›ã‚“ã€‚");
 			}
 		}
 

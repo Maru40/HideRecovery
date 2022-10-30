@@ -129,8 +129,8 @@ namespace basecross
 
 	bool PlayerInputer::IsDecision()
 	{
-		return App::GetApp()->GetMyInputDevice()->GetKeyBoard().IsInputDown(KeyCode::F) ||
-			App::GetApp()->GetMyInputDevice()->GetXInputGamePad().IsInputDown(XInputCode::A);
+		return App::GetApp()->GetMyInputDevice()->GetKeyBoard().IsInputPush(KeyCode::Enter) ||
+			App::GetApp()->GetMyInputDevice()->GetXInputGamePad().IsInputPush(XInputCode::A);
 	}
 
 	bool PlayerInputer::IsCancel()
@@ -175,7 +175,7 @@ namespace basecross
 	}
 
 	bool PlayerInputer::IsItemAcquisition() {
-		return App::GetApp()->GetMyInputDevice()->GetKeyBoard().IsInputDown(KeyCode::F) ||
+		return App::GetApp()->GetMyInputDevice()->GetKeyBoard().IsInputDown(KeyCode::Enter) ||
 			App::GetApp()->GetMyInputDevice()->GetXInputGamePad().IsInputDown(XInputCode::A);
 	}
 
@@ -190,15 +190,17 @@ namespace basecross
 	}
 
 	bool PlayerInputer::IsAim() {
-		auto device = App::GetApp()->GetInputDevice();
+		auto& device = App::GetApp()->GetInputDevice();
 		const auto& pad = device.GetControlerVec()[0];
-		return pad.bLeftTrigger >= XINPUT_GAMEPAD_TRIGGER_THRESHOLD || pad.bRightTrigger >= XINPUT_GAMEPAD_TRIGGER_THRESHOLD;
+		return pad.bLeftTrigger >= XINPUT_GAMEPAD_TRIGGER_THRESHOLD || pad.bRightTrigger >= XINPUT_GAMEPAD_TRIGGER_THRESHOLD ||
+			App::GetApp()->GetMyInputDevice()->GetKeyBoard().IsInputPush(KeyCode::Space);
 	}
 
 	bool PlayerInputer::IsAimRelease() {
-		auto device = App::GetApp()->GetInputDevice();
+		auto& device = App::GetApp()->GetInputDevice();
 		const auto& pad = device.GetControlerVec()[0];
-		return pad.bLeftTrigger < XINPUT_GAMEPAD_TRIGGER_THRESHOLD && pad.bRightTrigger < XINPUT_GAMEPAD_TRIGGER_THRESHOLD;
+		return pad.bLeftTrigger < XINPUT_GAMEPAD_TRIGGER_THRESHOLD && pad.bRightTrigger < XINPUT_GAMEPAD_TRIGGER_THRESHOLD &&
+			!App::GetApp()->GetMyInputDevice()->GetKeyBoard().IsInputPush(KeyCode::Space);
 	}
 
 	bool PlayerInputer::IsShot()
@@ -329,7 +331,7 @@ namespace basecross
 
 	bool PlayerInputer::IsDesitionDown() const
 	{
-		return m_inputDevice->GetKeyBoard().IsInputDown(KeyCode::F) ||
+		return m_inputDevice->GetKeyBoard().IsInputDown(KeyCode::Enter) ||
 			m_inputDevice->GetXInputGamePad().IsInputDown(XInputCode::A);
 	}
 

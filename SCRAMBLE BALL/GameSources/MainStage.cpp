@@ -40,6 +40,9 @@
 #include "Maruyama/Utility/Object/GameManagerObject.h"
 #include "Maruyama/Interface/I_TeamMember.h"
 
+#include "Itabashi/OnlineGameItemManager.h"
+#include "Maruyama/Item/HideItem.h"
+
 namespace basecross {
 	// wstring MainStage::sm_loadMapName = L"StageS1_Copy.csv";
 	wstring MainStage::sm_loadMapName = L"StageS2.csv";
@@ -57,7 +60,6 @@ namespace basecross {
 	}
 
 	void MainStage::OnCreate() {
-		HidePlace::CountReset();
 
 		try {
 			AddGameObject<EfkInterface>();
@@ -77,12 +79,30 @@ namespace basecross {
 			auto onlineRoom = AddGameObject<Online::OnlineTestRoom>();
 			auto tester = onlineRoom->GetComponent<Online::OnlineTester>();
 			auto onlineGameTimer = onlineRoom->AddComponent<OnlineGameTimer>();
+			auto onlineGameItemManager = onlineRoom->AddComponent<OnlineGameItemManager>();
 			onlineRoom->AddComponent<GamePlayerManager>();
 			onlineRoom->AddComponent<Online::MainStageTransitioner>();
 
 			auto gameStartUI = AddGameObject<GameStartUI>();
 			std::weak_ptr<GameStartUI> weakgameStartUI = gameStartUI;
+			std::weak_ptr<OnlineGameItemManager> weakGameItemManager = onlineGameItemManager;
 			onlineGameTimer->AddGameStartCountFunc([weakgameStartUI]() { weakgameStartUI.lock()->Start(); });
+
+			onlineGameTimer->AddGameStartCountFunc([weakGameItemManager]() {
+
+				if (!Online::OnlineManager::GetLocalPlayer().getIsMasterClient())
+				{
+					return;
+				}
+
+				auto gameItemManager = weakGameItemManager.lock();
+
+				for (auto& hideItem : maru::Utility::FindComponents<HideItem>(gameItemManager->GetStage()))
+				{
+					gameItemManager->RandomHideItem(hideItem);
+				}
+			});
+
 			gameStartUI->AddTimeUpEventFunc([]() { SimpleSoundManager::ChangeBGM(L"GameStageBGM", 0.05f); });
 			gameStartUI->AddTimeUpEventFunc([]() { SimpleSoundManager::OnePlaySE(L"GameStartSE", 0.25f); });
 			std::weak_ptr<OnlineGameTimer> weakOnlineGameTimer = onlineGameTimer;

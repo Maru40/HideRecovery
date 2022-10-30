@@ -1,7 +1,7 @@
-/*!
+ï»¿/*!
 @file OpenBox.h
-@brief OpenBox‚È‚Ç
-’S“–FŠÛR—TŠì
+@brief OpenBoxãªã©
+æ‹…å½“ï¼šä¸¸å±±è£•å–œ
 */
 
 #pragma once
@@ -12,6 +12,7 @@
 namespace basecross {
 
 	class TargetManager;
+	class HidePlaceOpener;
 	class AccessHidePlace;
 
 	template<class EnumType>
@@ -20,12 +21,12 @@ namespace basecross {
 	namespace TaskListNode {
 
 		//--------------------------------------------------------------------------------------
-		///	ƒ{ƒbƒNƒX‚ğŠJ‚­ƒ^ƒXƒN
+		///	ãƒœãƒƒã‚¯ã‚¹ã‚’é–‹ãã‚¿ã‚¹ã‚¯
 		//--------------------------------------------------------------------------------------
 		class OpenBox : public TaskNodeBase<GameObject>
 		{
 			std::weak_ptr<TargetManager> m_targetManager;
-			std::weak_ptr<AccessHidePlace> m_accessHidePlace;
+			std::weak_ptr<HidePlaceOpener> m_hidePlaceOpener;
 
 		public:
 			OpenBox(const std::shared_ptr<GameObject>& owner);

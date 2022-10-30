@@ -26,7 +26,7 @@ namespace Online
 		/// <summary>
 		/// 担当するプレイヤーナンバー
 		/// </summary>
-		int m_playerNumber = 0;
+		int m_onlinePlayerNumber = OnlineManager::INVALID_ONLINE_PLAYER_NUMBER;
 
 		OnlineTransformData m_beforeData;
 
@@ -53,12 +53,12 @@ namespace Online
 		/// 対応するプレイヤー番号の設定
 		/// </summary>
 		/// <param name="playerNumber">プレイヤー番号</param>
-		void SetPlayerNumber(int playerNumber) { m_playerNumber = playerNumber; }
+		void SetOnlinePlayerNumber(int playerNumber) { m_onlinePlayerNumber = playerNumber; }
 		/// <summary>
 		/// 対応するプレイヤー番号の取得
 		/// </summary>
 		/// <returns>プレイヤー番号</returns>
-		int GetPlayerNumber() const { return m_playerNumber; }
+		int GetOnlinePlayerNumber() const { return m_onlinePlayerNumber; }
 	};
 }
 }

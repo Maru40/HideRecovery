@@ -676,9 +676,6 @@
     <Filter Include="Watanabe\Utility\Utility">
       <UniqueIdentifier>{f871da4d-e4dc-41d0-8c0a-9a965e06debd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Itabashi\Online\PlayerOnlineController">
-      <UniqueIdentifier>{5563d5b2-921e-4649-867c-f24adc0594bc}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Itabashi\Online\OnlineTestRoom">
       <UniqueIdentifier>{2909f469-304e-476a-b200-f2ed9245ef41}</UniqueIdentifier>
     </Filter>
@@ -1000,9 +997,6 @@
     <Filter Include="Maruyama\Camera\CameraForwardController">
       <UniqueIdentifier>{6cf37f95-4c14-42a0-a957-0143e3bc1950}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Maruyama\Player\Component\AccessHidePlace">
-      <UniqueIdentifier>{15de02f4-c11f-4def-8966-1f39c7665943}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Watanabe\Component\MatchingSyncPlayerObject">
       <UniqueIdentifier>{e672e2fd-f7f0-4508-93b4-43c96bc540ab}</UniqueIdentifier>
     </Filter>
@@ -1210,6 +1204,27 @@
     <Filter Include="Maruyama\Enemy\BehaviorTree\Interface\I_Selecter\Task\Priority">
       <UniqueIdentifier>{27d8ab97-5ffb-4bdf-a9d0-9a39037414d4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Itabashi\Component\PlayerControlManager">
+      <UniqueIdentifier>{042971cf-f423-42b3-a9f5-1cf3d00b3e35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Itabashi\Patch\UniqueIdCreater">
+      <UniqueIdentifier>{e4cac3a1-e222-49ab-be71-02f999a40634}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Itabashi\Online\OnlineStatus">
+      <UniqueIdentifier>{b46903dd-4397-4ad2-afb0-a9babfb0f9fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Itabashi\Online\OnlineGameItemManager">
+      <UniqueIdentifier>{db1fd80e-8b29-4fb3-88fe-66b7e838fb16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Itabashi\Online\OnlinePlayerSynchronizer">
+      <UniqueIdentifier>{ef334375-1010-4733-afec-98d5b254700b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Itabashi\Component\InputPlayerController">
+      <UniqueIdentifier>{5563d5b2-921e-4649-867c-f24adc0594bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Player\Component\HidePlaceOpener">
+      <UniqueIdentifier>{15de02f4-c11f-4def-8966-1f39c7665943}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1245,8 +1260,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\DebugClass\Debug.h">
       <Filter>Watanabe\DebugClass</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\PlayerOnlineController.h">
-      <Filter>Itabashi\Online\PlayerOnlineController</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\InputPlayerController.h">
+      <Filter>Itabashi\Component\InputPlayerController</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineManager.h">
       <Filter>Itabashi\Online\OnlineManager</Filter>
@@ -1515,8 +1530,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\MatchingSyncPlayerObject.h">
       <Filter>Watanabe\Component\MatchingSyncPlayerObject</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\AccessHidePlace.h">
-      <Filter>Maruyama\Player\Component\AccessHidePlace</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\HidePlaceOpener.h">
+      <Filter>Maruyama\Player\Component\HidePlaceOpener</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\ButtonUI.h">
       <Filter>Watanabe\UI\ButtonUI</Filter>
@@ -2265,6 +2280,21 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\SelecterTask\Priority.h">
       <Filter>Maruyama\Enemy\BehaviorTree\Interface\I_Selecter\Task\Priority</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\PlayerControlManager.h">
+      <Filter>Itabashi\Component\PlayerControlManager</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\Utility\UniqueIdCreater.h">
+      <Filter>Itabashi\Patch\UniqueIdCreater</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineStatus.h">
+      <Filter>Itabashi\Online\OnlineStatus</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineGameItemManager.h">
+      <Filter>Itabashi\Online\OnlineGameItemManager</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlinePlayerSynchronizer.h">
+      <Filter>Itabashi\Online\OnlinePlayerSynchronizer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2297,8 +2327,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\DebugClass\Debug.cpp">
       <Filter>Watanabe\DebugClass</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\PlayerOnlineController.cpp">
-      <Filter>Itabashi\Online\PlayerOnlineController</Filter>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\InputPlayerController.cpp">
+      <Filter>Itabashi\Component\InputPlayerController</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineManager.cpp">
       <Filter>Itabashi\Online\OnlineManager</Filter>
@@ -2537,8 +2567,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\MatchingSyncPlayerObject.cpp">
       <Filter>Watanabe\Component\MatchingSyncPlayerObject</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\AccessHidePlace.cpp">
-      <Filter>Maruyama\Player\Component\AccessHidePlace</Filter>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\HidePlaceOpener.cpp">
+      <Filter>Maruyama\Player\Component\HidePlaceOpener</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\ButtonUI.cpp">
       <Filter>Watanabe\UI\ButtonUI</Filter>
@@ -3226,6 +3256,18 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\SelecterTask\Priority.cpp">
       <Filter>Maruyama\Enemy\BehaviorTree\Interface\I_Selecter\Task\Priority</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\PlayerControlManager.cpp">
+      <Filter>Itabashi\Component\PlayerControlManager</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineStatus.cpp">
+      <Filter>Itabashi\Online\OnlineStatus</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineGameItemManager.cpp">
+      <Filter>Itabashi\Online\OnlineGameItemManager</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlinePlayerSynchronizer.cpp">
+      <Filter>Itabashi\Online\OnlinePlayerSynchronizer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

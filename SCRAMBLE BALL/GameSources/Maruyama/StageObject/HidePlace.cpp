@@ -17,12 +17,11 @@
 #include "Maruyama/Item/HideItem.h"
 
 #include "Maruyama/UI/3D/Component/OpenBoard.h"
+#include "Itabashi/ObjectHider.h"
 
 #include "Maruyama/Utility/SingletonComponent/ShareClassesManager.h"
 
 namespace basecross {
-
-	int HidePlace::m_objectCount = 1;
 
 	//--------------------------------------------------------------------------------------
 	/// パラメータ
@@ -54,9 +53,6 @@ namespace basecross {
 
 	void HidePlace::OnCreate() {
 		GetGameObject()->AddComponent<SoundEmitter>();
-
-		m_objectId = m_objectCount;
-		++m_objectCount;
 
 		CreateBoard();
 
@@ -107,29 +103,47 @@ namespace basecross {
 	/// アクセッサ
 	//--------------------------------------------------------------------------------------
 
-	void HidePlace::SetHideItem(const std::shared_ptr<HideItem>& item) {
-		m_hideItem = item;
+	bool HidePlace::PutHideItem(const std::shared_ptr<HideItem>& hideItem)
+	{
+		auto oldHideItem = m_hideItem.lock();
+
+		if (oldHideItem)
+		{
+			return false;
+		}
+
+		m_hideItem = hideItem;
+		hideItem->GetItem()->SetItemOwner(GetGameObject(), false);
+		hideItem->GetObjectHider()->Hide(GetHidePosition());
+
+		return true;
+	}
+
+	std::shared_ptr<HideItem> HidePlace::TakeOutHideItem()
+	{
+		auto hideItem = m_hideItem.lock();
+
+		if (!hideItem)
+		{
+			return nullptr;
+		}
+
+		m_hideItem.reset();
+
+		hideItem->GetItem()->ReleaseItemOwner(false);
+		hideItem->GetObjectHider()->Appear();
+
+		return hideItem;
 	}
 
 	std::shared_ptr<HideItem> HidePlace::GetHideItem() const {
 		return m_hideItem.lock();
 	}
 
-	std::shared_ptr<HidePlace> HidePlace::GetStageHidePlace(int objectId)
+	bool HidePlace::CanPutable() const
 	{
-		for (auto& gameObject : App::GetApp()->GetScene<Scene>()->GetActiveStage()->GetGameObjectVec())
-		{
-			auto hidePlace = gameObject->GetComponent<HidePlace>(false);
-
-			if (!hidePlace || hidePlace->GetObjectId() != objectId)
-			{
-				continue;
-			}
-
-			return hidePlace;
-		}
-
-		return nullptr;
+		auto hideItem = m_hideItem.lock();
+		return hideItem == nullptr;
 	}
 
 	void HidePlace::SetDrawUI(const bool isActive) {

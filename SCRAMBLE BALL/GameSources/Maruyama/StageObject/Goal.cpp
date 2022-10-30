@@ -23,7 +23,7 @@
 
 #include "Itabashi/ObjectHider.h"
 #include "Itabashi/OnlineManager.h"
-#include "Itabashi/PlayerOnlineController.h"
+#include "Itabashi/OnlinePlayerSynchronizer.h"
 
 #include "Watanabe/Manager/PointManager.h"
 #include "Watanabe/Component/PlayerAnimator.h"
@@ -48,6 +48,8 @@
 #include "Patch/PlayerInputer.h"
 #include "MainStage.h"
 
+#include "Itabashi/OnlineGameItemManager.h"
+
 namespace basecross {
 	//--------------------------------------------------------------------------------------
 	/// オンライン用データ
@@ -56,14 +58,10 @@ namespace basecross {
 	{
 		team::TeamType team;
 		int playerNumber;
-		int itemId;
-		int hidePlaceId;
 
-		OnlineGoalData(team::TeamType team, int playerNumber, int itemId, int hidePlaceId) :
+		OnlineGoalData(team::TeamType team, int playerNumber) :
 			team(team),
-			playerNumber(playerNumber),
-			itemId(itemId),
-			hidePlaceId(hidePlaceId)
+			playerNumber(playerNumber)
 		{}
 	};
 
@@ -117,6 +115,8 @@ namespace basecross {
 
 		SettingPerformable();
 		m_soundEmitter = GetGameObject()->GetComponent<SoundEmitter>();
+
+		m_onlineGameItemManager = maru::Utility::FindComponent<OnlineGameItemManager>(GetStage());
 	}
 
 	void Goal::OnUpdate() {
@@ -140,7 +140,7 @@ namespace basecross {
 		float leftTime = m_timer->GetLeftTime();
 	}
 
-	Vec3 Goal::GoalProcess(const std::shared_ptr<GameObject>& other, const std::shared_ptr<Item>& item, const std::shared_ptr<HidePlace>& hidePlace)
+	void Goal::GoalProcess(const std::shared_ptr<GameObject>& other, const std::shared_ptr<Item>& item)
 	{
 		auto otherTrans = other->GetComponent<Transform>();
 
@@ -168,25 +168,28 @@ namespace basecross {
 			AddPoint(teamMember->GetTeam());
 		}
 
-		//再配置場所の取得
-		std::weak_ptr<Operator::ObjectHider> weakObjectHider = item->GetGameObject()->GetComponent<Operator::ObjectHider>();
-		std::weak_ptr<HidePlace> weakHidePlace = hidePlace;
-
-		//アイテム再配置イベント
-		auto itemHiderEvent = [&, weakObjectHider, weakHidePlace]() {
-			if (weakObjectHider.lock() && weakHidePlace.lock()) {
-				GoalItemRelocation(weakObjectHider.lock(), weakHidePlace.lock());
-			}
-		};
-
 		//カウントダウンスタート
-		StartCountDown(itemHiderEvent);
+		if (Online::OnlineManager::GetLocalPlayer().getIsMasterClient())
+		{
+			std::weak_ptr<OnlineGameItemManager> weakGameItemManager = m_onlineGameItemManager;
+			std::weak_ptr<HideItem> weakHideItem = item->GetGameObject()->GetComponent<HideItem>();
+
+			auto itemHiderEvent = [this, weakHideItem]()
+			{
+				m_onlineGameItemManager.lock()->RandomHideItem(weakHideItem.lock());
+				GoalItemRelocation();
+			};
+
+			StartCountDown(itemHiderEvent);
+		}
+		else
+		{
+			StartCountDown([this]() {GoalItemRelocation(); });
+		}
 
 		//ゴール通知
-		auto playerController = other->GetComponent<Online::PlayerOnlineController>(false);
+		auto playerController = other->GetComponent<OnlinePlayerSynchronizer>(false);
 		ScoreManager::GetInstance()->AddGoalCount(playerController->GetGamePlayerNumber());
-
-		return hidePlace->GetHidePosition();
 	}
 
 	void Goal::SuccessGoal(const CollisionPair& pair) {
@@ -194,36 +197,35 @@ namespace basecross {
 		auto itemBag = other->GetComponent<ItemBag>();
 		auto hideItem = itemBag->GetHideItem();
 		auto item = hideItem->GetGameObject()->GetComponent<Item>();
-		auto onlineController = other->GetComponent<Online::PlayerOnlineController>();
+		auto onlinePlayerSynchronizer = other->GetComponent<OnlinePlayerSynchronizer>();
 
 		itemBag->RemoveItem(item);
 
 		auto hidePlaces = maru::Utility::FindComponents<HidePlace>(GetStage());
 		auto hidePlace = maru::MyRandom::RandomArray(hidePlaces);
 
-		auto hidePosition = GoalProcess(other, item, hidePlace);
+		GoalProcess(other, item);
 
-		auto data = OnlineGoalData(m_param.team, onlineController->GetPlayerNumber(), item->GetItemId(), hidePlace->GetObjectId());
+		auto data = OnlineGoalData(m_param.team, onlinePlayerSynchronizer->GetOnlinePlayerNumber());
 		Online::OnlineManager::RaiseEvent(false, (std::uint8_t*)&data, sizeof(OnlineGoalData), EXECUTE_GOAL_EVENT_CODE);
 	}
 
-	void Goal::SuccessGoal(team::TeamType team, int playerNumber, int itemId, int hidePlaceId)
+	void Goal::SuccessGoal(team::TeamType team, int playerNumber)
 	{
 		if (GetTeam() != team) {
 			return;
 		}
 
-		auto onlineController = Online::PlayerOnlineController::GetPlayerOnlineController(playerNumber);
-		auto other = onlineController->GetGameObject();
+		auto onlinePlayerSynchronizer = OnlinePlayerSynchronizer::GetOnlinePlayerSynchronizer(playerNumber);
+		auto other = onlinePlayerSynchronizer->GetGameObject();
 		auto itemBag = other->GetComponent<ItemBag>();
-		auto item = itemBag->GetItem(itemId);
+		auto hideItem = itemBag->GetHideItem();
+		auto item = hideItem->GetItem();
 		itemBag->RemoveItem(item);
 
 		auto hidePlaces = maru::Utility::FindComponents<HidePlace>(GetStage());
 
-		std::shared_ptr<HidePlace> hidePlace = HidePlace::GetStageHidePlace(hidePlaceId);
-
-		GoalProcess(other, item, hidePlace);
+		GoalProcess(other, item);
 
 		PlayAnimation(other);
 	}
@@ -244,8 +246,7 @@ namespace basecross {
 		}
 	}
 
-	void Goal::GoalItemRelocation(const std::shared_ptr<Operator::ObjectHider>& hider, const std::shared_ptr<HidePlace>& hidePlace) {
-		hider->Appear(hidePlace->GetHidePosition());
+	void Goal::GoalItemRelocation() {
 
 		auto splash = m_splashMessageUI.lock();
 		splash->SetMessage(SplashMessageUI::MessageType::Relocation);		//
@@ -315,7 +316,7 @@ namespace basecross {
 		if (eventCode == EXECUTE_GOAL_EVENT_CODE)
 		{
 			auto data = *(OnlineGoalData*)bytes;
-			SuccessGoal(data.team, data.playerNumber, data.itemId, data.hidePlaceId);
+			SuccessGoal(data.team, data.playerNumber);
 			return;
 		}
 	}

@@ -1,7 +1,7 @@
-/*!
+ï»¿/*!
 @file TackleAttack.cpp
-@brief TackleAttackƒNƒ‰ƒXÀ‘Ì
-’S“–FŠÛR—TŠì
+@brief TackleAttackã‚¯ãƒ©ã‚¹å®Ÿä½“
+æ‹…å½“ï¼šä¸¸å±±è£•å–œ
 */
 
 #include "stdafx.h"
@@ -17,7 +17,6 @@
 #include "VelocityManager.h"
 
 #include "Itabashi/ObjectMover.h"
-#include "Itabashi/PlayerOnlineController.h"
 
 #include "Maruyama/Utility/Timer/TimeHelper.h"
 #include "Maruyama/Utility/Timer/GameTimer.h"
@@ -53,13 +52,13 @@ namespace basecross {
 	void TackleAttack::DefineTask() {
 		auto object = GetGameObject();
 
-		//—\”õ“®ì
+		//äºˆå‚™å‹•ä½œ
 		m_taskList->DefineTask(TaskEnum::Preliminary, std::make_shared<Task::Preriminary_Tackle>(object));
 
-		//UŒ‚
+		//æ”»æ’ƒ
 		m_taskList->DefineTask(TaskEnum::Tackle, std::make_shared<Task::Attack_Tackle>(object));
 
-		//UŒ‚Œãd’¼
+		//æ”»æ’ƒå¾Œç¡¬ç›´
 		m_taskList->DefineTask(TaskEnum::EndWait, std::make_shared<Task::EndWait_Tackle>(object));
 	}
 
@@ -76,7 +75,7 @@ namespace basecross {
 	}
 
 	void TackleAttack::StartAttack() {
-		if (IsTackle()) {	//ƒ^ƒbƒNƒ‹’†‚È‚çˆ—‚ğ”ò‚Î‚·B
+		if (IsTackle()) {	//ã‚¿ãƒƒã‚¯ãƒ«ä¸­ãªã‚‰å‡¦ç†ã‚’é£›ã°ã™ã€‚
 			return;
 		}
 
@@ -95,19 +94,19 @@ namespace basecross {
 
 	void TackleAttack::ForceTaskReset() {
 		m_taskList->ForceStop();
-		//Œ¸‘¬ˆ—‰ğœ
+		//æ¸›é€Ÿå‡¦ç†è§£é™¤
 		if (auto velocityManager = GetGameObject()->GetComponent<VelocityManager>(false)) {
 			velocityManager->SetIsDeseleration(false);
 		}
 	}
 
 	//--------------------------------------------------------------------------------------
-	/// ƒ^ƒbƒNƒ‹UŒ‚‚Ìƒ^ƒXƒN
+	/// ã‚¿ãƒƒã‚¯ãƒ«æ”»æ’ƒã®ã‚¿ã‚¹ã‚¯
 	//--------------------------------------------------------------------------------------
 
 	namespace Task {
 		//--------------------------------------------------------------------------------------
-		/// ƒ^ƒbƒNƒ‹UŒ‚‚Ì—\”õ“®ì
+		/// ã‚¿ãƒƒã‚¯ãƒ«æ”»æ’ƒã®äºˆå‚™å‹•ä½œ
 		//--------------------------------------------------------------------------------------
 
 		Preriminary_Tackle::Preriminary_Tackle(const std::shared_ptr<GameObject>& objPtr) :
@@ -118,21 +117,21 @@ namespace basecross {
 			SetIsActive(true);
 
 			m_animator = GetOwner()->GetComponent<PlayerAnimator>(false);
-			PlayAnimation();	//ƒAƒjƒ[ƒVƒ‡ƒ“‚ÌÄ¶
+			PlayAnimation();	//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®å†ç”Ÿ
 		}
 
 		bool Preriminary_Tackle::OnUpdate() {
 			auto animator = m_animator.lock();
-			if (!animator) {	//ƒAƒjƒ[ƒ^[‚ª‘¶İ‚µ‚È‚¢‚È‚çAˆ—‚ğI—¹‚³‚¹‚éB
+			if (!animator) {	//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚¿ãƒ¼ãŒå­˜åœ¨ã—ãªã„ãªã‚‰ã€å‡¦ç†ã‚’çµ‚äº†ã•ã›ã‚‹ã€‚
 				return true;
 			}
 
-			//ƒAƒjƒ[ƒ^‚ªDAStart‚Å‚È‚¢‚È‚çAˆ—‚ğI—¹‚³‚¹‚éB
+			//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚¿ãŒDAStartã§ãªã„ãªã‚‰ã€å‡¦ç†ã‚’çµ‚äº†ã•ã›ã‚‹ã€‚
 			if (!animator->IsCurretAnimationState(PlayerAnimationState::State::DAStart)) {
 				return true;
 			}
 
-			return animator->IsTargetAnimationEnd();	//ƒAƒjƒ[ƒVƒ‡ƒ“‚ªI—¹‚µ‚Ä‚¢‚é‚È‚çtrue
+			return animator->IsTargetAnimationEnd();	//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ãŒçµ‚äº†ã—ã¦ã„ã‚‹ãªã‚‰true
 		}
 
 		void Preriminary_Tackle::OnExit() {
@@ -146,7 +145,7 @@ namespace basecross {
 		}
 
 		//--------------------------------------------------------------------------------------
-		/// ƒ^ƒbƒNƒ‹UŒ‚‚ÌUŒ‚’†“®ì‚Ìƒpƒ‰ƒ[ƒ^
+		/// ã‚¿ãƒƒã‚¯ãƒ«æ”»æ’ƒã®æ”»æ’ƒä¸­å‹•ä½œã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
 		//--------------------------------------------------------------------------------------
 
 		Attack_Tackle_Parametor::Attack_Tackle_Parametor(const DamageData& damageData) :
@@ -155,7 +154,7 @@ namespace basecross {
 		{}
 
 		//--------------------------------------------------------------------------------------
-		/// ƒ^ƒbƒNƒ‹UŒ‚‚ÌUŒ‚’†“®ì
+		/// ã‚¿ãƒƒã‚¯ãƒ«æ”»æ’ƒã®æ”»æ’ƒä¸­å‹•ä½œ
 		//--------------------------------------------------------------------------------------
 
 		Attack_Tackle::Attack_Tackle(const std::shared_ptr<GameObject>& objPtr) :
@@ -167,7 +166,7 @@ namespace basecross {
 			m_param(parametor),
 			m_isCollision(false)
 		{
-			//‚ ‚½‚è”»’èİ’è
+			//ã‚ãŸã‚Šåˆ¤å®šè¨­å®š
 			if (auto collisionAction = GetOwner()->GetComponent<maru::CollisionAction>(false)) {
 				collisionAction->AddCollisionEnter([&](const CollisionPair& pair) { CollisionEnter(pair); });
 			}
@@ -179,7 +178,7 @@ namespace basecross {
 			m_isCollision = true;
 			m_animator = GetOwner()->GetComponent<PlayerAnimator>(false);
 
-			//‘¬“x‚ğ‰ÁZ
+			//é€Ÿåº¦ã‚’åŠ ç®—
 			if (auto velocityManager = GetOwner()->GetComponent<VelocityManager>(false)) {
 				auto transform = GetOwner()->GetComponent<Transform>();
 				velocityManager->AddForce(transform->GetForward() * m_param.tackleSpeed);
@@ -189,7 +188,7 @@ namespace basecross {
 
 			PlayAnimation();
 
-			// ƒ^ƒbƒNƒ‹ƒGƒtƒFƒNƒg‚ÌÄ¶
+			// ã‚¿ãƒƒã‚¯ãƒ«ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®å†ç”Ÿ
 			if (auto efkComp = GetOwner()->GetComponent<EfkComponent>(false)) {
 				efkComp->Play(L"Tackle", true);
 			}
@@ -197,16 +196,16 @@ namespace basecross {
 
 		bool Attack_Tackle::OnUpdate() {
 			auto animator = m_animator.lock();
-			if (!animator) {	//ƒAƒjƒ[ƒ^[‚ª‘¶İ‚µ‚È‚¢‚È‚çAˆ—‚ğI—¹‚³‚¹‚éB
+			if (!animator) {	//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚¿ãƒ¼ãŒå­˜åœ¨ã—ãªã„ãªã‚‰ã€å‡¦ç†ã‚’çµ‚äº†ã•ã›ã‚‹ã€‚
 				return true;
 			}
 
-			//ƒAƒjƒ[ƒ^‚ªDAStart‚Å‚È‚¢‚È‚çAˆ—‚ğI—¹‚³‚¹‚éB
+			//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚¿ãŒDAStartã§ãªã„ãªã‚‰ã€å‡¦ç†ã‚’çµ‚äº†ã•ã›ã‚‹ã€‚
 			if (!animator->IsCurretAnimationState(PlayerAnimationState::State::DAttack)) {
 				return true;
 			}
 
-			return animator->IsTargetAnimationEnd();	//ƒAƒjƒ[ƒVƒ‡ƒ“‚ªI—¹‚µ‚Ä‚¢‚é‚È‚çtrue
+			return animator->IsTargetAnimationEnd();	//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ãŒçµ‚äº†ã—ã¦ã„ã‚‹ãªã‚‰true
 		}
 
 		void Attack_Tackle::OnExit() {
@@ -232,7 +231,7 @@ namespace basecross {
 		}
 
 		//--------------------------------------------------------------------------------------
-		/// ƒ^ƒbƒNƒ‹UŒ‚‚ÌUŒ‚Œãd’¼
+		/// ã‚¿ãƒƒã‚¯ãƒ«æ”»æ’ƒã®æ”»æ’ƒå¾Œç¡¬ç›´
 		//--------------------------------------------------------------------------------------
 
 		EndWait_Tackle::EndWait_Tackle(const std::shared_ptr<GameObject>& objPtr, const float waitTime) :
@@ -254,12 +253,12 @@ namespace basecross {
 		}
 
 		void EndWait_Tackle::OnExit() {
-			//Œ¸‘¬ˆ—‰ğœ
+			//æ¸›é€Ÿå‡¦ç†è§£é™¤
 			if (auto velocityManager = m_velocityManager.lock()) {
 				velocityManager->SetIsDeseleration(false);
 			}
 
-			//ƒAƒjƒ[ƒVƒ‡ƒ“‚Ì•ÏX
+			//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®å¤‰æ›´
 			if (auto animator = GetOwner()->GetComponent<PlayerAnimator>(false)) {
 				animator->ChangePlayerAnimation(PlayerAnimationState::State::Wait);
 			}

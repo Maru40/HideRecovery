@@ -94,24 +94,4 @@ namespace basecross {
 
 		return nullptr;
 	}
-
-	std::shared_ptr<Item> ItemBag::GetItem(int itemId) const
-	{
-		for (auto& itemWeak : m_items) {
-
-			auto item = itemWeak.lock();
-
-			if (!item)
-			{
-				continue;
-			}
-
-			if (item->GetItemId() == itemId)
-			{
-				return item;
-			}
-		}
-
-		return nullptr;
-	}
 }

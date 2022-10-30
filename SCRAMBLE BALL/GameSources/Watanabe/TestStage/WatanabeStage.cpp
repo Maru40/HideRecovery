@@ -10,7 +10,7 @@
 #include "Maruyama/Player/Object/HeroPlayerObject.h"
 #include "Maruyama/Player/Object/VillainPlayerObject.h"
 #include "Patch/CameraHelper.h"
-#include "Itabashi/PlayerOnlineController.h"
+#include "Itabashi/OnlinePlayerSynchronizer.h"
 #include "Itabashi/OnlineTransformSynchronization.h"
 #include "Patch/SpringArmComponent.h"
 #include "Patch/CameraHelper.h"
@@ -73,7 +73,7 @@ namespace basecross {
 		// ヴィランプレイヤーを生成
 		auto player = Instantiate<VillainPlayerObject>(Vec3(0.0f, 1.0f, 0.0f), Quat::Identity());
 		// テストのためオンライン系のコンポーネントを削除
-		player->RemoveComponent<Online::PlayerOnlineController>();
+		player->RemoveComponent<OnlinePlayerSynchronizer>();
 		player->RemoveComponent<Online::OnlineTransformSynchronization>();
 		// プレイヤーを見るようなカメラを設定
 		auto sp = player->GetArm()->GetComponent<SpringArmComponent>();

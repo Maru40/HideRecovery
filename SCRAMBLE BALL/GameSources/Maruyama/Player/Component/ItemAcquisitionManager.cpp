@@ -25,7 +25,7 @@
 
 #include "Watanabe/Component/PlayerAnimator.h"
 #include "Watanabe/UI/SplashMessageUI.h"
-#include "Itabashi/PlayerOnlineController.h"
+#include "Itabashi/OnlinePlayerSynchronizer.h"
 
 #include "VelocityManager.h"
 
@@ -103,7 +103,7 @@ namespace basecross {
 	}
 
 	void ItemAcquisitionManager::HideItemAcquisitionEvent(const std::shared_ptr<GameObject>& other) {
-		auto selfTeamMember = Online::PlayerOnlineController::GetLocalOnlineController()->GetGameObject()->GetComponent<I_TeamMember>(false);
+		auto selfTeamMember =OnlinePlayerSynchronizer::GetLocalOnlinePlayerSynchronizer()->GetGameObject()->GetComponent<I_TeamMember>(false);
 		auto otherTeamMember = other->GetComponent<I_TeamMember>(false);
 		if (!selfTeamMember && !otherTeamMember) {
 			return;
@@ -211,13 +211,9 @@ namespace basecross {
 
 		auto animator = GetGameObject()->GetComponent<PlayerAnimator>(false);
 
-		if (!animator)
-		{
-			return false;
-		}
-
 		//アニメーションが置く状態ならできない
-		if (animator->IsCurretAnimationState(PlayerAnimationState::State::PutItem_Floor) || animator->IsCurretAnimationState(PlayerAnimationState::State::PutItem_HideObject))
+		if (!animator || animator->IsCurretAnimationState(PlayerAnimationState::State::PutItem_Floor) ||
+				animator->IsCurretAnimationState(PlayerAnimationState::State::PutItem_HideObject))
 		{
 			return false;
 		}

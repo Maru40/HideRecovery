@@ -2,7 +2,8 @@
 #include "GamePlayerManager.h"
 #include "OnlineMatching.h"
 #include "Maruyama/Player/Object/VillainPlayerObject.h"
-#include "PlayerOnlineController.h"
+#include "InputPlayerController.h"
+#include "PlayerControlManager.h"
 #include "OnlineTransformSynchronization.h"
 #include "Maruyama/Player/Component/PlayerSpawnPoint.h"
 #include "Maruyama/Utility/Utility.h"
@@ -25,8 +26,8 @@
 #include "Maruyama/UI/2D/Component/TeleportUI.h"
 #include "Maruyama/Utility/Component/ToTargetMove.h"
 #include "Maruyama/Utility/SingletonComponent/GameManager.h"
-
-#include "Maruyama/Player/Component/AccessHidePlace.h"
+#include "Maruyama/Player/Component/HidePlaceOpener.h"
+#include "OnlinePlayerSynchronizer.h"
 
 namespace basecross
 {
@@ -40,17 +41,16 @@ namespace basecross
 	{
 		auto playerObject = GetStage()->AddGameObject<VillainPlayerObject>();
 
-		auto onlineController = playerObject->GetComponent<Online::PlayerOnlineController>();
-		onlineController->SetPlayerNumber(playerNumber);
+		auto onlinePlayerSynchronizer = playerObject->GetComponent<OnlinePlayerSynchronizer>();
+		onlinePlayerSynchronizer->SetOnlinePlayerNumber(playerNumber);
+		onlinePlayerSynchronizer->SetGamePlayerNumber(gameNumber);
 
 		auto onlineTransform = playerObject->GetComponent<Online::OnlineTransformSynchronization>();
-		onlineTransform->SetPlayerNumber(playerNumber);
+		onlineTransform->SetOnlinePlayerNumber(playerNumber);
 
 		std::shared_ptr<PlayerSpawnPoint> spawnPoint;
 
 		auto areas = maru::Utility::FindComponents<OwnArea>(GetStage());
-
-		onlineController->SetGamePlayerNumber(gameNumber);
 
 		auto respawner = playerObject->GetComponent<Respawner>();
 		spawnPoint = GetSpawmPoint(gameNumber);
@@ -74,8 +74,6 @@ namespace basecross
 
 		auto playerStatus = playerObject->GetComponent<PlayerStatus>();
 		auto playerTeam = playerStatus->GetTeam();
-		auto playerOnlineController = playerObject->GetComponent<Online::PlayerOnlineController>();
-		auto playerGameNumber = playerOnlineController->GetGamePlayerNumber();
 
 		if (playerNumber != Online::OnlineManager::GetLocalPlayer().getNumber())
 		{
@@ -84,7 +82,7 @@ namespace basecross
 			GetStage()->AddGameObject<HPGaugeBP>(playerStatus);
 			// (playerNumber % 3) + 1で1～6が 1,2,3 1,2,3になる
 			auto label = GetStage()->AddGameObject<PlayerLabelBP>(
-				team::GetTeamTypeString(playerTeam), (playerGameNumber % 3) + 1);
+				team::GetTeamTypeString(playerTeam), (gameNumber % 3) + 1);
 
 			auto syncComp = label->AddComponent<SyncObject>();
 			syncComp->SetTarget(transform);
@@ -97,7 +95,9 @@ namespace basecross
 
 			return playerObject;
 		}
+
 		playerObject->AddComponent<Reticle>();
+		playerObject->AddComponent<InputPlayerController>();
 
 		auto springArm = playerObject->GetArm()->GetComponent<SpringArmComponent>();
 		auto& tpsCamera = springArm->GetChildObject();
@@ -105,7 +105,9 @@ namespace basecross
 		tpsCamera->AddComponent<VirtualCamera>(10);
 		tpsCamera->AddComponent<LookAtCameraManager>(playerObject, LookAtCameraManager::Parametor());
 
-		onlineController->SetCamera(GetStage()->GetView()->GetTargetCamera());
+		auto controlManager = playerObject->GetComponent<PlayerControlManager>();
+		controlManager->SetCamera(GetStage()->GetView()->GetTargetCamera());
+
 		auto teleport = playerObject->GetComponent<Teleport>();
 
 		auto cameraObject = GetStage()->AddGameObject<GameObject>();
@@ -118,6 +120,9 @@ namespace basecross
 
 		auto useWeapon = playerObject->GetComponent<UseWeapon>();
 		useWeapon->SetIsUseCamera(true);
+
+		auto accessHidePlace = playerObject->GetComponent<HidePlaceOpener>();
+		accessHidePlace->SetIsDrawUI(true);
 
 		// 自身のHPゲージにステータスコンポーネントをセット
 		auto mainStage = GetGameObject()->GetTypeStage<MainStage>(false);
@@ -132,7 +137,7 @@ namespace basecross
 			playerNumber->SetColor(teamColor);
 
 			playerLabel->ChangeSprite(SimpleSprite::Type::SpriteData, team::GetTeamTypeString(playerStatus->GetTeam()));
-			playerNumber->SetNumber((playerGameNumber % 3) + 1);
+			playerNumber->SetNumber((gameNumber % 3) + 1);
 		}
 
 		auto soundListener = playerObject->AddComponent<SoundListener>();
@@ -164,8 +169,6 @@ namespace basecross
 			springArm->SetRadXZ(rad);
 			springArm->OnUpdate2();
 		}
-
-		playerObject->AddComponent<AccessHidePlace>();
 
 		return playerObject;
 	}

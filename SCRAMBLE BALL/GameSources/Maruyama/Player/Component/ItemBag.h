@@ -80,8 +80,6 @@ namespace basecross {
 		/// </summary>
 		/// <returns>隠すアイテム</returns>
 		std::shared_ptr<HideItem> GetHideItem() const;
-
-		std::shared_ptr<Item> GetItem(int itemId) const;
 	};
 
 }

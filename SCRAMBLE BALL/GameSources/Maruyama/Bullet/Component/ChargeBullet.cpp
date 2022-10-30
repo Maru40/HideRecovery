@@ -14,7 +14,6 @@
 
 #include "Watanabe/Component/PlayerStatus.h"
 #include "Watanabe/DebugClass/Debug.h"
-#include "Itabashi/OnlineManager.h"
 
 #include "Maruyama/Load/StageMapCSV.h"
 
@@ -45,24 +44,11 @@ namespace basecross {
 	void ChargeBullet::Shot(const std::shared_ptr<GameObject>& owner, const Vec3& direct) {
 		SetOwner(owner);
 		SetMoveDirect(direct);
-
-		if (Online::OnlineManager::GetLocalPlayer().getIsMasterClient())
-		{
-			//最大距離を設定
-			auto rangeDestroy = GetGameObject()->AddComponent<RangeDestoryManager>(GetMaxRange());
-		}
 	}
 
 	void ChargeBullet::OnCollisionEnter(const CollisionPair& pair) {
 		auto other = pair.m_Dest.lock()->GetGameObject();
 		if (GetOwner() == other) {	//当たった相手が所有者なら処理をしない
-			return;
-		}
-
-		auto chargeBullet = other->GetComponent<ChargeBullet>(false);
-
-		if (!Online::OnlineManager::GetLocalPlayer().getIsMasterClient() || chargeBullet)
-		{
 			return;
 		}
 

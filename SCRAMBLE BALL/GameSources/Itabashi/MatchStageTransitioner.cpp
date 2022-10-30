@@ -4,6 +4,7 @@
 #include "Patch/InputHelper.h"
 #include "Patch/PlayerInputer.h"
 #include "Scene.h"
+#include <random>
 
 namespace basecross
 {
@@ -12,11 +13,16 @@ namespace basecross
 	{
 	}
 
-	void MatchStageTransitioner::GoToMainStage()
+	void MatchStageTransitioner::GoToMainStage(std::uint64_t seed)
 	{
 		SimpleSoundManager::StopBGM();
 		SimpleSoundManager::OnePlaySE(L"DecisionSE", 0.5f);
-		PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToMainStage");
+		PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToMainStage", std::make_shared<std::uint64_t>(seed));
+	}
+
+	std::uint64_t MatchStageTransitioner::CreateStageInstanceIdSeed() const
+	{
+		return std::mt19937_64(std::random_device()())();
 	}
 
 	void MatchStageTransitioner::OnCreate()
@@ -33,6 +39,7 @@ namespace basecross
 			return;
 		}
 
+		// キャンセルされたら、接続を切りタイトルに戻る
 		if (PlayerInputer::IsCancel())
 		{
 			Online::OnlineManager::Disconnect();
@@ -44,15 +51,17 @@ namespace basecross
 		{
 			const auto& gamePad = App::GetApp()->GetMyInputDevice()->GetXInputGamePad();
 			// Aボタンが押されたら
-			if (gamePad.IsInputPush(XInputCode::A))
+			if (PlayerInputer::GetInstance()->IsDecision())
 			{
 				// 何秒か押し続けて遷移
 				if (m_holdTimer.Count())
 				{
 					Online::OnlineManager::GetCurrentlyJoinedRoom().setIsOpen(false);
 					onlineMatching->ShuffleTeam();
-					GoToMainStage();
-					Online::OnlineManager::RaiseEvent(false, nullptr, 0, TO_MAINSTAGE_EVENT_CODE);
+
+					auto seed = CreateStageInstanceIdSeed();
+					GoToMainStage(seed);
+					Online::OnlineManager::RaiseEvent(false, (std::uint8_t*)&seed, sizeof(std::uint64_t), TO_MAINSTAGE_EVENT_CODE);
 					m_holdTimer.Reset();
 					return;
 				}
@@ -68,7 +77,7 @@ namespace basecross
 	{
 		if (eventCode == TO_MAINSTAGE_EVENT_CODE)
 		{
-			GoToMainStage();
+			GoToMainStage(*(std::uint64_t*)bytes);
 			return;
 		}
 	}

@@ -27,7 +27,7 @@
 
 #include "VelocityManager.h"
 #include "Itabashi/ObjectMover.h"
-#include "Itabashi/PlayerOnlineController.h"
+#include "Itabashi/OnlinePlayerSynchronizer.h"
 #include "Itabashi/OnlineTransformSynchronization.h"
 
 #include "Watanabe/Component/PlayerAnimator.h"
@@ -49,8 +49,10 @@
 
 #include "Maruyama/Enemy/Component/EyeSearchRange.h"
 
-#include "Maruyama/Player/Component/AccessHidePlace.h"
+#include "Maruyama/Player/Component/HidePlaceOpener.h"
 #include "Maruyama/Player/Component/HeightDestroy.h"
+
+#include "Itabashi/PlayerControlManager.h"
 
 namespace basecross {
 	PlayerObject::PlayerObject(const std::shared_ptr<Stage>& stage) :
@@ -97,7 +99,8 @@ namespace basecross {
 		objecfMover->SetMoveSpeed(8.5f);
 		//objecfMover->SetMoveSpeed(28.5f);
 		objecfMover->SetAffectedCamera(GetStage()->GetView()->GetTargetCamera());
-		AddComponent<Online::PlayerOnlineController>();
+		AddComponent<PlayerControlManager>();
+		AddComponent<OnlinePlayerSynchronizer>();
 		AddComponent<Online::OnlineTransformSynchronization>();
 
 		AddComponent<PlayerAnimator>();
@@ -113,7 +116,7 @@ namespace basecross {
 		//AddComponent<FieldMap>();
 		//AddComponent<Teleport>();
 		AddComponent<EyeSearchRange>();
-		//AddComponent<AccessHidePlace>();
+		AddComponent<HidePlaceOpener>();
 
 		AddComponent<Teleport>();	//テレポートの生成
 		auto heightDestory = AddComponent<HeightDestroy>();

@@ -71,7 +71,8 @@ namespace basecross {
 			ResetActiveStage<LoadStage>(L"ToTitleStage");
 		}
 		else if (event->m_MsgStr == L"ToMainStage") {
-			ResetActiveStage<MainStage>();
+			auto seedPtr = static_pointer_cast<std::uint64_t>(event->m_Info);
+			ResetActiveStage<MainStage>(*seedPtr);
 		}
 		else if (event->m_MsgStr == L"ToWatanabeStage") {
 			ResetActiveStage<TestShaderStage>();

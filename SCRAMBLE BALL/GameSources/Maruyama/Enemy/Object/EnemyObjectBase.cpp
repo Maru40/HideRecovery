@@ -1,6 +1,6 @@
-/*!
+Ôªø/*!
 @file EnemyObjectBase.cpp
-@brief EnemyObjectBaseÇ»Ç«é¿ëÃ
+@brief EnemyObjectBase„Å™„Å©ÂÆü‰Ωì
 */
 
 #include "stdafx.h"
@@ -21,9 +21,9 @@
 
 #include "Maruyama/Enemy/Component/EnemyBase.h"
 
-#include "Maruyama/Player/Component/AccessHidePlace.h"
-
 #include "SelfAstarNodeController.h"
+
+#include "Maruyama/Player/Component/HidePlaceOpener.h"
 
 namespace basecross {
 	namespace Enemy {
@@ -47,7 +47,7 @@ namespace basecross {
 			AddComponent<TargetManager>();
 			AddComponent<EyeSearchRange>();
 			AddComponent<SeekTarget>(nullptr);
-			AddComponent<AccessHidePlace>()->SetIsUpdateDrawBoxUI(false);
+			AddComponent<HidePlaceOpener>()->SetIsDrawUI(false);
 			AddComponent<SelfAstarNodeController>();
 
 			//AddComponent<AIPlayerBehaviorTree>();

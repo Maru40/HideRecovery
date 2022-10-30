@@ -47,6 +47,8 @@
 #include "Maruyama/StageObject/GoalObject.h"
 #include "Itabashi/GamePlayerManager.h"
 
+#include "Itabashi/OnlineStatus.h"
+
 namespace basecross {
 	void GameStageBase::CreateMainCamera()
 	{
@@ -97,7 +99,7 @@ namespace basecross {
 		AddGameObject<SkyBox>(Vec3(500));
 
 		//フィールドの影響マップの生成
-		for (auto block : maru::Utility::FindGameObjects<Block>(GetThis<Stage>())) {
+		for (auto& block : maru::Utility::FindGameObjects<Block>(GetThis<Stage>())) {
 			if (block->GetName() == L"Floor") {	//床の取得
 				m_floors.push_back(block);
 				break;
@@ -106,6 +108,14 @@ namespace basecross {
 		AddGameObject<GameObject>()->AddComponent<maru::FieldImpactMap>(maru::Utility::ConvertArrayType<GameObject>(m_floors));
 		//外側コリジョン設定
 		//CreateMapOutCollisions(m_floors);
+
+		UniqueIdCreater<std::uint32_t> idCreater(m_stageObjectIdSeed, 1, UINT_MAX);
+
+		for (auto& onlineStatus : maru::Utility::FindComponents<Online::OnlineStatus>(GetThis<Stage>()))
+		{
+			// 成功するまで繰り返す
+			while (!onlineStatus->ChangeInstanceId(idCreater.CreateId())) {}
+		}
 	}
 
 	std::shared_ptr<UIObjectCSVBuilder> GameStageBase::CreateUI(const wstring& fileName) {
@@ -150,8 +160,9 @@ namespace basecross {
 		Stage::RenderStage();
 	}
 
-	GameStageBase::GameStageBase() :
-		Stage()
+	GameStageBase::GameStageBase(std::uint64_t seed) :
+		Stage(),
+		m_stageObjectIdSeed(seed)
 	{}
 
 	void GameStageBase::OnCreate() {

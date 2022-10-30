@@ -10,7 +10,7 @@
 
 namespace basecross {
 	ScoreUI::ScoreUI(const shared_ptr<Stage>& stage, int playerNumber, team::TeamType teamType)
-		:UIObjectBase(stage, L"ScoreUI"), m_playerNumber(playerNumber), m_teamType(teamType)
+		:UIObjectBase(stage, L"ScoreUI"), m_onlinePlayerNumber(playerNumber), m_teamType(teamType)
 	{}
 
 	ScoreUI::ScoreUI(const shared_ptr<Stage>& stage, const wstring& line)
@@ -18,7 +18,7 @@ namespace basecross {
 	{
 		vector<wstring> tokens = DataExtracter::DelimitData(line);
 		size_t nextIndex = DataExtracter::RectTransformDataExtraction(tokens, m_rectTransformData);
-		m_playerNumber = stoi(tokens[nextIndex]);
+		m_onlinePlayerNumber = stoi(tokens[nextIndex]);
 
 		wstring teamType = tokens[nextIndex + 1];
 		if (teamType == L"Blue") {
@@ -51,7 +51,7 @@ namespace basecross {
 
 		// データの適用
 		auto playerNumberUI = uiBuilder->GetUIObject<Numbers>(L"PlayerNumber");
-		playerNumberUI->SetNumber(m_playerNumber);
+		playerNumberUI->SetNumber(m_onlinePlayerNumber);
 		auto killCountNumber = uiBuilder->GetUIObject<Numbers>(L"KillCountNumber");
 		killCountNumber->SetNumber(scoreData.KillCount);
 		auto goalCountNumber = uiBuilder->GetUIObject<Numbers>(L"GoalCountNumber");

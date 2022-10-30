@@ -10,6 +10,8 @@
 #include "targetver.h"
 
 #define WIN32_LEAN_AND_MEAN             // Windows ヘッダーから使用されていない部分を除外します。
+#define NOMINMAX                        // min(), max()マクロを無効にする
+
 // Windows ヘッダー ファイル:
 #include <windows.h>
 

@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 
 #include "MaruTestStage.h"
 
@@ -21,7 +21,6 @@
 #include "Maruyama/Player/Object/HeroPlayerObject.h"
 #include "Maruyama/Player/Object/VillainPlayerObject.h"
 #include "Patch/CameraHelper.h"
-#include "Itabashi/PlayerOnlineController.h"
 #include "Itabashi/OnlineTransformSynchronization.h"
 #include "Patch/SpringArmComponent.h"
 #include "Patch/CameraHelper.h"
@@ -43,14 +42,14 @@ namespace basecross {
 		const Vec3 eye(0.0f, 252.4f, -0.001f);
 		const Vec3 at(0, 0.0f, 0);
 		auto PtrView = CreateView<SingleView>();
-		//ƒrƒ…[‚ÌƒJƒƒ‰‚Ìİ’è
+		//ãƒ“ãƒ¥ãƒ¼ã®ã‚«ãƒ¡ãƒ©ã®è¨­å®š
 		auto PtrCamera = ObjectFactory::Create<Camera>();
 		PtrView->SetCamera(PtrCamera);
 		PtrCamera->SetEye(eye);
 		PtrCamera->SetAt(at);
-		//ƒ}ƒ‹ƒ`ƒ‰ƒCƒg‚Ìì¬
+		//ãƒãƒ«ãƒãƒ©ã‚¤ãƒˆã®ä½œæˆ
 		auto PtrMultiLight = CreateLight<MultiLight>();
-		//ƒfƒtƒHƒ‹ƒg‚Ìƒ‰ƒCƒeƒBƒ“ƒO‚ğw’è
+		//ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®ãƒ©ã‚¤ãƒ†ã‚£ãƒ³ã‚°ã‚’æŒ‡å®š
 		PtrMultiLight->SetDefaultLighting();
 	}
 
@@ -65,7 +64,7 @@ namespace basecross {
 
 		auto cameraObj = Instantiate<CameraObject>();
 		
-		//// ƒvƒŒƒCƒ„[‚ğŒ©‚é‚æ‚¤‚ÈƒJƒƒ‰‚ğİ’è
+		//// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’è¦‹ã‚‹ã‚ˆã†ãªã‚«ãƒ¡ãƒ©ã‚’è¨­å®š
 		auto player = Instantiate<TestPlayerObject>(Vec3(0.0f, 1.0f, -7.0f), Quat::Identity());
 		auto sp = player->GetArm()->GetComponent<SpringArmComponent>();
 		auto& tpsCamera = sp->GetChildObject();

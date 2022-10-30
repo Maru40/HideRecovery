@@ -26,7 +26,7 @@ namespace basecross {
 
 	public:
 
-		MainStage() :GameStageBase() {}
+		MainStage(std::uint64_t seed = 0) :GameStageBase(seed) {}
 		virtual ~MainStage() {}
 
 		virtual void OnCreate() override;

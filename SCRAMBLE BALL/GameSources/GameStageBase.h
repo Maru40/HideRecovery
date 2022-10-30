@@ -1,4 +1,4 @@
-/*!
+ï»¿/*!
 @file GameStageBase.h
 @brief GameStageBase
 */
@@ -8,7 +8,7 @@
 
 namespace basecross {
 	//--------------------------------------------------------------------------------------
-	/// ‘O•ûéŒ¾
+	/// å‰æ–¹å®£è¨€
 	//--------------------------------------------------------------------------------------
 	class PlayerObject;
 	class MainCamera;
@@ -21,61 +21,63 @@ namespace basecross {
 	class GameStageBase : public Stage {
 	protected:
 		//--------------------------------------------------------------------------------------
-		/// ‚æ‚­g‚í‚ê‚éƒIƒuƒWƒFƒNƒg
+		/// ã‚ˆãä½¿ã‚ã‚Œã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 		//--------------------------------------------------------------------------------------
 
 		ex_weak_ptr<PlayerObject> m_player;
-		std::vector<std::shared_ptr<GameObject>> m_floors; // °‚É‘Î‰‚·‚éƒIƒuƒWƒFƒNƒg
+		std::vector<std::shared_ptr<GameObject>> m_floors; // åºŠã«å¯¾å¿œã™ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 
 		//--------------------------------------------------------------------------------------
-		/// ƒJƒƒ‰
+		/// ã‚«ãƒ¡ãƒ©
 		//--------------------------------------------------------------------------------------
 
-		//ƒƒCƒ“ƒJƒƒ‰
-		//std::shared_ptr<SingleView> m_mainView;                    //ƒrƒ…[
-		//std::shared_ptr<MainCamera> m_mainCamera;                  //ƒJƒƒ‰
-		//std::shared_ptr<MainCameraObject> m_mainCameraObject;      //ƒIƒuƒWƒFƒNƒg
-		std::shared_ptr<SingleView> m_mainView;						//ƒrƒ…[
-		std::shared_ptr<Camera> m_mainCamera;						//ƒJƒƒ‰
+		//ãƒ¡ã‚¤ãƒ³ã‚«ãƒ¡ãƒ©
+		//std::shared_ptr<SingleView> m_mainView;                    //ãƒ“ãƒ¥ãƒ¼
+		//std::shared_ptr<MainCamera> m_mainCamera;                  //ã‚«ãƒ¡ãƒ©
+		//std::shared_ptr<MainCameraObject> m_mainCameraObject;      //ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+		std::shared_ptr<SingleView> m_mainView;						//ãƒ“ãƒ¥ãƒ¼
+		std::shared_ptr<Camera> m_mainCamera;						//ã‚«ãƒ¡ãƒ©
 
-		//ƒXƒ^[ƒgƒJƒƒ‰
-		std::shared_ptr<SingleView> m_startView;					//ƒrƒ…[
-		std::shared_ptr<StartCamera> m_startCamera;					//ƒJƒƒ‰
+		//ã‚¹ã‚¿ãƒ¼ãƒˆã‚«ãƒ¡ãƒ©
+		std::shared_ptr<SingleView> m_startView;					//ãƒ“ãƒ¥ãƒ¼
+		std::shared_ptr<StartCamera> m_startCamera;					//ã‚«ãƒ¡ãƒ©
 
-		//ƒŒƒ“ƒ_[ƒ^[ƒQƒbƒg
-		std::shared_ptr<SlimeRenderTarget> m_slimeRenderTarget;		//ƒXƒ‰ƒCƒ€—p‚ÌƒŒƒ“ƒ_[ƒ^[ƒQƒbƒg
+		//ãƒ¬ãƒ³ãƒ€ãƒ¼ã‚¿ãƒ¼ã‚²ãƒƒãƒˆ
+		std::shared_ptr<SlimeRenderTarget> m_slimeRenderTarget;		//ã‚¹ãƒ©ã‚¤ãƒ ç”¨ã®ãƒ¬ãƒ³ãƒ€ãƒ¼ã‚¿ãƒ¼ã‚²ãƒƒãƒˆ
 
-		// ƒrƒ‹ƒ_[
-		std::shared_ptr<UIObjectCSVBuilder> m_uiObjectCSVBuilder;	//UI—p‚ÌƒIƒuƒWƒFƒNƒgƒrƒ‹ƒ_[
+		// ãƒ“ãƒ«ãƒ€ãƒ¼
+		std::shared_ptr<UIObjectCSVBuilder> m_uiObjectCSVBuilder;	//UIç”¨ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãƒ“ãƒ«ãƒ€ãƒ¼
+
+		std::uint64_t m_stageObjectIdSeed; // ã‚¹ãƒ†ãƒ¼ã‚¸è¨­ç½®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹IDç”¨ã‚·ãƒ¼ãƒ‰
 
 		/// <summary>
-		/// ƒƒCƒ“ƒJƒƒ‰‚Ì¶¬
+		/// ãƒ¡ã‚¤ãƒ³ã‚«ãƒ¡ãƒ©ã®ç”Ÿæˆ
 		/// </summary>
 		virtual void CreateMainCamera();
 
 		/// <summary>
-		/// ƒXƒ^[ƒgƒJƒƒ‰‚Ì¶¬
+		/// ã‚¹ã‚¿ãƒ¼ãƒˆã‚«ãƒ¡ãƒ©ã®ç”Ÿæˆ
 		/// </summary>
-		/// <param name="stageName">ƒXƒe[ƒW–¼</param>
+		/// <param name="stageName">ã‚¹ãƒ†ãƒ¼ã‚¸å</param>
 		virtual void CreateStartCamera(const wstring& stageName);
 
 		/// <summary>
-		/// ƒ}ƒbƒv‚Ì¶¬
+		/// ãƒãƒƒãƒ—ã®ç”Ÿæˆ
 		/// </summary>
-		/// <param name="fileName">ƒ}ƒbƒvƒtƒ@ƒCƒ‹‚Ì–¼‘O</param>
+		/// <param name="fileName">ãƒãƒƒãƒ—ãƒ•ã‚¡ã‚¤ãƒ«ã®åå‰</param>
 		virtual void CreateMap(const wstring& fileName);
 
 		/// <summary>
-		/// UI‚Ì¶¬
+		/// UIã®ç”Ÿæˆ
 		/// </summary>
-		/// <param name="fileName">UIƒŒƒCƒAƒEƒgƒtƒ@ƒCƒ‹‚Ì–¼‘O</param>
-		/// <returns>ƒrƒ‹ƒ_[</returns>
+		/// <param name="fileName">UIãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆãƒ•ã‚¡ã‚¤ãƒ«ã®åå‰</param>
+		/// <returns>ãƒ“ãƒ«ãƒ€ãƒ¼</returns>
 		virtual std::shared_ptr<UIObjectCSVBuilder> CreateUI(const wstring& fileName);
 
 		/// <summary>
-		/// ŠO‘¤‚ÌƒRƒŠƒWƒ‡ƒ“‚ğ•¡”¶¬‚·‚éŠÖ”
+		/// å¤–å´ã®ã‚³ãƒªã‚¸ãƒ§ãƒ³ã‚’è¤‡æ•°ç”Ÿæˆã™ã‚‹é–¢æ•°
 		/// </summary>
-		/// <param name="objects">¶¬‚·‚éƒx[ƒX‚Æ‚È‚é°ƒIƒuƒWƒFƒNƒg</param>
+		/// <param name="objects">ç”Ÿæˆã™ã‚‹ãƒ™ãƒ¼ã‚¹ã¨ãªã‚‹åºŠã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</param>
 		template<class T>
 		void CreateMapOutCollisions(const std::vector<std::shared_ptr<T>>& objects) {
 			for (const auto& object : objects) {
@@ -85,53 +87,53 @@ namespace basecross {
 				auto halfScale = scale * 0.5f;
 
 				constexpr float Width = 0.5f;
-				//‰œs¶¬
+				//å¥¥è¡Œç”Ÿæˆ
 				auto forwardPosition = position + (Vec3::Forward() * halfScale.z);
 				CreateMapOutCollision(forwardPosition, Vec3::Forward(), scale.x, Width);
 
-				//è‘O‘¤¶¬
+				//æ‰‹å‰å´ç”Ÿæˆ
 				auto backPosition = position + (-Vec3::Forward() * halfScale.z);
 				CreateMapOutCollision(backPosition, -Vec3::Forward(), scale.x, Width);
 
-				//‰E‘¤
+				//å³å´
 				auto rightPosition = position + (Vec3::Right() * halfScale.x);
 				CreateMapOutCollision(rightPosition, Vec3::Right(), scale.z, Width);
 
-				//¶‘¤
+				//å·¦å´
 				auto leftPosition = position + (-Vec3::Right() * halfScale.x);
 				CreateMapOutCollision(leftPosition, -Vec3::Right(), scale.z, Width);
 			}
 		}
 
 		/// <summary>
-		/// ŠO‘¤‚ÌƒRƒŠƒWƒ‡ƒ“‚ğ¶¬‚·‚é
+		/// å¤–å´ã®ã‚³ãƒªã‚¸ãƒ§ãƒ³ã‚’ç”Ÿæˆã™ã‚‹
 		/// </summary>
-		/// <param name="startPosition">¶¬ƒXƒ^[ƒgêŠ</param>
-		/// <param name="forward">Œü‚«</param>
-		/// <param name="length">’·‚³</param>
-		/// <param name="width">‰¡•</param>
-		/// <param name="height">‚‚³</param>
+		/// <param name="startPosition">ç”Ÿæˆã‚¹ã‚¿ãƒ¼ãƒˆå ´æ‰€</param>
+		/// <param name="forward">å‘ã</param>
+		/// <param name="length">é•·ã•</param>
+		/// <param name="width">æ¨ªå¹…</param>
+		/// <param name="height">é«˜ã•</param>
 		void CreateMapOutCollision(const Vec3& startPosition, const Vec3& forward, const float& length, const float& width, const float& height = 15.0f);
 
 	public:
-		GameStageBase();
+		GameStageBase(std::uint64_t seed = 0);
 		virtual ~GameStageBase() {}
 
 		virtual void OnCreate() override;
 		virtual void RenderStage() override;
 
 		//--------------------------------------------------------------------------------------
-		/// ƒAƒNƒZƒbƒT
+		/// ã‚¢ã‚¯ã‚»ãƒƒã‚µ
 		//--------------------------------------------------------------------------------------
 
 		/// <summary>
-		/// ƒvƒŒƒCƒ„[‚Ìæ“¾
+		/// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å–å¾—
 		/// </summary>
-		/// <returns>ƒvƒŒƒCƒ„[</returns>
+		/// <returns>ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼</returns>
 		std::shared_ptr<PlayerObject> GetPlayer() const;
 
 		/// <summary>
-		/// ƒJƒƒ‰‚Ìæ“¾
+		/// ã‚«ãƒ¡ãƒ©ã®å–å¾—
 		/// </summary>
 		template<class T>
 		std::shared_ptr<T> GetCamera() const
@@ -143,35 +145,35 @@ namespace basecross {
 		}
 
 		/// <summary>
-		/// ƒƒCƒ“ƒJƒƒ‰‚ÉØ‚è‘Ö‚¦
+		/// ãƒ¡ã‚¤ãƒ³ã‚«ãƒ¡ãƒ©ã«åˆ‡ã‚Šæ›¿ãˆ
 		/// </summary>
-		/// <returns>ƒƒCƒ“ƒJƒƒ‰</returns>
+		/// <returns>ãƒ¡ã‚¤ãƒ³ã‚«ãƒ¡ãƒ©</returns>
 		std::shared_ptr<Camera> ChangeMainCamera();
 
 		/// <summary>
-		/// ƒƒCƒ“ƒJƒƒ‰ƒIƒuƒWƒFƒNƒg‚Ìæ“¾
+		/// ãƒ¡ã‚¤ãƒ³ã‚«ãƒ¡ãƒ©ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®å–å¾—
 		/// </summary>
-		/// <returns>ƒƒCƒ“ƒJƒƒ‰ƒIƒuƒWƒFƒNƒg</returns>
+		/// <returns>ãƒ¡ã‚¤ãƒ³ã‚«ãƒ¡ãƒ©ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</returns>
 		//std::shared_ptr<MainCameraObject> GetMainCameraObject() const;
 
 		/// <summary>
-		/// ƒXƒ^[ƒgƒJƒƒ‰‚ÉØ‚è‘Ö‚¦
+		/// ã‚¹ã‚¿ãƒ¼ãƒˆã‚«ãƒ¡ãƒ©ã«åˆ‡ã‚Šæ›¿ãˆ
 		/// </summary>
-		/// <returns>ƒXƒ^[ƒgƒJƒƒ‰</returns>
+		/// <returns>ã‚¹ã‚¿ãƒ¼ãƒˆã‚«ãƒ¡ãƒ©</returns>
 		std::shared_ptr<StartCamera> ChangeStartCamera();
 
 		/// <summary>
-		/// °‚É‘Î‰‚·‚éƒIƒuƒWƒFƒNƒg‚ğ’Ç‰Á
+		/// åºŠã«å¯¾å¿œã™ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’è¿½åŠ 
 		/// </summary>
-		/// <param name="obj">ƒIƒuƒWƒFƒNƒg</param>
+		/// <param name="obj">ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</param>
 		void AddFloorObject(std::shared_ptr<GameObject> obj) {
 			m_floors.push_back(obj);
 		}
 
 		/// <summary>
-		/// UI—p‚ÌƒIƒuƒWƒFƒNƒgƒrƒ‹ƒ_[‚ğæ“¾
+		/// UIç”¨ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãƒ“ãƒ«ãƒ€ãƒ¼ã‚’å–å¾—
 		/// </summary>
-		/// <returns>ƒIƒuƒWƒFƒNƒgƒrƒ‹ƒ_[</returns>
+		/// <returns>ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãƒ“ãƒ«ãƒ€ãƒ¼</returns>
 		std::shared_ptr<UIObjectCSVBuilder> GetUIObjectCSVBuilder() {
 			return m_uiObjectCSVBuilder;
 		}

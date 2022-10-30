@@ -22,6 +22,7 @@ namespace basecross {
 	class RelocationCountBP;
 	class GoalBP;
 	class HidePlace;
+	class OnlineGameItemManager;
 
 	namespace Operator {
 		class ObjectHider;
@@ -65,6 +66,8 @@ namespace basecross {
 
 		std::weak_ptr<SoundEmitter> m_soundEmitter;
 
+		std::weak_ptr<OnlineGameItemManager> m_onlineGameItemManager;
+
 		SoundClip m_goalEffectSoundClip;
 		SoundClip m_relocationBallSoundClip; //ボール再配置SE
 
@@ -83,7 +86,7 @@ namespace basecross {
 		/// </summary>
 		void TimerUpdate();
 
-		Vec3 GoalProcess(const std::shared_ptr<GameObject>& other, const std::shared_ptr<Item>& item, const std::shared_ptr<HidePlace>& hidePlace);
+		void GoalProcess(const std::shared_ptr<GameObject>& other, const std::shared_ptr<Item>& item);
 
 		/// <summary>
 		/// ゴール成功(ゴールした人の処理)
@@ -96,9 +99,7 @@ namespace basecross {
 		/// </summary>
 		/// <param name="team">チームタイプ</param>
 		/// <param name="playerNumber">プレイヤーナンバー</param>
-		/// <param name="itemId">アイテムID</param>
-		/// <param name="hidePlaceId">隠す場所のId</param>
-		void SuccessGoal(team::TeamType team, int playerNumber, int itemId, int hidePlaceId);
+		void SuccessGoal(team::TeamType team, int playerNumber);
 
 		/// <summary>
 		/// ポイント加算の通知を行う
@@ -108,7 +109,7 @@ namespace basecross {
 		/// <summary>
 		/// 再配置までのカウントダウン
 		/// </summary>
-		void StartCountDown(const std::function<void()>& endEvent);
+		void StartCountDown(const std::function<void()>& endEvent = []() {});
 
 		/// <summary>
 		/// アニメーション再生
@@ -118,7 +119,7 @@ namespace basecross {
 		/// <summary>
 		/// アイテム再配置処理
 		/// </summary>
-		void GoalItemRelocation(const std::shared_ptr<Operator::ObjectHider>& hider, const std::shared_ptr<HidePlace>& hidePlace);
+		void GoalItemRelocation();
 
 		/// <summary>
 		/// 当たり判定をとるかどうか

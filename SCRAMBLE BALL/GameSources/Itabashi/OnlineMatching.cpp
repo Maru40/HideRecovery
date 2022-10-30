@@ -23,7 +23,7 @@ namespace Online
 
 		for (auto& number : m_playerNumbers)
 		{
-			if (isAdd)
+			if (isAdd) // 追加なら
 			{
 				if (number == 0)
 				{
@@ -31,7 +31,7 @@ namespace Online
 					break;
 				}
 			}
-			else
+			else // 削除なら
 			{
 				if (number == playerNumber)
 				{
@@ -89,7 +89,7 @@ namespace Online
 
 	void OnlineMatching::Reset()
 	{
-		std::fill_n(m_playerNumbers, MAX_PLAYER_NUM, 0);
+		std::fill_n(m_playerNumbers, MAX_PLAYER_NUM, OnlineManager::INVALID_ONLINE_PLAYER_NUMBER);
 	}
 
 	void OnlineMatching::ShuffleTeam()
@@ -122,7 +122,7 @@ namespace Online
 
 		auto& players = OnlineManager::GetCurrentlyJoinedRoom().getPlayers();
 
-		for (int i = 0; i < players.getSize(); ++i)
+		for (unsigned int i = 0; i < players.getSize(); ++i)
 		{
 			unsigned int index = eng() % gameNumbers.size();
 

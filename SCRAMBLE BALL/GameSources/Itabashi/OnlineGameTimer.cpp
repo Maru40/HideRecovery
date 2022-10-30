@@ -30,11 +30,6 @@ namespace basecross
 
 	}
 
-	bool OnlineGameTimer::IsStartable() const
-	{
-		return m_isStartable;
-	}
-
 	void OnlineGameTimer::StartCheck()
 	{
 		if (!Online::OnlineManager::GetLocalPlayer().getIsMasterClient())
@@ -70,11 +65,6 @@ namespace basecross
 		m_count = 1;
 		SimpleSoundManager::OnePlaySE(L"StartCountSE", 0.5f);
 		
-		if (Online::OnlineManager::GetLocalPlayer().getIsMasterClient())
-		{
-			StartItemRandom();
-		}
-
 		for (auto& m_gameStartCountFuncs : m_gameStartCountFuncs)
 		{
 			m_gameStartCountFuncs();
@@ -91,36 +81,9 @@ namespace basecross
 		}
 	}
 
-	void OnlineGameTimer::StartItemRandom()
-	{
-		auto item = Item::StageFindToItemId(GetStage(), 100);
-
-		auto hidePlaces = maru::Utility::FindComponents<HidePlace>();
-
-		auto hidePlace = maru::MyRandom::RandomArray(hidePlaces);
-		auto objectHider = item->GetGameObject()->GetComponent<Operator::ObjectHider>();
-
-		objectHider->Appear(hidePlace->GetHidePosition());
-		hidePlace->SetHideItem(item->GetGameObject()->GetComponent<HideItem>());
-
-		auto data = OnlineRandomItemData(item->GetItemId(), hidePlace->GetObjectId());
-		Online::OnlineManager::RaiseEvent(false, (std::uint8_t*)&data, sizeof(OnlineRandomItemData), START_ITEM_RANDOM_EVENT_CODE);
-	}
-
-	void OnlineGameTimer::StartItemRandomEvent(int itemId, int hidePlaceId)
-	{
-		auto item = Item::StageFindToItemId(GetStage(), itemId);
-		auto hidePlace = HidePlace::GetStageHidePlace(hidePlaceId);
-
-		auto objectHider = item->GetGameObject()->GetComponent<Operator::ObjectHider>();
-
-		objectHider->Appear(hidePlace->GetHidePosition());
-		hidePlace->SetHideItem(item->GetGameObject()->GetComponent<HideItem>());
-	}
-
 	void OnlineGameTimer::OnCreate()
 	{
-		m_isStartable = true;
+		m_canGameStartable = true;
 	}
 
 	void OnlineGameTimer::OnLateStart()
@@ -194,16 +157,9 @@ namespace basecross
 
 	void OnlineGameTimer::OnCustomEventAction(int playerNumber, std::uint8_t eventCode, const std::uint8_t* bytes)
 	{
-		if (eventCode == START_ITEM_RANDOM_EVENT_CODE)
-		{
-			auto data = *(OnlineRandomItemData*)bytes;
-			StartItemRandomEvent(data.itemId, data.hidePlaceId);
-			return;
-		}
-
 		if (eventCode == GAMETIMER_START_CHECK_EVENT_CODE)
 		{
-			if (!IsStartable())
+			if (!m_canGameStartable)
 			{
 				return;
 			}
