@@ -19,6 +19,7 @@ namespace basecross {
 	class TargetManager;
 	class VelocityManager;
 	class RotationController;
+	class EyeSearchRange;
 
 	struct Task_MovePositions_Parametor;
 
@@ -78,6 +79,7 @@ namespace basecross {
 					std::unique_ptr<TaskList<TaskEnum>> m_taskList;	//タスクリスト
 
 					std::weak_ptr<Transform> m_transform;					//トランスフォーム
+					std::weak_ptr<EyeSearchRange> m_eyeRange;				//視界管理
 					std::weak_ptr<TargetManager> m_targetManager;			//ターゲット管理
 					std::weak_ptr<VelocityManager> m_velocityManager;		//速度管理
 					std::weak_ptr<RotationController> m_rotationController;	//向き管理
@@ -99,6 +101,11 @@ namespace basecross {
 					/// </summary>
 					/// <returns>ターゲット</returns>
 					std::shared_ptr<GameObject> CalculateTarget();
+
+					/// <summary>
+					/// 次のMoveArriveタスクに変更するかを監視する。
+					/// </summary>
+					void CheckForceNextMoveArriveTask();
 
 					/// <summary>
 					/// タスクの定義

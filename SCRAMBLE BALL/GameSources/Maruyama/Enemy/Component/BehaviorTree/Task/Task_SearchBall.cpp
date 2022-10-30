@@ -34,7 +34,9 @@
 #include "Maruyama/Item/HideItem.h"
 #include "Maruyama/StageObject/HidePlace.h"
 
+#include "Maruyama/Enemy/Component/EyeSearchRange.h"
 #include "Maruyama/Utility/Component/RotationController.h"
+#include "Maruyama/Utility/UtilityObstacle.h"
 
 #include "Watanabe/DebugClass/Debug.h"
 
@@ -74,6 +76,7 @@ namespace basecross {
 
 					auto object = GetOwner()->GetGameObject();
 					m_transform = object->GetComponent<Transform>();
+					m_eyeRange = object->GetComponent<EyeSearchRange>();
 					m_targetManager = object->GetComponent<TargetManager>();
 					m_velocityManager = object->GetComponent<VelocityManager>();
 					m_rotationController = object->GetComponent<RotationController>();
@@ -89,6 +92,7 @@ namespace basecross {
 				bool SearchBall::OnUpdate() {
 					m_taskList->UpdateTask();
 					Rotation();
+					CheckForceNextMoveArriveTask();
 
 					return IsEnd();
 				}
@@ -119,6 +123,31 @@ namespace basecross {
 					targetManager->SetTarget(target);
 
 					return target;
+				}
+
+				void SearchBall::CheckForceNextMoveArriveTask() {
+					if (m_taskList->IsEnd() || !m_targetManager.lock()->HasTarget()) {
+						return;
+					}
+
+					//Astar移動でなかったら処理をしない
+					if (m_taskList->GetCurrentTaskType() != TaskEnum::MoveAstar) {
+						return;
+					}
+
+					//ターゲットが障害物無の状態なら
+					auto startPosition = m_transform.lock()->GetPosition();
+					auto targetPosition = m_targetManager.lock()->GetTargetPosition();
+					auto toTargetPosition = targetPosition - startPosition;
+					//ターゲットの距離が視界距離より大きかったら、処理をしない。
+					if (m_eyeRange.lock()->GetEyeLength() < toTargetPosition.length()) {
+						return;
+					}
+
+					auto objects = GetOwner()->GetGameObject()->GetStage()->GetGameObjectVec();
+					if (!maru::UtilityObstacle::IsRayObstacle(startPosition, targetPosition, objects)) {
+						m_taskList->ForceNextTask();
+					}
 				}
 
 				void SearchBall::DefineTask() {
@@ -182,7 +211,7 @@ namespace basecross {
 				}
 
 				void SearchBall::InitializeParametor() {
-					constexpr float MoveSpeed = 5.0f;
+					constexpr float MoveSpeed = 6.0f;
 					constexpr float NearTargetRange = 1.5f;
 
 					//Astarで目標の近くまで移動するパラメータ
