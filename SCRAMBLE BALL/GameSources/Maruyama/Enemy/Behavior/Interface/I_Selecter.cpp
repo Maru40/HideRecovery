@@ -134,7 +134,7 @@ namespace basecross {
 			{ }
 
 			void Selecter::OnStart() {
-				SetState(BehaviorState::Running);
+
 			}
 
 			bool Selecter::OnUpdate() {
@@ -159,8 +159,6 @@ namespace basecross {
 				for (auto& edge : m_transitionEdges) {
 					edge.lock()->GetToNode()->SetState(BehaviorState::Inactive);
 				}
-
-				SetState(BehaviorState::Completed);
 			}
 
 

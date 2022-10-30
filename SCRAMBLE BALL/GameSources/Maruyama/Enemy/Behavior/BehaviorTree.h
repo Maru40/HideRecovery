@@ -124,6 +124,7 @@ namespace basecross {
 					//ノードが存在するなら追加処理をする。
 					if (node) {
 						node->OnStart();
+						node->SetState(BehaviorState::Running);
 						m_currentStack.push(node);
 					}
 				}
@@ -139,6 +140,7 @@ namespace basecross {
 					auto node = m_currentStack.top().lock();
 					if (node) {
 						node->OnExit();		//ノードの終了判定処理
+						node->SetState(BehaviorState::Completed);
 					}
 
 					m_currentStack.pop();	//スタックからポップ
