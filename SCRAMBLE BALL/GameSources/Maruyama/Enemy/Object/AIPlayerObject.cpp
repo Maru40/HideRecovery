@@ -21,6 +21,7 @@
 #include "Maruyama/Enemy/Component/BehaviorTree/AIPlayerBehaviorTree.h"
 
 #include "Watanabe/Component/PlayerStatus.h"
+#include "Watanabe/Component/PlayerAnimator.h"
 
 namespace basecross {
 	namespace Enemy {
@@ -33,7 +34,27 @@ namespace basecross {
 			EnemyObjectBase::OnCreate();
 
 			AddComponent<PlayerStatus>();
+			AddComponent<PlayerAnimator>();
+
 			AddComponent<AIPlayerBehaviorTree>();
+		}
+
+		void AIPlayerObject::CreateModel() {
+			Mat4x4 spanMat;
+			const float fScale = 0.8f;
+			Vec3 scale = Vec3(fScale);
+			spanMat.affineTransformation(
+				scale,
+				Vec3(0.0f, 0.0f, 0.0f),
+				Vec3(0.0f, XM_PI, 0.0f),
+				Vec3(0.0f, -0.5f, 0.0f)
+			);
+
+			auto draw = AddComponent<DrawComp>();
+			draw->SetMultiMeshResource(L"Player_Mesh");
+			draw->SetMeshToTransformMatrix(spanMat);
+			draw->SetModelTextureEnabled(false);
+			SetAlphaActive(true);
 		}
 
 	}
