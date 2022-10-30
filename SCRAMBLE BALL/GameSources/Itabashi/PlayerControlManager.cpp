@@ -103,7 +103,7 @@ namespace basecross
 
 		auto rotationController = m_rotationController.lock();
 
-		auto direction = rotationController->GetDirect();
+		auto direction = rotationController->GetDirection();
 
 		if (rotationController && !useWeapon->IsAim())	//ローテーションがあり、Aim状態でないなら
 		{

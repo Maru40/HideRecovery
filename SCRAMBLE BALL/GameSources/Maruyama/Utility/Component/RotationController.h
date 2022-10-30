@@ -77,7 +77,7 @@ namespace basecross {
 		/// Œü‚«‚½‚¢•ûŒü‚Ìæ“¾
 		/// </summary>
 		/// <returns>Œü‚«‚½‚¢•ûŒü</returns>
-		Vec3 GetDirect() const noexcept { return m_param.direction; }
+		Vec3 GetDirection() const noexcept { return m_param.direction; }
 
 		/// <summary>
 		/// ‰ñ“]‘¬“x‚Ìİ’è
