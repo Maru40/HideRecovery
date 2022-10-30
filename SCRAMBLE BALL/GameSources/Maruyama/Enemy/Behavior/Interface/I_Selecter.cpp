@@ -134,22 +134,33 @@ namespace basecross {
 			{ }
 
 			void Selecter::OnStart() {
-				//更新するノードを決める。
-				ChangeCurrentNode(SearchCurrentNode());
+				SetState(BehaviorState::Running);
 			}
 
 			bool Selecter::OnUpdate() {
-				//カレントノードがあるなら更新を入れる。
-				if (HasCurrentNode()) {
-					return GetCurrentNode()->OnUpdate();
+				//現在使用していない
+
+				if (!HasCurrentNode()) {
+					return true;
 				}
 
-				return true;
+				auto currentNode = GetCurrentNode();
+
+				//カレントノードが完了状態なら処理を終了する。
+				if (currentNode->IsState(BehaviorState::Completed)) {
+					return true;
+				}
+
+				return currentNode->OnUpdate();	//カレントノードをアップデート
 			}
 
 			void Selecter::OnExit() {
-				//更新中のノードをnullptrにする。(関数内で終了処理も呼べる。)
-				ChangeCurrentNode(nullptr);
+				//遷移先のエッジを元の状態に戻す。
+				for (auto& edge : m_transitionEdges) {
+					edge.lock()->GetToNode()->SetState(BehaviorState::Inactive);
+				}
+
+				SetState(BehaviorState::Completed);
 			}
 
 
@@ -174,12 +185,30 @@ namespace basecross {
 				auto transitionEdges = m_transitionEdges;		//メンバをソートするとconstにできないため、一時変数化
 				std::sort(transitionEdges.begin(), transitionEdges.end(), &SortEdges);	//昇順ソート
 
-				return transitionEdges[0].lock()->GetToNode();	//一番優先度が高いノードを返す。
+				//並べ替えたノードが遷移できるかどうかを判断する。
+				for (const auto& edge : transitionEdges) {
+					if (edge.lock()->GetToNode()->CanTransition()) {	//遷移できるなら、そのノードを返す。
+						return edge.lock()->GetToNode();
+					}
+				}
+
+				return nullptr;
 			}
 
 			std::shared_ptr<I_Node> Selecter::SearchRandomNode() const {
-				auto randomEdge = maru::MyRandom::RandomArray(m_transitionEdges);
-				return randomEdge.lock()->GetToNode();
+				std::vector<std::shared_ptr<I_Edge>> transitionEdges;
+				for (auto edge : m_transitionEdges) {
+					if (edge.lock()->GetToNode()->CanTransition()) {
+						transitionEdges.push_back(edge.lock());
+					}
+				}
+
+				if (transitionEdges.empty()) {	//遷移先が存在しないならnullptrを返す。
+					return nullptr;
+				}
+
+				auto randomEdge = maru::MyRandom::RandomArray(transitionEdges);
+				return randomEdge->GetToNode();
 			}
 
 			void Selecter::ChangeCurrentNode(const std::shared_ptr<I_Node>& node) {
@@ -218,6 +247,19 @@ namespace basecross {
 
 			std::shared_ptr<I_Node> Selecter::GetCurrentNode() const noexcept {
 				return m_currentNode.lock();
+			}
+
+			std::shared_ptr<I_Node> Selecter::CheckCurrentNode() const {
+				if (!HasCurrentNode()) {
+					return nullptr;
+				}
+
+				auto currentNode = GetCurrentNode();
+				if (currentNode->IsState(BehaviorState::Completed)) {	//完了状態なら処理をしない。
+					return nullptr;
+				}
+
+				return GetCurrentNode();
 			}
 
 		}
