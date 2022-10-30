@@ -247,19 +247,6 @@ namespace basecross {
 				return m_currentNode.lock();
 			}
 
-			std::shared_ptr<I_Node> Selecter::CheckCurrentNode() const {
-				if (!HasCurrentNode()) {
-					return nullptr;
-				}
-
-				auto currentNode = GetCurrentNode();
-				if (currentNode->IsState(BehaviorState::Completed)) {	//Š®—¹ó‘Ô‚È‚çˆ—‚ğ‚µ‚È‚¢B
-					return nullptr;
-				}
-
-				return GetCurrentNode();
-			}
-
 		}
 	}
 }
