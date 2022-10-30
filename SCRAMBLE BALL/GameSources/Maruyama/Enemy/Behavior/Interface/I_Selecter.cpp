@@ -95,7 +95,7 @@ namespace basecross {
 				auto transitionDatas = m_transitionDatas;	//メンバをソートするとconstにできないため、一時変数化
 				std::sort(transitionDatas.begin(), transitionDatas.end(), &SortTransitionNodeData);	//昇順ソート
 
-				return transitionDatas[0]->node.lock();	//一番優先度が高いノードを返す。
+				return transitionDatas[0]->node.lock();		//一番優先度が高いノードを返す。
 			}
 
 			bool SelecterBase::IsEmptyTransitionNodes() const {
