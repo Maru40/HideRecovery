@@ -138,20 +138,7 @@ namespace basecross {
 			}
 
 			bool Selecter::OnUpdate() {
-				//現在使用していない
-
-				if (!HasCurrentNode()) {
-					return true;
-				}
-
-				auto currentNode = GetCurrentNode();
-
-				//カレントノードが完了状態なら処理を終了する。
-				if (currentNode->IsState(BehaviorState::Completed)) {
-					return true;
-				}
-
-				return currentNode->OnUpdate();	//カレントノードをアップデート
+				return false;
 			}
 
 			void Selecter::OnExit() {
