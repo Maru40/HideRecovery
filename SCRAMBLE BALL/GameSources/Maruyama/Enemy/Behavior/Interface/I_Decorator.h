@@ -26,6 +26,12 @@ namespace basecross {
 				/// </summary>
 				/// <returns>遷移できるならtrue</returns>
 				virtual bool CanTransition() const = 0;
+
+				/// <summary>
+				/// アップデートが可能かどうか
+				/// </summary>
+				/// <returns>アップデートが可能ならtrue</returns>
+				virtual bool CanUpdate() const = 0;
 			};
 
 		}
