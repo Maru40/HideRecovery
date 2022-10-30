@@ -361,7 +361,11 @@ namespace basecross {
 					return true;
 				}
 
-				std::shared_ptr<I_Node> DecoratorsUpdate() {
+				/// <summary>
+				/// 更新不可になっているノードが存在するかどうか
+				/// </summary>
+				/// <returns>更新不可のノードを返す</returns>
+				std::shared_ptr<I_Node> SearchStopNode() {
 					auto copyStack = m_currentStack;
 					while (!copyStack.empty()) {	//スタックが空になるまで
 						auto node = copyStack.top().lock();
@@ -475,7 +479,7 @@ namespace basecross {
 					}
 
 					//監視が必要なデコレータの更新
-					auto stopNode = DecoratorsUpdate();
+					auto stopNode = SearchStopNode();
 					if (stopNode) {	//戻り値が存在するなら、更新不能なノードが存在した。
 						//ストップしたノードの手前ノードまで戻る。
 						ReverseTargetBeforeStack(stopNode);
