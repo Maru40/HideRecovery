@@ -248,7 +248,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\UtilityObstacle.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\ObjectMover.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineTestRoom.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\PlayerOnlineController.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\InputPlayerController.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineTestStage.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineTransformSynchronization.h" />
@@ -377,7 +377,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineTestRoom.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\PCTStaticModelDraw.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\PlayerControlManager.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\PlayerOnlineController.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\InputPlayerController.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineTestStage.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineTransformSynchronization.cpp" />

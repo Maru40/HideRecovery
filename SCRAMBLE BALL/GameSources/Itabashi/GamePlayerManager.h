@@ -9,12 +9,12 @@ namespace basecross
 
 namespace Online
 {
-	class PlayerOnlineController;
+	class InputPlayerController;
 }
 
 	class GamePlayerManager : public Online::OnlineComponent
 	{
-		std::vector<std::weak_ptr<Online::PlayerOnlineController>> m_managedControllers;
+		std::vector<std::weak_ptr<Online::InputPlayerController>> m_managedControllers;
 
 		std::shared_ptr<VillainPlayerObject> CreatePlayerObject(int gameNumber, int playerNumber);
 

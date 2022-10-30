@@ -1,8 +1,8 @@
-
+ï»¿
 /*!
 @file TestPlayerObject.cpp
-@brief TestPlayerObjectƒNƒ‰ƒXÀ‘Ì
-’S“–FŠÛR—TŠì
+@brief TestPlayerObjectã‚¯ãƒ©ã‚¹å®Ÿä½“
+æ‹…å½“ï¼šä¸¸å±±è£•å–œ
 */
 
 #include "stdafx.h"
@@ -33,7 +33,6 @@
 
 #include "VelocityManager.h"
 #include "Itabashi/ObjectMover.h"
-#include "Itabashi/PlayerOnlineController.h"
 #include "Itabashi/OnlineTransformSynchronization.h"
 
 #include "Watanabe/Component/PlayerAnimator.h"
@@ -100,7 +99,7 @@ namespace basecross {
 		AddComponent<PlayerStatus>();
 		AddComponent<Teleport>();
 
-		//ƒJƒƒ‰ƒZƒbƒeƒBƒ“ƒO----------------------------------------------------------
+		//ã‚«ãƒ¡ãƒ©ã‚»ãƒƒãƒ†ã‚£ãƒ³ã‚°----------------------------------------------------------
 
 		auto springArm = GetStage()->Instantiate<GameObject>(Vec3(), Quat());
 

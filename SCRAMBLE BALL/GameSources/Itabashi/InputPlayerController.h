@@ -9,14 +9,14 @@ namespace basecross
 	/// <summary>
 	/// オンラインでのプレイヤーのイベント制御
 	/// </summary>
-	class PlayerOnlineController : public Component
+	class InputPlayerController : public Component
 	{
 		std::weak_ptr<PlayerStatus> m_playerStatus;
 		std::weak_ptr<OnlinePlayerSynchronizer> m_onlinePlayerSynchronizer;
 
 	public:
 
-		PlayerOnlineController(const std::shared_ptr<GameObject>& owner);
+		InputPlayerController(const std::shared_ptr<GameObject>& owner);
 
 		void OnLateStart() override;
 

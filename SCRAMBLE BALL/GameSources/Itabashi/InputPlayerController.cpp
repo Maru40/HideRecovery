@@ -1,5 +1,5 @@
 ﻿#include "stdafx.h"
-#include "PlayerOnlineController.h"
+#include "InputPlayerController.h"
 #include "Patch/PlayerInputer.h"
 #include "Watanabe/Component/PlayerStatus.h"
 #include "OnlinePlayerSynchronizer.h"
@@ -12,19 +12,19 @@ T ConvertByteData(const std::uint8_t* bytes)
 
 namespace basecross
 {
-	PlayerOnlineController::PlayerOnlineController(const std::shared_ptr<GameObject>& owner) :
+	InputPlayerController::InputPlayerController(const std::shared_ptr<GameObject>& owner) :
 		Component(owner)
 	{
 
 	}
 
-	void PlayerOnlineController::OnLateStart()
+	void InputPlayerController::OnLateStart()
 	{
 		m_playerStatus = GetGameObject()->GetComponent<PlayerStatus>();
 		m_onlinePlayerSynchronizer = GetGameObject()->GetComponent<OnlinePlayerSynchronizer>(false);
 	}
 
-	void PlayerOnlineController::OnUpdate()
+	void InputPlayerController::OnUpdate()
 	{
 		auto playerStatus = m_playerStatus.lock();
 

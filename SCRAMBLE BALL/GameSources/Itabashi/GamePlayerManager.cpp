@@ -2,7 +2,7 @@
 #include "GamePlayerManager.h"
 #include "OnlineMatching.h"
 #include "Maruyama/Player/Object/VillainPlayerObject.h"
-#include "PlayerOnlineController.h"
+#include "InputPlayerController.h"
 #include "PlayerControlManager.h"
 #include "OnlineTransformSynchronization.h"
 #include "Maruyama/Player/Component/PlayerSpawnPoint.h"
@@ -97,7 +97,7 @@ namespace basecross
 		}
 
 		playerObject->AddComponent<Reticle>();
-		playerObject->AddComponent<PlayerOnlineController>();
+		playerObject->AddComponent<InputPlayerController>();
 
 		auto springArm = playerObject->GetArm()->GetComponent<SpringArmComponent>();
 		auto& tpsCamera = springArm->GetChildObject();
