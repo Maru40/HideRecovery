@@ -70,6 +70,7 @@ namespace basecross {
 			}
 			else {
 				SetIsSearchRoute(true);
+				//NextRoute();
 				//ƒXƒŒƒbƒh¶¬
 				std::thread nextRoute([&]() { NextRoute(); });
 				nextRoute.detach();
