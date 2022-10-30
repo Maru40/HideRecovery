@@ -11,6 +11,8 @@
 #include "OpenBox.h"
 
 #include "Maruyama/Utility/Component/TargetManager.h"
+#include "Watanabe/Component/PlayerAnimator.h"
+#include "VelocityManager.h"
 
 #include "Maruyama/StageObject/HidePlace.h"
 
@@ -26,13 +28,17 @@ namespace basecross {
 			TaskNodeBase(owner)
 		{
 			m_targetManager = owner->GetComponent<TargetManager>(false);
+			m_animator = owner->GetComponent<PlayerAnimator>(false);
 			m_hidePlaceOpener = owner->GetComponent<HidePlaceOpener>(false);
+			m_velocityManager = owner->GetComponent<VelocityManager>(false);
 		}
 
 		void OpenBox::OnStart() {
 			Open();				//ボックスを開く
 
 			ChangeAnimation();	//アニメーションの切り替え
+
+			m_velocityManager.lock()->ResetAll();
 		}
 
 		bool OpenBox::OnUpdate() {
@@ -67,7 +73,7 @@ namespace basecross {
 		}
 
 		void OpenBox::ChangeAnimation() {
-
+			m_animator.lock()->ChangePlayerAnimation(PlayerAnimationState::State::PutItem_Floor);
 		}
 
 	}

@@ -73,14 +73,14 @@ namespace basecross {
 
 		//AddGameObject<GameObject>()->AddComponent<maru::Behavior::TesterTree>();
 
-		Vec3 basePos(8.25f, 1.0f, 50.0f);
+		Vec3 basePos(5.0f, 1.0f, 60.0f);
 		Vec3 positions[] = {
 			Vec3(+basePos.x, 1.0f, -basePos.z),
-			//Vec3(0.0f, 1.0f, -basePos.z),
-			//Vec3(-basePos.x, 1.0f, -basePos.z),
+			Vec3(0.0f, 1.0f, -basePos.z),
+			Vec3(-basePos.x, 1.0f, -basePos.z),
 
-			//Vec3(+basePos.x, 1.0f, basePos.z),
-			//Vec3(0.0f, 1.0f, basePos.z),
+			Vec3(+basePos.x, 1.0f, basePos.z),
+			Vec3(0.0f, 1.0f, basePos.z),
 
 			//Vec3(-basePos.x, 1.0f, basePos.z),
 		};

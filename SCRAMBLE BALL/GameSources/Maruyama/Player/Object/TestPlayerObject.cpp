@@ -121,5 +121,9 @@ namespace basecross {
 		springArmComponent->SetChildObject(tpsCamera);
 	}
 
+	void TestPlayerObject::OnUpdate() {
+		//Debug::GetInstance()->Log(transform->GetPosition());
+	}
+
 
 }
