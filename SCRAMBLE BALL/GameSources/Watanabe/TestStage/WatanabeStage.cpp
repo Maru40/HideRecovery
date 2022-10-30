@@ -98,7 +98,7 @@ namespace basecross {
 					auto input = PlayerInputer::GetMoveDirection();
 					auto direct = maru::Utility::CalcuCameraVec(Vec3(input.x, 0, input.y), stage->GetView()->GetTargetCamera(), player);
 
-					rotationController->SetDirect(direct);
+					rotationController->SetDirection(direct);
 				}
 			}
 		);

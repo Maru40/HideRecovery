@@ -81,7 +81,7 @@ namespace basecross {
 
 					auto rotation = GetOwner()->GetGameObject()->GetComponent<RotationController>(false);
 					if (rotation) {
-						rotation->SetDirect(targetManager->CalcuToTargetVec());
+						rotation->SetDirection(targetManager->CalcuToTargetVec());
 					}
 				}
 			}

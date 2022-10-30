@@ -23,8 +23,8 @@ namespace basecross {
 		:Parametor(speed, Vec3(0.0f), isUseY)
 	{}
 
-	RotationController::Parametor::Parametor(const float& speed, const Vec3& direct, const bool isUseY)
-		:speed(speed),direct(direct),isUseY(isUseY)
+	RotationController::Parametor::Parametor(const float& speed, const Vec3& direction, const bool isUseY)
+		:speed(speed),direction(direction),isUseY(isUseY)
 	{}
 
 	//--------------------------------------------------------------------------------------
@@ -40,7 +40,7 @@ namespace basecross {
 		auto obj = GetGameObject();
 		auto objTrans = obj->GetComponent<Transform>();
 
-		auto direct = m_param.direct;
+		auto direct = m_param.direction;
 		if (!m_param.isUseY) {
 			direct.y = 0.0f;
 		}
@@ -50,7 +50,7 @@ namespace basecross {
 	}
 
 	bool RotationController::IsRotation() {
-		float newDot = dot(transform->GetForward(), m_param.direct.GetNormalized());
+		float newDot = dot(transform->GetForward(), m_param.direction.GetNormalized());
 		float angleRad = abs(acosf(newDot));
 		constexpr float AngleBettween = XMConvertToRadians(5.0f);
 

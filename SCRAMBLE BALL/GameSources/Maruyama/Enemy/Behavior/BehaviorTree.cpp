@@ -13,15 +13,7 @@ namespace basecross {
 
 		namespace Behavior {
 
-			ObserveStackData::ObserveStackData(
-				const int stackIndex,
-				const std::shared_ptr<I_Node>& node
-			):
-				stackIndex(stackIndex),
-				node(node)
-			{
-				this->state = node->GetState();	//スタックされた時のステートを取得
-			}
+
 
 		}
 

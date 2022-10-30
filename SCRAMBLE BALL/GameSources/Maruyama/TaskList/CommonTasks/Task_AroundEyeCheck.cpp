@@ -52,7 +52,7 @@ namespace basecross {
 			if (rotationController) {
 				m_defaultSpeed = rotationController->GetSpeed();
 				rotationController->SetSpeed(m_paramPtr->speed);
-				rotationController->SetDirect(m_directs[m_index]);
+				rotationController->SetDirection(m_directs[m_index]);
 			}
 			else {
 				DebugObject::AddString(L"Task::AroundEyeCheck::OnStart(), RotationController‚ª‘¶Ý‚µ‚Ü‚¹‚ñB");
@@ -115,7 +115,7 @@ namespace basecross {
 
 			auto rotationController = GetOwner()->GetComponent<RotationController>(false);
 			if (rotationController) {
-				rotationController->SetDirect(m_directs[m_index]);
+				rotationController->SetDirection(m_directs[m_index]);
 			}
 		}
 

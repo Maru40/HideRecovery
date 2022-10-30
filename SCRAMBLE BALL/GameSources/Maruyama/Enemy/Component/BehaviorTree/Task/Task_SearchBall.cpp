@@ -34,6 +34,8 @@
 #include "Maruyama/Item/HideItem.h"
 #include "Maruyama/StageObject/HidePlace.h"
 
+#include "Maruyama/Utility/Component/RotationController.h"
+
 #include "Watanabe/DebugClass/Debug.h"
 
 namespace basecross {
@@ -49,7 +51,6 @@ namespace basecross {
 
 				SearchBall_Parametor::SearchBall_Parametor() :
 					moveAstarParam(new basecross::Task::MoveAstar::Parametor()),
-					//toTargetMoveParam(new basecross::Task::ToTargetMove::Parametor()),
 					targetSeekParam(new TaskListNode::TargetSeek::Parametor()),
 					waitParam(new basecross::Task::Wait::Parametor(1.0f))
 				{}
@@ -75,17 +76,19 @@ namespace basecross {
 					m_transform = object->GetComponent<Transform>();
 					m_targetManager = object->GetComponent<TargetManager>();
 					m_velocityManager = object->GetComponent<VelocityManager>();
+					m_rotationController = object->GetComponent<RotationController>();
 					m_factionMember = object->GetComponent<Enemy::I_FactionMember>();
 				}
 
 				void SearchBall::OnStart() {
-					SelectTask();		//タスクの選択
-
 					CalculateTarget();	//ターゲットの計算
+
+					SelectTask();		//タスクの選択
 				}
 
 				bool SearchBall::OnUpdate() {
 					m_taskList->UpdateTask();
+					Rotation();
 
 					return IsEnd();
 				}
@@ -189,6 +192,16 @@ namespace basecross {
 					m_param.targetSeekParam->toTargetMoveParam->speed = MoveSpeed;
 					m_param.targetSeekParam->toTargetMoveParam->moveType = basecross::Task::ToTargetMove::MoveType::ArriveVelocity;
 					m_param.targetSeekParam->toTargetMoveParam->targetNearRange = NearTargetRange;
+				}
+
+				void SearchBall::Rotation() {
+					auto rotationController = m_rotationController.lock();
+					auto velocityManager = m_velocityManager.lock();
+					if (!velocityManager || !rotationController) {
+						return;
+					}
+
+					rotationController->SetDirection(velocityManager->GetVelocity());
 				}
 
 				bool SearchBall::IsEnd() const { return m_taskList->IsEnd(); }

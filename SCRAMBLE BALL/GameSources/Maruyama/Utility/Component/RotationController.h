@@ -21,7 +21,7 @@ namespace basecross {
 		struct Parametor
 		{
 			float speed;          //回転速度
- 			Vec3 direct;          //向きたい方向
+ 			Vec3 direction;          //向きたい方向
 			bool isUseY = false;  //Y軸を考慮するかどうか
 
 			/// <summary>
@@ -40,9 +40,9 @@ namespace basecross {
 			/// コンストラクタ
 			/// </summary>
 			/// <param name="speed">回転速度</param>
-			/// <param name="direct">向きたい方向</param>
+			/// <param name="direction">向きたい方向</param>
 			/// <param name="isUseY">Y軸を考慮するかどうか</param>
-			Parametor(const float& speed, const Vec3& direct, const bool isUseY = false);
+			Parametor(const float& speed, const Vec3& direction, const bool isUseY = false);
 		};
 
 	private:
@@ -70,14 +70,14 @@ namespace basecross {
 		/// <summary>
 		/// 向きたい方向を設定
 		/// </summary>
-		/// <param name="direct">向きたい方向</param>
-		void SetDirect(const Vec3& direct) noexcept { m_param.direct = direct; }
+		/// <param name="direction">向きたい方向</param>
+		void SetDirection(const Vec3& direction) noexcept { m_param.direction = direction; }
 
 		/// <summary>
 		/// 向きたい方向の取得
 		/// </summary>
 		/// <returns>向きたい方向</returns>
-		Vec3 GetDirect() const noexcept { return m_param.direct; }
+		Vec3 GetDirect() const noexcept { return m_param.direction; }
 
 		/// <summary>
 		/// 回転速度の設定

@@ -143,7 +143,7 @@ namespace basecross {
 		//向きたい方法を設定
 		if (auto rotationController = GetGameObject()->GetComponent<RotationController>(false)) {
 			auto direct = hidePosition - transform->GetPosition();
-			rotationController->SetDirect(direct);
+			rotationController->SetDirection(direct);
 		}
 	}
 

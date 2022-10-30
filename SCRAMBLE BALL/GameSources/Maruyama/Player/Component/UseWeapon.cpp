@@ -196,7 +196,7 @@ namespace basecross {
 			m_direction = baseDirection;
 		}
 
-		rotationController->SetDirect(m_direction);
+		rotationController->SetDirection(m_direction);
 	}
 
 	void UseWeapon::AssistCameraRotation(const Vec3& direction) {

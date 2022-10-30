@@ -71,7 +71,7 @@ namespace basecross {
 			auto velocityManager = ownerObject->GetComponent<VelocityManager>(false);
 			auto rotationController = ownerObject->GetComponent<RotationController>(false);
 			if (velocityManager && rotationController) {
-				rotationController->SetDirect(velocityManager->GetVelocity());
+				rotationController->SetDirection(velocityManager->GetVelocity());
 			}
 		}
 

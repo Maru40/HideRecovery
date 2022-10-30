@@ -26,7 +26,7 @@ namespace basecross {
 
 		protected:
 
-			void CreateModel();
+			virtual void CreateModel();
 		};
 	}
 }
