@@ -120,6 +120,9 @@ namespace basecross {
 					/// </summary>
 					void InitializeParametor();
 
+					/// <summary>
+					/// Œü‚«’²®
+					/// </summary>
 					void Rotation();
 
 				public:

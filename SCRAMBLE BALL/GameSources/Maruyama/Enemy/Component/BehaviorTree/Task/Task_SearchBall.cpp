@@ -201,7 +201,7 @@ namespace basecross {
 						return;
 					}
 
-					rotationController->SetDirect(velocityManager->GetVelocity());
+					rotationController->SetDirection(velocityManager->GetVelocity());
 				}
 
 				bool SearchBall::IsEnd() const { return m_taskList->IsEnd(); }

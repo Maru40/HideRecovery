@@ -146,7 +146,7 @@ namespace basecross {
 
 		//回転コントローラー
 		if (auto rotationController = GetGameObject()->GetComponent<RotationController>(false)) {	
-			rotationController->SetDirect(m_param.dunkPosition - transform->GetPosition());
+			rotationController->SetDirection(m_param.dunkPosition - transform->GetPosition());
 		}
 
 		//音を鳴らす

@@ -109,7 +109,7 @@ namespace basecross
 		{
 			direction = maru::Utility::CalcuCameraVec(Vec3(inputVector.x, 0, inputVector.y), GetStage()->GetView()->GetTargetCamera(), GetGameObject());
 
-			rotationController->SetDirect(direction);
+			rotationController->SetDirection(direction);
 		}
 
 		if (outputMoveVector)
@@ -131,7 +131,7 @@ namespace basecross
 		auto rotationController = m_rotationController.lock();
 
 		velocityManager->SetVelocity(moveVector / App::GetApp()->GetElapsedTime());
-		rotationController->SetDirect(forward);
+		rotationController->SetDirection(forward);
 	}
 
 	bool PlayerControlManager::TryAquisition(const std::shared_ptr<Item>& item)

@@ -138,7 +138,7 @@ namespace basecross {
 						return;
 					}
 
-					rotationController->SetDirect(velocityManager->GetVelocity());
+					rotationController->SetDirection(velocityManager->GetVelocity());
 				}
 
 				void ChaseState_AstarSeek::EndProcess() {
