@@ -4,6 +4,8 @@
 #include "Watanabe/Component/PlayerStatus.h"
 #include "OnlinePlayerSynchronizer.h"
 
+#include "Maruyama/Player/Component/Teleport.h"
+
 template<class T>
 T ConvertByteData(const std::uint8_t* bytes)
 {
@@ -20,8 +22,10 @@ namespace basecross
 
 	void InputPlayerController::OnLateStart()
 	{
-		m_playerStatus = GetGameObject()->GetComponent<PlayerStatus>();
-		m_onlinePlayerSynchronizer = GetGameObject()->GetComponent<OnlinePlayerSynchronizer>(false);
+		auto owner = GetGameObject();
+		m_playerStatus = owner->GetComponent<PlayerStatus>();
+		m_onlinePlayerSynchronizer = owner->GetComponent<OnlinePlayerSynchronizer>(false);
+		m_teleport = owner->GetComponent<Teleport>();
 	}
 
 	void InputPlayerController::OnUpdate()
@@ -38,6 +42,12 @@ namespace basecross
 		if (!onlinePlayerSynchronizer)
 		{
 			return;
+		}
+
+		if (PlayerInputer::GetInstance()->IsOpenMap())
+		{
+			auto teleport = m_teleport.lock();
+			teleport->OpenMap();
 		}
 
 		if (PlayerInputer::GetInstance()->IsDesitionDown())
