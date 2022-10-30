@@ -18,6 +18,7 @@ namespace basecross {
 
 	class TargetManager;
 	class VelocityManager;
+	class RotationController;
 
 	struct Task_MovePositions_Parametor;
 
@@ -55,7 +56,6 @@ namespace basecross {
 				//--------------------------------------------------------------------------------------
 				struct SearchBall_Parametor {
 					basecross::Task::MoveAstar_Parametor* moveAstarParam;
-					//std::shared_ptr<basecross::Task::ToTargetMove_Parametor> toTargetMoveParam;
 					TaskListNode::TargetSeek_Parametor* targetSeekParam;
 					std::shared_ptr<basecross::Task::Wait_Parametor> waitParam;
 
@@ -77,10 +77,11 @@ namespace basecross {
 					
 					std::unique_ptr<TaskList<TaskEnum>> m_taskList;	//タスクリスト
 
-					std::weak_ptr<Transform> m_transform;
-					std::weak_ptr<TargetManager> m_targetManager;
-					std::weak_ptr<VelocityManager> m_velocityManager;
-					std::weak_ptr<Enemy::I_FactionMember> m_factionMember;
+					std::weak_ptr<Transform> m_transform;					//トランスフォーム
+					std::weak_ptr<TargetManager> m_targetManager;			//ターゲット管理
+					std::weak_ptr<VelocityManager> m_velocityManager;		//速度管理
+					std::weak_ptr<RotationController> m_rotationController;	//向き管理
+					std::weak_ptr<Enemy::I_FactionMember> m_factionMember;	//ファクションメンバー
 
 				public:
 					SearchBall(const std::shared_ptr<Enemy::EnemyBase>& owner);
@@ -118,6 +119,8 @@ namespace basecross {
 					/// パラメータの初期化
 					/// </summary>
 					void InitializeParametor();
+
+					void Rotation();
 
 				public:
 
