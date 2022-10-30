@@ -99,6 +99,12 @@ namespace basecross {
 				virtual bool CanTransition() const = 0;
 
 				/// <summary>
+				/// 更新処理を続けらるかどうか
+				/// </summary>
+				/// <returns>続けらるならtrue</returns>
+				virtual bool CanUpdate() const = 0;
+
+				/// <summary>
 				/// デコレータの追加
 				/// </summary>
 				virtual void AddDecorator(const std::shared_ptr<I_Decorator>& decorator) = 0;
@@ -144,6 +150,8 @@ namespace basecross {
 				bool IsState(const BehaviorState state) const noexcept override { return m_state == state; }
 
 				bool CanTransition() const override;
+
+				bool CanUpdate() const override;
 
 				void AddDecorator(const std::shared_ptr<I_Decorator>& decorator) override;
 

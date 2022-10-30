@@ -44,6 +44,20 @@ namespace basecross {
 			class Selecter;
 
 			//--------------------------------------------------------------------------------------
+			/// スタックされた中で監視が必要なノード
+			//--------------------------------------------------------------------------------------
+			struct ObserveStackData {
+				int stackIndex;							//スタックされたインデックス
+				BehaviorState state;					//スタックされた時のステート
+				std::weak_ptr<I_Node> node;				//そのデコレータを所持するノード
+
+				ObserveStackData(
+					const int stackIndex,
+					const std::shared_ptr<I_Node>& node
+				);
+			};
+
+			//--------------------------------------------------------------------------------------
 			/// ビヘイビアのインターフェース
 			//--------------------------------------------------------------------------------------
 			class I_Behavior {
@@ -74,7 +88,7 @@ namespace basecross {
 				std::stack<std::weak_ptr<I_Node>> m_currentStack;	//現在積まれているノードスタック
 
 				EdgesMap m_edgesMap;	//遷移エッジ
-
+	
 			private:
 				/// <summary>
 				/// ノードの追加
@@ -84,7 +98,6 @@ namespace basecross {
 				std::shared_ptr<I_Node> AddNode(const EnumType type, const std::shared_ptr<I_Node>& node) {
 					node->SetIndex(static_cast<int>(type));
 					m_nodeMap[type] = node;
-
 					return node;
 				}
 
@@ -144,31 +157,6 @@ namespace basecross {
 					}
 
 					m_currentStack.pop();	//スタックからポップ
-				}
-
-				/// <summary>
-				/// 遷移先のノードが見つかるまで、スタックを巻き戻す。
-				/// </summary>
-				/// <param name="node"></param>
-				/// <returns></returns>
-				std::shared_ptr<I_Node> ReversStack(const std::shared_ptr<I_Node>& node) {
-					if (node == GetNode(m_firstNodeType)) {
-						ResetFirstNode();
-					}
-
-					auto selecter = GetSelecter(node->GetType<EnumType>());
-					if (!selecter) {	//セレクターでないなら前のノードに戻る。
-						PopCurrentStack();
-						return ReversStack(m_currentStack.top().lock());
-					}
-
-					auto nextNode = selecter->SearchCurrentNode();
-					if (!nextNode) {	//ノードが存在しないなら、手前のノードに戻る。
-						PopCurrentStack();
-						return ReversStack(m_currentStack.top().lock());
-					}
-
-					return nextNode;
 				}
 
 			public:
@@ -387,6 +375,45 @@ namespace basecross {
 					return true;
 				}
 
+				std::shared_ptr<I_Node> DecoratorsUpdate() {
+					auto copyStack = m_currentStack;
+					while (!copyStack.empty()) {	//スタックが空になるまで
+						auto node = copyStack.top().lock();
+						if (!node->CanUpdate()) {	//ノードが更新可能でなかったら
+							return node;
+						}
+
+						copyStack.pop();
+					}
+
+					return nullptr;
+				}
+
+				/// <summary>
+				/// 遷移先のノードが見つかるまで、スタックを巻き戻す。
+				/// </summary>
+				/// <param name="node">確認したいノード</param>
+				/// <returns></returns>
+				std::shared_ptr<I_Node> ReverseStack(const std::shared_ptr<I_Node>& node) {
+					if (node == GetNode(m_firstNodeType)) {
+						ResetFirstNode();
+					}
+
+					auto selecter = GetSelecter(node->GetType<EnumType>());
+					if (!selecter) {	//セレクターでないなら前のノードに戻る。
+						PopCurrentStack();
+						return ReverseStack(m_currentStack.top().lock());
+					}
+
+					auto nextNode = selecter->SearchCurrentNode();
+					if (!nextNode) {	//ノードが存在しないなら、手前のノードに戻る。
+						PopCurrentStack();
+						return ReverseStack(m_currentStack.top().lock());
+					}
+
+					return nextNode;
+				}
+
 				/// <summary>
 				/// 再起処理をして、遷移先のノードを取得する。
 				/// </summary>
@@ -410,8 +437,26 @@ namespace basecross {
 					}
 
 					//遷移先がないため、Popして戻る。
-					//PopCurrentStack();
-					return ReversStack(node);
+					return ReverseStack(node);
+				}
+
+				/// <summary>
+				/// 引数で渡したノードの手前ノードまでスタックを戻す
+				/// </summary>
+				/// <param name="targetNode">戻りたいノード</param>
+				void ReverseTargetBeforeStack(const std::shared_ptr<I_Node>& targetNode) {
+					if (m_currentStack.empty()) {
+						return;
+					}
+
+					auto currentNode = m_currentStack.top().lock();
+					if (currentNode == targetNode) {
+						PopCurrentStack();	//ストップした手前のノードまで戻って終了
+						return;
+					}
+
+					PopCurrentStack();		//スタックをポップ
+					ReverseTargetBeforeStack(targetNode);	//再起処理
 				}
 
 				/// <summary>
@@ -422,7 +467,7 @@ namespace basecross {
 						return GetNode(m_firstNodeType);
 					}
 					
-					return ReversStack(m_currentStack.top().lock());
+					return ReverseStack(m_currentStack.top().lock());
 				}
 
 				/// <summary>
@@ -443,9 +488,17 @@ namespace basecross {
 						return;
 					}
 
-					bool isEndTaskUpdate = TaskUpdate();
+					//監視が必要なデコレータの更新
+					auto stopNode = DecoratorsUpdate();
+					if (stopNode) {	//戻り値が存在するなら、更新不能なノードが存在した。
+						//ストップしたノードの手前ノードまで戻る。
+						ReverseTargetBeforeStack(stopNode);
+						Transition();	//遷移
+					}
 
-					//ノードが終了したら、最初に戻る
+					bool isEndTaskUpdate = TaskUpdate();	//ノードの更新
+
+					//ノードが終了したら、遷移
 					if (isEndTaskUpdate) {
 						Transition();	//遷移
 					}
