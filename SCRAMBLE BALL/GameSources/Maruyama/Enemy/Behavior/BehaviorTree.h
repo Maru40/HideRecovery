@@ -367,7 +367,7 @@ namespace basecross {
 				/// </summary>
 				/// <param name="node"></param>
 				/// <returns></returns>
-				std::shared_ptr<I_Node> ReversStack(const std::shared_ptr<I_Node>& node) {
+				std::shared_ptr<I_Node> ReverseStack(const std::shared_ptr<I_Node>& node) {
 					if (node == GetNode(m_firstNodeType)) {
 						ResetFirstNode();
 					}
@@ -375,13 +375,13 @@ namespace basecross {
 					auto selecter = GetSelecter(node->GetType<EnumType>());
 					if (!selecter) {	//セレクターでないなら前のノードに戻る。
 						PopCurrentStack();
-						return ReversStack(m_currentStack.top().lock());
+						return ReverseStack(m_currentStack.top().lock());
 					}
 
 					auto nextNode = selecter->SearchCurrentNode();
 					if (!nextNode) {	//ノードが存在しないなら、手前のノードに戻る。
 						PopCurrentStack();
-						return ReversStack(m_currentStack.top().lock());
+						return ReverseStack(m_currentStack.top().lock());
 					}
 
 					return nextNode;
@@ -411,7 +411,7 @@ namespace basecross {
 
 					//遷移先がないため、Popして戻る。
 					//PopCurrentStack();
-					return ReversStack(node);
+					return ReverseStack(node);
 				}
 
 				/// <summary>
@@ -422,7 +422,7 @@ namespace basecross {
 						return GetNode(m_firstNodeType);
 					}
 					
-					return ReversStack(m_currentStack.top().lock());
+					return ReverseStack(m_currentStack.top().lock());
 				}
 
 				/// <summary>
