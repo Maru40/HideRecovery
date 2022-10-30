@@ -146,31 +146,6 @@ namespace basecross {
 					m_currentStack.pop();	//スタックからポップ
 				}
 
-				/// <summary>
-				/// 遷移先のノードが見つかるまで、スタックを巻き戻す。
-				/// </summary>
-				/// <param name="node"></param>
-				/// <returns></returns>
-				std::shared_ptr<I_Node> ReversStack(const std::shared_ptr<I_Node>& node) {
-					if (node == GetNode(m_firstNodeType)) {
-						ResetFirstNode();
-					}
-
-					auto selecter = GetSelecter(node->GetType<EnumType>());
-					if (!selecter) {	//セレクターでないなら前のノードに戻る。
-						PopCurrentStack();
-						return ReversStack(m_currentStack.top().lock());
-					}
-
-					auto nextNode = selecter->SearchCurrentNode();
-					if (!nextNode) {	//ノードが存在しないなら、手前のノードに戻る。
-						PopCurrentStack();
-						return ReversStack(m_currentStack.top().lock());
-					}
-
-					return nextNode;
-				}
-
 			public:
 				virtual ~BehaviorTree() = default;
 
@@ -385,6 +360,31 @@ namespace basecross {
 					}
 
 					return true;
+				}
+
+				/// <summary>
+				/// 遷移先のノードが見つかるまで、スタックを巻き戻す。
+				/// </summary>
+				/// <param name="node"></param>
+				/// <returns></returns>
+				std::shared_ptr<I_Node> ReversStack(const std::shared_ptr<I_Node>& node) {
+					if (node == GetNode(m_firstNodeType)) {
+						ResetFirstNode();
+					}
+
+					auto selecter = GetSelecter(node->GetType<EnumType>());
+					if (!selecter) {	//セレクターでないなら前のノードに戻る。
+						PopCurrentStack();
+						return ReversStack(m_currentStack.top().lock());
+					}
+
+					auto nextNode = selecter->SearchCurrentNode();
+					if (!nextNode) {	//ノードが存在しないなら、手前のノードに戻る。
+						PopCurrentStack();
+						return ReversStack(m_currentStack.top().lock());
+					}
+
+					return nextNode;
 				}
 
 				/// <summary>
