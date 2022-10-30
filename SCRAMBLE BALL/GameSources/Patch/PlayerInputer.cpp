@@ -190,14 +190,14 @@ namespace basecross
 	}
 
 	bool PlayerInputer::IsAim() {
-		auto device = App::GetApp()->GetInputDevice();
+		auto& device = App::GetApp()->GetInputDevice();
 		const auto& pad = device.GetControlerVec()[0];
 		return pad.bLeftTrigger >= XINPUT_GAMEPAD_TRIGGER_THRESHOLD || pad.bRightTrigger >= XINPUT_GAMEPAD_TRIGGER_THRESHOLD ||
 			App::GetApp()->GetMyInputDevice()->GetKeyBoard().IsInputPush(KeyCode::Space);
 	}
 
 	bool PlayerInputer::IsAimRelease() {
-		auto device = App::GetApp()->GetInputDevice();
+		auto& device = App::GetApp()->GetInputDevice();
 		const auto& pad = device.GetControlerVec()[0];
 		return pad.bLeftTrigger < XINPUT_GAMEPAD_TRIGGER_THRESHOLD && pad.bRightTrigger < XINPUT_GAMEPAD_TRIGGER_THRESHOLD &&
 			!App::GetApp()->GetMyInputDevice()->GetKeyBoard().IsInputPush(KeyCode::Space);
