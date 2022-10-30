@@ -25,7 +25,13 @@ namespace basecross {
 					return false;
 				}
 
-				if (IsDecoratorEmpty()) {	//デコレータがないなら、常にtrue
+				//完了状態なら遷移しない。
+				if (IsState(BehaviorState::Completed)) {
+					return false;
+				}
+
+				//デコレータがないなら、常にtrue
+				if (IsDecoratorEmpty()) {	
 					return true;
 				}
 

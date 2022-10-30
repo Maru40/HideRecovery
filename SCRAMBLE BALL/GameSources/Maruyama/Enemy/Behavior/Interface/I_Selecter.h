@@ -201,10 +201,6 @@ namespace basecross {
 				void OnExit() override;
 
 			private:
-				/// <summary>
-				/// 更新するノードを検索
-				/// </summary>
-				std::shared_ptr<I_Node> SearchCurrentNode() const;
 
 				/// <summary>
 				/// 一番優先度の高いノードを返す。
@@ -224,6 +220,11 @@ namespace basecross {
 				void ChangeCurrentNode(const std::shared_ptr<I_Node>& node);
 
 			public:
+				/// <summary>
+				/// 更新するノードを検索
+				/// </summary>
+				std::shared_ptr<I_Node> SearchCurrentNode() const;
+
 				//--------------------------------------------------------------------------------------
 				/// アクセッサ
 				//--------------------------------------------------------------------------------------
@@ -261,6 +262,11 @@ namespace basecross {
 				/// 現在使用中のノードを返す
 				/// </summary>
 				_NODISCARD std::shared_ptr<I_Node> GetCurrentNode() const noexcept;
+
+				/// <summary>
+				/// 現在使用中のノードをチェックして返す。
+				/// </summary>
+				_NODISCARD std::shared_ptr<I_Node> CheckCurrentNode() const;
 
 			};
 

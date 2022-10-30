@@ -204,6 +204,9 @@ namespace basecross {
 		auto openDataList = DataPtrList();
 		auto closeDataList = DataPtrList();
 
+		//Debug::GetInstance()->Log(startNode->GetIndex());
+		//Debug::GetInstance()->Log(targetNode->GetIndex());
+
 		//初期オープンデータを生成
 		m_heuristic->SetTargetNode(targetNode);
 		openDataList.push_back(std::make_shared<OpenData>(nullptr, startNode, 0.0f, m_heuristic->CalculateHeuristicRange(startNode)));
