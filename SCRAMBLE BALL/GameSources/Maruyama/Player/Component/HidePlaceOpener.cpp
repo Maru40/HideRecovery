@@ -1,14 +1,14 @@
 ﻿
 /*!
-@file AccessHidePlace.cpp
-@brief AccessHidePlaceクラス実体
+@file HidePlaceOpener.cpp
+@brief HidePlaceOpenerクラス実体
 担当：丸山裕喜
 */
 
 #include "stdafx.h"
 #include "Project.h"
 
-#include "AccessHidePlace.h"
+#include "HidePlaceOpener.h"
 
 #include "Maruyama/Utility/Utility.h"
 #include "Maruyama/StageObject/HidePlace.h"

@@ -997,9 +997,6 @@
     <Filter Include="Maruyama\Camera\CameraForwardController">
       <UniqueIdentifier>{6cf37f95-4c14-42a0-a957-0143e3bc1950}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Maruyama\Player\Component\AccessHidePlace">
-      <UniqueIdentifier>{15de02f4-c11f-4def-8966-1f39c7665943}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Watanabe\Component\MatchingSyncPlayerObject">
       <UniqueIdentifier>{e672e2fd-f7f0-4508-93b4-43c96bc540ab}</UniqueIdentifier>
     </Filter>
@@ -1185,6 +1182,9 @@
     </Filter>
     <Filter Include="Itabashi\Component\InputPlayerController">
       <UniqueIdentifier>{5563d5b2-921e-4649-867c-f24adc0594bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Player\Component\HidePlaceOpener">
+      <UniqueIdentifier>{15de02f4-c11f-4def-8966-1f39c7665943}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1497,8 +1497,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\MatchingSyncPlayerObject.h">
       <Filter>Watanabe\Component\MatchingSyncPlayerObject</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\AccessHidePlace.h">
-      <Filter>Maruyama\Player\Component\AccessHidePlace</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\HidePlaceOpener.h">
+      <Filter>Maruyama\Player\Component\HidePlaceOpener</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\ButtonUI.h">
       <Filter>Watanabe\UI\ButtonUI</Filter>
@@ -2501,8 +2501,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\MatchingSyncPlayerObject.cpp">
       <Filter>Watanabe\Component\MatchingSyncPlayerObject</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\AccessHidePlace.cpp">
-      <Filter>Maruyama\Player\Component\AccessHidePlace</Filter>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\HidePlaceOpener.cpp">
+      <Filter>Maruyama\Player\Component\HidePlaceOpener</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\ButtonUI.cpp">
       <Filter>Watanabe\UI\ButtonUI</Filter>

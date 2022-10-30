@@ -11,7 +11,7 @@
 #include "ObjectMover.h"
 #include "Maruyama/Player/Component/UseWeapon.h"
 #include "Maruyama/Player/Component/GoalAnimationController.h"
-#include "Maruyama/Player/Component/AccessHidePlace.h"
+#include "Maruyama/Player/Component/HidePlaceOpener.h"
 #include "Maruyama/StageObject/HidePlace.h"
 #include "Watanabe/Component/PlayerAnimator.h"
 #include "Maruyama/Utility/Component/RotationController.h"

@@ -49,7 +49,7 @@
 
 #include "Maruyama/Enemy/Component/EyeSearchRange.h"
 
-#include "Maruyama/Player/Component/AccessHidePlace.h"
+#include "Maruyama/Player/Component/HidePlaceOpener.h"
 #include "Maruyama/Player/Component/HeightDestroy.h"
 
 #include "Itabashi/PlayerControlManager.h"

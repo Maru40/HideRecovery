@@ -26,7 +26,7 @@
 #include "Maruyama/UI/2D/Component/TeleportUI.h"
 #include "Maruyama/Utility/Component/ToTargetMove.h"
 #include "Maruyama/Utility/SingletonComponent/GameManager.h"
-#include "Maruyama/Player/Component/AccessHidePlace.h"
+#include "Maruyama/Player/Component/HidePlaceOpener.h"
 #include "OnlinePlayerSynchronizer.h"
 
 namespace basecross

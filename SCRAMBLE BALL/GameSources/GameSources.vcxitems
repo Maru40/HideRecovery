@@ -133,7 +133,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Load\LoadCSV.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Load\LoadData.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Load\StageMapCSV.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\AccessHidePlace.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\HidePlaceOpener.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\AnimationCtrl.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\AttackBase.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\BuffController.h" />
@@ -478,7 +478,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Load\LoadCSV.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Load\LoadData.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Load\StageMapCSV.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\AccessHidePlace.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\HidePlaceOpener.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\BuffController.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\ChargeGun.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\GoalAnimationController.cpp" />
