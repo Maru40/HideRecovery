@@ -21,6 +21,7 @@ namespace basecross {
 		TestPlayerObject(const std::shared_ptr<Stage>& stage);
 
 		void OnCreate() override;
+		void OnUpdate() override;
 
 		std::shared_ptr<GameObject> GetArm() const { return m_arm.lock(); }
 	};
