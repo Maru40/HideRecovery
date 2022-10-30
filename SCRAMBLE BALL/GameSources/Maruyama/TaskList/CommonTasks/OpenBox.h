@@ -13,7 +13,6 @@ namespace basecross {
 
 	class TargetManager;
 	class HidePlaceOpener;
-	class AccessHidePlace;
 	class PlayerAnimator;
 	class VelocityManager;
 
