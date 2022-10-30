@@ -20,9 +20,9 @@ namespace basecross {
 		/// </summary>
 		struct Parametor
 		{
-			float speed;          //回転速度
- 			Vec3 direction;          //向きたい方向
-			bool isUseY = false;  //Y軸を考慮するかどうか
+			float speed;			//回転速度
+ 			Vec3 direction;			//向きたい方向
+			bool isUseY = false;	//Y軸を考慮するかどうか
 
 			/// <summary>
 			/// コンストラクタ
