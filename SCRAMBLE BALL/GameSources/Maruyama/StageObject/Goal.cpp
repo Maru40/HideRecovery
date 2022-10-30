@@ -23,7 +23,7 @@
 
 #include "Itabashi/ObjectHider.h"
 #include "Itabashi/OnlineManager.h"
-#include "Itabashi/PlayerOnlineController.h"
+#include "Itabashi/OnlinePlayerSynchronizer.h"
 
 #include "Watanabe/Manager/PointManager.h"
 #include "Watanabe/Component/PlayerAnimator.h"
@@ -188,7 +188,7 @@ namespace basecross {
 		}
 
 		//ゴール通知
-		auto playerController = other->GetComponent<Online::PlayerOnlineController>(false);
+		auto playerController = other->GetComponent<OnlinePlayerSynchronizer>(false);
 		ScoreManager::GetInstance()->AddGoalCount(playerController->GetGamePlayerNumber());
 	}
 
@@ -197,7 +197,7 @@ namespace basecross {
 		auto itemBag = other->GetComponent<ItemBag>();
 		auto hideItem = itemBag->GetHideItem();
 		auto item = hideItem->GetGameObject()->GetComponent<Item>();
-		auto onlineController = other->GetComponent<Online::PlayerOnlineController>();
+		auto onlinePlayerSynchronizer = other->GetComponent<OnlinePlayerSynchronizer>();
 
 		itemBag->RemoveItem(item);
 
@@ -206,7 +206,7 @@ namespace basecross {
 
 		GoalProcess(other, item);
 
-		auto data = OnlineGoalData(m_param.team, onlineController->GetOnlinePlayerNumber());
+		auto data = OnlineGoalData(m_param.team, onlinePlayerSynchronizer->GetOnlinePlayerNumber());
 		Online::OnlineManager::RaiseEvent(false, (std::uint8_t*)&data, sizeof(OnlineGoalData), EXECUTE_GOAL_EVENT_CODE);
 	}
 
@@ -216,8 +216,8 @@ namespace basecross {
 			return;
 		}
 
-		auto onlineController = Online::PlayerOnlineController::GetPlayerOnlineController(playerNumber);
-		auto other = onlineController->GetGameObject();
+		auto onlinePlayerSynchronizer = OnlinePlayerSynchronizer::GetOnlinePlayerSynchronizer(playerNumber);
+		auto other = onlinePlayerSynchronizer->GetGameObject();
 		auto itemBag = other->GetComponent<ItemBag>();
 		auto hideItem = itemBag->GetHideItem();
 		auto item = hideItem->GetItem();

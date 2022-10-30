@@ -27,7 +27,7 @@
 
 #include "VelocityManager.h"
 #include "Itabashi/ObjectMover.h"
-#include "Itabashi/PlayerOnlineController.h"
+#include "Itabashi/OnlinePlayerSynchronizer.h"
 #include "Itabashi/OnlineTransformSynchronization.h"
 
 #include "Watanabe/Component/PlayerAnimator.h"
@@ -100,7 +100,7 @@ namespace basecross {
 		//objecfMover->SetMoveSpeed(28.5f);
 		objecfMover->SetAffectedCamera(GetStage()->GetView()->GetTargetCamera());
 		AddComponent<PlayerControlManager>();
-		AddComponent<Online::PlayerOnlineController>();
+		AddComponent<OnlinePlayerSynchronizer>();
 		AddComponent<Online::OnlineTransformSynchronization>();
 
 		AddComponent<PlayerAnimator>();

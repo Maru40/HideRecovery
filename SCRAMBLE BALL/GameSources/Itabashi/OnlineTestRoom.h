@@ -1,6 +1,6 @@
 ﻿#pragma once
+#include "OnlineManager.h"
 #include "Maruyama/Player/Object/PlayerObject.h"
-#include "PlayerOnlineController.h"
 #include "Patch/CameraHelper.h"
 #include "Patch/SpringArmComponent.h"
 #include "Maruyama/Camera/Component/LookAtCameraManager.h"

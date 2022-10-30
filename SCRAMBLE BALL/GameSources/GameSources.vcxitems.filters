@@ -1183,6 +1183,9 @@
     <Filter Include="Itabashi\Online\OnlineGameItemManager">
       <UniqueIdentifier>{db1fd80e-8b29-4fb3-88fe-66b7e838fb16}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Itabashi\Online\OnlinePlayerSynchronizer">
+      <UniqueIdentifier>{ef334375-1010-4733-afec-98d5b254700b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2217,6 +2220,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineGameItemManager.h">
       <Filter>Itabashi\Online\OnlineGameItemManager</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlinePlayerSynchronizer.h">
+      <Filter>Itabashi\Online\OnlinePlayerSynchronizer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -3151,6 +3157,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineGameItemManager.cpp">
       <Filter>Itabashi\Online\OnlineGameItemManager</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlinePlayerSynchronizer.cpp">
+      <Filter>Itabashi\Online\OnlinePlayerSynchronizer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

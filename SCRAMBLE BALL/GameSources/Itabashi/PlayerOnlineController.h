@@ -1,142 +1,18 @@
 ﻿#pragma once
-#include "OnlineManager.h"
 #include <unordered_map>
 
 namespace basecross
 {
+	class OnlinePlayerSynchronizer;
 	class PlayerStatus;
 
-	class PlayerControlManager;
-
-	struct DamageData;
-
-namespace Online
-{
 	/// <summary>
 	/// オンラインでのプレイヤーのイベント制御
 	/// </summary>
-	class PlayerOnlineController : public OnlineComponent
+	class PlayerOnlineController : public Component
 	{
-	public:
-
-		static constexpr std::uint8_t EXECUTE_MOVE_EVENT_CODE = 6;
-		static constexpr std::uint8_t EXECUTE_SHOT_EVENT_CODE = 7;
-		static constexpr std::uint8_t EXECUTE_DAMAGE_EVENT_CODE = 8;
-		static constexpr std::uint8_t EXECUTE_BULLET_DESTROY_EVENT_CODE = 9;
-		static constexpr std::uint8_t EXECUTE_AIM_STATE_CHANGE_EVENT_CODE = 12;
-		static constexpr std::uint8_t EXECUTE_CAMERA_FORWARD_EVENT_CODE = 13;
-		static constexpr std::uint8_t EXECUTE_TELEPORT_EVENT_CODE = 14;
-
-		static constexpr std::uint8_t TRY_OPEN_HIDEPLACE_EVENT_CODE = 15;
-		static constexpr std::uint8_t EXECUTE_OPEN_HIDEPLACE_EVENT_CODE = 16;
-
-	private:
-
 		std::weak_ptr<PlayerStatus> m_playerStatus;
-
-		std::weak_ptr<PlayerControlManager> m_controlManager;
-
-		/// <summary>
-		/// 対応するプレイヤー番号
-		/// </summary>
-		int m_onlinePlayerNumber = OnlineManager::INVALID_ONLINE_PLAYER_NUMBER;
-
-		int m_gamePlayerNumber = 0;
-
-		std::unordered_map<std::uint32_t, std::weak_ptr<GameObject>> m_bulletObjectMap;
-
-		Vec3 m_beforeMoveVector = Vec3();
-
-		void UpdateCameraForward();
-
-		void ExecuteCameraForward(int playerNumber, const Vec3& cameraForward);
-		/// <summary>
-		/// 移動処理
-		/// </summary>
-		void Move();
-		/// <summary>
-		/// 誰かが移動したら呼ばれるイベント
-		/// </summary>
-		/// <param name="playerNumber">移動したプレイヤー番号</param>
-		/// <param name="moveVector">移動量ベクトル</param>
-		/// <param name="forward">前方ベクトル</param>
-		void ExecuteMove(int playerNumber, const Vec3& moveVector, const Vec3& forward);
-
-
-		/// <summary>
-		/// 弾を撃つ
-		/// </summary>
-		void Shot();
-		/// <summary>
-		/// 誰か(自分以外)が弾を撃った際に呼ばれるイベント
-		/// </summary>
-		/// <param name="playerNumber">撃ったプレイヤー番号</param>
-		/// <param name="bulletPosition">発射位置</param>
-		/// <param name="bulletDirection">発射方向</param>
-		/// <param name="instanceId">弾のID</param>
-		/// <param name="destroyedGameObject">削除する弾のオブジェクト</param>
-		void ExecuteShot(int playerNumber, const Vec3& bulletPosition, const Vec3& bulletDirection, std::uint32_t instanceId);
-
-		void BulletDestroyed(const std::shared_ptr<GameObject>& destroyedGameObject);
-		/// <summary>
-		/// 弾が削除されたときに呼ばれるイベント
-		/// </summary>
-		/// <param name="bulletInstanceId">削除する弾のID</param>
-		void ExecuteBulletDestroyEvent(std::uint32_t bulletInstanceId, const Vec3& position);
-
-		/// <summary>
-		/// ダメージを受けた
-		/// </summary>
-		/// <param name="playerStatus">プレイヤーのステータス</param>
-		/// <param name="damageData">ダメージ情報</param>
-		void Damaged(const std::shared_ptr<PlayerStatus>& playerStatus, const DamageData& damageData);
-		/// <summary>
-		/// 誰か(自分以外)がダメージを受けた際に呼ばれる
-		/// </summary>
-		/// <param name="attackerPlayerNumber">攻撃者のプレイヤー番号</param>
-		/// <param name="damagedPlayerNumber">ダメージを受けたプレイヤー番号</param>
-		/// <param name="damage">ダメージ量</param>
-		void ExecuteDamagedEvent(int attackerPlayerNumber, int damagedPlayerNumber, int damage);
-
-		/// <summary>
-		/// エイムを試す
-		/// </summary>
-		void TryAim();
-		/// <summary>
-		/// 誰か(自分以外)がエイム状態を変更したときに呼ばれるイベント
-		/// </summary>
-		/// <param name="playerNumber">エイムを変更したプレイヤー番号</param>
-		/// <param name="isAim">エイム中か</param>
-		void ExecuteAimEvent(int playerNumber, bool isAim);
-
-		/// <summary>
-		/// テレポート入力
-		/// </summary>
-		void TeleportInputer();
-		/// <summary>
-		/// 誰かがテレポートしたら呼ばれるイベント
-		/// </summary>
-		/// <param name="playerNumber">テレポートしたプレイヤー番号</param>
-		/// <param name="teleportPosition">テレポート位置</param>
-		/// <param name="cameraPosition">カメラ位置</param>
-		void ExecuteTeleportEvent(int playerNumber, const Vec3& teleportPosition, const Vec3& cameraPosition);
-
-		/// <summary>
-		/// 箱を開ける操作関数
-		/// </summary>
-		void OpenHidePlaceInputer();
-		/// <summary>
-		/// 誰かが箱を開けるのを試す時に呼ばれるイベント
-		/// </summary>
-		/// <param name="playerNumber">試すプレイヤー番号</param>
-		/// <param name="instanceId">箱のID</param>
-		void TryOpenHidePlaceEvent(int playerNumber, std::uint32_t instanceId);
-		/// <summary>
-		/// 誰かが箱を開けたときに呼ばれるイベント
-		/// </summary>
-		/// <param name="playerNumber">開けたプレイヤー番号</param>
-		/// <param name="instanceId">箱のID</param>
-		void ExecuteOpenHidePlace(int playerNumber, std::uint32_t instanceId);
+		std::weak_ptr<OnlinePlayerSynchronizer> m_onlinePlayerSynchronizer;
 
 	public:
 
@@ -147,37 +23,5 @@ namespace Online
 		void OnUpdate() override;
 
 		void OnDraw() override {}
-
-		void OnCustomEventAction(int playerNumber, std::uint8_t eventCode, const std::uint8_t* bytes) override;
-
-		/// <summary>
-		/// 対応するプレイヤー番号の設定
-		/// </summary>
-		/// <param name="playerNumber">プレイヤー番号</param>
-		void SetOnlinePlayerNumber(int playerNumber) { m_onlinePlayerNumber = playerNumber; }
-		/// <summary>
-		/// 対応するプレイヤー番号の取得
-		/// </summary>
-		/// <returns>プレイヤー番号</returns>
-		int GetOnlinePlayerNumber() const { return m_onlinePlayerNumber; }
-
-		void SetGamePlayerNumber(int gamePlayerNumber) { m_gamePlayerNumber = gamePlayerNumber; }
-
-		int GetGamePlayerNumber() const { return m_gamePlayerNumber; }
-
-		std::shared_ptr<PlayerControlManager> GetPlayerControlManager() const { return m_controlManager.lock(); }
-
-		/// <summary>
-		/// プレイヤー番号に対応したPlayerOnlineControllerを取得
-		/// </summary>
-		/// <param name="playerNumber">プレイヤー番号</param>
-		/// <returns>対応したPlayerOnlineController</returns>
-		static std::shared_ptr<PlayerOnlineController> GetPlayerOnlineController(int playerNumber);
-		/// <summary>
-		/// ローカルPlayerOnlineControllerを取得
-		/// </summary>
-		/// <returns>ローカルPlayerOnlineController</returns>
-		static std::shared_ptr<PlayerOnlineController> GetLocalOnlineController() { return GetPlayerOnlineController(Online::OnlineManager::GetLocalPlayer().getNumber()); }
 	};
-}
 }

@@ -27,6 +27,7 @@
 #include "Maruyama/Utility/Component/ToTargetMove.h"
 #include "Maruyama/Utility/SingletonComponent/GameManager.h"
 #include "Maruyama/Player/Component/AccessHidePlace.h"
+#include "OnlinePlayerSynchronizer.h"
 
 namespace basecross
 {
@@ -40,8 +41,9 @@ namespace basecross
 	{
 		auto playerObject = GetStage()->AddGameObject<VillainPlayerObject>();
 
-		auto onlineController = playerObject->GetComponent<Online::PlayerOnlineController>();
-		onlineController->SetOnlinePlayerNumber(playerNumber);
+		auto onlinePlayerSynchronizer = playerObject->GetComponent<OnlinePlayerSynchronizer>();
+		onlinePlayerSynchronizer->SetOnlinePlayerNumber(playerNumber);
+		onlinePlayerSynchronizer->SetGamePlayerNumber(gameNumber);
 
 		auto onlineTransform = playerObject->GetComponent<Online::OnlineTransformSynchronization>();
 		onlineTransform->SetOnlinePlayerNumber(playerNumber);
@@ -49,8 +51,6 @@ namespace basecross
 		std::shared_ptr<PlayerSpawnPoint> spawnPoint;
 
 		auto areas = maru::Utility::FindComponents<OwnArea>(GetStage());
-
-		onlineController->SetGamePlayerNumber(gameNumber);
 
 		auto respawner = playerObject->GetComponent<Respawner>();
 		spawnPoint = GetSpawmPoint(gameNumber);
@@ -74,8 +74,6 @@ namespace basecross
 
 		auto playerStatus = playerObject->GetComponent<PlayerStatus>();
 		auto playerTeam = playerStatus->GetTeam();
-		auto playerOnlineController = playerObject->GetComponent<Online::PlayerOnlineController>();
-		auto playerGameNumber = playerOnlineController->GetGamePlayerNumber();
 
 		if (playerNumber != Online::OnlineManager::GetLocalPlayer().getNumber())
 		{
@@ -84,7 +82,7 @@ namespace basecross
 			GetStage()->AddGameObject<HPGaugeBP>(playerStatus);
 			// (playerNumber % 3) + 1で1～6が 1,2,3 1,2,3になる
 			auto label = GetStage()->AddGameObject<PlayerLabelBP>(
-				team::GetTeamTypeString(playerTeam), (playerGameNumber % 3) + 1);
+				team::GetTeamTypeString(playerTeam), (gameNumber % 3) + 1);
 
 			auto syncComp = label->AddComponent<SyncObject>();
 			syncComp->SetTarget(transform);
@@ -97,7 +95,9 @@ namespace basecross
 
 			return playerObject;
 		}
+
 		playerObject->AddComponent<Reticle>();
+		playerObject->AddComponent<PlayerOnlineController>();
 
 		auto springArm = playerObject->GetArm()->GetComponent<SpringArmComponent>();
 		auto& tpsCamera = springArm->GetChildObject();
@@ -137,7 +137,7 @@ namespace basecross
 			playerNumber->SetColor(teamColor);
 
 			playerLabel->ChangeSprite(SimpleSprite::Type::SpriteData, team::GetTeamTypeString(playerStatus->GetTeam()));
-			playerNumber->SetNumber((playerGameNumber % 3) + 1);
+			playerNumber->SetNumber((gameNumber % 3) + 1);
 		}
 
 		auto soundListener = playerObject->AddComponent<SoundListener>();

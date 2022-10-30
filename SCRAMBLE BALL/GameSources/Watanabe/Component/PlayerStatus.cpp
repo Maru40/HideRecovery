@@ -15,8 +15,7 @@
 #include "Maruyama/Item/HideItem.h"
 
 #include "Watanabe/Manager/ScoreManager.h"
-
-#include "Itabashi/PlayerOnlineController.h"
+#include "Itabashi/OnlinePlayerSynchronizer.h"
 
 namespace basecross {
 	PlayerStatus::PlayerStatus(const shared_ptr<GameObject>& owner)
@@ -55,7 +54,7 @@ namespace basecross {
 		// 念のため0にクランプ
 		if (m_status.hp <= 0) {
 			//キルカウントを加算
-			auto playerController = damage.attacker->GetComponent<Online::PlayerOnlineController>(false);
+			auto playerController = damage.attacker->GetComponent<OnlinePlayerSynchronizer>(false);
 			if (playerController) {
 				ScoreManager::GetInstance()->AddKillCount(playerController->GetGamePlayerNumber());
 			}
