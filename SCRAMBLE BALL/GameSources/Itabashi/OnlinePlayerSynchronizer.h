@@ -7,28 +7,31 @@ namespace basecross
 	class PlayerStatus;
 	struct DamageData;
 
+	/// <summary>
+	/// プレイヤーのオンライン同期を担当するコンポーネント
+	/// </summary>
 	class OnlinePlayerSynchronizer : public Online::OnlineComponent
 	{
 	public:
 
-		static constexpr std::uint8_t EXECUTE_CAMERA_FORWARD_EVENT_CODE = 6; // プレイヤー処理に使用するカメラの前方ベクトルの変更を通知するオンラインイベントコード
-		static constexpr std::uint8_t EXECUTE_MOVE_EVENT_CODE = 7; // 移動を通知するオンラインイベントコード
-		static constexpr std::uint8_t EXECUTE_SHOT_EVENT_CODE = 8; // 弾を撃ったことを通知するオンラインイベントコード
-		static constexpr std::uint8_t EXECUTE_BULLET_DESTROY_EVENT_CODE = 9; // 弾が破棄されたことを通知するオンラインイベントコード
+		static constexpr std::uint8_t EXECUTE_CAMERA_FORWARD_EVENT_CODE   =  6; // プレイヤー処理に使用するカメラの前方ベクトルの変更を通知するオンラインイベントコード
+		static constexpr std::uint8_t EXECUTE_MOVE_EVENT_CODE             =  7; // 移動を通知するオンラインイベントコード
+		static constexpr std::uint8_t EXECUTE_SHOT_EVENT_CODE             =  8; // 弾を撃ったことを通知するオンラインイベントコード
+		static constexpr std::uint8_t EXECUTE_BULLET_DESTROY_EVENT_CODE   =  9; // 弾が破棄されたことを通知するオンラインイベントコード
 		static constexpr std::uint8_t EXECUTE_AIM_STATE_CHANGE_EVENT_CODE = 10; // エイムの変更を通知するオンラインイベントコード
-		static constexpr std::uint8_t EXECUTE_TELEPORT_EVENT_CODE = 11; // テレポートしたことを通知するオンラインイベントコード
-		static constexpr std::uint8_t TRY_OPEN_HIDEPLACE_EVENT_CODE = 12; // 箱を開けるのを試すことを通知するオンラインイベントコード
-		static constexpr std::uint8_t EXECUTE_OPEN_HIDEPLACE_EVENT_CODE = 13; // 箱を開けたことを通知するオンラインイベントコード
-		static constexpr std::uint8_t EXECUTE_DAMAGE_EVENT_CODE = 14; // ダメージを受けたことを通知するオンラインイベントコード
+		static constexpr std::uint8_t EXECUTE_TELEPORT_EVENT_CODE         = 11; // テレポートしたことを通知するオンラインイベントコード
+		static constexpr std::uint8_t TRY_OPEN_HIDEPLACE_EVENT_CODE       = 12; // 箱を開けるのを試すことを通知するオンラインイベントコード
+		static constexpr std::uint8_t EXECUTE_OPEN_HIDEPLACE_EVENT_CODE   = 13; // 箱を開けたことを通知するオンラインイベントコード
+		static constexpr std::uint8_t EXECUTE_DAMAGE_EVENT_CODE           = 14; // ダメージを受けたことを通知するオンラインイベントコード
 
-		static constexpr int INVALID_GAME_PLAYER_NUMBER = -1;
+		static constexpr int INVALID_GAME_PLAYER_NUMBER = -1; // 無効なゲームプレイヤー番号
 
 	private:
 
 		static std::vector<std::weak_ptr<OnlinePlayerSynchronizer>> m_onlinePlayerSynchronizers; // ステージに存在するすべてのOnlinePlayerSynchronizer
 
-		std::weak_ptr<PlayerControlManager> m_controlManager;
-		std::weak_ptr<PlayerStatus> m_playerStatus;
+		std::weak_ptr<PlayerControlManager> m_controlManager; // プレイヤーの操作コンポーネント
+		std::weak_ptr<PlayerStatus> m_playerStatus; // プレイヤーのステータスコンポーネント
 
 		int m_onlinePlayerNumber = Online::OnlineManager::INVALID_ONLINE_PLAYER_NUMBER;	// 対応するオンラインプレイヤー番号
 		int m_gamePlayerNumber = INVALID_GAME_PLAYER_NUMBER; // 対応するゲームプレイヤー番号
@@ -37,7 +40,7 @@ namespace basecross
 
 		std::unordered_map<std::uint32_t, std::weak_ptr<GameObject>> m_bulletObjectMap; // 撃った弾のオブジェクトマップ
 
-		bool m_isBeforeAim = false;
+		bool m_isBeforeAim = false; // 1フレーム前のエイム状態
 
 
 		/// <summary>
@@ -161,10 +164,26 @@ namespace basecross
 		/// </summary>
 		void OpenHidePlace();
 
+		/// <summary>
+		/// オンラインプレイヤー番号の設定
+		/// </summary>
+		/// <param name="onlinePlayerNumber">オンラインプレイヤー番号</param>
 		void SetOnlinePlayerNumber(int onlinePlayerNumber) { m_onlinePlayerNumber = onlinePlayerNumber; }
+		/// <summary>
+		/// オンラインプレイヤー番号の取得
+		/// </summary>
+		/// <returns>オンラインプレイヤー番号</returns>
 		int GetOnlinePlayerNumber() const { return m_onlinePlayerNumber; }
 
+		/// <summary>
+		/// ゲームプレイヤー番号の設定
+		/// </summary>
+		/// <param name="gamePlayerNumber">ゲームプレイヤー番号</param>
 		void SetGamePlayerNumber(int gamePlayerNumber) { m_gamePlayerNumber = gamePlayerNumber; }
+		/// <summary>
+		/// ゲームプレイヤー番号の取得
+		/// </summary>
+		/// <returns>ゲームプレイヤー番号</returns>
 		int GetGamePlayerNumber() const { return m_gamePlayerNumber; }
 
 		/// <summary>

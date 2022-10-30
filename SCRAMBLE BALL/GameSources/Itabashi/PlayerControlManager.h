@@ -90,7 +90,10 @@ namespace basecross
 		/// <param name="forward">変更があればそのベクトルが入る</param>
 		/// <returns>変更があればtrue</returns>
 		bool IsUpdateCameraForward(Vec3* forward);
-
+		/// <summary>
+		/// カメラのforwardの更新をする
+		/// </summary>
+		/// <param name="forward">カメラのforward</param>
 		void ExecuteUpdateCameraForward(const Vec3& forward);
 
 		/// <summary>
@@ -115,8 +118,17 @@ namespace basecross
 		/// <returns>成功したらtrue</returns>
 		bool TryAquisition(const std::shared_ptr<Item>& item);
 
+		/// <summary>
+		/// 弾を撃つことを試す
+		/// </summary>
+		/// <param name="outputBulletObject">撃てたら弾オブジェクトがここに入る</param>
+		/// <returns>撃てたらtrue</returns>
 		bool TryShot(std::shared_ptr<BulletObjectBase>* outputBulletObject);
-
+		/// <summary>
+		/// 弾を撃つ
+		/// </summary>
+		/// <param name="direction">撃つ方向</param>
+		/// <returns>撃った弾オブジェクト</returns>
 		std::shared_ptr<BulletObjectBase> ExecuteShot(const Vec3& direction);
 
 		/// <summary>
@@ -125,7 +137,18 @@ namespace basecross
 		/// <returns>成功したらtrue</returns>
 		bool TryOpenMap();
 
+		/// <summary>
+		/// テレポートを試す
+		/// </summary>
+		/// <param name="teleportPosition">成功したらテレポート座標がここに入る</param>
+		/// <param name="cameraPosition">成功したらカメラ座標がここに入る</param>
+		/// <returns>成功したらtrue</returns>
 		bool TryTeleport(Vec3* teleportPosition, Vec3* cameraPosition);
+		/// <summary>
+		/// テレポートをする
+		/// </summary>
+		/// <param name="temeportPosition">テレポート座標</param>
+		/// <param name="cameraPosition">カメラ座標</param>
 		void ExecuteTeleport(const Vec3& temeportPosition, const Vec3& cameraPosition);
 
 		/// <summary>
@@ -140,6 +163,10 @@ namespace basecross
 		/// <param name="isAim">エイム状態ならtrue</param>
 		void ExecuteUpdateAim(bool isAim);
 
+		/// <summary>
+		/// 開くことができる箱を取得
+		/// </summary>
+		/// <returns>開くことができる箱</returns>
 		std::shared_ptr<HidePlace> GetCanOpenHidePlace() const;
 
 		/// <summary>
