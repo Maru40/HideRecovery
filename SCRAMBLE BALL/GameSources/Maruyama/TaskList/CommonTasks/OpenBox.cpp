@@ -38,7 +38,6 @@ namespace basecross {
 
 			ChangeAnimation();	//アニメーションの切り替え
 
-			//m_velocityManager.lock()->StartDeseleration();
 			m_velocityManager.lock()->ResetAll();
 		}
 
@@ -49,7 +48,7 @@ namespace basecross {
 		}
 
 		void OpenBox::OnExit() {
-			//m_velocityManager.lock()->SetIsDeseleration(false);
+
 		}
 
 		void OpenBox::Open() {
