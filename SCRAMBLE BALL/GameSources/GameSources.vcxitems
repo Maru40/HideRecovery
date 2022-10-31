@@ -234,6 +234,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Object\CollisionObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Object\GameManagerObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Object\TactileObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\ObserveIsInEyeTarget.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Random.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\ReactiveBool.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\ReactiveProperty.h" />
@@ -586,6 +587,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Object\CollisionObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Object\GameManagerObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Object\TactileObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\ObserveIsInEyeTarget.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\ReactiveBool.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\ReactiveProperty.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\GameManager.cpp" />
