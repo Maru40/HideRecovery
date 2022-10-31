@@ -1258,6 +1258,18 @@
     <Filter Include="Watanabe\TestStage\TestEffectStage">
       <UniqueIdentifier>{6ecd7ee6-b17a-4920-8877-a46f28f4259a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\Camera\TitleCamera">
+      <UniqueIdentifier>{5406103a-f08d-4b1a-a2af-04823809e858}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\Camera\TestCamera">
+      <UniqueIdentifier>{4e479895-2003-48b6-9466-c386a7899e9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\Utility\GameController">
+      <UniqueIdentifier>{fce8effc-dd98-4d17-9638-1ae4c8b9597c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\StageObject\CameraTarget">
+      <UniqueIdentifier>{d2b73c06-5257-4de3-8eb3-d720f7e8817e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1571,9 +1583,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\Zooming.h">
       <Filter>Watanabe\Component\Zooming</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Camera\TitleCamera.h">
-      <Filter>Watanabe\Camera</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\PCTStaticModelDraw.h">
       <Filter>Itabashi\Component\Graphic</Filter>
@@ -2349,6 +2358,18 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\TestEffectStage.h">
       <Filter>Watanabe\TestStage\TestEffectStage</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Camera\TitleCamera.h">
+      <Filter>Watanabe\Camera\TitleCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Camera\TestCamera.h">
+      <Filter>Watanabe\Camera\TestCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\GameController.h">
+      <Filter>Watanabe\Utility\GameController</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\CameraTarget.h">
+      <Filter>Watanabe\StageObject\CameraTarget</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2629,9 +2650,6 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\Zooming.cpp">
       <Filter>Watanabe\Component\Zooming</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Camera\TitleCamera.cpp">
-      <Filter>Watanabe\Camera</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\PCTStaticModelDraw.cpp">
       <Filter>Itabashi\Component\Graphic</Filter>
@@ -3340,6 +3358,18 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\TestEffectStage.cpp">
       <Filter>Watanabe\TestStage\TestEffectStage</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Camera\TitleCamera.cpp">
+      <Filter>Watanabe\Camera\TitleCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Camera\TestCamera.cpp">
+      <Filter>Watanabe\Camera\TestCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Utility\GameController.cpp">
+      <Filter>Watanabe\Utility\GameController</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\CameraTarget.cpp">
+      <Filter>Watanabe\StageObject\CameraTarget</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
