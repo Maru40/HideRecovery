@@ -14,6 +14,6 @@ float4 main(float4 position : SV_Position) : SV_TARGET
 
     float outlineValue = (col00 - col11) * (col00 - col11) + (col10 - col01) * (col10 - col01);
 
-    return outlineValue - 0.00001f > 0 ? float4(1, 0, 0, 1) : g_mainRender.Load(sampleIndices);
+    return outlineValue - 0.00001f > 0 ? float4(1,1, 1, 1) : g_mainRender.Load(sampleIndices);
 
 }
