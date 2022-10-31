@@ -49,6 +49,16 @@ namespace Online
 		std::memcpy(m_playerNumbers, playerNumbers, sizeof(m_playerNumbers));
 	}
 
+	void OnlineMatching::OnCreate()
+	{
+		Online::OnlineManager::Connect();
+	}
+
+	void OnlineMatching::OnConnected()
+	{
+		Online::OnlineManager::JoinRandomOrCreateRoom(ExitGames::LoadBalancing::RoomOptions().setMaxPlayers(MAX_PLAYER_NUM));
+	}
+
 	void OnlineMatching::OnCreateRoom()
 	{
 	}

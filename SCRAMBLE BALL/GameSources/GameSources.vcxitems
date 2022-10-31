@@ -18,7 +18,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\GamePlayerManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\Item.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MainStageTransitioner.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageRoomer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageTransitioner.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\ObjectHider.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineGameItemManager.h" />
@@ -381,7 +380,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\GamePlayerManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\Item.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\MainStageTransitioner.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageRoomer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageTransitioner.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\ObjectHider.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\ObjectMover.cpp" />

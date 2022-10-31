@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0"
-  xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Headers">
       <UniqueIdentifier>{4b0a624a-610d-4bc6-b311-2b02a781cdf9}</UniqueIdentifier>
@@ -893,9 +892,6 @@
     <Filter Include="Itabashi\Component\OnlineMatchStage\MatchStageTransitioner">
       <UniqueIdentifier>{04d07eac-4827-4430-8b66-911d86917a77}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Itabashi\Component\OnlineMatchStage\MatchStageRoomer">
-      <UniqueIdentifier>{d15c9508-5a27-4b95-91df-2f53335c8158}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Watanabe\UI\GameFinishUI">
       <UniqueIdentifier>{1968564a-b4c0-4fc3-910e-78bf32437180}</UniqueIdentifier>
     </Filter>
@@ -1401,9 +1397,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\GamePlayerManager.h">
       <Filter>Itabashi\Component\GamePlayerManager</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageRoomer.h">
-      <Filter>Itabashi\Component\OnlineMatchStage\MatchStageRoomer</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\Numbers.h">
       <Filter>Watanabe\UI\Numbers</Filter>
@@ -2474,9 +2467,6 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\GamePlayerManager.cpp">
       <Filter>Itabashi\Component\GamePlayerManager</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageRoomer.cpp">
-      <Filter>Itabashi\Component\OnlineMatchStage\MatchStageRoomer</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\Numbers.cpp">
       <Filter>Watanabe\UI\Numbers</Filter>

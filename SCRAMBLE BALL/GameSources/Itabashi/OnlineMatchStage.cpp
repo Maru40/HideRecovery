@@ -4,7 +4,6 @@
 #include "Scene.h"
 #include "OnlineMatching.h"
 #include "MatchStageTransitioner.h"
-#include "MatchStageRoomer.h"
 #include "Watanabe/DebugClass/Debug.h"
 #include "Watanabe/UI/UIObjects.h"
 #include "Watanabe/Component/MatchingUIController.h"
@@ -42,7 +41,6 @@ namespace basecross
 
 		auto gameObject = AddGameObject<GameObject>();
 		auto onlineMatching = gameObject->AddComponent<Online::OnlineMatching>();
-		auto matchStageRoomer = gameObject->AddComponent<MatchStageRoomer>();
 		auto matchStageTransitioner = gameObject->AddComponent<MatchStageTransitioner>();
 
 		// マップとUIの生成
