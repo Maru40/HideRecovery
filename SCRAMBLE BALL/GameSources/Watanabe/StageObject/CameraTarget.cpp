@@ -4,7 +4,7 @@
 
 namespace basecross {
 	void CameraTarget::OnCreate() {
-		AddComponent<CollisionObb>()->SetDrawActive(true);
+		//AddComponent<CollisionObb>()->SetDrawActive(true);
 	}
 	void CameraTarget::OnUpdate() {
 		auto trans = GetComponent<Transform>();
@@ -21,7 +21,13 @@ namespace basecross {
 		Vec3 moveV = Vec3(Vertical * m_controller.GetLeftStickVec().x);
 		Vec3 moveVec = moveH + moveV;
 
-		pos += moveVec * 10 * App::GetApp()->GetElapsedTime();
+		float speed = 10;
+
+		if (m_controller.GetLeftTrigger()) {
+			speed *= 2;
+		}
+
+		pos += moveVec * speed * App::GetApp()->GetElapsedTime();
 		trans->SetPosition(pos);
 	}
 }

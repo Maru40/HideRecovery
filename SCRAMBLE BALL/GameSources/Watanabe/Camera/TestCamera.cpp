@@ -7,7 +7,7 @@ namespace basecross {
 	GameCamera::GameCamera(const shared_ptr<GameObject>& target,
 		const Vec2& defaultAngle)
 		:m_controller(0), m_angleRad(defaultAngle),
-		m_length(5.0f), m_moveSpeed(90.0f), m_target(target),
+		m_length(7.0f), m_moveSpeed(90.0f), m_target(target),
 		m_upDownMaxAngle(XMConvertToRadians(170)),
 		m_upDownMinAngle(XMConvertToRadians(60)),
 		m_atOffset(Vec3(0, 0.75f, 0)), m_sensitivity(1, 0.75f)
