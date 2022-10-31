@@ -1270,6 +1270,9 @@
     <Filter Include="Watanabe\StageObject\CameraTarget">
       <UniqueIdentifier>{d2b73c06-5257-4de3-8eb3-d720f7e8817e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\UI\DirectionWithHasBallUI">
+      <UniqueIdentifier>{73b08fd6-b54c-462d-a4e8-e0dabbba7334}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2370,6 +2373,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\CameraTarget.h">
       <Filter>Watanabe\StageObject\CameraTarget</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\DirectionWithHasBallUI.h">
+      <Filter>Watanabe\UI\DirectionWithHasBallUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -3370,6 +3376,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\CameraTarget.cpp">
       <Filter>Watanabe\StageObject\CameraTarget</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\DirectionWithHasBallUI.cpp">
+      <Filter>Watanabe\UI\DirectionWithHasBallUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
