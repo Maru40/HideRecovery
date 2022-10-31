@@ -4,6 +4,7 @@
 #include "../Effekseer/EfkEffect.h"
 #include "../Camera/TestCamera.h"
 #include "../StageObject/CameraTarget.h"
+#include "Watanabe/StageObject/StageObjects.h"
 
 namespace basecross {
 	void TestEffectStage::CreateViewLight() {
@@ -28,9 +29,18 @@ namespace basecross {
 		Debug::GetInstance()->Log(L"TestEffectStage");
 		AddGameObject<EfkInterface>();
 
-		auto test = AddGameObject<GameObject>();
-		auto draw = test->AddComponent<PNTStaticDraw>();
-		draw->SetMeshResource(L"DEFAULT_CUBE");
+		GameObjecttCSVBuilder builder;
+		builder.Register<Block>(L"Block");
+		builder.Register<RackObject>(L"Rack");
+		builder.Register<HideItemObject>(L"HideItem");
+		builder.Register<GoalObject>(L"Goal");
+		builder.Register<OwnAreaObject>(L"OwnAreaObject");
+		builder.Register<Container>(L"Container");
+		auto dir = App::GetApp()->GetDataDirWString();
+		auto path = dir + L"MapDatas/";
+		builder.Build(GetThis<Stage>(), path + L"StageS2.csv");
+
+		AddGameObject<SkyBox>(Vec3(500));
 	}
 
 	void TestEffectStage::OnUpdate() {
