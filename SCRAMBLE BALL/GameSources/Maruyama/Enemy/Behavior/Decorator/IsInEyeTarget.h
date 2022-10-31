@@ -1,6 +1,6 @@
 /*!
-@file I_Decorator.h
-@brief I_Decoratorなど
+@file IsInEyeTarget.h
+@brief IsInEyeTargetなど
 担当者：丸山 裕喜
 */
 
@@ -17,6 +17,8 @@ namespace basecross {
 	/// 前方宣言
 	//--------------------------------------------------------------------------------------
 	class EyeSearchRange;
+	class ObserveIsInEyeTarget;
+	class GameTimer;
 
 	namespace Enemy {
 		class EnemyBase;
@@ -29,7 +31,7 @@ namespace basecross {
 			namespace Decorator {
 
 				//--------------------------------------------------------------------------------------
-				/// 監視対象に指定したターゲットが視界範囲にいるかどうかを判断するデコレータ
+				/// 監視対象が視界範囲にいるかどうかを判断するデコレータ
 				//--------------------------------------------------------------------------------------
 				class IsInEyeTarget : public DecoratorBase<Enemy::EnemyBase>
 				{
@@ -38,11 +40,9 @@ namespace basecross {
 					using ObserveSharedTargets = std::vector<std::shared_ptr<GameObject>>;
 
 				private:
-					//std::weak_ptr<GameObject> m_target;		//ターゲットを設定
-					ObserveTargets m_observeTargets;			//監視対象配列
 
-					std::weak_ptr<EyeSearchRange> m_eyeRange;	//視界管理コンポーネント
-
+					std::unique_ptr<ObserveIsInEyeTarget> m_observeIsInTarget;	//監視処理担当クラス。
+					
 				public:
 					IsInEyeTarget(const std::shared_ptr<Enemy::EnemyBase>& owner);
 
@@ -70,15 +70,13 @@ namespace basecross {
 					/// 監視対象の追加
 					/// </summary>
 					/// <param name="target">監視対象</param>
-					void AddObserveTarget(const std::shared_ptr<GameObject>& target){ 
-						m_observeTargets.push_back(target);
-					}
+					void AddObserveTarget(const std::shared_ptr<GameObject>& target);
 
-					void SetObserveTargets(const ObserveTargets& targets) { m_observeTargets = targets; }
+					void SetObserveTargets(const ObserveTargets& targets);
 
 					void SetObserveTargets(const ObserveSharedTargets& targets);
 
-					_NODISCARD ObserveTargets GetObserveTargets() const noexcept { return m_observeTargets; }
+					_NODISCARD ObserveTargets GetObserveTargets() const noexcept;
 
 				};
 
