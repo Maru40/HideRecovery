@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0"
+  xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Headers">
       <UniqueIdentifier>{4b0a624a-610d-4bc6-b311-2b02a781cdf9}</UniqueIdentifier>
@@ -1225,6 +1226,36 @@
     <Filter Include="Maruyama\Player\Component\HidePlaceOpener">
       <UniqueIdentifier>{15de02f4-c11f-4def-8966-1f39c7665943}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\Stage\ResultStage">
+      <UniqueIdentifier>{eff7db8b-3a7b-47b5-bf5b-5ded9037b0f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\Stage\AdvStageBase">
+      <UniqueIdentifier>{2a534e17-aaa1-4b60-970f-2e71bf312547}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\Utility\AdvRenderer">
+      <UniqueIdentifier>{d5bcce4f-725f-4d34-9d86-29e594e12789}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\Shader\PostProcess">
+      <UniqueIdentifier>{28154e25-6a94-4bb9-ac93-8ac47a7b4856}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\Shader\RenderTexture">
+      <UniqueIdentifier>{4fff7ee0-3018-406c-82ad-f3451de98764}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\Shader\Main">
+      <UniqueIdentifier>{2b0e178e-08bb-407f-a164-dd6f95533dc5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\Shader\PostEffect">
+      <UniqueIdentifier>{34c94a58-fe04-4441-be2b-bb1630617a2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\Shader\PostProcess\OutlinePostEffect">
+      <UniqueIdentifier>{dba54588-8f88-43e8-a256-59b69dd10769}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\Shader\PostProcess\HLSL">
+      <UniqueIdentifier>{3c39b0e1-d586-4387-ab90-5ad2d116452a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\Shader\AdvStageBase">
+      <UniqueIdentifier>{6dbc0f07-0f92-43ea-a97d-93fa7728c97d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1472,9 +1503,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\StageObjects.h">
       <Filter>Watanabe\StageObject</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Stage\ResultStage.h">
-      <Filter>Watanabe\Stage</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\SplashMessageUI.h">
       <Filter>Watanabe\UI\SplashMessageUI</Filter>
@@ -2295,6 +2323,27 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlinePlayerSynchronizer.h">
       <Filter>Itabashi\Online\OnlinePlayerSynchronizer</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Stage\ResultStage.h">
+      <Filter>Watanabe\Stage\ResultStage</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Stage\AdvStageBase.h">
+      <Filter>Watanabe\Stage\AdvStageBase</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\AdvRenderer.h">
+      <Filter>Watanabe\Utility\AdvRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\PostProcess.h">
+      <Filter>Watanabe\Shader\PostProcess</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\RenderTexture.h">
+      <Filter>Watanabe\Shader\RenderTexture</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\IPostEffect.h">
+      <Filter>Watanabe\Shader\PostEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\PostEffect\OutlinePostEffect.h">
+      <Filter>Watanabe\Shader\PostProcess\OutlinePostEffect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2512,9 +2561,6 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\BallAnimator.cpp">
       <Filter>Watanabe\Component\BallAnimator</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Stage\ResultStage.cpp">
-      <Filter>Watanabe\Stage</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\SplashMessageUI.cpp">
       <Filter>Watanabe\UI\SplashMessageUI</Filter>
@@ -3269,6 +3315,24 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlinePlayerSynchronizer.cpp">
       <Filter>Itabashi\Online\OnlinePlayerSynchronizer</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Stage\ResultStage.cpp">
+      <Filter>Watanabe\Stage\ResultStage</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Stage\AdvStageBase.cpp">
+      <Filter>Watanabe\Stage\AdvStageBase</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Utility\AdvRenderer.cpp">
+      <Filter>Watanabe\Utility\AdvRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\PostProcess.cpp">
+      <Filter>Watanabe\Shader\PostProcess</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\RenderTexture.cpp">
+      <Filter>Watanabe\Shader\RenderTexture</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\PostEffect\OutlinePostEffect.cpp">
+      <Filter>Watanabe\Shader\PostProcess\OutlinePostEffect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="$(MSBuildThisFileDirectory)..\..\Libs\BaseLib\DxShaders\SlimeVS.hlsl">
@@ -3319,6 +3383,15 @@
     <FxCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\HLSL\VSBoneModelDrawShadow.hlsl">
       <Filter>Watanabe\Shader\BoneModelDraw\HLSL</Filter>
     </FxCompile>
+    <FxCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\HLSL\VS_Main.hlsl">
+      <Filter>Watanabe\Shader\Main</Filter>
+    </FxCompile>
+    <FxCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\HLSL\PS_Main.hlsl">
+      <Filter>Watanabe\Shader\Main</Filter>
+    </FxCompile>
+    <FxCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\PostEffect\HLSL\CS_Outline.hlsl">
+      <Filter>Watanabe\Shader\PostProcess\HLSL</Filter>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)..\..\Libs\BaseLib\DxShaders\SlimeParametors.hlsli">
@@ -3341,6 +3414,9 @@
     </None>
     <None Include="$(MSBuildThisFileDirectory)Maruyama\Shader\Toon\ToonParametors.hlsli">
       <Filter>Maruyama\Shader\ToonShader</Filter>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Watanabe\Shader\HLSL\AdvStageBase.hlsli">
+      <Filter>Watanabe\Shader\AdvStageBase</Filter>
     </None>
   </ItemGroup>
 </Project>
