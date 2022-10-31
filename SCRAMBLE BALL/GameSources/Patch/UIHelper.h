@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 namespace basecross
 {
@@ -7,7 +7,7 @@ namespace basecross
 	class Stage;
 
 	/// <summary>
-	/// •\¦‚·‚éÛ‚ÌƒAƒ“ƒJ[ƒ^ƒCƒv
+	/// è¡¨ç¤ºã™ã‚‹éš›ã®ã‚¢ãƒ³ã‚«ãƒ¼ã‚¿ã‚¤ãƒ—
 	/// </summary>
 	enum class AnchorType
 	{
@@ -23,206 +23,206 @@ namespace basecross
 	};
 
 	/// <summary>
-	/// UI•`‰æ—pƒgƒ‰ƒ“ƒXƒtƒH[ƒ€
+	/// UIæç”»ç”¨ãƒˆãƒ©ãƒ³ã‚¹ãƒ•ã‚©ãƒ¼ãƒ 
 	/// </summary>
 	class RectTransform : public Component
 	{
 		/// <summary>
-		/// ƒAƒ“ƒJ[‚É‘Î‰‚·‚éƒNƒ‰ƒCƒAƒ“ƒg—Ìˆæ¶ã‚Ì’¸“_‚ÌƒIƒtƒZƒbƒg‚ğ‚à‚Âƒ}ƒbƒv
+		/// ã‚¢ãƒ³ã‚«ãƒ¼ã«å¯¾å¿œã™ã‚‹ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆé ˜åŸŸå·¦ä¸Šã®é ‚ç‚¹ã®ã‚ªãƒ•ã‚»ãƒƒãƒˆã‚’ã‚‚ã¤ãƒãƒƒãƒ—
 		/// </summary>
 		static const std::unordered_map<AnchorType, Vec2> m_anchorOffsetTable;
 
 		/// <summary>
-		/// ƒ[ƒJƒ‹À•W
+		/// ãƒ­ãƒ¼ã‚«ãƒ«åº§æ¨™
 		/// </summary>
 		Vec2 m_position = Vec2(0, 0);
 		/// <summary>
-		/// ƒ[ƒJƒ‹‰ñ“]
+		/// ãƒ­ãƒ¼ã‚«ãƒ«å›è»¢
 		/// </summary>
 		float m_rotation = 0.0f;
 		/// <summary>
-		/// ƒ[ƒJƒ‹ƒXƒP[ƒ‹
+		/// ãƒ­ãƒ¼ã‚«ãƒ«ã‚¹ã‚±ãƒ¼ãƒ«
 		/// </summary>
 		Vec2 m_scale = Vec2(1.0f, 1.0f);
 
 		/// <summary>
-		/// lŠp‚Ì•
+		/// å››è§’ã®å¹…
 		/// </summary>
 		float m_width;
 		/// <summary>
-		/// lŠp‚Ì‚‚³
+		/// å››è§’ã®é«˜ã•
 		/// </summary>
 		float m_height;
 
 		/// <summary>
-		/// lŠp‚ÌƒAƒ“ƒJ[ƒ^ƒCƒv
+		/// å››è§’ã®ã‚¢ãƒ³ã‚«ãƒ¼ã‚¿ã‚¤ãƒ—
 		/// </summary>
 		AnchorType m_anchorType = AnchorType::Center;
 
 		/// <summary>
-		/// ƒsƒ{ƒbƒg
+		/// ãƒ”ãƒœãƒƒãƒˆ
 		/// </summary>
 		Vec2 m_pivot = Vec2(0.0f, 0.0f);
 
 	public:
 		/// <summary>
-		/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+		/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		/// </summary>
-		/// <param name="owner">ƒQ[ƒ€ƒIƒuƒWƒFƒNƒg</param>
+		/// <param name="owner">ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</param>
 		RectTransform(std::shared_ptr<GameObject>& owner);
 
 		/// <summary>
-		/// UI—pÀ•W‚ğƒEƒBƒ“ƒhƒEÀ•W‚É•ÏŠ·‚·‚é
+		/// UIç”¨åº§æ¨™ã‚’ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦åº§æ¨™ã«å¤‰æ›ã™ã‚‹
 		/// </summary>
-		/// <param name="uiPoint">UI—pÀ•W</param>
-		/// <returns>ƒEƒBƒ“ƒhƒEÀ•W</returns>
+		/// <param name="uiPoint">UIç”¨åº§æ¨™</param>
+		/// <returns>ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦åº§æ¨™</returns>
 		static Vec2 ToWindowPoint(const Vec2& uiPoint);
 
 		/// <summary>
-		/// ƒAƒ“ƒJ[ƒ^ƒCƒv‚ğİ’è‚·‚é
+		/// ã‚¢ãƒ³ã‚«ãƒ¼ã‚¿ã‚¤ãƒ—ã‚’è¨­å®šã™ã‚‹
 		/// </summary>
-		/// <param name="anchorType">ƒAƒ“ƒJ[ƒ^ƒCƒv</param>
+		/// <param name="anchorType">ã‚¢ãƒ³ã‚«ãƒ¼ã‚¿ã‚¤ãƒ—</param>
 		void SetAnchor(const AnchorType anchorType);
 
 		/// <summary>
-		/// ƒAƒ“ƒJ[ƒ^ƒCƒv‚ğæ“¾‚·‚é
+		/// ã‚¢ãƒ³ã‚«ãƒ¼ã‚¿ã‚¤ãƒ—ã‚’å–å¾—ã™ã‚‹
 		/// </summary>
-		/// <returns>ƒAƒ“ƒJ[ƒ^ƒCƒv</returns>
+		/// <returns>ã‚¢ãƒ³ã‚«ãƒ¼ã‚¿ã‚¤ãƒ—</returns>
 		AnchorType GetAnhor() const;
 
 		/// <summary>
-		/// ƒsƒ{ƒbƒg‚ğİ’è‚·‚é
+		/// ãƒ”ãƒœãƒƒãƒˆã‚’è¨­å®šã™ã‚‹
 		/// </summary>
-		/// <param name="pivot">ƒsƒ{ƒbƒg</param>
+		/// <param name="pivot">ãƒ”ãƒœãƒƒãƒˆ</param>
 		void SetPivot(Vec2 pivot);
 		/// <summary>
-		/// ƒsƒ{ƒbƒg‚ğİ’è‚·‚é
+		/// ãƒ”ãƒœãƒƒãƒˆã‚’è¨­å®šã™ã‚‹
 		/// </summary>
-		/// <param name="x">ƒsƒ{ƒbƒgXÀ•W</param>
-		/// <param name="y">ƒsƒ{ƒbƒgYÀ•W</param>
+		/// <param name="x">ãƒ”ãƒœãƒƒãƒˆXåº§æ¨™</param>
+		/// <param name="y">ãƒ”ãƒœãƒƒãƒˆYåº§æ¨™</param>
 		void SetPivot(float x, float y);
 
 		/// <summary>
-		/// ƒsƒ{ƒbƒg‚ğæ“¾‚·‚é
+		/// ãƒ”ãƒœãƒƒãƒˆã‚’å–å¾—ã™ã‚‹
 		/// </summary>
-		/// <returns>ƒsƒ{ƒbƒg</returns>
+		/// <returns>ãƒ”ãƒœãƒƒãƒˆ</returns>
 		Vec2 GetPivot() const;
 
 		/// <summary>
-		/// lŠp‚Ì•‚ğİ’è‚·‚é
+		/// å››è§’ã®å¹…ã‚’è¨­å®šã™ã‚‹
 		/// </summary>
-		/// <param name="width">•</param>
+		/// <param name="width">å¹…</param>
 		void SetWidth(const float width);
 		/// <summary>
-		/// lŠp‚Ì‚‚³‚ğİ’è‚·‚é
+		/// å››è§’ã®é«˜ã•ã‚’è¨­å®šã™ã‚‹
 		/// </summary>
-		/// <param name="height">‚‚³</param>
+		/// <param name="height">é«˜ã•</param>
 		void SetHeight(const float height);
 		/// <summary>
-		/// lŠp‚ÌƒTƒCƒY‚ğİ’è‚·‚é
+		/// å››è§’ã®ã‚µã‚¤ã‚ºã‚’è¨­å®šã™ã‚‹
 		/// </summary>
-		/// <param name="width">•</param>
-		/// <param name="height">‚‚³</param>
+		/// <param name="width">å¹…</param>
+		/// <param name="height">é«˜ã•</param>
 		void SetRectSize(const float width, const float height);
 
 		/// <summary>
-		/// lŠp‚Ì•‚ğæ“¾‚·‚é
+		/// å››è§’ã®å¹…ã‚’å–å¾—ã™ã‚‹
 		/// </summary>
-		/// <returns>•</returns>
+		/// <returns>å¹…</returns>
 		float GetWidth() const;
 		/// <summary>
-		/// lŠp‚Ì‚‚³‚ğæ“¾‚·‚é
+		/// å››è§’ã®é«˜ã•ã‚’å–å¾—ã™ã‚‹
 		/// </summary>
-		/// <returns>‚‚³</returns>
+		/// <returns>é«˜ã•</returns>
 		float GetHeight() const;
 
 		/// <summary>
-		/// ƒ[ƒJƒ‹À•W‚ğİ’è‚·‚é
+		/// ãƒ­ãƒ¼ã‚«ãƒ«åº§æ¨™ã‚’è¨­å®šã™ã‚‹
 		/// </summary>
-		/// <param name="position">ƒ[ƒJƒ‹À•W</param>
+		/// <param name="position">ãƒ­ãƒ¼ã‚«ãƒ«åº§æ¨™</param>
 		void SetPosition(const Vec2& position);
 		/// <summary>
-		/// ƒ[ƒJƒ‹À•W‚ğİ’è‚·‚é
+		/// ãƒ­ãƒ¼ã‚«ãƒ«åº§æ¨™ã‚’è¨­å®šã™ã‚‹
 		/// </summary>
-		/// <param name="x">ƒ[ƒJƒ‹XÀ•W</param>
-		/// <param name="y">ƒ[ƒJƒ‹À•W</param>
+		/// <param name="x">ãƒ­ãƒ¼ã‚«ãƒ«Xåº§æ¨™</param>
+		/// <param name="y">ãƒ­ãƒ¼ã‚«ãƒ«åº§æ¨™</param>
 		void SetPosition(const float x, const float y);
 
 		/// <summary>
-		/// ƒ[ƒJƒ‹À•W‚ğæ“¾‚·‚é
+		/// ãƒ­ãƒ¼ã‚«ãƒ«åº§æ¨™ã‚’å–å¾—ã™ã‚‹
 		/// </summary>
-		/// <returns>ƒ[ƒJƒ‹À•W</returns>
+		/// <returns>ãƒ­ãƒ¼ã‚«ãƒ«åº§æ¨™</returns>
 		Vec2 GetPosition() const;
 
 		Vec2 GetWorldPosition() const;
 
 		/// <summary>
-		/// ƒ[ƒJƒ‹‰ñ“]‚ğİ’è‚·‚é
+		/// ãƒ­ãƒ¼ã‚«ãƒ«å›è»¢ã‚’è¨­å®šã™ã‚‹
 		/// </summary>
-		/// <param name="radian">ƒ[ƒJƒ‹Z‰ñ“]</param>
+		/// <param name="radian">ãƒ­ãƒ¼ã‚«ãƒ«Zå›è»¢</param>
 		void SetRotation(const float radian);
 
 		/// <summary>
-		/// ƒ[ƒJƒ‹‰ñ“]‚ğæ“¾‚·‚é
+		/// ãƒ­ãƒ¼ã‚«ãƒ«å›è»¢ã‚’å–å¾—ã™ã‚‹
 		/// </summary>
-		/// <returns>ƒ[ƒJƒ‹Z‰ñ“]</returns>
+		/// <returns>ãƒ­ãƒ¼ã‚«ãƒ«Zå›è»¢</returns>
 		float GetRotation() const;
 
 		/// <summary>
-		/// ƒ[ƒJƒ‹Z‰ñ“]‚ğ’Ç‰Á‚·‚é
+		/// ãƒ­ãƒ¼ã‚«ãƒ«Zå›è»¢ã‚’è¿½åŠ ã™ã‚‹
 		/// </summary>
-		/// <param name="radian">’Ç‰Á‚·‚éƒ[ƒJƒ‹Z‰ñ“]</param>
+		/// <param name="radian">è¿½åŠ ã™ã‚‹ãƒ­ãƒ¼ã‚«ãƒ«Zå›è»¢</param>
 		void Rotate(const float radian);
 
 		/// <summary>
-		/// ƒ[ƒJƒ‹ƒXƒP[ƒ‹‚ğİ’è‚·‚é
+		/// ãƒ­ãƒ¼ã‚«ãƒ«ã‚¹ã‚±ãƒ¼ãƒ«ã‚’è¨­å®šã™ã‚‹
 		/// </summary>
-		/// <param name="scale">ƒ[ƒJƒ‹ƒXƒP[ƒ‹</param>
+		/// <param name="scale">ãƒ­ãƒ¼ã‚«ãƒ«ã‚¹ã‚±ãƒ¼ãƒ«</param>
 		void SetScale(const Vec2& scale);
 		/// <summary>
-		/// ƒ[ƒJƒ‹ƒXƒP[ƒ‹‚ğİ’è‚·‚é
+		/// ãƒ­ãƒ¼ã‚«ãƒ«ã‚¹ã‚±ãƒ¼ãƒ«ã‚’è¨­å®šã™ã‚‹
 		/// </summary>
-		/// <param name="x">ƒ[ƒJƒ‹XƒXƒP[ƒ‹</param>
-		/// <param name="y">ƒ[ƒJƒ‹YƒXƒP[ƒ‹</param>
+		/// <param name="x">ãƒ­ãƒ¼ã‚«ãƒ«Xã‚¹ã‚±ãƒ¼ãƒ«</param>
+		/// <param name="y">ãƒ­ãƒ¼ã‚«ãƒ«Yã‚¹ã‚±ãƒ¼ãƒ«</param>
 		void SetScale(const float x, const float y);
 
 		/// <summary>
-		/// ƒ[ƒJƒ‹ƒXƒP[ƒ‹‚ğæ“¾‚·‚é
+		/// ãƒ­ãƒ¼ã‚«ãƒ«ã‚¹ã‚±ãƒ¼ãƒ«ã‚’å–å¾—ã™ã‚‹
 		/// </summary>
-		/// <returns>ƒ[ƒJƒ‹ƒXƒP[ƒ‹</returns>
+		/// <returns>ãƒ­ãƒ¼ã‚«ãƒ«ã‚¹ã‚±ãƒ¼ãƒ«</returns>
 		Vec2 GetScale() const;
 
 		/// <summary>
-		/// ƒ[ƒ‹ƒhƒXƒP[ƒ‹‚ğæ“¾‚·‚é
+		/// ãƒ¯ãƒ¼ãƒ«ãƒ‰ã‚¹ã‚±ãƒ¼ãƒ«ã‚’å–å¾—ã™ã‚‹
 		/// </summary>
-		/// <returns>ƒ[ƒ‹ƒhƒXƒP[ƒ‹</returns>
+		/// <returns>ãƒ¯ãƒ¼ãƒ«ãƒ‰ã‚¹ã‚±ãƒ¼ãƒ«</returns>
 		Vec2 GetWorldScale() const;
 
 		/// <summary>
-		/// ƒsƒ{ƒbƒg‚©‚çó‚¯æ‚Á‚½ƒAƒ“ƒJ[ƒ^ƒCƒv‚Ü‚Å‚Ì’·‚³‚ğ•Ô‚·
+		/// ãƒ”ãƒœãƒƒãƒˆã‹ã‚‰å—ã‘å–ã£ãŸã‚¢ãƒ³ã‚«ãƒ¼ã‚¿ã‚¤ãƒ—ã¾ã§ã®é•·ã•ã‚’è¿”ã™
 		/// </summary>
-		/// <param name="anchorType">ƒAƒ“ƒJ[ƒ^ƒCƒv</param>
-		/// <param name="isScaleble">ƒXƒP[ƒ‹‚Ì‰e‹¿‚ğó‚¯‚é‚©</param>
-		/// <returns>ƒsƒ{ƒbƒg‚©‚çƒAƒ“ƒJ[ƒ^ƒCƒv‚Ì‹——£</returns>
+		/// <param name="anchorType">ã‚¢ãƒ³ã‚«ãƒ¼ã‚¿ã‚¤ãƒ—</param>
+		/// <param name="isScaleble">ã‚¹ã‚±ãƒ¼ãƒ«ã®å½±éŸ¿ã‚’å—ã‘ã‚‹ã‹</param>
+		/// <returns>ãƒ”ãƒœãƒƒãƒˆã‹ã‚‰ã‚¢ãƒ³ã‚«ãƒ¼ã‚¿ã‚¤ãƒ—ã®è·é›¢</returns>
 		Vec2 GetAnchorOffset(const AnchorType anchorType,const bool isScaleble = true) const;
 
 		/// <summary>
-		/// ƒ[ƒ‹ƒhs—ñ‚ğæ“¾‚·‚é
+		/// ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ã‚’å–å¾—ã™ã‚‹
 		/// </summary>
 		/// <returns></returns>
 		D2D1::Matrix3x2F GetWorldMatrix() const;
 
 		/// <summary>
-		/// e‚ÌRectTransform‚ğæ“¾‚·‚é
+		/// è¦ªã®RectTransformã‚’å–å¾—ã™ã‚‹
 		/// </summary>
-		/// <returns>e‚ÌRectTransform</returns>
+		/// <returns>è¦ªã®RectTransform</returns>
 		std::shared_ptr<RectTransform> GetParentRectTransform() const;
 
 		/// <summary>
-		/// e‚ÌƒAƒ“ƒJ[ƒIƒtƒZƒbƒg‚ğæ“¾‚·‚é
+		/// è¦ªã®ã‚¢ãƒ³ã‚«ãƒ¼ã‚ªãƒ•ã‚»ãƒƒãƒˆã‚’å–å¾—ã™ã‚‹
 		/// </summary>
-		/// <param name="anchorType">ƒAƒ“ƒJ[ƒ^ƒCƒv</param>
-		/// <returns>ƒAƒ“ƒJ[ƒIƒtƒZƒbƒg</returns>
+		/// <param name="anchorType">ã‚¢ãƒ³ã‚«ãƒ¼ã‚¿ã‚¤ãƒ—</param>
+		/// <returns>ã‚¢ãƒ³ã‚«ãƒ¼ã‚ªãƒ•ã‚»ãƒƒãƒˆ</returns>
 		Vec2 GetParentAnchorOffset(const AnchorType anchorType) const;
 
 		void OnUpdate() override;
@@ -238,99 +238,99 @@ namespace basecross
 	};
 
 	/// <summary>
-	/// ‰æ‘œ‚ğ•\¦‚·‚éƒRƒ“ƒ|[ƒlƒ“ƒg
+	/// ç”»åƒã‚’è¡¨ç¤ºã™ã‚‹ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
 	/// </summary>
 	class Image : public PCTSpriteDraw
 	{
 		/// <summary>
-		/// Vertices‚É•K—v‚È’¸“_”
+		/// Verticesã«å¿…è¦ãªé ‚ç‚¹æ•°
 		/// </summary>
 		static constexpr int VERTICES_POINT_NUM = 4;
 
 		/// <summary>
-		/// ’¸“_ƒf[ƒ^”z—ñ
+		/// é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿é…åˆ—
 		/// </summary>
 		static const std::vector<uint16_t> m_indices;
 
 		/// <summary>
-		/// lŠpƒgƒ‰ƒ“ƒXƒtƒH[ƒ€
+		/// å››è§’ãƒˆãƒ©ãƒ³ã‚¹ãƒ•ã‚©ãƒ¼ãƒ 
 		/// </summary>
 		ex_weak_ptr<RectTransform> rectTransform;
 
 		/// <summary>
-		/// ‰æ‘œ‚ÌØ‚èæ‚è—Ìˆæ‚Ì’¸“_ƒf[ƒ^
+		/// ç”»åƒã®åˆ‡ã‚Šå–ã‚Šé ˜åŸŸã®é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿
 		/// </summary>
 		std::array<Vec2, VERTICES_POINT_NUM> m_UVPoints;
 
 		/// <summary>
-		/// ‰æ‘œ‚Ì“h‚è‚Â‚Ô‚µƒ^ƒCƒv
+		/// ç”»åƒã®å¡—ã‚Šã¤ã¶ã—ã‚¿ã‚¤ãƒ—
 		/// </summary>
 		ImageFillType m_fillType = ImageFillType::None;
 
 		/// <summary>
-		/// “h‚è‚Â‚Ô‚³‚ê‚é—Ê (1.0f ` 2.0f)
+		/// å¡—ã‚Šã¤ã¶ã•ã‚Œã‚‹é‡ (1.0f ï½ 2.0f)
 		/// </summary>
 		float m_fillAmount = 1.0f;
 
 		/// <summary>
-		/// Œ»İ‚Ìó‘Ô‚Ìverticesƒf[ƒ^‚ğì¬‚·‚é
+		/// ç¾åœ¨ã®çŠ¶æ…‹ã®verticesãƒ‡ãƒ¼ã‚¿ã‚’ä½œæˆã™ã‚‹
 		/// </summary>
-		/// <returns>verticesƒf[ƒ^</returns>
+		/// <returns>verticesãƒ‡ãƒ¼ã‚¿</returns>
 		std::vector<VertexPositionColorTexture> CreateVertices() const;
 
 	public:
 		/// <summary>
-		/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+		/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		/// </summary>
-		/// <param name="owner">ƒQ[ƒ€ƒIƒuƒWƒFƒNƒg</param>
-		/// <param name="width">•`‰æ‚·‚é•</param>
-		/// <param name="height">•`‰æ‚·‚é‚‚³</param>
+		/// <param name="owner">ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</param>
+		/// <param name="width">æç”»ã™ã‚‹å¹…</param>
+		/// <param name="height">æç”»ã™ã‚‹é«˜ã•</param>
 		Image(std::shared_ptr<GameObject>& owner);
 
 
 		/// <summary>
-		/// ‰æ‘œ‚ÌØ‚èæ‚è—Ìˆæ‚ğİ’è‚·‚é
+		/// ç”»åƒã®åˆ‡ã‚Šå–ã‚Šé ˜åŸŸã‚’è¨­å®šã™ã‚‹
 		/// </summary>
-		/// <param name="leftUpPoint">Ø‚èæ‚è—Ìˆæ‚Ì¶ã‚Ì’¸“_‚ÌÀ•W</param>
-		/// <param name="width">Ø‚èæ‚è—Ìˆæ‚Ì•</param>
-		/// <param name="height">Ø‚èæ‚è—Ìˆæ‚Ì‚‚³</param>
-		/// <param name="imageSize">Œ³‰æ‘œ‚Ì•‚Æ‚‚³</param>
+		/// <param name="leftUpPoint">åˆ‡ã‚Šå–ã‚Šé ˜åŸŸã®å·¦ä¸Šã®é ‚ç‚¹ã®åº§æ¨™</param>
+		/// <param name="width">åˆ‡ã‚Šå–ã‚Šé ˜åŸŸã®å¹…</param>
+		/// <param name="height">åˆ‡ã‚Šå–ã‚Šé ˜åŸŸã®é«˜ã•</param>
+		/// <param name="imageSize">å…ƒç”»åƒã®å¹…ã¨é«˜ã•</param>
 		void SetUVRect(const Vec2& leftUpPoint,const float width,const float height,Vec2& imageSize);
 
 		/// <summary>
-		/// Alpha’l‚ğİ’è‚·‚é
+		/// Alphaå€¤ã‚’è¨­å®šã™ã‚‹
 		/// </summary>
-		/// <param name="alpha">Alpha’l</param>
+		/// <param name="alpha">Alphaå€¤</param>
 		void SetAlpha(const float alpha);
 
 		/// <summary>
-		/// Alpha’l‚ğæ“¾‚·‚é
+		/// Alphaå€¤ã‚’å–å¾—ã™ã‚‹
 		/// </summary>
-		/// <returns>Alpha’l</returns>
+		/// <returns>Alphaå€¤</returns>
 		float GetAlpha() const;
 
 		/// <summary>
-		/// “h‚è‚Â‚Ô‚µƒ^ƒCƒv‚ğİ’è‚·‚é
+		/// å¡—ã‚Šã¤ã¶ã—ã‚¿ã‚¤ãƒ—ã‚’è¨­å®šã™ã‚‹
 		/// </summary>
-		/// <param name="fillType">“h‚è‚Â‚Ô‚µƒ^ƒCƒv</param>
+		/// <param name="fillType">å¡—ã‚Šã¤ã¶ã—ã‚¿ã‚¤ãƒ—</param>
 		void SetFillType(const ImageFillType fillType);
 
 		/// <summary>
-		/// “h‚è‚Â‚Ô‚µƒ^ƒCƒv‚ğæ“¾‚·‚é
+		/// å¡—ã‚Šã¤ã¶ã—ã‚¿ã‚¤ãƒ—ã‚’å–å¾—ã™ã‚‹
 		/// </summary>
 		/// <returns></returns>
 		ImageFillType GetFillType() const;
 
 		/// <summary>
-		/// “h‚è‚Â‚Ô‚µ—Ê‚ğİ’è‚·‚é
+		/// å¡—ã‚Šã¤ã¶ã—é‡ã‚’è¨­å®šã™ã‚‹
 		/// </summary>
-		/// <param name="fillAmount">“h‚è‚Â‚Ô‚µ—Ê</param>
+		/// <param name="fillAmount">å¡—ã‚Šã¤ã¶ã—é‡</param>
 		void SetFillAmount(const float fillAmount);
 
 		/// <summary>
-		/// “h‚è‚Â‚Ô‚µ—Ê‚ğæ“¾‚·‚é
+		/// å¡—ã‚Šã¤ã¶ã—é‡ã‚’å–å¾—ã™ã‚‹
 		/// </summary>
-		/// <returns>“h‚è‚Â‚Ô‚µ—Ê</returns>
+		/// <returns>å¡—ã‚Šã¤ã¶ã—é‡</returns>
 		float GetFillAmount() const;
 
 		virtual void OnCreate() override;
@@ -339,27 +339,27 @@ namespace basecross
 	};
 
 	/// <summary>
-	/// ƒeƒLƒXƒg‚ğ•\¦‚·‚éƒRƒ“ƒ|[ƒlƒ“ƒg
+	/// ãƒ†ã‚­ã‚¹ãƒˆã‚’è¡¨ç¤ºã™ã‚‹ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
 	/// </summary>
 	class TextBox : public Component
 	{
 	public:
 
 		/// <summary>
-		/// Box‚Ìc•ûŒü‚É‘Î‚µ‚ÄAText‚ª‚Ç‚ÌˆÊ’u‚É‚ ‚é‚©
+		/// Boxã®ç¸¦æ–¹å‘ã«å¯¾ã—ã¦ã€TextãŒã©ã®ä½ç½®ã«ã‚ã‚‹ã‹
 		/// </summary>
 		enum class TextVerticalAlignment
 		{
 			/// <summary>
-			/// ã‹l‚ß
+			/// ä¸Šè©°ã‚
 			/// </summary>
 			Up,
 			/// <summary>
-			/// ’†‰›Šñ‚¹
+			/// ä¸­å¤®å¯„ã›
 			/// </summary>
 			Center,
 			/// <summary>
-			/// ‰º‹l‚ß
+			/// ä¸‹è©°ã‚
 			/// </summary>
 			Down
 		};
@@ -380,205 +380,205 @@ namespace basecross
 
 	private:
 		/// <summary>
-		/// ƒeƒLƒXƒgƒXƒ^ƒCƒ‹‚É‘Î‚µ‚ÄDWRITE_FONT_STYLE‚É•ÏŠ·‚·‚éƒe[ƒuƒ‹
+		/// ãƒ†ã‚­ã‚¹ãƒˆã‚¹ã‚¿ã‚¤ãƒ«ã«å¯¾ã—ã¦DWRITE_FONT_STYLEã«å¤‰æ›ã™ã‚‹ãƒ†ãƒ¼ãƒ–ãƒ«
 		/// </summary>
 		static const std::unordered_map<TextStyle, DWRITE_FONT_STYLE> m_textStypeToDWriteStyleTable;
 
 		/// <summary>
-		/// lŠpƒgƒ‰ƒ“ƒXƒtƒH[ƒ€
+		/// å››è§’ãƒˆãƒ©ãƒ³ã‚¹ãƒ•ã‚©ãƒ¼ãƒ 
 		/// </summary>
 		ex_weak_ptr<RectTransform> rectTransform;
 		/// <summary>
-		/// ƒeƒLƒXƒg‚Ì‰¡‚É‘Î‚·‚éˆÊ’u
+		/// ãƒ†ã‚­ã‚¹ãƒˆã®æ¨ªã«å¯¾ã™ã‚‹ä½ç½®
 		/// </summary>
 		TextSideAlignment m_textSideAlignment = TextSideAlignment::Left;
 		/// <summary>
-		/// ƒeƒLƒXƒg‚Ìc‚É‘Î‚·‚éˆÊ’u
+		/// ãƒ†ã‚­ã‚¹ãƒˆã®ç¸¦ã«å¯¾ã™ã‚‹ä½ç½®
 		/// </summary>
 		TextVerticalAlignment m_textVerticalAlignment = TextVerticalAlignment::Up;
 
 		/// <summary>
-		/// ƒ{ƒbƒNƒX‚ÌF
+		/// ãƒœãƒƒã‚¯ã‚¹ã®è‰²
 		/// </summary>
 		Col4 m_boxColor = Col4();
 		/// <summary>
-		/// ƒ{ƒbƒNƒX•`‰æ—pFƒuƒ‰ƒV
+		/// ãƒœãƒƒã‚¯ã‚¹æç”»ç”¨è‰²ãƒ–ãƒ©ã‚·
 		/// </summary>
 		ComPtr<ID2D1SolidColorBrush> m_boxBrush;
 
 		/// <summary>
-		/// ƒtƒHƒ“ƒg‚ÌF
+		/// ãƒ•ã‚©ãƒ³ãƒˆã®è‰²
 		/// </summary>
 		Col4 m_fontColor = Col4(0,0,0,1);
 		/// <summary>
-		/// ƒtƒHƒ“ƒg‚Ì•`‰æ—pFƒuƒ‰ƒVS
+		/// ãƒ•ã‚©ãƒ³ãƒˆã®æç”»ç”¨è‰²ãƒ–ãƒ©ã‚·S
 		/// </summary>
 		ComPtr<ID2D1SolidColorBrush> m_fontBrush;
 
 		/// <summary>
-		/// ƒXƒe[ƒgƒuƒƒbƒN
+		/// ã‚¹ãƒ†ãƒ¼ãƒˆãƒ–ãƒ­ãƒƒã‚¯
 		/// </summary>
 		ComPtr<ID2D1DrawingStateBlock> m_stateBlock;
 
 		/// <summary>
-		/// ƒtƒHƒ“ƒg–¼
+		/// ãƒ•ã‚©ãƒ³ãƒˆå
 		/// </summary>
-		std::wstring m_fontName = L"‚l‚r ƒSƒVƒbƒN";
+		std::wstring m_fontName = L"ï¼­ï¼³ ã‚´ã‚·ãƒƒã‚¯";
 
 		/// <summary>
-		/// ƒtƒHƒ“ƒgƒTƒCƒY
+		/// ãƒ•ã‚©ãƒ³ãƒˆã‚µã‚¤ã‚º
 		/// </summary>
 		float m_fontSize = 16.0f;
 
 		/// <summary>
-		/// ƒeƒLƒXƒg
+		/// ãƒ†ã‚­ã‚¹ãƒˆ
 		/// </summary>
 		std::wstring m_text;
 
 		/// <summary>
-		/// ƒeƒLƒXƒgƒtƒH[ƒ}ƒbƒg
+		/// ãƒ†ã‚­ã‚¹ãƒˆãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆ
 		/// </summary>
 		ComPtr<IDWriteTextFormat> m_textFormat;
 		/// <summary>
-		/// ƒeƒLƒXƒgƒŒƒCƒAƒEƒg
+		/// ãƒ†ã‚­ã‚¹ãƒˆãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆ
 		/// </summary>
 		ComPtr<IDWriteTextLayout> m_textLayout;
 
 		/// <summary>
-		/// ƒeƒLƒXƒgƒƒgƒŠƒNƒXs
+		/// ãƒ†ã‚­ã‚¹ãƒˆãƒ¡ãƒˆãƒªã‚¯ã‚¹s
 		/// </summary>
 		DWRITE_TEXT_METRICS m_textMetrics;
 
 		/// <summary>
-		/// ƒeƒLƒXƒgƒXƒ^ƒCƒ‹
+		/// ãƒ†ã‚­ã‚¹ãƒˆã‚¹ã‚¿ã‚¤ãƒ«
 		/// </summary>
 		TextStyle m_textStyle = TextStyle::Normal;
 
 		/// <summary>
-		/// ƒeƒLƒXƒg‚ÌƒtƒH[ƒ}ƒbƒg‚ğXV‚·‚é
+		/// ãƒ†ã‚­ã‚¹ãƒˆã®ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã‚’æ›´æ–°ã™ã‚‹
 		/// </summary>
 		void TextFormatUpdate();
 		/// <summary>
-		/// ƒeƒLƒXƒg‚ÌƒŒƒCƒAƒEƒg‚ğXV‚·‚é
+		/// ãƒ†ã‚­ã‚¹ãƒˆã®ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã‚’æ›´æ–°ã™ã‚‹
 		/// </summary>
 		void TextLayoutUpdate();
 	public:
 		/// <summary>
-		/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+		/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		/// </summary>
-		/// <param name="owner">ƒQ[ƒ€ƒIƒuƒWƒFƒNƒg</param>
+		/// <param name="owner">ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</param>
 		TextBox(std::shared_ptr<GameObject>& owner);
 
 		/// <summary>
-		/// ƒ{ƒbƒNƒX‚ÌF‚ğİ’è‚·‚é
+		/// ãƒœãƒƒã‚¯ã‚¹ã®è‰²ã‚’è¨­å®šã™ã‚‹
 		/// </summary>
-		/// <param name="color">ƒ{ƒbƒNƒX‚ÌF</param>
+		/// <param name="color">ãƒœãƒƒã‚¯ã‚¹ã®è‰²</param>
 		void SetBoxColor(const Col4& color);
 		/// <summary>
-		/// ƒ{ƒbƒNƒX‚ÌF‚ğİ’è‚·‚é
+		/// ãƒœãƒƒã‚¯ã‚¹ã®è‰²ã‚’è¨­å®šã™ã‚‹
 		/// </summary>
-		/// <param name="red">Ô</param>
-		/// <param name="green">—Î</param>
-		/// <param name="blue">Â</param>
-		/// <param name="alpha">“§–¾“x</param>
+		/// <param name="red">èµ¤</param>
+		/// <param name="green">ç·‘</param>
+		/// <param name="blue">é’</param>
+		/// <param name="alpha">é€æ˜åº¦</param>
 		void SetBoxColor(const float red, const float green, const float blue, const float alpha);
 
 		/// <summary>
-		/// ƒ{ƒbƒNƒX‚ÌF‚ğæ“¾‚·‚é
+		/// ãƒœãƒƒã‚¯ã‚¹ã®è‰²ã‚’å–å¾—ã™ã‚‹
 		/// </summary>
-		/// <returns>ƒ{ƒbƒNƒX‚ÌF</returns>
+		/// <returns>ãƒœãƒƒã‚¯ã‚¹ã®è‰²</returns>
 		Col4 GetBoxColor() const;
 
 		/// <summary>
-		/// ƒtƒHƒ“ƒg‚ÌF‚ğİ’è‚·‚é
+		/// ãƒ•ã‚©ãƒ³ãƒˆã®è‰²ã‚’è¨­å®šã™ã‚‹
 		/// </summary>
-		/// <param name="color">ƒtƒHƒ“ƒg‚ÌF</param>
+		/// <param name="color">ãƒ•ã‚©ãƒ³ãƒˆã®è‰²</param>
 		void SetFontColor(const Col4& color);
 		/// <summary>
-		/// ƒtƒHƒ“ƒg‚ÌF‚ğİ’è‚·‚é
+		/// ãƒ•ã‚©ãƒ³ãƒˆã®è‰²ã‚’è¨­å®šã™ã‚‹
 		/// </summary>
-		/// <param name="red">Ô</param>
-		/// <param name="green">—Î</param>
-		/// <param name="blue">Â</param>
-		/// <param name="alpha">“§–¾“x</param>
+		/// <param name="red">èµ¤</param>
+		/// <param name="green">ç·‘</param>
+		/// <param name="blue">é’</param>
+		/// <param name="alpha">é€æ˜åº¦</param>
 		void SetFontColor(const float red, const float green, const float blue, const float alpha);
 
 		/// <summary>
-		/// ƒtƒHƒ“ƒg‚ÌF‚ğæ“¾‚·‚é
+		/// ãƒ•ã‚©ãƒ³ãƒˆã®è‰²ã‚’å–å¾—ã™ã‚‹
 		/// </summary>
-		/// <returns>ƒtƒHƒ“ƒg‚ÌF</returns>
+		/// <returns>ãƒ•ã‚©ãƒ³ãƒˆã®è‰²</returns>
 		Col4 GetFontColor() const;
 
 		/// <summary>
-		/// ƒtƒHƒ“ƒg‚Ìš‘Ì‚ğİ’è‚·‚é
+		/// ãƒ•ã‚©ãƒ³ãƒˆã®å­—ä½“ã‚’è¨­å®šã™ã‚‹
 		/// </summary>
-		/// <param name="fontName">ƒtƒHƒ“ƒg–¼</param>
+		/// <param name="fontName">ãƒ•ã‚©ãƒ³ãƒˆå</param>
 		void SetFontName(const std::wstring& fontName);
 
 		/// <summary>
-		/// ƒtƒHƒ“ƒg‚ÌƒTƒCƒY‚ğİ’è‚·‚é
+		/// ãƒ•ã‚©ãƒ³ãƒˆã®ã‚µã‚¤ã‚ºã‚’è¨­å®šã™ã‚‹
 		/// </summary>
-		/// <param name="fontSize">ƒtƒHƒ“ƒgƒTƒCƒY</param>
+		/// <param name="fontSize">ãƒ•ã‚©ãƒ³ãƒˆã‚µã‚¤ã‚º</param>
 		void SetFontSize(const float fontSize);
 
 		/// <summary>
-		/// TextBox‘S‘Ì‚ÌAlpha’l‚ğİ’è‚·‚é
+		/// TextBoxå…¨ä½“ã®Alphaå€¤ã‚’è¨­å®šã™ã‚‹
 		/// </summary>
-		/// <param name="alpha">Alpha’l</param>
+		/// <param name="alpha">Alphaå€¤</param>
 		void SetAlpha(const float alpha);
 
 		/// <summary>
-		/// ƒeƒLƒXƒg‚ğİ’è‚·‚é
+		/// ãƒ†ã‚­ã‚¹ãƒˆã‚’è¨­å®šã™ã‚‹
 		/// </summary>
-		/// <param name="text">İ’è‚·‚éƒeƒLƒXƒg</param>
+		/// <param name="text">è¨­å®šã™ã‚‹ãƒ†ã‚­ã‚¹ãƒˆ</param>
 		void SetText(const std::wstring& text);
 
 		/// <summary>
-		/// ƒeƒLƒXƒg‚ğ’Ç‰Á‚·‚é
+		/// ãƒ†ã‚­ã‚¹ãƒˆã‚’è¿½åŠ ã™ã‚‹
 		/// </summary>
-		/// <param name="text">’Ç‰Á‚·‚éƒeƒLƒXƒg</param>
+		/// <param name="text">è¿½åŠ ã™ã‚‹ãƒ†ã‚­ã‚¹ãƒˆ</param>
 		void AddText(const std::wstring& text);
 
 		/// <summary>
-		/// ƒeƒLƒXƒg‚ğæ“¾‚·‚é
+		/// ãƒ†ã‚­ã‚¹ãƒˆã‚’å–å¾—ã™ã‚‹
 		/// </summary>
-		/// <returns>ƒeƒLƒXƒg</returns>
+		/// <returns>ãƒ†ã‚­ã‚¹ãƒˆ</returns>
 		std::wstring GetText() const;
 
 		/// <summary>
-		/// ƒeƒLƒXƒg‚Ì‰¡‚É‘Î‚·‚éˆÊ’u‚ğİ’è‚·‚é
+		/// ãƒ†ã‚­ã‚¹ãƒˆã®æ¨ªã«å¯¾ã™ã‚‹ä½ç½®ã‚’è¨­å®šã™ã‚‹
 		/// </summary>
-		/// <param name="textSideAlignment">‰¡‚É‘Î‚·‚éˆÊ’u</param>
+		/// <param name="textSideAlignment">æ¨ªã«å¯¾ã™ã‚‹ä½ç½®</param>
 		void SetTextSideAlignment(const TextSideAlignment textSideAlignment);
 
 		/// <summary>
-		/// ƒeƒLƒXƒg‚Ì‰¡‚É‘Î‚·‚éˆÊ’u‚ğæ“¾‚·‚é
+		/// ãƒ†ã‚­ã‚¹ãƒˆã®æ¨ªã«å¯¾ã™ã‚‹ä½ç½®ã‚’å–å¾—ã™ã‚‹
 		/// </summary>
-		/// <returns>‰¡‚É‘Î‚·‚éˆÊ’u</returns>
+		/// <returns>æ¨ªã«å¯¾ã™ã‚‹ä½ç½®</returns>
 		TextSideAlignment GetTextSideAlignment() const;
 
 		/// <summary>
-		/// ƒeƒLƒXƒg‚Ìc‚É‘Î‚·‚éˆÊ’u‚ğİ’è‚·‚é
+		/// ãƒ†ã‚­ã‚¹ãƒˆã®ç¸¦ã«å¯¾ã™ã‚‹ä½ç½®ã‚’è¨­å®šã™ã‚‹
 		/// </summary>
-		/// <param name="textVerticalAlignment">c‚É‘Î‚·‚éˆÊ’u</param>
+		/// <param name="textVerticalAlignment">ç¸¦ã«å¯¾ã™ã‚‹ä½ç½®</param>
 		void SetTextVerticalAlignment(const TextVerticalAlignment textVerticalAlignment);
 
 		/// <summary>
-		/// ƒeƒLƒXƒg‚Ìc‚É‘Î‚·‚éˆÊ’u‚ğæ“¾‚·‚é
+		/// ãƒ†ã‚­ã‚¹ãƒˆã®ç¸¦ã«å¯¾ã™ã‚‹ä½ç½®ã‚’å–å¾—ã™ã‚‹
 		/// </summary>
-		/// <returns>c‚É‘Î‚·‚éˆÊ’u</returns>
+		/// <returns>ç¸¦ã«å¯¾ã™ã‚‹ä½ç½®</returns>
 		TextVerticalAlignment GetTextVerticalAlignment() const;
 
 		/// <summary>
-		/// ƒeƒLƒXƒgƒXƒ^ƒCƒ‹‚ğİ’è‚·‚é
+		/// ãƒ†ã‚­ã‚¹ãƒˆã‚¹ã‚¿ã‚¤ãƒ«ã‚’è¨­å®šã™ã‚‹
 		/// </summary>
-		/// <param name="textStyle">ƒeƒLƒXƒgƒXƒ^ƒCƒ‹</param>
+		/// <param name="textStyle">ãƒ†ã‚­ã‚¹ãƒˆã‚¹ã‚¿ã‚¤ãƒ«</param>
 		void SetTextStyle(const TextStyle textStyle);
 
 		/// <summary>
-		/// ƒeƒLƒXƒgƒXƒ^ƒCƒ‹‚ğæ“¾‚·‚é
+		/// ãƒ†ã‚­ã‚¹ãƒˆã‚¹ã‚¿ã‚¤ãƒ«ã‚’å–å¾—ã™ã‚‹
 		/// </summary>
-		/// <returns>ƒeƒLƒXƒgƒXƒ^ƒCƒ‹</returns>
+		/// <returns>ãƒ†ã‚­ã‚¹ãƒˆã‚¹ã‚¿ã‚¤ãƒ«</returns>
 		TextStyle GetTextStyle() const;
 
 		void OnUpdate() override {}
@@ -722,7 +722,7 @@ namespace basecross
 	};
 
 	/// <summary>
-	/// ƒ{ƒ^ƒ“UI
+	/// ãƒœã‚¿ãƒ³UI
 	/// </summary>
 	class Button : public SelectableComponent
 	{
@@ -749,7 +749,7 @@ namespace basecross
 	};
 
 	/// <summary>
-	/// UI—pGameObject
+	/// UIç”¨GameObject
 	/// </summary>
 	class UIObject : public GameObject
 	{
@@ -757,7 +757,7 @@ namespace basecross
 		ex_weak_ptr<RectTransform> rectTransform;
 
 	public:
-		UIObject(std::shared_ptr<Stage>& stage);
+		UIObject(const std::shared_ptr<Stage>& stage);
 
 		void OnPreCreate() override;
 	};

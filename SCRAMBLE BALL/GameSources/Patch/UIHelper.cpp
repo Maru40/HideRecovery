@@ -1,4 +1,4 @@
-#include"UIHelper.h"
+ï»¿#include"UIHelper.h"
 #include"WindowSetting.h"
 #include"FontHelper.h"
 #include"MathHelper.h"
@@ -416,7 +416,7 @@ namespace basecross
 	{
 		rectTransform = owner->GetComponent<RectTransform>();
 
-		// ƒfƒoƒCƒX‚ÉˆË‘¶‚·‚éƒŠƒ\[ƒX‚ðì¬‚µ‚Ü‚·B
+		// ãƒ‡ãƒã‚¤ã‚¹ã«ä¾å­˜ã™ã‚‹ãƒªã‚½ãƒ¼ã‚¹ã‚’ä½œæˆã—ã¾ã™ã€‚
 		auto deviceResources = App::GetApp()->GetDeviceResources();
 		auto D2DFactory = deviceResources->GetD2DFactory();
 
@@ -457,8 +457,8 @@ namespace basecross
 			m_text.c_str(),
 			(uint32)m_text.length(),
 			m_textFormat.Get(),
-			rectTransform->GetWidth(), // “ü—ÍƒeƒLƒXƒg‚ÌÅ‘å•B
-			rectTransform->GetHeight(), // “ü—ÍƒeƒLƒXƒg‚ÌÅ‘å‚‚³B
+			rectTransform->GetWidth(), // å…¥åŠ›ãƒ†ã‚­ã‚¹ãƒˆã®æœ€å¤§å¹…ã€‚
+			rectTransform->GetHeight(), // å…¥åŠ›ãƒ†ã‚­ã‚¹ãƒˆã®æœ€å¤§é«˜ã•ã€‚
 			&m_textLayout
 		);
 
@@ -626,7 +626,7 @@ namespace basecross
 		D2DDeviceContext->SaveDrawingState(m_stateBlock.Get());
 		D2DDeviceContext->BeginDraw();
 
-		//ƒoƒbƒNƒOƒ‰ƒEƒ“ƒh‚Ì•`‰æ
+		//ãƒãƒƒã‚¯ã‚°ãƒ©ã‚¦ãƒ³ãƒ‰ã®æç”»
 		D2DDeviceContext->FillRectangle(&boxRectangle, m_boxBrush.Get());
 
 		float heightOffset = 0;
@@ -1108,7 +1108,7 @@ namespace basecross
 
 	// UIObject ---------------------------------
 
-	UIObject::UIObject(std::shared_ptr<Stage>& stage) :
+	UIObject::UIObject(const std::shared_ptr<Stage>& stage) :
 		GameObject(stage)
 	{
 
