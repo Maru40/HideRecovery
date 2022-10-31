@@ -119,7 +119,7 @@ namespace basecross {
 						return false;	//ターゲットが視界内にいるならfalse(Lostしてない)
 					}
 
-					return true;		//視界内にいない溜め、Lost
+					return true;		//視界内にいないため、Lost
 				}
 
 				bool IsInEyeTarget::IsFarRange() const {
