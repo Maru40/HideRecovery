@@ -38,7 +38,9 @@ namespace basecross {
 
 			ChangeAnimation();	//アニメーションの切り替え
 
-			m_velocityManager.lock()->ResetAll();
+			if (!m_velocityManager.expired()) {
+				m_velocityManager.lock()->ResetAll();
+			}
 		}
 
 		bool OpenBox::OnUpdate() {
@@ -73,6 +75,10 @@ namespace basecross {
 		}
 
 		void OpenBox::ChangeAnimation() {
+			if (m_animator.lock() == nullptr) {
+				return;
+			}
+
 			m_animator.lock()->ChangePlayerAnimation(PlayerAnimationState::State::PutItem_Floor);
 		}
 
