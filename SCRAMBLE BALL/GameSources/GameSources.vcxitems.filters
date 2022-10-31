@@ -1225,6 +1225,12 @@
     <Filter Include="Maruyama\Player\Component\HidePlaceOpener">
       <UniqueIdentifier>{15de02f4-c11f-4def-8966-1f39c7665943}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Enemy\BehaviorTree\Decorator">
+      <UniqueIdentifier>{20e32679-f50f-4a3f-bded-8db56e691e6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\BehaviorTree\Decorator\IsInEyeTarget">
+      <UniqueIdentifier>{48e70ae6-5554-4167-9133-ef225bccb201}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2295,6 +2301,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlinePlayerSynchronizer.h">
       <Filter>Itabashi\Online\OnlinePlayerSynchronizer</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\IsInEyeTarget.h">
+      <Filter>Maruyama\Enemy\BehaviorTree\Decorator\IsInEyeTarget</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -3268,6 +3277,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlinePlayerSynchronizer.cpp">
       <Filter>Itabashi\Online\OnlinePlayerSynchronizer</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\IsInEyeTarget.cpp">
+      <Filter>Maruyama\Enemy\BehaviorTree\Decorator\IsInEyeTarget</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
