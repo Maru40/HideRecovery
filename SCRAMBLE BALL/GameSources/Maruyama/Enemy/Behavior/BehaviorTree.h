@@ -107,15 +107,6 @@ namespace basecross {
 				}
 
 				/// <summary>
-				///	初期ノードのリセット
-				/// </summary>
-				void ResetFirstNode() {
-					for (auto& edge : GetEdges(m_firstNodeType)) {
-						edge->GetToNode()->SetState(BehaviorState::Inactive);
-					}
-				}
-
-				/// <summary>
 				/// カレントスタックに追加する。
 				/// </summary>
 				/// <param name="node"></param>
@@ -143,6 +134,24 @@ namespace basecross {
 					}
 
 					m_currentStack.pop();	//スタックからポップ
+				}
+
+				/// <summary>
+				///	初期ノードのリセット
+				/// </summary>
+				void ResetFirstNode() {
+					for (auto& edge : GetEdges(m_firstNodeType)) {
+						edge->GetToNode()->SetState(BehaviorState::Inactive);
+					}
+				}
+
+				/// <summary>
+				/// 全てのスタックされたノードの終了処理をする。
+				/// </summary>
+				void ResetAllStack() {
+					while (!m_currentStack.empty()) {	//スタックが空になるまでループ
+						PopCurrentStack();
+					}
 				}
 
 			public:
@@ -345,6 +354,15 @@ namespace basecross {
 				/// </summary>
 				/// <returns>開始ノード</returns>
 				EnumType GetFirstNodeType() const { return m_firstNodeType; }
+
+				/// <summary>
+				/// 強制終了
+				/// </summary>
+				void ForceStop() {
+					ResetAllStack();
+					ResetFirstNode();
+					m_currentNode.reset();
+				}
 
 			private:
 
