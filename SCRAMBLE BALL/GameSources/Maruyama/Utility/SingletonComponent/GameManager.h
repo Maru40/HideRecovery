@@ -74,6 +74,13 @@ namespace basecross {
 		void ChangeState(const State state);
 
 		/// <summary>
+		/// 現在のステートが引数で渡したステートかどうかを判断
+		/// </summary>
+		/// <param name="state">ステート</param>
+		/// <returns>引数で渡したステートならtrue</returns>
+		bool IsCurrentState(const State state) const;
+
+		/// <summary>
 		/// 現在のステートを取得
 		/// </summary>
 		/// <returns>現在のステート</returns>
