@@ -283,8 +283,6 @@ namespace basecross
 		/// コンストラクタ
 		/// </summary>
 		/// <param name="owner">ゲームオブジェクト</param>
-		/// <param name="width">描画する幅</param>
-		/// <param name="height">描画する高さ</param>
 		Image(std::shared_ptr<GameObject>& owner);
 
 
@@ -655,6 +653,9 @@ namespace basecross
 		ex_weak_ptr<I_Selectable> m_horizontalNextSelectable;
 
 		bool m_isSelectedLock = false;
+
+		bool m_isSelected = false;
+
 	public:
 		itbs::Utility::Delegate<void()> pushEvent;
 
@@ -683,6 +684,8 @@ namespace basecross
 		std::shared_ptr<I_Selectable> GetVerticalNextSelectable() const override;
 		std::shared_ptr<I_Selectable> GetHorizontalBeforeSelectable() const override;
 		std::shared_ptr<I_Selectable> GetHorizontalNextSelectable() const override;
+
+		bool IsSelected() const { return m_isSelected; }
 	};
 
 	class itbs::Input::I_BasicInputer;
@@ -693,12 +696,12 @@ namespace basecross
 		static const std::wstring EVENTSYSTEM_OBJECT_KEY;
 
 	private:
-		static ex_weak_ptr<EventSystem> m_eventSystem;
+		static std::weak_ptr<EventSystem> m_eventSystem;
 
 		std::shared_ptr<itbs::Input::I_BasicInputer> m_basicInputer;
 
-		ex_weak_ptr<I_Selectable> m_nowSelectable;
-		std::stack<ex_weak_ptr<I_Selectable>> m_stackSelectable;
+		std::weak_ptr<I_Selectable> m_nowSelectable;
+		std::stack<std::weak_ptr<I_Selectable>> m_stackSelectable;
 
 		void MoveCheck(bool(itbs::Input::I_BasicInputer::*isDown)()const, std::shared_ptr<I_Selectable>(I_Selectable::*func)() const);
 	public:
@@ -712,7 +715,7 @@ namespace basecross
 
 		std::shared_ptr<I_Selectable> GetNowSelectable() const;
 
-		static ex_weak_ptr<EventSystem> GetInstance(const std::shared_ptr<Stage>& stage);
+		static std::shared_ptr<EventSystem> GetInstance(const std::shared_ptr<Stage>& stage);
 
 		void SetBasicInputer(const std::shared_ptr<itbs::Input::I_BasicInputer>& basicInputer);
 
@@ -726,20 +729,23 @@ namespace basecross
 	/// </summary>
 	class Button : public SelectableComponent
 	{
-		ex_weak_ptr<Image> m_image;
+		std::weak_ptr<Image> m_image;
 
-		std::wstring m_normalButtonImageKey;
-		std::wstring m_selectedButtonImageKey;
+		std::weak_ptr<TextureResource> m_normalButtonTexture;
+		std::weak_ptr<TextureResource> m_selectedButtonTexture;
 
 	public:
 
 		Button(std::shared_ptr<GameObject>& owner);
 
-		void SetNormalButtonImage(const std::wstring& normalButtonImageKey);
+		void SetNormalButtonTexture(const std::shared_ptr<TextureResource>& normalButtonTexture);
+		void SetNormalButtonTexture(const std::wstring& normalButtonTextureKey) { SetNormalButtonTexture(App::GetApp()->GetResource<TextureResource>(normalButtonTextureKey)); }
 
-		void SetSelectedButtonImage(const std::wstring& selectedButtonImageKey);
+		void SetSelectedButtonTexture(const std::shared_ptr<TextureResource>& selectedButtonTexture);
+		void SetSelectedButtonTexture(const std::wstring& selectedButtonTextureKey) { SetSelectedButtonTexture(App::GetApp()->GetResource<TextureResource>(selectedButtonTextureKey)); }
 
-		void SetAllButtonImage(const std::wstring& allButtonImageKey);
+		void SetAllButtonTexture(const std::shared_ptr<TextureResource>& allButtonTexture);
+		void SetAllButtonTexture(const std::wstring& allButtonTextureKey) { SetAllButtonTexture(App::GetApp()->GetResource<TextureResource>(allButtonTextureKey)); }
 
 		void OnSelect() override;
 

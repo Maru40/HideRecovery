@@ -871,6 +871,8 @@ namespace basecross
 
 	void SelectableComponent::OnSelect()
 	{
+		m_isSelected = true;
+
 		selectEvent();
 	}
 
@@ -881,6 +883,8 @@ namespace basecross
 
 	void SelectableComponent::OnOutSelect()
 	{
+		m_isSelected = false;
+
 		outSelectEvent();
 	}
 
@@ -926,7 +930,7 @@ namespace basecross
 
 	// EventSystem ------------------------------
 
-	ex_weak_ptr<EventSystem> EventSystem::m_eventSystem;
+	std::weak_ptr<EventSystem> EventSystem::m_eventSystem;
 
 	EventSystem::EventSystem(std::shared_ptr<GameObject>& owner) :
 		Component(owner)
@@ -935,12 +939,14 @@ namespace basecross
 
 	void EventSystem::MoveCheck(bool(itbs::Input::I_BasicInputer::*isDown)() const,std::shared_ptr<I_Selectable>(I_Selectable::*func)() const)
 	{
-		if (!m_nowSelectable || m_nowSelectable->GetIsSelectedLock())
+		auto nowSelectable = m_nowSelectable.lock();
+
+		if (!nowSelectable || nowSelectable->GetIsSelectedLock())
 		{
 			return;
 		}
 
-		auto nextSelectable = (m_nowSelectable.get()->*func)();
+		auto nextSelectable = (nowSelectable.get()->*func)();
 
 		if (!nextSelectable)
 		{
@@ -949,31 +955,33 @@ namespace basecross
 
 		if ((m_basicInputer.get()->*isDown)())
 		{
-			if (m_nowSelectable)
+			if (nowSelectable)
 			{
-				m_nowSelectable->OnOutSelect();
+				nowSelectable->OnOutSelect();
 			}
 
 			m_nowSelectable = nextSelectable;
 
-			if (m_nowSelectable)
+			if (nextSelectable)
 			{
-				m_nowSelectable->OnSelect();
+				nextSelectable->OnSelect();
 			}
 		}
 	}
 
 	void EventSystem::SetNowSelectable(const std::shared_ptr<I_Selectable>& nowSelectable)
 	{
-		if (m_nowSelectable)
+		auto oldSelectable = m_nowSelectable.lock();
+
+		if (oldSelectable)
 		{
-			m_nowSelectable->OnOutSelect();
+			oldSelectable->OnOutSelect();
 		}
 		m_nowSelectable = nowSelectable;
 
-		if (m_nowSelectable)
+		if (nowSelectable)
 		{
-			m_nowSelectable->OnSelect();
+			nowSelectable->OnSelect();
 		}
 	}
 
@@ -983,37 +991,42 @@ namespace basecross
 
 		m_nowSelectable = nowSelectable;
 
-		if (m_nowSelectable)
+		if (nowSelectable)
 		{
-			m_nowSelectable->OnSelect();
+			nowSelectable->OnSelect();
 		}
 	}
 
 	void EventSystem::PopSelectable()
 	{
-		if (m_nowSelectable)
+		auto oldSelectable = m_nowSelectable.lock();
+
+		if (oldSelectable)
 		{
-			m_nowSelectable->OnOutSelect();
+			oldSelectable->OnOutSelect();
 		}
 
-		m_nowSelectable = m_stackSelectable.top().GetShard();
+		m_nowSelectable = m_stackSelectable.top().lock();
 
 		m_stackSelectable.pop();
 	}
 
 	std::shared_ptr<I_Selectable> EventSystem::GetNowSelectable() const
 	{
-		return m_nowSelectable.GetShard();
+		return m_nowSelectable.lock();
 	}
 
-	ex_weak_ptr<EventSystem> EventSystem::GetInstance(const std::shared_ptr<Stage>& stage)
+	std::shared_ptr<EventSystem> EventSystem::GetInstance(const std::shared_ptr<Stage>& stage)
 	{
-		if (!m_eventSystem || m_eventSystem->GetStage() != stage)
+		auto eventSystem = m_eventSystem.lock();
+
+		if (!eventSystem || eventSystem->GetStage() != stage)
 		{
-			m_eventSystem = stage->Instantiate<GameObject>()->AddComponent<EventSystem>();
+			eventSystem = stage->Instantiate<GameObject>()->AddComponent<EventSystem>();
+			m_eventSystem = eventSystem;
 		}
 
-		return m_eventSystem;
+		return eventSystem;
 	}
 
 	void EventSystem::SetBasicInputer(const std::shared_ptr<itbs::Input::I_BasicInputer>& basicInputer)
@@ -1023,7 +1036,9 @@ namespace basecross
 
 	void EventSystem::OnCreate()
 	{
-		if (!m_eventSystem)
+		auto eventSystem = m_eventSystem.lock();
+
+		if (!eventSystem)
 		{
 			m_eventSystem = GetThis<EventSystem>();
 		}
@@ -1041,12 +1056,16 @@ namespace basecross
 		MoveCheck(&itbs::Input::I_BasicInputer::IsUpDown, &I_Selectable::GetVerticalBeforeSelectable);
 		MoveCheck(&itbs::Input::I_BasicInputer::IsDownDown, &I_Selectable::GetVerticalNextSelectable);
 
-		if ((m_basicInputer.get()->* & itbs::Input::I_BasicInputer::IsDesitionDown)())
+		auto nowSelectable = m_nowSelectable.lock();
+
+		if (!nowSelectable)
 		{
-			if (m_nowSelectable)
-			{
-				m_nowSelectable->OnPush();
-			}
+			return;
+		}
+
+		if ((m_basicInputer.get()->*(&itbs::Input::I_BasicInputer::IsDesitionDown))())
+		{
+			nowSelectable->OnPush();
 		}
 	}
 
@@ -1058,33 +1077,58 @@ namespace basecross
 
 	}
 
-	void Button::SetNormalButtonImage(const std::wstring& normalButtonImageKey)
+	void Button::SetNormalButtonTexture(const std::shared_ptr<TextureResource>& normalButtonTexture)
 	{
-		m_normalButtonImageKey = normalButtonImageKey;
+		m_normalButtonTexture = normalButtonTexture;
 
-		if (!m_image->GetTextureResource())
+		if (IsSelected())
 		{
-			m_image->SetTextureResource(m_normalButtonImageKey);
+			return;
 		}
+
+		auto image = m_image.lock();
+
+		if (!image)
+		{
+			return;
+		}
+
+		image->SetTextureResource(normalButtonTexture);
 	}
 
-	void Button::SetSelectedButtonImage(const std::wstring& selectedButtonImageKey)
+	void Button::SetSelectedButtonTexture(const std::shared_ptr<TextureResource>& selectedButtonTexture)
 	{
-		m_selectedButtonImageKey = selectedButtonImageKey;
+		m_selectedButtonTexture = selectedButtonTexture;
+
+		if (!IsSelected())
+		{
+			return;
+		}
+
+		auto image = m_image.lock();
+
+		if (!image)
+		{
+			return;
+		}
+
+		image->SetTextureResource(selectedButtonTexture);
 	}
 
-	void Button::SetAllButtonImage(const std::wstring& allButtonImageKey)
+	void Button::SetAllButtonTexture(const std::shared_ptr<TextureResource>& allButtonTexture)
 	{
-		SetNormalButtonImage(allButtonImageKey);
-		SetSelectedButtonImage(allButtonImageKey);
+		SetNormalButtonTexture(allButtonTexture);
+		SetSelectedButtonTexture(allButtonTexture);
 	}
 
 
 	void Button::OnCreate()
 	{
-		m_image = GetGameObject()->GetComponent<Image>(false);
+		auto image = GetGameObject()->GetComponent<Image>(false);;
 
-		if (!m_image)
+		m_image = image;
+
+		if (!image)
 		{
 			m_image = GetGameObject()->AddComponent<Image>();
 		}
@@ -1096,14 +1140,26 @@ namespace basecross
 	{
 		SelectableComponent::OnSelect();
 
-		m_image->SetTextureResource(m_selectedButtonImageKey);
+		auto image = m_image.lock();
+
+		if (image)
+		{
+			auto selectedButtonTexture = m_selectedButtonTexture.lock();
+			image->SetTextureResource(selectedButtonTexture);
+		}
 	}
 
 	void Button::OnOutSelect()
 	{
 		SelectableComponent::OnOutSelect();
 
-		m_image->SetTextureResource(m_normalButtonImageKey);
+		auto image = m_image.lock();
+
+		if (image)
+		{
+			auto normalButtonTexture = m_normalButtonTexture.lock();
+			image->SetTextureResource(normalButtonTexture);
+		}
 	}
 
 	// UIObject ---------------------------------
