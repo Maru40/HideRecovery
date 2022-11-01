@@ -171,9 +171,29 @@ namespace basecross {
 			return Vec3(XMVector3TransformCoord(position, mVPS));
 		}
 
-		float GetTwoVectorAngle(const Vec3& vector1, const Vec3& vector2) {
-			auto dot = vector1.dot(vector2);
-			return XMConvertToDegrees(acosf(dot));
+		float GetTwoVectorAngle(const Vec3& from, const Vec3& to) {
+			auto _from = from.GetNormalized();
+			auto _to = to.GetNormalized();
+			// θを求める
+			auto theta = _from.dot(_to);
+			// degで返す
+			return XMConvertToDegrees(acosf(theta));
+		}
+
+		float GetTwoVectorAngle360(const Vec3& from, const Vec3& to, const Vec3& up) {
+			auto _from = from;
+			// 普通に角度を求める
+			float angle = GetTwoVectorAngle(_from, to);
+			// fromをForward、upをUpとした、Right方向のベクトルを求める
+			Vec3 right = -_from.cross(up).GetNormalized();
+			// toとrightの内積が+なら右側にいる
+			bool isRightSide = to.dot(right) > 0;
+			// 右側が0～180、左側が180～360になるようにする
+			if (!isRightSide) {
+				float diff = 180.0f - angle;
+				angle = 180.0f + diff;
+			}
+			return angle;
 		}
 
 		Vec3 ClampVector3(const Vec3& value, const Vec3& _min, const Vec3& _max) {
@@ -264,6 +284,16 @@ namespace basecross {
 			mat *= matParent;
 
 			return mat.transInMatrix();
+		}
+
+		Vec3 Vector3ProjectOnPlane(const Vec3& vec, const Vec3& planeNormal) {
+			auto _planeNormal = planeNormal.GetNormalized();
+			// vecの法線方向(planeNormal)の大きさ
+			float vectorSizeOnNormal = vec.dot(_planeNormal);
+			// 法線方向のベクトル（大きさ：vectorSizeOnNormal）
+			auto normalDirectionVector = vectorSizeOnNormal * _planeNormal;
+			// 平面上のベクトル
+			return vec - normalDirectionVector;
 		}
 	}
 }

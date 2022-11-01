@@ -148,11 +148,21 @@ namespace basecross {
 		/**
 		 * @brief 2つのベクトルのなす角を求める
 		 *
-		 * @param vector1 ベクトル1
-		 * @param vector2 ベクトル2
+		 * @param from ベクトル1
+		 * @param to ベクトル2
 		 * @return float 角度（deg）
 		 */
-		float GetTwoVectorAngle(const Vec3& vector1, const Vec3& vector2);
+		float GetTwoVectorAngle(const Vec3& from, const Vec3& to);
+
+		/**
+		 * @brief 2つのベクトルのなす角を求める
+		 *
+		 * @param from ベクトル1
+		 * @param to ベクトル2
+		 * @param up 回転の中心となるベクトル
+		 * @return float 角度（deg）
+		 */
+		float GetTwoVectorAngle360(const Vec3& from, const Vec3& to, const Vec3& up);
 
 		Vec3 ClampVector3(const Vec3& value, const Vec3& _min, const Vec3& _max);
 
@@ -183,6 +193,11 @@ namespace basecross {
 		 * @brief 親からの相対位置をワールド座標に変換する
 		 */
 		Vec3 ParentRelativePositionToWorldPosition(const shared_ptr<Transform>& transPtr, const Vec3& relativePosition);
+
+		/**
+		 * @brief planeNormalを法線とする平面にvecを投影する
+		 */
+		Vec3 Vector3ProjectOnPlane(const Vec3& vec, const Vec3& planeNormal);
 	}
 }
 //end basecross
