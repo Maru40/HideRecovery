@@ -12,7 +12,7 @@
 
 #include "Maruyama/Enemy/Component/EnemyBase.h"
 
-#include "Maruyama/Enemy/Component/BehaviorTree/Task/Task_SearchBall.h"
+#include "Maruyama/Enemy/Behavior/Task/Task_SearchBall.h"
 #include "Maruyama/Enemy/Behavior/Interface/I_PriorityController.h"
 
 namespace basecross {

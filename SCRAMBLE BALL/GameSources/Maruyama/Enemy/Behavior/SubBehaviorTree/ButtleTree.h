@@ -38,6 +38,8 @@ namespace basecross {
 							InducementAttack,	//足止め攻撃
 							//逃げる(自分をおとりに、攻撃させたくなる動き)
 						EvadeMoveTask,	//退避移動
+
+
 				};
 
 				//--------------------------------------------------------------------------------------
@@ -59,6 +61,16 @@ namespace basecross {
 
 					void CreateEdge() override;
 
+					/// <summary>
+					/// 攻撃系のエッジ生成
+					/// </summary>
+					void CreateAttackEdge();
+
+					/// <summary>
+					/// 逃走系のエッジ生成
+					/// </summary>
+					void CreateEvadeEdge();
+
 					void CreateDecorator() override;
 
 				};
@@ -67,3 +79,12 @@ namespace basecross {
 		}
 	}
 }
+
+
+//メモ
+//逃げた後に敵のHPと自分のHPに合わせて、
+//反撃
+//逃げる
+//回り込む
+
+//これらの選択が取れそう。
