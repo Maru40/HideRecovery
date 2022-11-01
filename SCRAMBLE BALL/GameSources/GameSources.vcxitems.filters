@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0"
+  xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Headers">
       <UniqueIdentifier>{4b0a624a-610d-4bc6-b311-2b02a781cdf9}</UniqueIdentifier>
@@ -1276,6 +1277,30 @@
     <Filter Include="Maruyama\Enemy\BehaviorTree\SubBehaviorTree">
       <UniqueIdentifier>{69c64880-14aa-481a-aa75-489268d355a7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\TestStage\TestEffectStage">
+      <UniqueIdentifier>{6ecd7ee6-b17a-4920-8877-a46f28f4259a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\Camera\TitleCamera">
+      <UniqueIdentifier>{5406103a-f08d-4b1a-a2af-04823809e858}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\Camera\TestCamera">
+      <UniqueIdentifier>{4e479895-2003-48b6-9466-c386a7899e9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\Utility\GameController">
+      <UniqueIdentifier>{fce8effc-dd98-4d17-9638-1ae4c8b9597c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\StageObject\CameraTarget">
+      <UniqueIdentifier>{d2b73c06-5257-4de3-8eb3-d720f7e8817e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\UI\DirectionWithHasBallUI">
+      <UniqueIdentifier>{73b08fd6-b54c-462d-a4e8-e0dabbba7334}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\UI\PasscodeUI">
+      <UniqueIdentifier>{38b8ad1c-03a6-4c88-a5a6-d9c7702a6582}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\UI\HasBallUI">
+      <UniqueIdentifier>{b38f08fe-322c-4399-9a39-2ebeefa38fdd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1589,9 +1614,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\Zooming.h">
       <Filter>Watanabe\Component\Zooming</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Camera\TitleCamera.h">
-      <Filter>Watanabe\Camera</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\PCTStaticModelDraw.h">
       <Filter>Itabashi\Component\Graphic</Filter>
@@ -2382,6 +2404,30 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\SubBehaviorTreeBase.h">
       <Filter>Maruyama\Enemy\BehaviorTree\SubBehaviorTree</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\TestEffectStage.h">
+      <Filter>Watanabe\TestStage\TestEffectStage</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Camera\TitleCamera.h">
+      <Filter>Watanabe\Camera\TitleCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Camera\TestCamera.h">
+      <Filter>Watanabe\Camera\TestCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\GameController.h">
+      <Filter>Watanabe\Utility\GameController</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\CameraTarget.h">
+      <Filter>Watanabe\StageObject\CameraTarget</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\DirectionWithHasBallUI.h">
+      <Filter>Watanabe\UI\DirectionWithHasBallUI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\PasscodeUI.h">
+      <Filter>Watanabe\UI\PasscodeUI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\HasBallUI.h">
+      <Filter>Watanabe\UI\HasBallUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2662,9 +2708,6 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\Zooming.cpp">
       <Filter>Watanabe\Component\Zooming</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Camera\TitleCamera.cpp">
-      <Filter>Watanabe\Camera</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\PCTStaticModelDraw.cpp">
       <Filter>Itabashi\Component\Graphic</Filter>
@@ -3388,6 +3431,30 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\SubBehaviorTreeBase.cpp">
       <Filter>Maruyama\Enemy\BehaviorTree\SubBehaviorTree</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\TestEffectStage.cpp">
+      <Filter>Watanabe\TestStage\TestEffectStage</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Camera\TitleCamera.cpp">
+      <Filter>Watanabe\Camera\TitleCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Camera\TestCamera.cpp">
+      <Filter>Watanabe\Camera\TestCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Utility\GameController.cpp">
+      <Filter>Watanabe\Utility\GameController</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\CameraTarget.cpp">
+      <Filter>Watanabe\StageObject\CameraTarget</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\DirectionWithHasBallUI.cpp">
+      <Filter>Watanabe\UI\DirectionWithHasBallUI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\PasscodeUI.cpp">
+      <Filter>Watanabe\UI\PasscodeUI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\HasBallUI.cpp">
+      <Filter>Watanabe\UI\HasBallUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

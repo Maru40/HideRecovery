@@ -16,6 +16,7 @@ namespace basecross {
 			StolenBall,		// ボールを奪われた
 			CreateRoom,		// 部屋を作成した
 			JoinRoom,		// 部屋に参加した
+			CanNotJoin,		// 部屋に参加できなかった
 			Remaining60s,	// 残り60秒
 			Remaining30s,	// 残り30秒
 			Goal,			// ゴール
