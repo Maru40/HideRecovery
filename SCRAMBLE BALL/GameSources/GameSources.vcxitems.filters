@@ -1276,6 +1276,15 @@
     <Filter Include="Maruyama\Enemy\BehaviorTree\SubBehaviorTree\HidePlacePatrolTree">
       <UniqueIdentifier>{4521b984-fe0a-44a2-b39c-622892d3c87d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Enemy\Component\Stator\StateNode\HidePlacePatrol">
+      <UniqueIdentifier>{1c11fad7-dc1b-43f1-9c67-5080572e0c21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\Component\Stator\StateNode\Attack">
+      <UniqueIdentifier>{857f267a-c8e7-44f4-8125-8d85e1e3ad2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\BehaviorTree\SubBehaviorTree\ButtleTree">
+      <UniqueIdentifier>{8662011d-5f43-4ec6-a0ca-c52d44ba8775}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2374,13 +2383,19 @@
       <Filter>Maruyama\Enemy\Component\Stator</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Stator\StateNode\StateNode_HidePlacePatrol.h">
-      <Filter>Maruyama\Enemy\Component\Stator\StateNode</Filter>
+      <Filter>Maruyama\Enemy\Component\Stator\StateNode\HidePlacePatrol</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\BehaviorTree\HidePlacePatrolTree.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\SubBehaviorTree\SubBehaviorTreeBase.h">
+      <Filter>Maruyama\Enemy\BehaviorTree\SubBehaviorTree</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\SubBehaviorTree\HidePlacePatrolTree.h">
       <Filter>Maruyama\Enemy\BehaviorTree\SubBehaviorTree\HidePlacePatrolTree</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\SubBehaviorTreeBase.h">
-      <Filter>Maruyama\Enemy\BehaviorTree\SubBehaviorTree</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Stator\StateNode\StateNode_Buttle.h">
+      <Filter>Maruyama\Enemy\Component\Stator\StateNode\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\SubBehaviorTree\ButtleTree.h">
+      <Filter>Maruyama\Enemy\BehaviorTree\SubBehaviorTree\ButtleTree</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -3381,13 +3396,19 @@
       <Filter>Maruyama\Enemy\Component\Stator</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Stator\StateNode\StateNode_HidePlacePatrol.cpp">
-      <Filter>Maruyama\Enemy\Component\Stator\StateNode</Filter>
+      <Filter>Maruyama\Enemy\Component\Stator\StateNode\HidePlacePatrol</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\BehaviorTree\HidePlacePatrolTree.cpp">
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\SubBehaviorTree\SubBehaviorTreeBase.cpp">
+      <Filter>Maruyama\Enemy\BehaviorTree\SubBehaviorTree</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\SubBehaviorTree\HidePlacePatrolTree.cpp">
       <Filter>Maruyama\Enemy\BehaviorTree\SubBehaviorTree\HidePlacePatrolTree</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\SubBehaviorTreeBase.cpp">
-      <Filter>Maruyama\Enemy\BehaviorTree\SubBehaviorTree</Filter>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Stator\StateNode\StateNode_Buttle.cpp">
+      <Filter>Maruyama\Enemy\Component\Stator\StateNode\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\SubBehaviorTree\ButtleTree.cpp">
+      <Filter>Maruyama\Enemy\BehaviorTree\SubBehaviorTree\ButtleTree</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
