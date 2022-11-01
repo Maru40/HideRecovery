@@ -747,6 +747,9 @@ namespace basecross
 		void SetAllButtonTexture(const std::shared_ptr<TextureResource>& allButtonTexture);
 		void SetAllButtonTexture(const std::wstring& allButtonTextureKey) { SetAllButtonTexture(App::GetApp()->GetResource<TextureResource>(allButtonTextureKey)); }
 
+		void SetImage(const std::shared_ptr<Image>& image);
+		std::shared_ptr<Image> GetImage() const { return m_image.lock(); }
+
 		void OnSelect() override;
 
 		void OnOutSelect() override;

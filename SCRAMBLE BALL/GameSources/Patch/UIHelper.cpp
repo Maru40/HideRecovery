@@ -1121,6 +1121,19 @@ namespace basecross
 		SetSelectedButtonTexture(allButtonTexture);
 	}
 
+	void Button::SetImage(const std::shared_ptr<Image>& image)
+	{
+		m_image = image;
+
+		if (!image)
+		{
+			return;
+		}
+
+		std::shared_ptr<TextureResource> buttonTexture = IsSelected() ? m_selectedButtonTexture.lock() : m_normalButtonTexture.lock();
+
+		image->SetTextureResource(buttonTexture);
+	}
 
 	void Button::OnCreate()
 	{
