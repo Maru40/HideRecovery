@@ -6,6 +6,8 @@
 #include "../StageObject/CameraTarget.h"
 #include "Watanabe/StageObject/StageObjects.h"
 
+#include "../UI/DirectionWithHasBallUI.h"
+
 namespace basecross {
 	void TestEffectStage::CreateViewLight() {
 		const Vec3 eye(5.0f, 5.0f, -5.0f);
@@ -41,8 +43,26 @@ namespace basecross {
 		builder.Build(GetThis<Stage>(), path + L"StageS2.csv");
 
 		AddGameObject<SkyBox>(Vec3(500));
+
+		EfkEffectResource::RegisterEffectResource(L"Explosion", dir + L"Effects/" + L"Explosion.efk");
+
+		auto effectObject = AddGameObject<GameObject>();
+		m_efkComp = effectObject->AddComponent<EfkComponent>();
+		m_efkComp->SetEffectResource(L"Explosion", TransformData(Vec3(0, 0, 80.25), Vec3(7, 10, 7)), true);
+		m_efkComp->SetEffectResource(L"HasBall", TransformData(Vec3(0, 0.5f, 0), Vec3(0.5f)));
+
+		auto ui = AddGameObject<DirectionWithHasBallUI>();
+		ui->SetTarget(effectObject);
 	}
 
 	void TestEffectStage::OnUpdate() {
+		if (m_controller.GetPressedButtons(ControllerButton::A)) {
+			m_efkComp->Play(L"Explosion");
+		}
+
+		if (m_controller.GetPressedButtons(ControllerButton::B)) {
+			m_efkComp->Stop(L"HasBall");
+			m_efkComp->PlayLoop(L"HasBall");
+		}
 	}
 }
