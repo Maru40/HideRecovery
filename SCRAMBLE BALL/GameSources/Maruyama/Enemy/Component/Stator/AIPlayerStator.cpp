@@ -56,7 +56,7 @@ namespace basecross {
 			auto enemy = GetGameObject()->GetComponent<EnemyBase>();
 
 			//None
-			//m_stateMachine->AddEdge(StateType::None, StateType::HidePlacePatrol, &IsGameState);
+			m_stateMachine->AddEdge(StateType::None, StateType::HidePlacePatrol, &IsGameState);
 
 			//‰B‚µêŠ‚ğ’T‚·
 
