@@ -361,6 +361,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\HPGaugeUI.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\MessageUI.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\Numbers.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\PasscodeUI.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\PointUI.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\ScoreUI.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\SimpleSprite.h" />
@@ -699,6 +700,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\HPGaugeUI.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\MessageUI.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\Numbers.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\PasscodeUI.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\PointUI.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\ScoreUI.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\SimpleSprite.cpp" />
