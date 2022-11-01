@@ -252,6 +252,21 @@ namespace basecross {
 				}
 
 				/// <summary>
+				/// タスクの追加
+				/// </summary>
+				/// <param name="type">ノードタイプ</param>
+				template<class T, class... Ts,
+					std::enable_if_t<
+						std::is_constructible_v<T, Ts...> &&	//コンストラクタの引数を監視
+						std::is_base_of_v<I_Task, T>,			//基底クラス制限
+					std::nullptr_t> = nullptr
+				>
+				void AddTask(const EnumType type, Ts&&... params) {
+					auto newTask = std::make_shared<T>(params...);
+					AddTask(type, newTask);
+				}
+
+				/// <summary>
 				/// タスクの取得
 				/// </summary>
 				/// <param name="type">ノードタイプ</param>
@@ -282,10 +297,20 @@ namespace basecross {
 				/// <summary>
 				/// エッジの追加
 				/// </summary>
-				/// <param name="fromType"></param>
-				/// <param name="toType"></param>
+				/// <param name="fromType">手前のノードタイプ</param>
+				/// <param name="toType">遷移先のノードタイプ</param>
 				void AddEdge(const EnumType fromType, const EnumType toType, const std::shared_ptr<I_PriorityController>& priorityController) {
 					AddEdge<EdgeBase>(GetNode(fromType), GetNode(toType), priorityController);
+				}
+
+				/// <summary>
+				/// エッジの追加
+				/// </summary>
+				/// <param name="fromType">手前のノードタイプ</param>
+				/// <param name="toType">遷移先のノードタイプ</param>
+				/// <param name="priority">優先度</param>
+				void AddEdge(const EnumType fromType, const EnumType toType, const float priority) {
+					AddEdge(fromType, toType, std::make_shared<PriorityControllerBase>(priority));
 				}
 
 				/// <summary>
