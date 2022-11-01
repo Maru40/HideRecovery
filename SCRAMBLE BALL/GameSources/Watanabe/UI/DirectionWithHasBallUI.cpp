@@ -1,9 +1,11 @@
-﻿#include "stdafx.h"
-#include "DirectionWithHasBallUI.h"
-#include "../Manager/SpriteDataManager.h"
-#include "../Utility/Utility.h"
+﻿/*!
+@file   DirectionWithHasBallUI.cpp
+@brief  画面外のオブジェクト位置を指すUIの実体
+*/
 
-#include "../DebugClass/Debug.h"
+#include "stdafx.h"
+#include "DirectionWithHasBallUI.h"
+#include "../Utility/Utility.h"
 
 namespace basecross {
 	DirectionWithHasBallUI::DirectionWithHasBallUI(const shared_ptr<Stage>& stage)
@@ -26,29 +28,39 @@ namespace basecross {
 		rectTrans->SetScale(0.3f, -0.3f);
 
 		m_cursor->SetParent(GetThis<DirectionWithHasBallUI>());
-		m_rectTrans = GetRectTransform();
-	}
 
-	void DirectionWithHasBallUI::OnUpdate() {
-		if (!m_targetObject) {
-			//return;
-		}
+		m_view = GetStage()->GetView();
 
-		auto view = GetStage()->GetView();
+		// 画面内の範囲を定義
 		// Viewportを0基準からー～＋範囲に変換
-		const Viewport& viewport = view->GetTargetViewport();
+		const Viewport& viewport = m_view->GetTargetViewport();
 		float halfWidth = viewport.Width / 2.0f;
 		float halfHeight = viewport.Height / 2.0f;
 		Rect2D<float> screenRect(
 			-halfWidth, -halfHeight,
 			halfWidth, halfHeight
 		);
+		m_screenRect = screenRect;
+
+		m_selfRectTrans = GetRectTransform();
+	}
+
+	void DirectionWithHasBallUI::OnUpdate() {
+		// ターゲットが設定されていない
+		if (!m_targetTransform) {
+			// 非表示に
+			SetDrawActive(false);
+			return;
+		}
+		const Vec3& targetPosition = m_targetTransform->GetPosition();
 
 		// ターゲットが画面内か
-		bool isTargetInScreen = Utility::IsPresentInScreen(Vec3(0, 0, 0), view, screenRect);
+		bool isTargetInScreen = Utility::IsPresentInScreen(targetPosition, m_view, m_screenRect);
+		// 画面外なら表示
 		SetDrawActive(!isTargetInScreen);
 		// ターゲットが画面内
 		if (isTargetInScreen) {
+			// 以下の処理はやらない
 			return;
 		}
 
@@ -57,21 +69,25 @@ namespace basecross {
 		cameraForward.normalize();
 		// カメラ方向を法線とした平面にターゲット方向へのベクトルを投影する
 		Vec3 targetDirectionOnPlane = Utility::Vector3ProjectOnPlane(
-			Vec3(0, 0, 0) - m_camera->GetAt(), cameraForward);
+			targetPosition - m_camera->GetAt(), cameraForward);
 		targetDirectionOnPlane.normalize();
 		Vec3 cameraUp = m_camera->GetUp().GetNormalized();
 
 		// カメラの上方向（スクリーンの上方向）を基準とした
 		// targetDirectionOnPlaneのなす角度を求める
 		float angle = Utility::GetTwoVectorAngle360(cameraUp, targetDirectionOnPlane, cameraForward);
-		m_rectTrans->SetRotation(XMConvertToRadians(angle));
+		m_selfRectTrans->SetRotation(XMConvertToRadians(angle));
 	}
 
-	void DirectionWithHasBallUI::SetTarget(const shared_ptr<Transform>& target) {
-		m_targetObject = target;
+	void DirectionWithHasBallUI::SetTarget(const shared_ptr<Transform>& targetTransform) {
+		m_targetTransform = targetTransform;
+	}
+
+	void DirectionWithHasBallUI::SetTarget(const shared_ptr<GameObject>& targetObject) {
+		SetTarget(targetObject->GetComponent<Transform>());
 	}
 
 	void DirectionWithHasBallUI::ClearTarget() {
-		SetTarget(nullptr);
+		m_targetTransform = nullptr;
 	}
 }
