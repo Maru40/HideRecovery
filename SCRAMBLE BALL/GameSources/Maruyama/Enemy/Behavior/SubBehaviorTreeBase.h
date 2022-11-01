@@ -28,24 +28,33 @@ namespace basecross {
 				template<class EnumType>
 				class SubBehaviorTreeBase
 				{
+				public:
+					using BehaviorTree = maru::Behavior::BehaviorTree<EnumType>;
+
+				private:
+
 					std::weak_ptr<GameObject> m_owner;	//オーナータイプ
 
 				protected:
 					
-					std::unique_ptr<BehaviorTree<EnumType>> m_behaviorTree;	//ビヘイビアツリー
+					std::unique_ptr<BehaviorTree> m_behaviorTree;	//ビヘイビアツリー
 
 				public:
 					SubBehaviorTreeBase(const std::shared_ptr<GameObject>& owner) :
 						m_owner(owner),
-						m_behaviorTree(new BehaviorTree<EnumType>)
+						m_behaviorTree(new BehaviorTree())
 					{}
 
 					virtual ~SubBehaviorTreeBase() = default;
 
-					void OnCreate() final {
+					virtual void OnCreate() final {
 						CreateNode();
 						CreateEdge();
 						CreateDecorator();
+					}
+
+					virtual void OnUpdate() {
+						m_behaviorTree->OnUpdate();
 					}
 
 				protected:
@@ -55,8 +64,18 @@ namespace basecross {
 					virtual void CreateDecorator() = 0;
 
 				public:
-
+					/// <summary>
+					/// オーナーゲームオブジェクトの取得
+					/// </summary>
+					/// <returns>オーナーゲームオブジェクト</returns>
 					_NODISCARD std::shared_ptr<GameObject> GetOwner() const noexcept { return m_owner.lock(); }
+
+					/// <summary>
+					/// ストップ処理
+					/// </summary>
+					void ForceStop() {
+						m_behaviorTree->ForceStop();
+					}
 
 				};
 
