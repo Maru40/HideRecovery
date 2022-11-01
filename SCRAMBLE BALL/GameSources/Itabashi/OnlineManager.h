@@ -148,6 +148,8 @@ namespace Online
 
 		OnlineManager() noexcept = default;
 
+		void EventCallback(int errorCode, void(I_OnlineCallBacks::* successFunc)(), void(I_OnlineCallBacks::* errorFunc)(int));
+
 	public:
 		~OnlineManager() noexcept = default;
 
@@ -259,6 +261,9 @@ namespace Online
 			const ExitGames::Common::Hashtable& playerProperties, int errorCode, const ExitGames::Common::JString& errorString) override;
 
 		void joinRandomRoomReturn(int localPlayerNr, const ExitGames::Common::Hashtable& roomProperties,
+			const ExitGames::Common::Hashtable& playerProperties, int errorCode, const ExitGames::Common::JString& errorString) override;
+
+		void joinRandomOrCreateRoomReturn(int localPlayerNr, const ExitGames::Common::Hashtable& roomProperties,
 			const ExitGames::Common::Hashtable& playerProperties, int errorCode, const ExitGames::Common::JString& errorString) override;
 
 		void leaveRoomReturn(int errorCode, const ExitGames::Common::JString& errorString) override {}

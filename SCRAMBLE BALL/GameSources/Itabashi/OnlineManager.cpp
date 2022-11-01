@@ -18,6 +18,24 @@ namespace Online
 
 	std::unique_ptr<OnlineManager> OnlineManager::m_instance;
 
+	void OnlineManager::EventCallback(int errorCode, void(I_OnlineCallBacks::* successFunc)(), void(I_OnlineCallBacks::* errorFunc)(int))
+	{
+		if (errorCode != 0)
+		{
+			for (auto& callback : m_callBacksVector)
+			{
+				(callback->*errorFunc)(errorCode);
+			}
+
+			return;
+		}
+
+		for (auto& callback : m_callBacksVector)
+		{
+			(callback->*successFunc)();
+		}
+	}
+
 	void OnlineManager::Update()
 	{
 		for (auto& removeCallBack : GetInstance()->m_removeCallBacks)
@@ -124,7 +142,7 @@ namespace Online
 
 	void OnlineManager::JoinRandomOrCreateRoom(const ExitGames::LoadBalancing::RoomOptions& roomOptions)
 	{
-		GetInstance()->m_client->opJoinRandomRoom();
+		GetInstance()->m_client->opJoinRandomOrCreateRoom(L"", roomOptions, ExitGames::Common::Hashtable(), roomOptions.getMaxPlayers());
 	}
 
 	void OnlineManager::RaiseEvent(bool reliable, const std::uint8_t* bytes, int size, std::uint8_t eventCode, const ExitGames::LoadBalancing::RaiseEventOptions& options)
@@ -168,20 +186,7 @@ namespace Online
 	void OnlineManager::connectReturn(int errorCode, const ExitGames::Common::JString& errorString,
 		const ExitGames::Common::JString& region, const ExitGames::Common::JString& cluster)
 	{
-		if (errorCode != 0)
-		{
-			for (auto& callback : m_callBacksVector)
-			{
-				callback->OnConnectFailed(errorCode);
-			}
-
-			return;
-		}
-
-		for (auto& callback : m_callBacksVector)
-		{
-			callback->OnConnected();
-		}
+		EventCallback(errorCode, &I_OnlineCallBacks::OnConnected, &I_OnlineCallBacks::OnConnectFailed);
 	}
 
 	void OnlineManager::disconnectReturn()
@@ -195,54 +200,27 @@ namespace Online
 	void OnlineManager::createRoomReturn(int localPlayerNr, const ExitGames::Common::Hashtable& roomProperties,
 		const ExitGames::Common::Hashtable& playerProperties, int errorCode, const ExitGames::Common::JString& errorString)
 	{
-		if (errorCode)
-		{
-			for (auto& callback : m_callBacksVector)
-			{
-				callback->OnCreateRoomFailed(errorCode);
-			}
-
-			return;
-		}
-
-		for (auto& callback : m_callBacksVector)
-		{
-			callback->OnCreateRoom();
-		}
+		EventCallback(errorCode, &I_OnlineCallBacks::OnCreateRoom, &I_OnlineCallBacks::OnCreateRoomFailed);
 	}
 
 	void OnlineManager::joinRoomReturn(int localPlayerNr, const ExitGames::Common::Hashtable& roomProperties,
 		const ExitGames::Common::Hashtable& playerProperties, int errorCode, const ExitGames::Common::JString& errorString)
 	{
-		if (errorCode)
-		{
-			for (auto& callback : m_callBacksVector)
-			{
-				callback->OnJoinRoomFailed(errorCode);
-			}
-
-			return;
-		}
-
-		for (auto& callback : m_callBacksVector)
-		{
-			callback->OnJoinRoom();
-		}
+		EventCallback(errorCode, &I_OnlineCallBacks::OnJoinRoom, &I_OnlineCallBacks::OnJoinRoomFailed);
 	}
 
 	void OnlineManager::joinRandomRoomReturn(int localPlayerNr, const ExitGames::Common::Hashtable& roomProperties,
 		const ExitGames::Common::Hashtable& playerProperties, int errorCode, const ExitGames::Common::JString& errorString)
 	{
-		if (errorCode)
-		{
-			OnlineManager::CreateRoom(L"", ExitGames::LoadBalancing::RoomOptions().setMaxPlayers(6));
-			return;
-		}
+		EventCallback(errorCode, &I_OnlineCallBacks::OnJoinRoom, &I_OnlineCallBacks::OnJoinRoomFailed);
+	}
 
-		for (auto& callback : m_callBacksVector)
-		{
-			callback->OnJoinRoom();
-		}
+	void OnlineManager::joinRandomOrCreateRoomReturn(int localPlayerNr, const ExitGames::Common::Hashtable& roomProperties,
+		const ExitGames::Common::Hashtable& playerProperties, int errorCode, const ExitGames::Common::JString& errorString)
+	{
+		auto successCallback = (localPlayerNr == 1) ? &I_OnlineCallBacks::OnCreateRoom : &I_OnlineCallBacks::OnJoinRoom;
+
+		EventCallback(errorCode, successCallback, &I_OnlineCallBacks::OnCreateRoomFailed);
 	}
 }
 }
