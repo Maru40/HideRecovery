@@ -9,6 +9,7 @@
 #include "stdafx.h"
 
 #include "StatorBase.h"
+#include "Maruyama/Enemy/StateMachine/EnemyMainStateMachine.h"
 
 namespace basecross {
 
@@ -34,13 +35,13 @@ namespace basecross {
 		///	AIPlayerStator‚Ì‘JˆÚğŒƒƒ“ƒo[
 		//--------------------------------------------------------------------------------------
 		struct AIPlayerStator_TransitionMember {
-
+			AIPlayerStator_TransitionMember() = default;
 		};
 
 		//--------------------------------------------------------------------------------------
 		///	AIPlayerStator
 		//--------------------------------------------------------------------------------------
-		class AIPlayerStator : StatorBase<EnemyBase, AIPlayerStator_StateType, AIPlayerStator_TransitionMember>
+		class AIPlayerStator : public StatorBase<EnemyBase, AIPlayerStator_StateType, AIPlayerStator_TransitionMember>
 		{
 		public:
 			using StateType = AIPlayerStator_StateType;
@@ -51,6 +52,8 @@ namespace basecross {
 
 		public:
 			AIPlayerStator(const std::shared_ptr<GameObject>& objPtr);
+
+			virtual ~AIPlayerStator() = default;
 
 			void CreateNode() override;
 			void CreateEdge() override;

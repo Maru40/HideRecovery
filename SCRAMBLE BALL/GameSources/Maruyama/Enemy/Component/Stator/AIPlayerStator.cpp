@@ -8,11 +8,12 @@
 #include "stdafx.h"
 #include "Project.h"
 
+#include "StatorBase.h"
+
 #include "AIPlayerStator.h"
 
-#include "Maruyama/Enemy/StateMachine/EnemyMainStateMachine.h"
-
 #include "Maruyama/Enemy/Component/EnemyBase.h"
+#include "Maruyama/Enemy/StateMachine/EnemyMainStateMachine.h"
 
 #include "Maruyama/Enemy/Component/Stator/StateNode/StateNode_HidePlacePatrol.h"
 
@@ -55,11 +56,7 @@ namespace basecross {
 			auto enemy = GetGameObject()->GetComponent<EnemyBase>();
 
 			//None
-			m_stateMachine->AddEdge(
-				StateType::None,
-				StateType::HidePlacePatrol,
-				&IsGameState
-			);
+			//m_stateMachine->AddEdge(StateType::None, StateType::HidePlacePatrol, &IsGameState);
 
 			//‰B‚µêŠ‚ğ’T‚·
 
