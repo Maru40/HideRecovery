@@ -198,6 +198,11 @@ namespace basecross {
 		 * @brief planeNormalを法線とする平面にvecを投影する
 		 */
 		Vec3 Vector3ProjectOnPlane(const Vec3& vec, const Vec3& planeNormal);
+
+		/**
+		 * @brief 画面内にオブジェクトが映っているか
+		 */
+		bool IsPresentInScreen(const Vec3& worldPosition, const shared_ptr<ViewBase>& view);
 	}
 }
 //end basecross

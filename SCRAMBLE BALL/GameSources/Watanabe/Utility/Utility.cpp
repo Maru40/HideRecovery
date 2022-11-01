@@ -295,5 +295,29 @@ namespace basecross {
 			// 平面上のベクトル
 			return vec - normalDirectionVector;
 		}
+
+		bool IsPresentInScreen(const Vec3& worldPosition, const shared_ptr<ViewBase>& view) {
+			// スクリーン座標に変換
+			Vec3 screenPosition = ConvertWorldToScreen(view, worldPosition);
+
+			// Viewportを0基準からー～＋範囲に変換
+			const Viewport& viewport = view->GetTargetViewport();
+			float halfWidth = viewport.Width / 2.0f;
+			float halfHeight = viewport.Height / 2.0f;
+			Rect2D<float> screenRect(
+				-halfWidth, -halfHeight,
+				halfWidth, halfHeight
+			);
+			// Rect2D内の判定用
+			Point2D<float> screenPoint(screenPosition.x, screenPosition.y);
+			// スクリーン内に点があるか（画面外でもtrueになる場合がある）
+			bool inScreen = screenRect.PtInRect(screenPoint);
+
+			// 画面内に見えるか
+			// ※見えていなくてもカメラ方向の真後ろにある場合
+			// 　inScreenはtrueになる(その場合screenPosition.zが1を超える)
+			bool isVisible = inScreen && screenPosition.z < 1;
+			return isVisible;
+		}
 	}
 }
