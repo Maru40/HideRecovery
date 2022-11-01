@@ -38,3 +38,4 @@ CanNotJoin,Message_TX,0,1280,1024,90,参加できない
 FreeMatch,Message_TX,0,1370,600,110,メニュー用
 CreateRoomLabel,Message_TX,0,940,605,120,メニュー用
 JoinRoomLabel,Message_TX,0,1060,605,120,メニュー用
+EnterPasscode,Message_TX,365,1180,595,100,パスコードを入力
