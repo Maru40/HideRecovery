@@ -131,6 +131,10 @@ namespace basecross {
 		}
 	}
 
+	bool GameManager::IsCurrentState(const State state) const {
+		return GetCurrentState() == state;
+	}
+
 	GameManager::State GameManager::GetCurrentState() const {
 		return m_paramPtr->state;
 	}
