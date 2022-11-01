@@ -9,7 +9,7 @@
 #include "stdafx.h"
 #include "Project.h"
 
-#include "Maruyama/Enemy/Behavior/SubBehaviorTreeBase.h"
+#include "Maruyama/Enemy/Behavior/SubBehaviorTree/SubBehaviorTreeBase.h"
 
 namespace basecross {
 
@@ -24,6 +24,9 @@ namespace basecross {
 					PatrolTask,			//パトロールタスク
 				};
 
+				//--------------------------------------------------------------------------------------
+				/// 隠れ場所を探すパトロールビヘイビアツリー
+				//--------------------------------------------------------------------------------------
 				class HidePlacePatrolTree : public SubBehaviorTreeBase<HidePlacePatrolTree_BehaviorType>
 				{
 				public:
