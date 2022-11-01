@@ -1255,9 +1255,6 @@
     <Filter Include="Maruyama\Enemy\Component\Stator\StateNode">
       <UniqueIdentifier>{7f79a7de-113b-4a7d-af2a-79ec01ec3cb4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Maruyama\Enemy\Component\EachEnemy\Common\BehaviorTree\HidePlacePatrolTree">
-      <UniqueIdentifier>{4521b984-fe0a-44a2-b39c-622892d3c87d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Maruyama\Item\Generator">
       <UniqueIdentifier>{3b7feaea-d2f5-453e-94c8-a867f3210a48}</UniqueIdentifier>
     </Filter>
@@ -1275,6 +1272,9 @@
     </Filter>
     <Filter Include="Maruyama\Enemy\BehaviorTree\SubBehaviorTree">
       <UniqueIdentifier>{69c64880-14aa-481a-aa75-489268d355a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\BehaviorTree\SubBehaviorTree\HidePlacePatrolTree">
+      <UniqueIdentifier>{4521b984-fe0a-44a2-b39c-622892d3c87d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -2377,7 +2377,7 @@
       <Filter>Maruyama\Enemy\Component\Stator\StateNode</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\BehaviorTree\HidePlacePatrolTree.h">
-      <Filter>Maruyama\Enemy\Component\EachEnemy\Common\BehaviorTree\HidePlacePatrolTree</Filter>
+      <Filter>Maruyama\Enemy\BehaviorTree\SubBehaviorTree\HidePlacePatrolTree</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\SubBehaviorTreeBase.h">
       <Filter>Maruyama\Enemy\BehaviorTree\SubBehaviorTree</Filter>
@@ -3384,7 +3384,7 @@
       <Filter>Maruyama\Enemy\Component\Stator\StateNode</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\BehaviorTree\HidePlacePatrolTree.cpp">
-      <Filter>Maruyama\Enemy\Component\EachEnemy\Common\BehaviorTree\HidePlacePatrolTree</Filter>
+      <Filter>Maruyama\Enemy\BehaviorTree\SubBehaviorTree\HidePlacePatrolTree</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\SubBehaviorTreeBase.cpp">
       <Filter>Maruyama\Enemy\BehaviorTree\SubBehaviorTree</Filter>
