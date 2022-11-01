@@ -23,6 +23,8 @@
 #include "Watanabe/Component/PlayerStatus.h"
 #include "Watanabe/Component/PlayerAnimator.h"
 
+#include "Maruyama/Enemy/Component/Stator/AIPlayerStator.h"
+
 namespace basecross {
 	namespace Enemy {
 
@@ -36,7 +38,8 @@ namespace basecross {
 			AddComponent<PlayerStatus>();
 			AddComponent<PlayerAnimator>();
 
-			AddComponent<AIPlayerBehaviorTree>();
+			AddComponent<AIPlayerStator>();
+			//AddComponent<AIPlayerBehaviorTree>();
 		}
 
 		void AIPlayerObject::CreateModel() {
