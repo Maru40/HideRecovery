@@ -31,6 +31,9 @@ namespace basecross {
 
 		namespace StateNode {
 
+			//--------------------------------------------------------------------------------------
+			///	隠し場所を探すステート
+			//--------------------------------------------------------------------------------------
 			class HidePlacePatrol : public EnemyStateNodeBase<EnemyBase>
 			{
 				using HidePlacePatrolTree = maru::Behavior::SubBehavior::HidePlacePatrolTree;

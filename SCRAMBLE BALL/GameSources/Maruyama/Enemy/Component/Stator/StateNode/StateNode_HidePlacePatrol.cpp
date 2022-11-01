@@ -11,7 +11,7 @@
 #include "Maruyama/Enemy/Component/EnemyBase.h"
 
 #include "Maruyama/Enemy/Behavior/BehaviorTree.h"
-#include "Maruyama/Enemy/Component/BehaviorTree/HidePlacePatrolTree.h"
+#include "Maruyama/Enemy/Behavior/SubBehaviorTree/HidePlacePatrolTree.h"
 
 namespace basecross {
 	namespace Enemy {
