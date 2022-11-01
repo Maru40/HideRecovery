@@ -9,52 +9,42 @@
 #include "stdafx.h"
 #include "Project.h"
 
+#include "Maruyama/Enemy/Behavior/SubBehaviorTreeBase.h"
+
 namespace basecross {
 
 	namespace maru {
 		namespace Behavior {
-			template<class EnumType>
-			class BehaviorTree;
+
+			namespace SubBehavior {
+
+				enum class HidePlacePatrolTree_BehaviorType {
+					FirstSelecter,		//初回ノード
+
+					PatrolTask,			//パトロールタスク
+				};
+
+				class HidePlacePatrolTree : public SubBehaviorTreeBase<HidePlacePatrolTree_BehaviorType>
+				{
+				public:
+					using BehaviorType = HidePlacePatrolTree_BehaviorType;
+
+				public:
+					HidePlacePatrolTree(const std::shared_ptr<GameObject>& objPtr);
+
+					virtual ~HidePlacePatrolTree() = default;
+
+				protected:
+
+					void CreateNode() override;
+					void CreateEdge() override;
+					void CreateDecorator() override;
+
+				public:
+
+				};
+
+			}
 		}
-	}
-
-	namespace Enemy {
-
-		enum class HidePlacePatrolTree_BehaviorType {
-			FirstSelecter,		//初回ノード
-
-			PatrolTask,			//パトロールタスク
-		};
-
-		class HidePlacePatrolTree
-		{
-		public:
-			using BehaviorType = HidePlacePatrolTree_BehaviorType;
-			using BehaviorTree = maru::Behavior::BehaviorTree<BehaviorType>;
-
-		private:
-			std::weak_ptr<GameObject> m_owner;				//オーナーオブジェクト
-
-			std::unique_ptr<BehaviorTree> m_behaviorTree;	//ビヘイビアツリー
-
-		public:
-			HidePlacePatrolTree(const std::shared_ptr<GameObject>& objPtr);
-
-			virtual ~HidePlacePatrolTree() = default;
-
-			void OnCreate();
-			void OnUpdate();
-
-		protected:
-
-			void CreateNode();
-			void CreateEdge();
-			void CreateDecorator();
-
-		public:
-
-			_NODISCARD std::shared_ptr<GameObject> GetOwner() const noexcept { return m_owner.lock(); }
-		};
-
 	}
 }

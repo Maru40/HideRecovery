@@ -16,49 +16,47 @@
 #include "Maruyama/Enemy/Behavior/Interface/I_PriorityController.h"
 
 namespace basecross {
-	namespace Enemy {
 
-		HidePlacePatrolTree::HidePlacePatrolTree(const std::shared_ptr<GameObject>& objPtr) :
-			m_owner(objPtr),
-			m_behaviorTree(new BehaviorTree())
-		{}
+	namespace maru {
+		namespace Behavior {
 
-		void HidePlacePatrolTree::OnCreate() {
-			CreateNode();
-			CreateEdge();
-			CreateDecorator();
+			namespace SubBehavior {
+
+				HidePlacePatrolTree::HidePlacePatrolTree(const std::shared_ptr<GameObject>& objPtr) :
+					SubBehaviorTreeBase(objPtr)
+				{}
+
+				void HidePlacePatrolTree::CreateNode() {
+					using namespace maru::Behavior;
+
+					auto owner = GetOwner()->GetComponent<Enemy::EnemyBase>();
+
+					//初回セレクター
+					m_behaviorTree->AddSelecter(BehaviorType::FirstSelecter);
+
+					//ボール探すタスク
+					m_behaviorTree->AddTask(
+						BehaviorType::PatrolTask,
+						std::make_shared<maru::Behavior::Task::SearchBall>(owner)
+					);
+				}
+
+				void HidePlacePatrolTree::CreateEdge() {
+					using PriorityControllerBase = maru::Behavior::PriorityControllerBase;
+
+					//初回セレクター
+					m_behaviorTree->AddEdge(
+						BehaviorType::FirstSelecter, 
+						BehaviorType::PatrolTask, 
+						std::make_shared<PriorityControllerBase>(0.0f)
+					);
+				}
+
+				void HidePlacePatrolTree::CreateDecorator() {
+
+				}
+
+			}
 		}
-
-		void HidePlacePatrolTree::OnUpdate() {
-			m_behaviorTree->OnUpdate();
-		}
-
-		void HidePlacePatrolTree::CreateNode() {
-			using namespace maru::Behavior;
-
-			auto owner = GetOwner()->GetComponent<EnemyBase>();
-
-			//初回セレクター
-			m_behaviorTree->AddSelecter(BehaviorType::FirstSelecter);
-
-			//ボール探すタスク
-			m_behaviorTree->AddTask(
-				BehaviorType::PatrolTask,
-				std::make_shared<maru::Behavior::Task::SearchBall>(owner)
-			);
-		}
-
-		void HidePlacePatrolTree::CreateEdge() {
-			using PriorityControllerBase = maru::Behavior::PriorityControllerBase;
-
-			//初回セレクター
-			m_behaviorTree->AddEdge(BehaviorType::FirstSelecter, BehaviorType::PatrolTask, std::make_shared<PriorityControllerBase>(0.0f));
-		}
-
-		void HidePlacePatrolTree::CreateDecorator() {
-
-		}
-
-
 	}
 }
