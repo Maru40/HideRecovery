@@ -297,9 +297,6 @@ namespace basecross {
 		}
 
 		bool IsPresentInScreen(const Vec3& worldPosition, const shared_ptr<ViewBase>& view) {
-			// スクリーン座標に変換
-			Vec3 screenPosition = ConvertWorldToScreen(view, worldPosition);
-
 			// Viewportを0基準からー～＋範囲に変換
 			const Viewport& viewport = view->GetTargetViewport();
 			float halfWidth = viewport.Width / 2.0f;
@@ -308,6 +305,13 @@ namespace basecross {
 				-halfWidth, -halfHeight,
 				halfWidth, halfHeight
 			);
+			return IsPresentInScreen(worldPosition, view, screenRect);
+		}
+
+		bool IsPresentInScreen(const Vec3& worldPosition, const shared_ptr<ViewBase>& view, const Rect2D<float>& screenRect) {
+			// スクリーン座標に変換
+			Vec3 screenPosition = ConvertWorldToScreen(view, worldPosition);
+
 			// Rect2D内の判定用
 			Point2D<float> screenPoint(screenPosition.x, screenPosition.y);
 			// スクリーン内に点があるか（画面外でもtrueになる場合がある）
