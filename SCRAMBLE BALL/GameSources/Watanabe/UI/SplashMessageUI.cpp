@@ -11,6 +11,7 @@ namespace basecross {
 		{MessageType::StolenBall,MessageData(SimpleSprite::Type::SpriteData,L"StolenBall")},
 		{MessageType::CreateRoom,MessageData(SimpleSprite::Type::SpriteData,L"CreatedRoom")},
 		{MessageType::JoinRoom,MessageData(SimpleSprite::Type::SpriteData,L"JoinedRoom")},
+		{MessageType::CanNotJoin,MessageData(SimpleSprite::Type::SpriteData,L"CanNotJoin")},
 		{MessageType::Remaining60s,MessageData(SimpleSprite::Type::SpriteData,L"Remaining60s")},
 		{MessageType::Remaining30s,MessageData(SimpleSprite::Type::SpriteData,L"Remaining30s")},
 		{MessageType::Goal,MessageData(SimpleSprite::Type::SpriteData,L"Goal")},
