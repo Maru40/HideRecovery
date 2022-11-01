@@ -323,5 +323,22 @@ namespace basecross {
 			bool isVisible = inScreen && screenPosition.z < 1;
 			return isVisible;
 		}
+
+		bool IsPresentInScreen(const Vec3& worldPosition, const shared_ptr<ViewBase>& view, const Rect2D<float>& screenRect, Vec2& outputScreenPosition) {
+			// スクリーン座標に変換
+			Vec3 screenPosition = ConvertWorldToScreen(view, worldPosition);
+			outputScreenPosition = Vec2(screenPosition.x, screenPosition.y);
+
+			// Rect2D内の判定用
+			Point2D<float> screenPoint(screenPosition.x, screenPosition.y);
+			// スクリーン内に点があるか（画面外でもtrueになる場合がある）
+			bool inScreen = screenRect.PtInRect(screenPoint);
+
+			// 画面内に見えるか
+			// ※見えていなくてもカメラ方向の真後ろにある場合
+			// 　inScreenはtrueになる(その場合screenPosition.zが1を超える)
+			bool isVisible = inScreen && screenPosition.z < 1;
+			return isVisible;
+		}
 	}
 }

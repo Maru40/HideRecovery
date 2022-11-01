@@ -357,6 +357,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\GameFinishUI.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\GameStartUI.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\GoalMessageUI.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\HasBallUI.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\HoldButtonUI.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\HPGaugeUI.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\MessageUI.h" />
@@ -696,6 +697,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\GameFinishUI.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\GameStartUI.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\GoalMessageUI.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\HasBallUI.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\HoldButtonUI.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\HPGaugeUI.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\MessageUI.cpp" />

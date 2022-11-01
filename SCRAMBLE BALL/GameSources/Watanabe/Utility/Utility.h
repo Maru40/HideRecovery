@@ -207,6 +207,10 @@ namespace basecross {
 		 * @brief 画面内にオブジェクトが映っているか
 		 */
 		bool IsPresentInScreen(const Vec3& worldPosition, const shared_ptr<ViewBase>& view, const Rect2D<float>& screenRect);
+		/**
+		 * @brief 画面内にオブジェクトが映っているか
+		 */
+		bool IsPresentInScreen(const Vec3& worldPosition, const shared_ptr<ViewBase>& view, const Rect2D<float>& screenRect, Vec2& outputScreenPosition);
 	}
 }
 //end basecross
