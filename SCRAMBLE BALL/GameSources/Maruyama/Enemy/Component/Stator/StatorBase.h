@@ -99,6 +99,8 @@ namespace basecross {
 				: Component(objPtr), m_stateMachine(new StateMachine(member))
 			{}
 
+			virtual ~StatorBase() = default;
+
 		protected:
 			/// <summary>
 			/// ƒm[ƒh‚Ì¶¬
