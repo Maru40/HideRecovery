@@ -39,4 +39,5 @@ FreeMatch,Message_TX,0,1370,600,110,メニュー用
 CreateRoomLabel,Message_TX,0,940,605,120,メニュー用
 JoinRoomLabel,Message_TX,0,1060,605,120,メニュー用
 EnterPasscode,Message_TX,365,1180,595,100,パスコードを入力
-Asterisk,Numbers_TX,1200,0,80,128,パスコードが入力されていないときに表示
+Asterisk,Numbers_TX,1200,0,102,128,パスコードが入力されていないときに表示
+UnderScore,Numbers_TX,1302,0,102,128,アンダーバー
