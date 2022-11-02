@@ -57,7 +57,7 @@ namespace basecross {
 		CreateBoard();
 
 		if (auto shareManager = ShareClassesManager::GetInstance(GetStage())) {
-			shareManager->AddShareClass(GetThis<HidePlace>());
+			shareManager->AddShareClass<HidePlace>(GetThis<HidePlace>());
 		}
 	}
 
