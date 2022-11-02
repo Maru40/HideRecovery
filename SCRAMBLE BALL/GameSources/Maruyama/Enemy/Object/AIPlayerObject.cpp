@@ -61,7 +61,7 @@ namespace basecross {
 
 			AddComponent<Teleport>();
 			AddComponent<ItemAcquisitionManager>();
-			AddComponent<UseWeapon>(chargeGun);
+			AddComponent<UseWeapon>(chargeGun)->SetIsUpdateRotation(false);
 			AddComponent<GoalAnimationController>();
 			AddComponent<HidePlaceOpener>();
 			AddComponent<Operator::ObjectMover>();
