@@ -20,6 +20,7 @@ namespace basecross {
 			namespace SubBehavior {
 
 				//class HidePlacePatrolTree;
+				class ButtleTree;
 
 			}
 		}
@@ -36,6 +37,12 @@ namespace basecross {
 			//--------------------------------------------------------------------------------------
 			class Buttle : public EnemyStateNodeBase<EnemyBase>
 			{
+			public:
+				using ButtleTree = maru::Behavior::SubBehavior::ButtleTree;
+
+			private:
+				std::unique_ptr<ButtleTree> m_behaviorTree;
+
 			public:
 				Buttle(const std::shared_ptr<EnemyBase>& owner);
 
