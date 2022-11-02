@@ -171,9 +171,29 @@ namespace basecross {
 			return Vec3(XMVector3TransformCoord(position, mVPS));
 		}
 
-		float GetTwoVectorAngle(const Vec3& vector1, const Vec3& vector2) {
-			auto dot = vector1.dot(vector2);
-			return XMConvertToDegrees(acosf(dot));
+		float GetTwoVectorAngle(const Vec3& from, const Vec3& to) {
+			auto _from = from.GetNormalized();
+			auto _to = to.GetNormalized();
+			// θを求める
+			auto theta = _from.dot(_to);
+			// degで返す
+			return XMConvertToDegrees(acosf(theta));
+		}
+
+		float GetTwoVectorAngle360(const Vec3& from, const Vec3& to, const Vec3& up) {
+			auto _from = from;
+			// 普通に角度を求める
+			float angle = GetTwoVectorAngle(_from, to);
+			// fromをForward、upをUpとした、Right方向のベクトルを求める
+			Vec3 right = -_from.cross(up).GetNormalized();
+			// toとrightの内積が+なら右側にいる
+			bool isRightSide = to.dot(right) > 0;
+			// 右側が0～180、左側が180～360になるようにする
+			if (!isRightSide) {
+				float diff = 180.0f - angle;
+				angle = 180.0f + diff;
+			}
+			return angle;
 		}
 
 		Vec3 ClampVector3(const Vec3& value, const Vec3& _min, const Vec3& _max) {
@@ -264,6 +284,61 @@ namespace basecross {
 			mat *= matParent;
 
 			return mat.transInMatrix();
+		}
+
+		Vec3 Vector3ProjectOnPlane(const Vec3& vec, const Vec3& planeNormal) {
+			auto _planeNormal = planeNormal.GetNormalized();
+			// vecの法線方向(planeNormal)の大きさ
+			float vectorSizeOnNormal = vec.dot(_planeNormal);
+			// 法線方向のベクトル（大きさ：vectorSizeOnNormal）
+			auto normalDirectionVector = vectorSizeOnNormal * _planeNormal;
+			// 平面上のベクトル
+			return vec - normalDirectionVector;
+		}
+
+		bool IsPresentInScreen(const Vec3& worldPosition, const shared_ptr<ViewBase>& view) {
+			// Viewportを0基準からー～＋範囲に変換
+			const Viewport& viewport = view->GetTargetViewport();
+			float halfWidth = viewport.Width / 2.0f;
+			float halfHeight = viewport.Height / 2.0f;
+			Rect2D<float> screenRect(
+				-halfWidth, -halfHeight,
+				halfWidth, halfHeight
+			);
+			return IsPresentInScreen(worldPosition, view, screenRect);
+		}
+
+		bool IsPresentInScreen(const Vec3& worldPosition, const shared_ptr<ViewBase>& view, const Rect2D<float>& screenRect) {
+			// スクリーン座標に変換
+			Vec3 screenPosition = ConvertWorldToScreen(view, worldPosition);
+
+			// Rect2D内の判定用
+			Point2D<float> screenPoint(screenPosition.x, screenPosition.y);
+			// スクリーン内に点があるか（画面外でもtrueになる場合がある）
+			bool inScreen = screenRect.PtInRect(screenPoint);
+
+			// 画面内に見えるか
+			// ※見えていなくてもカメラ方向の真後ろにある場合
+			// 　inScreenはtrueになる(その場合screenPosition.zが1を超える)
+			bool isVisible = inScreen && screenPosition.z < 1;
+			return isVisible;
+		}
+
+		bool IsPresentInScreen(const Vec3& worldPosition, const shared_ptr<ViewBase>& view, const Rect2D<float>& screenRect, Vec2& outputScreenPosition) {
+			// スクリーン座標に変換
+			Vec3 screenPosition = ConvertWorldToScreen(view, worldPosition);
+			outputScreenPosition = Vec2(screenPosition.x, screenPosition.y);
+
+			// Rect2D内の判定用
+			Point2D<float> screenPoint(screenPosition.x, screenPosition.y);
+			// スクリーン内に点があるか（画面外でもtrueになる場合がある）
+			bool inScreen = screenRect.PtInRect(screenPoint);
+
+			// 画面内に見えるか
+			// ※見えていなくてもカメラ方向の真後ろにある場合
+			// 　inScreenはtrueになる(その場合screenPosition.zが1を超える)
+			bool isVisible = inScreen && screenPosition.z < 1;
+			return isVisible;
 		}
 	}
 }

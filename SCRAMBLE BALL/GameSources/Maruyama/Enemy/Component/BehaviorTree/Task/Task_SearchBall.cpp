@@ -104,8 +104,9 @@ namespace basecross {
 				std::shared_ptr<GameObject> SearchBall::CalculateTarget() {
 					using HidePlacePtrol = Enemy::AICoordinator::Patrol::HidePlacePatrol;
 
+					//ターゲット管理が存在しないなら処理をしない
 					auto targetManager = m_targetManager.lock();
-					if (!targetManager) {	//ターゲット管理が存在しないなら処理をしない
+					if (!targetManager) {	
 						return nullptr;
 					}
 
@@ -114,7 +115,8 @@ namespace basecross {
 					auto factionMembmer = m_factionMember.lock();
 					auto patrolCoordinator = factionMembmer->GetAssignedFaction<HidePlacePtrol>();	//パトロールコーディネーターの取得
 
-					if (!patrolCoordinator) {	//パトロール中でなかったら処理を飛ばす。
+					//パトロール中でなかったら処理を飛ばす。
+					if (!patrolCoordinator) {	
 						return nullptr;
 					}
 
@@ -139,11 +141,13 @@ namespace basecross {
 					auto startPosition = m_transform.lock()->GetPosition();
 					auto targetPosition = m_targetManager.lock()->GetTargetPosition();
 					auto toTargetPosition = targetPosition - startPosition;
+
 					//ターゲットの距離が視界距離より大きかったら、処理をしない。
 					if (m_eyeRange.lock()->GetEyeLength() < toTargetPosition.length()) {
 						return;
 					}
 
+					//Ray判定を取る。
 					auto objects = GetOwner()->GetGameObject()->GetStage()->GetGameObjectVec();
 					if (!maru::UtilityObstacle::IsRayObstacle(startPosition, targetPosition, objects)) {
 						m_taskList->ForceNextTask();

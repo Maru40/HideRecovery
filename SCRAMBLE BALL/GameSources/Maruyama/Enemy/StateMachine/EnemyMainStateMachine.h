@@ -100,6 +100,8 @@ namespace basecross {
 			:GraphBase(), m_transitionStruct(member)
 		{}
 
+		virtual ~EnemyMainStateMachine() = default;
+
 		/// <summary>
 		/// ƒm[ƒh‚Ì’Ç‰Á
 		/// </summary>

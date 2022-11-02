@@ -74,6 +74,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\SparseGraph.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\UtilityAstar.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\BehaviorTree.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\IsInEyeTarget.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Interface\I_Decorator.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Interface\I_Edge.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Interface\I_Node.h" />
@@ -81,6 +82,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Interface\I_Selecter.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Interface\I_Task.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\SelecterTask\Priority.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\SubBehaviorTreeBase.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Tester\Tester_Behavior.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Animation\AnimationMainStateMachine.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Animation\AnimatorBase.h" />
@@ -88,6 +90,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Animation\SubAnimatorBase.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\BehaviorTree\BehaviorTreeComponentBase.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\BehaviorTree\AIPlayerBehaviorTree.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\BehaviorTree\HidePlacePatrolTree.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\BehaviorTree\Task\Task_SearchBall.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\EnemyBase.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\EnemyStatusBase.h" />
@@ -96,11 +99,13 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Skill\ActiveSkillBase.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Skill\PassiveSkillBase.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Skill\SkillBase.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Stator\AIPlayerStator.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Stator\EnemyStatorBase.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Stator\StateNode\ChaseState_AstarSeek.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Stator\StateNode\ChaseState_TargetSeek.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Stator\StateNode\EnemyStateNode_Chase.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Stator\StateNode\EnemyStateNode_Plowling.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Stator\StateNode\StateNode_HidePlacePatrol.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Stator\StatorBase.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Stator\Stator_Hero.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Stator\Stator_Villain.h" />
@@ -234,6 +239,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Object\CollisionObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Object\GameManagerObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Object\TactileObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\ObserveIsInEyeTarget.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Random.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\ReactiveBool.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\ReactiveProperty.h" />
@@ -298,6 +304,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\BoardPoly\HPGaugeBP.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\BoardPoly\PlayerLabelBP.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\BoardPoly\RelocationCountBP.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Camera\TestCamera.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Camera\TitleCamera.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\Animator.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\BallAnimationState.h" />
@@ -336,6 +343,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\RenderTexture.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\StaticModelDraw.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\Block.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\CameraTarget.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\Container.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\FireworksObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\OwnAreaObject.h" />
@@ -347,17 +355,21 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Stage\ResultStage.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Stage\TitleStage.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\MatchingUILayoutStage.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\TestEffectStage.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\TestShaderStage.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\WatanabeStage.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\ButtonUI.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\CountDownUI.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\DirectionWithHasBallUI.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\GameFinishUI.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\GameStartUI.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\GoalMessageUI.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\HasBallUI.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\HoldButtonUI.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\HPGaugeUI.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\MessageUI.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\Numbers.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\PasscodeUI.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\PointUI.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\ScoreUI.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\SimpleSprite.h" />
@@ -373,6 +385,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\BaseSingleton.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\CSVLoad.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\DataExtracter.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\GameController.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\TimeCounter.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\TransformData.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\Utility.h" />
@@ -443,6 +456,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\SparseGraph.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\UtilityAstar.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\BehaviorTree.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\IsInEyeTarget.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Interface\I_Decorator.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Interface\I_Edge.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Interface\I_Node.cpp" />
@@ -450,6 +464,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Interface\I_Selecter.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Interface\I_Task.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\SelecterTask\Priority.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\SubBehaviorTreeBase.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Tester\Tester_Behavior.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Animation\AnimationMainStateMachine.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Animation\AnimatorBase.cpp" />
@@ -457,6 +472,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Animation\SubAnimatorBase.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\BehaviorTree\BehaviorTreeComponentBase.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\BehaviorTree\AIPlayerBehaviorTree.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\BehaviorTree\HidePlacePatrolTree.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\BehaviorTree\Task\Task_SearchBall.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\EnemyBase.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\EnemyStatusBase.cpp" />
@@ -465,11 +481,13 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Skill\ActiveSkillBase.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Skill\PassiveSkillBase.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Skill\SkilBase.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Stator\AIPlayerStator.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Stator\EnemyStatorBase.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Stator\StateNode\ChaseState_AstarSeek.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Stator\StateNode\ChaseState_TargetSeek.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Stator\StateNode\EnemyStateNode_Chase.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Stator\StateNode\EnemyStateNode_Plowling.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Stator\StateNode\StateNode_HidePlacePatrol.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Stator\StatorBase.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Stator\Stator_Hero.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Stator\Stator_Villain.cpp" />
@@ -592,6 +610,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Object\CollisionObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Object\GameManagerObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Object\TactileObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\ObserveIsInEyeTarget.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\ReactiveBool.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\ReactiveProperty.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\SingletonComponent\GameManager.cpp" />
@@ -639,6 +658,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\BoardPoly\HPGaugeBP.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\BoardPoly\PlayerLabelBP.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\BoardPoly\RelocationCountBP.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Camera\TestCamera.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Camera\TitleCamera.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\Animator.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\BallAnimator.cpp" />
@@ -671,6 +691,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\RenderTexture.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\StaticModelDraw.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\Block.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\CameraTarget.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\Container.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\FireworksObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\OwnAreaObject.cpp" />
@@ -681,17 +702,21 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Stage\ResultStage.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Stage\TitleStage.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\MatchingUILayoutStage.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\TestEffectStage.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\TestShaderStage.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\WatanabeStage.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\ButtonUI.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\CountDownUI.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\DirectionWithHasBallUI.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\GameFinishUI.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\GameStartUI.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\GoalMessageUI.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\HasBallUI.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\HoldButtonUI.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\HPGaugeUI.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\MessageUI.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\Numbers.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\PasscodeUI.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\PointUI.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\ScoreUI.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\SimpleSprite.cpp" />
@@ -704,6 +729,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Utility\AdvMeshUtil.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Utility\AdvRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Utility\CSVLoad.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Utility\GameController.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Utility\TimeCounter.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Utility\Utility.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WinMain.cpp" />

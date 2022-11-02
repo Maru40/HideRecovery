@@ -184,15 +184,6 @@
     <Filter Include="Maruyama\Utility\Component\Builder">
       <UniqueIdentifier>{340290f7-9f40-48ff-8b1b-b336604ff6e5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Maruyama\Generator">
-      <UniqueIdentifier>{3b7feaea-d2f5-453e-94c8-a867f3210a48}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Maruyama\Generator\Component">
-      <UniqueIdentifier>{1c1aa6ee-1961-4615-bea1-3e08f1a5428d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Maruyama\Generator\Component\RandomPositionGenerator">
-      <UniqueIdentifier>{51abb125-2fd0-464d-9e73-269dbc73984d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Maruyama\Enemy\Component\EnemyMainStateMachine">
       <UniqueIdentifier>{def6dec4-a167-49dc-a466-fde6c6c390ae}</UniqueIdentifier>
     </Filter>
@@ -370,9 +361,6 @@
     <Filter Include="Maruyama\Utility\Component\WallEvasion\Tactile">
       <UniqueIdentifier>{ab2d2501-87ca-455a-bdb4-d93205942fb6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Maruyama\Generator\Component\LoadPositionGenerator">
-      <UniqueIdentifier>{1945ca4c-891b-4992-b5f1-a2b3e3e25d90}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Maruyama\Utility\Component\ReactiveProperty">
       <UniqueIdentifier>{e1fdc22f-d32a-4d7c-95b0-307b4a9dd2a0}</UniqueIdentifier>
     </Filter>
@@ -501,9 +489,6 @@
     </Filter>
     <Filter Include="Maruyama\Enemy\Component\EachEnemy\Hero\Stator">
       <UniqueIdentifier>{a871ca39-dc2e-4987-b7f5-9ec3ab19df9b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Maruyama\Generator\Object">
-      <UniqueIdentifier>{b97609dc-af44-4b8b-90b8-c45ed94eb269}</UniqueIdentifier>
     </Filter>
     <Filter Include="Patch\basecross\CameraHelper\CameraRotate">
       <UniqueIdentifier>{b6d2318e-3b54-43cc-85ae-0f609cb548ca}</UniqueIdentifier>
@@ -1258,6 +1243,66 @@
     <Filter Include="Itabashi\Component\PasswordTextUI">
       <UniqueIdentifier>{4f5b0a74-c537-4699-930f-05660e038e0a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Enemy\BehaviorTree\Decorator">
+      <UniqueIdentifier>{20e32679-f50f-4a3f-bded-8db56e691e6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\BehaviorTree\Decorator\IsInEyeTarget">
+      <UniqueIdentifier>{48e70ae6-5554-4167-9133-ef225bccb201}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Utility\ObserveIsInEyeTarget">
+      <UniqueIdentifier>{8220dc99-fea5-4e2b-b9cb-6fb7f90da84c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\Component\Stator">
+      <UniqueIdentifier>{8f659669-a5cc-4822-9da0-efc31f22e477}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\Component\Stator\StateNode">
+      <UniqueIdentifier>{7f79a7de-113b-4a7d-af2a-79ec01ec3cb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\Component\EachEnemy\Common\BehaviorTree\HidePlacePatrolTree">
+      <UniqueIdentifier>{4521b984-fe0a-44a2-b39c-622892d3c87d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Item\Generator">
+      <UniqueIdentifier>{3b7feaea-d2f5-453e-94c8-a867f3210a48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Item\Generator\Component">
+      <UniqueIdentifier>{1c1aa6ee-1961-4615-bea1-3e08f1a5428d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Item\Generator\Component\RandomPositionGenerator">
+      <UniqueIdentifier>{51abb125-2fd0-464d-9e73-269dbc73984d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Item\Generator\Component\LoadPositionGenerator">
+      <UniqueIdentifier>{1945ca4c-891b-4992-b5f1-a2b3e3e25d90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Item\Generator\Object">
+      <UniqueIdentifier>{b97609dc-af44-4b8b-90b8-c45ed94eb269}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\BehaviorTree\SubBehaviorTree">
+      <UniqueIdentifier>{69c64880-14aa-481a-aa75-489268d355a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\TestStage\TestEffectStage">
+      <UniqueIdentifier>{6ecd7ee6-b17a-4920-8877-a46f28f4259a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\Camera\TitleCamera">
+      <UniqueIdentifier>{5406103a-f08d-4b1a-a2af-04823809e858}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\Camera\TestCamera">
+      <UniqueIdentifier>{4e479895-2003-48b6-9466-c386a7899e9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\Utility\GameController">
+      <UniqueIdentifier>{fce8effc-dd98-4d17-9638-1ae4c8b9597c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\StageObject\CameraTarget">
+      <UniqueIdentifier>{d2b73c06-5257-4de3-8eb3-d720f7e8817e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\UI\DirectionWithHasBallUI">
+      <UniqueIdentifier>{73b08fd6-b54c-462d-a4e8-e0dabbba7334}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\UI\PasscodeUI">
+      <UniqueIdentifier>{38b8ad1c-03a6-4c88-a5a6-d9c7702a6582}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\UI\HasBallUI">
+      <UniqueIdentifier>{b38f08fe-322c-4399-9a39-2ebeefa38fdd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1569,9 +1614,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\Zooming.h">
       <Filter>Watanabe\Component\Zooming</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Camera\TitleCamera.h">
-      <Filter>Watanabe\Camera</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\PCTStaticModelDraw.h">
       <Filter>Itabashi\Component\Graphic</Filter>
     </ClInclude>
@@ -1702,7 +1744,7 @@
       <Filter>Maruyama\Enemy\Component\EachEnemy\Villain</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Generator\EnemyGeneratorObject.h">
-      <Filter>Maruyama\Generator\Object</Filter>
+      <Filter>Maruyama\Item\Generator\Object</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Object\EnemyObjectBase.h">
       <Filter>Maruyama\Enemy\Object</Filter>
@@ -1762,13 +1804,13 @@
       <Filter>Maruyama\Utility\Timer\GameTimer</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Generator\GeneratorBase.h">
-      <Filter>Maruyama\Generator\Component</Filter>
+      <Filter>Maruyama\Item\Generator\Component</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Generator\RandomPositionGenerator.h">
-      <Filter>Maruyama\Generator\Component\RandomPositionGenerator</Filter>
+      <Filter>Maruyama\Item\Generator\Component\RandomPositionGenerator</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Generator\LoadPositionGenerator.h">
-      <Filter>Maruyama\Generator\Component\LoadPositionGenerator</Filter>
+      <Filter>Maruyama\Item\Generator\Component\LoadPositionGenerator</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\GraphAstar.h">
       <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\GraphAstar</Filter>
@@ -2349,6 +2391,48 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\PasswordTextUI.h">
       <Filter>Itabashi\Component\PasswordTextUI</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\IsInEyeTarget.h">
+      <Filter>Maruyama\Enemy\BehaviorTree\Decorator\IsInEyeTarget</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\ObserveIsInEyeTarget.h">
+      <Filter>Maruyama\Utility\ObserveIsInEyeTarget</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Stator\AIPlayerStator.h">
+      <Filter>Maruyama\Enemy\Component\Stator</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Stator\StateNode\StateNode_HidePlacePatrol.h">
+      <Filter>Maruyama\Enemy\Component\Stator\StateNode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\BehaviorTree\HidePlacePatrolTree.h">
+      <Filter>Maruyama\Enemy\Component\EachEnemy\Common\BehaviorTree\HidePlacePatrolTree</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\SubBehaviorTreeBase.h">
+      <Filter>Maruyama\Enemy\BehaviorTree\SubBehaviorTree</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\TestEffectStage.h">
+      <Filter>Watanabe\TestStage\TestEffectStage</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Camera\TitleCamera.h">
+      <Filter>Watanabe\Camera\TitleCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Camera\TestCamera.h">
+      <Filter>Watanabe\Camera\TestCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\GameController.h">
+      <Filter>Watanabe\Utility\GameController</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\CameraTarget.h">
+      <Filter>Watanabe\StageObject\CameraTarget</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\DirectionWithHasBallUI.h">
+      <Filter>Watanabe\UI\DirectionWithHasBallUI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\PasscodeUI.h">
+      <Filter>Watanabe\UI\PasscodeUI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\HasBallUI.h">
+      <Filter>Watanabe\UI\HasBallUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -2627,9 +2711,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\Zooming.cpp">
       <Filter>Watanabe\Component\Zooming</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Camera\TitleCamera.cpp">
-      <Filter>Watanabe\Camera</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\PCTStaticModelDraw.cpp">
       <Filter>Itabashi\Component\Graphic</Filter>
     </ClCompile>
@@ -2751,7 +2832,7 @@
       <Filter>Maruyama\Enemy\Component\EachEnemy\Villain</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Generator\EnemyGeneratorObject.cpp">
-      <Filter>Maruyama\Generator\Object</Filter>
+      <Filter>Maruyama\Item\Generator\Object</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Object\EnemyObjectBase.cpp">
       <Filter>Maruyama\Enemy\Object</Filter>
@@ -2802,13 +2883,13 @@
       <Filter>Maruyama\Utility\Timer\GameTimer</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Generator\GeneratorBase.cpp">
-      <Filter>Maruyama\Generator\Component</Filter>
+      <Filter>Maruyama\Item\Generator\Component</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Generator\RandomPosiitonGenerator.cpp">
-      <Filter>Maruyama\Generator\Component\RandomPositionGenerator</Filter>
+      <Filter>Maruyama\Item\Generator\Component\RandomPositionGenerator</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Generator\LoadPositionGenerator.cpp">
-      <Filter>Maruyama\Generator\Component\LoadPositionGenerator</Filter>
+      <Filter>Maruyama\Item\Generator\Component\LoadPositionGenerator</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\GraphAstar.cpp">
       <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\GraphAstar</Filter>
@@ -3340,6 +3421,48 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\PasswordTextUI.cpp">
       <Filter>Itabashi\Component\PasswordTextUI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\IsInEyeTarget.cpp">
+      <Filter>Maruyama\Enemy\BehaviorTree\Decorator\IsInEyeTarget</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\ObserveIsInEyeTarget.cpp">
+      <Filter>Maruyama\Utility\ObserveIsInEyeTarget</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Stator\AIPlayerStator.cpp">
+      <Filter>Maruyama\Enemy\Component\Stator</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Stator\StateNode\StateNode_HidePlacePatrol.cpp">
+      <Filter>Maruyama\Enemy\Component\Stator\StateNode</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\BehaviorTree\HidePlacePatrolTree.cpp">
+      <Filter>Maruyama\Enemy\Component\EachEnemy\Common\BehaviorTree\HidePlacePatrolTree</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\SubBehaviorTreeBase.cpp">
+      <Filter>Maruyama\Enemy\BehaviorTree\SubBehaviorTree</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\TestEffectStage.cpp">
+      <Filter>Watanabe\TestStage\TestEffectStage</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Camera\TitleCamera.cpp">
+      <Filter>Watanabe\Camera\TitleCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Camera\TestCamera.cpp">
+      <Filter>Watanabe\Camera\TestCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Utility\GameController.cpp">
+      <Filter>Watanabe\Utility\GameController</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\StageObject\CameraTarget.cpp">
+      <Filter>Watanabe\StageObject\CameraTarget</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\DirectionWithHasBallUI.cpp">
+      <Filter>Watanabe\UI\DirectionWithHasBallUI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\PasscodeUI.cpp">
+      <Filter>Watanabe\UI\PasscodeUI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\HasBallUI.cpp">
+      <Filter>Watanabe\UI\HasBallUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
