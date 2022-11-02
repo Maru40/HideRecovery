@@ -78,7 +78,7 @@ namespace basecross {
 		/// シェアするクラスを取得する。
 		/// </summary>
 		template<class T>
-		bool AddShareClass(const std::shared_ptr<T>& objPtr) {
+		bool AddShareClass(const std::shared_ptr<ObjectInterface>& objPtr) {
 			auto index = type_index(typeid(T));
 			m_shareClassesMap[index].push_back(objPtr);
 			return true;
