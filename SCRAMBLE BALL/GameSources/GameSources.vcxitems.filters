@@ -3416,6 +3416,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Task\Task_SearchBall.cpp">
       <Filter>Maruyama\Enemy\BehaviorTree\Task\SearchBall</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Task\BehaviorTask_Shot.cpp">
+      <Filter>Maruyama\Enemy\BehaviorTree\Task\Shot</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="$(MSBuildThisFileDirectory)..\..\Libs\BaseLib\DxShaders\SlimeVS.hlsl">
