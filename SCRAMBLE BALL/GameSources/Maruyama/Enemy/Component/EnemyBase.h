@@ -37,6 +37,7 @@ namespace basecross {
 				Component(objPtr)
 			{ }
 
+			virtual void OnCreate() override;
 			virtual void OnStart() override;
 
 			//--------------------------------------------------------------------------------------

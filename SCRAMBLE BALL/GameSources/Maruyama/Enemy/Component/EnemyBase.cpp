@@ -10,8 +10,16 @@
 
 #include "Maruyama/Utility/Component/TargetManager.h"
 
+#include "Maruyama/Utility/SingletonComponent/ShareClassesManager.h"
+
 namespace basecross {
 	namespace Enemy {
+
+		void EnemyBase::OnCreate() {
+			if (auto shareManager = ShareClassesManager::GetInstance(GetStage())) {
+				shareManager->AddShareClass<EnemyBase>(GetThis<EnemyBase>());
+			}
+		}
 
 		void EnemyBase::OnStart() {
 			m_targetManager = GetGameObject()->GetComponent<TargetManager>(false);
