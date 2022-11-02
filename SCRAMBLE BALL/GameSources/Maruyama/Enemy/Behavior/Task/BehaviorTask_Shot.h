@@ -13,9 +13,16 @@
 
 namespace basecross {
 
-	class OnlinePlayerSynchronizer;
-	class TargetManager;
+	//--------------------------------------------------------------------------------------
+	///	前方宣言
+	//--------------------------------------------------------------------------------------
 	class UseWeapon;
+	class TargetManager;
+	class RotationController;
+	class OnlinePlayerSynchronizer;
+
+	template<class T>
+	class TaskList;
 
 	namespace Enemy {
 		class EnemyBase;
@@ -27,7 +34,7 @@ namespace basecross {
 	}
 
 	namespace TaskListNode {
-		
+		struct CrabWalk_Parametor;
 	}
 
 	namespace maru {
@@ -36,11 +43,41 @@ namespace basecross {
 
 			namespace Task {
 
+				//--------------------------------------------------------------------------------------
+				///	移動タスクタイプ
+				//--------------------------------------------------------------------------------------
+				enum class MoveTaskEnum {
+					CrabWalk,	//かに歩き
+				};
+
+				//--------------------------------------------------------------------------------------
+				///	撃つ攻撃処理パラメータ
+				//--------------------------------------------------------------------------------------
+				struct Shot_Parametor {
+					TaskListNode::CrabWalk_Parametor* crabWalkParamPtr;
+
+					Shot_Parametor();
+
+					virtual ~Shot_Parametor();
+				};
+
+				//--------------------------------------------------------------------------------------
+				///	撃つ攻撃処理
+				//--------------------------------------------------------------------------------------
 				class Shot : public TaskBase<Enemy::EnemyBase>
 				{
+				public:
+					using Parametor = Shot_Parametor;
+
+				private:
+					Parametor m_param;	//パラメータ
+
 					std::weak_ptr<UseWeapon> m_useWeapon;							//武器の使用
 					std::weak_ptr<TargetManager> m_targetManager;					//ターゲット管理
+					std::weak_ptr<RotationController> m_rotationController;			//回転管理
 					std::weak_ptr<OnlinePlayerSynchronizer> m_onlineSynchronizer;	//オンラインシンクロ
+
+					std::unique_ptr<TaskList<MoveTaskEnum>>	m_moveTaskList;			//移動用タスク
 
 				public:
 					Shot(const std::shared_ptr<Enemy::EnemyBase>& owner);
@@ -54,8 +91,15 @@ namespace basecross {
 					void OnExit() override;
 
 				private:
+					void MoveUpdate();
+
+					void RotationUpdate();
+
 					void ShotUpdate();
 
+					void DefineMoveTask();
+
+					void SelectMoveTask();
 				};
 
 			}
