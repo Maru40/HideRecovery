@@ -27,7 +27,7 @@ namespace basecross {
 		//--------------------------------------------------------------------------------------
 
 		CrabWalk_Parametor::CrabWalk_Parametor():
-			CrabWalk_Parametor(2.0f)
+			CrabWalk_Parametor(3.0f)
 		{}
 
 		CrabWalk_Parametor::CrabWalk_Parametor(const float speed):
@@ -85,6 +85,10 @@ namespace basecross {
 				return;
 			}
 
+			//auto velocity = CalculateMoveDirection() * m_paramPtr->speed;
+
+			//velocityManager->SetVelocity(velocity);
+
 			auto velocity = velocityManager->GetVelocity();
 			auto force = UtilityVelocity::CalucSeekVec(velocity, CalculateMoveDirection(), m_paramPtr->speed);
 
@@ -93,9 +97,9 @@ namespace basecross {
 
 		CrabWalk::MoveDirectionType CrabWalk::GetRandomMoveDirectionType() {
 			std::vector<MoveDirectionType> directions = {
-				MoveDirectionType::None,
 				MoveDirectionType::Right,
 				MoveDirectionType::Left,
+				MoveDirectionType::None,
 			};
 
 			return maru::MyRandom::RandomArray(directions);
