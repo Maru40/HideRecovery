@@ -12,7 +12,7 @@
 
 #include "Maruyama/Enemy/Component/EnemyBase.h"
 
-#include "Maruyama/Enemy/Behavior/Task/Task_SearchBall.h"
+#include "Maruyama/Enemy/Behavior/Task/BehaviorTask_Shot.h"
 #include "Maruyama/Enemy/Behavior/Interface/I_PriorityController.h"
 
 namespace basecross {
@@ -27,6 +27,8 @@ namespace basecross {
 				{}
 
 				void ButtleTree::CreateNode() {
+					auto enemy = GetOwner()->GetComponent<Enemy::EnemyBase>();
+
 					//初期セレクター
 					m_behaviorTree->AddSelecter(NodeType::FirstSelecter);
 
@@ -53,7 +55,7 @@ namespace basecross {
 
 
 					//射撃攻撃タスク
-					//m_behaviorTree->AddTask(NodeType::ShotTask);
+					m_behaviorTree->AddTask<Task::Shot>(NodeType::ShotTask, enemy);
 
 					//退避セレクター
 					m_behaviorTree->AddSelecter(NodeType::EvadeSelecter);
@@ -80,25 +82,25 @@ namespace basecross {
 				void ButtleTree::CreateAttackEdge() {
 					//攻撃セレクター
 					m_behaviorTree->AddEdge(NodeType::AttackSelecter, NodeType::AttackMoveSelecter, (int)NodeType::AttackMoveSelecter);
-					m_behaviorTree->AddEdge(NodeType::AttackSelecter, NodeType::ShotTask, (int)NodeType::ShotTask);
+					m_behaviorTree->AddEdge(NodeType::AttackSelecter, NodeType::ShotTask, 0.0f);
 
 					//攻撃中の移動セレクター
-					m_behaviorTree->AddEdge(NodeType::AttackMoveSelecter, NodeType::NearSeekMoveTask, (int)NodeType::NearSeekMoveTask);
+					//m_behaviorTree->AddEdge(NodeType::AttackMoveSelecter, NodeType::NearSeekMoveTask, (int)NodeType::NearSeekMoveTask);
 					m_behaviorTree->AddEdge(NodeType::AttackMoveSelecter, NodeType::WanparoundSelecter, (int)NodeType::WanparoundSelecter);
 
 					//回り込みセレクター
-					m_behaviorTree->AddEdge(NodeType::WanparoundSelecter, NodeType::RightSideMoveTask, (int)NodeType::RightSideMoveTask);
-					m_behaviorTree->AddEdge(NodeType::WanparoundSelecter, NodeType::LeftSideMoveTask, (int)NodeType::LeftSideMoveTask);
-					m_behaviorTree->AddEdge(NodeType::WanparoundSelecter, NodeType::BackSideMoveTask, (int)NodeType::BackSideMoveTask);
+					//m_behaviorTree->AddEdge(NodeType::WanparoundSelecter, NodeType::RightSideMoveTask, (int)NodeType::RightSideMoveTask);
+					//m_behaviorTree->AddEdge(NodeType::WanparoundSelecter, NodeType::LeftSideMoveTask, (int)NodeType::LeftSideMoveTask);
+					//m_behaviorTree->AddEdge(NodeType::WanparoundSelecter, NodeType::BackSideMoveTask, (int)NodeType::BackSideMoveTask);
 				}
 
 				void ButtleTree::CreateEvadeEdge() {
 					//逃亡セレクター
 					m_behaviorTree->AddEdge(NodeType::EvadeSelecter, NodeType::InducementStaySelecter, (int)NodeType::InducementStaySelecter);
-					m_behaviorTree->AddEdge(NodeType::EvadeSelecter, NodeType::EvadeMoveTask, (int)NodeType::EvadeMoveTask);
+					//m_behaviorTree->AddEdge(NodeType::EvadeSelecter, NodeType::EvadeMoveTask, (int)NodeType::EvadeMoveTask);
 
-					//足止めセレクター
-					m_behaviorTree->AddEdge(NodeType::InducementStaySelecter, NodeType::InducementAttack, (int)NodeType::InducementAttack);
+					////足止めセレクター
+					//m_behaviorTree->AddEdge(NodeType::InducementStaySelecter, NodeType::InducementAttack, (int)NodeType::InducementAttack);
 				}
 
 				void ButtleTree::CreateDecorator() {
