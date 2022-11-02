@@ -6,6 +6,7 @@
 #include "Scene.h"
 
 #include "Watanabe/DebugClass/Debug.h"
+#include "Watanabe/Effekseer/EfkEffect.h"
 #include "Watanabe/UI/UIObjects.h"
 #include "Watanabe/Component/Zooming.h"
 #include "Watanabe/Camera/TitleCamera.h"
@@ -36,6 +37,16 @@
 
 #include "Maruyama/Enemy/Object/AIPlayerObject.h"
 
+//Online----------------------------------------------
+
+#include "Itabashi/GamePlayerManager.h"
+#include "Itabashi/MainStageTransitioner.h"
+#include "Itabashi/OnlineGameTimer.h"
+#include "Itabashi/OnlineTestRoom.h"
+#include "Itabashi/OnlineGameItemManager.h"
+
+//----------------------------------------------------
+
 namespace basecross {
 
 	void MaruTestStage::CreateViewLight() {
@@ -54,6 +65,7 @@ namespace basecross {
 	}
 
 	void MaruTestStage::OnCreate() {
+		AddGameObject<EfkInterface>();
 		CreateViewLight();
 		auto log = AddGameObject<Debug>();
 		Debug::GetInstance()->Log(L"MaruTestStage");
@@ -63,6 +75,15 @@ namespace basecross {
 		CreateMap(L"StageS2.csv");
 
 		auto cameraObj = Instantiate<CameraObject>();
+
+		//Online------------------------------------------------------------------------------------
+		//auto onlineRoom = AddGameObject<Online::OnlineTestRoom>();
+		//auto tester = onlineRoom->GetComponent<Online::OnlineTester>();
+		//auto onlineGameTimer = onlineRoom->AddComponent<OnlineGameTimer>();
+		//auto onlineGameItemManager = onlineRoom->AddComponent<OnlineGameItemManager>();
+		//onlineRoom->AddComponent<GamePlayerManager>();
+		//onlineRoom->AddComponent<Online::MainStageTransitioner>();
+		//------------------------------------------------------------------------------------------
 		
 		//// プレイヤーを見るようなカメラを設定
 		auto player = Instantiate<TestPlayerObject>(Vec3(0.0f, 1.0f, -7.0f), Quat::Identity());
