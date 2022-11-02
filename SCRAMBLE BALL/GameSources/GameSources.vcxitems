@@ -24,9 +24,11 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineGameTimer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlinePlayerSynchronizer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineStatus.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\PasswordTextUI.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\PCTStaticModelDraw.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\PlayerControlManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\Utility\ActionTimer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\Utility\InputTextManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\Utility\UniqueIdCreater.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Bullet\Component\BulletBase.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Bullet\Component\ChargeBullet.h" />
@@ -390,6 +392,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlinePlayerSynchronizer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineStatus.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineTestRoom.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\PasswordTextUI.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\PCTStaticModelDraw.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\PlayerControlManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\InputPlayerController.cpp" />
@@ -397,6 +400,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineTestStage.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineTransformSynchronization.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\Utility\ActionTimer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\Utility\InputTextManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Bullet\Component\BulletBase.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Bullet\Component\ChargeBullet.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Bullet\Object\ChargeBulletObject.cpp" />

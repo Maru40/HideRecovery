@@ -1252,6 +1252,12 @@
     <Filter Include="Watanabe\Shader\AdvStageBase">
       <UniqueIdentifier>{6dbc0f07-0f92-43ea-a97d-93fa7728c97d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Itabashi\Patch\InputTextManager">
+      <UniqueIdentifier>{e4a28988-8215-488b-a393-00ecff2aaf95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Itabashi\Component\PasswordTextUI">
+      <UniqueIdentifier>{4f5b0a74-c537-4699-930f-05660e038e0a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2337,6 +2343,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\PostEffect\OutlinePostEffect.h">
       <Filter>Watanabe\Shader\PostProcess\OutlinePostEffect</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\Utility\InputTextManager.h">
+      <Filter>Itabashi\Patch\InputTextManager</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\PasswordTextUI.h">
+      <Filter>Itabashi\Component\PasswordTextUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -3322,6 +3334,12 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\PostEffect\OutlinePostEffect.cpp">
       <Filter>Watanabe\Shader\PostProcess\OutlinePostEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\Utility\InputTextManager.cpp">
+      <Filter>Itabashi\Patch\InputTextManager</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\PasswordTextUI.cpp">
+      <Filter>Itabashi\Component\PasswordTextUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
