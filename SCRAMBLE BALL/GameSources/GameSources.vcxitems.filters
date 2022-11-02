@@ -1288,6 +1288,9 @@
     <Filter Include="Maruyama\Enemy\BehaviorTree\Task\SearchBall">
       <UniqueIdentifier>{af9b27fe-b382-47bb-96ee-e702b0e54e20}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Utility\TaskList\CommonTasks\CrabWalk">
+      <UniqueIdentifier>{ffca069f-9e5b-4f8a-ae6a-3b1379de204c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2403,6 +2406,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Task\Task_SearchBall.h">
       <Filter>Maruyama\Enemy\BehaviorTree\Task\SearchBall</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\CrabWalk.h">
+      <Filter>Maruyama\Utility\TaskList\CommonTasks\CrabWalk</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -3418,6 +3424,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Task\BehaviorTask_Shot.cpp">
       <Filter>Maruyama\Enemy\BehaviorTree\Task\Shot</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\CrabWalk.cpp">
+      <Filter>Maruyama\Utility\TaskList\CommonTasks\CrabWalk</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
