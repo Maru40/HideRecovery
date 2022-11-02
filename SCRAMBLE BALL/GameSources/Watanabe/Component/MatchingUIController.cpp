@@ -31,10 +31,10 @@ namespace basecross {
 		// 親子関係を設定
 		gameStart->SetParent(parent);
 		aButton->SetParent(parent);
-		//parent->AddComponent<Zooming>();
 
 		auto holdA = m_builder->GetUIObject<HoldButtonUI>(L"HoldA");
 		holdA->SetParent(aButton);
+
 		auto transitioner = GetGameObject()->GetComponent<MatchStageTransitioner>(false);
 		if (transitioner) {
 			holdA->SetTransitioner(transitioner);
@@ -56,5 +56,11 @@ namespace basecross {
 		m_builder->GetUIObject(L"WaitHost")->SetDrawActive(true);
 		m_builder->GetUIObject<SplashMessageUI>(L"SplashMessage")
 			->SetMessage(SplashMessageUI::MessageType::JoinRoom);
+	}
+
+	void MatchingUIController::OnJoinRoomFailed(int errorCode) {
+		m_builder->GetUIObject(L"Matching")->SetDrawActive(false);
+		m_builder->GetUIObject<SplashMessageUI>(L"SplashMessage")
+			->SetMessage(SplashMessageUI::MessageType::CanNotJoin);
 	}
 }
