@@ -878,7 +878,10 @@ namespace basecross
 
 	void SelectableComponent::OnPush()
 	{
-		pushEvent();
+		for (const auto& pushEvent : m_pushEvents)
+		{
+			pushEvent();
+		}
 	}
 
 	void SelectableComponent::OnOutSelect()

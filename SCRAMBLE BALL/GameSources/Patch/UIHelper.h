@@ -656,8 +656,9 @@ namespace basecross
 
 		bool m_isSelected = false;
 
+		std::vector<std::function<void()>> m_pushEvents;
+
 	public:
-		itbs::Utility::Delegate<void()> pushEvent;
 
 		itbs::Utility::Delegate<void()> selectEvent;
 
@@ -686,6 +687,8 @@ namespace basecross
 		std::shared_ptr<I_Selectable> GetHorizontalNextSelectable() const override;
 
 		bool IsSelected() const { return m_isSelected; }
+
+		void AddPushEvent(const std::function<void()>& pushEvent) { m_pushEvents.push_back(pushEvent); }
 	};
 
 	class itbs::Input::I_BasicInputer;
