@@ -20,7 +20,7 @@ namespace basecross {
 			origin + Vec2(0.0f, size.y),
 			origin + size
 		};
-		Utility::ConvertToUVCoordinates(uv, spriteData.useTextureKey, uv01);
+		TextureUtility::ConvertToUVCoordinates(uv, spriteData.useTextureKey, uv01);
 
 		// サイズを1以内に納める
 		Vec2 size01 = Utility::ConvertVec2to01(size);

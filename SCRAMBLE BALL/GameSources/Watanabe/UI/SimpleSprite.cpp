@@ -44,7 +44,7 @@ namespace basecross {
 		case SimpleSprite::Type::Texture:
 			data.useTextureKey = m_key;
 			data.origin = Vec2(0.0f);
-			data.size = Utility::GetTextureSize(m_key);
+			data.size = TextureUtility::GetTextureSize(m_key);
 			break;
 		case SimpleSprite::Type::SpriteData:
 			data = SpriteDataManager::GetInstance()->GetSpriteData(m_key);
@@ -62,7 +62,7 @@ namespace basecross {
 			data.origin + Vec2(0.0f,size.y),
 			data.origin + size
 		};
-		Utility::ConvertToUVCoordinates(uv, data.useTextureKey, uv01);
+		TextureUtility::ConvertToUVCoordinates(uv, data.useTextureKey, uv01);
 		auto halfSize = size / 2.0f;
 		Col4 color(1);
 		vertices = {
@@ -102,7 +102,7 @@ namespace basecross {
 		case SimpleSprite::Type::Texture:
 			data.useTextureKey = m_key;
 			data.origin = Vec2(0.0f);
-			data.size = Utility::GetTextureSize(m_key);
+			data.size = TextureUtility::GetTextureSize(m_key);
 			break;
 		case SimpleSprite::Type::SpriteData:
 			data = SpriteDataManager::GetInstance()->GetSpriteData(m_key);
@@ -115,7 +115,7 @@ namespace basecross {
 			data.origin + Vec2(0.0f,size.y),
 			data.origin + size
 		};
-		Utility::ConvertToUVCoordinates(uv, data.useTextureKey, uv01);
+		TextureUtility::ConvertToUVCoordinates(uv, data.useTextureKey, uv01);
 		auto halfSize = size / 2.0f;
 		Col4 color(1);
 		vertices = {

@@ -27,7 +27,7 @@ namespace basecross {
 			m_objectiveStr = stage->AddGameObject<SimpleSprite>(SimpleSprite::Type::Texture, L"Objective_TX");
 			auto trans = m_objectiveStr->GetComponent<RectTransform>();
 			trans->SetScale(Vec2(0.75f));
-			auto objectiveTexSize = Utility::GetTextureSize(L"Objective_TX");
+			auto objectiveTexSize = TextureUtility::GetTextureSize(L"Objective_TX");
 			trans->SetPosition(Vec2(0, -objectiveTexSize.y));
 		}
 		m_countDown->SetActive(false);

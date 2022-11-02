@@ -73,6 +73,6 @@ namespace basecross {
 	}
 
 	void HasBallUI::ClearTarget() {
-		m_targetTransform = nullptr;
+		m_targetTransform.reset();
 	}
 }

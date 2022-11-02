@@ -16,7 +16,7 @@ namespace basecross {
 	}
 
 	void HoldButtonUI::OnCreate() {
-		auto texSize = Utility::GetTextureSize(L"CircleGauge_TX");
+		auto texSize = TextureUtility::GetTextureSize(L"CircleGauge_TX");
 		auto size = texSize / 2.0f;
 		// テクスチャ座標でUVを定義
 		vector<Vec2> uv = {
