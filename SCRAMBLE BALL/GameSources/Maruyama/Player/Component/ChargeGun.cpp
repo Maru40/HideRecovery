@@ -49,6 +49,10 @@ namespace basecross {
 		auto weightStr = StageMapCSV::GetWstringData(L"ShotParametor", L"CSVDatas\\", L"ShotDatas.csv", WeightIndex);
 		auto weight = static_cast<float>(_wtof(weightStr.c_str()));
 		SetWeight(weight);
+
+		if (GetGameObject()->GetComponent<EfkComponent>(false) == nullptr) {
+			GetGameObject()->AddComponent<EfkComponent>();
+		}
 	}
 
 	void ChargeGun::OnLateStart() {
