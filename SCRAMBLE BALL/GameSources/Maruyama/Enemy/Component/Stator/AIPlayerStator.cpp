@@ -59,12 +59,6 @@ namespace basecross {
 				tupleSpace->Write<Tuple::FindTarget>(GetGameObject(), target);	//ターゲットを通知
 			}
 
-			//仮遷移実装
-			//bool isTransition = targets.size();
-			//if (isTransition) {
-			//	GetGameObject()->GetComponent<TargetManager>()->SetTarget(targets[0]);
-			//}
-
 			return false;
 		}
 
