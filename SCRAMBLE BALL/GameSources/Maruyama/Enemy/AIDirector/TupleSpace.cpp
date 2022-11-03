@@ -96,32 +96,32 @@ namespace basecross {
 			/// 通知用データ管理
 			//--------------------------------------------------------------------------------------
 
-			NotifyController::NotifyController(
-				const std::function<void()>& func,
-				const std::function<bool()>& isCall
-			):
-				func(func),
-				isCall(isCall)
-			{}
+			//NotifyController::NotifyController(
+			//	const std::function<void(const std::shared_ptr<I_Tuple>&)>& func,
+			//	const std::function<bool(const std::shared_ptr<I_Tuple>&)>& isCall
+			//):
+			//	func(func),
+			//	isCall(isCall)
+			//{}
 
-			void NotifyController::Invoke() {
-				if (isCall()) {
-					func();
-				}
-			}
+			//void NotifyController::Invoke(const std::shared_ptr<I_Tuple>& tuple) {
+			//	if (isCall(tuple)) {
+			//		func(tuple);
+			//	}
+			//}
 
 			//--------------------------------------------------------------------------------------
 			/// タプルスペース本体
 			//--------------------------------------------------------------------------------------
 
-			void TupleSpace::CallNotifys(const type_index typeIndex) {
-				auto notifys = m_notifysMap[typeIndex];
+			//void TupleSpace::CallNotifys(const type_index typeIndex, const std::shared_ptr<I_Tuple>& tuple) {
+			//	auto notifys = m_notifysMap[typeIndex];
 
-				//全ての通知を呼び出す。
-				for (auto& notify : notifys) {
-					notify->Invoke();
-				}
-			}
+			//	//全ての通知を呼び出す。
+			//	for (auto& notify : notifys) {
+			//		notify->Invoke(tuple);
+			//	}
+			//}
 
 		}
 	}

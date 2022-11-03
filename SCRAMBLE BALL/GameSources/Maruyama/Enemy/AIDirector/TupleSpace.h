@@ -101,23 +101,45 @@ namespace basecross {
 					const std::shared_ptr<GameObject>& target,
 					const float value
 				);
+
+				virtual ~ButtleTarget() = default;
+
+				std::shared_ptr<GameObject> GetTarget() { return target.lock(); };
+			};
+
+			//--------------------------------------------------------------------------------------
+			/// 通知用データ管理インターフェース
+			//--------------------------------------------------------------------------------------
+			class I_NotifyController {
+			public:
+				virtual ~I_NotifyController() = default;
 			};
 
 			//--------------------------------------------------------------------------------------
 			/// 通知用データ管理クラス
 			//--------------------------------------------------------------------------------------
-			class NotifyController {
+			template<class T>
+			class NotifyController : public I_NotifyController {
 			private:
-				std::function<void()> func;		//呼び出す処理
-				std::function<bool()> isCall;	//呼び出す条件
+				std::function<void(const std::shared_ptr<T>&)> func;		//呼び出す処理
+				std::function<bool(const std::shared_ptr<T>&)> isCall;	//呼び出す条件
 
 			public:
 				NotifyController(
-					const std::function<void()>& func,
-					const std::function<bool()>& isCall = []() { return true; }
-				);
+					const std::function<void(const std::shared_ptr<T>&)>& func,
+					const std::function<bool(const std::shared_ptr<T>&)>& isCall = [](const std::shared_ptr<T>& tuple) { return true; }
+				):
+					func(func),
+					isCall(isCall)
+				{}
 
-				void Invoke();
+				virtual ~NotifyController() = default;
+
+				void Invoke(const std::shared_ptr<T>& tuple) {
+					if (isCall(tuple)) {
+						func(tuple);
+					}
+				}
 			};
 
 			//--------------------------------------------------------------------------------------
@@ -126,7 +148,7 @@ namespace basecross {
 			class TupleSpace
 			{
 			public:
-				using NotifyControllers = std::vector<std::shared_ptr<NotifyController>>;
+				using NotifyControllers = std::vector<std::shared_ptr<I_NotifyController>>;
 
 			private:
 				//書き込まれた情報一覧
@@ -143,6 +165,47 @@ namespace basecross {
 				//--------------------------------------------------------------------------------------
 
 				/// <summary>
+				/// 同じ情報のタプルスペースかどうかを判断
+				/// </summary>
+				/// <returns>同じ情報のタプルスペースならtrue</returns>
+				template<class T, class... Ts,
+					std::enable_if_t<
+						std::is_base_of_v<I_Tuple, T>,
+					std::nullptr_t> = nullptr
+				>
+				bool IsSomeTuple(const std::shared_ptr<T>& newTuple) {
+					auto typeIndex = type_index(typeid(T));
+
+					if (m_tuplesMap.count(typeIndex) != 0) {	//Mapに存在する(存在しないなら、新規のため、同じかどうかの判断がいらない。)
+						for (auto& tuple : m_tuplesMap[typeIndex]) {
+							auto tTuple = dynamic_pointer_cast<T>(tuple);
+							if (!tTuple) {	//キャストできないなら
+								continue;
+							}
+
+							//同一の書き込みなら、書き込まない
+							if (*tTuple.get() == *newTuple.get()) {
+								return true;
+							}
+						}
+					}
+
+					return false;
+				}
+
+				/// <summary>
+				/// 同じNotifyかどうか
+				/// </summary>
+				template<class T, class... Ts,
+					std::enable_if_t<
+						std::is_base_of_v<I_Tuple, T>,
+					std::nullptr_t> = nullptr
+				>
+				void IsSomeNotify() {
+
+				}
+
+				/// <summary>
 				/// メッセージを書き込む
 				/// </summary>
 				template<class T, class... Ts,
@@ -157,25 +220,15 @@ namespace basecross {
 					auto newTuple = std::make_shared<T>(params...);
 
 					//同じ情報なら書き込まない
-					if (m_tuplesMap.count(typeIndex) != 0) {	//Mapに存在する(存在しないなら、新規のため、同じかどうかの判断がいらない。)
-						for (auto& tuple : m_tuplesMap[typeIndex]) {
-							auto tTuple = dynamic_pointer_cast<T>(tuple);
-							if (!tTuple) {	//キャストできないなら
-								continue;
-							}
-
-							//同一の書き込みなら、書き込まない
-							if (*tTuple.get() == *newTuple.get()) {
-								return;
-							}
-						}
+					if (IsSomeTuple(newTuple)) {
+						return;
 					}
 
 					//型を入れる。
 					m_tuplesMap[typeIndex].push_back(newTuple);
 
 					//登録された通知を呼び出す。
-					CallNotifys(typeIndex);
+					CallNotifys<T>(newTuple);
 				}
 
 				/// <summary>
@@ -244,27 +297,47 @@ namespace basecross {
 				}
 
 				/// <summary>
+				/// メッセージを全て受信して、削除する。
+				/// </summary>
+				/// <param name="isFunc">取得条件</param>
+				template<class T,
+					std::enable_if_t<
+						std::is_base_of_v<I_Tuple, T>,
+					std::nullptr_t> = nullptr
+				>
+				std::vector<std::shared_ptr<T>> Takes(
+					const std::function<bool(const std::shared_ptr<T>&)>& isFunc = [](const std::shared_ptr<T>&) { return true; }
+				) {
+					std::vector<std::shared_ptr<T>> result;
+
+					while (true) {	//全ての通知を受け取るまで処理をする。
+						auto tuple = Take<T>(isFunc);
+						if (!tuple) {
+							break;	//空ならすでにそのタプルが存在しないため、終了。
+						}
+
+						result.push_back(tuple);
+					}
+
+					return result;
+				}
+
+				/// <summary>
 				/// テンプレートに一致する命令が受信されたら、通知を受け取る。
 				/// </summary>
 				template<class T,
 					std::enable_if_t<std::is_base_of_v<I_Tuple, T>, std::nullptr_t> = nullptr>	//基底クラスの制約
 				void Notify(
-					const std::function<void()>& func, 
-					const std::function<bool()>& isCall = []() { return true; }
+					const std::function<void(const std::shared_ptr<T>&)>& func, 
+					const std::function<bool(const std::shared_ptr<T>&)>& isCall = [](const std::shared_ptr<T>& tuple) { return true; }
 				) {
 					auto typeIndex = type_index(typeid(T));	//型インデックスの取得
 
-					auto newNotify = std::make_shared<NotifyController>(func, isCall);
+					auto newNotify = std::make_shared<NotifyController<T>>(func, isCall);
 					m_notifysMap[typeIndex].push_back(newNotify);	//Notipyの生成
 				}
 
 			private:
-				/// <summary>
-				/// 登録された通知を呼び出す。
-				/// </summary>
-				/// <param name="typeIndex">タイプインデックス</param>
-				void CallNotifys(const type_index typeIndex);
-
 				/// <summary>
 				/// 登録された通知を呼び出す。
 				/// </summary>
@@ -273,9 +346,20 @@ namespace basecross {
 						std::is_base_of_v<I_Tuple, T>,
 					std::nullptr_t> = nullptr
 				>
-				void CallNotifys() {
+				void CallNotifys(const std::shared_ptr<T>& tuple) {
 					auto typeIndex = type_index(typeid(T));
-					CallNotifys(typeIndex);
+					auto notifys = m_notifysMap[typeIndex];
+
+					//全ての通知を呼び出す。
+					for (auto i_notify : notifys) {
+						//通知のキャスト
+						auto notify = std::dynamic_pointer_cast<NotifyController<T>>(i_notify);
+
+						//通知の呼び出し。
+						if (notify) {	
+							notify->Invoke(tuple);
+						}
+					}
 				}
 
 				/// <summary>
