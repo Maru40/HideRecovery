@@ -38,7 +38,11 @@ namespace basecross {
 				HidePlacePatrol::HidePlacePatrol(const std::shared_ptr<FactionCoordinator>& owner, const std::vector<std::weak_ptr<EnemyBase>>& members) :
 					PatrolCoordinator(owner, members),
 					m_param(Parametor())
-				{}
+				{
+					auto tuple = GetTupleSpace();
+
+					tuple->Notify<Tuple::FindTarget>([&]() { FindTarget(); });
+				}
 
 				void HidePlacePatrol::OnStart() {
 					PatrolCoordinator::OnStart();
@@ -54,6 +58,10 @@ namespace basecross {
 
 				void HidePlacePatrol::OnExit() {
 
+				}
+
+				void HidePlacePatrol::FindTarget() {
+					int o = 0;
 				}
 
 				bool HidePlacePatrol::IsSomeMemberTarget(const std::shared_ptr<GameObject>& target) {

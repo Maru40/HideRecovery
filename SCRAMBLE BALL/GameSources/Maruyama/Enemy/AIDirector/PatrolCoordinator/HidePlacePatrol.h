@@ -54,6 +54,9 @@ namespace basecross {
 					void OnExit() override;
 
 				private:
+					//ターゲットが見つかった時に呼び出す処理
+					void FindTarget();
+
 					/// <summary>
 					/// すでにメンバーがターゲット指定しているかどうか
 					/// </summary>
