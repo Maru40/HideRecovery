@@ -55,7 +55,7 @@ namespace basecross {
 
 				private:
 					//ターゲットが見つかった時に呼び出す処理
-					void FindTarget();
+					void FindTarget(const std::shared_ptr<Tuple::FindTarget>& tuple);
 
 					/// <summary>
 					/// すでにメンバーがターゲット指定しているかどうか

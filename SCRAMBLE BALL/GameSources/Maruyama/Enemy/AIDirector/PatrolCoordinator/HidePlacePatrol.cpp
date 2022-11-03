@@ -22,6 +22,8 @@
 
 #include "Maruyama/Utility/SingletonComponent/ShareClassesManager.h"
 
+#include "Maruyama/Enemy/Component/Stator/AIPlayerStator.h"
+
 namespace basecross {
 
 	namespace Enemy {
@@ -41,7 +43,7 @@ namespace basecross {
 				{
 					auto tuple = GetTupleSpace();
 
-					tuple->Notify<Tuple::FindTarget>([&]() { FindTarget(); });
+					tuple->Notify<Tuple::FindTarget>([&](const std::shared_ptr<Tuple::FindTarget>& tuple) { FindTarget(tuple); });
 				}
 
 				void HidePlacePatrol::OnStart() {
@@ -52,6 +54,16 @@ namespace basecross {
 
 				bool HidePlacePatrol::OnUpdate() {
 					//検索リクエストがあるなら、処理をする。
+					auto tupleSpace = GetTupleSpace();
+
+					for (auto member : GetMembers()) {
+						
+					}
+
+					auto buttles = tupleSpace->Takes<Tuple::ButtleTarget>();
+					for (auto& buttle : buttles) {
+						;
+					}
 
 					return IsEnd();
 				}
@@ -60,8 +72,27 @@ namespace basecross {
 
 				}
 
-				void HidePlacePatrol::FindTarget() {
-					int o = 0;
+				void HidePlacePatrol::FindTarget(const std::shared_ptr<Tuple::FindTarget>& tuple) {
+					//本当はI_FactionMemberがメンバーに登録された時に通知を受け取れるようにしたい。
+					//Notifyの削除が安定して行えるようになるまで保留。
+
+					auto tupleSpace = GetTupleSpace();
+
+					for (auto& member : GetMembers()) {
+						constexpr float RayHitValue = 2.0f;	//障害物の分、評価値を下げるための設定。
+						constexpr float TransitionTargetRange = 3.0f;	//一定距離以上ならターゲット通知をしない処理
+
+						//ターゲットとの距離を測定。
+						auto target = tuple->target.lock();
+						auto memberObject = member.lock()->GetGameObject();
+						auto toTargetVec = maru::Utility::CalcuToTargetVec(memberObject, target);
+
+						float hopeValue = toTargetVec.length();	//期待値
+
+						tupleSpace->Write<Tuple::ButtleTarget>(memberObject, target, hopeValue);	//ターゲットを狙うことをリクエスト
+					}
+
+					auto takeTuple = tupleSpace->Take(tuple);
 				}
 
 				bool HidePlacePatrol::IsSomeMemberTarget(const std::shared_ptr<GameObject>& target) {
