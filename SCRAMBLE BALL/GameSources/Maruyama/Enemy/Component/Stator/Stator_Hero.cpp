@@ -85,13 +85,13 @@ namespace basecross {
 					//	targetManager->SetTarget(target->GetGameObject());
 					//}
 
-					//ファクションに通知
-					if (auto& factionMember = GetGameObject()->GetComponent<I_FactionMember>(false)) {
-						auto faction = factionMember->GetAssignedFaction();
-						auto tupleSpace = faction->GetTupleSpace();
+					////ファクションに通知
+					//if (auto& factionMember = GetGameObject()->GetComponent<I_FactionMember>(false)) {
+					//	auto faction = factionMember->GetAssignedFaction();
+					//	auto tupleSpace = faction->GetTupleSpace();
 
-						tupleSpace->Write<Tuple::FindTarget>(Tuple::FindTarget(GetGameObject(), target->GetGameObject()));
-					}
+					//	tupleSpace->Write<Tuple::FindTarget>(Tuple::FindTarget(GetGameObject(), target->GetGameObject()));
+					//}
 
 					return true;
 				}
