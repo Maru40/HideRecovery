@@ -8,6 +8,7 @@
 #include "stdafx.h"
 #include "Project.h"
 
+#include "Maruyama/Utility/MaruAction.h"
 #include "TupleSpace.h"
 
 namespace basecross {
@@ -77,6 +78,51 @@ namespace basecross {
 
 				return false;
 			}
+
+			//--------------------------------------------------------------------------------------
+			/// ターゲットとバトルすることをリクエストするタプル
+			//--------------------------------------------------------------------------------------
+
+			ButtleTarget::ButtleTarget(
+				const std::shared_ptr<GameObject>& requester,
+				const std::shared_ptr<GameObject>& target,
+				const float value
+			):
+				TupleRequestBase(requester, value),
+				target(target)
+			{}
+
+			//--------------------------------------------------------------------------------------
+			/// 通知用データ管理
+			//--------------------------------------------------------------------------------------
+
+			NotifyController::NotifyController(
+				const std::function<void()>& func,
+				const std::function<bool()>& isCall
+			):
+				func(func),
+				isCall(isCall)
+			{}
+
+			void NotifyController::Invoke() {
+				if (isCall()) {
+					func();
+				}
+			}
+
+			//--------------------------------------------------------------------------------------
+			/// タプルスペース本体
+			//--------------------------------------------------------------------------------------
+
+			void TupleSpace::CallNotifys(const type_index typeIndex) {
+				auto notifys = m_notifysMap[typeIndex];
+
+				//全ての通知を呼び出す。
+				for (auto& notify : notifys) {
+					notify->Invoke();
+				}
+			}
+
 		}
 	}
 }
