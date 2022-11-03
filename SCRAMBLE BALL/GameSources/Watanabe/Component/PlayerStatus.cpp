@@ -28,7 +28,7 @@ namespace basecross {
 
 	void PlayerStatus::OnCreate() {
 		if (auto shareManager = ShareClassesManager::GetInstance(GetStage())) {
-			shareManager->AddShareClass<I_TeamMember>(GetGameObject());
+			shareManager->AddShareClass<I_TeamMember>(GetThis<PlayerStatus>());
 		}
 	}
 
