@@ -52,17 +52,17 @@ namespace basecross {
 	void AIImpacter::OnCreate() {
 		return;
 		//タプルスペースのデバッグ
-		using namespace Enemy::Tuple;
+		//using namespace Enemy::Tuple;
 
-		auto tupleSpace = TupleSpace();
+		//auto tupleSpace = TupleSpace();
 
-		tupleSpace.Write<TupleRequestBase>(GetGameObject(), 1.0f);
+		//tupleSpace.Write<TupleRequestBase>(GetGameObject(), 1.0f);
 
-		auto isFunc = [](const std::shared_ptr<TupleRequestBase>& request) { return request->value > 0.5f; };
-		auto read = tupleSpace.Read<TupleRequestBase>(isFunc);
-		auto read2 = tupleSpace.Take(read);
+		//auto isFunc = [](const std::shared_ptr<TupleRequestBase>& request) { return request->value > 0.5f; };
+		//auto read = tupleSpace.Read<TupleRequestBase>(isFunc);
+		//auto read2 = tupleSpace.Take(read);
 
-		auto r2 = tupleSpace.Read<TupleRequestBase>(isFunc);
+		//auto r2 = tupleSpace.Read<TupleRequestBase>(isFunc);
 	}
 
 	void AIImpacter::OnUpdate() {
