@@ -46,13 +46,13 @@ namespace basecross {
 				const std::shared_ptr<GameObject>& requester, 
 				const float value
 			) :
-				requester(requester),
-				value(value)
+				m_requester(requester),
+				m_value(value)
 			{}
 
 			bool TupleRequestBase::operator== (const TupleRequestBase& other) {
-				if (this->requester.lock() == other.requester.lock() &&
-					this->value == other.value)
+				if (m_requester.lock() == other.GetRequester() &&
+					m_value == other.GetValue())
 				{
 					return true;
 				}
@@ -65,13 +65,13 @@ namespace basecross {
 			//--------------------------------------------------------------------------------------
 
 			FindTarget::FindTarget(const std::shared_ptr<GameObject>& requester, const std::shared_ptr<GameObject>& target, const float value):
-				TupleRequestBase(requester, value), target(target)
+				TupleRequestBase(requester, value), m_target(target)
 			{}
 
 			bool FindTarget::operator== (const FindTarget& other) {
-				if (this->requester.lock() == other.requester.lock() &&
-					this->target.lock() == other.target.lock() &&
-					this->value == other.value)
+				if (GetRequester() == other.GetRequester() &&
+					GetTarget() == other.GetTarget() &&
+					GetValue() == other.GetValue())
 				{
 					return true;
 				}
@@ -91,37 +91,6 @@ namespace basecross {
 				TupleRequestBase(requester, value),
 				target(target)
 			{}
-
-			//--------------------------------------------------------------------------------------
-			/// 通知用データ管理
-			//--------------------------------------------------------------------------------------
-
-			//NotifyController::NotifyController(
-			//	const std::function<void(const std::shared_ptr<I_Tuple>&)>& func,
-			//	const std::function<bool(const std::shared_ptr<I_Tuple>&)>& isCall
-			//):
-			//	func(func),
-			//	isCall(isCall)
-			//{}
-
-			//void NotifyController::Invoke(const std::shared_ptr<I_Tuple>& tuple) {
-			//	if (isCall(tuple)) {
-			//		func(tuple);
-			//	}
-			//}
-
-			//--------------------------------------------------------------------------------------
-			/// タプルスペース本体
-			//--------------------------------------------------------------------------------------
-
-			//void TupleSpace::CallNotifys(const type_index typeIndex, const std::shared_ptr<I_Tuple>& tuple) {
-			//	auto notifys = m_notifysMap[typeIndex];
-
-			//	//全ての通知を呼び出す。
-			//	for (auto& notify : notifys) {
-			//		notify->Invoke(tuple);
-			//	}
-			//}
 
 		}
 	}

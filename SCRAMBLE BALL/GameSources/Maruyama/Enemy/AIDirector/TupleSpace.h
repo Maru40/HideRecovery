@@ -22,6 +22,14 @@ namespace basecross {
 		namespace Tuple {
 
 			//--------------------------------------------------------------------------------------
+			/// タプルスペースを使う者のインターフェース
+			//--------------------------------------------------------------------------------------
+			class I_Tupler {
+			public:
+
+			};
+
+			//--------------------------------------------------------------------------------------
 			/// タプルのインターフェース
 			//--------------------------------------------------------------------------------------
 			class I_Tuple {
@@ -57,9 +65,10 @@ namespace basecross {
 			//--------------------------------------------------------------------------------------
 			class TupleRequestBase : public I_Tuple
 			{
+				std::weak_ptr<GameObject> m_requester;	//要請を出した者
+				float m_value;							//評価値
+
 			public:
-				std::weak_ptr<GameObject> requester;	//要請を出した者
-				float value;							//評価値
 
 				/// <summary>
 				/// コンストラクタ
@@ -71,6 +80,10 @@ namespace basecross {
 				virtual ~TupleRequestBase() = default;
 
 				virtual bool operator== (const TupleRequestBase& other);
+
+				std::shared_ptr<GameObject> GetRequester() const { return m_requester.lock(); }
+
+				float GetValue() const { return m_value; }
 			};
 
 			//--------------------------------------------------------------------------------------
@@ -78,14 +91,16 @@ namespace basecross {
 			//--------------------------------------------------------------------------------------
 			class FindTarget : public TupleRequestBase
 			{
+				std::weak_ptr<GameObject> m_target;
 			public:
-				std::weak_ptr<GameObject> target;
 
 				FindTarget(const std::shared_ptr<GameObject>& requester, const std::shared_ptr<GameObject>& target, const float value = 1.0f);
 
 				virtual ~FindTarget() = default;
 
 				bool operator== (const FindTarget& other);
+
+				std::shared_ptr<GameObject> GetTarget() const { return m_target.lock(); };
 			};
 
 			//--------------------------------------------------------------------------------------
@@ -121,14 +136,17 @@ namespace basecross {
 			template<class T>
 			class NotifyController : public I_NotifyController {
 			private:
-				std::function<void(const std::shared_ptr<T>&)> func;		//呼び出す処理
+				const I_Tupler* m_requester;				//リクエストした本人
+				std::function<void(const std::shared_ptr<T>&)> func;	//呼び出す処理
 				std::function<bool(const std::shared_ptr<T>&)> isCall;	//呼び出す条件
 
 			public:
 				NotifyController(
+					const I_Tupler* requester,
 					const std::function<void(const std::shared_ptr<T>&)>& func,
 					const std::function<bool(const std::shared_ptr<T>&)>& isCall = [](const std::shared_ptr<T>& tuple) { return true; }
 				):
+					m_requester(requester),
 					func(func),
 					isCall(isCall)
 				{}
@@ -328,12 +346,13 @@ namespace basecross {
 				template<class T,
 					std::enable_if_t<std::is_base_of_v<I_Tuple, T>, std::nullptr_t> = nullptr>	//基底クラスの制約
 				void Notify(
+					const I_Tupler* requester,
 					const std::function<void(const std::shared_ptr<T>&)>& func, 
 					const std::function<bool(const std::shared_ptr<T>&)>& isCall = [](const std::shared_ptr<T>& tuple) { return true; }
 				) {
 					auto typeIndex = type_index(typeid(T));	//型インデックスの取得
 
-					auto newNotify = std::make_shared<NotifyController<T>>(func, isCall);
+					auto newNotify = std::make_shared<NotifyController<T>>(requester, func, isCall);
 					m_notifysMap[typeIndex].push_back(newNotify);	//Notipyの生成
 				}
 
