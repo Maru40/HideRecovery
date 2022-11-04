@@ -23,6 +23,7 @@
 #include "Maruyama/Utility/SingletonComponent/ShareClassesManager.h"
 
 #include "Maruyama/Enemy/Component/Stator/AIPlayerStator.h"
+#include "Maruyama/Utility/Component/TargetManager.h"
 
 namespace basecross {
 
@@ -43,7 +44,7 @@ namespace basecross {
 				{
 					auto tuple = GetTupleSpace();
 
-					tuple->Notify<Tuple::FindTarget>([&](const std::shared_ptr<Tuple::FindTarget>& tuple) { FindTarget(tuple); });
+					tuple->Notify<Tuple::FindTarget>(this, [&](const std::shared_ptr<Tuple::FindTarget>& tuple) { FindTarget(tuple); });
 				}
 
 				void HidePlacePatrol::OnStart() {
@@ -54,22 +55,59 @@ namespace basecross {
 
 				bool HidePlacePatrol::OnUpdate() {
 					//検索リクエストがあるなら、処理をする。
-					auto tupleSpace = GetTupleSpace();
-
-					for (auto member : GetMembers()) {
-						
-					}
-
-					auto buttles = tupleSpace->Takes<Tuple::ButtleTarget>();
-					for (auto& buttle : buttles) {
-						;
-					}
+					ObserveTransitionButtle();
 
 					return IsEnd();
 				}
 
 				void HidePlacePatrol::OnExit() {
 
+				}
+
+				void HidePlacePatrol::ObserveTransitionButtle() {
+					constexpr float ButtleRange = 10.0f;	//バトルの距離(将来的にメンバ)
+					auto tupleSpace = GetTupleSpace();
+
+					for (auto member : GetMembers()) {
+						//メンバーがnullなら処理をしない。
+						if (member.expired()) {	
+							continue;
+						}
+
+						//すでにバトルステートなら遷移しない。
+						auto stator = member.lock()->GetGameObject()->GetComponent<AIPlayerStator>(false);
+						if (stator && stator->IsCurrentState(AIPlayerStator::StateType::Buttle)) {
+							int i = 0;
+							//continue;
+						}
+
+						//メンバーが登録した者のみ取得する。
+						auto isRequester = [&](const std::shared_ptr<Tuple::ButtleTarget>& tuple) {
+							return tuple->GetRequester() == member.lock()->GetGameObject();
+						};
+						auto buttles = tupleSpace->Takes<Tuple::ButtleTarget>(isRequester);
+
+						if (buttles.empty()) {	//空なら処理を飛ばす。
+							continue;
+						}
+
+						//評価値を元に昇順ソート
+						auto sortFunc = [](const std::shared_ptr<Tuple::ButtleTarget>& left, const std::shared_ptr<Tuple::ButtleTarget>& right) {
+							return left->GetValue() < right->GetValue();
+						};
+						std::sort(buttles.begin(), buttles.end(), sortFunc);	//ソート
+
+						auto buttle = buttles[0];	//一番評価の高い値を参照
+
+						if (buttle->GetValue() < ButtleRange) {	//バトル距離いないなら
+							auto targetManager = member.lock()->GetGameObject()->GetComponent<TargetManager>(false);
+							if (targetManager && stator) {
+								targetManager->SetTarget(buttle->GetTarget());
+								stator->ChangeState(AIPlayerStator::StateType::Buttle);
+								//バトルメンバーにアサインさせる。
+							}
+						}
+					}
 				}
 
 				void HidePlacePatrol::FindTarget(const std::shared_ptr<Tuple::FindTarget>& tuple) {
@@ -83,7 +121,7 @@ namespace basecross {
 						constexpr float TransitionTargetRange = 3.0f;	//一定距離以上ならターゲット通知をしない処理
 
 						//ターゲットとの距離を測定。
-						auto target = tuple->target.lock();
+						auto target = tuple->GetTarget();
 						auto memberObject = member.lock()->GetGameObject();
 						auto toTargetVec = maru::Utility::CalcuToTargetVec(memberObject, target);
 

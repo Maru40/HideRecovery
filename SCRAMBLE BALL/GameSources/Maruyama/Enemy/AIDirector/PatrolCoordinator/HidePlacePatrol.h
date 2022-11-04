@@ -54,6 +54,8 @@ namespace basecross {
 					void OnExit() override;
 
 				private:
+					void ObserveTransitionButtle();
+
 					//ターゲットが見つかった時に呼び出す処理
 					void FindTarget(const std::shared_ptr<Tuple::FindTarget>& tuple);
 
