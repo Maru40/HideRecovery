@@ -75,6 +75,8 @@ namespace basecross {
 
 		_NODISCARD ObserveTargets GetObserveTargets() const noexcept { return m_observeTargets; }
 
+		void ClearObserveTargets() { m_observeTargets.clear(); }
+
 	};
 
 }
