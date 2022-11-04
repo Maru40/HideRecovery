@@ -44,7 +44,7 @@ namespace basecross {
 				return;
 			}
 
-			auto target = tuple->target.lock();
+			auto target = tuple->GetTarget();
 
 			for (auto& weakMember : GetMembers()) {
 				auto member = weakMember.lock();
