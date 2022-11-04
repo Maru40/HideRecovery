@@ -15,6 +15,10 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 	///	前方宣言
 	//--------------------------------------------------------------------------------------
+	class ObserveIsInEyeTarget;
+	class I_TeamMember;
+	class EyeSearchRange;
+
 	namespace maru {
 		namespace Behavior {
 			namespace SubBehavior {
@@ -28,6 +32,7 @@ namespace basecross {
 	namespace Enemy {
 
 		class EnemyBase;
+		class I_FactionMember;
 
 		namespace StateNode {
 
@@ -36,9 +41,16 @@ namespace basecross {
 			//--------------------------------------------------------------------------------------
 			class HidePlacePatrol : public EnemyStateNodeBase<EnemyBase>
 			{
+			public:
 				using HidePlacePatrolTree = maru::Behavior::SubBehavior::HidePlacePatrolTree;
 
-				std::unique_ptr<HidePlacePatrolTree> m_behaviorTree;	//ビヘイビアツリー
+			private:
+				std::unique_ptr<HidePlacePatrolTree> m_behaviorTree;			//ビヘイビアツリー
+
+				std::unique_ptr<ObserveIsInEyeTarget> m_observeButtleTarget;	//バトル用に監視したい対象
+
+				std::weak_ptr<I_TeamMember> m_teamMember;			//チームメンバー
+				std::weak_ptr<I_FactionMember> m_factionMember;		//ファクションメンバー
 
 			public:
 				HidePlacePatrol(const std::shared_ptr<EnemyBase>& owner);
@@ -48,6 +60,17 @@ namespace basecross {
 				void OnStart() override;
 				bool OnUpdate() override;
 				void OnExit() override;
+
+			private:
+				/// <summary>
+				/// バトル用のターゲットを監視する。
+				/// </summary>
+				void ObserveButtleTarget();
+
+				/// <summary>
+				/// 隠し場所を探しているときの
+				/// </summary>
+				void SettingObserveButtleTargets();
 				
 			};
 
