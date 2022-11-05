@@ -85,7 +85,7 @@ namespace basecross {
 
 						//メンバーが登録した者のみ取得する。
 						auto isRequester = [&](const std::shared_ptr<Tuple::ButtleTarget>& tuple) {
-							return tuple->GetRequester() == member.lock()->GetGameObject();
+							return tuple->GetRequester() == member.lock();
 						};
 						auto buttles = tupleSpace->Takes<Tuple::ButtleTarget>(isRequester);
 
@@ -106,15 +106,17 @@ namespace basecross {
 						if (buttle->GetValue() < ButtleRange) {	//バトル距離いないなら
 							auto targetManager = member.lock()->GetGameObject()->GetComponent<TargetManager>(false);
 							if (targetManager && stator) {
+								//メンバーのタプルスペースにバトル状態に遷移することを伝える。
 								auto memberTupleSpace = member.lock()->GetTupleSpace();
 
-								//memberTupleSpace->Write<Tuple::ButtleTransition>();
+								memberTupleSpace->Write<Tuple::ButtleTransition>(
+									GetThis<HidePlacePatrol>(), 
+									buttle->GetTarget(), 
+									buttle->GetValue()
+								);
 
-								targetManager->SetTarget(buttle->GetTarget());
-								stator->ChangeState(AIPlayerStator::StateType::Buttle);
+								//バトルメンバーにアサイン
 
-								//バトルメンバーにアサインさせる。
-								
 
 							}
 						}
@@ -138,7 +140,7 @@ namespace basecross {
 
 						float hopeValue = toTargetVec.length();	//期待値
 
-						tupleSpace->Write<Tuple::ButtleTarget>(memberObject, target, hopeValue);	//ターゲットを狙うことをリクエスト
+						tupleSpace->Write<Tuple::ButtleTarget>(member.lock(), target, hopeValue);	//ターゲットを狙うことをリクエスト
 					}
 
 					auto takeTuple = tupleSpace->Take(tuple);
