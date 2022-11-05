@@ -6,9 +6,9 @@
 namespace basecross {
 	class HasBallUI :public UIObjectBase {
 		shared_ptr<SimpleSprite> m_icon;
-		shared_ptr<ViewBase> m_view;
-		shared_ptr<RectTransform> m_selfRectTrans;
-		shared_ptr<Transform> m_targetTransform;
+		weak_ptr<ViewBase> m_view;
+		weak_ptr<RectTransform> m_selfRectTrans;
+		weak_ptr<Transform> m_targetTransform;
 		Rect2D<float> m_screenRect;
 		Vec2 m_offset;
 		shared_ptr<SimpleSprite> CreateSprite(const wstring& spriteKey);

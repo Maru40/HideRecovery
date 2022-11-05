@@ -20,47 +20,6 @@ namespace basecross {
 		}
 
 		/**
-		 * @brief テクスチャのサイズを返す関数
-		 *
-		 * @param key テクスチャキー
-		 * @return const Vec2 テクスチャサイズ
-		 */
-		const Vec2 GetTextureSize(const wstring& key);
-
-		/**
-		 * @brief テクスチャの座標をUV座標に変換する関数（単体）
-		 *
-		 * @param coordinate テクスチャ座標の位置
-		 * @param textureSize テクスチャサイズ
-		 * @return const Vec2 UV座標
-		 */
-		const Vec2 ConvertToUVCoordinate(const Vec2& coordinate, const Vec2& textureSize);
-		/**
-		 * @brief テクスチャの座標をUV座標に変換する関数（単体）
-		 *
-		 * @param coordinate テクスチャ座標の位置
-		 * @param textureName テクスチャキー
-		 * @return const Vec2 UV座標
-		 */
-		const Vec2 ConvertToUVCoordinate(const Vec2& coordinate, const wstring& textureName);
-		/**
-		 * @brief テクスチャの座標をUV座標に変換する関数（複数）
-		 *
-		 * @param coordinates テクスチャ座標の位置のvector配列
-		 * @param textureSize テクスチャサイズ
-		 * @param uv UV座標の位置のvector配列（出力）
-		 */
-		void ConvertToUVCoordinates(const vector<Vec2>& coordinates, const Vec2& textureSize, vector<Vec2>& uv);
-		/**
-		 * @brief テクスチャの座標をUV座標に変換する関数（複数）
-		 *
-		 * @param coordinates テクスチャ座標の位置のvector配列
-		 * @param textureName テクスチャキー
-		 * @param uv UV座標の位置のvector配列（出力）
-		 */
-		void ConvertToUVCoordinates(const vector<Vec2>& coordinates, const wstring& textureName, vector<Vec2>& uv);
-
-		/**
 		 * @brief Vec3のDegをRadに変換
 		 *
 		 * @param deg 角度（Deg）
@@ -82,6 +41,7 @@ namespace basecross {
 		 * @return Vec2 角度（Rad）
 		 */
 		Vec2 ConvertDegVecToRadVec(const Vec2& deg);
+
 		/**
 		 * @brief Vec2のRadをDegに変換
 		 *
@@ -211,6 +171,49 @@ namespace basecross {
 		 * @brief 画面内にオブジェクトが映っているか
 		 */
 		bool IsPresentInScreen(const Vec3& worldPosition, const shared_ptr<ViewBase>& view, const Rect2D<float>& screenRect, Vec2& outputScreenPosition);
+	}
+
+	namespace TextureUtility {
+		/**
+		 * @brief テクスチャのサイズを返す関数
+		 *
+		 * @param key テクスチャキー
+		 * @return const Vec2 テクスチャサイズ
+		 */
+		const Vec2 GetTextureSize(const wstring& key);
+
+		/**
+		 * @brief テクスチャの座標をUV座標に変換する関数（単体）
+		 *
+		 * @param coordinate テクスチャ座標の位置
+		 * @param textureSize テクスチャサイズ
+		 * @return const Vec2 UV座標
+		 */
+		const Vec2 ConvertToUVCoordinate(const Vec2& coordinate, const Vec2& textureSize);
+		/**
+		 * @brief テクスチャの座標をUV座標に変換する関数（単体）
+		 *
+		 * @param coordinate テクスチャ座標の位置
+		 * @param textureName テクスチャキー
+		 * @return const Vec2 UV座標
+		 */
+		const Vec2 ConvertToUVCoordinate(const Vec2& coordinate, const wstring& textureName);
+		/**
+		 * @brief テクスチャの座標をUV座標に変換する関数（複数）
+		 *
+		 * @param coordinates テクスチャ座標の位置のvector配列
+		 * @param textureSize テクスチャサイズ
+		 * @param uv UV座標の位置のvector配列（出力）
+		 */
+		void ConvertToUVCoordinates(const vector<Vec2>& coordinates, const Vec2& textureSize, vector<Vec2>& uv);
+		/**
+		 * @brief テクスチャの座標をUV座標に変換する関数（複数）
+		 *
+		 * @param coordinates テクスチャ座標の位置のvector配列
+		 * @param textureName テクスチャキー
+		 * @param uv UV座標の位置のvector配列（出力）
+		 */
+		void ConvertToUVCoordinates(const vector<Vec2>& coordinates, const wstring& textureName, vector<Vec2>& uv);
 	}
 }
 //end basecross

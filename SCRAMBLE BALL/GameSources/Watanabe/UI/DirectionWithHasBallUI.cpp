@@ -33,7 +33,7 @@ namespace basecross {
 
 		// 画面内の範囲を定義
 		// Viewportを0基準からー～＋範囲に変換
-		const Viewport& viewport = m_view->GetTargetViewport();
+		const Viewport& viewport = m_view.lock()->GetTargetViewport();
 		float halfWidth = viewport.Width / 2.0f;
 		float halfHeight = viewport.Height / 2.0f;
 		Rect2D<float> screenRect(
@@ -47,15 +47,15 @@ namespace basecross {
 
 	void DirectionWithHasBallUI::OnUpdate() {
 		// ターゲットが設定されていない
-		if (!m_targetTransform) {
+		if (!m_targetTransform.lock()) {
 			// 非表示に
 			SetDrawActive(false);
 			return;
 		}
-		const Vec3& targetPosition = m_targetTransform->GetPosition();
+		const Vec3& targetPosition = m_targetTransform.lock()->GetPosition();
 
 		// ターゲットが画面内か
-		bool isTargetInScreen = Utility::IsPresentInScreen(targetPosition, m_view, m_screenRect);
+		bool isTargetInScreen = Utility::IsPresentInScreen(targetPosition, m_view.lock(), m_screenRect);
 		// 画面外なら表示
 		SetDrawActive(!isTargetInScreen);
 		// ターゲットが画面内
@@ -64,19 +64,21 @@ namespace basecross {
 			return;
 		}
 
+		auto camera = m_camera.lock();
+
 		// カメラ方向を計算
-		Vec3 cameraForward = m_camera->GetAt() - m_camera->GetEye();
+		Vec3 cameraForward = camera->GetAt() - camera->GetEye();
 		cameraForward.normalize();
 		// カメラ方向を法線とした平面にターゲット方向へのベクトルを投影する
 		Vec3 targetDirectionOnPlane = Utility::Vector3ProjectOnPlane(
-			targetPosition - m_camera->GetAt(), cameraForward);
+			targetPosition - camera->GetAt(), cameraForward);
 		targetDirectionOnPlane.normalize();
-		Vec3 cameraUp = m_camera->GetUp().GetNormalized();
+		Vec3 cameraUp = camera->GetUp().GetNormalized();
 
 		// カメラの上方向（スクリーンの上方向）を基準とした
 		// targetDirectionOnPlaneのなす角度を求める
 		float angle = Utility::GetTwoVectorAngle360(cameraUp, targetDirectionOnPlane, cameraForward);
-		m_selfRectTrans->SetRotation(XMConvertToRadians(angle));
+		m_selfRectTrans.lock()->SetRotation(XMConvertToRadians(angle));
 	}
 
 	void DirectionWithHasBallUI::SetTarget(const shared_ptr<Transform>& targetTransform) {
@@ -88,6 +90,6 @@ namespace basecross {
 	}
 
 	void DirectionWithHasBallUI::ClearTarget() {
-		m_targetTransform = nullptr;
+		m_targetTransform.reset();
 	}
 }

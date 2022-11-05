@@ -29,7 +29,7 @@ namespace basecross {
 		m_view = GetStage()->GetView();
 		// 画面内の範囲を定義
 		// Viewportを0基準からー～＋範囲に変換
-		const Viewport& viewport = m_view->GetTargetViewport();
+		const Viewport& viewport = m_view.lock()->GetTargetViewport();
 		float halfWidth = viewport.Width / 2.0f;
 		float halfHeight = viewport.Height / 2.0f;
 		Rect2D<float> screenRect(
@@ -43,17 +43,17 @@ namespace basecross {
 
 	void HasBallUI::OnUpdate() {
 		// ターゲットが設定されていない
-		if (!m_targetTransform) {
+		if (!m_targetTransform.lock()) {
 			// 非表示に
 			SetDrawActive(false);
 			return;
 		}
-		const Vec3& targetPosition = m_targetTransform->GetPosition();
+		const Vec3& targetPosition = m_targetTransform.lock()->GetPosition();
 
 		Vec2 screenPosition(0);
 
 		// ターゲットが画面内か
-		bool isTargetInScreen = Utility::IsPresentInScreen(targetPosition, m_view, m_screenRect, screenPosition);
+		bool isTargetInScreen = Utility::IsPresentInScreen(targetPosition, m_view.lock(), m_screenRect, screenPosition);
 		// 画面内なら表示
 		SetDrawActive(isTargetInScreen);
 		// ターゲットが画面外
@@ -61,7 +61,7 @@ namespace basecross {
 			return;
 		}
 
-		m_selfRectTrans->SetPosition(screenPosition + m_offset);
+		m_selfRectTrans.lock()->SetPosition(screenPosition + m_offset);
 	}
 
 	void HasBallUI::SetTarget(const shared_ptr<Transform>& targetTransform) {
@@ -73,6 +73,6 @@ namespace basecross {
 	}
 
 	void HasBallUI::ClearTarget() {
-		m_targetTransform = nullptr;
+		m_targetTransform.reset();
 	}
 }

@@ -20,7 +20,7 @@ namespace basecross {
 			Vec2((fnumber + 0) * size.x,size.y),
 			Vec2((fnumber + 1) * size.x,size.y)
 		};
-		Utility::ConvertToUVCoordinates(uv, data.useTextureKey, uv01);
+		TextureUtility::ConvertToUVCoordinates(uv, data.useTextureKey, uv01);
 		auto halfSize = size / 2.0f;
 		Col4 color(1);
 		vertices = {
@@ -53,7 +53,7 @@ namespace basecross {
 				data.origin + Vec2(0.0f, size.y),
 				data.origin + size
 			};
-			Utility::ConvertToUVCoordinates(uv, data.useTextureKey, uv01);
+			TextureUtility::ConvertToUVCoordinates(uv, data.useTextureKey, uv01);
 			auto halfSize = size / 2.0f;
 			Col4 color(1);
 			vertices = {
@@ -73,7 +73,7 @@ namespace basecross {
 				Vec2((fnumber + 0) * size.x,size.y),
 				Vec2((fnumber + 1) * size.x,size.y)
 			};
-			Utility::ConvertToUVCoordinates(uv, data.useTextureKey, uv01);
+			TextureUtility::ConvertToUVCoordinates(uv, data.useTextureKey, uv01);
 			auto halfSize = size / 2.0f;
 			Col4 color(1);
 			vertices = {

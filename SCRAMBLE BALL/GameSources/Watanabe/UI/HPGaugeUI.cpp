@@ -19,7 +19,7 @@ namespace basecross {
 		const wstring TextureKey = L"HPGauge_TX";
 
 		Vec2 origin(0.0f);
-		auto size = Utility::GetTextureSize(TextureKey);
+		auto size = TextureUtility::GetTextureSize(TextureKey);
 		// テクスチャ座標でUVを定義
 		vector<Vec2> uvs, uv = {
 			origin,
@@ -28,7 +28,7 @@ namespace basecross {
 			origin + size
 		};
 		// テクスチャ座標からUV座標に変換
-		Utility::ConvertToUVCoordinates(uv, TextureKey, uvs);
+		TextureUtility::ConvertToUVCoordinates(uv, TextureKey, uvs);
 		Col4 color(1.0f);
 		Vec2 halfSize = size / 2.0f;
 		// 頂点のデータ (番号は左上から右下まで)

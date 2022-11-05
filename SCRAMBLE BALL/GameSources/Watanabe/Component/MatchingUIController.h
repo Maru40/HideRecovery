@@ -16,5 +16,7 @@ namespace basecross {
 		void OnCreateRoom()override;
 		// 部屋に参加
 		void OnJoinRoom()override;
+		// 部屋に参加できなかった（パスコード入力ミス）
+		void OnJoinRoomFailed(int errorCode)override;
 	};
 }
