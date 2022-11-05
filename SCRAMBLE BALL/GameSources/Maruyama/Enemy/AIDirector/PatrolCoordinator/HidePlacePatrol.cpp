@@ -42,15 +42,18 @@ namespace basecross {
 					PatrolCoordinator(owner, members),
 					m_param(Parametor())
 				{
-					auto tuple = GetTupleSpace();
+					
+				}
 
-					tuple->Notify<Tuple::FindTarget>(this, [&](const std::shared_ptr<Tuple::FindTarget>& tuple) { FindTarget(tuple); });
+				void HidePlacePatrol::OnCreate() {
+					PatrolCoordinator::OnCreate();
+
+					auto tuple = GetTupleSpace();
+					tuple->Notify<Tuple::FindTarget>(GetThis<HidePlacePatrol>(), [&](const std::shared_ptr<Tuple::FindTarget>& tuple) { FindTarget(tuple); });
 				}
 
 				void HidePlacePatrol::OnStart() {
 					PatrolCoordinator::OnStart();
-
-
 				}
 
 				bool HidePlacePatrol::OnUpdate() {
@@ -77,8 +80,7 @@ namespace basecross {
 						//すでにバトルステートなら遷移しない。
 						auto stator = member.lock()->GetGameObject()->GetComponent<AIPlayerStator>(false);
 						if (stator && stator->IsCurrentState(AIPlayerStator::StateType::Buttle)) {
-							int i = 0;
-							//continue;
+							continue;
 						}
 
 						//メンバーが登録した者のみ取得する。
@@ -99,12 +101,21 @@ namespace basecross {
 
 						auto buttle = buttles[0];	//一番評価の高い値を参照
 
+						//メンバーの
+
 						if (buttle->GetValue() < ButtleRange) {	//バトル距離いないなら
 							auto targetManager = member.lock()->GetGameObject()->GetComponent<TargetManager>(false);
 							if (targetManager && stator) {
+								auto memberTupleSpace = member.lock()->GetTupleSpace();
+
+								//memberTupleSpace->Write<Tuple::ButtleTransition>();
+
 								targetManager->SetTarget(buttle->GetTarget());
 								stator->ChangeState(AIPlayerStator::StateType::Buttle);
+
 								//バトルメンバーにアサインさせる。
+								
+
 							}
 						}
 					}

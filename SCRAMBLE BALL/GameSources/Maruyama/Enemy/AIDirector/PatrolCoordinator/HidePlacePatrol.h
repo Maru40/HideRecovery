@@ -47,6 +47,8 @@ namespace basecross {
 
 					virtual ~HidePlacePatrol() = default;
 
+					void OnCreate() override;
+
 					void OnStart() override;
 
 					bool OnUpdate() override;
