@@ -22,11 +22,16 @@ namespace basecross {
 		namespace Tuple {
 
 			//--------------------------------------------------------------------------------------
+			/// 前方宣言
+			//--------------------------------------------------------------------------------------
+			class TupleSpace;
+
+			//--------------------------------------------------------------------------------------
 			/// タプルスペースを使う者のインターフェース
 			//--------------------------------------------------------------------------------------
 			class I_Tupler {
 			public:
-
+				_NODISCARD virtual std::shared_ptr<Tuple::TupleSpace> GetTupleSpace() const noexcept = 0;
 			};
 
 			//--------------------------------------------------------------------------------------
@@ -119,7 +124,27 @@ namespace basecross {
 
 				virtual ~ButtleTarget() = default;
 
-				std::shared_ptr<GameObject> GetTarget() { return target.lock(); };
+				bool operator==(const ButtleTarget& other);
+
+				std::shared_ptr<GameObject> GetTarget() const noexcept { return target.lock(); };
+			};
+
+			//--------------------------------------------------------------------------------------
+			/// バトルに遷移することをリクエストするタプル
+			//--------------------------------------------------------------------------------------
+			class ButtleTransition : public TupleRequestBase {
+				std::weak_ptr<GameObject> m_target;
+
+			public:
+				ButtleTransition(
+					const std::shared_ptr<GameObject>& requester,
+					const std::shared_ptr<GameObject>& target,
+					const float value
+				);
+
+				bool operator==(const ButtleTransition& other);
+
+				_NODISCARD std::shared_ptr<GameObject> GetTarget() const noexcept { return m_target.lock(); }
 			};
 
 			//--------------------------------------------------------------------------------------
@@ -128,6 +153,10 @@ namespace basecross {
 			class I_NotifyController {
 			public:
 				virtual ~I_NotifyController() = default;
+
+				virtual _NODISCARD const std::shared_ptr<I_Tupler> GetRequester() const noexcept = 0;
+
+				virtual bool operator==(const I_NotifyController& other) const { return GetRequester() == other.GetRequester(); };
 			};
 
 			//--------------------------------------------------------------------------------------
@@ -136,13 +165,13 @@ namespace basecross {
 			template<class T>
 			class NotifyController : public I_NotifyController {
 			private:
-				const I_Tupler* m_requester;				//リクエストした本人
+				const std::weak_ptr<I_Tupler> m_requester;				//リクエストした本人
 				std::function<void(const std::shared_ptr<T>&)> func;	//呼び出す処理
 				std::function<bool(const std::shared_ptr<T>&)> isCall;	//呼び出す条件
 
 			public:
 				NotifyController(
-					const I_Tupler* requester,
+					const std::shared_ptr<I_Tupler> requester,
 					const std::function<void(const std::shared_ptr<T>&)>& func,
 					const std::function<bool(const std::shared_ptr<T>&)>& isCall = [](const std::shared_ptr<T>& tuple) { return true; }
 				):
@@ -158,6 +187,8 @@ namespace basecross {
 						func(tuple);
 					}
 				}
+
+				_NODISCARD virtual const shared_ptr<I_Tupler> GetRequester() const noexcept { return m_requester.lock(); }
 			};
 
 			//--------------------------------------------------------------------------------------
@@ -214,13 +245,23 @@ namespace basecross {
 				/// <summary>
 				/// 同じNotifyかどうか
 				/// </summary>
-				template<class T, class... Ts,
+				template<class T,
 					std::enable_if_t<
 						std::is_base_of_v<I_Tuple, T>,
 					std::nullptr_t> = nullptr
 				>
-				void IsSomeNotify() {
+				bool IsSomeNotify(const std::shared_ptr<I_NotifyController>& newNotify) {
+					auto typeIndex = type_index(typeid(T));
+					auto notifys = m_notifysMap[typeIndex];	//タプルごとのマップから、登録されたNotifyを取得
 
+					for (const auto& notify : notifys) {
+						//同じリクエスターなら登録をしない。
+						if ((*notify.get()) == (*newNotify.get())) {
+							return true;
+						}
+					}
+
+					return false;
 				}
 
 				/// <summary>
@@ -346,13 +387,18 @@ namespace basecross {
 				template<class T,
 					std::enable_if_t<std::is_base_of_v<I_Tuple, T>, std::nullptr_t> = nullptr>	//基底クラスの制約
 				void Notify(
-					const I_Tupler* requester,
+					const std::shared_ptr<I_Tupler> requester,
 					const std::function<void(const std::shared_ptr<T>&)>& func, 
 					const std::function<bool(const std::shared_ptr<T>&)>& isCall = [](const std::shared_ptr<T>& tuple) { return true; }
 				) {
 					auto typeIndex = type_index(typeid(T));	//型インデックスの取得
 
 					auto newNotify = std::make_shared<NotifyController<T>>(requester, func, isCall);
+
+					if(IsSomeNotify<T>(newNotify)){	//同じ通知登録なら登録しない。
+						return;
+					}
+
 					m_notifysMap[typeIndex].push_back(newNotify);	//Notipyの生成
 				}
 

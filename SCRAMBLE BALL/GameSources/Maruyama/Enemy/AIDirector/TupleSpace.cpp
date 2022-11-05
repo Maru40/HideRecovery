@@ -92,6 +92,41 @@ namespace basecross {
 				target(target)
 			{}
 
+			bool ButtleTarget::operator==(const ButtleTarget& other) {
+				if (GetRequester() == other.GetRequester() &&
+					GetTarget() == other.GetTarget() &&
+					GetValue() == other.GetValue())
+				{
+					return true;
+				}
+
+				return false;
+			}
+
+			//--------------------------------------------------------------------------------------
+			/// バトルに遷移することをリクエストするタプル
+			//--------------------------------------------------------------------------------------
+
+			ButtleTransition::ButtleTransition(
+				const std::shared_ptr<GameObject>& requester,
+				const std::shared_ptr<GameObject>& target,
+				const float value
+			):
+				TupleRequestBase(requester, value),
+				m_target(target)
+			{}
+
+			bool ButtleTransition::operator==(const ButtleTransition& other) {
+				if (GetRequester() == other.GetRequester() &&
+					GetTarget() == other.GetTarget() &&
+					GetValue() == other.GetValue())
+				{
+					return true;
+				}
+
+				return false;
+			}
+
 		}
 	}
 }
