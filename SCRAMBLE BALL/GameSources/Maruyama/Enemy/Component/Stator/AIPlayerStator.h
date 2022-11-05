@@ -19,11 +19,16 @@ namespace basecross {
 	class EyeSearchRange;
 	class ObserveIsInEyeTarget;
 	class I_TeamMember;
+	class TargetManager;
 
 	namespace Enemy {
 
 		class EnemyBase;
 		class I_FactionMember;
+
+		namespace Tuple {
+			class I_Tupler;
+		}
 
 		//--------------------------------------------------------------------------------------
 		///	AIPlayerStatorのステートタイプ
@@ -56,6 +61,8 @@ namespace basecross {
 			std::weak_ptr<EyeSearchRange> m_eye;			//視界管理
 			std::weak_ptr<I_TeamMember> m_teamMember;		//チームメンバーインターフェース
 			std::weak_ptr<I_FactionMember> m_factionMember;	//ファクションメンバーインターフェース
+			std::weak_ptr<Tuple::I_Tupler> m_tupler;		//タプルスペースを使う者
+			std::weak_ptr<TargetManager> m_targetManager;	//ターゲット管理
 
 			std::unique_ptr<ObserveIsInEyeTarget> m_observeButtleTarget;	//バトル用に監視したい対象
 

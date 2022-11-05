@@ -46,17 +46,21 @@ namespace basecross {
 		}
 
 		bool AIPlayerStator::IsFindButtleTarget(const TransitionMember& member) {
-			auto targets = m_observeButtleTarget->SearchIsInEyeTargets();
+			auto tupleSpace = m_tupler.lock()->GetTupleSpace();
+			auto buttleTransition = tupleSpace->Take<Tuple::ButtleTransition>();
 
-			if (targets.empty()) {
-				return false;
-			}
+			//メッセージが届いていたら。
+			if (buttleTransition) {
+				//ターゲットの設定
+				auto targetManager = m_targetManager.lock();
+				auto target = buttleTransition->GetTarget();
+				targetManager->SetTarget(target);
 
-			//ターゲットを見つけたことをAIDirectorに伝える。
-			for (auto& target : targets) {
-				auto factionMember = m_factionMember.lock();
-				auto tupleSpace = factionMember->GetAssignedFaction()->GetTupleSpace();
-				tupleSpace->Write<Tuple::FindTarget>(GetGameObject(), target);	//ターゲットを通知
+				//メンバーの変更を通知
+				auto faction = m_factionMember.lock()->GetFactionCoordinator();
+				
+
+				return true;
 			}
 
 			return false;
@@ -73,6 +77,8 @@ namespace basecross {
 		{
 			m_teamMember = objPtr->GetComponent<I_TeamMember>(false);
 			m_factionMember = objPtr->GetComponent<I_FactionMember>(false);
+			m_tupler = objPtr->GetComponent<Tuple::I_Tupler>(false);
+			m_targetManager = objPtr->GetComponent<TargetManager>(false);
 		}
 
 		void AIPlayerStator::OnLateStart() {
