@@ -43,7 +43,7 @@ namespace basecross {
 			//--------------------------------------------------------------------------------------
 
 			TupleRequestBase::TupleRequestBase(
-				const std::shared_ptr<GameObject>& requester, 
+				const std::shared_ptr<I_Tupler>& requester, 
 				const float value
 			) :
 				m_requester(requester),
@@ -64,7 +64,7 @@ namespace basecross {
 			/// ターゲットを見つけたことを知らせるタプル
 			//--------------------------------------------------------------------------------------
 
-			FindTarget::FindTarget(const std::shared_ptr<GameObject>& requester, const std::shared_ptr<GameObject>& target, const float value):
+			FindTarget::FindTarget(const std::shared_ptr<I_Tupler>& requester, const std::shared_ptr<GameObject>& target, const float value):
 				TupleRequestBase(requester, value), m_target(target)
 			{}
 
@@ -84,7 +84,7 @@ namespace basecross {
 			//--------------------------------------------------------------------------------------
 
 			ButtleTarget::ButtleTarget(
-				const std::shared_ptr<GameObject>& requester,
+				const std::shared_ptr<I_Tupler>& requester,
 				const std::shared_ptr<GameObject>& target,
 				const float value
 			):
@@ -108,7 +108,7 @@ namespace basecross {
 			//--------------------------------------------------------------------------------------
 
 			ButtleTransition::ButtleTransition(
-				const std::shared_ptr<GameObject>& requester,
+				const std::shared_ptr<I_Tupler>& requester,
 				const std::shared_ptr<GameObject>& target,
 				const float value
 			):

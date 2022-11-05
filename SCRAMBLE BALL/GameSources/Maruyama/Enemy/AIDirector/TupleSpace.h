@@ -70,7 +70,7 @@ namespace basecross {
 			//--------------------------------------------------------------------------------------
 			class TupleRequestBase : public I_Tuple
 			{
-				std::weak_ptr<GameObject> m_requester;	//要請を出した者
+				std::weak_ptr<I_Tupler> m_requester;	//要請を出した者
 				float m_value;							//評価値
 
 			public:
@@ -80,13 +80,13 @@ namespace basecross {
 				/// </summary>
 				/// <param name="requester">要請を出した者</param>
 				/// <param name="value">評価値</param>
-				TupleRequestBase(const std::shared_ptr<GameObject>& requester, const float value);
+				TupleRequestBase(const std::shared_ptr<I_Tupler>& requester, const float value);
 
 				virtual ~TupleRequestBase() = default;
 
 				virtual bool operator== (const TupleRequestBase& other);
 
-				std::shared_ptr<GameObject> GetRequester() const { return m_requester.lock(); }
+				std::shared_ptr<I_Tupler> GetRequester() const { return m_requester.lock(); }
 
 				float GetValue() const { return m_value; }
 			};
@@ -99,7 +99,7 @@ namespace basecross {
 				std::weak_ptr<GameObject> m_target;
 			public:
 
-				FindTarget(const std::shared_ptr<GameObject>& requester, const std::shared_ptr<GameObject>& target, const float value = 1.0f);
+				FindTarget(const std::shared_ptr<I_Tupler>& requester, const std::shared_ptr<GameObject>& target, const float value = 1.0f);
 
 				virtual ~FindTarget() = default;
 
@@ -117,7 +117,7 @@ namespace basecross {
 
 			public:
 				ButtleTarget(
-					const std::shared_ptr<GameObject>& requester,
+					const std::shared_ptr<I_Tupler>& requester,
 					const std::shared_ptr<GameObject>& target,
 					const float value
 				);
@@ -137,7 +137,7 @@ namespace basecross {
 
 			public:
 				ButtleTransition(
-					const std::shared_ptr<GameObject>& requester,
+					const std::shared_ptr<I_Tupler>& requester,
 					const std::shared_ptr<GameObject>& target,
 					const float value
 				);
