@@ -69,7 +69,7 @@ namespace basecross {
 				for (auto& target : targets) {
 					auto factionMember = m_factionMember.lock();
 					auto tupleSpace = factionMember->GetAssignedFaction()->GetTupleSpace();
-					tupleSpace->Write<Tuple::FindTarget>(GetOwner()->GetGameObject(), target);	//ターゲットを通知
+					tupleSpace->Write<Tuple::FindTarget>(GetOwner(), target);	//ターゲットを通知
 				}
 			}
 
