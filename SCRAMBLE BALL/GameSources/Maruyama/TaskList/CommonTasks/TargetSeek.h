@@ -63,6 +63,8 @@ namespace basecross {
 		private:
 			void SettingSeek();
 
+			void UpdateSeekPosition();
+
 			void DefineTask();
 
 			void SelectTask();

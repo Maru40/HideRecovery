@@ -53,6 +53,7 @@ namespace basecross {
 		}
 
 		bool TargetSeek::OnUpdate() {
+			UpdateSeekPosition();
 			m_taskList->UpdateTask();
 
 			return m_taskList->IsEnd();
@@ -72,6 +73,16 @@ namespace basecross {
 
 			toTargetMoveParam->startPosition = GetOwner()->GetComponent<Transform>()->GetPosition();	//開始位置設定
 			toTargetMoveParam->endPosition = targetManager->GetTargetPosition();						//終了位置設定
+		}
+
+		void TargetSeek::UpdateSeekPosition() {
+			auto targetManager = m_targetManager.lock();
+			if (!targetManager || !targetManager->HasTarget()) {
+				return;
+			}
+
+			auto& toTargetMoveParam = m_paramPtr->toTargetMoveParam;
+			toTargetMoveParam->endPosition = targetManager->GetTargetPosition();	//終了位置設定
 		}
 
 		void TargetSeek::DefineTask() {
