@@ -31,14 +31,18 @@ namespace basecross {
 
 			namespace SubBehavior {
 
+				constexpr float EYE_DEGREE = 90.0f;
+
 				//--------------------------------------------------------------------------------------
 				/// バトル用のビヘイビアツリーのパラメータのデコレータ群
 				//--------------------------------------------------------------------------------------
 
+				using EyeParametor = EyeSearchRangeParametor;
+
 				ButtleTree_DecoratorParametor::ButtleTree_DecoratorParametor():
-					nearSeek_isInEyeParamPtr(new Decorator::IsInEyeTarget_Parametor(EyeSearchRangeParametor(15.0f), 0.5f)),
-					nearAstar_isInEyeParamPtr(new Decorator::IsInEyeTarget_Parametor(EyeSearchRangeParametor(15.0f), 5.0f)),
-					shot_isInEyeParamPtr(new Decorator::IsInEyeTarget_Parametor(EyeSearchRangeParametor(20.0f), 0.5f))
+					nearSeek_isInEyeParamPtr(new Decorator::IsInEyeTarget_Parametor(EyeParametor(15.0f, 3.0f, XMConvertToRadians(EYE_DEGREE)), 0.5f)),
+					nearAstar_isInEyeParamPtr(new Decorator::IsInEyeTarget_Parametor(EyeParametor(15.0f, 3.0f, XMConvertToRadians(EYE_DEGREE)), 5.0f)),
+					shot_isInEyeParamPtr(new Decorator::IsInEyeTarget_Parametor(EyeParametor(20.0f, 3.0f, XMConvertToRadians(EYE_DEGREE)), 0.5f))
 				{}
 
 				ButtleTree_DecoratorParametor::~ButtleTree_DecoratorParametor() {
@@ -53,7 +57,7 @@ namespace basecross {
 
 				ButtleTree_TaskParametor::ButtleTree_TaskParametor():
 					nearSeekParamPtr(new Task::NearSeekMove::Parametor()),
-					nearAstarParamPtr(new Task::NearAstarMove_Parametor())
+					nearAstarParamPtr(new Task::NearAstarMove_Parametor(EyeParametor(20.0f, 3.0f, XMConvertToRadians(EYE_DEGREE))))
 				{}
 
 				ButtleTree_TaskParametor::~ButtleTree_TaskParametor() {
@@ -201,7 +205,6 @@ namespace basecross {
 						auto& param = m_param.taskParam.nearAstarParamPtr;
 						auto& moveParam = param->moveParamPtr->movePositionsParam->moveParamPtr;
 						moveParam->speed = MoveSpeed;
-						//moveParam->targetNearRange = 15.0f;
 						moveParam->moveType = basecross::Task::ToTargetMove::MoveType::ArriveVelocity;
 					}
 				}
