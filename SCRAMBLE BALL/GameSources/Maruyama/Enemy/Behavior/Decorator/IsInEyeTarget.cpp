@@ -122,8 +122,7 @@ namespace basecross {
 						return true;	//ターゲットが存在しないならtrue
 					}
 
-					auto targetPosition = targetManager->GetTargetPosition();
-					if (m_eyeRange.lock()->IsInEyeRange(targetPosition), m_paramPtr->eyeParametor.length) {
+					if (m_eyeRange.lock()->IsInEyeRange(targetManager->GetTarget(), m_paramPtr->eyeParametor.length)) {
 						return false;	//ターゲットが視界内にいるならfalse(Lostしてない)
 					}
 
