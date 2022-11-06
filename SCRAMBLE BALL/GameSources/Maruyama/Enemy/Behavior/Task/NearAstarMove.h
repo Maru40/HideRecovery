@@ -16,6 +16,7 @@ namespace basecross {
 	template<class T>
 	class TaskList;
 
+	struct EyeSearchRangeParametor;
 	class EyeSearchRange;
 	class TargetManager;
 	class RotationController;
@@ -38,9 +39,12 @@ namespace basecross {
 				///	ターゲットにAstarで近づくパラメータ
 				//--------------------------------------------------------------------------------------
 				struct NearAstarMove_Parametor{
+					EyeSearchRangeParametor* eyeSearchParamPtr;
 					basecross::Task::MoveAstar_Parametor* moveParamPtr;
 
 					NearAstarMove_Parametor();
+
+					NearAstarMove_Parametor(const EyeSearchRangeParametor& eyeParam);
 
 					~NearAstarMove_Parametor();
 				};

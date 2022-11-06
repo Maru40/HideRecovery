@@ -21,6 +21,9 @@
 
 #include "Maruyama/TaskList/CommonTasks/Task_ToTargetMove.h"
 
+#include "Maruyama/Utility/Utility.h"
+#include "Maruyama/Utility/UtilityObstacle.h"
+
 namespace basecross {
 	namespace maru {
 
@@ -33,10 +36,16 @@ namespace basecross {
 				//--------------------------------------------------------------------------------------
 
 				NearAstarMove_Parametor::NearAstarMove_Parametor():
+					NearAstarMove_Parametor(EyeSearchRangeParametor())
+				{}
+
+				NearAstarMove_Parametor::NearAstarMove_Parametor(const EyeSearchRangeParametor& eyeParam):
+					eyeSearchParamPtr(new EyeSearchRangeParametor(eyeParam)),
 					moveParamPtr(new basecross::Task::MoveAstar_Parametor())
 				{}
 
 				NearAstarMove_Parametor::~NearAstarMove_Parametor() {
+					delete(eyeSearchParamPtr);
 					delete(moveParamPtr);
 				}
 
@@ -108,8 +117,10 @@ namespace basecross {
 						return true;
 					}
 
-					//ターゲットが視界範囲内なら終了
-					if (m_eyeRange.lock()->IsInEyeRange(targetManager->GetTarget())) {
+					auto target = targetManager->GetTarget();
+
+					//ターゲットが範囲内、かつ、障害物がないなら
+					if (m_eyeRange.lock()->IsInEyeRange(target, *m_paramPtr->eyeSearchParamPtr)) {
 						return true;
 					}
 
