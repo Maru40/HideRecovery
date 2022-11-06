@@ -73,6 +73,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\SparseGraph.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\UtilityAstar.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\BehaviorTree.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\IsInEyeTarget.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\IsInEyeTargets.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Interface\I_Decorator.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Interface\I_Edge.h" />
@@ -459,6 +460,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\SparseGraph.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\UtilityAstar.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\BehaviorTree.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\IsInEyeTarget.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\IsInEyeTargets.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Interface\I_Decorator.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Interface\I_Edge.cpp" />
