@@ -17,18 +17,16 @@ namespace basecross {
 	class TaskList;
 
 	class TargetManager;
-	class VelocityManager;
 	class RotationController;
-	class EyeSearchRange;
 
 	namespace Enemy {
 		class EnemyBase;
-		class I_FactionMember;
+		//class I_FactionMember;
 	}
 
-	namespace Task {
-		struct ToTargetMove_Parametor;
-	}
+	//namespace Task {
+	//	struct ToTargetMove_Parametor;
+	//}
 
 	namespace TaskListNode {
 		struct TargetSeek_Parametor;
@@ -64,12 +62,15 @@ namespace basecross {
 					};
 
 				private:
-					Parametor m_param;
+					const Parametor* m_paramPtr;
+
+					std::weak_ptr<TargetManager> m_targetManager;
+					std::weak_ptr<RotationController> m_rotationController;
 
 					std::unique_ptr<TaskList<TaskEnum>> m_taskList;
 
 				public:
-					NearSeekMove(const std::shared_ptr<Enemy::EnemyBase>& owner);
+					NearSeekMove(const std::shared_ptr<Enemy::EnemyBase>& owner, const Parametor* paramPtr);
 
 					virtual ~NearSeekMove() = default;
 
@@ -84,6 +85,7 @@ namespace basecross {
 
 					void DefineTask();
 
+					void RotationUpdate();
 
 				public:
 

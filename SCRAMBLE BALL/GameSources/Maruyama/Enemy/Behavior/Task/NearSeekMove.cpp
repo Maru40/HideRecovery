@@ -13,6 +13,11 @@
 #include "Maruyama/TaskList/TaskList.h"
 #include "Maruyama/TaskList/CommonTasks/TargetSeek.h"
 
+#include "Maruyama/Utility/Component/RotationController.h"
+#include "Maruyama/Utility/Component/TargetManager.h"
+
+#include "Maruyama/TaskList/CommonTasks/Task_ToTargetMove.h"
+
 namespace basecross {
 	namespace maru {
 
@@ -36,11 +41,15 @@ namespace basecross {
 				///	ターゲットに近づく本体
 				//--------------------------------------------------------------------------------------
 
-				NearSeekMove::NearSeekMove(const std::shared_ptr<Enemy::EnemyBase>& owner):
+				NearSeekMove::NearSeekMove(const std::shared_ptr<Enemy::EnemyBase>& owner, const Parametor* paramPtr):
 					TaskBase(owner),
+					m_paramPtr(paramPtr),
 					m_taskList(new TaskList<TaskEnum>())
 				{
 					auto object = owner->GetGameObject();
+
+					m_targetManager = object->GetComponent<TargetManager>(false);
+					m_rotationController = object->GetComponent<RotationController>(false);
 
 					DefineTask();
 				}
@@ -51,6 +60,7 @@ namespace basecross {
 
 				bool NearSeekMove::OnUpdate() {
 					m_taskList->UpdateTask();
+					RotationUpdate();
 
 					return IsEnd();
 				}
@@ -72,7 +82,17 @@ namespace basecross {
 				void NearSeekMove::DefineTask() {
 					auto object = GetOwner()->GetGameObject();
 
-					m_taskList->DefineTask(TaskEnum::Move, std::make_shared<TaskListNode::TargetSeek>(object, m_param.moveParamPtr));
+					m_taskList->DefineTask(TaskEnum::Move, std::make_shared<TaskListNode::TargetSeek>(object, m_paramPtr->moveParamPtr));
+				}
+
+				void NearSeekMove::RotationUpdate() {
+					auto rotationController = m_rotationController.lock();
+					auto targetManager = m_targetManager.lock();
+					if (!rotationController || !targetManager || !targetManager->HasTarget()) {
+						return;
+					}
+
+					rotationController->SetDirection(targetManager->CalcuToTargetVec());
 				}
 
 				bool NearSeekMove::IsEnd() {
