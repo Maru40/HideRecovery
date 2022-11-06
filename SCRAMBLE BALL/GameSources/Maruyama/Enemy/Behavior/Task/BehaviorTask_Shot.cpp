@@ -14,6 +14,7 @@
 #include "Maruyama/Player/Component/UseWeapon.h"
 #include "Maruyama/Player/Component/WeponBase.h"
 #include "Maruyama/Utility/Component/TargetManager.h"
+#include "VelocityManager.h"
 #include "Maruyama/Utility/Component/RotationController.h"
 
 #include "Maruyama/TaskList/TaskList.h"
@@ -52,6 +53,7 @@ namespace basecross {
 
 					m_useWeapon = object->GetComponent<UseWeapon>(false);
 					m_targetManager = object->GetComponent<TargetManager>(false);
+					m_velocityManager = object->GetComponent<VelocityManager>(false);
 					m_rotationController = object->GetComponent<RotationController>(false);
 					m_onlineSynchronizer = object->GetComponent<OnlinePlayerSynchronizer>(false);
 
@@ -74,6 +76,7 @@ namespace basecross {
 
 				void Shot::OnExit() {
 					m_useWeapon.lock()->SetIsAim(false);
+					m_velocityManager.lock()->ResetAll();
 
 					m_moveTaskList->ForceStop();	//タスクの終了
 				}
