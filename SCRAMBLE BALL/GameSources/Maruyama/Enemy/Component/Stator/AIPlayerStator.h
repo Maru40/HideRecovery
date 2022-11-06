@@ -65,8 +65,6 @@ namespace basecross {
 			std::weak_ptr<Tuple::I_Tupler> m_tupler;		//タプルスペースを使う者
 			std::weak_ptr<TargetManager> m_targetManager;	//ターゲット管理
 
-			std::unique_ptr<ObserveIsInEyeTarget> m_observeButtleTarget;	//バトル用に監視したい対象
-
 		public:
 			AIPlayerStator(const std::shared_ptr<GameObject>& objPtr);
 
@@ -79,11 +77,6 @@ namespace basecross {
 
 		private:
 
-			/// <summary>
-			/// バトル対象として監視するターゲットをセッティング
-			/// </summary>
-			void SettingObserveButtleTargets();
-
 			//--------------------------------------------------------------------------------------
 			///	遷移条件系
 			//--------------------------------------------------------------------------------------
@@ -94,6 +87,8 @@ namespace basecross {
 			/// <param name="member">遷移条件メンバー</param>
 			/// <returns>バトルターゲット</returns>
 			bool IsFindButtleTarget(const TransitionMember& member);
+
+			bool IsLostButtleTarget(const TransitionMember& member);
 
 		};
 

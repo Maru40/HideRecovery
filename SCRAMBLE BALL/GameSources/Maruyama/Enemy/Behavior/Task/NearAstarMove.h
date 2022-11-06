@@ -1,6 +1,6 @@
 /*!
-@file NearSeekMove.h
-@brief NearSeekMoveなど
+@file NearAstarMove.h
+@brief NearAstarMoveなど
 担当者：丸山 裕喜
 */
 
@@ -16,21 +16,17 @@ namespace basecross {
 	template<class T>
 	class TaskList;
 
+	struct EyeSearchRangeParametor;
 	class EyeSearchRange;
 	class TargetManager;
 	class RotationController;
 
 	namespace Enemy {
 		class EnemyBase;
-		//class I_FactionMember;
 	}
 
-	//namespace Task {
-	//	struct ToTargetMove_Parametor;
-	//}
-
-	namespace TaskListNode {
-		struct TargetSeek_Parametor;
+	namespace Task {
+		struct MoveAstar_Parametor;
 	}
 
 	namespace maru {
@@ -40,23 +36,26 @@ namespace basecross {
 			namespace Task {
 
 				//--------------------------------------------------------------------------------------
-				///	ターゲットに近づくパラメータ
+				///	ターゲットにAstarで近づくパラメータ
 				//--------------------------------------------------------------------------------------
-				struct NearSeekMove_Parametor {
-					TaskListNode::TargetSeek_Parametor* moveParamPtr;
+				struct NearAstarMove_Parametor{
+					EyeSearchRangeParametor* eyeSearchParamPtr;
+					basecross::Task::MoveAstar_Parametor* moveParamPtr;
 
-					NearSeekMove_Parametor();
+					NearAstarMove_Parametor();
 
-					~NearSeekMove_Parametor();
+					NearAstarMove_Parametor(const EyeSearchRangeParametor& eyeParam);
+
+					~NearAstarMove_Parametor();
 				};
 
 				//--------------------------------------------------------------------------------------
-				///	ターゲットに近づくタスク
+				///	ターゲットにAstarで近づく
 				//--------------------------------------------------------------------------------------
-				class NearSeekMove : public TaskBase<Enemy::EnemyBase>
+				class NearAstarMove : public TaskBase<Enemy::EnemyBase> 
 				{
 				public:
-					using Parametor = NearSeekMove_Parametor;
+					using Parametor = NearAstarMove_Parametor;
 
 					enum class TaskEnum {
 						Move,
@@ -72,9 +71,9 @@ namespace basecross {
 					std::unique_ptr<TaskList<TaskEnum>> m_taskList;
 
 				public:
-					NearSeekMove(const std::shared_ptr<Enemy::EnemyBase>& owner, const Parametor* paramPtr);
+					NearAstarMove(const std::shared_ptr<Enemy::EnemyBase>& owner, const Parametor* paramPtr);
 
-					virtual ~NearSeekMove() = default;
+					virtual ~NearAstarMove() = default;
 
 					void OnStart() override;
 
@@ -83,15 +82,13 @@ namespace basecross {
 					void OnExit() override;
 
 				private:
-					void SelectTask();
-
 					void DefineTask();
+
+					void SelectTask();
 
 					void RotationUpdate();
 
-				public:
-
-					bool IsEnd();
+					bool IsEnd() const;
 				};
 
 			}

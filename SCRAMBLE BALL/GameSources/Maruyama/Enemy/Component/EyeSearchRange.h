@@ -65,6 +65,10 @@ namespace basecross {
 	//------------------------------------------------------------------------------------------------
 	class EyeSearchRange : public Component
 	{
+	public:
+		using Parametor = EyeSearchRangeParametor;
+
+	private:
 		std::vector<EyeTargetParametor> m_targetParams; //範囲に入っているかの対象になるオブジェクト
 
 		EyeSearchRangeParametor m_param;                //視界範囲パラメータ
@@ -149,6 +153,13 @@ namespace basecross {
 		/// <param name="target">ターゲット</param>
 		/// <returns>視界の中にいるならtrue</returns>
 		bool IsInEyeRange(std::shared_ptr<GameObject>& target, const float& length);
+
+		/// <summary>
+		/// 視界内にいるならtrueを返す
+		/// </summary>
+		/// <param name="target">ターゲット</param>
+		/// <returns>視界の中にいるならtrue</returns>
+		bool IsInEyeRange(std::shared_ptr<GameObject>& target, const Parametor& param);
 
 		//------------------------------------------------------------------------------------------------
 		/// アクセッサ

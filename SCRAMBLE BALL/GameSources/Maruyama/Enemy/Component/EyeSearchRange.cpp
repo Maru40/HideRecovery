@@ -115,6 +115,16 @@ namespace basecross {
 		return isInEeyRange;
 	}
 
+	bool EyeSearchRange::IsInEyeRange(std::shared_ptr<GameObject>& target, const Parametor& param) {
+		auto defaultParam = m_param;
+		m_param = param;
+
+		bool isInEeyRange = IsInEyeRange(target);  //Œ‹‰Ê‚ð•Û‘¶
+		m_param = defaultParam;
+
+		return isInEeyRange;
+	}
+
 
 }
 

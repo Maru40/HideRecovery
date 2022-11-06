@@ -13,6 +13,7 @@
 
 #include "Maruyama/Player/Component/UseWeapon.h"
 #include "Maruyama/Player/Component/WeponBase.h"
+#include "Maruyama/Enemy/Component/EyeSearchRange.h"
 #include "Maruyama/Utility/Component/TargetManager.h"
 #include "VelocityManager.h"
 #include "Maruyama/Utility/Component/RotationController.h"
@@ -53,6 +54,7 @@ namespace basecross {
 
 					m_useWeapon = object->GetComponent<UseWeapon>(false);
 					m_targetManager = object->GetComponent<TargetManager>(false);
+					m_eyeRange = object->GetComponent<EyeSearchRange>(false);
 					m_velocityManager = object->GetComponent<VelocityManager>(false);
 					m_rotationController = object->GetComponent<RotationController>(false);
 					m_onlineSynchronizer = object->GetComponent<OnlinePlayerSynchronizer>(false);
@@ -71,7 +73,7 @@ namespace basecross {
 					RotationUpdate();
 					ShotUpdate();
 
-					return false;
+					return IsEnd();
 				}
 
 				void Shot::OnExit() {
@@ -124,6 +126,10 @@ namespace basecross {
 					for (auto& task : tasks) {
 						m_moveTaskList->AddTask(task);
 					}
+				}
+
+				bool Shot::IsEnd() const {
+					return false;
 				}
 
 			}
