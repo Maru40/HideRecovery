@@ -16,6 +16,9 @@
 #include "Maruyama/Enemy/Behavior/Task/NearSeekMove.h"
 #include "Maruyama/TaskList/CommonTasks/TargetSeek.h"
 #include "Maruyama/TaskList/CommonTasks/Task_ToTargetMove.h"
+#include "Maruyama/Enemy/Behavior/Task/NearAstarMove.h"
+#include "Maruyama/TaskList/CommonTasks/MoveAstar.h"
+#include "Maruyama/TaskList/CommonTasks/Task_MovePositions.h"
 
 #include "Maruyama/Enemy/Behavior/Interface/I_PriorityController.h"
 
@@ -33,10 +36,14 @@ namespace basecross {
 				//--------------------------------------------------------------------------------------
 
 				ButtleTree_DecoratorParametor::ButtleTree_DecoratorParametor():
+					nearSeek_isInEyeParamPtr(new Decorator::IsInEyeTarget_Parametor(EyeSearchRangeParametor(15.0f), 0.5f)),
+					nearAstar_isInEyeParamPtr(new Decorator::IsInEyeTarget_Parametor(EyeSearchRangeParametor(15.0f), 5.0f)),
 					shot_isInEyeParamPtr(new Decorator::IsInEyeTarget_Parametor(EyeSearchRangeParametor(20.0f), 0.5f))
 				{}
 
 				ButtleTree_DecoratorParametor::~ButtleTree_DecoratorParametor() {
+					delete(nearSeek_isInEyeParamPtr);
+					delete(nearAstar_isInEyeParamPtr);
 					delete(shot_isInEyeParamPtr);
 				}
 
@@ -45,11 +52,13 @@ namespace basecross {
 				//--------------------------------------------------------------------------------------
 
 				ButtleTree_TaskParametor::ButtleTree_TaskParametor():
-					nearSeekParamPtr(new Task::NearSeekMove::Parametor())
+					nearSeekParamPtr(new Task::NearSeekMove::Parametor()),
+					nearAstarParamPtr(new Task::NearAstarMove_Parametor())
 				{}
 
 				ButtleTree_TaskParametor::~ButtleTree_TaskParametor() {
 					delete(nearSeekParamPtr);
+					delete(nearAstarParamPtr);
 				}
 
 				//--------------------------------------------------------------------------------------
@@ -96,7 +105,8 @@ namespace basecross {
 					//直線的に近づくセレクター
 					m_behaviorTree->AddTask<Task::NearSeekMove>(NodeType::NearSeekMoveTask, enemy, m_param.taskParam.nearSeekParamPtr);
 
-					//m_behaviorTree->AddTask(NodeType::NearAstarMoveTask);
+					//Astarを使って近づくタスク
+					m_behaviorTree->AddTask<Task::NearAstarMove>(NodeType::NearAstarMoveTask, enemy, m_param.taskParam.nearAstarParamPtr);
 					
 					//回り込みセレクター
 					m_behaviorTree->AddSelecter(NodeType::WanparoundSelecter);
@@ -147,7 +157,7 @@ namespace basecross {
 
 					//近づくときのセレクター
 					m_behaviorTree->AddEdge(NodeType::NearMoveSelecter, NodeType::NearSeekMoveTask, (int)NodeType::NearSeekMoveTask);
-					//m_behaviorTree->AddEdge(NodeType::NearMoveSelecter, NodeType::NearAstarMoveTask, (int)NodeType::NearAstarMoveTask);
+					m_behaviorTree->AddEdge(NodeType::NearMoveSelecter, NodeType::NearAstarMoveTask, (int)NodeType::NearAstarMoveTask);
 
 					//回り込みセレクター
 					//m_behaviorTree->AddEdge(NodeType::WanparoundSelecter, NodeType::RightSideMoveTask, (int)NodeType::RightSideMoveTask);
@@ -169,7 +179,8 @@ namespace basecross {
 					auto enemy = GetOwner()->GetComponent<Enemy::EnemyBase>(false);
 
 					//NearSeekデコレータ
-
+					//視界範囲内なら
+					m_behaviorTree->AddDecorator<Decorator::IsInEyeTarget>(NodeType::NearSeekMoveTask, enemy, decoratorParam.nearSeek_isInEyeParamPtr);
 
 					//Shotにデコレータ追加
 					//視界範囲内なら
@@ -177,11 +188,22 @@ namespace basecross {
 				}
 
 				void ButtleTree::InitializeParametor() {
+					constexpr float MoveSpeed = 6.0f;
+
 					//通常シークパラメータ
 					auto& nearSeekParamPtr = m_param.taskParam.nearSeekParamPtr;
-					nearSeekParamPtr->moveParamPtr->toTargetMoveParam->speed = 6.0f;
+					nearSeekParamPtr->moveParamPtr->toTargetMoveParam->speed = MoveSpeed;
 					nearSeekParamPtr->moveParamPtr->toTargetMoveParam->targetNearRange = 15.0f;
 					nearSeekParamPtr->moveParamPtr->toTargetMoveParam->moveType = basecross::Task::ToTargetMove::MoveType::ArriveVelocity;
+
+					//AstarMoveパラメータ
+					{
+						auto& param = m_param.taskParam.nearAstarParamPtr;
+						auto& moveParam = param->moveParamPtr->movePositionsParam->moveParamPtr;
+						moveParam->speed = MoveSpeed;
+						moveParam->targetNearRange = 15.0f;
+						moveParam->moveType = basecross::Task::ToTargetMove::MoveType::ArriveVelocity;
+					}
 				}
 
 			}

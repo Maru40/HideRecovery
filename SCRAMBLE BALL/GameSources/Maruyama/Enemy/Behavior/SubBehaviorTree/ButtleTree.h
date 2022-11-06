@@ -22,6 +22,7 @@ namespace basecross {
 
 			namespace Task {
 				struct NearSeekMove_Parametor;
+				struct NearAstarMove_Parametor;
 			}
 
 			namespace SubBehavior {
@@ -56,7 +57,9 @@ namespace basecross {
 				/// バトル用のビヘイビアツリーのパラメータのデコレータ群
 				//--------------------------------------------------------------------------------------
 				struct ButtleTree_DecoratorParametor {
-					Decorator::IsInEyeTarget_Parametor* shot_isInEyeParamPtr;	//視界範囲制御デコレータ
+					Decorator::IsInEyeTarget_Parametor* nearSeek_isInEyeParamPtr;	//近づくタスクの視界デコレータ
+					Decorator::IsInEyeTarget_Parametor* nearAstar_isInEyeParamPtr;	//Astarで近づくタスクの視界デコレータ
+					Decorator::IsInEyeTarget_Parametor* shot_isInEyeParamPtr;		//視界範囲制御デコレータ
 
 					ButtleTree_DecoratorParametor();
 
@@ -68,6 +71,7 @@ namespace basecross {
 				//--------------------------------------------------------------------------------------
 				struct ButtleTree_TaskParametor {
 					Task::NearSeekMove_Parametor* nearSeekParamPtr;
+					Task::NearAstarMove_Parametor* nearAstarParamPtr;
 
 					ButtleTree_TaskParametor();
 
