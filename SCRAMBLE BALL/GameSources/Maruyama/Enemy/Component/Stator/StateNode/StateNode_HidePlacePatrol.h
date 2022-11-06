@@ -68,7 +68,7 @@ namespace basecross {
 				void ObserveButtleTarget();
 
 				/// <summary>
-				/// ‰B‚µêŠ‚ğ’T‚µ‚Ä‚¢‚é‚Æ‚«‚Ì
+				/// ‰B‚µêŠ‚ğ’T‚µ‚Ä‚¢‚é‚Æ‚«‚Ìƒ^[ƒQƒbƒg‚ğİ’è‚·‚éB
 				/// </summary>
 				void SettingObserveButtleTargets();
 				
