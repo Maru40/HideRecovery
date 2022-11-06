@@ -1,6 +1,6 @@
 /*!
-@file Task_SearchBall.h
-@brief Task_SearchBall‚È‚Ç
+@file NearSeekMove.h
+@brief NearSeekMove‚È‚Ç
 ’S“–ÒFŠÛR —TŠì
 */
 
@@ -16,6 +16,7 @@ namespace basecross {
 	template<class T>
 	class TaskList;
 
+	class EyeSearchRange;
 	class TargetManager;
 	class RotationController;
 
@@ -64,6 +65,7 @@ namespace basecross {
 				private:
 					const Parametor* m_paramPtr;
 
+					std::weak_ptr<EyeSearchRange> m_eyeRange;
 					std::weak_ptr<TargetManager> m_targetManager;
 					std::weak_ptr<RotationController> m_rotationController;
 

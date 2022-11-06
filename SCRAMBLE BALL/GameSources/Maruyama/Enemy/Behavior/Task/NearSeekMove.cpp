@@ -1,6 +1,6 @@
 /*!
-@file Task_SearchBall.cpp
-@brief Task_SearchBall‚È‚ÇŽÀ‘Ì
+@file NearSeekMove.cpp
+@brief NearSeekMove‚È‚ÇŽÀ‘Ì
 */
 
 #include "stdafx.h"
@@ -13,6 +13,7 @@
 #include "Maruyama/TaskList/TaskList.h"
 #include "Maruyama/TaskList/CommonTasks/TargetSeek.h"
 
+#include "Maruyama/Enemy/Component/EyeSearchRange.h"
 #include "Maruyama/Utility/Component/RotationController.h"
 #include "Maruyama/Utility/Component/TargetManager.h"
 
@@ -48,6 +49,7 @@ namespace basecross {
 				{
 					auto object = owner->GetGameObject();
 
+					m_eyeRange = object->GetComponent<EyeSearchRange>(false);
 					m_targetManager = object->GetComponent<TargetManager>(false);
 					m_rotationController = object->GetComponent<RotationController>(false);
 
@@ -96,6 +98,7 @@ namespace basecross {
 				}
 
 				bool NearSeekMove::IsEnd() {
+
 					return m_taskList->IsEnd();
 				}
 
