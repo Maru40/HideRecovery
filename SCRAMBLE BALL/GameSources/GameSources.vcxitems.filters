@@ -1291,6 +1291,9 @@
     <Filter Include="Maruyama\Utility\TaskList\CommonTasks\CrabWalk">
       <UniqueIdentifier>{ffca069f-9e5b-4f8a-ae6a-3b1379de204c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Enemy\BehaviorTree\Task\NearSeekMove">
+      <UniqueIdentifier>{1f0c30e4-e734-45c6-b469-22c4e601abc7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2416,6 +2419,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\HasBallUI.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\PasscodeUI.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\GameController.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Task\NearSeekMove.h">
+      <Filter>Maruyama\Enemy\BehaviorTree\Task\NearSeekMove</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -3442,6 +3448,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\HasBallUI.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\PasscodeUI.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Utility\GameController.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Task\NearSeekMove.cpp">
+      <Filter>Maruyama\Enemy\BehaviorTree\Task\NearSeekMove</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="$(MSBuildThisFileDirectory)..\..\Libs\BaseLib\DxShaders\SlimeVS.hlsl">
