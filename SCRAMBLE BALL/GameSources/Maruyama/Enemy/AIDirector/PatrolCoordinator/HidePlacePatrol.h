@@ -56,6 +56,7 @@ namespace basecross {
 					void OnExit() override;
 
 				private:
+					
 					void ObserveTransitionButtle();
 
 					//ターゲットが見つかった時に呼び出す処理
