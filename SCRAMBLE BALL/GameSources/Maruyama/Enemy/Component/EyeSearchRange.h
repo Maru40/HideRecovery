@@ -37,7 +37,11 @@ namespace basecross {
 		float rad;    //õ“G”ÍˆÍ(Šp“x)
 
 		EyeSearchRangeParametor()
-			:EyeSearchRangeParametor(20.0f, 3.0f, XMConvertToRadians(30.0f))
+			:EyeSearchRangeParametor(20.0f)
+		{}
+
+		EyeSearchRangeParametor(const float& length) :
+			EyeSearchRangeParametor(length, 3.0f, XMConvertToRadians(30.0f))
 		{}
 
 		/// <summary>
