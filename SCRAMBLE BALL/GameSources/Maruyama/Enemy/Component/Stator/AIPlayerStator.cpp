@@ -77,14 +77,20 @@ namespace basecross {
 			return false;
 		}
 
+		bool AIPlayerStator::IsLostButtleTarget(const TransitionMember& member) {
+
+
+			return false;
+		}
+
 		//--------------------------------------------------------------------------------------
 		///	AIPlayerStator本体
 		//--------------------------------------------------------------------------------------
 
 		AIPlayerStator::AIPlayerStator(const std::shared_ptr<GameObject>& objPtr):
 			StatorBase(objPtr),
-			m_eye(objPtr->GetComponent<EyeSearchRange>()),
-			m_observeButtleTarget(new ObserveIsInEyeTarget(m_eye.lock()))
+			m_eye(objPtr->GetComponent<EyeSearchRange>())
+			//m_observeButtleTarget(new ObserveIsInEyeTarget(m_eye.lock()))
 		{
 			m_teamMember = objPtr->GetComponent<I_TeamMember>(false);
 			m_factionMember = objPtr->GetComponent<I_FactionMember>(false);
@@ -93,8 +99,7 @@ namespace basecross {
 		}
 
 		void AIPlayerStator::OnLateStart() {
-			//バトル用の監視対象をセッティング
-			SettingObserveButtleTargets();
+
 		}
 
 		void AIPlayerStator::CreateNode() {
@@ -125,22 +130,11 @@ namespace basecross {
 			);
 
 			//バトル
-		}
-
-		void AIPlayerStator::SettingObserveButtleTargets() {
-			auto selfTeamMember = GetGameObject()->GetComponent<I_TeamMember>(false);
-			if (!selfTeamMember) {
-				return;
-			}
-
-			//別チームをバトル監視対象にする。
-			auto teamMembers = ShareClassesManager::GetInstance()->GetCastShareClasses<I_TeamMember>();
-			for (auto& member : teamMembers) {
-				//別チームなら、監視対象に追加
-				if (member.lock()->GetTeam() != selfTeamMember->GetTeam()) {
-					m_observeButtleTarget->AddObserveTarget(member.lock()->GetOwnerObject());
-				}
-			}
+			m_stateMachine->AddEdge(
+				StateType::Buttle,
+				StateType::HidePlacePatrol,
+				[&](const TransitionMember& member) { return IsLostButtleTarget(member); }
+			);
 		}
 
 	}
