@@ -73,13 +73,7 @@ namespace basecross {
 
 					for (auto member : GetMembers()) {
 						//メンバーがnullなら処理をしない。
-						if (member.expired()) {	
-							continue;
-						}
-
-						//すでにバトルステートなら遷移しない。
-						auto stator = member.lock()->GetGameObject()->GetComponent<AIPlayerStator>(false);
-						if (stator && stator->IsCurrentState(AIPlayerStator::StateType::Buttle)) {
+						if (member.expired()) {
 							continue;
 						}
 
@@ -87,9 +81,9 @@ namespace basecross {
 						auto isRequester = [&](const std::shared_ptr<Tuple::ButtleTarget>& tuple) {
 							return tuple->GetRequester() == member.lock();
 						};
-						auto buttles = tupleSpace->Takes<Tuple::ButtleTarget>(isRequester);
+						auto buttleTuples = tupleSpace->Takes<Tuple::ButtleTarget>(isRequester);
 
-						if (buttles.empty()) {	//空なら処理を飛ばす。
+						if (buttleTuples.empty()) {	//空なら処理を飛ばす。
 							continue;
 						}
 
@@ -97,29 +91,17 @@ namespace basecross {
 						auto sortFunc = [](const std::shared_ptr<Tuple::ButtleTarget>& left, const std::shared_ptr<Tuple::ButtleTarget>& right) {
 							return left->GetValue() < right->GetValue();
 						};
-						std::sort(buttles.begin(), buttles.end(), sortFunc);	//ソート
+						std::sort(buttleTuples.begin(), buttleTuples.end(), sortFunc);	//ソート
 
-						auto buttle = buttles[0];	//一番評価の高い値を参照
+						auto buttleTuple = buttleTuples[0];	//一番評価の高い値を参照
 
-						//メンバーの
-
-						if (buttle->GetValue() < ButtleRange) {	//バトル距離いないなら
-							auto targetManager = member.lock()->GetGameObject()->GetComponent<TargetManager>(false);
-							if (targetManager && stator) {
-								//メンバーのタプルスペースにバトル状態に遷移することを伝える。
-								auto memberTupleSpace = member.lock()->GetTupleSpace();
-
-								memberTupleSpace->Write<Tuple::ButtleTransition>(
-									GetThis<HidePlacePatrol>(), 
-									buttle->GetTarget(), 
-									buttle->GetValue()
-								);
-
-								//バトルメンバーにアサイン
-
-
-							}
-						}
+						//メンバーのタプルスペースにバトル状態に遷移することを伝える。
+						auto memberTupleSpace = member.lock()->GetTupleSpace();
+						memberTupleSpace->Write<Tuple::ButtleTransition>(
+							GetThis<HidePlacePatrol>(),
+							buttleTuple->GetTarget(),
+							buttleTuple->GetValue()
+						);
 					}
 				}
 
