@@ -26,7 +26,9 @@ namespace basecross {
 
 					AttackSelecter,		//攻撃(シーケンス(移動が必要なければ飛ばす))
 						AttackMoveSelecter,	//攻撃中の移動セレクター
-							NearSeekMoveTask,	//近づくタスク(気づかれてなかったら、距離詰めたいかも)
+							NearMoveSelecter,	//近づくタスク(気づかれてなかったら、距離詰めたいかも)
+								NearSeekMoveTask,	//直線的に近づく
+								NearAstarMoveTask,	//Astarを使って近づく
 							WanparoundSelecter,	//回り込む(見方が打ち合っていたら)
 								RightSideMoveTask,	//右サイド
 								LeftSideMoveTask,	//左サイド 

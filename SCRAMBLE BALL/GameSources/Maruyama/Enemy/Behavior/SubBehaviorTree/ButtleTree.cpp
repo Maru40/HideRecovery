@@ -13,6 +13,8 @@
 #include "Maruyama/Enemy/Component/EnemyBase.h"
 
 #include "Maruyama/Enemy/Behavior/Task/BehaviorTask_Shot.h"
+#include "Maruyama/Enemy/Behavior/Task/NearSeekMove.h"
+
 #include "Maruyama/Enemy/Behavior/Interface/I_PriorityController.h"
 
 namespace basecross {
@@ -38,8 +40,13 @@ namespace basecross {
 					//攻撃中の移動セレクター
 					m_behaviorTree->AddSelecter(NodeType::AttackMoveSelecter);
 
-					//近づくタスク
-					//m_behaviorTree->AddTask(NodeType::NearSeekMoveTask,);
+					//近づくセレクター
+					m_behaviorTree->AddSelecter(NodeType::NearMoveSelecter);
+
+					//直線的に近づくセレクター
+					m_behaviorTree->AddTask<Task::NearSeekMove>(NodeType::NearSeekMoveTask, enemy);
+
+					//m_behaviorTree->AddTask(NodeType::NearAstarMoveTask);
 					
 					//回り込みセレクター
 					m_behaviorTree->AddSelecter(NodeType::WanparoundSelecter);
@@ -85,8 +92,12 @@ namespace basecross {
 					m_behaviorTree->AddEdge(NodeType::AttackSelecter, NodeType::ShotTask, 0.0f);
 
 					//攻撃中の移動セレクター
-					//m_behaviorTree->AddEdge(NodeType::AttackMoveSelecter, NodeType::NearSeekMoveTask, (int)NodeType::NearSeekMoveTask);
+					m_behaviorTree->AddEdge(NodeType::AttackMoveSelecter, NodeType::NearMoveSelecter, (int)NodeType::NearMoveSelecter);
 					m_behaviorTree->AddEdge(NodeType::AttackMoveSelecter, NodeType::WanparoundSelecter, (int)NodeType::WanparoundSelecter);
+
+					//近づくときのセレクター
+					m_behaviorTree->AddEdge(NodeType::NearMoveSelecter, NodeType::NearSeekMoveTask, (int)NodeType::NearSeekMoveTask);
+					//m_behaviorTree->AddEdge(NodeType::NearMoveSelecter, NodeType::NearAstarMoveTask, (int)NodeType::NearAstarMoveTask);
 
 					//回り込みセレクター
 					//m_behaviorTree->AddEdge(NodeType::WanparoundSelecter, NodeType::RightSideMoveTask, (int)NodeType::RightSideMoveTask);
@@ -104,7 +115,8 @@ namespace basecross {
 				}
 
 				void ButtleTree::CreateDecorator() {
-
+					//Shotにデコレータ追加
+					
 				}
 
 			}
