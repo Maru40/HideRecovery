@@ -75,7 +75,7 @@ namespace basecross {
 						return false;
 					}
 
-					return m_eyeRange.lock()->IsInEyeRange(targetManager->GetTarget(), m_paramPtr->eyeParametor.length);
+					return m_eyeRange.lock()->IsInEyeRange(targetManager->GetTarget(), m_paramPtr->eyeParametor);
 				}
 
 				bool IsInEyeTarget::CanUpdate() {
@@ -122,7 +122,7 @@ namespace basecross {
 						return true;	//ターゲットが存在しないならtrue
 					}
 
-					if (m_eyeRange.lock()->IsInEyeRange(targetManager->GetTarget(), m_paramPtr->eyeParametor.length)) {
+					if (m_eyeRange.lock()->IsInEyeRange(targetManager->GetTarget(), m_paramPtr->eyeParametor)) {
 						return false;	//ターゲットが視界内にいるならfalse(Lostしてない)
 					}
 
