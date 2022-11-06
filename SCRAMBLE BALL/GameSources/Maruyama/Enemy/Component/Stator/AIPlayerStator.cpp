@@ -33,8 +33,19 @@
 
 #include "Maruyama/Utility/Component/TargetManager.h"
 
+#include "Maruyama/Enemy/AIDirector/CombatCoordinator.h"
+
 namespace basecross {
 	namespace Enemy {
+
+		//--------------------------------------------------------------------------------------
+		///	AIPlayerStatorの遷移条件メンバー
+		//--------------------------------------------------------------------------------------
+
+		AIPlayerStator_TransitionMember::AIPlayerStator_TransitionMember():
+			hidePatrolEeyRange(5.0f),
+			buttleStartEyeRange(10.0f)
+		{}
 
 		//--------------------------------------------------------------------------------------
 		///	遷移条件式
@@ -50,15 +61,15 @@ namespace basecross {
 			auto buttleTransition = tupleSpace->Take<Tuple::ButtleTransition>();
 
 			//メッセージが届いていたら。
-			if (buttleTransition) {
+			if (buttleTransition && buttleTransition->GetValue() < member.buttleStartEyeRange) {
 				//ターゲットの設定
 				auto targetManager = m_targetManager.lock();
 				auto target = buttleTransition->GetTarget();
 				targetManager->SetTarget(target);
 
-				//メンバーの変更を通知
+				//ファクションの変更を通知
 				auto faction = m_factionMember.lock()->GetFactionCoordinator();
-				
+				faction->TransitionFaction<CombatCoordinator>(m_factionMember.lock());
 
 				return true;
 			}

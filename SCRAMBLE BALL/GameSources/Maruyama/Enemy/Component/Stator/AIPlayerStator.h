@@ -43,9 +43,10 @@ namespace basecross {
 		///	AIPlayerStator‚Ì‘JˆÚğŒƒƒ“ƒo[
 		//--------------------------------------------------------------------------------------
 		struct AIPlayerStator_TransitionMember {
-			float hidePatrolEeyRange = 5.0f;	//‰B‚µêŠ‚ğ’T‚µ‚Ä‚¢‚é‚Æ‚«‚Ì‹ŠE”ÍˆÍ
+			float hidePatrolEeyRange;	//‰B‚µêŠ‚ğ’T‚µ‚Ä‚¢‚é‚Æ‚«‚Ì‹ŠE”ÍˆÍ
+			float buttleStartEyeRange;	//ƒoƒgƒ‹ŠJn‚Ì‹ŠE”ÍˆÍ
 
-			AIPlayerStator_TransitionMember() = default;
+			AIPlayerStator_TransitionMember();
 		};
 
 		//--------------------------------------------------------------------------------------
