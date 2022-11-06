@@ -44,7 +44,7 @@ namespace basecross {
 
 		AIPlayerStator_TransitionMember::AIPlayerStator_TransitionMember():
 			hidePatrolEeyRange(5.0f),
-			buttleStartEyeRange(10.0f)
+			buttleStartEyeRange(20.0f)
 		{}
 
 		//--------------------------------------------------------------------------------------

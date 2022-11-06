@@ -1,6 +1,6 @@
 /*!
-@file IsInEyeTarget.cpp
-@brief IsInEyeTargetなど実体
+@file IsInEyeTargets.cpp
+@brief IsInEyeTargetsなど実体
 */
 
 #include "stdafx.h"
@@ -15,7 +15,6 @@
 #include "Maruyama/Utility/Component/TargetManager.h"
 
 #include "Maruyama/Utility/Timer/GameTimer.h"
-#include "Maruyama/Utility/ObserveIsInEyeTarget.h"
 
 #include "Maruyama/Utility/Utility.h"
 
@@ -32,53 +31,51 @@ namespace basecross {
 				/// 監視対象が視界範囲にいるかどうかを判断するデコレータのパラメータ
 				//--------------------------------------------------------------------------------------
 
-				IsInEyeTarget_Parametor::IsInEyeTarget_Parametor():
-					IsInEyeTarget_Parametor(10.0f, 20.0f)
+				IsInEyeTarget_Parametor::IsInEyeTarget_Parametor() :
+					IsInEyeTarget_Parametor(EyeSearchRangeParametor())
 				{}
 
-				IsInEyeTarget_Parametor::IsInEyeTarget_Parametor(const float lostIntervalTime, const float farRange):
+				IsInEyeTarget_Parametor::IsInEyeTarget_Parametor(const EyeSearchRangeParametor& eyeParametor) :
+					IsInEyeTarget_Parametor(eyeParametor, 10.0f)
+				{}
+
+				IsInEyeTarget_Parametor::IsInEyeTarget_Parametor(
+					const EyeSearchRangeParametor& eyeParametor,
+					const float lostIntervalTime
+				):
+					IsInEyeTarget_Parametor(eyeParametor, lostIntervalTime, 30.0f)
+				{}
+
+				IsInEyeTarget_Parametor::IsInEyeTarget_Parametor(
+					const EyeSearchRangeParametor& eyeParametor,
+					const float lostIntervalTime, 
+					const float farRange
+				) :
+					eyeParametor(eyeParametor),
 					lostIntervalTime(lostIntervalTime),
 					farRange(farRange)
 				{}
 
 				//--------------------------------------------------------------------------------------
-				/// 監視対象が視界範囲にいるかどうかを判断するデコレータ本体
+				/// 監視対象が視界範囲にいるかどうかを判断するデコレータ
 				//--------------------------------------------------------------------------------------
 
-				IsInEyeTarget::IsInEyeTarget(const std::shared_ptr<Enemy::EnemyBase>& owner) :
-					IsInEyeTarget(owner, std::vector<std::weak_ptr<GameObject>>())
-				{}
-
-				IsInEyeTarget::IsInEyeTarget(
-					const std::shared_ptr<Enemy::EnemyBase>& owner,
-					const ObserveSharedTargets& observeTargets,
-					const Parametor& parametor
-				):
-					IsInEyeTarget(
-						owner, 
-						maru::Utility::ConvertArraySharedToWeak(observeTargets),
-						parametor
-					)
-				{}
-
-				IsInEyeTarget::IsInEyeTarget(
-					const std::shared_ptr<Enemy::EnemyBase>& owner,
-					const ObserveTargets& observeTargets,
-					const Parametor& parametor
-				):
+				IsInEyeTarget::IsInEyeTarget(const std::shared_ptr<Enemy::EnemyBase>& owner, const Parametor* paramPtr):
 					DecoratorBase(owner),
-					m_param(parametor),
-					m_timer(new GameTimer(0.0f)),
-					m_observeIsInTarget(new ObserveIsInEyeTarget(owner->GetGameObject()->GetComponent<EyeSearchRange>(), observeTargets))
+					m_paramPtr(paramPtr),
+					m_timer(new GameTimer(0.0f))
 				{
 					m_eyeRange = owner->GetGameObject()->GetComponent<EyeSearchRange>(false);
 					m_targetManager = owner->GetGameObject()->GetComponent<TargetManager>(false);
 				}
 
 				bool IsInEyeTarget::CanTransition() const {
-					auto target = m_observeIsInTarget->SearchIsInEyeTarget();
-					
-					return target ? true : false;	//ターゲットが存在するならtrue
+					auto targetManager = m_targetManager.lock();
+					if (!targetManager || !targetManager->HasTarget()) {
+						return false;
+					}
+
+					return m_eyeRange.lock()->IsInEyeRange(targetManager->GetTarget(), m_paramPtr->eyeParametor.length);
 				}
 
 				bool IsInEyeTarget::CanUpdate() {
@@ -102,24 +99,10 @@ namespace basecross {
 						}
 					}
 					else {
-						m_timer->ResetTimer(m_param.lostIntervalTime);
+						m_timer->ResetTimer(m_paramPtr->lostIntervalTime);
 					}
 
 					return true;
-				}
-
-				bool IsInEyeTarget::IsLost() const {
-					auto targetManager = m_targetManager.lock();
-					if (!targetManager || !targetManager->HasTarget()) {
-						return true;	//ターゲットが存在しないならtrue
-					}
-
-					auto targetPosition = targetManager->GetTargetPosition();
-					if (m_eyeRange.lock()->IsInEyeRange(targetPosition)) {
-						return false;	//ターゲットが視界内にいるならfalse(Lostしてない)
-					}
-
-					return true;		//視界内にいないため、Lost
 				}
 
 				bool IsInEyeTarget::IsFarRange() const {
@@ -130,27 +113,21 @@ namespace basecross {
 
 					auto toTargetRange = targetManager->CalcuToTargetVec().length();
 
-					return m_param.farRange < toTargetRange;	//farRangeよりターゲットが遠くにいるならtrue
+					return m_paramPtr->farRange < toTargetRange;	//farRangeよりターゲットが遠くにいるならtrue
 				}
 
-				//--------------------------------------------------------------------------------------
-				/// アクセッサ
-				//--------------------------------------------------------------------------------------
+				bool IsInEyeTarget::IsLost() const {
+					auto targetManager = m_targetManager.lock();
+					if (!targetManager || !targetManager->HasTarget()) {
+						return true;	//ターゲットが存在しないならtrue
+					}
 
-				void IsInEyeTarget::AddObserveTarget(const std::shared_ptr<GameObject>& target) {
-					m_observeIsInTarget->AddObserveTarget(target);
-				}
+					auto targetPosition = targetManager->GetTargetPosition();
+					if (m_eyeRange.lock()->IsInEyeRange(targetPosition), m_paramPtr->eyeParametor.length) {
+						return false;	//ターゲットが視界内にいるならfalse(Lostしてない)
+					}
 
-				void IsInEyeTarget::SetObserveTargets(const ObserveTargets& targets) {
-					m_observeIsInTarget->SetObserveTargets(targets); 
-				}
-
-				void IsInEyeTarget::SetObserveTargets(const ObserveSharedTargets& targets) {
-					SetObserveTargets(maru::Utility::ConvertArraySharedToWeak(targets));
-				}
-
-				_NODISCARD IsInEyeTarget::ObserveTargets IsInEyeTarget::GetObserveTargets() const noexcept {
-					return m_observeIsInTarget->GetObserveTargets();
+					return true;		//視界内にいないため、Lost
 				}
 
 			}

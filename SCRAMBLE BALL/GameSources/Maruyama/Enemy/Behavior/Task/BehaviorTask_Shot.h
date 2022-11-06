@@ -18,6 +18,7 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 	class UseWeapon;
 	class TargetManager;
+	class VelocityManager;
 	class RotationController;
 	class OnlinePlayerSynchronizer;
 
@@ -74,6 +75,7 @@ namespace basecross {
 
 					std::weak_ptr<UseWeapon> m_useWeapon;							//武器の使用
 					std::weak_ptr<TargetManager> m_targetManager;					//ターゲット管理
+					std::weak_ptr<VelocityManager> m_velocityManager;				//速度管理
 					std::weak_ptr<RotationController> m_rotationController;			//回転管理
 					std::weak_ptr<OnlinePlayerSynchronizer> m_onlineSynchronizer;	//オンラインシンクロ
 

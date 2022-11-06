@@ -68,7 +68,6 @@ namespace basecross {
 				}
 
 				void HidePlacePatrol::ObserveTransitionButtle() {
-					constexpr float ButtleRange = 10.0f;	//バトルの距離(将来的にメンバ)
 					auto tupleSpace = GetTupleSpace();
 
 					for (auto member : GetMembers()) {

@@ -16,17 +16,27 @@ namespace basecross {
 	namespace maru {
 		namespace Behavior {
 
+			namespace Decorator {
+				struct IsInEyeTarget_Parametor;
+			}
+
+			namespace Task {
+				struct NearSeekMove_Parametor;
+			}
+
 			namespace SubBehavior {
 
 				//--------------------------------------------------------------------------------------
-				/// バトル用のビヘイビアツリー
+				/// バトル用のビヘイビアツリーのタイプ
 				//--------------------------------------------------------------------------------------
 				enum class ButtleTree_BihaviorType {
 					FirstSelecter,		//初期セレクター
 
 					AttackSelecter,		//攻撃(シーケンス(移動が必要なければ飛ばす))
 						AttackMoveSelecter,	//攻撃中の移動セレクター
-							NearSeekMoveTask,	//近づくタスク(気づかれてなかったら、距離詰めたいかも)
+							NearMoveSelecter,	//近づくタスク(気づかれてなかったら、距離詰めたいかも)
+								NearSeekMoveTask,	//直線的に近づく
+								NearAstarMoveTask,	//Astarを使って近づく
 							WanparoundSelecter,	//回り込む(見方が打ち合っていたら)
 								RightSideMoveTask,	//右サイド
 								LeftSideMoveTask,	//左サイド 
@@ -43,18 +53,57 @@ namespace basecross {
 				};
 
 				//--------------------------------------------------------------------------------------
+				/// バトル用のビヘイビアツリーのパラメータのデコレータ群
+				//--------------------------------------------------------------------------------------
+				struct ButtleTree_DecoratorParametor {
+					Decorator::IsInEyeTarget_Parametor* shot_isInEyeParamPtr;	//視界範囲制御デコレータ
+
+					ButtleTree_DecoratorParametor();
+
+					virtual ~ButtleTree_DecoratorParametor();
+				};
+
+				//--------------------------------------------------------------------------------------
+				/// バトル用のビヘイビアツリーのパラメータのタスク群
+				//--------------------------------------------------------------------------------------
+				struct ButtleTree_TaskParametor {
+					Task::NearSeekMove_Parametor* nearSeekParamPtr;
+
+					ButtleTree_TaskParametor();
+
+					virtual ~ButtleTree_TaskParametor();
+				};
+
+				//--------------------------------------------------------------------------------------
+				/// バトル用のビヘイビアツリーのパラメータ
+				//--------------------------------------------------------------------------------------
+				struct ButtleTree_Parametor {
+					ButtleTree_TaskParametor taskParam;
+					ButtleTree_DecoratorParametor decoratorParam;
+
+					ButtleTree_Parametor();
+
+					virtual ~ButtleTree_Parametor();
+				};
+
+				//--------------------------------------------------------------------------------------
 				/// バトル用のビヘイビアツリー
 				//--------------------------------------------------------------------------------------
 				class ButtleTree : public SubBehaviorTreeBase<ButtleTree_BihaviorType>
 				{
 				public:
 					using NodeType = ButtleTree_BihaviorType;
+					using Parametor = ButtleTree_Parametor;
 
 				private:
-
+					Parametor m_param;
 
 				public:
-					ButtleTree(const std::shared_ptr<GameObject>& owner);
+					ButtleTree(
+						const std::shared_ptr<GameObject>& owner
+					);
+
+					virtual ~ButtleTree() = default;
 
 				protected:
 					void CreateNode() override;
@@ -72,6 +121,8 @@ namespace basecross {
 					void CreateEvadeEdge();
 
 					void CreateDecorator() override;
+
+					void InitializeParametor();
 
 				};
 

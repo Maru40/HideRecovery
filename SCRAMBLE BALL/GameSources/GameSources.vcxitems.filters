@@ -1237,9 +1237,6 @@
     <Filter Include="Maruyama\Enemy\BehaviorTree\Decorator">
       <UniqueIdentifier>{20e32679-f50f-4a3f-bded-8db56e691e6e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Maruyama\Enemy\BehaviorTree\Decorator\IsInEyeTarget">
-      <UniqueIdentifier>{48e70ae6-5554-4167-9133-ef225bccb201}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Maruyama\Utility\ObserveIsInEyeTarget">
       <UniqueIdentifier>{8220dc99-fea5-4e2b-b9cb-6fb7f90da84c}</UniqueIdentifier>
     </Filter>
@@ -1290,6 +1287,15 @@
     </Filter>
     <Filter Include="Maruyama\Utility\TaskList\CommonTasks\CrabWalk">
       <UniqueIdentifier>{ffca069f-9e5b-4f8a-ae6a-3b1379de204c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\BehaviorTree\Task\NearSeekMove">
+      <UniqueIdentifier>{1f0c30e4-e734-45c6-b469-22c4e601abc7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\BehaviorTree\Decorator\IsInEyeTargets">
+      <UniqueIdentifier>{48e70ae6-5554-4167-9133-ef225bccb201}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\BehaviorTree\Decorator\IsInEyeTarget">
+      <UniqueIdentifier>{a5daad0d-3170-4719-95ec-474b0ddf8134}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -2376,8 +2382,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\PostEffect\OutlinePostEffect.h">
       <Filter>Watanabe\Shader\PostProcess\OutlinePostEffect</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\IsInEyeTarget.h">
-      <Filter>Maruyama\Enemy\BehaviorTree\Decorator\IsInEyeTarget</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\IsInEyeTargets.h">
+      <Filter>Maruyama\Enemy\BehaviorTree\Decorator\IsInEyeTargets</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\ObserveIsInEyeTarget.h">
       <Filter>Maruyama\Utility\ObserveIsInEyeTarget</Filter>
@@ -2416,6 +2422,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\HasBallUI.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\PasscodeUI.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\GameController.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Task\NearSeekMove.h">
+      <Filter>Maruyama\Enemy\BehaviorTree\Task\NearSeekMove</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\IsInEyeTarget.h">
+      <Filter>Maruyama\Enemy\BehaviorTree\Decorator\IsInEyeTarget</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -3402,8 +3414,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\PostEffect\OutlinePostEffect.cpp">
       <Filter>Watanabe\Shader\PostProcess\OutlinePostEffect</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\IsInEyeTarget.cpp">
-      <Filter>Maruyama\Enemy\BehaviorTree\Decorator\IsInEyeTarget</Filter>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\IsInEyeTargets.cpp">
+      <Filter>Maruyama\Enemy\BehaviorTree\Decorator\IsInEyeTargets</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\ObserveIsInEyeTarget.cpp">
       <Filter>Maruyama\Utility\ObserveIsInEyeTarget</Filter>
@@ -3442,6 +3454,12 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\HasBallUI.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\PasscodeUI.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Utility\GameController.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Task\NearSeekMove.cpp">
+      <Filter>Maruyama\Enemy\BehaviorTree\Task\NearSeekMove</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\IsInEyeTarget.cpp">
+      <Filter>Maruyama\Enemy\BehaviorTree\Decorator\IsInEyeTarget</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="$(MSBuildThisFileDirectory)..\..\Libs\BaseLib\DxShaders\SlimeVS.hlsl">
