@@ -39,9 +39,13 @@ namespace basecross {
 			CoordinatorBase(members), m_director(director)
 		{}
 
-		void FactionCoordinator::OnStart() {
+		void FactionCoordinator::OnCreate() {
 			//初めはパトロール設定をする。
-			CreateFaction<PatrolCoordinator, AICoordinator::Patrol::HidePlacePatrol>(m_patrols, GetMembers());
+			CreateFaction<AICoordinator::Patrol::HidePlacePatrol>(GetMembers());
+		}
+
+		void FactionCoordinator::OnStart() {
+
 		}
 
 		bool FactionCoordinator::OnUpdate() {
