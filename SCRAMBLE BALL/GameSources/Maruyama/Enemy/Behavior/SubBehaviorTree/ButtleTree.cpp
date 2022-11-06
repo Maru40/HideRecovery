@@ -201,7 +201,7 @@ namespace basecross {
 						auto& param = m_param.taskParam.nearAstarParamPtr;
 						auto& moveParam = param->moveParamPtr->movePositionsParam->moveParamPtr;
 						moveParam->speed = MoveSpeed;
-						moveParam->targetNearRange = 15.0f;
+						//moveParam->targetNearRange = 15.0f;
 						moveParam->moveType = basecross::Task::ToTargetMove::MoveType::ArriveVelocity;
 					}
 				}
