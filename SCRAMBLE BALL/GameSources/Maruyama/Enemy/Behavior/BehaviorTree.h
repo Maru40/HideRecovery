@@ -470,7 +470,7 @@ namespace basecross {
 					}
 
 					//‘JˆÚæ‚ª‚È‚¢‚½‚ßAPop‚µ‚Ä–ß‚éB
-					return ReverseStack(node);
+					return Recursive_TransitionNode(ReverseStack(node));
 				}
 
 				/// <summary>
