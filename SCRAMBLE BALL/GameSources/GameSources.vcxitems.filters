@@ -1297,6 +1297,9 @@
     <Filter Include="Maruyama\Enemy\BehaviorTree\Decorator\IsInEyeTarget">
       <UniqueIdentifier>{a5daad0d-3170-4719-95ec-474b0ddf8134}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Enemy\BehaviorTree\Task\NearAstarMove">
+      <UniqueIdentifier>{3a914f6d-b8b6-49d6-98e2-43605c6aeba1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2428,6 +2431,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\IsInEyeTarget.h">
       <Filter>Maruyama\Enemy\BehaviorTree\Decorator\IsInEyeTarget</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Task\NearAstarMove.h">
+      <Filter>Maruyama\Enemy\BehaviorTree\Task\NearAstarMove</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -3459,6 +3465,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\IsInEyeTarget.cpp">
       <Filter>Maruyama\Enemy\BehaviorTree\Decorator\IsInEyeTarget</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Task\NearAstarMove.cpp">
+      <Filter>Maruyama\Enemy\BehaviorTree\Task\NearAstarMove</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
