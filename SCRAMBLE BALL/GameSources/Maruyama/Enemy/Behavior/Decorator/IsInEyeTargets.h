@@ -1,6 +1,6 @@
 /*!
-@file IsInEyeTarget.h
-@brief IsInEyeTargetなど
+@file IsInEyeTargets.h
+@brief IsInEyeTargetsなど
 担当者：丸山 裕喜
 */
 
@@ -34,25 +34,25 @@ namespace basecross {
 				//--------------------------------------------------------------------------------------
 				/// 監視対象が視界範囲にいるかどうかを判断するデコレータのパラメータ
 				//--------------------------------------------------------------------------------------
-				struct IsInEyeTarget_Parametor {
+				struct IsInEyeTargets_Parametor {
 					float lostIntervalTime;	//見失った後に追いかける時間
 					float farRange;			//追従不可能な程遠くに行ったと判断する距離
 
-					IsInEyeTarget_Parametor();
+					IsInEyeTargets_Parametor();
 
-					IsInEyeTarget_Parametor(const float lostIntervalTime, const float farRange);
+					IsInEyeTargets_Parametor(const float lostIntervalTime, const float farRange);
 				};
 
 				//--------------------------------------------------------------------------------------
 				/// 監視対象が視界範囲にいるかどうかを判断するデコレータ
 				//--------------------------------------------------------------------------------------
-				class IsInEyeTarget : public DecoratorBase<Enemy::EnemyBase>
+				class IsInEyeTargets : public DecoratorBase<Enemy::EnemyBase>
 				{
 				public:
 					using ObserveTargets = std::vector<std::weak_ptr<GameObject>>;
 					using ObserveSharedTargets = std::vector<std::shared_ptr<GameObject>>;
 
-					using Parametor = IsInEyeTarget_Parametor;
+					using Parametor = IsInEyeTargets_Parametor;
 
 				private:
 					Parametor m_param;	//パラメータ
@@ -64,21 +64,21 @@ namespace basecross {
 					std::weak_ptr<TargetManager> m_targetManager;				//目標監視クラス
 					
 				public:
-					IsInEyeTarget(const std::shared_ptr<Enemy::EnemyBase>& owner);
+					IsInEyeTargets(const std::shared_ptr<Enemy::EnemyBase>& owner);
 
-					IsInEyeTarget(
+					IsInEyeTargets(
 						const std::shared_ptr<Enemy::EnemyBase>& owner,
 						const ObserveSharedTargets& observeTargets,
 						const Parametor& parametor = Parametor()
 					);
 
-					IsInEyeTarget(
+					IsInEyeTargets(
 						const std::shared_ptr<Enemy::EnemyBase>& owner,
 						const ObserveTargets& observeTargets,
 						const Parametor& parametor = Parametor()
 					);
 
-					virtual ~IsInEyeTarget() = default;
+					virtual ~IsInEyeTargets() = default;
 
 					bool CanTransition() const override;
 

@@ -1,6 +1,6 @@
 /*!
-@file IsInEyeTarget.cpp
-@brief IsInEyeTargetなど実体
+@file IsInEyeTargets.cpp
+@brief IsInEyeTargetsなど実体
 */
 
 #include "stdafx.h"
@@ -8,7 +8,7 @@
 
 #include "../Interface/I_Decorator.h"
 
-#include "IsInEyeTarget.h"
+#include "IsInEyeTargets.h"
 
 #include "Maruyama/Enemy/Component/EnemyBase.h"
 #include "Maruyama/Enemy/Component/EyeSearchRange.h"
@@ -32,11 +32,11 @@ namespace basecross {
 				/// 監視対象が視界範囲にいるかどうかを判断するデコレータのパラメータ
 				//--------------------------------------------------------------------------------------
 
-				IsInEyeTarget_Parametor::IsInEyeTarget_Parametor():
-					IsInEyeTarget_Parametor(10.0f, 20.0f)
+				IsInEyeTargets_Parametor::IsInEyeTargets_Parametor():
+					IsInEyeTargets_Parametor(10.0f, 20.0f)
 				{}
 
-				IsInEyeTarget_Parametor::IsInEyeTarget_Parametor(const float lostIntervalTime, const float farRange):
+				IsInEyeTargets_Parametor::IsInEyeTargets_Parametor(const float lostIntervalTime, const float farRange):
 					lostIntervalTime(lostIntervalTime),
 					farRange(farRange)
 				{}
@@ -45,23 +45,23 @@ namespace basecross {
 				/// 監視対象が視界範囲にいるかどうかを判断するデコレータ本体
 				//--------------------------------------------------------------------------------------
 
-				IsInEyeTarget::IsInEyeTarget(const std::shared_ptr<Enemy::EnemyBase>& owner) :
-					IsInEyeTarget(owner, std::vector<std::weak_ptr<GameObject>>())
+				IsInEyeTargets::IsInEyeTargets(const std::shared_ptr<Enemy::EnemyBase>& owner) :
+					IsInEyeTargets(owner, std::vector<std::weak_ptr<GameObject>>())
 				{}
 
-				IsInEyeTarget::IsInEyeTarget(
+				IsInEyeTargets::IsInEyeTargets(
 					const std::shared_ptr<Enemy::EnemyBase>& owner,
 					const ObserveSharedTargets& observeTargets,
 					const Parametor& parametor
 				):
-					IsInEyeTarget(
+					IsInEyeTargets(
 						owner, 
 						maru::Utility::ConvertArraySharedToWeak(observeTargets),
 						parametor
 					)
 				{}
 
-				IsInEyeTarget::IsInEyeTarget(
+				IsInEyeTargets::IsInEyeTargets(
 					const std::shared_ptr<Enemy::EnemyBase>& owner,
 					const ObserveTargets& observeTargets,
 					const Parametor& parametor
@@ -75,13 +75,13 @@ namespace basecross {
 					m_targetManager = owner->GetGameObject()->GetComponent<TargetManager>(false);
 				}
 
-				bool IsInEyeTarget::CanTransition() const {
+				bool IsInEyeTargets::CanTransition() const {
 					auto target = m_observeIsInTarget->SearchIsInEyeTarget();
 					
 					return target ? true : false;	//ターゲットが存在するならtrue
 				}
 
-				bool IsInEyeTarget::CanUpdate() {
+				bool IsInEyeTargets::CanUpdate() {
 					//ターゲットが存在しないなら、更新できない。
 					auto targetManager = m_targetManager.lock();
 					if (!targetManager || !targetManager->HasTarget()) {
@@ -108,7 +108,7 @@ namespace basecross {
 					return true;
 				}
 
-				bool IsInEyeTarget::IsLost() const {
+				bool IsInEyeTargets::IsLost() const {
 					auto targetManager = m_targetManager.lock();
 					if (!targetManager || !targetManager->HasTarget()) {
 						return true;	//ターゲットが存在しないならtrue
@@ -122,7 +122,7 @@ namespace basecross {
 					return true;		//視界内にいないため、Lost
 				}
 
-				bool IsInEyeTarget::IsFarRange() const {
+				bool IsInEyeTargets::IsFarRange() const {
 					auto targetManager = m_targetManager.lock();
 					if (!targetManager || !targetManager->HasTarget()) {
 						return true;	//ターゲットが存在しないならtrue
@@ -137,19 +137,19 @@ namespace basecross {
 				/// アクセッサ
 				//--------------------------------------------------------------------------------------
 
-				void IsInEyeTarget::AddObserveTarget(const std::shared_ptr<GameObject>& target) {
+				void IsInEyeTargets::AddObserveTarget(const std::shared_ptr<GameObject>& target) {
 					m_observeIsInTarget->AddObserveTarget(target);
 				}
 
-				void IsInEyeTarget::SetObserveTargets(const ObserveTargets& targets) {
+				void IsInEyeTargets::SetObserveTargets(const ObserveTargets& targets) {
 					m_observeIsInTarget->SetObserveTargets(targets); 
 				}
 
-				void IsInEyeTarget::SetObserveTargets(const ObserveSharedTargets& targets) {
+				void IsInEyeTargets::SetObserveTargets(const ObserveSharedTargets& targets) {
 					SetObserveTargets(maru::Utility::ConvertArraySharedToWeak(targets));
 				}
 
-				_NODISCARD IsInEyeTarget::ObserveTargets IsInEyeTarget::GetObserveTargets() const noexcept {
+				_NODISCARD IsInEyeTargets::ObserveTargets IsInEyeTargets::GetObserveTargets() const noexcept {
 					return m_observeIsInTarget->GetObserveTargets();
 				}
 
