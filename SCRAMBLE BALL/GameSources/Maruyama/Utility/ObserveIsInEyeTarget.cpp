@@ -60,6 +60,31 @@ namespace basecross {
 		return nullptr;
 	}
 
+	std::vector<std::shared_ptr<GameObject>> ObserveIsInEyeTarget::SearchIsInEyeTargets() const {
+		std::vector<std::shared_ptr<GameObject>> result;
+
+		auto eyeRange = m_eyeRange.lock();
+		if (!eyeRange) {
+			Debug::GetInstance()->Log(L"IsInEyeTarget::CanTransition() : 必要コンポーネントがありません。");
+			return result;	//視界がないから判断できないため、監視できない。
+		}
+
+		for (auto& weakTarget : m_observeTargets) {
+			if (weakTarget.expired()) {
+				continue;	//対象がないなら対象外
+			}
+
+			//視界範囲内なら、遷移できる。
+			auto target = weakTarget.lock();
+			auto targetPosition = target->GetComponent<Transform>()->GetPosition();
+			if (eyeRange->IsInEyeRange(targetPosition)) {
+				result.push_back(target);
+			}
+		}
+
+		return result;
+	}
+
 	//--------------------------------------------------------------------------------------
 	/// アクセッサ
 	//--------------------------------------------------------------------------------------

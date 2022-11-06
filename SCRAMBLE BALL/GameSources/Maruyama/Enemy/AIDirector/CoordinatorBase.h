@@ -27,7 +27,7 @@ namespace basecross {
 		/// 調整者の基底クラス
 		//--------------------------------------------------------------------------------------
 		template<class T>
-		class CoordinatorBase : public std::enable_shared_from_this<CoordinatorBase<T>>
+		class CoordinatorBase : public std::enable_shared_from_this<CoordinatorBase<T>>, public Tuple::I_Tupler
 		{
 		private:
 			std::vector<std::weak_ptr<T>> m_members;			//登録されたメンバー配列

@@ -16,11 +16,19 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 	///	前方宣言
 	//--------------------------------------------------------------------------------------
-	
+	class EyeSearchRange;
+	class ObserveIsInEyeTarget;
+	class I_TeamMember;
+	class TargetManager;
 
 	namespace Enemy {
 
 		class EnemyBase;
+		class I_FactionMember;
+
+		namespace Tuple {
+			class I_Tupler;
+		}
 
 		//--------------------------------------------------------------------------------------
 		///	AIPlayerStatorのステートタイプ
@@ -28,14 +36,17 @@ namespace basecross {
 		enum class AIPlayerStator_StateType {
 			None,
 			HidePlacePatrol,	//隠し場所探す。
-			Attack,				//攻撃
+			Buttle,				//バトル
 		};
 
 		//--------------------------------------------------------------------------------------
 		///	AIPlayerStatorの遷移条件メンバー
 		//--------------------------------------------------------------------------------------
 		struct AIPlayerStator_TransitionMember {
-			AIPlayerStator_TransitionMember() = default;
+			float hidePatrolEeyRange;	//隠し場所を探しているときの視界範囲
+			float buttleStartEyeRange;	//バトル開始時の視界範囲
+
+			AIPlayerStator_TransitionMember();
 		};
 
 		//--------------------------------------------------------------------------------------
@@ -48,15 +59,41 @@ namespace basecross {
 			using TransitionMember = AIPlayerStator_TransitionMember;
 
 		private:
+			std::weak_ptr<EyeSearchRange> m_eye;			//視界管理
+			std::weak_ptr<I_TeamMember> m_teamMember;		//チームメンバーインターフェース
+			std::weak_ptr<I_FactionMember> m_factionMember;	//ファクションメンバーインターフェース
+			std::weak_ptr<Tuple::I_Tupler> m_tupler;		//タプルスペースを使う者
+			std::weak_ptr<TargetManager> m_targetManager;	//ターゲット管理
 
+			std::unique_ptr<ObserveIsInEyeTarget> m_observeButtleTarget;	//バトル用に監視したい対象
 
 		public:
 			AIPlayerStator(const std::shared_ptr<GameObject>& objPtr);
 
 			virtual ~AIPlayerStator() = default;
 
+			void OnLateStart() override;
+
 			void CreateNode() override;
 			void CreateEdge() override;
+
+		private:
+
+			/// <summary>
+			/// バトル対象として監視するターゲットをセッティング
+			/// </summary>
+			void SettingObserveButtleTargets();
+
+			//--------------------------------------------------------------------------------------
+			///	遷移条件系
+			//--------------------------------------------------------------------------------------
+
+			/// <summary>
+			/// バトルターゲット発見
+			/// </summary>
+			/// <param name="member">遷移条件メンバー</param>
+			/// <returns>バトルターゲット</returns>
+			bool IsFindButtleTarget(const TransitionMember& member);
 
 		};
 

@@ -42,18 +42,20 @@ namespace basecross {
 		UseWeapon_Parametor(false, false)
 	{}
 
-	UseWeapon_Parametor::UseWeapon_Parametor(const bool isAim, const bool canShot) :
+	UseWeapon_Parametor::UseWeapon_Parametor(const bool isAim, const bool canShot, const bool isUpdateRotation) :
 		defaultCameraSpeed(0.0f),
 		aimCameraSpeed(0.0f),
 		assitPower(3.0f),
 		isAim(new maru::ReactiveBool(isAim)),
-		canShot(new maru::ReactiveBool(canShot))
+		canShot(new maru::ReactiveBool(canShot)),
+		isUpdateRotation(isUpdateRotation)
 	{}
 
 	UseWeapon_Parametor::UseWeapon_Parametor(const UseWeapon_Parametor& parametor) :
 		UseWeapon_Parametor(
 			parametor.isAim->GetValue(),
-			parametor.canShot->GetValue()
+			parametor.canShot->GetValue(),
+			parametor.isUpdateRotation
 		)
 	{}
 
@@ -183,6 +185,10 @@ namespace basecross {
 	}
 
 	void UseWeapon::RotationUpdate() {
+		if (!m_param.isUpdateRotation) {	//回転更新処理をしないなら、処理を更新しない
+			return;
+		}
+
 		auto camera = GetStage()->GetView()->GetTargetCamera();
 		auto rotationController = m_rotationController.lock();
 		if (!camera || !rotationController) {
@@ -385,7 +391,7 @@ namespace basecross {
 
 	bool UseWeapon::IsAim() const { return m_param.isAim->GetValue(); }
 
-	void UseWeapon::SetCanShot(const bool isShot) { *m_param.canShot = isShot; }
+	void UseWeapon::SetCanShot(const bool canShot) { *m_param.canShot = canShot; }
 
 	bool UseWeapon::CanShot() const { return m_param.canShot->GetValue(); }
 

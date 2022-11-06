@@ -29,12 +29,13 @@ namespace basecross {
 		float defaultCameraSpeed;
 		float aimCameraSpeed;
 		float assitPower;
-		std::unique_ptr<maru::ReactiveBool> isAim;	//Aim中かどうか
+		std::unique_ptr<maru::ReactiveBool> isAim;		//Aim中かどうか
 		std::unique_ptr<maru::ReactiveBool> canShot;	//撃てる状態かどうか
+		bool isUpdateRotation;	//向きの調整を更新するかどうか
 
 		UseWeapon_Parametor();
 
-		UseWeapon_Parametor(const bool isAim, const bool isShot);
+		UseWeapon_Parametor(const bool isAim, const bool isShot, const bool isUpdateRotation = true);
 
 		/// <summary>
 		/// コピーコンストラクタ
@@ -187,6 +188,10 @@ namespace basecross {
 		void SetIsUseCamera(bool isUseCamera) { m_isUseCamera = isUseCamera; }
 
 		bool IsUseCamera() const { return m_isUseCamera; }
+
+		void SetIsUpdateRotation(const bool isUpdateRotation) { m_param.isUpdateRotation = isUpdateRotation; }
+
+		bool IsUpdateRoration() const { return m_param.isUpdateRotation; }
 
 	};
 

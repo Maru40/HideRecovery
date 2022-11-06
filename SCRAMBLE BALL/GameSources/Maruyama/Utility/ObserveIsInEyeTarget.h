@@ -51,6 +51,12 @@ namespace basecross {
 		/// <returns></returns>
 		std::shared_ptr<GameObject> SearchIsInEyeTarget() const;
 
+		/// <summary>
+		/// 視界内のターゲットを全て取得する。
+		/// </summary>
+		/// <returns>視界内のターゲット全て</returns>
+		std::vector<std::shared_ptr<GameObject>> SearchIsInEyeTargets() const;
+
 		//--------------------------------------------------------------------------------------
 		/// アクセッサ
 		//--------------------------------------------------------------------------------------
@@ -68,6 +74,8 @@ namespace basecross {
 		void SetObserveTargets(const ObserveSharedTargets& targets);
 
 		_NODISCARD ObserveTargets GetObserveTargets() const noexcept { return m_observeTargets; }
+
+		void ClearObserveTargets() { m_observeTargets.clear(); }
 
 	};
 

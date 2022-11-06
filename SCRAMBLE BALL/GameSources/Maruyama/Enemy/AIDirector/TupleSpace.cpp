@@ -8,6 +8,7 @@
 #include "stdafx.h"
 #include "Project.h"
 
+#include "Maruyama/Utility/MaruAction.h"
 #include "TupleSpace.h"
 
 namespace basecross {
@@ -42,16 +43,16 @@ namespace basecross {
 			//--------------------------------------------------------------------------------------
 
 			TupleRequestBase::TupleRequestBase(
-				const std::shared_ptr<GameObject>& requester, 
+				const std::shared_ptr<I_Tupler>& requester, 
 				const float value
 			) :
-				requester(requester),
-				value(value)
+				m_requester(requester),
+				m_value(value)
 			{}
 
 			bool TupleRequestBase::operator== (const TupleRequestBase& other) {
-				if (this->requester.lock() == other.requester.lock() &&
-					this->value == other.value)
+				if (m_requester.lock() == other.GetRequester() &&
+					m_value == other.GetValue())
 				{
 					return true;
 				}
@@ -63,20 +64,69 @@ namespace basecross {
 			/// ターゲットを見つけたことを知らせるタプル
 			//--------------------------------------------------------------------------------------
 
-			FindTarget::FindTarget(const std::shared_ptr<GameObject>& requester, const std::shared_ptr<GameObject>& target, const float value):
-				TupleRequestBase(requester, value), target(target)
+			FindTarget::FindTarget(const std::shared_ptr<I_Tupler>& requester, const std::shared_ptr<GameObject>& target, const float value):
+				TupleRequestBase(requester, value), m_target(target)
 			{}
 
 			bool FindTarget::operator== (const FindTarget& other) {
-				if (this->requester.lock() == other.requester.lock() &&
-					this->target.lock() == other.target.lock() &&
-					this->value == other.value)
+				if (GetRequester() == other.GetRequester() &&
+					GetTarget() == other.GetTarget() &&
+					GetValue() == other.GetValue())
 				{
 					return true;
 				}
 
 				return false;
 			}
+
+			//--------------------------------------------------------------------------------------
+			/// ターゲットとバトルすることをリクエストするタプル
+			//--------------------------------------------------------------------------------------
+
+			ButtleTarget::ButtleTarget(
+				const std::shared_ptr<I_Tupler>& requester,
+				const std::shared_ptr<GameObject>& target,
+				const float value
+			):
+				TupleRequestBase(requester, value),
+				target(target)
+			{}
+
+			bool ButtleTarget::operator==(const ButtleTarget& other) {
+				if (GetRequester() == other.GetRequester() &&
+					GetTarget() == other.GetTarget() &&
+					GetValue() == other.GetValue())
+				{
+					return true;
+				}
+
+				return false;
+			}
+
+			//--------------------------------------------------------------------------------------
+			/// バトルに遷移することをリクエストするタプル
+			//--------------------------------------------------------------------------------------
+
+			ButtleTransition::ButtleTransition(
+				const std::shared_ptr<I_Tupler>& requester,
+				const std::shared_ptr<GameObject>& target,
+				const float value
+			):
+				TupleRequestBase(requester, value),
+				m_target(target)
+			{}
+
+			bool ButtleTransition::operator==(const ButtleTransition& other) {
+				if (GetRequester() == other.GetRequester() &&
+					GetTarget() == other.GetTarget() &&
+					GetValue() == other.GetValue())
+				{
+					return true;
+				}
+
+				return false;
+			}
+
 		}
 	}
 }

@@ -47,6 +47,8 @@ namespace basecross {
 
 					virtual ~HidePlacePatrol() = default;
 
+					void OnCreate() override;
+
 					void OnStart() override;
 
 					bool OnUpdate() override;
@@ -54,6 +56,11 @@ namespace basecross {
 					void OnExit() override;
 
 				private:
+					void ObserveTransitionButtle();
+
+					//ターゲットが見つかった時に呼び出す処理
+					void FindTarget(const std::shared_ptr<Tuple::FindTarget>& tuple);
+
 					/// <summary>
 					/// すでにメンバーがターゲット指定しているかどうか
 					/// </summary>

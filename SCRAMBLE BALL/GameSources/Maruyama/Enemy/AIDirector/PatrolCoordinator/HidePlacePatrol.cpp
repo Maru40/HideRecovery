@@ -22,6 +22,9 @@
 
 #include "Maruyama/Utility/SingletonComponent/ShareClassesManager.h"
 
+#include "Maruyama/Enemy/Component/Stator/AIPlayerStator.h"
+#include "Maruyama/Utility/Component/TargetManager.h"
+
 namespace basecross {
 
 	namespace Enemy {
@@ -38,22 +41,91 @@ namespace basecross {
 				HidePlacePatrol::HidePlacePatrol(const std::shared_ptr<FactionCoordinator>& owner, const std::vector<std::weak_ptr<EnemyBase>>& members) :
 					PatrolCoordinator(owner, members),
 					m_param(Parametor())
-				{}
+				{
+					
+				}
+
+				void HidePlacePatrol::OnCreate() {
+					PatrolCoordinator::OnCreate();
+
+					auto tuple = GetTupleSpace();
+					tuple->Notify<Tuple::FindTarget>(GetThis<HidePlacePatrol>(), [&](const std::shared_ptr<Tuple::FindTarget>& tuple) { FindTarget(tuple); });
+				}
 
 				void HidePlacePatrol::OnStart() {
 					PatrolCoordinator::OnStart();
-
-
 				}
 
 				bool HidePlacePatrol::OnUpdate() {
 					//検索リクエストがあるなら、処理をする。
+					ObserveTransitionButtle();
 
 					return IsEnd();
 				}
 
 				void HidePlacePatrol::OnExit() {
 
+				}
+
+				void HidePlacePatrol::ObserveTransitionButtle() {
+					constexpr float ButtleRange = 10.0f;	//バトルの距離(将来的にメンバ)
+					auto tupleSpace = GetTupleSpace();
+
+					for (auto member : GetMembers()) {
+						//メンバーがnullなら処理をしない。
+						if (member.expired()) {
+							continue;
+						}
+
+						//メンバーが登録した者のみ取得する。
+						auto isRequester = [&](const std::shared_ptr<Tuple::ButtleTarget>& tuple) {
+							return tuple->GetRequester() == member.lock();
+						};
+						auto buttleTuples = tupleSpace->Takes<Tuple::ButtleTarget>(isRequester);
+
+						if (buttleTuples.empty()) {	//空なら処理を飛ばす。
+							continue;
+						}
+
+						//評価値を元に昇順ソート
+						auto sortFunc = [](const std::shared_ptr<Tuple::ButtleTarget>& left, const std::shared_ptr<Tuple::ButtleTarget>& right) {
+							return left->GetValue() < right->GetValue();
+						};
+						std::sort(buttleTuples.begin(), buttleTuples.end(), sortFunc);	//ソート
+
+						auto buttleTuple = buttleTuples[0];	//一番評価の高い値を参照
+
+						//メンバーのタプルスペースにバトル状態に遷移することを伝える。
+						auto memberTupleSpace = member.lock()->GetTupleSpace();
+						memberTupleSpace->Write<Tuple::ButtleTransition>(
+							GetThis<HidePlacePatrol>(),
+							buttleTuple->GetTarget(),
+							buttleTuple->GetValue()
+						);
+					}
+				}
+
+				void HidePlacePatrol::FindTarget(const std::shared_ptr<Tuple::FindTarget>& tuple) {
+					//本当はI_FactionMemberがメンバーに登録された時に通知を受け取れるようにしたい。
+					//Notifyの削除が安定して行えるようになるまで保留。
+
+					auto tupleSpace = GetTupleSpace();
+
+					for (auto& member : GetMembers()) {
+						constexpr float RayHitValue = 2.0f;	//障害物の分、評価値を下げるための設定。
+						constexpr float TransitionTargetRange = 3.0f;	//一定距離以上ならターゲット通知をしない処理
+
+						//ターゲットとの距離を測定。
+						auto target = tuple->GetTarget();
+						auto memberObject = member.lock()->GetGameObject();
+						auto toTargetVec = maru::Utility::CalcuToTargetVec(memberObject, target);
+
+						float hopeValue = toTargetVec.length();	//期待値
+
+						tupleSpace->Write<Tuple::ButtleTarget>(member.lock(), target, hopeValue);	//ターゲットを狙うことをリクエスト
+					}
+
+					auto takeTuple = tupleSpace->Take(tuple);
 				}
 
 				bool HidePlacePatrol::IsSomeMemberTarget(const std::shared_ptr<GameObject>& target) {

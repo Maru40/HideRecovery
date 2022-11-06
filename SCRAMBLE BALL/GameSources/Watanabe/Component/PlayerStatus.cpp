@@ -17,12 +17,20 @@
 #include "Watanabe/Manager/ScoreManager.h"
 #include "Itabashi/OnlinePlayerSynchronizer.h"
 
+#include "Maruyama/Utility/SingletonComponent/ShareClassesManager.h"
+
 namespace basecross {
 	PlayerStatus::PlayerStatus(const shared_ptr<GameObject>& owner)
 		:Component(owner), m_status(10), m_team(team::TeamType(0)),
 		m_damageSoundClip(L"PlayerDamageSE", false, 0.75f),
 		m_inAreaSoundClip(L"AlertSE_00", false, 0.05f)
 	{}
+
+	void PlayerStatus::OnCreate() {
+		if (auto shareManager = ShareClassesManager::GetInstance(GetStage())) {
+			shareManager->AddShareClass<I_TeamMember>(GetThis<PlayerStatus>());
+		}
+	}
 
 	void PlayerStatus::OnLateStart()
 	{

@@ -25,6 +25,23 @@
 
 #include "Maruyama/Enemy/Component/Stator/AIPlayerStator.h"
 
+//Olineに必要なコンポーネント-------------------------------------------
+#include "Maruyama/Player/Component/ChargeGun.h"
+
+#include "Maruyama/Player/Component/Teleport.h"
+#include "Maruyama/Player/Component/ItemAcquisitionManager.h"
+#include "Maruyama/Player/Component/UseWeapon.h"
+#include "Maruyama/Player/Component/GoalAnimationController.h"
+#include "Maruyama/Player/Component/HidePlaceOpener.h"
+#include "Itabashi/ObjectMover.h"
+#include "Itabashi/PlayerControlManager.h"
+#include "Itabashi/OnlinePlayerSynchronizer.h"
+//-----------------------------------------------------------------------
+
+//#include "Watanabe/DebugClass/Debug.h"
+//#include "Watanabe/UI/UIObjects.h"
+//#include "Watanabe/Effekseer/EfkEffect.h"
+
 namespace basecross {
 	namespace Enemy {
 
@@ -37,6 +54,22 @@ namespace basecross {
 
 			AddComponent<PlayerStatus>();
 			AddComponent<PlayerAnimator>();
+
+			//Olineに必要なコンポーネント------------------------
+			auto chargeGun = AddComponent<ChargeGun>();
+			auto soundEmitter = AddComponent<SoundEmitter>();
+
+			AddComponent<Teleport>();
+			AddComponent<ItemAcquisitionManager>();
+			AddComponent<UseWeapon>(chargeGun)->SetIsUpdateRotation(false);
+			AddComponent<GoalAnimationController>();
+			AddComponent<HidePlaceOpener>();
+			AddComponent<Operator::ObjectMover>();
+			AddComponent<PlayerControlManager>();
+			AddComponent<OnlinePlayerSynchronizer>();
+			//---------------------------------------------------
+
+			//auto efkComp = AddComponent<EfkComponent>();
 
 			AddComponent<AIPlayerStator>();
 			//AddComponent<AIPlayerBehaviorTree>();
