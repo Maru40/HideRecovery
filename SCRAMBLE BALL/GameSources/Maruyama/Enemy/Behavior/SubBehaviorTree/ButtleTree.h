@@ -13,6 +13,16 @@
 
 namespace basecross {
 
+	//--------------------------------------------------------------------------------------
+	/// 前方宣言
+	//--------------------------------------------------------------------------------------
+	
+	namespace Enemy {
+		namespace Tuple {
+			class I_Tupler;
+		}
+	}
+
 	namespace maru {
 		namespace Behavior {
 
@@ -127,6 +137,21 @@ namespace basecross {
 					void CreateDecorator() override;
 
 					void InitializeParametor();
+
+					/// <summary>
+					/// 同じリクエスタのタプルを削除
+					/// </summary>
+					template<class T>
+					void RemoveTuples(std::vector<std::shared_ptr<T>>& tuples, std::shared_ptr<Enemy::Tuple::I_Tupler>& requester) {
+						auto iter = tuples.begin();
+						while (iter != tuples.end()) {
+							if ((*iter)->GetRequester() == requester) {
+								iter = tuples.erase(iter);
+								continue;
+							}
+							iter++;
+						}
+					}
 
 				};
 
