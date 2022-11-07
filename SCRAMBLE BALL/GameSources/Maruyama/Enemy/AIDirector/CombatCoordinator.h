@@ -69,6 +69,27 @@ namespace basecross {
 			//命令の生成
 			void CreateOrder(const Data& data);
 
+		private:
+
+			void ObserveFindTarget();
+
+			bool HasTarget() const;
+
+			/// <summary>
+			/// 同じリクエスタのタプルを削除
+			/// </summary>
+			template<class T>
+			void RemoveTuples(std::vector<std::shared_ptr<T>>& tuples, std::shared_ptr<Enemy::Tuple::I_Tupler>& requester) {
+				auto iter = tuples.begin();
+				while (iter != tuples.end()) {
+					if ((*iter)->GetRequester() == requester) {
+						iter = tuples.erase(iter);
+						continue;
+					}
+					iter++;
+				}
+			}
+
 		public:
 			//--------------------------------------------------------------------------------------
 			/// アクセッサ
@@ -80,6 +101,8 @@ namespace basecross {
 			/// <param name="member">リクエストを送ったメンバー</param>
 			/// <param name="data">リクエストデータ</param>
 			void Request(const std::shared_ptr<EnemyBase>& member, const Data& data);
+
+			
 		};
 
 	}
