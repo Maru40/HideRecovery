@@ -29,6 +29,8 @@ namespace basecross {
 		bool m_ModelEmissivePriority;
 		//モデルに入っているテクスチャを使うかどうか
 		bool m_ModelTextureEnabled;
+		// アウトラインを描画するかどうか
+		bool m_IsDrawOutline;
 		////Instance描画用
 		////Instance最大値
 		//size_t m_MaxInstance;
@@ -46,7 +48,8 @@ namespace basecross {
 			m_OwnShadowActive(false),
 			m_ModelDiffusePriority(false),
 			m_ModelEmissivePriority(false),
-			m_ModelTextureEnabled(true)
+			m_ModelTextureEnabled(true),
+			m_IsDrawOutline(false)
 			//m_MaxInstance(2000),
 			//m_AutoClearMatrixVec(false)
 		{}
@@ -200,6 +203,14 @@ namespace basecross {
 	//	pID3D11DeviceContext->Unmap(pImpl->m_MatrixBuffer.Get(), 0);
 	//}
 #pragma endregion
+
+	bool AdvBaseDraw::IsDrawOutline() const {
+		return pImpl->m_IsDrawOutline;
+	}
+
+	void AdvBaseDraw::SetActiveOutline(bool b) {
+		pImpl->m_IsDrawOutline = b;
+	}
 
 	bool AdvBaseDraw::IsOriginalMeshUse() const {
 		return pImpl->m_UseOriginalMeshResource;

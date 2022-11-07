@@ -459,6 +459,10 @@ namespace basecross {
 		/// <param name="data">メッシュのデータ</param>
 		template<typename T_VShader, typename T_PShader>
 		void DrawOutline(const MeshPrimData& data) {
+			// 無効の場合は実行しない
+			if (!IsDrawOutline())
+				return;
+
 			auto Dev = App::GetApp()->GetDeviceResources();
 			auto pD3D11DeviceContext = Dev->GetD3DDeviceContext();
 			auto RenderState = Dev->GetRenderState();
@@ -532,6 +536,18 @@ namespace basecross {
 		}
 
 	public:
+		/// <summary>
+		/// アウトラインを描画するかどうか
+		/// </summary>
+		/// <returns>描画する場合はtrue</returns>
+		bool IsDrawOutline() const;
+
+		/// <summary>
+		/// アウトラインを描画するかを設定
+		/// </summary>
+		/// <param name="b">描画するか</param>
+		void SetActiveOutline(bool b);
+
 		/// <summary>
 		/// オリジナルメッシュを使うかどうか
 		/// </summary>
