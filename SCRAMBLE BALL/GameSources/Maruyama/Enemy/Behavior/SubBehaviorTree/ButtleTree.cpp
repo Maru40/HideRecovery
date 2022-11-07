@@ -205,7 +205,7 @@ namespace basecross {
 						auto& param = m_param.taskParam.nearAstarParamPtr;
 						auto& moveParam = param->moveParamPtr->movePositionsParam->moveParamPtr;
 						moveParam->speed = MoveSpeed;
-						moveParam->moveType = basecross::Task::ToTargetMove::MoveType::ArriveVelocity;
+						moveParam->moveType = basecross::Task::ToTargetMove::MoveType::SeekVelocity;
 					}
 				}
 
