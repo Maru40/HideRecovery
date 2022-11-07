@@ -853,7 +853,7 @@ namespace basecross
 
 	// SelectableComponent ----------------------
 
-	SelectableComponent::SelectableComponent(std::shared_ptr<GameObject>& owner) :
+	SelectableComponent::SelectableComponent(const std::shared_ptr<GameObject>& owner) :
 		Component(owner)
 	{
 
@@ -869,66 +869,9 @@ namespace basecross
 		return m_isSelectedLock;
 	}
 
-	void SelectableComponent::OnSelect()
+	bool SelectableComponent::IsSelected() const
 	{
-		m_isSelected = true;
-
-		selectEvent();
-	}
-
-	void SelectableComponent::OnPush()
-	{
-		for (const auto& pushEvent : m_pushEvents)
-		{
-			pushEvent();
-		}
-	}
-
-	void SelectableComponent::OnOutSelect()
-	{
-		m_isSelected = false;
-
-		outSelectEvent();
-	}
-
-	void SelectableComponent::SetVerticalBeforeSelectable(const std::shared_ptr<I_Selectable>& verticalBeforeSelectable)
-	{
-		m_verticalBeforeSelectable = verticalBeforeSelectable;
-	}
-
-	void SelectableComponent::SetVerticalNextSelectable(const std::shared_ptr<I_Selectable>& verticalNextSelectable)
-	{
-		m_verticalNextSelectable = verticalNextSelectable;
-	}
-
-	void SelectableComponent::SetHorizontalBeforeSelectable(const std::shared_ptr<I_Selectable>& horizontalBeforeSelectable)
-	{
-		m_horizontalBeforeSelectable = horizontalBeforeSelectable;
-	}
-
-	void SelectableComponent::SetHorizontalNextSelectable(const std::shared_ptr<I_Selectable>& horizontalNextSelectable)
-	{
-		m_horizontalNextSelectable = horizontalNextSelectable;
-	}
-
-	std::shared_ptr<I_Selectable> SelectableComponent::GetVerticalBeforeSelectable() const
-	{
-		return m_verticalBeforeSelectable.GetShard();
-	}
-
-	std::shared_ptr<I_Selectable> SelectableComponent::GetVerticalNextSelectable() const
-	{
-		return m_verticalNextSelectable.GetShard();
-	}
-
-	std::shared_ptr<I_Selectable> SelectableComponent::GetHorizontalBeforeSelectable() const
-	{
-		return m_horizontalBeforeSelectable.GetShard();
-	}
-
-	std::shared_ptr<I_Selectable> SelectableComponent::GetHorizontalNextSelectable() const
-	{
-		return m_horizontalNextSelectable.GetShard();
+		return GetGameObject() == EventSystem::GetInstance(GetStage())->GetNowSelectableObject();
 	}
 
 	// EventSystem ------------------------------
@@ -940,83 +883,82 @@ namespace basecross
 	{
 	}
 
-	void EventSystem::MoveCheck(bool(itbs::Input::I_BasicInputer::*isDown)() const,std::shared_ptr<I_Selectable>(I_Selectable::*func)() const)
+	std::shared_ptr<SelectableComponent> EventSystem::MoveCheck(bool(itbs::Input::I_BasicInputer::*isDown)() const,
+		const std::shared_ptr<SelectableComponent>& selectableComponent, std::shared_ptr<SelectableComponent>(SelectableComponent::*func)() const)
 	{
-		auto nowSelectable = m_nowSelectable.lock();
-
-		if (!nowSelectable || nowSelectable->GetIsSelectedLock())
+		if (!selectableComponent)
 		{
+			return nullptr;
+		}
+
+		auto nextSelectableComponent = (selectableComponent.get()->*func)();
+
+		if (!nextSelectableComponent || !(m_basicInputer.get()->*isDown)())
+		{
+			return selectableComponent;
+		}
+
+		return nextSelectableComponent;
+	}
+
+	void EventSystem::SetNowSelectableObject(const std::shared_ptr<GameObject>& nowSelectableObject)
+	{
+		auto oldSelectableObject = m_nowSelectableObject.lock();
+
+		if (oldSelectableObject)
+		{
+			for (const auto& selectable : oldSelectableObject->GetComponents<I_Selectable>())
+			{
+				selectable->OnDeselect();
+			}
+		}
+		m_nowSelectableObject = nowSelectableObject;
+
+		if (nowSelectableObject)
+		{
+			for (const auto& selectable : nowSelectableObject->GetComponents<I_Selectable>())
+			{
+				selectable->OnSelect();
+			}
+		}
+	}
+
+	void EventSystem::PushSelectableObject(const std::shared_ptr<GameObject>& nowSelectableObject)
+	{
+		m_stackSelectableObject.push(m_nowSelectableObject);
+
+		m_nowSelectableObject = nowSelectableObject;
+
+		if (nowSelectableObject)
+		{
+			for (const auto& selectable : nowSelectableObject->GetComponents<I_Selectable>())
+			{
+				selectable->OnSelect();
+			}
+		}
+	}
+
+	void EventSystem::PopSelectableObject()
+	{
+		auto oldSelectableObject = m_nowSelectableObject.lock();
+
+		if (oldSelectableObject)
+		{
+			for (const auto& selectable : oldSelectableObject->GetComponents<I_Selectable>())
+			{
+				selectable->OnDeselect();
+			}
+		}
+
+		if (m_stackSelectableObject.empty())
+		{
+			m_nowSelectableObject.reset();
 			return;
 		}
 
-		auto nextSelectable = (nowSelectable.get()->*func)();
+		m_nowSelectableObject = m_stackSelectableObject.top().lock();
 
-		if (!nextSelectable)
-		{
-			return;
-		}
-
-		if ((m_basicInputer.get()->*isDown)())
-		{
-			if (nowSelectable)
-			{
-				nowSelectable->OnOutSelect();
-			}
-
-			m_nowSelectable = nextSelectable;
-
-			if (nextSelectable)
-			{
-				nextSelectable->OnSelect();
-			}
-		}
-	}
-
-	void EventSystem::SetNowSelectable(const std::shared_ptr<I_Selectable>& nowSelectable)
-	{
-		auto oldSelectable = m_nowSelectable.lock();
-
-		if (oldSelectable)
-		{
-			oldSelectable->OnOutSelect();
-		}
-		m_nowSelectable = nowSelectable;
-
-		if (nowSelectable)
-		{
-			nowSelectable->OnSelect();
-		}
-	}
-
-	void EventSystem::PushSelectable(const std::shared_ptr<I_Selectable>& nowSelectable)
-	{
-		m_stackSelectable.push(m_nowSelectable);
-
-		m_nowSelectable = nowSelectable;
-
-		if (nowSelectable)
-		{
-			nowSelectable->OnSelect();
-		}
-	}
-
-	void EventSystem::PopSelectable()
-	{
-		auto oldSelectable = m_nowSelectable.lock();
-
-		if (oldSelectable)
-		{
-			oldSelectable->OnOutSelect();
-		}
-
-		m_nowSelectable = m_stackSelectable.top().lock();
-
-		m_stackSelectable.pop();
-	}
-
-	std::shared_ptr<I_Selectable> EventSystem::GetNowSelectable() const
-	{
-		return m_nowSelectable.lock();
+		m_stackSelectableObject.pop();
 	}
 
 	std::shared_ptr<EventSystem> EventSystem::GetInstance(const std::shared_ptr<Stage>& stage)
@@ -1049,26 +991,50 @@ namespace basecross
 
 	void EventSystem::OnUpdate()
 	{
-		if (!m_basicInputer)
+		auto nowSelectableObject = m_nowSelectableObject.lock();
+
+		if (!m_basicInputer || !nowSelectableObject)
 		{
 			return;
 		}
 
-		MoveCheck(&itbs::Input::I_BasicInputer::IsLeftDown, &I_Selectable::GetHorizontalBeforeSelectable);
-		MoveCheck(&itbs::Input::I_BasicInputer::IsRightDown, &I_Selectable::GetHorizontalNextSelectable);
-		MoveCheck(&itbs::Input::I_BasicInputer::IsUpDown, &I_Selectable::GetVerticalBeforeSelectable);
-		MoveCheck(&itbs::Input::I_BasicInputer::IsDownDown, &I_Selectable::GetVerticalNextSelectable);
+		auto selectableComponent = nowSelectableObject->GetComponent<SelectableComponent>(false);
 
-		auto nowSelectable = m_nowSelectable.lock();
+		if (selectableComponent)
+		{
+			std::shared_ptr<SelectableComponent> moveSelectableComponent = selectableComponent;
 
-		if (!nowSelectable)
+			moveSelectableComponent = MoveCheck(&itbs::Input::I_BasicInputer::IsLeftDown, moveSelectableComponent, &SelectableComponent::GetLeftSelectable);
+			moveSelectableComponent = MoveCheck(&itbs::Input::I_BasicInputer::IsRightDown, moveSelectableComponent, &SelectableComponent::GetRightSelectable);
+			moveSelectableComponent = MoveCheck(&itbs::Input::I_BasicInputer::IsUpDown, moveSelectableComponent, &SelectableComponent::GetUpSelectable);
+			moveSelectableComponent = MoveCheck(&itbs::Input::I_BasicInputer::IsDownDown, moveSelectableComponent, &SelectableComponent::GetDownSelectable);
+
+			if (selectableComponent != moveSelectableComponent)
+			{
+				SetNowSelectableObject(moveSelectableComponent->GetGameObject());
+				nowSelectableObject = m_nowSelectableObject.lock();
+			}
+		}
+
+		if (!nowSelectableObject)
 		{
 			return;
 		}
 
-		if ((m_basicInputer.get()->*(&itbs::Input::I_BasicInputer::IsDesitionDown))())
+		if (m_basicInputer->IsDesitionDown())
 		{
-			nowSelectable->OnPush();
+			for (const auto& submitable : nowSelectableObject->GetComponents<I_Submitable>())
+			{
+				submitable->OnSubmit();
+			}
+		}
+
+		if (m_basicInputer->IsCancelDown())
+		{
+			for (const auto& cancelable : nowSelectableObject->GetComponents<I_Cancelable>())
+			{
+				cancelable->OnCancel();
+			}
 		}
 	}
 
@@ -1140,22 +1106,13 @@ namespace basecross
 
 	void Button::OnCreate()
 	{
-		auto image = GetGameObject()->GetComponent<Image>(false);;
-
-		m_image = image;
-
-		if (!image)
-		{
-			m_image = GetGameObject()->AddComponent<Image>();
-		}
+		m_image = GetGameObject()->GetComponent<Image>(false);
 
 		EventSystem::GetInstance(GetStage());
 	}
 
 	void Button::OnSelect()
 	{
-		SelectableComponent::OnSelect();
-
 		auto image = m_image.lock();
 
 		if (image)
@@ -1165,16 +1122,22 @@ namespace basecross
 		}
 	}
 
-	void Button::OnOutSelect()
+	void Button::OnDeselect()
 	{
-		SelectableComponent::OnOutSelect();
-
 		auto image = m_image.lock();
 
 		if (image)
 		{
 			auto normalButtonTexture = m_normalButtonTexture.lock();
 			image->SetTextureResource(normalButtonTexture);
+		}
+	}
+
+	void Button::OnSubmit()
+	{
+		for (const auto& pushEvent : m_pushEvents)
+		{
+			pushEvent();
 		}
 	}
 

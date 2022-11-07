@@ -632,63 +632,86 @@ namespace basecross
 		void OnUpdate2() override;
 	};
 
+	/// <summary>
+	/// 移動方向列挙
+	/// </summary>
+	enum class UIMoveDirection
+	{
+		Left, // 左方向
+		Right, // 右方向
+		Up, // 上方向
+		Down // 下方向
+	};
+
+	/// <summary>
+	/// 決定用インターフェース
+	/// </summary>
+	class I_Submitable
+	{
+	public:
+		virtual void OnSubmit() = 0;
+	};
+
+	/// <summary>
+	/// キャンセル用インターフェース
+	/// </summary>
+	class I_Cancelable
+	{
+	public:
+		virtual void OnCancel() = 0;
+	};
+
+	/// <summary>
+	/// 移動用インターフェース
+	/// </summary>
 	class I_Selectable
 	{
 	public:
 		virtual void OnSelect() = 0;
-		virtual void OnOutSelect() = 0;
-		virtual void OnPush() = 0;
-		virtual bool GetIsSelectedLock() const = 0;
-		virtual std::shared_ptr<I_Selectable> GetVerticalBeforeSelectable() const = 0;
-		virtual std::shared_ptr<I_Selectable> GetVerticalNextSelectable() const = 0;
-		virtual std::shared_ptr<I_Selectable> GetHorizontalBeforeSelectable() const = 0;
-		virtual std::shared_ptr<I_Selectable> GetHorizontalNextSelectable() const = 0;
+		virtual void OnDeselect() = 0;
 	};
 
+	class I_Movable
+	{
+	public:
+		virtual void OnMove(UIMoveDirection direction) = 0;
+	};
+
+	/// <summary>
+	/// 選択することができるコンポーネント
+	/// </summary>
 	class SelectableComponent : public Component, public I_Selectable
 	{
-		ex_weak_ptr<I_Selectable> m_verticalBeforeSelectable;
-		ex_weak_ptr<I_Selectable> m_verticalNextSelectable;
-		ex_weak_ptr<I_Selectable> m_horizontalBeforeSelectable;
-		ex_weak_ptr<I_Selectable> m_horizontalNextSelectable;
+		std::weak_ptr<SelectableComponent> m_leftSelectable; // 左で選択されるSelectableComponent
+		std::weak_ptr<SelectableComponent> m_rightSelectable; // 右で選択されるSelectableComponent
+		std::weak_ptr<SelectableComponent> m_upSelectable; // 上で選択されるSelectableComponent
+		std::weak_ptr<SelectableComponent> m_downSelectable; // 下で選択されるSelectableComponent
 
 		bool m_isSelectedLock = false;
 
-		bool m_isSelected = false;
-
-		std::vector<std::function<void()>> m_pushEvents;
-
 	public:
 
-		itbs::Utility::Delegate<void()> selectEvent;
-
-		itbs::Utility::Delegate<void()> outSelectEvent;
-
-		SelectableComponent(std::shared_ptr<GameObject>& owner);
+		SelectableComponent(const std::shared_ptr<GameObject>& owner);
 
 		void SetIsSelectedLock(const bool isSelectedLock);
 
-		bool GetIsSelectedLock() const override;
+		bool GetIsSelectedLock() const;
 
-		virtual void OnSelect() override;
+		virtual void OnSelect() override {}
 
-		virtual void OnPush() override;
+		virtual void OnDeselect() override {}
 
-		virtual void OnOutSelect() override;
+		void SetLeftSelectable(const std::shared_ptr<SelectableComponent>& selectable) noexcept { m_leftSelectable = selectable; }
+		void SetRightSelectable(const std::shared_ptr<SelectableComponent>& selectable) noexcept { m_rightSelectable = selectable; }
+		void SetUpSelectable(const std::shared_ptr<SelectableComponent>& selectable) noexcept { m_upSelectable = selectable; }
+		void SetDownSelectable(const std::shared_ptr<SelectableComponent>& selectable) noexcept { m_downSelectable = selectable; }
 
-		void SetVerticalBeforeSelectable(const std::shared_ptr<I_Selectable>& verticalBeforeSelectable);
-		void SetVerticalNextSelectable(const std::shared_ptr<I_Selectable>& verticalNextSelectable);
-		void SetHorizontalBeforeSelectable(const std::shared_ptr<I_Selectable>& horizontalBeforeSelectable);
-		void SetHorizontalNextSelectable(const std::shared_ptr<I_Selectable>& horizontalNextSelectable);
+		_NODISCARD std::shared_ptr<SelectableComponent> GetLeftSelectable() const noexcept { return m_leftSelectable.lock(); }
+		_NODISCARD std::shared_ptr<SelectableComponent> GetRightSelectable() const noexcept { return m_rightSelectable.lock(); }
+		_NODISCARD std::shared_ptr<SelectableComponent> GetUpSelectable() const noexcept { return m_upSelectable.lock(); }
+		_NODISCARD std::shared_ptr<SelectableComponent> GetDownSelectable() const noexcept { return m_downSelectable.lock(); }
 
-		std::shared_ptr<I_Selectable> GetVerticalBeforeSelectable() const override;
-		std::shared_ptr<I_Selectable> GetVerticalNextSelectable() const override;
-		std::shared_ptr<I_Selectable> GetHorizontalBeforeSelectable() const override;
-		std::shared_ptr<I_Selectable> GetHorizontalNextSelectable() const override;
-
-		bool IsSelected() const { return m_isSelected; }
-
-		void AddPushEvent(const std::function<void()>& pushEvent) { m_pushEvents.push_back(pushEvent); }
+		bool IsSelected() const;
 	};
 
 	class itbs::Input::I_BasicInputer;
@@ -703,20 +726,21 @@ namespace basecross
 
 		std::shared_ptr<itbs::Input::I_BasicInputer> m_basicInputer;
 
-		std::weak_ptr<I_Selectable> m_nowSelectable;
-		std::stack<std::weak_ptr<I_Selectable>> m_stackSelectable;
+		std::weak_ptr<GameObject> m_nowSelectableObject;
+		std::stack<std::weak_ptr<GameObject>> m_stackSelectableObject;
 
-		void MoveCheck(bool(itbs::Input::I_BasicInputer::*isDown)()const, std::shared_ptr<I_Selectable>(I_Selectable::*func)() const);
+		std::shared_ptr<SelectableComponent> MoveCheck(bool(itbs::Input::I_BasicInputer::*isDown)()const,
+			const std::shared_ptr<SelectableComponent>& selectableComponent,  std::shared_ptr<SelectableComponent>(SelectableComponent::*func)() const);
 	public:
 		EventSystem(std::shared_ptr<GameObject>& owner);
 
-		void SetNowSelectable(const std::shared_ptr<I_Selectable>& nowSelectable);
+		void SetNowSelectableObject(const std::shared_ptr<GameObject>& selectableObject);
 
-		void PushSelectable(const std::shared_ptr<I_Selectable>& nowSelectable);
+		void PushSelectableObject(const std::shared_ptr<GameObject>& selectableObject);
 
-		void PopSelectable();
+		void PopSelectableObject();
 
-		std::shared_ptr<I_Selectable> GetNowSelectable() const;
+		_NODISCARD std::shared_ptr<GameObject> GetNowSelectableObject() const noexcept { return m_nowSelectableObject.lock(); }
 
 		static std::shared_ptr<EventSystem> GetInstance(const std::shared_ptr<Stage>& stage);
 
@@ -725,17 +749,21 @@ namespace basecross
 		void OnCreate() override;
 
 		void OnUpdate() override;
+
+		virtual void OnDraw() override {}
 	};
 
 	/// <summary>
 	/// ボタンUI
 	/// </summary>
-	class Button : public SelectableComponent
+	class Button : public SelectableComponent, public I_Submitable
 	{
 		std::weak_ptr<Image> m_image;
 
 		std::weak_ptr<TextureResource> m_normalButtonTexture;
 		std::weak_ptr<TextureResource> m_selectedButtonTexture;
+
+		std::vector<std::function<void()>> m_pushEvents;
 
 	public:
 
@@ -755,9 +783,13 @@ namespace basecross
 
 		void OnSelect() override;
 
-		void OnOutSelect() override;
+		void OnDeselect() override;
+
+		void OnSubmit() override;
 
 		void OnCreate() override;
+
+		void AddPushEvent(const std::function<void()>& pushEvent) { m_pushEvents.push_back(pushEvent); }
 	};
 
 	/// <summary>
