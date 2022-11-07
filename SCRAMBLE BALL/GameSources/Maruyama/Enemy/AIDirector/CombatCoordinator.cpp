@@ -25,17 +25,9 @@ namespace basecross {
 		{}
 
 		bool CombatCoordinator::OnUpdate() {
-			for (const auto& data : m_requestDatas) {
-				CreateOrder(data);
-			}
-
 			ObserveFindTarget();
 
 			return false;
-		}
-
-		void CombatCoordinator::CreateOrder(const Data& data) {
-
 		}
 
 		void CombatCoordinator::ObserveFindTarget() {
@@ -43,10 +35,6 @@ namespace basecross {
 
 			auto tupleSpace = GetTupleSpace();
 			auto takes = tupleSpace->Takes<Tuple::FindTarget>();	//ターゲット取得の者を取得
-		}
-
-		void CombatCoordinator::Request(const std::shared_ptr<EnemyBase>& member, const Data& data) {
-			m_requestDatas.push_back(data);
 		}
 
 	}

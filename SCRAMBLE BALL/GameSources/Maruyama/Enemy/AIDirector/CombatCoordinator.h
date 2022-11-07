@@ -50,11 +50,9 @@ namespace basecross {
 		class CombatCoordinator : public HereOwnerCoordinatorBase<FactionCoordinator, EnemyBase>
 		{
 		public:
-			using Data = CombatCoordinator_Data;
-
+			
 		private:
-			std::map<std::weak_ptr<EnemyBase>, Data> m_dataMap;	//エネミーごとのデータマップ
-			std::vector<Data> m_requestDatas;					//リクエストデータ管理配列
+
 
 		public:
 			CombatCoordinator(const std::shared_ptr<FactionCoordinator>& owner);
@@ -66,8 +64,6 @@ namespace basecross {
 			void OnExit() override {};
 			
 		private:
-			//命令の生成
-			void CreateOrder(const Data& data);
 
 		private:
 			/// <summary>
@@ -95,14 +91,6 @@ namespace basecross {
 			/// アクセッサ
 			//--------------------------------------------------------------------------------------
 
-			/// <summary>
-			/// 行動のリクエスト
-			/// </summary>
-			/// <param name="member">リクエストを送ったメンバー</param>
-			/// <param name="data">リクエストデータ</param>
-			void Request(const std::shared_ptr<EnemyBase>& member, const Data& data);
-
-			
 		};
 
 	}
