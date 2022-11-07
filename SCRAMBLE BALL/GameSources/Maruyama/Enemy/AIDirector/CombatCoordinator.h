@@ -70,13 +70,13 @@ namespace basecross {
 			void CreateOrder(const Data& data);
 
 		private:
-
+			/// <summary>
+			/// ターゲットの監視
+			/// </summary>
 			void ObserveFindTarget();
 
-			bool HasTarget() const;
-
 			/// <summary>
-			/// 同じリクエスタのタプルを削除
+			/// 同じリクエスタのタプルを削除(本来ここに書くべきじゃない。移動予定)
 			/// </summary>
 			template<class T>
 			void RemoveTuples(std::vector<std::shared_ptr<T>>& tuples, std::shared_ptr<Enemy::Tuple::I_Tupler>& requester) {
