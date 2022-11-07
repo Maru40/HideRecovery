@@ -28,6 +28,7 @@ namespace basecross {
 		//メッシュリソースの取得
 		auto PtrMeshResource = GetMeshResource();
 		if (PtrMeshResource) {
+			DrawOutline<VSOutlineDraw, PSOutlineDraw>(PtrMeshResource->GetMashData());
 			if (GetOwnShadowActive()) {
 				DrawStatic<VSModelDrawShadow, PSModelDrawShadow>(PtrMeshResource->GetMashData());
 			}
@@ -42,6 +43,7 @@ namespace basecross {
 			auto& vec = PtrMultiMeshResource->GetMeshVec();
 			for (size_t i = 0; i < count; i++) {
 				if (GetMultiMeshIsDraw(i)) {
+					DrawOutline<VSOutlineDraw, PSOutlineDraw>(vec[i]);
 					if (GetOwnShadowActive()) {
 						if (GetGameObject()->GetComponent<Shadowmap>(false)) {
 							DrawStatic<VSModelDrawShadow, PSModelDrawShadow2>(vec[i]);

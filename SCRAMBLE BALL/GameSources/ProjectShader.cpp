@@ -24,8 +24,13 @@ namespace basecross {
 		IMPLEMENT_DX11_VERTEX_SHADER(VSBoneModelDrawShadow, App::GetApp()->GetShadersPath() + L"VSBoneModelDrawShadow.cso")
 		IMPLEMENT_DX11_VERTEX_SHADER(VSModelDraw, App::GetApp()->GetShadersPath() + L"VSModelDraw.cso")
 		IMPLEMENT_DX11_VERTEX_SHADER(VSModelDrawShadow, App::GetApp()->GetShadersPath() + L"VSModelDrawShadow.cso")
+
+		IMPLEMENT_DX11_VERTEX_SHADER(VSOutlineDraw, App::GetApp()->GetShadersPath() + L"VSOutlineDraw.cso")
+		IMPLEMENT_DX11_VERTEX_SHADER(VSBoneOutlineDraw, App::GetApp()->GetShadersPath() + L"VSBoneOutlineDraw.cso")
+
 		IMPLEMENT_DX11_PIXEL_SHADER(PSModelDraw, App::GetApp()->GetShadersPath() + L"PSModelDraw.cso")
 		IMPLEMENT_DX11_PIXEL_SHADER(PSModelDrawShadow, App::GetApp()->GetShadersPath() + L"PSModelDrawShadow.cso")
 		IMPLEMENT_DX11_PIXEL_SHADER(PSModelDrawShadow2, App::GetApp()->GetShadersPath() + L"PSModelDrawShadow2.cso")
+		IMPLEMENT_DX11_PIXEL_SHADER(PSOutlineDraw, App::GetApp()->GetShadersPath() + L"PSOutlineDraw.cso")
 }
 //end basecross

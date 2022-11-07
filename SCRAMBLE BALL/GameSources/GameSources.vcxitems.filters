@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0"
-  xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Headers">
       <UniqueIdentifier>{4b0a624a-610d-4bc6-b311-2b02a781cdf9}</UniqueIdentifier>
@@ -1301,6 +1300,9 @@
     <Filter Include="Watanabe\UI\HasBallUI">
       <UniqueIdentifier>{b38f08fe-322c-4399-9a39-2ebeefa38fdd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\Shader\Outline">
+      <UniqueIdentifier>{fdd50817-5117-4905-bd59-a1328a9e482b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2428,6 +2430,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\HasBallUI.h">
       <Filter>Watanabe\UI\HasBallUI</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\Outline.h">
+      <Filter>Watanabe\Shader\Outline</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -3456,6 +3461,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\HasBallUI.cpp">
       <Filter>Watanabe\UI\HasBallUI</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\Outline.cpp">
+      <Filter>Watanabe\Shader\Outline</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="$(MSBuildThisFileDirectory)..\..\Libs\BaseLib\DxShaders\SlimeVS.hlsl">
@@ -3514,6 +3522,15 @@
     </FxCompile>
     <FxCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\PostEffect\HLSL\CS_Outline.hlsl">
       <Filter>Watanabe\Shader\PostProcess\HLSL</Filter>
+    </FxCompile>
+    <FxCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\HLSL\VSOutlineDraw.hlsl">
+      <Filter>Watanabe\Shader\ModelDraw\HLSL</Filter>
+    </FxCompile>
+    <FxCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\HLSL\PSOutlineDraw.hlsl">
+      <Filter>Watanabe\Shader\ModelDraw\HLSL</Filter>
+    </FxCompile>
+    <FxCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\HLSL\VSBoneOutlineDraw.hlsl">
+      <Filter>Watanabe\Shader\BoneModelDraw\HLSL</Filter>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>

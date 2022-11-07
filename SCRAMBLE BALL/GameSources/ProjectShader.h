@@ -25,8 +25,12 @@ namespace basecross {
 	DECLARE_DX11_VERTEX_SHADER(VSBoneModelDrawShadow, VertexPositionNormalTextureSkinning)
 	DECLARE_DX11_VERTEX_SHADER(VSModelDraw, VertexPositionNormalTexture)
 	DECLARE_DX11_VERTEX_SHADER(VSModelDrawShadow, VertexPositionNormalTexture)
+	DECLARE_DX11_VERTEX_SHADER(VSOutlineDraw, VertexPositionNormal)
+	DECLARE_DX11_VERTEX_SHADER(VSBoneOutlineDraw, VertexPositionNormalTextureSkinning)
+
 	DECLARE_DX11_PIXEL_SHADER(PSModelDraw)
 	DECLARE_DX11_PIXEL_SHADER(PSModelDrawShadow)
 	DECLARE_DX11_PIXEL_SHADER(PSModelDrawShadow2)
+	DECLARE_DX11_PIXEL_SHADER(PSOutlineDraw)
 }
 //end basecross
