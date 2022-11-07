@@ -189,7 +189,7 @@ namespace basecross {
 					auto enemy = GetOwner()->GetComponent<Enemy::EnemyBase>(false);
 
 					//FirstSelecter
-					//視界範囲の敵の監視
+					//視界範囲で他の敵を監視
 					m_behaviorTree->AddDecorator<Decorator::ObserveTargets>(
 						NodeType::FirstSelecter, enemy, std::vector<std::shared_ptr<GameObject>>()
 					);
@@ -206,40 +206,6 @@ namespace basecross {
 						NodeType::ShotTask, enemy, decoratorParam.shot_isInEyeParamPtr
 					);
 				}
-
-				//void ButtleTree::ObserveFindTarget() {
-				//	using namespace basecross::Enemy;
-
-				//	if (!HasTarget()) {
-				//		return;
-				//	}
-
-				//	auto faction = m_factionMember.lock()->GetAssignedFaction();
-				//	auto tupleSpace = faction->GetTupleSpace();
-
-				//	auto tuples = tupleSpace->Takes<Tuple::FindTarget>();
-
-				//	if (tuples.empty()) {	//タプルが存在しないなら処理をしない。
-				//		return;
-				//	}
-
-				//	//タプルスペースの評価値に合わせたソート
-				//	auto sortFunc = [](const std::shared_ptr<Tuple::FindTarget>& left, const std::shared_ptr<Tuple::FindTarget>& right) {
-				//		return left->GetValue() < right->GetValue();
-				//	};
-				//	std::sort(tuples.begin(), tuples.end(), sortFunc);
-
-				//	for (int i = 0; i < tuples.size(); i++) {
-				//		auto& tuple = tuples[i];
-
-				//		auto toTargetRange = m_targetManager.lock()->CalcuToTargetVec().length();
-				//		if (tuple->GetValue() < toTargetRange) {	//新規書き込みの方が評価値が高かったら
-				//			m_targetManager.lock()->SetTarget(tuple->GetTarget());
-				//		}
-
-				//		RemoveTuples(tuples, tuple->GetRequester());
-				//	}
-				//}
 
 				void ButtleTree::InitializeParametor() {
 					constexpr float MoveSpeed = 6.0f;
