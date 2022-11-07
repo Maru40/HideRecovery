@@ -32,7 +32,7 @@ namespace basecross {
 		{}
 
 		CrabWalk_Parametor::CrabWalk_Parametor(const float speed):
-			CrabWalk_Parametor(speed, 1.0f, 1.0f)
+			CrabWalk_Parametor(speed, 0.5f, 1.5f)
 		{}
 
 		CrabWalk_Parametor::CrabWalk_Parametor(
