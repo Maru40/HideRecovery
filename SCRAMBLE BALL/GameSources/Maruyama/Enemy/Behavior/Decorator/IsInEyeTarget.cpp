@@ -17,6 +17,7 @@
 #include "Maruyama/Utility/Timer/GameTimer.h"
 
 #include "Maruyama/Utility/Utility.h"
+#include "Maruyama/Utility/Random.h"
 
 #include "Watanabe/DebugClass/Debug.h"
 
@@ -36,23 +37,26 @@ namespace basecross {
 				{}
 
 				IsInEyeTarget_Parametor::IsInEyeTarget_Parametor(const EyeSearchRangeParametor& eyeParametor) :
-					IsInEyeTarget_Parametor(eyeParametor, 10.0f)
+					IsInEyeTarget_Parametor(eyeParametor, 10.0f, 15.0f)
 				{}
 
 				IsInEyeTarget_Parametor::IsInEyeTarget_Parametor(
 					const EyeSearchRangeParametor& eyeParametor,
-					const float lostIntervalTime
+					const float minLostIntervalTime,
+					const float maxLostIntervalTime
 				):
-					IsInEyeTarget_Parametor(eyeParametor, lostIntervalTime, 30.0f)
+					IsInEyeTarget_Parametor(eyeParametor, minLostIntervalTime, maxLostIntervalTime, 30.0f)
 				{}
 
 				IsInEyeTarget_Parametor::IsInEyeTarget_Parametor(
 					const EyeSearchRangeParametor& eyeParametor,
-					const float lostIntervalTime, 
+					const float minLostIntervalTime,
+					const float maxLostIntervalTime,
 					const float farRange
 				) :
 					eyeParametor(eyeParametor),
-					lostIntervalTime(lostIntervalTime),
+					minLostIntervalTime(minLostIntervalTime),
+					maxLostIntervalTime(maxLostIntervalTime),
 					farRange(farRange)
 				{}
 
@@ -99,10 +103,14 @@ namespace basecross {
 						}
 					}
 					else {
-						m_timer->ResetTimer(m_paramPtr->lostIntervalTime);
+						m_timer->ResetTimer(GetRandomIntervalTime());
 					}
 
 					return true;
+				}
+
+				float IsInEyeTarget::GetRandomIntervalTime() const {
+					return maru::MyRandom::Random(m_paramPtr->minLostIntervalTime, m_paramPtr->maxLostIntervalTime);
 				}
 
 				bool IsInEyeTarget::IsFarRange() const {
