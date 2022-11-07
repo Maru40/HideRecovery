@@ -42,7 +42,8 @@ namespace basecross {
 				//--------------------------------------------------------------------------------------
 				struct IsInEyeTarget_Parametor {
 					EyeSearchRangeParametor eyeParametor;	//視界パラメータ
-					float lostIntervalTime;					//見失った後に追いかける時間
+					float minLostIntervalTime;				//見失った後に追いかける時間(最小)
+					float maxLostIntervalTime;				//見失った後に追いかける時間(最大)
 					float farRange;							//追従不可能な程遠くに行ったと判断する距離
 
 					IsInEyeTarget_Parametor();
@@ -51,12 +52,14 @@ namespace basecross {
 
 					IsInEyeTarget_Parametor(
 						const EyeSearchRangeParametor& eyeParametor,
-						const float lostIntervalTime
+						const float minLostIntervalTime,
+						const float maxLostIntervalTime
 					);
 
 					IsInEyeTarget_Parametor(
 						const EyeSearchRangeParametor& eyeParametor,
-						const float lostIntervalTime, 
+						const float minLostIntervalTime, 
+						const float maxLostIntervalTime,
 						const float farRange
 					);
 				};
@@ -87,6 +90,8 @@ namespace basecross {
 					bool CanUpdate() override;
 
 				private:
+					float GetRandomIntervalTime() const;
+
 					/// <summary>
 					/// ターゲットが遠すぎるときtrue
 					/// </summary>

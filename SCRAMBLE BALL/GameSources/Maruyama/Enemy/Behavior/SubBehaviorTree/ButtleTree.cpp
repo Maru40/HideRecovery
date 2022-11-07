@@ -23,6 +23,12 @@
 #include "Maruyama/Enemy/Behavior/Interface/I_PriorityController.h"
 
 #include "Maruyama/Enemy/Behavior/Decorator/IsInEyeTarget.h"
+#include "Maruyama/Enemy/Behavior/Decorator/ObserveTargets.h"
+
+#include "Maruyama/Enemy/AIDirector/CoordinatorBase.h"
+#include "Maruyama/Enemy/AIDirector/TupleSpace.h"
+
+#include "Maruyama/Utility/Component/TargetManager.h"
 
 namespace basecross {
 
@@ -40,9 +46,9 @@ namespace basecross {
 				using EyeParametor = EyeSearchRangeParametor;
 
 				ButtleTree_DecoratorParametor::ButtleTree_DecoratorParametor():
-					nearSeek_isInEyeParamPtr(new Decorator::IsInEyeTarget_Parametor(EyeParametor(15.0f, 3.0f, XMConvertToRadians(EYE_DEGREE)), 0.5f)),
-					nearAstar_isInEyeParamPtr(new Decorator::IsInEyeTarget_Parametor(EyeParametor(15.0f, 3.0f, XMConvertToRadians(EYE_DEGREE)), 5.0f)),
-					shot_isInEyeParamPtr(new Decorator::IsInEyeTarget_Parametor(EyeParametor(20.0f, 3.0f, XMConvertToRadians(EYE_DEGREE)), 0.5f))
+					nearSeek_isInEyeParamPtr(new Decorator::IsInEyeTarget_Parametor(EyeParametor(20.0f, 3.0f, XMConvertToRadians(EYE_DEGREE)), 0.5f, 0.5f)),
+					nearAstar_isInEyeParamPtr(new Decorator::IsInEyeTarget_Parametor(EyeParametor(20.0f, 3.0f, XMConvertToRadians(EYE_DEGREE)), 5.0f, 5.0f)),
+					shot_isInEyeParamPtr(new Decorator::IsInEyeTarget_Parametor(EyeParametor(25.0f, 3.0f, XMConvertToRadians(EYE_DEGREE)), 0.0f, 1.5f))
 				{}
 
 				ButtleTree_DecoratorParametor::~ButtleTree_DecoratorParametor() {
@@ -182,13 +188,23 @@ namespace basecross {
 					auto& decoratorParam = m_param.decoratorParam;
 					auto enemy = GetOwner()->GetComponent<Enemy::EnemyBase>(false);
 
+					//FirstSelecter
+					//Ž‹ŠE”ÍˆÍ‚Å‘¼‚Ì“G‚ðŠÄŽ‹
+					m_behaviorTree->AddDecorator<Decorator::ObserveTargets>(
+						NodeType::FirstSelecter, enemy, std::vector<std::shared_ptr<GameObject>>()
+					);
+
 					//NearSeekƒfƒRƒŒ[ƒ^
 					//Ž‹ŠE”ÍˆÍ“à‚È‚ç
-					m_behaviorTree->AddDecorator<Decorator::IsInEyeTarget>(NodeType::NearSeekMoveTask, enemy, decoratorParam.nearSeek_isInEyeParamPtr);
+					m_behaviorTree->AddDecorator<Decorator::IsInEyeTarget>(
+						NodeType::NearSeekMoveTask, enemy, decoratorParam.nearSeek_isInEyeParamPtr
+					);
 
 					//Shot‚ÉƒfƒRƒŒ[ƒ^’Ç‰Á
 					//Ž‹ŠE”ÍˆÍ“à‚È‚ç
-					m_behaviorTree->AddDecorator<Decorator::IsInEyeTarget>(NodeType::ShotTask, enemy, decoratorParam.shot_isInEyeParamPtr);
+					m_behaviorTree->AddDecorator<Decorator::IsInEyeTarget>(
+						NodeType::ShotTask, enemy, decoratorParam.shot_isInEyeParamPtr
+					);
 				}
 
 				void ButtleTree::InitializeParametor() {
@@ -205,9 +221,14 @@ namespace basecross {
 						auto& param = m_param.taskParam.nearAstarParamPtr;
 						auto& moveParam = param->moveParamPtr->movePositionsParam->moveParamPtr;
 						moveParam->speed = MoveSpeed;
-						moveParam->moveType = basecross::Task::ToTargetMove::MoveType::ArriveVelocity;
+						moveParam->moveType = basecross::Task::ToTargetMove::MoveType::SeekVelocity;
 					}
 				}
+
+				//bool ButtleTree::HasTarget() const {
+				//	auto targetManager = m_targetManager.lock();
+				//	return targetManager && targetManager->HasTarget();
+				//}
 
 			}
 		}

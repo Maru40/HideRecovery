@@ -96,11 +96,11 @@ namespace basecross {
 
 		Vec3 basePos(5.0f, 1.0f, 60.0f);
 		Vec3 positions[] = {
-			//Vec3(+basePos.x, 1.0f, -basePos.z),
-			//Vec3(0.0f, 1.0f, -basePos.z),
-			//Vec3(-basePos.x, 1.0f, -basePos.z),
+			Vec3(+basePos.x, 1.0f, -basePos.z),
+			Vec3(0.0f, 1.0f, -basePos.z),
+			Vec3(-basePos.x, 1.0f, -basePos.z),
 
-			//Vec3(+basePos.x, 1.0f, basePos.z),
+			Vec3(+basePos.x, 1.0f, basePos.z),
 			Vec3(0.0f, 1.0f, basePos.z),
 
 			//Vec3(-basePos.x, 1.0f, basePos.z),
@@ -112,8 +112,8 @@ namespace basecross {
 		for (auto position : positions) {
 			auto enemy = Instantiate<Enemy::AIPlayerObject>(position, Quat::Identity());
 			auto color = index < 3 ? blue : red;
-			//auto teamType = index < 3 ? team::TeamType::Blue : team::TeamType::Red;
-			auto teamType = team::TeamType::Red;
+			auto teamType = index < 3 ? team::TeamType::Blue : team::TeamType::Red;
+			//auto teamType = team::TeamType::Red;
 			//enemy->GetComponent<PNTStaticDraw>()->SetDiffuse(color);
 			enemy->GetComponent<I_TeamMember>(false)->SetTeam(teamType);
 			index++;

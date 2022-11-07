@@ -15,6 +15,8 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 	///	ëOï˚êÈåæ
 	//--------------------------------------------------------------------------------------
+	class TargetManager;
+
 	namespace maru {
 		namespace Behavior {
 			namespace SubBehavior {
@@ -30,6 +32,10 @@ namespace basecross {
 
 		class EnemyBase;
 
+		namespace Tuple {
+			class FindTarget;
+		}
+
 		namespace StateNode {
 
 			//--------------------------------------------------------------------------------------
@@ -41,6 +47,8 @@ namespace basecross {
 				using ButtleTree = maru::Behavior::SubBehavior::ButtleTree;
 
 			private:
+				std::weak_ptr<TargetManager> m_targetManager;
+
 				std::unique_ptr<ButtleTree> m_behaviorTree;
 
 			public:
@@ -51,6 +59,12 @@ namespace basecross {
 				bool OnUpdate() override;
 
 				void OnExit() override;
+
+			private:
+
+				void ObserveOtherFindTarget(const std::shared_ptr<Tuple::FindTarget>& tuple);
+
+				bool HasTarget() const;
 
 			};
 

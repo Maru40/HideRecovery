@@ -88,6 +88,11 @@ namespace basecross {
 			/// <returns>バトルターゲット</returns>
 			bool IsFindButtleTarget(const TransitionMember& member);
 
+			/// <summary>
+			/// ターゲットを見失ったときの遷移
+			/// </summary>
+			/// <param name="member">遷移条件メンバー</param>
+			/// <returns>ターゲットを見失ったらtrue</returns>
 			bool IsLostButtleTarget(const TransitionMember& member);
 
 		};
