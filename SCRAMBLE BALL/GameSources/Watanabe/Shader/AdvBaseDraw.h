@@ -50,6 +50,9 @@ namespace basecross {
 		};
 	};
 
+	struct OutlineConstants {
+	};
+
 	class AdvBaseDraw : public DrawComponent {
 	private:
 		struct Impl;
@@ -179,9 +182,9 @@ namespace basecross {
 						SmCb.Emissive = Em4;
 					}
 					// コンスタントバッファの更新
-					pD3D11DeviceContext->UpdateSubresource(CBSimple::GetPtr()->GetBuffer(), 0, nullptr, &SmCb, 0, 0);
+					pD3D11DeviceContext->UpdateSubresource(CBAdvBaseDraw::GetPtr()->GetBuffer(), 0, nullptr, &SmCb, 0, 0);
 					// コンスタントバッファの設定
-					ID3D11Buffer* pConstantBuffer = CBSimple::GetPtr()->GetBuffer();
+					ID3D11Buffer* pConstantBuffer = CBAdvBaseDraw::GetPtr()->GetBuffer();
 					ID3D11Buffer* pNullConstantBuffer = nullptr;
 					// 頂点シェーダに渡す
 					pD3D11DeviceContext->VSSetConstantBuffers(0, 1, &pConstantBuffer);
@@ -270,9 +273,9 @@ namespace basecross {
 		//		SmCb.ActiveFlg.x = 0;
 		//	}
 
-		//	pD3D11DeviceContext->UpdateSubresource(CBSimple::GetPtr()->GetBuffer(), 0, nullptr, &SmCb, 0, 0);
+		//	pD3D11DeviceContext->UpdateSubresource(CBAdvBaseDraw::GetPtr()->GetBuffer(), 0, nullptr, &SmCb, 0, 0);
 
-		//	ID3D11Buffer* pConstantBuffer = CBSimple::GetPtr()->GetBuffer();
+		//	ID3D11Buffer* pConstantBuffer = CBAdvBaseDraw::GetPtr()->GetBuffer();
 		//	ID3D11Buffer* pNullConstantBuffer = nullptr;
 
 		//	pD3D11DeviceContext->VSSetConstantBuffers(0, 1, &pConstantBuffer);
@@ -396,9 +399,9 @@ namespace basecross {
 					SmCb.Emissive = Em4;
 				}
 				// コンスタントバッファの更新
-				pD3D11DeviceContext->UpdateSubresource(CBSimple::GetPtr()->GetBuffer(), 0, nullptr, &SmCb, 0, 0);
+				pD3D11DeviceContext->UpdateSubresource(CBAdvBaseDraw::GetPtr()->GetBuffer(), 0, nullptr, &SmCb, 0, 0);
 				// コンスタントバッファの設定
-				ID3D11Buffer* pConstantBuffer = CBSimple::GetPtr()->GetBuffer();
+				ID3D11Buffer* pConstantBuffer = CBAdvBaseDraw::GetPtr()->GetBuffer();
 				ID3D11Buffer* pNullConstantBuffer = nullptr;
 				// 頂点シェーダに渡す
 				pD3D11DeviceContext->VSSetConstantBuffers(0, 1, &pConstantBuffer);
@@ -447,7 +450,104 @@ namespace basecross {
 				MatIndex++;
 			}
 		}
+
+		/// <summary>
+		/// アウトラインの描画
+		/// </summary>
+		/// <typeparam name="T_VShader">使用する頂点シェーダ</typeparam>
+		/// <typeparam name="T_PShader">使用するピクセルシェーダ</typeparam>
+		/// <param name="data">メッシュのデータ</param>
+		template<typename T_VShader, typename T_PShader>
+		void DrawOutline(const MeshPrimData& data) {
+			// 無効の場合は実行しない
+			if (!IsDrawOutline())
+				return;
+
+			auto Dev = App::GetApp()->GetDeviceResources();
+			auto pD3D11DeviceContext = Dev->GetD3DDeviceContext();
+			auto RenderState = Dev->GetRenderState();
+			// NULLのシェーダリソースの準備
+			ID3D11ShaderResourceView* pNull[D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT] = { nullptr };
+			// サンプラーの準備
+			ID3D11SamplerState* pNullSR[D3D11_COMMONSHADER_SAMPLER_SLOT_COUNT] = { nullptr };
+			// シェーダの設定
+			// 頂点シェーダ
+			pD3D11DeviceContext->VSSetShader(T_VShader::GetPtr()->GetShader(), nullptr, 0);
+			// インプットレイアウトの設定
+			pD3D11DeviceContext->IASetInputLayout(T_VShader::GetPtr()->GetInputLayout());
+			// ピクセルシェーダ
+			pD3D11DeviceContext->PSSetShader(T_PShader::GetPtr()->GetShader(), nullptr, 0);
+
+			// コンスタントバッファの作成
+			AdvConstants SmCb;
+			SetConstants(SmCb, data);
+
+			// コンスタントバッファの更新
+			pD3D11DeviceContext->UpdateSubresource(CBAdvBaseDraw::GetPtr()->GetBuffer(), 0, nullptr, &SmCb, 0, 0);
+			// コンスタントバッファの設定
+			ID3D11Buffer* pConstantBuffer = CBAdvBaseDraw::GetPtr()->GetBuffer();
+			ID3D11Buffer* pNullConstantBuffer = nullptr;
+			// 頂点シェーダに渡す
+			pD3D11DeviceContext->VSSetConstantBuffers(0, 1, &pConstantBuffer);
+			// ピクセルシェーダに渡す
+			pD3D11DeviceContext->PSSetConstantBuffers(0, 1, &pConstantBuffer);
+			// ストライドとオフセット
+			UINT stride = data.m_NumStride;
+			UINT offset = 0;
+			// 描画方法のセット
+			pD3D11DeviceContext->IASetPrimitiveTopology(data.m_PrimitiveTopology);
+			// 頂点バッファのセット
+			pD3D11DeviceContext->IASetVertexBuffers(0, 1, data.m_VertexBuffer.GetAddressOf(), &stride, &offset);
+			// インデックスバッファのセット
+			pD3D11DeviceContext->IASetIndexBuffer(data.m_IndexBuffer.Get(), DXGI_FORMAT_R16_UINT, 0);
+			// 各レンダリングステートの設定
+			// ブレンドステート
+			RenderState->SetBlendState(pD3D11DeviceContext, GetBlendState());
+			// デプスステンシルステート
+			RenderState->SetDepthStencilState(pD3D11DeviceContext, GetDepthStencilState());
+
+			// メッシュ内のマテリアルの配列
+			auto& MatVec = data.m_MaterialExVec;
+			if (MatVec.size() == 0) {
+				// 透明処理用
+				// ラスタライザステート(裏描画)
+				pD3D11DeviceContext->RSSetState(RenderState->GetCullFront());
+				// 描画
+				pD3D11DeviceContext->DrawIndexed(data.m_NumIndicis, 0, 0);
+			}
+			else {
+				for (auto& m : MatVec) {
+					// コンスタントバッファの更新
+					pD3D11DeviceContext->UpdateSubresource(CBAdvBaseDraw::GetPtr()->GetBuffer(), 0, nullptr, &SmCb, 0, 0);
+					// コンスタントバッファの設定
+					ID3D11Buffer* pConstantBuffer = CBAdvBaseDraw::GetPtr()->GetBuffer();
+					ID3D11Buffer* pNullConstantBuffer = nullptr;
+					// 頂点シェーダに渡す
+					pD3D11DeviceContext->VSSetConstantBuffers(0, 1, &pConstantBuffer);
+					// ピクセルシェーダに渡す
+					pD3D11DeviceContext->PSSetConstantBuffers(0, 1, &pConstantBuffer);
+
+					// ラスタライザステート(裏描画)
+					pD3D11DeviceContext->RSSetState(RenderState->GetCullFront());
+					// 描画
+					pD3D11DeviceContext->DrawIndexed(m.m_IndexCount, m.m_StartIndex, 0);
+				}
+			}
+		}
+
 	public:
+		/// <summary>
+		/// アウトラインを描画するかどうか
+		/// </summary>
+		/// <returns>描画する場合はtrue</returns>
+		bool IsDrawOutline() const;
+
+		/// <summary>
+		/// アウトラインを描画するかを設定
+		/// </summary>
+		/// <param name="b">描画するか</param>
+		void SetActiveOutline(bool b);
+
 		/// <summary>
 		/// オリジナルメッシュを使うかどうか
 		/// </summary>

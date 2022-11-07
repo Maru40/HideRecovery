@@ -46,6 +46,8 @@ namespace basecross {
 		// メッシュリソースの取得
 		auto PtrMeshResource = GetMeshResource();
 		if (PtrMeshResource) {
+			DrawOutline<VSBoneOutlineDraw, PSOutlineDraw>(PtrMeshResource->GetMashData());
+
 			// シェーダの設定
 			if (IsOwnShadowActive()) {
 				// 影付き
@@ -68,6 +70,8 @@ namespace basecross {
 			auto& vec = PtrMultiMeshResource->GetMeshVec();
 			for (size_t i = 0; i < count; i++) {
 				if (GetMultiMeshIsDraw(i)) {
+					DrawOutline<VSBoneOutlineDraw, PSOutlineDraw>(vec[i]);
+
 					if (GetOwnShadowActive()) {
 						if (GetGameObject()->GetComponent<Shadowmap>(false)) {
 							DrawModel<VSBoneModelDrawShadow, PSModelDrawShadow2>(vec[i]);

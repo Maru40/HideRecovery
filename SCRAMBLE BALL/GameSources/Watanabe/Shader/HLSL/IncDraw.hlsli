@@ -14,6 +14,27 @@ struct VSPNTInput
     float2 tex : TEXCOORD;
 };
 
+struct VSOutlineInput
+{
+    float4 position : SV_POSITION;
+    float3 norm : NORMAL;
+};
+
+
+struct VSBoneOutlineInput
+{
+    float4 position : SV_Position;
+    float3 norm : NORMAL;
+    uint4 indices : BLENDINDICES0;
+    float4 weights : BLENDWEIGHT0;
+};
+
+struct PSOutlineInput
+{
+    float4 position : SV_POSITION;
+    float3 norm : NORMAL;
+};
+
 struct PSPNTInput
 {
     float4 position : SV_POSITION;

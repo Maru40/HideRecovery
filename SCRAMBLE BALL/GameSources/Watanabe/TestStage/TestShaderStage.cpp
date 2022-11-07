@@ -49,7 +49,7 @@ namespace basecross {
 		// 念のためSkyBoxを生成
 		AddGameObject<SkyBox>(Vec3(100, 100, 100));
 
-		GetPostProcess()->AddPostEffect<OutlinePostEffect>();
+		//GetPostProcess()->AddPostEffect<OutlinePostEffect>();
 	}
 
 	void TestShaderStage::OnUpdate() {
