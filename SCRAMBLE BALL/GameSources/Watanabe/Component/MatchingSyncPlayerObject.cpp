@@ -98,4 +98,12 @@ namespace basecross {
 			}
 		}
 	}
+
+	void MatchingSyncPlayerObject::Reset()
+	{
+		for (auto& player : m_players)
+		{
+			player->SetActive(false);
+		}
+	}
 }
