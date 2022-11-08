@@ -34,6 +34,9 @@ namespace basecross {
 		drawComp->SetMultiMeshResource(L"Player_Mesh");
 		drawComp->SetMeshToTransformMatrix(spanMat);
 
+		// アウトライン関係
+		drawComp->SetOutlineActive(true);
+
 		auto shadow = gameObject->AddComponent<Shadowmap>();
 		shadow->SetMultiMeshResource(L"Player_Mesh");
 		shadow->SetMeshToTransformMatrix(spanMat);

@@ -28,7 +28,6 @@ namespace basecross {
 	}
 
 	void RackObject::OnCreate() {
-
 		AddComponent<Online::OnlineStatus>();
 
 		auto col = AddComponent<CollisionObb>();
@@ -40,6 +39,9 @@ namespace basecross {
 		//drawComp->SetMeshResource(L"rack");
 		drawComp->SetMultiMeshResource(L"Box_Model");
 		drawComp->SetOwnShadowActive(true);
+
+		// アウトライン関係
+		drawComp->SetOutlineActive(true);
 
 		if (auto mainStage = dynamic_pointer_cast<MainStage>(GetStage())) {
 			auto animator = AddComponent<BoxAnimator>();
