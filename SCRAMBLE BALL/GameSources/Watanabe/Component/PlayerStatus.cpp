@@ -139,12 +139,5 @@ namespace basecross {
 		//ダメージを受けたことを伝える。
 		auto tupleSpace = factionMember->GetAssignedFaction()->GetTupleSpace();
 		tupleSpace->Write<Enemy::Tuple::Damaged>(tupler, data, (float)data.value);
-
-
-		//攻撃状態で、かつ、攻撃対象以外なら、Help
-
-		//攻撃状態で、かつ、攻撃対象なら、Damageを受けたことを伝えるだけ
-
-		//徘徊状態なら、攻撃対象に変更(OK)
 	}
 }
