@@ -103,7 +103,7 @@ namespace basecross {
 			/// </summary>
 			template<class T>
 			static T RandomArray(const vector<T>& vec) {
-				auto ran = MyRandom::Random(0, (int)vec.size() - 1);
+				auto ran = MyRandom::Random(0, (int)vec.size());
 
 				return vec[ran];
 			}

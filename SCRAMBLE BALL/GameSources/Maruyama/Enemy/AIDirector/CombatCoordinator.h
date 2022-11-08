@@ -50,33 +50,35 @@ namespace basecross {
 		class CombatCoordinator : public HereOwnerCoordinatorBase<FactionCoordinator, EnemyBase>
 		{
 		public:
-			using Data = CombatCoordinator_Data;
-
+			
 		private:
-			std::map<std::weak_ptr<EnemyBase>, Data> m_dataMap;	//エネミーごとのデータマップ
-			std::vector<Data> m_requestDatas;					//リクエストデータ管理配列
+			std::vector<std::weak_ptr<GameObject>> m_targets;	//すでに発見済みのターゲット
 
 		public:
 			CombatCoordinator(const std::shared_ptr<FactionCoordinator>& owner);
 
 			~CombatCoordinator() = default;
 
+			void OnCreate() override;
 			void OnStart() override {};
 			bool OnUpdate() override;
 			void OnExit() override {};
 			
 		private:
-			//命令の生成
-			void CreateOrder(const Data& data);
 
 		private:
-
-			void ObserveFindTarget();
-
-			bool HasTarget() const;
+			/// <summary>
+			/// ターゲットの監視
+			/// </summary>
+			void UpdateObserveFindTarget();
 
 			/// <summary>
-			/// 同じリクエスタのタプルを削除
+			/// メンバーがダメージを受けたことを監視
+			/// </summary>
+			void UpdateObserveDamaged();
+
+			/// <summary>
+			/// 同じリクエスタのタプルを削除(本来ここに書くべきじゃない。移動予定)
 			/// </summary>
 			template<class T>
 			void RemoveTuples(std::vector<std::shared_ptr<T>>& tuples, std::shared_ptr<Enemy::Tuple::I_Tupler>& requester) {
@@ -95,14 +97,9 @@ namespace basecross {
 			/// アクセッサ
 			//--------------------------------------------------------------------------------------
 
-			/// <summary>
-			/// 行動のリクエスト
-			/// </summary>
-			/// <param name="member">リクエストを送ったメンバー</param>
-			/// <param name="data">リクエストデータ</param>
-			void Request(const std::shared_ptr<EnemyBase>& member, const Data& data);
+			void AddTargets(const std::shared_ptr<GameObject>& target);
 
-			
+			bool HasTarget(const std::shared_ptr<GameObject>& target) const;
 		};
 
 	}

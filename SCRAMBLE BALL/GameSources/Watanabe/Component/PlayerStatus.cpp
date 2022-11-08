@@ -19,12 +19,18 @@
 
 #include "Maruyama/Utility/SingletonComponent/ShareClassesManager.h"
 
+#include "Maruyama/Interface/I_FactionMember.h"
+#include "Maruyama/Enemy/AIDirector/CoordinatorBase.h"
+#include "Maruyama/Enemy/AIDirector/TupleSpace.h"
+
 namespace basecross {
 	PlayerStatus::PlayerStatus(const shared_ptr<GameObject>& owner)
 		:Component(owner), m_status(10), m_team(team::TeamType(0)),
 		m_damageSoundClip(L"PlayerDamageSE", false, 0.75f),
 		m_inAreaSoundClip(L"AlertSE_00", false, 0.05f)
-	{}
+	{
+		
+	}
 
 	void PlayerStatus::OnCreate() {
 		if (auto shareManager = ShareClassesManager::GetInstance(GetStage())) {
@@ -35,6 +41,8 @@ namespace basecross {
 	void PlayerStatus::OnLateStart()
 	{
 		m_soundEmitter = GetGameObject()->GetComponent<SoundEmitter>(false);
+		m_factionMember = GetGameObject()->GetComponent<Enemy::I_FactionMember>(false);
+		m_tupler = GetGameObject()->GetComponent<Enemy::Tuple::I_Tupler>(false);
 
 		AddReactiveIsInAreaEvent(true, [&]() { 
 			if (auto soundEmitter = m_soundEmitter.lock()) {
@@ -47,6 +55,7 @@ namespace basecross {
 	}
 
 	void PlayerStatus::AddDamage(const DamageData& damage) {
+
 		if (IsDead()) {
 			return;
 		}
@@ -74,8 +83,13 @@ namespace basecross {
 			m_status.hp = 0;
 		}
 
-		auto soundEmitter = m_soundEmitter.lock();
-		soundEmitter->PlaySoundClip(m_damageSoundClip);
+		//ダメージを与えた相手を伝える。
+		SendFaciton_DamageMessage(damage);
+
+		return;
+
+		//auto soundEmitter = m_soundEmitter.lock();
+		//soundEmitter->PlaySoundClip(m_damageSoundClip);
 
 		for (auto& damagedFunc : m_damagedFuncs)
 		{
@@ -113,5 +127,17 @@ namespace basecross {
 				break;
 			}
 		}
+	}
+
+	void PlayerStatus::SendFaciton_DamageMessage(const DamageData& data) {
+		auto factionMember = m_factionMember.lock();
+		auto tupler = m_tupler.lock();
+		if (!factionMember || !tupler) {
+			return;
+		}
+
+		//ダメージを受けたことを伝える。
+		auto tupleSpace = factionMember->GetAssignedFaction()->GetTupleSpace();
+		tupleSpace->Write<Enemy::Tuple::Damaged>(tupler, data, (float)data.value);
 	}
 }

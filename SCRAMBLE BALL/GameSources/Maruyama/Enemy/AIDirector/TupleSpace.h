@@ -8,6 +8,8 @@
 #pragma once
 #include "stdafx.h"
 
+#include "Maruyama/Interface/I_Damaged.h"
+
 namespace basecross {
 
 	namespace maru {
@@ -146,6 +148,44 @@ namespace basecross {
 
 				_NODISCARD std::shared_ptr<GameObject> GetTarget() const noexcept { return m_target.lock(); }
 			};
+
+			//--------------------------------------------------------------------------------------
+			/// ダメージを受けたことを伝えるタプル
+			//--------------------------------------------------------------------------------------
+			class Damaged : public TupleRequestBase {
+				DamageData m_damageData;
+
+			public:
+				Damaged(
+					const std::shared_ptr<I_Tupler>& requester,
+					const DamageData& data,
+					const float value
+				);
+
+				bool operator ==(const Damaged& other);
+
+				_NODISCARD const DamageData& GetDamageData() const noexcept { return m_damageData; };
+			};
+
+			//--------------------------------------------------------------------------------------
+			///	Helpタプル
+			//--------------------------------------------------------------------------------------
+			class HelpAction : public TupleRequestBase 
+			{
+				std::weak_ptr<GameObject> m_target;
+
+			public:
+				HelpAction(
+					const std::shared_ptr<I_Tupler>& requester,
+					const std::shared_ptr<GameObject>& target,
+					const float value
+				);
+
+				bool operator ==(const HelpAction& other);
+
+				_NODISCARD std::shared_ptr<GameObject> GetTarget() const noexcept { return m_target.lock(); }
+			};
+
 
 			//--------------------------------------------------------------------------------------
 			/// 通知用データ管理インターフェース
@@ -300,7 +340,7 @@ namespace basecross {
 					std::nullptr_t> = nullptr
 				>
 				const std::shared_ptr<const T> Read(
-						const std::function<bool(const std::shared_ptr<T>&)>& isFunc = [](const std::shared_ptr<T>&) { return true; } ) const
+					const std::function<bool(const std::shared_ptr<T>&)>& isFunc = [](const std::shared_ptr<T>&) { return true; } ) const
 				{
 					return SearchTuple<T>(isFunc);
 				}
@@ -315,7 +355,7 @@ namespace basecross {
 					std::nullptr_t> = nullptr
 				>
 				std::shared_ptr<T> Take(
-						const std::function<bool(const std::shared_ptr<T>&)>& isFunc = [](const std::shared_ptr<T>&) { return true; }
+					const std::function<bool(const std::shared_ptr<T>&)>& isFunc = [](const std::shared_ptr<T>&) { return true; }
 				) {
 					auto tuple = SearchTuple<T>(isFunc);
 					if (!tuple) {	//タプルが存在しないならnullptr
@@ -400,7 +440,48 @@ namespace basecross {
 					}
 
 					m_notifysMap[typeIndex].push_back(newNotify);	//Notipyの生成
+
+					auto notifys = m_notifysMap.at(typeIndex);
 				}
+
+				/// <summary>
+				/// 自分の通知を消す。
+				/// </summary>
+				template<class T,
+					std::enable_if_t<std::is_base_of_v<I_Tuple, T>, std::nullptr_t> = nullptr>
+				bool RemoveNotify(const std::shared_ptr<I_Tupler>& tupler)
+				{
+					if (tupler == nullptr) {
+						return false;
+					}
+
+					auto tIndex = type_index(typeid(T));	//型インデックスの取得
+
+					if (m_notifysMap.count(tIndex) == 0) {		//Mapに存在しないならfalseを返す。
+						return false;
+					}
+
+					auto& notifys = m_notifysMap.at(tIndex);
+
+					auto iter = notifys.begin();
+					while (iter != notifys.end()) {
+						auto test = *iter;
+						if ((*iter)->GetRequester() == tupler) {
+							iter = notifys.erase(iter);
+							return true;
+						}
+						iter++;
+					}
+
+					return false;
+				}
+
+				/// <summary>
+				/// 指定したタプルスペース使用者の通知を全て消す。
+				/// </summary>
+				/// <param name="tupler">タプルスペース使用者</param>
+				/// <returns></returns>
+				bool RemoveAllNotifys(const std::shared_ptr<I_Tupler>& tupler);
 
 			private:
 				/// <summary>
@@ -480,6 +561,22 @@ namespace basecross {
 							return true;
 						}
 						iter++;
+					}
+
+					return false;
+				}
+
+				bool RemoveNotify(const std::shared_ptr<I_NotifyController>& removeNotify) {
+					for (auto& pair : m_notifysMap) {
+						auto iter = pair.second.begin();
+						while (iter != pair.second.end()) {
+							if (*iter == removeNotify) {
+								iter = pair.second.erase(iter);
+								return true;
+							}
+
+							iter++;
+						}
 					}
 
 					return false;

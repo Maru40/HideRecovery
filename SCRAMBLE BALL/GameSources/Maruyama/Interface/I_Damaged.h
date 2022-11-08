@@ -13,8 +13,8 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 	struct DamageData
 	{
-		int value;      //ダメージ値
-		std::shared_ptr<GameObject> attacker;
+		int value;								//ダメージ値
+		std::shared_ptr<GameObject> attacker;	//攻撃する者
 
 		/// <summary>
 		/// コンストラクタ

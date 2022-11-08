@@ -50,7 +50,7 @@ namespace basecross {
 					m_observeEyeTargets->ClearObserveTargets();						//監視ターゲットのクリア
 					m_observeEyeTargets->SetObserveTargets(SearchObserveTargets());	//ターゲットの指定
 
-					auto targets = SearchOtherTarget(m_observeEyeTargets->SearchIsInEyeTargets());
+					auto targets = SearchOtherTarget(m_observeEyeTargets->SearchIsInEyeTargets());	//視界内のターゲットを取得
 
 					NotifyTargets(targets);
 
@@ -63,6 +63,7 @@ namespace basecross {
 					auto selfPosition = m_transform.lock()->GetPosition();
 					auto assignedFaction = GetOwner()->GetAssignedFaction();
 					auto tupleSpace = assignedFaction->GetTupleSpace();
+					//ターゲットを見つけたことを通知する。
 					for (const auto& target : targets) {
 						auto targetPosition = target->GetComponent<Transform>()->GetPosition();
 						auto toTargetVec = targetPosition - selfPosition;
