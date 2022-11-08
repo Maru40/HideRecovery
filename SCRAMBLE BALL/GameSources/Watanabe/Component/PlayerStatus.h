@@ -10,6 +10,18 @@
 #include "Maruyama/Interface/I_TeamMember.h"
 
 namespace basecross {
+
+	//--------------------------------------------------------------------------------------
+	/// 前方宣言
+	//--------------------------------------------------------------------------------------
+	namespace Enemy {
+		class I_FactionMember;
+
+		namespace Tuple {
+			class I_Tupler;
+		}
+	}
+
 	/// <summary>
 	/// ステータス構造体
 	/// </summary>
@@ -34,6 +46,9 @@ namespace basecross {
 		}
 	};
 
+	//--------------------------------------------------------------------------------------
+	/// playerステータス
+	//--------------------------------------------------------------------------------------
 	class PlayerStatus :public Component, public I_TeamMember {
 	public:
 		using DamageFuncType = std::function<void(const std::shared_ptr<PlayerStatus>&, const DamageData&)>;
@@ -41,6 +56,9 @@ namespace basecross {
 	private:
 		Status m_status;
 		team::TeamType m_team;
+
+		std::weak_ptr<Enemy::I_FactionMember> m_factionMember;	//ファクションメンバー
+		std::weak_ptr<Enemy::Tuple::I_Tupler> m_tupler;			//タプルスペースの使用者
 
 		std::vector<DamageFuncType> m_damagedFuncs;
 		std::weak_ptr<SoundEmitter> m_soundEmitter;
@@ -90,5 +108,11 @@ namespace basecross {
 		Status GetStatus() const { return m_status; }
 
 		std::shared_ptr<GameObject> GetOwnerObject() const override { return GetGameObject(); }
+
+	private:
+		/// <summary>
+		/// ファクション管理者にダメージを受けたことを伝える。
+		/// </summary>
+		void SendFaciton_DamageMessage(const DamageData& data);
 	};
 }
