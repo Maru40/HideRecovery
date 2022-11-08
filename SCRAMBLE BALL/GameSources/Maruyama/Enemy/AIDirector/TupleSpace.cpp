@@ -153,6 +153,29 @@ namespace basecross {
 				return false;
 			}
 
+			//--------------------------------------------------------------------------------------
+			///	Helpタプル
+			//--------------------------------------------------------------------------------------
+
+			HelpAction::HelpAction(
+				const std::shared_ptr<I_Tupler>& requester,
+				const std::shared_ptr<GameObject>& target,
+				const float value
+			):
+				TupleRequestBase(requester, value),
+				m_target(target)
+			{}
+
+			bool HelpAction::operator ==(const HelpAction& other) {
+				if (GetRequester() == other.GetRequester() &&
+					GetTarget() == other.GetTarget() &&
+					GetValue() == other.GetValue())
+				{
+					return true;
+				}
+
+				return false;
+			}
 
 			//--------------------------------------------------------------------------------------
 			/// タプルスペース本体

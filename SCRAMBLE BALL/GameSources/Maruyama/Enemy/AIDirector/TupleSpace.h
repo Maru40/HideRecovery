@@ -168,6 +168,26 @@ namespace basecross {
 			};
 
 			//--------------------------------------------------------------------------------------
+			///	Helpタプル
+			//--------------------------------------------------------------------------------------
+			class HelpAction : public TupleRequestBase 
+			{
+				std::weak_ptr<GameObject> m_target;
+
+			public:
+				HelpAction(
+					const std::shared_ptr<I_Tupler>& requester,
+					const std::shared_ptr<GameObject>& target,
+					const float value
+				);
+
+				bool operator ==(const HelpAction& other);
+
+				_NODISCARD std::shared_ptr<GameObject> GetTarget() const noexcept { return m_target.lock(); }
+			};
+
+
+			//--------------------------------------------------------------------------------------
 			/// 通知用データ管理インターフェース
 			//--------------------------------------------------------------------------------------
 			class I_NotifyController {
@@ -422,8 +442,6 @@ namespace basecross {
 					m_notifysMap[typeIndex].push_back(newNotify);	//Notipyの生成
 
 					auto notifys = m_notifysMap.at(typeIndex);
-
-					int i = 0;
 				}
 
 				/// <summary>
