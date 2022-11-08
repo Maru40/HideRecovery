@@ -52,13 +52,14 @@ namespace basecross {
 		public:
 			
 		private:
-
+			std::vector<std::weak_ptr<GameObject>> m_targets;	//すでに発見済みのターゲット
 
 		public:
 			CombatCoordinator(const std::shared_ptr<FactionCoordinator>& owner);
 
 			~CombatCoordinator() = default;
 
+			void OnCreate() override;
 			void OnStart() override {};
 			bool OnUpdate() override;
 			void OnExit() override {};
@@ -69,7 +70,12 @@ namespace basecross {
 			/// <summary>
 			/// ターゲットの監視
 			/// </summary>
-			void ObserveFindTarget();
+			void UpdateObserveFindTarget();
+
+			/// <summary>
+			/// メンバーがダメージを受けたことを監視
+			/// </summary>
+			void UpdateObserveDamaged();
 
 			/// <summary>
 			/// 同じリクエスタのタプルを削除(本来ここに書くべきじゃない。移動予定)
@@ -91,6 +97,9 @@ namespace basecross {
 			/// アクセッサ
 			//--------------------------------------------------------------------------------------
 
+			void AddTargets(const std::shared_ptr<GameObject>& target);
+
+			bool HasTarget(const std::shared_ptr<GameObject>& target) const;
 		};
 
 	}
