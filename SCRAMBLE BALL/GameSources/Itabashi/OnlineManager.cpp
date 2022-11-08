@@ -126,7 +126,6 @@ namespace Online
 		if (client)
 		{
 			client->disconnect();
-			client.reset();
 		}
 	}
 
@@ -145,9 +144,19 @@ namespace Online
 		GetInstance()->m_client->opJoinRandomOrCreateRoom(L"", roomOptions, ExitGames::Common::Hashtable(), roomOptions.getMaxPlayers());
 	}
 
+	void OnlineManager::LeaveRoom()
+	{
+		GetInstance()->m_client->opLeaveRoom();
+	}
+
 	void OnlineManager::RaiseEvent(bool reliable, const std::uint8_t* bytes, int size, std::uint8_t eventCode, const ExitGames::LoadBalancing::RaiseEventOptions& options)
 	{
 		GetInstance()->m_client->opRaiseEvent(reliable, bytes, size, eventCode, options);
+	}
+
+	bool OnlineManager::IsConnected()
+	{
+		return GetInstance()->m_client != nullptr;
 	}
 
 	void OnlineManager::joinRoomEventAction(int playerNr, const ExitGames::Common::JVector<int>& playernrs, const ExitGames::LoadBalancing::Player& player)
@@ -221,6 +230,11 @@ namespace Online
 		auto successCallback = (localPlayerNr == 1) ? &I_OnlineCallBacks::OnCreateRoom : &I_OnlineCallBacks::OnJoinRoom;
 
 		EventCallback(errorCode, successCallback, &I_OnlineCallBacks::OnCreateRoomFailed);
+	}
+
+	void OnlineManager::leaveRoomReturn(int errorCode, const ExitGames::Common::JString& errorString)
+	{
+		EventCallback(errorCode, &I_OnlineCallBacks::OnLeaveRoom, &I_OnlineCallBacks::OnLeaveRoomFailed);
 	}
 }
 }

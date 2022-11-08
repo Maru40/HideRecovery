@@ -77,6 +77,15 @@ namespace Online
 		/// </summary>
 		/// <param name="errorCode">エラーコード</param>
 		virtual void OnJoinRoomFailed(int errorCode) = 0;
+		/// <summary>
+		/// 部屋から抜けたとき
+		/// </summary>
+		virtual void OnLeaveRoom() = 0;
+		/// <summary>
+		/// 部屋から抜けるのに失敗したとき
+		/// </summary>
+		/// <param name="errorCode">エラーコード</param>
+		virtual void OnLeaveRoomFailed(int errorCode) = 0;
 	};
 
 	/// <summary>
@@ -104,6 +113,9 @@ namespace Online
 
 		virtual void OnJoinRoom() override {}
 		virtual void OnJoinRoomFailed(int errorCode) override {}
+
+		virtual void OnLeaveRoom() override {}
+		virtual void OnLeaveRoomFailed(int errorCode) override {}
 	};
 
 	/// <summary>
@@ -226,6 +238,10 @@ namespace Online
 		/// <param name="roomOptions">部屋設定</param>
 		static void JoinRandomOrCreateRoom(const ExitGames::LoadBalancing::RoomOptions& roomOptions = ExitGames::LoadBalancing::RoomOptions());
 		/// <summary>
+		/// 部屋から抜ける
+		/// </summary>
+		static void LeaveRoom();
+		/// <summary>
 		/// オンラインでイベントを発行する
 		/// </summary>
 		/// <param name="reliable"></param>
@@ -234,6 +250,11 @@ namespace Online
 		/// <param name="eventCode">イベントコード</param>
 		/// <param name="options">部屋設定</param>
 		static void RaiseEvent(bool reliable, const std::uint8_t* bytes, int size, std::uint8_t eventCode, const ExitGames::LoadBalancing::RaiseEventOptions& options = ExitGames::LoadBalancing::RaiseEventOptions());
+		/// <summary>
+		/// 接続されているか
+		/// </summary>
+		/// <returns>接続しているならtrue</returns>
+		static bool IsConnected();
 
 		// 自分自身のコールバック -------------------------------------------------------------------------------------------------
 
@@ -266,7 +287,7 @@ namespace Online
 		void joinRandomOrCreateRoomReturn(int localPlayerNr, const ExitGames::Common::Hashtable& roomProperties,
 			const ExitGames::Common::Hashtable& playerProperties, int errorCode, const ExitGames::Common::JString& errorString) override;
 
-		void leaveRoomReturn(int errorCode, const ExitGames::Common::JString& errorString) override {}
+		void leaveRoomReturn(int errorCode, const ExitGames::Common::JString& errorString) override;
 
 		// -------------------------------------------------------------------------------------------------------------------------
 	};
