@@ -35,6 +35,8 @@
 
 #include "Maruyama/Enemy/AIDirector/CombatCoordinator.h"
 
+#include "Watanabe/DebugClass/Debug.h"
+
 namespace basecross {
 	namespace Enemy {
 
@@ -44,7 +46,7 @@ namespace basecross {
 
 		AIPlayerStator_TransitionMember::AIPlayerStator_TransitionMember():
 			hidePatrolEeyRange(5.0f),
-			buttleStartEyeRange(20.0f)
+			buttleStartEyeRange(30.0f)
 		{}
 
 		//--------------------------------------------------------------------------------------
