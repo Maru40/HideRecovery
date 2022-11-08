@@ -6,7 +6,6 @@
 #include "stdafx.h"
 
 namespace basecross {
-
 	//--------------------------------------------------------------------------------------
 	//	struct TextureResource::Impl;
 	//	用途: Implイディオム
@@ -19,7 +18,6 @@ namespace basecross {
 		~Impl() {}
 		//ミューテックス
 		std::mutex Mutex;
-
 	};
 
 	TextureResource::Impl::Impl(const wstring& FileName, const wstring& TexType) :
@@ -123,24 +121,20 @@ namespace basecross {
 			ID3D11DeviceContext* pID3D11DeviceContex = Dev->GetD3DDeviceContext();
 
 			Util::DemandCreate(m_ShaderResView, Mutex, [&](ID3D11ShaderResourceView** pResult) -> HRESULT
-			{
-				// 画像からシェーダリソースViewの作成
-				hr = ThrowIfFailed(CreateShaderResourceView(pDx11Device, image.GetImages(), image.GetImageCount(), metadata, pResult),
-					L"シェーダーリソースビューを作成できません",
-					L"if( FAILED( CreateShaderResourceView() ) )",
-					L"Texture::Impl::Impl()"
-				);
-				return hr;
-			});
-
-
+				{
+					// 画像からシェーダリソースViewの作成
+					hr = ThrowIfFailed(CreateShaderResourceView(pDx11Device, image.GetImages(), image.GetImageCount(), metadata, pResult),
+						L"シェーダーリソースビューを作成できません",
+						L"if( FAILED( CreateShaderResourceView() ) )",
+						L"Texture::Impl::Impl()"
+					);
+					return hr;
+				});
 		}
 		catch (...) {
 			throw;
 		}
 	}
-
-
 
 	//--------------------------------------------------------------------------------------
 	//	class TextureResource : public BaseResource;
@@ -171,8 +165,6 @@ namespace basecross {
 	const wstring& TextureResource::GetTextureFileName() const {
 		return pImpl->m_FileName;
 	}
-
-
 
 	//--------------------------------------------------------------------------------------
 	///	メッシュリソース
@@ -244,11 +236,7 @@ namespace basecross {
 		catch (...) {
 			throw;
 		}
-
-
 	}
-
-
 
 	shared_ptr<MeshResource> MeshResource::CreateCylinder(float Height, float Diameter, size_t Tessellation, bool AccessWrite) {
 		try {
@@ -293,7 +281,6 @@ namespace basecross {
 		catch (...) {
 			throw;
 		}
-
 	}
 
 	shared_ptr<MeshResource> MeshResource::CreateTetrahedron(float Size, bool AccessWrite) {
@@ -486,7 +473,6 @@ namespace basecross {
 			if (TextureFileStr != L"") {
 				TextureFileStr = BinDataDir + TextureFileStr;
 				ToM.m_TextureResource = ObjectFactory::Create<TextureResource>(TextureFileStr);
-
 			}
 			else {
 				ToM.m_TextureResource = nullptr;
@@ -503,13 +489,11 @@ namespace basecross {
 				L"MeshResource::ReadBaseData()"
 			);
 		}
-
 	}
 	void MeshResource::ReadBaseBoneData(BinaryReader& Reader, const wstring& BinDataDir, const wstring& BinDataFile,
 		vector<VertexPositionNormalTextureSkinning>& vertices, vector<VertexPositionNormalTangentTextureSkinning>& vertices_withtan,
 		vector<uint16_t>& indices, vector<MaterialEx>& materials,
 		vector<bsm::Mat4x4>& bonematrix, UINT& BoneCount, UINT& SampleCount) {
-
 		vertices.clear();
 		vertices_withtan.clear();
 		indices.clear();
@@ -568,7 +552,6 @@ namespace basecross {
 				}
 				vertices_withtan.push_back(v);
 			}
-
 		}
 
 		//インデックスの読み込み
@@ -755,8 +738,6 @@ namespace basecross {
 		}
 	}
 
-
-
 	shared_ptr<MeshResource> MeshResource::CreateBoneModelMeshBase(BinaryReader& Reader, const wstring& BinDataDir,
 		const wstring& BinDataFile, bool AccessWrite) {
 		try {
@@ -853,8 +834,6 @@ namespace basecross {
 		}
 	}
 
-
-
 	shared_ptr<MeshResource> MeshResource::CreateStaticModelMesh(const wstring& BinDataDir, const wstring& BinDataFile, bool AccessWrite) {
 		try {
 			wstring DataFile = BinDataDir + BinDataFile;
@@ -869,7 +848,7 @@ namespace basecross {
 					L"MeshResource::CreateStaticModelMesh()"
 				);
 			}
-			return CreateStaticModelMeshBase(Reader,BinDataDir,BinDataFile,AccessWrite);
+			return CreateStaticModelMeshBase(Reader, BinDataDir, BinDataFile, AccessWrite);
 		}
 		catch (...) {
 			throw;
@@ -890,13 +869,12 @@ namespace basecross {
 					L"MeshResource::CreateStaticModelMeshWithTangent()"
 				);
 			}
-			return CreateStaticModelMeshWithTangentBase(Reader,BinDataDir,BinDataFile,AccessWrite);
+			return CreateStaticModelMeshWithTangentBase(Reader, BinDataDir, BinDataFile, AccessWrite);
 		}
 		catch (...) {
 			throw;
 		}
 	}
-
 
 	shared_ptr<MeshResource> MeshResource::CreateBoneModelMesh(const wstring& BinDataDir,
 		const wstring& BinDataFile, bool AccessWrite) {
@@ -913,12 +891,11 @@ namespace basecross {
 					L"MeshResource::CreateBoneModelMesh()"
 				);
 			}
-			return CreateBoneModelMeshBase(Reader,BinDataDir,BinDataFile,AccessWrite);
+			return CreateBoneModelMeshBase(Reader, BinDataDir, BinDataFile, AccessWrite);
 		}
 		catch (...) {
 			throw;
 		}
-
 	}
 
 	shared_ptr<MeshResource> MeshResource::CreateBoneModelMeshWithTangent(const wstring& BinDataDir,
@@ -936,7 +913,7 @@ namespace basecross {
 					L"MeshResource::CreateBoneModelMeshWithTangent()"
 				);
 			}
-			return CreateBoneModelMeshWithTangentBase(Reader,BinDataDir,BinDataFile,AccessWrite);
+			return CreateBoneModelMeshWithTangentBase(Reader, BinDataDir, BinDataFile, AccessWrite);
 		}
 		catch (...) {
 			throw;
@@ -951,7 +928,6 @@ namespace basecross {
 	{}
 	//破棄
 	MultiMeshResource::~MultiMeshResource() {}
-
 
 	shared_ptr<MultiMeshResource> MultiMeshResource::CreateStaticModelMultiMesh(const wstring& BinDataDir,
 		const wstring& BinDataFile, bool AccessWrite) {
@@ -987,9 +963,7 @@ namespace basecross {
 		catch (...) {
 			throw;
 		}
-
 	}
-
 
 	shared_ptr<MultiMeshResource> MultiMeshResource::CreateStaticModelMultiMeshWithTangent(const wstring& BinDataDir,
 		const wstring& BinDataFile, bool AccessWrite) {
@@ -1026,7 +1000,6 @@ namespace basecross {
 			throw;
 		}
 	}
-
 
 	shared_ptr<MultiMeshResource> MultiMeshResource::CreateBoneModelMultiMesh(const wstring& BinDataDir,
 		const wstring& BinDataFile, bool AccessWrite) {
@@ -1065,7 +1038,7 @@ namespace basecross {
 	}
 
 	shared_ptr<MultiMeshResource> MultiMeshResource::CreateBoneModelMultiMeshWithTangent(const wstring& BinDataDir,
-		const wstring& BinDataFile, bool AccessWrite){
+		const wstring& BinDataFile, bool AccessWrite) {
 		try {
 			wstring DataFile = BinDataDir + BinDataFile;
 			BinaryReader Reader(DataFile);
@@ -1098,9 +1071,7 @@ namespace basecross {
 		catch (...) {
 			throw;
 		}
-
 	}
-
 
 	//--------------------------------------------------------------------------------------
 	//	struct DeviceResources::Impl;
@@ -1113,7 +1084,6 @@ namespace basecross {
 		ComPtr<ID3D11Device2> m_D3D11Device;		//デバイス
 		ComPtr<ID3D11DeviceContext2> m_D3D11Context;		//コンテキスト
 		ComPtr<IDXGISwapChain1> m_D3D11SwapChain;	//スワップチェーン
-
 
 													// Direct2D 描画コンポーネント。
 		ComPtr<ID2D1Factory2>		m_d2dFactory;
@@ -1130,13 +1100,10 @@ namespace basecross {
 		shared_ptr<ShadowMapRenderTarget> m_ShadowMapRenderTarget;	///<シャドウマップのレンダリングターゲット
 		shared_ptr<RenderState> m_RenderState;					///<レンダリングステート
 
-
-
 		void CreateSamplerState(D3D11_FILTER filter,
 			D3D11_TEXTURE_ADDRESS_MODE addressMode,
 			ID3D11SamplerState** pResult) {
 			try {
-
 				auto Dev = App::GetApp()->GetDeviceResources();
 				auto pDx11Device = Dev->GetD3DDevice();
 
@@ -1168,7 +1135,6 @@ namespace basecross {
 			catch (...) {
 				throw;
 			}
-
 		}
 		void CreateBlendState(D3D11_BLEND srcBlend, D3D11_BLEND destBlend,
 			ID3D11BlendState** pResult) {
@@ -1284,34 +1250,30 @@ namespace basecross {
 
 		ID3D11SamplerState* GetLinearClampSampler() {
 			return Util::DemandCreate(m_LinearClampPtr, Mutex, [&](ID3D11SamplerState** pResult)
-			{
-				CreateSamplerState(D3D11_FILTER_MIN_MAG_MIP_LINEAR, D3D11_TEXTURE_ADDRESS_CLAMP, pResult);
-			});
+				{
+					CreateSamplerState(D3D11_FILTER_MIN_MAG_MIP_LINEAR, D3D11_TEXTURE_ADDRESS_CLAMP, pResult);
+				});
 		}
 		ID3D11BlendState* GetOpaqueBlend() {
 			return Util::DemandCreate(m_OpaquePtr, Mutex, [&](ID3D11BlendState** pResult)
-			{
-				CreateBlendState(D3D11_BLEND_ONE, D3D11_BLEND_ZERO, pResult);
-			});
-
+				{
+					CreateBlendState(D3D11_BLEND_ONE, D3D11_BLEND_ZERO, pResult);
+				});
 		}
 
 		ID3D11RasterizerState* GetCullBackRasterizer() {
 			return Util::DemandCreate(m_CullBackPtr, Mutex, [&](ID3D11RasterizerState** pResult)
-			{
-				CreateRasterizerState(D3D11_CULL_BACK, D3D11_FILL_SOLID, pResult);
-			});
+				{
+					CreateRasterizerState(D3D11_CULL_BACK, D3D11_FILL_SOLID, pResult);
+				});
 		}
 
 		ID3D11DepthStencilState* GetDefaultDepthStencil() {
 			return Util::DemandCreate(m_DepthDefaultPtr, Mutex, [&](ID3D11DepthStencilState** pResult)
-			{
-				CreateDepthStencilState(true, true, pResult);
-			});
+				{
+					CreateDepthStencilState(true, true, pResult);
+				});
 		}
-
-
-
 	};
 	//構築
 	DeviceResources::Impl::Impl(HWND hWnd, bool isFullScreen, UINT Width, UINT Height) :
@@ -1327,7 +1289,6 @@ namespace basecross {
 	}
 	//リソースの構築
 	void DeviceResources::Impl::CreateDeviceResources(HWND hWnd, bool isFullScreen, UINT Width, UINT Height) {
-
 		// Direct2D リソースを初期化します。
 		D2D1_FACTORY_OPTIONS options;
 		ZeroMemory(&options, sizeof(D2D1_FACTORY_OPTIONS));
@@ -1348,7 +1309,6 @@ namespace basecross {
 			L"D2D1CreateFactory()",
 			L"DeviceResources::Impl::CreateDeviceResources()"
 		);
-
 
 		// DirectWrite ファクトリを初期化します。
 		ThrowIfFailed(
@@ -1373,7 +1333,6 @@ namespace basecross {
 			L"CoCreateInstance()",
 			L"DeviceResources::Impl::CreateDeviceResources()"
 		);
-
 
 		HRESULT hr;	//APIの戻り値用
 					//デバイス作成用フラグ
@@ -1412,7 +1371,7 @@ namespace basecross {
 		sd.BufferDesc.RefreshRate.Denominator = 1;	//リフレッシュレート最小値
 		sd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;	//出力用として定義
 		sd.OutputWindow = hWnd;		//ウインドウのハンドル
-		sd.SampleDesc.Count = 1;		//マルチサンプリング 数は1
+		sd.SampleDesc.Count = 8;		//マルチサンプリング 数は1
 		sd.SampleDesc.Quality = 0;		//マルチサンプリングクオリティは0（最大）
 
 		sd.Windowed = TRUE;			//ウインドウモードで作成してあとからフルsクリーンにする
@@ -1420,7 +1379,6 @@ namespace basecross {
 		ComPtr<ID3D11Device> temp_device;
 		ComPtr<ID3D11DeviceContext>	temp_context;
 		ComPtr<IDXGISwapChain>	temp_swapChain;
-
 
 		//デバイスとスワップチェーンの作成
 		for (UINT driverTypeIndex = 0; driverTypeIndex < numDriverTypes; driverTypeIndex++) {
@@ -1451,7 +1409,6 @@ namespace basecross {
 			L"D3D11CreateDeviceAndSwapChain()",
 			L"DeviceResources::Impl::CreateDeviceResources()"
 		);
-
 
 		//リソースをバージョンアップする
 		ThrowIfFailed(
@@ -1491,7 +1448,6 @@ namespace basecross {
 		pfac->MakeWindowAssociation(hWnd, DXGI_MWA_NO_WINDOW_CHANGES
 			| DXGI_MWA_NO_ALT_ENTER);
 
-
 		// Direct2D デバイス オブジェクトと、対応するコンテキストを作成します。
 
 		ComPtr<IDXGIDevice3> dxgiDevice;
@@ -1519,18 +1475,16 @@ namespace basecross {
 			L"m_d2dDevice->CreateDeviceContext()",
 			L"DeviceResources::Impl::CreateDeviceResources()"
 		);
-/*
-		if (isFullScreen) {
-			ThrowIfFailed(
-				m_D3D11SwapChain->SetFullscreenState(true, NULL),
-				L"フルスクリーン移行に失敗しました。",
-				L"m_D3D11SwapChain->SetFullscreenState(true, NULL)",
-				L"DeviceResources::Impl::CreateDeviceResources()"
-			);
-
-		}
-*/
-
+		/*
+				if (isFullScreen) {
+					ThrowIfFailed(
+						m_D3D11SwapChain->SetFullscreenState(true, NULL),
+						L"フルスクリーン移行に失敗しました。",
+						L"m_D3D11SwapChain->SetFullscreenState(true, NULL)",
+						L"DeviceResources::Impl::CreateDeviceResources()"
+					);
+				}
+		*/
 	}
 
 	//--------------------------------------------------------------------------------------
@@ -1546,17 +1500,17 @@ namespace basecross {
 	}
 	DeviceResources::~DeviceResources() {}
 	//アクセサ
-	ID3D11Device2*	DeviceResources::GetD3DDevice() const { return pImpl->m_D3D11Device.Get(); }
+	ID3D11Device2* DeviceResources::GetD3DDevice() const { return pImpl->m_D3D11Device.Get(); }
 	ID3D11DeviceContext2* DeviceResources::GetD3DDeviceContext() const { return pImpl->m_D3D11Context.Get(); }
 	IDXGISwapChain1* DeviceResources::GetSwapChain() const { return pImpl->m_D3D11SwapChain.Get(); }
 	D3D_FEATURE_LEVEL DeviceResources::GetFeatureLevel() const { return pImpl->m_D3DFeatureLevel; }
 
 	// D2D アクセサー。
-	ID2D1Factory2*			DeviceResources::GetD2DFactory() const { return pImpl->m_d2dFactory.Get(); }
-	ID2D1Device1*			DeviceResources::GetD2DDevice() const { return pImpl->m_d2dDevice.Get(); }
-	ID2D1DeviceContext1*	DeviceResources::GetD2DDeviceContext() const { return pImpl->m_d2dContext.Get(); }
-	IDWriteFactory2*		DeviceResources::GetDWriteFactory() const { return pImpl->m_dwriteFactory.Get(); }
-	IWICImagingFactory2*	DeviceResources::GetWicImagingFactory() const { return pImpl->m_wicFactory.Get(); }
+	ID2D1Factory2* DeviceResources::GetD2DFactory() const { return pImpl->m_d2dFactory.Get(); }
+	ID2D1Device1* DeviceResources::GetD2DDevice() const { return pImpl->m_d2dDevice.Get(); }
+	ID2D1DeviceContext1* DeviceResources::GetD2DDeviceContext() const { return pImpl->m_d2dContext.Get(); }
+	IDWriteFactory2* DeviceResources::GetDWriteFactory() const { return pImpl->m_dwriteFactory.Get(); }
+	IWICImagingFactory2* DeviceResources::GetWicImagingFactory() const { return pImpl->m_wicFactory.Get(); }
 
 	void DeviceResources::InitializeStates() {
 		ID3D11ShaderResourceView* pNull[D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT] = { nullptr };
@@ -1591,7 +1545,6 @@ namespace basecross {
 		pID3D11DeviceContext->RSSetState(pImpl->GetCullBackRasterizer());
 		//デプスステンシル使用
 		pID3D11DeviceContext->OMSetDepthStencilState(pImpl->GetDefaultDepthStencil(), 0);
-
 	}
 
 	shared_ptr<DefaultRenderTarget> DeviceResources::GetDefaultRenderTarget() {
@@ -1601,7 +1554,7 @@ namespace basecross {
 		}
 		return pImpl->m_DefaultRenderTarget;
 	}
-	shared_ptr<ShadowMapRenderTarget> DeviceResources::GetShadowMapRenderTarget(float ShadowMapDimension ) {
+	shared_ptr<ShadowMapRenderTarget> DeviceResources::GetShadowMapRenderTarget(float ShadowMapDimension) {
 		if (!pImpl->m_ShadowMapRenderTarget) {
 			//シャドウマップのレンダリングターゲットを作成
 			pImpl->m_ShadowMapRenderTarget = make_shared<ShadowMapRenderTarget>(ShadowMapDimension);
@@ -1611,8 +1564,6 @@ namespace basecross {
 	shared_ptr<RenderState> DeviceResources::GetRenderState()const {
 		return pImpl->m_RenderState;
 	}
-
-
 
 	void DeviceResources::ClearShadowmapViews() {
 		auto ShadowTarget = GetShadowMapRenderTarget();
@@ -1643,7 +1594,6 @@ namespace basecross {
 		// バックバッファからフロントバッファに転送
 		GetSwapChain()->Present(SyncInterval, Flags);
 	}
-
 
 	//--------------------------------------------------------------------------------------
 	//	struct RenderState;
@@ -1736,8 +1686,6 @@ namespace basecross {
 		void CreateSamplerState(D3D11_FILTER filter,
 			D3D11_TEXTURE_ADDRESS_MODE addressMode,
 			ID3D11SamplerState** pResult);
-
-
 	};
 
 	//--------------------------------------------------------------------------------------
@@ -1883,7 +1831,6 @@ namespace basecross {
 		D3D11_TEXTURE_ADDRESS_MODE addressMode,
 		ID3D11SamplerState** pResult) {
 		try {
-
 			auto Dev = App::GetApp()->GetDeviceResources();
 			auto pDx11Device = Dev->GetD3DDevice();
 
@@ -1941,17 +1888,16 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 	ID3D11BlendState* RenderState::GetOpaque()const {
 		return Util::DemandCreate(pImpl->m_OpaquePtr, pImpl->Mutex, [&](ID3D11BlendState** pResult)
-		{
-			pImpl->CreateBlendState(D3D11_BLEND_ONE, D3D11_BLEND_ZERO, pResult);
-		});
-
+			{
+				pImpl->CreateBlendState(D3D11_BLEND_ONE, D3D11_BLEND_ZERO, pResult);
+			});
 	}
 
 	ID3D11BlendState* RenderState::GetAlphaBlend()const {
 		return Util::DemandCreate(pImpl->m_AlphaBlendPtr, pImpl->Mutex, [&](ID3D11BlendState** pResult)
-		{
-			pImpl->CreateBlendState(D3D11_BLEND_ONE, D3D11_BLEND_INV_SRC_ALPHA, pResult);
-		});
+			{
+				pImpl->CreateBlendState(D3D11_BLEND_ONE, D3D11_BLEND_INV_SRC_ALPHA, pResult);
+			});
 	}
 
 	ID3D11BlendState* RenderState::GetAlphaBlendEx()const {
@@ -1983,19 +1929,18 @@ namespace basecross {
 		return pImpl->m_AlphaBlendExPtr.Get();
 	}
 
-
 	ID3D11BlendState* RenderState::GetAdditive()const {
 		return Util::DemandCreate(pImpl->m_AdditivePtr, pImpl->Mutex, [&](ID3D11BlendState** pResult)
-		{
-			pImpl->CreateBlendState(D3D11_BLEND_SRC_ALPHA, D3D11_BLEND_ONE, pResult);
-		});
+			{
+				pImpl->CreateBlendState(D3D11_BLEND_SRC_ALPHA, D3D11_BLEND_ONE, pResult);
+			});
 	}
 
-	ID3D11BlendState*  RenderState::GetNonPremultiplied()const {
+	ID3D11BlendState* RenderState::GetNonPremultiplied()const {
 		return Util::DemandCreate(pImpl->m_NonPremultipliedPtr, pImpl->Mutex, [&](ID3D11BlendState** pResult)
-		{
-			pImpl->CreateBlendState(D3D11_BLEND_SRC_ALPHA, D3D11_BLEND_INV_SRC_ALPHA, pResult);
-		});
+			{
+				pImpl->CreateBlendState(D3D11_BLEND_SRC_ALPHA, D3D11_BLEND_INV_SRC_ALPHA, pResult);
+			});
 	}
 
 	ID3D11BlendState* RenderState::GetAlphaToCoverage()const {
@@ -2008,19 +1953,19 @@ namespace basecross {
 			bddesc.AlphaToCoverageEnable = TRUE;
 			D3D11_BLEND_DESC* pdesc = &bddesc;
 
-/*
-			D3D11_BLEND_DESC desc;
-			ZeroMemory(&desc, sizeof(desc));
+			/*
+						D3D11_BLEND_DESC desc;
+						ZeroMemory(&desc, sizeof(desc));
 
-			desc.RenderTarget[0].BlendEnable = true;
-			desc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
-			desc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
-			desc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
-			desc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
-			desc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;
-			desc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
-			desc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
-*/
+						desc.RenderTarget[0].BlendEnable = true;
+						desc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
+						desc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
+						desc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+						desc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
+						desc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;
+						desc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
+						desc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
+			*/
 
 			HRESULT hr = pDx11Device->CreateBlendState(pdesc, &pImpl->m_AlphaToCoveragePtr);
 			if (FAILED(hr)) {
@@ -2035,30 +1980,29 @@ namespace basecross {
 		return pImpl->m_AlphaToCoveragePtr.Get();
 	}
 
-
 	//--------------------------------------------------------------------------------------
 	//	用途: デプスステンシルステートアクセッサ
 	//	戻り値: デプスステンシルステートのポインタ
 	//--------------------------------------------------------------------------------------
 	ID3D11DepthStencilState* RenderState::GetDepthNone()const {
 		return Util::DemandCreate(pImpl->m_DepthNonePtr, pImpl->Mutex, [&](ID3D11DepthStencilState** pResult)
-		{
-			pImpl->CreateDepthStencilState(false, false, pResult);
-		});
+			{
+				pImpl->CreateDepthStencilState(false, false, pResult);
+			});
 	}
 
 	ID3D11DepthStencilState* RenderState::GetDepthDefault()const {
 		return Util::DemandCreate(pImpl->m_DepthDefaultPtr, pImpl->Mutex, [&](ID3D11DepthStencilState** pResult)
-		{
-			pImpl->CreateDepthStencilState(true, true, pResult);
-		});
+			{
+				pImpl->CreateDepthStencilState(true, true, pResult);
+			});
 	}
 
 	ID3D11DepthStencilState* RenderState::GetDepthRead()const {
 		return Util::DemandCreate(pImpl->m_DepthReadPtr, pImpl->Mutex, [&](ID3D11DepthStencilState** pResult)
-		{
-			pImpl->CreateDepthStencilState(true, false, pResult);
-		});
+			{
+				pImpl->CreateDepthStencilState(true, false, pResult);
+			});
 	}
 
 	//--------------------------------------------------------------------------------------
@@ -2067,58 +2011,58 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 	ID3D11RasterizerState* RenderState::GetCullNone()const {
 		return Util::DemandCreate(pImpl->m_CullNonePtr, pImpl->Mutex, [&](ID3D11RasterizerState** pResult)
-		{
-			pImpl->CreateRasterizerState(D3D11_CULL_NONE, D3D11_FILL_SOLID, pResult);
-		});
+			{
+				pImpl->CreateRasterizerState(D3D11_CULL_NONE, D3D11_FILL_SOLID, pResult);
+			});
 	}
 
 	ID3D11RasterizerState* RenderState::GetCullNoneScissor()const {
 		return Util::DemandCreate(pImpl->m_CullNoneScissorPtr, pImpl->Mutex, [&](ID3D11RasterizerState** pResult)
-		{
-			pImpl->CreateRasterizerState(D3D11_CULL_NONE, D3D11_FILL_SOLID, pResult, true);
-		});
+			{
+				pImpl->CreateRasterizerState(D3D11_CULL_NONE, D3D11_FILL_SOLID, pResult, true);
+			});
 	}
 
 	ID3D11RasterizerState* RenderState::GetCullFront()const {
 		return Util::DemandCreate(pImpl->m_CullFrontPtr, pImpl->Mutex, [&](ID3D11RasterizerState** pResult)
-		{
-			pImpl->CreateRasterizerState(D3D11_CULL_FRONT, D3D11_FILL_SOLID, pResult);
-		});
+			{
+				pImpl->CreateRasterizerState(D3D11_CULL_FRONT, D3D11_FILL_SOLID, pResult);
+			});
 	}
 
 	ID3D11RasterizerState* RenderState::GetCullFrontScissor()const {
 		return Util::DemandCreate(pImpl->m_CullFrontScissorPtr, pImpl->Mutex, [&](ID3D11RasterizerState** pResult)
-		{
-			pImpl->CreateRasterizerState(D3D11_CULL_FRONT, D3D11_FILL_SOLID, pResult, true);
-		});
+			{
+				pImpl->CreateRasterizerState(D3D11_CULL_FRONT, D3D11_FILL_SOLID, pResult, true);
+			});
 	}
 
 	ID3D11RasterizerState* RenderState::GetCullBack()const {
 		return Util::DemandCreate(pImpl->m_CullBackPtr, pImpl->Mutex, [&](ID3D11RasterizerState** pResult)
-		{
-			pImpl->CreateRasterizerState(D3D11_CULL_BACK, D3D11_FILL_SOLID, pResult);
-		});
+			{
+				pImpl->CreateRasterizerState(D3D11_CULL_BACK, D3D11_FILL_SOLID, pResult);
+			});
 	}
 
 	ID3D11RasterizerState* RenderState::GetCullBackScissor()const {
 		return Util::DemandCreate(pImpl->m_CullBackScissorPtr, pImpl->Mutex, [&](ID3D11RasterizerState** pResult)
-		{
-			pImpl->CreateRasterizerState(D3D11_CULL_BACK, D3D11_FILL_SOLID, pResult, true);
-		});
+			{
+				pImpl->CreateRasterizerState(D3D11_CULL_BACK, D3D11_FILL_SOLID, pResult, true);
+			});
 	}
 
 	ID3D11RasterizerState* RenderState::GetWireframe()const {
 		return Util::DemandCreate(pImpl->m_WireframePtr, pImpl->Mutex, [&](ID3D11RasterizerState** pResult)
-		{
-			pImpl->CreateRasterizerState(D3D11_CULL_BACK, D3D11_FILL_WIREFRAME, pResult);
-		});
+			{
+				pImpl->CreateRasterizerState(D3D11_CULL_BACK, D3D11_FILL_WIREFRAME, pResult);
+			});
 	}
 
 	ID3D11RasterizerState* RenderState::GetWireframeScissor()const {
 		return Util::DemandCreate(pImpl->m_WireframeScissorPtr, pImpl->Mutex, [&](ID3D11RasterizerState** pResult)
-		{
-			pImpl->CreateRasterizerState(D3D11_CULL_BACK, D3D11_FILL_WIREFRAME, pResult, true);
-		});
+			{
+				pImpl->CreateRasterizerState(D3D11_CULL_BACK, D3D11_FILL_WIREFRAME, pResult, true);
+			});
 	}
 
 	//--------------------------------------------------------------------------------------
@@ -2127,44 +2071,44 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 	ID3D11SamplerState* RenderState::GetPointWrap()const {
 		return Util::DemandCreate(pImpl->m_PointWrapPtr, pImpl->Mutex, [&](ID3D11SamplerState** pResult)
-		{
-			pImpl->CreateSamplerState(D3D11_FILTER_MIN_MAG_MIP_POINT, D3D11_TEXTURE_ADDRESS_WRAP, pResult);
-		});
+			{
+				pImpl->CreateSamplerState(D3D11_FILTER_MIN_MAG_MIP_POINT, D3D11_TEXTURE_ADDRESS_WRAP, pResult);
+			});
 	}
 
 	ID3D11SamplerState* RenderState::GetPointClamp()const {
 		return Util::DemandCreate(pImpl->m_PointClampPtr, pImpl->Mutex, [&](ID3D11SamplerState** pResult)
-		{
-			pImpl->CreateSamplerState(D3D11_FILTER_MIN_MAG_MIP_POINT, D3D11_TEXTURE_ADDRESS_CLAMP, pResult);
-		});
+			{
+				pImpl->CreateSamplerState(D3D11_FILTER_MIN_MAG_MIP_POINT, D3D11_TEXTURE_ADDRESS_CLAMP, pResult);
+			});
 	}
 
 	ID3D11SamplerState* RenderState::GetLinearWrap()const {
 		return Util::DemandCreate(pImpl->m_LinearWrapPtr, pImpl->Mutex, [&](ID3D11SamplerState** pResult)
-		{
-			pImpl->CreateSamplerState(D3D11_FILTER_MIN_MAG_MIP_LINEAR, D3D11_TEXTURE_ADDRESS_WRAP, pResult);
-		});
+			{
+				pImpl->CreateSamplerState(D3D11_FILTER_MIN_MAG_MIP_LINEAR, D3D11_TEXTURE_ADDRESS_WRAP, pResult);
+			});
 	}
 
 	ID3D11SamplerState* RenderState::GetLinearClamp()const {
 		return Util::DemandCreate(pImpl->m_LinearClampPtr, pImpl->Mutex, [&](ID3D11SamplerState** pResult)
-		{
-			pImpl->CreateSamplerState(D3D11_FILTER_MIN_MAG_MIP_LINEAR, D3D11_TEXTURE_ADDRESS_CLAMP, pResult);
-		});
+			{
+				pImpl->CreateSamplerState(D3D11_FILTER_MIN_MAG_MIP_LINEAR, D3D11_TEXTURE_ADDRESS_CLAMP, pResult);
+			});
 	}
 
 	ID3D11SamplerState* RenderState::GetAnisotropicWrap()const {
 		return Util::DemandCreate(pImpl->m_AnisotropicWrapPtr, pImpl->Mutex, [&](ID3D11SamplerState** pResult)
-		{
-			pImpl->CreateSamplerState(D3D11_FILTER_ANISOTROPIC, D3D11_TEXTURE_ADDRESS_WRAP, pResult);
-		});
+			{
+				pImpl->CreateSamplerState(D3D11_FILTER_ANISOTROPIC, D3D11_TEXTURE_ADDRESS_WRAP, pResult);
+			});
 	}
 
 	ID3D11SamplerState* RenderState::GetAnisotropicClamp()const {
 		return Util::DemandCreate(pImpl->m_AnisotropicClampPtr, pImpl->Mutex, [&](ID3D11SamplerState** pResult)
-		{
-			pImpl->CreateSamplerState(D3D11_FILTER_ANISOTROPIC, D3D11_TEXTURE_ADDRESS_CLAMP, pResult);
-		});
+			{
+				pImpl->CreateSamplerState(D3D11_FILTER_ANISOTROPIC, D3D11_TEXTURE_ADDRESS_CLAMP, pResult);
+			});
 	}
 
 	ID3D11SamplerState* RenderState::GetComparisonLinear()const {
@@ -2217,7 +2161,6 @@ namespace basecross {
 	{}
 	RenderTarget::~RenderTarget() {}
 
-
 	const D3D11_VIEWPORT& RenderTarget::GetViewport() const {
 		return pImpl->m_ViewPort;
 	}
@@ -2225,7 +2168,6 @@ namespace basecross {
 	void RenderTarget::SetViewport(const D3D11_VIEWPORT& Viewport) {
 		pImpl->m_ViewPort = Viewport;
 	}
-
 
 	//--------------------------------------------------------------------------------------
 	//	struct ShadowMapRenderTarget::Impl;
@@ -2242,8 +2184,6 @@ namespace basecross {
 		{}
 		~Impl() {}
 	};
-
-
 
 	//--------------------------------------------------------------------------------------
 	//	class ShadowMapRenderTarget: public RenderTarget;
@@ -2307,7 +2247,6 @@ namespace basecross {
 				L"ShadowMapRenderTarget::ShadowMapRenderTarget()"
 			);
 
-
 			D3D11_RASTERIZER_DESC shadowRenderStateDesc;
 			ZeroMemory(&shadowRenderStateDesc, sizeof(D3D11_RASTERIZER_DESC));
 			shadowRenderStateDesc.CullMode = D3D11_CULL_FRONT;
@@ -2319,7 +2258,6 @@ namespace basecross {
 				L"pD3D11Device->CreateRasterizerState(&shadowRenderStateDesc,&pImpl->m_ShadowRenderState)",
 				L"ShadowMapRenderTarget::ShadowMapRenderTarget()"
 			);
-
 
 			//ビューポートの作成
 			//シャドウレンダリングビューポート
@@ -2342,8 +2280,7 @@ namespace basecross {
 	float ShadowMapRenderTarget::GetShadowMapDimension() const { return pImpl->m_ShadowMapDimension; }
 	ID3D11ShaderResourceView* ShadowMapRenderTarget::GetShaderResourceView() const { return pImpl->m_ShaderResourceView.Get(); }
 	ID3D11Texture2D* ShadowMapRenderTarget::GetDepthStencil() const { return pImpl->m_DepthStencil.Get(); }
-	ID3D11DepthStencilView*	ShadowMapRenderTarget::GetDepthStencilView() const { return pImpl->m_DepthStencilView.Get(); }
-
+	ID3D11DepthStencilView* ShadowMapRenderTarget::GetDepthStencilView() const { return pImpl->m_DepthStencilView.Get(); }
 
 	//レンダリングターゲットをクリアする
 	void ShadowMapRenderTarget::ClearViews(const bsm::Col4& col) {
@@ -2375,8 +2312,6 @@ namespace basecross {
 		pD3D11DeviceContext->PSSetShader(nullptr, nullptr, 0);
 		//ジオメトリシェーダの設定（使用しない）
 		pD3D11DeviceContext->GSSetShader(nullptr, nullptr, 0);
-
-
 	}
 	//レンダリングターゲットを終了する
 	void ShadowMapRenderTarget::EndRenderTarget() {
@@ -2417,7 +2352,6 @@ namespace basecross {
 		~Impl() {}
 	};
 
-
 	//--------------------------------------------------------------------------------------
 	//	class DefaultRenderTarget : public RenderTarget;
 	//	用途: デフォルトのレンダーターゲット
@@ -2428,13 +2362,11 @@ namespace basecross {
 		pImpl(new Impl())
 	{
 		try {
-
 			auto Dev = App::GetApp()->GetDeviceResources();
 			auto pD3D11Device = Dev->GetD3DDevice();
 			auto pSwapChain = Dev->GetSwapChain();
 			auto pD3D11DeviceContext = Dev->GetD3DDeviceContext();
 			auto pD2D11DeviceContext = Dev->GetD2DDeviceContext();
-
 
 			//レンダリングターゲットビューの作成
 			ComPtr<ID3D11Texture2D> pBackBuffer;
@@ -2461,7 +2393,7 @@ namespace basecross {
 			descDepth.MipLevels = 1;
 			descDepth.ArraySize = 1;
 			descDepth.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
-			descDepth.SampleDesc.Count = 1;
+			descDepth.SampleDesc.Count = 8;
 			descDepth.SampleDesc.Quality = 0;
 			descDepth.Usage = D3D11_USAGE_DEFAULT;
 			descDepth.BindFlags = D3D11_BIND_DEPTH_STENCIL;
@@ -2479,7 +2411,7 @@ namespace basecross {
 			D3D11_DEPTH_STENCIL_VIEW_DESC descDSV;
 			ZeroMemory(&descDSV, sizeof(descDSV));
 			descDSV.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
-			descDSV.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
+			descDSV.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2DMS;
 			descDSV.Texture2D.MipSlice = 0;
 
 			ThrowIfFailed(
@@ -2496,7 +2428,6 @@ namespace basecross {
 				L"m_d2dDevice->CreateDeviceContext()",
 				L"DeviceResources::Impl::CreateDeviceResources()"
 			);
-
 
 			ThrowIfFailed(
 				pD2D11DeviceContext->CreateBitmapFromDxgiSurface(
@@ -2523,8 +2454,6 @@ namespace basecross {
 			ViewPort.TopLeftX = 0;
 			ViewPort.TopLeftY = 0;
 			SetViewport(ViewPort);
-
-
 		}
 		catch (...) {
 			throw;
@@ -2532,13 +2461,11 @@ namespace basecross {
 	}
 	DefaultRenderTarget::~DefaultRenderTarget() {}
 
-
 	//アクセサ
 	ID3D11RenderTargetView* DefaultRenderTarget::GetRenderTargetView() const { return pImpl->m_D3D11RenderTargetView.Get(); }
 	ID3D11Texture2D* DefaultRenderTarget::GetDepthStencil() const { return pImpl->m_DepthStencil.Get(); }
-	ID3D11DepthStencilView*	DefaultRenderTarget::GetDepthStencilView() const { return pImpl->m_DepthStencilView.Get(); }
-	ID2D1Bitmap1*			DefaultRenderTarget::GetD2DTargetBitmap() const { return pImpl->m_d2dTargetBitmap.Get(); }
-
+	ID3D11DepthStencilView* DefaultRenderTarget::GetDepthStencilView() const { return pImpl->m_DepthStencilView.Get(); }
+	ID2D1Bitmap1* DefaultRenderTarget::GetD2DTargetBitmap() const { return pImpl->m_d2dTargetBitmap.Get(); }
 
 	//操作
 	//スクリーン全体を指定の色でクリアする
@@ -2594,7 +2521,6 @@ namespace basecross {
 		pD3D11DeviceContext->GSSetShader(nullptr, nullptr, 0);
 		//ブレンドは指定しない
 		pD3D11DeviceContext->OMSetBlendState(nullptr, nullptr, 0xffffffff);
-
 	}
 	//レンダリングターゲットを終了する
 	void DefaultRenderTarget::EndRenderTarget() {
@@ -2656,7 +2582,6 @@ namespace basecross {
 				fileName,
 				L"ShaderResource::ReadBinaryFile()"
 			);
-
 		}
 		catch (...) {
 			throw;
@@ -2682,7 +2607,6 @@ namespace basecross {
 				L"if( FAILED( pDx11Device->CreateVertexShader() ) )",
 				L"ShaderResource::CreateVertexShader()"
 			);
-
 		}
 		catch (...) {
 			throw;
@@ -2887,6 +2811,5 @@ namespace basecross {
 			throw;
 		}
 	}
-
 }
 //end basecross
