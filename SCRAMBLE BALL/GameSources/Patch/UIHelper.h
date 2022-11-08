@@ -637,6 +637,7 @@ namespace basecross
 	/// </summary>
 	enum class UIMoveDirection
 	{
+		None, // 無移動
 		Left, // 左方向
 		Right, // 右方向
 		Up, // 上方向
@@ -680,7 +681,7 @@ namespace basecross
 	/// <summary>
 	/// 選択することができるコンポーネント
 	/// </summary>
-	class SelectableComponent : public Component, public I_Selectable
+	class SelectableComponent : public Component, public I_Selectable, public I_Movable
 	{
 		std::weak_ptr<SelectableComponent> m_leftSelectable; // 左で選択されるSelectableComponent
 		std::weak_ptr<SelectableComponent> m_rightSelectable; // 右で選択されるSelectableComponent
@@ -700,6 +701,8 @@ namespace basecross
 		virtual void OnSelect() override {}
 
 		virtual void OnDeselect() override {}
+
+		virtual void OnMove(UIMoveDirection direction) override;
 
 		void SetLeftSelectable(const std::shared_ptr<SelectableComponent>& selectable) noexcept { m_leftSelectable = selectable; }
 		void SetRightSelectable(const std::shared_ptr<SelectableComponent>& selectable) noexcept { m_rightSelectable = selectable; }
@@ -729,16 +732,16 @@ namespace basecross
 		std::weak_ptr<GameObject> m_nowSelectableObject;
 		std::stack<std::weak_ptr<GameObject>> m_stackSelectableObject;
 
-		std::shared_ptr<SelectableComponent> MoveCheck(bool(itbs::Input::I_BasicInputer::*isDown)()const,
-			const std::shared_ptr<SelectableComponent>& selectableComponent,  std::shared_ptr<SelectableComponent>(SelectableComponent::*func)() const);
+		UIMoveDirection GetMoveInput() const;
+
 	public:
 		EventSystem(std::shared_ptr<GameObject>& owner);
 
 		void SetNowSelectableObject(const std::shared_ptr<GameObject>& selectableObject);
 
-		void PushSelectableObject(const std::shared_ptr<GameObject>& selectableObject);
+		void PushSelectableObject(const std::shared_ptr<GameObject>& selectableObject, bool oldObjectEnable = false);
 
-		void PopSelectableObject();
+		void PopSelectableObject(bool oldObjectActive = false);
 
 		_NODISCARD std::shared_ptr<GameObject> GetNowSelectableObject() const noexcept { return m_nowSelectableObject.lock(); }
 

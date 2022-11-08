@@ -874,6 +874,34 @@ namespace basecross
 		return GetGameObject() == EventSystem::GetInstance(GetStage())->GetNowSelectableObject();
 	}
 
+	void SelectableComponent::OnMove(UIMoveDirection direction)
+	{
+		std::shared_ptr<SelectableComponent> nextSelectableComponent;
+
+		switch (direction)
+		{
+		case basecross::UIMoveDirection::Left:
+			nextSelectableComponent = m_leftSelectable.lock();
+			break;
+		case basecross::UIMoveDirection::Right:
+			nextSelectableComponent = m_rightSelectable.lock();
+			break;
+		case basecross::UIMoveDirection::Up:
+			nextSelectableComponent = m_upSelectable.lock();
+			break;
+		case basecross::UIMoveDirection::Down:
+			nextSelectableComponent = m_downSelectable.lock();
+			break;
+		}
+
+		if (!nextSelectableComponent)
+		{
+			return;
+		}
+
+		EventSystem::GetInstance(GetStage())->SetNowSelectableObject(nextSelectableComponent->GetGameObject());
+	}
+
 	// EventSystem ------------------------------
 
 	std::weak_ptr<EventSystem> EventSystem::m_eventSystem;
@@ -883,22 +911,34 @@ namespace basecross
 	{
 	}
 
-	std::shared_ptr<SelectableComponent> EventSystem::MoveCheck(bool(itbs::Input::I_BasicInputer::*isDown)() const,
-		const std::shared_ptr<SelectableComponent>& selectableComponent, std::shared_ptr<SelectableComponent>(SelectableComponent::*func)() const)
+	UIMoveDirection EventSystem::GetMoveInput() const
 	{
-		if (!selectableComponent)
+		if (!m_basicInputer)
 		{
-			return nullptr;
+			return UIMoveDirection::None;
 		}
 
-		auto nextSelectableComponent = (selectableComponent.get()->*func)();
-
-		if (!nextSelectableComponent || !(m_basicInputer.get()->*isDown)())
+		if (m_basicInputer->IsLeftDown())
 		{
-			return selectableComponent;
+			return UIMoveDirection::Left;
 		}
 
-		return nextSelectableComponent;
+		if (m_basicInputer->IsRightDown())
+		{
+			return UIMoveDirection::Right;
+		}
+
+		if (m_basicInputer->IsUpDown())
+		{
+			return UIMoveDirection::Up;
+		}
+
+		if (m_basicInputer->IsDownDown())
+		{
+			return UIMoveDirection::Down;
+		}
+
+		return UIMoveDirection::None;
 	}
 
 	void EventSystem::SetNowSelectableObject(const std::shared_ptr<GameObject>& nowSelectableObject)
@@ -923,8 +963,15 @@ namespace basecross
 		}
 	}
 
-	void EventSystem::PushSelectableObject(const std::shared_ptr<GameObject>& nowSelectableObject)
+	void EventSystem::PushSelectableObject(const std::shared_ptr<GameObject>& nowSelectableObject, bool oldObjectEnable)
 	{
+		auto oldSelectableObject = m_nowSelectableObject.lock();
+
+		if (oldSelectableObject && oldObjectEnable)
+		{
+			oldSelectableObject->SetActive(false);
+		}
+
 		m_stackSelectableObject.push(m_nowSelectableObject);
 
 		m_nowSelectableObject = nowSelectableObject;
@@ -938,7 +985,7 @@ namespace basecross
 		}
 	}
 
-	void EventSystem::PopSelectableObject()
+	void EventSystem::PopSelectableObject(bool oldObjectActive)
 	{
 		auto oldSelectableObject = m_nowSelectableObject.lock();
 
@@ -959,6 +1006,13 @@ namespace basecross
 		m_nowSelectableObject = m_stackSelectableObject.top().lock();
 
 		m_stackSelectableObject.pop();
+
+		auto nowSelectableObject = m_nowSelectableObject.lock();
+
+		if (nowSelectableObject && oldObjectActive)
+		{
+			nowSelectableObject->SetActive(true);
+		}
 	}
 
 	std::shared_ptr<EventSystem> EventSystem::GetInstance(const std::shared_ptr<Stage>& stage)
@@ -998,27 +1052,19 @@ namespace basecross
 			return;
 		}
 
-		auto selectableComponent = nowSelectableObject->GetComponent<SelectableComponent>(false);
-
-		if (selectableComponent)
-		{
-			std::shared_ptr<SelectableComponent> moveSelectableComponent = selectableComponent;
-
-			moveSelectableComponent = MoveCheck(&itbs::Input::I_BasicInputer::IsLeftDown, moveSelectableComponent, &SelectableComponent::GetLeftSelectable);
-			moveSelectableComponent = MoveCheck(&itbs::Input::I_BasicInputer::IsRightDown, moveSelectableComponent, &SelectableComponent::GetRightSelectable);
-			moveSelectableComponent = MoveCheck(&itbs::Input::I_BasicInputer::IsUpDown, moveSelectableComponent, &SelectableComponent::GetUpSelectable);
-			moveSelectableComponent = MoveCheck(&itbs::Input::I_BasicInputer::IsDownDown, moveSelectableComponent, &SelectableComponent::GetDownSelectable);
-
-			if (selectableComponent != moveSelectableComponent)
-			{
-				SetNowSelectableObject(moveSelectableComponent->GetGameObject());
-				nowSelectableObject = m_nowSelectableObject.lock();
-			}
-		}
-
-		if (!nowSelectableObject)
+		if (!nowSelectableObject || !nowSelectableObject->IsActive())
 		{
 			return;
+		}
+
+		UIMoveDirection direction = GetMoveInput();
+
+		if (direction != UIMoveDirection::None)
+		{
+			for (const auto& movable : nowSelectableObject->GetComponents<I_Movable>())
+			{
+				movable->OnMove(direction);
+			}
 		}
 
 		if (m_basicInputer->IsDesitionDown())
