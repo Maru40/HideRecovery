@@ -34,16 +34,8 @@ namespace basecross
 	{
 		auto onlineMatching = m_onlineMatching.lock();
 
-		if (!onlineMatching)
+		if (!onlineMatching || !Online::OnlineManager::IsConnected())
 		{
-			return;
-		}
-
-		// キャンセルされたら、接続を切りタイトルに戻る
-		if (PlayerInputer::IsCancel())
-		{
-			Online::OnlineManager::Disconnect();
-			PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToTitleStage");
 			return;
 		}
 
@@ -73,6 +65,11 @@ namespace basecross
 		}
 	}
 
+	void MatchStageTransitioner::OnDisconnected()
+	{
+		BackTitleStage();
+	}
+
 	void MatchStageTransitioner::OnCustomEventAction(int playerNumber, std::uint8_t eventCode, const std::uint8_t* bytes)
 	{
 		if (eventCode == TO_MAINSTAGE_EVENT_CODE)
@@ -80,5 +77,11 @@ namespace basecross
 			GoToMainStage(*(std::uint64_t*)bytes);
 			return;
 		}
+	}
+
+	void MatchStageTransitioner::BackTitleStage()
+	{
+		Online::OnlineManager::Disconnect();
+		PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToTitleStage");
 	}
 }
