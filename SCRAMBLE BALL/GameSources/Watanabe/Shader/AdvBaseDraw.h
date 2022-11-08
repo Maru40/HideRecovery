@@ -475,7 +475,7 @@ namespace basecross {
 		template<typename T_VShader, typename T_PShader>
 		void DrawOutline(const MeshPrimData& data) {
 			// 無効の場合は実行しない
-			if (IsDrawOutline())
+			if (!IsOutlineDraw())
 				return;
 
 			auto Dev = App::GetApp()->GetDeviceResources();
@@ -576,13 +576,13 @@ namespace basecross {
 		/// アウトラインを描画するかどうか
 		/// </summary>
 		/// <returns>描画する場合はtrue</returns>
-		bool IsDrawOutline() const;
+		bool IsOutlineDraw() const;
 
 		/// <summary>
 		/// アウトラインを描画するかを設定
 		/// </summary>
 		/// <param name="b">描画するか</param>
-		void SetActiveOutline(bool b);
+		void SetOutlineActive(bool b);
 
 		/// <summary>
 		/// アウトラインの色を取得

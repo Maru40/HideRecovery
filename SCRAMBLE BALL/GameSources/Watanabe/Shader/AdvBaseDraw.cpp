@@ -30,7 +30,7 @@ namespace basecross {
 		//モデルに入っているテクスチャを使うかどうか
 		bool m_ModelTextureEnabled;
 		// アウトラインを描画するかどうか
-		bool m_IsDrawOutline;
+		bool m_IsOutlineDraw;
 		// アウトラインの色
 		Col4 m_OutlineColor;
 		// アウトラインの幅
@@ -53,7 +53,7 @@ namespace basecross {
 			m_ModelDiffusePriority(false),
 			m_ModelEmissivePriority(false),
 			m_ModelTextureEnabled(true),
-			m_IsDrawOutline(false),
+			m_IsOutlineDraw(false),
 			m_OutlineColor(0, 0, 0, 1),
 			m_OutlineWidth(0.01f)
 			//m_MaxInstance(2000),
@@ -234,12 +234,12 @@ namespace basecross {
 		pImpl->m_OutlineWidth = width;
 	}
 
-	bool AdvBaseDraw::IsDrawOutline() const {
-		return pImpl->m_IsDrawOutline;
+	bool AdvBaseDraw::IsOutlineDraw() const {
+		return pImpl->m_IsOutlineDraw;
 	}
 
-	void AdvBaseDraw::SetActiveOutline(bool b) {
-		pImpl->m_IsDrawOutline = b;
+	void AdvBaseDraw::SetOutlineActive(bool b) {
+		pImpl->m_IsOutlineDraw = b;
 	}
 
 	bool AdvBaseDraw::IsOriginalMeshUse() const {
