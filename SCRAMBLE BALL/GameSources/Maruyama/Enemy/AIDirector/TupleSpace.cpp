@@ -11,6 +11,8 @@
 #include "Maruyama/Utility/MaruAction.h"
 #include "TupleSpace.h"
 
+#include "Watanabe/DebugClass/Debug.h"
+
 namespace basecross {
 
 	namespace Enemy {
@@ -127,6 +129,54 @@ namespace basecross {
 				return false;
 			}
 
+			//--------------------------------------------------------------------------------------
+			/// ダメージを受けたことを伝えるタプル
+			//--------------------------------------------------------------------------------------
+
+			Damaged::Damaged(
+				const std::shared_ptr<I_Tupler>& requester,
+				const DamageData& data,
+				const float value
+			):
+				TupleRequestBase(requester, value),
+				m_damageData(data)
+			{}
+
+			bool Damaged::operator ==(const Damaged& other) {
+				if (GetRequester() == other.GetRequester() &&
+					GetDamageData().attacker == other.GetDamageData().attacker &&
+					GetValue() == other.GetValue())
+				{
+					return true;
+				}
+
+				return false;
+			}
+
+
+			//--------------------------------------------------------------------------------------
+			/// タプルスペース本体
+			//--------------------------------------------------------------------------------------
+
+			bool TupleSpace::RemoveAllNotifys(const std::shared_ptr<I_Tupler>& tupler) {
+				std::vector<std::function<bool()>> removeFuncs;
+
+				//削除候補を検索
+				for (auto& pair : m_notifysMap) {
+					for (auto& notify : pair.second) {
+						if (notify->GetRequester() == tupler) {
+							removeFuncs.push_back([&, notify]() { return RemoveNotify(notify); });
+						}
+					}
+				}
+
+				//削除処理
+				for (auto& removeFunc : removeFuncs) {
+					bool isRemove = removeFunc();
+				}
+
+				return !removeFuncs.empty();	//emptyなら削除がされてないことを示す。
+			}
 		}
 	}
 }
