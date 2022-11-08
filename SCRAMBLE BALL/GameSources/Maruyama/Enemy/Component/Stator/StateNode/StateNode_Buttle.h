@@ -34,6 +34,7 @@ namespace basecross {
 
 		namespace Tuple {
 			class FindTarget;
+			class Damaged;
 		}
 
 		namespace StateNode {
@@ -47,6 +48,7 @@ namespace basecross {
 				using ButtleTree = maru::Behavior::SubBehavior::ButtleTree;
 
 			private:
+				std::weak_ptr<Transform> m_transform;
 				std::weak_ptr<TargetManager> m_targetManager;
 
 				std::unique_ptr<ButtleTree> m_behaviorTree;
@@ -63,6 +65,15 @@ namespace basecross {
 			private:
 
 				void ObserveOtherFindTarget(const std::shared_ptr<Tuple::FindTarget>& tuple);
+
+				void ObserveDamaged(const std::shared_ptr<Tuple::Damaged>& tuple);
+
+				void SelfDamaged(const std::shared_ptr<Tuple::Damaged>& tuple);
+
+				void OtherDamaged(const std::shared_ptr<Tuple::Damaged>& tuple);
+
+				//‚»‚Ìƒ^[ƒQƒbƒg‚ğ‘_‚¤•]‰¿’l‚ğŒvZ‚µ‚Ä•Ô‚·B
+				float CalculateEvalutionValue(const std::shared_ptr<GameObject>& target);
 
 				bool HasTarget() const;
 
