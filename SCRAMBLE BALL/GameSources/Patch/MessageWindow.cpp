@@ -1,4 +1,4 @@
-#include"MessageWindow.h"
+﻿#include"MessageWindow.h"
 
 namespace basecross
 {
@@ -88,7 +88,7 @@ namespace basecross
 
 	}
 
-	void MessageWindow::OnPush()
+	void MessageWindow::OnSubmit()
 	{
 		if (m_isFinish)
 		{
@@ -112,7 +112,7 @@ namespace basecross
 		}
 	}
 
-	void MessageWindow::OnOutSelect()
+	void MessageWindow::OnDeselect()
 	{
 
 	}
