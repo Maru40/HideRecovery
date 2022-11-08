@@ -23,6 +23,8 @@
 
 #include "Maruyama/Utility/SingletonComponent/ShareClassesManager.h"
 
+#include "Watanabe/DebugClass/Debug.h"
+
 namespace basecross {
 	namespace Enemy {
 
@@ -42,6 +44,15 @@ namespace basecross {
 
 			void HidePlacePatrol::OnStart() {
 				SettingObserveButtleTargets();
+
+				//ダメージ通知を受け取れるようにする。
+				if (auto factionMember = m_factionMember.lock()) {
+					factionMember->GetAssignedFaction()->GetTupleSpace()->Notify<Tuple::Damaged>(
+						GetOwner(),
+						[&](const std::shared_ptr<Tuple::Damaged>& tuple) { Damaged(tuple); },
+						[&](const std::shared_ptr<Tuple::Damaged>& tuple) { return tuple->GetRequester() == GetOwner(); }
+					);
+				}
 			}
 
 			bool HidePlacePatrol::OnUpdate() {
@@ -54,6 +65,14 @@ namespace basecross {
 
 			void HidePlacePatrol::OnExit() {
 				m_behaviorTree->ForceStop();
+			}
+
+			void HidePlacePatrol::Damaged(const std::shared_ptr<Tuple::Damaged>& tuple) {
+				//ダメージを与えてきた相手を伝える。
+				auto tupleSpace = m_factionMember.lock()->GetAssignedFaction()->GetTupleSpace();
+				tupleSpace->Write<Tuple::FindTarget>(GetOwner(), tuple->GetDamageData().attacker, tuple->GetValue());
+
+				tupleSpace->Take(tuple);	//タプルを自分自身の者とする。
 			}
 
 			void HidePlacePatrol::ObserveButtleTarget() {

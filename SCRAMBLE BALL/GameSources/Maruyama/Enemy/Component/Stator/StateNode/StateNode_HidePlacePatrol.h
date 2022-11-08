@@ -34,6 +34,10 @@ namespace basecross {
 		class EnemyBase;
 		class I_FactionMember;
 
+		namespace Tuple {
+			class Damaged;
+		}
+
 		namespace StateNode {
 
 			//--------------------------------------------------------------------------------------
@@ -62,6 +66,12 @@ namespace basecross {
 				void OnExit() override;
 
 			private:
+
+				/// <summary>
+				/// ダメージを受けた時の処理
+				/// </summary>
+				void Damaged(const std::shared_ptr<Tuple::Damaged>& tuple);
+
 				/// <summary>
 				/// バトル用のターゲットを監視する。
 				/// </summary>
