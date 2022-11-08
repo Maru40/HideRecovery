@@ -51,6 +51,14 @@ namespace basecross {
 	};
 
 	struct OutlineConstants {
+		// アウトラインの色と幅（RGB:色、A:幅）
+		Col4 Color;
+		Vec4 Width;
+		OutlineConstants() {
+			memset(this, 0, sizeof(OutlineConstants));
+			Color = Col4(0.0f, 0.0f, 0.0f, 1.0f);
+			Width = Vec4(0.01f, 0, 0, 0);
+		};
 	};
 
 	class AdvBaseDraw : public DrawComponent {
@@ -65,8 +73,15 @@ namespace basecross {
 		/// コンスタントバッファの設定
 		/// </summary>
 		/// <param name="cb">設定するコンスタントバッファ構造体</param>
-		/// <param name="data">設定するコンスタントバッファ構造体</param>
+		/// <param name="data">メッシュデータ</param>
 		void SetConstants(AdvConstants& cb, const MeshPrimData& data);
+
+		/// <summary>
+		/// アウトライン用コンスタントバッファの設定
+		/// </summary>
+		/// <param name="cb">設定するコンスタントバッファ構造体</param>
+		/// <param name="data">メッシュデータ</param>
+		void SetOutlineConstants(OutlineConstants& cb, const MeshPrimData& data);
 
 		/// <summary>
 		/// 行列バッファの作成(インスタンス描画用)
@@ -460,7 +475,7 @@ namespace basecross {
 		template<typename T_VShader, typename T_PShader>
 		void DrawOutline(const MeshPrimData& data) {
 			// 無効の場合は実行しない
-			if (!IsDrawOutline())
+			if (IsDrawOutline())
 				return;
 
 			auto Dev = App::GetApp()->GetDeviceResources();
@@ -481,6 +496,8 @@ namespace basecross {
 			// コンスタントバッファの作成
 			AdvConstants SmCb;
 			SetConstants(SmCb, data);
+			OutlineConstants outlineCb;
+			SetOutlineConstants(outlineCb, data);
 
 			// コンスタントバッファの更新
 			pD3D11DeviceContext->UpdateSubresource(CBAdvBaseDraw::GetPtr()->GetBuffer(), 0, nullptr, &SmCb, 0, 0);
@@ -491,6 +508,16 @@ namespace basecross {
 			pD3D11DeviceContext->VSSetConstantBuffers(0, 1, &pConstantBuffer);
 			// ピクセルシェーダに渡す
 			pD3D11DeviceContext->PSSetConstantBuffers(0, 1, &pConstantBuffer);
+
+			// コンスタントバッファの更新
+			pD3D11DeviceContext->UpdateSubresource(CBOutlineDraw::GetPtr()->GetBuffer(), 0, nullptr, &outlineCb, 0, 0);
+			// コンスタントバッファの設定
+			ID3D11Buffer* pOutlineConstantBuffer = CBOutlineDraw::GetPtr()->GetBuffer();
+			// 頂点シェーダに渡す
+			pD3D11DeviceContext->VSSetConstantBuffers(1, 1, &pOutlineConstantBuffer);
+			// ピクセルシェーダに渡す
+			pD3D11DeviceContext->PSSetConstantBuffers(1, 1, &pOutlineConstantBuffer);
+
 			// ストライドとオフセット
 			UINT stride = data.m_NumStride;
 			UINT offset = 0;
@@ -527,6 +554,15 @@ namespace basecross {
 					// ピクセルシェーダに渡す
 					pD3D11DeviceContext->PSSetConstantBuffers(0, 1, &pConstantBuffer);
 
+					// コンスタントバッファの更新
+					pD3D11DeviceContext->UpdateSubresource(CBOutlineDraw::GetPtr()->GetBuffer(), 0, nullptr, &outlineCb, 0, 0);
+					// コンスタントバッファの設定
+					ID3D11Buffer* pOutlineConstantBuffer = CBOutlineDraw::GetPtr()->GetBuffer();
+					// 頂点シェーダに渡す
+					pD3D11DeviceContext->VSSetConstantBuffers(1, 1, &pOutlineConstantBuffer);
+					// ピクセルシェーダに渡す
+					pD3D11DeviceContext->PSSetConstantBuffers(1, 1, &pOutlineConstantBuffer);
+
 					// ラスタライザステート(裏描画)
 					pD3D11DeviceContext->RSSetState(RenderState->GetCullFront());
 					// 描画
@@ -547,6 +583,27 @@ namespace basecross {
 		/// </summary>
 		/// <param name="b">描画するか</param>
 		void SetActiveOutline(bool b);
+
+		/// <summary>
+		/// アウトラインの色を取得
+		/// </summary>
+		/// <returns>アウトラインの色</returns>
+		Col4 GetOutlineColor() const;
+		/// <summary>
+		/// アウトラインの色を設定
+		/// </summary>
+		/// <param name="color">アウトラインの色</param>
+		void SetOutlineColor(const Col4& color);
+		/// <summary>
+		/// アウトラインの幅を取得
+		/// </summary>
+		/// <returns>アウトラインの幅</returns>
+		float GetOutlineWidth() const;
+		/// <summary>
+		/// アウトラインの幅を設定
+		/// </summary>
+		/// <param name="width">アウトラインの幅</param>
+		void SetOutlineWidth(float width);
 
 		/// <summary>
 		/// オリジナルメッシュを使うかどうか

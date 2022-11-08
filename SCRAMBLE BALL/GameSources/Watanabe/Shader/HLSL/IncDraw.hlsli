@@ -70,3 +70,9 @@ cbuffer ParametersBuffer : register(b0)
     float4x4 LightProjection : packoffset(c23);
     float4x3 Bones[100] : packoffset(c27);
 };
+
+cbuffer OutlineParametersBuffer : register(b1)
+{
+    float4 OutlineColor : packoffset(c0);
+    float OutlineWidth : packoffset(c1.x);
+};
