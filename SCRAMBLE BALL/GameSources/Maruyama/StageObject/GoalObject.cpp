@@ -69,6 +69,9 @@ namespace basecross {
 		draw->SetMeshToTransformMatrix(spanMat);
 		draw->SetMultiMeshResource(L"Goal");
 
+		// アウトライン関係
+		draw->SetOutlineActive(true);
+
 		auto shadow = AddComponent<Shadowmap>();
 		shadow->SetMultiMeshResource(L"Goal");
 

@@ -24,6 +24,9 @@ namespace basecross {
 		drawComp->SetModelTextureEnabled(false);
 		drawComp->SetTextureResource(m_color + L"ContianerTx");
 
+		// アウトライン関係
+		drawComp->SetOutlineActive(true);
+
 		auto shadow = AddComponent<Shadowmap>();
 		shadow->SetMultiMeshResource(L"Container");
 

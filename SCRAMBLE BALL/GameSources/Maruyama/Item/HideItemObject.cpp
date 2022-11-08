@@ -76,6 +76,10 @@ namespace basecross {
 		draw->SetDiffuse(Col4(0.0f, 0.5f, 0.0f, 1.0f));
 		draw->SetMeshToTransformMatrix(spanMat);
 
+		// アウトライン関係
+		draw->SetOutlineActive(true);
+		draw->SetOutlineWidth(0.05f);
+
 		transform->SetScale(Vec3(0.5f));
 	}
 }

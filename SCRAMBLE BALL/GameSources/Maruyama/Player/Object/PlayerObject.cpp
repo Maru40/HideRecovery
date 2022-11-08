@@ -74,6 +74,10 @@ namespace basecross {
 		draw->SetMultiMeshResource(L"Player_Mesh");
 		draw->SetMeshToTransformMatrix(spanMat);
 		draw->SetModelTextureEnabled(false);
+
+		// アウトライン関係
+		draw->SetOutlineActive(true);
+
 		SetAlphaActive(true);
 		//draw->SetDiffuse(Col4(0.0f, 0.0f, 1.0f, 1.0f));
 

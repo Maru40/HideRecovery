@@ -30,7 +30,11 @@ namespace basecross {
 		//モデルに入っているテクスチャを使うかどうか
 		bool m_ModelTextureEnabled;
 		// アウトラインを描画するかどうか
-		bool m_IsDrawOutline;
+		bool m_IsOutlineDraw;
+		// アウトラインの色
+		Col4 m_OutlineColor;
+		// アウトラインの幅
+		float m_OutlineWidth;
 		////Instance描画用
 		////Instance最大値
 		//size_t m_MaxInstance;
@@ -49,7 +53,9 @@ namespace basecross {
 			m_ModelDiffusePriority(false),
 			m_ModelEmissivePriority(false),
 			m_ModelTextureEnabled(true),
-			m_IsDrawOutline(false)
+			m_IsOutlineDraw(false),
+			m_OutlineColor(0, 0, 0, 1),
+			m_OutlineWidth(0.01f)
 			//m_MaxInstance(2000),
 			//m_AutoClearMatrixVec(false)
 		{}
@@ -159,6 +165,14 @@ namespace basecross {
 		}
 	}
 
+	void AdvBaseDraw::SetOutlineConstants(OutlineConstants& cb, const MeshPrimData& data) {
+		// アウトラインの色
+		cb.Color = pImpl->m_OutlineColor;
+		// アウトラインの幅
+		cb.Width = Vec4(0);
+		cb.Width.x = pImpl->m_OutlineWidth;
+	}
+
 #pragma region Instance
 	////行列バッファの作成
 	//void AdvBaseDraw::CreateMatrixBuffer() {
@@ -204,12 +218,28 @@ namespace basecross {
 	//}
 #pragma endregion
 
-	bool AdvBaseDraw::IsDrawOutline() const {
-		return pImpl->m_IsDrawOutline;
+	Col4 AdvBaseDraw::GetOutlineColor() const {
+		return pImpl->m_OutlineColor;
 	}
 
-	void AdvBaseDraw::SetActiveOutline(bool b) {
-		pImpl->m_IsDrawOutline = b;
+	void AdvBaseDraw::SetOutlineColor(const Col4& color) {
+		pImpl->m_OutlineColor = color;
+	}
+
+	float AdvBaseDraw::GetOutlineWidth() const {
+		return pImpl->m_OutlineWidth;
+	}
+
+	void AdvBaseDraw::SetOutlineWidth(float width) {
+		pImpl->m_OutlineWidth = width;
+	}
+
+	bool AdvBaseDraw::IsOutlineDraw() const {
+		return pImpl->m_IsOutlineDraw;
+	}
+
+	void AdvBaseDraw::SetOutlineActive(bool b) {
+		pImpl->m_IsOutlineDraw = b;
 	}
 
 	bool AdvBaseDraw::IsOriginalMeshUse() const {
