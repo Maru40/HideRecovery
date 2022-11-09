@@ -79,8 +79,8 @@ namespace basecross {
 				targetManager->SetTarget(target);
 
 				//ファクションの変更を通知
-				auto faction = m_factionMember.lock()->GetFactionCoordinator();
-				faction->TransitionFaction<CombatCoordinator>(m_factionMember.lock());
+				//auto faction = m_factionMember.lock()->GetFactionCoordinator();
+				//faction->TransitionFaction<CombatCoordinator>(m_factionMember.lock());
 
 				return true;
 			}
