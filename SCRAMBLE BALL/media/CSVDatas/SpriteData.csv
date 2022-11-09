@@ -41,3 +41,5 @@ JoinRoomLabel,Message_TX,0,1060,605,120,メニュー用
 EnterPasscode,Message_TX,365,1180,595,100,パスコードを入力
 Asterisk,Numbers_TX,1200,0,102,128,パスコードが入力されていないときに表示
 UnderScore,Numbers_TX,1302,0,102,128,アンダーバー
+Busy,Message_TX,600,1370,300,110,通信中
+CannotConnect,Message_TX,0,1480,900,70,接続できない
