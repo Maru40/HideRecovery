@@ -36,6 +36,9 @@
 #include "Itabashi/ObjectMover.h"
 #include "Itabashi/PlayerControlManager.h"
 #include "Itabashi/OnlinePlayerSynchronizer.h"
+#include "Itabashi/OnlineTransformSynchronization.h"
+#include "Maruyama/Player/Component/Respawner.h"
+#include "Maruyama/Player/Component/PlayerDeader.h"
 //-----------------------------------------------------------------------
 
 //#include "Watanabe/DebugClass/Debug.h"
@@ -66,10 +69,16 @@ namespace basecross {
 			AddComponent<HidePlaceOpener>();
 			AddComponent<Operator::ObjectMover>();
 			AddComponent<PlayerControlManager>();
+			AddComponent<Online::OnlineTransformSynchronization>();
 			AddComponent<OnlinePlayerSynchronizer>();
+			AddComponent<Respawner>();
 			//---------------------------------------------------
 
+			AddComponent<PlayerDeader>();
+
 			//auto efkComp = AddComponent<EfkComponent>();
+
+
 
 			AddComponent<AIPlayerStator>();
 			//AddComponent<AIPlayerBehaviorTree>();
