@@ -1300,10 +1300,9 @@
     <Filter Include="Maruyama\Enemy\BehaviorTree\Task\NearAstarMove">
       <UniqueIdentifier>{3a914f6d-b8b6-49d6-98e2-43605c6aeba1}</UniqueIdentifier>
     </Filter>
-
     <Filter Include="Watanabe\Shader\Outline">
       <UniqueIdentifier>{fdd50817-5117-4905-bd59-a1328a9e482b}</UniqueIdentifier>
-	</Filter>
+    </Filter>
     <Filter Include="Maruyama\Enemy\BehaviorTree\Decorator\ObserveTarget">
       <UniqueIdentifier>{4290f9d6-7189-467e-a9de-35846d6ad09f}</UniqueIdentifier>
     </Filter>
@@ -1330,7 +1329,12 @@
     </Filter>
     <Filter Include="Watanabe\TestStage\TestEffectStage">
       <UniqueIdentifier>{99b5a9b3-d781-494b-b609-31c8b5c95325}</UniqueIdentifier>
-
+    </Filter>
+    <Filter Include="Maruyama\Enemy\Component\Stator\StateNode\Dyning">
+      <UniqueIdentifier>{82c12608-0bd2-411d-81b6-10b7800c35f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\Component\Stator\StateNode\Dead">
+      <UniqueIdentifier>{fedf4c18-3d51-49d6-a4ae-2a4d0dbfbfef}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -2456,10 +2460,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Task\NearAstarMove.h">
       <Filter>Maruyama\Enemy\BehaviorTree\Task\NearAstarMove</Filter>
     </ClInclude>
-
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\Outline.h">
       <Filter>Watanabe\Shader\Outline</Filter>
-	</ClInclude>
+    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\ObserveTargets.h">
       <Filter>Maruyama\Enemy\BehaviorTree\Decorator\ObserveTarget</Filter>
     </ClInclude>
@@ -2486,7 +2489,12 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\TestEffectStage.h">
       <Filter>Watanabe\TestStage\TestEffectStage</Filter>
-
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Stator\StateNode\StateNode_Dyning.h">
+      <Filter>Maruyama\Enemy\Component\Stator\StateNode\Dyning</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Stator\StateNode\StateNode_Dead.h">
+      <Filter>Maruyama\Enemy\Component\Stator\StateNode\Dead</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -3513,10 +3521,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Task\NearAstarMove.cpp">
       <Filter>Maruyama\Enemy\BehaviorTree\Task\NearAstarMove</Filter>
     </ClCompile>
-
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\Outline.cpp">
-		<Filter>Watanabe\Shader\Outline</Filter>
-	</ClCompile>
+      <Filter>Watanabe\Shader\Outline</Filter>
+    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\ObserveTargets.cpp">
       <Filter>Maruyama\Enemy\BehaviorTree\Decorator\ObserveTarget</Filter>
     </ClCompile>
@@ -3543,7 +3550,12 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\TestEffectStage.cpp">
       <Filter>Watanabe\TestStage\TestEffectStage</Filter>
-
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Stator\StateNode\StateNode_Dyning.cpp">
+      <Filter>Maruyama\Enemy\Component\Stator\StateNode\Dyning</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Stator\StateNode\StateNode_Dead.cpp">
+      <Filter>Maruyama\Enemy\Component\Stator\StateNode\Dead</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
