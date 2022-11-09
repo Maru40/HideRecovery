@@ -8,6 +8,9 @@
 
 #include "StateNode_Dyning.h"
 
+#include "Maruyama/Enemy/Component/EnemyBase.h"
+#include "Maruyama/Enemy/AIDirector/FactionCoordinator.h"
+
 namespace basecross {
 	namespace Enemy {
 
@@ -22,7 +25,9 @@ namespace basecross {
 			void Dyning::OnStart() {
 				StartChangeComponents();
 
-
+				//ファクションを移動
+				//auto factionCoordinator = GetOwner()->GetFactionCoordinator();
+				
 			}
 
 			bool Dyning::OnUpdate() {
