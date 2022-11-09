@@ -19,6 +19,9 @@
 #include "Maruyama/Utility/Component/TargetManager.h"
 #include "Watanabe/Component/PlayerStatus.h"
 
+#include "Maruyama/Enemy/AIDirector/CombatCoordinator.h"
+#include "Maruyama/Enemy/AIDirector/FactionCoordinator.h"
+
 namespace basecross {
 	namespace Enemy {
 
@@ -37,6 +40,10 @@ namespace basecross {
 			}
 
 			void Buttle::OnStart() {
+				//バトルコーディネーターに移動する。
+				auto faction = GetOwner()->GetFactionCoordinator();
+				faction->TransitionFaction<CombatCoordinator>(GetOwner());
+
 				//通知の受け取り登録
 				auto tupleSpace = GetOwner()->GetAssignedFaction()->GetTupleSpace();
 				tupleSpace->Notify<Tuple::FindTarget>(
