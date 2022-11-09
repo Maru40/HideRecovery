@@ -55,7 +55,14 @@ namespace basecross {
 
 		bool IsGameState(const AIPlayerStator::TransitionMember& member) {
 			//ƒQ[ƒ€ó‘Ô‚©‚Ç‚¤‚©‚ð”»’f
-			return GameManager::GetInstance()->IsCurrentState(GameManager::State::Game);
+			bool isTransition = GameManager::GetInstance()->IsCurrentState(GameManager::State::Game);
+
+			if (isTransition) {
+				//AIDirector‚É“`‚¦‚ÄAƒAƒTƒCƒ“B
+				AIDirector::GetInstance()->StartAssign();
+			}
+
+			return isTransition;
 		}
 
 		bool AIPlayerStator::IsFindButtleTarget(const TransitionMember& member) {
