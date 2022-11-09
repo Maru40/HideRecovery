@@ -12,6 +12,12 @@
 #include "Watanabe/Manager/PointManager.h"
 #include "Watanabe/Manager/TimeManager.h"
 #include "Watanabe/Manager/ScoreManager.h"
+#include "Watanabe/UI/PasscodeUI.h"
+#include "MatchingSelectUIObject.h"
+#include "PasswordTextUI.h"
+#include "UICancelEventer.h"
+#include "MatchStageCoreObject.h"
+#include "MatchStageUIObject.h"
 
 namespace basecross
 {
@@ -39,31 +45,70 @@ namespace basecross
 		TimeManager::CreateInstance();
 		ScoreManager::CreateInstance();
 
-		auto gameObject = AddGameObject<GameObject>();
-		auto onlineMatching = gameObject->AddComponent<Online::OnlineMatching>();
-		auto matchStageTransitioner = gameObject->AddComponent<MatchStageTransitioner>();
-
-		// マップとUIの生成
 		CreateMap(L"WaitStage.csv");
-		auto uiBuilder = CreateUI(L"MatchingUILayout.csv");
-		gameObject->AddComponent<MatchingUIController>(uiBuilder);
 
-		// スポーンオブジェクトを取得
-		vector<shared_ptr<PlayerSpawnPointObject>> spawnPointObjects;
-		for (auto gameObject : GetGameObjectVec()) {
-			if (auto spawnObject = dynamic_pointer_cast<PlayerSpawnPointObject>(gameObject)) {
-				spawnPointObjects.push_back(spawnObject);
-			}
-		}
-		// IDでソート
-		sort(spawnPointObjects.begin(), spawnPointObjects.end(),
-			[](const shared_ptr<PlayerSpawnPointObject>& a, const shared_ptr<PlayerSpawnPointObject>& b) {
-				return a->GetID() < b->GetID();
-			}
-		);
-		gameObject->AddComponent<MatchingSyncPlayerObject>(spawnPointObjects);
+		auto matchStageCoreObject = AddGameObject<StageObject::MatchStageCoreObject>();
+		auto onlineMatching = matchStageCoreObject->GetComponent<Online::OnlineMatching>();
+		auto matchStageTransitioner = matchStageCoreObject->GetComponent<MatchStageTransitioner>();
+
+		// UIの生成
+		auto uiBuilder = CreateUI(L"MatchingUILayout.csv");
+
+		auto matchStageUIObject = AddGameObject<StageObject::MatchStageUIObject>(uiBuilder);
+		auto matchingUIController = matchStageUIObject->GetComponent<MatchingUIController>();
+		matchingUIController->SetStageTransitioner(matchStageTransitioner);
+		matchingUIController->SetOnlineMatching(onlineMatching);
+		onlineMatching->SetMatchingUIController(matchingUIController);
+
+		std::weak_ptr<MatchingSyncPlayerObject> weakMatchingSyncPlayerObject = matchStageCoreObject->GetComponent<MatchingSyncPlayerObject>();
 
 		SimpleSoundManager::ChangeBGM(L"MatchingStageBGM", 0.1f);
+
+		auto passwordText = matchStageUIObject->GetPasscodeUIObject()->GetComponent<UI::PasswordTextUI>();
+
+		auto matchingSelectUIObject = matchStageUIObject->GetMatchingSelectUIObject();
+
+		auto freeMatchingButton = matchingSelectUIObject->GetFreeMatchingButtonObject()->GetComponent<Button>();
+		auto createRoomButton = matchingSelectUIObject->GetCreateRoomButtonObject()->GetComponent<Button>();
+		auto joinRoomButton = matchingSelectUIObject->GetJoinRoomButtonObject()->GetComponent<Button>();
+
+		std::weak_ptr<Online::OnlineMatching> weakOnlineMatching = onlineMatching;
+
+		matchStageUIObject->GetComponent<UICancelEventer>()->AddCancelEvent([weakOnlineMatching, weakMatchingSyncPlayerObject]()
+			{
+				auto onlineMatching = weakOnlineMatching.lock();
+				onlineMatching->StartLeaveRoom();
+
+				EventSystem::GetInstance(onlineMatching->GetStage())->PopSelectableObject();
+
+				weakMatchingSyncPlayerObject.lock()->Reset();
+			}
+		);
+
+		freeMatchingButton->AddPushEvent([weakOnlineMatching]()
+			{
+				auto onlineMatching = weakOnlineMatching.lock();
+
+				onlineMatching->StartFreeMatching();
+			}
+		);
+
+		createRoomButton->AddPushEvent([weakOnlineMatching]()
+			{
+				auto onlineMatching = weakOnlineMatching.lock();
+
+				onlineMatching->StartCreatePasswordMatching();
+			}
+		);
+
+		passwordText->AddSubmitEvent([weakOnlineMatching](const std::wstring& password)
+			{
+				auto onlineMatching = weakOnlineMatching.lock();
+				onlineMatching->StartJoinPasswordMatching(password);
+			}
+		);
+
+		EventSystem::GetInstance(GetThis<Stage>())->SetBasicInputer(PlayerInputer::GetInstance());
 	}
 
 	void OnlineMatchStage::OnUpdate()
