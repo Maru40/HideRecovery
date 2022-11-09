@@ -19,6 +19,7 @@
 
 #include "Maruyama/Utility/SingletonComponent/ShareClassesManager.h"
 
+#include "Maruyama/Enemy/Component/EnemyBase.h"
 #include "Maruyama/Interface/I_FactionMember.h"
 #include "Maruyama/Enemy/AIDirector/CoordinatorBase.h"
 #include "Maruyama/Enemy/AIDirector/TupleSpace.h"
