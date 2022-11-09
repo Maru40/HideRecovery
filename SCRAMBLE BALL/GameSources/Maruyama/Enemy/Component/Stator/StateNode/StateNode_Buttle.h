@@ -66,10 +66,22 @@ namespace basecross {
 
 				void ObserveOtherFindTarget(const std::shared_ptr<Tuple::FindTarget>& tuple);
 
+				/// <summary>
+				/// ダメージメッセージを監視する。
+				/// </summary>
+				/// <param name="tuple">ダメージメッセージ</param>
 				void ObserveDamaged(const std::shared_ptr<Tuple::Damaged>& tuple);
 
+				/// <summary>
+				/// 自分自身へのダメージ処理
+				/// </summary>
+				/// <param name="tuple">ダメージメッセージ</param>
 				void SelfDamaged(const std::shared_ptr<Tuple::Damaged>& tuple);
 
+				/// <summary>
+				/// 自分以外がダメージを受けた時
+				/// </summary>
+				/// <param name="tuple">ダメージメッセージ</param>
 				void OtherDamaged(const std::shared_ptr<Tuple::Damaged>& tuple);
 
 				//そのターゲットを狙う評価値を計算して返す。

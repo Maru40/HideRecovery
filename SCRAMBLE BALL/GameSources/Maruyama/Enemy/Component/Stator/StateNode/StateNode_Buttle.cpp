@@ -19,6 +19,9 @@
 #include "Maruyama/Utility/Component/TargetManager.h"
 #include "Watanabe/Component/PlayerStatus.h"
 
+#include "Maruyama/Enemy/AIDirector/CombatCoordinator.h"
+#include "Maruyama/Enemy/AIDirector/FactionCoordinator.h"
+
 namespace basecross {
 	namespace Enemy {
 
@@ -37,6 +40,10 @@ namespace basecross {
 			}
 
 			void Buttle::OnStart() {
+				//バトルコーディネーターに移動する。
+				auto faction = GetOwner()->GetFactionCoordinator();
+				faction->TransitionFaction<CombatCoordinator>(GetOwner());
+
 				//通知の受け取り登録
 				auto tupleSpace = GetOwner()->GetAssignedFaction()->GetTupleSpace();
 				tupleSpace->Notify<Tuple::FindTarget>(
@@ -81,6 +88,7 @@ namespace basecross {
 
 			void Buttle::SelfDamaged(const std::shared_ptr<Tuple::Damaged>& tuple) {
 				auto otherTarget = tuple->GetDamageData().attacker;
+
 				if (!HasTarget()) {
 					//ターゲットを持ってないなら、ターゲットを設定。
 					m_targetManager.lock()->SetTarget(otherTarget);
@@ -104,6 +112,7 @@ namespace basecross {
 			void Buttle::OtherDamaged(const std::shared_ptr<Tuple::Damaged>& tuple) {
 				auto otherTarget = tuple->GetDamageData().attacker;
 
+				//ターゲットが存在しないなら、
 				if (!HasTarget()) {
 					m_targetManager.lock()->SetTarget(otherTarget);
 					return;
@@ -114,16 +123,15 @@ namespace basecross {
 					return;
 				}
 
-				//攻撃対象以外なら、Help
+				//どちらのターゲットの優先度が高いかを計算する。
 				float currentValue = CalculateEvalutionValue(m_targetManager.lock()->GetTarget());
 				float otherValue = CalculateEvalutionValue(otherTarget);
 
-				//ohterValueの方が優先なら、ターゲットを切り替える。
+				//ohterValueの方が優先なら、助けることを伝える。
 				if (otherValue < currentValue) {
 					auto tupleSpace = GetOwner()->GetAssignedFaction()->GetTupleSpace();
-					//tupleSpace->Write<Tuple::>();	//HelpWriteする。
+					tupleSpace->Write<Tuple::HelpAction>(GetOwner(), otherTarget, otherValue);	//HelpWriteする。
 				}
-				
 			}
 
 			float Buttle::CalculateEvalutionValue(const std::shared_ptr<GameObject>& target) {

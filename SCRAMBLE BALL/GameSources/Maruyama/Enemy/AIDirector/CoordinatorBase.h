@@ -108,6 +108,7 @@ namespace basecross {
 				while (iter != m_members.end()) {
 					if (iter->lock() == member) {
 						iter = m_members.erase(iter);
+						//GetTupleSpace()->RemoveAllNotifys(member);	//íœ‚µ‚½ƒƒ“ƒo[‚Ì’Ê’m‚àˆê‚Éíœ
 						return true;
 					}
 					iter++;

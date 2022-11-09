@@ -17,6 +17,8 @@
 
 #include "Maruyama/Enemy/Component/Stator/StateNode/StateNode_HidePlacePatrol.h"
 #include "Maruyama/Enemy/Component/Stator/StateNode/StateNode_Buttle.h"
+#include "Maruyama/Enemy/Component/Stator/StateNode/StateNode_Dyning.h"
+#include "Maruyama/Enemy/Component/Stator/StateNode/StateNode_Dead.h"
 
 #include "Maruyama/Enemy/Component/EyeSearchRange.h"
 #include "Maruyama/Utility/ObserveIsInEyeTarget.h"
@@ -55,7 +57,14 @@ namespace basecross {
 
 		bool IsGameState(const AIPlayerStator::TransitionMember& member) {
 			//ゲーム状態かどうかを判断
-			return GameManager::GetInstance()->IsCurrentState(GameManager::State::Game);
+			bool isTransition = GameManager::GetInstance()->IsCurrentState(GameManager::State::Game);
+
+			if (isTransition) {
+				//AIDirectorに伝えて、アサイン。
+				AIDirector::GetInstance()->StartAssign();
+			}
+
+			return isTransition;
 		}
 
 		bool AIPlayerStator::IsFindButtleTarget(const TransitionMember& member) {
@@ -70,8 +79,8 @@ namespace basecross {
 				targetManager->SetTarget(target);
 
 				//ファクションの変更を通知
-				auto faction = m_factionMember.lock()->GetFactionCoordinator();
-				faction->TransitionFaction<CombatCoordinator>(m_factionMember.lock());
+				//auto faction = m_factionMember.lock()->GetFactionCoordinator();
+				//faction->TransitionFaction<CombatCoordinator>(m_factionMember.lock());
 
 				return true;
 			}
@@ -115,6 +124,12 @@ namespace basecross {
 
 			//バトル
 			m_stateMachine->AddNode(StateType::Buttle, std::make_shared<StateNode::Buttle>(enemy));
+
+			//死亡中
+			m_stateMachine->AddNode(StateType::Dyning, std::make_shared<StateNode::Dyning>(enemy));
+
+			//死亡
+			m_stateMachine->AddNode(StateType::Dyning, std::make_shared<StateNode::Dead>(enemy));
 		}
 
 		void AIPlayerStator::CreateEdge() {

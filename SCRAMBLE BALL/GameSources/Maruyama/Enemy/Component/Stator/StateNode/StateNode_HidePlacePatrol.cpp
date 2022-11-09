@@ -19,6 +19,7 @@
 #include "Maruyama/Enemy/Component/EyeSearchRange.h"
 
 #include "Maruyama/Enemy/AIDirector/FactionCoordinator.h"
+#include "Maruyama/Enemy/AIDirector/PatrolCoordinator/HidePlacePatrol.h"
 #include "Maruyama/Enemy/AIDirector/TupleSpace.h"
 
 #include "Maruyama/Utility/SingletonComponent/ShareClassesManager.h"
@@ -44,6 +45,10 @@ namespace basecross {
 
 			void HidePlacePatrol::OnStart() {
 				SettingObserveButtleTargets();
+
+				//パトルールファクションに移動
+				auto factionCoordinator = GetOwner()->GetFactionCoordinator();
+				factionCoordinator->TransitionFaction<AICoordinator::Patrol::HidePlacePatrol>(GetOwner());
 
 				//ダメージ通知を受け取れるようにする。
 				if (auto factionMember = m_factionMember.lock()) {

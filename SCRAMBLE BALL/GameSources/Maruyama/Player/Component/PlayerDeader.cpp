@@ -21,6 +21,8 @@
 #include "Maruyama/Item/HideItem.h"
 #include "Itabashi/OnlineTransformSynchronization.h"
 
+#include "Maruyama/Enemy/Component/Stator/AIPlayerStator.h"
+
 namespace basecross {
 
 	PlayerDeader::PlayerDeader(const std::shared_ptr<GameObject>& objPtr) :
@@ -80,6 +82,12 @@ namespace basecross {
 				respawner->StartRespawn();
 			}
 
+			//AIなら死亡状態に変更
+			if (auto stator = GetGameObject()->GetComponent<Enemy::AIPlayerStator>(false)) {
+				auto stateType = Enemy::AIPlayerStator::StateType::HidePlacePatrol;
+				//stator->ChangeState(stateType, (int)stateType);
+			}
+
 			m_updateFunction = nullptr;	//更新をやめる。
 		}
 	}
@@ -130,6 +138,12 @@ namespace basecross {
 		//当たり判定を消す
 		if (auto collision = GetGameObject()->GetComponent<CollisionObb>(false)) {
 			collision-> SetUpdateActive(false);
+		}
+
+		//AIなら死亡ステートに変更
+		if (auto stator = GetGameObject()->GetComponent<Enemy::AIPlayerStator>(false)) {
+			auto stateType = Enemy::AIPlayerStator::StateType::Dyning;
+			//stator->ChangeState(stateType, (int)stateType);
 		}
 
 		m_updateFunction = [&]() { ObserveAnimation(); };	//更新処理設定
