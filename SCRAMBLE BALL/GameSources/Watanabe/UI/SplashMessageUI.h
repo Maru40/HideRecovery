@@ -5,6 +5,19 @@
 #include "../Utility/TimeCounter.h"
 
 namespace basecross {
+	namespace Message {
+		struct MessageData {
+			SimpleSprite::Type Type;
+			wstring Key;
+			MessageData()
+				:MessageData(SimpleSprite::Type::None, L"")
+			{}
+			MessageData(SimpleSprite::Type type, const wstring& key)
+				:Type(type), Key(key)
+			{}
+		};
+	}
+
 	class SplashMessageUI :public UIObjectBase {
 		using Type = SimpleSprite::Type;
 	public:
@@ -24,18 +37,8 @@ namespace basecross {
 			CannotConnect,	// インターネットに接続できません
 		};
 	private:
-		struct MessageData {
-			Type Type;
-			wstring Key;
-			MessageData()
-				:MessageData(Type::None, L"")
-			{}
-			MessageData(SimpleSprite::Type type, const wstring& key)
-				:Type(type), Key(key)
-			{}
-		};
 		// メッセージに対応するデータマップ
-		static map<MessageType, MessageData> sm_Type2DataMap;
+		static map<MessageType, Message::MessageData> sm_Type2DataMap;
 		// メッセージオブジェクト
 		shared_ptr<SimpleSprite> m_sprite;
 		// 計測が始まっているか
