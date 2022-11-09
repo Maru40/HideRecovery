@@ -57,7 +57,7 @@ namespace basecross {
 
 		std::shared_ptr<Heuristic> m_heuristic;	//ヒュースリックの数値を計算するクラス。
 
-		std::stack<std::shared_ptr<NavGraphNode>> m_route;	//生成したルート
+		std::stack<std::weak_ptr<NavGraphNode>> m_route;	//生成したルート
 
 		std::weak_ptr<NavGraphNode> m_otherAreaNode;		//別のエリアノード
 
@@ -161,7 +161,7 @@ namespace basecross {
 		/// <summary>
 		/// ルートの取得
 		/// </summary>
-		std::stack<std::shared_ptr<NavGraphNode>> GetRoute();
+		std::stack<std::weak_ptr<NavGraphNode>> GetRoute();
 
 	};
 
