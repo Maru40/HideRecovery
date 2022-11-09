@@ -73,7 +73,7 @@ namespace basecross {
 
 		auto draw = AddComponent<DrawComp>();
 		draw->SetMultiMeshResource(L"Ball_Model");
-		draw->SetDiffuse(Col4(0.0f, 0.5f, 0.0f, 1.0f));
+		//draw->SetDiffuse(Col4(0.0f, 0.5f, 0.0f, 1.0f));
 		draw->SetMeshToTransformMatrix(spanMat);
 
 		// アウトライン関係
