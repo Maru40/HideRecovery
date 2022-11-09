@@ -9,6 +9,8 @@
 #include "EnemyObjectBase.h"
 #include "AIPlayerObject.h"
 
+#include "Maruyama/Enemy/Component/EnemyBase.h"
+
 #include "Maruyama/Player/Component/ItemBag.h"
 #include "Maruyama/Utility/Component/RotationController.h"
 #include "VelocityManager.h"
@@ -24,6 +26,7 @@
 #include "Watanabe/Component/PlayerAnimator.h"
 
 #include "Maruyama/Enemy/Component/Stator/AIPlayerStator.h"
+#include "SelfAstarNodeController.h"
 
 //Olineに必要なコンポーネント-------------------------------------------
 #include "Maruyama/Player/Component/ChargeGun.h"
@@ -39,6 +42,7 @@
 #include "Itabashi/OnlineTransformSynchronization.h"
 #include "Maruyama/Player/Component/Respawner.h"
 #include "Maruyama/Player/Component/PlayerDeader.h"
+#include "Maruyama/Player/Component/ItemBag.h"
 //-----------------------------------------------------------------------
 
 //#include "Watanabe/DebugClass/Debug.h"
@@ -49,57 +53,58 @@ namespace basecross {
 	namespace Enemy {
 
 		AIPlayerObject::AIPlayerObject(const std::shared_ptr<Stage>& stage):
-			EnemyObjectBase(stage)
+			PlayerObject(stage)
 		{}
 
 		void AIPlayerObject::OnCreate() {
-			EnemyObjectBase::OnCreate();
+			PlayerObject::OnCreate();
 
-			AddComponent<PlayerStatus>();
-			AddComponent<PlayerAnimator>();
+			//AddComponent<PlayerStatus>();
+			//AddComponent<PlayerAnimator>();
 
 			//Olineに必要なコンポーネント------------------------
-			auto chargeGun = AddComponent<ChargeGun>();
-			auto soundEmitter = AddComponent<SoundEmitter>();
+			//auto chargeGun = AddComponent<ChargeGun>();
+			//auto soundEmitter = AddComponent<SoundEmitter>();
 
-			AddComponent<Teleport>();
-			AddComponent<ItemAcquisitionManager>();
-			AddComponent<UseWeapon>(chargeGun)->SetIsUpdateRotation(false);
-			AddComponent<GoalAnimationController>();
-			AddComponent<HidePlaceOpener>();
-			AddComponent<Operator::ObjectMover>();
-			AddComponent<PlayerControlManager>();
-			AddComponent<Online::OnlineTransformSynchronization>();
-			AddComponent<OnlinePlayerSynchronizer>();
-			AddComponent<Respawner>();
+			//AddComponent<Teleport>();
+			//AddComponent<ItemAcquisitionManager>();
+			//AddComponent<UseWeapon>(chargeGun)->SetIsUpdateRotation(false);
+			//AddComponent<GoalAnimationController>();
+			//AddComponent<HidePlaceOpener>();
+			//AddComponent<Operator::ObjectMover>();
+			//AddComponent<PlayerControlManager>();
+			//AddComponent<Online::OnlineTransformSynchronization>();
+			//AddComponent<OnlinePlayerSynchronizer>();
+			//AddComponent<Respawner>();
+			//AddComponent<PlayerDeader>();
+			//auto efkComp = AddComponent<EfkComponent>();
 			//---------------------------------------------------
 
-			AddComponent<PlayerDeader>();
 
-			//auto efkComp = AddComponent<EfkComponent>();
-
-
-
+			AddComponent<EnemyBase>();
+			AddComponent<SeekTarget>(nullptr);
+			AddComponent<SelfAstarNodeController>();
+			AddComponent<TargetManager>();
 			AddComponent<AIPlayerStator>();
-			//AddComponent<AIPlayerBehaviorTree>();
+			
 		}
 
 		void AIPlayerObject::CreateModel() {
-			Mat4x4 spanMat;
-			const float fScale = 0.8f;
-			Vec3 scale = Vec3(fScale);
-			spanMat.affineTransformation(
-				scale,
-				Vec3(0.0f, 0.0f, 0.0f),
-				Vec3(0.0f, XM_PI, 0.0f),
-				Vec3(0.0f, -0.5f, 0.0f)
-			);
+			//Mat4x4 spanMat;
+			//const float fScale = 0.8f;
+			//Vec3 scale = Vec3(fScale);
+			//spanMat.affineTransformation(
+			//	scale,
+			//	Vec3(0.0f, 0.0f, 0.0f),
+			//	Vec3(0.0f, XM_PI, 0.0f),
+			//	Vec3(0.0f, -0.5f, 0.0f)
+			//);
 
-			auto draw = AddComponent<DrawComp>();
-			draw->SetMultiMeshResource(L"Player_Mesh");
-			draw->SetMeshToTransformMatrix(spanMat);
-			draw->SetModelTextureEnabled(false);
-			SetAlphaActive(true);
+			//auto draw = AddComponent<DrawComp>();
+			//draw->SetMultiMeshResource(L"Player_Mesh");
+			//draw->SetMeshToTransformMatrix(spanMat);
+			//draw->SetModelTextureEnabled(false);
+			//SetAlphaActive(true);
 		}
 
 	}
