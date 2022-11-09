@@ -1303,6 +1303,24 @@
     <Filter Include="Watanabe\UI\HasBallUI">
       <UniqueIdentifier>{b38f08fe-322c-4399-9a39-2ebeefa38fdd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Itabashi\StageObject">
+      <UniqueIdentifier>{375846f6-a375-47eb-b86c-abac7636ffb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Itabashi\Component\SelectAppearanceChanger">
+      <UniqueIdentifier>{caea9e65-3521-47ba-9714-35097fb1932b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Itabashi\Component\UICancelEventer">
+      <UniqueIdentifier>{7fb9b867-b6fe-4822-83e5-228df5dcc436}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Itabashi\StageObject\MatchingSelectUIObject">
+      <UniqueIdentifier>{26430e86-4299-4d3a-ae81-fb503d7284e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Itabashi\StageObject\MatchStageCoreObject">
+      <UniqueIdentifier>{cd2c6231-f9a5-4658-86f9-96973d985c76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Itabashi\StageObject\MatchStageUIObject">
+      <UniqueIdentifier>{ea399564-cc15-46b7-bca7-d278649ed535}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2433,6 +2451,21 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\HasBallUI.h">
       <Filter>Watanabe\UI\HasBallUI</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\SelectAppearanceChanger.h">
+      <Filter>Itabashi\Component\SelectAppearanceChanger</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\UICancelEventer.h">
+      <Filter>Itabashi\Component\UICancelEventer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MatchingSelectUIObject.h">
+      <Filter>Itabashi\StageObject\MatchingSelectUIObject</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageCoreObject.h">
+      <Filter>Itabashi\StageObject\MatchStageCoreObject</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageUIObject.h">
+      <Filter>Itabashi\StageObject\MatchStageUIObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -3463,6 +3496,21 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\HasBallUI.cpp">
       <Filter>Watanabe\UI\HasBallUI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\SelectAppearanceChanger.cpp">
+      <Filter>Itabashi\Component\SelectAppearanceChanger</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\UICancelEventer.cpp">
+      <Filter>Itabashi\Component\UICancelEventer</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\MatchingSelectUIObject.cpp">
+      <Filter>Itabashi\StageObject\MatchingSelectUIObject</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageCoreObject.cpp">
+      <Filter>Itabashi\StageObject\MatchStageCoreObject</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageUIObject.cpp">
+      <Filter>Itabashi\StageObject\MatchStageUIObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

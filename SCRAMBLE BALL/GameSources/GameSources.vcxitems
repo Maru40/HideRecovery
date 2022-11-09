@@ -17,8 +17,11 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)GameStageBase.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\GamePlayerManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\Item.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageCoreObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MainStageTransitioner.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MatchingSelectUIObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageTransitioner.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageUIObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\ObjectHider.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineGameItemManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineGameTimer.h" />
@@ -27,6 +30,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\PasswordTextUI.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\PCTStaticModelDraw.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\PlayerControlManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\SelectAppearanceChanger.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\UICancelEventer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\Utility\ActionTimer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\Utility\InputTextManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\Utility\UniqueIdCreater.h" />
@@ -394,8 +399,11 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)GameStageBase.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\GamePlayerManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\Item.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageCoreObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\MainStageTransitioner.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\MatchingSelectUIObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageTransitioner.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageUIObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\ObjectHider.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\ObjectMover.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineGameItemManager.cpp" />
@@ -412,6 +420,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineTestStage.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineTransformSynchronization.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\SelectAppearanceChanger.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\UICancelEventer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\Utility\ActionTimer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\Utility\InputTextManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Bullet\Component\BulletBase.cpp" />
