@@ -81,6 +81,7 @@ namespace basecross {
 
 			void Buttle::SelfDamaged(const std::shared_ptr<Tuple::Damaged>& tuple) {
 				auto otherTarget = tuple->GetDamageData().attacker;
+
 				if (!HasTarget()) {
 					//ターゲットを持ってないなら、ターゲットを設定。
 					m_targetManager.lock()->SetTarget(otherTarget);
