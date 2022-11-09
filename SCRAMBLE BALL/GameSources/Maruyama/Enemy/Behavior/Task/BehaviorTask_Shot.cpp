@@ -102,9 +102,9 @@ namespace basecross {
 				}
 
 				void Shot::ShotUpdate() {
-					if (!m_useWeapon.lock()->CanShot()) {
-						return;
-					}
+					//if (!m_useWeapon.lock()->CanShot()) {
+					//	return;
+					//}
 
 					//auto ownerTrans = GetOwner()->GetGameObject()->GetComponent<Transform>();
 					//m_useWeapon.lock()->GetWepon()->Shot(ownerTrans->GetForward());

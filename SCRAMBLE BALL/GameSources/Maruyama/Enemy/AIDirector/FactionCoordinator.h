@@ -144,10 +144,11 @@ namespace basecross {
 				std::nullptr_t> = nullptr
 			>
 			std::shared_ptr<TransitionType> TransitionFaction(const std::shared_ptr<I_FactionMember>& member) {
-				//元々アサインされていたメンバーから外す。
-				auto assignedFaction = member->GetAssignedFaction();	
-				assignedFaction->RemoveMember(std::dynamic_pointer_cast<EnemyBase>(member));
-				assignedFaction->GetTupleSpace()->RemoveAllNotifys(member->GetSelfObject()->GetComponent<Tuple::I_Tupler>(false)); //タプルスペースに登録された者を変更
+				//元々アサインされていたメンバーから外す。(どこにもアサインされていなかったら、処理を飛ばす。)
+				if (auto assignedFaction = member->GetAssignedFaction()) {
+					assignedFaction->RemoveMember(std::dynamic_pointer_cast<EnemyBase>(member));
+				}
+				//assignedFaction->GetTupleSpace()->RemoveAllNotifys(member->GetSelfObject()->GetComponent<Tuple::I_Tupler>(false)); //タプルスペースに登録された者を変更
 
 				return AddFactionMember<TransitionType>(member);
 			}

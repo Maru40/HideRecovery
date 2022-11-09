@@ -15,6 +15,7 @@ namespace basecross {
 	class HidePlaceOpener;
 	class PlayerAnimator;
 	class VelocityManager;
+	class OnlinePlayerSynchronizer;
 
 	template<class EnumType>
 	class TaskList;
@@ -30,6 +31,7 @@ namespace basecross {
 			std::weak_ptr<PlayerAnimator> m_animator;
 			std::weak_ptr<HidePlaceOpener> m_hidePlaceOpener;
 			std::weak_ptr<VelocityManager> m_velocityManager;
+			std::weak_ptr<OnlinePlayerSynchronizer> m_onlineSynchronizer;
 
 		public:
 			OpenBox(const std::shared_ptr<GameObject>& owner);

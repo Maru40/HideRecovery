@@ -108,7 +108,6 @@ namespace basecross {
 				while (iter != m_members.end()) {
 					if (iter->lock() == member) {
 						iter = m_members.erase(iter);
-						//GetTupleSpace()->RemoveAllNotifys(member);	//削除したメンバーの通知も一緒に削除
 						return true;
 					}
 					iter++;
@@ -188,6 +187,10 @@ namespace basecross {
 				member->SetAssignFaction(GetThis<CoordinatorBase<MemberType>>());
 			}
 
+			virtual void SettingRemoveMember(const std::shared_ptr<I_FactionMember>& member) {
+				member->SetAssignFaction(nullptr);	//アサインから外す。
+			}
+
 		public:
 			//--------------------------------------------------------------------------------------
 			/// アクセッサ
@@ -206,6 +209,15 @@ namespace basecross {
 			virtual void AddMember(const std::shared_ptr<MemberType>& member) override {
 				CoordinatorBase::AddMember(member);
 				SettingMember(member);
+			}
+
+			virtual bool RemoveMember(const std::shared_ptr<MemberType>& member) override {
+				bool isRemove = CoordinatorBase::RemoveMember(member);
+				if (isRemove) {
+					SettingRemoveMember(member);
+				}
+
+				return isRemove;
 			}
 		};
 

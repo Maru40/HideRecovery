@@ -84,8 +84,8 @@ namespace basecross {
 
 			//AIなら死亡状態に変更
 			if (auto stator = GetGameObject()->GetComponent<Enemy::AIPlayerStator>(false)) {
-				auto stateType = Enemy::AIPlayerStator::StateType::HidePlacePatrol;
-				//stator->ChangeState(stateType, (int)stateType);
+				auto stateType = Enemy::AIPlayerStator::StateType::Dead;
+				stator->ChangeState(stateType, (int)stateType);
 			}
 
 			m_updateFunction = nullptr;	//更新をやめる。
@@ -140,10 +140,10 @@ namespace basecross {
 			collision-> SetUpdateActive(false);
 		}
 
-		//AIなら死亡ステートに変更
+		//AIなら死亡中ステートに変更
 		if (auto stator = GetGameObject()->GetComponent<Enemy::AIPlayerStator>(false)) {
 			auto stateType = Enemy::AIPlayerStator::StateType::Dyning;
-			//stator->ChangeState(stateType, (int)stateType);
+			stator->ChangeState(stateType, (int)stateType);
 		}
 
 		m_updateFunction = [&]() { ObserveAnimation(); };	//更新処理設定

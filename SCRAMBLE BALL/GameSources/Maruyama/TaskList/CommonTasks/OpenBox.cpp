@@ -20,6 +20,8 @@
 
 #include "Maruyama/Player/Component/HidePlaceOpener.h"
 
+#include "Itabashi/OnlinePlayerSynchronizer.h"
+
 namespace basecross {
 
 	namespace TaskListNode {
@@ -31,6 +33,7 @@ namespace basecross {
 			m_animator = owner->GetComponent<PlayerAnimator>(false);
 			m_hidePlaceOpener = owner->GetComponent<HidePlaceOpener>(false);
 			m_velocityManager = owner->GetComponent<VelocityManager>(false);
+			m_onlineSynchronizer = owner->GetComponent<OnlinePlayerSynchronizer>(false);
 		}
 
 		void OpenBox::OnStart() {
@@ -54,24 +57,26 @@ namespace basecross {
 		}
 
 		void OpenBox::Open() {
+			m_onlineSynchronizer.lock()->OpenHidePlace();
+
 			//ターゲットの有無を確認する。
-			auto targetManager = m_targetManager.lock();
-			if (!targetManager || !targetManager->HasTarget()) {
-				Debug::GetInstance()->Log(L"TaskListNode::OpenBox::Open() : 必要コンポーネントが存在しません。");
-				return;
-			}
+			//auto targetManager = m_targetManager.lock();
+			//if (!targetManager || !targetManager->HasTarget()) {
+			//	Debug::GetInstance()->Log(L"TaskListNode::OpenBox::Open() : 必要コンポーネントが存在しません。");
+			//	return;
+			//}
 
-			auto target = targetManager->GetTarget();
+			//auto target = targetManager->GetTarget();
 
-			//ターゲットがHidePlaceならOpenする。
-			auto hidePlace = target->GetComponent<HidePlace>(false);
-			if (hidePlace) {
-				hidePlace->Open();
-				Debug::GetInstance()->Log(L"Open");
-			}
-			else {
-				Debug::GetInstance()->Log(L"TaskListNode::OpenBox::Open() : ターゲットがHidePlaceでありません。");
-			}
+			////ターゲットがHidePlaceならOpenする。
+			//auto hidePlace = target->GetComponent<HidePlace>(false);
+			//if (hidePlace) {
+			//	hidePlace->Open();
+			//	Debug::GetInstance()->Log(L"Open");
+			//}
+			//else {
+			//	Debug::GetInstance()->Log(L"TaskListNode::OpenBox::Open() : ターゲットがHidePlaceでありません。");
+			//}
 		}
 
 		void OpenBox::ChangeAnimation() {

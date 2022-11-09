@@ -242,7 +242,7 @@ namespace basecross {
 		return isSearchSuccess;
 	}
 
-	std::stack<std::shared_ptr<NavGraphNode>> OpenDataHandler::GetRoute() {
+	std::stack<std::weak_ptr<NavGraphNode>> OpenDataHandler::GetRoute() {
 		return m_route;
 	}
 

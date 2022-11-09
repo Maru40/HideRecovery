@@ -70,6 +70,11 @@ namespace basecross {
 
 			void HidePlacePatrol::OnExit() {
 				m_behaviorTree->ForceStop();
+
+				auto  member = GetOwner();
+				auto assignedFaction = member->GetAssignedFaction();
+				assignedFaction->RemoveMember(member);	//ファクションから離脱。
+				assignedFaction->GetTupleSpace()->RemoveAllNotifys(member->GetSelfObject()->GetComponent<Tuple::I_Tupler>(false)); //タプルスペースに登録された者を変更
 			}
 
 			void HidePlacePatrol::Damaged(const std::shared_ptr<Tuple::Damaged>& tuple) {

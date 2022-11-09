@@ -194,7 +194,7 @@ namespace basecross {
 		std::vector<std::shared_ptr<NavGraphNode>> resultVec;
 		auto copyRoute = m_route;
 		while (!copyRoute.empty()) {
-			resultVec.push_back(copyRoute.top());
+			resultVec.push_back(copyRoute.top().lock());
 			copyRoute.pop();
 		}
 
@@ -206,8 +206,11 @@ namespace basecross {
 		auto copyRoute = m_route;
 		while (!copyRoute.empty()) {
 			auto top = copyRoute.top();
+			if (top.expired()) {
+				continue;
+			}
 			
-			resultPositions.push_back(top->GetPosition());
+			resultPositions.push_back(top.lock()->GetPosition());
 			//デバッグインデックス表示
 			//Debug::GetInstance()->Log(top->GetIndex());
 			
@@ -222,8 +225,11 @@ namespace basecross {
 		auto copyRoute = m_route;
 		while (!copyRoute.empty()) {
 			auto top = copyRoute.top();
+			if (top.expired()) {
+				continue;
+			}
 
-			resultIndices.push_back(top->GetAreaIndex());
+			resultIndices.push_back(top.lock()->GetAreaIndex());
 
 			copyRoute.pop();
 		}
@@ -328,7 +334,7 @@ namespace basecross {
 		//生成したRouteを表示する。
 		auto copyRoute = m_route;
 		while (!copyRoute.empty()) {
-			std::wstring debugStr = std::to_wstring(copyRoute.top()->GetIndex());
+			std::wstring debugStr = std::to_wstring(copyRoute.top().lock()->GetIndex());
 			debugStr += L",";
 
 			Debug::GetInstance()->Log(debugStr);
