@@ -37,6 +37,8 @@ namespace basecross {
 			None,
 			HidePlacePatrol,	//‰B‚µêŠ’T‚·B
 			Buttle,				//ƒoƒgƒ‹
+			Dyning,				//€–S’†
+			Dead,				//€–S
 		};
 
 		//--------------------------------------------------------------------------------------
