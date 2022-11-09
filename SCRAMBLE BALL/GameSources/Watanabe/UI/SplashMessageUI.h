@@ -32,10 +32,15 @@ namespace basecross {
 				:Type(type), Key(key)
 			{}
 		};
+		// メッセージに対応するデータマップ
 		static map<MessageType, MessageData> sm_Type2DataMap;
+		// メッセージオブジェクト
 		shared_ptr<SimpleSprite> m_sprite;
+		// 計測が始まっているか
 		bool m_isStart;
+		// タイマー
 		TimeCounter m_timer;
+		// デフォルトの色
 		Col4 m_defaultColor;
 	public:
 		SplashMessageUI(const shared_ptr<Stage>& stage);
@@ -49,6 +54,11 @@ namespace basecross {
 		/// </summary>
 		/// <param name="type">メッセージタイプ</param>
 		void SetMessage(MessageType type);
+
+		/// <summary>
+		/// メッセージをクリア
+		/// </summary>
+		void ClearMessage();
 
 		/// <summary>
 		/// 色を設定する

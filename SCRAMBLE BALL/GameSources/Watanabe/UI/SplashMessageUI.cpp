@@ -55,6 +55,11 @@ namespace basecross {
 		SetColor(m_defaultColor);
 	}
 
+	void SplashMessageUI::ClearMessage() {
+		m_isStart = false;
+		m_sprite->SetActive(false);
+	}
+
 	void SplashMessageUI::SetColor(const Col4& color) {
 		m_sprite->GetDrawComponent()->SetDiffuse(color);
 	}
