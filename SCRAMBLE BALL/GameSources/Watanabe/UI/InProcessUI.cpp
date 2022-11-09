@@ -26,16 +26,30 @@ namespace basecross {
 	}
 
 	void InProcessUI::OnCreate() {
+		m_shape = GetStage()->AddGameObject<SimpleSprite>(Type::Texture, L"Process_TX");
 		m_label = GetStage()->AddGameObject<SimpleSprite>();
+
+		m_shape->SetParent(GetThis<InProcessUI>());
 		m_label->SetParent(GetThis<InProcessUI>());
-		//m_label->SetActive(false);
+
+		m_shapeRectTrans = m_shape->GetRectTransform();
+		SetActive(false);
 	}
+
 	void InProcessUI::OnUpdate() {
 		// 描画していないときは何もしない
 		// ※SetActiveで表示非表示を設定しているため
 		// 　実際はなくても動作する（多分）
 		if (!GetDrawActive())
 			return;
+
+		// 念のため0に
+		if (m_totalDelta > XM_2PI)
+			m_totalDelta = 0.0f;
+
+		m_shapeRectTrans.lock()->SetRotation(m_totalDelta);
+
+		m_totalDelta += App::GetApp()->GetElapsedTime();
 	}
 
 	void InProcessUI::SetLabel(LabelType messageType) {

@@ -24,8 +24,14 @@ namespace basecross {
 		static map<LabelType, Message::MessageData> sm_Type2DataMap;
 		// ラベルオブジェクト
 		shared_ptr<SimpleSprite> m_label;
+		// 処理中のぐるぐる
+		shared_ptr<SimpleSprite> m_shape;
+		// m_shapeのRectTransform
+		weak_ptr<RectTransform> m_shapeRectTrans;
 		// デフォルトの色
 		Col4 m_defaultColor;
+		// 時間計測用
+		float m_totalDelta = 0.0f;
 	public:
 		InProcessUI(const shared_ptr<Stage>& stage);
 		InProcessUI(const shared_ptr<Stage>& stage, const wstring& line);
