@@ -6,6 +6,7 @@
 
 namespace basecross {
 	class SplashMessageUI :public UIObjectBase {
+		using Type = SimpleSprite::Type;
 	public:
 		/// <summary>
 		/// 表示するメッセージ
@@ -20,13 +21,14 @@ namespace basecross {
 			Remaining60s,	// 残り60秒
 			Remaining30s,	// 残り30秒
 			Goal,			// ゴール
+			CannotConnect,	// インターネットに接続できません
 		};
 	private:
 		struct MessageData {
-			SimpleSprite::Type Type;
+			Type Type;
 			wstring Key;
 			MessageData()
-				:MessageData(SimpleSprite::Type::None, L"")
+				:MessageData(Type::None, L"")
 			{}
 			MessageData(SimpleSprite::Type type, const wstring& key)
 				:Type(type), Key(key)

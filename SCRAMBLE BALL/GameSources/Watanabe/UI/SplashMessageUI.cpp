@@ -6,15 +6,16 @@ namespace basecross {
 	// 初期化
 	map<SplashMessageUI::MessageType, SplashMessageUI::MessageData> SplashMessageUI::sm_Type2DataMap =
 	{
-		{MessageType::Relocation,MessageData(SimpleSprite::Type::SpriteData,L"Relocation")},
-		{MessageType::GetBall,MessageData(SimpleSprite::Type::SpriteData,L"GetBall")},
-		{MessageType::StolenBall,MessageData(SimpleSprite::Type::SpriteData,L"StolenBall")},
-		{MessageType::CreateRoom,MessageData(SimpleSprite::Type::SpriteData,L"CreatedRoom")},
-		{MessageType::JoinRoom,MessageData(SimpleSprite::Type::SpriteData,L"JoinedRoom")},
-		{MessageType::CanNotJoin,MessageData(SimpleSprite::Type::SpriteData,L"CanNotJoin")},
-		{MessageType::Remaining60s,MessageData(SimpleSprite::Type::SpriteData,L"Remaining60s")},
-		{MessageType::Remaining30s,MessageData(SimpleSprite::Type::SpriteData,L"Remaining30s")},
-		{MessageType::Goal,MessageData(SimpleSprite::Type::SpriteData,L"Goal")},
+		{MessageType::Relocation,MessageData(Type::SpriteData,L"Relocation")},
+		{MessageType::GetBall,MessageData(Type::SpriteData,L"GetBall")},
+		{MessageType::StolenBall,MessageData(Type::SpriteData,L"StolenBall")},
+		{MessageType::CreateRoom,MessageData(Type::SpriteData,L"CreatedRoom")},
+		{MessageType::JoinRoom,MessageData(Type::SpriteData,L"JoinedRoom")},
+		{MessageType::CanNotJoin,MessageData(Type::SpriteData,L"CanNotJoin")},
+		{MessageType::Remaining60s,MessageData(Type::SpriteData,L"Remaining60s")},
+		{MessageType::Remaining30s,MessageData(Type::SpriteData,L"Remaining30s")},
+		{MessageType::Goal,MessageData(Type::SpriteData,L"Goal")},
+		{MessageType::CannotConnect,MessageData(Type::SpriteData,L"CannotConnect")}
 	};
 
 	SplashMessageUI::SplashMessageUI(const shared_ptr<Stage>& stage)
