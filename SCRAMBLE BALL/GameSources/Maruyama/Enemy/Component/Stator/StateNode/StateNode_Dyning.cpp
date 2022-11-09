@@ -25,9 +25,11 @@ namespace basecross {
 			void Dyning::OnStart() {
 				StartChangeComponents();
 
-				//ファクションを移動
-				//auto factionCoordinator = GetOwner()->GetFactionCoordinator();
-				
+				//ファクションをどこにも属さないようにする。
+				if (auto assignedFanction = GetOwner()->GetAssignedFaction()) {
+					assignedFanction->RemoveMember(GetOwner());
+					assignedFanction->GetTupleSpace()->RemoveAllNotifys(GetOwner());
+				}
 			}
 
 			bool Dyning::OnUpdate() {

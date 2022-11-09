@@ -73,7 +73,7 @@ namespace basecross {
 
 				auto  member = GetOwner();
 				auto assignedFaction = member->GetAssignedFaction();
-				assignedFaction->RemoveMember(std::dynamic_pointer_cast<EnemyBase>(member));
+				assignedFaction->RemoveMember(member);	//ファクションから離脱。
 				assignedFaction->GetTupleSpace()->RemoveAllNotifys(member->GetSelfObject()->GetComponent<Tuple::I_Tupler>(false)); //タプルスペースに登録された者を変更
 			}
 
