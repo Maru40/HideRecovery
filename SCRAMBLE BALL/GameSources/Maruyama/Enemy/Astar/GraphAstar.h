@@ -37,7 +37,7 @@ namespace basecross {
 		std::shared_ptr<GraphType> m_baseGraph = nullptr;	//グラフのデータ(エリア内のグラフデータ)
 		GraphMap m_graphMap;								//グラフのエリアインデックスごとに分けたマップ
 
-		std::stack<std::shared_ptr<NavGraphNode>> m_route;	//生成したルート
+		std::stack<std::weak_ptr<NavGraphNode>> m_route;	//生成したルート
 
 	public:
 		/// <summary>
@@ -190,7 +190,7 @@ namespace basecross {
 		/// ルートの取得
 		/// </summary>
 		/// <returns>ルート</returns>
-		const std::stack<std::shared_ptr<NavGraphNode>> GetRoute() const {
+		const std::stack<std::weak_ptr<NavGraphNode>> GetRoute() const {
 			return m_route;
 		}
 
