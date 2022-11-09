@@ -86,10 +86,8 @@ namespace basecross {
 		//ダメージを与えた相手を伝える。
 		SendFaciton_DamageMessage(damage);
 
-		return;
-
-		//auto soundEmitter = m_soundEmitter.lock();
-		//soundEmitter->PlaySoundClip(m_damageSoundClip);
+		auto soundEmitter = m_soundEmitter.lock();
+		soundEmitter->PlaySoundClip(m_damageSoundClip);
 
 		for (auto& damagedFunc : m_damagedFuncs)
 		{
