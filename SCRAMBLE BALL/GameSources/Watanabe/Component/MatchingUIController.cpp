@@ -8,6 +8,7 @@
 #include "Itabashi/MatchingSelectUIObject.h"
 #include "Watanabe/UI/PasscodeUI.h"
 #include "Itabashi/PasswordTextUI.h"
+#include "Itabashi/OnlineMatching.h"
 
 namespace basecross {
 	MatchingUIController::MatchingUIController(const shared_ptr<GameObject>& owner,
@@ -99,6 +100,18 @@ namespace basecross {
 			->SetMessage(SplashMessageUI::MessageType::CreateRoom);
 
 		EventSystem::GetInstance(GetStage())->PushSelectableObject(GetGameObject());
+
+		std::wstring password = Online::OnlineManager::GetCurrentlyJoinedRoom().getName().cstr();
+
+		auto numbersObject = m_passwordViewNumbersObject.lock();
+		auto onlineMatching = m_onlineMatching.lock();
+
+		if (onlineMatching->UsePassword() && numbersObject)
+		{
+			auto passwordNumber = std::stoi(password);
+			numbersObject->SetNumber(passwordNumber);
+			numbersObject->SetActive(true);
+		}
 	}
 
 	void MatchingUIController::OnJoinRoom() {

@@ -10,6 +10,11 @@ namespace basecross {
 		class MatchingSelectUIObject;
 	}
 
+	namespace Online
+	{
+		class OnlineMatching;
+	}
+
 	class MatchStageTransitioner;
 	class PasscodeUI;
 
@@ -20,6 +25,7 @@ namespace basecross {
 		shared_ptr<UIObjectCSVBuilder> m_builder; // UIビルダー
 
 		std::weak_ptr<MatchStageTransitioner> m_transitioner; // MatchStageの遷移用コンポーネント
+		std::weak_ptr<Online::OnlineMatching> m_onlineMatching; // マッチング用コンポーネント
 
 		std::weak_ptr<StageObject::MatchingSelectUIObject> m_selectUIObject; // マッチング選択用UIオブジェクト
 		std::weak_ptr<PasscodeUI> m_passcodeUIObject; // パスワード入力用UIオブジェクト
@@ -60,9 +66,30 @@ namespace basecross {
 		/// </summary>
 		void ChangeUIStartLeaveRoom();
 
+		/// <summary>
+		/// マッチング選択用UIオブジェクトの設定
+		/// </summary>
+		/// <param name="selectUIObject">マッチング選択用UIオブジェクト</param>
 		void SetMatchingSelectUIObject(const std::shared_ptr<StageObject::MatchingSelectUIObject>& selectUIObject) { m_selectUIObject = selectUIObject; }
+		/// <summary>
+		/// パスワード入力用UIオブジェクトの設定
+		/// </summary>
+		/// <param name="passcodeUIObject">パスワード入力用UIオブジェクト</param>
 		void SetPasscodeUIObject(const std::shared_ptr<PasscodeUI>& passcodeUIObject) { m_passcodeUIObject = passcodeUIObject; }
+		/// <summary>
+		/// パスワード表示用UIオブジェクトの設定
+		/// </summary>
+		/// <param name="passwordViewNumbersObject">パスワード表示用UIオブジェクト</param>
 		void SetPasswordViewNumbersObject(const std::shared_ptr<Numbers>& passwordViewNumbersObject) { m_passwordViewNumbersObject = passwordViewNumbersObject; }
+		/// <summary>
+		/// MatchStageの遷移用コンポーネントの設定
+		/// </summary>
+		/// <param name="transitioner">MatchStageの遷移用コンポーネント</param>
 		void SetStageTransitioner(const std::shared_ptr<MatchStageTransitioner>& transitioner) { m_transitioner = transitioner; }
+		/// <summary>
+		/// マッチング用コンポーネントの設定
+		/// </summary>
+		/// <param name="onlineMatching">マッチング用コンポーネント</param>
+		void SetOnlineMatching(const std::shared_ptr<Online::OnlineMatching>& onlineMatching) { m_onlineMatching = onlineMatching; }
 	};
 }
