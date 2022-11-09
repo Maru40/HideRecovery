@@ -106,10 +106,10 @@ namespace basecross {
 						return;
 					}
 
-					auto ownerTrans = GetOwner()->GetGameObject()->GetComponent<Transform>();
-					m_useWeapon.lock()->GetWepon()->Shot(ownerTrans->GetForward());
+					//auto ownerTrans = GetOwner()->GetGameObject()->GetComponent<Transform>();
+					//m_useWeapon.lock()->GetWepon()->Shot(ownerTrans->GetForward());
 
-					//m_onlineSynchronizer.lock()->Shot();
+					m_onlineSynchronizer.lock()->Shot();
 				}
 
 				void Shot::DefineMoveTask() {
