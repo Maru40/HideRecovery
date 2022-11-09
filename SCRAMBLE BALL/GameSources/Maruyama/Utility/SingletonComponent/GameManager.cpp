@@ -19,6 +19,8 @@
 #include "Maruyama/UI/2D/Component/TeleportUI.h"
 #include "Maruyama/Player/Component/OwnArea.h"
 
+#include "Maruyama/Enemy/AIDirector/EnemyAIDirector.h"
+
 namespace basecross {
 
 	std::weak_ptr<GameManager>  maru::SingletonComponent<GameManager>::sm_instance;
@@ -111,6 +113,8 @@ namespace basecross {
 			for (auto area : ownerAreas) {
 				area->SetOutCollisionActive(false);
 			}
+
+			Enemy::AIDirector::GetInstance()->StartAssign();
 		}
 			break;
 
