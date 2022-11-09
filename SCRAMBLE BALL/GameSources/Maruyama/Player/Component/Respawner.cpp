@@ -107,7 +107,7 @@ namespace basecross {
 		}
 
 		if (auto stator = GetGameObject()->GetComponent<Enemy::AIPlayerStator>(false)) {
-			stator->ChangeState(Enemy::AIPlayerStator::StateType::HidePlacePatrol);
+			//stator->ChangeState(Enemy::AIPlayerStator::StateType::HidePlacePatrol);
 		}
 
 		//playerのカメラ位置変更
