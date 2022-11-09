@@ -754,6 +754,8 @@ namespace basecross
 		void OnUpdate() override;
 
 		virtual void OnDraw() override {}
+
+		void Clear();
 	};
 
 	/// <summary>

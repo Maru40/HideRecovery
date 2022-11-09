@@ -1084,6 +1084,16 @@ namespace basecross
 		}
 	}
 
+	void EventSystem::Clear()
+	{
+		m_nowSelectableObject.reset();
+
+		while (!m_stackSelectableObject.empty())
+		{
+			m_stackSelectableObject.pop();
+		}
+	}
+
 	// Button -----------------------------------
 
 	Button::Button(std::shared_ptr<GameObject>& owner) :
