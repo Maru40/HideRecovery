@@ -26,6 +26,8 @@
 
 #include "Patch/SpringArmComponent.h"
 
+#include "Maruyama/Enemy/Component/Stator/AIPlayerStator.h"
+
 namespace basecross {
 	//--------------------------------------------------------------------------------------
 	/// リスポーンをさせるクラスのパラメータ
@@ -104,6 +106,9 @@ namespace basecross {
 			onlineTransitioner->SetUpdateActive(true);
 		}
 
+		if (auto stator = GetGameObject()->GetComponent<Enemy::AIPlayerStator>(false)) {
+			stator->ChangeState(Enemy::AIPlayerStator::StateType::HidePlacePatrol);
+		}
 
 		//playerのカメラ位置変更
 		auto player = dynamic_pointer_cast<PlayerObject>(GetGameObject());
