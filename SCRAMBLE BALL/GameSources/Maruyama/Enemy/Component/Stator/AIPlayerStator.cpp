@@ -39,6 +39,10 @@
 
 #include "Watanabe/DebugClass/Debug.h"
 
+#include "Patch/PlayerInputer.h"
+#include "Watanabe/Component/PlayerStatus.h"
+#include "Maruyama/Player/Component/PlayerDeader.h"
+
 namespace basecross {
 	namespace Enemy {
 
@@ -58,11 +62,6 @@ namespace basecross {
 		bool IsGameState(const AIPlayerStator::TransitionMember& member) {
 			//ƒQ[ƒ€ó‘Ô‚©‚Ç‚¤‚©‚ð”»’f
 			bool isTransition = GameManager::GetInstance()->IsCurrentState(GameManager::State::Game);
-
-			if (isTransition) {
-				//AIDirector‚É“`‚¦‚ÄAƒAƒTƒCƒ“B
-				AIDirector::GetInstance()->StartAssign();
-			}
 
 			return isTransition;
 		}
@@ -89,7 +88,11 @@ namespace basecross {
 		}
 
 		bool AIPlayerStator::IsLostButtleTarget(const TransitionMember& member) {
-
+			//if (PlayerInputer::IsBDown()) {
+			//	if (auto deader = GetGameObject()->GetComponent<PlayerDeader>(false)) {
+			//		deader->StartDead();
+			//	}
+			//}
 
 			return false;
 		}
@@ -129,7 +132,7 @@ namespace basecross {
 			m_stateMachine->AddNode(StateType::Dyning, std::make_shared<StateNode::Dyning>(enemy));
 
 			//Ž€–S
-			m_stateMachine->AddNode(StateType::Dyning, std::make_shared<StateNode::Dead>(enemy));
+			m_stateMachine->AddNode(StateType::Dead, std::make_shared<StateNode::Dead>(enemy));
 		}
 
 		void AIPlayerStator::CreateEdge() {
