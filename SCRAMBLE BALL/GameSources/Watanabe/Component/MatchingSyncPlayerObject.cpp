@@ -83,7 +83,14 @@ namespace basecross {
 	}
 
 	void MatchingSyncPlayerObject::OnJoinRoomEventAction(int playerNumber, const std::vector<int>& playerNumbers, const ExitGames::LoadBalancing::Player& player) {
-		for (int i = 0; i < playerNumbers.size(); i++) {
+		for (int i = 0; i < Online::OnlineMatching::MAX_PLAYER_NUM; i++) {
+
+			if (i >= playerNumbers.size())
+			{
+				m_players[i]->SetActive(false);
+				continue;
+			}
+
 			auto efkComp = m_players[i]->GetComponent<EfkComponent>(false);
 			if (efkComp && !m_players[i]->IsActive()) {
 				efkComp->Play(L"Respawn");
@@ -92,7 +99,13 @@ namespace basecross {
 		}
 	}
 	void MatchingSyncPlayerObject::OnLeaveRoomEventAction(int playerNumber, bool isInactive) {
-		for (int i = 0; i < m_players.size(); i++) {
+
+		if (!m_players[0]->IsActive())
+		{
+			return;
+		}
+
+		for (int i = 1; i < m_players.size(); i++) {
 			if (!m_players[i]->IsActive()) {
 				m_players[i - 1]->SetActive(false);
 			}
