@@ -17,6 +17,8 @@
 
 #include "Maruyama/Enemy/Component/Stator/StateNode/StateNode_HidePlacePatrol.h"
 #include "Maruyama/Enemy/Component/Stator/StateNode/StateNode_Buttle.h"
+#include "Maruyama/Enemy/Component/Stator/StateNode/StateNode_Dyning.h"
+#include "Maruyama/Enemy/Component/Stator/StateNode/StateNode_Dead.h"
 
 #include "Maruyama/Enemy/Component/EyeSearchRange.h"
 #include "Maruyama/Utility/ObserveIsInEyeTarget.h"
@@ -122,6 +124,12 @@ namespace basecross {
 
 			//ƒoƒgƒ‹
 			m_stateMachine->AddNode(StateType::Buttle, std::make_shared<StateNode::Buttle>(enemy));
+
+			//Ž€–S’†
+			m_stateMachine->AddNode(StateType::Dyning, std::make_shared<StateNode::Dyning>(enemy));
+
+			//Ž€–S
+			m_stateMachine->AddNode(StateType::Dyning, std::make_shared<StateNode::Dead>(enemy));
 		}
 
 		void AIPlayerStator::CreateEdge() {
