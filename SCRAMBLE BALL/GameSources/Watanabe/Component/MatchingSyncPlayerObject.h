@@ -18,5 +18,9 @@ namespace basecross {
 		void OnJoinRoomEventAction(int playerNumber, const std::vector<int>& playerNumbers, const ExitGames::LoadBalancing::Player& player)override;
 		// 誰かが部屋を抜けた
 		void OnLeaveRoomEventAction(int playerNumber, bool isInactive)override;
+		/// <summary>
+		/// 表示人数の初期化
+		/// </summary>
+		void Reset();
 	};
 }

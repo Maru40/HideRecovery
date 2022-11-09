@@ -1,8 +1,8 @@
-#pragma once
+﻿#pragma once
 
 namespace basecross
 {
-	class MessageWindow : public SelectableComponent
+	class MessageWindow : public SelectableComponent, public I_Submitable
 	{
 		ex_weak_ptr<TextBox> m_textBox;
 
@@ -38,9 +38,9 @@ namespace basecross
 
 		void OnSelect() override;
 
-		void OnPush() override;
+		void OnSubmit() override;
 
-		void OnOutSelect() override;
+		void OnDeselect() override;
 
 		void CheckMessageFlag();
 	};

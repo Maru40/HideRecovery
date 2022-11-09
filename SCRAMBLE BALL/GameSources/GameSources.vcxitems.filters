@@ -877,9 +877,6 @@
     <Filter Include="Itabashi\Component\OnlineMatchStage\MatchStageTransitioner">
       <UniqueIdentifier>{04d07eac-4827-4430-8b66-911d86917a77}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Itabashi\Component\OnlineMatchStage\MatchStageRoomer">
-      <UniqueIdentifier>{d15c9508-5a27-4b95-91df-2f53335c8158}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Watanabe\UI\GameFinishUI">
       <UniqueIdentifier>{1968564a-b4c0-4fc3-910e-78bf32437180}</UniqueIdentifier>
     </Filter>
@@ -1234,6 +1231,12 @@
     <Filter Include="Watanabe\Shader\AdvStageBase">
       <UniqueIdentifier>{6dbc0f07-0f92-43ea-a97d-93fa7728c97d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Itabashi\Patch\InputTextManager">
+      <UniqueIdentifier>{e4a28988-8215-488b-a393-00ecff2aaf95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Itabashi\Component\PasswordTextUI">
+      <UniqueIdentifier>{4f5b0a74-c537-4699-930f-05660e038e0a}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Maruyama\Enemy\BehaviorTree\Decorator">
       <UniqueIdentifier>{20e32679-f50f-4a3f-bded-8db56e691e6e}</UniqueIdentifier>
     </Filter>
@@ -1331,6 +1334,24 @@
     <Filter Include="Watanabe\TestStage\TestEffectStage">
       <UniqueIdentifier>{99b5a9b3-d781-494b-b609-31c8b5c95325}</UniqueIdentifier>
 
+    </Filter>
+    <Filter Include="Itabashi\StageObject">
+      <UniqueIdentifier>{375846f6-a375-47eb-b86c-abac7636ffb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Itabashi\Component\SelectAppearanceChanger">
+      <UniqueIdentifier>{caea9e65-3521-47ba-9714-35097fb1932b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Itabashi\Component\UICancelEventer">
+      <UniqueIdentifier>{7fb9b867-b6fe-4822-83e5-228df5dcc436}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Itabashi\StageObject\MatchingSelectUIObject">
+      <UniqueIdentifier>{26430e86-4299-4d3a-ae81-fb503d7284e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Itabashi\StageObject\MatchStageCoreObject">
+      <UniqueIdentifier>{cd2c6231-f9a5-4658-86f9-96973d985c76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Itabashi\StageObject\MatchStageUIObject">
+      <UniqueIdentifier>{ea399564-cc15-46b7-bca7-d278649ed535}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1477,9 +1498,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\GamePlayerManager.h">
       <Filter>Itabashi\Component\GamePlayerManager</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageRoomer.h">
-      <Filter>Itabashi\Component\OnlineMatchStage\MatchStageRoomer</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\Numbers.h">
       <Filter>Watanabe\UI\Numbers</Filter>
@@ -2417,6 +2435,15 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\IsInEyeTargets.h">
       <Filter>Maruyama\Enemy\BehaviorTree\Decorator\IsInEyeTargets</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\Utility\InputTextManager.h">
+      <Filter>Itabashi\Patch\InputTextManager</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\PasswordTextUI.h">
+      <Filter>Itabashi\Component\PasswordTextUI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\IsInEyeTarget.h">
+      <Filter>Maruyama\Enemy\BehaviorTree\Decorator\IsInEyeTarget</Filter>
+    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\ObserveIsInEyeTarget.h">
       <Filter>Maruyama\Utility\ObserveIsInEyeTarget</Filter>
     </ClInclude>
@@ -2487,6 +2514,21 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\TestEffectStage.h">
       <Filter>Watanabe\TestStage\TestEffectStage</Filter>
 
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\SelectAppearanceChanger.h">
+      <Filter>Itabashi\Component\SelectAppearanceChanger</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\UICancelEventer.h">
+      <Filter>Itabashi\Component\UICancelEventer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MatchingSelectUIObject.h">
+      <Filter>Itabashi\StageObject\MatchingSelectUIObject</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageCoreObject.h">
+      <Filter>Itabashi\StageObject\MatchStageCoreObject</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageUIObject.h">
+      <Filter>Itabashi\StageObject\MatchStageUIObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2618,9 +2660,6 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\GamePlayerManager.cpp">
       <Filter>Itabashi\Component\GamePlayerManager</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageRoomer.cpp">
-      <Filter>Itabashi\Component\OnlineMatchStage\MatchStageRoomer</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\Numbers.cpp">
       <Filter>Watanabe\UI\Numbers</Filter>
@@ -3474,6 +3513,15 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\IsInEyeTargets.cpp">
       <Filter>Maruyama\Enemy\BehaviorTree\Decorator\IsInEyeTargets</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\Utility\InputTextManager.cpp">
+      <Filter>Itabashi\Patch\InputTextManager</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\PasswordTextUI.cpp">
+      <Filter>Itabashi\Component\PasswordTextUI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\IsInEyeTarget.cpp">
+      <Filter>Maruyama\Enemy\BehaviorTree\Decorator\IsInEyeTarget</Filter>
+    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\ObserveIsInEyeTarget.cpp">
       <Filter>Maruyama\Utility\ObserveIsInEyeTarget</Filter>
     </ClCompile>
@@ -3544,6 +3592,21 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\TestEffectStage.cpp">
       <Filter>Watanabe\TestStage\TestEffectStage</Filter>
 
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\SelectAppearanceChanger.cpp">
+      <Filter>Itabashi\Component\SelectAppearanceChanger</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\UICancelEventer.cpp">
+      <Filter>Itabashi\Component\UICancelEventer</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\MatchingSelectUIObject.cpp">
+      <Filter>Itabashi\StageObject\MatchingSelectUIObject</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageCoreObject.cpp">
+      <Filter>Itabashi\StageObject\MatchStageCoreObject</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageUIObject.cpp">
+      <Filter>Itabashi\StageObject\MatchStageUIObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -3,6 +3,7 @@
 #include "Project.h"
 #include "Patch/PlayerInputer.h"
 #include "Itabashi/OnlineManager.h"
+#include "Itabashi/Utility/InputTextManager.h"
 
 using namespace basecross;
 
@@ -296,6 +297,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	HDC hdc;
 	switch (message)
 	{
+	case WM_CHAR:
+		itbs::Input::InputTextManager::Push((wchar_t)wParam);
+		break;
 	case WM_PAINT:
 		hdc = BeginPaint(hWnd, &ps);
 		EndPaint(hWnd, &ps);

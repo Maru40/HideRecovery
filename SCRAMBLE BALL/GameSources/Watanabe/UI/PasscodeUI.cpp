@@ -1,25 +1,32 @@
 ﻿#include "stdafx.h"
 #include "PasscodeUI.h"
+#include "Itabashi/PasswordTextUI.h"
+#include "Itabashi/UICancelEventer.h"
 
 namespace basecross {
 	PasscodeUI::PasscodeUI(const shared_ptr<Stage>& stage)
 		:UIObjectBase(stage, L"PasscodeUI")
 	{}
 
-	void PasscodeUI::OnCreate() {
-		m_label = GetStage()->AddGameObject<SimpleSprite>(
+	void PasscodeUI::OnCreate()
+	{
+		auto label = GetStage()->AddGameObject<SimpleSprite>(
 			SimpleSprite::Type::SpriteData, L"EnterPasscode"
 			);
-		m_passCodeNumbers = GetStage()->AddGameObject<Numbers>(4);
 
-		m_label->GetRectTransform()->SetPosition(0, 100);
-		m_passCodeNumbers->GetRectTransform()->SetPosition(0, -100);
+		auto passcodeNumbers = GetStage()->AddGameObject<Numbers>(4);
 
-		m_label->SetParent(GetThis<PasscodeUI>());
-		m_passCodeNumbers->SetParent(GetThis<PasscodeUI>());
-	}
+		label->GetRectTransform()->SetPosition(0, 100);
+		passcodeNumbers->GetRectTransform()->SetPosition(0, -100);
 
-	void PasscodeUI::UpdateCode(int code) {
-		m_passCodeNumbers->SetNumber(code);
+		label->SetParent(GetThis<PasscodeUI>());
+		passcodeNumbers->SetParent(GetThis<PasscodeUI>());
+
+		auto passwordTextUI = AddComponent<UI::PasswordTextUI>();
+
+		passwordTextUI->SetNumbers(passcodeNumbers);
+		passwordTextUI->SetDecisionSEKey(L"DecisionSE");
+
+		AddComponent<UICancelEventer>();
 	}
 }

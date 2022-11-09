@@ -4,6 +4,11 @@
 #include "../UI/HoldButtonUI.h"
 #include "Zooming.h"
 #include "../DebugClass/Debug.h"
+#include "Patch/PlayerInputer.h"
+#include "Itabashi/MatchingSelectUIObject.h"
+#include "Watanabe/UI/PasscodeUI.h"
+#include "Itabashi/PasswordTextUI.h"
+#include "Itabashi/OnlineMatching.h"
 
 namespace basecross {
 	MatchingUIController::MatchingUIController(const shared_ptr<GameObject>& owner,
@@ -11,12 +16,41 @@ namespace basecross {
 		:OnlineComponent(owner), m_builder(builder)
 	{}
 
-	void MatchingUIController::OnCreate() {
+	void MatchingUIController::CreateUIEvent()
+	{
+		auto joinRoomButton = m_selectUIObject.lock()->GetJoinRoomButtonObject()->GetComponent<Button>();
+
+		auto passcodeUIObject = m_passcodeUIObject.lock();
+		auto passwordTextUI = passcodeUIObject->GetComponent<UI::PasswordTextUI>();
+
+		std::weak_ptr<GameObject> weakPasscodeUIObject = passcodeUIObject;
+
+		// 押されたら、バスワード入力UIを表示して選択する
+		joinRoomButton->AddPushEvent([weakPasscodeUIObject]()
+			{
+				auto passwordObject = weakPasscodeUIObject.lock();
+
+				passwordObject->SetActive(true);
+				EventSystem::GetInstance(passwordObject->GetStage())->PushSelectableObject(passwordObject);
+			}
+		);
+
+		// 押されたら、非表示にする
+		passwordTextUI->AddSubmitEvent([&, weakPasscodeUIObject](const std::wstring& password)
+			{
+				m_isJoinRoom = true;
+				weakPasscodeUIObject.lock()->SetActive(false);
+			}
+		);
+	}
+
+	void MatchingUIController::OnLateStart() {
 		auto gameStart = m_builder->GetUIObject(L"GameStart");
 		gameStart->SetDrawActive(false);
 		auto aButton = m_builder->GetUIObject(L"AButton");
 		aButton->SetDrawActive(false);
 		m_builder->GetUIObject(L"WaitHost")->SetDrawActive(false);
+		m_builder->GetUIObject(L"Matching")->SetDrawActive(false);
 
 		// 親となるオブジェクトを作成し、所定の位置へ
 		auto parent = GetStage()->AddGameObject<UIObjectBase>(L"GameStartParent");
@@ -34,12 +68,28 @@ namespace basecross {
 
 		auto holdA = m_builder->GetUIObject<HoldButtonUI>(L"HoldA");
 		holdA->SetParent(aButton);
+		
+		auto transitioner = m_transitioner.lock();
 
-		auto transitioner = GetGameObject()->GetComponent<MatchStageTransitioner>(false);
 		if (transitioner) {
 			holdA->SetTransitioner(transitioner);
 		}
 		holdA->SetDrawActive(false);
+
+		CreateUIEvent();
+	}
+
+	void MatchingUIController::OnUpdate()
+	{	
+	}
+
+	void MatchingUIController::OnConnected()
+	{
+		auto selectUIObject = m_selectUIObject.lock();
+
+		selectUIObject->SetActive(true);
+
+		EventSystem::GetInstance(GetStage())->SetNowSelectableObject(selectUIObject->GetFreeMatchingButtonObject());
 	}
 
 	void MatchingUIController::OnCreateRoom() {
@@ -49,6 +99,20 @@ namespace basecross {
 		m_builder->GetUIObject(L"HoldA")->SetDrawActive(true);
 		m_builder->GetUIObject<SplashMessageUI>(L"SplashMessage")
 			->SetMessage(SplashMessageUI::MessageType::CreateRoom);
+
+		EventSystem::GetInstance(GetStage())->PushSelectableObject(GetGameObject());
+
+		std::wstring password = Online::OnlineManager::GetCurrentlyJoinedRoom().getName().cstr();
+
+		auto numbersObject = m_passwordViewNumbersObject.lock();
+		auto onlineMatching = m_onlineMatching.lock();
+
+		if (onlineMatching->UsePassword() && numbersObject)
+		{
+			auto passwordNumber = std::stoi(password);
+			numbersObject->SetNumber(passwordNumber);
+			numbersObject->SetActive(true);
+		}
 	}
 
 	void MatchingUIController::OnJoinRoom() {
@@ -56,11 +120,54 @@ namespace basecross {
 		m_builder->GetUIObject(L"WaitHost")->SetDrawActive(true);
 		m_builder->GetUIObject<SplashMessageUI>(L"SplashMessage")
 			->SetMessage(SplashMessageUI::MessageType::JoinRoom);
+
+		EventSystem::GetInstance(GetStage())->PushSelectableObject(GetGameObject());
 	}
 
-	void MatchingUIController::OnJoinRoomFailed(int errorCode) {
+	void MatchingUIController::OnJoinRoomFailed(int errorCode)
+	{
+		auto passcodeUIObject = m_passcodeUIObject.lock();
+
+		passcodeUIObject->SetActive(true);
+		passcodeUIObject->GetComponent<UI::PasswordTextUI>()->Clear();
+
 		m_builder->GetUIObject(L"Matching")->SetDrawActive(false);
+
 		m_builder->GetUIObject<SplashMessageUI>(L"SplashMessage")
 			->SetMessage(SplashMessageUI::MessageType::CanNotJoin);
+
+		m_isJoinRoom = false;
+	}
+
+	void MatchingUIController::OnLeaveRoom()
+	{
+		auto selectUIObject = m_selectUIObject.lock();
+
+		if (m_isJoinRoom)
+		{
+			auto eventSystem = EventSystem::GetInstance(GetStage());
+			eventSystem->Clear();
+			eventSystem->SetNowSelectableObject(selectUIObject->GetJoinRoomButtonObject());
+		}
+
+		selectUIObject->SetActive(true);
+
+		m_isJoinRoom = false;
+	}
+
+	void MatchingUIController::ChangeUIStartMatching()
+	{
+		m_builder->GetUIObject(L"Matching")->SetActive(true);
+	}
+
+	void MatchingUIController::ChangeUIStartLeaveRoom()
+	{
+		m_builder->GetUIObject(L"GameStart")->SetDrawActive(false);
+		m_builder->GetUIObject(L"AButton")->SetDrawActive(false);
+		m_builder->GetUIObject(L"HoldA")->SetDrawActive(false);
+		m_builder->GetUIObject(L"WaitHost")->SetDrawActive(false);
+
+		m_passcodeUIObject.lock()->SetActive(false);
+		m_passwordViewNumbersObject.lock()->SetActive(false);
 	}
 }

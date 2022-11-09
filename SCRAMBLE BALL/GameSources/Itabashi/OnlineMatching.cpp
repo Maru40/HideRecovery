@@ -1,17 +1,22 @@
 ﻿#include "stdafx.h"
 #include "OnlineMatching.h"
-#include <random>
+#include <iomanip>
+#include "Watanabe/UI/Numbers.h"
+#include "Watanabe/Component/MatchingUIController.h"
 
 namespace basecross
 {
 namespace Online
 {
+	std::mt19937_64 m_randomEngine = std::mt19937_64(std::random_device()());
+
 	int OnlineMatching::m_playerNumbers[OnlineMatching::MAX_PLAYER_NUM] = {};
 
 	OnlineMatching::OnlineMatching(const std::shared_ptr<GameObject>& owner) :
-		OnlineComponent(owner)
+		OnlineComponent(owner),
+		m_passwordDistribution(0, PASSWORD_UINT_MAX)
 	{
-
+		m_roomOptions.setMaxPlayers(MAX_PLAYER_NUM);
 	}
 
 	void OnlineMatching::PlayerStateUpdateEvent(int playerNumber, bool isAdd)
@@ -49,12 +54,54 @@ namespace Online
 		std::memcpy(m_playerNumbers, playerNumbers, sizeof(m_playerNumbers));
 	}
 
+	std::wstring OnlineMatching::CreatePassword()
+	{
+		std::wstringstream wss;
+		wss << std::setfill(L'0') << std::setw(PASSWORD_DISIT_NUM) << m_passwordDistribution(m_randomEngine);
+
+		return wss.str();
+	}
+
+	void OnlineMatching::OnCreate()
+	{
+		Online::OnlineManager::Connect();
+	}
+
+	void OnlineMatching::OnLateStart()
+	{
+	}
+
+	void OnlineMatching::OnConnected()
+	{
+		m_isConnected = true;
+	}
+
 	void OnlineMatching::OnCreateRoom()
 	{
 	}
 
+	void OnlineMatching::OnCreateRoomFailed(int errorCode)
+	{
+		if (!m_usePassword)
+		{
+			return;
+		}
+
+		OnlineManager::CreateRoom(CreatePassword(), m_roomOptions);
+	}
+
 	void OnlineMatching::OnJoinRoom()
 	{
+	}
+
+	void OnlineMatching::OnJoinRoomFailed(int errorCode)
+	{
+		m_isMatching = false;
+	}
+
+	void OnlineMatching::OnLeaveRoom()
+	{
+		m_isMatching = false;
 	}
 
 	void OnlineMatching::OnJoinRoomEventAction(int playerNumber, const std::vector<int>& playerNumbers, const ExitGames::LoadBalancing::Player& player)
@@ -132,6 +179,58 @@ namespace Online
 		}
 
 		OnlineManager::RaiseEvent(false, (std::uint8_t*)m_playerNumbers, sizeof(m_playerNumbers), EXECUTE_UPDATE_PLAYER_NUMBERS);
+	}
+
+	void OnlineMatching::StartFreeMatching()
+	{
+		if (!m_isConnected || m_isMatching)
+		{
+			return;
+		}
+
+		m_isMatching = true;
+		m_usePassword = false;
+
+		m_matchingUIController.lock()->ChangeUIStartMatching();
+
+		m_roomOptions.setIsVisible(true);
+		Online::OnlineManager::JoinRandomOrCreateRoom(m_roomOptions);
+	}
+
+	void OnlineMatching::StartCreatePasswordMatching()
+	{
+		if (!m_isConnected || m_isMatching)
+		{
+			return;
+		}
+
+		m_isMatching = true;
+		m_usePassword = true;
+
+		m_matchingUIController.lock()->ChangeUIStartMatching();
+
+		m_roomOptions.setIsVisible(false);
+		Online::OnlineManager::CreateRoom(CreatePassword(), m_roomOptions);
+	}
+
+	void OnlineMatching::StartJoinPasswordMatching(const std::wstring& password)
+	{
+		if (!m_isConnected || m_isMatching)
+		{
+			return;
+		}
+
+		m_isMatching = true;
+		m_usePassword = true;
+
+		m_matchingUIController.lock()->ChangeUIStartMatching();
+
+		OnlineManager::JoinRoom(password);
+	}
+
+	void OnlineMatching::StartLeaveRoom()
+	{
+		OnlineManager::LeaveRoom();
 	}
 
 }
