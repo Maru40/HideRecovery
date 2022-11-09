@@ -86,6 +86,11 @@ namespace basecross {
 			/// <returns></returns>
 			std::shared_ptr<FactionCoordinator> GetFactionCoordinator(const int index) const;
 
+			/// <summary>
+			/// ゲーム開始時にAIDirectorに全ての敵をアサインする処理
+			/// </summary>
+			void StartAssign();
+
 		};
 
 	}

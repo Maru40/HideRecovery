@@ -29,15 +29,15 @@ namespace basecross {
 		{}
 
 		void AIDirector::OnLateStart() {
-			SettingStartAllEnemys();
+			//SettingStartAllEnemys();
 
-			//チームタイプごとに分ける。
-			auto enemysMap = DivideTeamType(m_enemys);
+			////チームタイプごとに分ける。
+			//auto enemysMap = DivideTeamType(m_enemys);
 
-			//チームごとにファクションを生成する。
-			for (auto& pair : enemysMap) {
-				auto faction = CreateFaction(pair.second);
-			}
+			////チームごとにファクションを生成する。
+			//for (auto& pair : enemysMap) {
+			//	auto faction = CreateFaction(pair.second);
+			//}
 		}
 
 		void AIDirector::OnUpdate() {
@@ -97,6 +97,18 @@ namespace basecross {
 			}
 
 			return m_factionCoordinators[index];
+		}
+
+		void AIDirector::StartAssign() {
+			SettingStartAllEnemys();
+
+			//チームタイプごとに分ける。
+			auto enemysMap = DivideTeamType(m_enemys);
+
+			//チームごとにファクションを生成する。
+			for (auto& pair : enemysMap) {
+				auto faction = CreateFaction(pair.second);
+			}
 		}
 	}
 }
