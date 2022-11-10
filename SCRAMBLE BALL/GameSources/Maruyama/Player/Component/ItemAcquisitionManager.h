@@ -15,9 +15,14 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 	class Item;
 	class SplashMessageUI;
+	class I_TeamMember;
 
 	namespace Enemy {
 		class I_FactionMember;
+
+		namespace Tuple {
+			class I_Tupler;
+		}
 	}
 
 	//--------------------------------------------------------------------------------------
@@ -46,7 +51,10 @@ namespace basecross {
 		std::vector<std::weak_ptr<Item>> m_acquisitionItems;	//獲得したアイテム
 
 		std::weak_ptr<SplashMessageUI> m_splashMessageUI;
-		std::weak_ptr <Enemy::I_FactionMember > m_factionMember;
+
+		std::weak_ptr <Enemy::I_FactionMember > m_factionMember;	//ファクションメンバー
+		std::weak_ptr<Enemy::Tuple::I_Tupler> m_tupler;
+		std::weak_ptr<I_TeamMember> m_teamMember;
 
 		std::weak_ptr<SoundEmitter> m_soundEmitter;
 		SoundClip m_getBallSoundClip;
@@ -68,6 +76,7 @@ namespace basecross {
 		/// <param name="param">パラメータ</param>
 		ItemAcquisitionManager(const std::shared_ptr<GameObject>& objPtr, const Parametor& param);
 
+		void OnStart() override;
 		void OnLateStart() override;
 		void OnUpdate() override;
 

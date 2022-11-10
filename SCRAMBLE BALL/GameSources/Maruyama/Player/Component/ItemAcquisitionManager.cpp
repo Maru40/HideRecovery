@@ -28,6 +28,7 @@
 #include "Maruyama/Enemy/AIDirector/TupleSpace.h"
 #include "Maruyama/Utility/SingletonComponent/SingletonComponent.h"
 #include "Maruyama/Enemy/AIDirector/EnemyAIDirector.h"
+#include "Maruyama/Interface/I_TeamMember.h"
 
 #include "Watanabe/Component/PlayerAnimator.h"
 #include "Watanabe/UI/SplashMessageUI.h"
@@ -63,6 +64,14 @@ namespace basecross {
 		m_getBallSoundClip(L"GetBallSE", false, 0.5f),
 		m_stolenBallSoundClip(L"StolenBallSE", false, 0.5f)
 	{}
+
+	void ItemAcquisitionManager::OnStart() {
+		auto object = GetGameObject();
+
+		m_factionMember = object->GetComponent<Enemy::I_FactionMember>(false);
+		m_tupler = object->GetComponent<Enemy::Tuple::I_Tupler>(false);
+		m_teamMember = object->GetComponent<I_TeamMember>(false);
+	}
 
 	void ItemAcquisitionManager::OnLateStart() {
 		//アイテムを取得する。
@@ -177,9 +186,11 @@ namespace basecross {
 		}
 
 		//アイテムを手に入れたことをAIDirectorに伝える。
-		if (auto factionMember = m_factionMember.lock()) {
-			//Enemy::AIDirector::
-		}
+		Enemy::AIDirector::GetInstance()->GetTupleSpace()->Write<Enemy::Tuple::FindBall>(
+			m_tupler.lock(),
+			m_teamMember.lock(),
+			0.0f
+		);
 	}
 
 	bool ItemAcquisitionManager::IsAcquisitionRange(const std::shared_ptr<Item>& item) {
