@@ -161,7 +161,7 @@ namespace basecross {
 				//ターゲットが存在しないなら、強制切り替え,
 				//又は、ターゲットが死亡した相手なら切り替える。
 				if (!HasTarget() ||
-					m_targetManager.lock()->GetTarget() == tuple->GetKilled()->GetSelfObject()	//ターゲットが死亡した相手なら
+					m_targetManager.lock()->GetTarget() == tuple->GetKilled()	//ターゲットが死亡した相手なら
 				) {
 					//新規ターゲットの検索依頼
 					GetOwner()->GetAssignedFaction()->GetTupleSpace()->Write<Tuple::SearchTarget>(

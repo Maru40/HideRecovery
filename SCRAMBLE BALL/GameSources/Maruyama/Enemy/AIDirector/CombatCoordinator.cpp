@@ -71,7 +71,7 @@ namespace basecross {
 
 		void CombatCoordinator::NotifyTuple_Kill(const std::shared_ptr<Tuple::Kill>& tuple) {
 			//キルしたターゲットの取得
-			RemoveTaret(tuple->GetKilled()->GetSelfObject());
+			RemoveTaret(tuple->GetKilled());
 
 			GetTupleSpace()->Take(tuple);
 		}

@@ -156,8 +156,8 @@ namespace basecross {
 		if (assignedFaction) {
 			assignedFaction->GetTupleSpace()->Write<Enemy::Tuple::Kill>(
 				m_tupler.lock(),
-				factionMember,
-				m_factionMember.lock(),
+				data.attacker,
+				GetGameObject(),
 				0.0f
 			);
 		}
