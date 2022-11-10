@@ -24,6 +24,10 @@ namespace basecross {
 		class FactionCoordinator;
 		class I_FactionMember;
 
+		namespace Tuple {
+			class FindBall;
+		}
+
 		//--------------------------------------------------------------------------------------
 		/// グループタイプ
 		//--------------------------------------------------------------------------------------
@@ -71,6 +75,12 @@ namespace basecross {
 			void OnExit() override;
 
 		private:
+			/// <summary>
+			/// ボールを見つけた通知を受け取ったとき
+			/// </summary>
+			/// <param name="tuple">通知</param>
+			void NotifyTuple_FindBall(const std::shared_ptr<Tuple::FindBall>& tuple);
+
 			/// <summary>
 			/// グループの生成
 			/// </summary>

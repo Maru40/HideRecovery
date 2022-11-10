@@ -24,6 +24,7 @@
 #include "Maruyama/Enemy/Component/Stator/EnemyStatorBase.h"
 
 #include "PatrolCoordinator/HidePlacePatrol.h"
+#include "Maruyama/Interface/I_TeamMember.h"
 
 #include "Watanabe/DebugClass/Debug.h"
 
@@ -45,7 +46,11 @@ namespace basecross {
 		}
 
 		void FactionCoordinator::OnStart() {
-
+			//通知設定
+			GetDirector()->GetTupleSpace()->Notify<Tuple::FindBall>(
+				GetThis<FactionCoordinator>(),
+				[&](const std::shared_ptr<Tuple::FindBall>& tuple) { NotifyTuple_FindBall(tuple); }
+			);
 		}
 
 		bool FactionCoordinator::OnUpdate() {
@@ -57,7 +62,33 @@ namespace basecross {
 		}
 
 		void FactionCoordinator::OnExit() {
+			//通知削除
+			GetDirector()->GetTupleSpace()->RemoveAllNotifys(GetThis<FactionCoordinator>());
+		}
 
+		//ボールを見つけた通知を受け取る。
+		void FactionCoordinator::NotifyTuple_FindBall(const std::shared_ptr<Tuple::FindBall>& tuple) {
+			for (auto& weakMember : GetMembers()) {
+				auto member = weakMember.lock();
+				auto teamMember = member->GetSelfObject()->GetComponent<I_TeamMember>(false);
+				if (!teamMember) {	//チームメンバーでなかったら
+					continue;
+				}
+
+				//見つけた本人だったら、ゴールを目指す。
+				if (member == tuple->GetRequester()) {
+						//ゴールを目指す。
+					continue;	//その後の処理をしない。
+				}
+
+				//ボールを発見した相手が、自分と同じメンバーなら。
+				if (teamMember->GetTeam() == tuple->GetTeamMember()->GetTeam()) {
+						//ヘルプ行動や、集団行動を取る。
+				}
+				else {	//発見した相手が、違うメンバーなら。
+						//ボールを持っている相手をターゲットにする。
+				}
+			}
 		}
 
 		//--------------------------------------------------------------------------------------
