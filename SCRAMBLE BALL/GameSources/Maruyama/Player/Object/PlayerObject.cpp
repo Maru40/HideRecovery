@@ -34,6 +34,7 @@
 #include "Maruyama/Player/Component/ChargeGun.h"
 #include "Watanabe/Component/PlayerStatus.h"
 #include "Watanabe/Component/HoldBallEffectEmitter.h"
+#include "Watanabe/Component/HasBallEventExecuter.h"
 
 #include "Maruyama/Player/Component/TackleAttack.h"
 #include "Maruyama/Utility/Component/CollisionAction.h"
@@ -76,7 +77,6 @@ namespace basecross {
 		return nullptr;
 	}
 
-
 	void PlayerObject::OnCreate() {
 		Mat4x4 spanMat;
 		const float fScale = 0.8f;
@@ -112,6 +112,12 @@ namespace basecross {
 		auto itemBag = AddComponent<ItemBag>();
 		AddComponent<ItemAcquisitionManager>();
 		AddComponent<HoldBallEffectEmitter>(itemBag);
+		auto hasBallEvent = AddComponent<HasBallEventExecuter>(itemBag);
+		hasBallEvent->SetEvent(
+			[](const shared_ptr<GameObject>& owner) {
+				Debug::GetInstance()->Log(L"ボールを持った");
+			}
+		);
 
 		AddComponent<VelocityManager>();
 
