@@ -18,6 +18,7 @@ namespace basecross {
 	}
 
 	class I_TeamMember;
+	class TargetManager;
 
 	namespace Enemy {
 
@@ -191,7 +192,6 @@ namespace basecross {
 			//--------------------------------------------------------------------------------------
 			///	FindBallタプル
 			//--------------------------------------------------------------------------------------
-
 			class FindBall : public TupleRequestBase 
 			{
 				std::weak_ptr<I_TeamMember> m_teamMember;	//チームメンバー
@@ -211,7 +211,6 @@ namespace basecross {
 			//--------------------------------------------------------------------------------------
 			///	Killタプル
 			//--------------------------------------------------------------------------------------
-
 			class Kill : public TupleRequestBase
 			{
 				std::weak_ptr<I_FactionMember> m_killer;	//キルした人
@@ -235,11 +234,31 @@ namespace basecross {
 				bool operator==(const Kill& other);
 
 				//キルした人
-				std::shared_ptr<I_FactionMember> GetKiller() const noexcept;
+				_NODISCARD std::shared_ptr<I_FactionMember> GetKiller() const noexcept;
 
 				//キルされた人
-				std::shared_ptr<I_FactionMember> GetKilled() const noexcept;
+				_NODISCARD std::shared_ptr<I_FactionMember> GetKilled() const noexcept;
 
+			};
+
+			//--------------------------------------------------------------------------------------
+			///	ターゲットの検索をお願いするタプル
+			//--------------------------------------------------------------------------------------
+			class SearchTarget : public TupleRequestBase
+			{
+				std::weak_ptr<TargetManager> m_targetManager;	//ターゲット管理
+
+			public:
+				SearchTarget(
+					const std::shared_ptr<I_Tupler>& requester,
+					const std::shared_ptr<TargetManager>& targetManager,
+					const float value
+				);
+
+				bool operator == (const SearchTarget& other);
+
+				//ターゲット管理の取得
+				_NODISCARD std::shared_ptr<TargetManager> GetTargetManager() const noexcept { return m_targetManager.lock(); }
 			};
 
 			//--------------------------------------------------------------------------------------
@@ -495,8 +514,6 @@ namespace basecross {
 					}
 
 					m_notifysMap[typeIndex].push_back(newNotify);	//Notipyの生成
-
-					auto notifys = m_notifysMap.at(typeIndex);
 				}
 
 				/// <summary>
@@ -603,7 +620,7 @@ namespace basecross {
 				{
 					auto tIndex = type_index(typeid(T));	//型インデックスの取得
 
-					if (m_tuplesMap.count(tIndex) == 0) {		//Mapに存在しないならfalseを返す。
+					if (m_tuplesMap.count(tIndex) == 0) {	//Mapに存在しないならfalseを返す。
 						return false;
 					}
 

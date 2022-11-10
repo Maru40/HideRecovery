@@ -240,6 +240,29 @@ namespace basecross {
 			}
 
 			//--------------------------------------------------------------------------------------
+			///	ターゲットの検索をお願いするタプル
+			//--------------------------------------------------------------------------------------
+
+			SearchTarget::SearchTarget(
+				const std::shared_ptr<I_Tupler>& requester,
+				const std::shared_ptr<TargetManager>& targetManager,
+				const float value
+			):
+				TupleRequestBase(requester, value),
+				m_targetManager(targetManager)
+			{}
+
+			bool SearchTarget::operator ==(const SearchTarget& other) {
+				if (GetRequester() == other.GetRequester() &&
+					GetValue() == other.GetValue())
+				{
+					return true;
+				}
+
+				return false;
+			}
+
+			//--------------------------------------------------------------------------------------
 			/// タプルスペース本体
 			//--------------------------------------------------------------------------------------
 
