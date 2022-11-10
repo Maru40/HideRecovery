@@ -18,6 +18,7 @@ namespace basecross {
 	class ObserveIsInEyeTarget;
 	class I_TeamMember;
 	class EyeSearchRange;
+	class TargetManager;
 
 	namespace maru {
 		namespace Behavior {
@@ -55,6 +56,7 @@ namespace basecross {
 
 				std::weak_ptr<I_TeamMember> m_teamMember;			//チームメンバー
 				std::weak_ptr<I_FactionMember> m_factionMember;		//ファクションメンバー
+				std::weak_ptr<TargetManager> m_targetManager;
 
 			public:
 				HidePlacePatrol(const std::shared_ptr<EnemyBase>& owner);

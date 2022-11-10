@@ -23,6 +23,8 @@
 #include "Maruyama/Enemy/AIDirector/TupleSpace.h"
 
 #include "Maruyama/Utility/SingletonComponent/ShareClassesManager.h"
+#include "Watanabe/Component/PlayerStatus.h"
+#include "Maruyama/Utility/Component/TargetManager.h"
 
 #include "Watanabe/DebugClass/Debug.h"
 
@@ -41,6 +43,7 @@ namespace basecross {
 				auto object = owner->GetGameObject();
 				m_teamMember = object->GetComponent<I_TeamMember>(false);
 				m_factionMember = object->GetComponent<I_FactionMember>(false);
+				m_targetManager = object->GetComponent<TargetManager>(false);
 			}
 
 			void HidePlacePatrol::OnStart() {
@@ -74,7 +77,8 @@ namespace basecross {
 				auto  member = GetOwner();
 				auto assignedFaction = member->GetAssignedFaction();
 				assignedFaction->RemoveMember(member);	//ファクションから離脱。
-				assignedFaction->GetTupleSpace()->RemoveAllNotifys(member->GetSelfObject()->GetComponent<Tuple::I_Tupler>(false)); //タプルスペースに登録された者を変更
+				assignedFaction->GetTupleSpace()->RemoveAllNotifys(member); //タプルスペースに登録された者を変更
+				assignedFaction->GetTupleSpace()->RemoveAllTuples(member);
 			}
 
 			void HidePlacePatrol::Damaged(const std::shared_ptr<Tuple::Damaged>& tuple) {
@@ -96,6 +100,16 @@ namespace basecross {
 
 				//ターゲットを見つけたことをAIDirectorに伝える。
 				for (auto& target : targets) {
+					auto status = target->GetComponent<PlayerStatus>(false);
+					if (status && status->IsDead()) {
+						continue;
+					}
+
+					auto targetManager = m_targetManager.lock();
+					if (targetManager && targetManager->HasTarget() && targetManager->GetTarget() == target) {
+						continue;
+					}
+
 					auto factionMember = m_factionMember.lock();
 					auto tupleSpace = factionMember->GetAssignedFaction()->GetTupleSpace();
 					tupleSpace->Write<Tuple::FindTarget>(GetOwner(), target);	//ターゲットを通知

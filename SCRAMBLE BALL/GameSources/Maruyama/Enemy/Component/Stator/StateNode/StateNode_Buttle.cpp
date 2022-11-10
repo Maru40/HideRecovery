@@ -65,7 +65,8 @@ namespace basecross {
 				auto  member = GetOwner();
 				auto assignedFaction = member->GetAssignedFaction();	
 				assignedFaction->RemoveMember(member);
-				assignedFaction->GetTupleSpace()->RemoveAllNotifys(member->GetSelfObject()->GetComponent<Tuple::I_Tupler>(false)); //タプルスペースに登録された者を変更
+				assignedFaction->GetTupleSpace()->RemoveAllNotifys(member); //タプルスペースに登録された者を変更
+				assignedFaction->GetTupleSpace()->RemoveAllTuples(member);
 			}
 
 			void Buttle::SettingNotify() {
