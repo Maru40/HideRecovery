@@ -15,6 +15,9 @@
 #include "Maruyama/Enemy/AIDirector/TupleSpace.h"
 
 #include "Maruyama/Utility/Utility.h"
+#include "Maruyama/Enemy/AIDirector/Calculater/CombatCalculater.h"
+
+#include "Maruyama/Utility/Component/TargetManager.h"
 
 namespace basecross {
 
@@ -39,7 +42,10 @@ namespace basecross {
 				[&](const std::shared_ptr<Tuple::Kill>& tuple) { NotifyTuple_Kill(tuple); }
 			);
 
-
+			GetTupleSpace()->Notify<Tuple::SearchTarget>(
+				GetThis<CombatCoordinator>(),
+				[&](const std::shared_ptr<Tuple::SearchTarget>& tuple) { NotifyTuple_SearchTarget(tuple); }
+			);
 		}
 
 		bool CombatCoordinator::OnUpdate() {
@@ -68,6 +74,49 @@ namespace basecross {
 			RemoveTaret(tuple->GetKilled()->GetSelfObject());
 
 			GetTupleSpace()->Take(tuple);
+		}
+
+		void CombatCoordinator::NotifyTuple_SearchTarget(const std::shared_ptr<Tuple::SearchTarget>& tuple) {
+			if (m_targets.empty()) {	//ターゲットが存在しないなら。
+				//パトロールに変更。
+				//tuple->GetRequester()->GetTupleSpace()->Write();	
+				return;
+			}
+
+			//ターゲットの変更
+			auto target = SearchPriorityTarget(tuple->GetTargetManager()->GetGameObject());
+			tuple->GetTargetManager()->SetTarget(target);
+		}
+
+		std::shared_ptr<GameObject> CombatCoordinator::SearchPriorityTarget(const std::shared_ptr<GameObject>& requester) {
+			if (m_targets.empty()) {
+				return nullptr;	//登録されているターゲットが存在しないなら、nullptrを返す。
+			}
+
+			//ソート用の仮データ構造体
+			struct Data {
+				std::weak_ptr<GameObject> target;	//目標
+				float evalutionValue;				//評価値
+
+				Data(const std::shared_ptr<GameObject>& target, const float value):
+					target(target), evalutionValue(value)
+				{}
+			};
+
+			std::vector<Data> datas; //評価値Data配列
+
+			for (auto& target : m_targets) {
+				float value = Calculater::Combat::CalculateEvalutionValue(requester, target.lock());
+				datas.push_back(Data(target.lock(), value));
+			}
+
+			//ソート
+			auto sortFunc = [](const Data& left, const Data& right) {	
+				return left.evalutionValue < right.evalutionValue;	//ソート条件
+			};
+			std::sort(datas.begin(), datas.end(), sortFunc);
+
+			return datas[0].target.lock();	//一番評価されているターゲットを取得
 		}
 
 		//--------------------------------------------------------------------------------------

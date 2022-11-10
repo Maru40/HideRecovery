@@ -22,6 +22,7 @@ namespace basecross {
 
 		namespace Tuple {
 			class Kill;
+			class SearchTarget;
 		}
 
 		//--------------------------------------------------------------------------------------
@@ -85,6 +86,18 @@ namespace basecross {
 			/// キルタプルを受け取ったとき。
 			/// </summary>
 			void NotifyTuple_Kill(const std::shared_ptr<Tuple::Kill>& tuple);
+
+			/// <summary>
+			/// ターゲットの検索を託された時。
+			/// </summary>
+			/// <param name="tuple"></param>
+			void NotifyTuple_SearchTarget(const std::shared_ptr<Tuple::SearchTarget>& tuple);
+
+			/// <summary>
+			/// 一番優先度の高いターゲットを探して返す。
+			/// </summary>
+			/// <returns></returns>
+			std::shared_ptr<GameObject> SearchPriorityTarget(const std::shared_ptr<GameObject>& requester);
 
 			/// <summary>
 			/// 同じリクエスタのタプルを削除(本来ここに書くべきじゃない。移動予定)
