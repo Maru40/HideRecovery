@@ -133,6 +133,8 @@ namespace basecross {
 		}
 
 		void CombatCoordinator::NotifyTuple_FindTarget(const std::shared_ptr<Tuple::FindTarget>& tuple) {
+			GetTupleSpace()->Take(tuple);
+
 			AddTarget(tuple->GetTarget());
 		}
 
