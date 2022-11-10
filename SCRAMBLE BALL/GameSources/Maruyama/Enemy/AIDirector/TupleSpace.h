@@ -17,6 +17,8 @@ namespace basecross {
 		class Action;
 	}
 
+	class I_TeamMember;
+
 	namespace Enemy {
 
 		class I_FactionMember;
@@ -186,6 +188,25 @@ namespace basecross {
 				_NODISCARD std::shared_ptr<GameObject> GetTarget() const noexcept { return m_target.lock(); }
 			};
 
+			//--------------------------------------------------------------------------------------
+			///	FindBallタプル
+			//--------------------------------------------------------------------------------------
+
+			class FindBall : public TupleRequestBase 
+			{
+				std::weak_ptr<I_TeamMember> m_teamMember;	//チームメンバー
+
+			public:
+				FindBall(
+					const std::shared_ptr<I_Tupler>& requester,
+					const std::shared_ptr<I_TeamMember>& teamMember,
+					const float value
+				);
+
+				bool operator ==(const FindBall& other);
+
+				_NODISCARD std::shared_ptr<I_TeamMember> GetTeamMember() const noexcept;
+			};
 
 			//--------------------------------------------------------------------------------------
 			/// 通知用データ管理インターフェース

@@ -178,6 +178,33 @@ namespace basecross {
 			}
 
 			//--------------------------------------------------------------------------------------
+			///	FindBallタプル
+			//--------------------------------------------------------------------------------------
+
+			FindBall::FindBall(
+				const std::shared_ptr<I_Tupler>& requester,
+				const std::shared_ptr<I_TeamMember>& teamMember,
+				const float value
+			):
+				TupleRequestBase(requester, value),
+				m_teamMember(teamMember)
+			{}
+
+			bool FindBall::operator== (const FindBall& other) {
+				if (GetRequester() == other.GetRequester() &&
+					GetValue() == other.GetValue())
+				{
+					return true;
+				}
+
+				return false;
+			}
+
+			std::shared_ptr<I_TeamMember> FindBall::GetTeamMember() const noexcept {
+				return m_teamMember.lock();
+			}
+
+			//--------------------------------------------------------------------------------------
 			/// タプルスペース本体
 			//--------------------------------------------------------------------------------------
 
