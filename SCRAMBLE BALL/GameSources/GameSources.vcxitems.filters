@@ -1367,6 +1367,9 @@
     <Filter Include="Watanabe\UI\InProcessUI">
       <UniqueIdentifier>{0dd52f99-20fc-434f-b9d3-082a5d2cc6b0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\Utility\DeviceResUtil">
+      <UniqueIdentifier>{52e3b2c8-2004-4854-b485-9f2f6697feb3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2557,6 +2560,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\InProcessUI.h">
       <Filter>Watanabe\UI\InProcessUI</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\DeviceResUtil.h">
+      <Filter>Watanabe\Utility\DeviceResUtil</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -3647,6 +3653,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\InProcessUI.cpp">
       <Filter>Watanabe\UI\InProcessUI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Utility\DeviceResUtil.cpp">
+      <Filter>Watanabe\Utility\DeviceResUtil</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
