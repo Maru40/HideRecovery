@@ -46,12 +46,6 @@ namespace basecross {
 
 		void CombatCoordinator::UpdateObserveDamaged() {
 			auto takes = GetTupleSpace()->Takes<Tuple::Damaged>();
-
-			//自分のターゲットと違うならHelp
-
-			//Helpが来るなら→HPが低い方を攻撃
-
-			//Helpが来ないなら→逃げる。
 		}
 
 		//--------------------------------------------------------------------------------------
