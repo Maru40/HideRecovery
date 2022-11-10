@@ -44,10 +44,11 @@ namespace basecross {
 			return;
 
 		// 念のため0に
-		if (m_totalDelta > XM_2PI)
+		if (m_totalDelta > 1.0f)
 			m_totalDelta = 0.0f;
 
-		m_shapeRectTrans.lock()->SetRotation(m_totalDelta);
+		auto angle = Lerp::CalculateLerp(0.0f, XM_PIDIV2, 0, 1, m_totalDelta, Lerp::rate::Cube);
+		m_shapeRectTrans.lock()->SetRotation(angle);
 
 		m_totalDelta += App::GetApp()->GetElapsedTime();
 	}
