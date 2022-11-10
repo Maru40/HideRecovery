@@ -205,6 +205,41 @@ namespace basecross {
 			}
 
 			//--------------------------------------------------------------------------------------
+			///	Killタプル
+			//--------------------------------------------------------------------------------------
+
+			Kill::Kill(
+				const std::shared_ptr<I_Tupler>& requester,
+				const std::shared_ptr<I_FactionMember>& killer,
+				const std::shared_ptr<I_FactionMember>& killed,
+				const float value
+			) :
+				TupleRequestBase(requester, value),
+				m_killer(killer),
+				m_killed(killed)
+			{}
+
+			bool Kill::operator==(const Kill& other) {
+				if (GetRequester() == other.GetRequester()	&&
+					GetValue() == other.GetValue()			&&
+					GetKiller() == other.GetKiller()		&&
+					GetKilled() == other.GetKilled() 
+				) {
+					return true;
+				}
+
+				return false;
+			}
+
+			std::shared_ptr<I_FactionMember> Kill::GetKiller() const noexcept {
+				return m_killer.lock();
+			}
+
+			std::shared_ptr<I_FactionMember> Kill::GetKilled() const noexcept {
+				return m_killed.lock();
+			}
+
+			//--------------------------------------------------------------------------------------
 			/// タプルスペース本体
 			//--------------------------------------------------------------------------------------
 

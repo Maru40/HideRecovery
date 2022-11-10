@@ -209,6 +209,40 @@ namespace basecross {
 			};
 
 			//--------------------------------------------------------------------------------------
+			///	Killタプル
+			//--------------------------------------------------------------------------------------
+
+			class Kill : public TupleRequestBase
+			{
+				std::weak_ptr<I_FactionMember> m_killer;	//キルした人
+				std::weak_ptr<I_FactionMember> m_killed;	//キルされた人
+
+			public:
+				/// <summary>
+				/// コンストラクタ
+				/// </summary>
+				/// <param name="requester">送信者</param>
+				/// <param name="killer">キルした人</param>
+				/// <param name="killed">キルされた人</param>
+				/// <param name="value"></param>
+				Kill(
+					const std::shared_ptr<I_Tupler>& requester,
+					const std::shared_ptr<I_FactionMember>& killer,
+					const std::shared_ptr<I_FactionMember>& killed,
+					const float value
+				);
+
+				bool operator==(const Kill& other);
+
+				//キルした人
+				std::shared_ptr<I_FactionMember> GetKiller() const noexcept;
+
+				//キルされた人
+				std::shared_ptr<I_FactionMember> GetKilled() const noexcept;
+
+			};
+
+			//--------------------------------------------------------------------------------------
 			/// 通知用データ管理インターフェース
 			//--------------------------------------------------------------------------------------
 			class I_NotifyController {
