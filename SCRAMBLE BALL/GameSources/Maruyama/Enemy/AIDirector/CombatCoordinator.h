@@ -111,6 +111,12 @@ namespace basecross {
 			bool RemoveTaret(const std::shared_ptr<GameObject>& target);
 
 			bool HasTarget(const std::shared_ptr<GameObject>& target) const;
+
+			/// <summary>
+			/// 発見済みのターゲットを取得する。
+			/// </summary>
+			/// <returns>発見済みのターゲット</returns>
+			std::vector<std::weak_ptr<GameObject>> GetFindTargets() const { return m_targets; }
 		};
 
 	}

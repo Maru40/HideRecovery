@@ -50,6 +50,7 @@ namespace basecross {
 		}
 
 		void CombatCoordinator::OnExit() {
+			//通知の削除
 			GetTupleSpace()->RemoveAllNotifys(GetThis<CombatCoordinator>());
 		}
 
@@ -63,6 +64,9 @@ namespace basecross {
 		}
 
 		void CombatCoordinator::NotifyTuple_Kill(const std::shared_ptr<Tuple::Kill>& tuple) {
+			//キルしたターゲットの取得
+			RemoveTaret(tuple->GetKilled()->GetSelfObject());
+
 			GetTupleSpace()->Take(tuple);
 		}
 
