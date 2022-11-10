@@ -129,6 +129,12 @@ namespace basecross {
 
 				//ohterValueの方が優先なら、ターゲットを切り替える。
 				if (otherValue < currentValue) {
+					GetOwner()->GetAssignedFaction()->GetTupleSpace()->Write<Tuple::FindTarget>(
+						GetOwner(),
+						otherTarget,
+						otherValue
+					);
+
 					m_targetManager.lock()->SetTarget(otherTarget);
 				}
 			}
