@@ -146,13 +146,13 @@ namespace basecross {
 
 	void PlayerStatus::SendFactionMessage_Dead(const DamageData& data) {
 		//AIDirectorに倒されたことを伝える。
-		auto factionMember = data.attacker->GetComponent<Enemy::I_FactionMember>(false);
-		if (!factionMember) {
+		auto attackerFactionMember = data.attacker->GetComponent<Enemy::I_FactionMember>(false);
+		if (!attackerFactionMember) {
 			return;
 		}
 
 		//殺してきた相手に自分を殺したことを伝える。
-		auto assignedFaction = factionMember->GetAssignedFaction();
+		auto assignedFaction = attackerFactionMember->GetAssignedFaction();
 		if (assignedFaction) {
 			assignedFaction->GetTupleSpace()->Write<Enemy::Tuple::Kill>(
 				m_tupler.lock(),
