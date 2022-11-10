@@ -8,6 +8,8 @@
 #pragma once
 #include "stdafx.h"
 
+#include "Maruyama/Enemy/AIDirector/TupleSpace.h"
+
 namespace basecross {
 
 	namespace team {

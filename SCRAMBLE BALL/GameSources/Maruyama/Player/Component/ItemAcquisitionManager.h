@@ -16,6 +16,10 @@ namespace basecross {
 	class Item;
 	class SplashMessageUI;
 
+	namespace Enemy {
+		class I_FactionMember;
+	}
+
 	//--------------------------------------------------------------------------------------
 	/// パラメータ
 	//--------------------------------------------------------------------------------------
@@ -42,6 +46,7 @@ namespace basecross {
 		std::vector<std::weak_ptr<Item>> m_acquisitionItems;	//獲得したアイテム
 
 		std::weak_ptr<SplashMessageUI> m_splashMessageUI;
+		std::weak_ptr <Enemy::I_FactionMember > m_factionMember;
 
 		std::weak_ptr<SoundEmitter> m_soundEmitter;
 		SoundClip m_getBallSoundClip;
