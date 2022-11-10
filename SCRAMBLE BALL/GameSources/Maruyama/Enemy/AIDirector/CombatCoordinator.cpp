@@ -77,9 +77,14 @@ namespace basecross {
 		}
 
 		void CombatCoordinator::NotifyTuple_SearchTarget(const std::shared_ptr<Tuple::SearchTarget>& tuple) {
+			GetTupleSpace()->Take(tuple);
+
 			if (m_targets.empty()) {	//ターゲットが存在しないなら。
 				//パトロールに変更。
-				//tuple->GetRequester()->GetTupleSpace()->Write();	
+				tuple->GetRequester()->GetTupleSpace()->Write<Tuple::PatrolTransition>(
+					GetThis<CombatCoordinator>(),
+					0.0f
+				);	
 				return;
 			}
 
