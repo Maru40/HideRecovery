@@ -20,6 +20,10 @@ namespace basecross {
 		class EnemyBase;
 		class FactionCoordinator;
 
+		namespace Tuple {
+			class Kill;
+		}
+
 		//--------------------------------------------------------------------------------------
 		/// 戦闘データのタイプ
 		//--------------------------------------------------------------------------------------
@@ -60,9 +64,9 @@ namespace basecross {
 			~CombatCoordinator() = default;
 
 			void OnCreate() override;
-			void OnStart() override {};
+			void OnStart() override;
 			bool OnUpdate() override;
-			void OnExit() override {};
+			void OnExit() override;
 			
 		private:
 
@@ -76,6 +80,11 @@ namespace basecross {
 			/// メンバーがダメージを受けたことを監視
 			/// </summary>
 			void UpdateObserveDamaged();
+
+			/// <summary>
+			/// キルタプルを受け取ったとき。
+			/// </summary>
+			void NotifyTuple_Kill(const std::shared_ptr<Tuple::Kill>& tuple);
 
 			/// <summary>
 			/// 同じリクエスタのタプルを削除(本来ここに書くべきじゃない。移動予定)
@@ -97,7 +106,9 @@ namespace basecross {
 			/// アクセッサ
 			//--------------------------------------------------------------------------------------
 
-			void AddTargets(const std::shared_ptr<GameObject>& target);
+			void AddTarget(const std::shared_ptr<GameObject>& target);
+
+			bool RemoveTaret(const std::shared_ptr<GameObject>& target);
 
 			bool HasTarget(const std::shared_ptr<GameObject>& target) const;
 		};

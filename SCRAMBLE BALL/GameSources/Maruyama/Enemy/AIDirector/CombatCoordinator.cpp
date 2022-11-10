@@ -32,11 +32,25 @@ namespace basecross {
 			
 		}
 
+		void CombatCoordinator::OnStart() {
+			//通知設定
+			GetTupleSpace()->Notify<Tuple::Kill>(
+				GetThis<CombatCoordinator>(),
+				[&](const std::shared_ptr<Tuple::Kill>& tuple) { NotifyTuple_Kill(tuple); }
+			);
+
+
+		}
+
 		bool CombatCoordinator::OnUpdate() {
 			UpdateObserveFindTarget();
 			UpdateObserveDamaged();
 
 			return false;
+		}
+
+		void CombatCoordinator::OnExit() {
+			GetTupleSpace()->RemoveAllNotifys(GetThis<CombatCoordinator>());
 		}
 
 		void CombatCoordinator::UpdateObserveFindTarget() {
@@ -48,15 +62,32 @@ namespace basecross {
 			auto takes = GetTupleSpace()->Takes<Tuple::Damaged>();
 		}
 
+		void CombatCoordinator::NotifyTuple_Kill(const std::shared_ptr<Tuple::Kill>& tuple) {
+			GetTupleSpace()->Take(tuple);
+		}
+
 		//--------------------------------------------------------------------------------------
 		/// アクセッサ
 		//--------------------------------------------------------------------------------------
 
-		void CombatCoordinator::AddTargets(const std::shared_ptr<GameObject>& target) {
+		void CombatCoordinator::AddTarget(const std::shared_ptr<GameObject>& target) {
 			//登録されていなかったら、追加する。
 			if (!HasTarget(target)) {
 				m_targets.push_back(target);
 			}
+		}
+
+		bool CombatCoordinator::RemoveTaret(const std::shared_ptr<GameObject>& removeTaret) {
+			auto iter = m_targets.begin();
+			while (iter != m_targets.end()) {
+				if ((*iter).lock() == removeTaret) {
+					iter = m_targets.erase(iter);
+					return true;
+				}
+				iter++;
+			}
+
+			return false;
 		}
 
 		bool CombatCoordinator::HasTarget(const std::shared_ptr<GameObject>& target) const {
