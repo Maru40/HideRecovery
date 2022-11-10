@@ -113,6 +113,17 @@ namespace basecross {
 		/// <summary>
 		/// ファクション管理者にダメージを受けたことを伝える。
 		/// </summary>
-		void SendFaciton_DamageMessage(const DamageData& data);
+		void SendFacitonMessage_Damage(const DamageData& data);
+
+		/// <summary>
+		/// ファクション管理者に死んだことを伝える。
+		/// </summary>
+		void SendFactionMessage_Dead(const DamageData& data);
+
+		/// <summary>
+		/// ファクションにメッセージを飛ばせるかどうか
+		/// </summary>
+		/// <returns></returns>
+		bool CanSendFactionMessage() const;
 	};
 }
