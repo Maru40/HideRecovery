@@ -77,10 +77,6 @@ namespace basecross {
 				auto target = buttleTransition->GetTarget();
 				targetManager->SetTarget(target);
 
-				//ファクションの変更を通知
-				//auto faction = m_factionMember.lock()->GetFactionCoordinator();
-				//faction->TransitionFaction<CombatCoordinator>(m_factionMember.lock());
-
 				return true;
 			}
 
@@ -88,11 +84,14 @@ namespace basecross {
 		}
 
 		bool AIPlayerStator::IsLostButtleTarget(const TransitionMember& member) {
-			//if (PlayerInputer::IsBDown()) {
-			//	if (auto deader = GetGameObject()->GetComponent<PlayerDeader>(false)) {
-			//		deader->StartDead();
-			//	}
-			//}
+			auto tupleSpace = m_tupler.lock()->GetTupleSpace();
+			auto patrolTransition = tupleSpace->Take<Tuple::PatrolTransition>();
+
+			if (patrolTransition) {
+				auto tup = tupleSpace->Take<Tuple::PatrolTransition>();
+
+				return true;
+			}
 
 			return false;
 		}
