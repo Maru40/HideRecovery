@@ -23,6 +23,12 @@
 #include "Maruyama/Item/HideItem.h"
 #include "Maruyama/Interface/I_TeamMember.h"
 
+#include "Maruyama/Interface/I_FactionMember.h"
+#include "Maruyama/Enemy/AIDirector/CoordinatorBase.h"
+#include "Maruyama/Enemy/AIDirector/TupleSpace.h"
+#include "Maruyama/Utility/SingletonComponent/SingletonComponent.h"
+#include "Maruyama/Enemy/AIDirector/EnemyAIDirector.h"
+
 #include "Watanabe/Component/PlayerAnimator.h"
 #include "Watanabe/UI/SplashMessageUI.h"
 #include "Itabashi/OnlinePlayerSynchronizer.h"
@@ -168,6 +174,11 @@ namespace basecross {
 		if (auto rotationController = GetGameObject()->GetComponent<RotationController>(false)) {
 			auto direct = itemPosition - transform->GetPosition();
 			rotationController->SetDirection(direct);
+		}
+
+		//アイテムを手に入れたことをAIDirectorに伝える。
+		if (auto factionMember = m_factionMember.lock()) {
+			//Enemy::AIDirector::
 		}
 	}
 
