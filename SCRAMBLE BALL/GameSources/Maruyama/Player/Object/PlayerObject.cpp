@@ -11,7 +11,6 @@
 
 #include "Patch/PlayerMover.h"
 #include "Maruyama/Utility/Component/RotationController.h"
-//#include "PlayerController.h"
 
 #include "Patch/CameraHelper.h"
 #include "Patch/CameraRotater.h"
@@ -23,7 +22,6 @@
 
 #include "Maruyama/Player/Component/ItemBag.h"
 #include "Maruyama/Player/Component/ItemAcquisitionManager.h"
-//#include "OwnHideItemManager.h"
 
 #include "VelocityManager.h"
 #include "Itabashi/ObjectMover.h"
@@ -54,10 +52,30 @@
 
 #include "Itabashi/PlayerControlManager.h"
 
+#include "Maruyama/Utility/Utility.h"
+#include "Maruyama/Player/Component/OwnArea.h"
+#include "Maruyama/Player/Component/PlayerSpawnPoint.h"
+
 namespace basecross {
 	PlayerObject::PlayerObject(const std::shared_ptr<Stage>& stage) :
 		GameObject(stage)
 	{}
+
+	std::shared_ptr<PlayerSpawnPoint> PlayerObject::GetSpawmPoint(int uniqueId) const
+	{
+		for (auto& gameObject : GetStage()->GetGameObjectVec())
+		{
+			auto playerSpawnPoint = gameObject->GetComponent<PlayerSpawnPoint>(false);
+
+			if (playerSpawnPoint && playerSpawnPoint->GetID() == uniqueId)
+			{
+				return playerSpawnPoint;
+			}
+		}
+
+		return nullptr;
+	}
+
 
 	void PlayerObject::OnCreate() {
 		Mat4x4 spanMat;
@@ -94,14 +112,11 @@ namespace basecross {
 		auto itemBag = AddComponent<ItemBag>();
 		AddComponent<ItemAcquisitionManager>();
 		AddComponent<HoldBallEffectEmitter>(itemBag);
-		//AddComponent<OwnHideItemManager>();
 
-		//AddComponent<PlayerAnimationCtrl>();
 		AddComponent<VelocityManager>();
 
 		auto objecfMover = AddComponent<Operator::ObjectMover>();
 		objecfMover->SetMoveSpeed(8.5f);
-		//objecfMover->SetMoveSpeed(28.5f);
 		objecfMover->SetAffectedCamera(GetStage()->GetView()->GetTargetCamera());
 		AddComponent<PlayerControlManager>();
 		AddComponent<OnlinePlayerSynchronizer>();
@@ -177,5 +192,37 @@ namespace basecross {
 
 		springArmComponent->AddHitTag(L"Wall");
 		springArmComponent->SetChildObject(tpsCamera);
+	}
+
+	void PlayerObject::OnlineSetting(int gameNumber, int playerNumber)
+	{
+		auto onlinePlayerSynchronizer = GetComponent<OnlinePlayerSynchronizer>();
+		onlinePlayerSynchronizer->SetOnlinePlayerNumber(playerNumber);
+		onlinePlayerSynchronizer->SetGamePlayerNumber(gameNumber);
+
+		auto onlineTransform = GetComponent<Online::OnlineTransformSynchronization>();
+		onlineTransform->SetOnlinePlayerNumber(playerNumber);
+
+		auto areas = maru::Utility::FindComponents<OwnArea>(GetStage());
+
+		auto respawner = GetComponent<Respawner>();
+		auto spawnPoint = GetSpawmPoint(gameNumber);
+		respawner->SetSpawnPoint(spawnPoint);
+
+		//チームメンバーにチームを割り当てる。
+		if (auto teamMember = GetComponent<I_TeamMember>(false)) {
+			auto team = spawnPoint->GetTeam();
+			teamMember->SetTeam(team);
+			for (auto& area : areas) {
+				if (area->GetTeam() == team) {
+					teamMember->SetOwnArea(area);
+					break;
+				}
+			}
+		}
+
+		auto transform = GetComponent<Transform>();
+		transform->SetPosition(spawnPoint->GetWorldPosition());
+		transform->SetQuaternion(spawnPoint->GetQuaternion());
 	}
 }

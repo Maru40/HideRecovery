@@ -4,7 +4,7 @@
 
 namespace basecross
 {
-	class VillainPlayerObject;
+	class PlayerObject;
 	class PlayerSpawnPoint;
 
 namespace Online
@@ -16,9 +16,7 @@ namespace Online
 	{
 		std::vector<std::weak_ptr<Online::InputPlayerController>> m_managedControllers;
 
-		std::shared_ptr<VillainPlayerObject> CreatePlayerObject(int gameNumber, int playerNumber);
-
-		std::shared_ptr<PlayerSpawnPoint> GetSpawmPoint(int uniqueId) const;
+		std::shared_ptr<PlayerObject> CreatePlayerObject(int gameNumber, int playerNumber);
 
 	public:
 		GamePlayerManager(const std::shared_ptr<GameObject>& owner);
