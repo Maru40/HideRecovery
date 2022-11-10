@@ -1,11 +1,12 @@
 ﻿#include "stdafx.h"
 #include "DeviceResUtil.h"
+#include "Utility.h"
 
 namespace basecross {
-	DXGI_SAMPLE_DESC DeviceResUtil::sm_SampleDescForMSAA = { -1,-1 };
+	DXGI_SAMPLE_DESC DeviceResUtil::sm_SampleDescForMSAA = { 0u,0u };
 
 	DXGI_SAMPLE_DESC DeviceResUtil::CheckMultisampleQualityLevels(const ComPtr<ID3D11Device>& device) {
-		if (sm_SampleDescForMSAA.Count != -1)
+		if (sm_SampleDescForMSAA.Count != 0u)
 			return sm_SampleDescForMSAA;
 
 		DXGI_SAMPLE_DESC sampleDesc = {};
@@ -21,6 +22,8 @@ namespace basecross {
 				}
 			}
 		}
+		// 常に最大設定だと重いので抑える
+		sampleDesc.Count = Utility::Clamp(sampleDesc.Count, 1u, MAX_SAMPLE_COUNT);
 		sm_SampleDescForMSAA = sampleDesc;
 		return sampleDesc;
 	}

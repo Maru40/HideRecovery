@@ -4,6 +4,7 @@
 @copyright Copyright (c) 2017 WiZ Tamura Hiroki,Yamanoi Yasushi.
 */
 #include "stdafx.h"
+#include "Watanabe/Utility/DeviceResUtil.h"
 
 namespace basecross {
 	//--------------------------------------------------------------------------------------
@@ -1371,7 +1372,7 @@ namespace basecross {
 		sd.BufferDesc.RefreshRate.Denominator = 1;	//リフレッシュレート最小値
 		sd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;	//出力用として定義
 		sd.OutputWindow = hWnd;		//ウインドウのハンドル
-		sd.SampleDesc.Count = 8;		//マルチサンプリング 数は1
+		sd.SampleDesc.Count = 1;		//マルチサンプリング 数は1
 		sd.SampleDesc.Quality = 0;		//マルチサンプリングクオリティは0（最大）
 
 		sd.Windowed = TRUE;			//ウインドウモードで作成してあとからフルsクリーンにする
@@ -1423,6 +1424,13 @@ namespace basecross {
 			L"temp_context.As(&m_D3D11Context)",
 			L"DeviceResources::Impl::CreateDeviceResources()"
 		);
+
+		// MSAAのためのデバイスの性能確認
+		auto msaaDesc = DeviceResUtil::CheckMultisampleQualityLevels(m_D3D11Device);
+		sd.SampleDesc = msaaDesc;
+		// スワップチェイン作成
+		DeviceResUtil::CreateSwapChain(m_D3D11Device, sd, temp_swapChain);
+
 		ThrowIfFailed(
 			temp_swapChain.As(&m_D3D11SwapChain),
 			L"DX11スワップチェーンのバージョンアップに失敗しました。",
@@ -2385,6 +2393,9 @@ namespace basecross {
 				L"DefaultRenderTarget::DefaultRenderTarget()"
 			);
 
+			// デバイスの性能に合わせたMSAAの設定を取得
+			auto msaaDesc = DeviceResUtil::CheckMultisampleQualityLevels(pD3D11Device);
+
 			//深度テクスチャの作成
 			D3D11_TEXTURE2D_DESC descDepth;
 			ZeroMemory(&descDepth, sizeof(descDepth));
@@ -2393,8 +2404,7 @@ namespace basecross {
 			descDepth.MipLevels = 1;
 			descDepth.ArraySize = 1;
 			descDepth.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
-			descDepth.SampleDesc.Count = 8;
-			descDepth.SampleDesc.Quality = 0;
+			descDepth.SampleDesc = msaaDesc;
 			descDepth.Usage = D3D11_USAGE_DEFAULT;
 			descDepth.BindFlags = D3D11_BIND_DEPTH_STENCIL;
 			descDepth.CPUAccessFlags = 0;
@@ -2411,7 +2421,12 @@ namespace basecross {
 			D3D11_DEPTH_STENCIL_VIEW_DESC descDSV;
 			ZeroMemory(&descDSV, sizeof(descDSV));
 			descDSV.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
-			descDSV.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2DMS;
+			if (msaaDesc.Count <= 1) {
+				descDSV.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
+			}
+			else {
+				descDSV.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2DMS;
+			}
 			descDSV.Texture2D.MipSlice = 0;
 
 			ThrowIfFailed(
