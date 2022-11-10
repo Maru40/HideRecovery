@@ -77,7 +77,7 @@ namespace basecross {
 
 				//見つけた本人だったら、ゴールを目指す。
 				if (member == tuple->GetRequester()) {
-						//ゴールを目指す。
+						//ゴールを目指す命令を出す。
 					continue;	//その後の処理をしない。
 				}
 
