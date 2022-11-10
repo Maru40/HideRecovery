@@ -1,23 +1,21 @@
 ﻿#include "stdafx.h"
 #include "MatchingUIController.h"
-#include "../UI/SplashMessageUI.h"
-#include "../UI/HoldButtonUI.h"
-#include "Zooming.h"
 #include "../DebugClass/Debug.h"
-#include "Patch/PlayerInputer.h"
+#include "../UI/HoldButtonUI.h"
+#include "../UI/SplashMessageUI.h"
 #include "Itabashi/MatchingSelectUIObject.h"
-#include "Watanabe/UI/PasscodeUI.h"
-#include "Itabashi/PasswordTextUI.h"
 #include "Itabashi/OnlineMatching.h"
+#include "Itabashi/PasswordTextUI.h"
+#include "Patch/PlayerInputer.h"
+#include "Watanabe/UI/PasscodeUI.h"
+#include "Zooming.h"
 
 namespace basecross {
 	MatchingUIController::MatchingUIController(const shared_ptr<GameObject>& owner,
 		const shared_ptr<UIObjectCSVBuilder>& builder)
-		:OnlineComponent(owner), m_builder(builder)
-	{}
+		: OnlineComponent(owner), m_builder(builder) {}
 
-	void MatchingUIController::CreateUIEvent()
-	{
+	void MatchingUIController::CreateUIEvent() {
 		auto joinRoomButton = m_selectUIObject.lock()->GetJoinRoomButtonObject()->GetComponent<Button>();
 
 		auto passcodeUIObject = m_passcodeUIObject.lock();
@@ -26,22 +24,18 @@ namespace basecross {
 		std::weak_ptr<GameObject> weakPasscodeUIObject = passcodeUIObject;
 
 		// 押されたら、バスワード入力UIを表示して選択する
-		joinRoomButton->AddPushEvent([weakPasscodeUIObject]()
-			{
-				auto passwordObject = weakPasscodeUIObject.lock();
+		joinRoomButton->AddPushEvent([weakPasscodeUIObject]() {
+			auto passwordObject = weakPasscodeUIObject.lock();
 
-				passwordObject->SetActive(true);
-				EventSystem::GetInstance(passwordObject->GetStage())->PushSelectableObject(passwordObject);
-			}
-		);
+			passwordObject->SetActive(true);
+			EventSystem::GetInstance(passwordObject->GetStage())->PushSelectableObject(passwordObject);
+			});
 
 		// 押されたら、非表示にする
-		passwordTextUI->AddSubmitEvent([&, weakPasscodeUIObject](const std::wstring& password)
-			{
-				m_isJoinRoom = true;
-				weakPasscodeUIObject.lock()->SetActive(false);
-			}
-		);
+		passwordTextUI->AddSubmitEvent([&, weakPasscodeUIObject](const std::wstring& password) {
+			m_isJoinRoom = true;
+			weakPasscodeUIObject.lock()->SetActive(false);
+			});
 	}
 
 	void MatchingUIController::OnLateStart() {
@@ -50,7 +44,7 @@ namespace basecross {
 		auto aButton = m_builder->GetUIObject(L"AButton");
 		aButton->SetDrawActive(false);
 		m_builder->GetUIObject(L"WaitHost")->SetDrawActive(false);
-		m_builder->GetUIObject(L"Matching")->SetDrawActive(false);
+		m_builder->GetUIObject(L"InProcess")->SetDrawActive(false);
 
 		// 親となるオブジェクトを作成し、所定の位置へ
 		auto parent = GetStage()->AddGameObject<UIObjectBase>(L"GameStartParent");
@@ -68,7 +62,7 @@ namespace basecross {
 
 		auto holdA = m_builder->GetUIObject<HoldButtonUI>(L"HoldA");
 		holdA->SetParent(aButton);
-		
+
 		auto transitioner = m_transitioner.lock();
 
 		if (transitioner) {
@@ -79,12 +73,10 @@ namespace basecross {
 		CreateUIEvent();
 	}
 
-	void MatchingUIController::OnUpdate()
-	{	
+	void MatchingUIController::OnUpdate() {
 	}
 
-	void MatchingUIController::OnConnected()
-	{
+	void MatchingUIController::OnConnected() {
 		auto selectUIObject = m_selectUIObject.lock();
 
 		selectUIObject->SetActive(true);
@@ -93,7 +85,7 @@ namespace basecross {
 	}
 
 	void MatchingUIController::OnCreateRoom() {
-		m_builder->GetUIObject(L"Matching")->SetDrawActive(false);
+		m_builder->GetUIObject(L"InProcess")->SetActive(false);
 		m_builder->GetUIObject(L"GameStart")->SetDrawActive(true);
 		m_builder->GetUIObject(L"AButton")->SetDrawActive(true);
 		m_builder->GetUIObject(L"HoldA")->SetDrawActive(true);
@@ -107,8 +99,7 @@ namespace basecross {
 		auto numbersObject = m_passwordViewNumbersObject.lock();
 		auto onlineMatching = m_onlineMatching.lock();
 
-		if (onlineMatching->UsePassword() && numbersObject)
-		{
+		if (onlineMatching->UsePassword() && numbersObject) {
 			auto passwordNumber = std::stoi(password);
 			numbersObject->SetNumber(passwordNumber);
 			numbersObject->SetActive(true);
@@ -116,7 +107,7 @@ namespace basecross {
 	}
 
 	void MatchingUIController::OnJoinRoom() {
-		m_builder->GetUIObject(L"Matching")->SetDrawActive(false);
+		m_builder->GetUIObject(L"InProcess")->SetActive(false);
 		m_builder->GetUIObject(L"WaitHost")->SetDrawActive(true);
 		m_builder->GetUIObject<SplashMessageUI>(L"SplashMessage")
 			->SetMessage(SplashMessageUI::MessageType::JoinRoom);
@@ -124,14 +115,13 @@ namespace basecross {
 		EventSystem::GetInstance(GetStage())->PushSelectableObject(GetGameObject());
 	}
 
-	void MatchingUIController::OnJoinRoomFailed(int errorCode)
-	{
+	void MatchingUIController::OnJoinRoomFailed(int errorCode) {
 		auto passcodeUIObject = m_passcodeUIObject.lock();
 
 		passcodeUIObject->SetActive(true);
 		passcodeUIObject->GetComponent<UI::PasswordTextUI>()->Clear();
 
-		m_builder->GetUIObject(L"Matching")->SetDrawActive(false);
+		m_builder->GetUIObject(L"InProcess")->SetDrawActive(false);
 
 		m_builder->GetUIObject<SplashMessageUI>(L"SplashMessage")
 			->SetMessage(SplashMessageUI::MessageType::CanNotJoin);
@@ -139,12 +129,10 @@ namespace basecross {
 		m_isJoinRoom = false;
 	}
 
-	void MatchingUIController::OnLeaveRoom()
-	{
+	void MatchingUIController::OnLeaveRoom() {
 		auto selectUIObject = m_selectUIObject.lock();
 
-		if (m_isJoinRoom)
-		{
+		if (m_isJoinRoom) {
 			auto eventSystem = EventSystem::GetInstance(GetStage());
 			eventSystem->Clear();
 			eventSystem->SetNowSelectableObject(selectUIObject->GetJoinRoomButtonObject());
@@ -155,13 +143,14 @@ namespace basecross {
 		m_isJoinRoom = false;
 	}
 
-	void MatchingUIController::ChangeUIStartMatching()
-	{
-		m_builder->GetUIObject(L"Matching")->SetActive(true);
+	void MatchingUIController::ChangeUIStartMatching() {
+		// 「マッチング中」の表示
+		auto inProcessUI = m_builder->GetUIObject<InProcessUI>(L"InProcess");
+		inProcessUI->SetLabel(InProcessUI::LabelType::Matching);
+		inProcessUI->SetActive(true);
 	}
 
-	void MatchingUIController::ChangeUIStartLeaveRoom()
-	{
+	void MatchingUIController::ChangeUIStartLeaveRoom() {
 		m_builder->GetUIObject(L"GameStart")->SetDrawActive(false);
 		m_builder->GetUIObject(L"AButton")->SetDrawActive(false);
 		m_builder->GetUIObject(L"HoldA")->SetDrawActive(false);

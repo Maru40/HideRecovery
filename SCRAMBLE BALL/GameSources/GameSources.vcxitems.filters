@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0"
+  xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Headers">
       <UniqueIdentifier>{4b0a624a-610d-4bc6-b311-2b02a781cdf9}</UniqueIdentifier>
@@ -1363,6 +1364,9 @@
     <Filter Include="Itabashi\StageObject\SelfPlayerObject">
       <UniqueIdentifier>{9ba8463e-520b-4de2-9bd8-a4a768f01e3d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\UI\InProcessUI">
+      <UniqueIdentifier>{0dd52f99-20fc-434f-b9d3-082a5d2cc6b0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2550,6 +2554,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\SelfPlayerObject.h">
       <Filter>Itabashi\StageObject\SelfPlayerObject</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\InProcessUI.h">
+      <Filter>Watanabe\UI\InProcessUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -3637,6 +3644,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\SelfPlayerObject.cpp">
       <Filter>Itabashi\StageObject\SelfPlayerObject</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\InProcessUI.cpp">
+      <Filter>Watanabe\UI\InProcessUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

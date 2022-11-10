@@ -6,7 +6,7 @@
 #include "../StageObject/CameraTarget.h"
 #include "Watanabe/StageObject/StageObjects.h"
 
-#include "../UI/DirectionWithHasBallUI.h"
+#include "../UI/UIObjects.h"
 
 namespace basecross {
 	void TestEffectStage::CreateViewLight() {
@@ -53,6 +53,8 @@ namespace basecross {
 
 		auto ui = AddGameObject<DirectionWithHasBallUI>();
 		ui->SetTarget(effectObject);
+
+		m_ui = AddGameObject<InProcessUI>();
 	}
 
 	void TestEffectStage::OnUpdate() {
@@ -63,6 +65,17 @@ namespace basecross {
 		if (m_controller.GetPressedButtons(ControllerButton::B)) {
 			m_efkComp->Stop(L"HasBall");
 			m_efkComp->PlayLoop(L"HasBall");
+		}
+
+		if (m_controller.GetPressedButtons(ControllerButton::X)) {
+			dynamic_pointer_cast<InProcessUI>(m_ui)->SetLabel(
+				InProcessUI::LabelType::Matching
+			);
+			m_ui->SetActive(true);
+			Debug::GetInstance()->Log(L"Active");
+		}
+		if (m_controller.GetPressedButtons(ControllerButton::Y)) {
+			m_ui->SetActive(false);
 		}
 	}
 }
