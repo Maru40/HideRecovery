@@ -1357,6 +1357,12 @@
     <Filter Include="Itabashi\StageObject\MatchStageUIObject">
       <UniqueIdentifier>{ea399564-cc15-46b7-bca7-d278649ed535}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Itabashi\StageObject\OtherPlayerObject">
+      <UniqueIdentifier>{228fc14f-b72a-4fd9-ada9-95c87a1d6528}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Itabashi\StageObject\SelfPlayerObject">
+      <UniqueIdentifier>{9ba8463e-520b-4de2-9bd8-a4a768f01e3d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2538,6 +2544,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageUIObject.h">
       <Filter>Itabashi\StageObject\MatchStageUIObject</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OtherPlayerObject.h">
+      <Filter>Itabashi\StageObject\OtherPlayerObject</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\SelfPlayerObject.h">
+      <Filter>Itabashi\StageObject\SelfPlayerObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -3619,6 +3631,12 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageUIObject.cpp">
       <Filter>Itabashi\StageObject\MatchStageUIObject</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OtherPlayerObject.cpp">
+      <Filter>Itabashi\StageObject\OtherPlayerObject</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\SelfPlayerObject.cpp">
+      <Filter>Itabashi\StageObject\SelfPlayerObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
