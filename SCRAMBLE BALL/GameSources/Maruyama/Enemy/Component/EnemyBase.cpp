@@ -11,6 +11,8 @@
 #include "Maruyama/Utility/Component/TargetManager.h"
 
 #include "Maruyama/Utility/SingletonComponent/ShareClassesManager.h"
+#include "Itabashi/OnlinePlayerSynchronizer.h"
+#include "VelocityManager.h"
 
 namespace basecross {
 	namespace Enemy {
@@ -21,6 +23,7 @@ namespace basecross {
 		{}
 
 		void EnemyBase::OnCreate() {
+
 			if (auto shareManager = ShareClassesManager::GetInstance(GetStage())) {
 				shareManager->AddShareClass<EnemyBase>(GetThis<EnemyBase>());
 			}
@@ -28,6 +31,14 @@ namespace basecross {
 
 		void EnemyBase::OnStart() {
 			m_targetManager = GetGameObject()->GetComponent<TargetManager>(false);
+			m_velocityManager = GetGameObject()->GetComponent<VelocityManager>(false);
+			m_onlineSynchronizer = GetGameObject()->GetComponent<OnlinePlayerSynchronizer>(false);
+		}
+
+		void EnemyBase::OnUpdate() {
+			auto velocity = m_velocityManager.lock()->GetVelocity();
+			auto moveVec = Vec2(velocity.x, velocity.z);
+			m_onlineSynchronizer.lock()->Move(moveVec);
 		}
 
 		void EnemyBase::SetTarget(const std::shared_ptr<GameObject>& target) {
