@@ -47,6 +47,8 @@ namespace basecross {
 				virtual ~I_Tuple() = default;
 
 				virtual bool operator== (const I_Tuple& other);
+
+				virtual std::shared_ptr<I_Tupler> GetRequester() const = 0;
 			};
 
 			//--------------------------------------------------------------------------------------
@@ -91,7 +93,7 @@ namespace basecross {
 
 				virtual bool operator== (const TupleRequestBase& other);
 
-				std::shared_ptr<I_Tupler> GetRequester() const { return m_requester.lock(); }
+				std::shared_ptr<I_Tupler> GetRequester() const override { return m_requester.lock(); }
 
 				float GetValue() const { return m_value; }
 			};
@@ -150,6 +152,21 @@ namespace basecross {
 				bool operator==(const ButtleTransition& other);
 
 				_NODISCARD std::shared_ptr<GameObject> GetTarget() const noexcept { return m_target.lock(); }
+			};
+
+			//--------------------------------------------------------------------------------------
+			/// パトロールに遷移することをリクエストするタプル
+			//--------------------------------------------------------------------------------------
+
+			class PatrolTransition : public TupleRequestBase 
+			{
+			public:
+				PatrolTransition(
+					const std::shared_ptr<I_Tupler>& requester,
+					const float value
+				);
+
+				bool operator==(const PatrolTransition& other);
 			};
 
 			//--------------------------------------------------------------------------------------
@@ -554,6 +571,8 @@ namespace basecross {
 				/// <param name="tupler">タプルスペース使用者</param>
 				/// <returns></returns>
 				bool RemoveAllNotifys(const std::shared_ptr<I_Tupler>& tupler);
+
+				bool RemoveAllTuples(const std::shared_ptr<I_Tupler>& tupler);
 
 			private:
 				/// <summary>

@@ -130,6 +130,27 @@ namespace basecross {
 			}
 
 			//--------------------------------------------------------------------------------------
+			/// パトロールに遷移することをリクエストするタプル
+			//--------------------------------------------------------------------------------------
+
+			PatrolTransition::PatrolTransition(
+				const std::shared_ptr<I_Tupler>& requester,
+				const float value
+			):
+				TupleRequestBase(requester, value)
+			{}
+
+			bool PatrolTransition::operator==(const PatrolTransition& other) {
+				if (GetRequester() == other.GetRequester() &&
+					GetValue() == other.GetValue())
+				{
+					return true;
+				}
+
+				return false;
+			}
+
+			//--------------------------------------------------------------------------------------
 			/// ダメージを受けたことを伝えるタプル
 			//--------------------------------------------------------------------------------------
 
@@ -274,6 +295,26 @@ namespace basecross {
 					for (auto& notify : pair.second) {
 						if (notify->GetRequester() == tupler) {
 							removeFuncs.push_back([&, notify]() { return RemoveNotify(notify); });
+						}
+					}
+				}
+
+				//削除処理
+				for (auto& removeFunc : removeFuncs) {
+					bool isRemove = removeFunc();
+				}
+
+				return !removeFuncs.empty();	//emptyなら削除がされてないことを示す。
+			}
+
+			bool TupleSpace::RemoveAllTuples(const std::shared_ptr<I_Tupler>& tupler) {
+				std::vector<std::function<bool()>> removeFuncs;
+
+				//削除候補を検索
+				for (auto& pair : m_tuplesMap) {
+					for (auto& tuple : pair.second) {
+						if (tuple->GetRequester() == tupler) {
+							removeFuncs.push_back([&, tuple]() { return RemoveTuple(tuple); });
 						}
 					}
 				}
