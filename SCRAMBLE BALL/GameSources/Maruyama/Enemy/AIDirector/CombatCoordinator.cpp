@@ -37,14 +37,22 @@ namespace basecross {
 
 		void CombatCoordinator::OnStart() {
 			//通知設定
+
+			//キル
 			GetTupleSpace()->Notify<Tuple::Kill>(
 				GetThis<CombatCoordinator>(),
 				[&](const std::shared_ptr<Tuple::Kill>& tuple) { NotifyTuple_Kill(tuple); }
 			);
 
+			//ターゲットサーチ
 			GetTupleSpace()->Notify<Tuple::SearchTarget>(
 				GetThis<CombatCoordinator>(),
 				[&](const std::shared_ptr<Tuple::SearchTarget>& tuple) { NotifyTuple_SearchTarget(tuple); }
+			);
+
+			GetTupleSpace()->Notify<Tuple::FindTarget>(
+				GetThis<CombatCoordinator>(),
+				[&](const std::shared_ptr<Tuple::FindTarget>& tuple) { NotifyTuple_FindTarget(tuple); }
 			);
 		}
 
@@ -122,6 +130,10 @@ namespace basecross {
 			std::sort(datas.begin(), datas.end(), sortFunc);
 
 			return datas[0].target.lock();	//一番評価されているターゲットを取得
+		}
+
+		void CombatCoordinator::NotifyTuple_FindTarget(const std::shared_ptr<Tuple::FindTarget>& tuple) {
+			AddTarget(tuple->GetTarget());
 		}
 
 		//--------------------------------------------------------------------------------------
