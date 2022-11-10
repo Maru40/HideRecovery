@@ -25,6 +25,8 @@
 #include "Maruyama/Enemy/Component/Stator/AIPlayerStator.h"
 #include "Maruyama/Utility/Component/TargetManager.h"
 
+#include "Watanabe/Component/PlayerStatus.h"
+
 namespace basecross {
 
 	namespace Enemy {
@@ -102,6 +104,8 @@ namespace basecross {
 							buttleTuple->GetValue()
 						);
 					}
+
+					tupleSpace->Takes<Tuple::ButtleTarget>();
 				}
 
 				void HidePlacePatrol::FindTarget(const std::shared_ptr<Tuple::FindTarget>& tuple) {
