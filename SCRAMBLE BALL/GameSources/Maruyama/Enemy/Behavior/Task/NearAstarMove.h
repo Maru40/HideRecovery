@@ -88,6 +88,10 @@ namespace basecross {
 
 					void RotationUpdate();
 
+					/// <summary>
+					/// 終了判定
+					/// </summary>
+					/// <returns>ターゲットがいない、もしくはターゲットが視界内なら終了する。</returns>
 					bool IsEnd() const;
 				};
 

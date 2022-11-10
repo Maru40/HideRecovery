@@ -20,6 +20,11 @@ namespace basecross {
 		class EnemyBase;
 		class FactionCoordinator;
 
+		namespace Tuple {
+			class Kill;
+			class SearchTarget;
+		}
+
 		//--------------------------------------------------------------------------------------
 		/// 戦闘データのタイプ
 		//--------------------------------------------------------------------------------------
@@ -60,9 +65,9 @@ namespace basecross {
 			~CombatCoordinator() = default;
 
 			void OnCreate() override;
-			void OnStart() override {};
+			void OnStart() override;
 			bool OnUpdate() override;
-			void OnExit() override {};
+			void OnExit() override;
 			
 		private:
 
@@ -76,6 +81,23 @@ namespace basecross {
 			/// メンバーがダメージを受けたことを監視
 			/// </summary>
 			void UpdateObserveDamaged();
+
+			/// <summary>
+			/// キルタプルを受け取ったとき。
+			/// </summary>
+			void NotifyTuple_Kill(const std::shared_ptr<Tuple::Kill>& tuple);
+
+			/// <summary>
+			/// ターゲットの検索を託された時。
+			/// </summary>
+			/// <param name="tuple"></param>
+			void NotifyTuple_SearchTarget(const std::shared_ptr<Tuple::SearchTarget>& tuple);
+
+			/// <summary>
+			/// 一番優先度の高いターゲットを探して返す。
+			/// </summary>
+			/// <returns></returns>
+			std::shared_ptr<GameObject> SearchPriorityTarget(const std::shared_ptr<GameObject>& requester);
 
 			/// <summary>
 			/// 同じリクエスタのタプルを削除(本来ここに書くべきじゃない。移動予定)
@@ -97,9 +119,17 @@ namespace basecross {
 			/// アクセッサ
 			//--------------------------------------------------------------------------------------
 
-			void AddTargets(const std::shared_ptr<GameObject>& target);
+			void AddTarget(const std::shared_ptr<GameObject>& target);
+
+			bool RemoveTaret(const std::shared_ptr<GameObject>& target);
 
 			bool HasTarget(const std::shared_ptr<GameObject>& target) const;
+
+			/// <summary>
+			/// 発見済みのターゲットを取得する。
+			/// </summary>
+			/// <returns>発見済みのターゲット</returns>
+			std::vector<std::weak_ptr<GameObject>> GetFindTargets() const { return m_targets; }
 		};
 
 	}

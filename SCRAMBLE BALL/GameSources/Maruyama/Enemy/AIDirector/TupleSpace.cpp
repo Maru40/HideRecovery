@@ -130,6 +130,27 @@ namespace basecross {
 			}
 
 			//--------------------------------------------------------------------------------------
+			/// パトロールに遷移することをリクエストするタプル
+			//--------------------------------------------------------------------------------------
+
+			PatrolTransition::PatrolTransition(
+				const std::shared_ptr<I_Tupler>& requester,
+				const float value
+			):
+				TupleRequestBase(requester, value)
+			{}
+
+			bool PatrolTransition::operator==(const PatrolTransition& other) {
+				if (GetRequester() == other.GetRequester() &&
+					GetValue() == other.GetValue())
+				{
+					return true;
+				}
+
+				return false;
+			}
+
+			//--------------------------------------------------------------------------------------
 			/// ダメージを受けたことを伝えるタプル
 			//--------------------------------------------------------------------------------------
 
@@ -178,6 +199,91 @@ namespace basecross {
 			}
 
 			//--------------------------------------------------------------------------------------
+			///	FindBallタプル
+			//--------------------------------------------------------------------------------------
+
+			FindBall::FindBall(
+				const std::shared_ptr<I_Tupler>& requester,
+				const std::shared_ptr<I_TeamMember>& teamMember,
+				const float value
+			):
+				TupleRequestBase(requester, value),
+				m_teamMember(teamMember)
+			{}
+
+			bool FindBall::operator== (const FindBall& other) {
+				if (GetRequester() == other.GetRequester() &&
+					GetValue() == other.GetValue())
+				{
+					return true;
+				}
+
+				return false;
+			}
+
+			std::shared_ptr<I_TeamMember> FindBall::GetTeamMember() const noexcept {
+				return m_teamMember.lock();
+			}
+
+			//--------------------------------------------------------------------------------------
+			///	Killタプル
+			//--------------------------------------------------------------------------------------
+
+			Kill::Kill(
+				const std::shared_ptr<I_Tupler>& requester,
+				const std::shared_ptr<GameObject>& killer,
+				const std::shared_ptr<GameObject>& killed,
+				const float value
+			) :
+				TupleRequestBase(requester, value),
+				m_killer(killer),
+				m_killed(killed)
+			{}
+
+			bool Kill::operator==(const Kill& other) {
+				if (GetRequester() == other.GetRequester()	&&
+					GetValue() == other.GetValue()			&&
+					GetKiller() == other.GetKiller()		&&
+					GetKilled() == other.GetKilled() 
+				) {
+					return true;
+				}
+
+				return false;
+			}
+
+			std::shared_ptr<GameObject> Kill::GetKiller() const noexcept {
+				return m_killer.lock();
+			}
+
+			std::shared_ptr<GameObject> Kill::GetKilled() const noexcept {
+				return m_killed.lock();
+			}
+
+			//--------------------------------------------------------------------------------------
+			///	ターゲットの検索をお願いするタプル
+			//--------------------------------------------------------------------------------------
+
+			SearchTarget::SearchTarget(
+				const std::shared_ptr<I_Tupler>& requester,
+				const std::shared_ptr<TargetManager>& targetManager,
+				const float value
+			):
+				TupleRequestBase(requester, value),
+				m_targetManager(targetManager)
+			{}
+
+			bool SearchTarget::operator ==(const SearchTarget& other) {
+				if (GetRequester() == other.GetRequester() &&
+					GetValue() == other.GetValue())
+				{
+					return true;
+				}
+
+				return false;
+			}
+
+			//--------------------------------------------------------------------------------------
 			/// タプルスペース本体
 			//--------------------------------------------------------------------------------------
 
@@ -189,6 +295,26 @@ namespace basecross {
 					for (auto& notify : pair.second) {
 						if (notify->GetRequester() == tupler) {
 							removeFuncs.push_back([&, notify]() { return RemoveNotify(notify); });
+						}
+					}
+				}
+
+				//削除処理
+				for (auto& removeFunc : removeFuncs) {
+					bool isRemove = removeFunc();
+				}
+
+				return !removeFuncs.empty();	//emptyなら削除がされてないことを示す。
+			}
+
+			bool TupleSpace::RemoveAllTuples(const std::shared_ptr<I_Tupler>& tupler) {
+				std::vector<std::function<bool()>> removeFuncs;
+
+				//削除候補を検索
+				for (auto& pair : m_tuplesMap) {
+					for (auto& tuple : pair.second) {
+						if (tuple->GetRequester() == tupler) {
+							removeFuncs.push_back([&, tuple]() { return RemoveTuple(tuple); });
 						}
 					}
 				}

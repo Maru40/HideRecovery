@@ -24,20 +24,21 @@ namespace basecross {
 
 	namespace Enemy {
 
-		AIDirector::AIDirector(const std::shared_ptr<GameObject>& objPtr)
-			: maru::SingletonComponent<AIDirector>(objPtr)
+		AIDirector::AIDirector(const std::shared_ptr<GameObject>& objPtr):
+			maru::SingletonComponent<AIDirector>(objPtr),
+			m_tupleSapce(new Tuple::TupleSpace())
 		{}
 
+		void AIDirector::OnCreate() {
+			//通知の設定
+			m_tupleSapce->Notify<Tuple::FindBall>(
+				GetThis<AIDirector>(),
+				[&](const std::shared_ptr<Tuple::FindBall>& tuple) { NotifyTuple_FindBall(tuple); }
+			);
+		}
+
 		void AIDirector::OnLateStart() {
-			//SettingStartAllEnemys();
 
-			////チームタイプごとに分ける。
-			//auto enemysMap = DivideTeamType(m_enemys);
-
-			////チームごとにファクションを生成する。
-			//for (auto& pair : enemysMap) {
-			//	auto faction = CreateFaction(pair.second);
-			//}
 		}
 
 		void AIDirector::OnUpdate() {
@@ -45,6 +46,10 @@ namespace basecross {
 			for (auto& faction : m_factionCoordinators) {
 				faction->OnUpdate();
 			}
+		}
+
+		void AIDirector::NotifyTuple_FindBall(const std::shared_ptr<Tuple::FindBall>& tuple) {
+			GetTupleSpace()->Take(tuple);
 		}
 
 		void AIDirector::SettingStartAllEnemys() {
@@ -83,6 +88,18 @@ namespace basecross {
 			return enemysMap;
 		}
 
+		void AIDirector::StartAssign() {
+			SettingStartAllEnemys();
+
+			//チームタイプごとに分ける。
+			auto enemysMap = DivideTeamType(m_enemys);
+
+			//チームごとにファクションを生成する。
+			for (auto& pair : enemysMap) {
+				auto faction = CreateFaction(pair.second);
+			}
+		}
+
 		//--------------------------------------------------------------------------------------
 		/// アクセッサ
 		//--------------------------------------------------------------------------------------
@@ -99,16 +116,8 @@ namespace basecross {
 			return m_factionCoordinators[index];
 		}
 
-		void AIDirector::StartAssign() {
-			SettingStartAllEnemys();
-
-			//チームタイプごとに分ける。
-			auto enemysMap = DivideTeamType(m_enemys);
-
-			//チームごとにファクションを生成する。
-			for (auto& pair : enemysMap) {
-				auto faction = CreateFaction(pair.second);
-			}
+		std::shared_ptr<Tuple::TupleSpace> AIDirector::GetTupleSpace() const noexcept {
+			return m_tupleSapce;
 		}
 	}
 }

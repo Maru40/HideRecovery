@@ -24,6 +24,8 @@
 #include "Maruyama/Utility/SingletonComponent/SingletonComponent.h"
 #include "Maruyama/Utility/SingletonComponent/ShareClassesManager.h"
 
+#include "Watanabe/Component/PlayerStatus.h"
+
 namespace basecross {
 	namespace maru {
 
@@ -65,6 +67,17 @@ namespace basecross {
 					auto tupleSpace = assignedFaction->GetTupleSpace();
 					//ターゲットを見つけたことを通知する。
 					for (const auto& target : targets) {
+						//playerステータスがデッド状態なら、処理を省く(将来的には別にしたい。)
+						auto status = target->GetComponent<PlayerStatus>(false);
+						if (status && status->IsDead()) {
+							continue;
+						}
+
+						//ターゲットが現在のターゲットだったら処理を省く
+						if (target == m_targetManager.lock()->GetTarget()) {
+							continue;
+						}
+
 						auto targetPosition = target->GetComponent<Transform>()->GetPosition();
 						auto toTargetVec = targetPosition - selfPosition;
 						tupleSpace->Write<Tuple::FindTarget>(GetOwner(), target, toTargetVec.length());

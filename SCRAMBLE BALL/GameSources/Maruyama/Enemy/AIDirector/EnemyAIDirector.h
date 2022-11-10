@@ -24,16 +24,23 @@ namespace basecross {
 		class EnemyBase;
 		class FactionCoordinator;
 
+		namespace Tuple {
+			class FindBall;
+		}
+
 		//--------------------------------------------------------------------------------------
 		/// フィールド全体の制御
 		//--------------------------------------------------------------------------------------
-		class AIDirector : public maru::SingletonComponent<AIDirector>
+		class AIDirector : public maru::SingletonComponent<AIDirector>, public Tuple::I_Tupler
 		{
 			//全てのエネミー
 			vector<std::weak_ptr<EnemyBase>> m_enemys;
 
 			//グループ管理の配列
 			std::vector<std::shared_ptr<FactionCoordinator>> m_factionCoordinators;
+
+			//タプルスペース
+			std::shared_ptr<Tuple::TupleSpace> m_tupleSapce;
 
 		public :
 			/// <summary>
@@ -42,10 +49,16 @@ namespace basecross {
 			/// <param name="objPtr">このクラスを所有するゲームオブジェクト</param>
 			AIDirector(const std::shared_ptr<GameObject>& objPtr);
 
+			void OnCreate() override;
 			void OnLateStart() override;
 			void OnUpdate() override;
 
 		private:
+			/// <summary>
+			/// ボールを見つけた通知を受け取ったときの処理。
+			/// </summary>
+			void NotifyTuple_FindBall(const std::shared_ptr<Tuple::FindBall>& tuple);
+
 			/// <summary>
 			/// 初期配置されたエネミーを全て取得
 			/// </summary>
@@ -72,6 +85,11 @@ namespace basecross {
 			std::unordered_map<team::TeamType, std::vector<weak_ptr<EnemyBase>>> DivideTeamType(const std::vector<std::weak_ptr<EnemyBase>>& members);
 
 		public:
+			/// <summary>
+			/// ゲーム開始時にAIDirectorに全ての敵をアサインする処理
+			/// </summary>
+			void StartAssign();
+
 			//--------------------------------------------------------------------------------------
 			/// アクセッサ
 			//--------------------------------------------------------------------------------------
@@ -89,9 +107,10 @@ namespace basecross {
 			std::shared_ptr<FactionCoordinator> GetFactionCoordinator(const int index) const;
 
 			/// <summary>
-			/// ゲーム開始時にAIDirectorに全ての敵をアサインする処理
+			/// タプルスペースの取得
 			/// </summary>
-			void StartAssign();
+			/// <returns></returns>
+			_NODISCARD std::shared_ptr<Tuple::TupleSpace> GetTupleSpace() const noexcept override;
 
 		};
 

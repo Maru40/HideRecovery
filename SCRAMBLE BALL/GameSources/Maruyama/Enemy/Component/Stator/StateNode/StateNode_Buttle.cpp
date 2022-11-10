@@ -22,6 +22,10 @@
 #include "Maruyama/Enemy/AIDirector/CombatCoordinator.h"
 #include "Maruyama/Enemy/AIDirector/FactionCoordinator.h"
 
+#include "Maruyama/Interface/I_FactionMember.h"
+
+#include "Maruyama/Enemy/AIDirector/Calculater/CombatCalculater.h"
+
 namespace basecross {
 	namespace Enemy {
 
@@ -44,17 +48,8 @@ namespace basecross {
 				auto faction = GetOwner()->GetFactionCoordinator();
 				faction->TransitionFaction<CombatCoordinator>(GetOwner());
 
-				//通知の受け取り登録
-				auto tupleSpace = GetOwner()->GetAssignedFaction()->GetTupleSpace();
-				tupleSpace->Notify<Tuple::FindTarget>(
-					GetOwner(), 
-					[&](const std::shared_ptr<Tuple::FindTarget>& tuple) { ObserveOtherFindTarget(tuple); }
-				);
-
-				tupleSpace->Notify<Tuple::Damaged>(
-					GetOwner(),
-					[&](const std::shared_ptr<Tuple::Damaged>& tuple) { ObserveDamaged(tuple); }
-				);
+				//通知設定
+				SettingNotify();
 			}
 
 			bool Buttle::OnUpdate() {
@@ -70,7 +65,30 @@ namespace basecross {
 				auto  member = GetOwner();
 				auto assignedFaction = member->GetAssignedFaction();	
 				assignedFaction->RemoveMember(member);
-				assignedFaction->GetTupleSpace()->RemoveAllNotifys(member->GetSelfObject()->GetComponent<Tuple::I_Tupler>(false)); //タプルスペースに登録された者を変更
+				assignedFaction->GetTupleSpace()->RemoveAllNotifys(member); //タプルスペースに登録された者を変更
+				assignedFaction->GetTupleSpace()->RemoveAllTuples(member);
+			}
+
+			void Buttle::SettingNotify() {
+				auto tupleSpace = GetOwner()->GetAssignedFaction()->GetTupleSpace();
+
+				//ターゲット発見
+				tupleSpace->Notify<Tuple::FindTarget>(
+					GetOwner(),
+					[&](const std::shared_ptr<Tuple::FindTarget>& tuple) { ObserveOtherFindTarget(tuple); }
+				);
+
+				//ダメージ通知
+				tupleSpace->Notify<Tuple::Damaged>(
+					GetOwner(),
+					[&](const std::shared_ptr<Tuple::Damaged>& tuple) { ObserveDamaged(tuple); }
+				);
+
+				//Kill通知
+				tupleSpace->Notify<Tuple::Kill>(
+					GetOwner(),
+					[&](const std::shared_ptr<Tuple::Kill>& tuple) { NotifyTuple_Kill(tuple); }
+				);
 			}
 
 			void Buttle::ObserveOtherFindTarget(const std::shared_ptr<Tuple::FindTarget>& tuple) {
@@ -137,6 +155,21 @@ namespace basecross {
 				if (otherValue < currentValue) {
 					auto tupleSpace = GetOwner()->GetAssignedFaction()->GetTupleSpace();
 					tupleSpace->Write<Tuple::HelpAction>(GetOwner(), otherTarget, otherValue);	//HelpWriteする。
+				}
+			}
+
+			void Buttle::NotifyTuple_Kill(const std::shared_ptr<Tuple::Kill>& tuple) {
+				//ターゲットが存在しないなら、強制切り替え,
+				//又は、ターゲットが死亡した相手なら切り替える。
+				if (!HasTarget() ||
+					m_targetManager.lock()->GetTarget() == tuple->GetKilled()	//ターゲットが死亡した相手なら
+				) {
+					//新規ターゲットの検索依頼
+					GetOwner()->GetAssignedFaction()->GetTupleSpace()->Write<Tuple::SearchTarget>(
+						GetOwner(),
+						m_targetManager.lock(),
+						0.0f
+					);
 				}
 			}
 

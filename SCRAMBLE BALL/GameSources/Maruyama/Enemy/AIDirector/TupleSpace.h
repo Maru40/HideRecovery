@@ -17,6 +17,9 @@ namespace basecross {
 		class Action;
 	}
 
+	class I_TeamMember;
+	class TargetManager;
+
 	namespace Enemy {
 
 		class I_FactionMember;
@@ -44,6 +47,8 @@ namespace basecross {
 				virtual ~I_Tuple() = default;
 
 				virtual bool operator== (const I_Tuple& other);
+
+				virtual std::shared_ptr<I_Tupler> GetRequester() const = 0;
 			};
 
 			//--------------------------------------------------------------------------------------
@@ -88,7 +93,7 @@ namespace basecross {
 
 				virtual bool operator== (const TupleRequestBase& other);
 
-				std::shared_ptr<I_Tupler> GetRequester() const { return m_requester.lock(); }
+				std::shared_ptr<I_Tupler> GetRequester() const override { return m_requester.lock(); }
 
 				float GetValue() const { return m_value; }
 			};
@@ -150,6 +155,21 @@ namespace basecross {
 			};
 
 			//--------------------------------------------------------------------------------------
+			/// パトロールに遷移することをリクエストするタプル
+			//--------------------------------------------------------------------------------------
+
+			class PatrolTransition : public TupleRequestBase 
+			{
+			public:
+				PatrolTransition(
+					const std::shared_ptr<I_Tupler>& requester,
+					const float value
+				);
+
+				bool operator==(const PatrolTransition& other);
+			};
+
+			//--------------------------------------------------------------------------------------
 			/// ダメージを受けたことを伝えるタプル
 			//--------------------------------------------------------------------------------------
 			class Damaged : public TupleRequestBase {
@@ -186,6 +206,77 @@ namespace basecross {
 				_NODISCARD std::shared_ptr<GameObject> GetTarget() const noexcept { return m_target.lock(); }
 			};
 
+			//--------------------------------------------------------------------------------------
+			///	FindBallタプル
+			//--------------------------------------------------------------------------------------
+			class FindBall : public TupleRequestBase 
+			{
+				std::weak_ptr<I_TeamMember> m_teamMember;	//チームメンバー
+
+			public:
+				FindBall(
+					const std::shared_ptr<I_Tupler>& requester,
+					const std::shared_ptr<I_TeamMember>& teamMember,
+					const float value
+				);
+
+				bool operator ==(const FindBall& other);
+
+				_NODISCARD std::shared_ptr<I_TeamMember> GetTeamMember() const noexcept;
+			};
+
+			//--------------------------------------------------------------------------------------
+			///	Killタプル
+			//--------------------------------------------------------------------------------------
+			class Kill : public TupleRequestBase
+			{
+				std::weak_ptr<GameObject> m_killer;	//キルした人
+				std::weak_ptr<GameObject> m_killed;	//キルされた人
+
+			public:
+				/// <summary>
+				/// コンストラクタ
+				/// </summary>
+				/// <param name="requester">送信者</param>
+				/// <param name="killer">キルした人</param>
+				/// <param name="killed">キルされた人</param>
+				/// <param name="value"></param>
+				Kill(
+					const std::shared_ptr<I_Tupler>& requester,
+					const std::shared_ptr<GameObject>& killer,
+					const std::shared_ptr<GameObject>& killed,
+					const float value
+				);
+
+				bool operator==(const Kill& other);
+
+				//キルした人
+				_NODISCARD std::shared_ptr<GameObject> GetKiller() const noexcept;
+
+				//キルされた人
+				_NODISCARD std::shared_ptr<GameObject> GetKilled() const noexcept;
+
+			};
+
+			//--------------------------------------------------------------------------------------
+			///	ターゲットの検索をお願いするタプル
+			//--------------------------------------------------------------------------------------
+			class SearchTarget : public TupleRequestBase
+			{
+				std::weak_ptr<TargetManager> m_targetManager;	//ターゲット管理
+
+			public:
+				SearchTarget(
+					const std::shared_ptr<I_Tupler>& requester,
+					const std::shared_ptr<TargetManager>& targetManager,
+					const float value
+				);
+
+				bool operator == (const SearchTarget& other);
+
+				//ターゲット管理の取得
+				_NODISCARD std::shared_ptr<TargetManager> GetTargetManager() const noexcept { return m_targetManager.lock(); }
+			};
 
 			//--------------------------------------------------------------------------------------
 			/// 通知用データ管理インターフェース
@@ -440,8 +531,6 @@ namespace basecross {
 					}
 
 					m_notifysMap[typeIndex].push_back(newNotify);	//Notipyの生成
-
-					auto notifys = m_notifysMap.at(typeIndex);
 				}
 
 				/// <summary>
@@ -482,6 +571,8 @@ namespace basecross {
 				/// <param name="tupler">タプルスペース使用者</param>
 				/// <returns></returns>
 				bool RemoveAllNotifys(const std::shared_ptr<I_Tupler>& tupler);
+
+				bool RemoveAllTuples(const std::shared_ptr<I_Tupler>& tupler);
 
 			private:
 				/// <summary>
@@ -548,7 +639,7 @@ namespace basecross {
 				{
 					auto tIndex = type_index(typeid(T));	//型インデックスの取得
 
-					if (m_tuplesMap.count(tIndex) == 0) {		//Mapに存在しないならfalseを返す。
+					if (m_tuplesMap.count(tIndex) == 0) {	//Mapに存在しないならfalseを返す。
 						return false;
 					}
 

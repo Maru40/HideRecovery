@@ -20,13 +20,13 @@ namespace basecross {
 		/// </summary>
 		struct Parametor
 		{
-			Vec3 force;               //加える力
-			Vec3 velocity;            //速度       
-			Vec3 beforeVelocity;      //位置フレーム前の速度
+			Vec3 force;					//加える力
+			Vec3 velocity;				//速度       
+			Vec3 beforeVelocity;		//位置フレーム前の速度
 
-			float deselerationPower;  //減速速度
-			float maxSpeed;           //最大スピード
-			bool isDeseleration;      //減速中かどうか
+			float deselerationPower;	//減速速度
+			float maxSpeed;				//最大スピード
+			bool isDeseleration;		//減速中かどうか
 
 			Parametor();
 

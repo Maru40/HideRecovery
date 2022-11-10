@@ -24,6 +24,8 @@
 #include "Maruyama/Enemy/AIDirector/CoordinatorBase.h"
 #include "Maruyama/Enemy/AIDirector/TupleSpace.h"
 
+#include "Watanabe/DebugClass/Debug.h"
+
 namespace basecross {
 	PlayerStatus::PlayerStatus(const shared_ptr<GameObject>& owner)
 		:Component(owner), m_status(10), m_team(team::TeamType(0)),
@@ -81,11 +83,13 @@ namespace basecross {
 				deader->StartDead();
 			}
 
+			SendFactionMessage_Dead(damage);
+
 			m_status.hp = 0;
 		}
 
 		//ダメージを与えた相手を伝える。
-		SendFaciton_DamageMessage(damage);
+		SendFacitonMessage_Damage(damage);
 
 		auto soundEmitter = m_soundEmitter.lock();
 		soundEmitter->PlaySoundClip(m_damageSoundClip);
@@ -128,7 +132,7 @@ namespace basecross {
 		}
 	}
 
-	void PlayerStatus::SendFaciton_DamageMessage(const DamageData& data) {
+	void PlayerStatus::SendFacitonMessage_Damage(const DamageData& data) {
 		auto factionMember = m_factionMember.lock();
 		auto tupler = m_tupler.lock();
 		if (!factionMember || !tupler) {
@@ -139,4 +143,34 @@ namespace basecross {
 		auto tupleSpace = factionMember->GetAssignedFaction()->GetTupleSpace();
 		tupleSpace->Write<Enemy::Tuple::Damaged>(tupler, data, (float)data.value);
 	}
+
+	void PlayerStatus::SendFactionMessage_Dead(const DamageData& data) {
+		//AIDirectorに倒されたことを伝える。
+		auto attackerFactionMember = data.attacker->GetComponent<Enemy::I_FactionMember>(false);
+		if (!attackerFactionMember) {
+			return;
+		}
+
+		//殺してきた相手に自分を殺したことを伝える。
+		auto assignedFaction = attackerFactionMember->GetAssignedFaction();
+		if (assignedFaction) {
+			assignedFaction->GetTupleSpace()->Write<Enemy::Tuple::Kill>(
+				m_tupler.lock(),
+				data.attacker,
+				GetGameObject(),
+				0.0f
+			);
+		}
+		else {
+			Debug::GetInstance()->Log(L"PlayerStatus::SendFactionMessage_Dead() : ファクション登録されていません。");
+		}
+	}
+
+	bool PlayerStatus::CanSendFactionMessage() const {
+		auto factionMember = m_factionMember.lock();
+		auto tupler = m_tupler.lock();
+
+		return factionMember && tupler;	//どちらも存在するなら。
+	}
+
 }

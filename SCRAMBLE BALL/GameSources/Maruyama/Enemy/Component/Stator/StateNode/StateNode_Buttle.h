@@ -31,10 +31,12 @@ namespace basecross {
 	namespace Enemy {
 
 		class EnemyBase;
+		class I_FactionMember;
 
 		namespace Tuple {
 			class FindTarget;
 			class Damaged;
+			class Kill;
 		}
 
 		namespace StateNode {
@@ -64,6 +66,15 @@ namespace basecross {
 
 			private:
 
+				/// <summary>
+				/// 通知設定
+				/// </summary>
+				void SettingNotify();
+
+				/// <summary>
+				/// ターゲット発見メッセージを監視する。
+				/// </summary>
+				/// <param name="tuple"></param>
 				void ObserveOtherFindTarget(const std::shared_ptr<Tuple::FindTarget>& tuple);
 
 				/// <summary>
@@ -83,6 +94,12 @@ namespace basecross {
 				/// </summary>
 				/// <param name="tuple">ダメージメッセージ</param>
 				void OtherDamaged(const std::shared_ptr<Tuple::Damaged>& tuple);
+
+				/// <summary>
+				/// キルメッセージを受け取ったとき。
+				/// </summary>
+				/// <param name="tuple"></param>
+				void NotifyTuple_Kill(const std::shared_ptr<Tuple::Kill>& tuple);
 
 				//そのターゲットを狙う評価値を計算して返す。
 				float CalculateEvalutionValue(const std::shared_ptr<GameObject>& target);
