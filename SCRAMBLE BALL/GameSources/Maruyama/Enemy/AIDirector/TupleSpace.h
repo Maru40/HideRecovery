@@ -213,8 +213,8 @@ namespace basecross {
 			//--------------------------------------------------------------------------------------
 			class Kill : public TupleRequestBase
 			{
-				std::weak_ptr<I_FactionMember> m_killer;	//キルした人
-				std::weak_ptr<I_FactionMember> m_killed;	//キルされた人
+				std::weak_ptr<GameObject> m_killer;	//キルした人
+				std::weak_ptr<GameObject> m_killed;	//キルされた人
 
 			public:
 				/// <summary>
@@ -226,18 +226,18 @@ namespace basecross {
 				/// <param name="value"></param>
 				Kill(
 					const std::shared_ptr<I_Tupler>& requester,
-					const std::shared_ptr<I_FactionMember>& killer,
-					const std::shared_ptr<I_FactionMember>& killed,
+					const std::shared_ptr<GameObject>& killer,
+					const std::shared_ptr<GameObject>& killed,
 					const float value
 				);
 
 				bool operator==(const Kill& other);
 
 				//キルした人
-				_NODISCARD std::shared_ptr<I_FactionMember> GetKiller() const noexcept;
+				_NODISCARD std::shared_ptr<GameObject> GetKiller() const noexcept;
 
 				//キルされた人
-				_NODISCARD std::shared_ptr<I_FactionMember> GetKilled() const noexcept;
+				_NODISCARD std::shared_ptr<GameObject> GetKilled() const noexcept;
 
 			};
 

@@ -210,8 +210,8 @@ namespace basecross {
 
 			Kill::Kill(
 				const std::shared_ptr<I_Tupler>& requester,
-				const std::shared_ptr<I_FactionMember>& killer,
-				const std::shared_ptr<I_FactionMember>& killed,
+				const std::shared_ptr<GameObject>& killer,
+				const std::shared_ptr<GameObject>& killed,
 				const float value
 			) :
 				TupleRequestBase(requester, value),
@@ -231,11 +231,11 @@ namespace basecross {
 				return false;
 			}
 
-			std::shared_ptr<I_FactionMember> Kill::GetKiller() const noexcept {
+			std::shared_ptr<GameObject> Kill::GetKiller() const noexcept {
 				return m_killer.lock();
 			}
 
-			std::shared_ptr<I_FactionMember> Kill::GetKilled() const noexcept {
+			std::shared_ptr<GameObject> Kill::GetKilled() const noexcept {
 				return m_killed.lock();
 			}
 
