@@ -33,7 +33,7 @@ namespace basecross {
 			//’Ê’m‚ÌÝ’è
 			m_tupleSapce->Notify<Tuple::FindBall>(
 				GetThis<AIDirector>(),
-				[&](const std::shared_ptr<Tuple::FindBall>& tuple) {  }
+				[&](const std::shared_ptr<Tuple::FindBall>& tuple) { NotifyTuple_FindBall(tuple); }
 			);
 		}
 
