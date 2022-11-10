@@ -50,6 +50,9 @@
 
 #include "Itabashi/OnlineGameItemManager.h"
 
+#include "Maruyama/Utility/SingletonComponent/SingletonComponent.h"
+#include "Maruyama/Utility/SingletonComponent/ShareClassesManager.h"
+
 namespace basecross {
 	//--------------------------------------------------------------------------------------
 	/// オンライン用データ
@@ -101,6 +104,10 @@ namespace basecross {
 	{}
 
 	void Goal::OnCreate() {
+		if (auto shareManager = ShareClassesManager::GetInstance(GetStage())) {
+			shareManager->AddShareClass<Goal>(GetThis<Goal>());
+		}
+
 		//カウントダウンの生成
 		//auto relocationCount = GetStage()->Instantiate<RelocationCountBP>(m_param.countDrawPositionOffset, Quat::Identity());
 		//m_relocationCount = relocationCount;
