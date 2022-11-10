@@ -1369,6 +1369,9 @@
     <Filter Include="Watanabe\Utility\DeviceResUtil">
       <UniqueIdentifier>{52e3b2c8-2004-4854-b485-9f2f6697feb3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Enemy\Component\AI\Director\Calculater">
+      <UniqueIdentifier>{6ee272bf-1abf-49e0-8cb3-7bc2cb74c639}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2560,6 +2563,9 @@
       <Filter>Watanabe\UI\InProcessUI</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\DeviceResUtil.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\Calculater\CombatCalculater.h">
+      <Filter>Maruyama\Enemy\Component\AI\Director\Calculater</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -3652,6 +3658,9 @@
       <Filter>Watanabe\UI\InProcessUI</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Utility\DeviceResUtil.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\Calculater\CombatCalculater.cpp">
+      <Filter>Maruyama\Enemy\Component\AI\Director\Calculater</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="$(MSBuildThisFileDirectory)..\..\Libs\BaseLib\DxShaders\SlimeVS.hlsl">
