@@ -31,7 +31,7 @@ namespace basecross {
 	}
 
 	void SplashMessageUI::OnCreate() {
-		m_sprite = GetStage()->AddGameObject<SimpleSprite>(SimpleSprite::Type::SpriteData, L"StolenBall");
+		m_sprite = GetStage()->AddGameObject<SimpleSprite>();
 		m_sprite->SetParent(GetThis<SplashMessageUI>());
 		m_sprite->SetActive(false);
 		m_defaultColor = GetColor();

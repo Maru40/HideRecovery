@@ -40,10 +40,14 @@ namespace basecross {
 			holdA->SetTransitioner(transitioner);
 		}
 		holdA->SetDrawActive(false);
+
+		auto inProcessUI = m_builder->GetUIObject<InProcessUI>(L"InProcess");
+		inProcessUI->SetLabel(InProcessUI::LabelType::Matching);
+		inProcessUI->SetActive(true);
 	}
 
 	void MatchingUIController::OnCreateRoom() {
-		m_builder->GetUIObject(L"Matching")->SetDrawActive(false);
+		m_builder->GetUIObject(L"InProcess")->SetActive(false);
 		m_builder->GetUIObject(L"GameStart")->SetDrawActive(true);
 		m_builder->GetUIObject(L"AButton")->SetDrawActive(true);
 		m_builder->GetUIObject(L"HoldA")->SetDrawActive(true);
@@ -52,14 +56,14 @@ namespace basecross {
 	}
 
 	void MatchingUIController::OnJoinRoom() {
-		m_builder->GetUIObject(L"Matching")->SetDrawActive(false);
+		m_builder->GetUIObject(L"InProcess")->SetActive(false);
 		m_builder->GetUIObject(L"WaitHost")->SetDrawActive(true);
 		m_builder->GetUIObject<SplashMessageUI>(L"SplashMessage")
 			->SetMessage(SplashMessageUI::MessageType::JoinRoom);
 	}
 
 	void MatchingUIController::OnJoinRoomFailed(int errorCode) {
-		m_builder->GetUIObject(L"Matching")->SetDrawActive(false);
+		m_builder->GetUIObject(L"InProcess")->SetActive(false);
 		m_builder->GetUIObject<SplashMessageUI>(L"SplashMessage")
 			->SetMessage(SplashMessageUI::MessageType::CanNotJoin);
 	}
