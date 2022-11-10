@@ -18,6 +18,8 @@
 namespace basecross {
 
 	class TargetManager;
+	class OnlinePlayerSynchronizer;
+	class VelocityManager;
 
 	namespace Enemy
 	{
@@ -29,6 +31,8 @@ namespace basecross {
 			std::shared_ptr<Tuple::TupleSpace> m_tupleSpace;	//タプルスペース
 
 			std::weak_ptr<TargetManager> m_targetManager;		//ターゲット管理
+			std::weak_ptr<VelocityManager> m_velocityManager;	//速度管理
+			std::weak_ptr<OnlinePlayerSynchronizer> m_onlineSynchronizer;	//オンラインシンクロ
 
 		public:
 			/// <summary>
@@ -41,6 +45,8 @@ namespace basecross {
 
 			virtual void OnCreate() override;
 			virtual void OnStart() override;
+
+			virtual void OnUpdate() override;
 
 			//--------------------------------------------------------------------------------------
 			///	インターフェースの実装
