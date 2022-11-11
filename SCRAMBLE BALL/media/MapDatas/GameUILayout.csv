@@ -9,3 +9,4 @@ SplashMessageUI,SplashMessage,0,200,0.8,0.8,0,3,
 SplashMessageUI,RemainingTime,0,0,1,1,0,3,
 SimpleSprite,PlayerLabel,-30,-430,0.4,0.4,0,SpriteData,Blue
 Numbers,PlayerNumber,70,-304,0.41,0.41,0,1,
+DirectionWithHasBallUI,DirectionWithHasBallUI,0,0,1,1,0,,

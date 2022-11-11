@@ -1,10 +1,11 @@
 ﻿#pragma once
 #include "stdafx.h"
 #include "Maruyama/Player/Component/ItemBag.h"
+#include "Maruyama/Player/Object/PlayerObject.h"
 
 namespace basecross {
 	class HasBallEventExecuter :public Component {
-		using Func = function<void(const shared_ptr<GameObject>&)>;
+		using Func = function<void(const shared_ptr<PlayerObject>&)>;
 
 		// ボールを持っていないときのイベントリスト
 		vector<Func> m_notHaveBallEventList;
@@ -15,6 +16,7 @@ namespace basecross {
 		bool m_isExecutedHaveBallEvent = false;
 
 		weak_ptr<ItemBag> m_itemBag;
+		weak_ptr<PlayerObject> m_playerObject;
 
 		void ExecuteEvent(vector<Func>& eventList, bool& executionFlag);
 	public:

@@ -12,6 +12,10 @@ namespace basecross {
 		:UIObjectBase(stage, L"DirectionWithHasBallUI")
 	{}
 
+	DirectionWithHasBallUI::DirectionWithHasBallUI(const shared_ptr<Stage>& stage, const wstring& line)
+		: UIObjectBase(stage, L"DirectionWithHasBallUI")
+	{}
+
 	shared_ptr<SimpleSprite> DirectionWithHasBallUI::CreateSprite(const wstring& spriteKey) {
 		auto sprite = GetStage()->AddGameObject<SimpleSprite>(
 			SimpleSprite::Type::SpriteData, spriteKey

@@ -131,6 +131,7 @@ namespace basecross {
 		uiBuilder->Register<ButtonUI>(L"ButtonUI");
 		uiBuilder->Register<HoldButtonUI>(L"HoldButtonUI");
 		uiBuilder->Register<InProcessUI>(L"InProcessUI");
+		uiBuilder->Register<DirectionWithHasBallUI>(L"DirectionWithHasBallUI");
 		auto dir = App::GetApp()->GetDataDirWString();
 		auto path = dir + L"MapDatas/";
 		uiBuilder->Build(GetThis<Stage>(), path + fileName);

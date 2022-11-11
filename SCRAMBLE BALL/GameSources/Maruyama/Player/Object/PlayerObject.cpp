@@ -33,8 +33,10 @@
 
 #include "Maruyama/Player/Component/ChargeGun.h"
 #include "Watanabe/Component/PlayerStatus.h"
-#include "Watanabe/Component/HoldBallEffectEmitter.h"
 #include "Watanabe/Component/HasBallEventExecuter.h"
+#include "Watanabe/UI/UIObjectCSVBuilder.h"
+#include "Watanabe/UI/DirectionWithHasBallUI.h"
+#include "MainStage.h"
 
 #include "Maruyama/Player/Component/TackleAttack.h"
 #include "Maruyama/Utility/Component/CollisionAction.h"
@@ -166,15 +168,30 @@ namespace basecross {
 		auto hasBallEvent = AddComponent<HasBallEventExecuter>(itemBag);
 		// エフェクト
 		hasBallEvent->SetEvent(
-			[&](const shared_ptr<GameObject>& owner) {
+			[](const shared_ptr<PlayerObject>& owner) {
 				auto efkComp = owner->GetComponent<EfkComponent>();
 				if (!efkComp->IsPlaying(L"HasBall")) {
 					efkComp->PlayLoop(L"HasBall");
 				}
 			},
-			[&](const shared_ptr<GameObject>& owner) {
+			[](const shared_ptr<PlayerObject>& owner) {
 				auto efkComp = owner->GetComponent<EfkComponent>();
 				efkComp->Stop(L"HasBall");
+			}
+			);
+
+		m_directionUI = GetTypeStage<GameStageBase>()->GetUIObjectCSVBuilder()
+			->GetUIObject<DirectionWithHasBallUI>(L"DirectionWithHasBallUI");
+
+		// 自分がボールを持ったときに方向を知らせるUIに情報を渡す
+		hasBallEvent->SetEvent(
+			[](const shared_ptr<PlayerObject>& owner) {
+				auto directionUI = owner->GetDirectionWithHasBallUI();
+				directionUI->SetTarget(owner);
+			},
+			[](const shared_ptr<PlayerObject>& owner) {
+				auto directionUI = owner->GetDirectionWithHasBallUI();
+				directionUI->ClearTarget();
 			}
 			);
 

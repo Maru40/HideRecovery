@@ -7,7 +7,9 @@ namespace basecross {
 		:Component(owner), m_itemBag(itemBag)
 	{}
 
-	void HasBallEventExecuter::OnCreate() {}
+	void HasBallEventExecuter::OnCreate() {
+		m_playerObject = dynamic_pointer_cast<PlayerObject>(GetGameObject());
+	}
 
 	void HasBallEventExecuter::OnUpdate() {
 		// ボールを持っている
@@ -28,7 +30,7 @@ namespace basecross {
 		for (auto& eventFunc : eventList) {
 			// 関数が有効
 			if (eventFunc) {
-				eventFunc(GetGameObject());
+				eventFunc(m_playerObject.lock());
 			}
 		}
 
