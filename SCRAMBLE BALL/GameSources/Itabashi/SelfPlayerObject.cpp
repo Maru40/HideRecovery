@@ -16,6 +16,7 @@
 #include "Watanabe/UI/UIObjectCSVBuilder.h"
 #include "Maruyama/UI/2D/Component/TeleportUI.h"
 #include "Maruyama/Utility/SingletonComponent/GameManager.h"
+#include "Itabashi/ObjectMover.h"
 
 namespace basecross
 {
@@ -25,6 +26,13 @@ namespace StageObject
 		PlayerObject(stage)
 	{
 
+	}
+
+	void SelfPlayerObject::OnCreate()
+	{
+		PlayerObject::OnCreate();
+		auto objecfMover = GetComponent<Operator::ObjectMover>();
+		objecfMover->SetAffectedCamera(GetStage()->GetView()->GetTargetCamera());
 	}
 
 	void SelfPlayerObject::OnlineSetting(int gameNumber, int playerNumber)
