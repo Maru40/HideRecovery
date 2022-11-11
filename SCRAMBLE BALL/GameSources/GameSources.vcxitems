@@ -330,6 +330,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\BoxAnimationState.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\BoxAnimator.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\FadeComponent.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\HasBallEventExecuter.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\HoldBallEffectEmitter.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\LifeSpan.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\MatchingSyncPlayerObject.h" />
@@ -703,6 +704,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\BallAnimator.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\BoxAnimator.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\FadeComponent.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\HasBallEventExecuter.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\HoldBallEffectEmitter.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\LifeSpan.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\MatchingSyncPlayerObject.cpp" />

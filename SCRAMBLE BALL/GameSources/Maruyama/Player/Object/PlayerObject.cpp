@@ -32,7 +32,10 @@
 
 #include "Maruyama/Player/Component/ChargeGun.h"
 #include "Watanabe/Component/PlayerStatus.h"
-#include "Watanabe/Component/HoldBallEffectEmitter.h"
+#include "Watanabe/Component/HasBallEventExecuter.h"
+#include "Watanabe/UI/UIObjectCSVBuilder.h"
+#include "Watanabe/UI/DirectionWithHasBallUI.h"
+#include "MainStage.h"
 
 #include "Maruyama/Player/Component/TackleAttack.h"
 #include "Maruyama/Utility/Component/CollisionAction.h"
@@ -75,7 +78,6 @@ namespace basecross {
 		return nullptr;
 	}
 
-
 	void PlayerObject::OnCreate() {
 		Mat4x4 spanMat;
 		const float fScale = 0.8f;
@@ -110,7 +112,6 @@ namespace basecross {
 
 		auto itemBag = AddComponent<ItemBag>();
 		AddComponent<ItemAcquisitionManager>();
-		AddComponent<HoldBallEffectEmitter>(itemBag);
 
 		AddComponent<VelocityManager>();
 
@@ -160,6 +161,38 @@ namespace basecross {
 				efkComp->Play(L"PlayerHit");
 			}
 		);
+
+		// ボールを持ったとき & 持っていないときのイベント
+		auto hasBallEvent = AddComponent<HasBallEventExecuter>(itemBag);
+		// エフェクト
+		hasBallEvent->SetEvent(
+			[](const shared_ptr<PlayerObject>& owner) {
+				auto efkComp = owner->GetComponent<EfkComponent>();
+				if (!efkComp->IsPlaying(L"HasBall")) {
+					efkComp->PlayLoop(L"HasBall");
+				}
+			},
+			[](const shared_ptr<PlayerObject>& owner) {
+				auto efkComp = owner->GetComponent<EfkComponent>();
+				efkComp->Stop(L"HasBall");
+			}
+			);
+
+		m_directionUI = GetTypeStage<GameStageBase>()->GetUIObjectCSVBuilder()
+			->GetUIObject<DirectionWithHasBallUI>(L"DirectionWithHasBallUI");
+
+		// 自分がボールを持ったときに方向を知らせるUIに情報を渡す
+		hasBallEvent->SetEvent(
+			[](const shared_ptr<PlayerObject>& owner) {
+				auto directionUI = owner->GetDirectionWithHasBallUI();
+				directionUI->SetTarget(owner);
+			},
+			[](const shared_ptr<PlayerObject>& owner) {
+				auto directionUI = owner->GetDirectionWithHasBallUI();
+				directionUI->ClearTarget();
+			}
+			);
+
 		auto shadowmap = AddComponent<Shadowmap>();
 		shadowmap->SetMultiMeshResource(L"Player_Mesh");
 		shadowmap->SetMeshToTransformMatrix(spanMat);

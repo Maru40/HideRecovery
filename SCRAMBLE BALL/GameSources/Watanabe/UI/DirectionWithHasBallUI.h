@@ -20,6 +20,7 @@ namespace basecross {
 		shared_ptr<SimpleSprite> CreateSprite(const wstring& spriteKey);
 	public:
 		DirectionWithHasBallUI(const shared_ptr<Stage>& stage);
+		DirectionWithHasBallUI(const shared_ptr<Stage>& stage, const wstring& line);
 
 		void OnCreate()override;
 		void OnUpdate()override;
