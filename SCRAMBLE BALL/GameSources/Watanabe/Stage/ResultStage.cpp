@@ -14,6 +14,7 @@
 #include "Watanabe/Component/PlayerAnimator.h"
 #include "Watanabe/Component/MatchingSyncPlayerObject.h"
 #include "Watanabe/Component/PlayerStatus.h"
+#include "Watanabe/Component/CameraAnimator.h"
 
 #include "Maruyama/Interface/I_TeamMember.h"
 #include "VelocityManager.h"
@@ -74,6 +75,11 @@ namespace basecross {
 		Debug::GetInstance()->Log(L"A : マッチング画面へ");
 		Debug::GetInstance()->Log(L"B : タイトル画面へ");
 
+		// デバッグ
+		PointManager::GetInstance()->AddPoint(team::TeamType::Blue);
+
+		AddGameObject<GameObject>()->AddComponent<CameraAnimator>();
+
 		CreateMap(L"WaitStage.csv");
 		auto uiBuilder = CreateUI(L"ResultUILayout.csv");
 		// ラベルの色変更
@@ -108,6 +114,10 @@ namespace basecross {
 		}
 		else if (pad.IsInputDown(XInputCode::B)) {
 			PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToTitleStage");
+		}
+
+		else if (pad.IsInputDown(XInputCode::Y)) {
+			PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToResultStage");
 		}
 	}
 
