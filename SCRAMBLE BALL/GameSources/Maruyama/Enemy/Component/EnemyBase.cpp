@@ -37,8 +37,11 @@ namespace basecross {
 
 		void EnemyBase::OnUpdate() {
 			auto velocity = m_velocityManager.lock()->GetVelocity();
+			velocity /= m_velocityManager.lock()->GetMaxSpeed();
+			Debug::GetInstance()->Log(velocity);
 			auto moveVec = Vec2(velocity.x, velocity.z);
-			m_onlineSynchronizer.lock()->Move(moveVec.GetNormalize());
+			m_onlineSynchronizer.lock()->Move(moveVec);
+			//m_onlineSynchronizer.lock()->Move(moveVec);
 		}
 
 		void EnemyBase::SetTarget(const std::shared_ptr<GameObject>& target) {
