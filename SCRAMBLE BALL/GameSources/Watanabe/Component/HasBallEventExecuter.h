@@ -5,17 +5,18 @@
 namespace basecross {
 	class HasBallEventExecuter :public Component {
 		using Func = function<void(const shared_ptr<GameObject>&)>;
-		struct EventData {
-			// 実行するイベント
-			Func func;
-			// 実行済みか
-			bool isExecuted;
 
-			EventData(const Func& func)
-				:func(func), isExecuted(false) {}
-		};
-		vector<EventData> m_eventList;
+		// ボールを持っていないときのイベントリスト
+		vector<Func> m_notHaveBallEventList;
+		// ボールを持っているときのイベントリスト
+		vector<Func> m_haveBallEventList;
+
+		bool m_isExecutedNotHaveBallEvent = false;
+		bool m_isExecutedHaveBallEvent = false;
+
 		weak_ptr<ItemBag> m_itemBag;
+
+		void ExecuteEvent(vector<Func>& eventList, bool& executionFlag);
 	public:
 		HasBallEventExecuter(const shared_ptr<GameObject>& owner,
 			const shared_ptr<ItemBag>& itemBag);
@@ -23,6 +24,9 @@ namespace basecross {
 		void OnCreate()override;
 		void OnUpdate()override;
 
-		void SetEvent(const Func& func);
+		void SetEvent(const Func& haveBallEvent, const Func& notHaveBallEvent);
+
+		void SetHaveBallEvent(const Func& haveBallEvent);
+		void SetNotHaveBallEvent(const Func& notHaveBallEvent);
 	};
 }

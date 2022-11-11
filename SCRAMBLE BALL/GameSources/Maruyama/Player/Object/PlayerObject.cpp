@@ -116,8 +116,11 @@ namespace basecross {
 		hasBallEvent->SetEvent(
 			[](const shared_ptr<GameObject>& owner) {
 				Debug::GetInstance()->Log(L"ボールを持った");
+			},
+			[](const shared_ptr<GameObject>& owner) {
+				Debug::GetInstance()->Log(L"ボールを持っていない");
 			}
-		);
+			);
 
 		AddComponent<VelocityManager>();
 
