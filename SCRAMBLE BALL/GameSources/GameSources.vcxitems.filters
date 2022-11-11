@@ -1373,15 +1373,19 @@
     <Filter Include="Maruyama\Enemy\Component\AI\Director\Calculater">
       <UniqueIdentifier>{6ee272bf-1abf-49e0-8cb3-7bc2cb74c639}</UniqueIdentifier>
     </Filter>
-
     <Filter Include="Watanabe\Component\HasBallEventExecuter">
       <UniqueIdentifier>{75a6cc86-aa46-4daa-8962-5acd92021d6f}</UniqueIdentifier>
     </Filter>
     <Filter Include="Maruyama\Enemy\BehaviorTree\Decorator\OutSpecificTarget">
       <UniqueIdentifier>{a523e5b7-d680-4db6-ba9e-e9a127fb46c6}</UniqueIdentifier>
     </Filter>
+
     <Filter Include="Watanabe\Component\DissolveAnimator">
       <UniqueIdentifier>{e76dbee5-220b-476c-a2cf-17890d9f181d}</UniqueIdentifier>
+	</Filter>
+    <Filter Include="Maruyama\Enemy\Component\AIInputController">
+      <UniqueIdentifier>{39e44cc2-fba4-4b4b-8408-cf4c07427fd2}</UniqueIdentifier>
+
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -2576,14 +2580,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\DeviceResUtil.h">
       <Filter>Watanabe\Utility\DeviceResUtil</Filter>
     </ClInclude>
-
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\HasBallEventExecuter.h">
       <Filter>Watanabe\Component\HasBallEventExecuter</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\Calculater\CombatCalculater.h">
       <Filter>Maruyama\Enemy\Component\AI\Director\Calculater</Filter>
     </ClInclude>
-
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\Calculater\CombatCalculater.h">
       <Filter>Maruyama\Enemy\Component\AI\Director\Calculater</Filter>
     </ClInclude>
@@ -2591,8 +2593,13 @@
       <Filter>Maruyama\Enemy\BehaviorTree\Decorator\OutSpecificTarget</Filter>
     </ClInclude>
 
+
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\DissolveAnimator.h">
       <Filter>Watanabe\Component\DissolveAnimator</Filter>
+	</ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\AIVirtualController.h">
+      <Filter>Maruyama\Enemy\Component\AIInputController</Filter>
+
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -3688,14 +3695,12 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Utility\DeviceResUtil.cpp">
       <Filter>Watanabe\Utility\DeviceResUtil</Filter>
     </ClCompile>
-
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\HasBallEventExecuter.cpp">
       <Filter>Watanabe\Component\HasBallEventExecuter</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\Calculater\CombatCalculater.cpp">
       <Filter>Maruyama\Enemy\Component\AI\Director\Calculater</Filter>
     </ClCompile>
-
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\Calculater\CombatCalculater.cpp">
       <Filter>Maruyama\Enemy\Component\AI\Director\Calculater</Filter>
     </ClCompile>
@@ -3705,6 +3710,10 @@
 
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\DissolveAnimator.cpp">
       <Filter>Watanabe\Component\DissolveAnimator</Filter>
+	</ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\AIVirtualController.cpp">
+      <Filter>Maruyama\Enemy\Component\AIInputController</Filter>
+
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

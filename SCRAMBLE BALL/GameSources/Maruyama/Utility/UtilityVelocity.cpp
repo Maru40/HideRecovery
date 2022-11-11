@@ -21,12 +21,12 @@ namespace basecross {
 		return normalize(velocity) * speed;
 	}
 
-	Vec3 UtilityVelocity::CalucSeekVec(const Vec3& velocity, const Vec3& toVec,const float& maxSpeed) {
+	Vec3 UtilityVelocity::CalucSeekVec(const Vec3& velocity, const Vec3& toVec, const float& maxSpeed, const float forceMultipier) {
 		Vec3 desiredVelocity = normalize(toVec) * maxSpeed;  //希望のベクトル
-		return (desiredVelocity - velocity);
+		return (desiredVelocity - velocity) * forceMultipier;
 	}
 
-	Vec3 UtilityVelocity::CalucArriveVec(const Vec3& velocity, const Vec3& toVec, const float& maxSpeed, const float& decl) {
+	Vec3 UtilityVelocity::CalucArriveVec(const Vec3& velocity, const Vec3& toVec, const float& maxSpeed, const float forceMultipier, const float& decl) {
 		float dist = toVec.length();
 		if (dist > 0) {
 			constexpr float DecelerationTweaker = 0.3f;  //減速値
@@ -35,7 +35,7 @@ namespace basecross {
 			speed = maru::Mathf::Min(speed,maxSpeed);
 			Vec3 desiredVelocity = toVec * speed / dist; //希望のベクトル
 			auto steerVec = desiredVelocity - velocity;  //ステアリングベクトル
-			return steerVec;
+			return steerVec * forceMultipier;
 		}
 		return Vec3(0, 0, 0);
 	}

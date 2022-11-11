@@ -20,6 +20,7 @@ namespace basecross {
 
 	class GameTimer;
 	class VelocityManager;
+	class OnlinePlayerSynchronizer;
 
 	namespace TaskListNode {
 
@@ -58,6 +59,7 @@ namespace basecross {
 
 			std::weak_ptr<Transform> m_transform;				//トランスフォーム
 			std::weak_ptr<VelocityManager> m_velocityManager;	//速度管理
+			std::weak_ptr<OnlinePlayerSynchronizer> m_onlineSychoronizer;	//オンラインシンクロ
 
 		public:
 			CrabWalk(const std::shared_ptr<GameObject>& owner, const Parametor* paramPtr);
