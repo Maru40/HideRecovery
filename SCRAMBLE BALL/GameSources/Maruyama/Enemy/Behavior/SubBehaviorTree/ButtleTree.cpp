@@ -223,6 +223,12 @@ namespace basecross {
 						moveParam->speed = MoveSpeed;
 						moveParam->moveType = basecross::Task::ToTargetMove::MoveType::SeekVelocity;
 					}
+
+					//Shotƒpƒ‰ƒ[ƒ^
+					{
+						
+
+					}
 				}
 
 				//bool ButtleTree::HasTarget() const {
