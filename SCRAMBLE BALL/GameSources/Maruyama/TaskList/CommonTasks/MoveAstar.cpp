@@ -186,7 +186,7 @@ namespace basecross {
 			auto targetManager = m_targetManager.lock();
 			//必要コンポーネントが存在しないなら
 			if (!targetManager || !targetManager->HasTarget()) {
-				Debug::GetInstance()->Log(L"MoveAstar::CalculateMoveTargetPosition() で必要コンポーネントが存在しません。");
+				//Debug::GetInstance()->Log(L"MoveAstar::CalculateMoveTargetPosition() で必要コンポーネントが存在しません。");
 				return Vec3(0.0f);
 			}
 

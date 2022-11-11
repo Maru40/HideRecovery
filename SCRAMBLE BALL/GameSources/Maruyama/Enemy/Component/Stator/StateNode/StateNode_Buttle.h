@@ -101,9 +101,6 @@ namespace basecross {
 				/// <param name="tuple"></param>
 				void NotifyTuple_Kill(const std::shared_ptr<Tuple::Kill>& tuple);
 
-				//そのターゲットを狙う評価値を計算して返す。
-				float CalculateEvalutionValue(const std::shared_ptr<GameObject>& target);
-
 				bool HasTarget() const;
 
 			};

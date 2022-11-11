@@ -51,7 +51,10 @@ namespace basecross {
 					PatrolCoordinator::OnCreate();
 
 					auto tuple = GetTupleSpace();
-					tuple->Notify<Tuple::FindTarget>(GetThis<HidePlacePatrol>(), [&](const std::shared_ptr<Tuple::FindTarget>& tuple) { FindTarget(tuple); });
+					tuple->Notify<Tuple::FindTarget>(
+						GetThis<HidePlacePatrol>(), 
+						[&](const std::shared_ptr<Tuple::FindTarget>& tuple) { FindTarget(tuple); }
+					);
 				}
 
 				void HidePlacePatrol::OnStart() {

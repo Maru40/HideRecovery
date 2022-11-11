@@ -72,6 +72,11 @@ namespace basecross {
 
 			//メッセージが届いていたら。
 			if (buttleTransition && buttleTransition->GetValue() < member.buttleStartEyeRange) {
+				auto status = buttleTransition->GetTarget()->GetComponent<PlayerStatus>(false);
+				if (status && status->IsDead()) {
+					return false;
+				}
+
 				//ターゲットの設定
 				auto targetManager = m_targetManager.lock();
 				auto target = buttleTransition->GetTarget();

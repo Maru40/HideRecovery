@@ -124,11 +124,17 @@ namespace basecross {
 					return;
 				}
 
-				float currentValue = CalculateEvalutionValue(m_targetManager.lock()->GetTarget());
-				float otherValue = CalculateEvalutionValue(otherTarget);
+				float currentValue = Calculater::Combat::CalculateEvalutionValue(m_transform.lock(), m_targetManager.lock()->GetTarget());
+				float otherValue = Calculater::Combat::CalculateEvalutionValue(m_transform.lock(), otherTarget);
 
 				//ohterValueの方が優先なら、ターゲットを切り替える。
 				if (otherValue < currentValue) {
+					GetOwner()->GetAssignedFaction()->GetTupleSpace()->Write<Tuple::FindTarget>(
+						GetOwner(),
+						otherTarget,
+						otherValue
+					);
+
 					m_targetManager.lock()->SetTarget(otherTarget);
 				}
 			}
@@ -148,8 +154,8 @@ namespace basecross {
 				}
 
 				//どちらのターゲットの優先度が高いかを計算する。
-				float currentValue = CalculateEvalutionValue(m_targetManager.lock()->GetTarget());
-				float otherValue = CalculateEvalutionValue(otherTarget);
+				float currentValue = Calculater::Combat::CalculateEvalutionValue(m_transform.lock(), m_targetManager.lock()->GetTarget());
+				float otherValue = Calculater::Combat::CalculateEvalutionValue(m_transform.lock(), otherTarget);
 
 				//ohterValueの方が優先なら、助けることを伝える。
 				if (otherValue < currentValue) {
@@ -171,22 +177,6 @@ namespace basecross {
 						0.0f
 					);
 				}
-			}
-
-			float Buttle::CalculateEvalutionValue(const std::shared_ptr<GameObject>& target) {
-				float result = 0.0f;
-
-				auto targetTrans = target->GetComponent<Transform>();
-
-				float toTargetRange = (targetTrans->GetPosition() - m_transform.lock()->GetPosition()).length();
-				result += toTargetRange;	//距離を評価値とする。
-
-				if (auto status = target->GetComponent<PlayerStatus>(false)) {
-					float hpRate = (float)status->GetStatus().hp / (float)status->GetStatus().maxHp;
-					result *= hpRate;	//hpが低いほど、距離を減衰(ターゲットにしやすくする。)
-				}
-
-				return result;
 			}
 
 			bool Buttle::HasTarget() const {
