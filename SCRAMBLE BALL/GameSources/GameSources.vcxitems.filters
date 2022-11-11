@@ -1375,6 +1375,9 @@
     <Filter Include="Watanabe\Component\HasBallEventExecuter">
       <UniqueIdentifier>{75a6cc86-aa46-4daa-8962-5acd92021d6f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\Component\DissolveAnimator">
+      <UniqueIdentifier>{e76dbee5-220b-476c-a2cf-17890d9f181d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2574,6 +2577,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\Calculater\CombatCalculater.h">
       <Filter>Maruyama\Enemy\Component\AI\Director\Calculater</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\DissolveAnimator.h">
+      <Filter>Watanabe\Component\DissolveAnimator</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -3673,6 +3679,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\Calculater\CombatCalculater.cpp">
       <Filter>Maruyama\Enemy\Component\AI\Director\Calculater</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\DissolveAnimator.cpp">
+      <Filter>Watanabe\Component\DissolveAnimator</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
