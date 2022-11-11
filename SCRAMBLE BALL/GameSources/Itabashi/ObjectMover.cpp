@@ -13,26 +13,18 @@ namespace Operator
 		Component(owner)
 	{}
 
-	void ObjectMover::OnCreate()
+	void ObjectMover::OnLateStart()
 	{
 		m_velocityManager = GetGameObject()->GetComponent<VelocityManager>();
 	}
 
-	void ObjectMover::OnLateStart() {
-		m_useWepon = GetGameObject()->GetComponent<UseWeapon>(false);
-	}
-
-	Vec3 ObjectMover::DefaultMove(const Vec2& moveDirection) {
+	Vec3 ObjectMover::Move(const Vec2& moveDirection) {
 		auto velocityManager = m_velocityManager.lock();
-		auto useWeapon = m_useWepon.lock();
 
 		// 移動量が0ならば
 		if (moveDirection.lengthSqr() == 0)
 		{
-			if (velocityManager) {
-				velocityManager->ResetAll();
-			}
-
+			velocityManager->ResetAll();
 			return Vec3();
 		}
 
@@ -59,42 +51,11 @@ namespace Operator
 		auto moveRight = right * inputVector.x;
 		auto moveSpeed = m_moveSpeed;
 
-		// 武器を持っているかつ、エイム中ならば
-		if (useWeapon && useWeapon->IsAim()) {
-			moveSpeed += -useWeapon->GetWeaponWeight();
-		}
+		Vec3 moveVector = (moveForward + moveRight) * moveSpeed;
 
-		Vec3 moveVector = (moveForward + moveRight) * App::GetApp()->GetElapsedTime() * moveSpeed;
-
-		if (velocityManager)
-		{
-			velocityManager->SetVelocity(moveVector / App::GetApp()->GetElapsedTime());
-		}
-		else
-		{
-			auto position = transform->GetPosition();
-
-			position += moveVector;
-			transform->SetPosition(position);
-		}
+		velocityManager->SetVelocity(moveVector);
 
 		return moveVector;
-	}
-
-	Vec3 ObjectMover::AimMove(const Vec2& moveDirection) {
-		Vec3 resultVec = DefaultMove(moveDirection);
-
-		return resultVec;
-	}
-
-	Vec3 ObjectMover::Move(const Vec2& moveDirection)
-	{
-		if (IsAim()) {
-			return AimMove(moveDirection);
-		}
-		else {
-			return DefaultMove(moveDirection);
-		}
 	}
 }
 }

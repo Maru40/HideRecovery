@@ -25,19 +25,11 @@ namespace Operator
 		/// ベクトル管理コンポーネント
 		/// </summary>
 		std::weak_ptr<VelocityManager> m_velocityManager;
-		/// <summary>
-		/// 武器使用コンポーネント
-		/// </summary>
-		std::weak_ptr<UseWeapon> m_useWepon;
 
 		/// <summary>
 		/// カメラの影響を受けるか
 		/// </summary>
 		bool m_isCameraAffected = true;
-		/// <summary>
-		/// エイム中か
-		/// </summary>
-		bool m_isAim = false;
 		/// <summary>
 		/// 移動速度
 		/// </summary>
@@ -50,32 +42,17 @@ namespace Operator
 	public:
 		ObjectMover(const std::shared_ptr<GameObject>& owner);
 
-		void OnCreate() override;
 		void OnLateStart() override;
 
 		void OnUpdate() override {}
 
 		void OnDraw() override {}
 
-	private:
-		/// <summary>
-		/// 通常時の移動
-		/// </summary>
-		Vec3 DefaultMove(const Vec2& moveDirection);
-
-		/// <summary>
-		/// Aim中の移動
-		/// </summary>
-		Vec3 AimMove(const Vec2& moveDirection);
-
-	public:
-
 		/// <summary>
 		/// 影響を受けるカメラを設定する
 		/// </summary>
 		/// <param name="camera">影響を与えるカメラ</param>
 		void SetAffectedCamera(const std::shared_ptr<Camera>& camera) { m_camera = camera; }
-
 		/// <summary>
 		/// 影響を受けるカメラを取得する
 		/// </summary>
@@ -121,7 +98,6 @@ namespace Operator
 		/// <param name="moveDirection">移動方向</param>
 		/// <returns>移動量</returns>
 		Vec3 Move(const Vec2& moveDirection);
-
 		/// <summary>
 		/// 移動
 		/// </summary>
@@ -130,23 +106,10 @@ namespace Operator
 		void Move(float x, float y) { Move(Vec2(x, y)); }
 
 		/// <summary>
-		/// エイム中か
-		/// </summary>
-		/// <returns>エイム中ならtrue</returns>
-		bool IsAim() const noexcept { return m_isAim; }
-
-		/// <summary>
-		/// エイム中かを設定
-		/// </summary>
-		/// <param name="isAim">エイム中か</param>
-		void SetIsAim(const bool isAim) { m_isAim = isAim; }
-
-		/// <summary>
 		/// 移動に使用する前ベクトルの設定
 		/// </summary>
 		/// <param name="defaultForward">前ベクトル</param>
 		void SetDefaultForward(const Vec3& defaultForward) { m_defaultForward = defaultForward; }
-
 		/// <summary>
 		/// 移動に使用する前ベクトルの取得
 		/// </summary>
