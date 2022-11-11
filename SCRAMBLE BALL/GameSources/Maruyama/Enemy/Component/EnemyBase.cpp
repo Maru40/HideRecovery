@@ -1,6 +1,6 @@
-/*!
+ï»¿/*!
 @file AIPlayerBehaviorTree.cpp
-@brief AIPlayerBehaviorTree‚È‚ÇŽÀ‘Ì
+@brief AIPlayerBehaviorTreeãªã©å®Ÿä½“
 */
 
 #include "stdafx.h"
@@ -38,7 +38,7 @@ namespace basecross {
 		void EnemyBase::OnUpdate() {
 			auto velocity = m_velocityManager.lock()->GetVelocity();
 			auto moveVec = Vec2(velocity.x, velocity.z);
-			m_onlineSynchronizer.lock()->Move(moveVec);
+			m_onlineSynchronizer.lock()->Move(moveVec.GetNormalize());
 		}
 
 		void EnemyBase::SetTarget(const std::shared_ptr<GameObject>& target) {

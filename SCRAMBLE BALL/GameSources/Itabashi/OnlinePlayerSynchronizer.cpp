@@ -19,22 +19,23 @@ T ConvertByteData(const std::uint8_t* bytes)
 	return *(T*)bytes;
 }
 
+template<class T>
+struct OnlinePlayerData
+{
+	int playerNumber;
+	T data;
+
+public:
+	OnlinePlayerData(int playerNumber, const T& data) :
+		playerNumber(playerNumber),
+		data(data)
+	{
+	}
+};
+
 
 namespace basecross
 {
-	struct OnlineMoveData
-	{
-		Vec3 moveVector;
-		Vec3 forward;
-
-		OnlineMoveData(const Vec3& moveVector, const Vec3& forward) :
-			moveVector(moveVector),
-			forward(forward)
-		{
-
-		}
-	};
-
 	struct OnlineShotData
 	{
 		Vec3 position;
@@ -76,19 +77,6 @@ namespace basecross
 		}
 	};
 
-	struct OnlineFindOjbectData
-	{
-		std::uint32_t objectId;
-		int playerNumber;
-
-		OnlineFindOjbectData(std::uint32_t objectId, int playerNumber) :
-			objectId(objectId),
-			playerNumber(playerNumber)
-		{
-
-		}
-	};
-
 	struct OnlineDamageData
 	{
 		int attackerPlayerNumber;
@@ -122,7 +110,8 @@ namespace basecross
 			return;
 		}
 
-		Online::OnlineManager::RaiseEvent(false, (std::uint8_t*)&forward, sizeof(Vec3), EXECUTE_CAMERA_FORWARD_EVENT_CODE);
+		auto data = OnlinePlayerData<Vec3>(m_onlinePlayerNumber, forward);
+		Online::OnlineManager::RaiseEvent(false, (std::uint8_t*)&data, sizeof(data), EXECUTE_CAMERA_FORWARD_EVENT_CODE);
 	}
 
 	void OnlinePlayerSynchronizer::ExecuteCameraForward(int playerNumber, const Vec3& cameraForward)
@@ -142,7 +131,7 @@ namespace basecross
 		controlManager->ExecuteUpdateCameraForward(cameraForward);
 	}
 
-	void OnlinePlayerSynchronizer::ExecuteMove(int playerNumber, const Vec3& moveVector, const Vec3& forward)
+	void OnlinePlayerSynchronizer::ExecuteMove(int playerNumber, const Vec3& moveVector)
 	{
 		if (m_onlinePlayerNumber != playerNumber)
 		{
@@ -150,7 +139,7 @@ namespace basecross
 		}
 
 		auto controlManager = m_controlManager.lock();
-		controlManager->ExecuteMove(moveVector, forward);
+		controlManager->ExecuteMove(moveVector);
 	}
 
 	void OnlinePlayerSynchronizer::ExecuteShot(int playerNumber, const Vec3& bulletPosition, const Vec3& bulletDirection, std::uint32_t instanceId)
@@ -263,7 +252,8 @@ namespace basecross
 			return;
 		}
 
-		Online::OnlineManager::RaiseEvent(false, (std::uint8_t*)&OnlineFindOjbectData(instanceId, playerNumber), sizeof(OnlineFindOjbectData), EXECUTE_OPEN_HIDEPLACE_EVENT_CODE);
+		auto data = OnlinePlayerData<std::uint32_t>(playerNumber, instanceId);
+		Online::OnlineManager::RaiseEvent(false, (std::uint8_t*)&data, sizeof(data), EXECUTE_OPEN_HIDEPLACE_EVENT_CODE);
 
 		auto hideItem = hidePlace->TakeOutHideItem();
 
@@ -381,22 +371,22 @@ namespace basecross
 		// カメラの前方ベクトル変更が通知されたら
 		if (eventCode == EXECUTE_CAMERA_FORWARD_EVENT_CODE)
 		{
-			auto cameraForward = ConvertByteData<Vec3>(bytes);
-			ExecuteCameraForward(playerNumber, cameraForward);
+			auto playerData = ConvertByteData<OnlinePlayerData<Vec3>>(bytes);
+			ExecuteCameraForward(playerData.playerNumber, playerData.data);
 			return;
 		}
 		// 移動イベントが通知されたら
 		if (eventCode == EXECUTE_MOVE_EVENT_CODE)
 		{
-			auto data = ConvertByteData<OnlineMoveData>(bytes);
-			ExecuteMove(playerNumber, data.moveVector, data.forward);
+			auto playerData = ConvertByteData<OnlinePlayerData<Vec3>>(bytes);
+			ExecuteMove(playerData.playerNumber, playerData.data);
 			return;
 		}
 		// 弾を撃つイベントが通知されたら
 		if (eventCode == EXECUTE_SHOT_EVENT_CODE)
 		{
-			auto data = ConvertByteData<OnlineShotData>(bytes);
-			ExecuteShot(playerNumber, data.position, data.direction, data.instanceId);
+			auto playerData = ConvertByteData<OnlinePlayerData<OnlineShotData>>(bytes);
+			ExecuteShot(playerData.playerNumber, playerData.data.position, playerData.data.direction, playerData.data.instanceId);
 			return;
 		}
 		// 弾を破棄するイベントが通知されたら
@@ -409,29 +399,29 @@ namespace basecross
 		// エイムの変更イベントが通知されたら
 		if (eventCode == EXECUTE_AIM_STATE_CHANGE_EVENT_CODE)
 		{
-			bool isAim = ConvertByteData<bool>(bytes);
-			ExecuteAimEvent(playerNumber, isAim);
+			auto playerData = ConvertByteData<OnlinePlayerData<bool>>(bytes);
+			ExecuteAimEvent(playerData.playerNumber, playerData.data);
 			return;
 		}
 		// テレポートしたイベントが通知されたら
 		if (eventCode == EXECUTE_TELEPORT_EVENT_CODE)
 		{
-			auto data = ConvertByteData<OnlineTeleportData>(bytes);
-			ExecuteTeleportEvent(playerNumber, data.teleportPosition, data.cameraPosition);
+			auto playerData = ConvertByteData<OnlinePlayerData<OnlineTeleportData>>(bytes);
+			ExecuteTeleportEvent(playerData.playerNumber, playerData.data.teleportPosition, playerData.data.cameraPosition);
 			return;
 		}
 		// 箱を開けるのを試すイベントが通知されたら
 		if (eventCode == TRY_OPEN_HIDEPLACE_EVENT_CODE)
 		{
-			std::uint32_t instanceId = ConvertByteData<std::uint32_t>(bytes);
-			TryOpenHidePlaceEvent(playerNumber, instanceId);
+			auto playerData = ConvertByteData<OnlinePlayerData<std::uint32_t>>(bytes);
+			TryOpenHidePlaceEvent(playerData.playerNumber, playerData.data);
 			return;
 		}
 		// 箱を開けたイベントが通知されたら
 		if (eventCode == EXECUTE_OPEN_HIDEPLACE_EVENT_CODE)
 		{
-			auto findGameObjectData = ConvertByteData<OnlineFindOjbectData>(bytes);
-			ExecuteOpenHidePlace(findGameObjectData.playerNumber, findGameObjectData.objectId);
+			auto playerData = ConvertByteData<OnlinePlayerData<std::uint32_t>>(bytes);
+			ExecuteOpenHidePlace(playerData.playerNumber, playerData.data);
 			return;
 		}
 		// ダメージを受けたイベントが通知されたら
@@ -453,16 +443,16 @@ namespace basecross
 		}
 
 		Vec3 resultMoveVector;
-		Vec3 forward;
 
-		if (!controlManager->TryMove(moveVector, &resultMoveVector, &forward))
+		if (!controlManager->TryMove(moveVector, &resultMoveVector))
 		{
 			return;
 		}
 
 		if (resultMoveVector != m_beforeMoveVector)
 		{
-			Online::OnlineManager::RaiseEvent(false, (std::uint8_t*)&OnlineMoveData(resultMoveVector, forward), sizeof(OnlineMoveData), EXECUTE_MOVE_EVENT_CODE);
+			auto data = OnlinePlayerData<Vec3>(m_onlinePlayerNumber, resultMoveVector);
+			Online::OnlineManager::RaiseEvent(false, (std::uint8_t*)&data, sizeof(data), EXECUTE_MOVE_EVENT_CODE);
 		}
 
 		m_beforeMoveVector = moveVector;
@@ -504,9 +494,9 @@ namespace basecross
 
 		m_bulletObjectMap.insert(std::make_pair(bulletOnlineStatus->GetInstanceId(), bulletObject));
 
-		auto shotData = OnlineShotData(bulletTransform->GetWorldPosition(), transform->GetForward(), bulletOnlineStatus->GetInstanceId());
+		auto data = OnlinePlayerData<OnlineShotData>(m_onlinePlayerNumber, OnlineShotData(bulletTransform->GetWorldPosition(), transform->GetForward(), bulletOnlineStatus->GetInstanceId()));
 
-		Online::OnlineManager::RaiseEvent(false, (std::uint8_t*)&shotData, sizeof(OnlineShotData), EXECUTE_SHOT_EVENT_CODE);
+		Online::OnlineManager::RaiseEvent(false, (std::uint8_t*)&data, sizeof(data), EXECUTE_SHOT_EVENT_CODE);
 	}
 
 	void OnlinePlayerSynchronizer::Aim(bool isAim)
@@ -531,7 +521,8 @@ namespace basecross
 			return;
 		}
 
-		Online::OnlineManager::RaiseEvent(false, (std::uint8_t*)&isAim, sizeof(bool), EXECUTE_AIM_STATE_CHANGE_EVENT_CODE);
+		auto data = OnlinePlayerData<bool>(m_onlinePlayerNumber, isAim);
+		Online::OnlineManager::RaiseEvent(false, (std::uint8_t*)&data, sizeof(data), EXECUTE_AIM_STATE_CHANGE_EVENT_CODE);
 	}
 
 	void OnlinePlayerSynchronizer::Teleport()
@@ -548,11 +539,12 @@ namespace basecross
 
 		if (!controlManager->TryTeleport(&teleportPosition, &cameraPosition))
 		{
-			Online::OnlineManager::RaiseEvent(false, (std::uint8_t*)&OnlineTeleportData(teleportPosition, cameraPosition),
-				sizeof(OnlineTeleportData), EXECUTE_TELEPORT_EVENT_CODE);
-
 			return;
 		}
+
+		auto data = OnlinePlayerData<OnlineTeleportData>(m_onlinePlayerNumber, OnlineTeleportData(teleportPosition, cameraPosition));
+
+		Online::OnlineManager::RaiseEvent(false, (std::uint8_t*)&data, sizeof(data), EXECUTE_TELEPORT_EVENT_CODE);
 	}
 
 	void OnlinePlayerSynchronizer::OpenHidePlace()
@@ -577,7 +569,8 @@ namespace basecross
 		// ホストではないのなら
 		if (!Online::OnlineManager::GetLocalPlayer().getIsMasterClient())
 		{
-			Online::OnlineManager::RaiseEvent(false, (std::uint8_t*)&instanceId, sizeof(std::uint32_t), TRY_OPEN_HIDEPLACE_EVENT_CODE);
+			auto data = OnlinePlayerData<std::uint32_t>(m_onlinePlayerNumber, instanceId);
+			Online::OnlineManager::RaiseEvent(false, (std::uint8_t*)&data, sizeof(data), TRY_OPEN_HIDEPLACE_EVENT_CODE);
 			return;
 		}
 
@@ -586,7 +579,8 @@ namespace basecross
 			return;
 		}
 
-		Online::OnlineManager::RaiseEvent(false, (std::uint8_t*)&OnlineFindOjbectData(instanceId, m_onlinePlayerNumber), sizeof(OnlineFindOjbectData), EXECUTE_OPEN_HIDEPLACE_EVENT_CODE);
+		auto data = OnlinePlayerData<std::uint32_t>(m_onlinePlayerNumber, instanceId);
+		Online::OnlineManager::RaiseEvent(false, (std::uint8_t*)&data, sizeof(data), EXECUTE_OPEN_HIDEPLACE_EVENT_CODE);
 
 		auto hideItem = hidePlace->TakeOutHideItem();
 

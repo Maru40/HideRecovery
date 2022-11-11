@@ -32,7 +32,6 @@ namespace basecross {
 
 	void PlayerDeader::OnLateStart() {
 		m_animator = GetGameObject()->GetComponent<PlayerAnimator>(false);
-		m_onlineTransformSynchonization = GetGameObject()->GetComponent<Online::OnlineTransformSynchronization>();
 
 		auto animator = m_animator.lock();
 		if (animator) {
@@ -95,9 +94,6 @@ namespace basecross {
 	void PlayerDeader::StartDead() {
 		auto useWeapon = GetGameObject()->GetComponent<UseWeapon>(false);
 		auto animator = m_animator.lock();
-
-		auto onlineTransform = m_onlineTransformSynchonization.lock();
-		onlineTransform->SetUpdateActive(false);
 
 		//アニメーション遷移
 		if (animator && useWeapon) {

@@ -1,7 +1,7 @@
-/*!
+ï»¿/*!
 @file AIPlayerObject.h
-@brief AIPlayerObject‚È‚Ç
-’S“–FŠÛR—TŠì
+@brief AIPlayerObjectãªã©
+æ‹…å½“ï¼šä¸¸å±±è£•å–œ
 */
 
 #pragma once
@@ -9,14 +9,13 @@
 
 #include "EnemyObjectBase.h"
 
-#include "Maruyama/Player/Object/PlayerObject.h"
-#include "Maruyama/Player/Object/VillainPlayerObject.h"
+#include "Itabashi/OtherPlayerObject.h"
 
 namespace basecross {
 	namespace Enemy
 	{
 
-		class AIPlayerObject : public PlayerObject
+		class AIPlayerObject : public StageObject::OtherPlayerObject
 		{
 		public:
 			using DrawComp = BoneModelDraw;

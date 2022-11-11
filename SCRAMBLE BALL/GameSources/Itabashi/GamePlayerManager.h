@@ -16,7 +16,7 @@ namespace Online
 	{
 		std::vector<std::weak_ptr<Online::InputPlayerController>> m_managedControllers;
 
-		std::shared_ptr<PlayerObject> CreatePlayerObject(int gameNumber, int playerNumber);
+		std::shared_ptr<PlayerObject> CreatePlayerObject(int playerNumber);
 
 	public:
 		GamePlayerManager(const std::shared_ptr<GameObject>& owner);

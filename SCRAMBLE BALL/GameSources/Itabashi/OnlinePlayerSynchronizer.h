@@ -59,8 +59,7 @@ namespace basecross
 		/// </summary>
 		/// <param name="playerNumber">移動したプレイヤー番号</param>
 		/// <param name="moveVector">移動量ベクトル</param>
-		/// <param name="forward">前方ベクトル</param>
-		void ExecuteMove(int playerNumber, const Vec3& moveVector, const Vec3& forward);
+		void ExecuteMove(int playerNumber, const Vec3& moveVector);
 
 		/// <summary>
 		/// 誰かが弾を撃った際に呼ばれるイベント

@@ -2562,9 +2562,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\InProcessUI.h">
       <Filter>Watanabe\UI\InProcessUI</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\DeviceResUtil.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\Calculater\CombatCalculater.h">
-      <Filter>Maruyama\Enemy\Component\AI\Director\Calculater</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\DeviceResUtil.h">
+      <Filter>Watanabe\Utility\DeviceResUtil</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -3657,9 +3656,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\InProcessUI.cpp">
       <Filter>Watanabe\UI\InProcessUI</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Utility\DeviceResUtil.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\Calculater\CombatCalculater.cpp">
-      <Filter>Maruyama\Enemy\Component\AI\Director\Calculater</Filter>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Utility\DeviceResUtil.cpp">
+      <Filter>Watanabe\Utility\DeviceResUtil</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

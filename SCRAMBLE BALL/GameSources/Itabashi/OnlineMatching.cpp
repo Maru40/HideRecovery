@@ -178,6 +178,18 @@ namespace Online
 			gameNumbers.erase(gameNumbers.begin() + index);
 		}
 
+		// AI用番号割振り
+		int aiPlayerNumber = -1;
+
+		for (auto& playerNumber : m_playerNumbers)
+		{
+			if (playerNumber == OnlineManager::INVALID_ONLINE_PLAYER_NUMBER)
+			{
+				playerNumber = aiPlayerNumber;
+				--aiPlayerNumber;
+			}
+		}
+
 		OnlineManager::RaiseEvent(false, (std::uint8_t*)m_playerNumbers, sizeof(m_playerNumbers), EXECUTE_UPDATE_PLAYER_NUMBERS);
 	}
 
