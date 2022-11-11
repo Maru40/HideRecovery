@@ -17,6 +17,7 @@ namespace basecross {
 	struct Targeted_Parametor
 	{
 		Vec3 offset = Vec3(0.0f);
+		float priority = 0;	//優先度
 	};
 
 	//--------------------------------------------------------------------------------------
@@ -29,6 +30,9 @@ namespace basecross {
 
 	private:
 		Parametor m_param; //パラメータ
+
+		//ターゲット指定できる状態どうかを判断するbool関数配列
+		std::vector<std::function<bool()>> m_canTargetFunctions;	
 
 	public:
 		/// <summary>
@@ -59,6 +63,30 @@ namespace basecross {
 		/// </summary>
 		/// <returns>ターゲット位置のオフセット</returns>
 		Vec3 GetOffset() const;
+
+		/// <summary>
+		/// 優先度の設定
+		/// </summary>
+		/// <param name="priority">優先度</param>
+		void SetPriority(const float priority) { m_param.priority = priority; }
+
+		/// <summary>
+		/// 優先度の取得
+		/// </summary>
+		/// <returns></returns>
+		_NODISCARD float GetPriority() const noexcept { return m_param.priority; }
+
+		/// <summary>
+		/// ターゲットにすることができるか判断
+		/// </summary>
+		/// <returns>ターゲットにできるならtrue</returns>
+		bool CanTarget() const;
+
+		/// <summary>
+		/// ターゲット指定できるかどうかの条件式を追加
+		/// </summary>
+		/// <param name="canTargetFunction">追加したい条件式</param>
+		void AddCanTargetFunction(const std::function<bool()>& canTargetFunction);
 	};
 
 }

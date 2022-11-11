@@ -29,4 +29,25 @@ namespace basecross {
 	Vec3 Targeted::GetOffset() const {
 		return m_param.offset;
 	}
+
+	bool Targeted::CanTarget() const {
+		//条件式が一つもないなら、無条件でターゲットに指定できる。
+		if (m_canTargetFunctions.empty()) {
+			return true;
+		}
+
+		//一つでもターゲット指定できない条件が合ったら、falseを返す。
+		for (auto& canFunction : m_canTargetFunctions) {
+			if (!canFunction()) {
+				return false;
+			}
+		}
+
+		//全ての条件を達成しているためtrue
+		return true;
+	}
+
+	void Targeted::AddCanTargetFunction(const std::function<bool()>& canTargetFunction) {
+		m_canTargetFunctions.push_back(canTargetFunction);
+	}
 }
