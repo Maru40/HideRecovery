@@ -36,6 +36,10 @@ namespace basecross {
 		SetDiffuse(bsm::Col4(0.6f, 0.6f, 0.6f, 1.0f));
 	}
 
+	void BoneModelDraw::OnUpdate() {
+		AdvBaseDraw::OnUpdate();
+	}
+
 	void BoneModelDraw::OnDraw() {
 		if (GetGameObject()->GetAlphaActive()) {
 			if (!(GetBlendState() == BlendState::AlphaBlend || GetBlendState() == BlendState::Additive)) {

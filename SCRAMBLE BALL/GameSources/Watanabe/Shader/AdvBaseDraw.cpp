@@ -83,6 +83,18 @@ namespace basecross {
 
 	AdvBaseDraw::~AdvBaseDraw() {}
 
+	void AdvBaseDraw::OnLateStart() {
+		m_shadowmap = GetGameObject()->GetComponent<Shadowmap>(false);
+	}
+
+	void AdvBaseDraw::OnUpdate() {
+		auto shadowmap = m_shadowmap.lock();
+		// レートを同期
+		if (shadowmap) {
+			shadowmap->SetDissolveAnimationRate(GetDissolveAnimationRate());
+		}
+	}
+
 	void AdvBaseDraw::SetConstants(AdvConstants& SmCb, const MeshPrimData& data) {
 		//行列の定義
 		auto PtrTrans = GetGameObject()->GetComponent<Transform>();

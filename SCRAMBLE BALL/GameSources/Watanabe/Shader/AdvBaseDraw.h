@@ -66,6 +66,7 @@ namespace basecross {
 	private:
 		struct Impl;
 		unique_ptr<Impl> pImpl;
+		weak_ptr<Shadowmap> m_shadowmap;
 	protected:
 		explicit AdvBaseDraw(const shared_ptr<GameObject>& GameObjectPtr);
 		virtual ~AdvBaseDraw();
@@ -575,6 +576,9 @@ namespace basecross {
 	public:
 		float GetDissolveAnimationRate();
 		void SetDissolveAnimationRate(float rate);
+
+		void OnLateStart()override;
+		void OnUpdate()override;
 
 		/// <summary>
 		/// アウトラインを描画するかどうか

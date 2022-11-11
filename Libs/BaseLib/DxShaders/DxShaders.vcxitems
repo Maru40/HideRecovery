@@ -154,6 +154,10 @@
     <FxCompile Include="$(MSBuildThisFileDirectory)PSPTStatic.hlsl">
       <ShaderType>Pixel</ShaderType>
     </FxCompile>
+    <FxCompile Include="$(MSBuildThisFileDirectory)PSShadowmap.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+    </FxCompile>
     <FxCompile Include="$(MSBuildThisFileDirectory)VSPCSprite.hlsl">
       <ShaderType>Vertex</ShaderType>
     </FxCompile>

@@ -15,7 +15,7 @@ namespace basecross {
 		virtual ~StaticModelDraw();
 
 		virtual void OnCreate()override;
-		virtual void OnUpdate()override {}
+		virtual void OnUpdate()override;
 		virtual void OnDraw()override;
 	};
 }

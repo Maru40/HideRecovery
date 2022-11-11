@@ -39,7 +39,7 @@ namespace basecross {
 		void SetMultiMeshResource(const wstring& meshKey);
 
 		virtual void OnCreate()override;
-		virtual void OnUpdate()override {}
+		virtual void OnUpdate()override;
 		virtual void OnDraw()override;
 	};
 }
