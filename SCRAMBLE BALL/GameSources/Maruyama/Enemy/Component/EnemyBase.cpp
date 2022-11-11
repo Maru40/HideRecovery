@@ -37,12 +37,6 @@ namespace basecross {
 			m_onlineSynchronizer = GetGameObject()->GetComponent<OnlinePlayerSynchronizer>(false);
 		}
 
-		void EnemyBase::OnUpdate() {
-			//auto input = GetGameObject()->GetComponent<AIVirtualController>()->GetInputDirection();
-
-			//m_onlineSynchronizer.lock()->Move(input);
-		}
-
 		void EnemyBase::SetTarget(const std::shared_ptr<GameObject>& target) {
 			if (!m_targetManager.lock()) {
 				return;

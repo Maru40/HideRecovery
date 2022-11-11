@@ -46,8 +46,6 @@ namespace basecross {
 			virtual void OnCreate() override;
 			virtual void OnStart() override;
 
-			virtual void OnUpdate() override;
-
 			//--------------------------------------------------------------------------------------
 			///	インターフェースの実装
 			//--------------------------------------------------------------------------------------
