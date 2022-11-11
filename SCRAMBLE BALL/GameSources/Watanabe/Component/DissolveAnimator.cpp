@@ -16,6 +16,7 @@ namespace basecross {
 
 		if (m_timer.IsTimeUp()) {
 			m_isPlayingAnimation = false;
+			m_drawComp.lock()->SetDissolveAnimationRate(0.0f);
 			return;
 		}
 

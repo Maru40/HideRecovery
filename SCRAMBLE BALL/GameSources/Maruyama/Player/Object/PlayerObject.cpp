@@ -33,8 +33,10 @@
 #include "Maruyama/Player/Component/ChargeGun.h"
 #include "Watanabe/Component/PlayerStatus.h"
 #include "Watanabe/Component/HasBallEventExecuter.h"
+#include "Watanabe/Component/DissolveAnimator.h"
 #include "Watanabe/UI/UIObjectCSVBuilder.h"
 #include "Watanabe/UI/DirectionWithHasBallUI.h"
+
 #include "MainStage.h"
 
 #include "Maruyama/Player/Component/TackleAttack.h"
@@ -121,7 +123,16 @@ namespace basecross {
 		AddComponent<PlayerControlManager>();
 		AddComponent<OnlinePlayerSynchronizer>();
 
-		AddComponent<PlayerAnimator>();
+		auto dissolveAnimator = AddComponent<DissolveAnimator>();
+		auto animator = AddComponent<PlayerAnimator>();
+		// 死んだらディゾブル開始
+		animator->AddAnimationEvent(PlayerAnimationState::State::Dead,
+			[dissolveAnimator]() {
+				dissolveAnimator->Start();
+			},
+			nullptr, nullptr
+				);
+
 		auto chargeGun = AddComponent<ChargeGun>();
 		auto soundEmitter = AddComponent<SoundEmitter>();
 		auto playerStatus = AddComponent<PlayerStatus>();
