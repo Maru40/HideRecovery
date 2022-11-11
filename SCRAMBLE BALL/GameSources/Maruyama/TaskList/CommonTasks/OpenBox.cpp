@@ -80,6 +80,7 @@ namespace basecross {
 		}
 
 		void OpenBox::ChangeAnimation() {
+			return;
 			if (m_animator.lock() == nullptr) {
 				return;
 			}

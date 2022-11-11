@@ -139,6 +139,12 @@ namespace basecross {
 					void InitializeParametor();
 
 					/// <summary>
+					/// ショットタスク中にターゲット指定できないオブジェクトを取得
+					/// </summary>
+					/// <returns></returns>
+					std::shared_ptr<GameObject> GetShotOutTarget();
+
+					/// <summary>
 					/// 同じリクエスタのタプルを削除
 					/// </summary>
 					template<class T>

@@ -63,7 +63,8 @@ namespace basecross {
 				}
 
 				void Shot::OnStart() {
-					m_useWeapon.lock()->SetIsAim(true);
+					m_onlineSynchronizer.lock()->Aim(true);
+					//m_useWeapon.lock()->SetIsAim(true);
 
 					SelectMoveTask();
 				}
@@ -77,7 +78,8 @@ namespace basecross {
 				}
 
 				void Shot::OnExit() {
-					m_useWeapon.lock()->SetIsAim(false);
+					//m_useWeapon.lock()->SetIsAim(false);
+					m_onlineSynchronizer.lock()->Aim(false);
 					m_velocityManager.lock()->ResetAll();
 
 					m_moveTaskList->ForceStop();	//タスクの終了
@@ -102,13 +104,6 @@ namespace basecross {
 				}
 
 				void Shot::ShotUpdate() {
-					//if (!m_useWeapon.lock()->CanShot()) {
-					//	return;
-					//}
-
-					//auto ownerTrans = GetOwner()->GetGameObject()->GetComponent<Transform>();
-					//m_useWeapon.lock()->GetWepon()->Shot(ownerTrans->GetForward());
-
 					m_onlineSynchronizer.lock()->Shot();
 				}
 
