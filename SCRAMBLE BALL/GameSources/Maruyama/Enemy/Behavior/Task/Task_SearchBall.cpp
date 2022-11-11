@@ -54,7 +54,7 @@ namespace basecross {
 				SearchBall_Parametor::SearchBall_Parametor() :
 					moveAstarParam(new basecross::Task::MoveAstar::Parametor()),
 					targetSeekParam(new TaskListNode::TargetSeek::Parametor()),
-					waitParam(new basecross::Task::Wait::Parametor(1.0f))
+					waitParam(new basecross::Task::Wait::Parametor(0.5f))
 				{}
 
 				SearchBall_Parametor::~SearchBall_Parametor() {
