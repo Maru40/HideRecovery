@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0"
+  xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Headers">
       <UniqueIdentifier>{4b0a624a-610d-4bc6-b311-2b02a781cdf9}</UniqueIdentifier>
@@ -1378,7 +1379,9 @@
     </Filter>
     <Filter Include="Maruyama\Enemy\BehaviorTree\Decorator\OutSpecificTarget">
       <UniqueIdentifier>{a523e5b7-d680-4db6-ba9e-e9a127fb46c6}</UniqueIdentifier>
-
+    </Filter>
+    <Filter Include="Watanabe\Component\DissolveAnimator">
+      <UniqueIdentifier>{e76dbee5-220b-476c-a2cf-17890d9f181d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -2588,6 +2591,9 @@
       <Filter>Maruyama\Enemy\BehaviorTree\Decorator\OutSpecificTarget</Filter>
     </ClInclude>
 
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\DissolveAnimator.h">
+      <Filter>Watanabe\Component\DissolveAnimator</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -3697,6 +3703,9 @@
       <Filter>Maruyama\Enemy\BehaviorTree\Decorator\OutSpecificTarget</Filter>
     </ClCompile>
 
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\DissolveAnimator.cpp">
+      <Filter>Watanabe\Component\DissolveAnimator</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="$(MSBuildThisFileDirectory)..\..\Libs\BaseLib\DxShaders\SlimeVS.hlsl">

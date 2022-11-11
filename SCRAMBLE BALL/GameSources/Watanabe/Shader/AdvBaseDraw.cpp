@@ -6,6 +6,7 @@
 #include "stdafx.h"
 #include "AdvBaseDraw.h"
 #include "DrawComponents.h"
+#include "../Utility/Utility.h"
 
 namespace basecross {
 	struct AdvBaseDraw::Impl :public DrawObjectBase {
@@ -35,6 +36,12 @@ namespace basecross {
 		Col4 m_OutlineColor;
 		// アウトラインの幅
 		float m_OutlineWidth;
+		// ディゾルブのレート（0～1）
+		float m_DissolveAnimationRate;
+		// ディゾブルのエッジ色
+		Col4 m_DissolveEdgeColor;
+		// ディゾブルが有効か
+		bool m_EnabledDissolve;
 		////Instance描画用
 		////Instance最大値
 		//size_t m_MaxInstance;
@@ -55,7 +62,10 @@ namespace basecross {
 			m_ModelTextureEnabled(true),
 			m_IsOutlineDraw(false),
 			m_OutlineColor(0, 0, 0, 1),
-			m_OutlineWidth(0.01f)
+			m_OutlineWidth(0.01f),
+			m_DissolveAnimationRate(1),
+			m_DissolveEdgeColor(1, 1, 1, 1),
+			m_EnabledDissolve(false)
 			//m_MaxInstance(2000),
 			//m_AutoClearMatrixVec(false)
 		{}
@@ -68,15 +78,29 @@ namespace basecross {
 		//パイプラインステートをデフォルトの３D
 		SetBlendState(BlendState::Opaque);
 		SetDepthStencilState(DepthStencilState::Default);
-		SetRasterizerState(RasterizerState::CullBack);
+		SetRasterizerState(RasterizerState::CullNone);
 		SetSamplerState(SamplerState::LinearClamp);
 
 		// デフォルトで設定
 		SetTextureResource(L"Default_TX", TextureType::Default);
 		SetTextureResource(L"ToonTex_TX", TextureType::ToonRamp);
+		SetTextureResource(L"Noise_TX", TextureType::Noise);
 	}
 
 	AdvBaseDraw::~AdvBaseDraw() {}
+
+	void AdvBaseDraw::OnLateStart() {
+		m_shadowmap = GetGameObject()->GetComponent<Shadowmap>(false);
+	}
+
+	void AdvBaseDraw::OnUpdate() {
+		auto shadowmap = m_shadowmap.lock();
+		// レートを同期
+		if (shadowmap) {
+			shadowmap->SetDissolveAnimationRate(GetDissolveAnimationRate());
+			shadowmap->SetEnabledDissolve(pImpl->m_EnabledDissolve);
+		}
+	}
 
 	void AdvBaseDraw::SetConstants(AdvConstants& SmCb, const MeshPrimData& data) {
 		//行列の定義
@@ -163,6 +187,11 @@ namespace basecross {
 				}
 			}
 		}
+		SmCb.DissolveAnimationRate = Vec4(0);
+		SmCb.DissolveAnimationRate.x = pImpl->m_DissolveAnimationRate;
+		SmCb.DissolveAnimationRate.y = pImpl->m_EnabledDissolve;
+
+		SmCb.DissolveEdgeColor = pImpl->m_DissolveEdgeColor;
 	}
 
 	void AdvBaseDraw::SetOutlineConstants(OutlineConstants& cb, const MeshPrimData& data) {
@@ -217,6 +246,24 @@ namespace basecross {
 	//	pID3D11DeviceContext->Unmap(pImpl->m_MatrixBuffer.Get(), 0);
 	//}
 #pragma endregion
+	void AdvBaseDraw::SetEnabledDissolve(bool flg) {
+		pImpl->m_EnabledDissolve = flg;
+	}
+
+	void AdvBaseDraw::SetDissolveEdgeColor(const Col4& color) {
+		pImpl->m_DissolveEdgeColor = color;
+	}
+
+	Col4 AdvBaseDraw::GetDissolveEdgeColor()const {
+		return pImpl->m_DissolveEdgeColor;
+	}
+
+	float AdvBaseDraw::GetDissolveAnimationRate() {
+		return pImpl->m_DissolveAnimationRate;
+	}
+	void AdvBaseDraw::SetDissolveAnimationRate(float rate) {
+		pImpl->m_DissolveAnimationRate = Utility::Clamp(rate, 0.0f, 1.0f);
+	}
 
 	Col4 AdvBaseDraw::GetOutlineColor() const {
 		return pImpl->m_OutlineColor;

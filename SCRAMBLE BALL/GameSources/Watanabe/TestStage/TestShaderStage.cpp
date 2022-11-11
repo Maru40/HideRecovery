@@ -59,6 +59,7 @@ namespace basecross {
 		auto player = AddGameObject<GameObject>();
 		auto drawComp = player->AddComponent<BoneModelDraw>();
 		drawComp->SetMultiMeshResource(L"Player_Mesh");
+		drawComp->SetDissolveAnimationRate(0.5f);
 
 		auto shadow = player->AddComponent<Shadowmap>();
 		shadow->SetMultiMeshResource(L"Player_Mesh");
@@ -69,6 +70,11 @@ namespace basecross {
 			[player](float delta) {
 				auto util = player->GetBehavior<UtilBehavior>();
 				util->RotToHead(Vec3(cosf(delta), 0, sinf(delta)), 2 * delta);
+
+				auto drawComp = player->GetComponent<BoneModelDraw>();
+				drawComp->SetDissolveAnimationRate(0.5f);
+				drawComp->SetDissolveAnimationRate((cosf(delta) + 1) * 0.5f);
+				//Debug::GetInstance()->Log(drawComp->GetDissolveAnimationRate());
 			}
 		);
 

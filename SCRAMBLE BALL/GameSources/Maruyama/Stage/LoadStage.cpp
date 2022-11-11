@@ -73,6 +73,9 @@ namespace basecross
 		//RampTex
 		ResourceLoadData(L"Ramp_Rock_TX", L"RampTex_Rock.png"),
 
+		// ノイズテクスチャ
+		ResourceLoadData(L"Noise_TX", L"Noise_TX.png"),
+
 		// コンテナ用テクスチャ
 		ResourceLoadData(L"RedContianerTx", L"Contianer/RedContianerTx.png"),
 		ResourceLoadData(L"GreenContianerTx", L"Contianer/GreenContianerTx.png"),

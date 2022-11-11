@@ -63,6 +63,7 @@
     <FxCompile Include="$(MSBuildThisFileDirectory)VSShadowmap.hlsl" />
     <FxCompile Include="$(MSBuildThisFileDirectory)VSShadowmapBone.hlsl" />
     <FxCompile Include="$(MSBuildThisFileDirectory)VSShadowmapBoneWithTan.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)PSShadowmap.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)BcINCCommon.hlsli" />

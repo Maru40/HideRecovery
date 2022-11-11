@@ -7,71 +7,68 @@
 #include "DrawComponents.h"
 
 namespace basecross {
-
 	//Shadowmap
 	IMPLEMENT_DX11_CONSTANT_BUFFER(CBShadow)
-	IMPLEMENT_DX11_VERTEX_SHADER(VSShadowmap, App::GetApp()->GetShadersPath() + L"VSShadowmap.cso")
-	IMPLEMENT_DX11_VERTEX_SHADER(VSShadowmapBone, App::GetApp()->GetShadersPath() + L"VSShadowmapBone.cso")
-	IMPLEMENT_DX11_VERTEX_SHADER(VSShadowmapBoneWithTan, App::GetApp()->GetShadersPath() + L"VSShadowmapBoneWithTan.cso")
+		IMPLEMENT_DX11_VERTEX_SHADER(VSShadowmap, App::GetApp()->GetShadersPath() + L"VSShadowmap.cso")
+		IMPLEMENT_DX11_VERTEX_SHADER(VSShadowmapBone, App::GetApp()->GetShadersPath() + L"VSShadowmapBone.cso")
+		IMPLEMENT_DX11_VERTEX_SHADER(VSShadowmapBoneWithTan, App::GetApp()->GetShadersPath() + L"VSShadowmapBoneWithTan.cso")
+		IMPLEMENT_DX11_PIXEL_SHADER(PSShadowmap, App::GetApp()->GetShadersPath() + L"PSShadowmap.cso")
 
-	//スプライト用
-	IMPLEMENT_DX11_CONSTANT_BUFFER(CBSprite)
+		//スプライト用
+		IMPLEMENT_DX11_CONSTANT_BUFFER(CBSprite)
 
-	//PCSprite
-	IMPLEMENT_DX11_VERTEX_SHADER(VSPCSprite, App::GetApp()->GetShadersPath() + L"VSPCSprite.cso")
-	IMPLEMENT_DX11_PIXEL_SHADER(PSPCSprite, App::GetApp()->GetShadersPath() + L"PSPCSprite.cso")
+		//PCSprite
+		IMPLEMENT_DX11_VERTEX_SHADER(VSPCSprite, App::GetApp()->GetShadersPath() + L"VSPCSprite.cso")
+		IMPLEMENT_DX11_PIXEL_SHADER(PSPCSprite, App::GetApp()->GetShadersPath() + L"PSPCSprite.cso")
 
-	//PTSprite
-	IMPLEMENT_DX11_VERTEX_SHADER(VSPTSprite, App::GetApp()->GetShadersPath() + L"VSPTSprite.cso")
-	IMPLEMENT_DX11_PIXEL_SHADER(PSPTSprite, App::GetApp()->GetShadersPath() + L"PSPTSprite.cso")
+		//PTSprite
+		IMPLEMENT_DX11_VERTEX_SHADER(VSPTSprite, App::GetApp()->GetShadersPath() + L"VSPTSprite.cso")
+		IMPLEMENT_DX11_PIXEL_SHADER(PSPTSprite, App::GetApp()->GetShadersPath() + L"PSPTSprite.cso")
 
-	//PCTSprite
-	IMPLEMENT_DX11_VERTEX_SHADER(VSPCTSprite, App::GetApp()->GetShadersPath() + L"VSPCTSprite.cso")
-	IMPLEMENT_DX11_PIXEL_SHADER(PSPCTSprite, App::GetApp()->GetShadersPath() + L"PSPCTSprite.cso")
+		//PCTSprite
+		IMPLEMENT_DX11_VERTEX_SHADER(VSPCTSprite, App::GetApp()->GetShadersPath() + L"VSPCTSprite.cso")
+		IMPLEMENT_DX11_PIXEL_SHADER(PSPCTSprite, App::GetApp()->GetShadersPath() + L"PSPCTSprite.cso")
 
+		//CBSimple
+		IMPLEMENT_DX11_CONSTANT_BUFFER(CBSimple)
+		//PCStatic
+		IMPLEMENT_DX11_VERTEX_SHADER(VSPCStatic, App::GetApp()->GetShadersPath() + L"VSPCStatic.cso")
+		IMPLEMENT_DX11_PIXEL_SHADER(PSPCStatic, App::GetApp()->GetShadersPath() + L"PSPCStatic.cso")
+		//PNStatic
+		IMPLEMENT_DX11_VERTEX_SHADER(VSPNStatic, App::GetApp()->GetShadersPath() + L"VSPNStatic.cso")
+		IMPLEMENT_DX11_PIXEL_SHADER(PSPNStatic, App::GetApp()->GetShadersPath() + L"PSPNStatic.cso")
+		//PTStatic
+		IMPLEMENT_DX11_VERTEX_SHADER(VSPTStatic, App::GetApp()->GetShadersPath() + L"VSPTStatic.cso")
+		IMPLEMENT_DX11_PIXEL_SHADER(PSPTStatic, App::GetApp()->GetShadersPath() + L"PSPTStatic.cso")
+		//PCTStatic
+		IMPLEMENT_DX11_VERTEX_SHADER(VSPCTStatic, App::GetApp()->GetShadersPath() + L"VSPCTStatic.cso")
+		IMPLEMENT_DX11_PIXEL_SHADER(PSPCTStatic, App::GetApp()->GetShadersPath() + L"PSPCTStatic.cso")
+		//PNTStatic
+		IMPLEMENT_DX11_VERTEX_SHADER(VSPNTStatic, App::GetApp()->GetShadersPath() + L"VSPNTStatic.cso")
+		IMPLEMENT_DX11_PIXEL_SHADER(PSPNTStatic, App::GetApp()->GetShadersPath() + L"PSPNTStatic.cso")
+		//PNTStaticShadow
+		IMPLEMENT_DX11_VERTEX_SHADER(VSPNTStaticShadow, App::GetApp()->GetShadersPath() + L"VSPNTStaticShadow.cso")
+		IMPLEMENT_DX11_PIXEL_SHADER(PSPNTStaticShadow, App::GetApp()->GetShadersPath() + L"PSPNTStaticShadow.cso")
+		IMPLEMENT_DX11_PIXEL_SHADER(PSPNTStaticShadow2, App::GetApp()->GetShadersPath() + L"PSPNTStaticShadow2.cso")
+		//PNTBone
+		IMPLEMENT_DX11_VERTEX_SHADER(VSPNTBone, App::GetApp()->GetShadersPath() + L"VSPNTBone.cso")
+		IMPLEMENT_DX11_VERTEX_SHADER(VSPNTBoneShadow, App::GetApp()->GetShadersPath() + L"VSPNTBoneShadow.cso")
 
-	//CBSimple
-	IMPLEMENT_DX11_CONSTANT_BUFFER(CBSimple)
-	//PCStatic
-	IMPLEMENT_DX11_VERTEX_SHADER(VSPCStatic, App::GetApp()->GetShadersPath() + L"VSPCStatic.cso")
-	IMPLEMENT_DX11_PIXEL_SHADER(PSPCStatic, App::GetApp()->GetShadersPath() + L"PSPCStatic.cso")
-	//PNStatic
-	IMPLEMENT_DX11_VERTEX_SHADER(VSPNStatic, App::GetApp()->GetShadersPath() + L"VSPNStatic.cso")
-	IMPLEMENT_DX11_PIXEL_SHADER(PSPNStatic, App::GetApp()->GetShadersPath() + L"PSPNStatic.cso")
-	//PTStatic
-	IMPLEMENT_DX11_VERTEX_SHADER(VSPTStatic, App::GetApp()->GetShadersPath() + L"VSPTStatic.cso")
-	IMPLEMENT_DX11_PIXEL_SHADER(PSPTStatic, App::GetApp()->GetShadersPath() + L"PSPTStatic.cso")
-	//PCTStatic
-	IMPLEMENT_DX11_VERTEX_SHADER(VSPCTStatic, App::GetApp()->GetShadersPath() + L"VSPCTStatic.cso")
-	IMPLEMENT_DX11_PIXEL_SHADER(PSPCTStatic, App::GetApp()->GetShadersPath() + L"PSPCTStatic.cso")
-	//PNTStatic
-	IMPLEMENT_DX11_VERTEX_SHADER(VSPNTStatic, App::GetApp()->GetShadersPath() + L"VSPNTStatic.cso")
-	IMPLEMENT_DX11_PIXEL_SHADER(PSPNTStatic, App::GetApp()->GetShadersPath() + L"PSPNTStatic.cso")
-	//PNTStaticShadow
-	IMPLEMENT_DX11_VERTEX_SHADER(VSPNTStaticShadow, App::GetApp()->GetShadersPath() + L"VSPNTStaticShadow.cso")
-	IMPLEMENT_DX11_PIXEL_SHADER(PSPNTStaticShadow, App::GetApp()->GetShadersPath() + L"PSPNTStaticShadow.cso")
-	IMPLEMENT_DX11_PIXEL_SHADER(PSPNTStaticShadow2, App::GetApp()->GetShadersPath() + L"PSPNTStaticShadow2.cso")
-	//PNTBone
-	IMPLEMENT_DX11_VERTEX_SHADER(VSPNTBone, App::GetApp()->GetShadersPath() + L"VSPNTBone.cso")
-	IMPLEMENT_DX11_VERTEX_SHADER(VSPNTBoneShadow, App::GetApp()->GetShadersPath() + L"VSPNTBoneShadow.cso")
+		//PCStaticInstance
+		IMPLEMENT_DX11_VERTEX_SHADER(VSPCStaticInstance, App::GetApp()->GetShadersPath() + L"VSPCStaticInstance.cso")
+		//PTStaticInstance
+		IMPLEMENT_DX11_VERTEX_SHADER(VSPTStaticInstance, App::GetApp()->GetShadersPath() + L"VSPTStaticInstance.cso")
+		//PCTStaticInstance
+		IMPLEMENT_DX11_VERTEX_SHADER(VSPCTStaticInstance, App::GetApp()->GetShadersPath() + L"VSPCTStaticInstance.cso")
+		//PNTStaticInstance
+		IMPLEMENT_DX11_VERTEX_SHADER(VSPNTStaticInstance, App::GetApp()->GetShadersPath() + L"VSPNTStaticInstance.cso")
+		IMPLEMENT_DX11_VERTEX_SHADER(VSPNTStaticInstanceShadow, App::GetApp()->GetShadersPath() + L"VSPNTStaticInstanceShadow.cso")
 
-	//PCStaticInstance
-	IMPLEMENT_DX11_VERTEX_SHADER(VSPCStaticInstance, App::GetApp()->GetShadersPath() + L"VSPCStaticInstance.cso")
-	//PTStaticInstance
-	IMPLEMENT_DX11_VERTEX_SHADER(VSPTStaticInstance, App::GetApp()->GetShadersPath() + L"VSPTStaticInstance.cso")
-	//PCTStaticInstance
-	IMPLEMENT_DX11_VERTEX_SHADER(VSPCTStaticInstance, App::GetApp()->GetShadersPath() + L"VSPCTStaticInstance.cso")
-	//PNTStaticInstance
-	IMPLEMENT_DX11_VERTEX_SHADER(VSPNTStaticInstance, App::GetApp()->GetShadersPath() + L"VSPNTStaticInstance.cso")
-	IMPLEMENT_DX11_VERTEX_SHADER(VSPNTStaticInstanceShadow, App::GetApp()->GetShadersPath() + L"VSPNTStaticInstanceShadow.cso")
-
-
-
-	//--------------------------------------------------------------------------------------
-	//	struct DrawComponent::Impl;
-	//	用途: Implイディオム
-	//--------------------------------------------------------------------------------------
-	struct DrawComponent::Impl {
+		//--------------------------------------------------------------------------------------
+		//	struct DrawComponent::Impl;
+		//	用途: Implイディオム
+		//--------------------------------------------------------------------------------------
+		struct DrawComponent::Impl {
 		BlendState m_BlendState;
 		DepthStencilState m_DepthStencilState;
 		RasterizerState m_RasterizerState;
@@ -92,7 +89,6 @@ namespace basecross {
 	{}
 	DrawComponent::~DrawComponent() {}
 
-
 	BlendState DrawComponent::GetBlendState() const {
 		return pImpl->m_BlendState;
 	}
@@ -106,7 +102,6 @@ namespace basecross {
 	SamplerState DrawComponent::GetSamplerState() const {
 		return pImpl->m_SamplerState;
 	}
-
 
 	void DrawComponent::SetBlendState(const BlendState state) {
 		pImpl->m_BlendState = state;
@@ -134,10 +129,8 @@ namespace basecross {
 		}
 	}
 
-
 	void DrawComponent::SetDepthStencilState(const DepthStencilState state) {
 		pImpl->m_DepthStencilState = state;
-
 	}
 
 	void DrawComponent::SetDeviceDepthStencilState() {
@@ -155,7 +148,6 @@ namespace basecross {
 			pID3D11DeviceContext->OMSetDepthStencilState(RenderStatePtr->GetDepthRead(), 0);
 			break;
 		}
-
 	}
 
 	void DrawComponent::SetRasterizerState(const RasterizerState state) {
@@ -177,7 +169,6 @@ namespace basecross {
 			break;
 		}
 	}
-
 
 	void DrawComponent::SetSamplerState(const SamplerState state) {
 		pImpl->m_SamplerState = state;
@@ -220,16 +211,12 @@ namespace basecross {
 		pID3D11DeviceContext->PSSetSamplers(0, 1, &pSampler);
 	}
 
-
-
 	const bsm::Mat4x4& DrawComponent::GetMeshToTransformMatrix() const {
 		return pImpl->m_MeshToTransformMatrix;
 	}
 	void DrawComponent::SetMeshToTransformMatrix(const bsm::Mat4x4& Mat) {
 		pImpl->m_MeshToTransformMatrix = Mat;
 	}
-
-
 
 	//--------------------------------------------------------------------------------------
 	//	struct Shadowmap::Impl;
@@ -244,13 +231,17 @@ namespace basecross {
 
 		static float m_PosAdjustment;
 
+		float m_DissolveAnimationRate = 1;
+		weak_ptr<TextureResource> m_NoiseTexRes;
+		// ディゾブルが有効
+		bool m_EnabledDissolve;
+
 		//メッシュリソース
 		weak_ptr<MeshResource> m_MeshResource;
 		//マルチメッシュリソース
 		weak_ptr<MultiMeshResource> m_MultiMeshResource;
 		//マルチメッシュ用の描画するインデックス
 		vector<bool> m_MultiMeshDrawVec;
-
 
 		Impl()
 		{}
@@ -263,8 +254,6 @@ namespace basecross {
 	float Shadowmap::Impl::m_ViewWidth(128.0f);
 	float Shadowmap::Impl::m_ViewHeight(128.0f);
 	float Shadowmap::Impl::m_PosAdjustment(0.1f);
-
-
 
 	//--------------------------------------------------------------------------------------
 	//	class Shadowmap : public Component;
@@ -291,8 +280,6 @@ namespace basecross {
 	void Shadowmap::SetViewSize(float f) { Impl::m_ViewWidth = Impl::m_ViewHeight = f; }
 	void Shadowmap::SetPosAdjustment(float f) { Impl::m_PosAdjustment = f; }
 
-
-
 	shared_ptr<MeshResource> Shadowmap::GetMeshResource(bool ExceptionActive) const {
 		auto shptr = pImpl->m_MeshResource.lock();
 		if (shptr) {
@@ -309,7 +296,6 @@ namespace basecross {
 		}
 		return nullptr;
 	}
-
 
 	void Shadowmap::SetMeshResource(const wstring& ResKey) {
 		try {
@@ -381,6 +367,28 @@ namespace basecross {
 		pImpl->m_MultiMeshDrawVec[index] = b;
 	}
 
+	void Shadowmap::SetDissolveAnimationRate(float rate) {
+		pImpl->m_DissolveAnimationRate = rate;
+	}
+	float Shadowmap::GetDissolveAnimationRate() {
+		return pImpl->m_DissolveAnimationRate;
+	}
+
+	void Shadowmap::SetEnabledDissolve(bool flg) {
+		pImpl->m_EnabledDissolve = flg;
+	}
+
+	bool Shadowmap::GetEnabledDissolve() {
+		return pImpl->m_EnabledDissolve;
+	}
+
+	shared_ptr<TextureResource> Shadowmap::GetNoiseTexRes() const {
+		return pImpl->m_NoiseTexRes.lock();
+	}
+
+	void Shadowmap::OnCreate() {
+		pImpl->m_NoiseTexRes = App::GetApp()->GetResource<TextureResource>(L"Noise_TX");
+	}
 
 	void Shadowmap::DrawSigle(const MeshPrimData& data) {
 		auto PtrGameObject = GetGameObject();
@@ -434,6 +442,8 @@ namespace basecross {
 		Cb.mWorld = bsm::transpose(RealWorldMatrix);
 		Cb.mView = bsm::transpose(LightView);
 		Cb.mProj = bsm::transpose(LightProj);
+		Cb.mDissolveAnimationRate = Vec4(0);
+		Cb.mDissolveAnimationRate.x = GetDissolveAnimationRate();
 
 		bool IsSkin = false;
 		bool IsSkinStride = false;
@@ -520,8 +530,14 @@ namespace basecross {
 		//描画方法（3角形）
 		pID3D11DeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-		//ピクセルシェーダはセットしない！
-		pID3D11DeviceContext->PSSetShader(nullptr, nullptr, 0);
+		if (GetEnabledDissolve()) {
+			// ピクセルシェーダ
+			pID3D11DeviceContext->PSSetShader(PSShadowmap::GetPtr()->GetShader(), nullptr, 0);
+		}
+		else {
+			pID3D11DeviceContext->PSSetShader(nullptr, nullptr, 0);
+		}
+
 		//ジオメトリシェーダの設定（使用しない）
 		pID3D11DeviceContext->GSSetShader(nullptr, nullptr, 0);
 
@@ -530,13 +546,20 @@ namespace basecross {
 		ID3D11Buffer* pNullConstantBuffer = nullptr;
 		pID3D11DeviceContext->VSSetConstantBuffers(0, 1, &pConstantBuffer);
 		//コンスタントバッファをピクセルシェーダにセット
-		pID3D11DeviceContext->PSSetConstantBuffers(0, 1, &pNullConstantBuffer);
+		pID3D11DeviceContext->PSSetConstantBuffers(0, 1, &pConstantBuffer);
+
+		if (GetEnabledDissolve()) {
+			// サンプラーの設定
+			RenderStatePtr->SetSamplerState(pID3D11DeviceContext, GetSamplerState(), 0);
+			// ノイズテクスチャをセット
+			pID3D11DeviceContext->PSSetShaderResources(0, 1, GetNoiseTexRes()->GetShaderResourceView().GetAddressOf());
+		}
+
 		//描画
 		pID3D11DeviceContext->DrawIndexed(data.m_NumIndicis, 0, 0);
 		//後始末は呼び出し側で行う
 //		Dev->InitializeStates();
 	}
-
 
 	void Shadowmap::OnDraw() {
 		auto PtrGameObject = GetGameObject();
@@ -565,8 +588,6 @@ namespace basecross {
 		Dev->InitializeStates();
 	}
 
-
-
 	//--------------------------------------------------------------------------------------
 	//ParticleDraw準備のための構造体
 	//--------------------------------------------------------------------------------------
@@ -581,12 +602,10 @@ namespace basecross {
 		bsm::Col4 m_Diffuse;
 		DrawParticleSprite() :
 			m_ToCaneraLength(0),
-			m_Diffuse(1,1,1,1)
+			m_Diffuse(1, 1, 1, 1)
 
 		{}
 	};
-
-
 
 	//--------------------------------------------------------------------------------------
 	//	struct PCTParticleDraw::Impl;
@@ -600,7 +619,7 @@ namespace basecross {
 		ComPtr<ID3D11Buffer> m_MatrixBuffer;	///<行列用の頂点バッファ
 		//加算処理するかどうか
 		bool m_Addtype;
-		Impl(size_t MaxInstance,bool AddType) :
+		Impl(size_t MaxInstance, bool AddType) :
 			m_MaxInstance(MaxInstance),
 			m_Addtype(AddType)
 		{}
@@ -608,7 +627,6 @@ namespace basecross {
 		//頂点バッファの作成
 		void CreateParticleBuffers();
 	};
-
 
 	void PCTParticleDraw::Impl::CreateParticleBuffers() {
 		try {
@@ -630,15 +648,11 @@ namespace basecross {
 			//Max値で作成する
 			vector<bsm::Mat4x4> matrices(m_MaxInstance, bsm::Mat4x4());
 			MeshResource::CreateDynamicVertexBuffer(m_MatrixBuffer, matrices);
-
 		}
 		catch (...) {
 			throw;
 		}
 	}
-
-
-
 
 	//--------------------------------------------------------------------------------------
 	///	PCTParticle描画コンポーネント(パーティクル描画)
@@ -651,7 +665,7 @@ namespace basecross {
 	PCTParticleDraw::~PCTParticleDraw() {}
 
 	void PCTParticleDraw::AddParticle(float ToCaneraLength, const bsm::Mat4x4& WorldMatrix,
-		const shared_ptr<TextureResource>& TextureRes,const bsm::Col4& Diffuse) {
+		const shared_ptr<TextureResource>& TextureRes, const bsm::Col4& Diffuse) {
 		DrawParticleSprite Item;
 		Item.m_ToCaneraLength = ToCaneraLength;
 		Item.m_WorldMatrix = WorldMatrix;
@@ -671,7 +685,7 @@ namespace basecross {
 		bsm::Col4 m_Diffuse;
 		InstanceDrawStr(UINT s, UINT c, shared_ptr<TextureResource> t,
 			const bsm::Col4& Diffuse) :
-			Start(s), Count(c), Tex(t), m_Diffuse(Diffuse){}
+			Start(s), Count(c), Tex(t), m_Diffuse(Diffuse) {}
 	};
 
 	void PCTParticleDraw::OnDraw() {
@@ -700,9 +714,9 @@ namespace basecross {
 		UINT NowDrawCount = 0;
 
 		shared_ptr<TextureResource> NowTexRes = pImpl->m_DrawParticleSpriteVec[0].m_TextureRes;
-		bsm::Col4 NowDiffuse  = bsm::Col4(1,1,1,1);
+		bsm::Col4 NowDiffuse = bsm::Col4(1, 1, 1, 1);
 		for (size_t i = 0; i < pImpl->m_DrawParticleSpriteVec.size(); i++) {
-			if (pImpl->m_DrawParticleSpriteVec[i].m_TextureRes != NowTexRes || 
+			if (pImpl->m_DrawParticleSpriteVec[i].m_TextureRes != NowTexRes ||
 				pImpl->m_DrawParticleSpriteVec[i].m_Diffuse != NowDiffuse) {
 				m_InstancVec.push_back(InstanceDrawStr(NowStartIndex, NowDrawCount, NowTexRes, NowDiffuse));
 				NowStartIndex = (UINT)i;
@@ -715,7 +729,6 @@ namespace basecross {
 			}
 		}
 		m_InstancVec.push_back(InstanceDrawStr(NowStartIndex, NowDrawCount, NowTexRes, NowDiffuse));
-
 
 		//インスタンスバッファにマップ
 		D3D11_MAP mapType = D3D11_MAP_WRITE_DISCARD;
@@ -789,7 +802,6 @@ namespace basecross {
 		//転置する
 		Proj.transpose();
 
-
 		//コンスタントバッファの準備
 		SimpleConstants sb;
 		sb.World = bsm::Mat4x4();	//ワールド行列はダミー
@@ -839,7 +851,7 @@ namespace basecross {
 		{}
 	};
 
-	SpriteBaseDraw::SpriteBaseDraw(const shared_ptr<GameObject>& GameObjectPtr):
+	SpriteBaseDraw::SpriteBaseDraw(const shared_ptr<GameObject>& GameObjectPtr) :
 		DrawComponent(GameObjectPtr),
 		pImpl(new Impl())
 	{}
@@ -873,7 +885,6 @@ namespace basecross {
 
 	void SpriteBaseDraw::SetTextureResource(const shared_ptr<TextureResource>& TextureRes) {
 		pImpl->m_TextureResource = TextureRes;
-
 	}
 
 	void SpriteBaseDraw::SetTextureResource(const wstring& TextureKey) {
@@ -888,8 +899,6 @@ namespace basecross {
 		}
 		return nullptr;
 	}
-
-
 
 	bsm::Col4 SpriteBaseDraw::GetEmissive() const {
 		return pImpl->m_Emissive;
@@ -908,7 +917,7 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 	///	PCSprite描画コンポーネント
 	//--------------------------------------------------------------------------------------
-	PCSpriteDraw::PCSpriteDraw(const shared_ptr<GameObject>& GameObjectPtr):
+	PCSpriteDraw::PCSpriteDraw(const shared_ptr<GameObject>& GameObjectPtr) :
 		SpriteBaseDraw(GameObjectPtr)
 	{
 		//パイプラインステートをデフォルトの2D
@@ -918,9 +927,8 @@ namespace basecross {
 		SetSamplerState(SamplerState::LinearClamp);
 	}
 
-
 	PCSpriteDraw::PCSpriteDraw(const shared_ptr<GameObject>& GameObjectPtr,
-		vector<VertexPositionColor>& Vertices, vector<uint16_t>& indices) : 
+		vector<VertexPositionColor>& Vertices, vector<uint16_t>& indices) :
 		SpriteBaseDraw(GameObjectPtr)
 	{
 		//パイプラインステートをデフォルトの2D
@@ -936,7 +944,7 @@ namespace basecross {
 		}
 	}
 
-	PCSpriteDraw::~PCSpriteDraw(){}
+	PCSpriteDraw::~PCSpriteDraw() {}
 
 	void PCSpriteDraw::OnCreate() {
 		auto SpriteMesh = GetMeshResource();
@@ -986,7 +994,6 @@ namespace basecross {
 		SetRasterizerState(RasterizerState::CullBack);
 		SetSamplerState(SamplerState::LinearClamp);
 	}
-
 
 	PTSpriteDraw::PTSpriteDraw(const shared_ptr<GameObject>& GameObjectPtr,
 		vector<VertexPositionTexture>& Vertices, vector<uint16_t>& indices) :
@@ -1041,7 +1048,6 @@ namespace basecross {
 		//後始末
 		auto Dev = App::GetApp()->GetDeviceResources();
 		Dev->InitializeStates();
-
 	}
 
 	//--------------------------------------------------------------------------------------
@@ -1056,7 +1062,6 @@ namespace basecross {
 		SetRasterizerState(RasterizerState::CullBack);
 		SetSamplerState(SamplerState::LinearClamp);
 	}
-
 
 	PCTSpriteDraw::PCTSpriteDraw(const shared_ptr<GameObject>& GameObjectPtr,
 		vector<VertexPositionColorTexture>& Vertices, vector<uint16_t>& indices) :
@@ -1113,7 +1118,6 @@ namespace basecross {
 		auto Dev = App::GetApp()->GetDeviceResources();
 		Dev->InitializeStates();
 	}
-
 
 	//--------------------------------------------------------------------------------------
 	///	汎用描画用
@@ -1257,16 +1261,12 @@ namespace basecross {
 		pD3D11DeviceContext->DrawIndexed(MeshRes->GetNumIndicis(), 0, 0);
 		//後始末
 		Dev->InitializeStates();
-
 	}
-
-
 
 	void GenericDraw::DrawWireFrame(const shared_ptr<GameObject>& GameObj,
 		const shared_ptr<MeshResource>& Mesh, const bsm::Mat4x4& MeshToTransformMatrix) {
-
 		PCWireFrameDraw(GameObj, Mesh,
-			bsm::Col4(0,0,0,0), bsm::Col4(1, 1, 1, 1), MeshToTransformMatrix);
+			bsm::Col4(0, 0, 0, 0), bsm::Col4(1, 1, 1, 1), MeshToTransformMatrix);
 	}
 
 	void GenericDraw::DrawWireFrameWithWorldMatrix(const shared_ptr<GameObject>& GameObj,
@@ -1274,7 +1274,6 @@ namespace basecross {
 		PCWireFrameDrawWithWorldMatrix(GameObj, Mesh,
 			bsm::Col4(0, 0, 0, 0), bsm::Col4(1, 1, 1, 1), WorldMatrix);
 	}
-
 
 	//static変数の実体
 	vector<bsm::Vec3> DrawObjectBase::m_TempPositions;
@@ -1477,14 +1476,10 @@ namespace basecross {
 		}
 		//アンマップ
 		pID3D11DeviceContext->Unmap(pImpl->m_SmDrawObject.m_MatrixBuffer.Get(), 0);
-
 	}
-
-
 
 	bool SmBaseDraw::IsOriginalMeshUse() const {
 		return pImpl->m_SmDrawObject.m_UseOriginalMeshResource;
-
 	}
 
 	void SmBaseDraw::SetOriginalMeshUse(bool b) {
@@ -1493,12 +1488,10 @@ namespace basecross {
 
 	shared_ptr<MeshResource> SmBaseDraw::GetOriginalMeshResource() const {
 		return pImpl->m_SmDrawObject.m_OriginalMeshResource;
-
 	}
 
 	void SmBaseDraw::SetOriginalMeshResource(const shared_ptr<MeshResource>& MeshRes) {
 		pImpl->m_SmDrawObject.m_OriginalMeshResource = MeshRes;
-
 	}
 
 	shared_ptr<MeshResource> SmBaseDraw::GetMeshResource() const {
@@ -1524,7 +1517,6 @@ namespace basecross {
 
 	void SmBaseDraw::SetTextureResource(const shared_ptr<TextureResource>& TextureRes) {
 		pImpl->m_SmDrawObject.m_TextureResource = TextureRes;
-
 	}
 
 	void SmBaseDraw::SetTextureResource(const wstring& TextureKey) {
@@ -1538,7 +1530,6 @@ namespace basecross {
 			return shptr;
 		}
 		return nullptr;
-
 	}
 
 	shared_ptr<MultiMeshResource> SmBaseDraw::GetMultiMeshResource() const {
@@ -1548,7 +1539,6 @@ namespace basecross {
 			return shptr;
 		}
 		return nullptr;
-
 	}
 
 	void SmBaseDraw::SetMultiMeshResource(const shared_ptr<MultiMeshResource>& MeshResourcePtr) {
@@ -1558,12 +1548,10 @@ namespace basecross {
 			//最初はすべてのマルチメッシュを描画
 			pImpl->m_SmDrawObject.m_MultiMeshDrawVec.push_back(true);
 		}
-
 	}
 
 	void SmBaseDraw::SetMultiMeshResource(const wstring& ResKey) {
 		this->SetMultiMeshResource(App::GetApp()->GetResource<MultiMeshResource>(ResKey));
-
 	}
 
 	bool SmBaseDraw::GetMultiMeshIsDraw(size_t index) const {
@@ -1587,10 +1575,8 @@ namespace basecross {
 		pImpl->m_SmDrawObject.m_MultiMeshDrawVec[index] = b;
 	}
 
-
 	bsm::Col4 SmBaseDraw::GetEmissive() const {
 		return pImpl->m_SmDrawObject.m_Emissive;
-
 	}
 
 	void SmBaseDraw::SetEmissive(const bsm::Col4& col) {
@@ -1599,17 +1585,14 @@ namespace basecross {
 
 	bsm::Col4 SmBaseDraw::GetDiffuse() const {
 		return pImpl->m_SmDrawObject.m_Diffuse;
-
 	}
 
 	void SmBaseDraw::SetDiffuse(const bsm::Col4& col) {
 		pImpl->m_SmDrawObject.m_Diffuse = col;
-
 	}
 
 	bsm::Col4 SmBaseDraw::GetSpecular() const {
 		return pImpl->m_SmDrawObject.m_Specular;
-
 	}
 
 	void SmBaseDraw::SetSpecular(const bsm::Col4& col) {
@@ -1618,12 +1601,10 @@ namespace basecross {
 
 	bool SmBaseDraw::GetOwnShadowActive() const {
 		return pImpl->m_SmDrawObject.m_OwnShadowActive;
-
 	}
 
 	bool SmBaseDraw::IsOwnShadowActive() const {
 		return pImpl->m_SmDrawObject.m_OwnShadowActive;
-
 	}
 
 	void SmBaseDraw::SetOwnShadowActive(bool b) {
@@ -1632,27 +1613,22 @@ namespace basecross {
 
 	bool SmBaseDraw::GetModelDiffusePriority() const {
 		return pImpl->m_SmDrawObject.m_ModelDiffusePriority;
-
 	}
 
 	bool SmBaseDraw::IsModelDiffusePriority() const {
 		return pImpl->m_SmDrawObject.m_ModelDiffusePriority;
-
 	}
 
 	void SmBaseDraw::SetModelDiffusePriority(bool b) {
 		pImpl->m_SmDrawObject.m_ModelDiffusePriority = b;
-
 	}
 
 	bool SmBaseDraw::GetModelEmissivePriority() const {
 		return pImpl->m_SmDrawObject.m_ModelEmissivePriority;
-
 	}
 
 	bool SmBaseDraw::IsModelEmissivePriority() const {
 		return pImpl->m_SmDrawObject.m_ModelEmissivePriority;
-
 	}
 
 	void SmBaseDraw::SetModelEmissivePriority(bool b) {
@@ -1661,43 +1637,35 @@ namespace basecross {
 
 	bool SmBaseDraw::GetModelTextureEnabled() const {
 		return pImpl->m_SmDrawObject.m_ModelTextureEnabled;
-
 	}
 
 	bool SmBaseDraw::IsModelTextureEnabled() const {
 		return pImpl->m_SmDrawObject.m_ModelTextureEnabled;
-
 	}
 
 	void SmBaseDraw::SetModelTextureEnabled(bool b) {
 		pImpl->m_SmDrawObject.m_ModelTextureEnabled = b;
-
 	}
 
 	void SmBaseDraw::BoneInit() {
 		pImpl->m_SmDrawObject.BoneInit();
-
 	}
 
 	void SmBaseDraw::InterpolationMatrix(const bsm::Mat4x4& m1, const bsm::Mat4x4& m2, float t, bsm::Mat4x4& out) {
 		pImpl->m_SmDrawObject.InterpolationMatrix(m1, m2, t, out);
-
 	}
 
 	void SmBaseDraw::AddAnimation(const wstring& Name, int StartSample, int SampleLength, bool Loop,
 		float SamplesParSecond) {
 		pImpl->m_SmDrawObject.AddAnimation(Name, StartSample, SampleLength, Loop, SamplesParSecond);
-
 	}
 
 	void SmBaseDraw::ChangeCurrentAnimation(const wstring& AnemationName, float StartTime) {
 		pImpl->m_SmDrawObject.ChangeCurrentAnimation(AnemationName, StartTime);
-
 	}
 
 	const wstring& SmBaseDraw::GetCurrentAnimation() const {
 		return pImpl->m_SmDrawObject.m_CurrentAnimeName;
-
 	}
 
 	float SmBaseDraw::GetCurrentAnimationTime() const {
@@ -1709,10 +1677,8 @@ namespace basecross {
 		return AnimData.m_IsAnimeEnd;
 	}
 
-
 	bool SmBaseDraw::UpdateAnimation(float ElapsedTime) {
 		return pImpl->m_SmDrawObject.UpdateAnimation(ElapsedTime);
-
 	}
 
 	const vector< bsm::Mat4x4 >* SmBaseDraw::GetVecLocalBonesPtr() const {
@@ -1722,7 +1688,6 @@ namespace basecross {
 	vector< bsm::Mat4x4 >& SmBaseDraw::GetVecLocalBones() {
 		return pImpl->m_SmDrawObject.m_LocalBonesMatrix;
 	}
-
 
 	const vector< bsm::Mat4x4 >* SmBaseDraw::GetVecMultiLocalBonesPtr(size_t index) const {
 		if (pImpl->m_SmDrawObject.m_MultiLocalBonesMatrix.size() > index) {
@@ -1741,8 +1706,6 @@ namespace basecross {
 		}
 		return pImpl->m_SmDrawObject.m_MultiLocalBonesMatrix[index];
 	}
-
-
 
 	size_t SmBaseDraw::GetMaxInstance() const {
 		return pImpl->m_SmDrawObject.m_MaxInstance;
@@ -1979,17 +1942,16 @@ namespace basecross {
 		return false;
 	}
 
-
 	//--------------------------------------------------------------------------------------
 	///	PCStatic描画コンポーネント
 	//--------------------------------------------------------------------------------------
-	PCStaticDraw::PCStaticDraw(const shared_ptr<GameObject>& GameObjectPtr):
+	PCStaticDraw::PCStaticDraw(const shared_ptr<GameObject>& GameObjectPtr) :
 		SmBaseDraw(GameObjectPtr)
 	{}
 
-	PCStaticDraw::~PCStaticDraw(){}
+	PCStaticDraw::~PCStaticDraw() {}
 
-	void PCStaticDraw::OnCreate(){}
+	void PCStaticDraw::OnCreate() {}
 
 	void PCStaticDraw::OnDraw() {
 		if (GetGameObject()->GetAlphaActive()) {
@@ -2017,7 +1979,6 @@ namespace basecross {
 		//後始末
 		auto Dev = App::GetApp()->GetDeviceResources();
 		Dev->InitializeStates();
-
 	}
 
 	//--------------------------------------------------------------------------------------
@@ -2057,10 +2018,7 @@ namespace basecross {
 		//後始末
 		auto Dev = App::GetApp()->GetDeviceResources();
 		Dev->InitializeStates();
-
 	}
-
-
 
 	//--------------------------------------------------------------------------------------
 	///	PTStatic描画コンポーネント
@@ -2099,7 +2057,6 @@ namespace basecross {
 		//後始末
 		auto Dev = App::GetApp()->GetDeviceResources();
 		Dev->InitializeStates();
-
 	}
 
 	//--------------------------------------------------------------------------------------
@@ -2139,7 +2096,6 @@ namespace basecross {
 		//後始末
 		auto Dev = App::GetApp()->GetDeviceResources();
 		Dev->InitializeStates();
-
 	}
 
 	//--------------------------------------------------------------------------------------
@@ -2198,7 +2154,6 @@ namespace basecross {
 		//後始末
 		auto Dev = App::GetApp()->GetDeviceResources();
 		Dev->InitializeStates();
-
 	}
 
 	//--------------------------------------------------------------------------------------
@@ -2262,7 +2217,6 @@ namespace basecross {
 		//後始末
 		auto Dev = App::GetApp()->GetDeviceResources();
 		Dev->InitializeStates();
-
 	}
 
 	//--------------------------------------------------------------------------------------
@@ -2285,13 +2239,10 @@ namespace basecross {
 	void PNTBoneModelDraw::SetMultiMeshResource(const shared_ptr<MultiMeshResource>& MeshResourcePtr) {
 		SmBaseDraw::SetMultiMeshResource(MeshResourcePtr);
 		BoneInit();
-
 	}
 	void PNTBoneModelDraw::SetMultiMeshResource(const wstring& ResKey) {
 		PNTBoneModelDraw::SetMultiMeshResource(App::GetApp()->GetResource<MultiMeshResource>(ResKey));
 	}
-
-
 
 	void PNTBoneModelDraw::OnCreate() {
 		//ライティングのみだと極端になるので調整
@@ -2564,10 +2515,6 @@ namespace basecross {
 			//行列配列のクリア
 			ClearMatrixVec();
 		}
-
 	}
-
-
 }
 //end basecross
-

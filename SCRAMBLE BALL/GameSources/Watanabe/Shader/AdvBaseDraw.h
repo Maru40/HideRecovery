@@ -14,7 +14,8 @@ namespace basecross {
 		Default,
 		Shadowmap,
 		ToonRamp,
-		Normal
+		Normal,
+		Noise,
 	};
 
 	struct AdvConstants {
@@ -30,8 +31,10 @@ namespace basecross {
 		Col4 Diffuse;
 		// スペキュラー
 		Col4 Specular;
-		// テクスチャ=xがアクティブかどうか
-		XMUINT4 ActiveFlg;
+		// X:ディゾルブレート
+		Vec4 DissolveAnimationRate;
+		// ディゾブルのエッジ色
+		Col4 DissolveEdgeColor;
 		// ライイト方向
 		Vec4 LightDir;
 		// ライト位置
@@ -65,6 +68,7 @@ namespace basecross {
 	private:
 		struct Impl;
 		unique_ptr<Impl> pImpl;
+		weak_ptr<Shadowmap> m_shadowmap;
 	protected:
 		explicit AdvBaseDraw(const shared_ptr<GameObject>& GameObjectPtr);
 		virtual ~AdvBaseDraw();
@@ -533,6 +537,12 @@ namespace basecross {
 			// デプスステンシルステート
 			RenderState->SetDepthStencilState(pD3D11DeviceContext, GetDepthStencilState());
 
+			// サンプラーの設定
+			RenderState->SetSamplerState(pD3D11DeviceContext, GetSamplerState(), 0);
+
+			// ディゾブル用のノイズテクスチャをセット
+			pD3D11DeviceContext->PSSetShaderResources(0, 1, GetTextureResource(TextureType::Noise)->GetShaderResourceView().GetAddressOf());
+
 			// メッシュ内のマテリアルの配列
 			auto& MatVec = data.m_MaterialExVec;
 			if (MatVec.size() == 0) {
@@ -572,6 +582,17 @@ namespace basecross {
 		}
 
 	public:
+		void SetEnabledDissolve(bool flg);
+
+		void SetDissolveEdgeColor(const Col4& color);
+		Col4 GetDissolveEdgeColor()const;
+
+		float GetDissolveAnimationRate();
+		void SetDissolveAnimationRate(float rate);
+
+		void OnLateStart()override;
+		void OnUpdate()override;
+
 		/// <summary>
 		/// アウトラインを描画するかどうか
 		/// </summary>

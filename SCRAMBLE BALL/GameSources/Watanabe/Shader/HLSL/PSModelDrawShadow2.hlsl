@@ -7,9 +7,27 @@ SamplerState g_sampler : register(s0);
 Texture2D g_DepthMap : register(t1);
 SamplerState g_SamplerDepthMap : register(s1);
 Texture2D g_toonTexture : register(t2);
+Texture2D g_noiseTexture : register(t4);
 
 float4 main(PSPNTInputShadow input) : SV_TARGET
 {
+    if (EnabledDissolve)
+    {
+        // ノイズテクスチャから高さ（黒～白成分）を取得
+        float4 noise = g_noiseTexture.Sample(g_sampler, input.tex);
+        float height = 0.3 * noise.r + 0.6 * noise.g + 0.1 * noise.b;
+
+        if (height > DissolveAnimationRate)
+        {
+            discard;
+        }
+
+        if (height > DissolveAnimationRate - 0.05f)
+        {
+            return DissolveEdgeColor;
+        }
+    }
+
     float shadowColor = 1.0f;
 	// テクセルを計算
     float2 texel = float2(

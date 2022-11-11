@@ -16,6 +16,7 @@
 
 #include "Watanabe/Component/PlayerStatus.h"
 #include "Watanabe/Component/PlayerAnimator.h"
+#include "Watanabe/Component/DissolveAnimator.h"
 #include "Watanabe/Effekseer/EfkEffect.h"
 #include "Maruyama/Player/Component/UseWeapon.h"
 
@@ -75,6 +76,10 @@ namespace basecross {
 
 		if (auto useWeapon = GetGameObject()->GetComponent<UseWeapon>(false)) {
 			useWeapon->SetIsAim(false);
+		}
+
+		if (auto dissolve = GetGameObject()->GetComponent<DissolveAnimator>(false)) {
+			dissolve->Reset();
 		}
 
 		if (auto animator = GetGameObject()->GetComponent<PlayerAnimator>(false)) {

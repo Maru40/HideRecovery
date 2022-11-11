@@ -45,6 +45,7 @@ namespace basecross {
 		bsm::Mat4x4 mView;
 		/// 射影行列
 		bsm::Mat4x4 mProj;
+		bsm::Vec4 mDissolveAnimationRate;
 		/// Bone用
 		bsm::Vec4 Bones[3 * 100];
 		ShadowConstants() {
@@ -56,6 +57,7 @@ namespace basecross {
 	DECLARE_DX11_VERTEX_SHADER(VSShadowmap, VertexPositionNormalTexture)
 	DECLARE_DX11_VERTEX_SHADER(VSShadowmapBone, VertexPositionNormalTextureSkinning)
 	DECLARE_DX11_VERTEX_SHADER(VSShadowmapBoneWithTan, VertexPositionNormalTangentTextureSkinning)
+	DECLARE_DX11_PIXEL_SHADER(PSShadowmap);
 
 	//--------------------------------------------------------------------------------------
 	///	スプライト用コンスタントバッファ構造体
@@ -506,6 +508,13 @@ namespace basecross {
 		*/
 		//--------------------------------------------------------------------------------------
 		virtual void OnDraw()override;
+
+		void OnCreate()override;
+		void SetDissolveAnimationRate(float rate);
+		void SetEnabledDissolve(bool flg);
+		bool GetEnabledDissolve();
+		float GetDissolveAnimationRate();
+		shared_ptr<TextureResource> GetNoiseTexRes() const;
 	private:
 		// pImplイディオム
 		struct Impl;
