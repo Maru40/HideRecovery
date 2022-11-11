@@ -16,7 +16,7 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 
 	RotationController::Parametor::Parametor()
-		:Parametor(10.0f)
+		:Parametor(7.5f)
 	{}
 
 	RotationController::Parametor::Parametor(const float& speed, const bool isUseY)
