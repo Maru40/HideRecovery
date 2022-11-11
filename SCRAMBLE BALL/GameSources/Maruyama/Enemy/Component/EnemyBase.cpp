@@ -38,10 +38,9 @@ namespace basecross {
 		}
 
 		void EnemyBase::OnUpdate() {
-			auto input = GetGameObject()->GetComponent<AIVirtualController>()->GetInputDirection();
-			//Debug::GetInstance()->Log(input);
+			//auto input = GetGameObject()->GetComponent<AIVirtualController>()->GetInputDirection();
 
-			m_onlineSynchronizer.lock()->Move(input);
+			//m_onlineSynchronizer.lock()->Move(input);
 		}
 
 		void EnemyBase::SetTarget(const std::shared_ptr<GameObject>& target) {
