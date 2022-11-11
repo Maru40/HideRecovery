@@ -24,11 +24,15 @@
 
 #include "Maruyama/Enemy/Behavior/Decorator/IsInEyeTarget.h"
 #include "Maruyama/Enemy/Behavior/Decorator/ObserveTargets.h"
+#include "Maruyama/Enemy/Behavior/Decorator/OutSpecificTarget.h"
 
 #include "Maruyama/Enemy/AIDirector/CoordinatorBase.h"
 #include "Maruyama/Enemy/AIDirector/TupleSpace.h"
 
 #include "Maruyama/Utility/Component/TargetManager.h"
+
+#include "Maruyama/Utility/SingletonComponent/ShareClassesManager.h"
+#include "Maruyama/StageObject/Goal.h"
 
 namespace basecross {
 
@@ -205,16 +209,25 @@ namespace basecross {
 					m_behaviorTree->AddDecorator<Decorator::IsInEyeTarget>(
 						NodeType::ShotTask, enemy, decoratorParam.shot_isInEyeParamPtr
 					);
+
+					//ターゲットが特定のターゲットなら。
+					m_behaviorTree->AddDecorator<Decorator::OutSpecificTarget>(
+						NodeType::ShotTask, enemy, GetShotOutTarget()
+					);
 				}
 
 				void ButtleTree::InitializeParametor() {
+					//将来的には外部ファイルにする。
 					constexpr float MoveSpeed = 8.5f;
 
-					//通常シークパラメータ
-					auto& nearSeekParamPtr = m_param.taskParam.nearSeekParamPtr;
-					nearSeekParamPtr->moveParamPtr->toTargetMoveParam->speed = MoveSpeed;
-					nearSeekParamPtr->moveParamPtr->toTargetMoveParam->targetNearRange = 15.0f;
-					nearSeekParamPtr->moveParamPtr->toTargetMoveParam->moveType = basecross::Task::ToTargetMove::MoveType::ArriveVelocity;
+					//通常シークパラメータ 
+					{
+						auto& param = m_param.taskParam.nearSeekParamPtr;
+						auto& moveParam = param->moveParamPtr->toTargetMoveParam;
+						moveParam->speed = MoveSpeed;
+						moveParam->targetNearRange = 20.0f;
+						moveParam->moveType = basecross::Task::ToTargetMove::MoveType::ArriveVelocity;
+					}
 
 					//AstarMoveパラメータ
 					{
@@ -226,15 +239,29 @@ namespace basecross {
 
 					//Shotパラメータ
 					{
-						
 
 					}
 				}
 
-				//bool ButtleTree::HasTarget() const {
-				//	auto targetManager = m_targetManager.lock();
-				//	return targetManager && targetManager->HasTarget();
-				//}
+				std::shared_ptr<GameObject> ButtleTree::GetShotOutTarget() {
+					//チームメンバーがアタッチされているかどうか判断
+					auto teamMember = GetOwner()->GetComponent<I_TeamMember>(false);
+					if (!teamMember) {
+						Debug::GetInstance()->Log(L"ButtleTree::GetShotOutTarget() : I_TeamMemberがアタッチされていません。");
+						return nullptr;
+					}
+
+					auto goals = ShareClassesManager::GetInstance()->GetCastShareClasses<Goal>();
+
+					for (auto& goal : goals) {
+						//自分のチームと違うゴールなら。
+						if (goal.lock()->GetTeam() != teamMember->GetTeam()) {
+							return goal.lock()->GetGameObject();
+						}
+					}
+
+					return nullptr;
+				}
 
 			}
 		}
