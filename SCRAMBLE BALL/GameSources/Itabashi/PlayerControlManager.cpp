@@ -34,6 +34,8 @@ namespace basecross
 		m_hidePlaceOpener = ownerObject->GetComponent<HidePlaceOpener>();
 		m_playerAnimator = ownerObject->GetComponent<PlayerAnimator>();
 		m_rotationController = ownerObject->GetComponent<RotationController>();
+
+		m_defaultSpeed = m_objectMover.lock()->GetMoveSpeed();
 	}
 
 	bool PlayerControlManager::IsUpdateCameraForward(Vec3* forward)
@@ -74,7 +76,7 @@ namespace basecross
 		useWeapon->SetDirection(forward);
 	}
 
-	bool PlayerControlManager::TryMove(const Vec2& inputVector, Vec3* outputMoveVector, Vec3* outputForward)
+	bool PlayerControlManager::TryMove(const Vec2& inputVector, Vec3* outputMoveVector)
 	{
 		auto objectMover = m_objectMover.lock();
 
@@ -103,11 +105,11 @@ namespace basecross
 
 		auto rotationController = m_rotationController.lock();
 
-		auto direction = rotationController->GetDirection();
-
 		if (rotationController && !useWeapon->IsAim())	//ローテーションがあり、Aim状態でないなら
 		{
-			direction = maru::Utility::CalcuCameraVec(Vec3(inputVector.x, 0, inputVector.y), GetStage()->GetView()->GetTargetCamera(), GetGameObject());
+			Vec3 direction = moveVector;
+			direction.y = 0;
+			direction = direction.GetNormalized();
 
 			rotationController->SetDirection(direction);
 		}
@@ -117,21 +119,26 @@ namespace basecross
 			*outputMoveVector = moveVector;
 		}
 
-		if (outputForward)
-		{
-			*outputForward = direction;
-		}
-
 		return true;
 	}
 
-	void PlayerControlManager::ExecuteMove(const Vec3& moveVector, const Vec3& forward)
+	void PlayerControlManager::ExecuteMove(const Vec3& moveVector)
 	{
 		auto velocityManager = m_velocityManager.lock();
-		auto rotationController = m_rotationController.lock();
+		auto useWeapon = m_useWeapon.lock();
 
-		velocityManager->SetVelocity(moveVector / App::GetApp()->GetElapsedTime());
-		rotationController->SetDirection(forward);
+		velocityManager->SetVelocity(moveVector);
+
+		if (!useWeapon->IsAim())
+		{
+			auto rotationController = m_rotationController.lock();
+
+			Vec3 direction = moveVector;
+			direction.y = 0;
+			direction = direction.GetNormalized();
+
+			rotationController->SetDirection(direction);
+		}
 	}
 
 	bool PlayerControlManager::TryAquisition(const std::shared_ptr<Item>& item)
@@ -298,10 +305,13 @@ namespace basecross
 			return false;
 		}
 
+		auto objectMover = m_objectMover.lock();
+
 		// 条件に当てはまればエイム状態にする
 		if (isAim && !useWeapon->IsAim())
 		{
 			useWeapon->SetIsAim(isAim);
+			objectMover->SetMoveSpeed(m_defaultSpeed - useWeapon->GetWeaponWeight());
 			return true;
 		}
 
@@ -309,6 +319,8 @@ namespace basecross
 		if (!isAim && useWeapon->IsAim())
 		{
 			useWeapon->SetIsAim(isAim);
+			objectMover->SetMoveSpeed(m_defaultSpeed);
+
 			return true;
 		}
 
@@ -318,8 +330,13 @@ namespace basecross
 	void PlayerControlManager::ExecuteUpdateAim(bool isAim)
 	{
 		auto useWeapon = m_useWeapon.lock();
+		auto objectMover = m_objectMover.lock();
 
 		useWeapon->SetIsAim(isAim);
+
+		float speed = isAim ? m_defaultSpeed - useWeapon->GetWeaponWeight() : m_defaultSpeed;
+
+		objectMover->SetMoveSpeed(speed);
 	}
 
 	std::shared_ptr<HidePlace> PlayerControlManager::GetCanOpenHidePlace() const

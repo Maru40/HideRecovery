@@ -75,6 +75,8 @@ namespace basecross
 		/// </summary>
 		Vec3 m_beforeCameraForward = Vec3();
 
+		float m_defaultSpeed = 1.0f;
+
 	public:
 		PlayerControlManager(const std::shared_ptr<GameObject>& owner) : Component(owner) {}
 
@@ -101,15 +103,14 @@ namespace basecross
 		/// </summary>
 		/// <param name="inputVector">入力ベクトル</param>
 		/// <param name="outputMoveVector">nullptrでないなら移動量ベクトルをいれる</param>
-		/// <param name="outputForward">nullptrでないなら前方ベクトルを入れる</param>
 		/// <returns>成功したらtrue</returns>
-		bool TryMove(const Vec2& inputVector, Vec3* outputMoveVector, Vec3* outputForward);
+		bool TryMove(const Vec2& inputVector, Vec3* outputMoveVector);
 		/// <summary>
 		/// 誰かが移動したら呼ばれるイベント
 		/// </summary>
 		/// <param name="moveVector">移動量ベクトル</param>
 		/// <param name="forward">前方ベクトル</param>
-		void ExecuteMove(const Vec3& moveVector, const Vec3& forward);
+		void ExecuteMove(const Vec3& moveVector);
 
 		/// <summary>
 		/// アイテムの取得を試す
