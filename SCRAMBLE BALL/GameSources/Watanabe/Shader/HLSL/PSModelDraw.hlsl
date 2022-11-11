@@ -9,18 +9,21 @@ Texture2D g_noiseTexture : register(t4);
 
 float4 main(PSPNTInput input) : SV_TARGET
 {
-    // ノイズテクスチャから高さ（黒～白成分）を取得
-    float4 noise = g_noiseTexture.Sample(g_sampler, input.tex);
-    float height = 0.3 * noise.r + 0.6 * noise.g + 0.1 * noise.b;
-
-    if (height > DissolveAnimationRate)
+    if (EnabledDissolve)
     {
-        discard;
-    }
+        // ノイズテクスチャから高さ（黒～白成分）を取得
+        float4 noise = g_noiseTexture.Sample(g_sampler, input.tex);
+        float height = 0.3 * noise.r + 0.6 * noise.g + 0.1 * noise.b;
 
-    if (height > DissolveAnimationRate - 0.05f)
-    {
-        return DissolveEdgeColor;
+        if (height > DissolveAnimationRate)
+        {
+            discard;
+        }
+
+        if (height > DissolveAnimationRate - 0.05f)
+        {
+            return DissolveEdgeColor;
+        }
     }
 
     float3 lightdir = normalize(LightDir.xyz);

@@ -40,6 +40,8 @@ namespace basecross {
 		float m_DissolveAnimationRate;
 		// ディゾブルのエッジ色
 		Col4 m_DissolveEdgeColor;
+		// ディゾブルが有効か
+		bool m_EnabledDissolve;
 		////Instance描画用
 		////Instance最大値
 		//size_t m_MaxInstance;
@@ -62,7 +64,8 @@ namespace basecross {
 			m_OutlineColor(0, 0, 0, 1),
 			m_OutlineWidth(0.01f),
 			m_DissolveAnimationRate(1),
-			m_DissolveEdgeColor(1, 1, 1, 1)
+			m_DissolveEdgeColor(1, 1, 1, 1),
+			m_EnabledDissolve(false)
 			//m_MaxInstance(2000),
 			//m_AutoClearMatrixVec(false)
 		{}
@@ -95,6 +98,7 @@ namespace basecross {
 		// レートを同期
 		if (shadowmap) {
 			shadowmap->SetDissolveAnimationRate(GetDissolveAnimationRate());
+			shadowmap->SetEnabledDissolve(pImpl->m_EnabledDissolve);
 		}
 	}
 
@@ -185,6 +189,7 @@ namespace basecross {
 		}
 		SmCb.DissolveAnimationRate = Vec4(0);
 		SmCb.DissolveAnimationRate.x = pImpl->m_DissolveAnimationRate;
+		SmCb.DissolveAnimationRate.y = pImpl->m_EnabledDissolve;
 
 		SmCb.DissolveEdgeColor = pImpl->m_DissolveEdgeColor;
 	}
@@ -241,6 +246,10 @@ namespace basecross {
 	//	pID3D11DeviceContext->Unmap(pImpl->m_MatrixBuffer.Get(), 0);
 	//}
 #pragma endregion
+	void AdvBaseDraw::SetEnabledDissolve(bool flg) {
+		pImpl->m_EnabledDissolve = flg;
+	}
+
 	void AdvBaseDraw::SetDissolveEdgeColor(const Col4& color) {
 		pImpl->m_DissolveEdgeColor = color;
 	}

@@ -98,6 +98,8 @@ namespace basecross {
 
 		// アウトライン関係
 		draw->SetOutlineActive(true);
+		// ディゾブルアニメーションを有効
+		draw->SetEnabledDissolve(true);
 
 		SetAlphaActive(true);
 		//draw->SetDiffuse(Col4(0.0f, 0.0f, 1.0f, 1.0f));

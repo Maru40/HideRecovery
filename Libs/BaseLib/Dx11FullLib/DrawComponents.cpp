@@ -233,6 +233,8 @@ namespace basecross {
 
 		float m_DissolveAnimationRate = 1;
 		weak_ptr<TextureResource> m_NoiseTexRes;
+		// ディゾブルが有効
+		bool m_EnabledDissolve;
 
 		//メッシュリソース
 		weak_ptr<MeshResource> m_MeshResource;
@@ -370,6 +372,14 @@ namespace basecross {
 	}
 	float Shadowmap::GetDissolveAnimationRate() {
 		return pImpl->m_DissolveAnimationRate;
+	}
+
+	void Shadowmap::SetEnabledDissolve(bool flg) {
+		pImpl->m_EnabledDissolve = flg;
+	}
+
+	bool Shadowmap::GetEnabledDissolve() {
+		return pImpl->m_EnabledDissolve;
 	}
 
 	shared_ptr<TextureResource> Shadowmap::GetNoiseTexRes() const {
@@ -520,8 +530,13 @@ namespace basecross {
 		//描画方法（3角形）
 		pID3D11DeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-		// ピクセルシェーダ
-		pID3D11DeviceContext->PSSetShader(PSShadowmap::GetPtr()->GetShader(), nullptr, 0);
+		if (GetEnabledDissolve()) {
+			// ピクセルシェーダ
+			pID3D11DeviceContext->PSSetShader(PSShadowmap::GetPtr()->GetShader(), nullptr, 0);
+		}
+		else {
+			pID3D11DeviceContext->PSSetShader(nullptr, nullptr, 0);
+		}
 
 		//ジオメトリシェーダの設定（使用しない）
 		pID3D11DeviceContext->GSSetShader(nullptr, nullptr, 0);
@@ -533,10 +548,12 @@ namespace basecross {
 		//コンスタントバッファをピクセルシェーダにセット
 		pID3D11DeviceContext->PSSetConstantBuffers(0, 1, &pConstantBuffer);
 
-		// サンプラーの設定
-		RenderStatePtr->SetSamplerState(pID3D11DeviceContext, GetSamplerState(), 0);
-		// ノイズテクスチャをセット
-		pID3D11DeviceContext->PSSetShaderResources(0, 1, GetNoiseTexRes()->GetShaderResourceView().GetAddressOf());
+		if (GetEnabledDissolve()) {
+			// サンプラーの設定
+			RenderStatePtr->SetSamplerState(pID3D11DeviceContext, GetSamplerState(), 0);
+			// ノイズテクスチャをセット
+			pID3D11DeviceContext->PSSetShaderResources(0, 1, GetNoiseTexRes()->GetShaderResourceView().GetAddressOf());
+		}
 
 		//描画
 		pID3D11DeviceContext->DrawIndexed(data.m_NumIndicis, 0, 0);

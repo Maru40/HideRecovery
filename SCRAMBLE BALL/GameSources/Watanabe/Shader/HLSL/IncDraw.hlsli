@@ -32,6 +32,7 @@ struct VSBoneOutlineInput
 struct PSOutlineInput
 {
     float4 position : SV_POSITION;
+    float2 tex : TEXCOORD;
     float3 norm : NORMAL;
 };
 
@@ -63,6 +64,7 @@ cbuffer ParametersBuffer : register(b0)
     float4 Diffuse : packoffset(c13);
     float4 Specular : packoffset(c14);
     float DissolveAnimationRate : packoffset(c15.x);
+    float EnabledDissolve : packoffset(c15.y);
     float DissolveEdgeColor : packoffset(c16);
     float4 LightDir : packoffset(c17);
     float4 LightPos : packoffset(c18);

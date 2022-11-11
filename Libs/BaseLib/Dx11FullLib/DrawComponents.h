@@ -511,6 +511,8 @@ namespace basecross {
 
 		void OnCreate()override;
 		void SetDissolveAnimationRate(float rate);
+		void SetEnabledDissolve(bool flg);
+		bool GetEnabledDissolve();
 		float GetDissolveAnimationRate();
 		shared_ptr<TextureResource> GetNoiseTexRes() const;
 	private:
