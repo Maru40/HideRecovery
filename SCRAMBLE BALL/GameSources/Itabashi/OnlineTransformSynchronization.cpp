@@ -22,6 +22,7 @@ namespace Online
 
 		auto transform = m_transform.lock();
 
+		data.playerNumber = m_onlinePlayerNumber;
 		data.position = transform->GetWorldPosition();
 		data.rotation = transform->GetWorldQuaternion();
 
@@ -35,6 +36,11 @@ namespace Online
 
 	void OnlineTransformSynchronization::OnUpdate2()
 	{
+		if (!m_hasUpdateRight)
+		{
+			return;
+		}
+
 		auto transform = m_transform.lock();
 		int localNumber = OnlineManager::GetLocalPlayer().getNumber();
 
@@ -57,14 +63,21 @@ namespace Online
 
 	void OnlineTransformSynchronization::OnCustomEventAction(int playerNumber, std::uint8_t eventCode, const std::uint8_t* bytes)
 	{
+		return;
 		auto transform = m_transform.lock();
 
-		if (!transform || m_onlinePlayerNumber != playerNumber || eventCode != EVENT_CODE)
+		if (!transform || eventCode != EVENT_CODE)
 		{
 			return;
 		}
 
 		OnlineTransformData data = *(OnlineTransformData*)bytes;
+
+		if (m_onlinePlayerNumber != data.playerNumber)
+		{
+			return;
+		}
+
 		
 		transform->SetWorldPosition(data.position);
 		transform->SetWorldQuaternion(data.rotation);

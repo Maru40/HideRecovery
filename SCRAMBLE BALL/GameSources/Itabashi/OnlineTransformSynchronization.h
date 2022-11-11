@@ -12,6 +12,7 @@ namespace Online
 	{
 		struct OnlineTransformData
 		{
+			int playerNumber;
 			Vec3 position;
 			Quat rotation;
 
@@ -27,6 +28,8 @@ namespace Online
 		/// 担当するプレイヤーナンバー
 		/// </summary>
 		int m_onlinePlayerNumber = OnlineManager::INVALID_ONLINE_PLAYER_NUMBER;
+
+		bool m_hasUpdateRight = false;
 
 		OnlineTransformData m_beforeData;
 
@@ -59,6 +62,10 @@ namespace Online
 		/// </summary>
 		/// <returns>プレイヤー番号</returns>
 		int GetOnlinePlayerNumber() const { return m_onlinePlayerNumber; }
+
+		void SetUpdateRight(bool hasUpdateRight) { m_hasUpdateRight = hasUpdateRight; }
+
+		bool HasUpdateRight() const { return m_hasUpdateRight; }
 	};
 }
 }

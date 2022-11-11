@@ -38,7 +38,6 @@ namespace Online
 	private:
 		std::weak_ptr<PlayerAnimator> m_animator;	//アニメーター
 		std::function<void()> m_updateFunction;		//更新処理
-		std::weak_ptr<Online::OnlineTransformSynchronization> m_onlineTransformSynchonization;
 
 	public:
 		PlayerDeader(const std::shared_ptr<GameObject>& objPtr);

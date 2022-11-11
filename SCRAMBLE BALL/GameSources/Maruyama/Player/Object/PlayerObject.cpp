@@ -26,7 +26,6 @@
 #include "VelocityManager.h"
 #include "Itabashi/ObjectMover.h"
 #include "Itabashi/OnlinePlayerSynchronizer.h"
-#include "Itabashi/OnlineTransformSynchronization.h"
 
 #include "Watanabe/Component/PlayerAnimator.h"
 #include "Watanabe/Effekseer/EfkEffect.h"
@@ -120,7 +119,6 @@ namespace basecross {
 		objecfMover->SetAffectedCamera(GetStage()->GetView()->GetTargetCamera());
 		AddComponent<PlayerControlManager>();
 		AddComponent<OnlinePlayerSynchronizer>();
-		AddComponent<Online::OnlineTransformSynchronization>();
 
 		AddComponent<PlayerAnimator>();
 		auto chargeGun = AddComponent<ChargeGun>();
@@ -187,8 +185,6 @@ namespace basecross {
 		quat.rotationY(XM_PI);
 
 		auto tpsCamera = GetStage()->Instantiate<GameObject>(Vec3(0, 0, 3), quat);
-		//auto virtualCamera = tpsCamera->AddComponent<VirtualCamera>(10);
-		//tpsCamera->AddComponent<LookAtCameraManager>(GetThis<GameObject>(), LookAtCameraManager::Parametor());
 
 		springArmComponent->AddHitTag(L"Wall");
 		springArmComponent->SetChildObject(tpsCamera);
@@ -199,9 +195,6 @@ namespace basecross {
 		auto onlinePlayerSynchronizer = GetComponent<OnlinePlayerSynchronizer>();
 		onlinePlayerSynchronizer->SetOnlinePlayerNumber(playerNumber);
 		onlinePlayerSynchronizer->SetGamePlayerNumber(gameNumber);
-
-		auto onlineTransform = GetComponent<Online::OnlineTransformSynchronization>();
-		onlineTransform->SetOnlinePlayerNumber(playerNumber);
 
 		auto areas = maru::Utility::FindComponents<OwnArea>(GetStage());
 
