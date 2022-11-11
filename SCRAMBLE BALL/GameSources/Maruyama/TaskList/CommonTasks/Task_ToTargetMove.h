@@ -12,6 +12,8 @@
 #include "Maruyama/TaskList/TaskList.h"
 
 namespace basecross {
+	class VelocityManager;
+
 	namespace Task {
 		//--------------------------------------------------------------------------------------
 		///	移動タイプ
@@ -87,6 +89,8 @@ namespace basecross {
 
 		private:
 			ex_weak_ptr<Parametor> m_paramPtr;	//パラメータ
+
+			std::weak_ptr<VelocityManager> m_velocityManager;
 
 		public:
 			/// <summary>

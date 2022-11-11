@@ -52,10 +52,16 @@ namespace basecross {
 
 		ToTargetMove::ToTargetMove(const std::shared_ptr<GameObject>& owner, const std::shared_ptr<Parametor>& paramPtr)
 			:TaskNodeBase<GameObject>(owner), m_paramPtr(paramPtr)
-		{}
+		{
+			m_velocityManager = owner->GetComponent<VelocityManager>(false);
+		}
 
 		void ToTargetMove::OnStart() {
 			GetOwner()->GetComponent<Transform>()->SetPosition(m_paramPtr->startPosition);
+			
+			if (auto velocityManager = m_velocityManager.lock()) {
+				velocityManager->SetMaxSpeed(m_paramPtr->speed);
+			}
 		}
 
 		bool ToTargetMove::OnUpdate() {
