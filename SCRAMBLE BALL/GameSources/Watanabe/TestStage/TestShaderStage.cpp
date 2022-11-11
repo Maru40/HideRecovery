@@ -72,8 +72,9 @@ namespace basecross {
 				util->RotToHead(Vec3(cosf(delta), 0, sinf(delta)), 2 * delta);
 
 				auto drawComp = player->GetComponent<BoneModelDraw>();
+				drawComp->SetDissolveAnimationRate(0.5f);
 				drawComp->SetDissolveAnimationRate((cosf(delta) + 1) * 0.5f);
-				Debug::GetInstance()->Log(drawComp->GetDissolveAnimationRate());
+				//Debug::GetInstance()->Log(drawComp->GetDissolveAnimationRate());
 			}
 		);
 

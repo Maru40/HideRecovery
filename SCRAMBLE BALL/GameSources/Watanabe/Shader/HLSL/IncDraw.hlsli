@@ -63,12 +63,13 @@ cbuffer ParametersBuffer : register(b0)
     float4 Diffuse : packoffset(c13);
     float4 Specular : packoffset(c14);
     float DissolveAnimationRate : packoffset(c15.x);
-    float4 LightDir : packoffset(c16);
-    float4 LightPos : packoffset(c17);
-    float4 EyePos : packoffset(c18);
-    float4x4 LightView : packoffset(c19);
-    float4x4 LightProjection : packoffset(c23);
-    float4x3 Bones[100] : packoffset(c27);
+    float DissolveEdgeColor : packoffset(c16);
+    float4 LightDir : packoffset(c17);
+    float4 LightPos : packoffset(c18);
+    float4 EyePos : packoffset(c19);
+    float4x4 LightView : packoffset(c20);
+    float4x4 LightProjection : packoffset(c24);
+    float4x3 Bones[100] : packoffset(c28);
 };
 
 cbuffer OutlineParametersBuffer : register(b1)

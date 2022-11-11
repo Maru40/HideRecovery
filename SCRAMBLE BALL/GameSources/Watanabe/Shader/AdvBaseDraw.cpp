@@ -38,6 +38,8 @@ namespace basecross {
 		float m_OutlineWidth;
 		// ディゾルブのレート（0～1）
 		float m_DissolveAnimationRate;
+		// ディゾブルのエッジ色
+		Col4 m_DissolveEdgeColor;
 		////Instance描画用
 		////Instance最大値
 		//size_t m_MaxInstance;
@@ -59,7 +61,8 @@ namespace basecross {
 			m_IsOutlineDraw(false),
 			m_OutlineColor(0, 0, 0, 1),
 			m_OutlineWidth(0.01f),
-			m_DissolveAnimationRate(1)
+			m_DissolveAnimationRate(1),
+			m_DissolveEdgeColor(1, 1, 1, 1)
 			//m_MaxInstance(2000),
 			//m_AutoClearMatrixVec(false)
 		{}
@@ -72,7 +75,7 @@ namespace basecross {
 		//パイプラインステートをデフォルトの３D
 		SetBlendState(BlendState::Opaque);
 		SetDepthStencilState(DepthStencilState::Default);
-		SetRasterizerState(RasterizerState::CullBack);
+		SetRasterizerState(RasterizerState::CullNone);
 		SetSamplerState(SamplerState::LinearClamp);
 
 		// デフォルトで設定
@@ -182,6 +185,8 @@ namespace basecross {
 		}
 		SmCb.DissolveAnimationRate = Vec4(0);
 		SmCb.DissolveAnimationRate.x = pImpl->m_DissolveAnimationRate;
+
+		SmCb.DissolveEdgeColor = pImpl->m_DissolveEdgeColor;
 	}
 
 	void AdvBaseDraw::SetOutlineConstants(OutlineConstants& cb, const MeshPrimData& data) {
@@ -236,6 +241,13 @@ namespace basecross {
 	//	pID3D11DeviceContext->Unmap(pImpl->m_MatrixBuffer.Get(), 0);
 	//}
 #pragma endregion
+	void AdvBaseDraw::SetDissolveEdgeColor(const Col4& color) {
+		pImpl->m_DissolveEdgeColor = color;
+	}
+
+	Col4 AdvBaseDraw::GetDissolveEdgeColor()const {
+		return pImpl->m_DissolveEdgeColor;
+	}
 
 	float AdvBaseDraw::GetDissolveAnimationRate() {
 		return pImpl->m_DissolveAnimationRate;

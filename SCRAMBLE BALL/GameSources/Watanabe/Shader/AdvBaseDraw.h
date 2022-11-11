@@ -33,6 +33,8 @@ namespace basecross {
 		Col4 Specular;
 		// X:ディゾルブレート
 		Vec4 DissolveAnimationRate;
+		// ディゾブルのエッジ色
+		Col4 DissolveEdgeColor;
 		// ライイト方向
 		Vec4 LightDir;
 		// ライト位置
@@ -574,6 +576,9 @@ namespace basecross {
 		}
 
 	public:
+		void SetDissolveEdgeColor(const Col4& color);
+		Col4 GetDissolveEdgeColor()const;
+
 		float GetDissolveAnimationRate();
 		void SetDissolveAnimationRate(float rate);
 
