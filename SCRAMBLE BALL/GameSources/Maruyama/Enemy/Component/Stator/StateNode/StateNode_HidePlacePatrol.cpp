@@ -83,15 +83,14 @@ namespace basecross {
 
 			void HidePlacePatrol::Damaged(const std::shared_ptr<Tuple::Damaged>& tuple) {
 				//死亡状態なら遷移しない
-				auto status = tuple->GetDamageData().attacker->GetComponent<PlayerStatus>(false);
-				if (status && status->IsDead()) {
-					return;
-				}
+				//auto status = tuple->GetDamageData().attacker->GetComponent<PlayerStatus>(false);
+				//if (status && status->IsDead()) {
+				//	return;
+				//}
 
 				//ダメージを与えてきた相手を伝える。
 				auto tupleSpace = m_factionMember.lock()->GetAssignedFaction()->GetTupleSpace();
 				tupleSpace->Write<Tuple::FindTarget>(GetOwner(), tuple->GetDamageData().attacker, tuple->GetValue());
-
 				tupleSpace->Take(tuple);	//タプルを自分自身の者とする。
 			}
 
