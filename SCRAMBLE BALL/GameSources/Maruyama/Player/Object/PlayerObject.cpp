@@ -111,16 +111,6 @@ namespace basecross {
 
 		auto itemBag = AddComponent<ItemBag>();
 		AddComponent<ItemAcquisitionManager>();
-		AddComponent<HoldBallEffectEmitter>(itemBag);
-		auto hasBallEvent = AddComponent<HasBallEventExecuter>(itemBag);
-		hasBallEvent->SetEvent(
-			[](const shared_ptr<GameObject>& owner) {
-				Debug::GetInstance()->Log(L"ボールを持った");
-			},
-			[](const shared_ptr<GameObject>& owner) {
-				Debug::GetInstance()->Log(L"ボールを持っていない");
-			}
-			);
 
 		AddComponent<VelocityManager>();
 
@@ -171,6 +161,23 @@ namespace basecross {
 				efkComp->Play(L"PlayerHit");
 			}
 		);
+
+		// ボールを持ったとき & 持っていないときのイベント
+		auto hasBallEvent = AddComponent<HasBallEventExecuter>(itemBag);
+		// エフェクト
+		hasBallEvent->SetEvent(
+			[&](const shared_ptr<GameObject>& owner) {
+				auto efkComp = owner->GetComponent<EfkComponent>();
+				if (!efkComp->IsPlaying(L"HasBall")) {
+					efkComp->PlayLoop(L"HasBall");
+				}
+			},
+			[&](const shared_ptr<GameObject>& owner) {
+				auto efkComp = owner->GetComponent<EfkComponent>();
+				efkComp->Stop(L"HasBall");
+			}
+			);
+
 		auto shadowmap = AddComponent<Shadowmap>();
 		shadowmap->SetMultiMeshResource(L"Player_Mesh");
 		shadowmap->SetMeshToTransformMatrix(spanMat);
