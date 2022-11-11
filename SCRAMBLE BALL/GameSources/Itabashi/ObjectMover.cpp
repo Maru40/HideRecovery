@@ -1,9 +1,6 @@
 ﻿#include "stdafx.h"
 #include "ObjectMover.h"
 #include "VelocityManager.h"
-#include "Maruyama/Player/Component/UseWeapon.h"
-
-#include "Maruyama/Utility/Utility.h"
 
 namespace basecross
 {
