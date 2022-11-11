@@ -14,6 +14,8 @@
 #include "Itabashi/OnlinePlayerSynchronizer.h"
 #include "VelocityManager.h"
 
+#include "AIVirtualController.h"
+
 namespace basecross {
 	namespace Enemy {
 
@@ -36,12 +38,10 @@ namespace basecross {
 		}
 
 		void EnemyBase::OnUpdate() {
-			auto velocity = m_velocityManager.lock()->GetVelocity();
-			velocity /= m_velocityManager.lock()->GetMaxSpeed();
-			Debug::GetInstance()->Log(velocity);
-			auto moveVec = Vec2(velocity.x, velocity.z);
-			m_onlineSynchronizer.lock()->Move(moveVec);
-			//m_onlineSynchronizer.lock()->Move(moveVec);
+			auto input = GetGameObject()->GetComponent<AIVirtualController>()->GetInputDirection();
+			//Debug::GetInstance()->Log(input);
+
+			m_onlineSynchronizer.lock()->Move(input);
 		}
 
 		void EnemyBase::SetTarget(const std::shared_ptr<GameObject>& target) {
