@@ -21,9 +21,9 @@ namespace basecross {
 		return normalize(velocity) * speed;
 	}
 
-	Vec3 UtilityVelocity::CalucSeekVec(const Vec3& velocity, const Vec3& toVec,const float& maxSpeed) {
+	Vec3 UtilityVelocity::CalucSeekVec(const Vec3& velocity, const Vec3& toVec, const float& maxSpeed, const float forceMultipier) {
 		Vec3 desiredVelocity = normalize(toVec) * maxSpeed;  //Šó–]‚ÌƒxƒNƒgƒ‹
-		return (desiredVelocity - velocity);
+		return (desiredVelocity - velocity) * forceMultipier;
 	}
 
 	Vec3 UtilityVelocity::CalucArriveVec(const Vec3& velocity, const Vec3& toVec, const float& maxSpeed, const float& decl) {
