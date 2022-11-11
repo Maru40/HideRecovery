@@ -330,7 +330,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\BallAnimator.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\BoxAnimationState.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\BoxAnimator.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\CameraAnimator.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\DissolveAnimator.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\FadeComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\HasBallEventExecuter.h" />
@@ -343,6 +342,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\PlayerStatus.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\SyncObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\TestComponent.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\TimeLine\CameraAnimator.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\TimeLine\TimeLine.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\Zooming.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\DebugClass\Debug.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Effekseer\EfkComponent.h" />
@@ -707,7 +708,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\Animator.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\BallAnimator.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\BoxAnimator.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\CameraAnimator.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\DissolveAnimator.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\FadeComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\HasBallEventExecuter.cpp" />
@@ -719,6 +719,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\PlayerStatus.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\SyncObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\TestComponent.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\TimeLine\CameraAnimator.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\TimeLine\TimeLine.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\Zooming.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\DebugClass\Debug.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Effekseer\EfkComponent.cpp" />
