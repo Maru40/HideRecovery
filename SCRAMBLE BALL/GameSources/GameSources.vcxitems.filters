@@ -2595,7 +2595,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\TimeLine\TimeLine.h">
       <Filter>Watanabe\Component\TimeLine</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\TimeLine\CameraAnimator.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\TimeLine\KeyFrameData.h">
       <Filter>Watanabe\Component\TimeLine</Filter>
     </ClInclude>
   </ItemGroup>
@@ -3708,9 +3708,6 @@
       <Filter>Watanabe\Component\DissolveAnimator</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\TimeLine\TimeLine.cpp">
-      <Filter>Watanabe\Component\TimeLine</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\TimeLine\CameraAnimator.cpp">
       <Filter>Watanabe\Component\TimeLine</Filter>
     </ClCompile>
   </ItemGroup>

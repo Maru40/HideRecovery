@@ -342,7 +342,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\PlayerStatus.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\SyncObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\TestComponent.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\TimeLine\CameraAnimator.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\TimeLine\KeyFrameData.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\TimeLine\TimeLine.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\Zooming.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\DebugClass\Debug.h" />
@@ -719,7 +719,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\PlayerStatus.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\SyncObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\TestComponent.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\TimeLine\CameraAnimator.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\TimeLine\TimeLine.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\Zooming.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\DebugClass\Debug.cpp" />
