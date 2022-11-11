@@ -2559,6 +2559,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\InProcessUI.h">
       <Filter>Watanabe\UI\InProcessUI</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\DeviceResUtil.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -3650,6 +3651,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\InProcessUI.cpp">
       <Filter>Watanabe\UI\InProcessUI</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Utility\DeviceResUtil.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="$(MSBuildThisFileDirectory)..\..\Libs\BaseLib\DxShaders\SlimeVS.hlsl">
