@@ -13,6 +13,7 @@
 #include "VelocityManager.h"
 
 #include "Maruyama/Enemy/Component/AIVirtualController.h"
+#include "Itabashi/OnlinePlayerSynchronizer.h"
 
 namespace basecross {
 	namespace Task {
@@ -167,6 +168,10 @@ namespace basecross {
 
 			auto virtualController = GetOwner()->GetComponent<AIVirtualController>();
 			virtualController->SetInputDirection(Vec2(moveDirection.x, moveDirection.z));
+
+			auto input = GetOwner()->GetComponent<AIVirtualController>()->GetInputDirection();
+
+			GetOwner()->GetComponent<OnlinePlayerSynchronizer>()->Move(input);
 		}
 
 		Vec3 ToTargetMove::CalculateVelocityForce() {
