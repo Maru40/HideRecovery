@@ -67,23 +67,6 @@ namespace basecross {
 		ResetForce();
 
 		Deseleration();	//減速処理
-
-		////デバッグ
-		//if (PlayerInputer::GetInstance()->IsRightDown()) {
-		//	transform->SetPosition(maru::Utility::FindComponent<HideItem>()->GetGameObject()->GetComponent<Transform>()->GetPosition() + Vec3::Up());
-		//}
-
-		////デバッグ
-		//if (PlayerInputer::GetInstance()->IsLeftDown()) {
-		//	auto goals = maru::Utility::FindComponents<Goal>();
-		//	Vec3 position;
-		//	for (auto goal : goals) {
-		//		if (goal->GetTeam() != GetGameObject()->GetComponent<I_TeamMember>()->GetTeam()) {
-		//			position = goal->GetGameObject()->GetComponent<Transform>()->GetPosition();
-		//		}
-		//	}
-		//	transform->SetPosition(position + Vec3::Right());
-		//}
 	}
 
 	void VelocityManager::Move() {
