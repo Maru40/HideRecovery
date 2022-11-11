@@ -10,8 +10,33 @@
 
 namespace basecross {
 
+	//--------------------------------------------------------------------------------------
+	/// ターゲットにされる対象のパラメータ
+	//--------------------------------------------------------------------------------------
+
+	Targeted_Parametor::Targeted_Parametor():
+		Targeted_Parametor(0.0f)
+	{}
+
+	Targeted_Parametor::Targeted_Parametor(const float priority):
+		priority(priority),
+		offset(Vec3(0.0f))
+	{}
+
+	//--------------------------------------------------------------------------------------
+	/// ターゲットにされる対象の本体
+	//--------------------------------------------------------------------------------------
+
 	Targeted::Targeted(const std::shared_ptr<GameObject>& objPtr):
 		Component(objPtr)
+	{}
+
+	Targeted::Targeted(
+		const std::shared_ptr<GameObject>& objPtr,
+		const Parametor& param
+	):
+		Component(objPtr),
+		m_param(param)
 	{}
 
 	//--------------------------------------------------------------------------------------
