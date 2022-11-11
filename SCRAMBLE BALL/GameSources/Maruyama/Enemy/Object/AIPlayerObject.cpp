@@ -28,6 +28,8 @@
 #include "Maruyama/Enemy/Component/Stator/AIPlayerStator.h"
 #include "SelfAstarNodeController.h"
 
+#include "Maruyama/Enemy/Component/AIVirtualController.h"
+
 //Olineに必要なコンポーネント-------------------------------------------
 #include "Maruyama/Player/Component/ChargeGun.h"
 
@@ -86,6 +88,7 @@ namespace basecross {
 			AddComponent<SelfAstarNodeController>();
 			AddComponent<TargetManager>();
 			AddComponent<AIPlayerStator>();
+			AddComponent<AIVirtualController>();
 		}
 
 		void AIPlayerObject::CreateModel() {
