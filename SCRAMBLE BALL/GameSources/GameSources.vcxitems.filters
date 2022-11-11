@@ -1372,6 +1372,9 @@
     <Filter Include="Maruyama\Enemy\Component\AI\Director\Calculater">
       <UniqueIdentifier>{6ee272bf-1abf-49e0-8cb3-7bc2cb74c639}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Enemy\BehaviorTree\Decorator\OutSpecificTarget">
+      <UniqueIdentifier>{a523e5b7-d680-4db6-ba9e-e9a127fb46c6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2565,6 +2568,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Utility\DeviceResUtil.h">
       <Filter>Watanabe\Utility\DeviceResUtil</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\Calculater\CombatCalculater.h">
+      <Filter>Maruyama\Enemy\Component\AI\Director\Calculater</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\OutSpecificTarget.h">
+      <Filter>Maruyama\Enemy\BehaviorTree\Decorator\OutSpecificTarget</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -3658,6 +3667,12 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Utility\DeviceResUtil.cpp">
       <Filter>Watanabe\Utility\DeviceResUtil</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\Calculater\CombatCalculater.cpp">
+      <Filter>Maruyama\Enemy\Component\AI\Director\Calculater</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\OutSpecificTarget.cpp">
+      <Filter>Maruyama\Enemy\BehaviorTree\Decorator\OutSpecificTarget</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
