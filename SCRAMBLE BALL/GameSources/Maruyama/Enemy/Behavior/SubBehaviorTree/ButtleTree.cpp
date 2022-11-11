@@ -208,7 +208,7 @@ namespace basecross {
 				}
 
 				void ButtleTree::InitializeParametor() {
-					constexpr float MoveSpeed = 6.0f;
+					constexpr float MoveSpeed = 8.5f;
 
 					//通常シークパラメータ
 					auto& nearSeekParamPtr = m_param.taskParam.nearSeekParamPtr;
