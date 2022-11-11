@@ -18,6 +18,8 @@
 #include "VelocityManager.h"
 #include "Maruyama/Utility/UtilityVelocity.h"
 
+#include "Itabashi/OnlinePlayerSynchronizer.h"
+
 namespace basecross {
 
 	namespace TaskListNode {
@@ -28,7 +30,7 @@ namespace basecross {
 
 		CrabWalk_Parametor::CrabWalk_Parametor():
 			//CrabWalk_Parametor(3.0f)
-			CrabWalk_Parametor(1.5f)
+			CrabWalk_Parametor(0.25f)
 		{}
 
 		CrabWalk_Parametor::CrabWalk_Parametor(const float speed):
@@ -57,6 +59,7 @@ namespace basecross {
 		{
 			m_transform = owner->GetComponent<Transform>();
 			m_velocityManager = owner->GetComponent<VelocityManager>(false);
+			m_onlineSychoronizer = owner->GetComponent<OnlinePlayerSynchronizer>(false);
 		}
 
 		void CrabWalk::OnStart() {
@@ -88,7 +91,9 @@ namespace basecross {
 
 			auto velocity = CalculateMoveDirection() * m_paramPtr->speed;
 
-			velocityManager->SetVelocity(velocity);
+			m_onlineSychoronizer.lock()->Move(Vec2(velocity.x, velocity.z));
+
+			//velocityManager->SetVelocity(velocity);
 
 			//auto velocity = velocityManager->GetVelocity();
 			//auto force = UtilityVelocity::CalucSeekVec(velocity, CalculateMoveDirection(), m_paramPtr->speed);
