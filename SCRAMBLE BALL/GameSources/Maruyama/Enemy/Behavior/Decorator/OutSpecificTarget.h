@@ -1,6 +1,6 @@
 /*!
-@file ObserveTargets.h
-@brief ObserveTargetsなど
+@file OutSpecificTarget.h
+@brief OutSpecificTargetなど
 担当者：丸山 裕喜
 */
 
@@ -16,16 +16,11 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 	/// 前方宣言
 	//--------------------------------------------------------------------------------------
-	class EyeSearchRange;
+	
 	class TargetManager;
-	class GameTimer;
-
-	class ObserveIsInEyeTarget;
-	class I_TeamMember;
 
 	namespace Enemy {
 		class EnemyBase;
-		class I_FactionMember;
 	}
 
 	namespace maru {
@@ -39,12 +34,28 @@ namespace basecross {
 				//--------------------------------------------------------------------------------------
 				class OutSpecificTarget : public DecoratorBase<Enemy::EnemyBase> 
 				{
+					std::weak_ptr<GameObject> m_target;				//ターゲット
+
+					std::weak_ptr<TargetManager> m_targetManager;	//ターゲット管理
+
 				public:
-					OutSpecificTarget(const std::shared_ptr<Enemy::EnemyBase>& owner);
+					OutSpecificTarget(
+						const std::shared_ptr<Enemy::EnemyBase>& owner,
+						const std::shared_ptr<GameObject>& target
+					);
 
 					bool CanTransition() const override;
 
 					bool CanUpdate() override;
+
+				public:
+					//--------------------------------------------------------------------------------------
+					/// アクセッサ
+					//--------------------------------------------------------------------------------------
+
+					void SetTarget(const std::shared_ptr<GameObject>& target) { m_target = target; }
+
+					_NODISCARD std::shared_ptr<GameObject> GetTarget() const noexcept { return m_target.lock(); }
 				};
 
 			}
