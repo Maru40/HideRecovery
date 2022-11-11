@@ -14,7 +14,8 @@ namespace basecross {
 		Default,
 		Shadowmap,
 		ToonRamp,
-		Normal
+		Normal,
+		Noise,
 	};
 
 	struct AdvConstants {
@@ -30,8 +31,8 @@ namespace basecross {
 		Col4 Diffuse;
 		// スペキュラー
 		Col4 Specular;
-		// テクスチャ=xがアクティブかどうか
-		XMUINT4 ActiveFlg;
+		// X:ディゾルブレート
+		Vec4 DissolveAnimationRate;
 		// ライイト方向
 		Vec4 LightDir;
 		// ライト位置
@@ -572,6 +573,9 @@ namespace basecross {
 		}
 
 	public:
+		float GetDissolveAnimationRate();
+		void SetDissolveAnimationRate(float rate);
+
 		/// <summary>
 		/// アウトラインを描画するかどうか
 		/// </summary>

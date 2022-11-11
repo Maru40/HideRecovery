@@ -7,11 +7,19 @@ SamplerState g_sampler : register(s0);
 Texture2D g_DepthMap : register(t1);
 SamplerComparisonState g_SamplerDepthMap : register(s1);
 Texture2D g_toonTexture : register(t2);
+Texture2D g_noiseTexture : register(t4);
 
 float3 DplusS(float3 N, float3 L, float NdotL, float3 view);
 
 float4 main(PSPNTInputShadow input) : SV_TARGET
 {
+    // ノイズテクスチャから高さ（黒～白成分）を取得
+    float height = g_noiseTexture.Sample(g_sampler, input.tex).r;
+    if (height > DissolveAnimationRate)
+    {
+        discard;
+    }
+
     float3 lightdir = normalize(LightDir.xyz);
     float3 N1 = normalize(input.norm);
     float p = dot(N1, -lightdir);
