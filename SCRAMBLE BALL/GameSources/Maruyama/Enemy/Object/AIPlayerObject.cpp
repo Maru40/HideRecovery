@@ -1,6 +1,6 @@
-/*!
+ï»¿/*!
 @file AIPlayerObject.cpp
-@brief AIPlayerObject‚È‚ÇÀ‘Ì
+@brief AIPlayerObjectãªã©å®Ÿä½“
 */
 
 #include "stdafx.h"
@@ -28,7 +28,7 @@
 #include "Maruyama/Enemy/Component/Stator/AIPlayerStator.h"
 #include "SelfAstarNodeController.h"
 
-//Oline‚É•K—v‚ÈƒRƒ“ƒ|[ƒlƒ“ƒg-------------------------------------------
+//Olineã«å¿…è¦ãªã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ-------------------------------------------
 #include "Maruyama/Player/Component/ChargeGun.h"
 
 #include "Maruyama/Player/Component/Teleport.h"
@@ -53,16 +53,16 @@ namespace basecross {
 	namespace Enemy {
 
 		AIPlayerObject::AIPlayerObject(const std::shared_ptr<Stage>& stage):
-			PlayerObject(stage)
+			OtherPlayerObject(stage)
 		{}
 
 		void AIPlayerObject::OnCreate() {
-			PlayerObject::OnCreate();
+			OtherPlayerObject::OnCreate();
 
 			//AddComponent<PlayerStatus>();
 			//AddComponent<PlayerAnimator>();
 
-			//Oline‚É•K—v‚ÈƒRƒ“ƒ|[ƒlƒ“ƒg------------------------
+			//Olineã«å¿…è¦ãªã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ------------------------
 			//auto chargeGun = AddComponent<ChargeGun>();
 			//auto soundEmitter = AddComponent<SoundEmitter>();
 
@@ -86,7 +86,6 @@ namespace basecross {
 			AddComponent<SelfAstarNodeController>();
 			AddComponent<TargetManager>();
 			AddComponent<AIPlayerStator>();
-			
 		}
 
 		void AIPlayerObject::CreateModel() {
