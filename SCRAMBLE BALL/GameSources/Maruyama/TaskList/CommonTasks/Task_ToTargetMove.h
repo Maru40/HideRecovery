@@ -19,10 +19,10 @@ namespace basecross {
 		///	移動タイプ
 		//--------------------------------------------------------------------------------------
 		enum class ToTargetMove_MoveType {
-			Lerp,            //補間
-			Transform,       //通常トランスフォーム
-			SeekVelocity,    //追従速度
-			ArriveVelocity,  //到着速度
+			Lerp,					//補間
+			Transform,				//通常トランスフォーム
+			SeekVelocity,			//追従速度
+			ArriveVelocity,			//到着速度
 		};
 
 		//--------------------------------------------------------------------------------------
@@ -41,12 +41,13 @@ namespace basecross {
 			using MoveType = ToTargetMove_MoveType;	
 			using DeltaType = ToTargetMove_DeltaType;
 
-			Vec3 startPosition;       //開始位置
-			Vec3 endPosition;         //終了位置
-			float speed;              //移動速度
-			float targetNearRange;    //目的地にたどり着いたと判断する距離
-			MoveType moveType;        //移動タイプ
-			DeltaType deltaType;      //時間計測タイプ
+			Vec3 startPosition;			//開始位置
+			Vec3 endPosition;			//終了位置
+			float speed;				//移動速度
+			float targetNearRange;		//目的地にたどり着いたと判断する距離
+			MoveType moveType;			//移動タイプ
+			DeltaType deltaType;		//時間計測タイプ
+			bool isAIVirtualController;	//バーチャルコントローラーを使用する。
 
 			/// <summary>
 			/// コンストラクタ
@@ -138,6 +139,11 @@ namespace basecross {
 			void VelocityMove();
 
 			/// <summary>
+			/// 仮想コントローラーを使った移動をする。
+			/// </summary>
+			void AIVirtualControllerMove(const Vec3& force);
+
+			/// <summary>
 			/// タイプの合わせた加速力を返す。
 			/// </summary>
 			/// <returns>タイプに合わせた加速力</returns>
@@ -171,6 +177,12 @@ namespace basecross {
 			/// </summary>
 			/// <returns>パラメータ</returns>
 			std::shared_ptr<ToTargetMove::Parametor> GetParametor() const;
+
+			/// <summary>
+			///	バーチャルコントローラーを使うかどうか
+			/// </summary>
+			/// <param name="isAIVirtualController"></param>
+			void SetIsAIVirtualController(const bool isAIVirtualController) { m_paramPtr->isAIVirtualController = isAIVirtualController; }
 
 		};
 

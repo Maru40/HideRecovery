@@ -12,6 +12,8 @@
 #include "Maruyama/Utility/UtilityVelocity.h"
 #include "VelocityManager.h"
 
+#include "Maruyama/Enemy/Component/AIVirtualController.h"
+
 namespace basecross {
 	namespace Task {
 
@@ -43,7 +45,8 @@ namespace basecross {
 			speed(speed),
 			targetNearRange(taretNearRange),
 			moveType(moveType),
-			deltaType(deltaType)
+			deltaType(deltaType),
+			isAIVirtualController(true)
 		{}
 
 		//--------------------------------------------------------------------------------------
@@ -140,7 +143,30 @@ namespace basecross {
 			}
 
 			auto force = CalculateVelocityForce();
-			velocityManager->AddForce(force);
+
+			//VirtualController‚ðŽg‚¤‚©‚Ç‚¤‚©
+			if (m_paramPtr->isAIVirtualController) {
+				AIVirtualControllerMove(force);
+			}
+			else {
+				velocityManager->AddForce(force);
+			}
+		}
+
+		void ToTargetMove::AIVirtualControllerMove(const Vec3& force) {
+			auto owner = GetOwner();
+			auto velocityManager = owner->GetComponent<VelocityManager>(false);
+			if (!velocityManager) {
+				return;
+			}
+
+			auto velocity = velocityManager->GetVelocity();
+			auto moveDirection = velocity + force;
+
+			moveDirection /= velocityManager->GetMaxSpeed();	//0 ` 1‚ÌŠÔ‚É•ÏX
+
+			auto virtualController = GetOwner()->GetComponent<AIVirtualController>();
+			virtualController->SetInputDirection(Vec2(moveDirection.x, moveDirection.z));
 		}
 
 		Vec3 ToTargetMove::CalculateVelocityForce() {
