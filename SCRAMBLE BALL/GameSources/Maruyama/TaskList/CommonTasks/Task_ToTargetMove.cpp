@@ -47,7 +47,8 @@ namespace basecross {
 			targetNearRange(taretNearRange),
 			moveType(moveType),
 			deltaType(deltaType),
-			isAIVirtualController(true)
+			isAIVirtualController(true),
+			isOnlineSynchro(true)
 		{}
 
 		//--------------------------------------------------------------------------------------

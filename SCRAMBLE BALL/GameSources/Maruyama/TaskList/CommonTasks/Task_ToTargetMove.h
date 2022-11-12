@@ -54,6 +54,7 @@ namespace basecross {
 			MoveType moveType;			//移動タイプ
 			DeltaType deltaType;		//時間計測タイプ
 			bool isAIVirtualController;	//バーチャルコントローラーを使用する。
+			bool isOnlineSynchro;		//オンラインシンクロをするかどうか
 
 			/// <summary>
 			/// コンストラクタ
