@@ -29,6 +29,11 @@
 
 #include "Maruyama/Enemy/Component/Stator/AIPlayerStator.h"
 
+#include "Itabashi/OnlinePlayerSynchronizer.h"
+
+#include "Itabashi/ObjectMover.h"
+#include "Itabashi/PlayerControlManager.h"
+
 namespace basecross {
 	//--------------------------------------------------------------------------------------
 	/// リスポーンをさせるクラスのパラメータ
@@ -127,6 +132,16 @@ namespace basecross {
 				springArm->SetRadXZ(rad);
 				springArm->OnUpdate2();
 			}
+		}
+
+		//エイム状態を解除
+		if (auto online = GetGameObject()->GetComponent<OnlinePlayerSynchronizer>(false)) {
+			online->Aim(false);
+		}
+
+		//ObjectMoverのリセット
+		if (auto playerControl = GetGameObject()->GetComponent<PlayerControlManager>(false)) {
+			playerControl->ResetMoveSpeed();
 		}
 	}
 
