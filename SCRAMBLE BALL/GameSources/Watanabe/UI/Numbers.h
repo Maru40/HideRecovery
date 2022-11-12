@@ -35,5 +35,7 @@ namespace basecross {
 		void SetNumber(int num);
 
 		void SetColor(const Col4& color);
+
+		std::shared_ptr<NumberSprite> GetNumberSprite(int disit) const { return m_numbers[disit]; }
 	};
 }
