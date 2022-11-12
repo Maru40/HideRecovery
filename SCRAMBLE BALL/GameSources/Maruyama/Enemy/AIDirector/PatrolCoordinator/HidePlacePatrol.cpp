@@ -112,10 +112,8 @@ namespace basecross {
 				}
 
 				void HidePlacePatrol::FindTarget(const std::shared_ptr<Tuple::FindTarget>& tuple) {
-					//本当はI_FactionMemberがメンバーに登録された時に通知を受け取れるようにしたい。
-					//Notifyの削除が安定して行えるようになるまで保留。
-
 					auto tupleSpace = GetTupleSpace();
+					auto takeTuple = tupleSpace->Take(tuple);
 
 					for (auto& member : GetMembers()) {
 						constexpr float RayHitValue = 2.0f;	//障害物の分、評価値を下げるための設定。
@@ -130,8 +128,6 @@ namespace basecross {
 
 						tupleSpace->Write<Tuple::ButtleTarget>(member.lock(), target, hopeValue);	//ターゲットを狙うことをリクエスト
 					}
-
-					auto takeTuple = tupleSpace->Take(tuple);
 				}
 
 				bool HidePlacePatrol::IsSomeMemberTarget(const std::shared_ptr<GameObject>& target) {
