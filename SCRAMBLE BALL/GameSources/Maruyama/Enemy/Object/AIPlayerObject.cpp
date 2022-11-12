@@ -81,11 +81,11 @@ namespace basecross {
 			//---------------------------------------------------
 
 
-			AddComponent<EnemyBase>();
-			AddComponent<SeekTarget>(nullptr);
-			AddComponent<SelfAstarNodeController>();
-			AddComponent<TargetManager>();
-			AddComponent<AIPlayerStator>();
+			GetComponent<EnemyBase>()->SetUpdateActive(true);
+			GetComponent<SeekTarget>()->SetUpdateActive(true);
+			GetComponent<SelfAstarNodeController>()->SetUpdateActive(true);
+			GetComponent<TargetManager>()->SetUpdateActive(true);
+			GetComponent<AIPlayerStator>()->SetUpdateActive(true);
 		}
 
 		void AIPlayerObject::CreateModel() {
