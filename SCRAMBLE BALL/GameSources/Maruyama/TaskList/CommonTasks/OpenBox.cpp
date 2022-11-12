@@ -58,25 +58,6 @@ namespace basecross {
 
 		void OpenBox::Open() {
 			m_onlineSynchronizer.lock()->OpenHidePlace();
-
-			//ターゲットの有無を確認する。
-			//auto targetManager = m_targetManager.lock();
-			//if (!targetManager || !targetManager->HasTarget()) {
-			//	Debug::GetInstance()->Log(L"TaskListNode::OpenBox::Open() : 必要コンポーネントが存在しません。");
-			//	return;
-			//}
-
-			//auto target = targetManager->GetTarget();
-
-			////ターゲットがHidePlaceならOpenする。
-			//auto hidePlace = target->GetComponent<HidePlace>(false);
-			//if (hidePlace) {
-			//	hidePlace->Open();
-			//	Debug::GetInstance()->Log(L"Open");
-			//}
-			//else {
-			//	Debug::GetInstance()->Log(L"TaskListNode::OpenBox::Open() : ターゲットがHidePlaceでありません。");
-			//}
 		}
 
 		void OpenBox::ChangeAnimation() {
