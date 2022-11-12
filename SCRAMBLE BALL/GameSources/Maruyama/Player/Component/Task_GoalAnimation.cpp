@@ -23,9 +23,9 @@ namespace basecross {
 
 		ReturnJump_Parametor::ReturnJump_Parametor() :
 			returnDirect(Vec3(0.0f)),
-			jumpRad(XMConvertToRadians(65.0f)),
-			jumpUpPower(550.0f),
-			jumpHorizontalPower(180.0f)
+			jumpRad(XMConvertToRadians(80.0f)),
+			jumpUpPower(355.0f),
+			jumpHorizontalPower(4.5f)
 		{}
 
 		//--------------------------------------------------------------------------------------
