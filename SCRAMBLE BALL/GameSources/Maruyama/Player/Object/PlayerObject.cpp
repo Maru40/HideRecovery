@@ -60,6 +60,15 @@
 #include "Maruyama/Player/Component/OwnArea.h"
 #include "Maruyama/Player/Component/PlayerSpawnPoint.h"
 
+// AI操作用
+
+#include "Maruyama/Enemy/Component/EnemyBase.h"
+#include "Maruyama/Utility/Component/SeekTarget.h"
+#include "SelfAstarNodeController.h"
+#include "Maruyama/Utility/Component/TargetManager.h"
+#include "Maruyama/Enemy/Component/Stator/AIPlayerStator.h"
+#include "Maruyama/Enemy/Component/AIVirtualController.h"
+
 namespace basecross {
 	PlayerObject::PlayerObject(const std::shared_ptr<Stage>& stage) :
 		GameObject(stage)
@@ -233,6 +242,15 @@ namespace basecross {
 
 		springArmComponent->AddHitTag(L"Wall");
 		springArmComponent->SetChildObject(tpsCamera);
+
+		// AI用コンポーネント
+
+		AddComponent<Enemy::EnemyBase>()->SetUpdateActive(false);
+		AddComponent<SeekTarget>(nullptr)->SetUpdateActive(false);
+		AddComponent<SelfAstarNodeController>()->SetUpdateActive(false);
+		AddComponent<TargetManager>()->SetUpdateActive(false);
+		AddComponent<Enemy::AIPlayerStator>()->SetUpdateActive(false);
+		AddComponent<AIVirtualController>()->SetUpdateActive(false);
 	}
 
 	void PlayerObject::OnlineSetting(int gameNumber, int playerNumber)
