@@ -345,6 +345,14 @@ namespace basecross
 		return hidePlaceOpener ? hidePlaceOpener->GetCanOpenaHidePlace() : nullptr;
 	}
 
+	std::shared_ptr<Item> PlayerControlManager::GetCanAquisitionItem() const
+	{
+		auto acquisitionManager = m_acquisitionManager.lock();
+		auto canAquisitionItems = acquisitionManager->GetCanAcquisitionItems();
+
+		return canAquisitionItems.empty() ? nullptr : canAquisitionItems[0];
+	}
+
 	bool PlayerControlManager::TryAccessHidePlace(const std::shared_ptr<HidePlace>& hidePlace)
 	{
 		auto hidePlaceOpener = m_hidePlaceOpener.lock();

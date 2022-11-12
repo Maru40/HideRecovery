@@ -7,6 +7,7 @@
 #include "Maruyama/StageObject/HidePlace.h"
 #include "Maruyama/Item/HideItem.h"
 #include "Watanabe/Component/PlayerStatus.h"
+#include "Item.h"
 
 /// <summary>
 /// バイト配列を任意の型に変換する
@@ -288,6 +289,41 @@ namespace basecross
 		controlManager->TryAquisition(hideItem->GetItem());
 	}
 
+	void OnlinePlayerSynchronizer::TryItemAquisitionEvent(int playerNumber, std::uint32_t instanceId)
+	{
+		auto& localPlayer = Online::OnlineManager::GetLocalPlayer();
+
+		// 自分がホストで無いか、対応したプレイヤーではないなら
+		if (!localPlayer.getIsMasterClient() || m_onlinePlayerNumber != playerNumber)
+		{
+			return;
+		}
+
+		auto controlManager = m_controlManager.lock();
+		auto item = Online::OnlineStatus::FindOnlineGameObject(instanceId)->GetComponent<Item>();
+
+		if (!controlManager->TryAquisition(item))
+		{
+			return;
+		}
+
+		auto data = OnlinePlayerData<std::uint32_t>(playerNumber, instanceId);
+		Online::OnlineManager::RaiseEvent(false, (std::uint8_t*)&data, sizeof(data), EXECUTE_ITEM_AQUISITION_EVENT_CODE);
+	}
+
+	void OnlinePlayerSynchronizer::ExecuteItemAquisition(int playerNumber, std::uint32_t instanceId)
+	{
+		if (m_onlinePlayerNumber != playerNumber)
+		{
+			return;
+		}
+
+		auto controlManager = m_controlManager.lock();
+
+		auto item = Online::OnlineStatus::FindOnlineGameObject(instanceId)->GetComponent<Item>();
+		controlManager->TryAquisition(item);
+	}
+
 	void OnlinePlayerSynchronizer::Damaged(const std::shared_ptr<PlayerStatus>& playerStatus, const DamageData& damageData)
 	{
 		if (!Online::OnlineManager::GetLocalPlayer().getIsMasterClient())
@@ -422,6 +458,20 @@ namespace basecross
 		{
 			auto playerData = ConvertByteData<OnlinePlayerData<std::uint32_t>>(bytes);
 			ExecuteOpenHidePlace(playerData.playerNumber, playerData.data);
+			return;
+		}
+		// アイテムの取得を試すイベントが通知されたら
+		if (eventCode == TRY_ITEM_AQUISITION_EVENT_CODE)
+		{
+			auto playerData = ConvertByteData<OnlinePlayerData<std::uint32_t>>(bytes);
+			TryItemAquisitionEvent(playerData.playerNumber, playerData.data);
+			return;
+		}
+		// アイテム取得イベントが通知されたら
+		if (eventCode == EXECUTE_ITEM_AQUISITION_EVENT_CODE)
+		{
+			auto playerData = ConvertByteData<OnlinePlayerData<std::uint32_t>>(bytes);
+			ExecuteItemAquisition(playerData.playerNumber, playerData.data);
 			return;
 		}
 		// ダメージを受けたイベントが通知されたら
@@ -590,6 +640,42 @@ namespace basecross
 		}
 
 		controlManager->TryAquisition(hideItem->GetItem());
+	}
+
+	void OnlinePlayerSynchronizer::Aquisition()
+	{
+		auto controlManager = m_controlManager.lock();
+
+		if (!controlManager)
+		{
+			return;
+		}
+
+		auto item = controlManager->GetCanAquisitionItem();
+
+		if (!item)
+		{
+			return;
+		}
+
+		auto onlineStatus = item->GetGameObject()->GetComponent<Online::OnlineStatus>();
+		std::uint32_t instanceId = onlineStatus->GetInstanceId();
+
+		// ホストではないのなら
+		if (!Online::OnlineManager::GetLocalPlayer().getIsMasterClient())
+		{
+			auto data = OnlinePlayerData<std::uint32_t>(m_onlinePlayerNumber, instanceId);
+			Online::OnlineManager::RaiseEvent(false, (std::uint8_t*)&data, sizeof(data), TRY_ITEM_AQUISITION_EVENT_CODE);
+			return;
+		}
+
+		if (!controlManager->TryAquisition(item))
+		{
+			return;
+		}
+
+		auto data = OnlinePlayerData<std::uint32_t>(m_onlinePlayerNumber, instanceId);
+		Online::OnlineManager::RaiseEvent(false, (std::uint8_t*)&data, sizeof(data), EXECUTE_ITEM_AQUISITION_EVENT_CODE);
 	}
 
 	std::shared_ptr<OnlinePlayerSynchronizer> OnlinePlayerSynchronizer::GetOnlinePlayerSynchronizer(int onlinePlayerNumber)

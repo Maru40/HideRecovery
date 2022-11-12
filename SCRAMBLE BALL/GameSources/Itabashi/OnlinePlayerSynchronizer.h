@@ -23,6 +23,8 @@ namespace basecross
 		static constexpr std::uint8_t TRY_OPEN_HIDEPLACE_EVENT_CODE       = 12; // 箱を開けるのを試すことを通知するオンラインイベントコード
 		static constexpr std::uint8_t EXECUTE_OPEN_HIDEPLACE_EVENT_CODE   = 13; // 箱を開けたことを通知するオンラインイベントコード
 		static constexpr std::uint8_t EXECUTE_DAMAGE_EVENT_CODE           = 14; // ダメージを受けたことを通知するオンラインイベントコード
+		static constexpr std::uint8_t TRY_ITEM_AQUISITION_EVENT_CODE      = 15; // アイテムを取得を試すことを通知するオンラインイベントコード
+		static constexpr std::uint8_t EXECUTE_ITEM_AQUISITION_EVENT_CODE  = 16; // アイテムの取得を通知するオンラインイベントコード
 
 		static constexpr int INVALID_GAME_PLAYER_NUMBER = -1; // 無効なゲームプレイヤー番号
 
@@ -111,6 +113,9 @@ namespace basecross
 		/// <param name="instanceId">箱のID</param>
 		void ExecuteOpenHidePlace(int playerNumber, std::uint32_t instanceId);
 
+		void TryItemAquisitionEvent(int playerNumber, std::uint32_t instanceId);
+		void ExecuteItemAquisition(int playerNumber, std::uint32_t instanceId);
+
 		/// <summary>
 		/// ダメージを受けた
 		/// </summary>
@@ -162,6 +167,10 @@ namespace basecross
 		/// 箱を開ける
 		/// </summary>
 		void OpenHidePlace();
+		/// <summary>
+		/// アイテムの取得をする
+		/// </summary>
+		void Aquisition();
 
 		/// <summary>
 		/// オンラインプレイヤー番号の設定
