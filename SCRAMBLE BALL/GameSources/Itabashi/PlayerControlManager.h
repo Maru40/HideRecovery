@@ -188,5 +188,7 @@ namespace basecross
 		/// <returns>前方カメラコンポーネント</returns>
 		std::shared_ptr<Camera> GetCamera() const { return m_forwardCamera.lock(); }
 
+		void ResetMoveSpeed();
+
 	};
 }
