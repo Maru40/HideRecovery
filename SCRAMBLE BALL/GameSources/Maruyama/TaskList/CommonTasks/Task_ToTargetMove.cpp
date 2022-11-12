@@ -58,6 +58,8 @@ namespace basecross {
 			:TaskNodeBase<GameObject>(owner), m_paramPtr(paramPtr)
 		{
 			m_velocityManager = owner->GetComponent<VelocityManager>(false);
+			m_virtualController = GetOwner()->GetComponent<AIVirtualController>(false);
+			m_onlineSynchronizer = owner->GetComponent<OnlinePlayerSynchronizer>(false);
 		}
 
 		void ToTargetMove::OnStart() {
@@ -157,6 +159,7 @@ namespace basecross {
 		void ToTargetMove::AIVirtualControllerMove(const Vec3& force) {
 			auto owner = GetOwner();
 			auto velocityManager = owner->GetComponent<VelocityManager>(false);
+			auto virtualController = m_virtualController.lock();
 			if (!velocityManager) {
 				return;
 			}
@@ -166,12 +169,11 @@ namespace basecross {
 
 			moveDirection /= velocityManager->GetMaxSpeed();	//0 �` 1�̊ԂɕύX
 
-			auto virtualController = GetOwner()->GetComponent<AIVirtualController>();
-			virtualController->SetInputDirection(Vec2(moveDirection.x, moveDirection.z));
+			auto input = Vec2(moveDirection.x, moveDirection.z);
 
-			auto input = GetOwner()->GetComponent<AIVirtualController>()->GetInputDirection();
+			m_virtualController.lock()->SetInputDirection(input);
 
-			GetOwner()->GetComponent<OnlinePlayerSynchronizer>()->Move(input);
+			m_onlineSynchronizer.lock()->Move(input);
 		}
 
 		Vec3 ToTargetMove::CalculateVelocityForce() {

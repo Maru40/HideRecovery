@@ -17,10 +17,6 @@ namespace basecross {
 		m_inputDirection(Vec2(0.0f))
 	{}
 
-	void AIVirtualController::OnUpdate() {
-
-	}
-
 	void AIVirtualController::SetInputDirection(const Vec2& direction) {
 		m_inputDirection = direction;
 	}

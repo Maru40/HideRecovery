@@ -28,6 +28,8 @@
 
 #include "Watanabe/DebugClass/Debug.h"
 
+//#include "Maruyama/Enemy/Component/AIVirtualController.h"
+
 namespace basecross {
 	namespace Enemy {
 

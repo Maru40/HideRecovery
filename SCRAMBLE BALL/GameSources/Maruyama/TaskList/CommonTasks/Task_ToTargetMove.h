@@ -12,7 +12,13 @@
 #include "Maruyama/TaskList/TaskList.h"
 
 namespace basecross {
+
+	//--------------------------------------------------------------------------------------
+	///	前方宣言
+	//--------------------------------------------------------------------------------------
 	class VelocityManager;
+	class OnlinePlayerSynchronizer;
+	class AIVirtualController;
 
 	namespace Task {
 		//--------------------------------------------------------------------------------------
@@ -92,6 +98,8 @@ namespace basecross {
 			ex_weak_ptr<Parametor> m_paramPtr;	//パラメータ
 
 			std::weak_ptr<VelocityManager> m_velocityManager;
+			std::weak_ptr<AIVirtualController> m_virtualController;			//バーチャルコントローラー
+			std::weak_ptr<OnlinePlayerSynchronizer> m_onlineSynchronizer;	//オンラインシンクロ
 
 		public:
 			/// <summary>

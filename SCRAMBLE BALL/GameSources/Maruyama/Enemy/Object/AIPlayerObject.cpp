@@ -87,8 +87,8 @@ namespace basecross {
 			GetComponent<SeekTarget>()->SetUpdateActive(true);
 			GetComponent<SelfAstarNodeController>()->SetUpdateActive(true);
 			GetComponent<TargetManager>()->SetUpdateActive(true);
-			GetComponent<AIPlayerStator>()->SetUpdateActive(true);
 			GetComponent<AIVirtualController>()->SetUpdateActive(true);
+			GetComponent<AIPlayerStator>()->SetUpdateActive(true);
 		}
 
 		void AIPlayerObject::CreateModel() {

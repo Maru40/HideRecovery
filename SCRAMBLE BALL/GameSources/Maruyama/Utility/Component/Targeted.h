@@ -11,13 +11,24 @@
 
 namespace basecross {
 
+	namespace TargetedPriority {
+		constexpr float OPEN_BOX = 0.0f;	//ボールが入っている可能性がある箱
+		constexpr float PLAYER = 2.0f;		//player
+		constexpr float GOAL = 5.0f;		//ゴール
+		constexpr float BALL = 10.0f;		//ボール
+	}
+
 	//--------------------------------------------------------------------------------------
 	/// ターゲットにされる対象のパラメータ
 	//--------------------------------------------------------------------------------------
 	struct Targeted_Parametor
 	{
-		Vec3 offset = Vec3(0.0f);
-		float priority = 0;	//優先度
+		Vec3 offset;
+		float priority;	//優先度
+
+		Targeted_Parametor();
+
+		Targeted_Parametor(const float priority);
 	};
 
 	//--------------------------------------------------------------------------------------
@@ -35,11 +46,13 @@ namespace basecross {
 		std::vector<std::function<bool()>> m_canTargetFunctions;	
 
 	public:
-		/// <summary>
-		/// コンストラクタ
-		/// </summary>
-		/// <param name="objPtr">このクラスを所有するゲームオブジェクト</param>
+
 		Targeted(const std::shared_ptr<GameObject>& objPtr);
+
+		Targeted(
+			const std::shared_ptr<GameObject>& objPtr,
+			const Parametor& param
+		);
 		
 	public:
 		//--------------------------------------------------------------------------------------
@@ -87,6 +100,7 @@ namespace basecross {
 		/// </summary>
 		/// <param name="canTargetFunction">追加したい条件式</param>
 		void AddCanTargetFunction(const std::function<bool()>& canTargetFunction);
+
 	};
 
 }

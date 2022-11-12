@@ -42,7 +42,9 @@ namespace basecross {
 		AddComponent<Item>();
 
 		AddComponent<HideItem>();
-		AddComponent<Targeted>();
+
+		auto targeted = AddComponent<Targeted>(Targeted::Parametor(TargetedPriority::BALL));
+		targeted->AddCanTargetFunction([&]() { return IsDrawActive(); });
 
 		auto animator = AddComponent<BallAnimator>();
 		animator->ChangeBallAnimation(BallAnimationState::State::Gwait);
