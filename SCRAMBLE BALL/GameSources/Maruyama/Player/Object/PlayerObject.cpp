@@ -60,6 +60,8 @@
 #include "Maruyama/Player/Component/OwnArea.h"
 #include "Maruyama/Player/Component/PlayerSpawnPoint.h"
 
+#include "Maruyama/Utility/Component/Targeted.h"
+
 namespace basecross {
 	PlayerObject::PlayerObject(const std::shared_ptr<Stage>& stage) :
 		GameObject(stage)
@@ -211,6 +213,12 @@ namespace basecross {
 
 		constexpr float ScaleValue = 1.0f;
 		transform->SetScale(Vec3(ScaleValue));
+
+		//ターゲット判定の追加
+		auto targeted = AddComponent<Targeted>(Targeted::Parametor(TargetedPriority::PLAYER));
+		std::weak_ptr<PlayerStatus> weakPlayerStatus = playerStatus;
+		//死亡中はターゲットにできないように変更。
+		targeted->AddCanTargetFunction([weakPlayerStatus]() { return !weakPlayerStatus.lock()->IsDead(); });
 
 		//カメラセッティング----------------------------------------------------------
 
