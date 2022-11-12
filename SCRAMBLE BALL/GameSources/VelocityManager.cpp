@@ -56,7 +56,7 @@ namespace basecross {
 
 		GravityUpdate();
 
-		m_param.velocity += m_param.force * delta; //—Í‚ğ‰Á‚¦‚é
+		m_param.velocity += m_param.force; //—Í‚ğ‰Á‚¦‚é
 
 		//ãŒÀŠm”F
 		auto speed = maru::Mathf::Clamp(m_param.velocity.length(), 0.0f, m_param.maxSpeed);
@@ -168,6 +168,7 @@ namespace basecross {
     void VelocityManager::ResetAll() noexcept {
         ResetVelocity();
         ResetForce();
+		SetIsDeseleration(false);
     }
 
     void VelocityManager::StartDeseleration(const float& power) noexcept {
