@@ -110,8 +110,6 @@ namespace basecross {
 						return nullptr;
 					}
 
-					//本来はAIDirectorにアクセスして、ターゲットを確定させる。
-					auto aiDirector = Enemy::AIDirector::GetInstance();
 					auto factionMembmer = m_factionMember.lock();
 					auto patrolCoordinator = factionMembmer->GetAssignedFaction<HidePlacePtrol>();	//パトロールコーディネーターの取得
 
