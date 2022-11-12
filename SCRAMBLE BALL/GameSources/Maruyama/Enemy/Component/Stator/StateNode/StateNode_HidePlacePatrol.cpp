@@ -112,10 +112,10 @@ namespace basecross {
 						continue;
 					}
 
-					auto targetManager = m_targetManager.lock();
-					if (targetManager && targetManager->HasTarget() && targetManager->GetTarget() == target) {
-						continue;
-					}
+					//auto targetManager = m_targetManager.lock();
+					//if (targetManager && targetManager->HasTarget() && targetManager->GetTarget() == target) {
+					//	continue;
+					//}
 
 					auto factionMember = m_factionMember.lock();
 					auto tupleSpace = factionMember->GetAssignedFaction()->GetTupleSpace();
