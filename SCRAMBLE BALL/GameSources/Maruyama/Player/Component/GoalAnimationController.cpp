@@ -31,6 +31,8 @@
 #include "MainStage.h"
 #include "Watanabe/UI/UIObjects.h"
 
+#include "Itabashi/PlayerControlManager.h"
+
 namespace basecross {
 	//--------------------------------------------------------------------------------------
 	/// ゴール中のアニメーションコントローラーのパラメータ
@@ -199,11 +201,6 @@ namespace basecross {
 		m_taskList->DefineTask(TaskEnum::DunkMove, std::make_shared<Task::ToTargetMove>(object, m_param.dunkMoveParam));
 
 		//ダンク後の待機
-		m_param.dunkAfterWaitParam->start = [&]() {
-		};
-
-		m_param.dunkAfterWaitParam->exit = [&]() {
-		};
 		m_taskList->DefineTask(TaskEnum::DunkWait, std::make_shared<Task::Wait>(m_param.dunkAfterWaitParam));
 
 		//元の位置に戻る移動
@@ -213,6 +210,14 @@ namespace basecross {
 		m_param.endWaitParam->exit = [&]() {
 			if (auto animator = GetGameObject()->GetComponent<PlayerAnimator>(false)) {
 				animator->ChangePlayerAnimation(PlayerAnimationState::State::Wait);
+			}
+
+			if (auto velocityManager = GetGameObject()->GetComponent<VelocityManager>(false)) {
+				velocityManager->ResetAll();
+			}
+
+			if (auto playerController = GetGameObject()->GetComponent<PlayerControlManager>(false)) {
+				playerController->ResetMoveSpeed();
 			}
 		};
 		m_taskList->DefineTask(TaskEnum::EndWait, std::make_shared<Task::Wait>(m_param.endWaitParam));

@@ -59,8 +59,8 @@ namespace basecross {
 		m_param.velocity += m_param.force; //—Í‚ğ‰Á‚¦‚é
 
 		//ãŒÀŠm”F
-		auto speed = maru::Mathf::Clamp(m_param.velocity.length(), 0.0f, m_param.maxSpeed);
-		m_param.velocity = m_param.velocity.GetNormalized() * speed;
+		//auto speed = maru::Mathf::Clamp(m_param.velocity.length(), 0.0f, m_param.maxSpeed);
+		//m_param.velocity = m_param.velocity.GetNormalized() * speed;
 
 		Move();  //ˆÚ“®ˆ—
 
