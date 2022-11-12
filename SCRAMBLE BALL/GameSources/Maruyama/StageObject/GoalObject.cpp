@@ -12,6 +12,7 @@
 #include "Watanabe/Shader/StaticModelDraw.h"
 
 #include "Goal.h"
+#include "Maruyama/Utility/Component/Targeted.h"
 
 namespace basecross {
 	GoalObject::GoalObject(const shared_ptr<Stage>& stage) :
@@ -51,6 +52,9 @@ namespace basecross {
 
 		auto collision = AddComponent<CollisionObb>();
 		collision->SetAfterCollision(AfterCollision::None);
+
+		//ターゲット設定
+		AddComponent<Targeted>(Targeted::Parametor(TargetedPriority::GOAL));
 		//collision->SetDrawActive(true);
 	}
 
