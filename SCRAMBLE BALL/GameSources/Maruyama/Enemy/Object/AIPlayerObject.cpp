@@ -87,8 +87,8 @@ namespace basecross {
 			AddComponent<SeekTarget>(nullptr);
 			AddComponent<SelfAstarNodeController>();
 			AddComponent<TargetManager>();
-			AddComponent<AIPlayerStator>();
 			AddComponent<AIVirtualController>();
+			AddComponent<AIPlayerStator>();
 		}
 
 		void AIPlayerObject::CreateModel() {
