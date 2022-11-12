@@ -170,6 +170,8 @@ namespace basecross
 		/// <returns>開くことができる箱</returns>
 		std::shared_ptr<HidePlace> GetCanOpenHidePlace() const;
 
+		std::shared_ptr<Item> GetCanAquisitionItem() const;
+
 		/// <summary>
 		/// HidePlaceが開けるか試す
 		/// </summary>

@@ -60,6 +60,7 @@ namespace basecross
 		if (PlayerInputer::GetInstance()->IsDesitionDown())
 		{
 			onlinePlayerSynchronizer->OpenHidePlace();
+			onlinePlayerSynchronizer->Aquisition();
 		}
 
 		if (PlayerInputer::GetInstance()->IsShot())
