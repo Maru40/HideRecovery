@@ -1,106 +1,114 @@
 ﻿#include "PasswordTextUI.h"
 #include "Watanabe/UI/Numbers.h"
 
+/// <summary>
+/// 数字文字を増やす(9を超えたら0に戻す)
+/// </summary>
+/// <param name="c">現在の文字</param>
+/// <returns>結果文字</returns>
+wchar_t UpRollChar(wchar_t c)
+{
+	++c;
+
+	if (c > L'9')
+	{
+		c = L'0';
+	}
+
+	return c;
+}
+
+/// <summary>
+/// 数字文字を減らす(0を下回ったら0に戻す)
+/// </summary>
+/// <param name="c">現在の文字</param>
+/// <returns>結果文字</returns>
+wchar_t DownRollChar(wchar_t c)
+{
+	--c;
+
+	if (c < L'0')
+	{
+		c = L'9';
+	}
+
+	return c;
+}
+
 namespace basecross
 {
 namespace UI
 {
-	bool PasswordTextUI::TryPush(wchar_t wc)
+	void PasswordTextUI::UpdateTrianglePosition(UIMoveDirection direction)
 	{
-		if (!IsSelected())
+		if (direction == UIMoveDirection::Left)
 		{
-			return false;
-		}
-		
-		// バックスペースが押されたら
-		if (wc == VK_BACK)
-		{
-			if (!m_passwordText.empty())
-			{
-				m_passwordText.pop_back();
-				
-				m_passwordNumber /= 10;
-			}
-
-			return true;
+			m_targetPasswordDisitNum = std::max(--m_targetPasswordDisitNum, 0);
 		}
 
-		// パスワード桁数に達していたら
-		if (IsComplete())
+		if (direction == UIMoveDirection::Right)
 		{
-			return false;
+			m_targetPasswordDisitNum = std::min(++m_targetPasswordDisitNum, m_passwordDisitNum - 1);
 		}
 
+		auto number = m_numbers.lock();
 
-		// Enterは無視する
-		if (wc == VK_RETURN)
+		if (!number)
 		{
-			return false;
+			return;
+		}
+		auto numberSprite = number->GetNumberSprite(m_targetPasswordDisitNum);
+		auto numberPosition = numberSprite->GetRectTransform()->GetPosition();
+
+		auto upTriangle = m_upTriangle.lock();
+		auto downTriangle = m_downTriangle.lock();
+
+		if (upTriangle)
+		{
+			upTriangle->GetComponent<RectTransform>()->SetPosition(numberPosition.x, 120);
 		}
 
-
-
-		if (L'0' <= wc && wc <= L'9')
+		if (downTriangle)
 		{
-			m_passwordText.push_back(wc);
-
-			m_passwordNumber *= 10;
-			m_passwordNumber += wc - L'0';
-
-			return true;
+			downTriangle->GetComponent<RectTransform>()->SetPosition(numberPosition.x, -120);
 		}
-
-		return false;
 	}
 
-	PasswordTextUI::PasswordTextUI(const std::shared_ptr<GameObject>& owner) :
-		SelectableComponent(owner)
+	void PasswordTextUI::ChangeNumber(UIMoveDirection direction)
 	{
-		itbs::Input::InputTextManager::AddInputText(this);
-		m_passwordText.reserve(m_passwordDisitNum);
-	}
+		wchar_t& changeChar = m_passwordText[m_targetPasswordDisitNum];
 
-	PasswordTextUI::~PasswordTextUI()
-	{
-		itbs::Input::InputTextManager::RemoveInputText(this);
-	}
+		auto RollFunc = direction == UIMoveDirection::Up ? &UpRollChar : &DownRollChar;
 
-	void PasswordTextUI::OnCreate()
-	{
-
-	}
-
-	void PasswordTextUI::OnUpdate()
-	{
-
-	}
-
-	bool PasswordTextUI::Push(wchar_t wc)
-	{
-		// 入力に変更がなければ
-		if (!TryPush(wc))
-		{
-			return false;
-		}
+		changeChar = RollFunc(changeChar);
 
 		auto numbers = m_numbers.lock();
 
 		if (!numbers)
 		{
-			return true;
+			return;
 		}
 
-		int outputNumber = m_passwordNumber * static_cast<int>(std::pow(10, m_passwordDisitNum - m_passwordText.size()));
+		numbers->SetNumber(std::stoi(m_passwordText));
+	}
 
-		numbers->SetNumber(outputNumber);
+	PasswordTextUI::PasswordTextUI(const std::shared_ptr<GameObject>& owner) :
+		SelectableComponent(owner)
+	{
+		m_passwordText.resize(m_passwordDisitNum, L'0');
+		m_targetPasswordDisitNum = 0;
+	}
 
-		return true;
+	void PasswordTextUI::OnLateStart()
+	{
+		UpdateTrianglePosition(UIMoveDirection::None);
 	}
 
 	void PasswordTextUI::Clear()
 	{
 		m_passwordText.clear();
-		m_passwordNumber = 0;
+		m_passwordText.resize(m_passwordDisitNum, L'0');
+		m_targetPasswordDisitNum = 0;
 
 		auto numbers = m_numbers.lock();
 
@@ -121,6 +129,28 @@ namespace UI
 		{
 			submitEvent(m_passwordText);
 			SimpleSoundManager::OnePlaySE(m_decisionSEKey);
+		}
+	}
+
+	void PasswordTextUI::OnMove(UIMoveDirection direction)
+	{
+		SelectableComponent::OnMove(direction);
+
+
+		if (direction == UIMoveDirection::None)
+		{
+			return;
+		}
+
+		if (direction == UIMoveDirection::Left || direction == UIMoveDirection::Right)
+		{
+			UpdateTrianglePosition(direction);
+			return;
+		}
+
+		if (direction == UIMoveDirection::Up || direction == UIMoveDirection::Down)
+		{
+			ChangeNumber(direction);
 		}
 	}
 }

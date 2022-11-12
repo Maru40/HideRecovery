@@ -1,5 +1,4 @@
 ﻿#pragma once
-#include "Utility/InputTextManager.h"
 
 namespace basecross
 {
@@ -10,50 +9,71 @@ namespace UI
 	/// <summary>
 	/// キーボード入力のパスワードを表示するUIコンポーネント
 	/// </summary>
-	class PasswordTextUI : public SelectableComponent, public itbs::Input::I_InputText, public I_Submitable
+	class PasswordTextUI : public SelectableComponent, public I_Submitable
 	{
 		const int m_passwordDisitNum = 4; // パスワードの桁数
 
 		std::wstring m_passwordText; // パスワードの文字列データ
 		std::weak_ptr<Numbers> m_numbers; // パスワード表示用Numbers
 
-		int m_passwordNumber = 0; // パスワードの数字データ
+		std::weak_ptr<GameObject> m_upTriangle; // 上矢印オブジェクト
+		std::weak_ptr<GameObject> m_downTriangle; // 下矢印オブジェクト
+
+		int m_targetPasswordDisitNum = 0; // パスワードの現在の選択桁
 
 		std::wstring m_decisionSEKey; // パスワードの決定音
 
 		std::vector<std::function<void(const std::wstring&)>> m_submitEvents; // パスワード決定時イベント配列
 
 		/// <summary>
-		/// 入力を試す
+		/// 現在の選択桁を更新する
 		/// </summary>
-		/// <param name="wc">入力文字</param>
-		/// <returns>文字列に変更があればtrue</returns>
-		bool TryPush(wchar_t wc);
+		/// <param name="direction">入力方向</param>
+		void UpdateTrianglePosition(UIMoveDirection direction);
+
+		/// <summary>
+		/// 数字を変更する
+		/// </summary>
+		/// <param name="direction">入力方向</param>
+		void ChangeNumber(UIMoveDirection direction);
 
 	public:
 		PasswordTextUI(const std::shared_ptr<GameObject>& owner);
 
-		~PasswordTextUI() noexcept;
-
-		void OnCreate() override;
-
-		void OnUpdate() override;
+		void OnLateStart() override;
 
 		void OnDraw() override {}
 
-		bool Push(wchar_t wc) override;
-
-		const wchar_t* GetText() const override { return m_passwordText.c_str(); }
-
-		void Clear() override;
-
 		void OnSubmit() override;
 
+		void OnMove(UIMoveDirection direction) override;
+
 		/// <summary>
-		/// パスワード表示用Numbersの取得
+		/// 入力パスワードの取得
+		/// </summary>
+		/// <returns>入力パスワード</returns>
+		const std::wstring& GetPassword() const { return m_passwordText; }
+
+		/// <summary>
+		/// パスワードの初期化
+		/// </summary>
+		void Clear();
+
+		/// <summary>
+		/// パスワード表示用Numbersの設定
 		/// </summary>
 		/// <param name="numbers">パスワード表示用Numbers</param>
 		void SetNumbers(const std::shared_ptr<Numbers>& numbers) { m_numbers = numbers; }
+		/// <summary>
+		/// 上矢印オブジェクトを設定
+		/// </summary>
+		/// <param name="upTriangle">上矢印オブジェクト</param>
+		void SetUpTriangle(const std::shared_ptr<GameObject>& upTriangle) { m_upTriangle = upTriangle; }
+		/// <summary>
+		/// 下矢印オブジェクトの設定
+		/// </summary>
+		/// <param name="downTriangle">下矢印オブジェクト</param>
+		void SetDownTriangle(const std::shared_ptr<GameObject>& downTriangle) { m_downTriangle = downTriangle; }
 
 		/// <summary>
 		/// 入力が完了しているか
