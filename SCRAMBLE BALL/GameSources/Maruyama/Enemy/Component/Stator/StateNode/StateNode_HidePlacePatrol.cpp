@@ -26,6 +26,8 @@
 #include "Watanabe/Component/PlayerStatus.h"
 #include "Maruyama/Utility/Component/TargetManager.h"
 
+#include "Maruyama/Utility/Component/Targeted.h"
+
 #include "Watanabe/DebugClass/Debug.h"
 
 //#include "Maruyama/Enemy/Component/AIVirtualController.h"
@@ -107,13 +109,8 @@ namespace basecross {
 
 				//ターゲットを見つけたことをAIDirectorに伝える。
 				for (auto& target : targets) {
-					auto status = target->GetComponent<PlayerStatus>(false);
-					if (status && status->IsDead()) {
-						continue;
-					}
-
-					auto targetManager = m_targetManager.lock();
-					if (targetManager && targetManager->HasTarget() && targetManager->GetTarget() == target) {
+					auto targeted = target->GetComponent<Targeted>(false);
+					if (targeted && !targeted->CanTarget()) {
 						continue;
 					}
 

@@ -59,6 +59,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Effect\Component\ParticleManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Effect\Object\AuraObjectBase.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\Calculater\CombatCalculater.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\Calculater\HidePlacePatrolCalculater.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\CombatCoordinator.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\CoordinatorBase.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\EnemyAIDirector.h" />
@@ -82,10 +83,13 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\SparseGraph.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\UtilityAstar.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\BehaviorTree.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\IsActiveSpecificTarget.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\IsInEyeTarget.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\IsInEyeTargets.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\IsSpecificTarget.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\ObserveTargets.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\OutSpecificTarget.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\RegisterCanTransitionDecorator.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Interface\I_Decorator.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Interface\I_Edge.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Interface\I_Node.h" />
@@ -100,6 +104,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Task\NearAstarMove.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Task\NearSeekMove.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Task\Task_SearchBall.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Task\ToBallRunTask.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Tester\Tester_Behavior.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\AIVirtualController.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Animation\AnimationMainStateMachine.h" />
@@ -467,6 +472,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Effect\Component\ParticleManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Effect\Object\AuraObjectBase.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\Calculater\CombatCalculater.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\Calculater\HidePlacePatrolCalculater.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\CombatCoordinator.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\CoordinatorBase.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\EnemyAIDirector.cpp" />
@@ -489,10 +495,13 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\SparseGraph.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\UtilityAstar.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\BehaviorTree.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\IsActiveSpecificTarget.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\IsInEyeTarget.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\IsInEyeTargets.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\IsSpecificTarget.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\ObserveTargets.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\OutSpecificTarget.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\RegisterCanTransitionDecorator.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Interface\I_Decorator.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Interface\I_Edge.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Interface\I_Node.cpp" />
@@ -507,6 +516,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Task\NearAstarMove.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Task\NearSeekMove.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Task\Task_SearchBall.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Task\ToBallRunTask.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Tester\Tester_Behavior.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\AIVirtualController.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Animation\AnimationMainStateMachine.cpp" />

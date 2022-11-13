@@ -20,6 +20,9 @@
 
 #include "Itabashi/OnlineStatus.h"
 
+#include "Maruyama/Utility/SingletonComponent/SingletonComponent.h"
+#include "Maruyama/Utility/SingletonComponent/ShareClassesManager.h"
+
 namespace basecross {
 	HideItemObject::HideItemObject(const std::shared_ptr<Stage>& stage) :
 		StageObjectBase(stage, L"HideItem")
@@ -48,6 +51,10 @@ namespace basecross {
 
 		auto animator = AddComponent<BallAnimator>();
 		animator->ChangeBallAnimation(BallAnimationState::State::Gwait);
+
+		if (auto shareClass = ShareClassesManager::GetInstance()) {
+			shareClass->AddShareClass<HideItemObject>(GetThis<HideItemObject>());
+		}
 	}
 
 	void HideItemObject::OnUpdate() {

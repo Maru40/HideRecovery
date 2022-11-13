@@ -25,6 +25,7 @@
 #include "Maruyama/Utility/SingletonComponent/ShareClassesManager.h"
 
 #include "Watanabe/Component/PlayerStatus.h"
+#include "Maruyama/Utility/Component/Targeted.h"
 
 namespace basecross {
 	namespace maru {
@@ -68,8 +69,8 @@ namespace basecross {
 					//ターゲットを見つけたことを通知する。
 					for (const auto& target : targets) {
 						//playerステータスがデッド状態なら、処理を省く(将来的には別にしたい。)
-						auto status = target->GetComponent<PlayerStatus>(false);
-						if (status && status->IsDead()) {
+						auto targeted = target->GetComponent<Targeted>(false);
+						if (targeted && !targeted->CanTarget()) {
 							continue;
 						}
 

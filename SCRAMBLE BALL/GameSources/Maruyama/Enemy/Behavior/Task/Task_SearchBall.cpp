@@ -110,8 +110,6 @@ namespace basecross {
 						return nullptr;
 					}
 
-					//本来はAIDirectorにアクセスして、ターゲットを確定させる。
-					auto aiDirector = Enemy::AIDirector::GetInstance();
 					auto factionMembmer = m_factionMember.lock();
 					auto patrolCoordinator = factionMembmer->GetAssignedFaction<HidePlacePtrol>();	//パトロールコーディネーターの取得
 
@@ -227,8 +225,6 @@ namespace basecross {
 					m_param.targetSeekParam->toTargetMoveParam->speed = MoveSpeed;
 					m_param.targetSeekParam->toTargetMoveParam->moveType = basecross::Task::ToTargetMove::MoveType::ArriveVelocity;
 					m_param.targetSeekParam->toTargetMoveParam->targetNearRange = NearTargetRange;
-
-					
 				}
 
 				void SearchBall::Rotation() {
