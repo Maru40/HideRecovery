@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "stdafx.h"
+#include "../Utility/TransformData.h"
 
 namespace basecross {
 	struct KeyFrameData {
@@ -45,5 +46,11 @@ namespace basecross {
 		bool operator<(const CameraKeyFrameData& right) const {
 			return Time < right.Time;
 		}
+	};
+
+	struct GameObjectKeyFrameData {
+		TransformData m_transformData;
+		float Time;			// キーフレーム位置
+		Lerp::rate Rate;	// このフレームからの保管方法
 	};
 }
