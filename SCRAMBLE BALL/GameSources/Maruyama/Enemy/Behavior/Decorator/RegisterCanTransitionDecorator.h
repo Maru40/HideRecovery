@@ -37,6 +37,8 @@ namespace basecross {
 					std::vector<std::function<bool()>> m_canTransitions;
 
 				public:
+					void OnStart() override {}
+
 					bool CanTransition() const override;
 
 					bool CanUpdate() override;
