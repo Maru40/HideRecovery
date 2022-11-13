@@ -62,9 +62,9 @@ namespace basecross {
 			return false;
 		}
 
-		return m_paramPtr->target->IsActive();
+		//return m_paramPtr->target->IsActive();
 
-		//return m_paramPtr->target ? true : false;
+		return m_paramPtr->target ? true : false;
 	}
 
 	Vec3 TargetManager::GetTargetPosition() const {
