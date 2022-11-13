@@ -89,6 +89,8 @@ namespace basecross {
 				public:
 					ToGoalRunTask(const std::shared_ptr<Enemy::EnemyBase>& owner);
 
+					virtual ~ToGoalRunTask() = default;
+
 					void OnStart() override;
 
 					bool OnUpdate() override;
