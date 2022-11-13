@@ -37,6 +37,7 @@ namespace basecross {
 
 				//ˆê‚Â‚Å‚à‘JˆÚ‚Å‚«‚È‚¢‚È‚çfalse
 				for (const auto& decorator : m_decorators) {
+					decorator->OnStart();	//‘JˆÚğŒ‚ğŒŸõ‚·‚é‘O‚É‰Šú‰»‚·‚éB
 					if (!decorator->CanTransition()) {
 						return false;
 					}
