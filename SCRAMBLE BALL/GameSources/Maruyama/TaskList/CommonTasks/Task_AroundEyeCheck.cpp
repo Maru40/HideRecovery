@@ -51,7 +51,7 @@ namespace basecross {
 			auto rotationController = GetOwner()->GetComponent<RotationController>(false);
 			if (rotationController) {
 				m_defaultSpeed = rotationController->GetSpeed();
-				rotationController->SetSpeed(m_paramPtr->speed);
+				rotationController->SetSpeed(m_paramPtr.lock()->speed);
 				rotationController->SetDirection(m_directs[m_index]);
 			}
 			else {
@@ -98,8 +98,8 @@ namespace basecross {
 			auto forward = transform->GetForward();
 
 			float radians[] = {
-				+m_paramPtr->aroundRadian,
-				-m_paramPtr->aroundRadian
+				+m_paramPtr.lock()->aroundRadian,
+				-m_paramPtr.lock()->aroundRadian
 			};
 
 			for (const auto& radian : radians) {
