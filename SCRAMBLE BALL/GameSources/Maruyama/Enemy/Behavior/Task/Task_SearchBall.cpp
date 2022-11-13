@@ -225,8 +225,6 @@ namespace basecross {
 					m_param.targetSeekParam->toTargetMoveParam->speed = MoveSpeed;
 					m_param.targetSeekParam->toTargetMoveParam->moveType = basecross::Task::ToTargetMove::MoveType::ArriveVelocity;
 					m_param.targetSeekParam->toTargetMoveParam->targetNearRange = NearTargetRange;
-
-					
 				}
 
 				void SearchBall::Rotation() {
