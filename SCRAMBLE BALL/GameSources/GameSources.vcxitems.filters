@@ -1390,6 +1390,9 @@
     <Filter Include="Maruyama\Enemy\Component\AI\Director\Calculater\HidePlacePatorol">
       <UniqueIdentifier>{a8275876-71f0-4fc8-8d6c-bfa7f3e0b384}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Enemy\BehaviorTree\Decorator\IsSpecificTarget">
+      <UniqueIdentifier>{dfad3352-72c8-46ce-ae89-84ff48c29650}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2586,9 +2589,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\HasBallEventExecuter.h">
       <Filter>Watanabe\Component\HasBallEventExecuter</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\Calculater\CombatCalculater.h">
-      <Filter>Maruyama\Enemy\Component\AI\Director\Calculater</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\OutSpecificTarget.h">
       <Filter>Maruyama\Enemy\BehaviorTree\Decorator\OutSpecificTarget</Filter>
     </ClInclude>
@@ -2603,6 +2603,12 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\Calculater\HidePlacePatrolCalculater.h">
       <Filter>Maruyama\Enemy\Component\AI\Director\Calculater\HidePlacePatorol</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\Calculater\CombatCalculater.h">
+      <Filter>Maruyama\Enemy\Component\AI\Director\Calculater\Combat</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\IsSpecificTarget.h">
+      <Filter>Maruyama\Enemy\BehaviorTree\Decorator\IsSpecificTarget</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -3701,9 +3707,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\HasBallEventExecuter.cpp">
       <Filter>Watanabe\Component\HasBallEventExecuter</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\Calculater\CombatCalculater.cpp">
-      <Filter>Maruyama\Enemy\Component\AI\Director\Calculater</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\OutSpecificTarget.cpp">
       <Filter>Maruyama\Enemy\BehaviorTree\Decorator\OutSpecificTarget</Filter>
     </ClCompile>
@@ -3718,6 +3721,12 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\Calculater\HidePlacePatrolCalculater.cpp">
       <Filter>Maruyama\Enemy\Component\AI\Director\Calculater\HidePlacePatorol</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\Calculater\CombatCalculater.cpp">
+      <Filter>Maruyama\Enemy\Component\AI\Director\Calculater\Combat</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\IsSpecificTarget.cpp">
+      <Filter>Maruyama\Enemy\BehaviorTree\Decorator\IsSpecificTarget</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
