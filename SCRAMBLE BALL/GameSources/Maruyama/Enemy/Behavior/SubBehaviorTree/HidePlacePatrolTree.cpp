@@ -63,7 +63,7 @@ namespace basecross {
 					m_behaviorTree->AddEdge(
 						BehaviorType::FirstSelecter, 
 						BehaviorType::PatrolTask, 
-						std::make_shared<PriorityControllerBase>((int)BehaviorType::PatrolTask)
+						(int)BehaviorType::PatrolTask
 					);
 
 					//m_behaviorTree->AddEdge(
