@@ -21,6 +21,7 @@
 #include "Maruyama/Enemy/Behavior/Task/NearSeekMove.h"
 #include "Maruyama/TaskList/CommonTasks/TargetSeek.h"
 #include "Maruyama/TaskList/CommonTasks/Task_ToTargetMove.h"
+#include "Maruyama/Enemy/Behavior/Task/ToBallRunTask.h"
 
 #include "Maruyama/Enemy/Behavior/Interface/I_PriorityController.h"
 
@@ -83,10 +84,9 @@ namespace basecross {
 					moveParam->speed = 8.5f;
 					moveParam->moveType = basecross::Task::ToTargetMove::MoveType::SeekVelocity;
 					//Ballの場所まで駆けつけるタスク
-					m_behaviorTree->AddTask<Task::NearAstarMove>(
+					m_behaviorTree->AddTask<Task::ToBallRunTask>(
 						BehaviorType::ToBallRunTask,
-						owner,
-						m_param.astarMoveParamPtr
+						owner
 					);
 
 					//Goalまで行くタスク
