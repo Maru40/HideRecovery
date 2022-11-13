@@ -12,6 +12,9 @@
 #include "Itabashi/ObjectHider.h"
 #include "Itabashi/Item.h"
 
+#include "Maruyama/Utility/SingletonComponent/SingletonComponent.h"
+#include "Maruyama/Utility/SingletonComponent/ShareClassesManager.h"
+
 namespace basecross {
 
 	HideItem::HideItem(const std::shared_ptr<GameObject>& objPtr):
@@ -25,6 +28,10 @@ namespace basecross {
 
 		m_hider = gameObject->GetComponent<Operator::ObjectHider>();
 		m_item = gameObject->GetComponent<Item>();
+
+		if (auto shareClass = ShareClassesManager::GetInstance()) {
+			shareClass->AddShareClass<HideItem>(GetThis<HideItem>());
+		}
 	}
 
 }
