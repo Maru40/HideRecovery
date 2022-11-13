@@ -1405,6 +1405,9 @@
     <Filter Include="Maruyama\Enemy\BehaviorTree\Task\ToGoalRunTask">
       <UniqueIdentifier>{03cea400-6548-49db-9b6a-1f9006d7ebf3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Enemy\BehaviorTree\Decorator\SettingStartTarget">
+      <UniqueIdentifier>{2349014b-207e-470e-b2a2-22c81977994b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2631,6 +2634,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Task\ToBallRunTask.h">
       <Filter>Maruyama\Enemy\BehaviorTree\Task\ToBallRunTask</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\SettingStartTarget.h">
+      <Filter>Maruyama\Enemy\BehaviorTree\Decorator\SettingStartTarget</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -3757,6 +3763,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Task\ToBallRunTask.cpp">
       <Filter>Maruyama\Enemy\BehaviorTree\Task\ToBallRunTask</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\SettingStartTarget.cpp">
+      <Filter>Maruyama\Enemy\BehaviorTree\Decorator\SettingStartTarget</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
