@@ -342,6 +342,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\PlayerStatus.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\SyncObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\TestComponent.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\TimeLine\AdvQueue.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\TimeLine\KeyFrameData.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\TimeLine\TimeLine.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\Zooming.h" />

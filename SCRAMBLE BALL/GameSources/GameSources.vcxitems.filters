@@ -2598,6 +2598,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\TimeLine\KeyFrameData.h">
       <Filter>Watanabe\Component\TimeLine</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\TimeLine\AdvQueue.h">
+      <Filter>Watanabe\Component\TimeLine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
