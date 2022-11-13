@@ -26,6 +26,12 @@ namespace basecross {
 				}
 			}
 
+			void NodeBase::OnDecoratorExit() {
+				for (auto& decorator : m_decorators) {
+					decorator->OnExit();
+				}
+			}
+
 			bool NodeBase::CanTransition() const {
 				if (!IsActive()) {	//非アクティブなら遷移できないため、false
 					return false;
