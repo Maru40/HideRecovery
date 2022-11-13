@@ -23,6 +23,7 @@
 #include "Maruyama/TaskList/CommonTasks/Task_ToTargetMove.h"
 #include "Maruyama/Enemy/Behavior/Task/ToBallRunTask.h"
 #include "Maruyama/Enemy/Behavior/Task/ToGoalRunTask.h"
+#include "Maruyama/Enemy/Behavior/Task/RelifMember.h"
 
 #include "Maruyama/Enemy/Behavior/Interface/I_PriorityController.h"
 
@@ -31,6 +32,7 @@
 #include "Maruyama/Enemy/Behavior/Decorator/IsActiveSpecificTarget.h"
 #include "Maruyama/Enemy/Behavior/Decorator/SettingStartTarget_Ball.h"
 #include "Maruyama/Enemy/Behavior/Decorator/HasBallTransition.h"
+#include "Maruyama/Enemy/Behavior/Decorator/HasBall_OtherMember.h"
 
 #include "Maruyama/Utility/SingletonComponent/SingletonComponent.h"
 #include "Maruyama/Utility/SingletonComponent/ShareClassesManager.h"
@@ -92,7 +94,10 @@ namespace basecross {
 					);
 
 					//見方を守るタスク
-
+					m_behaviorTree->AddTask<Task::RelifMember>(
+						BehaviorType::RelifHasBallMemberTask,
+						owner
+					);
 				}
 
 				void HidePlacePatrolTree::CreateEdge() {
@@ -115,6 +120,12 @@ namespace basecross {
 						BehaviorType::FirstSelecter,
 						BehaviorType::ToGoalRunTask,
 						(int)BehaviorType::ToGoalRunTask
+					);
+
+					m_behaviorTree->AddEdge(
+						BehaviorType::FirstSelecter,
+						BehaviorType::RelifHasBallMemberTask,
+						(int)BehaviorType::RelifHasBallMemberTask
 					);
 				}
 
@@ -146,6 +157,16 @@ namespace basecross {
 					m_behaviorTree->AddDecorator<Decorator::HasBallTransition>(
 						BehaviorType::ToGoalRunTask,
 						GetOwner()
+					);
+
+					//-------------------------------------------------------------------------------------------------------
+
+					//見方を守るタスク---------------------------------------------------------------------------------------
+
+					//ボールを持っている人がいるなら
+					m_behaviorTree->AddDecorator<Decorator::HasBall_OtherMember>(
+						BehaviorType::RelifHasBallMemberTask,
+						enemy
 					);
 
 					//-------------------------------------------------------------------------------------------------------
