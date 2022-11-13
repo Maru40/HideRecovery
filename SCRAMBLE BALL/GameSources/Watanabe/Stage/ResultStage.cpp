@@ -14,7 +14,7 @@
 #include "Watanabe/Component/PlayerAnimator.h"
 #include "Watanabe/Component/MatchingSyncPlayerObject.h"
 #include "Watanabe/Component/PlayerStatus.h"
-#include "Watanabe/Component/CameraAnimator.h"
+#include "Watanabe/Component/TimeLine/TimeLine.h"
 
 #include "Maruyama/Interface/I_TeamMember.h"
 #include "VelocityManager.h"
@@ -78,7 +78,11 @@ namespace basecross {
 		// デバッグ
 		PointManager::GetInstance()->AddPoint(team::TeamType::Blue);
 
-		AddGameObject<GameObject>()->AddComponent<CameraAnimator>();
+		auto timeLine = AddGameObject<GameObject>()->AddComponent<TimeLine>();
+		timeLine->AddKeyFrame(CameraKeyFrameData(Vec3(0, 1, 5), Vec3(0), 0, Lerp::rate::Cube));
+		timeLine->AddKeyFrame(CameraKeyFrameData(Vec3(0, 1, 5), Vec3(0, 1, 0), 1, Lerp::rate::Cube));
+		timeLine->AddKeyFrame(CameraKeyFrameData(Vec3(0, 2, 5), Vec3(0, 1, 0), 1.2f, Lerp::rate::Cube));
+		timeLine->Play();
 
 		CreateMap(L"WaitStage.csv");
 		auto uiBuilder = CreateUI(L"ResultUILayout.csv");
