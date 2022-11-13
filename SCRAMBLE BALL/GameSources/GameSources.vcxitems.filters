@@ -1423,6 +1423,9 @@
     <Filter Include="Maruyama\Enemy\BehaviorTree\Decorator\CanCurrentTarget">
       <UniqueIdentifier>{9045f22e-1e02-48eb-84f8-abf544ee7c41}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Enemy\BehaviorTree\Decorator\HasBall_OtherMember">
+      <UniqueIdentifier>{cd8c1cae-8ad6-4ac6-8e2d-4ca0fc721f41}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2670,6 +2673,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\CanCurrentTarget.h">
       <Filter>Maruyama\Enemy\BehaviorTree\Decorator\CanCurrentTarget</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\HasBall_OtherMember.h">
+      <Filter>Maruyama\Enemy\BehaviorTree\Decorator\HasBall_OtherMember</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -3817,6 +3823,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\CanCurrentTarget.cpp">
       <Filter>Maruyama\Enemy\BehaviorTree\Decorator\CanCurrentTarget</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\HasBall_OtherMember.cpp">
+      <Filter>Maruyama\Enemy\BehaviorTree\Decorator\HasBall_OtherMember</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
