@@ -190,7 +190,7 @@ namespace basecross {
 
 					//Astarで目標の近くまで移動するパラメータ
 					m_param.moveAstarParam->movePositionsParam->moveParamPtr->speed = MoveSpeed;
-					m_param.moveAstarParam->movePositionsParam->moveParamPtr->targetNearRange = 2.0f;
+					m_param.moveAstarParam->movePositionsParam->moveParamPtr->targetNearRange = 1.5f;
 					m_param.moveAstarParam->movePositionsParam->moveParamPtr->moveType = basecross::Task::ToTargetMove_MoveType::SeekVelocity;
 
 					//目的地の近くまで移動した場合の設定
