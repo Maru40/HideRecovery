@@ -20,6 +20,12 @@ namespace basecross {
 			/// ビヘイビアタスクの基底クラス
 			//--------------------------------------------------------------------------------------
 
+			void NodeBase::OnDecoratorStart() {
+				for (auto& decorator : m_decorators) {
+					decorator->OnStart();
+				}
+			}
+
 			bool NodeBase::CanTransition() const {
 				if (!IsActive()) {	//非アクティブなら遷移できないため、false
 					return false;
@@ -37,7 +43,7 @@ namespace basecross {
 
 				//一つでも遷移できないならfalse
 				for (const auto& decorator : m_decorators) {
-					decorator->OnStart();	//遷移条件を検索する前に初期化する。
+					decorator->ReserveCanTransition();
 					if (!decorator->CanTransition()) {
 						return false;
 					}
