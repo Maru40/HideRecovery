@@ -22,6 +22,16 @@ namespace basecross {
 				virtual ~I_Decorator() = default;
 
 				/// <summary>
+				/// 生成時に一度だけ呼ぶ処理
+				/// </summary>
+				virtual void OnCreate() = 0;
+
+				/// <summary>
+				/// ノード開始時に呼び出す処理。
+				/// </summary>
+				virtual void OnStart() = 0;
+
+				/// <summary>
 				/// 遷移できるかどうか
 				/// </summary>
 				/// <returns>遷移できるならtrue</returns>
@@ -48,6 +58,9 @@ namespace basecross {
 				{}
 
 				virtual ~DecoratorBase() = default;
+
+				virtual void OnCreate() override {}
+				virtual void OnStart() override {}
 
 				//--------------------------------------------------------------------------------------
 				/// アクセッサ
