@@ -1420,6 +1420,9 @@
     <Filter Include="Maruyama\Enemy\BehaviorTree\Task\RelifMember">
       <UniqueIdentifier>{45281f90-6b3f-4db5-8ab9-be218da83819}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Enemy\BehaviorTree\Decorator\CanCurrentTarget">
+      <UniqueIdentifier>{9045f22e-1e02-48eb-84f8-abf544ee7c41}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2664,6 +2667,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Task\RelifMember.h">
       <Filter>Maruyama\Enemy\BehaviorTree\Task\RelifMember</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\CanCurrentTarget.h">
+      <Filter>Maruyama\Enemy\BehaviorTree\Decorator\CanCurrentTarget</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -3808,6 +3814,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Task\RelifMember.cpp">
       <Filter>Maruyama\Enemy\BehaviorTree\Task\RelifMember</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\CanCurrentTarget.cpp">
+      <Filter>Maruyama\Enemy\BehaviorTree\Decorator\CanCurrentTarget</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
