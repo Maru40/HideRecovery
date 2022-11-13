@@ -77,6 +77,16 @@ namespace basecross {
 			//m_impactMap->GetGraphAstar()->CreateAreaAstarGraph();	//それぞれのエリアのグラフの中心位置を設定する。
 				//エリアグラフ用のエッジをつなぐ
 
+			//いらないノードの削除
+			auto& astar = m_impactMap->GetGraphAstar();
+			auto& graph = astar->GetGraph();
+			for (auto& node : graph->GetNodes()) {
+				auto edges = graph->GetEdges(node->GetIndex());
+				if (edges.empty()) {
+					astar->RemoveNode(node->GetIndex());
+				}
+			}
+
 			m_impactMap->CreateDebugDraw(false);		//デバッグデータの生成
 		}
 
