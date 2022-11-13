@@ -39,6 +39,8 @@
 #include "Maruyama/Utility/Component/RotationController.h"
 #include "Maruyama/Utility/UtilityObstacle.h"
 
+#include "Maruyama/Player/Component/ItemBag.h"
+
 #include "Watanabe/DebugClass/Debug.h"
 
 namespace basecross {
@@ -104,6 +106,29 @@ namespace basecross {
 				}
 
 				std::shared_ptr<GameObject> RelifMember::CalculateTarget() {
+					auto assignedFaction = GetOwner()->GetAssignedFaction();
+					if (!assignedFaction) {
+						return nullptr;
+					}
+
+					for (auto& weakMember : assignedFaction->GetMembers()) {
+						auto member = weakMember.lock();
+						if (member == GetOwner()) {	//自分自身なら処理を飛ばす。
+							continue;
+						}
+
+						auto itemBag = member->GetGameObject()->GetComponent<ItemBag>(false);
+						if (!itemBag) {	//アイテムを持っていないなら処理を飛ばす。
+							continue;
+						}
+
+						auto hideItem = itemBag->GetHideItem();
+						if (hideItem) {	//隠しアイテムを持っているなら、ターゲットにする。
+							auto target = member->GetGameObject();
+							m_targetManager.lock()->SetTarget(target);
+							return target;
+						}
+					}
 
 					return nullptr;
 				}
@@ -182,7 +207,7 @@ namespace basecross {
 					TaskEnum tasks[] = {
 						TaskEnum::MoveAstar,
 						TaskEnum::MoveArrive,
-						TaskEnum::AroundPtrol,
+						//TaskEnum::AroundPtrol,
 						TaskEnum::Wait
 					};
 
