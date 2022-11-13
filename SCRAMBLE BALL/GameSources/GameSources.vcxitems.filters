@@ -1408,6 +1408,12 @@
     <Filter Include="Maruyama\Enemy\BehaviorTree\Decorator\SettingStartTarget">
       <UniqueIdentifier>{2349014b-207e-470e-b2a2-22c81977994b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Enemy\BehaviorTree\Decorator\SettingStartTarget\SettingStartTarget_Goal">
+      <UniqueIdentifier>{0f7428eb-f3a8-46e4-a84e-549d28dc3874}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\BehaviorTree\Decorator\SettingStartTarget\SettingStartBallTarget">
+      <UniqueIdentifier>{23588e6d-1615-43d3-b585-3f18766a9a7c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2637,6 +2643,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\SettingStartTarget.h">
       <Filter>Maruyama\Enemy\BehaviorTree\Decorator\SettingStartTarget</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\SettingStartTarget_Ball.h">
+      <Filter>Maruyama\Enemy\BehaviorTree\Decorator\SettingStartTarget\SettingStartBallTarget</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\SettingStartTarget_Goal.h">
+      <Filter>Maruyama\Enemy\BehaviorTree\Decorator\SettingStartTarget\SettingStartTarget_Goal</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -3766,6 +3778,12 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\SettingStartTarget.cpp">
       <Filter>Maruyama\Enemy\BehaviorTree\Decorator\SettingStartTarget</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\SettingStartTarget_Ball.cpp">
+      <Filter>Maruyama\Enemy\BehaviorTree\Decorator\SettingStartTarget\SettingStartBallTarget</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\SettingStartTarget_Goal.cpp">
+      <Filter>Maruyama\Enemy\BehaviorTree\Decorator\SettingStartTarget\SettingStartTarget_Goal</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
