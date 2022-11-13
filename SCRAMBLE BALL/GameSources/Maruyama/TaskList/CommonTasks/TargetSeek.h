@@ -49,6 +49,7 @@ namespace basecross {
 
 			std::unique_ptr<TaskList<TaskEnum>> m_taskList;	//タスクリスト
 
+			std::weak_ptr<Transform> m_transform;
 			std::weak_ptr<TargetManager> m_targetManager;	//ターゲット管理
 
 		public:
@@ -68,6 +69,9 @@ namespace basecross {
 			void DefineTask();
 
 			void SelectTask();
+
+		public:
+			bool IsEnd() const;
 
 		};
 

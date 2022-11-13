@@ -14,6 +14,9 @@
 
 #include "Maruyama/TaskList/CommonTasks/Task_ToTargetMove.h"
 
+#include "Maruyama/Utility/UtilityObstacle.h"
+#include "Maruyama/Enemy/Component/EyeSearchRange.h"
+
 namespace basecross {
 
 	namespace TaskListNode {
@@ -37,6 +40,7 @@ namespace basecross {
 		{
 			DefineTask();
 
+			m_transform = owner->GetComponent<Transform>();
 			m_targetManager = owner->GetComponent<TargetManager>();
 		}
 
@@ -56,7 +60,7 @@ namespace basecross {
 			UpdateSeekPosition();
 			m_taskList->UpdateTask();
 
-			return m_taskList->IsEnd();
+			return IsEnd();
 		}
 
 		void TargetSeek::OnExit() {
@@ -104,6 +108,21 @@ namespace basecross {
 			}
 		}
 
+		bool TargetSeek::IsEnd() const {
+			//ターゲットが存在しないなら処理を飛ばす。
+			auto targetManager = m_targetManager.lock();
+			if (!targetManager || !targetManager->HasTarget()) {
+				return true;
+			}
+
+			//障害物に当たったら。
+			auto objects = GetOwner()->GetStage()->GetGameObjectVec();
+			if(maru::UtilityObstacle::IsRayObstacle(m_transform.lock()->GetPosition(), m_targetManager.lock()->GetTargetPosition(), objects)) {
+				return true;
+			}
+
+			return m_taskList->IsEnd();
+		}
 	}
 }
 
