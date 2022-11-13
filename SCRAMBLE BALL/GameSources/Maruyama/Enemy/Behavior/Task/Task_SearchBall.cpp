@@ -180,16 +180,16 @@ namespace basecross {
 				void SearchBall::DefineWaitTask() {
 					//開始イベント
 					m_param.waitParam->start = [&]() {	
-						if (auto velocityManager = m_velocityManager.lock()) {
-							velocityManager->StartDeseleration();
-						}
+						//if (auto velocityManager = m_velocityManager.lock()) {
+						//	velocityManager->StartDeseleration();
+						//}
 					};
 
 					//終了イベント
 					m_param.waitParam->exit = [&]() {	
-						if (auto velocityManager = m_velocityManager.lock()) {
-							velocityManager->SetIsDeseleration(false);
-						}
+						//if (auto velocityManager = m_velocityManager.lock()) {
+						//	velocityManager->SetIsDeseleration(false);
+						//}
 					};
 
 					//タスクの定義
