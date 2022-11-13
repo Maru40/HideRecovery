@@ -51,6 +51,7 @@ namespace basecross {
 				[&](const std::shared_ptr<Tuple::SearchTarget>& tuple) { NotifyTuple_SearchTarget(tuple); }
 			);
 
+			//ターゲット発見
 			GetTupleSpace()->Notify<Tuple::FindTarget>(
 				GetThis<CombatCoordinator>(),
 				[&](const std::shared_ptr<Tuple::FindTarget>& tuple) { NotifyTuple_FindTarget(tuple); }
