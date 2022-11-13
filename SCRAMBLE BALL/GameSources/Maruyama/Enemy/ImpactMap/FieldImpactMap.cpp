@@ -78,13 +78,19 @@ namespace basecross {
 				//エリアグラフ用のエッジをつなぐ
 
 			//いらないノードの削除
+			std::vector<std::function<void()>> removeFuncs;
 			auto& astar = m_impactMap->GetGraphAstar();
 			auto& graph = astar->GetGraph();
 			for (auto& node : graph->GetNodes()) {
 				auto edges = graph->GetEdges(node->GetIndex());
 				if (edges.empty()) {
-					astar->RemoveNode(node->GetIndex());
+					int index = node->GetIndex();
+					removeFuncs.push_back([astar, node]() { astar->RemoveNode(node); });
 				}
+			}
+
+			for (auto removeFunc : removeFuncs) {
+				removeFunc();	//削除実行
 			}
 
 			m_impactMap->CreateDebugDraw(false);		//デバッグデータの生成
