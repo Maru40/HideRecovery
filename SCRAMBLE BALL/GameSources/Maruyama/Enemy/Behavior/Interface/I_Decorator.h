@@ -32,6 +32,11 @@ namespace basecross {
 				virtual void OnStart() = 0;
 
 				/// <summary>
+				/// ‘JˆÚğŒŠm”F‘O‚Ì€”õ(CanTransition‚ğŒÄ‚Ô‘O‚ÉŒÄ‚Ôˆ—)
+				/// </summary>
+				virtual void ReserveCanTransition() = 0;
+
+				/// <summary>
 				/// ‘JˆÚ‚Å‚«‚é‚©‚Ç‚¤‚©
 				/// </summary>
 				/// <returns>‘JˆÚ‚Å‚«‚é‚È‚çtrue</returns>
@@ -60,6 +65,7 @@ namespace basecross {
 				virtual ~DecoratorBase() = default;
 
 				virtual void OnCreate() override {}
+				virtual void ReserveCanTransition() override {};
 				virtual void OnStart() override {}
 
 				//--------------------------------------------------------------------------------------
