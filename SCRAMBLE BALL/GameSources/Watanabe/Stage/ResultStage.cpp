@@ -14,7 +14,7 @@
 #include "Watanabe/Component/PlayerAnimator.h"
 #include "Watanabe/Component/MatchingSyncPlayerObject.h"
 #include "Watanabe/Component/PlayerStatus.h"
-#include "Watanabe/Component/TimeLine/TimeLine.h"
+#include "Watanabe/TimeLine/TimeLine.h"
 
 #include "Maruyama/Interface/I_TeamMember.h"
 #include "VelocityManager.h"

@@ -1381,7 +1381,7 @@
     <Filter Include="Watanabe\Component\DissolveAnimator">
       <UniqueIdentifier>{e76dbee5-220b-476c-a2cf-17890d9f181d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Watanabe\Component\TimeLine">
+    <Filter Include="Watanabe\TimeLine">
       <UniqueIdentifier>{b4547b10-20d2-4290-9706-83b785993625}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -2592,14 +2592,14 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\DissolveAnimator.h">
       <Filter>Watanabe\Component\DissolveAnimator</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\TimeLine\TimeLine.h">
-      <Filter>Watanabe\Component\TimeLine</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\AdvQueue.h">
+      <Filter>Watanabe\TimeLine</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\TimeLine\KeyFrameData.h">
-      <Filter>Watanabe\Component\TimeLine</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\KeyFrameData.h">
+      <Filter>Watanabe\TimeLine</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\TimeLine\AdvQueue.h">
-      <Filter>Watanabe\Component\TimeLine</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\TimeLine.h">
+      <Filter>Watanabe\TimeLine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -3710,8 +3710,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\DissolveAnimator.cpp">
       <Filter>Watanabe\Component\DissolveAnimator</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\TimeLine\TimeLine.cpp">
-      <Filter>Watanabe\Component\TimeLine</Filter>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\TimeLine.cpp">
+      <Filter>Watanabe\TimeLine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

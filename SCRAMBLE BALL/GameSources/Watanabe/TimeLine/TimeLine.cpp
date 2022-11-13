@@ -1,6 +1,6 @@
 ﻿#include "stdafx.h"
 #include "TimeLine.h"
-#include "../../DebugClass/Debug.h"
+#include "../DebugClass/Debug.h"
 
 namespace basecross {
 	TimeLine::TimeLine(const shared_ptr<GameObject>& owner)
