@@ -1,6 +1,6 @@
 /*!
-@file ToBallRunTask.h
-@brief ToBallRunTaskなど
+@file ToGoalRunTask.h
+@brief ToGoalRunTaskなど
 担当者：丸山 裕喜
 */
 
@@ -20,6 +20,7 @@ namespace basecross {
 	class VelocityManager;
 	class RotationController;
 	class EyeSearchRange;
+	class I_TeamMember;
 	class OnlinePlayerSynchronizer;
 
 	struct Task_MovePositions_Parametor;
@@ -46,31 +47,29 @@ namespace basecross {
 			namespace Task {
 
 				//--------------------------------------------------------------------------------------
-				///	ボールへ向かうタスクのパラメータ
+				///	ゴールへ向かうタスクのパラメータ
 				//--------------------------------------------------------------------------------------
-				struct ToBallRunTask_Parametor {
+				struct ToGoalRunTask_Parametor {
 					basecross::Task::MoveAstar_Parametor* moveAstarParam;
 					TaskListNode::TargetSeek_Parametor* targetSeekParam;
 					std::shared_ptr<basecross::Task::Wait_Parametor> waitParam;
 
-					ToBallRunTask_Parametor();
+					ToGoalRunTask_Parametor();
 
-					virtual ~ToBallRunTask_Parametor();
+					virtual ~ToGoalRunTask_Parametor();
 				};
 
 				//--------------------------------------------------------------------------------------
-				///	ボールへ向かうタスク
+				///	ゴールへ向かうタスク
 				//--------------------------------------------------------------------------------------
-				class ToBallRunTask : public TaskBase<Enemy::EnemyBase>
+				class ToGoalRunTask : public TaskBase<Enemy::EnemyBase>
 				{
 				public:
-					using Parametor = ToBallRunTask_Parametor;
+					using Parametor = ToGoalRunTask_Parametor;
 
 					enum class TaskEnum {
 						MoveAstar,
-						MoveArrive,
-						GetBall,
-						//Wait,
+						MoveSeek,
 					};
 
 				private:
@@ -80,6 +79,7 @@ namespace basecross {
 
 					std::weak_ptr<Transform> m_transform;							//トランスフォーム
 					std::weak_ptr<EyeSearchRange> m_eyeRange;						//視界管理
+					std::weak_ptr<I_TeamMember> m_teamMember;						//チームメンバー
 					std::weak_ptr<TargetManager> m_targetManager;					//ターゲット管理
 					std::weak_ptr<VelocityManager> m_velocityManager;				//速度管理
 					std::weak_ptr<RotationController> m_rotationController;			//向き管理
@@ -87,9 +87,9 @@ namespace basecross {
 					std::weak_ptr<OnlinePlayerSynchronizer> m_onlineSynchronizer;	//オンラインシンクロ
 
 				public:
-					ToBallRunTask(const std::shared_ptr<Enemy::EnemyBase>& owner);
+					ToGoalRunTask(const std::shared_ptr<Enemy::EnemyBase>& owner);
 
-					virtual ~ToBallRunTask() = default;
+					virtual ~ToGoalRunTask() = default;
 
 					void OnStart() override;
 

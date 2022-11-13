@@ -60,6 +60,9 @@
 #include "Maruyama/Player/Component/OwnArea.h"
 #include "Maruyama/Player/Component/PlayerSpawnPoint.h"
 
+#include "Maruyama/Utility/SingletonComponent/SingletonComponent.h"
+#include "Maruyama/Utility/SingletonComponent/ShareClassesManager.h"
+
 // AI操作用
 
 #include "Maruyama/Enemy/Component/EnemyBase.h"
@@ -260,6 +263,10 @@ namespace basecross {
 		AddComponent<TargetManager>()->SetUpdateActive(false);
 		AddComponent<AIVirtualController>()->SetUpdateActive(false);
 		AddComponent<Enemy::AIPlayerStator>()->SetUpdateActive(false);
+
+		if (auto shareClass = ShareClassesManager::GetInstance()) {
+			shareClass->AddShareClass<PlayerObject>(GetThis<PlayerObject>());
+		}
 	}
 
 	void PlayerObject::OnlineSetting(int gameNumber, int playerNumber)

@@ -18,6 +18,7 @@
 #include "Maruyama/Enemy/AIDirector/Calculater/CombatCalculater.h"
 
 #include "Maruyama/Utility/Component/TargetManager.h"
+#include "Maruyama/Utility/Component/Targeted.h"
 
 namespace basecross {
 
@@ -50,6 +51,7 @@ namespace basecross {
 				[&](const std::shared_ptr<Tuple::SearchTarget>& tuple) { NotifyTuple_SearchTarget(tuple); }
 			);
 
+			//ターゲット発見
 			GetTupleSpace()->Notify<Tuple::FindTarget>(
 				GetThis<CombatCoordinator>(),
 				[&](const std::shared_ptr<Tuple::FindTarget>& tuple) { NotifyTuple_FindTarget(tuple); }
@@ -87,6 +89,9 @@ namespace basecross {
 		void CombatCoordinator::NotifyTuple_SearchTarget(const std::shared_ptr<Tuple::SearchTarget>& tuple) {
 			GetTupleSpace()->Take(tuple);
 
+			//ターゲットの整理
+
+
 			if (m_targets.empty()) {	//ターゲットが存在しないなら。
 				//パトロールに変更。
 				tuple->GetRequester()->GetTupleSpace()->Write<Tuple::PatrolTransition>(
@@ -119,8 +124,19 @@ namespace basecross {
 			std::vector<Data> datas; //評価値Data配列
 
 			for (auto& target : m_targets) {
+				//ターゲットがターゲット指定できないなら
+				auto targeted = target.lock()->GetComponent<Targeted>();
+				if (targeted && !targeted->CanTarget()) {
+					continue;	//ターゲットから省く。
+				}
+
 				float value = Calculater::Combat::CalculateEvalutionValue(requester, target.lock());
 				datas.push_back(Data(target.lock(), value));
+			}
+
+			//データが存在しないならnullptrを返す。
+			if (datas.empty()) {
+				return nullptr;
 			}
 
 			//ソート

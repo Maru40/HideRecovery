@@ -60,7 +60,7 @@ namespace basecross {
 		/// このクラスを所有するクラスの取得
 		/// </summary>
 		/// <returns>このクラスを所有するクラス</returns>
-		std::shared_ptr<T> GetOwner() {
+		std::shared_ptr<T> GetOwner() const {
 			return m_owner.lock();
 		}
 

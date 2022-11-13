@@ -1,12 +1,12 @@
 /*!
-@file Task_SearchBall.cpp
-@brief Task_SearchBallなど実体
+@file ToGoalRunTask.cpp
+@brief ToGoalRunTaskなど実体
 */
 
 #include "stdafx.h"
 #include "Project.h"
 
-#include "Task_SearchBall.h"
+#include "ToGoalRunTask.h"
 
 #include "Maruyama/Enemy/Component/EnemyBase.h"
 
@@ -38,6 +38,13 @@
 #include "Maruyama/Utility/Component/RotationController.h"
 #include "Maruyama/Utility/UtilityObstacle.h"
 
+#include "Maruyama/Utility/SingletonComponent/SingletonComponent.h"
+#include "Maruyama/Utility/SingletonComponent/ShareClassesManager.h"
+
+#include "Maruyama/StageObject/Goal.h"
+
+#include "Itabashi/OnlinePlayerSynchronizer.h"
+
 #include "Watanabe/DebugClass/Debug.h"
 
 namespace basecross {
@@ -48,25 +55,25 @@ namespace basecross {
 			namespace Task {
 
 				//--------------------------------------------------------------------------------------
-				///	ボールを探すタスクパラメータ
+				///	ボールへ向かうタスクのパラメータ
 				//--------------------------------------------------------------------------------------
 
-				SearchBall_Parametor::SearchBall_Parametor() :
+				ToGoalRunTask_Parametor::ToGoalRunTask_Parametor() :
 					moveAstarParam(new basecross::Task::MoveAstar::Parametor()),
 					targetSeekParam(new TaskListNode::TargetSeek::Parametor()),
 					waitParam(new basecross::Task::Wait::Parametor(0.5f))
 				{}
 
-				SearchBall_Parametor::~SearchBall_Parametor() {
+				ToGoalRunTask_Parametor::~ToGoalRunTask_Parametor() {
 					delete(moveAstarParam);
 					delete(targetSeekParam);
 				}
 
 				//--------------------------------------------------------------------------------------
-				///	ボールを探すタスク
+				///	ボールへ向かうタスクの本体
 				//--------------------------------------------------------------------------------------
 
-				SearchBall::SearchBall(const std::shared_ptr<Enemy::EnemyBase>& owner) :
+				ToGoalRunTask::ToGoalRunTask(const std::shared_ptr<Enemy::EnemyBase>& owner) :
 					TaskBase(owner),
 					m_param(Parametor()),
 					m_taskList(new TaskList<TaskEnum>())
@@ -77,19 +84,21 @@ namespace basecross {
 					auto object = GetOwner()->GetGameObject();
 					m_transform = object->GetComponent<Transform>();
 					m_eyeRange = object->GetComponent<EyeSearchRange>();
+					m_teamMember = object->GetComponent<I_TeamMember>();
 					m_targetManager = object->GetComponent<TargetManager>();
 					m_velocityManager = object->GetComponent<VelocityManager>();
 					m_rotationController = object->GetComponent<RotationController>();
 					m_factionMember = object->GetComponent<Enemy::I_FactionMember>();
+					m_onlineSynchronizer = object->GetComponent<OnlinePlayerSynchronizer>();
 				}
 
-				void SearchBall::OnStart() {
+				void ToGoalRunTask::OnStart() {
 					CalculateTarget();	//ターゲットの計算
 
 					SelectTask();		//タスクの選択
 				}
 
-				bool SearchBall::OnUpdate() {
+				bool ToGoalRunTask::OnUpdate() {
 					m_taskList->UpdateTask();
 					Rotation();
 					CheckForceNextMoveArriveTask();
@@ -97,35 +106,24 @@ namespace basecross {
 					return IsEnd();
 				}
 
-				void SearchBall::OnExit() {
+				void ToGoalRunTask::OnExit() {
 					m_taskList->ForceStop();
 				}
 
-				std::shared_ptr<GameObject> SearchBall::CalculateTarget() {
-					using HidePlacePtrol = Enemy::AICoordinator::Patrol::HidePlacePatrol;
+				std::shared_ptr<GameObject> ToGoalRunTask::CalculateTarget() {
+					auto targets = ShareClassesManager::GetInstance()->GetCastShareClasses<Goal>();
 
-					//ターゲット管理が存在しないなら処理をしない
-					auto targetManager = m_targetManager.lock();
-					if (!targetManager) {	
-						return nullptr;
+					for (auto& target : targets) {
+						if (target.lock()->GetTeam() != m_teamMember.lock()->GetTeam()) {
+							m_targetManager.lock()->SetTarget(target.lock()->GetGameObject());
+							return target.lock()->GetGameObject();
+						}
 					}
 
-					auto factionMembmer = m_factionMember.lock();
-					auto patrolCoordinator = factionMembmer->GetAssignedFaction<HidePlacePtrol>();	//パトロールコーディネーターの取得
-
-					//パトロール中でなかったら処理を飛ばす。
-					if (!patrolCoordinator) {	
-						return nullptr;
-					}
-
-					//パトロールコーディネータからターゲットを取得
-					auto target = patrolCoordinator->SearchTarget(factionMembmer);
-					targetManager->SetTarget(target);
-
-					return target;
+					return nullptr;
 				}
 
-				void SearchBall::CheckForceNextMoveArriveTask() {
+				void ToGoalRunTask::CheckForceNextMoveArriveTask() {
 					if (m_taskList->IsEnd() || !m_targetManager.lock()->HasTarget()) {
 						return;
 					}
@@ -152,7 +150,7 @@ namespace basecross {
 					}
 				}
 
-				void SearchBall::DefineTask() {
+				void ToGoalRunTask::DefineTask() {
 					auto ownerObject = GetOwner()->GetGameObject();
 
 					//Astar移動
@@ -163,48 +161,22 @@ namespace basecross {
 
 					//目的地の近くについたら時の到着移動
 					m_taskList->DefineTask(
-						TaskEnum::MoveArrive,
+						TaskEnum::MoveSeek,
 						std::make_shared<TaskListNode::TargetSeek>(ownerObject, m_param.targetSeekParam)
-					);
-
-					//ボックスを開く
-					m_taskList->DefineTask(
-						TaskEnum::OpenBox,
-						std::make_shared<TaskListNode::OpenBox>(ownerObject)
 					);
 
 					//待機行動
 					DefineWaitTask();
 				}
 
-				void SearchBall::DefineWaitTask() {
-					//開始イベント
-					m_param.waitParam->start = [&]() {	
-						//if (auto velocityManager = m_velocityManager.lock()) {
-						//	velocityManager->StartDeseleration();
-						//}
-					};
-
-					//終了イベント
-					m_param.waitParam->exit = [&]() {	
-						//if (auto velocityManager = m_velocityManager.lock()) {
-						//	velocityManager->SetIsDeseleration(false);
-						//}
-					};
-
-					//タスクの定義
-					m_taskList->DefineTask(
-						TaskEnum::Wait,
-						std::make_shared<basecross::Task::Wait>(m_param.waitParam)
-					);
+				void ToGoalRunTask::DefineWaitTask() {
+					
 				}
 
-				void SearchBall::SelectTask() {
+				void ToGoalRunTask::SelectTask() {
 					TaskEnum tasks[] = {
 						TaskEnum::MoveAstar,
-						TaskEnum::MoveArrive,
-						TaskEnum::OpenBox,
-						TaskEnum::Wait,
+						TaskEnum::MoveSeek,
 					};
 
 					for (const auto& task : tasks) {
@@ -212,7 +184,7 @@ namespace basecross {
 					}
 				}
 
-				void SearchBall::InitializeParametor() {
+				void ToGoalRunTask::InitializeParametor() {
 					constexpr float MoveSpeed = 8.5f;
 					constexpr float NearTargetRange = 1.5f;
 
@@ -223,11 +195,11 @@ namespace basecross {
 
 					//目的地の近くまで移動した場合の設定
 					m_param.targetSeekParam->toTargetMoveParam->speed = MoveSpeed;
-					m_param.targetSeekParam->toTargetMoveParam->moveType = basecross::Task::ToTargetMove::MoveType::ArriveVelocity;
+					m_param.targetSeekParam->toTargetMoveParam->moveType = basecross::Task::ToTargetMove::MoveType::SeekVelocity;
 					m_param.targetSeekParam->toTargetMoveParam->targetNearRange = NearTargetRange;
 				}
 
-				void SearchBall::Rotation() {
+				void ToGoalRunTask::Rotation() {
 					auto rotationController = m_rotationController.lock();
 					auto velocityManager = m_velocityManager.lock();
 					if (!velocityManager || !rotationController) {
@@ -237,7 +209,7 @@ namespace basecross {
 					rotationController->SetDirection(velocityManager->GetVelocity());
 				}
 
-				bool SearchBall::IsEnd() const { return m_taskList->IsEnd(); }
+				bool ToGoalRunTask::IsEnd() const { return m_taskList->IsEnd(); }
 
 			}
 		}

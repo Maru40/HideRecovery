@@ -48,11 +48,11 @@ namespace basecross {
 			using Parametor = AroundEyeCheck_Parametor;
 
 		private:
-			ex_weak_ptr<Parametor> m_paramPtr; //パラメータ
+			std::weak_ptr<Parametor> m_paramPtr; //パラメータ
 			float m_defaultSpeed = 0.0f;       //初期スピード
 
 			uint16_t m_index = 0;              //見る方向配列のインデックス
-			vector<Vec3> m_directs;            //確認する方向の配列
+			std::vector<Vec3> m_directs;       //確認する方向の配列
 
 		public:
 			/// <summary>

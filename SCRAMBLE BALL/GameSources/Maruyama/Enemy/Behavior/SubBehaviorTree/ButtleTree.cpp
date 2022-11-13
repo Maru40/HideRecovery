@@ -25,6 +25,7 @@
 #include "Maruyama/Enemy/Behavior/Decorator/IsInEyeTarget.h"
 #include "Maruyama/Enemy/Behavior/Decorator/ObserveTargets.h"
 #include "Maruyama/Enemy/Behavior/Decorator/OutSpecificTarget.h"
+#include "Maruyama/Enemy/Behavior/Decorator/CanCurrentTarget.h"
 
 #include "Maruyama/Enemy/AIDirector/CoordinatorBase.h"
 #include "Maruyama/Enemy/AIDirector/TupleSpace.h"
@@ -213,6 +214,11 @@ namespace basecross {
 					//ターゲットが特定のターゲットなら。
 					m_behaviorTree->AddDecorator<Decorator::OutSpecificTarget>(
 						NodeType::ShotTask, enemy, GetShotOutTarget()
+					);
+
+					//アタックセレクター
+					m_behaviorTree->AddDecorator<Decorator::CanCurrentTarget>(
+						NodeType::AttackSelecter, enemy->GetGameObject()
 					);
 				}
 

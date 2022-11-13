@@ -21,6 +21,11 @@ namespace basecross {
 
 	namespace Enemy {
 		class EnemyBase;
+		class I_FactionMember;
+		
+		namespace Tuple {
+			class I_Tupler;
+		}
 	}
 
 	namespace maru {
@@ -30,19 +35,16 @@ namespace basecross {
 			namespace Decorator {
 
 				//--------------------------------------------------------------------------------------
-				/// 遷移条件を登録するデコレータ
+				/// 現在のターゲットが現在もターゲット指定可能かどうかを判断
 				//--------------------------------------------------------------------------------------
-				class ResgisterCanTrasitionDecorator : public I_Decorator
+				class CanCurrentTarget : public DecoratorBase<GameObject>
 				{
-					std::vector<std::function<void()>> m_startFunctions;		//開始時に呼び出す処理
-					std::vector<std::function<void()>> m_reserveCanTransitions;	//遷移条件確認前に呼び出す処理
-					std::vector<std::function<bool()>> m_canTransitions;		//遷移時に呼び出す処理
-					std::vector<std::function<bool()>> m_canUpdates;			//更新時に呼び出す処理
+					std::weak_ptr<TargetManager> m_targetManager;
+					std::weak_ptr<Enemy::I_FactionMember> m_factionMember;
+					std::weak_ptr<Enemy::Tuple::I_Tupler> m_tupler;
 
 				public:
-					void OnCreate() override {}
-
-					void OnStart() override;
+					CanCurrentTarget(const std::shared_ptr<GameObject>& owner);
 
 					void ReserveCanTransition() override;
 
@@ -50,14 +52,9 @@ namespace basecross {
 
 					bool CanUpdate() override;
 
-				public:
-					void AddStartFunction(const std::function<void()>& startFunction);
+				private:
+					void RemoveFactionTarget(const std::shared_ptr<GameObject>& target);
 
-					void AddReserveCanTransitionFunction(const std::function<void()>& function);
-
-					void AddCanTransitionFunction(const std::function<bool()>& canTransition);
-
-					void AddCanUpdateFunction(const std::function<bool()>& canUpdate);
 				};
 
 			}

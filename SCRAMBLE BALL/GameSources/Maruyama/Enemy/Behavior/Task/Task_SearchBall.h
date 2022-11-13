@@ -88,6 +88,8 @@ namespace basecross {
 				public:
 					SearchBall(const std::shared_ptr<Enemy::EnemyBase>& owner);
 
+					virtual ~SearchBall() = default;
+
 					void OnStart() override;
 
 					bool OnUpdate() override;

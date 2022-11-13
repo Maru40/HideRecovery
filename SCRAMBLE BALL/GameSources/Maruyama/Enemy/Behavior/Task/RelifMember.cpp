@@ -1,12 +1,12 @@
 /*!
-@file Task_SearchBall.cpp
-@brief Task_SearchBallなど実体
+@file RelifMember.cpp
+@brief RelifMemberなど実体
 */
 
 #include "stdafx.h"
 #include "Project.h"
 
-#include "Task_SearchBall.h"
+#include "RelifMember.h"
 
 #include "Maruyama/Enemy/Component/EnemyBase.h"
 
@@ -21,6 +21,7 @@
 #include "Maruyama/TaskList/CommonTasks/TargetSeek.h"
 #include "Maruyama/TaskList/CommonTasks/OpenBox.h"
 #include "Maruyama/TaskList/CommonTasks/Task_Wait.h"
+#include "Maruyama/TaskList/CommonTasks/Task_AroundEyeCheck.h"
 
 #include "Maruyama/Utility/SingletonComponent/SingletonComponent.h"
 #include "Maruyama/Enemy/ImpactMap/FieldImpactMap.h"
@@ -38,6 +39,8 @@
 #include "Maruyama/Utility/Component/RotationController.h"
 #include "Maruyama/Utility/UtilityObstacle.h"
 
+#include "Maruyama/Player/Component/ItemBag.h"
+
 #include "Watanabe/DebugClass/Debug.h"
 
 namespace basecross {
@@ -48,25 +51,26 @@ namespace basecross {
 			namespace Task {
 
 				//--------------------------------------------------------------------------------------
-				///	ボールを探すタスクパラメータ
+				///	見方の周りの警戒タスクパラメータ
 				//--------------------------------------------------------------------------------------
 
-				SearchBall_Parametor::SearchBall_Parametor() :
+				RelifMember_Parametor::RelifMember_Parametor() :
 					moveAstarParam(new basecross::Task::MoveAstar::Parametor()),
 					targetSeekParam(new TaskListNode::TargetSeek::Parametor()),
+					aroundEyeCheckParam(new basecross::Task::AroundEyeCheck_Parametor()),
 					waitParam(new basecross::Task::Wait::Parametor(0.5f))
 				{}
 
-				SearchBall_Parametor::~SearchBall_Parametor() {
+				RelifMember_Parametor::~RelifMember_Parametor() {
 					delete(moveAstarParam);
 					delete(targetSeekParam);
 				}
 
 				//--------------------------------------------------------------------------------------
-				///	ボールを探すタスク
+				///	見方の周りの警戒タスク本体
 				//--------------------------------------------------------------------------------------
 
-				SearchBall::SearchBall(const std::shared_ptr<Enemy::EnemyBase>& owner) :
+				RelifMember::RelifMember(const std::shared_ptr<Enemy::EnemyBase>& owner):
 					TaskBase(owner),
 					m_param(Parametor()),
 					m_taskList(new TaskList<TaskEnum>())
@@ -83,13 +87,13 @@ namespace basecross {
 					m_factionMember = object->GetComponent<Enemy::I_FactionMember>();
 				}
 
-				void SearchBall::OnStart() {
+				void RelifMember::OnStart() {
 					CalculateTarget();	//ターゲットの計算
 
 					SelectTask();		//タスクの選択
 				}
 
-				bool SearchBall::OnUpdate() {
+				bool RelifMember::OnUpdate() {
 					m_taskList->UpdateTask();
 					Rotation();
 					CheckForceNextMoveArriveTask();
@@ -97,35 +101,39 @@ namespace basecross {
 					return IsEnd();
 				}
 
-				void SearchBall::OnExit() {
+				void RelifMember::OnExit() {
 					m_taskList->ForceStop();
 				}
 
-				std::shared_ptr<GameObject> SearchBall::CalculateTarget() {
-					using HidePlacePtrol = Enemy::AICoordinator::Patrol::HidePlacePatrol;
-
-					//ターゲット管理が存在しないなら処理をしない
-					auto targetManager = m_targetManager.lock();
-					if (!targetManager) {	
+				std::shared_ptr<GameObject> RelifMember::CalculateTarget() {
+					auto assignedFaction = GetOwner()->GetAssignedFaction();
+					if (!assignedFaction) {
 						return nullptr;
 					}
 
-					auto factionMembmer = m_factionMember.lock();
-					auto patrolCoordinator = factionMembmer->GetAssignedFaction<HidePlacePtrol>();	//パトロールコーディネーターの取得
+					for (auto& weakMember : assignedFaction->GetMembers()) {
+						auto member = weakMember.lock();
+						if (member == GetOwner()) {	//自分自身なら処理を飛ばす。
+							continue;
+						}
 
-					//パトロール中でなかったら処理を飛ばす。
-					if (!patrolCoordinator) {	
-						return nullptr;
+						auto itemBag = member->GetGameObject()->GetComponent<ItemBag>(false);
+						if (!itemBag) {	//アイテムを持っていないなら処理を飛ばす。
+							continue;
+						}
+
+						auto hideItem = itemBag->GetHideItem();
+						if (hideItem) {	//隠しアイテムを持っているなら、ターゲットにする。
+							auto target = member->GetGameObject();
+							m_targetManager.lock()->SetTarget(target);
+							return target;
+						}
 					}
 
-					//パトロールコーディネータからターゲットを取得
-					auto target = patrolCoordinator->SearchTarget(factionMembmer);
-					targetManager->SetTarget(target);
-
-					return target;
+					return nullptr;
 				}
 
-				void SearchBall::CheckForceNextMoveArriveTask() {
+				void RelifMember::CheckForceNextMoveArriveTask() {
 					if (m_taskList->IsEnd() || !m_targetManager.lock()->HasTarget()) {
 						return;
 					}
@@ -152,7 +160,7 @@ namespace basecross {
 					}
 				}
 
-				void SearchBall::DefineTask() {
+				void RelifMember::DefineTask() {
 					auto ownerObject = GetOwner()->GetGameObject();
 
 					//Astar移動
@@ -167,29 +175,25 @@ namespace basecross {
 						std::make_shared<TaskListNode::TargetSeek>(ownerObject, m_param.targetSeekParam)
 					);
 
-					//ボックスを開く
+					//ターゲットの周りを警戒する。
 					m_taskList->DefineTask(
-						TaskEnum::OpenBox,
-						std::make_shared<TaskListNode::OpenBox>(ownerObject)
+						TaskEnum::AroundPtrol,
+						std::make_shared<basecross::Task::AroundEyeCheck>(ownerObject, m_param.aroundEyeCheckParam)
 					);
 
 					//待機行動
 					DefineWaitTask();
 				}
 
-				void SearchBall::DefineWaitTask() {
+				void RelifMember::DefineWaitTask() {
 					//開始イベント
-					m_param.waitParam->start = [&]() {	
-						//if (auto velocityManager = m_velocityManager.lock()) {
-						//	velocityManager->StartDeseleration();
-						//}
+					m_param.waitParam->start = [&]() {
+
 					};
 
 					//終了イベント
-					m_param.waitParam->exit = [&]() {	
-						//if (auto velocityManager = m_velocityManager.lock()) {
-						//	velocityManager->SetIsDeseleration(false);
-						//}
+					m_param.waitParam->exit = [&]() {
+
 					};
 
 					//タスクの定義
@@ -199,12 +203,12 @@ namespace basecross {
 					);
 				}
 
-				void SearchBall::SelectTask() {
+				void RelifMember::SelectTask() {
 					TaskEnum tasks[] = {
 						TaskEnum::MoveAstar,
 						TaskEnum::MoveArrive,
-						TaskEnum::OpenBox,
-						TaskEnum::Wait,
+						//TaskEnum::AroundPtrol,
+						TaskEnum::Wait
 					};
 
 					for (const auto& task : tasks) {
@@ -212,9 +216,9 @@ namespace basecross {
 					}
 				}
 
-				void SearchBall::InitializeParametor() {
+				void RelifMember::InitializeParametor() {
 					constexpr float MoveSpeed = 8.5f;
-					constexpr float NearTargetRange = 1.5f;
+					constexpr float NearTargetRange = 3.5f;
 
 					//Astarで目標の近くまで移動するパラメータ
 					m_param.moveAstarParam->movePositionsParam->moveParamPtr->speed = MoveSpeed;
@@ -227,7 +231,7 @@ namespace basecross {
 					m_param.targetSeekParam->toTargetMoveParam->targetNearRange = NearTargetRange;
 				}
 
-				void SearchBall::Rotation() {
+				void RelifMember::Rotation() {
 					auto rotationController = m_rotationController.lock();
 					auto velocityManager = m_velocityManager.lock();
 					if (!velocityManager || !rotationController) {
@@ -237,7 +241,7 @@ namespace basecross {
 					rotationController->SetDirection(velocityManager->GetVelocity());
 				}
 
-				bool SearchBall::IsEnd() const { return m_taskList->IsEnd(); }
+				bool RelifMember::IsEnd() const { return m_taskList->IsEnd(); }
 
 			}
 		}

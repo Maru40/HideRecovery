@@ -37,6 +37,9 @@ namespace basecross {
 			public:
 				virtual ~I_Node() = default;
 
+				virtual void OnDecoratorStart() = 0;
+				virtual void OnDecoratorExit() = 0;
+
 				virtual void OnStart() = 0;
 				virtual bool OnUpdate() = 0;
 				virtual void OnExit() = 0;
@@ -134,6 +137,9 @@ namespace basecross {
 
 			public:
 				virtual ~NodeBase() = default;
+
+				virtual void OnDecoratorStart() override;
+				virtual void OnDecoratorExit() override;
 
 				virtual void SetIsActive(const bool isActive) noexcept override { m_isActive = isActive; };
 

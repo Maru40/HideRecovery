@@ -252,6 +252,33 @@ namespace basecross {
 			m_nextNodeIndex = index;
 		}
 
+		void RemoveNode(const std::shared_ptr<NodeType>& node) {
+			//ノードの削除
+			Utility::RemoveVec(m_nodes, node);
+
+			int index = node->GetIndex();
+
+
+
+			//そのノードのedgesの削除
+			m_edges.erase(index);
+
+			//削除したインデクスが含まれるエッジを削除
+			for (int i = 0; i < m_edges.size(); i++) {
+				if (m_edges.count(i) == 0) {
+					continue;
+				}
+
+				for (auto& edge : m_edges[i]) {
+					if (edge->GetTo() == index) {  //行先がindexと一緒なら
+						RemoveEdge(edge->GetFrom(), edge->GetTo());
+					}
+				}
+			}
+
+			m_nextNodeIndex = index;
+		}
+
 		/// <summary>
 		/// 全てのノードに親オブジェクトを設定する。
 		/// </summary>

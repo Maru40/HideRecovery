@@ -246,6 +246,8 @@ namespace basecross {
 		/// <param name="index">削除したいノードのインデックス</param>
 		void RemoveNode(const int& index);
 
+		void RemoveNode(const std::shared_ptr<NavGraphNode>& node);
+
 		/// <summary>
 		/// ノードの親オブジェクトを設定する。
 		/// </summary>

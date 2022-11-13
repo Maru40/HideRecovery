@@ -1405,6 +1405,33 @@
     <Filter Include="Maruyama\Enemy\BehaviorTree\Task\ToGoalRunTask">
       <UniqueIdentifier>{03cea400-6548-49db-9b6a-1f9006d7ebf3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Enemy\BehaviorTree\Decorator\SettingStartTarget">
+      <UniqueIdentifier>{2349014b-207e-470e-b2a2-22c81977994b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\BehaviorTree\Decorator\SettingStartTarget\SettingStartTarget_Goal">
+      <UniqueIdentifier>{0f7428eb-f3a8-46e4-a84e-549d28dc3874}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\BehaviorTree\Decorator\SettingStartTarget\SettingStartBallTarget">
+      <UniqueIdentifier>{23588e6d-1615-43d3-b585-3f18766a9a7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\BehaviorTree\Decorator\HasBallTransition">
+      <UniqueIdentifier>{7f862ef9-5640-4e2d-92aa-9160685f63bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\BehaviorTree\Task\RelifMember">
+      <UniqueIdentifier>{45281f90-6b3f-4db5-8ab9-be218da83819}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\BehaviorTree\Decorator\CanCurrentTarget">
+      <UniqueIdentifier>{9045f22e-1e02-48eb-84f8-abf544ee7c41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\BehaviorTree\Decorator\HasBall_OtherMember">
+      <UniqueIdentifier>{cd8c1cae-8ad6-4ac6-8e2d-4ca0fc721f41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\BehaviorTree\Decorator\HasBall_OtherTeam">
+      <UniqueIdentifier>{c4e38b53-edc2-4405-ac54-895670311886}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\BehaviorTree\Task\ToHasBallOtherTeam">
+      <UniqueIdentifier>{cf612460-e6c2-41b0-b764-02c78d4d451c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2631,6 +2658,36 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Task\ToBallRunTask.h">
       <Filter>Maruyama\Enemy\BehaviorTree\Task\ToBallRunTask</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\SettingStartTarget.h">
+      <Filter>Maruyama\Enemy\BehaviorTree\Decorator\SettingStartTarget</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\SettingStartTarget_Ball.h">
+      <Filter>Maruyama\Enemy\BehaviorTree\Decorator\SettingStartTarget\SettingStartBallTarget</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\SettingStartTarget_Goal.h">
+      <Filter>Maruyama\Enemy\BehaviorTree\Decorator\SettingStartTarget\SettingStartTarget_Goal</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Task\ToGoalRunTask.h">
+      <Filter>Maruyama\Enemy\BehaviorTree\Task\ToGoalRunTask</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\HasBallTransition.h">
+      <Filter>Maruyama\Enemy\BehaviorTree\Decorator\HasBallTransition</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Task\RelifMember.h">
+      <Filter>Maruyama\Enemy\BehaviorTree\Task\RelifMember</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\CanCurrentTarget.h">
+      <Filter>Maruyama\Enemy\BehaviorTree\Decorator\CanCurrentTarget</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\HasBall_OtherMember.h">
+      <Filter>Maruyama\Enemy\BehaviorTree\Decorator\HasBall_OtherMember</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\HasBall_OtherTeam.h">
+      <Filter>Maruyama\Enemy\BehaviorTree\Decorator\HasBall_OtherTeam</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Task\ToHasBallOtherTeam.h">
+      <Filter>Maruyama\Enemy\BehaviorTree\Task\ToHasBallOtherTeam</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -3757,6 +3814,36 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Task\ToBallRunTask.cpp">
       <Filter>Maruyama\Enemy\BehaviorTree\Task\ToBallRunTask</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\SettingStartTarget.cpp">
+      <Filter>Maruyama\Enemy\BehaviorTree\Decorator\SettingStartTarget</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\SettingStartTarget_Ball.cpp">
+      <Filter>Maruyama\Enemy\BehaviorTree\Decorator\SettingStartTarget\SettingStartBallTarget</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\SettingStartTarget_Goal.cpp">
+      <Filter>Maruyama\Enemy\BehaviorTree\Decorator\SettingStartTarget\SettingStartTarget_Goal</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Task\ToGoalRunTask.cpp">
+      <Filter>Maruyama\Enemy\BehaviorTree\Task\ToGoalRunTask</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\HasBallTransition.cpp">
+      <Filter>Maruyama\Enemy\BehaviorTree\Decorator\HasBallTransition</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Task\RelifMember.cpp">
+      <Filter>Maruyama\Enemy\BehaviorTree\Task\RelifMember</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\CanCurrentTarget.cpp">
+      <Filter>Maruyama\Enemy\BehaviorTree\Decorator\CanCurrentTarget</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\HasBall_OtherMember.cpp">
+      <Filter>Maruyama\Enemy\BehaviorTree\Decorator\HasBall_OtherMember</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\HasBall_OtherTeam.cpp">
+      <Filter>Maruyama\Enemy\BehaviorTree\Decorator\HasBall_OtherTeam</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Task\ToHasBallOtherTeam.cpp">
+      <Filter>Maruyama\Enemy\BehaviorTree\Task\ToHasBallOtherTeam</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
