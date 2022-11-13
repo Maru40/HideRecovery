@@ -113,6 +113,7 @@ namespace basecross {
 				void AddCurrentStack(const std::shared_ptr<I_Node>& node) {
 					//ƒm[ƒh‚ª‘¶Ý‚·‚é‚È‚ç’Ç‰Áˆ—‚ð‚·‚éB
 					if (node) {
+						node->OnDecoratorStart();
 						node->OnStart();
 						node->SetState(BehaviorState::Running);
 						m_currentStack.push(node);
