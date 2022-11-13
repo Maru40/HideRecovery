@@ -32,6 +32,11 @@ namespace basecross {
 				virtual void OnStart() = 0;
 
 				/// <summary>
+				/// ノード終了時に呼び出す処理
+				/// </summary>
+				virtual void OnExit() = 0;
+
+				/// <summary>
 				/// 遷移条件確認前の準備(CanTransitionを呼ぶ前に呼ぶ処理)
 				/// </summary>
 				virtual void ReserveCanTransition() = 0;
@@ -67,6 +72,7 @@ namespace basecross {
 				virtual void OnCreate() override {}
 				virtual void ReserveCanTransition() override {};
 				virtual void OnStart() override {}
+				virtual void OnExit() override {}
 
 				//--------------------------------------------------------------------------------------
 				/// アクセッサ
