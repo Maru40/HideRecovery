@@ -85,7 +85,7 @@ namespace basecross {
 
 			//デバッグ
 			if (m_impactMap) {
-				m_impactMap->DebugInput([]() { return PlayerInputer::GetInstance()->IsYDown(); });
+				m_impactMap->DebugInput([]() { return PlayerInputer::GetInstance()->IsXDown(); });
 			}
 		}
 
