@@ -11,13 +11,23 @@
 #include "Maruyama/Enemy/Behavior/BehaviorTree.h"
 
 #include "Maruyama/Enemy/Component/EnemyBase.h"
+#include "Maruyama/Enemy/Component/EyeSearchRange.h"
 
+//タスク
 #include "Maruyama/Enemy/Behavior/Task/Task_SearchBall.h"
+#include "Maruyama/Enemy/Behavior/Task/NearAstarMove.h"
+#include "Maruyama/TaskList/CommonTasks/MoveAstar.h"
+#include "Maruyama/TaskList/CommonTasks/Task_MovePositions.h"
+#include "Maruyama/Enemy/Behavior/Task/NearSeekMove.h"
+#include "Maruyama/TaskList/CommonTasks/TargetSeek.h"
+#include "Maruyama/TaskList/CommonTasks/Task_ToTargetMove.h"
+
 #include "Maruyama/Enemy/Behavior/Interface/I_PriorityController.h"
 
 //デコレータ
 #include "Maruyama/Enemy/Behavior/Decorator/OutSpecificTarget.h"
 #include "Maruyama/Enemy/Behavior/Decorator/IsActiveSpecificTarget.h"
+#include "Maruyama/Enemy/Behavior/Decorator/SettingStartTarget_Ball.h"
 
 #include "Maruyama/Utility/SingletonComponent/SingletonComponent.h"
 #include "Maruyama/Utility/SingletonComponent/ShareClassesManager.h"
@@ -31,8 +41,27 @@ namespace basecross {
 
 			namespace SubBehavior {
 
+				//--------------------------------------------------------------------------------------
+				/// 隠れ場所を探すパトロールビヘイビアツリーのパラメータ
+				//--------------------------------------------------------------------------------------
+
+				HidePlacePatrolTree_Parametor::HidePlacePatrolTree_Parametor():
+					astarMoveParamPtr(new Task::NearAstarMove_Parametor(EyeSearchRangeParametor(20.0f, 3.0f, XMConvertToRadians(90.0f)))),
+					seekMoveParamPtr(new Task::NearSeekMove_Parametor())
+				{}
+
+				HidePlacePatrolTree_Parametor::~HidePlacePatrolTree_Parametor(){
+					delete(astarMoveParamPtr);
+					delete(seekMoveParamPtr);
+				}
+
+				//--------------------------------------------------------------------------------------
+				/// 隠れ場所を探すパトロールビヘイビアツリー
+				//--------------------------------------------------------------------------------------
+
 				HidePlacePatrolTree::HidePlacePatrolTree(const std::shared_ptr<GameObject>& objPtr) :
-					SubBehaviorTreeBase(objPtr)
+					SubBehaviorTreeBase(objPtr),
+					m_param(Parametor())
 				{}
 
 				void HidePlacePatrolTree::CreateNode() {
@@ -49,8 +78,16 @@ namespace basecross {
 						std::make_shared<maru::Behavior::Task::SearchBall>(owner)
 					);
 
+					auto& param = m_param.astarMoveParamPtr;
+					auto& moveParam = param->moveParamPtr->movePositionsParam->moveParamPtr;
+					moveParam->speed = 8.5f;
+					moveParam->moveType = basecross::Task::ToTargetMove::MoveType::SeekVelocity;
 					//Ballの場所まで駆けつけるタスク
-					
+					m_behaviorTree->AddTask<Task::NearAstarMove>(
+						BehaviorType::ToBallRunTask,
+						owner,
+						m_param.astarMoveParamPtr
+					);
 
 					//Goalまで行くタスク
 
@@ -66,11 +103,11 @@ namespace basecross {
 						(int)BehaviorType::PatrolTask
 					);
 
-					//m_behaviorTree->AddEdge(
-					//	BehaviorType::FirstSelecter,
-					//	BehaviorType::ToBallRunTask,
-					//	std::make_shared<PriorityControllerBase>((int)BehaviorType::ToBallRunTask)
-					//);
+					m_behaviorTree->AddEdge(
+						BehaviorType::FirstSelecter,
+						BehaviorType::ToBallRunTask,
+						(int)BehaviorType::ToBallRunTask
+					);
 				}
 
 				void HidePlacePatrolTree::CreateDecorator() {
@@ -79,14 +116,14 @@ namespace basecross {
 					//パトロールタスク--------------------------------------------------------------------------------------
 					
 					//HideItemがターゲットの場合、遷移できないようにする。
-					auto outSpecificTargets = ShareClassesManager::GetInstance()->GetCastShareClasses<HideItemObject>();
-					for (auto& target : outSpecificTargets) {
-						m_behaviorTree->AddDecorator<Decorator::OutSpecificTarget>(
-							BehaviorType::PatrolTask,
-							enemy,
-							target.lock()
-						);
-					}
+					//auto outSpecificTargets = ShareClassesManager::GetInstance()->GetCastShareClasses<HideItemObject>();
+					//for (auto& target : outSpecificTargets) {
+					//	m_behaviorTree->AddDecorator<Decorator::OutSpecificTarget>(
+					//		BehaviorType::PatrolTask,
+					//		enemy,
+					//		target.lock()
+					//	);
+					//}
 
 					//-------------------------------------------------------------------------------------------------------
 
@@ -102,9 +139,19 @@ namespace basecross {
 						);
 					}
 
-					//ゴールまで行くタスク
+					//ボールをターゲットにする。
+					//m_behaviorTree->AddDecorator<Decorator::SettingStartTarget_Ball>(
+					//	BehaviorType::ToBallRunTask,
+					//	GetOwner(),
+					//	hideObjects[0].lock()
+					//);
+
+					//ゴールまで行くタスク-----------------------------------------------------------------------------------
+
+					//ボールを持っている人がいるのなら
 
 
+					//-------------------------------------------------------------------------------------------------------
 				}
 
 			}

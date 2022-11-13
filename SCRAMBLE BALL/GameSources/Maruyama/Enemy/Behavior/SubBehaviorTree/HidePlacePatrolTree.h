@@ -16,6 +16,11 @@ namespace basecross {
 	namespace maru {
 		namespace Behavior {
 
+			namespace Task {
+				struct NearAstarMove_Parametor;
+				struct NearSeekMove_Parametor;
+			}
+
 			namespace SubBehavior {
 
 				enum class HidePlacePatrolTree_BehaviorType {
@@ -27,12 +32,28 @@ namespace basecross {
 				};
 
 				//--------------------------------------------------------------------------------------
+				/// 隠れ場所を探すパトロールビヘイビアツリーのパラメータ
+				//--------------------------------------------------------------------------------------
+				struct HidePlacePatrolTree_Parametor {
+					Task::NearAstarMove_Parametor* astarMoveParamPtr;
+					Task::NearSeekMove_Parametor* seekMoveParamPtr;
+
+					HidePlacePatrolTree_Parametor();
+
+					~HidePlacePatrolTree_Parametor();
+				};
+
+				//--------------------------------------------------------------------------------------
 				/// 隠れ場所を探すパトロールビヘイビアツリー
 				//--------------------------------------------------------------------------------------
 				class HidePlacePatrolTree : public SubBehaviorTreeBase<HidePlacePatrolTree_BehaviorType>
 				{
 				public:
+					using Parametor = HidePlacePatrolTree_Parametor;
 					using BehaviorType = HidePlacePatrolTree_BehaviorType;
+
+				private:
+					Parametor m_param;
 
 				public:
 					HidePlacePatrolTree(const std::shared_ptr<GameObject>& objPtr);
