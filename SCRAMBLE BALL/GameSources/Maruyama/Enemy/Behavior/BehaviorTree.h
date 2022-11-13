@@ -344,6 +344,7 @@ namespace basecross {
 					}
 
 					auto node = GetNode(type);
+					decorator->OnCreate();			//¶¬Žž‚Éˆê“x‚¾‚¯ŒÄ‚Ño‚µ‚½‚¢ˆ—B
 					node->AddDecorator(decorator);
 
 					return true;
