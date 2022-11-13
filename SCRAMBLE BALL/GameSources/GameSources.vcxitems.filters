@@ -1429,6 +1429,9 @@
     <Filter Include="Maruyama\Enemy\BehaviorTree\Decorator\HasBall_OtherTeam">
       <UniqueIdentifier>{c4e38b53-edc2-4405-ac54-895670311886}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Enemy\BehaviorTree\Task\ToHasBallOtherTeam">
+      <UniqueIdentifier>{cf612460-e6c2-41b0-b764-02c78d4d451c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2682,6 +2685,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\HasBall_OtherTeam.h">
       <Filter>Maruyama\Enemy\BehaviorTree\Decorator\HasBall_OtherTeam</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Task\ToHasBallOtherTeam.h">
+      <Filter>Maruyama\Enemy\BehaviorTree\Task\ToHasBallOtherTeam</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -3835,6 +3841,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\HasBall_OtherTeam.cpp">
       <Filter>Maruyama\Enemy\BehaviorTree\Decorator\HasBall_OtherTeam</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Task\ToHasBallOtherTeam.cpp">
+      <Filter>Maruyama\Enemy\BehaviorTree\Task\ToHasBallOtherTeam</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
