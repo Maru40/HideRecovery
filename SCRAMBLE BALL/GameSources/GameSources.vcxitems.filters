@@ -1393,6 +1393,18 @@
     <Filter Include="Maruyama\Enemy\BehaviorTree\Decorator\IsSpecificTarget">
       <UniqueIdentifier>{dfad3352-72c8-46ce-ae89-84ff48c29650}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Enemy\BehaviorTree\Decorator\RegisterDecorator">
+      <UniqueIdentifier>{7fc8b8ea-c466-49db-9c4b-37b6b7562f75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\BehaviorTree\Decorator\IsActiveSpecificTarget">
+      <UniqueIdentifier>{2753cac9-b3db-48ee-a8b6-19d8c17d6b5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\BehaviorTree\Task\ToBallRunTask">
+      <UniqueIdentifier>{f2ad38d5-5440-40a2-8851-342e285006e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\BehaviorTree\Task\ToGoalRunTask">
+      <UniqueIdentifier>{03cea400-6548-49db-9b6a-1f9006d7ebf3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2610,6 +2622,15 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\IsSpecificTarget.h">
       <Filter>Maruyama\Enemy\BehaviorTree\Decorator\IsSpecificTarget</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\RegisterCanTransitionDecorator.h">
+      <Filter>Maruyama\Enemy\BehaviorTree\Decorator\RegisterDecorator</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\IsActiveSpecificTarget.h">
+      <Filter>Maruyama\Enemy\BehaviorTree\Decorator\IsActiveSpecificTarget</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Task\ToBallRunTask.h">
+      <Filter>Maruyama\Enemy\BehaviorTree\Task\ToBallRunTask</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -3727,6 +3748,15 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\IsSpecificTarget.cpp">
       <Filter>Maruyama\Enemy\BehaviorTree\Decorator\IsSpecificTarget</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\RegisterCanTransitionDecorator.cpp">
+      <Filter>Maruyama\Enemy\BehaviorTree\Decorator\RegisterDecorator</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\IsActiveSpecificTarget.cpp">
+      <Filter>Maruyama\Enemy\BehaviorTree\Decorator\IsActiveSpecificTarget</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Task\ToBallRunTask.cpp">
+      <Filter>Maruyama\Enemy\BehaviorTree\Task\ToBallRunTask</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
