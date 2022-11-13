@@ -130,6 +130,7 @@ namespace basecross {
 
 					auto node = m_currentStack.top().lock();
 					if (node) {
+						node->OnDecoratorExit();
 						node->OnExit();		//ノードの終了判定処理
 						node->SetState(BehaviorState::Completed);
 					}
@@ -443,6 +444,9 @@ namespace basecross {
 					auto nextNode = selecter->SearchCurrentNode();
 					if (!nextNode) {	//ノードが存在しないなら、手前のノードに戻る。
 						PopCurrentStack();
+						//if (m_currentStack.empty()) {
+						//	return GetNode(m_firstNodeType);	//バグ
+						//}
 						return ReverseStack(m_currentStack.top().lock());
 					}
 
