@@ -22,6 +22,7 @@
 #include "Maruyama/TaskList/CommonTasks/TargetSeek.h"
 #include "Maruyama/TaskList/CommonTasks/Task_ToTargetMove.h"
 #include "Maruyama/Enemy/Behavior/Task/ToBallRunTask.h"
+#include "Maruyama/Enemy/Behavior/Task/ToGoalRunTask.h"
 
 #include "Maruyama/Enemy/Behavior/Interface/I_PriorityController.h"
 
@@ -29,6 +30,7 @@
 #include "Maruyama/Enemy/Behavior/Decorator/OutSpecificTarget.h"
 #include "Maruyama/Enemy/Behavior/Decorator/IsActiveSpecificTarget.h"
 #include "Maruyama/Enemy/Behavior/Decorator/SettingStartTarget_Ball.h"
+#include "Maruyama/Enemy/Behavior/Decorator/HasBallTransition.h"
 
 #include "Maruyama/Utility/SingletonComponent/SingletonComponent.h"
 #include "Maruyama/Utility/SingletonComponent/ShareClassesManager.h"
@@ -46,14 +48,12 @@ namespace basecross {
 				/// 隠れ場所を探すパトロールビヘイビアツリーのパラメータ
 				//--------------------------------------------------------------------------------------
 
-				HidePlacePatrolTree_Parametor::HidePlacePatrolTree_Parametor():
-					astarMoveParamPtr(new Task::NearAstarMove_Parametor(EyeSearchRangeParametor(20.0f, 3.0f, XMConvertToRadians(90.0f)))),
-					seekMoveParamPtr(new Task::NearSeekMove_Parametor())
+				HidePlacePatrolTree_Parametor::HidePlacePatrolTree_Parametor()
+
 				{}
 
 				HidePlacePatrolTree_Parametor::~HidePlacePatrolTree_Parametor(){
-					delete(astarMoveParamPtr);
-					delete(seekMoveParamPtr);
+
 				}
 
 				//--------------------------------------------------------------------------------------
@@ -79,10 +79,6 @@ namespace basecross {
 						std::make_shared<maru::Behavior::Task::SearchBall>(owner)
 					);
 
-					auto& param = m_param.astarMoveParamPtr;
-					auto& moveParam = param->moveParamPtr->movePositionsParam->moveParamPtr;
-					moveParam->speed = 8.5f;
-					moveParam->moveType = basecross::Task::ToTargetMove::MoveType::SeekVelocity;
 					//Ballの場所まで駆けつけるタスク
 					m_behaviorTree->AddTask<Task::ToBallRunTask>(
 						BehaviorType::ToBallRunTask,
@@ -90,6 +86,12 @@ namespace basecross {
 					);
 
 					//Goalまで行くタスク
+					m_behaviorTree->AddTask<Task::ToGoalRunTask>(
+						BehaviorType::ToGoalRunTask,
+						owner
+					);
+
+					//見方を守るタスク
 
 				}
 
@@ -108,6 +110,12 @@ namespace basecross {
 						BehaviorType::ToBallRunTask,
 						(int)BehaviorType::ToBallRunTask
 					);
+
+					m_behaviorTree->AddEdge(
+						BehaviorType::FirstSelecter,
+						BehaviorType::ToGoalRunTask,
+						(int)BehaviorType::ToGoalRunTask
+					);
 				}
 
 				void HidePlacePatrolTree::CreateDecorator() {
@@ -115,15 +123,6 @@ namespace basecross {
 
 					//パトロールタスク--------------------------------------------------------------------------------------
 					
-					//HideItemがターゲットの場合、遷移できないようにする。
-					//auto outSpecificTargets = ShareClassesManager::GetInstance()->GetCastShareClasses<HideItemObject>();
-					//for (auto& target : outSpecificTargets) {
-					//	m_behaviorTree->AddDecorator<Decorator::OutSpecificTarget>(
-					//		BehaviorType::PatrolTask,
-					//		enemy,
-					//		target.lock()
-					//	);
-					//}
 
 					//-------------------------------------------------------------------------------------------------------
 
@@ -139,17 +138,15 @@ namespace basecross {
 						);
 					}
 
-					//ボールをターゲットにする。
-					//m_behaviorTree->AddDecorator<Decorator::SettingStartTarget_Ball>(
-					//	BehaviorType::ToBallRunTask,
-					//	GetOwner(),
-					//	hideObjects[0].lock()
-					//);
+					//-------------------------------------------------------------------------------------------------------
 
 					//ゴールまで行くタスク-----------------------------------------------------------------------------------
 
 					//ボールを持っている人がいるのなら
-
+					m_behaviorTree->AddDecorator<Decorator::HasBallTransition>(
+						BehaviorType::ToGoalRunTask,
+						GetOwner()
+					);
 
 					//-------------------------------------------------------------------------------------------------------
 				}

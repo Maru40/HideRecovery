@@ -26,17 +26,17 @@ namespace basecross {
 				enum class HidePlacePatrolTree_BehaviorType {
 					FirstSelecter,		//初回ノード
 
-					ToGoalRunTask,		//ゴールまで行くタスク。
-					ToBallRunTask,		//ボールまで駆けつけるタスク。
-					PatrolTask,			//パトロールタスク。
+					ToGoalRunTask,			//ゴールまで行くタスク。
+					ToMoveHasBallEnemyTask,	//ボールを持っている敵まで行くタスク。
+					RelifHasBallMemberTask,	//ボールを持っているメンバーを守る。
+					ToBallRunTask,			//ボールまで駆けつけるタスク。
+					PatrolTask,				//パトロールタスク。
 				};
 
 				//--------------------------------------------------------------------------------------
 				/// 隠れ場所を探すパトロールビヘイビアツリーのパラメータ
 				//--------------------------------------------------------------------------------------
 				struct HidePlacePatrolTree_Parametor {
-					Task::NearAstarMove_Parametor* astarMoveParamPtr;
-					Task::NearSeekMove_Parametor* seekMoveParamPtr;
 
 					HidePlacePatrolTree_Parametor();
 
