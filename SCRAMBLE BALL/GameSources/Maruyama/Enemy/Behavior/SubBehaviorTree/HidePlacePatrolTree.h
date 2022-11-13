@@ -21,9 +21,8 @@ namespace basecross {
 				enum class HidePlacePatrolTree_BehaviorType {
 					FirstSelecter,		//初回ノード
 
-					PatrolSelecter,		//パトロールセレクター
-						//ボールまで駆けつけるタスク。
-						PatrolTask,			//パトロールタスク
+					ToBallRunTask,		//ボールまで駆けつけるタスク。
+					PatrolTask,			//パトロールタスク
 				};
 
 				//--------------------------------------------------------------------------------------
