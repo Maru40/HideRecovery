@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0"
-  xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Headers">
       <UniqueIdentifier>{4b0a624a-610d-4bc6-b311-2b02a781cdf9}</UniqueIdentifier>
@@ -1379,13 +1378,11 @@
     <Filter Include="Maruyama\Enemy\BehaviorTree\Decorator\OutSpecificTarget">
       <UniqueIdentifier>{a523e5b7-d680-4db6-ba9e-e9a127fb46c6}</UniqueIdentifier>
     </Filter>
-
     <Filter Include="Watanabe\Component\DissolveAnimator">
       <UniqueIdentifier>{e76dbee5-220b-476c-a2cf-17890d9f181d}</UniqueIdentifier>
-	</Filter>
+    </Filter>
     <Filter Include="Maruyama\Enemy\Component\AIInputController">
       <UniqueIdentifier>{39e44cc2-fba4-4b4b-8408-cf4c07427fd2}</UniqueIdentifier>
-
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -2592,14 +2589,11 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\OutSpecificTarget.h">
       <Filter>Maruyama\Enemy\BehaviorTree\Decorator\OutSpecificTarget</Filter>
     </ClInclude>
-
-
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\DissolveAnimator.h">
       <Filter>Watanabe\Component\DissolveAnimator</Filter>
-	</ClInclude>
+    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\AIVirtualController.h">
       <Filter>Maruyama\Enemy\Component\AIInputController</Filter>
-
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -3707,13 +3701,11 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\OutSpecificTarget.cpp">
       <Filter>Maruyama\Enemy\BehaviorTree\Decorator\OutSpecificTarget</Filter>
     </ClCompile>
-
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\DissolveAnimator.cpp">
       <Filter>Watanabe\Component\DissolveAnimator</Filter>
-	</ClCompile>
+    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\AIVirtualController.cpp">
       <Filter>Maruyama\Enemy\Component\AIInputController</Filter>
-
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
