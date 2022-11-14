@@ -2469,9 +2469,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\OpenBox.h">
       <Filter>Maruyama\Utility\TaskList\CommonTasks\OpenBox</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)SelfAstarNodeController.h">
-      <Filter>Maruyama\Enemy\Component\SelfAstarNodeController</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\SelecterTask\Priority.h">
       <Filter>Maruyama\Enemy\BehaviorTree\Interface\I_Selecter\Task\Priority</Filter>
     </ClInclude>
@@ -2687,6 +2684,9 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Task\ToHasBallOtherTeam.h">
       <Filter>Maruyama\Enemy\BehaviorTree\Task\ToHasBallOtherTeam</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\SelfAstarNodeController.h">
+      <Filter>Maruyama\Enemy\Component\SelfAstarNodeController</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -3632,9 +3632,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\OpenBox.cpp">
       <Filter>Maruyama\Utility\TaskList\CommonTasks\OpenBox</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)SelfAstarNodeController.cpp">
-      <Filter>Maruyama\Enemy\Component\SelfAstarNodeController</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\SelecterTask\Priority.cpp">
       <Filter>Maruyama\Enemy\BehaviorTree\Interface\I_Selecter\Task\Priority</Filter>
     </ClCompile>
@@ -3844,6 +3841,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Task\ToHasBallOtherTeam.cpp">
       <Filter>Maruyama\Enemy\BehaviorTree\Task\ToHasBallOtherTeam</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\SelfAstarNodeController.cpp">
+      <Filter>Maruyama\Enemy\Component\SelfAstarNodeController</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
