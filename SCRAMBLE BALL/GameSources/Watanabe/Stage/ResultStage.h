@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include "stdafx.h"
 #include "GameStageBase.h"
+#include "../TimeLine/TimeLine.h"
 
 namespace basecross {
 	namespace team {
@@ -8,6 +9,7 @@ namespace basecross {
 	}
 
 	class ResultStage :public GameStageBase {
+		weak_ptr<TimeLine> m_timeLine;
 		void CreateViewLight();
 	public:
 		ResultStage() :GameStageBase() {}

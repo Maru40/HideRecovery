@@ -14,7 +14,6 @@
 #include "Watanabe/Component/PlayerAnimator.h"
 #include "Watanabe/Component/MatchingSyncPlayerObject.h"
 #include "Watanabe/Component/PlayerStatus.h"
-#include "Watanabe/TimeLine/TimeLine.h"
 
 #include "Maruyama/Interface/I_TeamMember.h"
 #include "VelocityManager.h"
@@ -84,7 +83,7 @@ namespace basecross {
 		timeLine->AddKeyFrame(CameraKeyFrameData(Vec3(1, 1, 2), Vec3(0, 0.5f, 0), 1.5f, Lerp::rate::Cube));
 		timeLine->AddKeyFrame(CameraKeyFrameData(Vec3(2, 1, 2), Vec3(1, 0.5f, 0), 2.5f, Lerp::rate::Cube));
 		timeLine->AddKeyFrame(CameraKeyFrameData(Vec3(0, 1, 5), Vec3(0, 1, 0), 3.5f, Lerp::rate::Cube));
-		timeLine->Play();
+		m_timeLine = timeLine;
 
 		CreateMap(L"WaitStage.csv");
 		auto uiBuilder = CreateUI(L"ResultUILayout.csv");
@@ -108,6 +107,8 @@ namespace basecross {
 		CreatePlayers(PointManager::GetInstance()->GetWinner());
 
 		Online::OnlineManager::Disconnect();
+
+		timeLine->Play();
 	}
 
 	void ResultStage::OnUpdate() {
@@ -142,17 +143,19 @@ namespace basecross {
 		struct Data {
 			Vec3 position;
 			PlayerAnimationState::State state;
+			float time;
 
-			Data(const Vec3& position, const PlayerAnimationState::State& state) :
+			Data(const Vec3& position, const PlayerAnimationState::State& state, float time) :
 				position(position),
-				state(state)
+				state(state),
+				time(time)
 			{}
 		};
 
 		Data datas[] = {
-			Data(Vec3(+0.0f, 0.1f, 0.0f), PlayerAnimationState::State::Win1),
-			Data(Vec3(-1.0f, 0.1f, 0.0f), PlayerAnimationState::State::Win2),
-			Data(Vec3(+1.0f, 0.1f, 0.0f), PlayerAnimationState::State::Win3),
+			Data(Vec3(-1.0f, 0.1f, 0.0f), PlayerAnimationState::State::Win2,0.5f),
+			Data(Vec3(+0.0f, 0.1f, 0.0f), PlayerAnimationState::State::Win1,1.5f),
+			Data(Vec3(+1.0f, 0.1f, 0.0f), PlayerAnimationState::State::Win3,2.5f),
 		};
 
 		for (auto& data : datas) {
@@ -162,7 +165,15 @@ namespace basecross {
 			teamMember->SetTeam(winerType);
 
 			auto animator = player->GetComponent<PlayerAnimator>(false);
-			animator->ChangePlayerAnimation(data.state);
+			animator->ChangePlayerAnimation(PlayerAnimationState::State::Wait);
+
+			if (auto timeLine = m_timeLine.lock()) {
+				timeLine->AddEvent(data.time,
+					[&, animator, data]() {
+						animator->ChangePlayerAnimation(data.state);
+					}
+				);
+			}
 		}
 	}
 }

@@ -5,6 +5,17 @@
 
 namespace basecross {
 	class TimeLine :public Component {
+	public:
+		struct EventData {
+			float Time;
+			function<void()> Func;
+
+			EventData() {}
+			EventData(float time, const function<void()>& func)
+				:Time(time), Func(func)
+			{}
+		};
+	private:
 		bool m_isPlaying = false;
 		float m_delta;
 		weak_ptr<Camera> m_camera;
@@ -13,6 +24,10 @@ namespace basecross {
 		shared_ptr<CameraKeyFrameData> m_nextKey;
 		vector<shared_ptr<CameraKeyFrameData>> m_keyFrameList;
 		AdvQueue<shared_ptr<CameraKeyFrameData>> m_timeLine;
+
+		AdvQueue<EventData> m_eventList;
+		EventData m_waitingEvent;
+		bool m_endEvent = false;
 	public:
 		TimeLine(const shared_ptr<GameObject>& owner);
 
@@ -21,6 +36,7 @@ namespace basecross {
 		void OnDraw()override {}
 
 		void AddKeyFrame(const CameraKeyFrameData data);
+		void AddEvent(float time, const function<void()>& func);
 		void Play();
 		void Reset();
 	};
