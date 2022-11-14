@@ -4,6 +4,21 @@
 #include "AdvQueue.h"
 
 namespace basecross {
+	namespace timeline {
+		class TimeLine {
+			bool m_isPlaying = false;
+			float m_delta;
+		public:
+			virtual void Interpolation() = 0;
+			virtual void AddKeyFrame(const CameraKeyFrameData data) = 0;
+			virtual void ClearKeyFrame() = 0;
+
+			virtual void Play() {}
+			virtual void Reset() {}
+			virtual void Stop() {}
+		};
+	}
+
 	class TimeLine :public Component {
 	public:
 		struct EventData {

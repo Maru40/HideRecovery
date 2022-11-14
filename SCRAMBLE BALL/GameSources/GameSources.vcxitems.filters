@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0"
-  xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Headers">
       <UniqueIdentifier>{4b0a624a-610d-4bc6-b311-2b02a781cdf9}</UniqueIdentifier>
@@ -1451,6 +1450,9 @@
     <Filter Include="Itabashi\Online\OnlineLeaveAIChanger">
       <UniqueIdentifier>{a0c4b9a8-cadd-4892-b103-fcd27d5e3707}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\TimeLine\UIObjectTimeLine">
+      <UniqueIdentifier>{86207b2f-caf4-415e-9b74-7eb1b146e7fd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2737,6 +2739,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineLeaveAIChanger.h">
       <Filter>Itabashi\Online\OnlineLeaveAIChanger</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\UIObjectTimeLine.h">
+      <Filter>Watanabe\TimeLine\UIObjectTimeLine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -3917,6 +3922,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineLeaveAIChanger.cpp">
       <Filter>Itabashi\Online\OnlineLeaveAIChanger</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\UIObjectTimeLine.cpp">
+      <Filter>Watanabe\TimeLine\UIObjectTimeLine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

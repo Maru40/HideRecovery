@@ -16,6 +16,7 @@
 #include "Watanabe/Component/PlayerStatus.h"
 #include "Watanabe/TimeLine/CameraTimeLine.h"
 #include "Watanabe/TimeLine/GameObjectTimeLine.h"
+#include "Watanabe/TimeLine/UIObjectTimeLine.h"
 
 #include "Maruyama/Interface/I_TeamMember.h"
 #include "VelocityManager.h"
