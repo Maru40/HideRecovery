@@ -85,6 +85,7 @@ namespace basecross {
 		timeLine->AddKeyFrame(CameraKeyFrameData(Vec3(1, 1, 2), Vec3(0, 0.5f, 0), 1.5f, Lerp::rate::Cube));
 		timeLine->AddKeyFrame(CameraKeyFrameData(Vec3(2.5f, 1, 2), Vec3(1.5f, 0.5f, 0), 2.5f, Lerp::rate::Cube));
 		timeLine->AddKeyFrame(CameraKeyFrameData(Vec3(0, 1, 5), Vec3(0, 1, 0), 3.5f, Lerp::rate::Cube));
+		timeLine->AddEvent(4.0f, [&]() {m_isTransitionable = true; });
 		m_timeLine = timeLine;
 
 		CreateMap(L"WaitStage.csv");
@@ -183,6 +184,10 @@ namespace basecross {
 	}
 
 	void ResultStage::OnUpdate() {
+		// 一通りのアニメーションが終わるまで遷移不可
+		if (!m_isTransitionable)
+			return;
+
 		// 各画面への遷移処理
 		// Aでマッチング画面、Bでタイトル画面
 		const auto& inputDevice = App::GetApp()->GetMyInputDevice();
@@ -192,10 +197,6 @@ namespace basecross {
 		}
 		else if (pad.IsInputDown(XInputCode::B)) {
 			PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToTitleStage");
-		}
-
-		else if (pad.IsInputDown(XInputCode::Y)) {
-			PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToResultStage");
 		}
 	}
 
