@@ -36,6 +36,7 @@ namespace basecross {
 
 			void OnCreate()override;
 			void OnUpdate()override;
+			void OnUpdate2()override;
 			void OnDraw()override {}
 
 			void AddKeyFrame(const CameraKeyFrameData data);
@@ -60,6 +61,7 @@ namespace basecross {
 
 			void OnCreate()override;
 			void OnUpdate()override;
+			void OnUpdate2()override;
 			void OnDraw()override {}
 
 			void AddKeyFrame(const UIObjectKeyFrameData data);
