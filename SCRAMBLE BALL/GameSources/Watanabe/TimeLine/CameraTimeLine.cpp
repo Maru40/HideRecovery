@@ -41,7 +41,6 @@ namespace basecross {
 		}
 
 		void CameraTimeLine::Play() {
-			//sort(m_keyFrameList.begin(), m_keyFrameList.end());
 			m_currentKey = m_timeLine.front();
 			m_timeLine.pop();
 
@@ -101,7 +100,6 @@ namespace basecross {
 		}
 
 		void UIObjectTimeLine::Play() {
-			//sort(m_keyFrameList.begin(), m_keyFrameList.end());
 			m_currentKey = m_timeLine.front();
 			m_timeLine.pop();
 

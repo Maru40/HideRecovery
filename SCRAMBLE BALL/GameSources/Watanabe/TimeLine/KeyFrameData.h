@@ -49,9 +49,24 @@ namespace basecross {
 	};
 
 	struct GameObjectKeyFrameData {
-		TransformData m_transformData;
+		TransformData Transform;
 		float Time;			// キーフレーム位置
 		Lerp::rate Rate;	// このフレームからの保管方法
+
+		GameObjectKeyFrameData(const TransformData& data, float time, const Lerp::rate& rate)
+			:Transform(data), Time(time), Rate(rate)
+		{}
+
+		/// <summary>
+		/// 補間する
+		/// </summary>
+		TransformData Interpolation(const shared_ptr<GameObjectKeyFrameData>& keyFrame, float delta) {
+			TransformData data = {};
+			data.Position = Lerp::CalculateLerp(Transform.Position, keyFrame->Transform.Position, Time, keyFrame->Time, delta, Rate);
+			data.Scale = Lerp::CalculateLerp(Transform.Scale, keyFrame->Transform.Scale, Time, keyFrame->Time, delta, Rate);
+			data.Rotation = Lerp::CalculateLerp(Transform.Rotation, keyFrame->Transform.Rotation, Time, keyFrame->Time, delta, Rate);
+			return data;
+		}
 	};
 
 	struct UIObjectKeyFrameData {
