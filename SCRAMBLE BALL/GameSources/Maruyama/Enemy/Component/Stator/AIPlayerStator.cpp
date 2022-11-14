@@ -20,6 +20,8 @@
 #include "Maruyama/Enemy/Component/Stator/StateNode/StateNode_Dyning.h"
 #include "Maruyama/Enemy/Component/Stator/StateNode/StateNode_Dead.h"
 
+#include "Maruyama/Enemy/Component/SelfAstarNodeController.h"
+
 #include "Maruyama/Enemy/Component/EyeSearchRange.h"
 #include "Maruyama/Utility/ObserveIsInEyeTarget.h"
 
@@ -108,7 +110,6 @@ namespace basecross {
 		AIPlayerStator::AIPlayerStator(const std::shared_ptr<GameObject>& objPtr):
 			StatorBase(objPtr),
 			m_eye(objPtr->GetComponent<EyeSearchRange>())
-			//m_observeButtleTarget(new ObserveIsInEyeTarget(m_eye.lock()))
 		{
 			m_teamMember = objPtr->GetComponent<I_TeamMember>(false);
 			m_factionMember = objPtr->GetComponent<I_FactionMember>(false);

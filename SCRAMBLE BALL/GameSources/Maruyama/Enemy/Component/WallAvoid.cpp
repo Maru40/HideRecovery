@@ -40,7 +40,7 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 
 	WallAvoid_Parametor::WallAvoid_Parametor():
-		avoidPower(0.1f),
+		avoidPower(0.15f),
 		offset(Vec3(0.0f, 0.5f, 0.0f))
 	{}
 
