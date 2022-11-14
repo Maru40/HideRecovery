@@ -79,9 +79,11 @@ namespace basecross {
 		PointManager::GetInstance()->AddPoint(team::TeamType::Blue);
 
 		auto timeLine = AddGameObject<GameObject>()->AddComponent<TimeLine>();
-		timeLine->AddKeyFrame(CameraKeyFrameData(Vec3(0, 1, 5), Vec3(0), 0, Lerp::rate::Cube));
-		timeLine->AddKeyFrame(CameraKeyFrameData(Vec3(0, 1, 5), Vec3(0, 1, 0), 1, Lerp::rate::Cube));
-		timeLine->AddKeyFrame(CameraKeyFrameData(Vec3(0, 2, 5), Vec3(0, 1, 0), 1.2f, Lerp::rate::Cube));
+		timeLine->AddKeyFrame(CameraKeyFrameData(Vec3(-1, 1, 2), Vec3(-2, 0.5f, 0), 0, Lerp::rate::Cube));
+		timeLine->AddKeyFrame(CameraKeyFrameData(Vec3(0, 1, 2), Vec3(-1, 0.5f, 0), 0.5f, Lerp::rate::Cube));
+		timeLine->AddKeyFrame(CameraKeyFrameData(Vec3(1, 1, 2), Vec3(0, 0.5f, 0), 1.5f, Lerp::rate::Cube));
+		timeLine->AddKeyFrame(CameraKeyFrameData(Vec3(2, 1, 2), Vec3(1, 0.5f, 0), 2.5f, Lerp::rate::Cube));
+		timeLine->AddKeyFrame(CameraKeyFrameData(Vec3(0, 1, 5), Vec3(0, 1, 0), 3.5f, Lerp::rate::Cube));
 		timeLine->Play();
 
 		CreateMap(L"WaitStage.csv");
