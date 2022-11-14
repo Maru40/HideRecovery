@@ -5,6 +5,7 @@
 #include "Watanabe/Component/SyncObject.h"
 #include "Maruyama/Player/Component/Teleport.h"
 #include "Maruyama/Utility/Component/ToTargetMove.h"
+#include "Itabashi/OnlineLeaveAIChanger.h"
 
 namespace basecross
 {
@@ -30,6 +31,8 @@ namespace StageObject
 		auto cameraObject = GetStage()->AddGameObject<GameObject>();
 		auto toTargetMove = cameraObject->AddComponent<ToTargetMove>();
 		teleport->SetToTargetMove(toTargetMove);
+
+		AddComponent<Online::OnlineLeaveAIChanger>();
 	}
 
 	void OtherPlayerObject::OnlineSetting(int gameNumber, int playerNumber)
