@@ -236,5 +236,13 @@ namespace Online
 	{
 		EventCallback(errorCode, &I_OnlineCallBacks::OnLeaveRoom, &I_OnlineCallBacks::OnLeaveRoomFailed);
 	}
+
+	void OnlineManager::onMasterClientChanged(int id, int oldId)
+	{
+		for (auto& callback : m_callBacksVector)
+		{
+			callback->OnMasterClientChanged(id, oldId);
+		}
+	}
 }
 }
