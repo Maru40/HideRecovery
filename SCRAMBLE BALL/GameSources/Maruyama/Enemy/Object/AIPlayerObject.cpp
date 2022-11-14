@@ -27,6 +27,7 @@
 
 #include "Maruyama/Enemy/Component/Stator/AIPlayerStator.h"
 #include "Maruyama/Enemy/Component/SelfAstarNodeController.h"
+#include "Maruyama/Enemy/Component/WallAvoid.h"
 
 #include "Maruyama/Enemy/Component/AIVirtualController.h"
 
@@ -87,6 +88,7 @@ namespace basecross {
 			GetComponent<SeekTarget>()->SetUpdateActive(true);
 			GetComponent<SelfAstarNodeController>()->SetUpdateActive(true);
 			GetComponent<TargetManager>()->SetUpdateActive(true);
+			GetComponent<WallAvoid>()->SetUpdateActive(true);
 			GetComponent<AIVirtualController>()->SetUpdateActive(true);
 			GetComponent<AIPlayerStator>()->SetUpdateActive(true);
 		}
