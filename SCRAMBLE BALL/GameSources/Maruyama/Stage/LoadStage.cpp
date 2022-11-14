@@ -92,6 +92,7 @@ namespace basecross
 
 		ResourceLoadData(L"Arrow_TX", L"Arrow.png"),
 		ResourceLoadData(L"SquareSprite_TX", L"SquareSprite.png"),
+		ResourceLoadData(L"Ball_IconTX", L"Ball_IconTX.png"),
 
 		ResourceLoadData(L"Open_TX", L"Open_TX.png"),
 

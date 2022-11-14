@@ -17,7 +17,6 @@ namespace basecross {
 		weak_ptr<Transform> m_targetTransform;
 		Rect2D<float> m_screenRect;
 
-		shared_ptr<SimpleSprite> CreateSprite(const wstring& spriteKey);
 	public:
 		DirectionWithHasBallUI(const shared_ptr<Stage>& stage);
 		DirectionWithHasBallUI(const shared_ptr<Stage>& stage, const wstring& line);
