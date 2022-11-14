@@ -16,16 +16,11 @@ namespace basecross {
 		: UIObjectBase(stage, L"DirectionWithHasBallUI")
 	{}
 
-	shared_ptr<SimpleSprite> DirectionWithHasBallUI::CreateSprite(const wstring& spriteKey) {
-		auto sprite = GetStage()->AddGameObject<SimpleSprite>(
-			SimpleSprite::Type::SpriteData, spriteKey
-			);
-		return sprite;
-	}
-
 	void DirectionWithHasBallUI::OnCreate() {
 		m_camera = GetStage()->GetView()->GetTargetCamera();
-		m_cursor = CreateSprite(L"Triangle");
+		m_cursor = GetStage()->AddGameObject<SimpleSprite>(
+			SimpleSprite::Type::Texture, L"Ball_IconTX"
+			);
 
 		auto rectTrans = m_cursor->GetRectTransform();
 		rectTrans->SetPosition(Vec2(0, 400));

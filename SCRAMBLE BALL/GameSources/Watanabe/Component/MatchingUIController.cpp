@@ -44,7 +44,11 @@ namespace basecross {
 		auto aButton = m_builder->GetUIObject(L"AButton");
 		aButton->SetDrawActive(false);
 		m_builder->GetUIObject(L"WaitHost")->SetDrawActive(false);
-		m_builder->GetUIObject(L"InProcess")->SetDrawActive(false);
+
+		// 通信中の表示
+		auto inProcessUI = m_builder->GetUIObject<InProcessUI>(L"InProcess");
+		inProcessUI->SetLabel(InProcessUI::LabelType::Busy);
+		inProcessUI->SetActive(true);
 
 		// 親となるオブジェクトを作成し、所定の位置へ
 		auto parent = GetStage()->AddGameObject<UIObjectBase>(L"GameStartParent");
@@ -77,6 +81,8 @@ namespace basecross {
 	}
 
 	void MatchingUIController::OnConnected() {
+		m_builder->GetUIObject(L"InProcess")->SetActive(false);
+
 		auto selectUIObject = m_selectUIObject.lock();
 
 		selectUIObject->SetActive(true);
@@ -151,6 +157,7 @@ namespace basecross {
 	}
 
 	void MatchingUIController::ChangeUIStartLeaveRoom() {
+		ClearSplashMessage();
 		m_builder->GetUIObject(L"GameStart")->SetDrawActive(false);
 		m_builder->GetUIObject(L"AButton")->SetDrawActive(false);
 		m_builder->GetUIObject(L"HoldA")->SetDrawActive(false);
@@ -158,5 +165,10 @@ namespace basecross {
 
 		m_passcodeUIObject.lock()->SetActive(false);
 		m_passwordViewNumbersObject.lock()->SetActive(false);
+	}
+
+	void MatchingUIController::ClearSplashMessage() {
+		m_builder->GetUIObject<SplashMessageUI>(L"SplashMessage")
+			->ClearMessage();
 	}
 }

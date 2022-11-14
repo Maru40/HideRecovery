@@ -57,7 +57,7 @@ namespace basecross {
 		//transform->SetScale(Vec3(fScale));
 
 		auto shadow = AddComponent<Shadowmap>();
-		//shadow->SetMeshResource(L"Box_Model");
+		shadow->SetMultiMeshResource(L"Box_Model");
 	}
 
 	void RackObject::OnUpdate() {
