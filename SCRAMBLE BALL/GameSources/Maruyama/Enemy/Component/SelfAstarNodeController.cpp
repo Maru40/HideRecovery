@@ -59,6 +59,7 @@ namespace basecross {
 
 	void SelfAstarNodeController::UpdateNode() {
 		if (!HasNode()) {
+			InitializeNode();
 			return;
 		}
 
@@ -99,7 +100,7 @@ namespace basecross {
 		};
 		std::sort(datas.begin(), datas.end(), sortFunction);		//ソート
 
-		m_node = !datas.empty() ? datas[0].node.lock() : nullptr;	//配列が存在するなら新規ノードに変更
+		m_node = !datas.empty() ? datas[0].node.lock() : m_node;	//配列が存在するなら新規ノードに変更
 	}
 
 	bool SelfAstarNodeController::IsUpdateNode() {
@@ -121,7 +122,17 @@ namespace basecross {
 		auto graph = astar->GetGraph();
 
 		auto areaIndex = astar->SearchNearAreaIndex(transform->GetPosition());
+		if (areaIndex < 0) {
+			m_isNodeInitialize = false;
+			return;
+		}
+
 		auto node = UtilityAstar::SearchNearNode(astar->GetGraph(areaIndex), transform->GetPosition());
+		if (!node) {
+			m_isNodeInitialize = false;
+			return;
+		}
+
 		SetNode(node);
 
 		m_isNodeInitialize = false;
