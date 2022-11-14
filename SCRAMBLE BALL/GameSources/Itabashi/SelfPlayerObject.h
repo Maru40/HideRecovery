@@ -11,6 +11,7 @@ namespace StageObject
 		SelfPlayerObject(const std::shared_ptr<Stage>& stage);
 
 		void OnCreate() override;
+		void OnUpdate() override;
 
 		void OnlineSetting(int gameNumber, int pleyerNumber) override;
 	};
