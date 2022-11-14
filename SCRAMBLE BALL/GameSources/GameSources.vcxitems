@@ -384,6 +384,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\CameraTimeLine.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\KeyFrameData.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\TimeLine.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\TimeLineEventDataList.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\ButtonUI.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\CountDownUI.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\DirectionWithHasBallUI.h" />
@@ -757,6 +758,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\WatanabeStage.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\CameraTimeLine.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\TimeLine.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\TimeLineEventDataList.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\ButtonUI.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\CountDownUI.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\DirectionWithHasBallUI.cpp" />

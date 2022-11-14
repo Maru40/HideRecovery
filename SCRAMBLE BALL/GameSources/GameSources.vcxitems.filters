@@ -1387,6 +1387,9 @@
     <Filter Include="Watanabe\TimeLine\CameraTimeLine">
       <UniqueIdentifier>{062a840d-8bd7-4828-8edc-0d1f6293d6b4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\TimeLine\TimeLineEventDataList">
+      <UniqueIdentifier>{2dd95dfe-3f94-4384-bd90-d180e220ffeb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2607,6 +2610,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\CameraTimeLine.h">
       <Filter>Watanabe\TimeLine\CameraTimeLine</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\TimeLineEventDataList.h">
+      <Filter>Watanabe\TimeLine\TimeLineEventDataList</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -3721,6 +3727,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\CameraTimeLine.cpp">
       <Filter>Watanabe\TimeLine\CameraTimeLine</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\TimeLineEventDataList.cpp">
+      <Filter>Watanabe\TimeLine\TimeLineEventDataList</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
