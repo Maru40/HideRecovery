@@ -84,6 +84,13 @@ namespace basecross {
 			const int targetAreaIndex = -1
 		);
 
+		void SearchAstarStart(
+			const std::shared_ptr<NavGraphNode>& selfNode,
+			const std::shared_ptr<NavGraphNode>& targetNode,
+			const int areaIndex,
+			const int targetAreaIndex = -1
+		);
+
 		/// <summary>
 		/// ランダムなルートを計測
 		/// </summary>
