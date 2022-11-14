@@ -27,6 +27,9 @@ namespace basecross {
 			Neutral
 		};
 
+		// チームメンバー数（RedとBlueの合計）
+		constexpr UINT TEAM_MEMBER_COUNT = 6;
+
 		// 各チームの色（あいまいになることがあるのでbasecross::で明示する）
 		static const Col4 REDTEAM_COLOR = basecross::maru::Utility::ConvertColorZeroToOne(Col4(243.0f, 17.0f, 67.0f, 255.0f));
 		static const Col4 BLUETEAM_COLOR = basecross::maru::Utility::ConvertColorZeroToOne(Col4(0.0f, 150.0f, 226.0f, 255.0f));

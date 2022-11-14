@@ -93,6 +93,29 @@ namespace basecross {
 			m_transitionDatasMap[state].push_back(TransitionData(isTransition, PlayerAnimationState::State::Wait));
 		}
 
+		{
+			// 勝利モーションをLoopさせる
+			const size_t IndexSize = 3;
+			PlayerAnimationState::State winStates[IndexSize] = {
+				PlayerAnimationState::State::Win1,
+				PlayerAnimationState::State::Win2,
+				PlayerAnimationState::State::Win3,
+			};
+			// winStatesのループ用
+			PlayerAnimationState::State winLoopStates[IndexSize] = {
+				PlayerAnimationState::State::Win1Loop,
+				PlayerAnimationState::State::Win2Loop,
+				PlayerAnimationState::State::Win3Loop,
+			};
+
+			for (int i = 0; i < IndexSize; i++) {
+				auto strState = PlayerAnimationState::PlayerAnimationState2wstring(winStates[i]);
+				auto isTransition = [&]() {return IsTargetAnimationEnd(); };
+				// それぞれのモーションに対応したLoopバージョンを遷移先として登録
+				m_transitionDatasMap[strState].push_back(TransitionData(isTransition, winLoopStates[i]));
+			}
+		}
+
 		//自動でshotに遷移したいアニメーション
 		{
 			auto state = PlayerAnimationState::PlayerAnimationState2wstring(PlayerAnimationState::State::GunSet2);
