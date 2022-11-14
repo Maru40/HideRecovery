@@ -138,7 +138,7 @@ namespace basecross {
 			}
 
 			if (targetNearNode == nullptr) {
-				//Debug::GetInstance()->Log(L"GraphAstar::SearchAstarStart(), targetNode‚ªnull‚Å‚·");
+				Debug::GetInstance()->Log(L"GraphAstar::SearchAstarStart(), targetNode‚ªnull‚Å‚·");
 			}
 
 			return;
