@@ -32,11 +32,15 @@ namespace basecross {
 
 				// 先頭を削除
 				m_eventQueue.pop();
-				// 同じ実行時間のイベントがあればなくなるまでループ
+				// 同じ時間帯のイベントがあればなくなるまでループ
 				while (delta > m_eventQueue.front()->ExecutingTime) {
 					if (auto func = m_eventQueue.front()->Function)
 						func();
 					m_eventQueue.pop();
+
+					// このタイミングで空なら終了
+					if (m_eventQueue.empty())
+						break;
 				}
 			}
 		}

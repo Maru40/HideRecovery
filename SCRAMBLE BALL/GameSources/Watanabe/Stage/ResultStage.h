@@ -9,7 +9,7 @@ namespace basecross {
 	}
 
 	class ResultStage :public GameStageBase {
-		weak_ptr<CameraTimeLine> m_timeLine;
+		weak_ptr<timeline::CameraTimeLine> m_timeLine;
 		void CreateViewLight();
 
 		void CreateUIAnimation(const shared_ptr<UIObjectBase>& uiObject, const Vec2& offset);

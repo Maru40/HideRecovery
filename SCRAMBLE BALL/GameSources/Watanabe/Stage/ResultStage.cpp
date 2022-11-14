@@ -78,7 +78,7 @@ namespace basecross {
 		// デバッグ
 		PointManager::GetInstance()->AddPoint(team::TeamType::Blue);
 
-		auto timeLine = AddGameObject<GameObject>()->AddComponent<CameraTimeLine>();
+		auto timeLine = AddGameObject<GameObject>()->AddComponent<timeline::CameraTimeLine>();
 		timeLine->AddKeyFrame(CameraKeyFrameData(Vec3(-2, 1, 2), Vec3(-3, 0.5f, 0), 0, Lerp::rate::Cube));
 		timeLine->AddKeyFrame(CameraKeyFrameData(Vec3(-0.5f, 1, 2), Vec3(-1.5f, 0.5f, 0), 0.5f, Lerp::rate::Cube));
 		timeLine->AddKeyFrame(CameraKeyFrameData(Vec3(1, 1, 2), Vec3(0, 0.5f, 0), 1.5f, Lerp::rate::Cube));
@@ -158,7 +158,7 @@ namespace basecross {
 	}
 
 	void ResultStage::CreateUIAnimation(const shared_ptr<UIObjectBase>& uiObject, const Vec2& offset) {
-		auto uiTimeLine = uiObject->AddComponent<UIObjectTimeLine>();
+		auto uiTimeLine = uiObject->AddComponent<timeline::UIObjectTimeLine>();
 		auto nowRectTrans = uiObject->GetRectTransform();
 		auto nowRectData = RectTransformData(
 			nowRectTrans->GetPosition(),
