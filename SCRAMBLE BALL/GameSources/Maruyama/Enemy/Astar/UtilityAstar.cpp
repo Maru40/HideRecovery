@@ -55,7 +55,6 @@ namespace basecross {
 
 		if (minNode == nullptr) {
 			Debug::GetInstance()->Log(L"ƒm[ƒh‚ªŒŸõ‚Å‚«‚Ü‚¹‚ñ‚Å‚µ‚½B");
-			int i = 0;
 		}
 
 		return minNode;
