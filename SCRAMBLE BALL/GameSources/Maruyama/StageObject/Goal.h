@@ -128,8 +128,6 @@ namespace basecross {
 		/// <returns>当たり判定をとるならtrue</returns>
 		bool IsCollision(const CollisionPair& pair) const;
 
-		void ExecuteRelocationItem(int itemId, const Vec3& hidePosition);
-
 	public:
 		void OnCollisionEnter(const CollisionPair& pair) override;
 

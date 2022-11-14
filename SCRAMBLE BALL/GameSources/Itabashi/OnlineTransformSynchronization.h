@@ -29,23 +29,30 @@ namespace Online
 		/// </summary>
 		int m_onlinePlayerNumber = OnlineManager::INVALID_ONLINE_PLAYER_NUMBER;
 
-		bool m_hasUpdateRight = false;
+		bool m_isMaster = false; // 同期元であるか
 
-		OnlineTransformData m_beforeData;
+		bool m_isSynchronizePosition = true; // 位置を同期するか
+		bool m_isSynchronizeRotation = true; // 回転を同期するか
 
-		OnlineTransformData GetTransformData() const;
+		float m_synchronizeSpan = 1.0f; // 同期するタイミング
+		float m_countSpan = 0.0f; // 同期用の経過時間
+
+		mutable OnlineTransformData m_beforeData;
+
+		std::vector<std::uint8_t> CreateTransformDeltaCompressionData() const;
+
+		void UpdateTransformData(const std::uint8_t* bytes);
 
 	public:
 		/// <summary>
 		/// オンラインのイベントコード
 		/// </summary>
-		static constexpr std::uint8_t EVENT_CODE = 1;
+		static constexpr std::uint8_t SYNCHRONIZE_TRANSFORM_ONLINE_EVENT_CODE = 1;
 
 		OnlineTransformSynchronization(const std::shared_ptr<GameObject>& owner);
 
 		void OnCreate() override;
 
-		void OnUpdate() override {}
 		void OnUpdate2() override;
 
 		void OnDraw() override {}
@@ -63,9 +70,16 @@ namespace Online
 		/// <returns>プレイヤー番号</returns>
 		int GetOnlinePlayerNumber() const { return m_onlinePlayerNumber; }
 
-		void SetUpdateRight(bool hasUpdateRight) { m_hasUpdateRight = hasUpdateRight; }
+		void SetIsSynchronizePosition(bool isSynchronizePosition) { m_isSynchronizePosition = isSynchronizePosition; }
+		bool IsSynchronizePosition() const { return m_isSynchronizePosition; }
 
-		bool HasUpdateRight() const { return m_hasUpdateRight; }
+		void SetIsSynchronizeRotation(bool isSynchronizeRotation) { m_isSynchronizeRotation = isSynchronizeRotation; }
+		bool IsSynchronizeRotation() const { return m_isSynchronizeRotation; }
+
+		void SetIsMaster(bool isMaster) { m_isMaster = isMaster; }
+		bool IsMaster() const { return m_isMaster; }
+
+		void SetCountSpan(float countSpan) { m_countSpan = countSpan; }
 	};
 }
 }

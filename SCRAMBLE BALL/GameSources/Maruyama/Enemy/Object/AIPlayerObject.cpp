@@ -45,6 +45,8 @@
 #include "Maruyama/Player/Component/Respawner.h"
 #include "Maruyama/Player/Component/PlayerDeader.h"
 #include "Maruyama/Player/Component/ItemBag.h"
+#include "Itabashi/OnlineTransformSynchronization.h"
+
 //-----------------------------------------------------------------------
 
 //#include "Watanabe/DebugClass/Debug.h"
@@ -89,6 +91,7 @@ namespace basecross {
 			GetComponent<TargetManager>()->SetUpdateActive(true);
 			GetComponent<AIVirtualController>()->SetUpdateActive(true);
 			GetComponent<AIPlayerStator>()->SetUpdateActive(true);
+			GetComponent<Online::OnlineTransformSynchronization>()->SetIsMaster(true);
 		}
 
 		void AIPlayerObject::CreateModel() {
