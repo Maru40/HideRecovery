@@ -15,6 +15,7 @@
 #include "Watanabe/Component/MatchingSyncPlayerObject.h"
 #include "Watanabe/Component/PlayerStatus.h"
 #include "Watanabe/TimeLine/CameraTimeLine.h"
+#include "Watanabe/TimeLine/GameObjectTimeLine.h"
 
 #include "Maruyama/Interface/I_TeamMember.h"
 #include "VelocityManager.h"
@@ -110,7 +111,7 @@ namespace basecross {
 		// UIアニメーション
 		{
 			// 1チームのメンバー数
-			auto eachTeamMemberCount = team::TEAM_MEMBER_COUNT / 2;
+			auto eachTeamMemberCount = int(team::TEAM_MEMBER_COUNT / 2);
 			for (int i = 1; i < eachTeamMemberCount + 1; i++) {
 				auto scoreUI = uiBuilder->GetUIObject(L"Red" + Util::IntToWStr(i) + L"Score");
 				CreateUIAnimation(scoreUI, Vec2(-400, 0));
@@ -230,13 +231,28 @@ namespace basecross {
 
 		for (auto& data : datas) {
 			auto player = PlayerCreate(GetThis<Stage>());
-			player->GetComponent<Transform>()->SetPosition(data.position);
+			auto playerTrans = player->GetComponent<Transform>();
+			playerTrans->SetPosition(data.position);
 			auto teamMember = player->GetComponent<I_TeamMember>(false);
 			teamMember->SetTeam(winerType);
+
+			if (data.state == PlayerAnimationState::State::Win2) {
+				auto gameObjectTimeLine = player->AddComponent<timeline::GameObjectTimeLine>();
+
+				TransformData tData = {};
+				tData.Position = data.position - Vec3(0, 0, 2);
+				playerTrans->SetPosition(tData.Position);
+				gameObjectTimeLine->AddKeyFrame(GameObjectKeyFrameData(tData, 0.0f, Lerp::rate::Linear));
+				tData.Position = data.position;
+				gameObjectTimeLine->AddKeyFrame(GameObjectKeyFrameData(tData, 1.3f, Lerp::rate::Linear));
+
+				gameObjectTimeLine->Play();
+			}
 
 			auto animator = player->GetComponent<PlayerAnimator>(false);
 			animator->ChangePlayerAnimation(PlayerAnimationState::State::Wait);
 
+			// カメラタイムラインに勝利アニメーションを始めるイベントを登録
 			if (auto timeLine = m_timeLine.lock()) {
 				auto cameraTimeLine = timeLine;// ->GetComponent<CameraTimeLine>();
 				cameraTimeLine->AddEvent(data.time,
