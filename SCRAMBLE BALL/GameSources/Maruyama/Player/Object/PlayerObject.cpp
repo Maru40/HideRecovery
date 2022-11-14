@@ -67,7 +67,7 @@
 
 #include "Maruyama/Enemy/Component/EnemyBase.h"
 #include "Maruyama/Utility/Component/SeekTarget.h"
-#include "SelfAstarNodeController.h"
+#include "Maruyama/Enemy/Component/SelfAstarNodeController.h"
 #include "Maruyama/Utility/Component/TargetManager.h"
 #include "Maruyama/Enemy/Component/Stator/AIPlayerStator.h"
 #include "Maruyama/Enemy/Component/AIVirtualController.h"

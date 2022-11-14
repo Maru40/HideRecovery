@@ -22,7 +22,10 @@
 #include "Maruyama/Item/HideItem.h"
 #include "Maruyama/StageObject/HidePlace.h"
 
-#include "SelfAstarNodeController.h"
+#include "Maruyama/Enemy/Component/SelfAstarNodeController.h"
+#include "Maruyama/Utility/Component/Targeted.h"
+
+#include "Maruyama/Enemy/ImpactMap/SelfImpactNodeManager.h"
 
 #include "Watanabe/DebugClass/Debug.h"
 
@@ -159,7 +162,7 @@ namespace basecross {
 				m_areaRoute.push(areaRouteIndex);
 				//Debug::GetInstance()->Log(areaRouteIndex);
 			}
-			//Debug::GetInstance()->Log(L"AreaRoute-------------------");
+			//Debug::GetInstance()->Log(L"AreaRoute-------------------");p
 
 			return m_areaRoute;
 		}
@@ -176,6 +179,7 @@ namespace basecross {
 			m_areaRoute.pop();
 			int targetAreaIndex = !m_areaRoute.empty() ? m_areaRoute.front() : areaIndex;
 			auto startNode = m_selfAstarNodeController.lock()->CalculateNode();
+			//auto targetNode = 
 			auto positions = maru::FieldImpactMap::GetInstance()->GetRoutePositions(startNode, endPosition, areaIndex, targetAreaIndex);
 
 			m_param->movePositionsParam->positions = positions;
@@ -191,6 +195,21 @@ namespace basecross {
 			}
 
 			return targetManager->GetTargetPosition();	//基本ターゲット管理からの取得で検索できるようにする。
+		}
+
+		std::shared_ptr<NavGraphNode> MoveAstar::CalculateMoveTargetNode() {
+			auto targetManager = m_targetManager.lock();
+			//必要コンポーネントが存在しないなら
+			if (!targetManager || !targetManager->HasTarget()) {
+				return nullptr;
+			}
+
+			auto selfAstarNodeController = targetManager->GetTarget()->GetComponent<SelfAstarNodeController>(false);
+			if (!selfAstarNodeController) {
+				return nullptr;
+			}
+			
+			return selfAstarNodeController->CalculateNode();
 		}
 
 		//--------------------------------------------------------------------------------------

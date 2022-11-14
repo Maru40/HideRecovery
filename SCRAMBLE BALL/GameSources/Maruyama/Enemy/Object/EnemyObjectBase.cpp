@@ -21,7 +21,7 @@
 
 #include "Maruyama/Enemy/Component/EnemyBase.h"
 
-#include "SelfAstarNodeController.h"
+#include "Maruyama/Enemy/Component/SelfAstarNodeController.h"
 
 #include "Maruyama/Player/Component/HidePlaceOpener.h"
 

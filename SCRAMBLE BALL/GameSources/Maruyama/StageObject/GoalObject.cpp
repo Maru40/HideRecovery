@@ -13,6 +13,7 @@
 
 #include "Goal.h"
 #include "Maruyama/Utility/Component/Targeted.h"
+#include "Maruyama/Enemy/Component/SelfAstarNodeController.h"
 
 namespace basecross {
 	GoalObject::GoalObject(const shared_ptr<Stage>& stage) :
