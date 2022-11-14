@@ -14,6 +14,7 @@
 #include "Watanabe/Component/PlayerAnimator.h"
 #include "Watanabe/Component/MatchingSyncPlayerObject.h"
 #include "Watanabe/Component/PlayerStatus.h"
+#include "Watanabe/TimeLine/CameraTimeLine.h"
 
 #include "Maruyama/Interface/I_TeamMember.h"
 #include "VelocityManager.h"
@@ -77,7 +78,7 @@ namespace basecross {
 		// デバッグ
 		PointManager::GetInstance()->AddPoint(team::TeamType::Blue);
 
-		auto timeLine = AddGameObject<GameObject>()->AddComponent<TimeLine>();
+		auto timeLine = AddGameObject<GameObject>()->AddComponent<CameraTimeLine>();
 		timeLine->AddKeyFrame(CameraKeyFrameData(Vec3(-2, 1, 2), Vec3(-3, 0.5f, 0), 0, Lerp::rate::Cube));
 		timeLine->AddKeyFrame(CameraKeyFrameData(Vec3(-0.5f, 1, 2), Vec3(-1.5f, 0.5f, 0), 0.5f, Lerp::rate::Cube));
 		timeLine->AddKeyFrame(CameraKeyFrameData(Vec3(1, 1, 2), Vec3(0, 0.5f, 0), 1.5f, Lerp::rate::Cube));
@@ -106,9 +107,78 @@ namespace basecross {
 		//playerの生成
 		CreatePlayers(PointManager::GetInstance()->GetWinner());
 
+		// UIアニメーション
+		{
+			// 1チームのメンバー数
+			auto eachTeamMemberCount = team::TEAM_MEMBER_COUNT / 2;
+			for (int i = 1; i < eachTeamMemberCount + 1; i++) {
+				auto scoreUI = uiBuilder->GetUIObject(L"Red" + Util::IntToWStr(i) + L"Score");
+				CreateUIAnimation(scoreUI, Vec2(-400, 0));
+			}
+
+			for (int i = 1; i < eachTeamMemberCount + 1; i++) {
+				auto scoreUI = uiBuilder->GetUIObject(L"Blue" + Util::IntToWStr(i) + L"Score");
+				CreateUIAnimation(scoreUI, Vec2(400, 0));
+			}
+
+			{
+				auto obj = uiBuilder->GetUIObject(L"ToTitle");
+				CreateUIAnimation(obj, Vec2(0, -200));
+			}
+			{
+				auto obj = uiBuilder->GetUIObject(L"ToContinue");
+				CreateUIAnimation(obj, Vec2(0, -200));
+			}
+			{
+				auto obj = uiBuilder->GetUIObject(L"AButton");
+				CreateUIAnimation(obj, Vec2(0, -200));
+			}
+			{
+				auto obj = uiBuilder->GetUIObject(L"BButton");
+				CreateUIAnimation(obj, Vec2(0, -200));
+			}
+			{
+				const wstring keys[] = {
+					L"WinOrLose",
+					L"BluePoint",
+					L"RedPoint",
+					L"RedLabel",
+					L"BlueLabel"
+				};
+				for (auto& key : keys) {
+					auto obj = uiBuilder->GetUIObject(key);
+					CreateUIAnimation(obj, Vec2(0, 400));
+				}
+			}
+		}
+
 		Online::OnlineManager::Disconnect();
 
 		timeLine->Play();
+	}
+
+	void ResultStage::CreateUIAnimation(const shared_ptr<UIObjectBase>& uiObject, const Vec2& offset) {
+		auto uiTimeLine = uiObject->AddComponent<UIObjectTimeLine>();
+		auto nowRectTrans = uiObject->GetRectTransform();
+		auto nowRectData = RectTransformData(
+			nowRectTrans->GetPosition(),
+			nowRectTrans->GetScale(),
+			nowRectTrans->GetRotation()
+		);
+
+		auto beforeRectData = nowRectData;
+		beforeRectData.Position += offset;
+
+		nowRectTrans->SetPosition(beforeRectData.Position);
+
+		uiTimeLine->AddKeyFrame(UIObjectKeyFrameData(beforeRectData, 0, Lerp::rate::Cube));
+		uiTimeLine->AddKeyFrame(UIObjectKeyFrameData(nowRectData, 0.5f, Lerp::rate::Cube));
+
+		m_timeLine.lock()->AddEvent(3.5f,
+			[&, uiTimeLine]() {
+				uiTimeLine->Play();
+			}
+		);
 	}
 
 	void ResultStage::OnUpdate() {
@@ -153,9 +223,9 @@ namespace basecross {
 		};
 
 		Data datas[] = {
-			Data(Vec3(-1.5f, 0.1f, 0.0f), PlayerAnimationState::State::Win2,0.5f),
-			Data(Vec3(+0.0f, 0.1f, 0.0f), PlayerAnimationState::State::Win1,1.5f),
-			Data(Vec3(+1.5f, 0.1f, 0.0f), PlayerAnimationState::State::Win3,2.5f),
+			Data(Vec3(-1.5f, 0.1f, 0.0f), PlayerAnimationState::State::Win2,0.2f),
+			Data(Vec3(+0.0f, 0.1f, 0.0f), PlayerAnimationState::State::Win1,1.2f),
+			Data(Vec3(+1.5f, 0.1f, 0.0f), PlayerAnimationState::State::Win3,2.2f),
 		};
 
 		for (auto& data : datas) {
@@ -168,7 +238,8 @@ namespace basecross {
 			animator->ChangePlayerAnimation(PlayerAnimationState::State::Wait);
 
 			if (auto timeLine = m_timeLine.lock()) {
-				timeLine->AddEvent(data.time,
+				auto cameraTimeLine = timeLine;// ->GetComponent<CameraTimeLine>();
+				cameraTimeLine->AddEvent(data.time,
 					[&, animator, data]() {
 						animator->ChangePlayerAnimation(data.state);
 					}

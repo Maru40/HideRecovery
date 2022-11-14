@@ -2,6 +2,7 @@
 #include "stdafx.h"
 #include "AdvQueue.h"
 #include "KeyFrameData.h"
+#include "../UI/UIObjectBase.h"
 
 namespace basecross {
 	class TimeLine {
@@ -17,20 +18,77 @@ namespace basecross {
 		virtual void Stop() {}
 	};
 
-	// 1つのオブジェクトに対するタイムライン
-	class CameraTimeLine : public TimeLine {
+	class CameraTimeLine :public Component {
+	public:
+		struct EventData {
+			float Time;
+			function<void()> Func;
+
+			EventData() {}
+			EventData(float time, const function<void()>& func)
+				:Time(time), Func(func)
+			{}
+		};
+	private:
+		bool m_isPlaying = false;
+		float m_delta;
 		weak_ptr<Camera> m_camera;
 
 		shared_ptr<CameraKeyFrameData> m_currentKey;
 		shared_ptr<CameraKeyFrameData> m_nextKey;
 		vector<shared_ptr<CameraKeyFrameData>> m_keyFrameList;
 		AdvQueue<shared_ptr<CameraKeyFrameData>> m_timeLine;
+
+		AdvQueue<EventData> m_eventList;
+		EventData m_waitingEvent;
+		bool m_endEvent = false;
 	public:
-		void Interpolation()override;
-		void AddKeyFrame(const CameraKeyFrameData data)override;
-		void ClearKeyFrame()override;
+		CameraTimeLine(const shared_ptr<GameObject>& owner);
+
+		void OnCreate()override;
+		void OnUpdate()override;
+		void OnDraw()override {}
+
+		void AddKeyFrame(const CameraKeyFrameData data);
+		void AddEvent(float time, const function<void()>& func);
+		void Play();
+		void Reset();
 	};
 
-	class GameObjectTimeLine {
+	class UIObjectTimeLine :public Component {
+	public:
+		struct EventData {
+			float Time;
+			function<void()> Func;
+
+			EventData() {}
+			EventData(float time, const function<void()>& func)
+				:Time(time), Func(func)
+			{}
+		};
+	private:
+		bool m_isPlaying = false;
+		float m_delta;
+		weak_ptr<RectTransform> m_ownerRect;
+
+		shared_ptr<UIObjectKeyFrameData> m_currentKey;
+		shared_ptr<UIObjectKeyFrameData> m_nextKey;
+		vector<shared_ptr<UIObjectKeyFrameData>> m_keyFrameList;
+		AdvQueue<shared_ptr<UIObjectKeyFrameData>> m_timeLine;
+
+		AdvQueue<EventData> m_eventList;
+		EventData m_waitingEvent;
+		bool m_endEvent = false;
+	public:
+		UIObjectTimeLine(const shared_ptr<GameObject>& owner);
+
+		void OnCreate()override;
+		void OnUpdate()override;
+		void OnDraw()override {}
+
+		void AddKeyFrame(const UIObjectKeyFrameData data);
+		void AddEvent(float time, const function<void()>& func);
+		void Play();
+		void Reset();
 	};
 }

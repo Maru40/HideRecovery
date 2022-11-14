@@ -59,7 +59,7 @@ namespace basecross {
 			this->Scale = scale;
 			this->Rotation = 0.0f;
 		}
-		RectTransformData(const Vec2& position, const Vec2& scale, float& rotation) {
+		RectTransformData(const Vec2& position, const Vec2& scale, const float& rotation) {
 			this->Position = position;
 			this->Scale = scale;
 			this->Rotation = rotation;
