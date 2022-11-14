@@ -56,6 +56,8 @@ namespace basecross {
 
 		//ターゲット設定
 		AddComponent<Targeted>(Targeted::Parametor(TargetedPriority::GOAL));
+		AddComponent<SelfAstarNodeController>()->SetUpdateActive(false);
+
 		//collision->SetDrawActive(true);
 	}
 
