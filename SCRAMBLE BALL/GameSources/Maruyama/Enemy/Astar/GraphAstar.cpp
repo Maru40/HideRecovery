@@ -138,7 +138,7 @@ namespace basecross {
 			}
 
 			if (targetNearNode == nullptr) {
-				Debug::GetInstance()->Log(L"GraphAstar::SearchAstarStart(), targetNodeがnullです");
+				//Debug::GetInstance()->Log(L"GraphAstar::SearchAstarStart(), targetNodeがnullです");
 			}
 
 			return;
@@ -172,7 +172,12 @@ namespace basecross {
 	}
 
 	int GraphAstar::SearchNearAreaIndex(const Vec3& position) {
-		return SearchNearAreaNode(position)->GetAreaIndex();
+		auto areaNode = SearchNearAreaNode(position);
+		if (areaNode) {
+			return areaNode->GetAreaIndex();
+		}
+
+		return -1;	//エラーのため、-1を返す。
 	}
 
 	std::shared_ptr<NavGraphNode> GraphAstar::SearchNearAreaNode(const Vec3& position) {
