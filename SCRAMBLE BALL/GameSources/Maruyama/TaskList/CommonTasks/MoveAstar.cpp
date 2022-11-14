@@ -152,11 +152,22 @@ namespace basecross {
 			//エリアのルートを取得
 			auto areaRouteIndices = fieldImpactMap->SearchAreaRouteIndices(startPosition, targetPosition);
 
+			std::wstring debugStr = L"";	//デバッグ
 			//Astar検索が最初の自分自身のノードを省くため、最初は現在所属しているエリアから検索する。
-			m_areaRoute.push(fieldImpactMap->SearchNearAreaIndex(startPosition));
+			int startAreaIndex = fieldImpactMap->SearchNearAreaIndex(startPosition);
+			debugStr += std::to_wstring(startAreaIndex);
+			m_areaRoute.push(startAreaIndex);
 			for (const auto& areaRouteIndex : areaRouteIndices) {
+				debugStr += L"," + std::to_wstring(areaRouteIndex);
 				m_areaRoute.push(areaRouteIndex);
 			}
+
+			Debug::GetInstance()->ClearLog();
+
+			Debug::GetInstance()->Log(L"エリアルート---------------------------");
+			//std::reverse(debugStr.begin(), debugStr.end());
+			Debug::GetInstance()->Log(debugStr);
+			Debug::GetInstance()->Log(L"");
 
 			return m_areaRoute;
 		}
