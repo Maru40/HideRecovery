@@ -14,6 +14,11 @@ namespace basecross {
 			if (!m_isPlaying)
 				return;
 
+			m_eventDataList->Update(m_delta);
+
+			if (m_timeLine.empty())
+				return;
+
 			if (m_delta > m_nextKey->Time) {
 				m_currentKey = m_nextKey;
 				if (!m_timeLine.empty()) {
@@ -26,9 +31,9 @@ namespace basecross {
 
 			m_camera.lock()->SetEye(data.Eye);
 			m_camera.lock()->SetAt(data.At);
+		}
 
-			m_eventDataList->Update(m_delta);
-
+		void CameraTimeLine::OnUpdate2() {
 			m_delta += App::GetApp()->GetElapsedTime();
 		}
 
@@ -41,11 +46,13 @@ namespace basecross {
 		}
 
 		void CameraTimeLine::Play() {
-			m_currentKey = m_timeLine.front();
-			m_timeLine.pop();
+			if (!m_timeLine.empty()) {
+				m_currentKey = m_timeLine.front();
+				m_timeLine.pop();
 
-			m_nextKey = m_timeLine.front();
-			m_timeLine.pop();
+				m_nextKey = m_timeLine.front();
+				m_timeLine.pop();
+			}
 
 			m_isPlaying = true;
 
@@ -87,7 +94,9 @@ namespace basecross {
 			rectTrans->SetRotation(data.Rotation);
 
 			m_eventDataList->Update(m_delta);
+		}
 
+		void UIObjectTimeLine::OnUpdate2() {
 			m_delta += App::GetApp()->GetElapsedTime();
 		}
 
@@ -100,11 +109,13 @@ namespace basecross {
 		}
 
 		void UIObjectTimeLine::Play() {
-			m_currentKey = m_timeLine.front();
-			m_timeLine.pop();
+			if (!m_timeLine.empty()) {
+				m_currentKey = m_timeLine.front();
+				m_timeLine.pop();
 
-			m_nextKey = m_timeLine.front();
-			m_timeLine.pop();
+				m_nextKey = m_timeLine.front();
+				m_timeLine.pop();
+			}
 
 			m_isPlaying = true;
 

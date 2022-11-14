@@ -44,11 +44,13 @@ namespace basecross {
 		}
 
 		void GameObjectTimeLine::Play() {
-			m_currentKey = m_timeLine.front();
-			m_timeLine.pop();
+			if (!m_timeLine.empty()) {
+				m_currentKey = m_timeLine.front();
+				m_timeLine.pop();
 
-			m_nextKey = m_timeLine.front();
-			m_timeLine.pop();
+				m_nextKey = m_timeLine.front();
+				m_timeLine.pop();
+			}
 
 			m_isPlaying = true;
 

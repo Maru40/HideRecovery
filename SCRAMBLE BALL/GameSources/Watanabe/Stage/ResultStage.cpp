@@ -76,18 +76,6 @@ namespace basecross {
 		Debug::GetInstance()->Log(L"A : マッチング画面へ");
 		Debug::GetInstance()->Log(L"B : タイトル画面へ");
 
-		// デバッグ
-		PointManager::GetInstance()->AddPoint(team::TeamType::Blue);
-
-		auto timeLine = AddGameObject<GameObject>()->AddComponent<timeline::CameraTimeLine>();
-		timeLine->AddKeyFrame(CameraKeyFrameData(Vec3(-2, 1, 2), Vec3(-3, 0.5f, 0), 0, Lerp::rate::Cube));
-		timeLine->AddKeyFrame(CameraKeyFrameData(Vec3(-0.5f, 1, 2), Vec3(-1.5f, 0.5f, 0), 0.5f, Lerp::rate::Cube));
-		timeLine->AddKeyFrame(CameraKeyFrameData(Vec3(1, 1, 2), Vec3(0, 0.5f, 0), 1.5f, Lerp::rate::Cube));
-		timeLine->AddKeyFrame(CameraKeyFrameData(Vec3(2.5f, 1, 2), Vec3(1.5f, 0.5f, 0), 2.5f, Lerp::rate::Cube));
-		timeLine->AddKeyFrame(CameraKeyFrameData(Vec3(0, 1, 5), Vec3(0, 1, 0), 3.5f, Lerp::rate::Cube));
-		timeLine->AddEvent(4.0f, [&]() {m_isTransitionable = true; });
-		m_timeLine = timeLine;
-
 		CreateMap(L"WaitStage.csv");
 		auto uiBuilder = CreateUI(L"ResultUILayout.csv");
 		// ラベルの色変更
@@ -96,14 +84,28 @@ namespace basecross {
 		auto blueLabel = uiBuilder->GetUIObject<SimpleSprite>(L"BlueLabel");
 		blueLabel->GetDrawComponent()->SetDiffuse(team::BLUETEAM_COLOR);
 
-		// 引き分け以外に生成
-		if (!PointManager::GetInstance()->IsDraw()) {
+		auto timeLine = AddGameObject<GameObject>()->AddComponent<timeline::CameraTimeLine>();
+		m_timeLine = timeLine;
+
+		const bool IsDraw = PointManager::GetInstance()->IsDraw();
+		if (!IsDraw) {
+			timeLine->AddKeyFrame(CameraKeyFrameData(Vec3(-2, 1, 2), Vec3(-3, 0.5f, 0), 0, Lerp::rate::Cube));
+			timeLine->AddKeyFrame(CameraKeyFrameData(Vec3(-0.5f, 1, 2), Vec3(-1.5f, 0.5f, 0), 0.5f, Lerp::rate::Cube));
+			timeLine->AddKeyFrame(CameraKeyFrameData(Vec3(1, 1, 2), Vec3(0, 0.5f, 0), 1.5f, Lerp::rate::Cube));
+			timeLine->AddKeyFrame(CameraKeyFrameData(Vec3(2.5f, 1, 2), Vec3(1.5f, 0.5f, 0), 2.5f, Lerp::rate::Cube));
+			timeLine->AddKeyFrame(CameraKeyFrameData(Vec3(0, 1, 5), Vec3(0, 1, 0), 3.5f, Lerp::rate::Cube));
+			timeLine->AddEvent(4.0f, [&]() {m_isTransitionable = true; });
+
+			// 引き分け以外に生成
 			// 紙吹雪エフェクト
 			auto effectObject = AddGameObject<GameObject>();
 			effectObject->GetComponent<Transform>()->SetPosition(Vec3(0, 5, 0));
 			auto efkComp = effectObject->AddComponent<EfkComponent>();
 			efkComp->SetEffectResource(L"Confetti");
 			efkComp->PlayLoop(L"Confetti");
+		}
+		else {
+			timeLine->AddEvent(0.5f, [&]() {m_isTransitionable = true; });
 		}
 
 		//playerの生成
@@ -176,7 +178,8 @@ namespace basecross {
 		uiTimeLine->AddKeyFrame(UIObjectKeyFrameData(beforeRectData, 0, Lerp::rate::Cube));
 		uiTimeLine->AddKeyFrame(UIObjectKeyFrameData(nowRectData, 0.5f, Lerp::rate::Cube));
 
-		m_timeLine.lock()->AddEvent(3.5f,
+		const bool IsDraw = PointManager::GetInstance()->IsDraw();
+		m_timeLine.lock()->AddEvent(IsDraw ? 0.0f : 3.5f,
 			[&, uiTimeLine]() {
 				uiTimeLine->Play();
 			}
