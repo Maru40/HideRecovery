@@ -32,15 +32,13 @@ namespace basecross {
 
 				// 先頭を削除
 				m_eventQueue.pop();
+				// キューがあり
 				// 同じ時間帯のイベントがあればなくなるまでループ
-				while (delta > m_eventQueue.front()->ExecutingTime) {
+				while (!m_eventQueue.empty() &&
+					delta > m_eventQueue.front()->ExecutingTime) {
 					if (auto func = m_eventQueue.front()->Function)
 						func();
 					m_eventQueue.pop();
-
-					// このタイミングで空なら終了
-					if (m_eventQueue.empty())
-						break;
 				}
 			}
 		}
