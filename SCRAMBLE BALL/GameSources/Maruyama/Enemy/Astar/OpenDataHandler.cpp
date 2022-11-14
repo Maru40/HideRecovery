@@ -123,6 +123,8 @@ namespace basecross {
 		int index = 0;
 		constexpr int tempMaxIndex = 10000;
 
+		Debug::GetInstance()->Log(L"ルート------------------------------------------------------");
+
 		auto tempData = FindSomeOpenData(openDataList, targetNode);
 		while (index <= tempMaxIndex) {
 			if (tempData->parent.lock() == nullptr) {
@@ -133,6 +135,22 @@ namespace basecross {
 			tempData = FindSomeOpenData(openDataList, tempData->parent.lock());
 			index++;
 		}
+
+		//デバッグ
+		auto tempRoute = m_route;
+		while (!tempRoute.empty()) {
+			auto data = tempRoute.top();
+			tempRoute.pop();
+			//debug----------------------------------------------------------------------------
+			auto areaIndex = std::to_wstring(data.lock()->GetAreaIndex());
+			auto nodeIndex = std::to_wstring(data.lock()->GetIndex());
+
+			Debug::GetInstance()->Log(L"エリア： " + areaIndex + L", ノード： " + nodeIndex);
+			//---------------------------------------------------------------------------------
+		}
+
+		Debug::GetInstance()->Log(L"");
+		//Debug::GetInstance()->Log(L"//-----------------------------------------------------------");
 
 		return index <= tempMaxIndex;		//上限回数を超えたら、失敗
 	}
@@ -233,6 +251,8 @@ namespace basecross {
 			openDataList.push_back(closeData);
 		}
 
+		//auto lastTargetNode = m_otherAreaNode.lock() ? 
+		//	FindSomeOpenData(openDataList, m_otherAreaNode.lock())->parent.lock() : targetNode;	//最終的なターゲットノード
 		auto lastTargetNode = m_otherAreaNode.lock() ? m_otherAreaNode.lock() : targetNode;	//最終的なターゲットノード
 		bool isCreateRoute = CreateRoute(openDataList, lastTargetNode);
 		if (!isCreateRoute) {
