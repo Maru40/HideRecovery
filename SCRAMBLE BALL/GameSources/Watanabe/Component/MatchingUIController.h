@@ -57,6 +57,8 @@ namespace basecross {
 
 		void OnLeaveRoom() override;
 
+		virtual void OnMasterClientChanged(int id, int oldID) override;
+
 		/// <summary>
 		/// マッチングの開始時に呼ぶUI表示処理
 		/// </summary>
