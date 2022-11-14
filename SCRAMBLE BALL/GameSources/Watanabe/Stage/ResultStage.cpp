@@ -78,10 +78,10 @@ namespace basecross {
 		PointManager::GetInstance()->AddPoint(team::TeamType::Blue);
 
 		auto timeLine = AddGameObject<GameObject>()->AddComponent<TimeLine>();
-		timeLine->AddKeyFrame(CameraKeyFrameData(Vec3(-1, 1, 2), Vec3(-2, 0.5f, 0), 0, Lerp::rate::Cube));
-		timeLine->AddKeyFrame(CameraKeyFrameData(Vec3(0, 1, 2), Vec3(-1, 0.5f, 0), 0.5f, Lerp::rate::Cube));
+		timeLine->AddKeyFrame(CameraKeyFrameData(Vec3(-2, 1, 2), Vec3(-3, 0.5f, 0), 0, Lerp::rate::Cube));
+		timeLine->AddKeyFrame(CameraKeyFrameData(Vec3(-0.5f, 1, 2), Vec3(-1.5f, 0.5f, 0), 0.5f, Lerp::rate::Cube));
 		timeLine->AddKeyFrame(CameraKeyFrameData(Vec3(1, 1, 2), Vec3(0, 0.5f, 0), 1.5f, Lerp::rate::Cube));
-		timeLine->AddKeyFrame(CameraKeyFrameData(Vec3(2, 1, 2), Vec3(1, 0.5f, 0), 2.5f, Lerp::rate::Cube));
+		timeLine->AddKeyFrame(CameraKeyFrameData(Vec3(2.5f, 1, 2), Vec3(1.5f, 0.5f, 0), 2.5f, Lerp::rate::Cube));
 		timeLine->AddKeyFrame(CameraKeyFrameData(Vec3(0, 1, 5), Vec3(0, 1, 0), 3.5f, Lerp::rate::Cube));
 		m_timeLine = timeLine;
 
@@ -153,9 +153,9 @@ namespace basecross {
 		};
 
 		Data datas[] = {
-			Data(Vec3(-1.0f, 0.1f, 0.0f), PlayerAnimationState::State::Win2,0.5f),
+			Data(Vec3(-1.5f, 0.1f, 0.0f), PlayerAnimationState::State::Win2,0.5f),
 			Data(Vec3(+0.0f, 0.1f, 0.0f), PlayerAnimationState::State::Win1,1.5f),
-			Data(Vec3(+1.0f, 0.1f, 0.0f), PlayerAnimationState::State::Win3,2.5f),
+			Data(Vec3(+1.5f, 0.1f, 0.0f), PlayerAnimationState::State::Win3,2.5f),
 		};
 
 		for (auto& data : datas) {
