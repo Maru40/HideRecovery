@@ -66,7 +66,7 @@ namespace basecross {
 			std::weak_ptr<I_FactionMember> m_factionMember;	//ファクションメンバーインターフェース
 			std::weak_ptr<Tuple::I_Tupler> m_tupler;		//タプルスペースを使う者
 			std::weak_ptr<TargetManager> m_targetManager;	//ターゲット管理
-
+			
 		public:
 			AIPlayerStator(const std::shared_ptr<GameObject>& objPtr);
 
