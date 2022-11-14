@@ -4,7 +4,6 @@
 #include "../UI/UIObjects.h"
 
 namespace basecross {
-
 	namespace StageObject
 	{
 		class MatchingSelectUIObject;
@@ -56,6 +55,11 @@ namespace basecross {
 		void OnJoinRoomFailed(int errorCode) override;
 
 		void OnLeaveRoom() override;
+
+		/// <summary>
+		/// スプラッシュメッセージをクリア
+		/// </summary>
+		void ClearSplashMessage();
 
 		/// <summary>
 		/// マッチングの開始時に呼ぶUI表示処理

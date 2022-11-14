@@ -157,6 +157,7 @@ namespace basecross {
 	}
 
 	void MatchingUIController::ChangeUIStartLeaveRoom() {
+		ClearSplashMessage();
 		m_builder->GetUIObject(L"GameStart")->SetDrawActive(false);
 		m_builder->GetUIObject(L"AButton")->SetDrawActive(false);
 		m_builder->GetUIObject(L"HoldA")->SetDrawActive(false);
@@ -164,5 +165,10 @@ namespace basecross {
 
 		m_passcodeUIObject.lock()->SetActive(false);
 		m_passwordViewNumbersObject.lock()->SetActive(false);
+	}
+
+	void MatchingUIController::ClearSplashMessage() {
+		m_builder->GetUIObject<SplashMessageUI>(L"SplashMessage")
+			->ClearMessage();
 	}
 }
