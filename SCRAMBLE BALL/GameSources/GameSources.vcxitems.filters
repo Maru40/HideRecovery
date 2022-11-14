@@ -1432,6 +1432,9 @@
     <Filter Include="Maruyama\Enemy\BehaviorTree\Task\ToHasBallOtherTeam">
       <UniqueIdentifier>{cf612460-e6c2-41b0-b764-02c78d4d451c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Enemy\BehaviorTree\Decorator\TimerWaitTransition">
+      <UniqueIdentifier>{7ae42f9b-8885-434f-997f-c0a291395e59}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2469,9 +2472,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\OpenBox.h">
       <Filter>Maruyama\Utility\TaskList\CommonTasks\OpenBox</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)SelfAstarNodeController.h">
-      <Filter>Maruyama\Enemy\Component\SelfAstarNodeController</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\SelecterTask\Priority.h">
       <Filter>Maruyama\Enemy\BehaviorTree\Interface\I_Selecter\Task\Priority</Filter>
     </ClInclude>
@@ -2687,6 +2687,12 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Task\ToHasBallOtherTeam.h">
       <Filter>Maruyama\Enemy\BehaviorTree\Task\ToHasBallOtherTeam</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\SelfAstarNodeController.h">
+      <Filter>Maruyama\Enemy\Component\SelfAstarNodeController</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\TimerWaitPosition.h">
+      <Filter>Maruyama\Enemy\BehaviorTree\Decorator\TimerWaitTransition</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -3632,9 +3638,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\OpenBox.cpp">
       <Filter>Maruyama\Utility\TaskList\CommonTasks\OpenBox</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)SelfAstarNodeController.cpp">
-      <Filter>Maruyama\Enemy\Component\SelfAstarNodeController</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\SelecterTask\Priority.cpp">
       <Filter>Maruyama\Enemy\BehaviorTree\Interface\I_Selecter\Task\Priority</Filter>
     </ClCompile>
@@ -3844,6 +3847,12 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Task\ToHasBallOtherTeam.cpp">
       <Filter>Maruyama\Enemy\BehaviorTree\Task\ToHasBallOtherTeam</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\SelfAstarNodeController.cpp">
+      <Filter>Maruyama\Enemy\Component\SelfAstarNodeController</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\TimerWaitPosition.cpp">
+      <Filter>Maruyama\Enemy\BehaviorTree\Decorator\TimerWaitTransition</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

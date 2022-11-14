@@ -10,6 +10,8 @@
 #include "SparseGraph.h"
 #include "Maruyama/Utility/UtilityObstacle.h"
 
+#include "Watanabe/DebugClass/Debug.h"
+
 namespace basecross {
 
 	std::shared_ptr<NavGraphNode> UtilityAstar::SearchNearNode(const GraphAstar& astar, const std::shared_ptr<GameObject>& target) {
@@ -52,6 +54,7 @@ namespace basecross {
 		}
 
 		if (minNode == nullptr) {
+			Debug::GetInstance()->Log(L"ƒm[ƒh‚ªŒŸõ‚Å‚«‚Ü‚¹‚ñ‚Å‚µ‚½B");
 			int i = 0;
 		}
 

@@ -10,6 +10,7 @@
 
 #include "Watanabe/Component/BoxAnimator.h"
 #include "Watanabe/Shader/BoneModelDraw.h"
+#include "Maruyama/Enemy/Component/SelfAstarNodeController.h"
 
 #include "MainStage.h"
 
@@ -50,6 +51,7 @@ namespace basecross {
 
 		// 隠せるオブジェクトにする
 		AddComponent<HidePlace>(HidePlace::Parametor(Vec3(0.0f, 0.35f, 0.0f)));
+		AddComponent<SelfAstarNodeController>()->SetUpdateActive(false);
 
 		//constexpr float fScale = 0.75f;
 		//transform->SetScale(Vec3(fScale));

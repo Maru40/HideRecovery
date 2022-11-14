@@ -16,6 +16,7 @@ namespace basecross {
 	class TargetManager;
 	class VelocityManager;
 	class SelfAstarNodeController;
+	class NavGraphNode;
 
 	template<class T>
 	class TaskList;
@@ -101,6 +102,11 @@ namespace basecross {
 			/// </summary>
 			/// <returns>œpœjˆÚ“®æ‚ğæ“¾</returns>
 			Vec3 CalculateMoveTargetPosition();
+
+			/// <summary>
+			/// œpœjæ‚Ì–Ú“Iƒm[ƒh‚ğæ“¾
+			/// </summary>
+			std::shared_ptr<NavGraphNode> CalculateMoveTargetNode();
 
 			void SetIsSearchRoute(const bool isSearchRoute) noexcept { m_isSearchRoute = isSearchRoute; }
 

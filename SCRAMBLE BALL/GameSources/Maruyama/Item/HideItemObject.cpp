@@ -23,6 +23,8 @@
 #include "Maruyama/Utility/SingletonComponent/SingletonComponent.h"
 #include "Maruyama/Utility/SingletonComponent/ShareClassesManager.h"
 
+#include "Maruyama/Enemy/Component/SelfAstarNodeController.h"
+
 namespace basecross {
 	HideItemObject::HideItemObject(const std::shared_ptr<Stage>& stage) :
 		StageObjectBase(stage, L"HideItem")
@@ -45,6 +47,7 @@ namespace basecross {
 		AddComponent<Item>();
 
 		AddComponent<HideItem>();
+		AddComponent<SelfAstarNodeController>()->SetUpdateActive(false);
 
 		auto targeted = AddComponent<Targeted>(Targeted::Parametor(TargetedPriority::BALL));
 		targeted->AddCanTargetFunction([&]() { return IsDrawActive(); });

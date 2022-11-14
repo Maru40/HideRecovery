@@ -35,6 +35,7 @@
 #include "Maruyama/Enemy/Behavior/Decorator/HasBallTransition.h"
 #include "Maruyama/Enemy/Behavior/Decorator/HasBall_OtherMember.h"
 #include "Maruyama/Enemy/Behavior/Decorator/HasBall_OtherTeam.h"
+#include "Maruyama/Enemy/Behavior/Decorator/TimerWaitPosition.h"
 
 #include "Maruyama/Utility/SingletonComponent/SingletonComponent.h"
 #include "Maruyama/Utility/SingletonComponent/ShareClassesManager.h"
@@ -194,6 +195,11 @@ namespace basecross {
 					);
 
 					//-------------------------------------------------------------------------------------------------------
+
+					//m_behaviorTree->AddDecorator<Decorator::TimerWaitPosition>(
+					//	BehaviorType::FirstSelecter,
+					//	GetOwner()
+					//);
 				}
 
 			}

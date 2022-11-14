@@ -109,6 +109,13 @@ namespace basecross {
 				const int targetAreaIndex
 			);
 
+			std::vector<Vec3> GetRoutePositions(
+				const std::shared_ptr<NavGraphNode>& selfNode,
+				const std::shared_ptr<NavGraphNode>& targetNode,
+				const int areaIndex,
+				const int targetAreaIndex
+			);
+
 			/// <summary>
 			/// 影響マップデータを取得
 			/// </summary>

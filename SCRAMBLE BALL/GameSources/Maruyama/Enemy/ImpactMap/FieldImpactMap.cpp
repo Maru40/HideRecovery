@@ -133,6 +133,15 @@ namespace basecross {
 			return m_impactMap->GetRoutePositions(selfNode, targetPosition, areaIndex, targetAreaIndex);
 		}
 
+		std::vector<Vec3> FieldImpactMap::GetRoutePositions(
+			const std::shared_ptr<NavGraphNode>& selfNode,
+			const std::shared_ptr<NavGraphNode>& targetNode,
+			const int areaIndex,
+			const int targetAreaIndex
+		) {
+			return m_impactMap->GetRoutePositions(selfNode, targetNode, areaIndex, targetAreaIndex);
+		}
+
 		std::shared_ptr<ImpactMap> FieldImpactMap::GetImpactMap() const {
 			return m_impactMap;
 		}

@@ -22,7 +22,10 @@
 #include "Maruyama/Item/HideItem.h"
 #include "Maruyama/StageObject/HidePlace.h"
 
-#include "SelfAstarNodeController.h"
+#include "Maruyama/Enemy/Component/SelfAstarNodeController.h"
+#include "Maruyama/Utility/Component/Targeted.h"
+
+#include "Maruyama/Enemy/ImpactMap/SelfImpactNodeManager.h"
 
 #include "Watanabe/DebugClass/Debug.h"
 
@@ -126,14 +129,14 @@ namespace basecross {
 			}
 
 			//減速処理開始
-			m_velocityManager.lock()->StartDeseleration();
+			//m_velocityManager.lock()->StartDeseleration();
 
-			CalculateMovePositions();	//新しいポジションに変更
+			auto positions = CalculateMovePositions();	//新しいポジションに変更
 
-			SelectTask();				//タスクの再始動
+			SelectTask();	//タスクの再始動
 
 			//減速処理終了
-			m_velocityManager.lock()->SetIsDeseleration(false);
+			//m_velocityManager.lock()->SetIsDeseleration(false);
 			SetIsSearchRoute(false);	//検索終了
 		}
 
@@ -149,17 +152,11 @@ namespace basecross {
 			//エリアのルートを取得
 			auto areaRouteIndices = fieldImpactMap->SearchAreaRouteIndices(startPosition, targetPosition);
 
-			//Debug::GetInstance()->Log(L"AreaRoute-------------------");
-
-			//Debug::GetInstance()->Log(fieldImpactMap->SearchNearAreaIndex(startPosition));
-
 			//Astar検索が最初の自分自身のノードを省くため、最初は現在所属しているエリアから検索する。
 			m_areaRoute.push(fieldImpactMap->SearchNearAreaIndex(startPosition));
 			for (const auto& areaRouteIndex : areaRouteIndices) {
 				m_areaRoute.push(areaRouteIndex);
-				//Debug::GetInstance()->Log(areaRouteIndex);
 			}
-			//Debug::GetInstance()->Log(L"AreaRoute-------------------");
 
 			return m_areaRoute;
 		}
@@ -176,7 +173,8 @@ namespace basecross {
 			m_areaRoute.pop();
 			int targetAreaIndex = !m_areaRoute.empty() ? m_areaRoute.front() : areaIndex;
 			auto startNode = m_selfAstarNodeController.lock()->CalculateNode();
-			auto positions = maru::FieldImpactMap::GetInstance()->GetRoutePositions(startNode, endPosition, areaIndex, targetAreaIndex);
+			//auto targetNode = 
+			auto positions = maru::FieldImpactMap::GetInstance()->GetRoutePositions(startNode, CalculateMoveTargetNode(), areaIndex, targetAreaIndex);
 
 			m_param->movePositionsParam->positions = positions;
 			return positions;
@@ -193,11 +191,36 @@ namespace basecross {
 			return targetManager->GetTargetPosition();	//基本ターゲット管理からの取得で検索できるようにする。
 		}
 
+		std::shared_ptr<NavGraphNode> MoveAstar::CalculateMoveTargetNode() {
+			auto targetManager = m_targetManager.lock();
+			//必要コンポーネントが存在しないなら
+			if (!targetManager || !targetManager->HasTarget()) {
+				return nullptr;
+			}
+
+			auto selfAstarNodeController = targetManager->GetTarget()->GetComponent<SelfAstarNodeController>(false);
+			if (!selfAstarNodeController) {
+				return nullptr;
+			}
+
+			auto node = selfAstarNodeController->CalculateNode();
+			if (!node) {
+				Debug::GetInstance()->Log(L"TaregetNodeがnullptrです。");
+			}
+			
+			return node;
+		}
+
 		//--------------------------------------------------------------------------------------
 		///	アクセッサ
 		//--------------------------------------------------------------------------------------
 
 		bool MoveAstar::IsEnd() const {
+			auto targetManager = m_targetManager.lock();
+			if (!targetManager || !targetManager->HasTarget()) {
+				return true;
+			}
+
 			return m_areaRoute.empty() && m_taskList->IsEnd();
 		}
 

@@ -26,7 +26,7 @@
 #include "Watanabe/Component/PlayerAnimator.h"
 
 #include "Maruyama/Enemy/Component/Stator/AIPlayerStator.h"
-#include "SelfAstarNodeController.h"
+#include "Maruyama/Enemy/Component/SelfAstarNodeController.h"
 
 #include "Maruyama/Enemy/Component/AIVirtualController.h"
 
