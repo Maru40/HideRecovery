@@ -1432,6 +1432,9 @@
     <Filter Include="Maruyama\Enemy\BehaviorTree\Task\ToHasBallOtherTeam">
       <UniqueIdentifier>{cf612460-e6c2-41b0-b764-02c78d4d451c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Enemy\BehaviorTree\Decorator\TimerWaitTransition">
+      <UniqueIdentifier>{7ae42f9b-8885-434f-997f-c0a291395e59}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2688,6 +2691,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\SelfAstarNodeController.h">
       <Filter>Maruyama\Enemy\Component\SelfAstarNodeController</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\TimerWaitPosition.h">
+      <Filter>Maruyama\Enemy\BehaviorTree\Decorator\TimerWaitTransition</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -3844,6 +3850,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\SelfAstarNodeController.cpp">
       <Filter>Maruyama\Enemy\Component\SelfAstarNodeController</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\TimerWaitPosition.cpp">
+      <Filter>Maruyama\Enemy\BehaviorTree\Decorator\TimerWaitTransition</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
