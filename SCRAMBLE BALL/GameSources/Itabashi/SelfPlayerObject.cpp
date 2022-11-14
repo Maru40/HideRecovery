@@ -17,6 +17,7 @@
 #include "Maruyama/UI/2D/Component/TeleportUI.h"
 #include "Maruyama/Utility/SingletonComponent/GameManager.h"
 #include "Itabashi/ObjectMover.h"
+#include "Itabashi/OnlineTransformSynchronization.h"
 
 namespace basecross
 {
@@ -114,6 +115,9 @@ namespace StageObject
 			springArm->SetRadXZ(rad);
 			springArm->OnUpdate2();
 		}
+
+		auto transformSynchronizer = GetComponent<Online::OnlineTransformSynchronization>();
+		transformSynchronizer->SetIsMaster(true);
 	}
 }
 }

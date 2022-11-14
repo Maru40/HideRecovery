@@ -59,6 +59,8 @@
 #include "Maruyama/Utility/Utility.h"
 #include "Maruyama/Player/Component/OwnArea.h"
 #include "Maruyama/Player/Component/PlayerSpawnPoint.h"
+#include "Itabashi/OnlineTransformSynchronization.h"
+#include "Itabashi/OnlineMatching.h"
 
 // AI操作用
 
@@ -156,6 +158,9 @@ namespace basecross {
 		//AddComponent<Teleport>();
 		AddComponent<EyeSearchRange>();
 		AddComponent<HidePlaceOpener>();
+
+		auto transformsynchronizer = AddComponent<Online::OnlineTransformSynchronization>();
+		transformsynchronizer->SetIsSynchronizeRotation(false);
 
 		AddComponent<Teleport>();	//テレポートの生成
 		auto heightDestory = AddComponent<HeightDestroy>();
@@ -280,5 +285,10 @@ namespace basecross {
 		auto transform = GetComponent<Transform>();
 		transform->SetPosition(spawnPoint->GetWorldPosition());
 		transform->SetQuaternion(spawnPoint->GetQuaternion());
+
+		auto transformSynchronizer = GetComponent<Online::OnlineTransformSynchronization>();
+		transformSynchronizer->SetOnlinePlayerNumber(playerNumber);
+
+		transformSynchronizer->SetCountSpan(1.0f / Online::OnlineMatching::MAX_PLAYER_NUM * gameNumber);
 	}
 }
