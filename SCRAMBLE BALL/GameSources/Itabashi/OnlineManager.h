@@ -86,6 +86,12 @@ namespace Online
 		/// </summary>
 		/// <param name="errorCode">エラーコード</param>
 		virtual void OnLeaveRoomFailed(int errorCode) = 0;
+		/// <summary>
+		/// ホストの変更があった時
+		/// </summary>
+		/// <param name="id">新しいホスト番号</param>
+		/// <param name="oldID">前のホスト番号</param>
+		virtual void OnMasterClientChanged(int id, int oldID) = 0;
 	};
 
 	/// <summary>
@@ -116,6 +122,8 @@ namespace Online
 
 		virtual void OnLeaveRoom() override {}
 		virtual void OnLeaveRoomFailed(int errorCode) override {}
+
+		virtual void OnMasterClientChanged(int id, int oldID) override {}
 	};
 
 	/// <summary>
@@ -288,6 +296,8 @@ namespace Online
 			const ExitGames::Common::Hashtable& playerProperties, int errorCode, const ExitGames::Common::JString& errorString) override;
 
 		void leaveRoomReturn(int errorCode, const ExitGames::Common::JString& errorString) override;
+
+		void onMasterClientChanged(int id, int oldID) override;
 
 		// -------------------------------------------------------------------------------------------------------------------------
 	};

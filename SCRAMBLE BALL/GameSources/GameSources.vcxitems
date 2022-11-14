@@ -25,6 +25,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\ObjectHider.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineGameItemManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineGameTimer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineLeaveAIChanger.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlinePlayerSynchronizer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineStatus.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OtherPlayerObject.h" />
@@ -450,6 +451,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\ObjectMover.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineGameItemManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineGameTimer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineLeaveAIChanger.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineMatching.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineMatchStage.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlinePlayerSynchronizer.cpp" />

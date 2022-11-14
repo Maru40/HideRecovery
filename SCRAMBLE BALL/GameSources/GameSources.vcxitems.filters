@@ -1448,6 +1448,9 @@
     <Filter Include="Watanabe\TimeLine\GameObjectTimeLine">
       <UniqueIdentifier>{13260967-a474-4572-a814-a3125952603c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Itabashi\Online\OnlineLeaveAIChanger">
+      <UniqueIdentifier>{a0c4b9a8-cadd-4892-b103-fcd27d5e3707}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2731,6 +2734,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\GameObjectTimeLine.h">
       <Filter>Watanabe\TimeLine\GameObjectTimeLine</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineLeaveAIChanger.h">
+      <Filter>Itabashi\Online\OnlineLeaveAIChanger</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -3908,6 +3914,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\GameObjectTimeLine.cpp">
       <Filter>Watanabe\TimeLine\GameObjectTimeLine</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineLeaveAIChanger.cpp">
+      <Filter>Itabashi\Online\OnlineLeaveAIChanger</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
