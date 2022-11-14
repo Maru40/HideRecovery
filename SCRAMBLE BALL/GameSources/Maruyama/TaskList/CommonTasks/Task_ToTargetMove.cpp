@@ -15,6 +15,8 @@
 #include "Maruyama/Enemy/Component/AIVirtualController.h"
 #include "Itabashi/OnlinePlayerSynchronizer.h"
 
+#include "Maruyama/Enemy/Component/WallAvoid.h"
+
 namespace basecross {
 	namespace Task {
 
@@ -61,6 +63,7 @@ namespace basecross {
 			m_velocityManager = owner->GetComponent<VelocityManager>(false);
 			m_virtualController = GetOwner()->GetComponent<AIVirtualController>(false);
 			m_onlineSynchronizer = owner->GetComponent<OnlinePlayerSynchronizer>(false);
+			m_wallAvoid = owner->GetComponent<WallAvoid>(false);
 		}
 
 		void ToTargetMove::OnStart() {
@@ -167,6 +170,7 @@ namespace basecross {
 
 			auto velocity = velocityManager->GetVelocity();
 			auto moveDirection = velocity + force;
+			moveDirection += m_wallAvoid.lock()->TakeAvoidVec();
 
 			moveDirection /= velocityManager->GetMaxSpeed();	//0 �` 1�̊ԂɕύX
 
