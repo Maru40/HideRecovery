@@ -166,14 +166,11 @@ namespace basecross {
 				return std::vector<Vec3>();
 			}
 
-			auto startPosition = m_transform.lock()->GetPosition();
-			auto endPosition = CalculateMoveTargetPosition();
-
 			int areaIndex = m_areaRoute.front();	//自分自身がいるエリアインデックス
 			m_areaRoute.pop();
 			int targetAreaIndex = !m_areaRoute.empty() ? m_areaRoute.front() : areaIndex;
 			auto startNode = m_selfAstarNodeController.lock()->CalculateNode();
-			//auto targetNode = 
+
 			auto positions = maru::FieldImpactMap::GetInstance()->GetRoutePositions(startNode, CalculateMoveTargetNode(), areaIndex, targetAreaIndex);
 
 			m_param->movePositionsParam->positions = positions;
