@@ -180,7 +180,7 @@ namespace basecross {
 			int targetAreaIndex = !m_areaRoute.empty() ? m_areaRoute.front() : areaIndex;
 			auto startNode = m_selfAstarNodeController.lock()->CalculateNode();
 			//auto targetNode = 
-			auto positions = maru::FieldImpactMap::GetInstance()->GetRoutePositions(startNode, endPosition, areaIndex, targetAreaIndex);
+			auto positions = maru::FieldImpactMap::GetInstance()->GetRoutePositions(startNode, CalculateMoveTargetNode(), areaIndex, targetAreaIndex);
 
 			m_param->movePositionsParam->positions = positions;
 			return positions;
@@ -208,8 +208,13 @@ namespace basecross {
 			if (!selfAstarNodeController) {
 				return nullptr;
 			}
+
+			auto node = selfAstarNodeController->CalculateNode();
+			if (!node) {
+				Debug::GetInstance()->Log(L"TaregetNode‚ªnullptr‚Å‚·B");
+			}
 			
-			return selfAstarNodeController->CalculateNode();
+			return node;
 		}
 
 		//--------------------------------------------------------------------------------------
