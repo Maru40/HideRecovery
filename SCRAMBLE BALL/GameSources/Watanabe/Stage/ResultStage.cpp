@@ -223,9 +223,9 @@ namespace basecross {
 		};
 
 		Data datas[] = {
-			Data(Vec3(-1.5f, 0.1f, 0.0f), PlayerAnimationState::State::Win2,0.2f),
-			Data(Vec3(+0.0f, 0.1f, 0.0f), PlayerAnimationState::State::Win1,1.2f),
-			Data(Vec3(+1.5f, 0.1f, 0.0f), PlayerAnimationState::State::Win3,2.2f),
+			Data(Vec3(-1.5f, 0.1f, 0.0f), PlayerAnimationState::State::Win2,0),
+			Data(Vec3(+0.0f, 0.1f, 0.0f), PlayerAnimationState::State::Win1,0.5f),
+			Data(Vec3(+1.5f, 0.1f, 0.0f), PlayerAnimationState::State::Win3,1.2f),
 		};
 
 		for (auto& data : datas) {
