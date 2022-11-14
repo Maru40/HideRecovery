@@ -70,6 +70,15 @@ namespace basecross {
 			);
 
 			/// <summary>
+			/// Ray‚ğ”ò‚Î‚µ‚ÄáŠQ•¨”»’è‚ğæ‚é
+			/// </summary>
+			static bool IsRayObstacle(
+				const Vec3& startPosition, 
+				const Vec3& endPosition,
+				const vector<std::weak_ptr<GameObject>>& objects
+			);
+
+			/// <summary>
 			/// ˆê”Ô‹ß‚¢áŠQ•¨‚ğŒ©‚Â‚¯‚é
 			/// </summary>
 			/// <param name="startPosition">Ray‚ÌŠJnˆÊ’u</param>
