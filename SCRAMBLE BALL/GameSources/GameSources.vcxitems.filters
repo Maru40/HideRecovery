@@ -1436,6 +1436,7 @@
     <Filter Include="Maruyama\Enemy\BehaviorTree\Decorator\TimerWaitTransition">
       <UniqueIdentifier>{7ae42f9b-8885-434f-997f-c0a291395e59}</UniqueIdentifier>
     </Filter>
+
     <Filter Include="Watanabe\TimeLine">
       <UniqueIdentifier>{b4547b10-20d2-4290-9706-83b785993625}</UniqueIdentifier>
     </Filter>
@@ -1450,6 +1451,10 @@
     </Filter>
     <Filter Include="Itabashi\Online\OnlineLeaveAIChanger">
       <UniqueIdentifier>{a0c4b9a8-cadd-4892-b103-fcd27d5e3707}</UniqueIdentifier>
+	</Filter>
+    <Filter Include="Maruyama\Enemy\Component\WallAvoid">
+      <UniqueIdentifier>{cc0bed25-b6d9-4c5c-8c94-3c36b8bd94b5}</UniqueIdentifier>
+
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -2716,6 +2721,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\TimerWaitPosition.h">
       <Filter>Maruyama\Enemy\BehaviorTree\Decorator\TimerWaitTransition</Filter>
     </ClInclude>
+
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\AdvQueue.h">
       <Filter>Watanabe\TimeLine</Filter>
     </ClInclude>
@@ -2736,6 +2742,10 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineLeaveAIChanger.h">
       <Filter>Itabashi\Online\OnlineLeaveAIChanger</Filter>
+	</ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\WallAvoid.h">
+      <Filter>Maruyama\Enemy\Component\WallAvoid</Filter>
+
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -3903,6 +3913,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\TimerWaitPosition.cpp">
       <Filter>Maruyama\Enemy\BehaviorTree\Decorator\TimerWaitTransition</Filter>
     </ClCompile>
+
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\TimeLine.cpp">
       <Filter>Watanabe\TimeLine</Filter>
     </ClCompile>
@@ -3917,6 +3928,10 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineLeaveAIChanger.cpp">
       <Filter>Itabashi\Online\OnlineLeaveAIChanger</Filter>
+	</ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\WallAvoid.cpp">
+      <Filter>Maruyama\Enemy\Component\WallAvoid</Filter>
+
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -95,6 +95,46 @@ namespace basecross {
 		return false;
 	}
 
+	bool maru::UtilityObstacle::IsRayObstacle(
+		const Vec3& startPosition, 
+		const Vec3& endPosition,
+		const vector<std::weak_ptr<GameObject>>& objects)
+	{
+		auto direction = endPosition - startPosition;
+		float directionRange = direction.length();
+
+		for (const auto& weakObject : objects)
+		{
+			auto object = weakObject.lock();
+
+			auto collision = object->GetComponent<CollisionObb>(false);
+			if (!collision) {
+				continue;
+			}
+
+			if (collision->GetUpdateActive() == false) {
+				continue;
+			}
+
+			if (collision->GetAfterCollision() == AfterCollision::None) {
+				continue;
+			}
+
+			auto transform = object->GetComponent<Transform>();
+			auto toEndRange = (endPosition - transform->GetPosition()).length();
+
+			if (directionRange < toEndRange) {	//‹——£‚ª‰“‚¢‚È‚ç”»’è‚ð‚µ‚È‚¢B
+				continue;
+			}
+
+			if (HitTest::SEGMENT_OBB(startPosition, endPosition, collision->GetObb())) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	std::shared_ptr<GameObject> maru::UtilityObstacle::FindRayHitNearObstacle(
 		const Vec3& startPosition, const Vec3& endPosition,
 		const vector<std::shared_ptr<GameObject>>& objects,

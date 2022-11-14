@@ -19,6 +19,7 @@ namespace basecross {
 	class VelocityManager;
 	class OnlinePlayerSynchronizer;
 	class AIVirtualController;
+	class WallAvoid;
 
 	namespace Task {
 		//--------------------------------------------------------------------------------------
@@ -101,6 +102,7 @@ namespace basecross {
 			std::weak_ptr<VelocityManager> m_velocityManager;
 			std::weak_ptr<AIVirtualController> m_virtualController;			//バーチャルコントローラー
 			std::weak_ptr<OnlinePlayerSynchronizer> m_onlineSynchronizer;	//オンラインシンクロ
+			std::weak_ptr<WallAvoid> m_wallAvoid;
 
 		public:
 			/// <summary>
