@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include "stdafx.h"
 #include "GameStageBase.h"
-#include "../TimeLine/CameraTimeLine.h"
+#include "../UI/UIObjectBase.h"
 
 namespace basecross {
 	namespace team {
@@ -9,7 +9,6 @@ namespace basecross {
 	}
 
 	class ResultStage :public GameStageBase {
-		weak_ptr<timeline::CameraTimeLine> m_timeLine;
 		// trueなら遷移可能
 		bool m_isTransitionable = false;
 

@@ -3,10 +3,6 @@
 
 namespace basecross {
 	namespace timeline {
-		shared_ptr<ClipBase> ClipBase::CreateClip(const shared_ptr<Stage>& stage, const wstring& clipName) {
-			//return make_shared<ClipBase>(stage, clipName);
-		}
-
 		ClipBase::ClipBase(const shared_ptr<Stage>& stage, const wstring& clipName)
 			:m_clipName(clipName), m_stage(stage)
 		{}
@@ -15,21 +11,35 @@ namespace basecross {
 			if (m_keyFrameQueue.empty())
 				return;
 
-			auto nextKeyFrame = m_keyFrameQueue.front();
-			if (delta > nextKeyFrame->Time) {
-				m_currentKeyFrame = nextKeyFrame;
-				if (!m_keyFrameQueue.empty()) {
-					m_keyFrameQueue.pop();
+			// 現在のキーフレームを通過
+			if (delta > m_currentKeyFrame->Time) {
+				auto nextKeyFrame = m_keyFrameQueue.front();
+				// 次のキーフレームを通過
+				if (delta > nextKeyFrame->Time) {
+					// キーフレームを前に進める
+					m_currentKeyFrame = nextKeyFrame;
+					// 空でなければ1つ削除
+					if (!m_keyFrameQueue.empty()) {
+						m_keyFrameQueue.pop();
+					}
+					else {
+						// キューが空＝次のキーフレームが無い
+						return;
+					}
 				}
-			}
 
-			// 補完処理
-			auto data = Interpolation(m_currentKeyFrame, nextKeyFrame, delta);
-			// データの適用
-			ApplyDataToObject(data);
+				// 補完処理
+				auto data = Interpolation(m_currentKeyFrame, nextKeyFrame, delta);
+				// データの適用
+				ApplyDataToObject(data);
+			}
 		}
 
 		void ClipBase::Initialize() {
+			// リストが空なら何もしない
+			if (m_keyFrameList.empty())
+				return;
+
 			// 実行順にソート
 			m_keyFrameList.sort(
 				[](shared_ptr<KeyFrameBase> left, shared_ptr<KeyFrameBase> right) {

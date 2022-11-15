@@ -21,6 +21,10 @@
 #include "../TimeLine/ClipBase.h"
 #include "../TimeLine/CameraKeyFrame.h"
 #include "../TimeLine/CameraClip.h"
+#include "../TimeLine/UIObjectClip.h"
+#include "../TimeLine/UIObjectKeyFrame.h"
+#include "../TimeLine/GameObjectClip.h"
+#include "../TimeLine/GameObjectKeyFrame.h"
 
 #include "Maruyama/Interface/I_TeamMember.h"
 #include "VelocityManager.h"
@@ -89,11 +93,6 @@ namespace basecross {
 		auto blueLabel = uiBuilder->GetUIObject<SimpleSprite>(L"BlueLabel");
 		blueLabel->GetDrawComponent()->SetDiffuse(team::BLUETEAM_COLOR);
 
-		PointManager::GetInstance()->AddPoint(team::TeamType::Blue);
-
-		auto timeLine = AddGameObject<GameObject>()->AddComponent<timeline::CameraTimeLine>();
-		m_timeLine = timeLine;
-
 		AddGameObject<timeline::TimeLine>();
 
 		const bool IsDraw = PointManager::GetInstance()->IsDraw();
@@ -105,10 +104,8 @@ namespace basecross {
 			cameraClip->AddKeyFrame(timeline::CameraKeyFrame::Create(Vec3(1, 1, 2), Vec3(0, 0.5f, 0), 1.5f, Lerp::rate::Cube));
 			cameraClip->AddKeyFrame(timeline::CameraKeyFrame::Create(Vec3(2.5f, 1, 2), Vec3(1.5f, 0.5f, 0), 2.5f, Lerp::rate::Cube));
 			cameraClip->AddKeyFrame(timeline::CameraKeyFrame::Create(Vec3(0, 1, 5), Vec3(0, 1, 0), 3.5f, Lerp::rate::Cube));
-			timeLine->AddEvent(4.0f, [&]() {m_isTransitionable = true; });
-
 			timeline::TimeLine::GetInstance()->AddClip(cameraClip);
-			timeline::TimeLine::GetInstance()->Play();
+			timeline::TimeLine::GetInstance()->AddEvent(4.0f, [&]() {m_isTransitionable = true; });
 
 			// 引き分け以外に生成
 			// 紙吹雪エフェクト
@@ -119,7 +116,7 @@ namespace basecross {
 			efkComp->PlayLoop(L"Confetti");
 		}
 		else {
-			timeLine->AddEvent(0.5f, [&]() {m_isTransitionable = true; });
+			timeline::TimeLine::GetInstance()->AddEvent(0.5f, [&]() {m_isTransitionable = true; });
 		}
 
 		//playerの生成
@@ -172,32 +169,32 @@ namespace basecross {
 
 		Online::OnlineManager::Disconnect();
 
-		timeLine->Play();
+		timeline::TimeLine::GetInstance()->Play();
 	}
 
 	void ResultStage::CreateUIAnimation(const shared_ptr<UIObjectBase>& uiObject, const Vec2& offset) {
-		auto uiTimeLine = uiObject->AddComponent<timeline::UIObjectTimeLine>();
-		auto nowRectTrans = uiObject->GetRectTransform();
+		auto uiClip = make_shared<timeline::UIObjectClip>(GetThis<ResultStage>(), L"UI");
+
+		auto rectTrans = uiObject->GetRectTransform();
 		auto nowRectData = RectTransformData(
-			nowRectTrans->GetPosition(),
-			nowRectTrans->GetScale(),
-			nowRectTrans->GetRotation()
+			rectTrans->GetPosition(),
+			rectTrans->GetScale(),
+			rectTrans->GetRotation()
 		);
+
+		uiClip->SetTargetObject(rectTrans);
 
 		auto beforeRectData = nowRectData;
 		beforeRectData.Position += offset;
 
-		nowRectTrans->SetPosition(beforeRectData.Position);
-
-		uiTimeLine->AddKeyFrame(UIObjectKeyFrameData(beforeRectData, 0, Lerp::rate::Cube));
-		uiTimeLine->AddKeyFrame(UIObjectKeyFrameData(nowRectData, 0.5f, Lerp::rate::Cube));
+		rectTrans->SetPosition(beforeRectData.Position);
 
 		const bool IsDraw = PointManager::GetInstance()->IsDraw();
-		m_timeLine.lock()->AddEvent(IsDraw ? 0.0f : 3.5f,
-			[&, uiTimeLine]() {
-				uiTimeLine->Play();
-			}
-		);
+		float startTime = IsDraw ? 0.0f : 3.5f;
+		uiClip->AddKeyFrame(timeline::UIObjectKeyFrame::Create(beforeRectData, startTime, Lerp::rate::Cube));
+		uiClip->AddKeyFrame(timeline::UIObjectKeyFrame::Create(nowRectData, startTime + 0.5f, Lerp::rate::Cube));
+
+		timeline::TimeLine::GetInstance()->AddClip(uiClip);
 	}
 
 	void ResultStage::OnUpdate() {
@@ -255,30 +252,28 @@ namespace basecross {
 			teamMember->SetTeam(winerType);
 
 			if (data.state == PlayerAnimationState::State::Win2) {
-				auto gameObjectTimeLine = player->AddComponent<timeline::GameObjectTimeLine>();
+				auto gameObjectClip = make_shared<timeline::GameObjectClip>(GetThis<ResultStage>(), L"Player");
+				gameObjectClip->SetTargetObject(playerTrans);
 
 				TransformData tData = {};
 				tData.Position = data.position - Vec3(0, 0, 2);
 				playerTrans->SetPosition(tData.Position);
-				gameObjectTimeLine->AddKeyFrame(GameObjectKeyFrameData(tData, 0.0f, Lerp::rate::Linear));
+				gameObjectClip->AddKeyFrame(timeline::GameObjectKeyFrame::Create(tData, 0.0f, Lerp::rate::Linear));
 				tData.Position = data.position;
-				gameObjectTimeLine->AddKeyFrame(GameObjectKeyFrameData(tData, 1.3f, Lerp::rate::Linear));
+				gameObjectClip->AddKeyFrame(timeline::GameObjectKeyFrame::Create(tData, 1.3f, Lerp::rate::Linear));
 
-				gameObjectTimeLine->Play();
+				timeline::TimeLine::GetInstance()->AddClip(gameObjectClip);
 			}
 
 			auto animator = player->GetComponent<PlayerAnimator>(false);
 			animator->ChangePlayerAnimation(PlayerAnimationState::State::Wait);
 
-			// カメラタイムラインに勝利アニメーションを始めるイベントを登録
-			if (auto timeLine = m_timeLine.lock()) {
-				auto cameraTimeLine = timeLine;// ->GetComponent<CameraTimeLine>();
-				cameraTimeLine->AddEvent(data.time,
-					[&, animator, data]() {
-						animator->ChangePlayerAnimation(data.state);
-					}
-				);
-			}
+			// タイムラインに勝利アニメーションを始めるイベントを登録
+			timeline::TimeLine::GetInstance()->AddEvent(data.time,
+				[&, animator, data]() {
+					animator->ChangePlayerAnimation(data.state);
+				}
+			);
 		}
 	}
 }

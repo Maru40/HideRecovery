@@ -65,10 +65,6 @@ namespace basecross {
 			this->Rotation = rotation;
 		}
 
-		RectTransformData(const RectTransformData& data) {
-			RectTransformData(data.Position, data.Scale, data.Rotation);
-		}
-
 		RectTransformData operator +(const RectTransformData& data) {
 			this->Position += data.Position;
 			this->Scale += data.Scale;

@@ -15,11 +15,8 @@ namespace basecross {
 
 			wstring m_clipName;
 			weak_ptr<Stage> m_stage;
-
 		public:
 			ClipBase(const shared_ptr<Stage>& stage, const wstring& clipName);
-
-			static shared_ptr<ClipBase> CreateClip(const shared_ptr<Stage>& stage, const wstring& clipName);
 
 			virtual void Create() {}
 
