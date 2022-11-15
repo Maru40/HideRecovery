@@ -1,72 +1,54 @@
 ﻿#include "stdafx.h"
 #include "TimeLine.h"
+#include "ClipBase.h"
+#include "TimeLineEventDataList.h"
 #include "../DebugClass/Debug.h"
 
 namespace basecross {
-	TimeLine::TimeLine(const shared_ptr<GameObject>& owner)
-		:Component(owner)
-	{}
+	// 静的メンバ変数の実体
+	shared_ptr<timeline::TimeLine> timeline::TimeLine::m_ownInstance = nullptr;
 
-	void TimeLine::OnCreate() {
-		m_camera = GetStage()->GetView()->GetTargetCamera();
-	}
-	void TimeLine::OnUpdate() {
-		if (!m_isPlaying)
-			return;
+	namespace timeline {
+		TimeLine::TimeLine(const shared_ptr<Stage>& stage)
+			:BaseSingletonGameObject(stage),
+			m_eventList(make_shared<TimeLineEventDataList>())
+		{}
 
-		if (m_delta > m_nextKey->Time) {
-			m_currentKey = m_nextKey;
-			if (m_timeLine.empty()) {
+		void TimeLine::OnCreate() {
+			CreateInstance();
+		}
+
+		void TimeLine::OnUpdate() {
+			if (!m_isPlaying)
 				return;
+
+			for (auto& clip : m_clipList) {
+				clip->Update(m_delta);
 			}
-			m_nextKey = m_timeLine.front();
-			m_timeLine.pop();
+			m_eventList->Update(m_delta);
+
+			m_delta += App::GetApp()->GetElapsedTime();
 		}
 
-		auto data = m_currentKey->Interpolation(m_nextKey, m_delta);
-
-		m_camera.lock()->SetEye(data.Eye);
-		m_camera.lock()->SetAt(data.At);
-
-		if (m_delta > m_waitingEvent.Time && !m_endEvent) {
-			if (m_waitingEvent.Func)
-				m_waitingEvent.Func();
-
-			if (!m_eventList.empty()) {
-				m_waitingEvent = m_eventList.front();
-				m_eventList.pop();
-			}
-			else {
-				m_endEvent = true;
-			}
+		void TimeLine::AddClip(const shared_ptr<ClipBase>& clip) {
+			m_clipList.push_back(clip);
 		}
 
-		m_delta += App::GetApp()->GetElapsedTime();
-	}
+		void TimeLine::Play() {
+			for (auto& clip : m_clipList) {
+				clip->Initialize();
+			}
+			m_eventList->Initialize();
 
-	void TimeLine::AddKeyFrame(const CameraKeyFrameData data) {
-		m_timeLine.push(make_shared<CameraKeyFrameData>(data));
-	}
+			m_isPlaying = true;
+		}
 
-	void TimeLine::AddEvent(float time, const function<void()>& func) {
-		m_eventList.push(EventData(time, func));
-	}
-
-	void TimeLine::Play() {
-		//sort(m_keyFrameList.begin(), m_keyFrameList.end());
-		m_currentKey = m_timeLine.front();
-		m_timeLine.pop();
-
-		m_nextKey = m_timeLine.front();
-		m_timeLine.pop();
-
-		m_isPlaying = true;
-
-		m_waitingEvent = m_eventList.front();
-		m_eventList.pop();
-		m_endEvent = false;
-	}
-	void TimeLine::Reset() {
-		m_delta = 0.0f;
+		void TimeLine::Reset() {
+			for (auto& clip : m_clipList) {
+				clip->Reset();
+			}
+			m_delta = 0.0f;
+			m_isPlaying = false;
+		}
 	}
 }

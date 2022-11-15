@@ -6,19 +6,18 @@
 namespace basecross {
 	namespace timeline {
 		class CameraClip :public ClipBase {
+			weak_ptr<Camera> m_camera;
 		public:
 			CameraClip(const shared_ptr<GameObject>& owner);
 
-			/// <summary>
-			/// 補間する
-			/// </summary>
-			void Interpolation(
-				const shared_ptr<CameraKeyFrame>& current,
-				const shared_ptr<CameraKeyFrame>& next,
-				float delta) {
-				auto Eye = Lerp::CalculateLerp(current->Eye, next->Eye, current->Time, next->Time, delta, current->Rate);
-				auto At = Lerp::CalculateLerp(current->At, next->At, current->Time, next->Time, delta, current->Rate);
-			}
+			void OnCreate()override;
+
+			shared_ptr<void> Interpolation(
+				const shared_ptr<KeyFrameBase>& current,
+				const shared_ptr<KeyFrameBase>& next,
+				float delta)override;
+
+			void ApplyDataToObject(const shared_ptr<void>& objectAnimationData)override;
 		};
 	}
 }

@@ -3,19 +3,21 @@
 #include "../Utility/TransformData.h"
 
 namespace basecross {
-	struct KeyFrameData {
-		float Time;			// キーフレーム位置
-		Lerp::rate Rate;	// このフレームからの保管方法
+	namespace timeline {
+		struct KeyFrameBase {
+			float Time;			// キーフレーム位置
+			Lerp::rate Rate;	// このフレームからの保管方法
 
-		/// <summary>
-		/// 補間する
-		/// </summary>
-		virtual void Interpolation(const shared_ptr<KeyFrameData>& keyFrame) = 0;
+			KeyFrameBase(float time, const Lerp::rate& rate)
+				:Time(time), Rate(rate)
+			{}
 
-		bool operator<(const KeyFrameData& right) const {
-			return Time < right.Time;
-		}
-	};
+			// ソート用
+			bool operator<(const KeyFrameBase& right) const {
+				return Time < right.Time;
+			}
+		};
+	}
 
 	struct CameraData {
 		Vec3 Eye;

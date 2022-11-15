@@ -1,23 +1,16 @@
 ﻿#pragma once
 #include "stdafx.h"
-#include "../Utility/TransformData.h"
+#include "KeyFrameData.h"
 
 namespace basecross {
 	namespace timeline {
-		struct CameraKeyFrame {
+		struct CameraKeyFrame :public KeyFrameBase {
 			Vec3 Eye;
 			Vec3 At;
-			float Time;			// キーフレーム位置
-			Lerp::rate Rate;	// このフレームからの保管方法
 
 			CameraKeyFrame(const Vec3& eye, const Vec3& at, float time, const Lerp::rate& rate)
-				:Eye(eye), At(at), Time(time), Rate(rate)
+				:Eye(eye), At(at), KeyFrameBase(time, rate)
 			{}
-
-			// ソート用
-			bool operator<(const CameraKeyFrame& right) const {
-				return Time < right.Time;
-			}
 		};
 	}
 }
