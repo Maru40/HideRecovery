@@ -66,6 +66,11 @@ namespace basecross {
 		void MoveAstar::OnStart() {
 			CalculateMoveAreaRouteQueue();	//徘徊エリアルートの取得
 
+			//検索中なら処理を中断
+			if (IsSearchRoute()) {
+				return;
+			}
+
 			if (m_isInitializeSearch) {
 				//初回検索のみバグるため、問題解決までの仮処理
 				m_isInitializeSearch = false;
