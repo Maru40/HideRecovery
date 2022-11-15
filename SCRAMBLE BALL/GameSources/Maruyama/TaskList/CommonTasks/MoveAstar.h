@@ -64,7 +64,7 @@ namespace basecross {
 
 			bool m_isInitializeSearch;	//初回サーチ限定
 			bool m_isSearchRoute;		//ルートを検索中かどうか
-			static std::mutex m_mtx;	//ミューテックス
+			//static std::mutex m_mtx;	//ミューテックス
 
 		public:
 			MoveAstar(const std::shared_ptr<Enemy::EnemyBase>& owner, const Parametor* paramPtr);

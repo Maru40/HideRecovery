@@ -126,7 +126,7 @@ namespace basecross {
 
 		void MoveAstar::NextRoute() {
 			//SetIsSearchRoute(true);		//ŒŸõŠJn
-			std::lock_guard<std::mutex> lock(m_mtx);
+			//std::lock_guard<std::mutex> lock(m_mtx);
 
 			if (m_areaRoute.empty()) {
 				SetIsSearchRoute(false);//ŒŸõI—¹
