@@ -109,6 +109,7 @@ namespace UI
 		m_passwordText.clear();
 		m_passwordText.resize(m_passwordDisitNum, L'0');
 		m_targetPasswordDisitNum = 0;
+		UpdateTrianglePosition(UIMoveDirection::None);
 
 		auto numbers = m_numbers.lock();
 
