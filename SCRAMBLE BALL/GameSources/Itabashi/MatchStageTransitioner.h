@@ -35,8 +35,6 @@ namespace basecross
 
 		void OnUpdate() override;
 
-		void OnDisconnected() override;
-
 		void OnCustomEventAction(int playerNumber, std::uint8_t eventCode, const std::uint8_t* bytes) override;
 
 		/// <summary>

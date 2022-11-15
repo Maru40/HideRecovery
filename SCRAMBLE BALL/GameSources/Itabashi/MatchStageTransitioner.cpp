@@ -65,11 +65,6 @@ namespace basecross
 		}
 	}
 
-	void MatchStageTransitioner::OnDisconnected()
-	{
-		BackTitleStage();
-	}
-
 	void MatchStageTransitioner::OnCustomEventAction(int playerNumber, std::uint8_t eventCode, const std::uint8_t* bytes)
 	{
 		if (eventCode == TO_MAINSTAGE_EVENT_CODE)
