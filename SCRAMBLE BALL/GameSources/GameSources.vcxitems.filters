@@ -1462,6 +1462,9 @@
     <Filter Include="Watanabe\TimeLine\CameraClip">
       <UniqueIdentifier>{bf97deea-6fa4-437e-959a-fab8392fa05d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\TimeLine\KeyFrame">
+      <UniqueIdentifier>{7276b6a8-687c-4373-a21e-63fda2a51e94}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2730,9 +2733,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\AdvQueue.h">
       <Filter>Watanabe\TimeLine</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\KeyFrameData.h">
-      <Filter>Watanabe\TimeLine</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\CameraTimeLine.h">
       <Filter>Watanabe\TimeLine\CameraTimeLine</Filter>
     </ClInclude>
@@ -2756,6 +2756,12 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\CameraClip.h">
       <Filter>Watanabe\TimeLine\CameraClip</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\KeyFrameData.h">
+      <Filter>Watanabe\TimeLine\KeyFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\CameraKeyFrame.h">
+      <Filter>Watanabe\TimeLine\KeyFrame</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
