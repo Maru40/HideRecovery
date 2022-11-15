@@ -1,43 +1,53 @@
 ﻿#pragma once
 #include "stdafx.h"
-#include "KeyFrameData.h"
-#include "AdvQueue.h"
+#include "TimeLineEventDataList.h"
+#include "../Utility/BaseSingleton.h"
 
 namespace basecross {
-	class TimeLine :public Component {
-	public:
-		struct EventData {
-			float Time;
-			function<void()> Func;
+	namespace timeline {
+		class ClipBase;
 
-			EventData() {}
-			EventData(float time, const function<void()>& func)
-				:Time(time), Func(func)
-			{}
+		class TimeLine :public BaseSingletonGameObject<TimeLine> {
+			float m_delta = 0.0f;
+			bool m_isPlaying = false;
+			map<wstring, shared_ptr<ClipBase>> m_clipList;
+			shared_ptr<TimeLineEventDataList> m_eventList;
+		public:
+			TimeLine(const shared_ptr<Stage>& stage);
+			void OnCreate()override;
+			void OnUpdate()override;
+
+			void Play();
+			void Reset();
+
+			void AddClip(const wstring& clipName, const shared_ptr<ClipBase>& clip);
+			void AddEvent(float time, const function<void()>& func) { m_eventList->AddEvent(time, func); }
+
+			template<class TClip>
+			shared_ptr<TClip> CreateClip(const wstring& clipName) {
+				auto clipData = make_shared<TClip>();
+				m_clipList[clipName] = clipData;
+				return clipData;
+			}
+
+			shared_ptr<ClipBase> GetClip(const wstring& clipName);
+
+			template<class TClip>
+			shared_ptr<TClip> GetClip(const wstring& clipName) {
+				auto clipData = dynamic_pointer_cast<TClip>(GetClip(clipName));
+				if (clipData) {
+					return clipData;
+				}
+
+				wstring str(L"Clipデータを");
+				str += Util::GetWSTypeName<T>();
+				str += L"型にキャストできません";
+				throw BaseException(
+					str,
+					L"!dynamic_pointer_cast<" + Util::GetWSTypeName<T>() + L">(GetClip(" + clipName + L"))",
+					L"TimeLine::GetClip()"
+				);
+			}
 		};
-	private:
-		bool m_isPlaying = false;
-		float m_delta;
-		weak_ptr<Camera> m_camera;
-
-		shared_ptr<CameraKeyFrameData> m_currentKey;
-		shared_ptr<CameraKeyFrameData> m_nextKey;
-		vector<shared_ptr<CameraKeyFrameData>> m_keyFrameList;
-		AdvQueue<shared_ptr<CameraKeyFrameData>> m_timeLine;
-
-		AdvQueue<EventData> m_eventList;
-		EventData m_waitingEvent;
-		bool m_endEvent = false;
-	public:
-		TimeLine(const shared_ptr<GameObject>& owner);
-
-		void OnCreate()override;
-		void OnUpdate()override;
-		void OnDraw()override {}
-
-		void AddKeyFrame(const CameraKeyFrameData data);
-		void AddEvent(float time, const function<void()>& func);
-		void Play();
-		void Reset();
-	};
+	}
 }

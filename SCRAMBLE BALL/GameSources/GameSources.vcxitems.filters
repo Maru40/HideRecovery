@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0"
-  xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Headers">
       <UniqueIdentifier>{4b0a624a-610d-4bc6-b311-2b02a781cdf9}</UniqueIdentifier>
@@ -1436,25 +1435,38 @@
     <Filter Include="Maruyama\Enemy\BehaviorTree\Decorator\TimerWaitTransition">
       <UniqueIdentifier>{7ae42f9b-8885-434f-997f-c0a291395e59}</UniqueIdentifier>
     </Filter>
-
     <Filter Include="Watanabe\TimeLine">
       <UniqueIdentifier>{b4547b10-20d2-4290-9706-83b785993625}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Watanabe\TimeLine\CameraTimeLine">
-      <UniqueIdentifier>{062a840d-8bd7-4828-8edc-0d1f6293d6b4}</UniqueIdentifier>
     </Filter>
     <Filter Include="Watanabe\TimeLine\TimeLineEventDataList">
       <UniqueIdentifier>{2dd95dfe-3f94-4384-bd90-d180e220ffeb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Watanabe\TimeLine\GameObjectTimeLine">
-      <UniqueIdentifier>{13260967-a474-4572-a814-a3125952603c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Itabashi\Online\OnlineLeaveAIChanger">
       <UniqueIdentifier>{a0c4b9a8-cadd-4892-b103-fcd27d5e3707}</UniqueIdentifier>
-	</Filter>
+    </Filter>
     <Filter Include="Maruyama\Enemy\Component\WallAvoid">
       <UniqueIdentifier>{cc0bed25-b6d9-4c5c-8c94-3c36b8bd94b5}</UniqueIdentifier>
-
+    </Filter>
+    <Filter Include="Watanabe\TimeLine\TimeLine">
+      <UniqueIdentifier>{b9e90dc1-4191-4279-99da-3bb88c37715e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\TimeLine\KeyFrame">
+      <UniqueIdentifier>{7276b6a8-687c-4373-a21e-63fda2a51e94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\TimeLine\Clip">
+      <UniqueIdentifier>{9dfaa103-0ddd-4c30-bc90-fd06fc93ba04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\TimeLine\Clip\CameraClip">
+      <UniqueIdentifier>{bf97deea-6fa4-437e-959a-fab8392fa05d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\TimeLine\Clip\ClipBase">
+      <UniqueIdentifier>{9570925d-a9aa-47c3-ad9a-02da97d14b93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\TimeLine\Clip\UIObjectClip">
+      <UniqueIdentifier>{c67b2c94-cf18-4eba-8457-cac04bb2a604}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\TimeLine\Clip\GameObjectClip">
+      <UniqueIdentifier>{86cc73e7-8757-4c71-9882-d9ffc6080258}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -2721,31 +2733,50 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\TimerWaitPosition.h">
       <Filter>Maruyama\Enemy\BehaviorTree\Decorator\TimerWaitTransition</Filter>
     </ClInclude>
-
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\AdvQueue.h">
       <Filter>Watanabe\TimeLine</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\KeyFrameData.h">
-      <Filter>Watanabe\TimeLine</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\TimeLine.h">
-      <Filter>Watanabe\TimeLine</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\CameraTimeLine.h">
-      <Filter>Watanabe\TimeLine\CameraTimeLine</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\TimeLineEventDataList.h">
       <Filter>Watanabe\TimeLine\TimeLineEventDataList</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\GameObjectTimeLine.h">
-      <Filter>Watanabe\TimeLine\GameObjectTimeLine</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineLeaveAIChanger.h">
+      <Filter>Itabashi\Online\OnlineLeaveAIChanger</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\TimeLine.h">
+      <Filter>Watanabe\TimeLine\TimeLine</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\ClipBase.h">
+      <Filter>Watanabe\TimeLine\Clip\ClipBase</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\CameraClip.h">
+      <Filter>Watanabe\TimeLine\Clip\CameraClip</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\KeyFrameBase.h">
+      <Filter>Watanabe\TimeLine\KeyFrame</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineLeaveAIChanger.h">
       <Filter>Itabashi\Online\OnlineLeaveAIChanger</Filter>
-	</ClInclude>
+    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\WallAvoid.h">
       <Filter>Maruyama\Enemy\Component\WallAvoid</Filter>
-
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\CameraKeyFrame.h">
+      <Filter>Watanabe\TimeLine\KeyFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\UIObjectClip.h">
+      <Filter>Watanabe\TimeLine\Clip\UIObjectClip</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\UIObjectKeyFrame.h">
+      <Filter>Watanabe\TimeLine\KeyFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\GameObjectKeyFrame.h">
+      <Filter>Watanabe\TimeLine\KeyFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\GameObjectClip.h">
+      <Filter>Watanabe\TimeLine\Clip\GameObjectClip</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\IncTimeLine.h">
+      <Filter>Watanabe\TimeLine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -3913,25 +3944,32 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\TimerWaitPosition.cpp">
       <Filter>Maruyama\Enemy\BehaviorTree\Decorator\TimerWaitTransition</Filter>
     </ClCompile>
-
-    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\TimeLine.cpp">
-      <Filter>Watanabe\TimeLine</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\CameraTimeLine.cpp">
-      <Filter>Watanabe\TimeLine\CameraTimeLine</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\TimeLineEventDataList.cpp">
       <Filter>Watanabe\TimeLine\TimeLineEventDataList</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\GameObjectTimeLine.cpp">
-      <Filter>Watanabe\TimeLine\GameObjectTimeLine</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineLeaveAIChanger.cpp">
       <Filter>Itabashi\Online\OnlineLeaveAIChanger</Filter>
-	</ClCompile>
+    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\WallAvoid.cpp">
       <Filter>Maruyama\Enemy\Component\WallAvoid</Filter>
-
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\TimeLine.cpp">
+      <Filter>Watanabe\TimeLine\TimeLine</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\ClipBase.cpp">
+      <Filter>Watanabe\TimeLine\Clip\ClipBase</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\CameraClip.cpp">
+      <Filter>Watanabe\TimeLine\Clip\CameraClip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\UIObjectClip.cpp">
+      <Filter>Watanabe\TimeLine\Clip\UIObjectClip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\GameObjectClip.cpp">
+      <Filter>Watanabe\TimeLine\Clip\GameObjectClip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\TimeLine.cpp">
+      <Filter>Watanabe\TimeLine\TimeLine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
