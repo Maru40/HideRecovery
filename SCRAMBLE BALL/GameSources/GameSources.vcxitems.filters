@@ -1459,6 +1459,9 @@
     <Filter Include="Watanabe\TimeLine\ClipBase">
       <UniqueIdentifier>{9570925d-a9aa-47c3-ad9a-02da97d14b93}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\TimeLine\CameraClip">
+      <UniqueIdentifier>{bf97deea-6fa4-437e-959a-fab8392fa05d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2751,6 +2754,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\ClipBase.h">
       <Filter>Watanabe\TimeLine\ClipBase</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\CameraClip.h">
+      <Filter>Watanabe\TimeLine\CameraClip</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -3937,6 +3943,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\ClipBase.cpp">
       <Filter>Watanabe\TimeLine\ClipBase</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\CameraClip.cpp">
+      <Filter>Watanabe\TimeLine\CameraClip</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

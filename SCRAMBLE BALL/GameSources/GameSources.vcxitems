@@ -399,6 +399,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\TestShaderStage.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\WatanabeStage.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\AdvQueue.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\CameraClip.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\CameraTimeLine.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\ClipBase.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\GameObjectTimeLine.h" />
@@ -795,6 +796,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\TestEffectStage.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\TestShaderStage.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TestStage\WatanabeStage.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\CameraClip.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\CameraTimeLine.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\ClipBase.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\GameObjectTimeLine.cpp" />
