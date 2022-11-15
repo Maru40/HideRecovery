@@ -13,8 +13,8 @@ namespace basecross {
 
 	namespace TargetedPriority {
 		constexpr float OPEN_BOX = 10.0f;	//ボールが入っている可能性がある箱
-		constexpr float PLAYER = 2.0f;		//player
-		constexpr float GOAL = 1.0f;		//ゴール
+		constexpr float PLAYER = 1.0f;		//player
+		constexpr float GOAL = 0.75f;		//ゴール
 		constexpr float BALL = 0.5f;		//ボール
 	}
 
