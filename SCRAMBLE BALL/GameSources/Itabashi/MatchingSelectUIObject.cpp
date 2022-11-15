@@ -54,7 +54,6 @@ namespace StageObject
 		// ボタン上でキャンセルが押されたら、接続を切り操作を無効にする
 		cancelEventer->AddCancelEvent([weakStage]()
 			{
-				Online::OnlineManager::Disconnect();
 				EventSystem::GetInstance(weakStage.lock())->PushSelectableObject(nullptr);
 			}
 		);
