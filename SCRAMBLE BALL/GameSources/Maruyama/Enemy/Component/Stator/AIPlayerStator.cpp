@@ -162,5 +162,8 @@ namespace basecross {
 			);
 		}
 
+		void AIPlayerStator::OnEnable() {
+			ChangeState(StateType::None);
+		}
 	}
 }

@@ -66,6 +66,11 @@ namespace basecross {
 		void MoveAstar::OnStart() {
 			CalculateMoveAreaRouteQueue();	//徘徊エリアルートの取得
 
+			//検索中なら処理を中断
+			if (IsSearchRoute()) {
+				return;
+			}
+
 			if (m_isInitializeSearch) {
 				//初回検索のみバグるため、問題解決までの仮処理
 				m_isInitializeSearch = false;
@@ -128,15 +133,10 @@ namespace basecross {
 				return;
 			}
 
-			//減速処理開始
-			//m_velocityManager.lock()->StartDeseleration();
-
 			auto positions = CalculateMovePositions();	//新しいポジションに変更
 
 			SelectTask();	//タスクの再始動
 
-			//減速処理終了
-			//m_velocityManager.lock()->SetIsDeseleration(false);
 			SetIsSearchRoute(false);	//検索終了
 		}
 

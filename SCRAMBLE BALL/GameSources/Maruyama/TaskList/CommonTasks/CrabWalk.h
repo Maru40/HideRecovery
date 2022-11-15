@@ -20,7 +20,14 @@ namespace basecross {
 
 	class GameTimer;
 	class VelocityManager;
+	class PlayerControlManager;
 	class OnlinePlayerSynchronizer;
+
+	class UseWeapon;
+
+	namespace Operator {
+		class ObjectMover;
+	}
 
 	namespace TaskListNode {
 
@@ -57,8 +64,11 @@ namespace basecross {
 			MoveDirectionType m_directionType;		//移動方向
 			std::unique_ptr<GameTimer> m_timer;		//タイマー
 
-			std::weak_ptr<Transform> m_transform;				//トランスフォーム
-			std::weak_ptr<VelocityManager> m_velocityManager;	//速度管理
+			std::weak_ptr<Transform> m_transform;					//トランスフォーム
+			std::weak_ptr<UseWeapon> m_useWepon;					//武器の使用
+			std::weak_ptr<Operator::ObjectMover> m_mover;			//移動系
+			std::weak_ptr<PlayerControlManager> m_playerController;	//playerコントローラー
+			std::weak_ptr<VelocityManager> m_velocityManager;		//速度管理
 			std::weak_ptr<OnlinePlayerSynchronizer> m_onlineSychoronizer;	//オンラインシンクロ
 
 		public:

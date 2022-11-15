@@ -77,6 +77,8 @@ namespace basecross {
 			void CreateNode() override;
 			void CreateEdge() override;
 
+			void OnEnable() override;
+
 		private:
 
 			//--------------------------------------------------------------------------------------
