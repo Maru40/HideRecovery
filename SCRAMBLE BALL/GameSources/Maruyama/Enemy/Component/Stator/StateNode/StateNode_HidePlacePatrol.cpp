@@ -86,12 +86,6 @@ namespace basecross {
 			}
 
 			void HidePlacePatrol::Damaged(const std::shared_ptr<Tuple::Damaged>& tuple) {
-				//Ž€–Só‘Ô‚È‚ç‘JˆÚ‚µ‚È‚¢
-				//auto status = tuple->GetDamageData().attacker->GetComponent<PlayerStatus>(false);
-				//if (status && status->IsDead()) {
-				//	return;
-				//}
-
 				//ƒ_ƒ[ƒW‚ð—^‚¦‚Ä‚«‚½‘ŠŽè‚ð“`‚¦‚éB
 				auto tupleSpace = m_factionMember.lock()->GetAssignedFaction()->GetTupleSpace();
 				tupleSpace->Write<Tuple::FindTarget>(GetOwner(), tuple->GetDamageData().attacker, tuple->GetValue());
