@@ -1,5 +1,6 @@
 ﻿#include "stdafx.h"
 #include "UIObjectBase.h"
+#include "MainStage.h"
 
 namespace basecross {
 	UIObjectBase::UIObjectBase(const shared_ptr<Stage>& stage, const wstring& name)
@@ -16,5 +17,8 @@ namespace basecross {
 		AddTag(m_uiName);
 
 		SetDrawLayer(2);
+
+		if (GetTypeStage<MainStage>(false))
+			SetDrawActive(false);
 	}
 }

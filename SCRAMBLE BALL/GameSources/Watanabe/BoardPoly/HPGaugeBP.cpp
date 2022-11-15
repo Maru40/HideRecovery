@@ -45,6 +45,8 @@ namespace basecross {
 		syncComp->SetOffsetPosition(Vec3(0, 1.5f, 0));
 
 		SetAlphaActive(true);
+
+		SetActive(false);
 	}
 	void HPGaugeBP::OnUpdate() {
 		auto status = m_status.lock()->GetStatus();

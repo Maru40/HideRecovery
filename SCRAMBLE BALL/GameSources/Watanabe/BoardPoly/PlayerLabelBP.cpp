@@ -85,6 +85,8 @@ namespace basecross {
 		}
 
 		GetComponent<Transform>()->SetScale(Vec3(0.7f));
+
+		SetActive(false);
 	}
 
 	void PlayerLabelBP::OnUpdate() {

@@ -73,6 +73,8 @@ namespace basecross {
 		auto billBoard = AddComponent<BillBoard>();
 		billBoard->SetRotationOffset(
 			Utility::ConvertDegVecToRadVec(Vec3(0, 180, 0)));
+
+		SetActive(false);
 	}
 	void GoalBP::OnUpdate() {
 	}
