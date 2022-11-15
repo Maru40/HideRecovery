@@ -33,7 +33,7 @@ namespace basecross {
 
 	namespace Task {
 
-		std::mutex MoveAstar::m_mtx;
+		//std::mutex MoveAstar::m_mtx;
 
 		//--------------------------------------------------------------------------------------
 		///	ターゲットの近くまでAstarを利用して移動するタスクパラメータ
