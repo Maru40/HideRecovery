@@ -20,6 +20,10 @@
 
 #include "Itabashi/OnlinePlayerSynchronizer.h"
 
+#include "Itabashi/ObjectMover.h"
+#include "Itabashi/PlayerControlManager.h"
+#include "Maruyama/Player/Component/UseWeapon.h"
+
 namespace basecross {
 
 	namespace TaskListNode {
@@ -30,7 +34,7 @@ namespace basecross {
 
 		CrabWalk_Parametor::CrabWalk_Parametor():
 			//CrabWalk_Parametor(3.0f)
-			CrabWalk_Parametor(0.25f)
+			CrabWalk_Parametor(0.5f)
 		{}
 
 		CrabWalk_Parametor::CrabWalk_Parametor(const float speed):
@@ -58,6 +62,9 @@ namespace basecross {
 			m_timer(new GameTimer(0.0f))
 		{
 			m_transform = owner->GetComponent<Transform>();
+			m_useWepon = owner->GetComponent<UseWeapon>(false);
+			m_mover = owner->GetComponent<Operator::ObjectMover>(false);
+			m_playerController = owner->GetComponent<PlayerControlManager>(false);
 			m_velocityManager = owner->GetComponent<VelocityManager>(false);
 			m_onlineSychoronizer = owner->GetComponent<OnlinePlayerSynchronizer>(false);
 		}
@@ -89,7 +96,8 @@ namespace basecross {
 				return;
 			}
 
-			auto velocity = CalculateMoveDirection() * m_paramPtr->speed;
+			auto speed = m_useWepon.lock()->GetWeaponWeight() / m_playerController.lock()->GetDefaultSpeed();
+			auto velocity = CalculateMoveDirection() * speed;
 
 			m_onlineSychoronizer.lock()->Move(Vec2(velocity.x, velocity.z));
 
@@ -122,7 +130,7 @@ namespace basecross {
 				break;
 
 			case MoveDirectionType::Right:
-				result =  transform->GetRight();
+				result = transform->GetRight();
 				break;
 
 			case MoveDirectionType::Left:
