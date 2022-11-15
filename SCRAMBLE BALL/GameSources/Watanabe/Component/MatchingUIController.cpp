@@ -9,6 +9,7 @@
 #include "Patch/PlayerInputer.h"
 #include "Watanabe/UI/PasscodeUI.h"
 #include "Zooming.h"
+#include "Itabashi/MatchStageReconnectUIObject.h"
 
 namespace basecross {
 	MatchingUIController::MatchingUIController(const shared_ptr<GameObject>& owner,
@@ -17,6 +18,7 @@ namespace basecross {
 
 	void MatchingUIController::CreateUIEvent() {
 		auto joinRoomButton = m_selectUIObject.lock()->GetJoinRoomButtonObject()->GetComponent<Button>();
+		auto toContinueButton = m_reconnectUIObject.lock()->GetToContinueButtonObject()->GetComponent<Button>();
 
 		auto passcodeUIObject = m_passcodeUIObject.lock();
 		auto passwordTextUI = passcodeUIObject->GetComponent<UI::PasswordTextUI>();
@@ -28,6 +30,8 @@ namespace basecross {
 			auto passwordObject = weakPasscodeUIObject.lock();
 
 			passwordObject->SetActive(true);
+			passwordObject->GetComponent<UI::PasswordTextUI>()->Clear();
+
 			EventSystem::GetInstance(passwordObject->GetStage())->PushSelectableObject(passwordObject);
 			});
 
@@ -36,6 +40,33 @@ namespace basecross {
 			m_isJoinRoom = true;
 			weakPasscodeUIObject.lock()->SetActive(false);
 			});
+
+		std::weak_ptr<UIObjectBase> inProcessUI = m_builder->GetUIObject(L"InProcess");
+
+		toContinueButton->AddPushEvent([inProcessUI]()
+			{
+				inProcessUI.lock()->SetActive(true);
+				Online::OnlineManager::Connect();
+			}
+		);
+	}
+
+	void MatchingUIController::DrawClear()
+	{
+		m_builder->GetUIObject(L"InProcess")->SetActive(false);
+		m_builder->GetUIObject(L"GameStart")->SetDrawActive(false);
+		m_builder->GetUIObject(L"AButton")->SetDrawActive(false);
+		m_builder->GetUIObject(L"HoldA")->SetDrawActive(false);
+		m_builder->GetUIObject(L"WaitHost")->SetDrawActive(false);
+
+		m_selectUIObject.lock()->SetActive(false);
+		m_passcodeUIObject.lock()->SetActive(false);
+		m_passwordViewNumbersObject.lock()->SetActive(false);
+		m_reconnectUIObject.lock()->SetActive(false);
+
+		ClearSplashMessage();
+
+		EventSystem::GetInstance(GetStage())->Clear();
 	}
 
 	void MatchingUIController::OnLateStart() {
@@ -88,6 +119,22 @@ namespace basecross {
 		selectUIObject->SetActive(true);
 
 		EventSystem::GetInstance(GetStage())->SetNowSelectableObject(selectUIObject->GetFreeMatchingButtonObject());
+	}
+
+	void MatchingUIController::OnConnectFailed(int errorCode)
+	{
+		OnDisconnected();
+	}
+
+	void MatchingUIController::OnDisconnected()
+	{
+		DrawClear();
+
+		auto reconnectUIObject = m_reconnectUIObject.lock();
+		reconnectUIObject->SetActive(true);
+		m_builder->GetUIObject<InProcessUI>(L"InProcess")->SetLabel(InProcessUI::LabelType::Busy);
+
+		EventSystem::GetInstance(GetStage())->SetNowSelectableObject(reconnectUIObject->GetToContinueButtonObject());
 	}
 
 	void MatchingUIController::OnCreateRoom() {

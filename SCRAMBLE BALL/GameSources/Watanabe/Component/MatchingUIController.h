@@ -7,6 +7,7 @@ namespace basecross {
 	namespace StageObject
 	{
 		class MatchingSelectUIObject;
+		class MatchStageReconnectUIObject;
 	}
 
 	namespace Online
@@ -29,6 +30,7 @@ namespace basecross {
 		std::weak_ptr<StageObject::MatchingSelectUIObject> m_selectUIObject; // マッチング選択用UIオブジェクト
 		std::weak_ptr<PasscodeUI> m_passcodeUIObject; // パスワード入力用UIオブジェクト
 		std::weak_ptr<Numbers> m_passwordViewNumbersObject; // パスワード表示用UIオブジェクト
+		std::weak_ptr<StageObject::MatchStageReconnectUIObject> m_reconnectUIObject; // 再接続用UIオブジェクト
 
 		bool m_isJoinRoom = false; // 部屋に参加ならtrue
 
@@ -36,6 +38,11 @@ namespace basecross {
 		/// UI同士のイベントのつながりの作成
 		/// </summary>
 		void CreateUIEvent();
+
+		/// <summary>
+		/// 表示と選択の初期化
+		/// </summary>
+		void DrawClear();
 
 	public:
 		MatchingUIController(const shared_ptr<GameObject>& owner,
@@ -46,6 +53,10 @@ namespace basecross {
 		void OnUpdate() override;
 
 		void OnConnected() override;
+
+		void OnConnectFailed(int errorCode) override;
+
+		void OnDisconnected() override;
 
 		// 部屋を作成
 		void OnCreateRoom()override;
@@ -87,6 +98,11 @@ namespace basecross {
 		/// </summary>
 		/// <param name="passwordViewNumbersObject">パスワード表示用UIオブジェクト</param>
 		void SetPasswordViewNumbersObject(const std::shared_ptr<Numbers>& passwordViewNumbersObject) { m_passwordViewNumbersObject = passwordViewNumbersObject; }
+		/// <summary>
+		/// 再接続用UIオブジェクトの設定
+		/// </summary>
+		/// <param name="reconnectUIObject">再接続用UIオブジェクト</param>
+		void SetMatchStageReconnectUIObject(const std::shared_ptr<StageObject::MatchStageReconnectUIObject>& reconnectUIObject) { m_reconnectUIObject = reconnectUIObject; }
 		/// <summary>
 		/// MatchStageの遷移用コンポーネントの設定
 		/// </summary>
