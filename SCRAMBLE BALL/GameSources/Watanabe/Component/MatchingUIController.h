@@ -56,6 +56,8 @@ namespace basecross {
 
 		void OnLeaveRoom() override;
 
+		virtual void OnMasterClientChanged(int id, int oldID) override;
+
 		/// <summary>
 		/// スプラッシュメッセージをクリア
 		/// </summary>

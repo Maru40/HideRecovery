@@ -175,6 +175,7 @@ int MainLoop(HINSTANCE hInstance, HWND hWnd, bool isFullScreen, int iClientWidth
 			//更新描画処理
 			App::GetApp()->UpdateDraw(1);
 		}
+
 		//msg.wParamには終了コードが入っている
 		RetCode = (int)msg.wParam;
 	}
@@ -222,8 +223,6 @@ int MainLoop(HINSTANCE hInstance, HWND hWnd, bool isFullScreen, int iClientWidth
 		}
 		RetCode = 1;
 	}
-
-	Online::OnlineManager::Disconnect();
 	//アプリケーションの削除
 	App::DeleteApp();
 	//例外処理終了
@@ -297,14 +296,13 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	HDC hdc;
 	switch (message)
 	{
-	//case WM_CHAR:
-	//	itbs::Input::InputTextManager::Push((wchar_t)wParam);
-	//	break;
 	case WM_PAINT:
 		hdc = BeginPaint(hWnd, &ps);
 		EndPaint(hWnd, &ps);
 		break;
 	case WM_DESTROY:
+		// 通信を切る
+		Online::OnlineManager::Disconnect();
 		PostQuitMessage(0);
 		break;
 	case WM_KEYDOWN:                // キーが押された

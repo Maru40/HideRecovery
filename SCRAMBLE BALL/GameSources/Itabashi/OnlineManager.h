@@ -268,8 +268,8 @@ namespace Online
 
 		void debugReturn(int debugLevel, const ExitGames::Common::JString& string) override {}
 
-		void connectionErrorReturn(int errorCode) override {}
-		void clientErrorReturn(int errorCode) override {}
+		void connectionErrorReturn(int errorCode) override;
+		void clientErrorReturn(int errorCode) override;
 		void warningReturn(int warningCode) override {}
 		void serverErrorReturn(int errorCode) override {}
 

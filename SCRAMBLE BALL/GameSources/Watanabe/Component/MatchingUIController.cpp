@@ -149,6 +149,35 @@ namespace basecross {
 		m_isJoinRoom = false;
 	}
 
+	void MatchingUIController::OnMasterClientChanged(int id, int oldID)
+	{
+		// 前のホストがいないか、新しいホストが自分ではなかったら
+		if (oldID == Online::OnlineManager::INVALID_ONLINE_PLAYER_NUMBER || Online::OnlineManager::GetLocalPlayer().getNumber() != id)
+		{
+			return;
+		}
+
+		m_builder->GetUIObject(L"InProcess")->SetActive(false);
+		m_builder->GetUIObject(L"WaitHost")->SetDrawActive(false);
+
+		m_builder->GetUIObject(L"GameStart")->SetDrawActive(true);
+		m_builder->GetUIObject(L"AButton")->SetDrawActive(true);
+		m_builder->GetUIObject(L"HoldA")->SetDrawActive(true);
+		//m_builder->GetUIObject<SplashMessageUI>(L"SplashMessage")
+		//	->SetMessage(SplashMessageUI::MessageType::CreateRoom);
+
+		std::wstring password = Online::OnlineManager::GetCurrentlyJoinedRoom().getName().cstr();
+
+		auto numbersObject = m_passwordViewNumbersObject.lock();
+		auto onlineMatching = m_onlineMatching.lock();
+
+		if (onlineMatching->UsePassword() && numbersObject) {
+			auto passwordNumber = std::stoi(password);
+			numbersObject->SetNumber(passwordNumber);
+			numbersObject->SetActive(true);
+		}
+	}
+
 	void MatchingUIController::ChangeUIStartMatching() {
 		// 「マッチング中」の表示
 		auto inProcessUI = m_builder->GetUIObject<InProcessUI>(L"InProcess");

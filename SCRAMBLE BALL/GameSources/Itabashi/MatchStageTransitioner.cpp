@@ -53,7 +53,7 @@ namespace basecross
 
 					auto seed = CreateStageInstanceIdSeed();
 					GoToMainStage(seed);
-					Online::OnlineManager::RaiseEvent(false, (std::uint8_t*)&seed, sizeof(std::uint64_t), TO_MAINSTAGE_EVENT_CODE);
+					Online::OnlineManager::RaiseEvent(true, (std::uint8_t*)&seed, sizeof(std::uint64_t), TO_MAINSTAGE_EVENT_CODE);
 					m_holdTimer.Reset();
 					return;
 				}
