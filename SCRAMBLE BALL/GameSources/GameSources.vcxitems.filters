@@ -1453,6 +1453,12 @@
     <Filter Include="Watanabe\TimeLine\UIObjectTimeLine">
       <UniqueIdentifier>{86207b2f-caf4-415e-9b74-7eb1b146e7fd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\TimeLine\TimeLine">
+      <UniqueIdentifier>{b9e90dc1-4191-4279-99da-3bb88c37715e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\TimeLine\ClipBase">
+      <UniqueIdentifier>{9570925d-a9aa-47c3-ad9a-02da97d14b93}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2724,9 +2730,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\KeyFrameData.h">
       <Filter>Watanabe\TimeLine</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\TimeLine.h">
-      <Filter>Watanabe\TimeLine</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\CameraTimeLine.h">
       <Filter>Watanabe\TimeLine\CameraTimeLine</Filter>
     </ClInclude>
@@ -2741,6 +2744,12 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\UIObjectTimeLine.h">
       <Filter>Watanabe\TimeLine\UIObjectTimeLine</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\TimeLine.h">
+      <Filter>Watanabe\TimeLine\TimeLine</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\ClipBase.h">
+      <Filter>Watanabe\TimeLine\ClipBase</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -3908,9 +3917,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\TimerWaitPosition.cpp">
       <Filter>Maruyama\Enemy\BehaviorTree\Decorator\TimerWaitTransition</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\TimeLine.cpp">
-      <Filter>Watanabe\TimeLine</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\CameraTimeLine.cpp">
       <Filter>Watanabe\TimeLine\CameraTimeLine</Filter>
     </ClCompile>
@@ -3925,6 +3931,12 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\UIObjectTimeLine.cpp">
       <Filter>Watanabe\TimeLine\UIObjectTimeLine</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\TimeLine.cpp">
+      <Filter>Watanabe\TimeLine\TimeLine</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\ClipBase.cpp">
+      <Filter>Watanabe\TimeLine\ClipBase</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

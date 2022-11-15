@@ -5,12 +5,24 @@
 
 namespace basecross {
 	namespace timeline {
+		template<class TKeyFrame>
+		class TimeLineData {
+			shared_ptr<TKeyFrame> m_currentKey;
+			shared_ptr<TKeyFrame> m_nextKey;
+			vector<shared_ptr<TKeyFrame>> m_keyFrameList;
+			AdvQueue<shared_ptr<TKeyFrame>> m_timeLine;
+		};
+
+		template<class T, class TKeyFrame>
 		class TimeLine {
 			bool m_isPlaying = false;
 			float m_delta;
+
+			shared_ptr<timeline::TimeLineEventDataList> m_eventDataList;
 		public:
 			virtual void Interpolation() = 0;
-			virtual void AddKeyFrame(const CameraKeyFrameData data) = 0;
+			template<class T>
+			virtual void AddKeyFrame(const shared_ptr<void> data) = 0;
 			virtual void ClearKeyFrame() = 0;
 
 			virtual void Play() {}
