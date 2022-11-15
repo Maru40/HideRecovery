@@ -3,8 +3,12 @@
 
 namespace basecross {
 	namespace timeline {
-		ClipBase::ClipBase(const shared_ptr<GameObject>& owner)
-			:Component(owner)
+		shared_ptr<ClipBase> ClipBase::CreateClip(const shared_ptr<Stage>& stage, const wstring& clipName) {
+			//return make_shared<ClipBase>(stage, clipName);
+		}
+
+		ClipBase::ClipBase(const shared_ptr<Stage>& stage, const wstring& clipName)
+			:m_clipName(clipName), m_stage(stage)
 		{}
 
 		void ClipBase::Update(float delta) {

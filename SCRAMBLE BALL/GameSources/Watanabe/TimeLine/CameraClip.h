@@ -8,9 +8,9 @@ namespace basecross {
 		class CameraClip :public ClipBase {
 			weak_ptr<Camera> m_camera;
 		public:
-			CameraClip(const shared_ptr<GameObject>& owner);
+			CameraClip(const shared_ptr<Stage>& stage, const wstring& clipName);
 
-			void OnCreate()override;
+			void Create()override;
 
 			shared_ptr<void> Interpolation(
 				const shared_ptr<KeyFrameBase>& current,

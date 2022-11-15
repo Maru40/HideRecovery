@@ -3,12 +3,14 @@
 
 namespace basecross {
 	namespace timeline {
-		CameraClip::CameraClip(const shared_ptr<GameObject>& owner)
-			:ClipBase(owner)
-		{}
+		CameraClip::CameraClip(const shared_ptr<Stage>& stage, const wstring& clipName)
+			:ClipBase(stage, clipName)
+		{
+			Create();
+		}
 
-		void CameraClip::OnCreate() {
-			m_camera = GetStage()->GetView()->GetTargetCamera();
+		void CameraClip::Create() {
+			m_camera = m_stage.lock()->GetView()->GetTargetCamera();
 		}
 
 		shared_ptr<void> CameraClip::Interpolation(

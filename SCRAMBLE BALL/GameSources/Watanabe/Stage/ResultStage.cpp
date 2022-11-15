@@ -17,6 +17,10 @@
 #include "Watanabe/TimeLine/CameraTimeLine.h"
 #include "Watanabe/TimeLine/GameObjectTimeLine.h"
 #include "Watanabe/TimeLine/UIObjectTimeLine.h"
+#include "../TimeLine/TimeLine.h"
+#include "../TimeLine/ClipBase.h"
+#include "../TimeLine/CameraKeyFrame.h"
+#include "../TimeLine/CameraClip.h"
 
 #include "Maruyama/Interface/I_TeamMember.h"
 #include "VelocityManager.h"
@@ -85,17 +89,26 @@ namespace basecross {
 		auto blueLabel = uiBuilder->GetUIObject<SimpleSprite>(L"BlueLabel");
 		blueLabel->GetDrawComponent()->SetDiffuse(team::BLUETEAM_COLOR);
 
+		PointManager::GetInstance()->AddPoint(team::TeamType::Blue);
+
 		auto timeLine = AddGameObject<GameObject>()->AddComponent<timeline::CameraTimeLine>();
 		m_timeLine = timeLine;
 
+		AddGameObject<timeline::TimeLine>();
+
 		const bool IsDraw = PointManager::GetInstance()->IsDraw();
 		if (!IsDraw) {
-			timeLine->AddKeyFrame(CameraKeyFrameData(Vec3(-2, 1, 2), Vec3(-3, 0.5f, 0), 0, Lerp::rate::Cube));
-			timeLine->AddKeyFrame(CameraKeyFrameData(Vec3(-0.5f, 1, 2), Vec3(-1.5f, 0.5f, 0), 0.5f, Lerp::rate::Cube));
-			timeLine->AddKeyFrame(CameraKeyFrameData(Vec3(1, 1, 2), Vec3(0, 0.5f, 0), 1.5f, Lerp::rate::Cube));
-			timeLine->AddKeyFrame(CameraKeyFrameData(Vec3(2.5f, 1, 2), Vec3(1.5f, 0.5f, 0), 2.5f, Lerp::rate::Cube));
-			timeLine->AddKeyFrame(CameraKeyFrameData(Vec3(0, 1, 5), Vec3(0, 1, 0), 3.5f, Lerp::rate::Cube));
+			auto cameraClip = make_shared<timeline::CameraClip>(GetThis<ResultStage>(), L"Camera");
+
+			cameraClip->AddKeyFrame(timeline::CameraKeyFrame::Create(Vec3(-2, 1, 2), Vec3(-3, 0.5f, 0), 0, Lerp::rate::Cube));
+			cameraClip->AddKeyFrame(timeline::CameraKeyFrame::Create(Vec3(-0.5f, 1, 2), Vec3(-1.5f, 0.5f, 0), 0.5f, Lerp::rate::Cube));
+			cameraClip->AddKeyFrame(timeline::CameraKeyFrame::Create(Vec3(1, 1, 2), Vec3(0, 0.5f, 0), 1.5f, Lerp::rate::Cube));
+			cameraClip->AddKeyFrame(timeline::CameraKeyFrame::Create(Vec3(2.5f, 1, 2), Vec3(1.5f, 0.5f, 0), 2.5f, Lerp::rate::Cube));
+			cameraClip->AddKeyFrame(timeline::CameraKeyFrame::Create(Vec3(0, 1, 5), Vec3(0, 1, 0), 3.5f, Lerp::rate::Cube));
 			timeLine->AddEvent(4.0f, [&]() {m_isTransitionable = true; });
+
+			timeline::TimeLine::GetInstance()->AddClip(cameraClip);
+			timeline::TimeLine::GetInstance()->Play();
 
 			// 引き分け以外に生成
 			// 紙吹雪エフェクト

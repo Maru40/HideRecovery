@@ -5,18 +5,23 @@
 
 namespace basecross {
 	namespace timeline {
-		class ClipBase :public Component {
+		class ClipBase {
+		protected:
 			shared_ptr<KeyFrameBase> m_currentKeyFrame;
 			shared_ptr<KeyFrameBase> m_nextKeyFrame;
 
 			list<shared_ptr<KeyFrameBase>> m_keyFrameList;
 			AdvQueue<shared_ptr<KeyFrameBase>> m_keyFrameQueue;
-		public:
-			ClipBase(const shared_ptr<GameObject>& owner);
 
-			virtual void OnCreate()override {}
-			void OnUpdate()override {}
-			void OnDraw()override {}
+			wstring m_clipName;
+			weak_ptr<Stage> m_stage;
+
+		public:
+			ClipBase(const shared_ptr<Stage>& stage, const wstring& clipName);
+
+			static shared_ptr<ClipBase> CreateClip(const shared_ptr<Stage>& stage, const wstring& clipName);
+
+			virtual void Create() {}
 
 			void Initialize();
 			void Update(float delta);
