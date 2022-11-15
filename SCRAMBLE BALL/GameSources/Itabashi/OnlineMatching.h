@@ -74,6 +74,8 @@ namespace Online
 
 		void OnConnected() override;
 
+		void OnDisconnected() override;
+
 		void OnCreateRoom() override;
 
 		virtual void OnCreateRoomFailed(int errorCode) override;

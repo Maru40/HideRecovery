@@ -18,6 +18,7 @@
 #include "UICancelEventer.h"
 #include "MatchStageCoreObject.h"
 #include "MatchStageUIObject.h"
+#include "Itabashi/MatchStageReconnectUIObject.h"
 
 namespace basecross
 {
@@ -67,12 +68,20 @@ namespace basecross
 		auto passwordText = matchStageUIObject->GetPasscodeUIObject()->GetComponent<UI::PasswordTextUI>();
 
 		auto matchingSelectUIObject = matchStageUIObject->GetMatchingSelectUIObject();
+		auto matchStageReconnectUIObject = matchStageUIObject->GetMatchStageReconnectUIObject();
 
 		auto freeMatchingButton = matchingSelectUIObject->GetFreeMatchingButtonObject()->GetComponent<Button>();
 		auto createRoomButton = matchingSelectUIObject->GetCreateRoomButtonObject()->GetComponent<Button>();
 		auto joinRoomButton = matchingSelectUIObject->GetJoinRoomButtonObject()->GetComponent<Button>();
+		auto backTitleButton = matchStageReconnectUIObject->GetBackTitleButtonObject()->GetComponent<Button>();
+
+		std::vector<std::shared_ptr<UICancelEventer>> backTitleEventers;
+		backTitleEventers.push_back(matchingSelectUIObject->GetFreeMatchingButtonObject()->GetComponent<UICancelEventer>());
+		backTitleEventers.push_back(matchingSelectUIObject->GetCreateRoomButtonObject()->GetComponent<UICancelEventer>());
+		backTitleEventers.push_back(matchingSelectUIObject->GetJoinRoomButtonObject()->GetComponent<UICancelEventer>());
 
 		std::weak_ptr<Online::OnlineMatching> weakOnlineMatching = onlineMatching;
+		std::weak_ptr<MatchStageTransitioner> weakMatchStageTransitioner = matchStageTransitioner;
 
 		matchStageUIObject->GetComponent<UICancelEventer>()->AddCancelEvent([weakOnlineMatching, weakMatchingSyncPlayerObject]()
 			{
@@ -107,6 +116,21 @@ namespace basecross
 				onlineMatching->StartJoinPasswordMatching(password);
 			}
 		);
+
+		backTitleButton->AddPushEvent([weakMatchStageTransitioner]()
+			{
+				weakMatchStageTransitioner.lock()->BackTitleStage();
+			}
+		);
+
+		for (const auto& backTitleEventer : backTitleEventers)
+		{
+			backTitleEventer->AddCancelEvent([weakMatchStageTransitioner]()
+				{
+					weakMatchStageTransitioner.lock()->BackTitleStage();
+				}
+			);
+		}
 
 		EventSystem::GetInstance(GetThis<Stage>())->SetBasicInputer(PlayerInputer::GetInstance());
 	}

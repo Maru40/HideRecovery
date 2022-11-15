@@ -9,6 +9,7 @@ namespace basecross
 namespace StageObject
 {
 	class MatchingSelectUIObject;
+	class MatchStageReconnectUIObject;
 
 	/// <summary>
 	/// MatchStageのUIオブジェクト
@@ -20,6 +21,7 @@ namespace StageObject
 		std::weak_ptr<MatchingSelectUIObject> m_matchingSelectUIObject; // マッチング選択UIオブジェクト
 		std::weak_ptr<PasscodeUI> m_passcodeUIObject; // パスワード入力用UIオブジェクト
 		std::weak_ptr<Numbers> m_passwordViewNumbers; // パスワード表示用UIオブジェクト
+		std::weak_ptr<MatchStageReconnectUIObject> m_matchStageReconnectUIObject; // 再接続用UIオブジェクト
 
 	public:
 		MatchStageUIObject(const std::shared_ptr<Stage>& stage, const std::shared_ptr<UIObjectCSVBuilder>& builder);
@@ -41,6 +43,11 @@ namespace StageObject
 		/// </summary>
 		/// <returns>パスワード表示用UIオブジェクト</returns>
 		std::shared_ptr<Numbers> GetPasswordViewNumbers() const { return m_passwordViewNumbers.lock(); }
+		/// <summary>
+		/// 再接続用UIオブジェクトの取得
+		/// </summary>
+		/// <returns>再接続用UIオブジェクト</returns>
+		std::shared_ptr<MatchStageReconnectUIObject> GetMatchStageReconnectUIObject() const { return m_matchStageReconnectUIObject.lock(); }
 	};
 }
 }

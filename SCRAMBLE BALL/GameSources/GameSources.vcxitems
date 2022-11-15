@@ -20,6 +20,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageCoreObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MainStageTransitioner.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MatchingSelectUIObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageReconnectUIObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageTransitioner.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageUIObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\ObjectHider.h" />
@@ -452,6 +453,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageCoreObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\MainStageTransitioner.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\MatchingSelectUIObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageReconnectUIObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageTransitioner.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageUIObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\ObjectHider.cpp" />

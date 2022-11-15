@@ -1468,6 +1468,9 @@
     <Filter Include="Watanabe\TimeLine\Clip\GameObjectClip">
       <UniqueIdentifier>{86cc73e7-8757-4c71-9882-d9ffc6080258}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Itabashi\StageObject\MatchStageReconnectUIObject">
+      <UniqueIdentifier>{1fff7357-c809-4863-a894-da1f69795c36}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2778,6 +2781,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\IncTimeLine.h">
       <Filter>Watanabe\TimeLine</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageReconnectUIObject.h">
+      <Filter>Itabashi\StageObject\MatchStageReconnectUIObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -3970,6 +3976,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\TimeLine.cpp">
       <Filter>Watanabe\TimeLine\TimeLine</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageReconnectUIObject.cpp">
+      <Filter>Itabashi\StageObject\MatchStageReconnectUIObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
