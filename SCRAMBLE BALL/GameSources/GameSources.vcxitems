@@ -403,6 +403,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\CameraKeyFrame.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\CameraTimeLine.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\ClipBase.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\GameObjectClip.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\GameObjectKeyFrame.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\GameObjectTimeLine.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\KeyFrameData.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\TimeLine.h" />
@@ -802,6 +804,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\CameraClip.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\CameraTimeLine.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\ClipBase.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\GameObjectClip.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\GameObjectTimeLine.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\TimeLine.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\TimeLineEventDataList.cpp" />
