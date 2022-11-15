@@ -33,7 +33,7 @@ namespace basecross {
 
 	namespace Task {
 
-		//std::mutex MoveAstar::m_mtx;
+		std::mutex MoveAstar::m_mtx;
 
 		//--------------------------------------------------------------------------------------
 		///	ターゲットの近くまでAstarを利用して移動するタスクパラメータ
@@ -126,22 +126,17 @@ namespace basecross {
 
 		void MoveAstar::NextRoute() {
 			//SetIsSearchRoute(true);		//検索開始
-			//std::lock_guard<std::mutex> lock(m_mtx);
+			std::lock_guard<std::mutex> lock(m_mtx);
 
 			if (m_areaRoute.empty()) {
 				SetIsSearchRoute(false);//検索終了
 				return;
 			}
 
-			//減速処理開始
-			//m_velocityManager.lock()->StartDeseleration();
-
 			auto positions = CalculateMovePositions();	//新しいポジションに変更
 
 			SelectTask();	//タスクの再始動
 
-			//減速処理終了
-			//m_velocityManager.lock()->SetIsDeseleration(false);
 			SetIsSearchRoute(false);	//検索終了
 		}
 
