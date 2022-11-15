@@ -107,7 +107,7 @@ namespace basecross {
 
 		{
 			// アニメーション終了後画面遷移を許可する
-			float startTime = IsDraw ? 0.5f : 4.0f;
+			float startTime = IsDraw ? 1.0f : 4.0f;
 			timeline::TimeLine::GetInstance()->AddEvent(startTime, [&]() {m_isTransitionable = true; });
 		}
 
@@ -118,14 +118,17 @@ namespace basecross {
 		{
 			// 1チームのメンバー数
 			auto eachTeamMemberCount = int(team::TEAM_MEMBER_COUNT / 2);
+			const float offsetTime[] = {
+				0.6f,0.7f,0.8f
+			};
 			for (int i = 1; i < eachTeamMemberCount + 1; i++) {
 				auto scoreUI = uiBuilder->GetUIObject(L"Red" + Util::IntToWStr(i) + L"Score");
-				CreateUIAnimation(L"RedScoreUI" + Util::IntToWStr(i), scoreUI, Vec2(-400, 0));
+				CreateUIAnimation(L"RedScoreUI" + Util::IntToWStr(i), scoreUI, Vec2(-400, 0), offsetTime[i - 1]);
 			}
 
 			for (int i = 1; i < eachTeamMemberCount + 1; i++) {
 				auto scoreUI = uiBuilder->GetUIObject(L"Blue" + Util::IntToWStr(i) + L"Score");
-				CreateUIAnimation(L"BlueScoreUI" + Util::IntToWStr(i), scoreUI, Vec2(400, 0));
+				CreateUIAnimation(L"BlueScoreUI" + Util::IntToWStr(i), scoreUI, Vec2(400, 0), offsetTime[i - 1]);
 			}
 			{
 				const wstring keys[] = {
@@ -136,7 +139,7 @@ namespace basecross {
 				};
 				for (auto& key : keys) {
 					auto obj = uiBuilder->GetUIObject(key);
-					CreateUIAnimation(key, obj, Vec2(0, -200));
+					CreateUIAnimation(key, obj, Vec2(0, -200), 0.5f);
 				}
 			}
 
@@ -162,6 +165,10 @@ namespace basecross {
 	}
 
 	void ResultStage::CreateUIAnimation(const wstring& clipName, const shared_ptr<UIObjectBase>& uiObject, const Vec2& offset) {
+		CreateUIAnimation(clipName, uiObject, offset, 0);
+	}
+
+	void ResultStage::CreateUIAnimation(const wstring& clipName, const shared_ptr<UIObjectBase>& uiObject, const Vec2& offset, float offsetTime) {
 		// UIオブジェクトクリップの作成
 		auto uiClip = timeline::TimeLine::GetInstance()
 			->CreateClip<timeline::UIObjectClip>(clipName);
@@ -184,7 +191,8 @@ namespace basecross {
 
 		// 引き分けの場合はUIアニメーションをすぐに再生
 		const bool IsDraw = PointManager::GetInstance()->IsDraw();
-		float startTime = IsDraw ? 0.0f : 3.5f;
+		float startTime = IsDraw ? 0.0f : 3.0f;
+		startTime += offsetTime;
 		uiClip->AddKeyFrame(timeline::UIObjectKeyFrame::Create(beforeRectData, startTime, Lerp::rate::Cube));
 		uiClip->AddKeyFrame(timeline::UIObjectKeyFrame::Create(nowRectData, startTime + 0.5f, Lerp::rate::Cube));
 	}
