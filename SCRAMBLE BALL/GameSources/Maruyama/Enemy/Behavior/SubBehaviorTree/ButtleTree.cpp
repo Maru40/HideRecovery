@@ -217,8 +217,16 @@ namespace basecross {
 					);
 
 					//アタックセレクター
+					//m_behaviorTree->AddDecorator<Decorator::CanCurrentTarget>(
+					//	NodeType::AttackSelecter, enemy->GetGameObject()
+					//);
+
 					m_behaviorTree->AddDecorator<Decorator::CanCurrentTarget>(
-						NodeType::AttackSelecter, enemy->GetGameObject()
+						NodeType::AttackMoveSelecter, enemy->GetGameObject()
+					);
+
+					m_behaviorTree->AddDecorator<Decorator::CanCurrentTarget>(
+						NodeType::ShotTask, enemy->GetGameObject()
 					);
 				}
 
