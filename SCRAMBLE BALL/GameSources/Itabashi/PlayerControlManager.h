@@ -192,5 +192,7 @@ namespace basecross
 
 		void ResetMoveSpeed();
 
+		_NODISCARD float GetDefaultSpeed() const noexcept { return m_defaultSpeed; }
+
 	};
 }
