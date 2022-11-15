@@ -12,6 +12,7 @@
 
 #include "Maruyama/Enemy/Component/EnemyBase.h"
 #include "Maruyama/Enemy/AIDirector/CoordinatorBase.h"
+#include "Maruyama/Enemy/AIDirector/FactionCoordinator.h"
 
 #include "Maruyama/Player/Component/ItemBag.h"
 
@@ -36,12 +37,12 @@ namespace basecross {
 						return false;	//‘JˆÚ‚µ‚È‚¢B
 					}
 
-					auto assignedFaction = GetOwner()->GetAssignedFaction();
-					if (!assignedFaction) {
+					auto faction = GetOwner()->GetFactionCoordinator();
+					if (!faction) {
 						return false;
 					}
 
-					for (auto& weakMember : assignedFaction->GetMembers()) {
+					for (auto& weakMember : faction->GetMembers()) {
 						auto member = weakMember.lock();
 						if (member == GetOwner()) {	//©•ª©g‚È‚çˆ—‚ğ”ò‚Î‚·B
 							continue;	

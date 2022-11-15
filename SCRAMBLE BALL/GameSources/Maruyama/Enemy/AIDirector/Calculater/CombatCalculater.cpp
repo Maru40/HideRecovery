@@ -11,6 +11,7 @@
 #include "CombatCalculater.h"
 
 #include "Watanabe/Component/PlayerStatus.h"
+#include "Maruyama/Utility/Component/Targeted.h"
 
 namespace basecross {
 
@@ -36,6 +37,11 @@ namespace basecross {
 
 				float toTargetRange = (targetTrans->GetPosition() - selfTransform->GetPosition()).length();
 				result += toTargetRange;	//距離を評価値とする。
+
+				//ターゲット本体の優先度を追加
+				if (auto targeted = target->GetComponent<Targeted>(false)) {
+					result *= targeted->GetPriority();
+				}
 
 				//playerステータスがある場合
 				if (auto status = target->GetComponent<PlayerStatus>(false)) {

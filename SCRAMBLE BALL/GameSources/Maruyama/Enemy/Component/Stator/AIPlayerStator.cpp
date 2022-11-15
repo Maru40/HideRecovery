@@ -45,6 +45,8 @@
 #include "Watanabe/Component/PlayerStatus.h"
 #include "Maruyama/Player/Component/PlayerDeader.h"
 
+#include "Maruyama/Utility/Component/Targeted.h"
+
 namespace basecross {
 	namespace Enemy {
 
@@ -74,8 +76,8 @@ namespace basecross {
 
 			//メッセージが届いていたら。
 			if (buttleTransition && buttleTransition->GetValue() < member.buttleStartEyeRange) {
-				auto status = buttleTransition->GetTarget()->GetComponent<PlayerStatus>(false);
-				if (status && status->IsDead()) {
+				auto targeted = buttleTransition->GetTarget()->GetComponent<Targeted>(false);
+				if (targeted && !targeted->CanTarget()) {
 					return false;
 				}
 
