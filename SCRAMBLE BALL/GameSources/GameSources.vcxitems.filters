@@ -1456,14 +1456,20 @@
     <Filter Include="Watanabe\TimeLine\TimeLine">
       <UniqueIdentifier>{b9e90dc1-4191-4279-99da-3bb88c37715e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Watanabe\TimeLine\ClipBase">
-      <UniqueIdentifier>{9570925d-a9aa-47c3-ad9a-02da97d14b93}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Watanabe\TimeLine\CameraClip">
-      <UniqueIdentifier>{bf97deea-6fa4-437e-959a-fab8392fa05d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Watanabe\TimeLine\KeyFrame">
       <UniqueIdentifier>{7276b6a8-687c-4373-a21e-63fda2a51e94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\TimeLine\Clip">
+      <UniqueIdentifier>{9dfaa103-0ddd-4c30-bc90-fd06fc93ba04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\TimeLine\Clip\CameraClip">
+      <UniqueIdentifier>{bf97deea-6fa4-437e-959a-fab8392fa05d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\TimeLine\Clip\ClipBase">
+      <UniqueIdentifier>{9570925d-a9aa-47c3-ad9a-02da97d14b93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\TimeLine\Clip\UIObjectClip">
+      <UniqueIdentifier>{c67b2c94-cf18-4eba-8457-cac04bb2a604}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -2752,15 +2758,21 @@
       <Filter>Watanabe\TimeLine\TimeLine</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\ClipBase.h">
-      <Filter>Watanabe\TimeLine\ClipBase</Filter>
+      <Filter>Watanabe\TimeLine\Clip\ClipBase</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\CameraClip.h">
-      <Filter>Watanabe\TimeLine\CameraClip</Filter>
+      <Filter>Watanabe\TimeLine\Clip\CameraClip</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\KeyFrameData.h">
       <Filter>Watanabe\TimeLine\KeyFrame</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\CameraKeyFrame.h">
+      <Filter>Watanabe\TimeLine\KeyFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\UIObjectClip.h">
+      <Filter>Watanabe\TimeLine\Clip\UIObjectClip</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\UIObjectKeyFrame.h">
       <Filter>Watanabe\TimeLine\KeyFrame</Filter>
     </ClInclude>
   </ItemGroup>
@@ -3948,10 +3960,13 @@
       <Filter>Watanabe\TimeLine\TimeLine</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\ClipBase.cpp">
-      <Filter>Watanabe\TimeLine\ClipBase</Filter>
+      <Filter>Watanabe\TimeLine\Clip\ClipBase</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\CameraClip.cpp">
-      <Filter>Watanabe\TimeLine\CameraClip</Filter>
+      <Filter>Watanabe\TimeLine\Clip\CameraClip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\TimeLine\UIObjectClip.cpp">
+      <Filter>Watanabe\TimeLine\Clip\UIObjectClip</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

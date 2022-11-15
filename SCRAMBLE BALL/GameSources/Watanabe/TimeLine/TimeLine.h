@@ -1,11 +1,11 @@
 ﻿#pragma once
 #include "stdafx.h"
+#include "TimeLineEventDataList.h"
 #include "../Utility/BaseSingleton.h"
 
 namespace basecross {
 	namespace timeline {
 		class ClipBase;
-		class TimeLineEventDataList;
 
 		class TimeLine :public BaseSingletonGameObject<TimeLine> {
 			float m_delta = 0.0f;
@@ -22,6 +22,8 @@ namespace basecross {
 
 			void Play();
 			void Reset();
+
+			void AddEvent(float time, const function<void()>& func) { m_eventList->AddEvent(time, func); }
 		};
 	}
 }

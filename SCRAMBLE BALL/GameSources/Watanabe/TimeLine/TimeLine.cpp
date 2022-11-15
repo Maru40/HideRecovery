@@ -1,7 +1,6 @@
 ﻿#include "stdafx.h"
 #include "TimeLine.h"
 #include "ClipBase.h"
-#include "TimeLineEventDataList.h"
 #include "../DebugClass/Debug.h"
 
 namespace basecross {
