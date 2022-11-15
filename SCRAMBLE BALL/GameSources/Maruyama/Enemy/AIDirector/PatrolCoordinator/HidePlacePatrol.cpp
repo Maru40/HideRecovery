@@ -27,6 +27,8 @@
 
 #include "Watanabe/Component/PlayerStatus.h"
 
+#include "Maruyama/Enemy/AIDirector/Calculater/HidePlacePatrolCalculater.h"
+
 namespace basecross {
 
 	namespace Enemy {
@@ -72,6 +74,7 @@ namespace basecross {
 
 				}
 
+				//バトル遷移のタプルが呼ばれたら
 				void HidePlacePatrol::ObserveTransitionButtle() {
 					auto tupleSpace = GetTupleSpace();
 
@@ -111,20 +114,17 @@ namespace basecross {
 					tupleSpace->Takes<Tuple::ButtleTarget>();
 				}
 
+				//ターゲット発見タプルが呼ばれたら。
 				void HidePlacePatrol::FindTarget(const std::shared_ptr<Tuple::FindTarget>& tuple) {
 					auto tupleSpace = GetTupleSpace();
 					auto takeTuple = tupleSpace->Take(tuple);
+					auto target = tuple->GetTarget();
 
 					for (auto& member : GetMembers()) {
-						constexpr float RayHitValue = 2.0f;	//障害物の分、評価値を下げるための設定。
-						constexpr float TransitionTargetRange = 3.0f;	//一定距離以上ならターゲット通知をしない処理
-
 						//ターゲットとの距離を測定。
-						auto target = tuple->GetTarget();
 						auto memberObject = member.lock()->GetGameObject();
-						auto toTargetVec = maru::Utility::CalcuToTargetVec(memberObject, target);
 
-						float hopeValue = toTargetVec.length();	//期待値
+						float hopeValue = Calculater::HidePlacePatorl::CalculateEvalutionValue(memberObject, target);	//期待値
 
 						tupleSpace->Write<Tuple::ButtleTarget>(member.lock(), target, hopeValue);	//ターゲットを狙うことをリクエスト
 					}
