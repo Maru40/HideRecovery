@@ -159,6 +159,14 @@ namespace Online
 		return GetInstance()->m_client != nullptr;
 	}
 
+	void OnlineManager::connectionErrorReturn(int errorCode)
+	{
+	}
+
+	void OnlineManager::clientErrorReturn(int errorCode)
+	{
+	}
+
 	void OnlineManager::joinRoomEventAction(int playerNr, const ExitGames::Common::JVector<int>& playernrs, const ExitGames::LoadBalancing::Player& player)
 	{
 		std::vector<int> playerNumbers;
