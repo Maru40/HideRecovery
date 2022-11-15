@@ -76,6 +76,12 @@ namespace Online
 		m_isConnected = true;
 	}
 
+	void OnlineMatching::OnDisconnected()
+	{
+		m_isConnected = false;
+		m_isMatching = false;
+	}
+
 	void OnlineMatching::OnCreateRoom()
 	{
 	}
