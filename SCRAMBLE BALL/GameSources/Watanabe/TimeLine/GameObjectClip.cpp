@@ -4,8 +4,8 @@
 
 namespace basecross {
 	namespace timeline {
-		GameObjectClip::GameObjectClip(const shared_ptr<Stage>& stage, const wstring& clipName)
-			:ClipBase(stage, clipName)
+		GameObjectClip::GameObjectClip()
+			:ClipBase()
 		{}
 
 		shared_ptr<void> GameObjectClip::Interpolation(

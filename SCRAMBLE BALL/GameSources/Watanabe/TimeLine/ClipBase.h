@@ -13,10 +13,8 @@ namespace basecross {
 			list<shared_ptr<KeyFrameBase>> m_keyFrameList;
 			AdvQueue<shared_ptr<KeyFrameBase>> m_keyFrameQueue;
 
-			wstring m_clipName;
-			weak_ptr<Stage> m_stage;
 		public:
-			ClipBase(const shared_ptr<Stage>& stage, const wstring& clipName);
+			ClipBase();
 
 			virtual void Create() {}
 

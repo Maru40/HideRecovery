@@ -8,7 +8,9 @@ namespace basecross {
 		class UIObjectClip :public ClipBase {
 			weak_ptr<RectTransform> m_rectTrans;
 		public:
-			UIObjectClip(const shared_ptr<Stage>& stage, const wstring& clipName);
+			UIObjectClip();
+
+			void SetTargetRectTransform(const shared_ptr<RectTransform>& obj) { m_rectTrans = obj; }
 
 			shared_ptr<void> Interpolation(
 				const shared_ptr<KeyFrameBase>& current,
@@ -16,8 +18,6 @@ namespace basecross {
 				float delta)override;
 
 			void ApplyDataToObject(const shared_ptr<void>& objectAnimationData)override;
-
-			void SetTargetObject(const shared_ptr<RectTransform>& obj) { m_rectTrans = obj; }
 		};
 	}
 }

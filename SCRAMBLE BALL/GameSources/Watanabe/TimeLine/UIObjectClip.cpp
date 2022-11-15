@@ -4,8 +4,8 @@
 
 namespace basecross {
 	namespace timeline {
-		UIObjectClip::UIObjectClip(const shared_ptr<Stage>& stage, const wstring& clipName)
-			:ClipBase(stage, clipName)
+		UIObjectClip::UIObjectClip()
+			:ClipBase()
 		{}
 
 		shared_ptr<void> UIObjectClip::Interpolation(

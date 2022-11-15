@@ -86,18 +86,17 @@ namespace basecross {
 		AddGameObject<timeline::TimeLine>();
 
 		const bool IsDraw = PointManager::GetInstance()->IsDraw();
+		// 引き分け以外
 		if (!IsDraw) {
-			auto cameraClip = make_shared<timeline::CameraClip>(GetThis<ResultStage>(), L"Camera");
-
+			// カメラクリップの作成
+			auto cameraClip = timeline::TimeLine::GetInstance()->CreateClip<timeline::CameraClip>(L"Camera");
+			cameraClip->SetTargetCamera(GetView()->GetTargetCamera());
 			cameraClip->AddKeyFrame(timeline::CameraKeyFrame::Create(Vec3(-2, 1, 2), Vec3(-3, 0.5f, 0), 0, Lerp::rate::Cube));
 			cameraClip->AddKeyFrame(timeline::CameraKeyFrame::Create(Vec3(-0.5f, 1, 2), Vec3(-1.5f, 0.5f, 0), 0.5f, Lerp::rate::Cube));
 			cameraClip->AddKeyFrame(timeline::CameraKeyFrame::Create(Vec3(1, 1, 2), Vec3(0, 0.5f, 0), 1.5f, Lerp::rate::Cube));
 			cameraClip->AddKeyFrame(timeline::CameraKeyFrame::Create(Vec3(2.5f, 1, 2), Vec3(1.5f, 0.5f, 0), 2.5f, Lerp::rate::Cube));
 			cameraClip->AddKeyFrame(timeline::CameraKeyFrame::Create(Vec3(0, 1, 5), Vec3(0, 1, 0), 3.5f, Lerp::rate::Cube));
-			timeline::TimeLine::GetInstance()->AddClip(cameraClip);
-			timeline::TimeLine::GetInstance()->AddEvent(4.0f, [&]() {m_isTransitionable = true; });
 
-			// 引き分け以外に生成
 			// 紙吹雪エフェクト
 			auto effectObject = AddGameObject<GameObject>();
 			effectObject->GetComponent<Transform>()->SetPosition(Vec3(0, 5, 0));
@@ -105,8 +104,11 @@ namespace basecross {
 			efkComp->SetEffectResource(L"Confetti");
 			efkComp->PlayLoop(L"Confetti");
 		}
-		else {
-			timeline::TimeLine::GetInstance()->AddEvent(0.5f, [&]() {m_isTransitionable = true; });
+
+		{
+			// アニメーション終了後画面遷移を許可する
+			float startTime = IsDraw ? 0.5f : 4.0f;
+			timeline::TimeLine::GetInstance()->AddEvent(startTime, [&]() {m_isTransitionable = true; });
 		}
 
 		//playerの生成
@@ -118,30 +120,26 @@ namespace basecross {
 			auto eachTeamMemberCount = int(team::TEAM_MEMBER_COUNT / 2);
 			for (int i = 1; i < eachTeamMemberCount + 1; i++) {
 				auto scoreUI = uiBuilder->GetUIObject(L"Red" + Util::IntToWStr(i) + L"Score");
-				CreateUIAnimation(scoreUI, Vec2(-400, 0));
+				CreateUIAnimation(L"RedScoreUI" + Util::IntToWStr(i), scoreUI, Vec2(-400, 0));
 			}
 
 			for (int i = 1; i < eachTeamMemberCount + 1; i++) {
 				auto scoreUI = uiBuilder->GetUIObject(L"Blue" + Util::IntToWStr(i) + L"Score");
-				CreateUIAnimation(scoreUI, Vec2(400, 0));
+				CreateUIAnimation(L"BlueScoreUI" + Util::IntToWStr(i), scoreUI, Vec2(400, 0));
+			}
+			{
+				const wstring keys[] = {
+					L"ToTitle",
+					L"ToContinue",
+					L"AButton",
+					L"BButton"
+				};
+				for (auto& key : keys) {
+					auto obj = uiBuilder->GetUIObject(key);
+					CreateUIAnimation(key, obj, Vec2(0, -200));
+				}
 			}
 
-			{
-				auto obj = uiBuilder->GetUIObject(L"ToTitle");
-				CreateUIAnimation(obj, Vec2(0, -200));
-			}
-			{
-				auto obj = uiBuilder->GetUIObject(L"ToContinue");
-				CreateUIAnimation(obj, Vec2(0, -200));
-			}
-			{
-				auto obj = uiBuilder->GetUIObject(L"AButton");
-				CreateUIAnimation(obj, Vec2(0, -200));
-			}
-			{
-				auto obj = uiBuilder->GetUIObject(L"BButton");
-				CreateUIAnimation(obj, Vec2(0, -200));
-			}
 			{
 				const wstring keys[] = {
 					L"WinOrLose",
@@ -152,39 +150,43 @@ namespace basecross {
 				};
 				for (auto& key : keys) {
 					auto obj = uiBuilder->GetUIObject(key);
-					CreateUIAnimation(obj, Vec2(0, 400));
+					CreateUIAnimation(key, obj, Vec2(0, 400));
 				}
 			}
 		}
 
 		Online::OnlineManager::Disconnect();
 
+		// タイムラインの再生
 		timeline::TimeLine::GetInstance()->Play();
 	}
 
-	void ResultStage::CreateUIAnimation(const shared_ptr<UIObjectBase>& uiObject, const Vec2& offset) {
-		auto uiClip = make_shared<timeline::UIObjectClip>(GetThis<ResultStage>(), L"UI");
+	void ResultStage::CreateUIAnimation(const wstring& clipName, const shared_ptr<UIObjectBase>& uiObject, const Vec2& offset) {
+		// UIオブジェクトクリップの作成
+		auto uiClip = timeline::TimeLine::GetInstance()
+			->CreateClip<timeline::UIObjectClip>(clipName);
 
 		auto rectTrans = uiObject->GetRectTransform();
+		// 現在のRectTransformデータ
 		auto nowRectData = RectTransformData(
 			rectTrans->GetPosition(),
 			rectTrans->GetScale(),
 			rectTrans->GetRotation()
 		);
-
-		uiClip->SetTargetObject(rectTrans);
+		// 動かすUIのRectTransformをクリップにセット
+		uiClip->SetTargetRectTransform(rectTrans);
 
 		auto beforeRectData = nowRectData;
 		beforeRectData.Position += offset;
 
+		// UIの位置を開始位置に
 		rectTrans->SetPosition(beforeRectData.Position);
 
+		// 引き分けの場合はUIアニメーションをすぐに再生
 		const bool IsDraw = PointManager::GetInstance()->IsDraw();
 		float startTime = IsDraw ? 0.0f : 3.5f;
 		uiClip->AddKeyFrame(timeline::UIObjectKeyFrame::Create(beforeRectData, startTime, Lerp::rate::Cube));
 		uiClip->AddKeyFrame(timeline::UIObjectKeyFrame::Create(nowRectData, startTime + 0.5f, Lerp::rate::Cube));
-
-		timeline::TimeLine::GetInstance()->AddClip(uiClip);
 	}
 
 	void ResultStage::OnUpdate() {
@@ -212,6 +214,7 @@ namespace basecross {
 	}
 
 	void ResultStage::CreatePlayers(const team::TeamType winerType) {
+		// 引き分けのとき生成しない
 		if (PointManager::GetInstance()->IsDraw()) {
 			return;
 		}
@@ -228,6 +231,7 @@ namespace basecross {
 			{}
 		};
 
+		// 位置、アニメーションの種類、遷移する秒数
 		Data datas[] = {
 			Data(Vec3(-1.5f, 0.1f, 0.0f), PlayerAnimationState::State::Win2,0),
 			Data(Vec3(+0.0f, 0.1f, 0.0f), PlayerAnimationState::State::Win1,0.5f),
@@ -241,21 +245,24 @@ namespace basecross {
 			auto teamMember = player->GetComponent<I_TeamMember>(false);
 			teamMember->SetTeam(winerType);
 
+			//Win2のみ歩きがあるためアニメーションを作成する
 			if (data.state == PlayerAnimationState::State::Win2) {
-				auto gameObjectClip = make_shared<timeline::GameObjectClip>(GetThis<ResultStage>(), L"Player");
-				gameObjectClip->SetTargetObject(playerTrans);
+				auto gameObjectClip = timeline::TimeLine::GetInstance()->
+					CreateClip<timeline::GameObjectClip>(L"PlayerObject");
+				gameObjectClip->SetTargetTransform(playerTrans);
 
 				TransformData tData = {};
+				// 歩きの始点
 				tData.Position = data.position - Vec3(0, 0, 2);
 				playerTrans->SetPosition(tData.Position);
 				gameObjectClip->AddKeyFrame(timeline::GameObjectKeyFrame::Create(tData, 0.0f, Lerp::rate::Linear));
+				// 歩きの終点
 				tData.Position = data.position;
 				gameObjectClip->AddKeyFrame(timeline::GameObjectKeyFrame::Create(tData, 1.3f, Lerp::rate::Linear));
-
-				timeline::TimeLine::GetInstance()->AddClip(gameObjectClip);
 			}
 
-			auto animator = player->GetComponent<PlayerAnimator>(false);
+			// 初期値はWait
+			auto animator = player->GetComponent<PlayerAnimator>();
 			animator->ChangePlayerAnimation(PlayerAnimationState::State::Wait);
 
 			// タイムラインに勝利アニメーションを始めるイベントを登録

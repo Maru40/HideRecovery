@@ -3,15 +3,9 @@
 
 namespace basecross {
 	namespace timeline {
-		CameraClip::CameraClip(const shared_ptr<Stage>& stage, const wstring& clipName)
-			:ClipBase(stage, clipName)
-		{
-			Create();
-		}
-
-		void CameraClip::Create() {
-			m_camera = m_stage.lock()->GetView()->GetTargetCamera();
-		}
+		CameraClip::CameraClip()
+			:ClipBase()
+		{}
 
 		shared_ptr<void> CameraClip::Interpolation(
 			const shared_ptr<KeyFrameBase>& current,

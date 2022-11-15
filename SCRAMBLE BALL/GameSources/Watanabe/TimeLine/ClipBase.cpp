@@ -3,8 +3,7 @@
 
 namespace basecross {
 	namespace timeline {
-		ClipBase::ClipBase(const shared_ptr<Stage>& stage, const wstring& clipName)
-			:m_clipName(clipName), m_stage(stage)
+		ClipBase::ClipBase()
 		{}
 
 		void ClipBase::Update(float delta) {

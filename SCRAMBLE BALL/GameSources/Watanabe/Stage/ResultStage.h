@@ -14,7 +14,7 @@ namespace basecross {
 
 		void CreateViewLight();
 
-		void CreateUIAnimation(const shared_ptr<UIObjectBase>& uiObject, const Vec2& offset);
+		void CreateUIAnimation(const wstring& clipName, const shared_ptr<UIObjectBase>& uiObject, const Vec2& offset);
 	public:
 		ResultStage() :GameStageBase() {}
 

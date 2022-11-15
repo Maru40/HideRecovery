@@ -13,9 +13,9 @@ namespace basecross {
 		class CameraClip :public ClipBase {
 			weak_ptr<Camera> m_camera;
 		public:
-			CameraClip(const shared_ptr<Stage>& stage, const wstring& clipName);
+			CameraClip();
 
-			void Create()override;
+			void SetTargetCamera(const shared_ptr<Camera>& camera) { m_camera = camera; }
 
 			shared_ptr<void> Interpolation(
 				const shared_ptr<KeyFrameBase>& current,
