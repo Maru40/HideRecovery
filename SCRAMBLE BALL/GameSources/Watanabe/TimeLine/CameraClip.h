@@ -5,6 +5,11 @@
 
 namespace basecross {
 	namespace timeline {
+		struct CameraData {
+			Vec3 Eye;
+			Vec3 At;
+		};
+
 		class CameraClip :public ClipBase {
 			weak_ptr<Camera> m_camera;
 		public:
