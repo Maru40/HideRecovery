@@ -77,7 +77,6 @@
 
 #include "Maruyama/Utility/Component/Targeted.h"
 
-
 namespace basecross {
 	PlayerObject::PlayerObject(const std::shared_ptr<Stage>& stage) :
 		GameObject(stage)
@@ -146,6 +145,12 @@ namespace basecross {
 		auto animator = AddComponent<PlayerAnimator>();
 		// 死んだらディゾブル開始
 		animator->AddAnimationEvent(PlayerAnimationState::State::Dead,
+			[dissolveAnimator]() {
+				dissolveAnimator->Start();
+			},
+			nullptr, nullptr
+				);
+		animator->AddAnimationEvent(PlayerAnimationState::State::GSDead,
 			[dissolveAnimator]() {
 				dissolveAnimator->Start();
 			},
