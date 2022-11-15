@@ -5,6 +5,7 @@
 #include "Watanabe/UI/PasscodeUI.h"
 #include "Itabashi/UICancelEventer.h"
 #include "Itabashi/PasswordTextUI.h"
+#include "Itabashi/MatchStageReconnectUIObject.h"
 
 namespace basecross
 {
@@ -35,10 +36,16 @@ namespace basecross
 			passwordViewNumbers->SetActive(false);
 			m_passwordViewNumbers = passwordViewNumbers;
 
+			auto reconnectUIObject = GetStage()->AddGameObject<MatchStageReconnectUIObject>();
+			reconnectUIObject->SetParent(objectThis);
+			reconnectUIObject->SetActive(false);
+			m_matchStageReconnectUIObject = reconnectUIObject;
+
 			auto matchingUIController = AddComponent<MatchingUIController>(m_builder);
 			matchingUIController->SetMatchingSelectUIObject(matchingSelectUIObject);
 			matchingUIController->SetPasscodeUIObject(passcodeUIObject);
 			matchingUIController->SetPasswordViewNumbersObject(passwordViewNumbers);
+			matchingUIController->SetMatchStageReconnectUIObject(reconnectUIObject);
 
 			auto cancelEventer = AddComponent<UICancelEventer>();
 
