@@ -89,6 +89,11 @@ namespace basecross {
 		//距離を計ってソート用の配列に代入する。
 		for (auto& edge : edges) {
 			auto node = graph->GetNode(edge->GetTo());
+			if (!node) {
+				auto strIndex = std::to_wstring(edge->GetTo());
+				Debug::GetInstance()->Log(L"OpenDataHandler::CreateOpenData(): ノードがnullです。: " + strIndex);
+				continue;
+			}
 			float toNodeRange = (node->GetPosition() - transform->GetPosition()).length();
 
 			datas.push_back(Data(node, toNodeRange));
