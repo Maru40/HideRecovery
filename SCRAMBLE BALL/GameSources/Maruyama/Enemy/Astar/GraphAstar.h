@@ -169,6 +169,10 @@ namespace basecross {
 		/// <param name="areaIndex">エリアインデックス</param>
 		/// <returns>エリアごとに分けたグラフ</returns>
 		const std::shared_ptr<const GraphType> GetGraph(const int areaIndex) const {
+			if (m_graphMap.count(areaIndex) == 0) {
+				return nullptr;
+			}
+
 			return m_graphMap.at(areaIndex);
 		}
 
