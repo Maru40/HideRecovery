@@ -206,6 +206,7 @@ namespace basecross {
 				return nullptr;
 			}
 
+			auto target = targetManager->GetTarget();
 			auto selfAstarNodeController = targetManager->GetTarget()->GetComponent<SelfAstarNodeController>(false);
 			if (!selfAstarNodeController) {
 				return nullptr;
@@ -213,6 +214,7 @@ namespace basecross {
 
 			auto node = selfAstarNodeController->CalculateNode();
 			if (!node) {
+				Debug::GetInstance()->Log(target->GetComponent<Transform>(false)->GetPosition());
 				Debug::GetInstance()->Log(L"TaregetNode‚ªnullptr‚Å‚·B");
 			}
 			
