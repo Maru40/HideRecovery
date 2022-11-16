@@ -41,7 +41,7 @@ namespace basecross {
 
 	WallAvoid_Parametor::WallAvoid_Parametor():
 		avoidPower(0.15f),
-		offset(Vec3(0.0f, 0.5f, 0.0f))
+		offset(Vec3(0.0f, -0.35f, 0.0f))
 	{}
 
 	//--------------------------------------------------------------------------------------
@@ -111,7 +111,7 @@ namespace basecross {
 		}
 
 		auto objects = GetStage()->GetGameObjectVec();
-		auto obstacles = maru::UtilityObstacle::FindObstacles(objects, maru::UtilityObstacle::DEFAULT_OBSTACLE_TAGS);
+		auto obstacles = maru::UtilityObstacle::FindObstacles(objects, maru::UtilityObstacle::DEFAULT_OBSTACLE_AND_ENEMY_AND_HIDEPLACE);
 
 		m_obstacles = maru::Utility::ConvertArraySharedToWeak(obstacles);
 	}
