@@ -94,7 +94,8 @@ namespace basecross {
 			cameraClip->AddKeyFrame(timeline::CameraKeyFrame::Create(Vec3(-2, 1, 2), Vec3(-3, 0.5f, 0), 0, Lerp::rate::Cube));
 			cameraClip->AddKeyFrame(timeline::CameraKeyFrame::Create(Vec3(-0.5f, 1, 2), Vec3(-1.5f, 0.5f, 0), 0.5f, Lerp::rate::Cube));
 			cameraClip->AddKeyFrame(timeline::CameraKeyFrame::Create(Vec3(1, 1, 2), Vec3(0, 0.5f, 0), 1.5f, Lerp::rate::Cube));
-			cameraClip->AddKeyFrame(timeline::CameraKeyFrame::Create(Vec3(2.5f, 1, 2), Vec3(1.5f, 0.5f, 0), 2.5f, Lerp::rate::Cube));
+			cameraClip->AddKeyFrame(timeline::CameraKeyFrame::Create(Vec3(2.5f, 1, 2), Vec3(1.5f, 0.5f, 0), 2.5f, Lerp::rate::Cos));
+			cameraClip->AddKeyFrame(timeline::CameraKeyFrame::Create(Vec3(0, 1, 6), Vec3(0, 1, 0), 3.3f, Lerp::rate::Cos));
 			cameraClip->AddKeyFrame(timeline::CameraKeyFrame::Create(Vec3(0, 1, 5), Vec3(0, 1, 0), 3.5f, Lerp::rate::Cube));
 
 			// 紙吹雪エフェクト
