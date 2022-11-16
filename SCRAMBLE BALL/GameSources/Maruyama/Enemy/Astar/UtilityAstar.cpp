@@ -26,7 +26,11 @@ namespace basecross {
 		return SearchNearNode(astar.GetGraph(), targetPos);
 	}
 
-	std::shared_ptr<NavGraphNode> UtilityAstar::SearchNearNode(const std::shared_ptr<const GraphAstar::GraphType>& graph, const Vec3& targetPos, const bool isObstacleConfirmation) {
+	std::shared_ptr<NavGraphNode> UtilityAstar::SearchNearNode(
+		const std::shared_ptr<const GraphAstar::GraphType>& graph, 
+		const Vec3& targetPos, 
+		const bool isObstacleConfirmation
+	) {
 		const auto& nodes = graph->GetNodes();	//ƒm[ƒh”z—ñ‚Ìæ“¾
 
 		float minRange = FLT_MAX;
