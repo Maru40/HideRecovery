@@ -19,6 +19,7 @@
 #include "Maruyama/Enemy/Component/Stator/StateNode/StateNode_Buttle.h"
 #include "Maruyama/Enemy/Component/Stator/StateNode/StateNode_Dyning.h"
 #include "Maruyama/Enemy/Component/Stator/StateNode/StateNode_Dead.h"
+#include "Maruyama/Enemy/Component/Stator/StateNode/StateNode_Goal.h"
 
 #include "Maruyama/Enemy/Component/SelfAstarNodeController.h"
 
@@ -135,6 +136,9 @@ namespace basecross {
 			//ƒoƒgƒ‹
 			m_stateMachine->AddNode(StateType::Buttle, std::make_shared<StateNode::Buttle>(enemy));
 
+			//ƒS[ƒ‹’†
+			m_stateMachine->AddNode(StateType::Goal, std::make_shared<StateNode::Goal>(enemy));
+
 			//Ž€–S’†
 			m_stateMachine->AddNode(StateType::Dyning, std::make_shared<StateNode::Dyning>(enemy));
 
@@ -161,6 +165,14 @@ namespace basecross {
 				StateType::Buttle,
 				StateType::HidePlacePatrol,
 				[&](const TransitionMember& member) { return IsLostButtleTarget(member); }
+			);
+
+			//ƒS[ƒ‹
+			m_stateMachine->AddEdge(
+				StateType::Goal,
+				StateType::HidePlacePatrol,
+				[](const TransitionMember& member) { return true; },
+				true
 			);
 		}
 
