@@ -258,10 +258,10 @@ namespace basecross {
 
 			int index = node->GetIndex();
 
-
-
 			//そのノードのedgesの削除
 			m_edges.erase(index);
+			
+			std::vector<std::function<void()>> removeFunctions;	//削除関数を用意
 
 			//削除したインデクスが含まれるエッジを削除
 			for (int i = 0; i < m_edges.size(); i++) {
@@ -269,11 +269,17 @@ namespace basecross {
 					continue;
 				}
 
-				for (auto& edge : m_edges[i]) {
+				auto& edges = m_edges[i];
+				for (auto& edge : edges) {
 					if (edge->GetTo() == index) {  //行先がindexと一緒なら
-						RemoveEdge(edge->GetFrom(), edge->GetTo());
+						removeFunctions.push_back([&, edge]() { RemoveEdge(edge->GetFrom(), edge->GetTo()); });
 					}
 				}
+			}
+
+			//削除実装
+			for (auto& removeFunc : removeFunctions) {
+				removeFunc();
 			}
 
 			m_nextNodeIndex = index;
@@ -317,7 +323,7 @@ namespace basecross {
 		}
 
 		/// <summary>
-		/// 渡されたインデックスが含まれるエッジを全て削除する。
+		/// 渡されたインデックスが含まれるエッジを全て削除する。(現在使用不可)
 		/// </summary>
 		/// <param name="index">削除したいインデックス</param>
 		void RemoveEdge(const int& index) {
