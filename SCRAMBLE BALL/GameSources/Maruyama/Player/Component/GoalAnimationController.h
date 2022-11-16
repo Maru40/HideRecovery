@@ -15,6 +15,10 @@ namespace basecross {
 	class TaskList;
 	class Goal;
 
+	namespace Enemy {
+		class AIPlayerStator;
+	}
+
 	namespace Task {
 		struct Wait_Parametor;
 		struct ToTargetMove_Parametor;
@@ -66,6 +70,7 @@ namespace basecross {
 		std::weak_ptr<GameObject> m_ball;				//ボール
 		std::unique_ptr<TaskList<TaskEnum>> m_taskList;	//タスク管理
 		std::weak_ptr<GameObject> m_goalPerson;			// ゴールした人
+		std::weak_ptr<Enemy::AIPlayerStator> m_stator;	//ステーター
 
 		SoundClip m_goalSoundClip;
 		SoundClip m_goalStartSE;

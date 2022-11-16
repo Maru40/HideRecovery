@@ -33,6 +33,8 @@
 
 #include "Itabashi/PlayerControlManager.h"
 
+#include "Maruyama/Enemy/Component/Stator/AIPlayerStator.h"
+
 namespace basecross {
 	//--------------------------------------------------------------------------------------
 	/// ゴール中のアニメーションコントローラーのパラメータ
@@ -66,6 +68,8 @@ namespace basecross {
 	{}
 
 	void GoalAnimationController::OnLateStart() {
+		m_stator = GetGameObject()->GetComponent<Enemy::AIPlayerStator>(false);
+
 		auto animator = GetGameObject()->GetComponent<PlayerAnimator>(false);
 		if (!animator) {	//animatorがなかったら処理を終了
 			return;
@@ -154,6 +158,11 @@ namespace basecross {
 		//音を鳴らす
 		if (auto soundEmmiter = GetGameObject()->GetComponent<SoundEmitter>(false)) {
 			soundEmmiter->PlaySoundClip(m_goalStartSE);
+		}
+
+		//ステータ
+		if (auto stator = m_stator.lock()) {
+			stator->ChangeState(Enemy::AIPlayerStator::StateType::Goal, (int)Enemy::AIPlayerStator::StateType::Goal);
 		}
 
 		m_taskList->ForceStop();
