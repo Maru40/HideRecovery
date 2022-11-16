@@ -58,6 +58,9 @@ namespace basecross {
 
 		auto shadow = AddComponent<Shadowmap>();
 		shadow->SetMultiMeshResource(L"Box_Model");
+
+		AddTag(L"T_HidePlace");
+		//AddTag(L"T_Obstacle");
 	}
 
 	void RackObject::OnUpdate() {
