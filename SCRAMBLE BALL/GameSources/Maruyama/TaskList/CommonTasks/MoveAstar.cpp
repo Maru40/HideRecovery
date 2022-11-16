@@ -152,22 +152,22 @@ namespace basecross {
 			//エリアのルートを取得
 			auto areaRouteIndices = fieldImpactMap->SearchAreaRouteIndices(startPosition, targetPosition);
 
-			std::wstring debugStr = L"";	//デバッグ
+			//std::wstring debugStr = L"";	//デバッグ
 			//Astar検索が最初の自分自身のノードを省くため、最初は現在所属しているエリアから検索する。
 			int startAreaIndex = fieldImpactMap->SearchNearAreaIndex(startPosition);
-			debugStr += std::to_wstring(startAreaIndex);
+			//debugStr += std::to_wstring(startAreaIndex);
 			m_areaRoute.push(startAreaIndex);
 			for (const auto& areaRouteIndex : areaRouteIndices) {
-				debugStr += L"," + std::to_wstring(areaRouteIndex);
+				//debugStr += L"," + std::to_wstring(areaRouteIndex);
 				m_areaRoute.push(areaRouteIndex);
 			}
 
-			Debug::GetInstance()->ClearLog();
+			//Debug::GetInstance()->ClearLog();
 
-			Debug::GetInstance()->Log(L"エリアルート---------------------------");
-			//std::reverse(debugStr.begin(), debugStr.end());
-			Debug::GetInstance()->Log(debugStr);
-			Debug::GetInstance()->Log(L"");
+			//Debug::GetInstance()->Log(L"エリアルート---------------------------");
+			////std::reverse(debugStr.begin(), debugStr.end());
+			//Debug::GetInstance()->Log(debugStr);
+			//Debug::GetInstance()->Log(L"");
 
 			return m_areaRoute;
 		}
@@ -206,6 +206,7 @@ namespace basecross {
 				return nullptr;
 			}
 
+			auto target = targetManager->GetTarget();
 			auto selfAstarNodeController = targetManager->GetTarget()->GetComponent<SelfAstarNodeController>(false);
 			if (!selfAstarNodeController) {
 				return nullptr;
@@ -213,6 +214,7 @@ namespace basecross {
 
 			auto node = selfAstarNodeController->CalculateNode();
 			if (!node) {
+				Debug::GetInstance()->Log(target->GetComponent<Transform>(false)->GetPosition());
 				Debug::GetInstance()->Log(L"TaregetNodeがnullptrです。");
 			}
 			

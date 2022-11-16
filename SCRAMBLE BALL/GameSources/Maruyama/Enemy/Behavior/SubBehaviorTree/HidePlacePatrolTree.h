@@ -24,11 +24,11 @@ namespace basecross {
 			namespace SubBehavior {
 
 				enum class HidePlacePatrolTree_BehaviorType {
-					FirstSelecter,		//初回ノード
+					FirstSelecter,			//初回セレクター
 
 					ToGoalRunTask,			//ゴールまで行くタスク。
 					ToMoveHasBallEnemyTask,	//ボールを持っている敵まで行くタスク。
-					RelifHasBallMemberTask,	//ボールを持っているメンバーを守る。
+					RelifHasBallMemberTask,	//ボールを持っているメンバーを守るタスク。
 					ToBallRunTask,			//ボールまで駆けつけるタスク。
 					PatrolTask,				//パトロールタスク。
 				};

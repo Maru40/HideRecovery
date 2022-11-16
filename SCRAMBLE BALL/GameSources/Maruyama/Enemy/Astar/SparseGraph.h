@@ -254,26 +254,32 @@ namespace basecross {
 
 		void RemoveNode(const std::shared_ptr<NodeType>& node) {
 			//ノードの削除
-			Utility::RemoveVec(m_nodes, node);
+			bool isRemove = Utility::RemoveVec(m_nodes, node);
 
 			int index = node->GetIndex();
 
-
-
 			//そのノードのedgesの削除
 			m_edges.erase(index);
+			
+			std::vector<std::function<void()>> removeFunctions;	//削除関数を用意
 
-			//削除したインデクスが含まれるエッジを削除
-			for (int i = 0; i < m_edges.size(); i++) {
+			for (auto& node : GetNodes()) {
+				auto i = node->GetIndex();
 				if (m_edges.count(i) == 0) {
 					continue;
 				}
 
-				for (auto& edge : m_edges[i]) {
+				auto& edges = m_edges[i];
+				for (auto& edge : edges) {
 					if (edge->GetTo() == index) {  //行先がindexと一緒なら
-						RemoveEdge(edge->GetFrom(), edge->GetTo());
+						removeFunctions.push_back([&, edge]() { RemoveEdge(edge->GetFrom(), edge->GetTo()); });
 					}
 				}
+			}
+
+			//削除実装
+			for (auto& removeFunc : removeFunctions) {
+				removeFunc();
 			}
 
 			m_nextNodeIndex = index;
@@ -303,6 +309,10 @@ namespace basecross {
 		/// <param name="from">手前側のノードインデックス</param>
 		/// <param name="back">先側のノードインデックス</param>
 		void RemoveEdge(const int& from, const int& to) {
+			if (to == 315) {
+				int i = 0;
+			}
+
 			auto& edges = m_edges[from];
 
 			auto iter = edges.begin();
@@ -317,7 +327,7 @@ namespace basecross {
 		}
 
 		/// <summary>
-		/// 渡されたインデックスが含まれるエッジを全て削除する。
+		/// 渡されたインデックスが含まれるエッジを全て削除する。(現在使用不可)
 		/// </summary>
 		/// <param name="index">削除したいインデックス</param>
 		void RemoveEdge(const int& index) {

@@ -50,6 +50,9 @@ namespace basecross {
 		/// </summary>
 		void InitializeNode();
 
+		//初めのエリアになかった場合に再起してノードを検索する。
+		std::shared_ptr<NavGraphNode> SearchNode(const int firstAreaIndex, const int currentAreaIndex ,const int direction = -1);
+
 		/// <summary>
 		/// 所持ノードが遠すぎるかどうか
 		/// </summary>

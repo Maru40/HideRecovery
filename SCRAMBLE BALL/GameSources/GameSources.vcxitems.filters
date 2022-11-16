@@ -1471,6 +1471,9 @@
     <Filter Include="Itabashi\StageObject\MatchStageReconnectUIObject">
       <UniqueIdentifier>{1fff7357-c809-4863-a894-da1f69795c36}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Enemy\Component\Stator\StateNode\Goal">
+      <UniqueIdentifier>{34fca94b-51eb-43a7-b975-a7518d0d5969}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2784,6 +2787,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageReconnectUIObject.h">
       <Filter>Itabashi\StageObject\MatchStageReconnectUIObject</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Stator\StateNode\StateNode_Goal.h">
+      <Filter>Maruyama\Enemy\Component\Stator\StateNode\Goal</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -3979,6 +3985,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageReconnectUIObject.cpp">
       <Filter>Itabashi\StageObject\MatchStageReconnectUIObject</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Stator\StateNode\StateNode_Goal.cpp">
+      <Filter>Maruyama\Enemy\Component\Stator\StateNode\Goal</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

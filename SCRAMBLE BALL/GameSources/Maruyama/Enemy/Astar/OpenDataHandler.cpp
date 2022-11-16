@@ -88,6 +88,11 @@ namespace basecross {
 
 		for (auto& edge : edges) {
 			auto node = graph->GetNode(edge->GetTo());	//ノードの取得
+			if (!node) {
+				auto strIndex = std::to_wstring(edge->GetTo());
+				Debug::GetInstance()->Log(L"OpenDataHandler::CreateOpenData(): ノードがnullです。: " + strIndex);
+				continue;
+			}
 
 			auto toNodeVec = node->GetPosition() - baseNode->GetPosition();			//ベースノードからの実コストを取得
 			auto range = toNodeVec.length();
@@ -123,7 +128,7 @@ namespace basecross {
 		int index = 0;
 		constexpr int tempMaxIndex = 10000;
 
-		Debug::GetInstance()->Log(L"ルート------------------------------------------------------");
+		//Debug::GetInstance()->Log(L"ルート------------------------------------------------------");
 
 		auto tempData = FindSomeOpenData(openDataList, targetNode);
 		while (index <= tempMaxIndex) {
@@ -137,19 +142,19 @@ namespace basecross {
 		}
 
 		//デバッグ
-		auto tempRoute = m_route;
-		while (!tempRoute.empty()) {
-			auto data = tempRoute.top();
-			tempRoute.pop();
-			//debug----------------------------------------------------------------------------
-			auto areaIndex = std::to_wstring(data.lock()->GetAreaIndex());
-			auto nodeIndex = std::to_wstring(data.lock()->GetIndex());
+		//auto tempRoute = m_route;
+		//while (!tempRoute.empty()) {
+		//	auto data = tempRoute.top();
+		//	tempRoute.pop();
+		//	//debug----------------------------------------------------------------------------
+		//	auto areaIndex = std::to_wstring(data.lock()->GetAreaIndex());
+		//	auto nodeIndex = std::to_wstring(data.lock()->GetIndex());
 
-			Debug::GetInstance()->Log(L"エリア： " + areaIndex + L", ノード： " + nodeIndex);
-			//---------------------------------------------------------------------------------
-		}
+		//	Debug::GetInstance()->Log(L"エリア： " + areaIndex + L", ノード： " + nodeIndex);
+		//	//---------------------------------------------------------------------------------
+		//}
 
-		Debug::GetInstance()->Log(L"");
+		//Debug::GetInstance()->Log(L"");
 		//Debug::GetInstance()->Log(L"//-----------------------------------------------------------");
 
 		return index <= tempMaxIndex;		//上限回数を超えたら、失敗

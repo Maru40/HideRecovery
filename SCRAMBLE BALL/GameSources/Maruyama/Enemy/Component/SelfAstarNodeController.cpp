@@ -58,6 +58,11 @@ namespace basecross {
 	}
 
 	void SelfAstarNodeController::UpdateNode() {
+		//ノードを持ってて、アップデートが必要ないなら、
+		if (HasNode() && !IsUpdateActive()) {
+			return;
+		}
+
 		if (!HasNode()) {
 			InitializeNode();
 			return;
@@ -89,6 +94,11 @@ namespace basecross {
 		//距離を計ってソート用の配列に代入する。
 		for (auto& edge : edges) {
 			auto node = graph->GetNode(edge->GetTo());
+			if (!node) {
+				auto strIndex = std::to_wstring(edge->GetTo());
+				Debug::GetInstance()->Log(L"OpenDataHandler::CreateOpenData(): ノードがnullです。: " + strIndex);
+				continue;
+			}
 			float toNodeRange = (node->GetPosition() - transform->GetPosition()).length();
 
 			datas.push_back(Data(node, toNodeRange));
@@ -129,13 +139,35 @@ namespace basecross {
 
 		auto node = UtilityAstar::SearchNearNode(astar->GetGraph(areaIndex), transform->GetPosition());
 		if (!node) {
-			m_isNodeInitialize = false;
-			return;
+			//再起して、絶対見つける。
+			node = SearchNode(areaIndex, areaIndex);
+			Debug::GetInstance()->Log(L"全ノードサーチをしました。重い！！");
+			if (!node) {
+				Debug::GetInstance()->Log(L"全サーチしたのにnullptr");
+			}
 		}
 
 		SetNode(node);
 
 		m_isNodeInitialize = false;
+	}
+
+	std::shared_ptr<NavGraphNode> SelfAstarNodeController::SearchNode(const int firstAreaIndex, const int currentAreaIndex, const int direction) {
+		auto index = currentAreaIndex + direction;
+		if (index < 0) {	//0より小さくなったら、大きくする過程で探す。
+			return SearchNode(firstAreaIndex, firstAreaIndex, +1);
+		}
+
+		auto areaGraph = maru::FieldImpactMap::GetInstance()->GetImpactMap()->GetGraphAstar()->GetGraph(index);
+		if (direction > 0 && !areaGraph) {
+			return nullptr;
+		}
+
+		auto node = UtilityAstar::SearchNearNode(
+			areaGraph, transform->GetPosition()
+		);
+
+		return node ? node : SearchNode(firstAreaIndex, index, direction);
 	}
 
 	bool SelfAstarNodeController::IsFarNode() {
@@ -153,6 +185,8 @@ namespace basecross {
 	}
 
 	std::shared_ptr<NavGraphNode> SelfAstarNodeController::CalculateNode() {
+		
+
 		UpdateNode();
 		return GetNode();
 	}
