@@ -17,9 +17,10 @@ namespace basecross {
 		class UtilityObstacle
 		{
 		public:
-			static const std::vector<std::wstring> DEFAULT_OBSTACLE_TAGS;                      //デフォルトの障害物タグ
-			static const std::vector<std::wstring> DEFAULT_OBSTACLE_AND_FLOOR_TAGS;            //デフォルトの障害物タグと床タグ
-			static const std::vector<std::wstring> DEFAULT_OBSTACLE_AND_FLOOR_AND_ENEMY_TAGS;  //デフォルトの障害物タグと床タグとエネミータグ
+			static const std::vector<std::wstring> DEFAULT_OBSTACLE_TAGS;						//デフォルトの障害物タグ
+			static const std::vector<std::wstring> DEFAULT_OBSTACLE_AND_FLOOR_TAGS;				//デフォルトの障害物タグと床タグ
+			static const std::vector<std::wstring> DEFAULT_OBSTACLE_AND_FLOOR_AND_ENEMY_TAGS;	//デフォルトの障害物タグと床タグとエネミータグ
+			static const std::vector<std::wstring> DEFAULT_OBSTACLE_AND_ENEMY_AND_HIDEPLACE;	//デフォルトの障害物タグとエネミーとHidePlace
 
 			/// <summary>
 			/// 障害物かどうか判断する
