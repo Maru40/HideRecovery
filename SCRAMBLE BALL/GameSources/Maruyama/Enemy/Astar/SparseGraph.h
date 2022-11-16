@@ -254,7 +254,7 @@ namespace basecross {
 
 		void RemoveNode(const std::shared_ptr<NodeType>& node) {
 			//ノードの削除
-			Utility::RemoveVec(m_nodes, node);
+			bool isRemove = Utility::RemoveVec(m_nodes, node);
 
 			int index = node->GetIndex();
 
@@ -263,8 +263,8 @@ namespace basecross {
 			
 			std::vector<std::function<void()>> removeFunctions;	//削除関数を用意
 
-			//削除したインデクスが含まれるエッジを削除
-			for (int i = 0; i < m_edges.size(); i++) {
+			for (auto& node : GetNodes()) {
+				auto i = node->GetIndex();
 				if (m_edges.count(i) == 0) {
 					continue;
 				}
@@ -309,6 +309,10 @@ namespace basecross {
 		/// <param name="from">手前側のノードインデックス</param>
 		/// <param name="back">先側のノードインデックス</param>
 		void RemoveEdge(const int& from, const int& to) {
+			if (to == 315) {
+				int i = 0;
+			}
+
 			auto& edges = m_edges[from];
 
 			auto iter = edges.begin();
