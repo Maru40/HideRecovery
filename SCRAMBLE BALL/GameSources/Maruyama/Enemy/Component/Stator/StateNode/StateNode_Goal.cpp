@@ -10,6 +10,7 @@
 #include "Maruyama/Enemy/Component/EnemyBase.h"
 
 #include "Maruyama/Player/Component/GoalAnimationController.h"
+#include "Maruyama/Enemy/Component/SelfAstarNodeController.h"
 
 #include "Watanabe/DebugClass/Debug.h"
 
@@ -21,11 +22,15 @@ namespace basecross {
 			Goal::Goal(const std::shared_ptr<EnemyBase>& owner):
 				EnemyStateNodeBase(owner)
 			{
-				m_goalAnimationController = owner->GetGameObject()->GetComponent<GoalAnimationController>(false);
+				auto object = owner->GetGameObject();
+
+				m_goalAnimationController = object->GetComponent<GoalAnimationController>(false);
+				AddChangeComponent(object->GetComponent<SelfAstarNodeController>(false), false, true);
 			}
 
 			void Goal::OnStart() {
-
+				StartChangeComponents();
+				Debug::GetInstance()->Log(L"GoalStart");
 			}
 
 			bool Goal::OnUpdate() {
@@ -33,6 +38,7 @@ namespace basecross {
 			}
 
 			void Goal::OnExit() {
+				ExitChangeComponents();
 				Debug::GetInstance()->Log(L"Goal_Exit");
 			}
 
