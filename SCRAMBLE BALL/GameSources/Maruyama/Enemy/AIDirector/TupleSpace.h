@@ -413,7 +413,7 @@ namespace basecross {
 
 					//同じ情報なら書き込まない
 					if (IsSomeTuple(newTuple)) {
-						Debug::GetInstance()->Log(L"タプルの重複を確認");
+						//Debug::GetInstance()->Log(L"タプルの重複を確認");
 						return;
 					}
 
