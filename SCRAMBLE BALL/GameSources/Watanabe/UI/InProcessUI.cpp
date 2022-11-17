@@ -10,8 +10,9 @@
 namespace basecross {
 	map<InProcessUI::LabelType, Message::MessageData> InProcessUI::sm_Type2DataMap =
 	{
-		{LabelType::Matching,Message::MessageData(Type::SpriteData,L"Matching")},
-		{LabelType::Busy    ,Message::MessageData(Type::SpriteData,L"Busy")}
+		{LabelType::Matching      ,Message::MessageData(Type::SpriteData,L"Matching")},
+		{LabelType::Busy          ,Message::MessageData(Type::SpriteData,L"Busy")},
+		{LabelType::InReconnection,Message::MessageData(Type::SpriteData,L"InReconnection")}
 	};
 
 	InProcessUI::InProcessUI(const shared_ptr<Stage>& stage)
