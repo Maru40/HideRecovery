@@ -518,6 +518,9 @@ namespace basecross {
 				/// <summary>
 				/// テンプレートに一致する命令が受信されたら、通知を受け取る。
 				/// </summary>
+				/// <param name="requester">登録者</param>
+				/// <param name="func">呼び出したい処理</param>
+				/// <param name="isCall">呼び出し条件</param>
 				template<class T,
 					std::enable_if_t<std::is_base_of_v<I_Tuple, T>, std::nullptr_t> = nullptr>	//基底クラスの制約
 				void Notify(
