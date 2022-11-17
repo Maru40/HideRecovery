@@ -1,0 +1,5 @@
+className,UIName,PosX,PosY,ScaleX,ScaleY,Rot,,
+SimpleSprite,ToTitle,80,-200,1.1,1.1,0,SpriteData,ToTitle
+SimpleSprite,CannotConnect,0,200,1,1,0,SpriteData,CannotConnect
+InProcessUI,InProcessUI,0,0,1,1,0,,
+ButtonUI,Button,-310,0,1,1,0,B,

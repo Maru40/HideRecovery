@@ -15,6 +15,14 @@ namespace basecross {
 
 		AddTag(m_uiName);
 
-		SetDrawLayer(2);
+		SetUIDrawLayer(2);
+	}
+
+	void UIObjectBase::SetUIDrawLayer(int i) {
+		SetDrawLayer(i);
+
+		for (auto& child : GetChildren()) {
+			child->SetDrawLayer(i);
+		}
 	}
 }

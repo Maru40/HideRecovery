@@ -1474,6 +1474,9 @@
     <Filter Include="Maruyama\Enemy\Component\Stator\StateNode\Goal">
       <UniqueIdentifier>{34fca94b-51eb-43a7-b975-a7518d0d5969}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\UI\ReconnectingInGameUI">
+      <UniqueIdentifier>{0a0388fb-0120-452e-a7b1-3de8b59076e3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2790,6 +2793,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Stator\StateNode\StateNode_Goal.h">
       <Filter>Maruyama\Enemy\Component\Stator\StateNode\Goal</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\ReconnectingInGameUI.h">
+      <Filter>Watanabe\UI\ReconnectingInGameUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -3988,6 +3994,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\Stator\StateNode\StateNode_Goal.cpp">
       <Filter>Maruyama\Enemy\Component\Stator\StateNode\Goal</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\ReconnectingInGameUI.cpp">
+      <Filter>Watanabe\UI\ReconnectingInGameUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -43,3 +43,4 @@ Asterisk,Numbers_TX,1200,0,102,128,パスコードが入力されていないときに表示
 UnderScore,Numbers_TX,1302,0,102,128,アンダーバー
 Busy,Message_TX,600,1370,300,110,通信中
 CannotConnect,Message_TX,0,1480,900,70,接続できない
+InReconnection,Message_TX,0,1550,400,110,再接続中

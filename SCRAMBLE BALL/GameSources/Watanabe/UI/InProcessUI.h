@@ -16,8 +16,9 @@ namespace basecross {
 		/// 表示するラベルタイプ
 		/// </summary>
 		enum class LabelType {
-			Matching,	// マッチング
-			Busy,		// 通信中
+			Matching,		// マッチング
+			Busy,			// 通信中
+			InReconnection,	// 再接続中
 		};
 	private:
 		// ラベルに対応するデータマップ

@@ -26,5 +26,11 @@ namespace basecross {
 		/// </summary>
 		/// <returns>RectTransform</returns>
 		shared_ptr<RectTransform> GetRectTransform() { return m_rectTransform; }
+
+		/// <summary>
+		/// 描画レイヤーを設定
+		/// </summary>
+		/// <param name="i">レイヤー</param>
+		void SetUIDrawLayer(int i);
 	};
 }
