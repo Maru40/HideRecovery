@@ -71,8 +71,8 @@ namespace basecross {
 	bool maru::UtilityObstacle::IsRayObstacle(const Vec3& startPosition, const Vec3& endPosition,
 		const vector<std::shared_ptr<GameObject>>& objects, const std::vector<wstring>& tags)
 	{
-		auto direction = endPosition - startPosition;
 		auto obstacleObjects = FindObstacles(objects, tags);
+		auto direction = endPosition - startPosition;
 
 		for (const auto& object : obstacleObjects)
 		{

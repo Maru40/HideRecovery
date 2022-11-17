@@ -52,7 +52,41 @@ namespace basecross {
 		/// <param name="targetPos">ターゲットのポジション</param>
 		/// <param name="isObstacleConfirmation">障害物判定を行うかどうか</param> 
 		/// <returns>ターゲットから一番近いノード</returns>
-		static std::shared_ptr<NavGraphNode> SearchNearNode(const std::shared_ptr<const GraphAstar::GraphType>& graph, const Vec3& targetPos, const bool isObstacleConfirmation = true);
+		static std::shared_ptr<NavGraphNode> SearchNearNode(
+			const std::shared_ptr<const GraphAstar::GraphType>& graph, 
+			const Vec3& targetPos, 
+			const bool isObstacleConfirmation = true
+		);
+
+		/// <summary>
+		/// ターゲットから一番近くのノードを検索する。
+		/// </summary>
+		/// <param name="graph">グラフの参照</param>
+		/// <param name="targetPos">ターゲットのポジション</param>
+		/// <param name="isObstacleConfirmation">障害物判定を行うかどうか</param> 
+		/// <returns>ターゲットから一番近いノード</returns>
+		static std::shared_ptr<NavGraphNode> SearchNearNode(
+			const std::shared_ptr<const GraphAstar::GraphType>& graph,
+			const Vec3& targetPos,
+			const std::vector<std::shared_ptr<GameObject>>& obstacleObjects,
+			const std::vector<std::shared_ptr<GameObject>>& excludeObstacleObject,
+			const bool isObstacleConfirmation = true
+		);
+
+		/// <summary>
+		/// ターゲットから一番近くのノードを検索する。
+		/// </summary>
+		/// <param name="graph">グラフの参照</param>
+		/// <param name="targetPos">ターゲットのポジション</param>
+		/// <param name="isObstacleConfirmation">障害物判定を行うかどうか</param> 
+		/// <returns>ターゲットから一番近いノード</returns>
+		static std::shared_ptr<NavGraphNode> SearchNearNode(
+			const std::shared_ptr<const GraphAstar::GraphType>& graph,
+			const std::shared_ptr<GameObject>& targetObject,
+			const std::vector<std::shared_ptr<GameObject>>& obstacleObjects,
+			const std::vector<std::shared_ptr<GameObject>>& excludeObstacleObject = {},
+			const bool isObstacleConfirmation = true
+		);
 
 		/// <summary>
 		/// 自分のノードから伸びるノードで一番ターゲットに近いノードの選択
@@ -61,8 +95,11 @@ namespace basecross {
 		/// <param name="selfObject">自分自身</param>
 		/// <param name="target">ターゲット</param>
 		/// <returns>一番近いノード</returns>
-		static std::shared_ptr<NavGraphNode> SearchMyNodeToTargetNearNode(const GraphAstar& astar,
-			const std::shared_ptr<GameObject>& selfObject,const std::shared_ptr<GameObject>& target);
+		static std::shared_ptr<NavGraphNode> SearchMyNodeToTargetNearNode(
+			const GraphAstar& astar,
+			const std::shared_ptr<GameObject>& selfObject,
+			const std::shared_ptr<GameObject>& target
+		);
 
 		/// <summary>
 		/// 自分のノードからターゲット方向にあるノードを検索
@@ -73,7 +110,8 @@ namespace basecross {
 		/// <returns>ターゲット方向のノード</returns>
 		static std::shared_ptr<NavGraphNode> CalculateTargetDirectNode(const GraphAstar& astar,
 			const std::shared_ptr<NavGraphNode>& startNode,
-			const Vec3& targetPos);
+			const Vec3& targetPos
+		);
 
 		/// <summary>
 		/// ターゲットから逃げるための方向のノードを検索する
@@ -84,7 +122,8 @@ namespace basecross {
 		/// <returns>ターゲット方向のノード</returns>
 		static std::shared_ptr<NavGraphNode> CalculateTargetEscapeDirectNode(const GraphAstar& astar,
 			const std::shared_ptr<NavGraphNode>& startNode,
-			const Vec3& targetPos);
+			const Vec3& targetPos
+		);
 
 		/// <summary>
 		/// 直進上で最も近いノードかどうか
@@ -140,7 +179,7 @@ namespace basecross {
 			vector<std::shared_ptr<EdgeType>> resultEdge;
 
 			//八方向に近いオブジェクトがあるなら処理をしない
-			constexpr float NearRange = 1.0f;
+			constexpr float NearRange = 0.5f;
 			Vec3 positions[] = {
 				newNode->GetPosition() + ( Vec3::Forward() * NearRange),
 				newNode->GetPosition() + (-Vec3::Forward() * NearRange),

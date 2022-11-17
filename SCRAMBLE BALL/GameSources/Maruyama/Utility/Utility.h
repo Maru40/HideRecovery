@@ -352,6 +352,39 @@ namespace basecross {
 				return reObject;
 			}
 
+			//baseとして渡した者が除きたい者と一緒の場合にtrue
+			template<class T>
+			static bool IsExclude(
+				const std::shared_ptr<T>& base,
+				const std::vector<std::shared_ptr<T>>& excludeVector
+			) {
+				//同じオブジェクトがあるならtrue
+				for (auto& exclude : excludeVector) {
+					if (base == exclude) {
+						return true;
+					}
+				}
+
+				return false;
+			}
+
+			//配列から特定の配列を削除したい関数。
+			template<class T>
+			static std::vector<std::shared_ptr<T>> ExcludeVector(
+				const std::vector<std::shared_ptr<T>>& baseVector,
+				const std::vector<std::shared_ptr<T>>& excludeVector
+			) {
+				std::vector<std::shared_ptr<T>> result;
+
+				for (auto& base : baseVector) {
+					if (IsExclude<T>(base, excludeVector)) {
+						result.push_back(base);
+					}
+				}
+
+				return result;
+			}
+
 			/// <summary>
 			/// ゲームオブジェクトVecから指定のオブジェクトのみ取得
 			/// 最初に取得できたものだけ返す。

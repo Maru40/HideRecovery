@@ -137,7 +137,8 @@ namespace basecross {
 			return;
 		}
 
-		auto node = UtilityAstar::SearchNearNode(astar->GetGraph(areaIndex), transform->GetPosition());
+		auto objects = GetStage()->GetGameObjectVec();
+		auto node = UtilityAstar::SearchNearNode(astar->GetGraph(areaIndex), transform->GetPosition(), objects, { GetGameObject() });
 		if (!node) {
 			//Ä‹N‚µ‚ÄAâ‘ÎŒ©‚Â‚¯‚éB
 			node = SearchNode(areaIndex, areaIndex);
@@ -185,8 +186,6 @@ namespace basecross {
 	}
 
 	std::shared_ptr<NavGraphNode> SelfAstarNodeController::CalculateNode() {
-		
-
 		UpdateNode();
 		return GetNode();
 	}

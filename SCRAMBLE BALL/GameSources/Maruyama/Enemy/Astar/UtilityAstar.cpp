@@ -26,23 +26,51 @@ namespace basecross {
 		return SearchNearNode(astar.GetGraph(), targetPos);
 	}
 
-	std::shared_ptr<NavGraphNode> UtilityAstar::SearchNearNode(const std::shared_ptr<const GraphAstar::GraphType>& graph, const Vec3& targetPos, const bool isObstacleConfirmation) {
+	std::shared_ptr<NavGraphNode> UtilityAstar::SearchNearNode(
+		const std::shared_ptr<const GraphAstar::GraphType>& graph, 
+		const Vec3& targetPos, 
+		const bool isObstacleConfirmation
+	) {
+		//将来的にここではobjectsを探さない。
+		//auto objects = maru::UtilityObstacle::FindObstacles(maru::Utility::GetStage()->GetGameObjectVec());
+		return SearchNearNode(graph, targetPos, {}, {}, isObstacleConfirmation);
+	}
+
+	std::shared_ptr<NavGraphNode> UtilityAstar::SearchNearNode(
+		const std::shared_ptr<const GraphAstar::GraphType>& graph,
+		const std::shared_ptr<GameObject>& targetObject,
+		const std::vector<std::shared_ptr<GameObject>>& obstacleObjects,
+		const std::vector<std::shared_ptr<GameObject>>& excludeObstacleObject,
+		const bool isObstacleConfirmation
+	) {
+		auto targetPosition = targetObject->GetComponent<Transform>()->GetPosition();
+		return SearchNearNode(graph, targetPosition, obstacleObjects, excludeObstacleObject, isObstacleConfirmation);
+	}
+
+	std::shared_ptr<NavGraphNode> UtilityAstar::SearchNearNode(
+		const std::shared_ptr<const GraphAstar::GraphType>& graph,
+		const Vec3& targetPosition,
+		const std::vector<std::shared_ptr<GameObject>>& obstacleObjects,
+		const std::vector<std::shared_ptr<GameObject>>& excludeObstacleObject,
+		const bool isObstacleConfirmation
+	) {
 		const auto& nodes = graph->GetNodes();	//ノード配列の取得
 
 		float minRange = FLT_MAX;
 		std::shared_ptr<NavGraphNode> minNode = nullptr;  //一番距離が短いノード
+		//障害物から障害物から排除したいオブジェクトを省く
+		auto objects = maru::Utility::ExcludeVector(obstacleObjects, excludeObstacleObject);
 
 		//検索開始
-		auto objects = maru::Utility::GetStage()->GetGameObjectVec();
 		for (const auto& node : nodes) {
 			auto pos = node->GetPosition();
-			auto toNode = pos - targetPos;
+			auto toNode = pos - targetPosition;
 			const auto& range = toNode.length();
 
 			int index = node->GetIndex();
 
 			//障害物が合ったらコンティニュ―
-			if (isObstacleConfirmation && maru::UtilityObstacle::IsRayObstacle(targetPos, pos, objects)) {
+			if (isObstacleConfirmation && maru::UtilityObstacle::IsRayObstacle(targetPosition, pos, objects)) {
 				continue;
 			}
 
@@ -71,7 +99,7 @@ namespace basecross {
 		const auto& edges = graph->GetEdges(from);
 		const Vec3 targetPosition = target->GetComponent<Transform>()->GetPosition();
 
-		float minRange = 100000.0f;
+		float minRange = FLT_MAX;
 		std::shared_ptr<NavGraphNode> nearNode;
 		for (auto& edge : edges) {
 			int toIndex = edge->GetTo();
