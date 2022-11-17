@@ -71,7 +71,7 @@ namespace basecross {
 		}
 
 		void MoveAstar::OnStart() {
-			Debug::GetInstance()->ClearLog();
+			//Debug::GetInstance()->ClearLog();
 			CalculateMoveAreaRouteQueue();	//徘徊エリアルートの取得
 
 			//検索中なら処理を中断
@@ -114,6 +114,8 @@ namespace basecross {
 
 		void MoveAstar::OnExit() {
 			m_taskList->ForceStop();
+
+			Debug::GetInstance()->Log(L"▲▲▲ルートエンド");
 		}
 
 		void MoveAstar::DefineTask() {
@@ -175,7 +177,6 @@ namespace basecross {
 			Debug::GetInstance()->Log(L"エリアルート---------------------------");
 			//std::reverse(debugStr.begin(), debugStr.end());
 			Debug::GetInstance()->Log(debugStr);
-			Debug::GetInstance()->Log(L"");
 
 			return m_areaRoute;
 		}
@@ -226,7 +227,7 @@ namespace basecross {
 				Debug::GetInstance()->Log(L"TaregetNodeがnullptrです。");
 			}
 
-			Debug::GetInstance()->Log(targetManager->GetTargetPosition());
+			//Debug::GetInstance()->Log(targetManager->GetTargetPosition());
 			return node;
 		}
 
@@ -311,7 +312,7 @@ namespace basecross {
 			}
 
 			if (selfNode->GetPosition() == targetNode->GetPosition()) {	//同じノードならtrue
-				Debug::GetInstance()->Log(L"MoveAstar::SearchAstarStart(), 同じルートです。");
+				//Debug::GetInstance()->Log(L"MoveAstar::SearchAstarStart(), 同じルートです。");
 				result.push(selfNode);
 				return result;
 			}
