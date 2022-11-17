@@ -27,7 +27,7 @@ namespace basecross {
 	{}
 
 	WallAvoidTacticle::WallAvoidTacticle(const float degree):
-		WallAvoidTacticle(3.0f, degree)
+		WallAvoidTacticle(2.0f, degree)
 	{}
 
 	WallAvoidTacticle::WallAvoidTacticle(const float range, const float degree):
@@ -40,7 +40,7 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 
 	WallAvoid_Parametor::WallAvoid_Parametor():
-		avoidPower(0.15f),
+		avoidPower(0.2f),
 		offset(Vec3(0.0f, -0.35f, 0.0f))
 	{}
 
@@ -118,9 +118,12 @@ namespace basecross {
 
 	void WallAvoid::SettingDefaultTacticles() {
 		constexpr float DEGREE_VALUE = 15.0f;
+		constexpr float DEGREE_VALUE_Side =40.0f;
 		float degrees[] = {
 			+DEGREE_VALUE,
-			-DEGREE_VALUE
+			-DEGREE_VALUE,
+			+DEGREE_VALUE_Side,
+			-DEGREE_VALUE_Side
 		};
 
 		//デフォで二つの触覚をはやす。
