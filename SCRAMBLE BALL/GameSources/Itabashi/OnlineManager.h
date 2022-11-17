@@ -165,6 +165,10 @@ namespace Online
 		/// 接続するためのクライアント
 		/// </summary>
 		std::unique_ptr<ExitGames::LoadBalancing::Client> m_client;
+		/// <summary>
+		/// 現在接続状態か
+		/// </summary>
+		bool m_isConnected = false;
 
 		OnlineManager() noexcept = default;
 
@@ -262,7 +266,7 @@ namespace Online
 		/// 接続されているか
 		/// </summary>
 		/// <returns>接続しているならtrue</returns>
-		static bool IsConnected();
+		static bool IsConnected() noexcept { return GetInstance()->m_isConnected; }
 
 		// 自分自身のコールバック -------------------------------------------------------------------------------------------------
 

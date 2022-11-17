@@ -154,11 +154,6 @@ namespace Online
 		GetInstance()->m_client->opRaiseEvent(reliable, bytes, size, eventCode, options);
 	}
 
-	bool OnlineManager::IsConnected()
-	{
-		return GetInstance()->m_client != nullptr;
-	}
-
 	void OnlineManager::connectionErrorReturn(int errorCode)
 	{
 	}
@@ -203,11 +198,18 @@ namespace Online
 	void OnlineManager::connectReturn(int errorCode, const ExitGames::Common::JString& errorString,
 		const ExitGames::Common::JString& region, const ExitGames::Common::JString& cluster)
 	{
+		if (errorCode == ExitGames::Photon::ErrorCode::SUCCESS)
+		{
+			m_isConnected = true;
+		}
+
 		EventCallback(errorCode, &I_OnlineCallBacks::OnConnected, &I_OnlineCallBacks::OnConnectFailed);
 	}
 
 	void OnlineManager::disconnectReturn()
 	{
+		m_isConnected = false;
+
 		for (auto& callback : m_callBacksVector)
 		{
 			callback->OnDisconnected();
