@@ -289,10 +289,16 @@ namespace basecross {
 
 	void GraphAstar::RemoveNode(const int& index) {
 		m_baseGraph->RemoveNode(index);
+		if (m_graphMap.count(index) != 0) {
+			m_graphMap[index]->RemoveNode(index);
+		}
 	}
 
 	void GraphAstar::RemoveNode(const std::shared_ptr<NavGraphNode>& node) {
 		m_baseGraph->RemoveNode(node);
+		if (m_graphMap.count(node->GetAreaIndex()) != 0) {
+			m_graphMap[node->GetAreaIndex()]->RemoveNode(node);
+		}
 	}
 
 	void GraphAstar::SetNodesParent(const std::shared_ptr<GameObject>& parent) {
