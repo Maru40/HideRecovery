@@ -13,3 +13,4 @@
 #include "HoldButtonUI.h"
 #include "DirectionWithHasBallUI.h"
 #include "InProcessUI.h"
+#include "ReconnectingInGameUI.h"

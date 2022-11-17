@@ -23,7 +23,7 @@ namespace basecross {
 		: UIObjectBase(stage, L"InProcessUI")
 	{
 		vector<wstring> tokens = DataExtracter::DelimitData(line);
-		size_t nextIndex = DataExtracter::RectTransformDataExtraction(tokens, m_rectTransformData);
+		DataExtracter::RectTransformDataExtraction(tokens, m_rectTransformData);
 	}
 
 	void InProcessUI::OnCreate() {
