@@ -377,7 +377,8 @@ namespace basecross {
 				std::vector<std::shared_ptr<T>> result;
 
 				for (auto& base : baseVector) {
-					if (IsExclude<T>(base, excludeVector)) {
+					//除きたいオブジェクトでなかったら、追加する。
+					if (!IsExclude<T>(base, excludeVector)) {
 						result.push_back(base);
 					}
 				}

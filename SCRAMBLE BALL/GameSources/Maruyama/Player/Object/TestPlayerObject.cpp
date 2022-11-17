@@ -82,21 +82,21 @@ namespace basecross {
 		//SetAlphaActive(true);
 		//draw->SetDiffuse(Col4(0.0f, 0.0f, 1.0f, 1.0f));
 
-		auto collision = AddComponent<CollisionObb>();
-		//collision->SetDrawActive(true);
-		constexpr float CollisionSize = 1.0f;
-		collision->SetMakedSize(CollisionSize);
-		AddComponent<maru::CollisionAction>();
+		//auto collision = AddComponent<CollisionObb>();
+		////collision->SetDrawActive(true);
+		//constexpr float CollisionSize = 1.0f;
+		//collision->SetMakedSize(CollisionSize);
+		//AddComponent<maru::CollisionAction>();
 		AddComponent<RotationController>();
 		AddComponent<PlayerController>();
-		auto gravity = AddComponent<Gravity>();
-		gravity->SetGravity(Vec3(0.0f, -9.8f * 3.0f, 0.0f));
+		//auto gravity = AddComponent<Gravity>();
+		//gravity->SetGravity(Vec3(0.0f, -9.8f * 3.0f, 0.0f));
 
 		AddComponent<VelocityManager>();
 		AddComponent<PlayerMover>();
 
-		AddComponent<PlayerStatus>();
-		AddComponent<Teleport>();
+		//AddComponent<PlayerStatus>();
+		//AddComponent<Teleport>();
 
 		//カメラセッティング----------------------------------------------------------
 
