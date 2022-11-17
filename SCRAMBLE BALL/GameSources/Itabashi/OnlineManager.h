@@ -256,7 +256,7 @@ namespace Online
 		/// <summary>
 		/// オンラインでイベントを発行する
 		/// </summary>
-		/// <param name="reliable"></param>
+		/// <param name="reliable">必ずイベントが届くか</param>
 		/// <param name="bytes">送るデータ(バイト配列)</param>
 		/// <param name="size">データサイズ</param>
 		/// <param name="eventCode">イベントコード</param>
