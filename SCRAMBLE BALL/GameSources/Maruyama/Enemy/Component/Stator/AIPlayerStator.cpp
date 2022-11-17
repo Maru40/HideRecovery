@@ -47,6 +47,7 @@
 #include "Maruyama/Player/Component/PlayerDeader.h"
 
 #include "Maruyama/Utility/Component/Targeted.h"
+#include "Itabashi/ObjectMover.h"
 
 namespace basecross {
 	namespace Enemy {
@@ -178,6 +179,10 @@ namespace basecross {
 
 		void AIPlayerStator::OnEnable() {
 			ChangeState(StateType::None);
+
+			if (auto objectMover = GetGameObject()->GetComponent<Operator::ObjectMover>(false)) {
+				objectMover->SetDefaultForward(Vec3::Forward());
+			}
 		}
 	}
 }

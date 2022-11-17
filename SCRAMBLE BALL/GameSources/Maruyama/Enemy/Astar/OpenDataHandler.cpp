@@ -80,6 +80,7 @@ namespace basecross {
 	) {
 		const auto& baseNode = openData->node.lock();		//基準となるノードを取得
 		auto edges = graph->GetEdges(baseNode->GetIndex());	//エッジの取得
+		int baseIndex = baseNode->GetIndex();
 
 		openDataList.pop_front();			//使用するオープンデータを削除
 		closeDataList.push_back(openData);	//使用するオープンデータをクローズリストに登録
@@ -99,6 +100,7 @@ namespace basecross {
 			range += openData->range;
 			auto heuristicRange = m_heuristic->CalculateHeuristicRange(node);		//ヒュースリック距離の取得
 
+			int newIndex = node->GetIndex();
 			auto newData = std::make_shared<OpenData>(baseNode, node, range, heuristicRange);	//新規オープンデータの生成
 
 			bool isAddData = AddOpenData(openDataList, closeDataList, newData);		//オープンデータの追加をする。
@@ -142,20 +144,20 @@ namespace basecross {
 		}
 
 		//デバッグ
-		//auto tempRoute = m_route;
-		//while (!tempRoute.empty()) {
-		//	auto data = tempRoute.top();
-		//	tempRoute.pop();
-		//	//debug----------------------------------------------------------------------------
-		//	auto areaIndex = std::to_wstring(data.lock()->GetAreaIndex());
-		//	auto nodeIndex = std::to_wstring(data.lock()->GetIndex());
+		auto tempRoute = m_route;
+		while (!tempRoute.empty()) {
+			auto data = tempRoute.top();
+			tempRoute.pop();
+			//debug----------------------------------------------------------------------------
+			auto areaIndex = std::to_wstring(data.lock()->GetAreaIndex());
+			auto nodeIndex = std::to_wstring(data.lock()->GetIndex());
 
-		//	Debug::GetInstance()->Log(L"エリア： " + areaIndex + L", ノード： " + nodeIndex);
-		//	//---------------------------------------------------------------------------------
-		//}
+			Debug::GetInstance()->Log(L"エリア： " + areaIndex + L", ノード： " + nodeIndex);
+			//---------------------------------------------------------------------------------
+		}
 
-		//Debug::GetInstance()->Log(L"");
-		//Debug::GetInstance()->Log(L"//-----------------------------------------------------------");
+		Debug::GetInstance()->Log(L"");
+		Debug::GetInstance()->Log(L"//-----------------------------------------------------------");
 
 		return index <= tempMaxIndex;		//上限回数を超えたら、失敗
 	}
@@ -221,6 +223,7 @@ namespace basecross {
 		const std::shared_ptr<AstarGraph>& graph,
 		const int targetAreaIndex
 	) {
+		maru::Utility::StackClear(m_route);
 		m_otherAreaNode.reset();
 
 		//オープンデータリストとクローズデータリストを生成

@@ -15,6 +15,10 @@
 
 #include "Maruyama/Utility/SingletonComponent/SingletonComponent.h"
 #include "Maruyama/Enemy/ImpactMap/FieldImpactMap.h"
+#include "Maruyama/Enemy/ImpactMap/ImpactMap.h"
+#include "Maruyama/Enemy/Astar/GraphAstar.h"
+#include "Maruyama/Enemy/Astar/NavGraphNode.h"
+#include "Maruyama/Enemy/Astar/AstarEdge.h"
 
 #include "Maruyama/Utility/Component/TargetManager.h"
 #include "VelocityManager.h"
@@ -26,6 +30,7 @@
 #include "Maruyama/Utility/Component/Targeted.h"
 
 #include "Maruyama/Enemy/ImpactMap/SelfImpactNodeManager.h"
+#include "Maruyama/Enemy/Astar/OpenDataHandler.h"
 
 #include "Watanabe/DebugClass/Debug.h"
 
@@ -52,6 +57,8 @@ namespace basecross {
 			TaskNodeBase(owner),
 			m_param(paramPtr),
 			m_taskList(new TaskList<TaskEnum>()),
+			m_areaOpenDataHandler(new OpenDataHandler()),
+			m_openDataHandler(new OpenDataHandler()),
 			m_isInitializeSearch(true),
 			m_isSearchRoute(false)
 		{
@@ -64,6 +71,7 @@ namespace basecross {
 		}
 
 		void MoveAstar::OnStart() {
+			Debug::GetInstance()->ClearLog();
 			CalculateMoveAreaRouteQueue();	//徘徊エリアルートの取得
 
 			//検索中なら処理を中断
@@ -126,13 +134,14 @@ namespace basecross {
 
 		void MoveAstar::NextRoute() {
 			//SetIsSearchRoute(true);		//検索開始
-			//std::lock_guard<std::mutex> lock(m_mtx);
+			std::lock_guard<std::mutex> lock(m_mtx);
 
 			if (m_areaRoute.empty()) {
 				SetIsSearchRoute(false);//検索終了
 				return;
 			}
 
+			//std::lock_guard<std::mutex> lock(m_mtx);
 			auto positions = CalculateMovePositions();	//新しいポジションに変更
 
 			SelectTask();	//タスクの再始動
@@ -144,30 +153,29 @@ namespace basecross {
 			maru::Utility::QueueClear(m_areaRoute);	//キューのクリア
 
 			auto fieldImpactMap = maru::FieldImpactMap::GetInstance();	//フィールド影響マップの取得
+			auto astar = fieldImpactMap->GetImpactMap()->GetGraphAstar();
 
 			//開始位置と目標位置の取得
 			auto startPosition = m_transform.lock()->GetPosition();
 			auto targetPosition = CalculateMoveTargetPosition();
 
 			//エリアのルートを取得
-			auto areaRouteIndices = fieldImpactMap->SearchAreaRouteIndices(startPosition, targetPosition);
+			auto areaRouteIndices = SearchAreaIndices(startPosition, targetPosition);
 
-			//std::wstring debugStr = L"";	//デバッグ
+			std::wstring debugStr = L"";	//デバッグ
 			//Astar検索が最初の自分自身のノードを省くため、最初は現在所属しているエリアから検索する。
-			int startAreaIndex = fieldImpactMap->SearchNearAreaIndex(startPosition);
-			//debugStr += std::to_wstring(startAreaIndex);
+			int startAreaIndex = astar->SearchNearAreaIndex(startPosition);
+			debugStr += std::to_wstring(startAreaIndex);
 			m_areaRoute.push(startAreaIndex);
 			for (const auto& areaRouteIndex : areaRouteIndices) {
-				//debugStr += L"," + std::to_wstring(areaRouteIndex);
+				debugStr += L"," + std::to_wstring(areaRouteIndex);
 				m_areaRoute.push(areaRouteIndex);
 			}
 
-			//Debug::GetInstance()->ClearLog();
-
-			//Debug::GetInstance()->Log(L"エリアルート---------------------------");
-			////std::reverse(debugStr.begin(), debugStr.end());
-			//Debug::GetInstance()->Log(debugStr);
-			//Debug::GetInstance()->Log(L"");
+			Debug::GetInstance()->Log(L"エリアルート---------------------------");
+			//std::reverse(debugStr.begin(), debugStr.end());
+			Debug::GetInstance()->Log(debugStr);
+			Debug::GetInstance()->Log(L"");
 
 			return m_areaRoute;
 		}
@@ -182,7 +190,7 @@ namespace basecross {
 			int targetAreaIndex = !m_areaRoute.empty() ? m_areaRoute.front() : areaIndex;
 			auto startNode = m_selfAstarNodeController.lock()->CalculateNode();
 
-			auto positions = maru::FieldImpactMap::GetInstance()->GetRoutePositions(startNode, CalculateMoveTargetNode(), areaIndex, targetAreaIndex);
+			auto positions = CalculateRoutePositions(startNode, CalculateMoveTargetNode(), areaIndex, targetAreaIndex);
 
 			m_param->movePositionsParam->positions = positions;
 			return positions;
@@ -217,8 +225,100 @@ namespace basecross {
 				Debug::GetInstance()->Log(target->GetComponent<Transform>(false)->GetPosition());
 				Debug::GetInstance()->Log(L"TaregetNodeがnullptrです。");
 			}
-			
+
+			Debug::GetInstance()->Log(targetManager->GetTargetPosition());
 			return node;
+		}
+
+		std::vector<int> MoveAstar::SearchAreaIndices(const Vec3& startPosition, const Vec3& targetPosition) {
+			auto fieldImpactMap = maru::FieldImpactMap::GetInstance();
+			auto impactMap = fieldImpactMap->GetImpactMap();
+			auto astar = impactMap->GetGraphAstar();
+			
+			auto areaGraph = astar->GetAreaGraph();
+
+			auto selfNode = astar->SearchNearAreaNode(startPosition);
+			auto targetNode = astar->SearchNearAreaNode(targetPosition);
+
+			auto route = SearchAstarStart(selfNode, targetNode, areaGraph, m_areaOpenDataHandler);
+
+			std::vector<int> resultIndices;
+			while (!route.empty()) {
+				auto top = route.top();
+				if (top.expired()) {
+					route.pop();
+					continue;
+				}
+
+				resultIndices.push_back(top.lock()->GetAreaIndex());
+
+				route.pop();
+			}
+
+			return resultIndices;
+		}
+
+		std::vector<Vec3> MoveAstar::CalculateRoutePositions(
+			const std::shared_ptr<NavGraphNode>& selfNode,
+			const std::shared_ptr<NavGraphNode>& targetNode,
+			const int areaIndex,
+			const int targetAreaIndex
+		) {
+			auto fieldImpactMap = maru::FieldImpactMap::GetInstance();
+			auto impactMap = fieldImpactMap->GetImpactMap();
+			auto astar = impactMap->GetGraphAstar();
+
+			auto graph = astar->GetBaseGraph();
+
+			auto route = SearchAstarStart(selfNode, targetNode, graph, m_openDataHandler, targetAreaIndex);
+
+			std::vector<Vec3> resultPositions;
+
+			while (!route.empty()) {
+				auto top = route.top();
+				if (top.expired()) {
+					route.pop();
+					continue;
+				}
+
+				resultPositions.push_back(top.lock()->GetPosition());
+
+				route.pop();
+			}
+
+			return resultPositions;
+		}
+
+		std::stack<std::weak_ptr<NavGraphNode>> MoveAstar::SearchAstarStart(
+			const std::shared_ptr<NavGraphNode>& selfNode,
+			const std::shared_ptr<NavGraphNode>& targetNode,
+			const std::shared_ptr<AstarGraph>& graph,
+			const std::shared_ptr<OpenDataHandler> openDataHandler,
+			const int targetAreaIndex
+		) {
+			std::stack<std::weak_ptr<NavGraphNode>> result;
+
+			if (selfNode == nullptr || targetNode == nullptr) {
+				if (selfNode == nullptr) {
+					Debug::GetInstance()->Log(L"MoveAstar::SearchAstarStart(), startNodeがnullです");
+				}
+
+				if (targetNode == nullptr) {
+					Debug::GetInstance()->Log(L"MoveAstar::SearchAstarStart(), targetNodeがnullです");
+				}
+
+				return result;
+			}
+
+			if (selfNode->GetPosition() == targetNode->GetPosition()) {	//同じノードならtrue
+				Debug::GetInstance()->Log(L"MoveAstar::SearchAstarStart(), 同じルートです。");
+				result.push(selfNode);
+				return result;
+			}
+
+			openDataHandler->StartSearchAstar(selfNode, targetNode, graph, targetAreaIndex);	//OpenDataを使って最短経路を検索する。
+
+			return openDataHandler->GetRoute();		//ルートの取得
 		}
 
 		//--------------------------------------------------------------------------------------
