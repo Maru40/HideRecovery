@@ -27,7 +27,7 @@ namespace basecross {
 	{}
 
 	WallAvoidTacticle::WallAvoidTacticle(const float degree):
-		WallAvoidTacticle(2.0f, degree)
+		WallAvoidTacticle(1.0f, degree)
 	{}
 
 	WallAvoidTacticle::WallAvoidTacticle(const float range, const float degree):
@@ -40,7 +40,7 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 
 	WallAvoid_Parametor::WallAvoid_Parametor():
-		avoidPower(0.2f),
+		avoidPower(0.75f),
 		offset(Vec3(0.0f, -0.35f, 0.0f))
 	{}
 
