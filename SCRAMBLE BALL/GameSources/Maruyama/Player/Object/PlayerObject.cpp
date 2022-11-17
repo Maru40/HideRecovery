@@ -244,6 +244,8 @@ namespace basecross {
 		//死亡中はターゲットにできないように変更。
 		targeted->AddCanTargetFunction([weakPlayerStatus]() { return !weakPlayerStatus.lock()->IsDead(); });
 
+		AddTag(L"T_Player");
+
 		//カメラセッティング----------------------------------------------------------
 
 		auto springArm = GetStage()->Instantiate<GameObject>(Vec3(), Quat());
