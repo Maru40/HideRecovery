@@ -8,6 +8,7 @@
 #include "Maruyama/Item/HideItem.h"
 #include "Watanabe/Component/PlayerStatus.h"
 #include "Item.h"
+#include "OnlineExtension.h"
 
 /// <summary>
 /// バイト配列を任意の型に変換する
@@ -254,7 +255,7 @@ namespace basecross
 		}
 
 		auto data = OnlinePlayerData<std::uint32_t>(playerNumber, instanceId);
-		Online::OnlineManager::RaiseEvent(false, (std::uint8_t*)&data, sizeof(data), EXECUTE_OPEN_HIDEPLACE_EVENT_CODE);
+		Online::OnlineManager::RaiseEvent(true, (std::uint8_t*)&data, sizeof(data), EXECUTE_OPEN_HIDEPLACE_EVENT_CODE);
 
 		auto hideItem = hidePlace->TakeOutHideItem();
 
@@ -326,7 +327,7 @@ namespace basecross
 
 	void OnlinePlayerSynchronizer::Damaged(const std::shared_ptr<PlayerStatus>& playerStatus, const DamageData& damageData)
 	{
-		if (!Online::OnlineManager::GetLocalPlayer().getIsMasterClient())
+		if (!Online::OnlineExtension::IsGameMaster())
 		{
 			return;
 		}
@@ -527,7 +528,7 @@ namespace basecross
 		auto bulletOnlineStatus = bulletObject->GetComponent<Online::OnlineStatus>();
 
 		// ホストが弾の削除の管理を行う
-		if (Online::OnlineManager::GetLocalPlayer().getIsMasterClient())
+		if (Online::OnlineExtension::IsGameMaster())
 		{
 			auto chargeBullet = bulletObject->GetComponent<ChargeBullet>();
 			chargeBullet->AddDestroyEventFunc([&](const std::shared_ptr<GameObject>& gameObject) { BulletDestroyed(gameObject); });
@@ -617,7 +618,7 @@ namespace basecross
 		std::uint32_t instanceId = onlineStatus->GetInstanceId();
 
 		// ホストではないのなら
-		if (!Online::OnlineManager::GetLocalPlayer().getIsMasterClient())
+		if (!Online::OnlineExtension::IsGameMaster())
 		{
 			auto data = OnlinePlayerData<std::uint32_t>(m_onlinePlayerNumber, instanceId);
 			Online::OnlineManager::RaiseEvent(false, (std::uint8_t*)&data, sizeof(data), TRY_OPEN_HIDEPLACE_EVENT_CODE);
@@ -662,7 +663,7 @@ namespace basecross
 		std::uint32_t instanceId = onlineStatus->GetInstanceId();
 
 		// ホストではないのなら
-		if (!Online::OnlineManager::GetLocalPlayer().getIsMasterClient())
+		if (!Online::OnlineExtension::IsGameMaster())
 		{
 			auto data = OnlinePlayerData<std::uint32_t>(m_onlinePlayerNumber, instanceId);
 			Online::OnlineManager::RaiseEvent(false, (std::uint8_t*)&data, sizeof(data), TRY_ITEM_AQUISITION_EVENT_CODE);

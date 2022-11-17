@@ -53,6 +53,8 @@
 #include "Maruyama/Utility/SingletonComponent/SingletonComponent.h"
 #include "Maruyama/Utility/SingletonComponent/ShareClassesManager.h"
 
+#include "Itabashi/OnlineExtension.h"
+
 namespace basecross {
 	//--------------------------------------------------------------------------------------
 	/// オンライン用データ
@@ -176,7 +178,7 @@ namespace basecross {
 		}
 
 		//カウントダウンスタート
-		if (Online::OnlineManager::GetLocalPlayer().getIsMasterClient())
+		if (Online::OnlineExtension::IsGameMaster())
 		{
 			std::weak_ptr<OnlineGameItemManager> weakGameItemManager = m_onlineGameItemManager;
 			std::weak_ptr<HideItem> weakHideItem = item->GetGameObject()->GetComponent<HideItem>();
@@ -214,7 +216,7 @@ namespace basecross {
 		GoalProcess(other, item);
 
 		auto data = OnlineGoalData(m_param.team, onlinePlayerSynchronizer->GetOnlinePlayerNumber());
-		Online::OnlineManager::RaiseEvent(false, (std::uint8_t*)&data, sizeof(OnlineGoalData), EXECUTE_GOAL_EVENT_CODE);
+		Online::OnlineManager::RaiseEvent(true, (std::uint8_t*)&data, sizeof(OnlineGoalData), EXECUTE_GOAL_EVENT_CODE);
 	}
 
 	void Goal::SuccessGoal(team::TeamType team, int playerNumber)
@@ -290,7 +292,7 @@ namespace basecross {
 			return false;
 		}
 
-		if (!Online::OnlineManager::GetLocalPlayer().getIsMasterClient()) {
+		if (!Online::OnlineExtension::IsGameMaster()) {
 			return false;
 		}
 

@@ -165,6 +165,10 @@ namespace Online
 		/// 接続するためのクライアント
 		/// </summary>
 		std::unique_ptr<ExitGames::LoadBalancing::Client> m_client;
+		/// <summary>
+		/// 現在接続状態か
+		/// </summary>
+		bool m_isConnected = false;
 
 		OnlineManager() noexcept = default;
 
@@ -252,7 +256,7 @@ namespace Online
 		/// <summary>
 		/// オンラインでイベントを発行する
 		/// </summary>
-		/// <param name="reliable"></param>
+		/// <param name="reliable">必ずイベントが届くか</param>
 		/// <param name="bytes">送るデータ(バイト配列)</param>
 		/// <param name="size">データサイズ</param>
 		/// <param name="eventCode">イベントコード</param>
@@ -262,7 +266,7 @@ namespace Online
 		/// 接続されているか
 		/// </summary>
 		/// <returns>接続しているならtrue</returns>
-		static bool IsConnected();
+		static bool IsConnected() noexcept { return GetInstance()->m_isConnected; }
 
 		// 自分自身のコールバック -------------------------------------------------------------------------------------------------
 

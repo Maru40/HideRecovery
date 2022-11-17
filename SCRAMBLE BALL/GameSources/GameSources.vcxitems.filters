@@ -1477,6 +1477,9 @@
     <Filter Include="Watanabe\UI\ReconnectingInGameUI">
       <UniqueIdentifier>{0a0388fb-0120-452e-a7b1-3de8b59076e3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Itabashi\Online\OnlineExtension">
+      <UniqueIdentifier>{b95ee6c0-4628-4f01-8f07-ef8adcddc839}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2795,6 +2798,9 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\ReconnectingInGameUI.h">
       <Filter>Watanabe\UI\ReconnectingInGameUI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineExtension.h">
+      <Filter>Itabashi\Online\OnlineExtension</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
