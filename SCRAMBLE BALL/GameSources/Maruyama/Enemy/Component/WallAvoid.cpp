@@ -111,7 +111,13 @@ namespace basecross {
 		}
 
 		auto objects = GetStage()->GetGameObjectVec();
-		auto obstacles = maru::UtilityObstacle::FindObstacles(objects, maru::UtilityObstacle::DEFAULT_OBSTACLE_AND_ENEMY_AND_HIDEPLACE);
+		//auto players = maru::Utility::FindGameObjects<PlayerObject>();
+		//std::vector<std::shared_ptr<GameObject>> excludes;
+		//for (auto& player : players) {
+		//	excludes.push_back(player);
+		//}
+		auto obstacles = maru::UtilityObstacle::FindObstacles(objects, maru::UtilityObstacle::DEFAULT_OBSTACLE_AND_PLAYER_AND_HIDEPLACE);
+		//auto obs = maru::Utility::ExcludeVector(obstacles, excludes);
 
 		m_obstacles = maru::Utility::ConvertArraySharedToWeak(obstacles);
 	}
