@@ -196,10 +196,10 @@ namespace basecross {
 
 					//-------------------------------------------------------------------------------------------------------
 
-					//m_behaviorTree->AddDecorator<Decorator::TimerWaitPosition>(
-					//	BehaviorType::FirstSelecter,
-					//	GetOwner()
-					//);
+					m_behaviorTree->AddDecorator<Decorator::TimerWaitPosition>(
+						BehaviorType::FirstSelecter,
+						GetOwner()
+					);
 				}
 
 			}
