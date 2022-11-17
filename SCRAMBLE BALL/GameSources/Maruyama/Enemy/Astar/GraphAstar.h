@@ -163,6 +163,10 @@ namespace basecross {
 			return m_baseGraph;
 		}
 
+		const std::shared_ptr<GraphType> GetBaseGraph() const {
+			return m_baseGraph;
+		}
+
 		/// <summary>
 		/// エリアごとに分けたグラフの取得
 		/// </summary>
@@ -176,7 +180,15 @@ namespace basecross {
 			return m_graphMap.at(areaIndex);
 		}
 
-		const std::shared_ptr<const GraphType> GetAreaGraph() const { 
+		const std::shared_ptr<GraphType> GetBaseGraph(const int areaIndex) const {
+			if (m_graphMap.count(areaIndex) == 0) {
+				return nullptr;
+			}
+
+			return m_graphMap.at(areaIndex);
+		}
+
+		const std::shared_ptr<GraphType> GetAreaGraph() const { 
 			return m_areaGraph;
 		}
 
