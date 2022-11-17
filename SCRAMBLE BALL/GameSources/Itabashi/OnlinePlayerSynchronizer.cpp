@@ -8,6 +8,7 @@
 #include "Maruyama/Item/HideItem.h"
 #include "Watanabe/Component/PlayerStatus.h"
 #include "Item.h"
+#include "OnlineExtension.h"
 
 /// <summary>
 /// バイト配列を任意の型に変換する
@@ -662,7 +663,7 @@ namespace basecross
 		std::uint32_t instanceId = onlineStatus->GetInstanceId();
 
 		// ホストではないのなら
-		if (!Online::OnlineManager::GetLocalPlayer().getIsMasterClient())
+		if (!Online::OnlineExtension::IsGameMaster())
 		{
 			auto data = OnlinePlayerData<std::uint32_t>(m_onlinePlayerNumber, instanceId);
 			Online::OnlineManager::RaiseEvent(false, (std::uint8_t*)&data, sizeof(data), TRY_ITEM_AQUISITION_EVENT_CODE);
