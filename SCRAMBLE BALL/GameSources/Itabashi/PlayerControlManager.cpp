@@ -166,7 +166,7 @@ namespace basecross
 		auto transform = m_transform.lock();
 		auto useWeapon = m_useWeapon.lock();
 
-		if (!useWeapon)
+		if (!useWeapon || !useWeapon->IsAim())
 		{
 			return false;
 		}
