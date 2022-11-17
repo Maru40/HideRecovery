@@ -4,16 +4,26 @@
 
 namespace basecross {
 	class InProcessUI;
-	class SimpleSprite;
 
 	class ReconnectingInGameUI :public UIObjectBase {
-		weak_ptr<InProcessUI> m_inProcessUI;
-		vector<weak_ptr<SimpleSprite>> m_toTitleUIs;
-		weak_ptr<SimpleSprite> m_splashMessageUI;
+	public:
+		/// <summary>
+		/// UIの状態
+		/// </summary>
+		enum class State {
+			None,			// 通常（なにも表示しない）
+			InConnection,	// 接続中（グルグル）
+			Abort,			// 接続を断念（タイトルへ）
+		};
+	private:
+		shared_ptr<InProcessUI> m_inProcessUI;
+		shared_ptr<UIObjectBase> m_toTitleUI;
+		shared_ptr<UIObjectBase> m_cannotConnectUI;
 	public:
 		ReconnectingInGameUI(const shared_ptr<Stage>& stage);
 
 		void OnCreate()override;
-		void OnUpdate()override {}
+
+		void SetState(const State& state);
 	};
 }

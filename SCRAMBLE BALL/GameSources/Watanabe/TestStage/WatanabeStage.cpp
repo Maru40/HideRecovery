@@ -7,6 +7,8 @@
 #include "Maruyama/Player/Component/PlayerController.h"
 #include "Scene.h"
 
+#include "../UI/UIObjects.h"
+
 namespace basecross {
 	void WatanabeStage::CreateViewLight() {
 		const Vec3 eye(5.0f, 5.0f, -5.0f);
@@ -28,6 +30,8 @@ namespace basecross {
 		AddGameObject<EfkInterface>();
 		AddGameObject<Debug>();
 		Debug::GetInstance()->Log(L"WatanabeStage");
+
+		m_ui = AddGameObject<ReconnectingInGameUI>();
 	}
 
 	void WatanabeStage::OnUpdate() {
@@ -40,6 +44,16 @@ namespace basecross {
 		//}
 		if (pad.IsInputDown(XInputCode::Start)) {
 			PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToWatanabeStage");
+		}
+
+		if (pad.IsInputDown(XInputCode::A)) {
+			m_ui->SetState(ReconnectingInGameUI::State::InConnection);
+		}
+		if (pad.IsInputDown(XInputCode::B)) {
+			m_ui->SetState(ReconnectingInGameUI::State::Abort);
+		}
+		if (pad.IsInputDown(XInputCode::Y)) {
+			m_ui->SetState(ReconnectingInGameUI::State::None);
 		}
 	}
 }
