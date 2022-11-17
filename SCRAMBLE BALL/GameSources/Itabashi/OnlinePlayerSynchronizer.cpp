@@ -326,7 +326,7 @@ namespace basecross
 
 	void OnlinePlayerSynchronizer::Damaged(const std::shared_ptr<PlayerStatus>& playerStatus, const DamageData& damageData)
 	{
-		if (!Online::OnlineManager::GetLocalPlayer().getIsMasterClient())
+		if (!Online::OnlineExtension::IsGameMaster())
 		{
 			return;
 		}
@@ -527,7 +527,7 @@ namespace basecross
 		auto bulletOnlineStatus = bulletObject->GetComponent<Online::OnlineStatus>();
 
 		// ホストが弾の削除の管理を行う
-		if (Online::OnlineManager::GetLocalPlayer().getIsMasterClient())
+		if (Online::OnlineExtension::IsGameMaster())
 		{
 			auto chargeBullet = bulletObject->GetComponent<ChargeBullet>();
 			chargeBullet->AddDestroyEventFunc([&](const std::shared_ptr<GameObject>& gameObject) { BulletDestroyed(gameObject); });
