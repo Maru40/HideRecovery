@@ -29,8 +29,14 @@ namespace basecross {
 			/// ステートの切り替え
 			/// </summary>
 			/// <param name="type">ステートのEnumType</param>
-			/// <param name="priority"></param>
+			/// <param name="priority">優先度</param>
 			virtual void ChangeState(const EnumType& state, const int& priority = 0) = 0;
+
+			/// <summary>
+			/// ステートの強制切り替え
+			/// </summary>
+			/// <param name="state">ステート</param>
+			virtual void ForceChangeState(const EnumType state) = 0;
 
 			/// <summary>
 			/// 現在使用中のステートタイプを取得
@@ -134,6 +140,14 @@ namespace basecross {
 			/// <param name="priority">優先度</param>
 			void ChangeState(const EnumType& state, const int& priority = 0) override final{
 				m_stateMachine->ChangeState(state, priority);
+			}
+
+			/// <summary>
+			/// ステートの強制変更
+			/// </summary>
+			/// <param name="state">変更したいステート</param>
+			void ForceChangeState(const EnumType state) {
+				m_stateMachine->ForceChangeState(state);
 			}
 
 			/// <summary>
