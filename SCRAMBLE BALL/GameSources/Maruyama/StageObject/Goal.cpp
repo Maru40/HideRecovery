@@ -216,7 +216,7 @@ namespace basecross {
 		GoalProcess(other, item);
 
 		auto data = OnlineGoalData(m_param.team, onlinePlayerSynchronizer->GetOnlinePlayerNumber());
-		Online::OnlineManager::RaiseEvent(false, (std::uint8_t*)&data, sizeof(OnlineGoalData), EXECUTE_GOAL_EVENT_CODE);
+		Online::OnlineManager::RaiseEvent(true, (std::uint8_t*)&data, sizeof(OnlineGoalData), EXECUTE_GOAL_EVENT_CODE);
 	}
 
 	void Goal::SuccessGoal(team::TeamType team, int playerNumber)
