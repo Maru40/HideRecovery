@@ -11,12 +11,17 @@
 
 #include "Maruyama/TaskList/TaskList.h"
 
+//#include "Maruyama/Enemy/Astar/GraphAstar.h"
+//#include "Maruyama/Enemy/Astar/AstarEdge.h"
+
 namespace basecross {
 
 	class TargetManager;
 	class VelocityManager;
 	class SelfAstarNodeController;
 	class NavGraphNode;
+	class OpenDataHandler;
+	class AstarGraph;
 
 	template<class T>
 	class TaskList;
@@ -62,9 +67,13 @@ namespace basecross {
 			std::weak_ptr<VelocityManager> m_velocityManager;
 			std::weak_ptr<SelfAstarNodeController> m_selfAstarNodeController;
 
+			std::shared_ptr<OpenDataHandler> m_areaOpenDataHandler;
+			std::shared_ptr<OpenDataHandler> m_openDataHandler;
+
 			bool m_isInitializeSearch;	//初回サーチ限定
 			bool m_isSearchRoute;		//ルートを検索中かどうか
 			//static std::mutex m_mtx;	//ミューテックス
+			std::mutex m_mtx;
 
 		public:
 			MoveAstar(const std::shared_ptr<Enemy::EnemyBase>& owner, const Parametor* paramPtr);
@@ -107,6 +116,26 @@ namespace basecross {
 			/// 徘徊先の目的ノードを取得
 			/// </summary>
 			std::shared_ptr<NavGraphNode> CalculateMoveTargetNode();
+
+			//エリアIndexの取得(本来はAstar系として別で実装)
+			std::vector<int> SearchAreaIndices(const Vec3& startPosition, const Vec3& targetPosition);
+
+			//ルートの取得(本来はAstar系として別で実装)
+			std::vector<Vec3> CalculateRoutePositions(
+				const std::shared_ptr<NavGraphNode>& selfNode,
+				const std::shared_ptr<NavGraphNode>& targetNode,
+				const int areaIndex,
+				const int targetAreaIndex
+			);
+
+			//Astar検索のスタート(本来はAstar系として別で実装)
+			std::stack<std::weak_ptr<NavGraphNode>> SearchAstarStart(
+				const std::shared_ptr<NavGraphNode>& selfNode,
+				const std::shared_ptr<NavGraphNode>& targetNode,
+				const std::shared_ptr<AstarGraph>& graph,
+				const std::shared_ptr<OpenDataHandler> openDataHandler,
+				const int areaIndex = -1
+			);
 
 			void SetIsSearchRoute(const bool isSearchRoute) noexcept { m_isSearchRoute = isSearchRoute; }
 
