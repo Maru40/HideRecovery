@@ -12,7 +12,34 @@ namespace basecross {
 		:UIObjectBase(stage, L"ReconnectingInGameUI")
 	{}
 
+	void ReconnectingInGameUI::CreateBackgroundSprite() {
+		vector<VertexPositionColor> vertices;
+		float windowWidth = (float)App::GetApp()->GetGameWidth();
+		float windowHeight = (float)App::GetApp()->GetGameHeight();
+		Vec2 size(windowWidth, windowHeight);
+
+		auto halfSize = size / 2.0f;
+		Col4 color(1);
+		vertices = {
+			{Vec3(-halfSize.x, +halfSize.y, 0.0f), color},
+			{Vec3(+halfSize.x, +halfSize.y, 0.0f), color},
+			{Vec3(-halfSize.x, -halfSize.y, 0.0f), color},
+			{Vec3(+halfSize.x, -halfSize.y, 0.0f), color}
+		};
+		vector<uint16_t> indices = {
+			0, 1, 2,
+			2, 1, 3
+		};
+
+		m_backgroundSprite = GetStage()->AddGameObject<UIObjectBase>(L"BackgroundSprite");
+		auto spriteDraw = m_backgroundSprite->AddComponent<PCSpriteDraw>(vertices, indices);
+		spriteDraw->SetDiffuse(Col4(0, 0, 0, 0.5f));
+		m_backgroundSprite->SetAlphaActive(true);
+	}
+
 	void ReconnectingInGameUI::OnCreate() {
+		CreateBackgroundSprite();
+
 		// UIパーツ生成
 		auto uiBuilder = UIObjectCSVBuilder::Create();
 		uiBuilder->Register<SimpleSprite>(L"SimpleSprite");
@@ -39,6 +66,13 @@ namespace basecross {
 		// 「インターネットに接続できませんでした」UI
 		m_cannotConnectUI = uiBuilder->GetUIObject(L"CannotConnect");
 
+		// 最前面に表示させる
+		int baseLayer = 3;
+		m_backgroundSprite->SetUIDrawLayer(baseLayer);
+		for (auto& ui : uiBuilder->GetUIObjects()) {
+			ui->SetUIDrawLayer(baseLayer + 1);
+		}
+
 		SetState(State::None);
 	}
 
@@ -50,7 +84,8 @@ namespace basecross {
 			shared_ptr<UIObjectBase> uis[] = {
 				m_cannotConnectUI,
 				m_inProcessUI,
-				m_toTitleUI
+				m_toTitleUI,
+				m_backgroundSprite
 			};
 			for (auto& ui : uis) {
 				ui->SetActive(false);
@@ -61,11 +96,13 @@ namespace basecross {
 			m_cannotConnectUI->SetActive(false);
 			m_toTitleUI->SetActive(false);
 			m_inProcessUI->SetActive(true);
+			m_backgroundSprite->SetActive(true);
 			return;
 		case State::Abort:
 			m_cannotConnectUI->SetActive(true);
 			m_toTitleUI->SetActive(true);
 			m_inProcessUI->SetActive(false);
+			m_backgroundSprite->SetActive(true);
 			return;
 		}
 

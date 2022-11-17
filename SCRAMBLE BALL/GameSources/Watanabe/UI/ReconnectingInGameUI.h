@@ -19,6 +19,8 @@ namespace basecross {
 		shared_ptr<InProcessUI> m_inProcessUI;
 		shared_ptr<UIObjectBase> m_toTitleUI;
 		shared_ptr<UIObjectBase> m_cannotConnectUI;
+		shared_ptr<UIObjectBase> m_backgroundSprite;
+		void CreateBackgroundSprite();
 	public:
 		ReconnectingInGameUI(const shared_ptr<Stage>& stage);
 
