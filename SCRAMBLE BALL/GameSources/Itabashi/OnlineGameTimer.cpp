@@ -50,7 +50,7 @@ namespace basecross
 		{
 			GameCountStart();
 
-			Online::OnlineManager::RaiseEvent(false, nullptr, 0, GAMETIMER_START_EVENT_CODE);
+			Online::OnlineManager::RaiseEvent(true, nullptr, 0, GAMETIMER_START_EVENT_CODE);
 
 			return;
 		}

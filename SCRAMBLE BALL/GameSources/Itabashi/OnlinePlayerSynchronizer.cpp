@@ -254,7 +254,7 @@ namespace basecross
 		}
 
 		auto data = OnlinePlayerData<std::uint32_t>(playerNumber, instanceId);
-		Online::OnlineManager::RaiseEvent(false, (std::uint8_t*)&data, sizeof(data), EXECUTE_OPEN_HIDEPLACE_EVENT_CODE);
+		Online::OnlineManager::RaiseEvent(true, (std::uint8_t*)&data, sizeof(data), EXECUTE_OPEN_HIDEPLACE_EVENT_CODE);
 
 		auto hideItem = hidePlace->TakeOutHideItem();
 
