@@ -15,7 +15,7 @@ namespace basecross {
 	const std::vector<std::wstring> maru::UtilityObstacle::DEFAULT_OBSTACLE_TAGS = { L"T_Obstacle" };
 	const std::vector<std::wstring> maru::UtilityObstacle::DEFAULT_OBSTACLE_AND_FLOOR_TAGS = { L"T_Obstacle", L"Floor" };
 	const std::vector<std::wstring> maru::UtilityObstacle::DEFAULT_OBSTACLE_AND_FLOOR_AND_ENEMY_TAGS = { L"T_Obstacle", L"Floor", L"T_Enemy"};
-	const std::vector<std::wstring> maru::UtilityObstacle::DEFAULT_OBSTACLE_AND_ENEMY_AND_HIDEPLACE = { L"T_Obstacle", L"T_HidePlace", L"T_Enemy" };
+	const std::vector<std::wstring> maru::UtilityObstacle::DEFAULT_OBSTACLE_AND_PLAYER_AND_HIDEPLACE = { L"T_Obstacle", L"T_HidePlace", L"T_Player" };
 
 	bool maru::UtilityObstacle::IsObstacle(const std::shared_ptr<GameObject>& object, const std::vector<wstring>& tags) {
 		for (const auto& tag : tags)
