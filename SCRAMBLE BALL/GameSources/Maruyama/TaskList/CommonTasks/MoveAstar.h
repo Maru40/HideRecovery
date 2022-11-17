@@ -75,6 +75,8 @@ namespace basecross {
 			//static std::mutex m_mtx;	//ミューテックス
 			std::mutex m_mtx;
 
+			std::thread::id m_currentThreadID;	//現在登録中のマルチタスク
+
 		public:
 			MoveAstar(const std::shared_ptr<Enemy::EnemyBase>& owner, const Parametor* paramPtr);
 
@@ -91,6 +93,9 @@ namespace basecross {
 			void DefineTask();
 
 			void SelectTask();
+
+			//次の場所の検索を開始
+			void StartThread_NextRoute();
 
 			void NextRoute();
 
@@ -133,7 +138,6 @@ namespace basecross {
 				const std::shared_ptr<NavGraphNode>& selfNode,
 				const std::shared_ptr<NavGraphNode>& targetNode,
 				const std::shared_ptr<AstarGraph>& graph,
-				const std::shared_ptr<OpenDataHandler> openDataHandler,
 				const int areaIndex = -1
 			);
 

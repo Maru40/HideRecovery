@@ -75,9 +75,9 @@ namespace basecross {
 			CalculateMoveAreaRouteQueue();	//徘徊エリアルートの取得
 
 			//検索中なら処理を中断
-			if (IsSearchRoute()) {
-				return;
-			}
+			//if (IsSearchRoute()) {
+			//	return;
+			//}
 
 			if (m_isInitializeSearch) {
 				//初回検索のみバグるため、問題解決までの仮処理
@@ -85,11 +85,7 @@ namespace basecross {
 				NextRoute();
 			}
 			else {
-				SetIsSearchRoute(true);
-				//NextRoute();
-				//スレッド生成
-				std::thread nextRoute([&]() { NextRoute(); });
-				nextRoute.detach();
+				StartThread_NextRoute();	//検索スレッドの開始
 			}
 		}
 
@@ -102,11 +98,7 @@ namespace basecross {
 			m_taskList->UpdateTask();
 
 			if (m_taskList->IsEnd()) {
-				SetIsSearchRoute(true);
-				//NextRoute();
-				//スレッド生成
-				std::thread nextRoute([&]() { NextRoute(); });
-				nextRoute.detach();
+				StartThread_NextRoute();	//検索スレッドの開始
 			}
 
 			return IsEnd();
@@ -125,6 +117,13 @@ namespace basecross {
 		}
 
 		void MoveAstar::SelectTask() {
+			//idが違うならreturn
+			if (m_currentThreadID != std::this_thread::get_id()) {
+				return;
+			}
+
+			std::lock_guard<mutex> lock(m_mtx);	//ロック
+
 			TaskEnum tasks[] = {
 				TaskEnum::Move,
 			};
@@ -134,20 +133,40 @@ namespace basecross {
 			}
 		}
 
+		void MoveAstar::StartThread_NextRoute() {
+			SetIsSearchRoute(true);
+			//スレッド生成
+			std::thread nextRoute(&MoveAstar::NextRoute, this);
+			m_currentThreadID = nextRoute.get_id();	//IDの取得
+			nextRoute.detach();
+		}
+
 		void MoveAstar::NextRoute() {
 			//SetIsSearchRoute(true);		//検索開始
-			std::lock_guard<std::mutex> lock(m_mtx);
+			//std::lock_guard<std::mutex> lock(m_mtx);
 
 			if (m_areaRoute.empty()) {
 				SetIsSearchRoute(false);//検索終了
 				return;
 			}
 
-			//std::lock_guard<std::mutex> lock(m_mtx);
 			auto positions = CalculateMovePositions();	//新しいポジションに変更
+	
+			//idが違うならreturn
+			if (m_currentThreadID != std::this_thread::get_id()) {
+				return;
+			}
 
+			m_param->movePositionsParam->positions = positions;
+			
 			SelectTask();	//タスクの再始動
 
+			//idが違うならreturn
+			if (m_currentThreadID != std::this_thread::get_id()) {
+				return;
+			}
+
+			std::lock_guard<mutex> lock(m_mtx);	//ロック
 			SetIsSearchRoute(false);	//検索終了
 		}
 
@@ -189,11 +208,17 @@ namespace basecross {
 			int areaIndex = m_areaRoute.front();	//自分自身がいるエリアインデックス
 			m_areaRoute.pop();
 			int targetAreaIndex = !m_areaRoute.empty() ? m_areaRoute.front() : areaIndex;
+			
+			if (m_currentThreadID != std::this_thread::get_id()) {
+				return {};
+			}
+
+			m_mtx.lock();	//ロック
 			auto startNode = m_selfAstarNodeController.lock()->CalculateNode();
+			m_mtx.unlock();	//ロック解除
 
 			auto positions = CalculateRoutePositions(startNode, CalculateMoveTargetNode(), areaIndex, targetAreaIndex);
 
-			m_param->movePositionsParam->positions = positions;
 			return positions;
 		}
 
@@ -241,7 +266,7 @@ namespace basecross {
 			auto selfNode = astar->SearchNearAreaNode(startPosition);
 			auto targetNode = astar->SearchNearAreaNode(targetPosition);
 
-			auto route = SearchAstarStart(selfNode, targetNode, areaGraph, m_areaOpenDataHandler);
+			auto route = SearchAstarStart(selfNode, targetNode, areaGraph);
 
 			std::vector<int> resultIndices;
 			while (!route.empty()) {
@@ -271,7 +296,7 @@ namespace basecross {
 
 			auto graph = astar->GetBaseGraph();
 
-			auto route = SearchAstarStart(selfNode, targetNode, graph, m_openDataHandler, targetAreaIndex);
+			auto route = SearchAstarStart(selfNode, targetNode, graph, targetAreaIndex);
 
 			std::vector<Vec3> resultPositions;
 
@@ -294,7 +319,6 @@ namespace basecross {
 			const std::shared_ptr<NavGraphNode>& selfNode,
 			const std::shared_ptr<NavGraphNode>& targetNode,
 			const std::shared_ptr<AstarGraph>& graph,
-			const std::shared_ptr<OpenDataHandler> openDataHandler,
 			const int targetAreaIndex
 		) {
 			std::stack<std::weak_ptr<NavGraphNode>> result;
@@ -317,9 +341,10 @@ namespace basecross {
 				return result;
 			}
 
-			openDataHandler->StartSearchAstar(selfNode, targetNode, graph, targetAreaIndex);	//OpenDataを使って最短経路を検索する。
+			auto openDataHandler = OpenDataHandler();
+			openDataHandler.StartSearchAstar(selfNode, targetNode, graph, targetAreaIndex);	//OpenDataを使って最短経路を検索する。
 
-			return openDataHandler->GetRoute();		//ルートの取得
+			return openDataHandler.GetRoute();		//ルートの取得
 		}
 
 		//--------------------------------------------------------------------------------------
