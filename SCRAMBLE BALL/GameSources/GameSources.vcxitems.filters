@@ -1471,6 +1471,9 @@
     <Filter Include="Itabashi\StageObject\MatchStageReconnectUIObject">
       <UniqueIdentifier>{1fff7357-c809-4863-a894-da1f69795c36}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Itabashi\Online\OnlineExtension">
+      <UniqueIdentifier>{b95ee6c0-4628-4f01-8f07-ef8adcddc839}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2783,6 +2786,9 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageReconnectUIObject.h">
       <Filter>Itabashi\StageObject\MatchStageReconnectUIObject</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineExtension.h">
+      <Filter>Itabashi\Online\OnlineExtension</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
