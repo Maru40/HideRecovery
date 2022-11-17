@@ -139,8 +139,13 @@ namespace basecross {
 			return;
 		}
 
+		auto assignedFaction = factionMember->GetAssignedFaction();
+		if (!assignedFaction) {
+			return;
+		}
+
 		//ダメージを受けたことを伝える。
-		auto tupleSpace = factionMember->GetAssignedFaction()->GetTupleSpace();
+		auto tupleSpace = assignedFaction->GetTupleSpace();
 		tupleSpace->Write<Enemy::Tuple::Damaged>(tupler, data, (float)data.value);
 	}
 
