@@ -99,6 +99,7 @@ namespace basecross {
 		if (animator && useWeapon) {
 			//IsAimなら
 			if (useWeapon->IsAim()) {
+				useWeapon->SetIsAim(false);
 				animator->ChangePlayerAnimation(PlayerAnimationState::State::GSDead);
 			}
 			else {
