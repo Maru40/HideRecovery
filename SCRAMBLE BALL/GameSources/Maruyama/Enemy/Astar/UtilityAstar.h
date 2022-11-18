@@ -179,7 +179,7 @@ namespace basecross {
 			vector<std::shared_ptr<EdgeType>> resultEdge;
 
 			//八方向に近いオブジェクトがあるなら処理をしない
-			constexpr float NearRange = 0.5f;
+			constexpr float NearRange = 1.5f;
 			Vec3 positions[] = {
 				newNode->GetPosition() + ( Vec3::Forward() * NearRange),
 				newNode->GetPosition() + (-Vec3::Forward() * NearRange),
