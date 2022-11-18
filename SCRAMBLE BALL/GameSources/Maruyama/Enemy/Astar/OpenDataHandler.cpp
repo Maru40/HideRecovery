@@ -144,19 +144,19 @@ namespace basecross {
 		}
 
 		//デバッグ
-		auto tempRoute = m_route;
-		while (!tempRoute.empty()) {
-			auto data = tempRoute.top();
-			tempRoute.pop();
-			//debug----------------------------------------------------------------------------
-			auto areaIndex = std::to_wstring(data.lock()->GetAreaIndex());
-			auto nodeIndex = std::to_wstring(data.lock()->GetIndex());
+		//auto tempRoute = m_route;
+		//while (!tempRoute.empty()) {
+		//	auto data = tempRoute.top();
+		//	tempRoute.pop();
+		//	//debug----------------------------------------------------------------------------
+		//	auto areaIndex = std::to_wstring(data.lock()->GetAreaIndex());
+		//	auto nodeIndex = std::to_wstring(data.lock()->GetIndex());
 
-			Debug::GetInstance()->Log(L"エリア： " + areaIndex + L", ノード： " + nodeIndex);
-			//---------------------------------------------------------------------------------
-		}
+		//	Debug::GetInstance()->Log(L"エリア： " + areaIndex + L", ノード： " + nodeIndex);
+		//	//---------------------------------------------------------------------------------
+		//}
 
-		Debug::GetInstance()->Log(L"▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲");
+		//Debug::GetInstance()->Log(L"▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲");
 
 		return index <= tempMaxIndex;		//上限回数を超えたら、失敗
 	}
