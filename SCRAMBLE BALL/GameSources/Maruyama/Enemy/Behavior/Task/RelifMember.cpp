@@ -106,12 +106,12 @@ namespace basecross {
 				}
 
 				std::shared_ptr<GameObject> RelifMember::CalculateTarget() {
-					auto assignedFaction = GetOwner()->GetAssignedFaction();
-					if (!assignedFaction) {
+					auto faction = GetOwner()->GetFactionCoordinator();
+					if (!faction) {
 						return nullptr;
 					}
 
-					for (auto& weakMember : assignedFaction->GetMembers()) {
+					for (auto& weakMember : faction->GetMembers()) {
 						auto member = weakMember.lock();
 						if (member == GetOwner()) {	//©•ª©g‚È‚çˆ—‚ğ”ò‚Î‚·B
 							continue;

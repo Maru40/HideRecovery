@@ -20,7 +20,11 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 	class SelfAstarNodeController : public Component
 	{
-		bool m_isNodeInitialize;
+		bool m_isNodeInitialize;	//将来的にはなくしたい。
+
+		bool m_isMover;				//動く者なら更新をかける。
+
+		std::mutex m_mtx;			//ミューテックス
 
 		std::weak_ptr<NavGraphNode> m_node;
 
@@ -51,7 +55,7 @@ namespace basecross {
 		void InitializeNode();
 
 		//初めのエリアになかった場合に再起してノードを検索する。
-		std::shared_ptr<NavGraphNode> SearchNode(const int firstAreaIndex, const int currentAreaIndex ,const int direction = -1);
+		std::shared_ptr<NavGraphNode> SearchNode(const int firstAreaIndex, const int currentAreaIndex, const int direction = -1);
 
 		/// <summary>
 		/// 所持ノードが遠すぎるかどうか
@@ -73,6 +77,10 @@ namespace basecross {
 		bool HasNode() const noexcept;
 
 		_NODISCARD bool IsInitializeNode() const noexcept { return m_isNodeInitialize; };
+
+		void SetIsMover(const bool isMover) noexcept { m_isMover = isMover; }
+
+		_NODISCARD bool IsMover() const noexcept { return m_isMover; }
 
 	};
 

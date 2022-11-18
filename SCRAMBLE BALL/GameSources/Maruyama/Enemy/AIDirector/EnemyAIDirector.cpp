@@ -17,6 +17,7 @@
 #include "Maruyama/Utility/Utility.h"
 
 #include "Maruyama/Interface/I_TeamMember.h"
+#include "Maruyama/Enemy/Component/Stator/AIPlayerStator.h"
 
 namespace basecross {
 
@@ -97,6 +98,16 @@ namespace basecross {
 			//チームごとにファクションを生成する。
 			for (auto& pair : enemysMap) {
 				auto faction = CreateFaction(pair.second);
+			}
+
+			//playerをHidePlaceFactionに入れる。
+			for (auto& enemy : m_enemys) {
+				auto stator = enemy.lock()->GetGameObject()->GetComponent<AIPlayerStator>();
+				if (!stator) {
+					continue;
+				}
+
+				stator->ForceChangeState(AIPlayerStator::StateType::HidePlacePatrol);
 			}
 		}
 

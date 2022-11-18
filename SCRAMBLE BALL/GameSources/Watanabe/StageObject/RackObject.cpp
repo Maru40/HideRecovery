@@ -51,7 +51,9 @@ namespace basecross {
 
 		// 隠せるオブジェクトにする
 		AddComponent<HidePlace>(HidePlace::Parametor(Vec3(0.0f, 0.35f, 0.0f)));
-		AddComponent<SelfAstarNodeController>()->SetUpdateActive(false);
+		auto selfAstarNodeController = AddComponent<SelfAstarNodeController>();
+		selfAstarNodeController->SetIsMover(false);
+		selfAstarNodeController->SetUpdateActive(false);
 
 		//constexpr float fScale = 0.75f;
 		//transform->SetScale(Vec3(fScale));

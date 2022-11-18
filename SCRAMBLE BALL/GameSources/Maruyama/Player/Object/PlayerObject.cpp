@@ -272,7 +272,7 @@ namespace basecross {
 
 		AddComponent<Enemy::EnemyBase>()->SetUpdateActive(false);
 		AddComponent<SeekTarget>(nullptr)->SetUpdateActive(false);
-		AddComponent<SelfAstarNodeController>()->SetUpdateActive(false);
+		AddComponent<SelfAstarNodeController>();
 		AddComponent<TargetManager>()->SetUpdateActive(false);
 		AddComponent<WallAvoid>()->SetUpdateActive(false);
 		AddComponent<AIVirtualController>()->SetUpdateActive(false);
