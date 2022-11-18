@@ -107,7 +107,7 @@ namespace basecross {
 		void MoveAstar::OnExit() {
 			m_taskList->ForceStop();
 
-			Debug::GetInstance()->Log(L"▲▲▲ルートエンド");
+			//Debug::GetInstance()->Log(L"▲▲▲ルートエンド");
 		}
 
 		void MoveAstar::DefineTask() {
@@ -193,9 +193,9 @@ namespace basecross {
 				m_areaRoute.push(areaRouteIndex);
 			}
 
-			Debug::GetInstance()->Log(L"エリアルート---------------------------");
-			//std::reverse(debugStr.begin(), debugStr.end());
-			Debug::GetInstance()->Log(debugStr);
+			//Debug::GetInstance()->Log(L"エリアルート---------------------------");
+			////std::reverse(debugStr.begin(), debugStr.end());
+			//Debug::GetInstance()->Log(debugStr);
 
 			return m_areaRoute;
 		}
