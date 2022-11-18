@@ -24,6 +24,8 @@ namespace basecross {
 
 		bool m_isMover;				//動く者なら更新をかける。
 
+		std::mutex m_mtx;			//ミューテックス
+
 		std::weak_ptr<NavGraphNode> m_node;
 
 	public:

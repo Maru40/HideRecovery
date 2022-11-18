@@ -52,7 +52,7 @@ namespace basecross {
 
 		if (!HasNode() || IsFarNode()) {
 			m_isNodeInitialize = true;
-			std::thread initializeNode([&]() { InitializeNode(); });
+			std::thread initializeNode(&SelfAstarNodeController::InitializeNode, this);
 			initializeNode.detach();
 			return;
 		}
@@ -132,6 +132,8 @@ namespace basecross {
 	}
 
 	void SelfAstarNodeController::InitializeNode() {
+		std::lock_guard<mutex> lock(m_mtx);	//ミューテックスロック
+
 		auto impactMap = maru::FieldImpactMap::GetInstance()->GetImpactMap();
 		auto astar = impactMap->GetGraphAstar();
 		auto graph = astar->GetGraph();
