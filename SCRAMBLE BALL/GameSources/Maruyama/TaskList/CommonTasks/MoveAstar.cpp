@@ -201,6 +201,8 @@ namespace basecross {
 		}
 
 		std::vector<Vec3> MoveAstar::CalculateMovePositions() {
+			std::lock_guard<mutex> lock(m_mtx);	//ロック
+
 			if (m_areaRoute.empty()) {
 				return std::vector<Vec3>();
 			}
@@ -213,9 +215,10 @@ namespace basecross {
 				return {};
 			}
 
-			m_mtx.lock();	//ロック
+			//m_mtx.lock();	//ロック
+
 			auto startNode = m_selfAstarNodeController.lock()->CalculateNode();
-			m_mtx.unlock();	//ロック解除
+			//m_mtx.unlock();	//ロック解除
 
 			auto positions = CalculateRoutePositions(startNode, CalculateMoveTargetNode(), areaIndex, targetAreaIndex);
 
@@ -329,7 +332,7 @@ namespace basecross {
 				}
 
 				if (targetNode == nullptr) {
-					Debug::GetInstance()->Log(L"MoveAstar::SearchAstarStart(), targetNodeがnullです");
+					//Debug::GetInstance()->Log(L"MoveAstar::SearchAstarStart(), targetNodeがnullです");
 				}
 
 				return result;
