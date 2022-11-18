@@ -25,7 +25,9 @@
 namespace basecross {
 
 	SelfAstarNodeController::SelfAstarNodeController(const std::shared_ptr<GameObject>& objPtr) :
-		Component(objPtr), m_isNodeInitialize(false)
+		Component(objPtr),
+		m_isNodeInitialize(false),
+		m_isMover(true)
 	{}
 
 	void SelfAstarNodeController::OnCreate() {
@@ -37,7 +39,10 @@ namespace basecross {
 	}
 
 	void SelfAstarNodeController::OnUpdate() {
-		UpdateProccess();
+		//動く者なら、ノードの更新を監視する。
+		if (IsMover()) {
+			UpdateProccess();
+		}
 	}
 
 	void SelfAstarNodeController::UpdateProccess() {
@@ -58,8 +63,8 @@ namespace basecross {
 	}
 
 	void SelfAstarNodeController::UpdateNode() {
-		//ノードを持ってて、アップデートが必要ないなら、
-		if (HasNode() && !IsUpdateActive()) {
+		//ノードを持ってて、動かないなら、
+		if (HasNode() && !IsMover()) {
 			return;
 		}
 
