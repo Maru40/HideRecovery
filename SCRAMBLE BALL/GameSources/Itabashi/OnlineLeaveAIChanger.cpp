@@ -1,5 +1,6 @@
 ﻿#include "OnlineLeaveAIChanger.h"
 #include "Itabashi/OnlinePlayerSynchronizer.h"
+#include "Itabashi/PlayerControlManager.h"
 
 #include "Maruyama/Enemy/Component/EnemyBase.h"
 #include "Maruyama/Utility/Component/SeekTarget.h"
@@ -8,6 +9,8 @@
 #include "Maruyama/Enemy/Component/AIVirtualController.h"
 #include "Maruyama/Enemy/Component/Stator/AIPlayerStator.h"
 #include "Itabashi/OnlineTransformSynchronization.h"
+#include "Itabashi/AIActiveChanger.h"
+#include "Itabashi/OnlineAliveChecker.h"
 
 namespace basecross
 {
@@ -23,18 +26,35 @@ namespace Online
 	{
 		auto gameObject = GetGameObject();
 
-		gameObject->GetComponent<Enemy::EnemyBase>()->SetUpdateActive(true);
-		gameObject->GetComponent<SeekTarget>()->SetUpdateActive(true);
-		gameObject->GetComponent<SelfAstarNodeController>()->SetUpdateActive(true);
-		gameObject->GetComponent<TargetManager>()->SetUpdateActive(true);
-		gameObject->GetComponent<AIVirtualController>()->SetUpdateActive(true);
-		gameObject->GetComponent<Enemy::AIPlayerStator>()->SetUpdateActive(true);
+		m_aiActiveChanger.lock()->AIActiveChange(true);
 		gameObject->GetComponent<Online::OnlineTransformSynchronization>()->SetIsMaster(true);
 	}
 
 	void OnlineLeaveAIChanger::OnLateStart()
 	{
-		m_onlinePlayerSynchronizer = GetGameObject()->GetComponent<OnlinePlayerSynchronizer>();
+		const auto& ownerObject = GetGameObject();
+		m_onlinePlayerSynchronizer = ownerObject->GetComponent<OnlinePlayerSynchronizer>();
+		m_aiActiveChanger = ownerObject->GetComponent<AIActiveChanger>();
+		m_playerControlManager = ownerObject->GetComponent<PlayerControlManager>();
+	}
+
+	void OnlineLeaveAIChanger::OnUpdate()
+	{
+		auto onlineAliveChecker = m_onlineAliveChecker.lock();
+		auto onlinePlayerSynchronizer = m_onlinePlayerSynchronizer.lock();
+
+		int onlinePlayerNumber = onlinePlayerSynchronizer->GetOnlinePlayerNumber();
+		int alivePlayerNumber = onlinePlayerNumber >= 0 ? onlinePlayerNumber : Online::OnlineManager::GetCurrentlyJoinedRoom().getMasterClientID();
+
+		bool isOnlineAlive = onlineAliveChecker->IsPlayerAlive(alivePlayerNumber);
+
+		if (isOnlineAlive != m_beforeOnlineAlive)
+		{
+			m_playerControlManager.lock()->StateReset();
+			m_aiActiveChanger.lock()->AIActiveChange(isOnlineAlive);
+		}
+
+		m_beforeOnlineAlive = isOnlineAlive;
 	}
 
 	void OnlineLeaveAIChanger::OnDisconnected()
