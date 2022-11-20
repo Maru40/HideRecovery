@@ -174,6 +174,8 @@ namespace Online
 
 		void EventCallback(int errorCode, void(I_OnlineCallBacks::* successFunc)(), void(I_OnlineCallBacks::* errorFunc)(int));
 
+		void OnUpdate();
+
 	public:
 		~OnlineManager() noexcept = default;
 

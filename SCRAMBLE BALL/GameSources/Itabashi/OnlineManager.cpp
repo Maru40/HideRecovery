@@ -36,11 +36,11 @@ namespace Online
 		}
 	}
 
-	void OnlineManager::Update()
+	void OnlineManager::OnUpdate()
 	{
-		for (auto& removeCallBack : GetInstance()->m_removeCallBacks)
+		for (auto& removeCallBack : m_removeCallBacks)
 		{
-			auto& callBacksVector = GetInstance()->m_callBacksVector;
+			auto& callBacksVector = m_callBacksVector;
 			auto itr = callBacksVector.begin();
 
 			while (itr != callBacksVector.end())
@@ -55,21 +55,26 @@ namespace Online
 			}
 		}
 
-		GetInstance()->m_removeCallBacks.clear();
+		m_removeCallBacks.clear();
 
-		for (auto& addCallBack : GetInstance()->m_addCallBacks)
+		for (auto& addCallBack : m_addCallBacks)
 		{
-			GetInstance()->m_callBacksVector.push_back(addCallBack);
+			m_callBacksVector.push_back(addCallBack);
 		}
 
-		GetInstance()->m_addCallBacks.clear();
+		m_addCallBacks.clear();
 
-		auto& client = GetInstance()->m_client;
-
-		if (client)
+		if (!m_client)
 		{
-			client->service();
+			return;
 		}
+
+		m_client->service();
+	}
+
+	void OnlineManager::Update()
+	{
+		GetInstance()->OnUpdate();
 	}
 
 	void OnlineManager::AddCallBacks(I_OnlineCallBacks* callbacks)

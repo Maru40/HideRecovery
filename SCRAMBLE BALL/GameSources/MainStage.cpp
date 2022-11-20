@@ -22,10 +22,7 @@
 #include "Watanabe/Effekseer/EfkEffect.h"
 
 #include "Maruyama/Utility/SingletonComponent/GameManager.h"
-#include "Itabashi/GamePlayerManager.h"
-#include "Itabashi/MainStageTransitioner.h"
 #include "Itabashi/OnlineGameTimer.h"
-#include "Itabashi/OnlineTestRoom.h"
 #include "Watanabe/Manager/TimeManager.h"
 #include "Watanabe/UI/GameStartUI.h"
 
@@ -42,6 +39,8 @@
 
 #include "Itabashi/OnlineGameItemManager.h"
 #include "Maruyama/Item/HideItem.h"
+
+#include "Itabashi/MainStageCoreObject.h"
 
 namespace basecross {
 	// wstring MainStage::sm_loadMapName = L"StageS1_Copy.csv";
@@ -76,12 +75,9 @@ namespace basecross {
 			EventSystem::GetInstance(GetThis<Stage>())->SetBasicInputer(PlayerInputer::GetInstance());
 			AddGameObject<GameManagerObject>();
 
-			auto onlineRoom = AddGameObject<Online::OnlineTestRoom>();
-			auto tester = onlineRoom->GetComponent<Online::OnlineTester>();
-			auto onlineGameTimer = onlineRoom->AddComponent<OnlineGameTimer>();
-			auto onlineGameItemManager = onlineRoom->AddComponent<OnlineGameItemManager>();
-			onlineRoom->AddComponent<GamePlayerManager>();
-			onlineRoom->AddComponent<Online::MainStageTransitioner>();
+			auto coreObject = AddGameObject<StageObject::MainStageCoreObject>();
+			auto onlineGameTimer = coreObject->GetComponent<OnlineGameTimer>();
+			auto onlineGameItemManager = coreObject->GetComponent<OnlineGameItemManager>();
 
 			auto gameStartUI = AddGameObject<GameStartUI>();
 			std::weak_ptr<GameStartUI> weakgameStartUI = gameStartUI;
