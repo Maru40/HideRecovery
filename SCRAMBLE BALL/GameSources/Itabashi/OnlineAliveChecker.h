@@ -9,23 +9,26 @@ namespace Online
 	{
 	public:
 		static constexpr std::uint8_t CONNECT_ALIVE_CHECK_EVENT_CODE = 171;
-		static constexpr std::uint8_t CONNECT_ALIVE_RESPONSE_EVENT_CODE = 172;
 
 	private:
+
+		struct CheckState
+		{
+			bool isAlive = false;
+			float responseCountTime = 0.0f;
+
+			CheckState() noexcept {}
+
+			CheckState(bool isAlive, float responseCountTime) :
+				isAlive(isAlive), responseCountTime(responseCountTime) {}
+		};
+
 		float m_aliveCheckTime = 1.0f;
 		float m_aliveResponseTime = 0.5f;
 
 		float m_aliveCheckCountTime = 0.0f;
-		float m_aliveResponseCountTime = 0.0f;
 
-		bool m_isWaitingResponse = false;
-
-		bool m_isAlive = true;
-
-		static const ExitGames::LoadBalancing::RaiseEventOptions m_raiseEventOptions;
-
-		void MasterProcess(float deltaTime);
-		void ClientProcess(float deltaTime);
+		std::unordered_map<int, CheckState> m_playerAliveCheckMap;
 
 	public:
 		OnlineAliveChecker(const std::shared_ptr<GameObject>& owner);
@@ -36,9 +39,9 @@ namespace Online
 
 		void OnCustomEventAction(int playerNumber, std::uint8_t eventCode, const std::uint8_t* bytes) override;
 
-		bool IsAlive() const { return m_isAlive; }
+		bool IsPlayerAlive(int onlinePlayerNumber) const { return m_playerAliveCheckMap.at(onlinePlayerNumber).isAlive; }
 
-		bool PlayerAlive(int onlinePlayerNumber);
+		bool IsLocalPlayerAlive() const { return IsPlayerAlive(OnlineManager::GetLocalPlayer().getNumber()); }
 	};
 }
 }
