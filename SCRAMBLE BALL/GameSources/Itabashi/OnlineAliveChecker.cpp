@@ -25,11 +25,11 @@ namespace Online
 	{
 		auto deltaTime = App::GetApp()->GetElapsedTime();
 
-		m_aliveCheckCountTime += deltaTime;
+		m_aliveCheckCount += deltaTime;
 
-		if (m_aliveCheckCountTime >= m_aliveCheckTime)
+		if (m_aliveCheckCount >= m_aliveCheckTime)
 		{
-			m_aliveCheckCountTime -= m_aliveCheckTime;
+			m_aliveCheckCount -= m_aliveCheckTime;
 			OnlineManager::RaiseEvent(true, nullptr, 0, CONNECT_ALIVE_CHECK_EVENT_CODE);
 			return;
 		}
