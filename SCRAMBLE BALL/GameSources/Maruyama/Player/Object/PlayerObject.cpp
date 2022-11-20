@@ -77,6 +77,8 @@
 
 #include "Maruyama/Utility/Component/Targeted.h"
 
+#include "Itabashi/AIActiveChanger.h"
+
 namespace basecross {
 	PlayerObject::PlayerObject(const std::shared_ptr<Stage>& stage) :
 		GameObject(stage)
@@ -275,6 +277,8 @@ namespace basecross {
 		AddComponent<WallAvoid>()->SetUpdateActive(false);
 		AddComponent<AIVirtualController>()->SetUpdateActive(false);
 		AddComponent<Enemy::AIPlayerStator>()->SetUpdateActive(false);
+
+		AddComponent<AIActiveChanger>();
 
 		if (auto shareClass = ShareClassesManager::GetInstance()) {
 			shareClass->AddShareClass<PlayerObject>(GetThis<PlayerObject>());

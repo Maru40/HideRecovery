@@ -4,6 +4,9 @@
 #include "Itabashi/OtherPlayerObject.h"
 #include "Itabashi/SelfPlayerObject.h"
 #include "Maruyama/Enemy/Object/AIPlayerObject.h"
+#include "Itabashi/OnlinePlayerSynchronizer.h"
+#include "Itabashi/OnlineAliveChecker.h"
+#include "Itabashi/OnlineLeaveAIChanger.h"
 
 namespace basecross
 {
@@ -40,11 +43,20 @@ namespace basecross
 
 	void GamePlayerManager::OnLateStart()
 	{
+		auto aliveChecker = GetGameObject()->GetComponent<Online::OnlineAliveChecker>();
+
 		for (int i = 0; i < Online::OnlineMatching::MAX_PLAYER_NUM; ++i)
 		{
 			int playerNumber = Online::OnlineMatching::GetPlayerNumberToGameNumber(i);
 			auto playerObject = CreatePlayerObject(playerNumber);
 			playerObject->OnlineSetting(i, playerNumber);
+
+			auto onlineLeaveAIChanger = playerObject->GetComponent<Online::OnlineLeaveAIChanger>(false);
+
+			if (onlineLeaveAIChanger)
+			{
+				onlineLeaveAIChanger->SetOnlineAliveChecker(aliveChecker);
+			}
 		}
 	}
 }
