@@ -15,8 +15,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)GameStageBase.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\AIActiveChanger.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\GamePlayerManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\Item.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MainStageCoreObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageCoreObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MainStageTransitioner.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MatchingSelectUIObject.h" />
@@ -24,6 +26,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageTransitioner.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageUIObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\ObjectHider.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineAliveChecker.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineExtension.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineGameItemManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineGameTimer.h" />
@@ -451,8 +454,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)GameStageBase.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\AIActiveChanger.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\GamePlayerManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\Item.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\MainStageCoreObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageCoreObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\MainStageTransitioner.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\MatchingSelectUIObject.cpp" />
@@ -461,6 +466,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageUIObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\ObjectHider.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\ObjectMover.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineAliveChecker.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineGameItemManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineGameTimer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineLeaveAIChanger.cpp" />
