@@ -379,4 +379,14 @@ namespace basecross
 			objectMover->SetMoveSpeed(m_defaultSpeed);
 		}
 	}
+
+	void PlayerControlManager::StateReset()
+	{
+		auto objectMover = m_objectMover.lock();
+
+		if (objectMover)
+		{
+			objectMover->Move(Vec2());
+		}
+	}
 }
