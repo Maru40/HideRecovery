@@ -3,6 +3,7 @@
 #include "OnlineGameItemManager.h"
 #include "GamePlayerManager.h"
 #include "MainStageTransitioner.h"
+#include "OnlineAliveChecker.h"
 
 namespace basecross
 {
@@ -20,6 +21,7 @@ namespace StageObject
 		AddComponent<OnlineGameItemManager>();
 		AddComponent<GamePlayerManager>();
 		AddComponent<Online::MainStageTransitioner>();
+		AddComponent<Online::OnlineAliveChecker>();
 	}
 }
 }
