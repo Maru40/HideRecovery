@@ -20,6 +20,17 @@
 
 namespace basecross
 {
+	bool PlayerControlManager::IsControlableAnimation() const
+	{
+		auto animator = m_playerAnimator.lock();
+
+		//特定のアニメーション中は操作を禁止する。
+		return 
+			!animator->IsCurretAnimationState(PlayerAnimationState::State::Goal1) &&
+			!animator->IsCurretAnimationState(PlayerAnimationState::State::PutItem_Floor)&&
+			!animator->IsCurretAnimationState(PlayerAnimationState::State::PutItem_HideObject);
+	}
+
 	void PlayerControlManager::OnLateStart()
 	{
 		auto ownerObject = GetGameObject();

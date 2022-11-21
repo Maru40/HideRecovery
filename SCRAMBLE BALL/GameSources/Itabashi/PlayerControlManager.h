@@ -77,6 +77,12 @@ namespace basecross
 
 		float m_defaultSpeed = 1.0f;
 
+		/// <summary>
+		/// 現在操作できるアニメーション中か
+		/// </summary>
+		/// <returns>操作できるならtrue</returns>
+		bool IsControlableAnimation() const;
+
 	public:
 		PlayerControlManager(const std::shared_ptr<GameObject>& owner) : Component(owner) {}
 
