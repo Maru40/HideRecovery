@@ -60,7 +60,6 @@ namespace basecross
 		if (PlayerInputer::GetInstance()->IsDesitionDown())
 		{
 			onlinePlayerSynchronizer->OpenHidePlace();
-			onlinePlayerSynchronizer->Aquisition();
 		}
 
 		if (PlayerInputer::GetInstance()->IsShot())
@@ -73,5 +72,27 @@ namespace basecross
 
 	void InputPlayerController::OnCollisionEnter(std::shared_ptr<GameObject>& other)
 	{
+		auto playerStatus = m_playerStatus.lock();
+
+		if (playerStatus->IsDead())
+		{
+			return;
+		}
+
+		auto item = other->GetComponent<Item>(false);
+
+		if (!item)
+		{
+			return;
+		}
+
+		auto onlinePlayerSynchronizer = m_onlinePlayerSynchronizer.lock();
+
+		if (!onlinePlayerSynchronizer)
+		{
+			return;
+		}
+
+		onlinePlayerSynchronizer->Aquisition(item);
 	}
 }
