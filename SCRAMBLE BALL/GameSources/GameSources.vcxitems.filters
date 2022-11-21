@@ -1021,9 +1021,6 @@
     <Filter Include="Watanabe\UI\HoldButtonUI">
       <UniqueIdentifier>{66789215-53a5-45b3-a5ec-a3c355baec12}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Watanabe\Component\HoldBallEffectEmitter">
-      <UniqueIdentifier>{455a0b32-c778-423e-bdb4-78954c28b3e3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Watanabe\BoardPoly\PlayerLabelBP">
       <UniqueIdentifier>{7da0a3a2-a08d-436b-9bf9-b000fb423b93}</UniqueIdentifier>
     </Filter>
@@ -1489,6 +1486,9 @@
     <Filter Include="Itabashi\Component\AIActiveChanger">
       <UniqueIdentifier>{bafafd51-a13c-4f44-bc23-029df21b810c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\Component\BallEffectEmitter">
+      <UniqueIdentifier>{455a0b32-c778-423e-bdb4-78954c28b3e3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -1809,8 +1809,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\UI\HoldButtonUI.h">
       <Filter>Watanabe\UI\HoldButtonUI</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\HoldBallEffectEmitter.h">
-      <Filter>Watanabe\Component\HoldBallEffectEmitter</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\BallEffectEmitter.h">
+      <Filter>Watanabe\Component\BallEffectEmitter</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\BoardPoly\PlayerLabelBP.h">
       <Filter>Watanabe\BoardPoly\PlayerLabelBP</Filter>
@@ -3107,8 +3107,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\UI\HoldButtonUI.cpp">
       <Filter>Watanabe\UI\HoldButtonUI</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\HoldBallEffectEmitter.cpp">
-      <Filter>Watanabe\Component\HoldBallEffectEmitter</Filter>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\BallEffectEmitter.cpp">
+      <Filter>Watanabe\Component\BallEffectEmitter</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\BoardPoly\PlayerLabelBP.cpp">
       <Filter>Watanabe\BoardPoly\PlayerLabelBP</Filter>

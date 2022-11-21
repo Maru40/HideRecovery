@@ -1,20 +1,20 @@
 ﻿#include "stdafx.h"
-#include "HoldBallEffectEmitter.h"
+#include "BallEffectEmitter.h"
 
 namespace basecross {
-	HoldBallEffectEmitter::HoldBallEffectEmitter(const shared_ptr<GameObject>& owner,
+	BallEffectEmitter::BallEffectEmitter(const shared_ptr<GameObject>& owner,
 		const shared_ptr<ItemBag>& itemBag)
 		:Component(owner), m_itemBag(itemBag), m_effectKey(L"HasBall")
 	{}
 
-	void HoldBallEffectEmitter::OnCreate() {
+	void BallEffectEmitter::OnCreate() {
 	}
 
-	void HoldBallEffectEmitter::OnLateStart() {
+	void BallEffectEmitter::OnLateStart() {
 		m_efkComp = GetGameObject()->GetComponent<EfkComponent>();
 	}
 
-	void HoldBallEffectEmitter::OnUpdate() {
+	void BallEffectEmitter::OnUpdate() {
 		auto efkComp = m_efkComp.lock();
 		// アイテム持っているとき
 		if (m_itemBag.lock()->GetHideItem()) {
