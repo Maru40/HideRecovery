@@ -229,12 +229,12 @@ namespace basecross {
 		// 自分がボールを持ったときに方向を知らせるUIに情報を渡す
 		hasBallEvent->AddEvent(
 			[](const shared_ptr<PlayerObject>& owner) {
-				auto directionUI = owner->GetDirectionWithHasBallUI();
-				directionUI->SetTarget(owner);
+				if (auto directionUI = owner->GetDirectionWithHasBallUI())
+					directionUI->SetTarget(owner);
 			},
 			[](const shared_ptr<PlayerObject>& owner) {
-				auto directionUI = owner->GetDirectionWithHasBallUI();
-				directionUI->ClearTarget();
+				if (auto directionUI = owner->GetDirectionWithHasBallUI())
+					directionUI->ClearTarget();
 			}
 			);
 
