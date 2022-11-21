@@ -90,6 +90,8 @@ namespace basecross {
 		if (IsPlaying(key)) {
 			m_effectDataMap[key].IsLoop = false;
 			m_manager->StopEffect(m_effectDataMap[key].Handle);
+			if (m_isDebugMode)
+				Debug::GetInstance()->Log(L"EfkComp::Stop:" + key);
 		}
 	}
 	void EfkComponent::Pause(const wstring& key) {
@@ -142,6 +144,8 @@ namespace basecross {
 
 	void EfkComponent::IsSyncGameObject(const wstring& key, bool flg) {
 		m_effectDataMap[key].IsSync = flg;
+		if (m_isDebugMode)
+			Debug::GetInstance()->Log(L"EfkComp::Sync:" + key + L" Flag:" + (flg ? L"true" : L"false"));
 	}
 
 	void EfkComponent::PlayLoop(const wstring& key) {
@@ -180,5 +184,7 @@ namespace basecross {
 		auto ownerTrans = GetGameObject()->GetComponent<Transform>();
 		auto posTarget = Utility::ParentRelativePositionToWorldPosition(ownerTrans, pos);
 		SetPosition(key, posTarget);
+		if (m_isDebugMode)
+			Debug::GetInstance()->Log(L"EfkComp::SynchronizePosition:" + key);
 	}
 }
