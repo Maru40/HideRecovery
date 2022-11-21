@@ -21,6 +21,17 @@
 
 namespace basecross
 {
+	bool PlayerControlManager::IsControlableAnimation() const
+	{
+		auto animator = m_playerAnimator.lock();
+
+		//特定のアニメーション中は操作を禁止する。
+		return 
+			!animator->IsCurretAnimationState(PlayerAnimationState::State::Goal1) &&
+			!animator->IsCurretAnimationState(PlayerAnimationState::State::PutItem_Floor)&&
+			!animator->IsCurretAnimationState(PlayerAnimationState::State::PutItem_HideObject);
+	}
+
 	void PlayerControlManager::OnLateStart()
 	{
 		auto ownerObject = GetGameObject();
@@ -86,12 +97,7 @@ namespace basecross
 			return false;
 		}
 
-		auto animator = GetGameObject()->GetComponent<PlayerAnimator>(false);
-
-		//特定のアニメーション中は移動を禁止する。
-		if (animator->IsCurretAnimationState(PlayerAnimationState::State::Goal1) ||
-			animator->IsCurretAnimationState(PlayerAnimationState::State::PutItem_Floor) ||
-			animator->IsCurretAnimationState(PlayerAnimationState::State::PutItem_HideObject))
+		if (!IsControlableAnimation())
 		{
 			return false;
 		}
@@ -152,6 +158,11 @@ namespace basecross
 		auto acquisitionManager = m_acquisitionManager.lock();
 
 		if (!acquisitionManager)
+		{
+			return false;
+		}
+
+		if (!IsControlableAnimation())
 		{
 			return false;
 		}
@@ -401,6 +412,13 @@ namespace basecross
 		if (objectMover)
 		{
 			objectMover->Move(Vec2());
+		}
+
+		auto useWeapon = m_useWeapon.lock();
+
+		if (useWeapon)
+		{
+			useWeapon->SetIsAim(false);
 		}
 	}
 }

@@ -6,6 +6,7 @@ namespace basecross
 	class PlayerControlManager;
 	class PlayerStatus;
 	struct DamageData;
+	class Item;
 
 	/// <summary>
 	/// プレイヤーのオンライン同期を担当するコンポーネント
@@ -171,6 +172,11 @@ namespace basecross
 		/// アイテムの取得をする
 		/// </summary>
 		void Aquisition();
+		/// <summary>
+		/// アイテムの取得をする
+		/// </summary>
+		/// <param name="item">取得したいアイテム</param>
+		void Aquisition(const std::shared_ptr<Item>& item);
 
 		/// <summary>
 		/// オンラインプレイヤー番号の設定

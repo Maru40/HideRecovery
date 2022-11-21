@@ -49,6 +49,9 @@ namespace basecross {
 		AddComponent<HideItem>();
 		AddComponent<SelfAstarNodeController>()->SetUpdateActive(false);
 
+		auto collision = AddComponent<CollisionSphere>();
+		collision->SetAfterCollision(AfterCollision::None);
+
 		auto targeted = AddComponent<Targeted>(Targeted::Parametor(TargetedPriority::BALL));
 		targeted->AddCanTargetFunction([&]() { return IsDrawActive(); });
 

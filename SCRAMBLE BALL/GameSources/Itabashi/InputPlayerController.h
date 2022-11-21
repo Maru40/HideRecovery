@@ -24,5 +24,7 @@ namespace basecross
 		void OnUpdate() override;
 
 		void OnDraw() override {}
+
+		void OnCollisionEnter(std::shared_ptr<GameObject>& other) override;
 	};
 }

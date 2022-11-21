@@ -659,6 +659,18 @@ namespace basecross
 			return;
 		}
 
+		Aquisition(item);
+	}
+
+	void OnlinePlayerSynchronizer::Aquisition(const std::shared_ptr<Item>& item)
+	{
+		auto controlManager = m_controlManager.lock();
+
+		if (!controlManager || !item)
+		{
+			return;
+		}
+
 		auto onlineStatus = item->GetGameObject()->GetComponent<Online::OnlineStatus>();
 		std::uint32_t instanceId = onlineStatus->GetInstanceId();
 
