@@ -1,19 +1,20 @@
 ﻿#pragma once
 #include "stdafx.h"
-#include "Maruyama/Player/Component/ItemBag.h"
-#include "Watanabe/Effekseer/EfkEffect.h"
 
 namespace basecross {
+	class EfkComponent;
+
 	class BallEffectEmitter :public Component {
-		weak_ptr<ItemBag> m_itemBag;
 		weak_ptr<EfkComponent> m_efkComp;
 		wstring m_effectKey;
 	public:
-		BallEffectEmitter(const shared_ptr<GameObject>& owner,
-			const shared_ptr<ItemBag>& itemBag);
+		BallEffectEmitter(const shared_ptr<GameObject>& owner);
 
-		void OnCreate()override;
+		void OnCreate()override {}
 		void OnLateStart()override;
-		void OnUpdate()override;
+		void OnUpdate()override {}
+
+		void OnEnable()override;
+		void OnDisable()override;
 	};
 }

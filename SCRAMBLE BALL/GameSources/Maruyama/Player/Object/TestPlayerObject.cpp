@@ -1,5 +1,4 @@
-﻿
-/*!
+﻿/*!
 @file TestPlayerObject.cpp
 @brief TestPlayerObjectクラス実体
 担当：丸山裕喜
@@ -40,7 +39,7 @@
 
 #include "Maruyama/Player/Component/ChargeGun.h"
 #include "Watanabe/Component/PlayerStatus.h"
-#include "Watanabe/Component/HoldBallEffectEmitter.h"
+#include "Watanabe/Component/BallEffectEmitter.h"
 
 #include "Maruyama/Player/Component/TackleAttack.h"
 #include "Maruyama/Utility/Component/CollisionAction.h"
@@ -58,7 +57,6 @@
 #include "Maruyama/Player/Component/PlayerController.h"
 
 namespace basecross {
-
 	TestPlayerObject::TestPlayerObject(const std::shared_ptr<Stage>& stage) :
 		GameObject(stage)
 	{}
@@ -124,6 +122,4 @@ namespace basecross {
 	void TestPlayerObject::OnUpdate() {
 		//Debug::GetInstance()->Log(transform->GetPosition());
 	}
-
-
 }

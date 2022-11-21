@@ -15,7 +15,10 @@
 #include "Itabashi/Item.h"
 #include "Watanabe/Utility/DataExtracter.h"
 #include "Watanabe/Component/BallAnimator.h"
+#include "Watanabe/Effekseer/EfkEffect.h"
+#include "Watanabe/Component/BallEffectEmitter.h"
 
+#include "MainStage.h"
 #include "Patch/PlayerInputer.h"
 
 #include "Itabashi/OnlineStatus.h"
@@ -60,6 +63,14 @@ namespace basecross {
 
 		if (auto shareClass = ShareClassesManager::GetInstance()) {
 			shareClass->AddShareClass<HideItemObject>(GetThis<HideItemObject>());
+		}
+
+		// メインステージのみ
+		if (GetTypeStage<MainStage>(false)) {
+			// エフェクト
+			auto efkComp = AddComponent<EfkComponent>();
+			efkComp->SetEffectResource(L"HasBall", TransformData(Vec3(0), Vec3(0.5f)));
+			AddComponent<BallEffectEmitter>();
 		}
 	}
 
