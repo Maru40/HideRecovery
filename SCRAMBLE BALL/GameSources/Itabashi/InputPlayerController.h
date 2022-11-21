@@ -15,6 +15,8 @@ namespace basecross
 		std::weak_ptr<PlayerStatus> m_playerStatus;
 		std::weak_ptr<OnlinePlayerSynchronizer> m_onlinePlayerSynchronizer;
 		std::weak_ptr<Teleport> m_teleport;
+		std::weak_ptr<Camera> m_camera;
+
 	public:
 
 		InputPlayerController(const std::shared_ptr<GameObject>& owner);

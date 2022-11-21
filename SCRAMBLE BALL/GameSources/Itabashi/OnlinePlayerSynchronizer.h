@@ -15,17 +15,17 @@ namespace basecross
 	{
 	public:
 
-		static constexpr std::uint8_t EXECUTE_CAMERA_FORWARD_EVENT_CODE   =  6; // プレイヤー処理に使用するカメラの前方ベクトルの変更を通知するオンラインイベントコード
-		static constexpr std::uint8_t EXECUTE_MOVE_EVENT_CODE             =  7; // 移動を通知するオンラインイベントコード
-		static constexpr std::uint8_t EXECUTE_SHOT_EVENT_CODE             =  8; // 弾を撃ったことを通知するオンラインイベントコード
-		static constexpr std::uint8_t EXECUTE_BULLET_DESTROY_EVENT_CODE   =  9; // 弾が破棄されたことを通知するオンラインイベントコード
-		static constexpr std::uint8_t EXECUTE_AIM_STATE_CHANGE_EVENT_CODE = 10; // エイムの変更を通知するオンラインイベントコード
-		static constexpr std::uint8_t EXECUTE_TELEPORT_EVENT_CODE         = 11; // テレポートしたことを通知するオンラインイベントコード
-		static constexpr std::uint8_t TRY_OPEN_HIDEPLACE_EVENT_CODE       = 12; // 箱を開けるのを試すことを通知するオンラインイベントコード
-		static constexpr std::uint8_t EXECUTE_OPEN_HIDEPLACE_EVENT_CODE   = 13; // 箱を開けたことを通知するオンラインイベントコード
-		static constexpr std::uint8_t EXECUTE_DAMAGE_EVENT_CODE           = 14; // ダメージを受けたことを通知するオンラインイベントコード
-		static constexpr std::uint8_t TRY_ITEM_AQUISITION_EVENT_CODE      = 15; // アイテムを取得を試すことを通知するオンラインイベントコード
-		static constexpr std::uint8_t EXECUTE_ITEM_AQUISITION_EVENT_CODE  = 16; // アイテムの取得を通知するオンラインイベントコード
+		static constexpr std::uint8_t EXECUTE_DEFAULT_FORWARD_EVENT_CODE   =  6; // プレイヤー処理に使用するカメラの前方ベクトルの変更を通知するオンラインイベントコード
+		static constexpr std::uint8_t EXECUTE_MOVE_EVENT_CODE              =  7; // 移動を通知するオンラインイベントコード
+		static constexpr std::uint8_t EXECUTE_SHOT_EVENT_CODE              =  8; // 弾を撃ったことを通知するオンラインイベントコード
+		static constexpr std::uint8_t EXECUTE_BULLET_DESTROY_EVENT_CODE    =  9; // 弾が破棄されたことを通知するオンラインイベントコード
+		static constexpr std::uint8_t EXECUTE_AIM_STATE_CHANGE_EVENT_CODE  = 10; // エイムの変更を通知するオンラインイベントコード
+		static constexpr std::uint8_t EXECUTE_TELEPORT_EVENT_CODE          = 11; // テレポートしたことを通知するオンラインイベントコード
+		static constexpr std::uint8_t TRY_OPEN_HIDEPLACE_EVENT_CODE        = 12; // 箱を開けるのを試すことを通知するオンラインイベントコード
+		static constexpr std::uint8_t EXECUTE_OPEN_HIDEPLACE_EVENT_CODE    = 13; // 箱を開けたことを通知するオンラインイベントコード
+		static constexpr std::uint8_t EXECUTE_DAMAGE_EVENT_CODE            = 14; // ダメージを受けたことを通知するオンラインイベントコード
+		static constexpr std::uint8_t TRY_ITEM_AQUISITION_EVENT_CODE       = 15; // アイテムを取得を試すことを通知するオンラインイベントコード
+		static constexpr std::uint8_t EXECUTE_ITEM_AQUISITION_EVENT_CODE   = 16; // アイテムの取得を通知するオンラインイベントコード
 
 		static constexpr int INVALID_GAME_PLAYER_NUMBER = -1; // 無効なゲームプレイヤー番号
 
@@ -47,15 +47,11 @@ namespace basecross
 
 
 		/// <summary>
-		/// カメラの前方ベクトルの更新を確認する
-		/// </summary>
-		void CheckUpdateCameraForward();
-		/// <summary>
 		/// 誰かがカメラの前方ベクトルを変更したときに呼ばれるイベント
 		/// </summary>
 		/// <param name="playerNumber">変更したプレイヤー番号</param>
 		/// <param name="cameraForward">カメラの前方ベクトル</param>
-		void ExecuteCameraForward(int playerNumber, const Vec3& cameraForward);
+		void ExecutedefaultForward(int playerNumber, const Vec3& defaultForward);
 
 		/// <summary>
 		/// 誰かが移動したときに呼ばれるイベント
@@ -138,14 +134,14 @@ namespace basecross
 		void OnCreate() override;
 		void OnLateStart() override;
 
-		void OnUpdate() override;
-
 		void OnDraw() override {}
 
 		void OnDestroy() override;
 
 		void OnCustomEventAction(int playerNumber, std::uint8_t eventCode, const std::uint8_t* bytes) override;
 
+
+		void ChangeDefaultForward(const Vec3& defaultForward);
 		/// <summary>
 		/// 移動する
 		/// </summary>

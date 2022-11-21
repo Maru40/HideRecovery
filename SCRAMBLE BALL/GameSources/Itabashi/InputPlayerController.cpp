@@ -6,12 +6,6 @@
 #include "Itabashi/Item.h"
 #include "Maruyama/Player/Component/Teleport.h"
 
-template<class T>
-T ConvertByteData(const std::uint8_t* bytes)
-{
-	return *(T*)bytes;
-}
-
 namespace basecross
 {
 	InputPlayerController::InputPlayerController(const std::shared_ptr<GameObject>& owner) :
@@ -26,6 +20,8 @@ namespace basecross
 		m_playerStatus = owner->GetComponent<PlayerStatus>();
 		m_onlinePlayerSynchronizer = owner->GetComponent<OnlinePlayerSynchronizer>(false);
 		m_teleport = owner->GetComponent<Teleport>();
+
+		m_camera = GetStage()->GetView()->GetTargetCamera();
 	}
 
 	void InputPlayerController::OnUpdate()
@@ -43,6 +39,14 @@ namespace basecross
 		{
 			return;
 		}
+
+		auto camera = m_camera.lock();
+
+		if (camera)
+		{
+			onlinePlayerSynchronizer->ChangeDefaultForward(camera->GetForward());
+		}
+
 
 		if (PlayerInputer::GetInstance()->IsOpenMap())
 		{

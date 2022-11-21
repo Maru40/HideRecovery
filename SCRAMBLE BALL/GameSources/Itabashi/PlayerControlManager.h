@@ -31,11 +31,6 @@ namespace basecross
 		std::weak_ptr<Transform> m_transform;
 
 		/// <summary>
-		/// 前の基準にするカメラ
-		/// </summary>
-		std::weak_ptr<Camera> m_forwardCamera;
-
-		/// <summary>
 		/// テレポート機能コンポーネント
 		/// </summary>
 		std::weak_ptr<Teleport> m_teleport;
@@ -73,7 +68,7 @@ namespace basecross
 		/// <summary>
 		/// 前回のカメラ前方ベクトル
 		/// </summary>
-		Vec3 m_beforeCameraForward = Vec3();
+		Vec3 m_beforeDefaultForward = Vec3();
 
 		float m_defaultSpeed = 1.0f;
 
@@ -93,16 +88,16 @@ namespace basecross
 		void OnDraw() override {}
 
 		/// <summary>
-		/// カメラのforwardの更新を試す
+		/// デフォルトのforwardの更新を試す
 		/// </summary>
-		/// <param name="forward">変更があればそのベクトルが入る</param>
+		/// <param name="forward">確認するベクトル</param>
 		/// <returns>変更があればtrue</returns>
-		bool IsUpdateCameraForward(Vec3* forward);
+		bool IsUpdateDefaultForward(const Vec3& forward);
 		/// <summary>
 		/// カメラのforwardの更新をする
 		/// </summary>
 		/// <param name="forward">カメラのforward</param>
-		void ExecuteUpdateCameraForward(const Vec3& forward);
+		void ExecuteUpdateDefaultForward(const Vec3& forward);
 
 		/// <summary>
 		/// 移動ができるかを試す
@@ -184,17 +179,6 @@ namespace basecross
 		/// <param name="hidePlace">開くHidePlace</param>
 		/// <returns>開けたならtrue</returns>
 		bool TryAccessHidePlace(const std::shared_ptr<HidePlace>& hidePlace);
-
-		/// <summary>
-		/// 前方カメラコンポーネントの設定
-		/// </summary>
-		/// <param name="camera">前方カメラコンポーネント</param>
-		void SetCamera(const std::shared_ptr<Camera>& camera) { m_forwardCamera = camera; }
-		/// <summary>
-		/// 前方カメラコンポーネントの取得
-		/// </summary>
-		/// <returns>前方カメラコンポーネント</returns>
-		std::shared_ptr<Camera> GetCamera() const { return m_forwardCamera.lock(); }
 
 		void ResetMoveSpeed();
 
