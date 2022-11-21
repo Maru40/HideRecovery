@@ -14,6 +14,8 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 	/// 前方宣言
 	//--------------------------------------------------------------------------------------
+	class GoalAnimationController;
+
 	namespace Enemy {
 		class I_FactionMember;
 
@@ -57,6 +59,7 @@ namespace basecross {
 		Status m_status;
 		team::TeamType m_team;
 
+		std::weak_ptr<GoalAnimationController> m_goalAnimationController;
 		std::weak_ptr<Enemy::I_FactionMember> m_factionMember;	//ファクションメンバー
 		std::weak_ptr<Enemy::Tuple::I_Tupler> m_tupler;			//タプルスペースの使用者
 
