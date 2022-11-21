@@ -138,8 +138,8 @@ namespace basecross {
 
 		AddComponent<VelocityManager>();
 
-		auto objecfMover = AddComponent<Operator::ObjectMover>();
-		objecfMover->SetMoveSpeed(8.5f);
+		auto objectMover = AddComponent<Operator::ObjectMover>();
+		objectMover->SetMoveSpeed(8.5f);
 		AddComponent<PlayerControlManager>();
 		AddComponent<OnlinePlayerSynchronizer>();
 

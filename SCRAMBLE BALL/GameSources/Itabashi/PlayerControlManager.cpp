@@ -50,36 +50,21 @@ namespace basecross
 		m_defaultSpeed = m_objectMover.lock()->GetMoveSpeed();
 	}
 
-	bool PlayerControlManager::IsUpdateCameraForward(Vec3* forward)
+	bool PlayerControlManager::IsUpdateDefaultForward(const Vec3& forward)
 	{
-		auto camera = m_forwardCamera.lock();
-
-		if (!camera)
+		if (forward == m_beforeDefaultForward)
 		{
 			return false;
 		}
 
-		auto cameraForward = camera->GetAt() - camera->GetEye();
-		cameraForward.normalize();
-
-		if (cameraForward == m_beforeCameraForward)
-		{
-			return false;
-		}
-
-		m_beforeCameraForward = cameraForward;
-
-		if (forward)
-		{
-			*forward = cameraForward;
-		}
+		m_beforeDefaultForward = forward;
 
 		return true;
 	}
 
-	void PlayerControlManager::ExecuteUpdateCameraForward(const Vec3& forward)
+	void PlayerControlManager::ExecuteUpdateDefaultForward(const Vec3& forward)
 	{
-		m_beforeCameraForward = forward;
+		m_beforeDefaultForward = forward;
 
 		auto objectMover = m_objectMover.lock();
 		auto useWeapon = m_useWeapon.lock();

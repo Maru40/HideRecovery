@@ -96,27 +96,8 @@ namespace basecross
 
 	std::vector<std::weak_ptr<OnlinePlayerSynchronizer>> OnlinePlayerSynchronizer::m_onlinePlayerSynchronizers;
 
-	void OnlinePlayerSynchronizer::CheckUpdateCameraForward()
-	{
-		auto controlManager = m_controlManager.lock();
 
-		if (!controlManager)
-		{
-			return;
-		}
-
-		Vec3 forward;
-
-		if (!controlManager->IsUpdateCameraForward(&forward))
-		{
-			return;
-		}
-
-		auto data = OnlinePlayerData<Vec3>(m_onlinePlayerNumber, forward);
-		Online::OnlineManager::RaiseEvent(false, (std::uint8_t*)&data, sizeof(data), EXECUTE_CAMERA_FORWARD_EVENT_CODE);
-	}
-
-	void OnlinePlayerSynchronizer::ExecuteCameraForward(int playerNumber, const Vec3& cameraForward)
+	void OnlinePlayerSynchronizer::ExecutedefaultForward(int playerNumber, const Vec3& defaultForward)
 	{
 		if (m_onlinePlayerNumber != playerNumber)
 		{
@@ -130,7 +111,7 @@ namespace basecross
 			return;
 		}
 
-		controlManager->ExecuteUpdateCameraForward(cameraForward);
+		controlManager->ExecuteUpdateDefaultForward(defaultForward);
 	}
 
 	void OnlinePlayerSynchronizer::ExecuteMove(int playerNumber, const Vec3& moveVector)
@@ -376,11 +357,6 @@ namespace basecross
 		m_controlManager = owner->GetComponent<PlayerControlManager>();
 	}
 
-	void OnlinePlayerSynchronizer::OnUpdate()
-	{
-		CheckUpdateCameraForward();
-	}
-
 	void OnlinePlayerSynchronizer::OnDestroy()
 	{
 		auto thisPtr = GetThis<OnlinePlayerSynchronizer>();
@@ -405,11 +381,11 @@ namespace basecross
 			return;
 		}
 
-		// カメラの前方ベクトル変更が通知されたら
-		if (eventCode == EXECUTE_CAMERA_FORWARD_EVENT_CODE)
+		// デフォルトの前方ベクトル変更が通知されたら
+		if (eventCode == EXECUTE_DEFAULT_FORWARD_EVENT_CODE)
 		{
 			auto playerData = ConvertByteData<OnlinePlayerData<Vec3>>(bytes);
-			ExecuteCameraForward(playerData.playerNumber, playerData.data);
+			ExecutedefaultForward(playerData.playerNumber, playerData.data);
 			return;
 		}
 		// 移動イベントが通知されたら
@@ -482,6 +458,19 @@ namespace basecross
 			ExecuteDamagedEvent(data.attackerPlayerNumber, data.damagedPlayerNumber, data.damage);
 			return;
 		}
+	}
+
+	void OnlinePlayerSynchronizer::ChangeDefaultForward(const Vec3& defaultForward)
+	{
+		auto controlManager = m_controlManager.lock();
+
+		if (!controlManager || !controlManager->IsUpdateDefaultForward(defaultForward))
+		{
+			return;
+		}
+
+		auto data = OnlinePlayerData<Vec3>(m_onlinePlayerNumber, defaultForward);
+		Online::OnlineManager::RaiseEvent(false, (std::uint8_t*)&data, sizeof(data), EXECUTE_DEFAULT_FORWARD_EVENT_CODE);
 	}
 
 	void OnlinePlayerSynchronizer::Move(const Vec2& moveVector)

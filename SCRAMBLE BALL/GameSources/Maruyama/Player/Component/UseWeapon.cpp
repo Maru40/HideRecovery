@@ -189,13 +189,14 @@ namespace basecross {
 			return;
 		}
 
-		auto camera = GetStage()->GetView()->GetTargetCamera();
 		auto rotationController = m_rotationController.lock();
-		if (!camera || !rotationController) {
+		if (!rotationController) {
 			return;
 		}
 
 		if (m_isUseCamera) {
+			auto& camera = GetStage()->GetView()->GetTargetCamera();
+
 			AssistCameraRotation(CalculateRotationDirection());
 			auto baseDirection = camera->GetAt() - camera->GetEye();
 			baseDirection.y = 0;

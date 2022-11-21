@@ -104,7 +104,6 @@ namespace StageObject
 		tpsCamera->AddComponent<LookAtCameraManager>(GetThis<GameObject>(), LookAtCameraManager::Parametor());
 
 		auto controlManager = GetComponent<PlayerControlManager>();
-		controlManager->SetCamera(GetStage()->GetView()->GetTargetCamera());
 
 		auto teleport = GetComponent<Teleport>();
 
