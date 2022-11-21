@@ -202,7 +202,7 @@ namespace basecross {
 
 					//–Ú“I’n‚Ì‹ß‚­‚Ü‚ÅˆÚ“®‚µ‚½ê‡‚Ìİ’è
 					m_param.targetSeekParam->toTargetMoveParam->speed = MoveSpeed;
-					m_param.targetSeekParam->toTargetMoveParam->moveType = basecross::Task::ToTargetMove::MoveType::ArriveVelocity;
+					m_param.targetSeekParam->toTargetMoveParam->moveType = basecross::Task::ToTargetMove::MoveType::SeekVelocity;
 					m_param.targetSeekParam->toTargetMoveParam->targetNearRange = NearTargetRange;
 				}
 
