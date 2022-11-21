@@ -11,6 +11,8 @@
 
 #include "../Interface/I_Decorator.h"
 
+#include "Maruyama/Enemy/AIDirector/TupleSpace.h"
+
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
@@ -32,20 +34,21 @@ namespace basecross {
 				//--------------------------------------------------------------------------------------
 				/// 開始時に特定のターゲットをセットする。(現在使用不可)(将来的に条件式など汎用性の高いデコレータにするためのクラス)
 				//--------------------------------------------------------------------------------------
+				template<class T,
+					std::enable_if_t<
+						std::is_base_of_v<Enemy::Tuple::I_Tuple, T>,	//タプルスペースを呼ぶ。
+					std::nullptr_t> = nullptr
+				>
 				class SettingStartTarget : public DecoratorBase<GameObject>
 				{
-					std::vector<std::weak_ptr<GameObject>> m_targets;	//ターゲット候補
-
 				public:
 					SettingStartTarget(
-						const std::shared_ptr<GameObject>& owner,
-						const std::vector<std::weak_ptr<GameObject>> targets
+						const std::shared_ptr<GameObject>& owner
 					) :
-						DecoratorBase(owner),
-						m_targets(targets)
+						DecoratorBase(owner)
 					{}
 
-					void OnStart() override;
+					void OnStart() override {};
 
 					bool CanTransition() const override { return true; }
 
