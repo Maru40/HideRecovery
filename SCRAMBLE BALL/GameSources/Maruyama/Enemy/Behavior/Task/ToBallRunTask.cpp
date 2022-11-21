@@ -189,7 +189,7 @@ namespace basecross {
 					TaskEnum tasks[] = {
 						TaskEnum::MoveAstar,
 						TaskEnum::MoveArrive,
-						TaskEnum::GetBall,
+						//TaskEnum::GetBall,
 					};
 
 					for (const auto& task : tasks) {
