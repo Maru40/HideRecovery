@@ -4,7 +4,6 @@
 namespace basecross
 {
 	class VelocityManager;
-	class UseWeapon;
 
 namespace Operator
 {
