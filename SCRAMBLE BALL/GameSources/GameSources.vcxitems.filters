@@ -2826,12 +2826,13 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\AIActiveChanger.h">
       <Filter>Itabashi\Component\AIActiveChanger</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\HoldBallEffectEmitter.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\SettingTarget_HasBallOtherMember.h">
-      <Filter>Maruyama\Enemy\BehaviorTree\Decorator\SettingStartTarget\SettingTarget_HasBallOtherMember</Filter>
-    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\BallObjectEventExecuter.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\BallEffectEmitter.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\SettingTarget_RandomTeamMember.h">
       <Filter>Maruyama\Enemy\BehaviorTree\Decorator\SettingStartTarget\SettingTarget_RandomTeamMember</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\SettingTarget_HasBallOtherMember.h">
+      <Filter>Maruyama\Enemy\BehaviorTree\Decorator\SettingStartTarget\SettingTarget_HasBallOtherMember</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -4041,12 +4042,13 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\AIActiveChanger.cpp">
       <Filter>Itabashi\Component\AIActiveChanger</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\HoldBallEffectEmitter.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\SettingTarget_HasBallOtherMember.cpp">
-      <Filter>Maruyama\Enemy\BehaviorTree\Decorator\SettingStartTarget\SettingTarget_HasBallOtherMember</Filter>
-    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\BallObjectEventExecuter.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\BallEffectEmitter.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\SettingTarget_RandomTeamMember.cpp">
       <Filter>Maruyama\Enemy\BehaviorTree\Decorator\SettingStartTarget\SettingTarget_RandomTeamMember</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\SettingTarget_HasBallOtherMember.cpp">
+      <Filter>Maruyama\Enemy\BehaviorTree\Decorator\SettingStartTarget\SettingTarget_HasBallOtherMember</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
