@@ -91,4 +91,9 @@ namespace basecross {
 	void DirectionWithHasBallUI::ClearTarget() {
 		m_targetTransform.reset();
 	}
+
+	bool DirectionWithHasBallUI::IsTargetSet() {
+		// リンクが切れていたらターゲットがセットされていないのでfalse
+		return !m_targetTransform.expired();
+	}
 }
