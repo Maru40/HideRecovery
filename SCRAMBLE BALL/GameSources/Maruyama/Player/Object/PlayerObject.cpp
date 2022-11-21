@@ -193,6 +193,7 @@ namespace basecross {
 		efkComp->IsSyncGameObject(L"Tackle", true);
 		efkComp->SetEffectResource(L"HasBall", TransformData(Vec3(0, 0.5f, 0), Vec3(0.5f)));
 		efkComp->IsSyncGameObject(L"HasBall", true);
+		efkComp->SetEffectResource(L"Excl", TransformData(Vec3(0, 1.5f, 0)));
 
 		// 被弾時のエフェクトを再生を登録
 		playerStatus->AddFuncAddDamage(
