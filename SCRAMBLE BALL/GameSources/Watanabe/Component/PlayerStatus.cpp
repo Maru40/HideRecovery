@@ -24,6 +24,8 @@
 #include "Maruyama/Enemy/AIDirector/CoordinatorBase.h"
 #include "Maruyama/Enemy/AIDirector/TupleSpace.h"
 
+#include "Maruyama/Player/Component/GoalAnimationController.h"
+
 #include "Watanabe/DebugClass/Debug.h"
 
 namespace basecross {
@@ -43,6 +45,7 @@ namespace basecross {
 
 	void PlayerStatus::OnLateStart()
 	{
+		m_goalAnimationController = GetGameObject()->GetComponent<GoalAnimationController>();
 		m_soundEmitter = GetGameObject()->GetComponent<SoundEmitter>(false);
 		m_factionMember = GetGameObject()->GetComponent<Enemy::I_FactionMember>(false);
 		m_tupler = GetGameObject()->GetComponent<Enemy::Tuple::I_Tupler>(false);
@@ -58,8 +61,13 @@ namespace basecross {
 	}
 
 	void PlayerStatus::AddDamage(const DamageData& damage) {
-
 		if (IsDead()) {
+			return;
+		}
+
+		//ゴール判定無敵。
+		auto goalAnimation = m_goalAnimationController.lock();
+		if (goalAnimation && goalAnimation->IsGoalAnimation()) {
 			return;
 		}
 
