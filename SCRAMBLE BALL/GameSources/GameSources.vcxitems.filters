@@ -1489,6 +1489,9 @@
     <Filter Include="Watanabe\Component\BallEffectEmitter">
       <UniqueIdentifier>{455a0b32-c778-423e-bdb4-78954c28b3e3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\Component\BallObjectEventExecuter">
+      <UniqueIdentifier>{5bdd8db8-9d69-457e-9256-90798c68a75e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2820,6 +2823,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\AIActiveChanger.h">
       <Filter>Itabashi\Component\AIActiveChanger</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\BallObjectEventExecuter.h">
+      <Filter>Watanabe\Component\BallObjectEventExecuter</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -4030,6 +4036,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\AIActiveChanger.cpp">
       <Filter>Itabashi\Component\AIActiveChanger</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\BallObjectEventExecuter.cpp">
+      <Filter>Watanabe\Component\BallObjectEventExecuter</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
