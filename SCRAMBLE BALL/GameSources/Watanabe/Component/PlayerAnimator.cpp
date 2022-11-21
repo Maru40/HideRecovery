@@ -13,6 +13,10 @@
 #include "Maruyama/StageObject/Goal.h"
 #include "Maruyama/Utility/Utility.h"
 
+#include "Itabashi/PlayerControlManager.h"
+#include "Itabashi/ObjectMover.h"
+#include "Itabashi/OnlinePlayerSynchronizer.h"
+
 namespace basecross {
 	//--------------------------------------------------------------------------------------
 	/// 遷移データ
@@ -78,6 +82,25 @@ namespace basecross {
 
 	void PlayerAnimator::OnLateStart() {
 		m_velocityManager = GetGameObject()->GetComponent<VelocityManager>(false);
+		m_playerControlManager = GetGameObject()->GetComponent<PlayerControlManager>(false);
+		m_objectMover = GetGameObject()->GetComponent<Operator::ObjectMover>(false);
+		m_onlineSychronizer = GetGameObject()->GetComponent<OnlinePlayerSynchronizer>(false);
+
+		//床に置くアニメーションのイベント
+		AddAnimationEvent(
+			PlayerAnimationState::State::PutItem_Floor,
+			[&]() { 
+				if (m_objectMover.lock()) { m_objectMover.lock()->SetUpdateActive(false); } 
+				if (m_playerControlManager.lock()) { m_playerControlManager.lock()->SetUpdateActive(false); }
+				if (m_velocityManager.lock()) { m_velocityManager.lock()->ResetAll(); }
+				if (m_onlineSychronizer.lock()) { m_onlineSychronizer.lock()->Move(Vec2(0.0f)); }
+			},
+			nullptr,
+			[&]() { 
+				if (m_objectMover.lock()) { m_objectMover.lock()->SetUpdateActive(true); } 
+				if (m_playerControlManager.lock()) { m_playerControlManager.lock()->SetUpdateActive(true); }
+			}
+		);
 
 		//自動でwaitに変更したいアニメーション一覧
 		PlayerAnimationState::State baseStates[] = {

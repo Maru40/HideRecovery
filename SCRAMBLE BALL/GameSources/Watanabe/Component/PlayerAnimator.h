@@ -15,6 +15,12 @@ namespace basecross {
 	/// 前方宣言
 	//--------------------------------------------------------------------------------------
 	class VelocityManager;
+	class PlayerControlManager;
+	class OnlinePlayerSynchronizer;
+
+	namespace Operator {
+		class ObjectMover;
+	}
 
 	//--------------------------------------------------------------------------------------
 	/// 遷移データ
@@ -83,6 +89,9 @@ namespace basecross {
 		float m_walkTransitionSpeed;
 
 		std::weak_ptr<VelocityManager> m_velocityManager;								//速度管理
+		std::weak_ptr<Operator::ObjectMover> m_objectMover;
+		std::weak_ptr<OnlinePlayerSynchronizer> m_onlineSychronizer;
+		std::weak_ptr<PlayerControlManager> m_playerControlManager;
 
 		std::unordered_map<wstring, std::vector<TransitionData>> m_transitionDatasMap;	//遷移データマップ
 		std::unordered_map<wstring, std::vector<AnimationEvent>> m_animationEventsMap;	//アニメーションイベントマップ
