@@ -24,6 +24,10 @@ namespace basecross {
 		m_timer.Count();
 	}
 
+	bool DissolveAnimator::IsPlayEnd() {
+		return m_timer.IsTimeUp();
+	}
+
 	void DissolveAnimator::Start() {
 		m_isPlayingAnimation = true;
 		m_timer.Reset();

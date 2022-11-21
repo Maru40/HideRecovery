@@ -18,6 +18,7 @@ namespace basecross {
 		void OnDraw()override {}
 
 		void Start();
+		bool IsPlayEnd();
 		void Reset();
 	};
 }
