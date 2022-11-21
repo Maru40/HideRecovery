@@ -165,17 +165,11 @@ namespace basecross {
 					//開始イベント
 					m_param.waitParam->start = [&]() {
 						m_onlineSynchronizer.lock()->Aquisition();
-
-						//if (auto velocityManager = m_velocityManager.lock()) {
-						//	velocityManager->StartDeseleration();
-						//}
 					};
 
 					//終了イベント
 					m_param.waitParam->exit = [&]() {
-						//if (auto velocityManager = m_velocityManager.lock()) {
-						//	velocityManager->SetIsDeseleration(false);
-						//}
+						
 					};
 
 					//タスクの定義
@@ -189,7 +183,7 @@ namespace basecross {
 					TaskEnum tasks[] = {
 						TaskEnum::MoveAstar,
 						TaskEnum::MoveArrive,
-						TaskEnum::GetBall,
+						//TaskEnum::GetBall,
 					};
 
 					for (const auto& task : tasks) {
