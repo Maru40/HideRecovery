@@ -1495,6 +1495,9 @@
     <Filter Include="Maruyama\Enemy\BehaviorTree\Decorator\SettingStartTarget\SettingTarget_HasBallOtherMember">
       <UniqueIdentifier>{16b3d76c-26ca-4e0b-8199-5b3b6c4c0889}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Enemy\BehaviorTree\Decorator\SettingStartTarget\SettingTarget_RandomTeamMember">
+      <UniqueIdentifier>{2547073c-d0de-4bb3-bee5-e4044e6c7b14}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2827,6 +2830,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\SettingTarget_HasBallOtherMember.h">
       <Filter>Maruyama\Enemy\BehaviorTree\Decorator\SettingStartTarget\SettingTarget_HasBallOtherMember</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\SettingTarget_RandomTeamMember.h">
+      <Filter>Maruyama\Enemy\BehaviorTree\Decorator\SettingStartTarget\SettingTarget_RandomTeamMember</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -4038,6 +4044,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\HoldBallEffectEmitter.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\SettingTarget_HasBallOtherMember.cpp">
       <Filter>Maruyama\Enemy\BehaviorTree\Decorator\SettingStartTarget\SettingTarget_HasBallOtherMember</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\SettingTarget_RandomTeamMember.cpp">
+      <Filter>Maruyama\Enemy\BehaviorTree\Decorator\SettingStartTarget\SettingTarget_RandomTeamMember</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
