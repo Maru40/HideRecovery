@@ -164,26 +164,26 @@ namespace basecross {
 		item->GetGameObject()->SetActive(false);
 		//HideItemAcquisitionEvent(GetGameObject());	//隠すアイテムの時に呼び出すイベント
 
-		//アニメーションを再生
-		auto itemPosition = item->GetGameObject()->GetComponent<Transform>()->GetPosition();
-		if (itemPosition.y < 0.0f) {
-			//アイテムが床にあるなら
-			animator->ChangePlayerAnimation(PlayerAnimationState::State::PutItem_Floor);
-		}
-		else {
-			//アイテムが床にないなら
-			animator->ChangePlayerAnimation(PlayerAnimationState::State::PutItem_HideObject);
-		}
+		////アニメーションを再生
+		//auto itemPosition = item->GetGameObject()->GetComponent<Transform>()->GetPosition();
+		//if (itemPosition.y < 0.0f) {
+		//	//アイテムが床にあるなら
+		//	animator->ChangePlayerAnimation(PlayerAnimationState::State::PutItem_Floor);
+		//}
+		//else {
+		//	//アイテムが床にないなら
+		//	animator->ChangePlayerAnimation(PlayerAnimationState::State::PutItem_HideObject);
+		//}
 
 		if (auto velocityManager = GetGameObject()->GetComponent<VelocityManager>(false)) {
 			velocityManager->ResetAll();
 		}
 
 		//向きたい方法を設定
-		if (auto rotationController = GetGameObject()->GetComponent<RotationController>(false)) {
-			auto direct = itemPosition - transform->GetPosition();
-			rotationController->SetDirection(direct);
-		}
+		//if (auto rotationController = GetGameObject()->GetComponent<RotationController>(false)) {
+		//	auto direct = itemPosition - transform->GetPosition();
+		//	rotationController->SetDirection(direct);
+		//}
 
 		//アイテムを手に入れたことをAIDirectorに伝える。
 		Enemy::AIDirector::GetInstance()->GetTupleSpace()->Write<Enemy::Tuple::FindBall>(

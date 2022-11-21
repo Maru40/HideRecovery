@@ -17,6 +17,7 @@
 #include "Maruyama/Utility/Component/RotationController.h"
 #include "Maruyama/Player/Component/WeponBase.h"
 #include "Maruyama/Bullet/Object/BulletObjectBase.h"
+#include "Maruyama/Utility/Component/RotationController.h"
 
 namespace basecross
 {
@@ -368,6 +369,19 @@ namespace basecross
 		}
 
 		hidePlace->Open();
+
+		//アニメーションの再生
+		if (auto animator = m_playerAnimator.lock()) {
+			animator->ChangePlayerAnimation(PlayerAnimationState::State::PutItem_Floor);
+		}
+
+		//向きたい方向の指定
+		if (auto rotationController = m_rotationController.lock()) {
+			auto hidePlacePosition = hidePlace->GetGameObject()->GetComponent<Transform>()->GetPosition();
+			auto toVec = hidePlacePosition - transform->GetPosition();
+			rotationController->SetDirection(toVec);
+		}
+
 
 		return true;
 	}
