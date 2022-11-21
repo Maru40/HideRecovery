@@ -193,6 +193,8 @@ namespace basecross {
 		efkComp->IsSyncGameObject(L"Tackle", true);
 		efkComp->SetEffectResource(L"HasBall", TransformData(Vec3(0, 0.5f, 0), Vec3(0.5f)));
 		efkComp->IsSyncGameObject(L"HasBall", true);
+		efkComp->SetEffectResource(L"Excl", TransformData(Vec3(0, 1.7f, 0)));
+		efkComp->IsSyncGameObject(L"Excl", true);
 
 		// 被弾時のエフェクトを再生を登録
 		playerStatus->AddFuncAddDamage(
@@ -205,12 +207,15 @@ namespace basecross {
 		// ボールを持ったとき & 持っていないときのイベント
 		auto hasBallEvent = AddComponent<HasBallEventExecuter>(itemBag);
 		// エフェクト
-		hasBallEvent->SetEvent(
+		hasBallEvent->AddEvent(
 			[](const shared_ptr<PlayerObject>& owner) {
 				auto efkComp = owner->GetComponent<EfkComponent>();
+				// ボールを持っている人を強調
 				if (!efkComp->IsPlaying(L"HasBall")) {
 					efkComp->PlayLoop(L"HasBall");
 				}
+				//「！」
+				//efkComp->Play(L"Excl");
 			},
 			[](const shared_ptr<PlayerObject>& owner) {
 				auto efkComp = owner->GetComponent<EfkComponent>();
@@ -222,16 +227,12 @@ namespace basecross {
 			->GetUIObject<DirectionWithHasBallUI>(L"DirectionWithHasBallUI");
 
 		// 自分がボールを持ったときに方向を知らせるUIに情報を渡す
-		hasBallEvent->SetEvent(
+		hasBallEvent->AddHaveBallEvent(
 			[](const shared_ptr<PlayerObject>& owner) {
-				auto directionUI = owner->GetDirectionWithHasBallUI();
-				directionUI->SetTarget(owner);
-			},
-			[](const shared_ptr<PlayerObject>& owner) {
-				auto directionUI = owner->GetDirectionWithHasBallUI();
-				directionUI->ClearTarget();
+				if (auto directionUI = owner->GetDirectionWithHasBallUI())
+					directionUI->SetTarget(owner);
 			}
-			);
+		);
 
 		auto shadowmap = AddComponent<Shadowmap>();
 		shadowmap->SetMultiMeshResource(L"Player_Mesh");

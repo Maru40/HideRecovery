@@ -40,5 +40,11 @@ namespace basecross {
 		/// ターゲット情報をクリア
 		/// </summary>
 		void ClearTarget();
+
+		/// <summary>
+		/// ターゲットがセットされているか
+		/// </summary>
+		/// <returns>されていたらtrue</returns>
+		bool IsTargetSet();
 	};
 }

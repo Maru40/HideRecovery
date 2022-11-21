@@ -26,9 +26,9 @@ namespace basecross {
 		void OnCreate()override;
 		void OnUpdate()override;
 
-		void SetEvent(const Func& haveBallEvent, const Func& notHaveBallEvent);
+		void AddEvent(const Func& haveBallEvent, const Func& notHaveBallEvent);
 
-		void SetHaveBallEvent(const Func& haveBallEvent);
-		void SetNotHaveBallEvent(const Func& notHaveBallEvent);
+		void AddHaveBallEvent(const Func& haveBallEvent);
+		void AddNotHaveBallEvent(const Func& notHaveBallEvent);
 	};
 }

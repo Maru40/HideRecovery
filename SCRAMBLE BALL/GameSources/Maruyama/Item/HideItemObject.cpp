@@ -15,7 +15,12 @@
 #include "Itabashi/Item.h"
 #include "Watanabe/Utility/DataExtracter.h"
 #include "Watanabe/Component/BallAnimator.h"
+#include "Watanabe/Effekseer/EfkEffect.h"
+#include "Watanabe/Component/BallObjectEventExecuter.h"
+#include "Watanabe/UI/DirectionWithHasBallUI.h"
+#include "Watanabe/UI/UIObjectCSVBuilder.h"
 
+#include "MainStage.h"
 #include "Patch/PlayerInputer.h"
 
 #include "Itabashi/OnlineStatus.h"
@@ -60,6 +65,37 @@ namespace basecross {
 
 		if (auto shareClass = ShareClassesManager::GetInstance()) {
 			shareClass->AddShareClass<HideItemObject>(GetThis<HideItemObject>());
+		}
+
+		// メインステージのみ
+		if (auto mainStage = GetTypeStage<MainStage>(false)) {
+			// エフェクト
+			auto efkComp = AddComponent<EfkComponent>();
+			efkComp->SetEffectResource(L"HasBall", TransformData(Vec3(0), Vec3(0.5f)));
+
+			auto eventExecuter = AddComponent<BallObjectEventExecuter>();
+			// エフェクト
+			eventExecuter->AddEvent(
+				[efkComp]() {
+					efkComp->PlayLoop(L"HasBall");
+				},
+				[efkComp]() {
+					efkComp->Stop(L"HasBall");
+				}
+				);
+
+			auto directionUI = mainStage->GetUIObjectCSVBuilder()
+				->GetUIObject<DirectionWithHasBallUI>(L"DirectionWithHasBallUI");
+
+			// 方向指示UI
+			eventExecuter->AddEvent(
+				[&, directionUI]() {
+					directionUI->SetTarget(GetThis<HideItemObject>());
+				},
+				[directionUI]() {
+					directionUI->ClearTarget();
+				}
+				);
 		}
 	}
 
