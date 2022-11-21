@@ -1,6 +1,6 @@
 /*!
-@file OutSpecificTarget.h
-@brief OutSpecificTarget‚È‚Ç
+@file SettingStartTarget.h
+@brief SettingStartTarget‚È‚Ç
 ’S“–ÒFŠÛR —TŠì
 */
 

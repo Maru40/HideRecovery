@@ -1,6 +1,6 @@
 /*!
-@file IsInEyeTargets.cpp
-@brief IsInEyeTargets‚È‚ÇŽÀ‘Ì
+@file SettingStartTarget.cpp
+@brief SettingStartTarget‚È‚ÇŽÀ‘Ì
 */
 
 #include "stdafx.h"
