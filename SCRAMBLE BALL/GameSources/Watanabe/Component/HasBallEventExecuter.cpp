@@ -37,15 +37,15 @@ namespace basecross {
 		executionFlag = true;
 	}
 
-	void HasBallEventExecuter::SetEvent(const Func& haveBallEvent, const Func& notHaveBallEvent) {
-		SetHaveBallEvent(haveBallEvent);
-		SetNotHaveBallEvent(notHaveBallEvent);
+	void HasBallEventExecuter::AddEvent(const Func& haveBallEvent, const Func& notHaveBallEvent) {
+		AddHaveBallEvent(haveBallEvent);
+		AddNotHaveBallEvent(notHaveBallEvent);
 	}
 
-	void HasBallEventExecuter::SetHaveBallEvent(const Func& haveBallEvent) {
+	void HasBallEventExecuter::AddHaveBallEvent(const Func& haveBallEvent) {
 		m_haveBallEventList.push_back(haveBallEvent);
 	}
-	void HasBallEventExecuter::SetNotHaveBallEvent(const Func& notHaveBallEvent) {
+	void HasBallEventExecuter::AddNotHaveBallEvent(const Func& notHaveBallEvent) {
 		m_notHaveBallEventList.push_back(notHaveBallEvent);
 	}
 }

@@ -206,7 +206,7 @@ namespace basecross {
 		// ボールを持ったとき & 持っていないときのイベント
 		auto hasBallEvent = AddComponent<HasBallEventExecuter>(itemBag);
 		// エフェクト
-		hasBallEvent->SetEvent(
+		hasBallEvent->AddEvent(
 			[](const shared_ptr<PlayerObject>& owner) {
 				auto efkComp = owner->GetComponent<EfkComponent>();
 				if (!efkComp->IsPlaying(L"HasBall")) {
@@ -223,7 +223,7 @@ namespace basecross {
 			->GetUIObject<DirectionWithHasBallUI>(L"DirectionWithHasBallUI");
 
 		// 自分がボールを持ったときに方向を知らせるUIに情報を渡す
-		hasBallEvent->SetEvent(
+		hasBallEvent->AddEvent(
 			[](const shared_ptr<PlayerObject>& owner) {
 				auto directionUI = owner->GetDirectionWithHasBallUI();
 				directionUI->SetTarget(owner);
