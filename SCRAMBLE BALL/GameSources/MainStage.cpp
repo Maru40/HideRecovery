@@ -59,7 +59,6 @@ namespace basecross {
 	}
 
 	void MainStage::OnCreate() {
-
 		try {
 			AddGameObject<EfkInterface>();
 			AddGameObject<Debug>();
@@ -85,7 +84,6 @@ namespace basecross {
 			onlineGameTimer->AddGameStartCountFunc([weakgameStartUI]() { weakgameStartUI.lock()->Start(); });
 
 			onlineGameTimer->AddGameStartCountFunc([weakGameItemManager]() {
-
 				if (!Online::OnlineManager::GetLocalPlayer().getIsMasterClient())
 				{
 					return;
@@ -97,7 +95,7 @@ namespace basecross {
 				{
 					gameItemManager->RandomHideItem(hideItem);
 				}
-			});
+				});
 
 			gameStartUI->AddTimeUpEventFunc([]() { SimpleSoundManager::ChangeBGM(L"GameStageBGM", 0.05f); });
 			gameStartUI->AddTimeUpEventFunc([]() { SimpleSoundManager::OnePlaySE(L"GameStartSE", 0.25f); });
@@ -120,9 +118,6 @@ namespace basecross {
 			// Generatorの生成
 			// AddGameObject<EnemyGeneratorObject>();
 
-			// Mapの読み込み
-			CreateMap(sm_loadMapName);
-
 			// UIレイアウトの読み込み
 			auto gameUIBuilder = CreateUI(L"GameUILayout.csv");
 			auto remainingTime = gameUIBuilder->GetUIObject<SplashMessageUI>(L"RemainingTime");
@@ -142,6 +137,9 @@ namespace basecross {
 					remainingTime->SetColor(Col4(1, 1, 1, 0.5f));
 					remainingTime->SetMessage(SplashMessageUI::MessageType::Remaining30s);
 				});
+
+			// Mapの読み込み
+			CreateMap(sm_loadMapName);
 
 			Debug::GetInstance()->Log(L"入力------------------------------");
 			Debug::GetInstance()->Log(L"X  : 置く");
