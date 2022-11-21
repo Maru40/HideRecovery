@@ -388,5 +388,12 @@ namespace basecross
 		{
 			objectMover->Move(Vec2());
 		}
+
+		auto useWeapon = m_useWeapon.lock();
+
+		if (useWeapon)
+		{
+			useWeapon->SetIsAim(false);
+		}
 	}
 }
