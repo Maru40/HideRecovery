@@ -65,20 +65,22 @@ namespace StageObject
 
 	void SelfPlayerObject::OnUpdate() {
 		//if (PlayerInputer::GetInstance()->IsBDown()) {
+		//	bool isActtive = GetComponent<Enemy::EnemyBase>()->GetUpdateActive();
+
 		//	auto objectMover = GetComponent<Operator::ObjectMover>();
-		//	objectMover->SetCameraAffected(false);
+		//	objectMover->SetCameraAffected(isActtive);
 		//	objectMover->SetDefaultForward(Vec3::Forward());
 
-		//	GetComponent<Enemy::EnemyBase>()->SetUpdateActive(true);
-		//	GetComponent<SeekTarget>()->SetUpdateActive(true);
-		//	GetComponent<SelfAstarNodeController>()->SetUpdateActive(true);
-		//	GetComponent<TargetManager>()->SetUpdateActive(true);
-		//	GetComponent<WallAvoid>()->SetUpdateActive(true);
-		//	GetComponent<AIVirtualController>()->SetUpdateActive(true);
-		//	GetComponent<Enemy::AIPlayerStator>()->SetUpdateActive(true);
+		//	GetComponent<Enemy::EnemyBase>()->SetUpdateActive(!isActtive);
+		//	GetComponent<SeekTarget>()->SetUpdateActive(!isActtive);
+		//	GetComponent<SelfAstarNodeController>()->SetUpdateActive(!isActtive);
+		//	GetComponent<TargetManager>()->SetUpdateActive(!isActtive);
+		//	GetComponent<WallAvoid>()->SetUpdateActive(!isActtive);
+		//	GetComponent<AIVirtualController>()->SetUpdateActive(!isActtive);
+		//	GetComponent<Enemy::AIPlayerStator>()->SetUpdateActive(!isActtive);
 
 		//	auto input = GetComponent<InputPlayerController>();
-		//	input->SetUpdateActive(false);
+		//	input->SetUpdateActive(isActtive);
 
 		//	if (auto playerControl = GetComponent<PlayerControlManager>(false)) {
 		//		playerControl->ResetMoveSpeed();
