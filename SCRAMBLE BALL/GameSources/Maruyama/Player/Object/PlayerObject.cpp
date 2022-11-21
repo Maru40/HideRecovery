@@ -227,16 +227,12 @@ namespace basecross {
 			->GetUIObject<DirectionWithHasBallUI>(L"DirectionWithHasBallUI");
 
 		// 自分がボールを持ったときに方向を知らせるUIに情報を渡す
-		hasBallEvent->AddEvent(
+		hasBallEvent->AddHaveBallEvent(
 			[](const shared_ptr<PlayerObject>& owner) {
 				if (auto directionUI = owner->GetDirectionWithHasBallUI())
 					directionUI->SetTarget(owner);
-			},
-			[](const shared_ptr<PlayerObject>& owner) {
-				if (auto directionUI = owner->GetDirectionWithHasBallUI())
-					directionUI->ClearTarget();
 			}
-			);
+		);
 
 		auto shadowmap = AddComponent<Shadowmap>();
 		shadowmap->SetMultiMeshResource(L"Player_Mesh");

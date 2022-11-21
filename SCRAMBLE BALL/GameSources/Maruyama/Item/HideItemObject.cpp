@@ -17,6 +17,9 @@
 #include "Watanabe/Component/BallAnimator.h"
 #include "Watanabe/Effekseer/EfkEffect.h"
 #include "Watanabe/Component/BallEffectEmitter.h"
+#include "Watanabe/Component/BallObjectEventExecuter.h"
+#include "Watanabe/UI/DirectionWithHasBallUI.h"
+#include "Watanabe/UI/UIObjectCSVBuilder.h"
 
 #include "MainStage.h"
 #include "Patch/PlayerInputer.h"
@@ -66,7 +69,22 @@ namespace basecross {
 		}
 
 		// メインステージのみ
-		if (GetTypeStage<MainStage>(false)) {
+		if (auto mainStage = GetTypeStage<MainStage>(false)) {
+			auto directionUI = mainStage->GetUIObjectCSVBuilder()
+				->GetUIObject<DirectionWithHasBallUI>(L"DirectionWithHasBallUI");
+
+			auto eventExecuter = AddComponent<BallObjectEventExecuter>();
+			eventExecuter->AddEvent(
+				[&, directionUI]() {
+					directionUI->SetTarget(GetThis<HideItemObject>());
+					Debug::GetInstance()->Log(L"BALL!!!!!");
+				},
+				[directionUI]() {
+					directionUI->ClearTarget();
+					Debug::GetInstance()->Log(L"B!");
+				}
+				);
+
 			// エフェクト
 			auto efkComp = AddComponent<EfkComponent>();
 			efkComp->SetEffectResource(L"HasBall", TransformData(Vec3(0), Vec3(0.5f)));
