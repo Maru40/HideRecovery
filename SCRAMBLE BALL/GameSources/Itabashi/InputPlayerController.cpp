@@ -3,7 +3,7 @@
 #include "Patch/PlayerInputer.h"
 #include "Watanabe/Component/PlayerStatus.h"
 #include "OnlinePlayerSynchronizer.h"
-
+#include "Itabashi/Item.h"
 #include "Maruyama/Player/Component/Teleport.h"
 
 template<class T>
@@ -69,5 +69,9 @@ namespace basecross
 		}
 
 		onlinePlayerSynchronizer->Aim(PlayerInputer::GetInstance()->IsAim());
+	}
+
+	void InputPlayerController::OnCollisionEnter(std::shared_ptr<GameObject>& other)
+	{
 	}
 }
