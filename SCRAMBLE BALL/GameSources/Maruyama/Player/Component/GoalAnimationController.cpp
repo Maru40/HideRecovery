@@ -16,6 +16,7 @@
 #include "Maruyama/TaskList/CommonTasks/Task_Wait.h"
 
 #include "Maruyama/TaskList/CommonTasks/Task_ToTargetMove.h"
+#include "Maruyama/Camera/Component/CameraShake.h"
 
 #include "Task_GoalAnimation.h"
 
@@ -34,6 +35,8 @@
 #include "Itabashi/PlayerControlManager.h"
 
 #include "Maruyama/Enemy/Component/Stator/AIPlayerStator.h"
+
+#include "Patch/SpringArmComponent.h"
 
 namespace basecross {
 	//--------------------------------------------------------------------------------------
@@ -210,6 +213,20 @@ namespace basecross {
 		m_taskList->DefineTask(TaskEnum::DunkMove, std::make_shared<Task::ToTargetMove>(object, m_param.dunkMoveParam));
 
 		//ダンク後の待機
+		m_param.dunkAfterWaitParam->start = [&](){
+			auto player = std::dynamic_pointer_cast<PlayerObject>(GetGameObject());
+			if (!player) {
+				return;
+			}
+
+			auto springArm = player->GetArm()->GetComponent<SpringArmComponent>();
+			auto& tpsCamera = springArm->GetChildObject();
+
+			auto cameraShake = tpsCamera->GetComponent<CameraShake>(false);
+			if (cameraShake) {
+				cameraShake->StartShake(1.0f);
+			}
+		};
 		m_taskList->DefineTask(TaskEnum::DunkWait, std::make_shared<Task::Wait>(m_param.dunkAfterWaitParam));
 
 		//元の位置に戻る移動
