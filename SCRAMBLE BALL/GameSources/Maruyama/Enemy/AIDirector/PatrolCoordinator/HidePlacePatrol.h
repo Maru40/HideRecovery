@@ -79,6 +79,12 @@ namespace basecross {
 						const std::vector<std::weak_ptr<HidePlace>>& hidePlaces
 					);
 
+					/// <summary>
+					/// 他のメンバーがターゲットにしている隠し場所を取得する(他に探す場所がないから、同じ場所を探す。)
+					/// </summary>
+					/// <returns></returns>
+					std::shared_ptr<GameObject> SearchSomeTarget() const;
+
 				public:
 					/// <summary>
 					/// メンバーからパトロールターゲットの検索を依頼された時の処理

@@ -163,6 +163,24 @@ namespace basecross {
 					return result;
 				}
 
+				std::shared_ptr<GameObject> HidePlacePatrol::SearchSomeTarget() const {
+					for (auto& member : GetMembers()) {
+						//ターゲットを持っていないならContinue
+						auto target = member.lock()->GetTarget();
+						if (!target) {
+							continue;
+						}
+
+						//HidePlaceなら、それと同じターゲットにするため、返す。
+						auto hidePlace = target->GetComponent<HidePlace>(false);
+						if (hidePlace) {
+							return target;
+						}
+					}
+
+					return nullptr;	//存在しないならnullptr
+				}
+
 				std::shared_ptr<GameObject> HidePlacePatrol::SearchTarget(const std::shared_ptr<I_FactionMember>& member) {
 					//探しものがないなら、処理を終了。
 					auto hidePlaces = ShareClassesManager::GetInstance()->GetCastShareClasses<HidePlace>();
@@ -175,7 +193,7 @@ namespace basecross {
 
 					//ターゲット候補が0なら、nullptrを返す(ターゲットが存在しない。)
 					if (otherTargets.empty()) {
-						return nullptr;
+						return SearchSomeTarget();
 					}
 
 					//ターゲット候補の中から一番近いターゲットが手前に来るようにソートする。
