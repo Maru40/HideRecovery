@@ -1,6 +1,6 @@
 /*!
-@file IsInEyeTargets.cpp
-@brief IsInEyeTargetsなど実体
+@file SettingStartTarget.cpp
+@brief SettingStartTargetなど実体
 */
 
 #include "stdafx.h"
@@ -8,18 +8,16 @@
 
 #include "../Interface/I_Decorator.h"
 
-#include "IsInEyeTarget.h"
-
 #include "Maruyama/Enemy/Component/EnemyBase.h"
-#include "Maruyama/Enemy/Component/EyeSearchRange.h"
-#include "Maruyama/Utility/Component/TargetManager.h"
 
+#include "Maruyama/Utility/Component/Targeted.h"
 #include "Maruyama/Utility/Timer/GameTimer.h"
+#include "Maruyama/Utility/Component/TargetManager.h"
+#include "Maruyama/Enemy/Component/EyeSearchRange.h"
 
-#include "Maruyama/Utility/Utility.h"
 #include "Maruyama/Utility/Random.h"
 
-#include "Watanabe/DebugClass/Debug.h"
+#include "OutTargetTimer.h"
 
 namespace basecross {
 	namespace maru {
@@ -29,26 +27,26 @@ namespace basecross {
 			namespace Decorator {
 
 				//--------------------------------------------------------------------------------------
-				/// 監視対象が視界範囲にいるかどうかを判断するデコレータのパラメータ
+				/// ターゲットが視界外に一定時間いると、強制終了させるデコレータのパラメータ
 				//--------------------------------------------------------------------------------------
 
-				IsInEyeTarget_Parametor::IsInEyeTarget_Parametor() :
-					IsInEyeTarget_Parametor(EyeSearchRangeParametor())
+				OutTargetTimer_Parametor::OutTargetTimer_Parametor() :
+					OutTargetTimer_Parametor(EyeSearchRangeParametor())
 				{}
 
-				IsInEyeTarget_Parametor::IsInEyeTarget_Parametor(const EyeSearchRangeParametor& eyeParametor) :
-					IsInEyeTarget_Parametor(eyeParametor, 10.0f, 15.0f)
+				OutTargetTimer_Parametor::OutTargetTimer_Parametor(const EyeSearchRangeParametor& eyeParametor) :
+					OutTargetTimer_Parametor(eyeParametor, 10.0f, 15.0f)
 				{}
 
-				IsInEyeTarget_Parametor::IsInEyeTarget_Parametor(
+				OutTargetTimer_Parametor::OutTargetTimer_Parametor(
 					const EyeSearchRangeParametor& eyeParametor,
 					const float minLostIntervalTime,
 					const float maxLostIntervalTime
-				):
-					IsInEyeTarget_Parametor(eyeParametor, minLostIntervalTime, maxLostIntervalTime, 30.0f)
+				) :
+					OutTargetTimer_Parametor(eyeParametor, minLostIntervalTime, maxLostIntervalTime, 30.0f)
 				{}
 
-				IsInEyeTarget_Parametor::IsInEyeTarget_Parametor(
+				OutTargetTimer_Parametor::OutTargetTimer_Parametor(
 					const EyeSearchRangeParametor& eyeParametor,
 					const float minLostIntervalTime,
 					const float maxLostIntervalTime,
@@ -61,32 +59,25 @@ namespace basecross {
 				{}
 
 				//--------------------------------------------------------------------------------------
-				/// 監視対象が視界範囲にいるかどうかを判断するデコレータ
+				/// ターゲットが視界外に一定時間いると、強制終了させるデコレータ
 				//--------------------------------------------------------------------------------------
 
-				IsInEyeTarget::IsInEyeTarget(const std::shared_ptr<Enemy::EnemyBase>& owner, const Parametor* paramPtr):
+				OutTargetTimer::OutTargetTimer(const std::shared_ptr<Enemy::EnemyBase>& owner, const Parametor* paramPtr):
 					DecoratorBase(owner),
-					m_paramPtr(paramPtr),
-					m_timer(new GameTimer(0.0f))
+					m_timer(new GameTimer(0.0f)),
+					m_paramPtr(paramPtr)
 				{
-					m_eyeRange = owner->GetGameObject()->GetComponent<EyeSearchRange>(false);
-					m_targetManager = owner->GetGameObject()->GetComponent<TargetManager>(false);
+					auto object = owner->GetGameObject();
+
+					m_eyeRange = object->GetComponent<EyeSearchRange>(false);
+					m_targetManager = object->GetComponent<TargetManager>(false);
 				}
 
-				void IsInEyeTarget::OnStart() {
+				void OutTargetTimer::OnStart() {
 					m_timer->ResetTimer(GetRandomIntervalTime());
 				}
 
-				bool IsInEyeTarget::CanTransition() const {
-					auto targetManager = m_targetManager.lock();
-					if (!targetManager || !targetManager->HasTarget()) {
-						return false;
-					}
-
-					return m_eyeRange.lock()->IsInEyeRange(targetManager->GetTarget(), m_paramPtr->eyeParametor);
-				}
-
-				bool IsInEyeTarget::CanUpdate() {
+				bool OutTargetTimer::CanUpdate() {
 					//ターゲットが存在しないなら、更新できない。
 					auto targetManager = m_targetManager.lock();
 					if (!targetManager || !targetManager->HasTarget()) {
@@ -113,11 +104,11 @@ namespace basecross {
 					return true;
 				}
 
-				float IsInEyeTarget::GetRandomIntervalTime() const {
+				float OutTargetTimer::GetRandomIntervalTime() const {
 					return maru::MyRandom::Random(m_paramPtr->minLostIntervalTime, m_paramPtr->maxLostIntervalTime);
 				}
 
-				bool IsInEyeTarget::IsFarRange() const {
+				bool OutTargetTimer::IsFarRange() const {
 					auto targetManager = m_targetManager.lock();
 					if (!targetManager || !targetManager->HasTarget()) {
 						return true;	//ターゲットが存在しないならtrue
@@ -128,7 +119,7 @@ namespace basecross {
 					return m_paramPtr->farRange < toTargetRange;	//farRangeよりターゲットが遠くにいるならtrue
 				}
 
-				bool IsInEyeTarget::IsLost() const {
+				bool OutTargetTimer::IsLost() const {
 					auto targetManager = m_targetManager.lock();
 					if (!targetManager || !targetManager->HasTarget()) {
 						return true;	//ターゲットが存在しないならtrue

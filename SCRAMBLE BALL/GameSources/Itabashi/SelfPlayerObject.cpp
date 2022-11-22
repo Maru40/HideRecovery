@@ -26,6 +26,7 @@
 #include "Maruyama/Enemy/Component/Stator/AIPlayerStator.h"
 #include "Maruyama/Enemy/Component/AIVirtualController.h"
 #include "Maruyama/Enemy/Component/WallAvoid.h"
+#include "Maruyama/Player/Component/UseWeapon.h"
 
 #include "Maruyama/Camera/Component/CameraShake.h"
 
@@ -86,6 +87,10 @@ namespace StageObject
 
 		//	if (auto playerControl = GetComponent<PlayerControlManager>(false)) {
 		//		playerControl->ResetMoveSpeed();
+		//	}
+
+		//	if (auto useWeapon = GetComponent<UseWeapon>(false)) {
+		//		useWeapon->SetIsUseCamera(isActtive);
 		//	}
 		//}
 	}

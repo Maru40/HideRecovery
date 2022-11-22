@@ -28,6 +28,7 @@ namespace basecross {
 
 			namespace Decorator {
 				struct IsInEyeTarget_Parametor;
+				struct OutTargetTimer_Parametor;
 			}
 
 			namespace Task {
@@ -69,6 +70,7 @@ namespace basecross {
 				struct ButtleTree_DecoratorParametor {
 					Decorator::IsInEyeTarget_Parametor* nearSeek_isInEyeParamPtr;	//近づくタスクの視界デコレータ
 					Decorator::IsInEyeTarget_Parametor* nearAstar_isInEyeParamPtr;	//Astarで近づくタスクの視界デコレータ
+					Decorator::OutTargetTimer_Parametor* nearAstar_outTargetTimerParamPtr;	//Astarで近づく視界デコレータ
 					Decorator::IsInEyeTarget_Parametor* shot_isInEyeParamPtr;		//視界範囲制御デコレータ
 
 					ButtleTree_DecoratorParametor();

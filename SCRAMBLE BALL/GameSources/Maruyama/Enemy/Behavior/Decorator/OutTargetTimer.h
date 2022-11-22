@@ -1,6 +1,6 @@
 /*!
-@file IsInEyeTarget.h
-@brief IsInEyeTargetなど
+@file NoneHidePlace.h
+@brief NoneHidePlaceなど
 担当者：丸山 裕喜
 */
 
@@ -18,9 +18,10 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 	/// 前方宣言
 	//--------------------------------------------------------------------------------------
-	class EyeSearchRange;
-	class TargetManager;
+
 	class GameTimer;
+	class TargetManager;
+	class EyeSearchRange;
 
 	namespace Enemy {
 		class EnemyBase;
@@ -32,62 +33,57 @@ namespace basecross {
 
 			namespace Decorator {
 
-				enum class IsInEyeTarget_CanType {
-					In,
-					Out
-				};
-
 				//--------------------------------------------------------------------------------------
-				/// 監視対象が視界範囲にいるかどうかを判断するデコレータのパラメータ
+				/// ターゲットが視界外に一定時間いると、強制終了させるデコレータのパラメータ
 				//--------------------------------------------------------------------------------------
-				struct IsInEyeTarget_Parametor {
+				struct OutTargetTimer_Parametor {
 					EyeSearchRangeParametor eyeParametor;	//視界パラメータ
 					float minLostIntervalTime;				//見失った後に追いかける時間(最小)
 					float maxLostIntervalTime;				//見失った後に追いかける時間(最大)
 					float farRange;							//追従不可能な程遠くに行ったと判断する距離
 
-					IsInEyeTarget_Parametor();
+					OutTargetTimer_Parametor();
 
-					IsInEyeTarget_Parametor(const EyeSearchRangeParametor& eyeParametor);
+					OutTargetTimer_Parametor(const EyeSearchRangeParametor& eyeParametor);
 
-					IsInEyeTarget_Parametor(
+					OutTargetTimer_Parametor(
 						const EyeSearchRangeParametor& eyeParametor,
 						const float minLostIntervalTime,
 						const float maxLostIntervalTime
 					);
 
-					IsInEyeTarget_Parametor(
+					OutTargetTimer_Parametor(
 						const EyeSearchRangeParametor& eyeParametor,
-						const float minLostIntervalTime, 
+						const float minLostIntervalTime,
 						const float maxLostIntervalTime,
 						const float farRange
 					);
 				};
 
 				//--------------------------------------------------------------------------------------
-				/// 監視対象が視界範囲にいるかどうかを判断するデコレータ
+				/// ターゲットが視界外に一定時間いると、強制終了させるデコレータ
 				//--------------------------------------------------------------------------------------
-				class IsInEyeTarget : public DecoratorBase<Enemy::EnemyBase>
+				class OutTargetTimer : public DecoratorBase<Enemy::EnemyBase>
 				{
 				public:
-					using Parametor = IsInEyeTarget_Parametor;
+					using Parametor = OutTargetTimer_Parametor;
 
 				private:
-					const Parametor* m_paramPtr;
+				    const Parametor* m_paramPtr;							//パラメータ
 
-					std::weak_ptr<EyeSearchRange> m_eyeRange;
-					std::weak_ptr<TargetManager> m_targetManager;
+					std::unique_ptr<GameTimer> m_timer;				//タイマー
 
-					std::unique_ptr<GameTimer> m_timer;
+					std::weak_ptr<TargetManager> m_targetManager;	//ターゲット管理
+					std::weak_ptr<EyeSearchRange> m_eyeRange;		//視界管理
 
 				public:
-					IsInEyeTarget(const std::shared_ptr<Enemy::EnemyBase>& owner, const Parametor* paramPtr);
+					OutTargetTimer(const std::shared_ptr<Enemy::EnemyBase>& owner, const Parametor* paramPtr);
 
-					virtual ~IsInEyeTarget() = default;
+					virtual ~OutTargetTimer() = default;
 
 					void OnStart() override;
 
-					bool CanTransition() const override;
+					bool CanTransition() const override { return true; }
 
 					bool CanUpdate() override;
 
