@@ -75,6 +75,8 @@ namespace basecross
 
 		// ノイズテクスチャ
 		ResourceLoadData(L"Noise_TX", L"Noise_TX.png"),
+		ResourceLoadData(L"Noise2_TX", L"Noise2_TX.png"),
+		ResourceLoadData(L"BlockNoise_TX", L"BlockNoise_TX.png"),
 
 		// コンテナ用テクスチャ
 		ResourceLoadData(L"RedContianerTx", L"Contianer/RedContianerTx.png"),
