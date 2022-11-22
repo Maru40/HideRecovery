@@ -27,6 +27,8 @@
 #include "Maruyama/Enemy/Component/AIVirtualController.h"
 #include "Maruyama/Enemy/Component/WallAvoid.h"
 
+#include "Maruyama/Camera/Component/CameraShake.h"
+
 #include "Maruyama/Utility/Component/Targeted.h"
 
 #include "Patch/PlayerInputer.h"
@@ -102,6 +104,7 @@ namespace StageObject
 
 		tpsCamera->AddComponent<VirtualCamera>(10);
 		tpsCamera->AddComponent<LookAtCameraManager>(GetThis<GameObject>(), LookAtCameraManager::Parametor());
+		tpsCamera->AddComponent<CameraShake>();
 
 		auto controlManager = GetComponent<PlayerControlManager>();
 
@@ -111,6 +114,7 @@ namespace StageObject
 		auto camera = cameraObject->AddComponent<VirtualCamera>(11);
 		camera->SetUpdateActive(false);
 		cameraObject->AddComponent<CameraForwardController>(camera);
+
 		auto toTargetMove = cameraObject->AddComponent<ToTargetMove>();
 		teleport->SetTeleportCamera(camera);
 		teleport->SetToTargetMove(toTargetMove);
