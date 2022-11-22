@@ -23,10 +23,11 @@ namespace basecross {
 	//ÉpÉâÉÅÅ[É^----------------------------------------------------------------------------------
 
 	CameraShake::Parametor::Parametor()
-		:Parametor(0.0f, Vec3(10.0f, 10.0f, 0.0f), 0.4f, 1.0f, maru::DeltaType::Normal)
+		:Parametor(0.0f, Vec3(10.0f, 10.0f, 0.0f), 0.25f, 1.0f, maru::DeltaType::Normal)
 	{}
 
-	CameraShake::Parametor::Parametor(const float& time, 
+	CameraShake::Parametor::Parametor(
+		const float& time, 
 		const Vec3& powerVec, 
 		const float& powerf,
 		const float& updateTimeSpeed,
