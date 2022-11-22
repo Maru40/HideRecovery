@@ -1498,6 +1498,9 @@
     <Filter Include="Maruyama\Enemy\BehaviorTree\Decorator\SettingStartTarget\SettingTarget_RandomTeamMember">
       <UniqueIdentifier>{2547073c-d0de-4bb3-bee5-e4044e6c7b14}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Enemy\BehaviorTree\Decorator\NoneHidePlace">
+      <UniqueIdentifier>{260ffe88-55c2-4f43-8226-21920006d50b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2833,6 +2836,9 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\SettingTarget_HasBallOtherMember.h">
       <Filter>Maruyama\Enemy\BehaviorTree\Decorator\SettingStartTarget\SettingTarget_HasBallOtherMember</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\NoneHidePlace.h">
+      <Filter>Maruyama\Enemy\BehaviorTree\Decorator\NoneHidePlace</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
