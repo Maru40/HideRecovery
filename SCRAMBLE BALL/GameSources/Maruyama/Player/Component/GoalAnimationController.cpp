@@ -224,7 +224,7 @@ namespace basecross {
 
 			auto cameraShake = tpsCamera->GetComponent<CameraShake>(false);
 			if (cameraShake) {
-				cameraShake->StartShake(1.0f);
+				cameraShake->StartShake(0.75f);
 			}
 		};
 		m_taskList->DefineTask(TaskEnum::DunkWait, std::make_shared<Task::Wait>(m_param.dunkAfterWaitParam));
