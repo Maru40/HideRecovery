@@ -29,5 +29,16 @@ namespace basecross {
 		 */
 		static void CreateCube(float textureSize, const Vec3& scale,
 			vector<VertexPositionNormalTexture>& vertices, vector<uint16_t>& indices);
+
+		/**
+		 * @brief スケールに合わせたUVを持つ板ポリの生成（Z-Up）
+		 *
+		 * @param textureSize テクスチャの大きさ
+		 * @param scale オブジェクトの大きさ
+		 * @param vertices 頂点データ
+		 * @param indices インデックスデータ
+		 */
+		static void CreateBoardPoly(float textureSize, const Vec2& scale,
+			vector<VertexPositionNormalTexture>& vertices, vector<uint16_t>& indices);
 	};
 }
