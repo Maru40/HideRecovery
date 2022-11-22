@@ -14,6 +14,8 @@
 
 #include "Maruyama/Utility/Utility.h"
 
+#include "Watanabe/Shader/StaticModelDraw.h"
+#include "Watanabe/Component/DissolveAnimator.h"
 #include "Watanabe/DebugClass/Debug.h"
 
 namespace basecross {
@@ -47,7 +49,6 @@ namespace basecross {
 	}
 
 	void OwnArea::OnLateStart() {
-
 	}
 
 	void OwnArea::OnUpdate() {
@@ -86,49 +87,85 @@ namespace basecross {
 		auto scale = objectTrans->GetScale();
 		auto halfScale = scale * 0.5f;
 
-		constexpr float Width = 0.5f;
 		//奥行生成
 		auto forwardPosition = position + (Vec3::Forward() * halfScale.z);
-		CreateMapOutCollision(forwardPosition, Vec3::Forward(), scale.x, Width);
+		CreateMapOutCollision(forwardPosition, Vec3::Forward(), scale.x);
 
 		//手前側生成
 		auto backPosition = position + (-Vec3::Forward() * halfScale.z);
-		CreateMapOutCollision(backPosition, -Vec3::Forward(), scale.x, Width);
+		CreateMapOutCollision(backPosition, -Vec3::Forward(), scale.x);
 
 		//右側
 		auto rightPosition = position + (Vec3::Right() * halfScale.x);
-		CreateMapOutCollision(rightPosition, Vec3::Right(), scale.z, Width);
+		CreateMapOutCollision(rightPosition, Vec3::Right(), scale.z);
 
 		//左側
 		auto leftPosition = position + (-Vec3::Right() * halfScale.x);
-		CreateMapOutCollision(leftPosition, -Vec3::Right(), scale.z, Width);
+		CreateMapOutCollision(leftPosition, -Vec3::Right(), scale.z);
 	}
 
-	void OwnArea::CreateMapOutCollision(const Vec3& startPosition, const Vec3& forward, const float& length, const float& width, const float& height) {
-		const float MoveForwardRange = width * 1.5f;
-		auto halfHeight = height * 0.5f;
-		auto direct = maru::Utility::ConvertForwardOffset(forward, Vec3::Right());
-		auto position = startPosition + (direct.GetNormalized() * MoveForwardRange);
+	void OwnArea::CreateMapOutCollision(const Vec3& startPosition, const Vec3& forward, const float& width, const float& height, const float& depth) {
+		const float halfHeight = height * 0.5f;
+		const float halfDepth = depth * 0.5f;
+
+		// 指定位置からhalfDepth分外側へ
+		auto position = startPosition + (forward.GetNormalized() * halfDepth);
 		position.y += halfHeight;
+
 		auto object = GetStage()->Instantiate<GameObject>(position, Quat::Identity());
 		auto collision = object->AddComponent<CollisionObb>();
-		//object->AddTag(L"T_Obstacle");
+		collision->SetFixed(true);
 
-		constexpr float depth = 1.0f;
 		auto objectTrans = object->GetComponent<Transform>();
-		objectTrans->SetScale(Vec3(length - width, height, depth));
+		objectTrans->SetScale(Vec3(width, height, depth));
 		objectTrans->SetForward(forward);
 
-		collision->SetFixed(true);
-		//collision->SetDrawActive(true);
+		auto drawComp = object->AddComponent<StaticModelDraw>();
+		drawComp->SetMeshResource(L"DEFAULT_CUBE");
+		drawComp->SetEnabledDissolve(true);
+		drawComp->SetDiffuse(Col4(1, 0, 0, 0.5f));
+
+		object->AddComponent<DissolveAnimator>();
+
+		object->SetAlphaActive(true);
 
 		m_outCollisonObject.push_back(object);
+	}
+
+	void OwnArea::SetOutCollisionActive(const bool isActive) {
+		for (auto object : m_outCollisonObject) {
+			auto _object = object.lock();
+			if (!_object)
+				continue;
+
+			// 表示は普通に
+			if (isActive) {
+				_object->SetActive(isActive);
+				continue;
+			}
+
+			// 非表示の場合ディゾブルアニメーションを再生
+
+			// 当たり判定を無効
+			auto collision = _object->GetComponent<CollisionObb>();
+			collision->SetUpdateActive(false);
+
+			if (auto animator = _object->GetComponent<DissolveAnimator>(false)) {
+				animator->SetPlayEndEvent(
+					[_object, isActive]() {
+						// 再生終了時に非アクティブ
+						_object->SetActive(isActive);
+					}
+				);
+				animator->Start();
+			}
+		}
 	}
 
 	void OwnArea::OnCollisionEnter(const CollisionPair& pair) {
 		auto other = pair.m_Dest.lock()->GetGameObject();
 		auto teamMember = other->GetComponent<I_TeamMember>(false);
-		if(!teamMember){
+		if (!teamMember) {
 			return;
 		}
 
