@@ -73,6 +73,10 @@ namespace basecross {
 					m_targetManager = owner->GetGameObject()->GetComponent<TargetManager>(false);
 				}
 
+				void IsInEyeTarget::OnStart() {
+					m_timer->ResetTimer(GetRandomIntervalTime());
+				}
+
 				bool IsInEyeTarget::CanTransition() const {
 					auto targetManager = m_targetManager.lock();
 					if (!targetManager || !targetManager->HasTarget()) {

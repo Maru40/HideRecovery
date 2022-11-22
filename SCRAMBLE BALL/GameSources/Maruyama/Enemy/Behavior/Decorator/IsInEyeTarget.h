@@ -85,6 +85,8 @@ namespace basecross {
 
 					virtual ~IsInEyeTarget() = default;
 
+					void OnStart() override;
+
 					bool CanTransition() const override;
 
 					bool CanUpdate() override;
