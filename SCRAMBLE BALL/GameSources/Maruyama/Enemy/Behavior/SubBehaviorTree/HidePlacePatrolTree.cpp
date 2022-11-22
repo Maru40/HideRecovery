@@ -36,6 +36,8 @@
 #include "Maruyama/Enemy/Behavior/Decorator/HasBall_OtherMember.h"
 #include "Maruyama/Enemy/Behavior/Decorator/HasBall_OtherTeam.h"
 #include "Maruyama/Enemy/Behavior/Decorator/TimerWaitPosition.h"
+#include "Maruyama/Enemy/Behavior/Decorator/SettingTarget_HasBallOtherMember.h"
+#include "Maruyama/Enemy/Behavior/Decorator/SettingTarget_RandomTeamMember.h"
 
 #include "Maruyama/Utility/SingletonComponent/SingletonComponent.h"
 #include "Maruyama/Utility/SingletonComponent/ShareClassesManager.h"
@@ -107,6 +109,12 @@ namespace basecross {
 						BehaviorType::ToMoveHasBallEnemyTask,
 						owner
 					);
+
+					//ランダムなメンバーを守る。
+					m_behaviorTree->AddTask<Task::RelifMember>(
+						BehaviorType::RandomMemberRelif,
+						owner
+					);
 				}
 
 				void HidePlacePatrolTree::CreateEdge() {
@@ -141,6 +149,12 @@ namespace basecross {
 						BehaviorType::FirstSelecter,
 						BehaviorType::ToMoveHasBallEnemyTask,
 						(int)BehaviorType::ToMoveHasBallEnemyTask
+					);
+
+					m_behaviorTree->AddEdge(
+						BehaviorType::FirstSelecter,
+						BehaviorType::RandomMemberRelif,
+						(int)BehaviorType::RandomMemberRelif
 					);
 				}
 
@@ -184,9 +198,15 @@ namespace basecross {
 						enemy
 					);
 
+					//ボールを持っている味方をターゲットにする。
+					m_behaviorTree->AddDecorator<Decorator::SettingTarget_HasBallOtherMember>(
+						BehaviorType::RelifHasBallMemberTask,
+						enemy
+					);
+
 					//-------------------------------------------------------------------------------------------------------
 
-					//ボールを持つ敵を追いかけるタスク---------------------------------------------------------------------------------------
+					//ボールを持つ敵を追いかけるタスク-----------------------------------------------------------------------
 
 					//ボールを持っている人がいるなら
 					m_behaviorTree->AddDecorator<Decorator::HasBall_OtherTeam>(
@@ -196,6 +216,18 @@ namespace basecross {
 
 					//-------------------------------------------------------------------------------------------------------
 
+
+					//ランダムなチームメンバーを守る-----------------------------------------------------------------------
+
+					//ランダムなチームメンバーを守る。
+					m_behaviorTree->AddDecorator<Decorator::SettingTarget_RandomTeamMember>(
+						BehaviorType::RandomMemberRelif,
+						enemy
+					);
+
+					//-------------------------------------------------------------------------------------------------------
+
+					//タスク全てに一定時間同じ場所にいたら、経路を探索しなおす処理を追加。
 					m_behaviorTree->AddDecorator<Decorator::TimerWaitPosition>(
 						BehaviorType::FirstSelecter,
 						GetOwner()

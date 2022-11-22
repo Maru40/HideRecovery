@@ -88,7 +88,7 @@ namespace basecross {
 				}
 
 				void RelifMember::OnStart() {
-					CalculateTarget();	//ターゲットの計算
+					//CalculateTarget();	//ターゲットの計算
 
 					SelectTask();		//タスクの選択
 				}

@@ -97,12 +97,15 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\IsInEyeTarget.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\IsInEyeTargets.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\IsSpecificTarget.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\NoneHidePlace.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\ObserveTargets.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\OutSpecificTarget.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\RegisterCanTransitionDecorator.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\SettingStartTarget.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\SettingStartTarget_Ball.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\SettingStartTarget_Goal.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\SettingTarget_HasBallOtherMember.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\SettingTarget_RandomTeamMember.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\TimerWaitPosition.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Interface\I_Decorator.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Interface\I_Edge.h" />
@@ -547,6 +550,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\SettingStartTarget.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\SettingStartTarget_Ball.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\SettingStartTarget_Goal.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\SettingTarget_HasBallOtherMember.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\SettingTarget_RandomTeamMember.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\TimerWaitPosition.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Interface\I_Decorator.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Interface\I_Edge.cpp" />

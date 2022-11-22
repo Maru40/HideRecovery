@@ -1,6 +1,6 @@
 /*!
-@file SettingStartTarget.h
-@brief SettingStartTargetなど
+@file SettingTarget_HasBallOtherMember.h
+@brief SettingTarget_HasBallOtherMemberなど
 担当者：丸山 裕喜
 */
 
@@ -10,8 +10,6 @@
 #include "Project.h"
 
 #include "../Interface/I_Decorator.h"
-
-#include "Maruyama/Enemy/AIDirector/TupleSpace.h"
 
 namespace basecross {
 
@@ -32,27 +30,23 @@ namespace basecross {
 			namespace Decorator {
 
 				//--------------------------------------------------------------------------------------
-				/// 開始時に特定のターゲットをセットする。(現在使用不可)(将来的に条件式など汎用性の高いデコレータにするためのクラス)
+				/// ボールを持っている他のメンバーを探して、ターゲットに指定するコンポーネント。
 				//--------------------------------------------------------------------------------------
-				template<class T,
-					std::enable_if_t<
-						std::is_base_of_v<Enemy::Tuple::I_Tuple, T>,	//タプルスペースを呼ぶ。
-					std::nullptr_t> = nullptr
-				>
-				class SettingStartTarget : public DecoratorBase<GameObject>
+				class SettingTarget_HasBallOtherMember : public DecoratorBase<Enemy::EnemyBase> 
 				{
-				public:
-					SettingStartTarget(
-						const std::shared_ptr<GameObject>& owner
-					) :
-						DecoratorBase(owner)
-					{}
+					std::weak_ptr<TargetManager> m_targetManager;
 
-					void OnStart() override {};
+				public:
+					SettingTarget_HasBallOtherMember(const std::shared_ptr<Enemy::EnemyBase>& owner);
+
+					void OnStart() override;
 
 					bool CanTransition() const override { return true; }
 
 					bool CanUpdate() override { return true; }
+
+				private:
+					std::shared_ptr<GameObject> SearchTarget() const;
 				};
 
 			}

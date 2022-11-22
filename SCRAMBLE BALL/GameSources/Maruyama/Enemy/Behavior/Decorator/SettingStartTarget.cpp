@@ -1,6 +1,6 @@
 /*!
-@file IsInEyeTargets.cpp
-@brief IsInEyeTargetsなど実体
+@file SettingStartTarget.cpp
+@brief SettingStartTargetなど実体
 */
 
 #include "stdafx.h"
@@ -25,20 +25,20 @@ namespace basecross {
 
 			namespace Decorator {
 
-				void SettingStartTarget::OnStart() {
-					for (auto& target : m_targets) {
-						auto targeted = target.lock()->GetComponent<Targeted>(false);
-						if (!targeted) {	//コンポーネントが存在しない。
-							continue;
-						}
+				//void SettingStartTarget::OnStart() {
+				//	for (auto& target : m_targets) {
+				//		auto targeted = target.lock()->GetComponent<Targeted>(false);
+				//		if (!targeted) {	//コンポーネントが存在しない。
+				//			continue;
+				//		}
 
-						if (!targeted->CanTarget()) {	//ターゲット指定できない
-							continue;
-						}
+				//		if (!targeted->CanTarget()) {	//ターゲット指定できない
+				//			continue;
+				//		}
 
 
-					}
-				}
+				//	}
+				//}
 
 			}
 		}
