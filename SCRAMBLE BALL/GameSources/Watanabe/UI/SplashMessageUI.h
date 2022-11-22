@@ -25,16 +25,17 @@ namespace basecross {
 		/// 表示するメッセージ
 		/// </summary>
 		enum class MessageType {
-			Relocation,		// ボールが再配置された
-			GetBall,		// ボールを入手した
-			StolenBall,		// ボールを奪われた
-			CreateRoom,		// 部屋を作成した
-			JoinRoom,		// 部屋に参加した
-			CanNotJoin,		// 部屋に参加できなかった
-			Remaining60s,	// 残り60秒
-			Remaining30s,	// 残り30秒
-			Goal,			// ゴール
-			CannotConnect,	// インターネットに接続できません
+			Relocation,			// ボールが再配置された
+			GetBall,			// ボールを入手した
+			StolenBall,			// ボールを奪われた
+			CreateRoom,			// 部屋を作成した
+			JoinRoom,			// 部屋に参加した
+			CanNotJoin,			// 部屋に参加できなかった
+			Remaining60s,		// 残り60秒
+			Remaining30s,		// 残り30秒
+			Goal,				// ゴール
+			CannotConnect,		// インターネットに接続できません
+			CannotConnectToHost	// ホストに接続できません
 		};
 	private:
 		// メッセージに対応するデータマップ

@@ -6,16 +6,17 @@ namespace basecross {
 	// 初期化
 	map<SplashMessageUI::MessageType, Message::MessageData> SplashMessageUI::sm_Type2DataMap =
 	{
-		{MessageType::Relocation   ,Message::MessageData(Type::SpriteData,L"Relocation")},
-		{MessageType::GetBall      ,Message::MessageData(Type::SpriteData,L"GetBall")},
-		{MessageType::StolenBall   ,Message::MessageData(Type::SpriteData,L"StolenBall")},
-		{MessageType::CreateRoom   ,Message::MessageData(Type::SpriteData,L"CreatedRoom")},
-		{MessageType::JoinRoom     ,Message::MessageData(Type::SpriteData,L"JoinedRoom")},
-		{MessageType::CanNotJoin   ,Message::MessageData(Type::SpriteData,L"CanNotJoin")},
-		{MessageType::Remaining60s ,Message::MessageData(Type::SpriteData,L"Remaining60s")},
-		{MessageType::Remaining30s ,Message::MessageData(Type::SpriteData,L"Remaining30s")},
-		{MessageType::Goal         ,Message::MessageData(Type::SpriteData,L"Goal")},
-		{MessageType::CannotConnect,Message::MessageData(Type::SpriteData,L"CannotConnect")}
+		{MessageType::Relocation         ,Message::MessageData(Type::SpriteData,L"Relocation")},
+		{MessageType::GetBall            ,Message::MessageData(Type::SpriteData,L"GetBall")},
+		{MessageType::StolenBall         ,Message::MessageData(Type::SpriteData,L"StolenBall")},
+		{MessageType::CreateRoom         ,Message::MessageData(Type::SpriteData,L"CreatedRoom")},
+		{MessageType::JoinRoom           ,Message::MessageData(Type::SpriteData,L"JoinedRoom")},
+		{MessageType::CanNotJoin         ,Message::MessageData(Type::SpriteData,L"CanNotJoin")},
+		{MessageType::Remaining60s       ,Message::MessageData(Type::SpriteData,L"Remaining60s")},
+		{MessageType::Remaining30s       ,Message::MessageData(Type::SpriteData,L"Remaining30s")},
+		{MessageType::Goal               ,Message::MessageData(Type::SpriteData,L"Goal")},
+		{MessageType::CannotConnect      ,Message::MessageData(Type::SpriteData,L"CannotConnect")},
+		{MessageType::CannotConnectToHost,Message::MessageData(Type::SpriteData,L"CannotConnectToHost")}
 	};
 
 	SplashMessageUI::SplashMessageUI(const shared_ptr<Stage>& stage)

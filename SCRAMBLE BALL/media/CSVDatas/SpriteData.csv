@@ -14,7 +14,7 @@ WaitHost,Message_TX,0,340,700,120,ホスト待機中
 Relocation,Message_TX,0,460,1024,120,ボールが再配置された
 GetBall,Message_TX,0,580,900,120,
 StolenBall,Message_TX,0,700,800,120,ボールを奪われた
-Matching,Message_TX,0,820,700,120,
+Matching,Message_TX,0,820,600,120,
 Win,WinOrLose_TX,0,0,280,140,
 Lose,WinOrLose_TX,0,140,415,140,
 Draw,WinOrLose_TX,0,280,420,140,
@@ -43,4 +43,5 @@ Asterisk,Numbers_TX,1200,0,102,128,パスコードが入力されていないときに表示
 UnderScore,Numbers_TX,1302,0,102,128,アンダーバー
 Busy,Message_TX,600,1370,300,110,通信中
 CannotConnect,Message_TX,0,1480,900,70,接続できない
-InReconnection,Message_TX,0,1550,400,110,再接続中
+InReconnection,Message_TX,600,820,400,110,再接続中
+CannotConnectToHost,Message_TX,0,1550,665,70,ホストに接続できない
