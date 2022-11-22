@@ -1501,6 +1501,12 @@
     <Filter Include="Maruyama\Enemy\BehaviorTree\Decorator\NoneHidePlace">
       <UniqueIdentifier>{260ffe88-55c2-4f43-8226-21920006d50b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\Shader\BarrierShader">
+      <UniqueIdentifier>{3291433e-a753-402b-8ac6-a98a2b52787a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\Shader\BarrierShader\HLSL">
+      <UniqueIdentifier>{724c9ffa-f40c-4b18-a715-79b6a77f0363}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2844,6 +2850,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\BallEffectEmitter.h">
       <Filter>Watanabe\Component\BallEffectEmitter</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\BarrierShader.h">
+      <Filter>Watanabe\Shader\BarrierShader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -4064,6 +4073,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\BallEffectEmitter.cpp">
       <Filter>Watanabe\Component\BallEffectEmitter</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\BarrierShader.cpp">
+      <Filter>Watanabe\Shader\BarrierShader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="$(MSBuildThisFileDirectory)..\..\Libs\BaseLib\DxShaders\SlimeVS.hlsl">
@@ -4131,6 +4143,9 @@
     </FxCompile>
     <FxCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\HLSL\VSBoneOutlineDraw.hlsl">
       <Filter>Watanabe\Shader\BoneModelDraw\HLSL</Filter>
+    </FxCompile>
+    <FxCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\HLSL\PSBarrierDraw.hlsl">
+      <Filter>Watanabe\Shader\BarrierShader\HLSL</Filter>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
