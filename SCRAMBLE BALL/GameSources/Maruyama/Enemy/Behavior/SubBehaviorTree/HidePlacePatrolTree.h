@@ -31,6 +31,7 @@ namespace basecross {
 					RelifHasBallMemberTask,	//ボールを持っているメンバーを守るタスク。
 					ToBallRunTask,			//ボールまで駆けつけるタスク。
 					PatrolTask,				//パトロールタスク。
+					RandomMemberRelif,		//ランダムなメンバーを守る。
 				};
 
 				//--------------------------------------------------------------------------------------
