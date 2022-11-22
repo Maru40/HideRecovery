@@ -31,8 +31,8 @@ namespace basecross {
 		Col4 Diffuse;
 		// スペキュラー
 		Col4 Specular;
-		// X:ディゾルブレート
-		Vec4 DissolveAnimationRate;
+		// X:ディゾルブレート,Y:ディゾブルの切り替え,Z:時間
+		Vec4 DissolveRateAndTime;
 		// ディゾブルのエッジ色
 		Col4 DissolveEdgeColor;
 		// ライイト方向
@@ -41,6 +41,8 @@ namespace basecross {
 		Vec4 LightPos;
 		// Eyeの位置
 		Vec4 EyePos;
+		// カメラ方向
+		Vec4 CameraDir;
 		// ライトビュー行列
 		Mat4x4 LightView;
 		// ライト射影行列
@@ -69,6 +71,7 @@ namespace basecross {
 		struct Impl;
 		unique_ptr<Impl> pImpl;
 		weak_ptr<Shadowmap> m_shadowmap;
+		float m_totalDelta = 0;
 	protected:
 		explicit AdvBaseDraw(const shared_ptr<GameObject>& GameObjectPtr);
 		virtual ~AdvBaseDraw();
@@ -582,6 +585,8 @@ namespace basecross {
 		}
 
 	public:
+		void SetEnabledTime(bool flg);
+
 		void SetEnabledDissolve(bool flg);
 
 		void SetDissolveEdgeColor(const Col4& color);
