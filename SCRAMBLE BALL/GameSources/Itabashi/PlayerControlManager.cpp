@@ -50,7 +50,7 @@ namespace basecross
 		m_defaultSpeed = m_objectMover.lock()->GetMoveSpeed();
 	}
 
-	bool PlayerControlManager::IsUpdateDefaultForward(const Vec3& forward)
+	bool PlayerControlManager::TryUpdateDefaultForward(const Vec3& forward)
 	{
 		if (forward == m_beforeDefaultForward)
 		{
@@ -59,6 +59,8 @@ namespace basecross
 
 		m_beforeDefaultForward = forward;
 
+		ExecuteUpdateDefaultForward(forward);
+
 		return true;
 	}
 
@@ -66,10 +68,10 @@ namespace basecross
 	{
 		m_beforeDefaultForward = forward;
 
-		auto objectMover = m_objectMover.lock();
+		//auto objectMover = m_objectMover.lock();
 		auto useWeapon = m_useWeapon.lock();
 
-		objectMover->SetDefaultForward(forward);
+		//objectMover->SetDefaultForward(forward);
 		useWeapon->SetDirection(forward);
 	}
 

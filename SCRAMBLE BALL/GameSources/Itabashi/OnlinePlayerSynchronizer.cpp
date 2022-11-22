@@ -464,7 +464,7 @@ namespace basecross
 	{
 		auto controlManager = m_controlManager.lock();
 
-		if (!controlManager || !controlManager->IsUpdateDefaultForward(defaultForward))
+		if (!controlManager || !controlManager->TryUpdateDefaultForward(defaultForward))
 		{
 			return;
 		}

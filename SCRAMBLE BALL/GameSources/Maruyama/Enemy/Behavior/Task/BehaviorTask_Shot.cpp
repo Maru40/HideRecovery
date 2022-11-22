@@ -1,6 +1,6 @@
-/*!
+ï»¿/*!
 @file BehaviorTask_Shot.cpp
-@brief BehaviorTask_Shot‚È‚ÇÀ‘Ì
+@brief BehaviorTask_Shotãªã©å®Ÿä½“
 */
 
 #include "stdafx.h"
@@ -29,7 +29,7 @@ namespace basecross {
 			namespace Task {
 
 				//--------------------------------------------------------------------------------------
-				///	Œ‚‚ÂUŒ‚ˆ—ƒpƒ‰ƒ[ƒ^
+				///	æ’ƒã¤æ”»æ’ƒå‡¦ç†ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
 				//--------------------------------------------------------------------------------------
 
 				Shot_Parametor::Shot_Parametor():
@@ -42,7 +42,7 @@ namespace basecross {
 				}
 
 				//--------------------------------------------------------------------------------------
-				///	Œ‚‚ÂUŒ‚ˆ—–{‘Ì
+				///	æ’ƒã¤æ”»æ’ƒå‡¦ç†æœ¬ä½“
 				//--------------------------------------------------------------------------------------
 
 				Shot::Shot(const std::shared_ptr<Enemy::EnemyBase>& owner) :
@@ -82,11 +82,11 @@ namespace basecross {
 					m_onlineSynchronizer.lock()->Aim(false);
 					m_velocityManager.lock()->ResetAll();
 
-					m_moveTaskList->ForceStop();	//ƒ^ƒXƒN‚ÌI—¹
+					m_moveTaskList->ForceStop();	//ã‚¿ã‚¹ã‚¯ã®çµ‚äº†
 				}
 
 				void Shot::MoveUpdate() {
-					//¶‰E‚Ì‚Ç‚¿‚ç‚©‚©A”‘‚Ü‚Á‚ÄŒ‚‚ÂB
+					//å·¦å³ã®ã©ã¡ã‚‰ã‹ã‹ã€æ³Šã¾ã£ã¦æ’ƒã¤ã€‚
 					m_moveTaskList->UpdateTask();
 
 					if (m_moveTaskList->IsEnd()) {
@@ -96,11 +96,12 @@ namespace basecross {
 
 				void Shot::RotationUpdate() {
 					auto targetManager = m_targetManager.lock();
-					if (!targetManager || !targetManager->HasTarget()) {	//ƒ^[ƒQƒbƒg‚ª‘¶İ‚µ‚È‚¢‚È‚çˆ—‚ğÈ‚­
+					if (!targetManager || !targetManager->HasTarget()) {	//ã‚¿ãƒ¼ã‚²ãƒƒãƒˆãŒå­˜åœ¨ã—ãªã„ãªã‚‰å‡¦ç†ã‚’çœã
 						return;
 					}
 
-					m_rotationController.lock()->SetDirection(targetManager->CalcuToTargetVec());
+					m_onlineSynchronizer.lock()->ChangeDefaultForward(targetManager->CalcuToTargetVec());
+					//m_rotationController.lock()->SetDirection(targetManager->CalcuToTargetVec());
 				}
 
 				void Shot::ShotUpdate() {
