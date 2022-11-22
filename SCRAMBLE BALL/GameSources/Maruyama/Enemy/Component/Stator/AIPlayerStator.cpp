@@ -1,8 +1,8 @@
-
+ï»¿
 /*!
 @file AIPlayerStator.cpp
-@brief AIPlayerStator‚ÌƒNƒ‰ƒXŽÀ‘Ì
-’S“–FŠÛŽR—TŠì
+@brief AIPlayerStatorã®ã‚¯ãƒ©ã‚¹å®Ÿä½“
+æ‹…å½“ï¼šä¸¸å±±è£•å–œ
 */
 
 #include "stdafx.h"
@@ -53,7 +53,7 @@ namespace basecross {
 	namespace Enemy {
 
 		//--------------------------------------------------------------------------------------
-		///	AIPlayerStator‚Ì‘JˆÚðŒƒƒ“ƒo[
+		///	AIPlayerStatorã®é·ç§»æ¡ä»¶ãƒ¡ãƒ³ãƒãƒ¼
 		//--------------------------------------------------------------------------------------
 
 		AIPlayerStator_TransitionMember::AIPlayerStator_TransitionMember():
@@ -62,11 +62,11 @@ namespace basecross {
 		{}
 
 		//--------------------------------------------------------------------------------------
-		///	‘JˆÚðŒŽ®
+		///	é·ç§»æ¡ä»¶å¼
 		//--------------------------------------------------------------------------------------
 
 		bool IsGameState(const AIPlayerStator::TransitionMember& member) {
-			//ƒQ[ƒ€ó‘Ô‚©‚Ç‚¤‚©‚ð”»’f
+			//ã‚²ãƒ¼ãƒ çŠ¶æ…‹ã‹ã©ã†ã‹ã‚’åˆ¤æ–­
 			bool isTransition = GameManager::GetInstance()->IsCurrentState(GameManager::State::Game);
 
 			return isTransition;
@@ -76,14 +76,14 @@ namespace basecross {
 			auto tupleSpace = m_tupler.lock()->GetTupleSpace();
 			auto buttleTransition = tupleSpace->Take<Tuple::ButtleTransition>();
 
-			//ƒƒbƒZ[ƒW‚ª“Í‚¢‚Ä‚¢‚½‚çB
+			//ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãŒå±Šã„ã¦ã„ãŸã‚‰ã€‚
 			if (buttleTransition && buttleTransition->GetValue() < member.buttleStartEyeRange) {
 				auto targeted = buttleTransition->GetTarget()->GetComponent<Targeted>(false);
 				if (targeted && !targeted->CanTarget()) {
 					return false;
 				}
 
-				//ƒ^[ƒQƒbƒg‚ÌÝ’è
+				//ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®è¨­å®š
 				auto targetManager = m_targetManager.lock();
 				auto target = buttleTransition->GetTarget();
 				targetManager->SetTarget(target);
@@ -108,7 +108,7 @@ namespace basecross {
 		}
 
 		//--------------------------------------------------------------------------------------
-		///	AIPlayerStator–{‘Ì
+		///	AIPlayerStatoræœ¬ä½“
 		//--------------------------------------------------------------------------------------
 
 		AIPlayerStator::AIPlayerStator(const std::shared_ptr<GameObject>& objPtr):
@@ -128,22 +128,22 @@ namespace basecross {
 		void AIPlayerStator::CreateNode() {
 			auto enemy = GetGameObject()->GetComponent<EnemyBase>();
 
-			//Noneó‘Ô
+			//NoneçŠ¶æ…‹
 			m_stateMachine->AddNode(StateType::None, nullptr);
 
-			//‰B‚µêŠ‚ð’T‚·ó‘Ô
+			//éš ã—å ´æ‰€ã‚’æŽ¢ã™çŠ¶æ…‹
 			m_stateMachine->AddNode(StateType::HidePlacePatrol, std::make_shared<StateNode::HidePlacePatrol>(enemy));
 
-			//ƒoƒgƒ‹
+			//ãƒãƒˆãƒ«
 			m_stateMachine->AddNode(StateType::Buttle, std::make_shared<StateNode::Buttle>(enemy));
 
-			//ƒS[ƒ‹’†
+			//ã‚´ãƒ¼ãƒ«ä¸­
 			m_stateMachine->AddNode(StateType::Goal, std::make_shared<StateNode::Goal>(enemy));
 
-			//Ž€–S’†
+			//æ­»äº¡ä¸­
 			m_stateMachine->AddNode(StateType::Dyning, std::make_shared<StateNode::Dyning>(enemy));
 
-			//Ž€–S
+			//æ­»äº¡
 			m_stateMachine->AddNode(StateType::Dead, std::make_shared<StateNode::Dead>(enemy));
 		}
 
@@ -154,21 +154,21 @@ namespace basecross {
 			m_stateMachine->AddEdge(StateType::None, StateType::HidePlacePatrol, &IsGameState);
 			//m_stateMachine->AddEdge(StateType::None, StateType::Buttle, &IsGameState);
 
-			//‰B‚µêŠ‚ð’T‚·
+			//éš ã—å ´æ‰€ã‚’æŽ¢ã™
 			m_stateMachine->AddEdge(
 				StateType::HidePlacePatrol, 
 				StateType::Buttle, 
 				[&](const TransitionMember& member) { return IsFindButtleTarget(member); }
 			);
 
-			//ƒoƒgƒ‹
+			//ãƒãƒˆãƒ«
 			m_stateMachine->AddEdge(
 				StateType::Buttle,
 				StateType::HidePlacePatrol,
 				[&](const TransitionMember& member) { return IsLostButtleTarget(member); }
 			);
 
-			//ƒS[ƒ‹
+			//ã‚´ãƒ¼ãƒ«
 			m_stateMachine->AddEdge(
 				StateType::Goal,
 				StateType::HidePlacePatrol,
@@ -178,7 +178,7 @@ namespace basecross {
 		}
 
 		void AIPlayerStator::OnEnable() {
-			ChangeState(StateType::None);
+			ForceChangeState(StateType::None);
 
 			if (auto objectMover = GetGameObject()->GetComponent<Operator::ObjectMover>(false)) {
 				objectMover->SetDefaultForward(Vec3::Forward());
