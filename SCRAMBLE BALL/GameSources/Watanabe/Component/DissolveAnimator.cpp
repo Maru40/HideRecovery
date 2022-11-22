@@ -17,11 +17,17 @@ namespace basecross {
 		if (m_timer.IsTimeUp()) {
 			m_isPlayingAnimation = false;
 			m_drawComp.lock()->SetDissolveAnimationRate(0.0f);
+			if (m_playEndEvent)
+				m_playEndEvent();
 			return;
 		}
 
 		m_drawComp.lock()->SetDissolveAnimationRate(m_timer.GetInverseTimeRate());
 		m_timer.Count();
+	}
+
+	bool DissolveAnimator::IsPlayEnd() {
+		return m_timer.IsTimeUp();
 	}
 
 	void DissolveAnimator::Start() {
@@ -30,5 +36,9 @@ namespace basecross {
 	}
 	void DissolveAnimator::Reset() {
 		m_drawComp.lock()->SetDissolveAnimationRate(1.0f);
+	}
+
+	void DissolveAnimator::SetPlayEndEvent(const function<void()>& func) {
+		m_playEndEvent = func;
 	}
 }

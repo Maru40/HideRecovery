@@ -14,6 +14,10 @@
 
 #include "Maruyama/Utility/Utility.h"
 
+#include "Watanabe/Shader/StaticModelDraw.h"
+#include "Watanabe/Component/DissolveAnimator.h"
+#include "Watanabe/Utility/AdvMeshUtil.h"
+#include "MainStage.h"
 #include "Watanabe/DebugClass/Debug.h"
 
 namespace basecross {
@@ -43,11 +47,12 @@ namespace basecross {
 		rect.width = scale.x;
 		rect.depth = scale.z;
 
-		CreateMapOutCollisions(GetGameObject());
+		// MainStageのみ作成
+		if (GetGameObject()->GetTypeStage<MainStage>(false))
+			CreateMapOutCollisions(GetGameObject());
 	}
 
 	void OwnArea::OnLateStart() {
-
 	}
 
 	void OwnArea::OnUpdate() {
@@ -86,49 +91,120 @@ namespace basecross {
 		auto scale = objectTrans->GetScale();
 		auto halfScale = scale * 0.5f;
 
-		constexpr float Width = 0.5f;
 		//奥行生成
 		auto forwardPosition = position + (Vec3::Forward() * halfScale.z);
-		CreateMapOutCollision(forwardPosition, Vec3::Forward(), scale.x, Width);
+		CreateMapOutCollision(forwardPosition, Vec3::Forward(), scale.x);
 
 		//手前側生成
 		auto backPosition = position + (-Vec3::Forward() * halfScale.z);
-		CreateMapOutCollision(backPosition, -Vec3::Forward(), scale.x, Width);
+		CreateMapOutCollision(backPosition, -Vec3::Forward(), scale.x);
 
 		//右側
 		auto rightPosition = position + (Vec3::Right() * halfScale.x);
-		CreateMapOutCollision(rightPosition, Vec3::Right(), scale.z, Width);
+		CreateMapOutCollision(rightPosition, Vec3::Right(), scale.z);
 
 		//左側
 		auto leftPosition = position + (-Vec3::Right() * halfScale.x);
-		CreateMapOutCollision(leftPosition, -Vec3::Right(), scale.z, Width);
+		CreateMapOutCollision(leftPosition, -Vec3::Right(), scale.z);
 	}
 
-	void OwnArea::CreateMapOutCollision(const Vec3& startPosition, const Vec3& forward, const float& length, const float& width, const float& height) {
-		const float MoveForwardRange = width * 1.5f;
-		auto halfHeight = height * 0.5f;
-		auto direct = maru::Utility::ConvertForwardOffset(forward, Vec3::Right());
-		auto position = startPosition + (direct.GetNormalized() * MoveForwardRange);
+	void OwnArea::CreateMapOutCollision(const Vec3& startPosition, const Vec3& forward, const float& width, const float& height, const float& depth) {
+		const float halfHeight = height * 0.5f;
+		const float halfDepth = depth * 0.5f;
+
+		// 指定位置からhalfDepth分外側へ
+		auto position = startPosition + (forward.GetNormalized() * halfDepth);
 		position.y += halfHeight;
+
 		auto object = GetStage()->Instantiate<GameObject>(position, Quat::Identity());
 		auto collision = object->AddComponent<CollisionObb>();
-		//object->AddTag(L"T_Obstacle");
+		collision->SetFixed(true);
 
-		constexpr float depth = 1.0f;
 		auto objectTrans = object->GetComponent<Transform>();
-		objectTrans->SetScale(Vec3(length - width, height, depth));
+		objectTrans->SetScale(Vec3(width, height, depth));
 		objectTrans->SetForward(forward);
 
-		collision->SetFixed(true);
-		//collision->SetDrawActive(true);
+		{
+			// 場所により壁と重なる箇所があるため、内側に少し移動させる
+			auto position = startPosition - (forward.GetNormalized() * halfDepth * 0.1f);
+			position.y += halfHeight;
+
+			auto planeObj = GetStage()->Instantiate<GameObject>(position, Quat::Identity());
+			auto objectTrans = planeObj->GetComponent<Transform>();
+			objectTrans->SetScale(Vec3(width, height, 1));
+			objectTrans->SetForward(forward);
+
+			auto drawComp = planeObj->AddComponent<StaticModelDraw>();
+			drawComp->SetSamplerState(SamplerState::LinearWrap);
+
+			vector<VertexPositionNormalTexture> vertices;
+			vector<uint16_t> indices;
+			AdvMeshUtil::CreateBoardPoly(10, Vec2(width, height), vertices, indices);
+			auto meshData = MeshResource::CreateMeshResource(vertices, indices, true);
+			drawComp->SetOriginalMeshResource(meshData);
+			drawComp->SetOriginalMeshUse(true);
+			drawComp->SetTextureResource(L"Noise_TX", TextureType::Noise);
+			drawComp->SetEnabledDissolve(true);
+
+			auto teamColor = team::GetTeamColor(m_param.team);
+			switch (m_param.team)
+			{
+			case team::TeamType::Blue:
+				drawComp->SetDiffuse(Col4(0, 0, teamColor.z, 0.5f));
+				break;
+			case team::TeamType::Red:
+				drawComp->SetDiffuse(Col4(teamColor.x, 0, 0, 0.5f));
+				break;
+			default:
+				drawComp->SetDiffuse(Col4(0));
+				break;
+			}
+
+			auto dissolveAnimator = planeObj->AddComponent<DissolveAnimator>();
+			planeObj->SetAlphaActive(true);
+
+			m_dissolveAnimators.push_back(planeObj);
+		}
 
 		m_outCollisonObject.push_back(object);
+	}
+
+	void OwnArea::SetOutCollisionActive(const bool isActive) {
+		for (auto object : m_outCollisonObject) {
+			auto _object = object.lock();
+			if (!_object)
+				continue;
+			_object->SetActive(isActive);
+		}
+
+		for (auto& animator : m_dissolveAnimators) {
+			auto _animator = animator.lock();
+			if (!_animator)
+				continue;
+
+			if (auto dissolveAnimator = _animator->GetComponent<DissolveAnimator>(false)) {
+				// 非表示にする場合のみアニメーション
+				if (!isActive) {
+					dissolveAnimator->SetPlayEndEvent(
+						[_animator]() {
+							// 再生終了時に非アクティブ
+							_animator->SetActive(false);
+						}
+					);
+					dissolveAnimator->Start();
+				}
+				else {
+					dissolveAnimator->Reset();
+					_animator->SetActive(isActive);
+				}
+			}
+		}
 	}
 
 	void OwnArea::OnCollisionEnter(const CollisionPair& pair) {
 		auto other = pair.m_Dest.lock()->GetGameObject();
 		auto teamMember = other->GetComponent<I_TeamMember>(false);
-		if(!teamMember){
+		if (!teamMember) {
 			return;
 		}
 

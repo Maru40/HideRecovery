@@ -9,6 +9,7 @@ namespace basecross {
 		bool m_isPlayingAnimation = false;
 		TimeCounter m_timer;
 		weak_ptr<AdvBaseDraw> m_drawComp;
+		function<void()> m_playEndEvent;
 	public:
 		DissolveAnimator(const shared_ptr<GameObject>& owner);
 
@@ -18,6 +19,9 @@ namespace basecross {
 		void OnDraw()override {}
 
 		void Start();
+		bool IsPlayEnd();
 		void Reset();
+
+		void SetPlayEndEvent(const function<void()>& func);
 	};
 }

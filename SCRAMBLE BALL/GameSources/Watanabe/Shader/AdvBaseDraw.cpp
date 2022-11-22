@@ -84,7 +84,7 @@ namespace basecross {
 		// デフォルトで設定
 		SetTextureResource(L"Default_TX", TextureType::Default);
 		SetTextureResource(L"ToonTex_TX", TextureType::ToonRamp);
-		SetTextureResource(L"Noise_TX", TextureType::Noise);
+		SetTextureResource(L"BlockNoise_TX", TextureType::Noise);
 	}
 
 	AdvBaseDraw::~AdvBaseDraw() {}
