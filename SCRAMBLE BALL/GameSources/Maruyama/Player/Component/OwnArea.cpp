@@ -16,6 +16,8 @@
 
 #include "Watanabe/Shader/StaticModelDraw.h"
 #include "Watanabe/Component/DissolveAnimator.h"
+#include "Watanabe/Utility/AdvMeshUtil.h"
+#include "MainStage.h"
 #include "Watanabe/DebugClass/Debug.h"
 
 namespace basecross {
@@ -45,7 +47,9 @@ namespace basecross {
 		rect.width = scale.x;
 		rect.depth = scale.z;
 
-		CreateMapOutCollisions(GetGameObject());
+		// MainStageのみ作成
+		if (GetGameObject()->GetTypeStage<MainStage>(false))
+			CreateMapOutCollisions(GetGameObject());
 	}
 
 	void OwnArea::OnLateStart() {
@@ -120,14 +124,47 @@ namespace basecross {
 		objectTrans->SetScale(Vec3(width, height, depth));
 		objectTrans->SetForward(forward);
 
-		auto drawComp = object->AddComponent<StaticModelDraw>();
-		drawComp->SetMeshResource(L"DEFAULT_CUBE");
-		drawComp->SetEnabledDissolve(true);
-		drawComp->SetDiffuse(Col4(1, 0, 0, 0.5f));
+		{
+			// 板ポリは厚さが無いためオフセットは不要
+			auto position = startPosition;
+			position.y += halfHeight;
 
-		object->AddComponent<DissolveAnimator>();
+			auto planeObj = GetStage()->Instantiate<GameObject>(position, Quat::Identity());
+			auto objectTrans = planeObj->GetComponent<Transform>();
+			objectTrans->SetScale(Vec3(width, height, 1));
+			objectTrans->SetForward(forward);
 
-		object->SetAlphaActive(true);
+			auto drawComp = planeObj->AddComponent<StaticModelDraw>();
+			drawComp->SetSamplerState(SamplerState::LinearWrap);
+
+			vector<VertexPositionNormalTexture> vertices;
+			vector<uint16_t> indices;
+			AdvMeshUtil::CreateBoardPoly(10, Vec2(width, height), vertices, indices);
+			auto meshData = MeshResource::CreateMeshResource(vertices, indices, true);
+			drawComp->SetOriginalMeshResource(meshData);
+			drawComp->SetOriginalMeshUse(true);
+			drawComp->SetTextureResource(L"Noise_TX", TextureType::Noise);
+			drawComp->SetEnabledDissolve(true);
+
+			auto teamColor = team::GetTeamColor(m_param.team);
+			switch (m_param.team)
+			{
+			case team::TeamType::Blue:
+				drawComp->SetDiffuse(Col4(0, 0, teamColor.z, 0.5f));
+				break;
+			case team::TeamType::Red:
+				drawComp->SetDiffuse(Col4(teamColor.x, 0, 0, 0.5f));
+				break;
+			default:
+				drawComp->SetDiffuse(Col4(0));
+				break;
+			}
+
+			auto dissolveAnimator = planeObj->AddComponent<DissolveAnimator>();
+			planeObj->SetAlphaActive(true);
+
+			m_dissolveAnimators.push_back(planeObj);
+		}
 
 		m_outCollisonObject.push_back(object);
 	}
@@ -137,27 +174,29 @@ namespace basecross {
 			auto _object = object.lock();
 			if (!_object)
 				continue;
+			_object->SetActive(isActive);
+		}
 
-			// 表示は普通に
-			if (isActive) {
-				_object->SetActive(isActive);
+		for (auto& animator : m_dissolveAnimators) {
+			auto _animator = animator.lock();
+			if (!_animator)
 				continue;
-			}
 
-			// 非表示の場合ディゾブルアニメーションを再生
-
-			// 当たり判定を無効
-			auto collision = _object->GetComponent<CollisionObb>();
-			collision->SetUpdateActive(false);
-
-			if (auto animator = _object->GetComponent<DissolveAnimator>(false)) {
-				animator->SetPlayEndEvent(
-					[_object, isActive]() {
-						// 再生終了時に非アクティブ
-						_object->SetActive(isActive);
-					}
-				);
-				animator->Start();
+			if (auto dissolveAnimator = _animator->GetComponent<DissolveAnimator>(false)) {
+				// 非表示にする場合のみアニメーション
+				if (!isActive) {
+					dissolveAnimator->SetPlayEndEvent(
+						[_animator]() {
+							// 再生終了時に非アクティブ
+							_animator->SetActive(false);
+						}
+					);
+					dissolveAnimator->Start();
+				}
+				else {
+					dissolveAnimator->Reset();
+					_animator->SetActive(isActive);
+				}
 			}
 		}
 	}

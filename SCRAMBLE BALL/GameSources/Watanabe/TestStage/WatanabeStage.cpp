@@ -130,7 +130,7 @@ namespace basecross {
 			auto meshData = MeshResource::CreateMeshResource(vertices, indices, true);
 			drawComp->SetOriginalMeshResource(meshData);
 			drawComp->SetOriginalMeshUse(true);
-			//drawComp->SetTextureResource(L"Noise_TX");
+			drawComp->SetTextureResource(L"Noise_TX", TextureType::Noise);
 			drawComp->SetEnabledDissolve(true);
 			drawComp->SetDiffuse(Col4(1, 0, 0, 0.5f));
 

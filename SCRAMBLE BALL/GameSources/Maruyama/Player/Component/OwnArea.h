@@ -16,6 +16,7 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 	class I_TeamMember;
 	struct CollisionPair;
+	class DissolveAnimator;
 
 	//--------------------------------------------------------------------------------------
 	/// 自陣エリアのパラメータ
@@ -42,6 +43,7 @@ namespace basecross {
 		std::vector<std::weak_ptr<I_TeamMember>> m_members;	//エリアに所属しているメンバー一覧
 
 		std::vector<std::weak_ptr<GameObject>> m_outCollisonObject;
+		std::vector<std::weak_ptr<GameObject>> m_dissolveAnimators;
 	public:
 		/// <summary>
 		/// コンストラクタ
