@@ -149,7 +149,9 @@ namespace basecross
 			return false;
 		}
 
-		if (!IsControlableAnimation())
+		auto animator = m_playerAnimator.lock();
+
+		if (animator->IsCurretAnimationState(PlayerAnimationState::State::Goal1))
 		{
 			return false;
 		}
