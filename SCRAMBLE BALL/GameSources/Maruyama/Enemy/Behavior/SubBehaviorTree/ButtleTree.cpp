@@ -26,6 +26,7 @@
 #include "Maruyama/Enemy/Behavior/Decorator/ObserveTargets.h"
 #include "Maruyama/Enemy/Behavior/Decorator/OutSpecificTarget.h"
 #include "Maruyama/Enemy/Behavior/Decorator/CanCurrentTarget.h"
+#include "Maruyama/Enemy/Behavior/Decorator/OutTargetTimer.h"
 
 #include "Maruyama/Enemy/AIDirector/CoordinatorBase.h"
 #include "Maruyama/Enemy/AIDirector/TupleSpace.h"
@@ -53,12 +54,14 @@ namespace basecross {
 				ButtleTree_DecoratorParametor::ButtleTree_DecoratorParametor():
 					nearSeek_isInEyeParamPtr(new Decorator::IsInEyeTarget_Parametor(EyeParametor(20.0f, 3.0f, XMConvertToRadians(EYE_DEGREE)), 0.5f, 0.5f)),
 					nearAstar_isInEyeParamPtr(new Decorator::IsInEyeTarget_Parametor(EyeParametor(20.0f, 3.0f, XMConvertToRadians(EYE_DEGREE)), 5.0f, 5.0f)),
+					nearAstar_outTargetTimerParamPtr(new Decorator::OutTargetTimer_Parametor(EyeParametor(20.0f, 3.0f, XMConvertToRadians(EYE_DEGREE)), 5.0f, 5.0f)),
 					shot_isInEyeParamPtr(new Decorator::IsInEyeTarget_Parametor(EyeParametor(25.0f, 3.0f, XMConvertToRadians(EYE_DEGREE)), 0.0f, 1.5f))
 				{}
 
 				ButtleTree_DecoratorParametor::~ButtleTree_DecoratorParametor() {
 					delete(nearSeek_isInEyeParamPtr);
 					delete(nearAstar_isInEyeParamPtr);
+					delete(nearAstar_outTargetTimerParamPtr);
 					delete(shot_isInEyeParamPtr);
 				}
 
@@ -193,33 +196,34 @@ namespace basecross {
 					auto& decoratorParam = m_param.decoratorParam;
 					auto enemy = GetOwner()->GetComponent<Enemy::EnemyBase>(false);
 
-					//FirstSelecter
+					//FirstSelecter-----------------------------------------------
 					//視界範囲で他の敵を監視
 					m_behaviorTree->AddDecorator<Decorator::ObserveTargets>(
 						NodeType::FirstSelecter, enemy, std::vector<std::shared_ptr<GameObject>>()
 					);
 
-					//NearSeekデコレータ
+					//NearSeekデコレータ------------------------------------------
 					//視界範囲内なら
 					m_behaviorTree->AddDecorator<Decorator::IsInEyeTarget>(
 						NodeType::NearSeekMoveTask, enemy, decoratorParam.nearSeek_isInEyeParamPtr
 					);
 
-					//Shotにデコレータ追加
+					//AstarSeek----------------------------------------------------
+					//ターゲットが視界外に一定時間いたら、ターゲットをあきらめる。
+					//m_behaviorTree->AddDecorator<Decorator::OutTargetTimer>(
+					//	NodeType::NearAstarMoveTask, enemy, decoratorParam.nearAstar_outTargetTimerParamPtr
+					//);
+
+					//Shotにデコレータ追加-----------------------------------------
 					//視界範囲内なら
 					m_behaviorTree->AddDecorator<Decorator::IsInEyeTarget>(
 						NodeType::ShotTask, enemy, decoratorParam.shot_isInEyeParamPtr
 					);
 
-					//ターゲットが特定のターゲットなら。
+					//ターゲットが特定のターゲットなら遷移できないようにする。
 					m_behaviorTree->AddDecorator<Decorator::OutSpecificTarget>(
 						NodeType::ShotTask, enemy, GetShotOutTarget()
 					);
-
-					//アタックセレクター
-					//m_behaviorTree->AddDecorator<Decorator::CanCurrentTarget>(
-					//	NodeType::AttackSelecter, enemy->GetGameObject()
-					//);
 
 					m_behaviorTree->AddDecorator<Decorator::CanCurrentTarget>(
 						NodeType::AttackMoveSelecter, enemy->GetGameObject()
