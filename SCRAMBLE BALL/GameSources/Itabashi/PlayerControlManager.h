@@ -92,7 +92,7 @@ namespace basecross
 		/// </summary>
 		/// <param name="forward">確認するベクトル</param>
 		/// <returns>変更があればtrue</returns>
-		bool IsUpdateDefaultForward(const Vec3& forward);
+		bool TryUpdateDefaultForward(const Vec3& forward);
 		/// <summary>
 		/// カメラのforwardの更新をする
 		/// </summary>
