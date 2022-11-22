@@ -33,5 +33,6 @@ namespace basecross {
 		IMPLEMENT_DX11_PIXEL_SHADER(PSModelDrawShadow, App::GetApp()->GetShadersPath() + L"PSModelDrawShadow.cso")
 		IMPLEMENT_DX11_PIXEL_SHADER(PSModelDrawShadow2, App::GetApp()->GetShadersPath() + L"PSModelDrawShadow2.cso")
 		IMPLEMENT_DX11_PIXEL_SHADER(PSOutlineDraw, App::GetApp()->GetShadersPath() + L"PSOutlineDraw.cso")
+		IMPLEMENT_DX11_PIXEL_SHADER(PSBarrierDraw, App::GetApp()->GetShadersPath() + L"PSBarrierDraw.cso")
 }
 //end basecross

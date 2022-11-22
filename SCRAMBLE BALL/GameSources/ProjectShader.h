@@ -33,5 +33,6 @@ namespace basecross {
 	DECLARE_DX11_PIXEL_SHADER(PSModelDrawShadow)
 	DECLARE_DX11_PIXEL_SHADER(PSModelDrawShadow2)
 	DECLARE_DX11_PIXEL_SHADER(PSOutlineDraw)
+	DECLARE_DX11_PIXEL_SHADER(PSBarrierDraw)
 }
 //end basecross

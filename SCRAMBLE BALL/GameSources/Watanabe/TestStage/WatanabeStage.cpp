@@ -12,6 +12,7 @@
 #include "../StageObject/CameraTarget.h"
 #include "../Component/DissolveAnimator.h"
 #include "../Utility/AdvMeshUtil.h"
+#include "../Shader/BarrierShader.h"
 
 namespace basecross {
 	void WatanabeStage::CreateViewLight() {
@@ -121,7 +122,7 @@ namespace basecross {
 			objectTrans->SetScale(Vec3(width, height, 1));
 			objectTrans->SetForward(forward);
 
-			auto drawComp = planeObj->AddComponent<StaticModelDraw>();
+			auto drawComp = planeObj->AddComponent<BarrierShader>();
 			drawComp->SetSamplerState(SamplerState::LinearWrap);
 
 			vector<VertexPositionNormalTexture> vertices;
