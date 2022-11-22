@@ -125,8 +125,8 @@ namespace basecross {
 		objectTrans->SetForward(forward);
 
 		{
-			// 板ポリは厚さが無いためオフセットは不要
-			auto position = startPosition;
+			// 場所により壁と重なる箇所があるため、内側に少し移動させる
+			auto position = startPosition - (forward.GetNormalized() * halfDepth * 0.1f);
 			position.y += halfHeight;
 
 			auto planeObj = GetStage()->Instantiate<GameObject>(position, Quat::Identity());
