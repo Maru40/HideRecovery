@@ -261,6 +261,27 @@ namespace basecross {
 			};
 
 			//--------------------------------------------------------------------------------------
+			///	ターゲットを見失ったことを通知
+			//--------------------------------------------------------------------------------------
+
+			class LostTarget : public TupleRequestBase
+			{
+				std::weak_ptr<TargetManager> m_targetManager;
+
+			public:
+				LostTarget(
+					const std::shared_ptr<I_Tupler>& requester,
+					const std::shared_ptr<TargetManager>& targetManager,
+					const float value
+				);
+
+				bool operator == (const LostTarget& other);
+
+				//ターゲット管理の取得
+				_NODISCARD std::shared_ptr<TargetManager> GetTargetManager() const noexcept { return m_targetManager.lock(); }
+			};
+
+			//--------------------------------------------------------------------------------------
 			///	ターゲットの検索をお願いするタプル
 			//--------------------------------------------------------------------------------------
 			class SearchTarget : public TupleRequestBase

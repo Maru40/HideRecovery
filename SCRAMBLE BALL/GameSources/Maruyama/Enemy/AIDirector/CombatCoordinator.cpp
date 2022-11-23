@@ -56,6 +56,12 @@ namespace basecross {
 				GetThis<CombatCoordinator>(),
 				[&](const std::shared_ptr<Tuple::FindTarget>& tuple) { NotifyTuple_FindTarget(tuple); }
 			);
+
+			//ターゲットを見失ったときの通知
+			GetTupleSpace()->Notify<Tuple::LostTarget>(
+				GetThis<CombatCoordinator>(),
+				[&](const std::shared_ptr<Tuple::LostTarget>& tuple) { NotifyTuple_LostTarget(tuple); }
+			);
 		}
 
 		bool CombatCoordinator::OnUpdate() {
@@ -152,6 +158,12 @@ namespace basecross {
 			GetTupleSpace()->Take(tuple);
 
 			AddTarget(tuple->GetTarget());
+		}
+
+		void CombatCoordinator::NotifyTuple_LostTarget(const std::shared_ptr<Tuple::LostTarget>& tuple) {
+			GetTupleSpace()->Take(tuple);
+
+			RemoveTaret(tuple->GetTargetManager()->GetTarget());
 		}
 
 		//--------------------------------------------------------------------------------------

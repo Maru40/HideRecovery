@@ -102,6 +102,9 @@ namespace basecross {
 					/// <returns></returns>
 					bool IsLost() const;
 
+					//ターゲットを完全にロスト
+					void LostTarget();
+
 				};
 
 			}

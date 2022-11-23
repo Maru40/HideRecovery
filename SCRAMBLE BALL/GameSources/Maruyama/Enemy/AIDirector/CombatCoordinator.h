@@ -24,6 +24,7 @@ namespace basecross {
 			class Kill;
 			class SearchTarget;
 			class FindTarget;
+			class LostTarget;
 		}
 
 		//--------------------------------------------------------------------------------------
@@ -101,6 +102,8 @@ namespace basecross {
 			std::shared_ptr<GameObject> SearchPriorityTarget(const std::shared_ptr<GameObject>& requester);
 
 			void NotifyTuple_FindTarget(const std::shared_ptr<Tuple::FindTarget>& tuple);
+
+			void NotifyTuple_LostTarget(const std::shared_ptr<Tuple::LostTarget>& tuple);
 
 			/// <summary>
 			/// 同じリクエスタのタプルを削除(本来ここに書くべきじゃない。移動予定)
