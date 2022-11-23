@@ -45,7 +45,7 @@ namespace basecross {
 
 	void PlayerStatus::OnLateStart()
 	{
-		m_goalAnimationController = GetGameObject()->GetComponent<GoalAnimationController>();
+		m_goalAnimationController = GetGameObject()->GetComponent<GoalAnimationController>(false);
 		m_soundEmitter = GetGameObject()->GetComponent<SoundEmitter>(false);
 		m_factionMember = GetGameObject()->GetComponent<Enemy::I_FactionMember>(false);
 		m_tupler = GetGameObject()->GetComponent<Enemy::Tuple::I_Tupler>(false);
