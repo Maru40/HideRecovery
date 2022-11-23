@@ -317,7 +317,7 @@ namespace basecross
 		auto damagedOnlineController = playerStatus->GetGameObject()->GetComponent<OnlinePlayerSynchronizer>();
 		OnlineDamageData data(attackerOnlineController->GetOnlinePlayerNumber(), damagedOnlineController->GetOnlinePlayerNumber(), damageData.value);
 
-		Online::OnlineManager::RaiseEvent(false, (std::uint8_t*)&data, sizeof(OnlineDamageData), EXECUTE_DAMAGE_EVENT_CODE);
+		Online::OnlineManager::RaiseEvent(true, (std::uint8_t*)&data, sizeof(OnlineDamageData), EXECUTE_DAMAGE_EVENT_CODE);
 	}
 
 	void OnlinePlayerSynchronizer::ExecuteDamagedEvent(int attackerPlayerNumber, int damagedPlayerNumber, int damage)

@@ -205,12 +205,11 @@ namespace basecross {
 
 		// 各画面への遷移処理
 		// Aでマッチング画面、Bでタイトル画面
-		const auto& inputDevice = App::GetApp()->GetMyInputDevice();
-		const auto& pad = inputDevice->GetXInputGamePad();
-		if (pad.IsInputDown(XInputCode::A)) {
+		const auto& playerInputer = PlayerInputer::GetInstance();
+		if (playerInputer->IsDesitionDown()) {
 			PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToMatchingStage");
 		}
-		else if (pad.IsInputDown(XInputCode::B)) {
+		else if (playerInputer->IsCancelDown()) {
 			PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToTitleStage");
 		}
 	}
