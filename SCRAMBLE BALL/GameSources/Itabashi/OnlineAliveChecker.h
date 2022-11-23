@@ -27,7 +27,7 @@ namespace Online
 		};
 
 		float m_aliveCheckTime = 1.0f; // 一定間隔で自分が生存を通知する時間
-		float m_aliveResponseTime = 0.5f; // 生きていることの応答待ち最大時間
+		float m_aliveResponseTime = 1.0f; // 生きていることの応答待ち最大時間
 
 		float m_aliveCheckCount = 0.0f; // 通知用カウント
 
