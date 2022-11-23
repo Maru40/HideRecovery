@@ -35,6 +35,7 @@ namespace basecross {
 			float updateTimeSpeed;     //計測時間のスピード
 			maru::DeltaType deltaType; //計測時間タイプ
 			Vec3 centerPosition;       //中心の場所
+			std::function<void()> exitFunction = nullptr;	//終了時に呼び出したい処理
 
 			/// <summary>
 			/// コンストラクタ
@@ -61,6 +62,7 @@ namespace basecross {
 		Parametor m_param;             //パラメータ
 
 		ex_weak_ptr<Camera> m_camera;  //カメラのポインタ
+
 		unique_ptr<GameTimer> m_timer; //時間計測クラス
 
 	public:
@@ -131,6 +133,12 @@ namespace basecross {
 		/// </summary>
 		/// <param name="parametor">カメラ揺らしパラメータ</param>
 		void StartShake(const Parametor& parametor);
+
+		/// <summary>
+		/// 終了時に呼び出したい処理を設定
+		/// </summary>
+		/// <param name="exitFunction"></param>
+		void SetExitFunction(const std::function<void()>& exitFunction) { m_param.exitFunction = exitFunction; }
 
 	};
 

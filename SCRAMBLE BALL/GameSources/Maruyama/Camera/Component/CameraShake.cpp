@@ -18,12 +18,15 @@
 
 #include "Patch/PlayerInputer.h"
 
+#include "Itabashi/InputPlayerController.h"
+#include "Patch/SpringArmComponent.h"
+
 namespace basecross {
 
 	//ƒpƒ‰ƒ[ƒ^----------------------------------------------------------------------------------
 
 	CameraShake::Parametor::Parametor()
-		:Parametor(0.0f, Vec3(10.0f, 10.0f, 0.0f), 0.25f, 1.0f, maru::DeltaType::Normal)
+		:Parametor(0.0f, Vec3(10.0f, 0.0f, 0.0f), 0.25f, 1.0f, maru::DeltaType::Normal)
 	{}
 
 	CameraShake::Parametor::Parametor(
@@ -51,6 +54,13 @@ namespace basecross {
 
 		m_timer->UpdateTimer(m_param.updateTimeSpeed, m_param.deltaType);
 		ShakeUpdate();
+
+		if(m_timer->IsTimeUp()) {
+			if (m_param.exitFunction) {
+				m_param.exitFunction();
+				m_param.exitFunction = nullptr;
+			}
+		}
 	}
 
 	void CameraShake::ShakeUpdate() {
@@ -60,7 +70,8 @@ namespace basecross {
 
 		auto camera = m_camera.GetShard();
 		auto forward = camera->GetAt() - camera->GetEye();
-		auto powerVec = maru::Utility::ConvertForwardOffset(forward, m_param.powerVec);
+		forward.y = 0.0f;
+		auto powerVec = maru::Utility::ConvertForwardOffset(forward.GetNormalized(), m_param.powerVec);
 
 		auto shakeVec = maru::MyRandom::RandomVector(powerVec).GetNormalized() * m_param.powerf;
 		auto position = m_param.centerPosition + shakeVec;
@@ -106,6 +117,9 @@ namespace basecross {
 		m_camera = gameStage->GetCamera<Camera>();
 		m_param = parametor;
 		m_param.centerPosition = transform->GetPosition();
+
+		//auto sprintArm = m_camera->GetCameraObject()->GetComponent<SpringArmComponent>(false);
+		//sprintArm->SetUpdateActive(false);
 
 		m_timer->ResetTimer(parametor.time);
 	}
