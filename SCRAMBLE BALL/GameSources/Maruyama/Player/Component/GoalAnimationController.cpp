@@ -35,6 +35,7 @@
 #include "Itabashi/PlayerControlManager.h"
 
 #include "Maruyama/Enemy/Component/Stator/AIPlayerStator.h"
+#include "Itabashi/InputPlayerController.h"
 
 #include "Patch/SpringArmComponent.h"
 
@@ -168,6 +169,10 @@ namespace basecross {
 			stator->ChangeState(Enemy::AIPlayerStator::StateType::Goal, (int)Enemy::AIPlayerStator::StateType::Goal);
 		}
 
+		//if (auto input = GetGameObject()->GetComponent<InputPlayerController>(false)) {
+		//	input->SetUpdateActive(false);
+		//}
+
 		m_taskList->ForceStop();
 		SelectTask();
 	}
@@ -190,6 +195,10 @@ namespace basecross {
 		if (auto ball = m_ball.lock()) {
 			GetStage()->RemoveGameObject<GameObject>(ball);
 		}
+
+		//if (auto input = GetGameObject()->GetComponent<InputPlayerController>(false)) {
+		//	input->SetUpdateActive(true);
+		//}
 	}
 
 	void GoalAnimationController::DefineTask() {
@@ -224,7 +233,12 @@ namespace basecross {
 
 			auto cameraShake = tpsCamera->GetComponent<CameraShake>(false);
 			if (cameraShake) {
-				cameraShake->StartShake(0.75f);
+				cameraShake->StartShake(0.25f);
+
+				std::weak_ptr<SpringArmComponent> weakSprintArm = springArm;
+				cameraShake->SetExitFunction([weakSprintArm]() { if (weakSprintArm.lock()) { weakSprintArm.lock()->SetUpdateActive(true); } });
+
+				springArm->SetUpdateActive(false);
 			}
 		};
 		m_taskList->DefineTask(TaskEnum::DunkWait, std::make_shared<Task::Wait>(m_param.dunkAfterWaitParam));
