@@ -102,7 +102,7 @@ namespace Online
 	public:
 		OnlineComponent(const std::shared_ptr<GameObject>& owner);
 
-		virtual void OnDestroy() override;
+		virtual ~OnlineComponent() noexcept;
 
 		virtual void OnConnected() override {}
 		virtual void OnConnectFailed(int errorCode) override {}
