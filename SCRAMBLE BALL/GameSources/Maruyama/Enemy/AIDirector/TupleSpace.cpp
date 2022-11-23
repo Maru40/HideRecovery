@@ -261,6 +261,29 @@ namespace basecross {
 			}
 
 			//--------------------------------------------------------------------------------------
+			///	ターゲットを見失ったことを通知
+			//--------------------------------------------------------------------------------------
+
+			LostTarget::LostTarget(
+				const std::shared_ptr<I_Tupler>& requester,
+				const std::shared_ptr<TargetManager>& targetManager,
+				const float value
+			):
+				TupleRequestBase(requester, value),
+				m_targetManager(targetManager)
+			{}
+
+			bool LostTarget::operator == (const LostTarget& other) {
+				if (GetRequester() == other.GetRequester() &&
+					GetValue() == other.GetValue())
+				{
+					return true;
+				}
+
+				return false;
+			}
+
+			//--------------------------------------------------------------------------------------
 			///	ターゲットの検索をお願いするタプル
 			//--------------------------------------------------------------------------------------
 
