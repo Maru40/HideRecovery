@@ -18,15 +18,17 @@ namespace basecross {
 
 	void DirectionWithHasBallUI::OnCreate() {
 		m_camera = GetStage()->GetView()->GetTargetCamera();
-		m_cursor = GetStage()->AddGameObject<SimpleSprite>(
+		auto cursor = GetStage()->AddGameObject<SimpleSprite>(
 			SimpleSprite::Type::Texture, L"Ball_IconTX"
 			);
 
-		auto rectTrans = m_cursor->GetRectTransform();
+		m_cursor = cursor;
+
+		auto rectTrans = cursor->GetRectTransform();
 		rectTrans->SetPosition(Vec2(0, 400));
 		rectTrans->SetScale(0.3f, -0.3f);
 
-		m_cursor->SetParent(GetThis<DirectionWithHasBallUI>());
+		cursor->SetParent(GetThis<DirectionWithHasBallUI>());
 
 		m_view = GetStage()->GetView();
 

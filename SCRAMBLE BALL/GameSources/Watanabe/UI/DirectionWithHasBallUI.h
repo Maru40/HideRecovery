@@ -10,7 +10,7 @@
 
 namespace basecross {
 	class DirectionWithHasBallUI :public UIObjectBase {
-		shared_ptr<SimpleSprite> m_cursor;
+		weak_ptr<SimpleSprite> m_cursor;
 		weak_ptr<Camera> m_camera;
 		weak_ptr<ViewBase> m_view;
 		weak_ptr<RectTransform> m_selfRectTrans;

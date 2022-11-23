@@ -143,18 +143,18 @@ namespace basecross {
 		AddComponent<PlayerControlManager>();
 		AddComponent<OnlinePlayerSynchronizer>();
 
-		auto dissolveAnimator = AddComponent<DissolveAnimator>();
+		std::weak_ptr<DissolveAnimator> weakDissolveAnimator = AddComponent<DissolveAnimator>();
 		auto animator = AddComponent<PlayerAnimator>();
 		// 死んだらディゾブル開始
 		animator->AddAnimationEvent(PlayerAnimationState::State::Dead,
-			[dissolveAnimator]() {
-				dissolveAnimator->Start();
+			[weakDissolveAnimator]() {
+				weakDissolveAnimator.lock()->Start();
 			},
 			nullptr, nullptr
 				);
 		animator->AddAnimationEvent(PlayerAnimationState::State::GSDead,
-			[dissolveAnimator]() {
-				dissolveAnimator->Start();
+			[weakDissolveAnimator]() {
+				weakDissolveAnimator.lock()->Start();
 			},
 			nullptr, nullptr
 				);
@@ -162,14 +162,11 @@ namespace basecross {
 		auto chargeGun = AddComponent<ChargeGun>();
 		auto soundEmitter = AddComponent<SoundEmitter>();
 		auto playerStatus = AddComponent<PlayerStatus>();
-		AddComponent<TackleAttack>();
 
 		auto respawner = AddComponent<Respawner>();
 		AddComponent<PlayerDeader>();
 		auto useWeapon = AddComponent<UseWeapon>(chargeGun);
 		AddComponent<GoalAnimationController>();
-		//AddComponent<FieldMap>();
-		//AddComponent<Teleport>();
 		AddComponent<EyeSearchRange>();
 		AddComponent<HidePlaceOpener>();
 
