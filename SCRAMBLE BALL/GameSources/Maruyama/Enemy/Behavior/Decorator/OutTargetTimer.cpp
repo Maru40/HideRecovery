@@ -15,6 +15,9 @@
 #include "Maruyama/Utility/Component/TargetManager.h"
 #include "Maruyama/Enemy/Component/EyeSearchRange.h"
 
+#include "Maruyama/Enemy/AIDirector/CoordinatorBase.h"
+#include "Maruyama/Enemy/AIDirector/TupleSpace.h"
+
 #include "Maruyama/Utility/Random.h"
 
 #include "OutTargetTimer.h"
@@ -94,6 +97,8 @@ namespace basecross {
 						//見失った後に一定時間たったら
 						m_timer->UpdateTimer();
 						if (m_timer->IsTimeUp()) {
+							//ターゲットの切り替えを通知する。
+							LostTarget();
 							return false;
 						}
 					}
@@ -130,6 +135,31 @@ namespace basecross {
 					}
 
 					return true;		//視界内にいないため、Lost
+				}
+
+				void OutTargetTimer::LostTarget() {
+					using namespace Enemy;
+
+					auto assignedFacntion = GetOwner()->GetAssignedFaction();
+					if (!assignedFacntion) {
+						return;
+					}
+
+					auto tupleSpace = assignedFacntion->GetTupleSpace();
+
+					//ターゲットロストを伝える。
+					tupleSpace->Write<Tuple::LostTarget>(
+						GetOwner(),
+						m_targetManager.lock(),
+						0.0f
+					);
+
+					//ターゲットの検索を頼む
+					tupleSpace->Write<Tuple::SearchTarget>(
+						GetOwner(),
+						m_targetManager.lock(),
+						0.0f
+					);
 				}
 
 			}
