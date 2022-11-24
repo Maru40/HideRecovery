@@ -40,5 +40,8 @@ namespace basecross {
 		 */
 		static void CreateBoardPoly(float textureSize, const Vec2& scale,
 			vector<VertexPositionNormalTexture>& vertices, vector<uint16_t>& indices);
+
+		static void CreateBoardPoly(float textureSize, const Vec2& scale,
+			vector<VertexPositionColorTexture>& vertices, vector<uint16_t>& indices);
 	};
 }

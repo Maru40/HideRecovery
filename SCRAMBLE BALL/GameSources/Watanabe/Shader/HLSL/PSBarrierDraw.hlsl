@@ -1,21 +1,20 @@
 #include "IncDraw.hlsli"
 
 Texture2D g_texture : register(t0);
+Texture2D g_texture2 : register(t2);
 SamplerState g_sampler : register(s0);
 
-Texture2D g_shadowMap : register(t1);
-Texture2D g_toonTexture : register(t2);
 Texture2D g_noiseTexture : register(t4);
 
 float4 main(PSPNTInput input) : SV_TARGET
 {
     if (EnabledDissolve)
     {
-        // ノイズテクスチャから高さ（黒～白成分）を取得
         float4 noise = g_noiseTexture.Sample(g_sampler, input.tex);
-        float height = 0.3 * noise.r + 0.6 * noise.g + 0.1 * noise.b;
+        // ノイズテクスチャから高さ（黒～白成分）を取得
+        float height = grayScale(noise);
 
-        if (height > DissolveAnimationRate + 0.05f)
+        if (height > DissolveAnimationRate + 0.05f || DissolveAnimationRate == 0)
         {
             discard;
         }
@@ -26,17 +25,14 @@ float4 main(PSPNTInput input) : SV_TARGET
         }
     }
 
-    float3 lightdir = normalize(LightDir.xyz);
-    float3 N1 = normalize(input.norm);
-    float p = dot(N1, -lightdir);
-    p = p * 0.5f + 0.5f;
-    p = p * p;
-    float4 Color = g_toonTexture.Sample(g_sampler, float2(p, 0.0f));
-    Color = Color * Diffuse + Emissive;
+    float4 auraArea = g_texture.Sample(g_sampler, input.tex);
+    float4 whiteAura = g_texture2.Sample(g_sampler, input.tex);
 
-    Color += input.specular;
-    Color.a = Diffuse.a;
+    // アルファブレンド[dst = a * src1 + (1 - a) * src2]
+    float a = whiteAura.a;
+    float4 src1 = whiteAura;
+    float4 src2 = auraArea * Diffuse;
+    float4 color = a * src1 + (1 - a) * src2;
 
-    Color = g_texture.Sample(g_sampler, input.tex) * Color;
-    return Color;
+    return color;
 }

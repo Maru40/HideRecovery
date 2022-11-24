@@ -12,8 +12,14 @@ namespace basecross {
 		SetEmissive(bsm::Col4(0.5f, 0.5f, 0.5f, 0.0f));
 		SetDiffuse(bsm::Col4(0.6f, 0.6f, 0.6f, 1.0f));
 
-		// デフォルトでノイズテクスチャをセット
+		// デフォルトで各テクスチャをセット
+		SetTextureResource(L"Aura_TX", TextureType::Default);
+		// 2枚目のテクスチャとしてToonRampの枠にセット
+		SetTextureResource(L"Aura2_TX", TextureType::ToonRamp);
 		SetTextureResource(L"GradientNoise_TX", TextureType::Noise);
+
+		SetSamplerState(SamplerState::LinearWrap);
+		SetEnabledDissolve(true);
 	}
 
 	// 影を使用しないためディゾブルの同期はしない
