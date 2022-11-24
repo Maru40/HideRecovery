@@ -2850,9 +2850,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\OutTargetTimer.h">
       <Filter>Maruyama\Enemy\BehaviorTree\Decorator\OutTargetTimer</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\BarrierShader.h">
-      <Filter>Watanabe\Shader\BarrierShader</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\BallEffectEmitter.h">
       <Filter>Watanabe\Component\BallEffectEmitter</Filter>
     </ClInclude>
@@ -4076,9 +4073,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\OutTargetTimer.cpp">
       <Filter>Maruyama\Enemy\BehaviorTree\Decorator\OutTargetTimer</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\BarrierShader.cpp">
-      <Filter>Watanabe\Shader\BarrierShader</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\BallEffectEmitter.cpp">
       <Filter>Watanabe\Component\BallEffectEmitter</Filter>
     </ClCompile>
@@ -4152,9 +4146,6 @@
     </FxCompile>
     <FxCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\HLSL\VSBoneOutlineDraw.hlsl">
       <Filter>Watanabe\Shader\BoneModelDraw\HLSL</Filter>
-    </FxCompile>
-    <FxCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\HLSL\PSBarrierDraw.hlsl">
-      <Filter>Watanabe\Shader\BarrierShader\HLSL</Filter>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
