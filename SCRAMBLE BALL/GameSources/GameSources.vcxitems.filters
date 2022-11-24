@@ -1504,6 +1504,12 @@
     <Filter Include="Maruyama\Enemy\BehaviorTree\Decorator\OutTargetTimer">
       <UniqueIdentifier>{66a3430d-1077-4111-9ccd-c7ab46dfdc30}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Itabashi\StageObject\DisconnectToTitleUIObject">
+      <UniqueIdentifier>{3b410096-83cd-4065-bf7b-4ccd89fceab7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Itabashi\StageObject\MainStageUIObject">
+      <UniqueIdentifier>{4fee6bec-3d9f-4bf8-8d45-8c3d9e197a9e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2846,6 +2852,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\OutTargetTimer.h">
       <Filter>Maruyama\Enemy\BehaviorTree\Decorator\OutTargetTimer</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\DisconnectToTitleUIObject.h">
+      <Filter>Itabashi\StageObject\DisconnectToTitleUIObject</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MainStageUIObject.h">
+      <Filter>Itabashi\StageObject\MainStageUIObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -4064,6 +4076,12 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\OutTargetTimer.cpp">
       <Filter>Maruyama\Enemy\BehaviorTree\Decorator\OutTargetTimer</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\DisconnectToTitleUIObject.cpp">
+      <Filter>Itabashi\StageObject\DisconnectToTitleUIObject</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\MainStageUIObject.cpp">
+      <Filter>Itabashi\StageObject\MainStageUIObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
