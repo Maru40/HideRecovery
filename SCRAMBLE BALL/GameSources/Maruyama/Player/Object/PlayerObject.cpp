@@ -211,8 +211,6 @@ namespace basecross {
 				if (!efkComp->IsPlaying(L"HasBall")) {
 					efkComp->PlayLoop(L"HasBall");
 				}
-				//「！」
-				//efkComp->Play(L"Excl");
 			},
 			[](const shared_ptr<PlayerObject>& owner) {
 				auto efkComp = owner->GetComponent<EfkComponent>();
