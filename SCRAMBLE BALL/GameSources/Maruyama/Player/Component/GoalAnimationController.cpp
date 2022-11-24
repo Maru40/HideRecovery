@@ -38,6 +38,8 @@
 #include "Itabashi/InputPlayerController.h"
 
 #include "Patch/SpringArmComponent.h"
+#include "Maruyama/Utility/SingletonComponent/SingletonComponent.h"
+#include "Maruyama/Utility/SingletonComponent/ShareClassesManager.h"
 
 namespace basecross {
 	//--------------------------------------------------------------------------------------
@@ -112,6 +114,31 @@ namespace basecross {
 				splashMessage->SetMessage(SplashMessageUI::MessageType::Goal);
 				splashMessage->SetColor(Col4(1, 0.5f, 0, 1));
 			}
+
+			//全てのplayerのカメラがついているのをシェイクする。
+			//auto players = ShareClassesManager::GetInstance()->GetCastShareClasses<PlayerObject>();
+			//for(auto weakPlayer : players) {
+			//	auto player = weakPlayer.lock();
+			//	if (!player) {
+			//		continue;
+			//	}
+
+			//	auto springArm = player->GetArm()->GetComponent<SpringArmComponent>();
+			//	auto tpsCamera = springArm->GetChildObject();
+			//	if (!tpsCamera) {
+			//		continue;
+			//	}
+
+			//	auto cameraShake = tpsCamera->GetComponent<CameraShake>(false);
+			//	if (cameraShake) {
+			//		cameraShake->StartShake(0.25f);
+
+			//		std::weak_ptr<SpringArmComponent> weakSprintArm = springArm;
+			//		cameraShake->SetExitFunction([weakSprintArm]() { if (weakSprintArm.lock()) { weakSprintArm.lock()->SetUpdateActive(true); } });
+
+			//		springArm->SetUpdateActive(false);
+			//	}
+			//}
 		};
 
 		constexpr float Time = 0.9f;
