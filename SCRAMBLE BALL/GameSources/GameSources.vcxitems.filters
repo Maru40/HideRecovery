@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0"
-  xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Headers">
       <UniqueIdentifier>{4b0a624a-610d-4bc6-b311-2b02a781cdf9}</UniqueIdentifier>
@@ -2839,8 +2838,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\AIActiveChanger.h">
       <Filter>Itabashi\Component\AIActiveChanger</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\BallObjectEventExecuter.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\BallEffectEmitter.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\SettingTarget_RandomTeamMember.h">
       <Filter>Maruyama\Enemy\BehaviorTree\Decorator\SettingStartTarget\SettingTarget_RandomTeamMember</Filter>
     </ClInclude>
@@ -2855,6 +2852,12 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\BarrierShader.h">
       <Filter>Watanabe\Shader\BarrierShader</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\BallEffectEmitter.h">
+      <Filter>Watanabe\Component\BallEffectEmitter</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\BallObjectEventExecuter.h">
+      <Filter>Watanabe\Component\BallObjectEventExecuter</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -4064,8 +4067,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\AIActiveChanger.cpp">
       <Filter>Itabashi\Component\AIActiveChanger</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\BallObjectEventExecuter.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\BallEffectEmitter.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\SettingTarget_RandomTeamMember.cpp">
       <Filter>Maruyama\Enemy\BehaviorTree\Decorator\SettingStartTarget\SettingTarget_RandomTeamMember</Filter>
     </ClCompile>
@@ -4077,6 +4078,12 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\BarrierShader.cpp">
       <Filter>Watanabe\Shader\BarrierShader</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\BallEffectEmitter.cpp">
+      <Filter>Watanabe\Component\BallEffectEmitter</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\BallObjectEventExecuter.cpp">
+      <Filter>Watanabe\Component\BallObjectEventExecuter</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
