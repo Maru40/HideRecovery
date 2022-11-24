@@ -2856,6 +2856,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Component\BallObjectEventExecuter.h">
       <Filter>Watanabe\Component\BallObjectEventExecuter</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\BarrierShader.h">
+      <Filter>Watanabe\Shader\BarrierShader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -4079,6 +4082,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Component\BallObjectEventExecuter.cpp">
       <Filter>Watanabe\Component\BallObjectEventExecuter</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\BarrierShader.cpp">
+      <Filter>Watanabe\Shader\BarrierShader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="$(MSBuildThisFileDirectory)..\..\Libs\BaseLib\DxShaders\SlimeVS.hlsl">
@@ -4146,6 +4152,9 @@
     </FxCompile>
     <FxCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\HLSL\VSBoneOutlineDraw.hlsl">
       <Filter>Watanabe\Shader\BoneModelDraw\HLSL</Filter>
+    </FxCompile>
+    <FxCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\HLSL\PSBarrierDraw.hlsl">
+      <Filter>Watanabe\Shader\BarrierShader\HLSL</Filter>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
