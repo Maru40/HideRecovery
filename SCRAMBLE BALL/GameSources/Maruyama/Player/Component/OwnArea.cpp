@@ -125,13 +125,14 @@ namespace basecross {
 		objectTrans->SetForward(forward);
 
 		{
+			float _height = height * 0.8f;
 			// êŠ‚É‚æ‚è•Ç‚Æd‚È‚é‰ÓŠ‚ª‚ ‚é‚½‚ßA“à‘¤‚É­‚µˆÚ“®‚³‚¹‚é
 			auto position = startPosition - (forward.GetNormalized() * halfDepth * 0.1f);
-			position.y += halfHeight;
+			position.y += _height * 0.5f;
 
 			auto planeObj = GetStage()->Instantiate<GameObject>(position, Quat::Identity());
 			auto objectTrans = planeObj->GetComponent<Transform>();
-			objectTrans->SetScale(Vec3(width, height, 1));
+			objectTrans->SetScale(Vec3(width, _height, 1));
 			objectTrans->SetForward(forward);
 
 			auto drawComp = planeObj->AddComponent<BarrierShader>();
@@ -158,6 +159,8 @@ namespace basecross {
 			drawComp->SetDiffuse(teamColor);
 
 			auto dissolveAnimator = planeObj->AddComponent<DissolveAnimator>();
+			dissolveAnimator->SetPlayLength(0.5f);
+
 			planeObj->SetAlphaActive(true);
 
 			m_dissolveAnimators.push_back(planeObj);

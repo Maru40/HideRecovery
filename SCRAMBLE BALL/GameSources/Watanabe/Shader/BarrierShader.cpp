@@ -20,7 +20,6 @@ namespace basecross {
 
 		SetSamplerState(SamplerState::LinearWrap);
 		SetEnabledDissolve(true);
-		SetDissolveEdgeLength(0.02f);
 	}
 
 	// 影を使用しないためディゾブルの同期はしない

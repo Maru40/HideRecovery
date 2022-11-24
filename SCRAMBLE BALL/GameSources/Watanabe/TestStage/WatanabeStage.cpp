@@ -144,7 +144,9 @@ namespace basecross {
 			drawComp->SetOriginalMeshUse(true);
 			drawComp->SetDiffuse(team::BLUETEAM_COLOR);
 
-			auto dissolveAnimator = planeObj->AddComponent<DissolveAnimator>();
+			auto dissolveAnimator = planeObj->AddComponent<DissolveAnimator>();			dissolveAnimator->SetPlayLength(0.5f);
+			dissolveAnimator->SetPlayLength(0.5f);
+
 			planeObj->SetAlphaActive(true);
 
 			m_dis.push_back(dissolveAnimator);
