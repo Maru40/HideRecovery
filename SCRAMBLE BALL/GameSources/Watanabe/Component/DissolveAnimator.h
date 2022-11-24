@@ -23,5 +23,6 @@ namespace basecross {
 		void Reset();
 
 		void SetPlayEndEvent(const function<void()>& func);
+		void SetPlayLength(float length);
 	};
 }

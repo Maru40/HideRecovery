@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0"
+  xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Headers">
       <UniqueIdentifier>{4b0a624a-610d-4bc6-b311-2b02a781cdf9}</UniqueIdentifier>
@@ -1504,6 +1505,12 @@
     <Filter Include="Maruyama\Enemy\BehaviorTree\Decorator\OutTargetTimer">
       <UniqueIdentifier>{66a3430d-1077-4111-9ccd-c7ab46dfdc30}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Watanabe\Shader\BarrierShader">
+      <UniqueIdentifier>{3291433e-a753-402b-8ac6-a98a2b52787a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Watanabe\Shader\BarrierShader\HLSL">
+      <UniqueIdentifier>{724c9ffa-f40c-4b18-a715-79b6a77f0363}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2846,6 +2853,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\OutTargetTimer.h">
       <Filter>Maruyama\Enemy\BehaviorTree\Decorator\OutTargetTimer</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\BarrierShader.h">
+      <Filter>Watanabe\Shader\BarrierShader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -4065,6 +4075,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Decorator\OutTargetTimer.cpp">
       <Filter>Maruyama\Enemy\BehaviorTree\Decorator\OutTargetTimer</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\BarrierShader.cpp">
+      <Filter>Watanabe\Shader\BarrierShader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="$(MSBuildThisFileDirectory)..\..\Libs\BaseLib\DxShaders\SlimeVS.hlsl">
@@ -4132,6 +4145,9 @@
     </FxCompile>
     <FxCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\HLSL\VSBoneOutlineDraw.hlsl">
       <Filter>Watanabe\Shader\BoneModelDraw\HLSL</Filter>
+    </FxCompile>
+    <FxCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\HLSL\PSBarrierDraw.hlsl">
+      <Filter>Watanabe\Shader\BarrierShader\HLSL</Filter>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>

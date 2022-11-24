@@ -14,7 +14,7 @@
 
 #include "Maruyama/Utility/Utility.h"
 
-#include "Watanabe/Shader/StaticModelDraw.h"
+#include "Watanabe/Shader/BarrierShader.h"
 #include "Watanabe/Component/DissolveAnimator.h"
 #include "Watanabe/Utility/AdvMeshUtil.h"
 #include "MainStage.h"
@@ -125,42 +125,42 @@ namespace basecross {
 		objectTrans->SetForward(forward);
 
 		{
+			float _height = height * 0.8f;
 			// 場所により壁と重なる箇所があるため、内側に少し移動させる
 			auto position = startPosition - (forward.GetNormalized() * halfDepth * 0.1f);
-			position.y += halfHeight;
+			position.y += _height * 0.5f;
 
 			auto planeObj = GetStage()->Instantiate<GameObject>(position, Quat::Identity());
 			auto objectTrans = planeObj->GetComponent<Transform>();
-			objectTrans->SetScale(Vec3(width, height, 1));
+			objectTrans->SetScale(Vec3(width, _height, 1));
 			objectTrans->SetForward(forward);
 
-			auto drawComp = planeObj->AddComponent<StaticModelDraw>();
-			drawComp->SetSamplerState(SamplerState::LinearWrap);
+			auto drawComp = planeObj->AddComponent<BarrierShader>();
+			Vec3 normal(0, 0, 1);
+			Vec2 halfSize = Vec2(1) * 0.5f;
+			// 頂点のデータ (番号は左上から右下まで)
+			vector<VertexPositionNormalTexture> vertices = {
+				{Vec3(-halfSize.x,+halfSize.y,0.0f),normal,Vec2(0,0)}, //0
+				{Vec3(+halfSize.x,+halfSize.y,0.0f),normal,Vec2(1,0)}, //1
 
-			vector<VertexPositionNormalTexture> vertices;
-			vector<uint16_t> indices;
-			AdvMeshUtil::CreateBoardPoly(10, Vec2(width, height), vertices, indices);
+				{Vec3(-halfSize.x,-halfSize.y,0.0f),normal,Vec2(0,1)}, //2
+				{Vec3(+halfSize.x,-halfSize.y,0.0f),normal,Vec2(1,1)},  //3
+			};
+
+			// 頂点インデックス
+			vector<uint16_t> indices = {
+				0, 1, 2, // 上の三角形
+				2, 1, 3  // 下の三角形
+			};
 			auto meshData = MeshResource::CreateMeshResource(vertices, indices, true);
 			drawComp->SetOriginalMeshResource(meshData);
 			drawComp->SetOriginalMeshUse(true);
-			drawComp->SetTextureResource(L"Noise_TX", TextureType::Noise);
-			drawComp->SetEnabledDissolve(true);
-
 			auto teamColor = team::GetTeamColor(m_param.team);
-			switch (m_param.team)
-			{
-			case team::TeamType::Blue:
-				drawComp->SetDiffuse(Col4(0, 0, teamColor.z, 0.5f));
-				break;
-			case team::TeamType::Red:
-				drawComp->SetDiffuse(Col4(teamColor.x, 0, 0, 0.5f));
-				break;
-			default:
-				drawComp->SetDiffuse(Col4(0));
-				break;
-			}
+			drawComp->SetDiffuse(teamColor);
 
 			auto dissolveAnimator = planeObj->AddComponent<DissolveAnimator>();
+			dissolveAnimator->SetPlayLength(0.5f);
+
 			planeObj->SetAlphaActive(true);
 
 			m_dissolveAnimators.push_back(planeObj);

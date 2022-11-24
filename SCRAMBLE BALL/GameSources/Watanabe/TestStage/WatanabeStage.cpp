@@ -12,6 +12,7 @@
 #include "../StageObject/CameraTarget.h"
 #include "../Component/DissolveAnimator.h"
 #include "../Utility/AdvMeshUtil.h"
+#include "../Shader/BarrierShader.h"
 
 namespace basecross {
 	void WatanabeStage::CreateViewLight() {
@@ -121,20 +122,31 @@ namespace basecross {
 			objectTrans->SetScale(Vec3(width, height, 1));
 			objectTrans->SetForward(forward);
 
-			auto drawComp = planeObj->AddComponent<StaticModelDraw>();
-			drawComp->SetSamplerState(SamplerState::LinearWrap);
+			auto drawComp = planeObj->AddComponent<BarrierShader>();
+			Vec3 normal(0, 0, 1);
+			Vec2 halfSize = Vec2(1) * 0.5f;
+			// 頂点のデータ (番号は左上から右下まで)
+			vector<VertexPositionNormalTexture> vertices = {
+				{Vec3(-halfSize.x,+halfSize.y,0.0f),normal,Vec2(0,0)}, //0
+				{Vec3(+halfSize.x,+halfSize.y,0.0f),normal,Vec2(1,0)}, //1
 
-			vector<VertexPositionNormalTexture> vertices;
-			vector<uint16_t> indices;
-			AdvMeshUtil::CreateBoardPoly(10, Vec2(width, height), vertices, indices);
+				{Vec3(-halfSize.x,-halfSize.y,0.0f),normal,Vec2(0,1)}, //2
+				{Vec3(+halfSize.x,-halfSize.y,0.0f),normal,Vec2(1,1)},  //3
+			};
+
+			// 頂点インデックス
+			vector<uint16_t> indices = {
+				0, 1, 2, // 上の三角形
+				2, 1, 3  // 下の三角形
+			};
 			auto meshData = MeshResource::CreateMeshResource(vertices, indices, true);
 			drawComp->SetOriginalMeshResource(meshData);
 			drawComp->SetOriginalMeshUse(true);
-			drawComp->SetTextureResource(L"Noise_TX", TextureType::Noise);
-			drawComp->SetEnabledDissolve(true);
-			drawComp->SetDiffuse(Col4(1, 0, 0, 0.5f));
+			drawComp->SetDiffuse(team::BLUETEAM_COLOR);
 
-			auto dissolveAnimator = planeObj->AddComponent<DissolveAnimator>();
+			auto dissolveAnimator = planeObj->AddComponent<DissolveAnimator>();			dissolveAnimator->SetPlayLength(0.5f);
+			dissolveAnimator->SetPlayLength(0.5f);
+
 			planeObj->SetAlphaActive(true);
 
 			m_dis.push_back(dissolveAnimator);

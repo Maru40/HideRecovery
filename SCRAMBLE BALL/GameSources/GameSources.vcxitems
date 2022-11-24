@@ -384,6 +384,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Manager\SpriteDataManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Manager\TimeManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\AdvBaseDraw.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\BarrierShader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\BoneModelDraw.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\IPostEffect.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\Shader\MySpriteBaseDraw.h" />
@@ -798,6 +799,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Manager\SpriteDataManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Manager\TimeManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\AdvBaseDraw.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\BarrierShader.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\BoneModelDraw.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\MySpriteBaseDraw.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\Outline.cpp" />
@@ -881,6 +883,11 @@
     <FxCompile Include="$(MSBuildThisFileDirectory)Maruyama\Shader\Toon\ToonVS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+    </FxCompile>
+    <FxCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\HLSL\PSBarrierDraw.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
     </FxCompile>
     <FxCompile Include="$(MSBuildThisFileDirectory)Watanabe\Shader\HLSL\PSModelDraw.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
