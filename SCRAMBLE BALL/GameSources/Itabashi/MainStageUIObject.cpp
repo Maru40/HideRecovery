@@ -1,6 +1,7 @@
 ﻿#include "MainStageUIObject.h"
 #include "Watanabe/UI/GameStartUI.h"
 #include "Watanabe/UI/GameFinishUI.h"
+#include "Itabashi/DisconnectToTitleUIObject.h"
 #include "Maruyama/Utility/SingletonComponent/GameManager.h"
 
 namespace basecross
@@ -25,6 +26,11 @@ namespace StageObject
 		auto gameFinishUIObject = stage->AddGameObject<GameFinishUI>();
 		gameFinishUIObject->SetParent(thisObject);
 		m_gameFinishUIObject = gameFinishUIObject;
+
+		auto disconnectToTitleUIObject = stage->AddGameObject<DisconnectToTitleUIObject>();
+		disconnectToTitleUIObject->SetParent(thisObject);
+		disconnectToTitleUIObject->SetDrawActive(false);
+		m_disconnectToTitleUIObject = disconnectToTitleUIObject;
 
 		gameStartUIObject->AddTimeUpEventFunc([]() { SimpleSoundManager::ChangeBGM(L"GameStageBGM", 0.05f); });
 		gameStartUIObject->AddTimeUpEventFunc([]() { SimpleSoundManager::OnePlaySE(L"GameStartSE", 0.25f); });
