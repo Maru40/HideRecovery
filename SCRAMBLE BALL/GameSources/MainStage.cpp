@@ -9,15 +9,8 @@
 #include "MainStage.h"
 #include "Patch/PlayerInputer.h"
 
-#include "Maruyama/Utility/SingletonComponent/SoundManager.h"
-
-#include "Maruyama/Utility/Mathf.h"
-
 #include "Patch/CameraHelper.h"
 
-#include "Maruyama/Item/HideItemObject.h"
-
-#include "Maruyama/Player/Object/VillainPlayerObject.h"
 #include "Watanabe/DebugClass/Debug.h"
 #include "Watanabe/Effekseer/EfkEffect.h"
 
@@ -29,19 +22,13 @@
 #include "Watanabe/UI/SplashMessageUI.h"
 #include "Watanabe/UI/UIObjectCSVBuilder.h"
 
-#include "Maruyama/StageObject/HidePlace.h"
-#include "Maruyama/UI/2D/Component/Reticle.h"
-#include "Maruyama/UI/2D/Component/TeleportUI.h"
-
 #include "Maruyama/Utility/SingletonComponent/GameManager.h"
 #include "Maruyama/Utility/Object/GameManagerObject.h"
 #include "Maruyama/Interface/I_TeamMember.h"
 
-#include "Itabashi/OnlineGameItemManager.h"
-#include "Maruyama/Item/HideItem.h"
-
 #include "Itabashi/MainStageCoreObject.h"
 #include "Itabashi/MainStageUIObject.h"
+#include "Itabashi/MainStageTransitioner.h"
 
 namespace basecross {
 	// wstring MainStage::sm_loadMapName = L"StageS1_Copy.csv";
@@ -77,6 +64,7 @@ namespace basecross {
 
 			auto coreObject = AddGameObject<StageObject::MainStageCoreObject>();
 			auto onlineGameTimer = coreObject->GetComponent<OnlineGameTimer>();
+			auto mainStageTransitioner = coreObject->GetComponent<Online::MainStageTransitioner>();
 
 			auto uiObject = AddGameObject<StageObject::MainStageUIObject>();
 
@@ -90,6 +78,8 @@ namespace basecross {
 			auto gameFinishUI = uiObject->GetGameFinishUI();
 			std::weak_ptr<GameFinishUI> weakGameFinishUI = gameFinishUI;
 			onlineGameTimer->AddGameFinishCountEventFunc([weakGameFinishUI]() { weakGameFinishUI.lock()->Start(); });
+
+			mainStageTransitioner->SetDisconnectToTitleUIObject(uiObject->GetDisconnectToTitleUIObject());
 
 			//ステージの設定
 			auto scene = App::GetApp()->GetScene<Scene>();
@@ -149,12 +139,5 @@ namespace basecross {
 	wstring MainStage::GetLoadMapName() {
 		return sm_loadMapName;
 	}
-
-	// std::shared_ptr<GameStartUI> MainStage::GetGameStartUI() {
-	//	return m_gameStartUI;
-	// }
-	// std::shared_ptr<GameFinishUI> MainStage::GetGameFinishUI() {
-	//	return m_gameFinishUI;
-	// }
 }
 // end basecross
