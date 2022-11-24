@@ -70,30 +70,30 @@ namespace basecross {
 		// メインステージのみ
 		if (auto mainStage = GetTypeStage<MainStage>(false)) {
 			// エフェクト
-			auto efkComp = AddComponent<EfkComponent>();
-			efkComp->SetEffectResource(L"HasBall", TransformData(Vec3(0), Vec3(0.5f)));
+			std::weak_ptr<EfkComponent> weakEfkComp = AddComponent<EfkComponent>();
+			weakEfkComp.lock()->SetEffectResource(L"HasBall", TransformData(Vec3(0), Vec3(0.5f)));
 
 			auto eventExecuter = AddComponent<BallObjectEventExecuter>();
 			// エフェクト
 			eventExecuter->AddEvent(
-				[efkComp]() {
-					efkComp->PlayLoop(L"HasBall");
+				[weakEfkComp]() {
+					weakEfkComp.lock()->PlayLoop(L"HasBall");
 				},
-				[efkComp]() {
-					efkComp->Stop(L"HasBall");
+				[weakEfkComp]() {
+					weakEfkComp.lock()->Stop(L"HasBall");
 				}
 				);
 
-			auto directionUI = mainStage->GetUIObjectCSVBuilder()
+			std::weak_ptr<DirectionWithHasBallUI> weakDirectionUI = mainStage->GetUIObjectCSVBuilder()
 				->GetUIObject<DirectionWithHasBallUI>(L"DirectionWithHasBallUI");
 
 			// 方向指示UI
 			eventExecuter->AddEvent(
-				[&, directionUI]() {
-					directionUI->SetTarget(GetThis<HideItemObject>());
+				[&, weakDirectionUI]() {
+					weakDirectionUI.lock()->SetTarget(GetThis<HideItemObject>());
 				},
-				[directionUI]() {
-					directionUI->ClearTarget();
+				[weakDirectionUI]() {
+					weakDirectionUI.lock()->ClearTarget();
 				}
 				);
 		}

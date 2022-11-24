@@ -1,5 +1,4 @@
-﻿
-/*!
+﻿/*!
 @file ItemAcquisitionManager.cpp
 @brief ItemAcquisitionManagerクラス実体
 担当：丸山裕喜
@@ -32,12 +31,12 @@
 
 #include "Watanabe/Component/PlayerAnimator.h"
 #include "Watanabe/UI/SplashMessageUI.h"
+#include "Watanabe/Effekseer/EfkComponent.h"
 #include "Itabashi/OnlinePlayerSynchronizer.h"
 
 #include "VelocityManager.h"
 
 namespace basecross {
-
 	//--------------------------------------------------------------------------------------
 	/// パラメータ
 	//--------------------------------------------------------------------------------------
@@ -59,7 +58,7 @@ namespace basecross {
 	{}
 
 	ItemAcquisitionManager::ItemAcquisitionManager(const std::shared_ptr<GameObject>& objPtr, const Parametor& param) :
-		Component(objPtr), 
+		Component(objPtr),
 		m_param(param),
 		m_getBallSoundClip(L"GetBallSE", false, 0.5f),
 		m_stolenBallSoundClip(L"StolenBallSE", false, 0.5f)
@@ -81,12 +80,10 @@ namespace basecross {
 	}
 
 	void ItemAcquisitionManager::OnUpdate() {
-
 		m_acquisitionItems.clear();
 
 		//アイテムが範囲内にいるか索敵
 		for (auto& itemWeak : m_allFieldItems) {
-
 			auto item = itemWeak.lock();
 
 			if (!item)
@@ -118,7 +115,7 @@ namespace basecross {
 	}
 
 	void ItemAcquisitionManager::HideItemAcquisitionEvent(const std::shared_ptr<GameObject>& other) {
-		auto selfTeamMember =OnlinePlayerSynchronizer::GetLocalOnlinePlayerSynchronizer()->GetGameObject()->GetComponent<I_TeamMember>(false);
+		auto selfTeamMember = OnlinePlayerSynchronizer::GetLocalOnlinePlayerSynchronizer()->GetGameObject()->GetComponent<I_TeamMember>(false);
 		auto otherTeamMember = other->GetComponent<I_TeamMember>(false);
 		if (!selfTeamMember && !otherTeamMember) {
 			return;
@@ -134,7 +131,6 @@ namespace basecross {
 		if (selfTeamMember->GetTeam() == otherTeamMember->GetTeam()) {
 			splashMessageUI->SetMessage(SplashMessageUI::MessageType::GetBall);
 			m_soundEmitter.lock()->PlaySoundClip(m_getBallSoundClip);
-
 		}
 		else {
 			splashMessageUI->SetMessage(SplashMessageUI::MessageType::StolenBall);
@@ -145,7 +141,6 @@ namespace basecross {
 	}
 
 	void ItemAcquisitionManager::ItemAcquisition(const std::shared_ptr<Item>& item) {
-
 		if (!item) {
 			return;
 		}
@@ -164,16 +159,10 @@ namespace basecross {
 		item->GetGameObject()->SetActive(false);
 		//HideItemAcquisitionEvent(GetGameObject());	//隠すアイテムの時に呼び出すイベント
 
-		////アニメーションを再生
-		//auto itemPosition = item->GetGameObject()->GetComponent<Transform>()->GetPosition();
-		//if (itemPosition.y < 0.0f) {
-		//	//アイテムが床にあるなら
-		//	animator->ChangePlayerAnimation(PlayerAnimationState::State::PutItem_Floor);
-		//}
-		//else {
-		//	//アイテムが床にないなら
-		//	animator->ChangePlayerAnimation(PlayerAnimationState::State::PutItem_HideObject);
-		//}
+		//「！」エフェクトの再生
+		if (auto efkComp = GetGameObject()->GetComponent<EfkComponent>(false)) {
+			efkComp->Play(L"Excl");
+		}
 
 		if (auto velocityManager = GetGameObject()->GetComponent<VelocityManager>(false)) {
 			velocityManager->ResetAll();
@@ -190,7 +179,7 @@ namespace basecross {
 			m_tupler.lock(),
 			m_teamMember.lock(),
 			0.0f
-		);
+			);
 	}
 
 	bool ItemAcquisitionManager::IsAcquisitionRange(const std::shared_ptr<Item>& item) {
@@ -202,8 +191,6 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 	/// アクセッサ
 	//--------------------------------------------------------------------------------------
-
-
 
 	//多分ボツ関数----------------------------------------------------
 
@@ -235,7 +222,7 @@ namespace basecross {
 
 		//アニメーションが置く状態ならできない
 		if (!animator || animator->IsCurretAnimationState(PlayerAnimationState::State::PutItem_Floor) ||
-				animator->IsCurretAnimationState(PlayerAnimationState::State::PutItem_HideObject))
+			animator->IsCurretAnimationState(PlayerAnimationState::State::PutItem_HideObject))
 		{
 			return false;
 		}
@@ -288,5 +275,4 @@ namespace basecross {
 
 		return items;
 	}
-
 }

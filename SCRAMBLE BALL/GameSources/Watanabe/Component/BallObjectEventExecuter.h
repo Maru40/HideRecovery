@@ -15,6 +15,9 @@ namespace basecross {
 		void OnEnable()override;
 		void OnDisable()override;
 
+		void OnCreate()override;
+		void OnDestroy()override;
+
 		void AddEvent(const Func& enableEvent, const Func& disableEvent);
 
 		void AddEnableEvent(const Func& enableEvent);
