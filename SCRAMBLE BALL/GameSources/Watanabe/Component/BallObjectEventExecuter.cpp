@@ -6,6 +6,14 @@ namespace basecross {
 		:Component(owner)
 	{}
 
+	void BallObjectEventExecuter::OnCreate() {
+		OnEnable();
+	}
+
+	void BallObjectEventExecuter::OnDestroy() {
+		OnDisable();
+	}
+
 	void BallObjectEventExecuter::OnEnable() {
 		ExecuteEvent(m_enableEventList);
 	}
