@@ -4,6 +4,7 @@
 namespace basecross
 {
 	class OnlinePlayerSynchronizer;
+	class PlayerControlManager;
 	class PlayerStatus;
 	class Teleport;
 
@@ -16,6 +17,7 @@ namespace basecross
 		std::weak_ptr<OnlinePlayerSynchronizer> m_onlinePlayerSynchronizer;
 		std::weak_ptr<Teleport> m_teleport;
 		std::weak_ptr<Camera> m_camera;
+		std::weak_ptr<PlayerControlManager> m_playerControlManager;
 
 	public:
 
