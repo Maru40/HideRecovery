@@ -41,4 +41,8 @@ namespace basecross {
 	void DissolveAnimator::SetPlayEndEvent(const function<void()>& func) {
 		m_playEndEvent = func;
 	}
+
+	void DissolveAnimator::SetPlayLength(float length) {
+		m_timer.SetIntervalTime(length);
+	}
 }
