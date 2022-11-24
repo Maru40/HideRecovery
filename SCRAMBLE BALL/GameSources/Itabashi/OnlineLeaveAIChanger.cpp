@@ -30,6 +30,14 @@ namespace Online
 		gameObject->GetComponent<Online::OnlineTransformSynchronization>()->SetIsMaster(true);
 	}
 
+	int OnlineLeaveAIChanger::GetCheckPlayerId() const
+	{
+		auto onlinePlayerSynchronizer = m_onlinePlayerSynchronizer.lock();
+
+		int onlinePlayerNumber = onlinePlayerSynchronizer->GetOnlinePlayerNumber();
+		return (onlinePlayerNumber >= 0) ? onlinePlayerNumber : Online::OnlineManager::GetCurrentlyJoinedRoom().getMasterClientID();
+	}
+
 	void OnlineLeaveAIChanger::OnLateStart()
 	{
 		const auto& ownerObject = GetGameObject();
@@ -41,17 +49,12 @@ namespace Online
 	void OnlineLeaveAIChanger::OnUpdate()
 	{
 		auto onlineAliveChecker = m_onlineAliveChecker.lock();
-		auto onlinePlayerSynchronizer = m_onlinePlayerSynchronizer.lock();
 
-		int onlinePlayerNumber = onlinePlayerSynchronizer->GetOnlinePlayerNumber();
-		int alivePlayerNumber = onlinePlayerNumber >= 0 ? onlinePlayerNumber : Online::OnlineManager::GetCurrentlyJoinedRoom().getMasterClientID();
+		bool isOnlineAlive = onlineAliveChecker->IsPlayerAlive(GetCheckPlayerId());
 
-		bool isOnlineAlive = onlineAliveChecker->IsPlayerAlive(alivePlayerNumber);
-
-		if (isOnlineAlive != m_beforeOnlineAlive)
+		if (isOnlineAlive != m_beforeOnlineAlive && !isOnlineAlive)
 		{
 			m_playerControlManager.lock()->StateReset();
-			m_aiActiveChanger.lock()->AIActiveChange(isOnlineAlive);
 		}
 
 		m_beforeOnlineAlive = isOnlineAlive;
@@ -59,21 +62,15 @@ namespace Online
 
 	void OnlineLeaveAIChanger::OnDisconnected()
 	{
-		auto onlinePlayerSynchronizer = m_onlinePlayerSynchronizer.lock();
-
-		if (onlinePlayerSynchronizer->GetOnlinePlayerNumber() == OnlineManager::GetLocalPlayer().getNumber())
-		{
-			return;
-		}
-
-		ChangeAI();
+		m_playerControlManager.lock()->StateReset();
+		m_aiActiveChanger.lock()->AIActiveChange(false);
 	}
 
 	void OnlineLeaveAIChanger::OnLeaveRoomEventAction(int playerNumber, bool isInactive)
 	{
 		auto onlinePlayerSynchronizer = m_onlinePlayerSynchronizer.lock();
 
-		if (onlinePlayerSynchronizer->GetOnlinePlayerNumber() != playerNumber)
+		if (!OnlineManager::GetLocalPlayer().getIsMasterClient() || onlinePlayerSynchronizer->GetOnlinePlayerNumber() != playerNumber)
 		{
 			return;
 		}

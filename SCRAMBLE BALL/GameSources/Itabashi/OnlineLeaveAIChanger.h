@@ -22,6 +22,12 @@ namespace Online
 
 		void ChangeAI();
 
+		/// <summary>
+		/// 確認プレイヤーIDの取得
+		/// </summary>
+		/// <returns>確認プレイヤーID</returns>
+		int GetCheckPlayerId() const;
+
 	public:
 		OnlineLeaveAIChanger(const std::shared_ptr<GameObject>& owner);
 
