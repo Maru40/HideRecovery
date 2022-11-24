@@ -53,6 +53,11 @@ namespace Online
 		/// </summary>
 		/// <returns>接続確認が取れているならtrue</returns>
 		bool IsLocalPlayerAlive() const { return IsPlayerAlive(OnlineManager::GetLocalPlayer().getNumber()); }
+		/// <summary>
+		/// マスタープレイヤーの接続確認が取れているか
+		/// </summary>
+		/// <returns>取れているならtrue</returns>
+		bool IsMasterPlayerAlive() const { return IsPlayerAlive(OnlineManager::GetCurrentlyJoinedRoom().getMasterClientID()); }
 
 		/// <summary>
 		/// 一定間隔で自分が生存を通知する時間を設定
