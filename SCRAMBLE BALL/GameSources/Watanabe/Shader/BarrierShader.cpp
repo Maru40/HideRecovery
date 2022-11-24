@@ -11,6 +11,9 @@ namespace basecross {
 		// ライティングのみだと極端になるので調整
 		SetEmissive(bsm::Col4(0.5f, 0.5f, 0.5f, 0.0f));
 		SetDiffuse(bsm::Col4(0.6f, 0.6f, 0.6f, 1.0f));
+
+		// デフォルトでノイズテクスチャをセット
+		SetTextureResource(L"GradientNoise_TX", TextureType::Noise);
 	}
 
 	// 影を使用しないためディゾブルの同期はしない

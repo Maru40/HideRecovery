@@ -124,16 +124,16 @@ namespace basecross {
 
 			auto drawComp = planeObj->AddComponent<BarrierShader>();
 			drawComp->SetSamplerState(SamplerState::LinearWrap);
+			drawComp->SetEnabledTime(true);
 
 			vector<VertexPositionNormalTexture> vertices;
 			vector<uint16_t> indices;
-			AdvMeshUtil::CreateBoardPoly(10, Vec2(width, height), vertices, indices);
+			AdvMeshUtil::CreateBoardPoly(20, Vec2(width, height), vertices, indices);
 			auto meshData = MeshResource::CreateMeshResource(vertices, indices, true);
 			drawComp->SetOriginalMeshResource(meshData);
 			drawComp->SetOriginalMeshUse(true);
-			drawComp->SetTextureResource(L"Noise_TX", TextureType::Noise);
 			drawComp->SetEnabledDissolve(true);
-			drawComp->SetDiffuse(Col4(1, 0, 0, 0.5f));
+			drawComp->SetDiffuse(Col4(1, 0, 0, 1));
 
 			auto dissolveAnimator = planeObj->AddComponent<DissolveAnimator>();
 			planeObj->SetAlphaActive(true);
