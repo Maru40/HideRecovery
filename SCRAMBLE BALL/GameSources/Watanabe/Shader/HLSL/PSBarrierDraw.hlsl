@@ -14,7 +14,8 @@ float4 main(PSPNTInput input) : SV_TARGET
         // ノイズテクスチャから高さ（黒～白成分）を取得
         float height = grayScale(noise);
 
-        if (height > DissolveAnimationRate + 0.05f || DissolveAnimationRate == 0)
+        if (height > DissolveAnimationRate + DissolveEdgeLength
+            || DissolveAnimationRate == 0)
         {
             discard;
         }

@@ -40,6 +40,8 @@ namespace basecross {
 		float m_DissolveAnimationRate;
 		// ディゾブルのエッジ色
 		Col4 m_DissolveEdgeColor;
+		// ディゾブルのエッジの長さ
+		float m_DissolveEdgeLength;
 		// ディゾブルが有効か
 		bool m_EnabledDissolve;
 		// シェーダーに時間を渡すか
@@ -67,6 +69,7 @@ namespace basecross {
 			m_OutlineWidth(0.01f),
 			m_DissolveAnimationRate(1),
 			m_DissolveEdgeColor(1, 1, 1, 1),
+			m_DissolveEdgeLength(0.05f),
 			m_EnabledDissolve(false),
 			m_EnabledTime(false)
 			//m_MaxInstance(2000),
@@ -195,12 +198,13 @@ namespace basecross {
 		SmCb.DissolveRateAndTime = Vec4(0);
 		SmCb.DissolveRateAndTime.x = pImpl->m_DissolveAnimationRate;
 		SmCb.DissolveRateAndTime.y = pImpl->m_EnabledDissolve;
+		SmCb.DissolveRateAndTime.z = pImpl->m_DissolveEdgeLength;
 
 		SmCb.DissolveEdgeColor = pImpl->m_DissolveEdgeColor;
 
 		if (pImpl->m_EnabledTime) {
 			m_totalDelta += App::GetApp()->GetElapsedTime();
-			SmCb.DissolveRateAndTime.z = m_totalDelta;
+			SmCb.DissolveRateAndTime.w = m_totalDelta;
 		}
 	}
 
@@ -270,6 +274,13 @@ namespace basecross {
 
 	Col4 AdvBaseDraw::GetDissolveEdgeColor()const {
 		return pImpl->m_DissolveEdgeColor;
+	}
+
+	void AdvBaseDraw::SetDissolveEdgeLength(float length) {
+		pImpl->m_DissolveEdgeLength = length;
+	}
+	float AdvBaseDraw::GetDissolveEdgeLength()const {
+		return pImpl->m_DissolveEdgeLength;
 	}
 
 	float AdvBaseDraw::GetDissolveAnimationRate() {

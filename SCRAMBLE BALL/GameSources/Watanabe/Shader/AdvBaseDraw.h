@@ -31,7 +31,7 @@ namespace basecross {
 		Col4 Diffuse;
 		// スペキュラー
 		Col4 Specular;
-		// X:ディゾルブレート,Y:ディゾブルの切り替え,Z:時間
+		// X:ディゾルブレート,Y:ディゾブルの切り替え,Z:エッジの長さ,W:時間
 		Vec4 DissolveRateAndTime;
 		// ディゾブルのエッジ色
 		Col4 DissolveEdgeColor;
@@ -591,6 +591,9 @@ namespace basecross {
 
 		void SetDissolveEdgeColor(const Col4& color);
 		Col4 GetDissolveEdgeColor()const;
+
+		void SetDissolveEdgeLength(float length);
+		float GetDissolveEdgeLength()const;
 
 		float GetDissolveAnimationRate();
 		void SetDissolveAnimationRate(float rate);

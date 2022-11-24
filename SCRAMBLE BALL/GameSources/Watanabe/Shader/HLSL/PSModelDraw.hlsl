@@ -13,14 +13,14 @@ float4 main(PSPNTInput input) : SV_TARGET
     {
         // ノイズテクスチャから高さ（黒～白成分）を取得
         float4 noise = g_noiseTexture.Sample(g_sampler, input.tex);
-        float height = 0.3 * noise.r + 0.6 * noise.g + 0.1 * noise.b;
+        float height = grayScale(noise);
 
-        if (height > DissolveAnimationRate + 0.05f)
+        if (height > DissolveAnimationRate + DissolveEdgeLength)
         {
             discard;
         }
 
-        if (height > DissolveAnimationRate )
+        if (height > DissolveAnimationRate)
         {
             return DissolveEdgeColor;
         }

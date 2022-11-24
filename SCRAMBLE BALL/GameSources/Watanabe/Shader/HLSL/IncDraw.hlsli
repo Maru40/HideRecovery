@@ -65,8 +65,9 @@ cbuffer ParametersBuffer : register(b0)
     float4 Specular : packoffset(c14);
     float DissolveAnimationRate : packoffset(c15.x);
     float EnabledDissolve : packoffset(c15.y);
-    float Time : packoffset(c15.z);
-    float DissolveEdgeColor : packoffset(c16);
+    float DissolveEdgeLength : packoffset(c15.z);
+    float Time : packoffset(c15.w);
+    float4 DissolveEdgeColor : packoffset(c16);
     float4 LightDir : packoffset(c17);
     float4 LightPos : packoffset(c18);
     float4 EyePos : packoffset(c19);
