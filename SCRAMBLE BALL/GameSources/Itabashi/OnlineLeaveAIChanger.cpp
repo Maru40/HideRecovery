@@ -38,26 +38,33 @@ namespace Online
 		return (onlinePlayerNumber >= 0) ? onlinePlayerNumber : Online::OnlineManager::GetCurrentlyJoinedRoom().getMasterClientID();
 	}
 
+	void OnlineLeaveAIChanger::StateChange(bool isAlive)
+	{
+		if (isAlive)
+		{
+			return;
+		}
+
+		m_playerControlManager.lock()->StateReset();
+	}
+
 	void OnlineLeaveAIChanger::OnLateStart()
 	{
 		const auto& ownerObject = GetGameObject();
 		m_onlinePlayerSynchronizer = ownerObject->GetComponent<OnlinePlayerSynchronizer>();
 		m_aiActiveChanger = ownerObject->GetComponent<AIActiveChanger>();
 		m_playerControlManager = ownerObject->GetComponent<PlayerControlManager>();
+
+		auto onlineAliveChanger = m_onlineAliveChecker.lock();
+
+		if (onlineAliveChanger)
+		{
+			onlineAliveChanger->AddPlayerStateChangeEvent( GetCheckPlayerId() ,[&](bool isAlive) { StateChange(isAlive); });
+		}
 	}
 
 	void OnlineLeaveAIChanger::OnUpdate()
 	{
-		auto onlineAliveChecker = m_onlineAliveChecker.lock();
-
-		bool isOnlineAlive = onlineAliveChecker->IsPlayerAlive(GetCheckPlayerId());
-
-		if (isOnlineAlive != m_beforeOnlineAlive && !isOnlineAlive)
-		{
-			m_playerControlManager.lock()->StateReset();
-		}
-
-		m_beforeOnlineAlive = isOnlineAlive;
 	}
 
 	void OnlineLeaveAIChanger::OnDisconnected()
