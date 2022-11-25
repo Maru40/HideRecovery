@@ -290,7 +290,7 @@ namespace basecross
 		}
 
 		auto data = OnlinePlayerData<std::uint32_t>(playerNumber, instanceId);
-		Online::OnlineManager::RaiseEvent(false, (std::uint8_t*)&data, sizeof(data), EXECUTE_ITEM_AQUISITION_EVENT_CODE);
+		Online::OnlineManager::RaiseEvent(true, (std::uint8_t*)&data, sizeof(data), EXECUTE_ITEM_AQUISITION_EVENT_CODE);
 	}
 
 	void OnlinePlayerSynchronizer::ExecuteItemAquisition(int playerNumber, std::uint32_t instanceId)
@@ -584,7 +584,7 @@ namespace basecross
 
 		auto data = OnlinePlayerData<OnlineTeleportData>(m_onlinePlayerNumber, OnlineTeleportData(teleportPosition, cameraPosition));
 
-		Online::OnlineManager::RaiseEvent(false, (std::uint8_t*)&data, sizeof(data), EXECUTE_TELEPORT_EVENT_CODE);
+		Online::OnlineManager::RaiseEvent(true, (std::uint8_t*)&data, sizeof(data), EXECUTE_TELEPORT_EVENT_CODE);
 	}
 
 	void OnlinePlayerSynchronizer::OpenHidePlace()
@@ -620,7 +620,7 @@ namespace basecross
 		}
 
 		auto data = OnlinePlayerData<std::uint32_t>(m_onlinePlayerNumber, instanceId);
-		Online::OnlineManager::RaiseEvent(false, (std::uint8_t*)&data, sizeof(data), EXECUTE_OPEN_HIDEPLACE_EVENT_CODE);
+		Online::OnlineManager::RaiseEvent(true, (std::uint8_t*)&data, sizeof(data), EXECUTE_OPEN_HIDEPLACE_EVENT_CODE);
 
 		auto hideItem = hidePlace->TakeOutHideItem();
 
@@ -677,7 +677,7 @@ namespace basecross
 		}
 
 		auto data = OnlinePlayerData<std::uint32_t>(m_onlinePlayerNumber, instanceId);
-		Online::OnlineManager::RaiseEvent(false, (std::uint8_t*)&data, sizeof(data), EXECUTE_ITEM_AQUISITION_EVENT_CODE);
+		Online::OnlineManager::RaiseEvent(true, (std::uint8_t*)&data, sizeof(data), EXECUTE_ITEM_AQUISITION_EVENT_CODE);
 	}
 
 	std::shared_ptr<OnlinePlayerSynchronizer> OnlinePlayerSynchronizer::GetOnlinePlayerSynchronizer(int onlinePlayerNumber)

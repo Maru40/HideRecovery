@@ -16,5 +16,7 @@ namespace basecross {
 
 		void SetActive(bool flg)override;
 		void ChangeButton(const wstring& buttonString);
+
+		void SetChildDrawLayer(int layer);
 	};
 }
