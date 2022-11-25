@@ -1510,6 +1510,9 @@
     <Filter Include="Itabashi\StageObject\MainStageUIObject">
       <UniqueIdentifier>{4fee6bec-3d9f-4bf8-8d45-8c3d9e197a9e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Itabashi\Component\MainStageDisconnectUIController">
+      <UniqueIdentifier>{b111285c-16cd-4d0e-8276-56cb6f4980a4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2858,6 +2861,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MainStageUIObject.h">
       <Filter>Itabashi\StageObject\MainStageUIObject</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MainStageDisconnectUIController.h">
+      <Filter>Itabashi\Component\MainStageDisconnectUIController</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -4082,6 +4088,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\MainStageUIObject.cpp">
       <Filter>Itabashi\StageObject\MainStageUIObject</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\MainStageDisconnectUIController.cpp">
+      <Filter>Itabashi\Component\MainStageDisconnectUIController</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
