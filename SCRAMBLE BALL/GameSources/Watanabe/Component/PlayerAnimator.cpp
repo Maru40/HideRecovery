@@ -90,15 +90,15 @@ namespace basecross {
 		AddAnimationEvent(
 			PlayerAnimationState::State::PutItem_Floor,
 			[&]() { 
-				if (m_objectMover.lock()) { m_objectMover.lock()->SetUpdateActive(false); } 
-				if (m_playerControlManager.lock()) { m_playerControlManager.lock()->SetUpdateActive(false); }
+				//if (m_objectMover.lock()) { m_objectMover.lock()->SetUpdateActive(true); } 
+				//if (m_playerControlManager.lock()) { m_playerControlManager.lock()->SetUpdateActive(false); }
 				if (m_velocityManager.lock()) { m_velocityManager.lock()->ResetAll(); }
 				if (m_onlineSychronizer.lock()) { m_onlineSychronizer.lock()->Move(Vec2(0.0f)); }
 			},
 			nullptr,
 			[&]() { 
-				if (m_objectMover.lock()) { m_objectMover.lock()->SetUpdateActive(true); } 
-				if (m_playerControlManager.lock()) { m_playerControlManager.lock()->SetUpdateActive(true); }
+				//if (m_objectMover.lock()) { m_objectMover.lock()->SetUpdateActive(true); } 
+				//if (m_playerControlManager.lock()) { m_playerControlManager.lock()->SetUpdateActive(true); }
 			}
 		);
 

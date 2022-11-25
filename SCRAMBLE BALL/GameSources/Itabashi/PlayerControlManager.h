@@ -83,7 +83,7 @@ namespace basecross
 
 		void OnLateStart() override;
 
-		void OnUpdate() override {}
+		void OnUpdate() override;
 
 		void OnDraw() override {}
 
