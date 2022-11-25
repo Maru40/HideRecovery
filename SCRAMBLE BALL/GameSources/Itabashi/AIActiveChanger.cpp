@@ -29,6 +29,10 @@ namespace basecross
 
 	void AIActiveChanger::AIActiveChange(bool isActive)
 	{
+		if (isActive == false) {
+			return;
+		}
+
 		m_seekTarget.lock()->SetUpdateActive(isActive);
 		m_selfAStarNodeController.lock()->SetUpdateActive(isActive);
 		m_targetManager.lock()->SetUpdateActive(isActive);
