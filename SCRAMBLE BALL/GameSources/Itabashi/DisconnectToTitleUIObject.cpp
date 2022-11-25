@@ -2,6 +2,7 @@
 #include "Watanabe/UI/SimpleSprite.h"
 #include "Watanabe/UI/InProcessUI.h"
 #include "Itabashi/MainStageDisconnectUIController.h"
+#include "Watanabe/UI/ButtonUI.h"
 
 namespace basecross
 {
@@ -36,21 +37,28 @@ namespace StageObject
 		disconnectUIObject->SetActive(false);
 
 		auto disconnectSpriteObject = stage->AddGameObject<SimpleSprite>();
-		//disconnectSpriteObject->SetActive(true);
 		disconnectSpriteObject->SetParent(disconnectUIObject);
 		disconnectSpriteObject->ChangeSprite(SimpleSprite::Type::SpriteData, L"CannotConnect");
 		disconnectSpriteObject->SetDrawLayer(4);
 		rectTransform = disconnectSpriteObject->GetComponent<RectTransform>();
 		rectTransform->SetPosition(0, 200);
 
-		auto toTitleButtonObject = stage->AddGameObject<SimpleSprite>();
-		//toTitleButtonObject->SetActive(true);
-		toTitleButtonObject->SetParent(disconnectUIObject);
-		m_toTitleButtonObject = toTitleButtonObject;
-		toTitleButtonObject->ChangeSprite(SimpleSprite::Type::SpriteData, L"ToTitle");
-		toTitleButtonObject->SetDrawLayer(4);
-		rectTransform = toTitleButtonObject->GetComponent<RectTransform>();
-		rectTransform->SetPosition(0, -200);
+		auto buttonObject = stage->AddGameObject<UIObject>();
+		buttonObject->SetParent(disconnectUIObject);
+		buttonObject->AddComponent<Button>();
+		m_toTitleButtonObject = buttonObject;
+
+		auto buttonSpriteObject = stage->AddGameObject<ButtonUI>();
+		buttonSpriteObject->SetParent(buttonObject);
+		buttonSpriteObject->ChangeButton(L"B");
+		buttonSpriteObject->SetChildDrawLayer(4);
+		buttonSpriteObject->GetComponent<RectTransform>()->SetPosition(-260, -200);
+
+		auto buttonTextObject = stage->AddGameObject<SimpleSprite>();
+		buttonTextObject->SetParent(buttonObject);
+		buttonTextObject->SetDrawLayer(4);
+		buttonTextObject->ChangeSprite(SimpleSprite::Type::SpriteData, L"ToTitle");
+		buttonTextObject->GetComponent<RectTransform>()->SetPosition(50, -200);
 
 		auto reconnectUIObject = stage->AddGameObject<InProcessUI>();
 		reconnectUIObject->SetParent(thisObject);
@@ -59,13 +67,11 @@ namespace StageObject
 		reconnectUIObject->SetLabel(InProcessUI::LabelType::InReconnection);
 		reconnectUIObject->SetActive(true);
 
-		auto button = toTitleButtonObject->AddComponent<Button>();
-
 		auto disconnectUIController = AddComponent<MainStageDisconnectUIController>();
 		disconnectUIController->SetGroupUIObject(thisObject);
 		disconnectUIController->SetWaitUIObject(reconnectUIObject);
 		disconnectUIController->SetDisconnectUIObject(disconnectUIObject);
-		disconnectUIController->SetSelectObject(toTitleButtonObject);
+		disconnectUIController->SetSelectObject(buttonObject);
 	}
 }
 }

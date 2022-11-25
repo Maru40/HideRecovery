@@ -32,4 +32,10 @@ namespace basecross {
 	void ButtonUI::ChangeButton(const wstring& buttonString) {
 		m_buttonText->ChangeSprite(SimpleSprite::Type::SpriteData, buttonString + L"Button");
 	}
+
+	void ButtonUI::SetChildDrawLayer(int layer)
+	{
+		m_buttonBack->SetDrawLayer(layer);
+		m_buttonText->SetDrawLayer(layer);
+	}
 }
