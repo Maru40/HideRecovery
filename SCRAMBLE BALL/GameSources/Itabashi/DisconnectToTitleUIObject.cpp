@@ -1,5 +1,7 @@
 ﻿#include "DisconnectToTitleUIObject.h"
 #include "Watanabe/UI/SimpleSprite.h"
+#include "Watanabe/UI/InProcessUI.h"
+#include "Itabashi/MainStageDisconnectUIController.h"
 
 namespace basecross
 {
@@ -29,22 +31,41 @@ namespace StageObject
 		rectTransform->SetRectSize(static_cast<float>(app->GetGameWidth()), static_cast<float>(app->GetGameHeight()));
 		backGroundObject->SetDrawLayer(3);
 
+		auto disconnectUIObject = stage->AddGameObject<UIObject>();
+		disconnectUIObject->SetParent(thisObject);
+		disconnectUIObject->SetActive(false);
+
 		auto disconnectSpriteObject = stage->AddGameObject<SimpleSprite>();
-		disconnectSpriteObject->SetParent(thisObject);
+		//disconnectSpriteObject->SetActive(true);
+		disconnectSpriteObject->SetParent(disconnectUIObject);
 		disconnectSpriteObject->ChangeSprite(SimpleSprite::Type::SpriteData, L"CannotConnect");
 		disconnectSpriteObject->SetDrawLayer(4);
 		rectTransform = disconnectSpriteObject->GetComponent<RectTransform>();
 		rectTransform->SetPosition(0, 200);
 
 		auto toTitleButtonObject = stage->AddGameObject<SimpleSprite>();
-		toTitleButtonObject->SetParent(thisObject);
+		//toTitleButtonObject->SetActive(true);
+		toTitleButtonObject->SetParent(disconnectUIObject);
 		m_toTitleButtonObject = toTitleButtonObject;
 		toTitleButtonObject->ChangeSprite(SimpleSprite::Type::SpriteData, L"ToTitle");
 		toTitleButtonObject->SetDrawLayer(4);
 		rectTransform = toTitleButtonObject->GetComponent<RectTransform>();
 		rectTransform->SetPosition(0, -200);
 
+		auto reconnectUIObject = stage->AddGameObject<InProcessUI>();
+		reconnectUIObject->SetParent(thisObject);
+		reconnectUIObject->SetDrawLayer(4);
+		reconnectUIObject->SetChildDrawLayer(4);
+		reconnectUIObject->SetLabel(InProcessUI::LabelType::InReconnection);
+		reconnectUIObject->SetActive(true);
+
 		auto button = toTitleButtonObject->AddComponent<Button>();
+
+		auto disconnectUIController = AddComponent<MainStageDisconnectUIController>();
+		disconnectUIController->SetGroupUIObject(thisObject);
+		disconnectUIController->SetWaitUIObject(reconnectUIObject);
+		disconnectUIController->SetDisconnectUIObject(disconnectUIObject);
+		disconnectUIController->SetSelectObject(toTitleButtonObject);
 	}
 }
 }
