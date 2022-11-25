@@ -45,5 +45,7 @@ namespace basecross {
 		/// </summary>
 		/// <param name="messageType">ラベルタイプ</param>
 		void SetLabel(LabelType messageType);
+
+		void SetChildDrawLayer(int layer);
 	};
 }
