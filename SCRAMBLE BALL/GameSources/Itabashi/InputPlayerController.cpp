@@ -6,6 +6,7 @@
 #include "Itabashi/Item.h"
 #include "Maruyama/Player/Component/Teleport.h"
 #include "Itabashi/PlayerControlManager.h"
+#include "Itabashi/OnlineAliveChecker.h"
 
 namespace basecross
 {
@@ -28,7 +29,7 @@ namespace basecross
 
 	void InputPlayerController::OnUpdate()
 	{
-		if (!Online::OnlineManager::IsConnected())
+		if (!m_onlineAliveChecker.lock()->IsMasterPlayerAlive() || !Online::OnlineManager::IsConnected())
 		{
 			m_playerControlManager.lock()->StateReset();
 			return;
