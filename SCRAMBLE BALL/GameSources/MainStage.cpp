@@ -30,6 +30,10 @@
 #include "Itabashi/MainStageUIObject.h"
 #include "Itabashi/MainStageTransitioner.h"
 
+#include "Itabashi/DisconnectToTitleUIObject.h"
+#include "Itabashi/MainStageDisconnectUIController.h"
+#include "Itabashi/OnlineAliveChecker.h"
+
 namespace basecross {
 	// wstring MainStage::sm_loadMapName = L"StageS1_Copy.csv";
 	wstring MainStage::sm_loadMapName = L"StageS2.csv";
@@ -65,6 +69,7 @@ namespace basecross {
 			auto coreObject = AddGameObject<StageObject::MainStageCoreObject>();
 			auto onlineGameTimer = coreObject->GetComponent<OnlineGameTimer>();
 			auto mainStageTransitioner = coreObject->GetComponent<Online::MainStageTransitioner>();
+			auto onlineAliveChecker = coreObject->GetComponent<Online::OnlineAliveChecker>();
 
 			auto uiObject = AddGameObject<StageObject::MainStageUIObject>();
 
@@ -80,6 +85,8 @@ namespace basecross {
 			onlineGameTimer->AddGameFinishCountEventFunc([weakGameFinishUI]() { weakGameFinishUI.lock()->Start(); });
 
 			mainStageTransitioner->SetDisconnectToTitleUIObject(uiObject->GetDisconnectToTitleUIObject());
+
+			uiObject->GetDisconnectToTitleUIObject()->GetComponent<MainStageDisconnectUIController>()->SetOnlineAliveChecker(onlineAliveChecker);
 
 			//ステージの設定
 			auto scene = App::GetApp()->GetScene<Scene>();
