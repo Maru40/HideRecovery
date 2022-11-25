@@ -55,7 +55,7 @@ namespace basecross {
 		dunkMoveSpeed(3.0f),
 
 		preliminaryJumpParam(std::make_shared<Task::Wait::Parametor>(0.0f)),
-		dunkMoveParam(std::make_shared<Task::ToTargetMove::Parametor>(3.0f, 0.1f, Task::ToTargetMove_MoveType::Lerp)),
+		dunkMoveParam(std::make_shared<Task::ToTargetMove::Parametor>(3.0f, 0.1f, Task::ToTargetMove_MoveType::OnlineLerp)),
 		dunkAfterWaitParam(std::make_shared<Task::Wait::Parametor>(0.5f)),
 		returnJumpParam(std::make_shared<Task::ReturnJump_Parametor>()),
 		endWaitParam(std::make_shared<Task::Wait::Parametor>(0.8f))
@@ -115,31 +115,6 @@ namespace basecross {
 				splashMessage->SetMessage(SplashMessageUI::MessageType::Goal);
 				splashMessage->SetColor(Col4(1, 0.5f, 0, 1));
 			}
-
-			//全てのplayerのカメラがついているのをシェイクする。
-			//auto players = ShareClassesManager::GetInstance()->GetCastShareClasses<PlayerObject>();
-			//for(auto weakPlayer : players) {
-			//	auto player = weakPlayer.lock();
-			//	if (!player) {
-			//		continue;
-			//	}
-
-			//	auto springArm = player->GetArm()->GetComponent<SpringArmComponent>();
-			//	auto tpsCamera = springArm->GetChildObject();
-			//	if (!tpsCamera) {
-			//		continue;
-			//	}
-
-			//	auto cameraShake = tpsCamera->GetComponent<CameraShake>(false);
-			//	if (cameraShake) {
-			//		cameraShake->StartShake(0.25f);
-
-			//		std::weak_ptr<SpringArmComponent> weakSprintArm = springArm;
-			//		cameraShake->SetExitFunction([weakSprintArm]() { if (weakSprintArm.lock()) { weakSprintArm.lock()->SetUpdateActive(true); } });
-
-			//		springArm->SetUpdateActive(false);
-			//	}
-			//}
 		};
 
 		constexpr float Time = 0.9f;
@@ -197,17 +172,11 @@ namespace basecross {
 			stator->ChangeState(Enemy::AIPlayerStator::StateType::Goal, (int)Enemy::AIPlayerStator::StateType::Goal);
 		}
 
-		//if (auto input = GetGameObject()->GetComponent<InputPlayerController>(false)) {
-		//	input->SetUpdateActive(false);
-		//}
-
 		m_taskList->ForceStop();
 		SelectTask();
 	}
 
 	bool GoalAnimationController::UpdateAnimationEvent() {
-		//m_taskList->UpdateTask();
-		//return m_taskList->IsEnd();
 		return true;
 	}
 
