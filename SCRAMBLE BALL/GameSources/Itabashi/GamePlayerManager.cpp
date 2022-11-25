@@ -7,6 +7,7 @@
 #include "Itabashi/OnlinePlayerSynchronizer.h"
 #include "Itabashi/OnlineAliveChecker.h"
 #include "Itabashi/OnlineLeaveAIChanger.h"
+#include "Itabashi/InputPlayerController.h"
 
 namespace basecross
 {
@@ -56,6 +57,13 @@ namespace basecross
 			if (onlineLeaveAIChanger)
 			{
 				onlineLeaveAIChanger->SetOnlineAliveChecker(aliveChecker);
+			}
+
+			auto inputPlayerController = playerObject->GetComponent<InputPlayerController>(false);
+
+			if (inputPlayerController)
+			{
+				inputPlayerController->SetOnlineAliveChecker(aliveChecker);
 			}
 		}
 	}
