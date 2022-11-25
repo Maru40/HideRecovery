@@ -50,6 +50,14 @@ namespace basecross
 		m_defaultSpeed = m_objectMover.lock()->GetMoveSpeed();
 	}
 
+	void PlayerControlManager::OnUpdate()
+	{
+		if (m_playerAnimator.lock()->IsCurretAnimationState(PlayerAnimationState::State::PutItem_Floor))
+		{
+			m_objectMover.lock()->Move(Vec2());
+		}
+	}
+
 	bool PlayerControlManager::TryUpdateDefaultForward(const Vec3& forward)
 	{
 		if (forward == m_beforeDefaultForward)
@@ -381,6 +389,8 @@ namespace basecross
 			auto toVec = hidePlacePosition - transform->GetPosition();
 			rotationController->SetDirection(toVec);
 		}
+
+		StateReset();
 
 
 		return true;

@@ -55,6 +55,9 @@
 
 #include "Itabashi/OnlineExtension.h"
 
+#include "Itabashi/PlayerControlManager.h"
+#include "Itabashi/OnlineTransformSynchronization.h"
+
 namespace basecross {
 	//--------------------------------------------------------------------------------------
 	/// オンライン用データ
@@ -170,6 +173,16 @@ namespace basecross {
 			goalAnimationController->SetDunkBallPosition(transform->GetPosition() + m_param.dunkBallPositionOffset);
 			goalAnimationController->SetGoal(GetThis<Goal>());
 			goalAnimationController->SetGoalPerson(other);
+		}
+
+		if (auto playerControlManager = other->GetComponent<PlayerControlManager>(false))
+		{
+			playerControlManager->StateReset();
+		}
+
+		if (auto onlineTransform = other->GetComponent<Online::OnlineTransformSynchronization>(false))
+		{
+			onlineTransform->SetUpdateActive(false);
 		}
 
 		//ポイント加算

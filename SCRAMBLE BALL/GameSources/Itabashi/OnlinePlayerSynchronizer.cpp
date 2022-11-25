@@ -282,9 +282,17 @@ namespace basecross
 		}
 
 		auto controlManager = m_controlManager.lock();
-		auto item = Online::OnlineStatus::FindOnlineGameObject(instanceId)->GetComponent<Item>();
 
-		if (!controlManager->TryAquisition(item))
+		auto findObject = Online::OnlineStatus::FindOnlineGameObject(instanceId);
+
+		if (!findObject)
+		{
+			return;
+		}
+
+		auto item = findObject->GetComponent<Item>();
+
+		if (!item || !controlManager->TryAquisition(item))
 		{
 			return;
 		}
