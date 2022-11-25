@@ -5,6 +5,8 @@
 #include "OnlinePlayerSynchronizer.h"
 #include "Itabashi/Item.h"
 #include "Maruyama/Player/Component/Teleport.h"
+#include "Itabashi/PlayerControlManager.h"
+#include "Itabashi/OnlineAliveChecker.h"
 
 namespace basecross
 {
@@ -22,10 +24,17 @@ namespace basecross
 		m_teleport = owner->GetComponent<Teleport>();
 
 		m_camera = GetStage()->GetView()->GetTargetCamera();
+		m_playerControlManager = owner->GetComponent<PlayerControlManager>();
 	}
 
 	void InputPlayerController::OnUpdate()
 	{
+		if (!m_onlineAliveChecker.lock()->IsMasterPlayerAlive() || !Online::OnlineManager::IsConnected())
+		{
+			m_playerControlManager.lock()->StateReset();
+			return;
+		}
+
 		auto playerStatus = m_playerStatus.lock();
 
 		if (playerStatus->IsDead())

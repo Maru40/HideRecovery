@@ -58,4 +58,10 @@ namespace basecross {
 		auto data = sm_Type2DataMap[messageType];
 		m_label->ChangeSprite(data.Type, data.Key);
 	}
+
+	void InProcessUI::SetChildDrawLayer(int layer)
+	{
+		m_shape->SetDrawLayer(layer);
+		m_label->SetDrawLayer(layer);
+	}
 }

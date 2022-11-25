@@ -155,6 +155,11 @@ namespace basecross
 		m_isBeforeTimeUp = isTimeUp;
 	}
 
+	void OnlineGameTimer::OnDisconnected()
+	{
+		GameTimerStop();
+	}
+
 	void OnlineGameTimer::OnCustomEventAction(int playerNumber, std::uint8_t eventCode, const std::uint8_t* bytes)
 	{
 		if (eventCode == GAMETIMER_START_CHECK_EVENT_CODE)

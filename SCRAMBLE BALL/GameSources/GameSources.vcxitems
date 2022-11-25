@@ -16,9 +16,12 @@
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)GameStageBase.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\AIActiveChanger.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\DisconnectToTitleUIObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\GamePlayerManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\Item.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MainStageCoreObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MainStageDisconnectUIController.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MainStageUIObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageCoreObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MainStageTransitioner.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\MatchingSelectUIObject.h" />
@@ -461,9 +464,12 @@
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)GameStageBase.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\AIActiveChanger.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\DisconnectToTitleUIObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\GamePlayerManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\Item.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\MainStageCoreObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\MainStageDisconnectUIController.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\MainStageUIObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\MatchStageCoreObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\MainStageTransitioner.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\MatchingSelectUIObject.cpp" />

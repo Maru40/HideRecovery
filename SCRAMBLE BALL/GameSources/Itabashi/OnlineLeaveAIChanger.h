@@ -18,9 +18,15 @@ namespace Online
 		std::weak_ptr<OnlineAliveChecker> m_onlineAliveChecker;
 		std::weak_ptr<PlayerControlManager> m_playerControlManager;
 
-		bool m_beforeOnlineAlive = true;
-
 		void ChangeAI();
+
+		/// <summary>
+		/// 確認プレイヤーIDの取得
+		/// </summary>
+		/// <returns>確認プレイヤーID</returns>
+		int GetCheckPlayerId() const;
+
+		void StateChange(bool isAlive);
 
 	public:
 		OnlineLeaveAIChanger(const std::shared_ptr<GameObject>& owner);

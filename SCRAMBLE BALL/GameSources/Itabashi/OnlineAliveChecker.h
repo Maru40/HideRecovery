@@ -17,8 +17,9 @@ namespace Online
 
 		struct CheckState
 		{
-			bool isAlive = false;
+			bool isAlive = true;
 			float responseCountTime = 0.0f;
+			std::vector<std::function<void(bool)>> m_onlineStateChangeEvents;
 
 			CheckState() noexcept {}
 
@@ -53,6 +54,18 @@ namespace Online
 		/// </summary>
 		/// <returns>接続確認が取れているならtrue</returns>
 		bool IsLocalPlayerAlive() const { return IsPlayerAlive(OnlineManager::GetLocalPlayer().getNumber()); }
+		/// <summary>
+		/// マスタープレイヤーの接続確認が取れているか
+		/// </summary>
+		/// <returns>取れているならtrue</returns>
+		bool IsMasterPlayerAlive() const { return IsPlayerAlive(OnlineManager::GetCurrentlyJoinedRoom().getMasterClientID()); }
+
+		/// <summary>
+		/// ステート変更のイベントを追加
+		/// </summary>
+		/// <param name="onlinePlayerNumber">プレイヤー番号</param>
+		/// <param name="stateChangeEvent">ステート変更イベント</param>
+		void AddPlayerStateChangeEvent(int onlinePlayerNumber, const std::function<void(bool)>& stateChangeEvent) { m_playerAliveCheckMap.at(onlinePlayerNumber).m_onlineStateChangeEvents.push_back(stateChangeEvent); }
 
 		/// <summary>
 		/// 一定間隔で自分が生存を通知する時間を設定

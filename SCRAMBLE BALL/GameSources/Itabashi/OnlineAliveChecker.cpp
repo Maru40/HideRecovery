@@ -47,6 +47,11 @@ namespace Online
 			if (checkState.responseCountTime >= m_aliveCheckTime + m_aliveResponseTime && checkState.isAlive)
 			{
 				checkState.isAlive = false;
+				
+				for (auto& stateChangeEvent : checkState.m_onlineStateChangeEvents)
+				{
+					stateChangeEvent(false);
+				}
 			}
 		}
 	}
@@ -59,8 +64,18 @@ namespace Online
 		}
 
 		auto& checkState = m_playerAliveCheckMap[playerNumber];
+
+		bool oldIsAlive = checkState.isAlive;
 		checkState.isAlive = true;
 		checkState.responseCountTime = 0.0f;
+
+		if (!oldIsAlive)
+		{
+			for (auto& stateChangeEvent : checkState.m_onlineStateChangeEvents)
+			{
+				stateChangeEvent(true);
+			}
+		}
 	}
 }
 }

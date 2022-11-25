@@ -9,15 +9,8 @@
 #include "MainStage.h"
 #include "Patch/PlayerInputer.h"
 
-#include "Maruyama/Utility/SingletonComponent/SoundManager.h"
-
-#include "Maruyama/Utility/Mathf.h"
-
 #include "Patch/CameraHelper.h"
 
-#include "Maruyama/Item/HideItemObject.h"
-
-#include "Maruyama/Player/Object/VillainPlayerObject.h"
 #include "Watanabe/DebugClass/Debug.h"
 #include "Watanabe/Effekseer/EfkEffect.h"
 
@@ -29,18 +22,17 @@
 #include "Watanabe/UI/SplashMessageUI.h"
 #include "Watanabe/UI/UIObjectCSVBuilder.h"
 
-#include "Maruyama/StageObject/HidePlace.h"
-#include "Maruyama/UI/2D/Component/Reticle.h"
-#include "Maruyama/UI/2D/Component/TeleportUI.h"
-
 #include "Maruyama/Utility/SingletonComponent/GameManager.h"
 #include "Maruyama/Utility/Object/GameManagerObject.h"
 #include "Maruyama/Interface/I_TeamMember.h"
 
-#include "Itabashi/OnlineGameItemManager.h"
-#include "Maruyama/Item/HideItem.h"
-
 #include "Itabashi/MainStageCoreObject.h"
+#include "Itabashi/MainStageUIObject.h"
+#include "Itabashi/MainStageTransitioner.h"
+
+#include "Itabashi/DisconnectToTitleUIObject.h"
+#include "Itabashi/MainStageDisconnectUIController.h"
+#include "Itabashi/OnlineAliveChecker.h"
 
 namespace basecross {
 	// wstring MainStage::sm_loadMapName = L"StageS1_Copy.csv";
@@ -76,38 +68,25 @@ namespace basecross {
 
 			auto coreObject = AddGameObject<StageObject::MainStageCoreObject>();
 			auto onlineGameTimer = coreObject->GetComponent<OnlineGameTimer>();
-			auto onlineGameItemManager = coreObject->GetComponent<OnlineGameItemManager>();
+			auto mainStageTransitioner = coreObject->GetComponent<Online::MainStageTransitioner>();
+			auto onlineAliveChecker = coreObject->GetComponent<Online::OnlineAliveChecker>();
 
-			auto gameStartUI = AddGameObject<GameStartUI>();
+			auto uiObject = AddGameObject<StageObject::MainStageUIObject>();
+
+			auto gameStartUI = uiObject->GetGameStartUI();
 			std::weak_ptr<GameStartUI> weakgameStartUI = gameStartUI;
-			std::weak_ptr<OnlineGameItemManager> weakGameItemManager = onlineGameItemManager;
 			onlineGameTimer->AddGameStartCountFunc([weakgameStartUI]() { weakgameStartUI.lock()->Start(); });
 
-			onlineGameTimer->AddGameStartCountFunc([weakGameItemManager]() {
-				if (!Online::OnlineManager::GetLocalPlayer().getIsMasterClient())
-				{
-					return;
-				}
-
-				auto gameItemManager = weakGameItemManager.lock();
-
-				for (auto& hideItem : maru::Utility::FindComponents<HideItem>(gameItemManager->GetStage()))
-				{
-					gameItemManager->RandomHideItem(hideItem);
-				}
-				});
-
-			gameStartUI->AddTimeUpEventFunc([]() { SimpleSoundManager::ChangeBGM(L"GameStageBGM", 0.05f); });
-			gameStartUI->AddTimeUpEventFunc([]() { SimpleSoundManager::OnePlaySE(L"GameStartSE", 0.25f); });
 			std::weak_ptr<OnlineGameTimer> weakOnlineGameTimer = onlineGameTimer;
 			gameStartUI->AddTimeUpEventFunc([weakOnlineGameTimer]() { weakOnlineGameTimer.lock()->GameTimerStart(); });
-			//ゲーム状態にする
-			gameStartUI->AddTimeUpEventFunc([]() { if (auto gameManager = GameManager::GetInstance()) { gameManager->ChangeState(GameManager::State::Game); } });
 
-			auto gameFinishUI = AddGameObject<GameFinishUI>();
+			auto gameFinishUI = uiObject->GetGameFinishUI();
 			std::weak_ptr<GameFinishUI> weakGameFinishUI = gameFinishUI;
 			onlineGameTimer->AddGameFinishCountEventFunc([weakGameFinishUI]() { weakGameFinishUI.lock()->Start(); });
-			onlineGameTimer->AddGameFinishEventFunc([]() { SimpleSoundManager::OnePlaySE(L"GameSetSE", 0.25f); });
+
+			mainStageTransitioner->SetDisconnectToTitleUIObject(uiObject->GetDisconnectToTitleUIObject());
+
+			uiObject->GetDisconnectToTitleUIObject()->GetComponent<MainStageDisconnectUIController>()->SetOnlineAliveChecker(onlineAliveChecker);
 
 			//ステージの設定
 			auto scene = App::GetApp()->GetScene<Scene>();
@@ -120,7 +99,7 @@ namespace basecross {
 
 			// UIレイアウトの読み込み
 			auto gameUIBuilder = CreateUI(L"GameUILayout.csv");
-			auto remainingTime = gameUIBuilder->GetUIObject<SplashMessageUI>(L"RemainingTime");
+			std::weak_ptr<SplashMessageUI> weakRemainingTime = gameUIBuilder->GetUIObject<SplashMessageUI>(L"RemainingTime");
 			auto teamRed = gameUIBuilder->GetUIObject<SimpleSprite>(L"TeamRed");
 			teamRed->GetDrawComponent()->SetDiffuse(team::REDTEAM_COLOR);
 			auto teamBlue = gameUIBuilder->GetUIObject<SimpleSprite>(L"TeamBlue");
@@ -128,15 +107,19 @@ namespace basecross {
 
 			// 残り時間表示のイベント登録
 			TimeManager::GetInstance()->AddEvent(60,
-				[remainingTime]() {
+				[weakRemainingTime]() {
+					auto remainingTime = weakRemainingTime.lock();
 					remainingTime->SetColor(Col4(1, 1, 1, 0.5f));
 					remainingTime->SetMessage(SplashMessageUI::MessageType::Remaining60s);
-				});
+				}
+			);
 			TimeManager::GetInstance()->AddEvent(30,
-				[remainingTime]() {
+				[weakRemainingTime]() {
+					auto remainingTime = weakRemainingTime.lock();
 					remainingTime->SetColor(Col4(1, 1, 1, 0.5f));
 					remainingTime->SetMessage(SplashMessageUI::MessageType::Remaining30s);
-				});
+				}
+			);
 
 			// Mapの読み込み
 			CreateMap(sm_loadMapName);
@@ -163,12 +146,5 @@ namespace basecross {
 	wstring MainStage::GetLoadMapName() {
 		return sm_loadMapName;
 	}
-
-	// std::shared_ptr<GameStartUI> MainStage::GetGameStartUI() {
-	//	return m_gameStartUI;
-	// }
-	// std::shared_ptr<GameFinishUI> MainStage::GetGameFinishUI() {
-	//	return m_gameFinishUI;
-	// }
 }
 // end basecross
