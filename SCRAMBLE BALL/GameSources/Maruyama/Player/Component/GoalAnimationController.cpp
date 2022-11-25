@@ -1,7 +1,7 @@
-/*!
+ï»¿/*!
 @file GoalAnimationController.cpp
-@brief GoalAnimationControllerƒNƒ‰ƒXÀ‘Ì
-’S“–FŠÛR—TŠì
+@brief GoalAnimationControllerã‚¯ãƒ©ã‚¹å®Ÿä½“
+æ‹…å½“ï¼šä¸¸å±±è£•å–œ
 */
 
 #include "stdafx.h"
@@ -40,10 +40,11 @@
 #include "Patch/SpringArmComponent.h"
 #include "Maruyama/Utility/SingletonComponent/SingletonComponent.h"
 #include "Maruyama/Utility/SingletonComponent/ShareClassesManager.h"
+#include "Itabashi/OnlineTransformSynchronization.h"
 
 namespace basecross {
 	//--------------------------------------------------------------------------------------
-	/// ƒS[ƒ‹’†‚ÌƒAƒjƒ[ƒVƒ‡ƒ“ƒRƒ“ƒgƒ[ƒ‰[‚Ìƒpƒ‰ƒ[ƒ^
+	/// ã‚´ãƒ¼ãƒ«ä¸­ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼ã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
 	//--------------------------------------------------------------------------------------
 
 	GoalAnimationController_Parametor::GoalAnimationController_Parametor() :
@@ -63,7 +64,7 @@ namespace basecross {
 	float GoalAnimationController_Parametor::GetJumpRad() const { return XMConvertToRadians(jumpDegree); }
 
 	//--------------------------------------------------------------------------------------
-	/// ƒS[ƒ‹’†‚ÌƒAƒjƒ[ƒVƒ‡ƒ“ƒRƒ“ƒgƒ[ƒ‰[–{‘Ì
+	/// ã‚´ãƒ¼ãƒ«ä¸­ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼æœ¬ä½“
 	//--------------------------------------------------------------------------------------
 
 	GoalAnimationController::GoalAnimationController(const std::shared_ptr<GameObject>& objPtr) :
@@ -77,13 +78,13 @@ namespace basecross {
 		m_stator = GetGameObject()->GetComponent<Enemy::AIPlayerStator>(false);
 
 		auto animator = GetGameObject()->GetComponent<PlayerAnimator>(false);
-		if (!animator) {	//animator‚ª‚È‚©‚Á‚½‚çˆ—‚ğI—¹
+		if (!animator) {	//animatorãŒãªã‹ã£ãŸã‚‰å‡¦ç†ã‚’çµ‚äº†
 			return;
 		}
 
 		DefineTask();
 
-		//ƒS[ƒ‹‚ÌƒAƒjƒ[ƒVƒ‡ƒ“ƒCƒxƒ“ƒg‚ğ“o˜^
+		//ã‚´ãƒ¼ãƒ«æ™‚ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚¤ãƒ™ãƒ³ãƒˆã‚’ç™»éŒ²
 		animator->AddAnimationEvent(
 			PlayerAnimationState::State::Goal1,
 			[&]() { StartAnimationEvent(); },
@@ -91,7 +92,7 @@ namespace basecross {
 			[&]() { ExitAnimationEvent(); }
 		);
 
-		//ƒ{[ƒ‹‚ğƒS[ƒ‹‚µ‚½uŠÔ‚Ìƒ^ƒCƒ€ƒCƒxƒ“ƒg
+		//ãƒœãƒ¼ãƒ«ã‚’ã‚´ãƒ¼ãƒ«ã—ãŸç¬é–“ã®ã‚¿ã‚¤ãƒ ã‚¤ãƒ™ãƒ³ãƒˆ
 		auto timeEvent = [&]() {
 			if (!m_ball.lock()) {
 				return;
@@ -115,7 +116,7 @@ namespace basecross {
 				splashMessage->SetColor(Col4(1, 0.5f, 0, 1));
 			}
 
-			//‘S‚Ä‚Ìplayer‚ÌƒJƒƒ‰‚ª‚Â‚¢‚Ä‚¢‚é‚Ì‚ğƒVƒFƒCƒN‚·‚éB
+			//å…¨ã¦ã®playerã®ã‚«ãƒ¡ãƒ©ãŒã¤ã„ã¦ã„ã‚‹ã®ã‚’ã‚·ã‚§ã‚¤ã‚¯ã™ã‚‹ã€‚
 			//auto players = ShareClassesManager::GetInstance()->GetCastShareClasses<PlayerObject>();
 			//for(auto weakPlayer : players) {
 			//	auto player = weakPlayer.lock();
@@ -154,7 +155,7 @@ namespace basecross {
 	}
 
 	void GoalAnimationController::OnDisable() {
-		//‰¼À‘•
+		//ä»®å®Ÿè£…
 		auto animator = GetGameObject()->GetComponent<PlayerAnimator>(false);
 		if (!animator->IsCurretAnimationState(PlayerAnimationState::State::Wait)) {
 			animator->ChangePlayerAnimation(PlayerAnimationState::State::Wait);
@@ -164,34 +165,34 @@ namespace basecross {
 	}
 
 	void GoalAnimationController::StartAnimationEvent() {
-		m_param.startPosition = transform->GetPosition();	//ŠJnˆÊ’u‚Ìİ’è
+		m_param.startPosition = transform->GetPosition();	//é–‹å§‹ä½ç½®ã®è¨­å®š
 
 		m_param.dunkMoveParam->startPosition = m_param.startPosition;
 		m_param.dunkMoveParam->endPosition = m_param.dunkPosition;
 
 		m_param.returnJumpParam->returnDirect = transform->GetPosition() - m_param.dunkPosition;
 
-		//d—Í‚Ì‰ğœ
+		//é‡åŠ›ã®è§£é™¤
 		if (auto gravity = GetGameObject()->GetComponent<Gravity>(false)) {							
 			gravity->SetUpdateActive(false);
 		}
 
-		//‘¬“xƒŠƒZƒbƒg
+		//é€Ÿåº¦ãƒªã‚»ãƒƒãƒˆ
 		if (auto velocityManager = GetGameObject()->GetComponent<VelocityManager>(false)) {			
 			velocityManager->ResetAll();
 		}
 
-		//‰ñ“]ƒRƒ“ƒgƒ[ƒ‰[
+		//å›è»¢ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼
 		if (auto rotationController = GetGameObject()->GetComponent<RotationController>(false)) {	
 			rotationController->SetDirection(m_param.dunkPosition - transform->GetPosition());
 		}
 
-		//‰¹‚ğ–Â‚ç‚·
+		//éŸ³ã‚’é³´ã‚‰ã™
 		if (auto soundEmmiter = GetGameObject()->GetComponent<SoundEmitter>(false)) {
 			soundEmmiter->PlaySoundClip(m_goalStartSE);
 		}
 
-		//ƒXƒe[ƒ^
+		//ã‚¹ãƒ†ãƒ¼ã‚¿
 		if (auto stator = m_stator.lock()) {
 			stator->ChangeState(Enemy::AIPlayerStator::StateType::Goal, (int)Enemy::AIPlayerStator::StateType::Goal);
 		}
@@ -211,7 +212,7 @@ namespace basecross {
 	}
 
 	void GoalAnimationController::ExitAnimationEvent() {
-		if (auto gravity = GetGameObject()->GetComponent<Gravity>(false)) {	//d—Í‚Ì‰ğœ
+		if (auto gravity = GetGameObject()->GetComponent<Gravity>(false)) {	//é‡åŠ›ã®è§£é™¤
 			gravity->SetUpdateActive(true);
 		}
 
@@ -223,6 +224,11 @@ namespace basecross {
 			GetStage()->RemoveGameObject<GameObject>(ball);
 		}
 
+		if (auto onlineTransform = GetGameObject()->GetComponent<Online::OnlineTransformSynchronization>(false))
+		{
+			onlineTransform->SetUpdateActive(true);
+		}
+
 		//if (auto input = GetGameObject()->GetComponent<InputPlayerController>(false)) {
 		//	input->SetUpdateActive(true);
 		//}
@@ -231,8 +237,8 @@ namespace basecross {
 	void GoalAnimationController::DefineTask() {
 		auto object = GetGameObject();
 
-		//ƒWƒƒƒ“ƒv‚Ì—­‚ß
-		m_param.preliminaryJumpParam->start = [&]() { //ŠJnƒCƒxƒ“ƒg
+		//ã‚¸ãƒ£ãƒ³ãƒ—ã®æºœã‚
+		m_param.preliminaryJumpParam->start = [&]() { //é–‹å§‹æ™‚ã‚¤ãƒ™ãƒ³ãƒˆ
 			const auto Offset = Vec3(0.0f, 0.25f, 0.0f);
 			auto hideItem = GetStage()->Instantiate<HideItemObject>(Offset, Quat::Identity(), GetGameObject());
 			m_ball = hideItem;
@@ -244,11 +250,11 @@ namespace basecross {
 		};
 		m_taskList->DefineTask(TaskEnum::PreliminaryJump, std::make_shared<Task::Wait>(m_param.preliminaryJumpParam));
 
-		//ƒ_ƒ“ƒNˆÊ’u‚Ü‚ÅˆÚ“®
+		//ãƒ€ãƒ³ã‚¯ä½ç½®ã¾ã§ç§»å‹•
 		auto& dunkMoveParam = m_param.dunkMoveParam;
 		m_taskList->DefineTask(TaskEnum::DunkMove, std::make_shared<Task::ToTargetMove>(object, m_param.dunkMoveParam));
 
-		//ƒ_ƒ“ƒNŒã‚Ì‘Ò‹@
+		//ãƒ€ãƒ³ã‚¯å¾Œã®å¾…æ©Ÿ
 		m_param.dunkAfterWaitParam->start = [&](){
 			auto player = std::dynamic_pointer_cast<PlayerObject>(GetGameObject());
 			if (!player) {
@@ -270,10 +276,10 @@ namespace basecross {
 		};
 		m_taskList->DefineTask(TaskEnum::DunkWait, std::make_shared<Task::Wait>(m_param.dunkAfterWaitParam));
 
-		//Œ³‚ÌˆÊ’u‚É–ß‚éˆÚ“®
+		//å…ƒã®ä½ç½®ã«æˆ»ã‚‹ç§»å‹•
 		m_taskList->DefineTask(TaskEnum::ReturnMove, std::make_shared<Task::ReturnJump>(GetGameObject(), m_param.returnJumpParam));
 
-		//I—¹‘Ò‹@
+		//çµ‚äº†æ™‚å¾…æ©Ÿ
 		m_param.endWaitParam->exit = [&]() {
 			if (auto animator = GetGameObject()->GetComponent<PlayerAnimator>(false)) {
 				animator->ChangePlayerAnimation(PlayerAnimationState::State::Wait);
