@@ -27,6 +27,7 @@
 #include "Maruyama/Enemy/Behavior/Decorator/OutSpecificTarget.h"
 #include "Maruyama/Enemy/Behavior/Decorator/CanCurrentTarget.h"
 #include "Maruyama/Enemy/Behavior/Decorator/OutTargetTimer.h"
+#include "Maruyama/Enemy/Behavior/Decorator/TimerWaitPosition.h"
 
 #include "Maruyama/Enemy/AIDirector/CoordinatorBase.h"
 #include "Maruyama/Enemy/AIDirector/TupleSpace.h"
@@ -208,11 +209,21 @@ namespace basecross {
 						NodeType::NearSeekMoveTask, enemy, decoratorParam.nearSeek_isInEyeParamPtr
 					);
 
+					//一定時間同じ場所にいるなら。
+					m_behaviorTree->AddDecorator<Decorator::TimerWaitPosition>(
+						NodeType::NearSeekMoveTask, GetOwner()
+					);
+
 					//AstarSeek----------------------------------------------------
 					//ターゲットが視界外に一定時間いたら、ターゲットをあきらめる。
 					//m_behaviorTree->AddDecorator<Decorator::OutTargetTimer>(
 					//	NodeType::NearAstarMoveTask, enemy, decoratorParam.nearAstar_outTargetTimerParamPtr
 					//);
+
+					//一定時間同じ場所にいたら検索しなおす。
+					m_behaviorTree->AddDecorator<Decorator::TimerWaitPosition>(
+						NodeType::NearAstarMoveTask, GetOwner()
+					);
 
 					//Shotにデコレータ追加-----------------------------------------
 					//視界範囲内なら
@@ -232,6 +243,7 @@ namespace basecross {
 					m_behaviorTree->AddDecorator<Decorator::CanCurrentTarget>(
 						NodeType::ShotTask, enemy->GetGameObject()
 					);
+
 				}
 
 				void ButtleTree::InitializeParametor() {
