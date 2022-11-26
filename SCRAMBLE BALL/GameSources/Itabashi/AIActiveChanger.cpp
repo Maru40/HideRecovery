@@ -6,6 +6,10 @@
 #include "Maruyama/Utility/Component/TargetManager.h"
 #include "Maruyama/Enemy/Component/AIVirtualController.h"
 #include "Maruyama/Enemy/Component/Stator/AIPlayerStator.h"
+#include "Maruyama/Player/Component/UseWeapon.h"
+#include "Itabashi/ObjectMover.h"
+
+#include "Watanabe/DebugClass/Debug.h"
 
 namespace basecross
 {
@@ -33,11 +37,24 @@ namespace basecross
 			return;
 		}
 
+		Debug::GetInstance()->Log(L"▲▲AIChange▲▲");
+
 		m_seekTarget.lock()->SetUpdateActive(isActive);
 		m_selfAStarNodeController.lock()->SetUpdateActive(isActive);
 		m_targetManager.lock()->SetUpdateActive(isActive);
 		m_aiVertualController.lock()->SetUpdateActive(isActive);
 		m_enemyBase.lock()->SetUpdateActive(isActive);
 		m_aiPlayerStator.lock()->SetUpdateActive(isActive);
+
+		if (auto objectMover = GetGameObject()->GetComponent<Operator::ObjectMover>(false)) {
+			Debug::GetInstance()->Log(L"▲▲MoverFalse▲▲");
+			objectMover->SetCameraAffected(false);
+			objectMover->SetDefaultForward(Vec3::Forward());
+		}
+
+		if (auto useWeapon = GetGameObject()->GetComponent<UseWeapon>(false)) {
+			Debug::GetInstance()->Log(L"▲▲UseWeaponFalse▲▲");
+			useWeapon->SetIsUseCamera(false);
+		}
 	}
 }
