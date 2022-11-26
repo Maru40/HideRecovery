@@ -43,6 +43,8 @@ namespace basecross {
 			}
 
 			if (auto velocityManager = GetOwner()->GetComponent<VelocityManager>(false)) {
+				velocityManager->SetUpdateActive(true);
+				velocityManager->ResetAll();
 				velocityManager->AddForce(CalculateJumpVec().GetNormalized() * GetParametor()->jumpHorizontalPower);
 				velocityManager->AddForce(Vec3::Up() * GetParametor()->jumpUpPower);
 			}

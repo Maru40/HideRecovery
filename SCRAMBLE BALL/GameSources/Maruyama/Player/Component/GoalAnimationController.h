@@ -146,5 +146,7 @@ namespace basecross {
 		/// ‹­§ƒŠƒZƒbƒg
 		/// </summary>
 		void ForceReset();
+
+		void StartGoalAnimation();
 	};
 }

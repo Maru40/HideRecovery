@@ -27,6 +27,7 @@ namespace basecross {
 		//--------------------------------------------------------------------------------------
 		enum class ToTargetMove_MoveType {
 			Lerp,					//補間
+			OnlineLerp,				//オンラインように仮で作ったLerp処理
 			Transform,				//通常トランスフォーム
 			SeekVelocity,			//追従速度
 			ArriveVelocity,			//到着速度

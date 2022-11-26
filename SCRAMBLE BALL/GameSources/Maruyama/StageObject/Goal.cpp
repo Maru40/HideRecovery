@@ -173,6 +173,7 @@ namespace basecross {
 			goalAnimationController->SetDunkBallPosition(transform->GetPosition() + m_param.dunkBallPositionOffset);
 			goalAnimationController->SetGoal(GetThis<Goal>());
 			goalAnimationController->SetGoalPerson(other);
+			//PlayAnimation(other);
 		}
 
 		if (auto playerControlManager = other->GetComponent<PlayerControlManager>(false))
@@ -249,7 +250,9 @@ namespace basecross {
 
 		GoalProcess(other, item);
 
-		PlayAnimation(other);
+		if (GetGameObject() != other) {
+			PlayAnimation(other);
+		}
 	}
 
 	void Goal::AddPoint(const team::TeamType& team) {
@@ -265,6 +268,10 @@ namespace basecross {
 	void Goal::PlayAnimation(const std::shared_ptr<GameObject>& other) {
 		if (auto animator = other->GetComponent<PlayerAnimator>()) {
 			animator->ChangePlayerAnimation(PlayerAnimationState::State::Goal1);
+		}
+
+		if (auto goalAnimationController = other->GetComponent<GoalAnimationController>(false)) {
+			goalAnimationController->StartGoalAnimation();
 		}
 	}
 

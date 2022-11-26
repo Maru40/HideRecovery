@@ -103,6 +103,10 @@ namespace basecross {
 				LerpMove();
 				break;
 
+			case MoveType::OnlineLerp:
+				LerpMove();
+				break;
+
 			case MoveType::Transform:
 				TransformMove();
 				break;
@@ -126,7 +130,19 @@ namespace basecross {
 			const float EndTime = 1.0f;
 			auto position = Lerp::CalculateLerp(GetOwnerPosition(), m_paramPtr->endPosition, StartTime, EndTime, speed, Lerp::rate::Linear);
 
-			SetOwnerPosition(position);
+			//タスクムーブの変更
+			if (m_paramPtr->moveType == MoveType::OnlineLerp) {
+				SetOwnerPosition(position);
+				//auto toVec = position - GetOwnerPosition();
+				////auto inputVec3 = toVec.GetNormalized() * (toVec.length() / m_paramPtr->speed);
+				//auto inputVec3 = toVec;
+				////Debug::GetInstance()->Log(inputVec3);
+				//SetOwnerPosition(GetOwnerPosition() + inputVec3);
+				////m_onlineSynchronizer.lock()->Move(Vec2(inputVec3.x, inputVec3.z));
+			}
+			else {
+				SetOwnerPosition(position);
+			}	
 		}
 
 		void ToTargetMove::TransformMove() {
