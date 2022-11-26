@@ -132,12 +132,13 @@ namespace basecross {
 
 			//タスクムーブの変更
 			if (m_paramPtr->moveType == MoveType::OnlineLerp) {
-				auto toVec = position - GetOwnerPosition();
-				//auto inputVec3 = toVec.GetNormalized() * (toVec.length() / m_paramPtr->speed);
-				auto inputVec3 = toVec;
-				Debug::GetInstance()->Log(inputVec3);
-				SetOwnerPosition(GetOwnerPosition() + inputVec3);
-				//m_onlineSynchronizer.lock()->Move(Vec2(inputVec3.x, inputVec3.z));
+				SetOwnerPosition(position);
+				//auto toVec = position - GetOwnerPosition();
+				////auto inputVec3 = toVec.GetNormalized() * (toVec.length() / m_paramPtr->speed);
+				//auto inputVec3 = toVec;
+				////Debug::GetInstance()->Log(inputVec3);
+				//SetOwnerPosition(GetOwnerPosition() + inputVec3);
+				////m_onlineSynchronizer.lock()->Move(Vec2(inputVec3.x, inputVec3.z));
 			}
 			else {
 				SetOwnerPosition(position);
