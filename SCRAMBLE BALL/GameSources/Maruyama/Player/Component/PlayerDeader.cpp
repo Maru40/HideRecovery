@@ -82,7 +82,8 @@ namespace basecross {
 			}
 
 			//AIなら死亡状態に変更
-			if (auto stator = GetGameObject()->GetComponent<Enemy::AIPlayerStator>(false)) {
+			auto stator = GetGameObject()->GetComponent<Enemy::AIPlayerStator>(false);
+			if (stator && stator->GetUpdateActive()) {
 				auto stateType = Enemy::AIPlayerStator::StateType::Dead;
 				stator->ChangeState(stateType, (int)stateType);
 			}
@@ -138,7 +139,8 @@ namespace basecross {
 		}
 
 		//AIなら死亡中ステートに変更
-		if (auto stator = GetGameObject()->GetComponent<Enemy::AIPlayerStator>(false)) {
+		auto stator = GetGameObject()->GetComponent<Enemy::AIPlayerStator>(false);
+		if (stator && stator->GetUpdateActive()) {
 			auto stateType = Enemy::AIPlayerStator::StateType::Dyning;
 			stator->ChangeState(stateType, (int)stateType);
 		}
