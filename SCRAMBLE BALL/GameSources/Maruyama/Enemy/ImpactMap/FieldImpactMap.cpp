@@ -40,7 +40,7 @@ namespace basecross {
 
 		//7.5f
 		FieldImpactMap_Parametor::FieldImpactMap_Parametor():
-			intervalRange(7.5f),
+			intervalRange(10.0f),
 			createHeightOffset(1.0f)
 		{}
 
