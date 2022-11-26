@@ -113,14 +113,16 @@ namespace basecross {
 		};
 
 		//アニメーション終了時に呼ぶイベント
-		auto exit = [&, animator]() {
-			auto fadeManager = ScreenFadeManager::GetInstance(GetStage());
+		std::weak_ptr<PlayerAnimator> weakAnimator = animator;
+		auto exit = [&, weakAnimator]() {
+			auto animator = weakAnimator.lock();
 
 			const bool IsFade = false;
 			if (IsFade) {
 				//フェード終了イベント
-				auto endEvent = [&, fadeManager, animator]() {
-					animator->ChangePlayerAnimation(PlayerAnimationState::State::EndTeleport);
+				auto endEvent = [&, weakAnimator]() {
+					auto fadeManager = ScreenFadeManager::GetInstance(GetStage());
+					weakAnimator.lock()->ChangePlayerAnimation(PlayerAnimationState::State::EndTeleport);
 					GetGameObject()->GetComponent<Transform>()->SetPosition(GetTeleportPosition());	//テレポート
 					
 					if (fadeManager) {
@@ -128,6 +130,7 @@ namespace basecross {
 					}
 				};
 
+				auto fadeManager = ScreenFadeManager::GetInstance(GetStage());
 				//フェード開始イベント
 				if (fadeManager) {
 					fadeManager->FadeStart(FadeType::Out, endEvent);
@@ -155,8 +158,9 @@ namespace basecross {
 				}
 
 				//移動しきったら、演出開始
-				auto moveEndEvent = [&, animator]() {
-					animator->ChangePlayerAnimation(PlayerAnimationState::State::EndTeleport);
+				auto moveEndEvent = [&, weakAnimator]() {
+					auto animator = weakAnimator.lock();
+					weakAnimator.lock()->ChangePlayerAnimation(PlayerAnimationState::State::EndTeleport);
 					GetGameObject()->GetComponent<Transform>()->SetPosition(GetTeleportPosition());	//テレポート
 
 					auto playerObject = dynamic_pointer_cast<PlayerObject>(GetGameObject());
@@ -213,14 +217,14 @@ namespace basecross {
 			//非表示
 			GetGameObject()->SetDrawActive(false);
 
-			//当たり判定解除
-			if (auto collision = GetGameObject()->GetComponent<CollisionObb>(false)) {
-				collision->SetUpdateActive(false);
-			}
-
 			//重力解除
 			if (auto gravity = GetGameObject()->GetComponent<Gravity>(false)) {
 				gravity->SetUpdateActive(false);
+			}
+
+			//当たり判定解除
+			if (auto collision = GetGameObject()->GetComponent<CollisionObb>(false)) {
+				collision->SetUpdateActive(false);
 			}
 
 			//音の再生
