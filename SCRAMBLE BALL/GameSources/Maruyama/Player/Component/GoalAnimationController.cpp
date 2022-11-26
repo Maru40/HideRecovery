@@ -41,6 +41,9 @@
 #include "Maruyama/Utility/SingletonComponent/SingletonComponent.h"
 #include "Maruyama/Utility/SingletonComponent/ShareClassesManager.h"
 #include "Itabashi/OnlineTransformSynchronization.h"
+#include "Itabashi/OnlinePlayerSynchronizer.h"
+
+#include "Itabashi/ObjectMover.h"
 
 namespace basecross {
 	//--------------------------------------------------------------------------------------
@@ -87,7 +90,7 @@ namespace basecross {
 		//ゴール時のアニメーションイベントを登録
 		animator->AddAnimationEvent(
 			PlayerAnimationState::State::Goal1,
-			[&]() { StartAnimationEvent(); },
+			[&]() { nullptr; },
 			[&]() { return UpdateAnimationEvent(); },
 			[&]() { ExitAnimationEvent(); }
 		);
@@ -136,10 +139,17 @@ namespace basecross {
 			animator->ChangePlayerAnimation(PlayerAnimationState::State::Wait);
 		}
 
+		ForceReset();
 		ExitAnimationEvent();
 	}
 
 	void GoalAnimationController::StartAnimationEvent() {
+		//if (IsGoalAnimation()) {
+		//	return;
+		//}
+
+		ForceReset();
+
 		m_param.startPosition = transform->GetPosition();	//開始位置の設定
 
 		m_param.dunkMoveParam->startPosition = m_param.startPosition;
@@ -172,7 +182,26 @@ namespace basecross {
 			stator->ChangeState(Enemy::AIPlayerStator::StateType::Goal, (int)Enemy::AIPlayerStator::StateType::Goal);
 		}
 
+		//オンラインシンクロの停止
+		if (auto onlineTransform = GetGameObject()->GetComponent<Online::OnlineTransformSynchronization>(false))
+		{
+			onlineTransform->SetUpdateActive(false);
+		}
+
+		if (auto objectMover = GetGameObject()->GetComponent<Operator::ObjectMover>(false)) {
+			objectMover->SetUpdateActive(false);
+		}
+
+		if (auto objectMover = GetGameObject()->GetComponent<OnlinePlayerSynchronizer>(false)) {
+			objectMover->SetUpdateActive(false);
+		}
+
+		if (auto velocityManager = GetGameObject()->GetComponent<VelocityManager>(false)) {
+			velocityManager->SetUpdateActive(false);
+		}
+
 		m_taskList->ForceStop();
+
 		SelectTask();
 	}
 
@@ -196,6 +225,14 @@ namespace basecross {
 		if (auto onlineTransform = GetGameObject()->GetComponent<Online::OnlineTransformSynchronization>(false))
 		{
 			onlineTransform->SetUpdateActive(true);
+		}
+
+		if (auto objectMover = GetGameObject()->GetComponent<Operator::ObjectMover>(false)) {
+			objectMover->SetUpdateActive(true);
+		}
+
+		if (auto objectMover = GetGameObject()->GetComponent<OnlinePlayerSynchronizer>(false)) {
+			objectMover->SetUpdateActive(true);
 		}
 
 		//if (auto input = GetGameObject()->GetComponent<InputPlayerController>(false)) {
@@ -266,6 +303,10 @@ namespace basecross {
 	}
 
 	void GoalAnimationController::SelectTask() {
+		//if (IsGoalAnimation()) {
+		//	return;
+		//}
+
 		SetUpdateActive(true);
 
 		TaskEnum tasks[] = {
@@ -294,5 +335,9 @@ namespace basecross {
 
 	void GoalAnimationController::ForceReset() {
 		m_taskList->ForceStop();
+	}
+
+	void GoalAnimationController::StartGoalAnimation() {
+		StartAnimationEvent();
 	}
 }
