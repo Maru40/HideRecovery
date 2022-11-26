@@ -11,6 +11,9 @@
 #include "TimerWaitPosition.h"
 
 #include "Maruyama/Utility/Timer/GameTimer.h"
+#include "Maruyama/Interface/I_FactionMember.h"
+#include "Maruyama/Enemy/AIDirector/CoordinatorBase.h"
+#include "Maruyama/Enemy/AIDirector/FactionCoordinator.h"
 
 #include "Watanabe/DebugClass/Debug.h"
 
@@ -59,6 +62,14 @@ namespace basecross {
 					bool isTimeUp = m_timer->IsTimeUp();
 					if (isTimeUp) {
 						//ここにターゲット依頼行動を入れるといいかも？
+						//auto factionMember = GetOwner()->GetComponent<Enemy::I_FactionMember>(false);
+						//if (factionMember) {
+						//	auto faction = factionMember->GetFactionCoordinator();
+						//	if (faction) {
+						//		//ターゲットを別にしてもらうようにお願いする。
+						//	}
+						//}
+
 						Debug::GetInstance()->Log(L"TimeUp: 一定時間同じ場所にいました。");
 					}
 

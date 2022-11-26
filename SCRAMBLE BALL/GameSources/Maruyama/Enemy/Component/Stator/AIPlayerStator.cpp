@@ -181,6 +181,7 @@ namespace basecross {
 			ForceChangeState(StateType::None);
 
 			if (auto objectMover = GetGameObject()->GetComponent<Operator::ObjectMover>(false)) {
+				objectMover->SetCameraAffected(false);
 				objectMover->SetDefaultForward(Vec3::Forward());
 			}
 		}

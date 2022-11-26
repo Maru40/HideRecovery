@@ -11,6 +11,8 @@
 #include "Maruyama/Enemy/Component/EnemyBase.h"
 #include "Maruyama/Enemy/AIDirector/FactionCoordinator.h"
 
+#include "Maruyama/Enemy/Component/Stator/AIPlayerStator.h"
+
 namespace basecross {
 	namespace Enemy {
 
@@ -25,8 +27,10 @@ namespace basecross {
 			void Dyning::OnStart() {
 				StartChangeComponents();
 
-				//ファクションをどこにも属さないようにする。
-				if (auto assignedFanction = GetOwner()->GetAssignedFaction()) {
+				//ファクションをどこにも属さないようにする。(応急処置、Statorがupdateでないならは...)
+				auto stator = GetOwner()->GetGameObject()->GetComponent<Enemy::AIPlayerStator>(false);
+				auto assignedFanction = GetOwner()->GetAssignedFaction();
+				if (assignedFanction && stator && stator->GetUpdateActive()) {
 					assignedFanction->RemoveMember(GetOwner());
 					assignedFanction->GetTupleSpace()->RemoveAllNotifys(GetOwner());
 				}

@@ -129,6 +129,12 @@ namespace basecross {
 	}
 
 	void GoalAnimationController::OnUpdate() {
+		if (m_taskList->IsEnd()) {
+			return;
+		}
+
+		//Debug::GetInstance()->Log(L"GoalAnimationUpdate");
+
 		m_taskList->UpdateTask();
 	}
 
