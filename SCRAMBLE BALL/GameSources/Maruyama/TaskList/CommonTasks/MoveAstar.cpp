@@ -85,6 +85,7 @@ namespace basecross {
 				NextRoute();
 			}
 			else {
+				//NextRoute();
 				StartThread_NextRoute();	//検索スレッドの開始
 			}
 		}
@@ -99,6 +100,7 @@ namespace basecross {
 
 			if (m_taskList->IsEnd()) {
 				StartThread_NextRoute();	//検索スレッドの開始
+				//NextRoute();
 			}
 
 			return IsEnd();
