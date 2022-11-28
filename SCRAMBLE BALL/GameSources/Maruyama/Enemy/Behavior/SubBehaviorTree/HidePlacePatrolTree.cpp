@@ -118,7 +118,7 @@ namespace basecross {
 				}
 
 				void HidePlacePatrolTree::CreateEdge() {
-					using PriorityControllerBase = maru::Behavior::PriorityControllerBase;
+					//using PriorityControllerBase = maru::Behavior::PriorityControllerBase;
 
 					//初回セレクター
 					m_behaviorTree->AddEdge(
