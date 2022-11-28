@@ -38,6 +38,7 @@ namespace basecross {
 
 			public:
 				TaskBase(const std::shared_ptr<OwnerType>& owner) :
+					I_Task(),
 					m_owner(owner)
 				{}
 
