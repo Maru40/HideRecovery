@@ -287,15 +287,18 @@ namespace basecross {
 				/// </summary>
 				template<class T, class... Ts,
 					std::enable_if_t<
-						std::is_constructible_v<T, Ts...>, 
+						std::is_constructible_v<T, Ts...> &&
+						std::is_base_of_v<I_Edge, T>, 
 					std::nullptr_t> = nullptr
 				>
-				void AddEdge(Ts&&... params) {
-					std::shared_ptr<I_Edge> newEdge = std::make_shared<T>(params...);
+				std::shared_ptr<T> AddEdge(Ts&&... params) {
+					auto newEdge = std::make_shared<T>(params...);
 					Union(newEdge);
 
 					auto fromType = newEdge->GetFromNode()->GetType<EnumType>();
 					m_edgesMap[fromType].push_back(newEdge);
+
+					return newEdge;
 				}
 
 				/// <summary>
@@ -303,18 +306,26 @@ namespace basecross {
 				/// </summary>
 				/// <param name="fromType">手前のノードタイプ</param>
 				/// <param name="toType">遷移先のノードタイプ</param>
-				//void AddEdge(const EnumType fromType, const EnumType toType, const std::shared_ptr<I_PriorityController>& priorityController) {
-				//	AddEdge<EdgeBase>(GetNode(fromType), GetNode(toType), priorityController);
-				//}
+				/// <param name="priority">優先度</param>
+				std::shared_ptr<EdgeBase> AddEdge(const EnumType fromType, const EnumType toType, const float priority) {
+					return AddEdge<EdgeBase>(GetNode(fromType), GetNode(toType), priority);
+				}
 
 				/// <summary>
-				/// エッジの追加
+				/// エッジの取得
 				/// </summary>
-				/// <param name="fromType">手前のノードタイプ</param>
-				/// <param name="toType">遷移先のノードタイプ</param>
-				/// <param name="priority">優先度</param>
-				void AddEdge(const EnumType fromType, const EnumType toType, const float priority) {
-					AddEdge<EdgeBase>(GetNode(fromType), GetNode(toType), priority);
+				/// <param name="fromType">エッジのFromタイプ</param>
+				/// <param name="toType">エッジのToタイプ</param>
+				/// <returns>エッジ</returns>
+				std::shared_ptr<I_Edge> GetEdge(const EnumType fromType, const EnumType toType) const {
+					auto edges = GetEdges(fromType);
+					for (auto& edge : edges) {
+						if (toType == edge->GetToNode()->GetType<EnumType>()) {
+							return GetNode(toType);
+						}
+					}
+
+					return nullptr;
 				}
 
 				/// <summary>
@@ -333,9 +344,48 @@ namespace basecross {
 				/// <summary>
 				/// エッジを持っているかどうか
 				/// </summary>
+				/// <param name="fromType">エッジのFromタイプ</param>
+				/// <param name="toType">エッジのToタイプ</param>
+				/// <returns>エッジがあるならtrue</returns>
+				bool HasEdge(const EnumType fromType, const EnumType toType) const {
+					auto edges = GetEdges(fromType);
+					for (auto& edge : edges) {
+						if (toType == edge->GetToNode()->GetType<EnumType>()) {
+							return true;
+						}
+					}
+
+					return false;
+				}
+
+				/// <summary>
+				/// エッジを持っているかどうか
+				/// </summary>
 				/// <param name="type">エッジのFromタイプ</param>
 				/// <returns>エッジがあるならtrue</returns>
 				bool HasEdges(const EnumType type) const { return static_cast<int>(m_edgesMap.count(type)) != 0; }
+
+				/// <summary>
+				/// エッジの優先度管理を追加
+				/// </summary>
+				template<class T, class... Ts,
+					std::enable_if_t<
+						std::is_base_of_v<I_PriorityController, T>&&	//基底クラス
+						std::is_constructible_v<T, Ts...>,				//コンストラクタ
+					std::nullptr_t> = nullptr
+				>
+				std::shared_ptr<T> AddEdgePriorityController(const EnumType fromType, const EnumType toType, Ts&&... params) {
+					//エッジの取得
+					auto edge = GetEdge(fromType, toType);
+					if (!edge) {
+						return nullptr;
+					}
+
+					auto newController = std::make_shared<T>(params...);	//優先度管理の新規生成。
+					edge->AddPriorityController(newController);				//エッジに優先度管理を登録する。
+					
+					return newController;
+				}
 
 				/// <summary>
 				/// デコレータの設定
