@@ -8,7 +8,7 @@
 #pragma once
 #include "stdafx.h"
 
-#include "Maruyama/Enemy/StateMachine/EnemyStateNodeBase.h"
+#include "Maruyama/Utility/StateMachine/Node_StateMachine.h"
 
 namespace basecross {
 
@@ -44,7 +44,7 @@ namespace basecross {
 			//--------------------------------------------------------------------------------------
 			///	バトルステート
 			//--------------------------------------------------------------------------------------
-			class Buttle : public EnemyStateNodeBase<EnemyBase>
+			class Buttle : public maru::NodeBase_StateMachine<EnemyBase>
 			{
 			public:
 				using ButtleTree = maru::Behavior::SubBehavior::ButtleTree;

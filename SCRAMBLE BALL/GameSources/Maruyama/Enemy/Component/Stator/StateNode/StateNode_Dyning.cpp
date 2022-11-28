@@ -19,13 +19,13 @@ namespace basecross {
 		namespace StateNode {
 
 			Dyning::Dyning(const std::shared_ptr<EnemyBase>& owner):
-				EnemyStateNodeBase(owner)
+				NodeBase_StateMachine(owner)
 			{
 				
 			}
 
 			void Dyning::OnStart() {
-				StartChangeComponents();
+				//StartChangeComponents();
 
 				//ファクションをどこにも属さないようにする。(応急処置、Statorがupdateでないならは...)
 				auto stator = GetOwner()->GetGameObject()->GetComponent<Enemy::AIPlayerStator>(false);
@@ -41,7 +41,7 @@ namespace basecross {
 			}
 
 			void Dyning::OnExit() {
-				ExitChangeComponents();
+				//ExitChangeComponents();
 			}
 
 		}

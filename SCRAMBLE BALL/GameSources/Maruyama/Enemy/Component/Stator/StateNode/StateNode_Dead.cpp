@@ -14,13 +14,13 @@ namespace basecross {
 		namespace StateNode {
 
 			Dead::Dead(const std::shared_ptr<EnemyBase>& owner) :
-				EnemyStateNodeBase(owner)
+				NodeBase_StateMachine(owner)
 			{
 
 			}
 
 			void Dead::OnStart() {
-				StartChangeComponents();
+				//StartChangeComponents();
 
 
 			}
@@ -30,7 +30,7 @@ namespace basecross {
 			}
 
 			void Dead::OnExit() {
-				ExitChangeComponents();
+				//ExitChangeComponents();
 			}
 
 		}

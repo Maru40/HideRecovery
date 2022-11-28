@@ -16,24 +16,24 @@ namespace basecross {
 
 		namespace StateNode {
 
-			SearchBall::SearchBall(const std::shared_ptr<EnemyBase>& owner) :
-				NodeBase_StateMachine<EnemyBase>(owner),
-				m_stateMachine(new StateMachine())
-			{}
+			//SearchBall::SearchBall(const std::shared_ptr<EnemyBase>& owner) :
+			//	NodeBase_StateMachine<EnemyBase>(owner),
+			//	m_stateMachine(new StateMachine())
+			//{}
 
-			void SearchBall::OnStart() {
-				
-			}
+			//void SearchBall::OnStart() {
+			//	
+			//}
 
-			bool SearchBall::OnUpdate() {
-				m_stateMachine->OnUpdate();
+			//bool SearchBall::OnUpdate() {
+			//	m_stateMachine->OnUpdate();
 
-				return false;
-			}
+			//	return false;
+			//}
 
-			void SearchBall::OnExit() {
+			//void SearchBall::OnExit() {
 
-			}
+			//}
 
 		}
 
