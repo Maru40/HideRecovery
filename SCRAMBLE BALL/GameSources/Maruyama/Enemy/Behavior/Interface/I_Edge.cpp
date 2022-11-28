@@ -18,40 +18,26 @@ namespace basecross {
 
 			EdgeBase::EdgeBase(
 				const std::shared_ptr<I_Node>& fromNode, 
-				const std::shared_ptr<I_Node>& toNode
-			) :
-				m_fromNode(fromNode),
-				m_toNode(toNode)
-			{ }
-
-			EdgeBase::EdgeBase(
-				const std::shared_ptr<I_Node>& fromNode,
 				const std::shared_ptr<I_Node>& toNode,
-				const std::shared_ptr<I_PriorityController> priorityController
+				const float priority
 			) :
 				m_fromNode(fromNode),
 				m_toNode(toNode),
-				m_priorityContorller(priorityController)
+				m_priority(priority)
 			{ }
 
-			void EdgeBase::SetPriority(const float priority) { m_priorityContorller->SetPriority(priority); }
+			float EdgeBase::CalculatePriority() {
+				//—Dæ“x‚ÌŒvŽZ
+				for (auto& priorityController : m_priorityControllers) {
+					priorityController->CalculatePriority();
+				}
 
-			float EdgeBase::GetPriority() const { 
-				//if (!GetToNode()->CanTransition()) {	
-				//	return FLT_MAX;	//‘JˆÚ‚Å‚«‚È‚¢‚Ì‚È‚çA—Dæ‡ˆÊ‚ðÅ’á’l‚Æ‚µ‚Ä•Ô‚·B
-				//}
-
-				return m_priorityContorller->GetPriority();
+				return GetPriority();
 			}
 
-			void EdgeBase::SetPriorityController(const std::shared_ptr<I_PriorityController>& priorityController) {
-				m_priorityContorller = priorityController;
+			void EdgeBase::AddPriorityController(const std::shared_ptr<I_PriorityController>& priorityController) {
+				m_priorityControllers.push_back(priorityController);
 			}
-
-			std::shared_ptr<I_PriorityController> EdgeBase::GetPriorityContorller() const {
-				return m_priorityContorller;
-			}
-
 		}
 	}
 }
