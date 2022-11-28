@@ -9,7 +9,6 @@
 #include "stdafx.h"
 
 #include "StatorBase.h"
-#include "Maruyama/Enemy/StateMachine/EnemyMainStateMachine.h"
 
 namespace basecross {
 

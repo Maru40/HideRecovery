@@ -13,7 +13,7 @@
 #include "AIPlayerStator.h"
 
 #include "Maruyama/Enemy/Component/EnemyBase.h"
-#include "Maruyama/Enemy/StateMachine/EnemyMainStateMachine.h"
+#include "Maruyama/Utility/StateMachine/StateMachine.h"
 
 #include "Maruyama/Enemy/Component/Stator/StateNode/StateNode_HidePlacePatrol.h"
 #include "Maruyama/Enemy/Component/Stator/StateNode/StateNode_Buttle.h"
