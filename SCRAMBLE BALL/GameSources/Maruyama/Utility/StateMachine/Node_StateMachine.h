@@ -159,5 +159,26 @@ namespace basecross {
 
 		};
 
+		namespace StateNode {
+
+			template<class OwnerType>
+			class EmptyNode : public NodeBase_StateMachine<OwnerType>
+			{
+			public:
+				EmptyNode(const int index, const std::shared_ptr<OwnerType>& owner) :
+					NodeBase_StateMachine(index, owner)
+				{}
+
+				virtual ~EmptyNode() = default;
+
+				void OnStart() override {}
+
+				bool OnUpdate() override { return true; }
+
+				void OnExit() override {}
+			};
+
+		}
+
 	}
 }
