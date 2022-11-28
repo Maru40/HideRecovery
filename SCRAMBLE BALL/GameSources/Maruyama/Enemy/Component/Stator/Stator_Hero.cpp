@@ -119,7 +119,7 @@ namespace basecross {
 			auto enemy = GetGameObject()->GetComponent<EnemyBase>();
 
 			//Start(¶¬’†)
-			m_stateMachine->AddNode(State::Start, nullptr);
+			//m_stateMachine->AddNode(State::Start, nullptr);
 
 			////œpœj
 			//m_stateMachine->AddNode(
