@@ -44,7 +44,7 @@ namespace basecross {
 		}
 
 		void AIPlayerBehaviorTree::CreateEdge() {
-			using PriorityControllerBase = maru::Behavior::PriorityControllerBase;
+			//using PriorityControllerBase = maru::Behavior::PriorityControllerBase;
 
 			//初回セレクター
 			//m_behaviorTree->AddEdge(BehaviorType::FirstSelecter, BehaviorType::PlowlingSelecter, std::make_shared<PriorityControllerBase>(0.0f));
