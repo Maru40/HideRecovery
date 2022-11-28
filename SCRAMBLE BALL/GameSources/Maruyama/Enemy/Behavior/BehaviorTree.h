@@ -40,7 +40,6 @@ namespace basecross {
 			class I_PriorityController;
 			class I_Task;
 
-			class I_Selecter;
 			class Selecter;
 
 			//--------------------------------------------------------------------------------------
@@ -444,9 +443,6 @@ namespace basecross {
 					auto nextNode = selecter->SearchCurrentNode();
 					if (!nextNode) {	//ノードが存在しないなら、手前のノードに戻る。
 						PopCurrentStack();
-						//if (m_currentStack.empty()) {
-						//	return GetNode(m_firstNodeType);	//バグ
-						//}
 						return ReverseStack(m_currentStack.top().lock());
 					}
 
