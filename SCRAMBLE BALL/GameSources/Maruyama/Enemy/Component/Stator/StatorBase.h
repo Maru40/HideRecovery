@@ -8,13 +8,17 @@
 #pragma once
 #include "stdafx.h"
 
+#include "Maruyama/Utility/StateMachine/StateMachine.h"
+
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
 	///	前方宣言
 	//--------------------------------------------------------------------------------------
-	template<class node_type, class EnumType, class TransitionType>
-	class EnemyMainStateMachine;
+	namespace maru {
+		template<class EnumType, class OwnerType, class TransitionStructMember>
+		class StateMachine;
+	}
 
 	namespace Enemy {
 		
@@ -25,6 +29,8 @@ namespace basecross {
 		class I_Stator_EnumType 
 		{
 		public:
+			virtual ~I_Stator_EnumType() = default;
+
 			/// <summary>
 			/// ステートの切り替え
 			/// </summary>
@@ -59,6 +65,8 @@ namespace basecross {
 		class I_Stator_TransitionType
 		{
 		public:
+			virtual ~I_Stator_TransitionType() = default;
+
 			/// <summary>
 			/// 遷移条件用のメンバーを取得
 			/// </summary>
@@ -72,7 +80,7 @@ namespace basecross {
 		template<class EnumType, class TransitionMember>
 		class I_Stator : public I_Stator_EnumType<EnumType>, public I_Stator_TransitionType<TransitionMember>
 		{
-
+			//virtual ~I_Stator() = default;
 		};
 
 		//--------------------------------------------------------------------------------------
@@ -82,7 +90,7 @@ namespace basecross {
 		class StatorBase : public Component, public I_Stator<EnumType, TransitionMember>
 		{
 		public:
-			using StateMachine = EnemyMainStateMachine<NodeType, EnumType, TransitionMember>;
+			using StateMachine = maru::StateMachine<NodeType, EnumType, TransitionMember>;
 
 		protected:
 			std::unique_ptr<StateMachine> m_stateMachine = nullptr;  //ステートマシン

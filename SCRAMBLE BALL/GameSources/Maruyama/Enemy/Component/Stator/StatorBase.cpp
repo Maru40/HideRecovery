@@ -9,6 +9,7 @@
 #include "Project.h"
 
 #include "Maruyama/Enemy/StateMachine/EnemyMainStateMachine.h"
+#include "Maruyama/Utility/StateMachine/StateMachine.h"
 
 #include "StatorBase.h"
 
