@@ -55,31 +55,19 @@ namespace basecross {
 				/// 優先度の設定
 				/// </summary>
 				/// <param name="priority">優先度</param>
-				virtual void SetPriority(const float priority) = 0;
+				virtual void SetPriority(const float priority) noexcept = 0;
 
 				/// <summary>
 				/// 優先度の取得
 				/// </summary>
 				/// <returns>優先度</returns>
-				virtual float GetPriority() const = 0;
+				virtual float GetPriority() const noexcept = 0;
 
 				/// <summary>
 				/// 優先度の計算
 				/// </summary>
 				/// <returns>計算後の優先度</returns>
 				virtual float CalculatePriority() = 0;
-
-				/// <summary>
-				/// 優先順位コントローラーの設定
-				/// </summary>
-				/// <param name="priorityController">優先順位コントローラー</param>
-				virtual void SetPriorityController(const std::shared_ptr<I_PriorityController>& priorityController) = 0;
-
-				/// <summary>
-				/// 優先順位コントローラーの取得
-				/// </summary>
-				/// <returns>優先順位コントローラー</returns>
-				virtual std::shared_ptr<I_PriorityController> GetPriorityContorller() const = 0;
 			};
 
 			//--------------------------------------------------------------------------------------
@@ -87,20 +75,22 @@ namespace basecross {
 			//--------------------------------------------------------------------------------------
 			class EdgeBase : public I_Edge
 			{
+			public:
+				using PriorityControllers = std::vector<std::shared_ptr<I_PriorityController>>;	//優先度管理群
+
+			private:
 				std::weak_ptr<I_Node> m_fromNode;	//自分の手前のノード
 				std::weak_ptr<I_Node> m_toNode;		//自分の先のノード
-				std::shared_ptr<I_PriorityController> m_priorityContorller;	//優先度管理
+
+				float m_priority;					//優先度
+				
+				PriorityControllers m_priorityControllers;	//優先度管理群
 
 			public:
 				EdgeBase(
 					const std::shared_ptr<I_Node>& fromNode, 
-					const std::shared_ptr<I_Node>& toNode
-				);
-
-				EdgeBase(
-					const std::shared_ptr<I_Node>& fromNode,
 					const std::shared_ptr<I_Node>& toNode,
-					const std::shared_ptr<I_PriorityController> priorityController
+					const float priority
 				);
 
 				virtual ~EdgeBase() = default;
@@ -113,15 +103,27 @@ namespace basecross {
 
 				std::shared_ptr<I_Node> GetToNode() const override { return m_toNode.lock(); }
 
-				void SetPriority(const float priority) override;
+				void SetPriority(const float priority) noexcept override { m_priority = priority; };
 
-				float GetPriority() const override;
+				float GetPriority() const noexcept override { return m_priority; }
 
 				float CalculatePriority() override;
 
-				virtual void SetPriorityController(const std::shared_ptr<I_PriorityController>& priorityController) override;
+				/// <summary>
+				/// 優先度管理を追加
+				/// </summary>
+				template<class T, class... Ts,
+					std::enable_if_t<
+						std::is_base_of_v<I_PriorityController, T> &&	//基底クラス
+						std::is_constructible_v<T, Ts...>,				//コンストラクタ
+					std::nullptr_t> = nullptr
+				>
+				std::shared_ptr<T> AddPriorityController(Ts&&... params) {
+					auto newController = std::make_shared<T>(params...);
+					m_priorityControllers(newController);
 
-				virtual std::shared_ptr<I_PriorityController> GetPriorityContorller() const override;
+					return newController;
+				}
 			};
 
 		}
