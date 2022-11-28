@@ -286,7 +286,10 @@ namespace basecross {
 				/// エッジの追加
 				/// </summary>
 				template<class T, class... Ts,
-					std::enable_if_t<std::is_constructible_v<T, Ts...>, std::nullptr_t> = nullptr>
+					std::enable_if_t<
+						std::is_constructible_v<T, Ts...>, 
+					std::nullptr_t> = nullptr
+				>
 				void AddEdge(Ts&&... params) {
 					std::shared_ptr<I_Edge> newEdge = std::make_shared<T>(params...);
 					Union(newEdge);
@@ -300,9 +303,9 @@ namespace basecross {
 				/// </summary>
 				/// <param name="fromType">手前のノードタイプ</param>
 				/// <param name="toType">遷移先のノードタイプ</param>
-				void AddEdge(const EnumType fromType, const EnumType toType, const std::shared_ptr<I_PriorityController>& priorityController) {
-					AddEdge<EdgeBase>(GetNode(fromType), GetNode(toType), priorityController);
-				}
+				//void AddEdge(const EnumType fromType, const EnumType toType, const std::shared_ptr<I_PriorityController>& priorityController) {
+				//	AddEdge<EdgeBase>(GetNode(fromType), GetNode(toType), priorityController);
+				//}
 
 				/// <summary>
 				/// エッジの追加
@@ -311,7 +314,7 @@ namespace basecross {
 				/// <param name="toType">遷移先のノードタイプ</param>
 				/// <param name="priority">優先度</param>
 				void AddEdge(const EnumType fromType, const EnumType toType, const float priority) {
-					AddEdge(fromType, toType, std::make_shared<PriorityControllerBase>(priority));
+					AddEdge<EdgeBase>(GetNode(fromType), GetNode(toType), priority);
 				}
 
 				/// <summary>
