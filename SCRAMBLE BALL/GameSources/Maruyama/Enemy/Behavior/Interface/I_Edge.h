@@ -64,6 +64,12 @@ namespace basecross {
 				virtual float GetPriority() const = 0;
 
 				/// <summary>
+				/// 優先度の計算
+				/// </summary>
+				/// <returns>計算後の優先度</returns>
+				virtual float CalculatePriority() = 0;
+
+				/// <summary>
 				/// 優先順位コントローラーの設定
 				/// </summary>
 				/// <param name="priorityController">優先順位コントローラー</param>
@@ -110,6 +116,8 @@ namespace basecross {
 				void SetPriority(const float priority) override;
 
 				float GetPriority() const override;
+
+				float CalculatePriority() override;
 
 				virtual void SetPriorityController(const std::shared_ptr<I_PriorityController>& priorityController) override;
 

@@ -44,6 +44,10 @@ namespace basecross {
 				return m_priorityContorller->GetPriority();
 			}
 
+			float EdgeBase::CalculatePriority() {
+				return m_priorityContorller->CalculatePriority();
+			}
+
 			void EdgeBase::SetPriorityController(const std::shared_ptr<I_PriorityController>& priorityController) {
 				m_priorityContorller = priorityController;
 			}
