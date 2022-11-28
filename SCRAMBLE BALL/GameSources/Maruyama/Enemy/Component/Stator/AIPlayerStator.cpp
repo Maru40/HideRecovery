@@ -129,22 +129,22 @@ namespace basecross {
 			auto enemy = GetGameObject()->GetComponent<EnemyBase>();
 
 			//None状態
-			m_stateMachine->AddNode(StateType::None, nullptr);
+			m_stateMachine->AddNode<maru::StateNode::EmptyNode<Enemy::EnemyBase>>(StateType::None, enemy);
 
 			//隠し場所を探す状態
-			m_stateMachine->AddNode(StateType::HidePlacePatrol, std::make_shared<StateNode::HidePlacePatrol>(enemy));
+			m_stateMachine->AddNode<StateNode::HidePlacePatrol>(StateType::HidePlacePatrol, enemy);
 
 			//バトル
-			m_stateMachine->AddNode(StateType::Buttle, std::make_shared<StateNode::Buttle>(enemy));
+			m_stateMachine->AddNode<StateNode::Buttle>(StateType::Buttle, enemy);
 
 			//ゴール中
-			m_stateMachine->AddNode(StateType::Goal, std::make_shared<StateNode::Goal>(enemy));
+			m_stateMachine->AddNode<StateNode::Goal>(StateType::Goal, enemy);
 
 			//死亡中
-			m_stateMachine->AddNode(StateType::Dyning, std::make_shared<StateNode::Dyning>(enemy));
+			m_stateMachine->AddNode<StateNode::Dyning>(StateType::Dyning, enemy);
 
 			//死亡
-			m_stateMachine->AddNode(StateType::Dead, std::make_shared<StateNode::Dead>(enemy));
+			m_stateMachine->AddNode<StateNode::Dead>(StateType::Dead, enemy);
 		}
 
 		void AIPlayerStator::CreateEdge() {
