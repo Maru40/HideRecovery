@@ -15,6 +15,15 @@
 namespace basecross {
 
 	namespace maru {
+		//--------------------------------------------------------------------------------------
+		/// 前方宣言
+		//--------------------------------------------------------------------------------------
+		template<class OnwerType>
+		class NodeBase_StateMachine;
+
+		class I_StateNode;
+
+		class NodeBase;
 
 		//--------------------------------------------------------------------------------------
 		/// ステートマシン用のエッジクラス
@@ -43,8 +52,11 @@ namespace basecross {
 			/// </summary>
 			/// <param name="from">手前のインデックス</param>
 			/// <param name="to">先のインデックス</param>
-			Edge_StateMachine(const EnumType from, const EnumType to)
-				:StateEdgeBase(from, to, nullptr)
+			Edge_StateMachine(
+				const std::shared_ptr<NodeBase>& fromNode,
+				const std::shared_ptr<NodeBase>& toNode
+			) :
+				StateEdgeBase(fromNode, toNode, nullptr)
 			{}
 
 			/// <summary>
@@ -54,11 +66,11 @@ namespace basecross {
 			/// <param name="to">先のインデックス</param>
 			/// <param name="isTransitionFunc">遷移条件関数</param>
 			Edge_StateMachine(
-				const EnumType from,
-				const EnumType to,
+				const std::shared_ptr<NodeBase>& fromNode,
+				const std::shared_ptr<NodeBase>& toNode,
 				const IsTransitionFunction& isTransitionFunc
 			) :
-				StateEdgeBase(from, to, isTransitionFunc, static_cast<int>(to))
+				StateEdgeBase(fromNode, toNode, isTransitionFunc, static_cast<int>(to))
 			{}
 
 			/// <summary>
@@ -69,12 +81,12 @@ namespace basecross {
 			/// <param name="isTransitionFunc">遷移条件関数</param>
 			/// <param name="priority">優先度</param>
 			Edge_StateMachine(
-				const EnumType from,
-				const EnumType to,
+				const std::shared_ptr<NodeBase>& fromNode,
+				const std::shared_ptr<NodeBase>& toNode,
 				const IsTransitionFunction& isTransitionFunc,
 				const int priority
 			) :
-				StateEdgeBase(from, to, isTransitionFunc, static_cast<int>(to), false)
+				Edge_StateMachine(fromNode, toNode, isTransitionFunc, toNode->GetIndex(), false)
 			{}
 
 			/// <summary>
@@ -86,17 +98,19 @@ namespace basecross {
 			/// <param name="priority">優先度</param>
 			/// <param name="isEndTransition">更新処理終了時に判断するかどうか</param>
 			Edge_StateMachine(
-				const EnumType from,
-				const EnumType to,
+				const std::shared_ptr<NodeBase>& fromNode,
+				const std::shared_ptr<NodeBase>& toNode,
 				const IsTransitionFunction& isTransitionFunc,
 				const int priority,
 				const bool isEndTransition
 			) :
-				GraphEdgeBase((int)from, (int)to),
+				EdgeBase(fromNode, toNode),
 				m_isTransitionFunc(isTransitionFunc),
 				m_priority(priority),
 				m_isEndTransition(isEndTransition)
 			{}
+
+			virtual ~Edge_StateMachine() = default;
 
 			//--------------------------------------------------------------------------------------
 			///	アクセッサ

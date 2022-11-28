@@ -32,7 +32,7 @@ namespace basecross {
 		namespace StateNode {
 
 			Buttle::Buttle(const std::shared_ptr<EnemyBase>& owner):
-				EnemyStateNodeBase(owner),
+				NodeBase_StateMachine(owner),
 				m_behaviorTree(new ButtleTree(owner->GetGameObject()))
 			{
 				auto object = owner->GetGameObject();

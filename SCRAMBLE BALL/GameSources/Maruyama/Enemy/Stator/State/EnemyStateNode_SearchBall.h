@@ -26,33 +26,33 @@ namespace basecross {
 
 		namespace StateNode {
 
-			enum class StateType_SearchBall {
-				
-			};
+			//enum class StateType_SearchBall {
+			//	
+			//};
 
-			struct TransitionMember_SearchBall {
+			//struct TransitionMember_SearchBall {
 
-			};
+			//};
 
-			class SearchBall : public maru::NodeBase_StateMachine<EnemyBase>
-			{	
-			public:
-				using StateType = StateType_SearchBall;
-				using TransitionMember = TransitionMember_SearchBall;
-				using StateMachine = maru::StateMachine<StateType, EnemyBase, TransitionMember>;
+			//class SearchBall : public maru::NodeBase_StateMachine<EnemyBase>
+			//{	
+			//public:
+			//	using StateType = StateType_SearchBall;
+			//	using TransitionMember = TransitionMember_SearchBall;
+			//	using StateMachine = maru::StateMachine<StateType, EnemyBase, TransitionMember>;
 
-			private:
-				std::unique_ptr<StateMachine> m_stateMachine;
+			//private:
+			//	std::unique_ptr<StateMachine> m_stateMachine;
 
-			public:
-				SearchBall(const std::shared_ptr<EnemyBase>& owner);
+			//public:
+			//	SearchBall(const std::shared_ptr<EnemyBase>& owner);
 
-				void OnStart() override;
+			//	void OnStart() override;
 
-				bool OnUpdate() override;
+			//	bool OnUpdate() override;
 
-				void OnExit() override;
-			};
+			//	void OnExit() override;
+			//};
 
 		}
 

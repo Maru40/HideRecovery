@@ -20,6 +20,8 @@ namespace basecross {
 		/// エッジのインターフェース
 		//--------------------------------------------------------------------------------------
 		class I_Edge {
+			//virtual ~I_Edge() = default;
+
 			virtual void SetFromIndex(const int index) noexcept = 0;
 
 			virtual int GetFromIndex() const noexcept = 0;
@@ -40,12 +42,14 @@ namespace basecross {
 		//--------------------------------------------------------------------------------------
 		class EdgeBase : public I_Edge
 		{
-			std::weak_ptr<NodeBase> m_fromNode;
-			std::weak_ptr<NodeBase> m_toNode;
+			std::weak_ptr<NodeBase> m_fromNode;	//手前のノード
+			std::weak_ptr<NodeBase> m_toNode;	//先のノード
 
 		public:
 			EdgeBase();
 			EdgeBase(const std::shared_ptr<NodeBase>& fromNode, const std::shared_ptr<NodeBase>& toNode);
+
+			virtual ~EdgeBase() = default;
 
 		public:
 			//--------------------------------------------------------------------------------------

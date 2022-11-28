@@ -8,7 +8,7 @@
 #pragma once
 #include "stdafx.h"
 
-#include "Maruyama/Enemy/StateMachine/EnemyStateNodeBase.h"
+#include "Maruyama/Utility/StateMachine/Node_StateMachine.h"
 
 namespace basecross {
 
@@ -44,7 +44,7 @@ namespace basecross {
 			//--------------------------------------------------------------------------------------
 			///	隠し場所を探すステート
 			//--------------------------------------------------------------------------------------
-			class HidePlacePatrol : public EnemyStateNodeBase<EnemyBase>
+			class HidePlacePatrol : public maru::NodeBase_StateMachine<EnemyBase>
 			{
 			public:
 				using HidePlacePatrolTree = maru::Behavior::SubBehavior::HidePlacePatrolTree;

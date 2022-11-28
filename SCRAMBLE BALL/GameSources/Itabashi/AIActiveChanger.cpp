@@ -5,6 +5,7 @@
 #include "Maruyama/Enemy/Component/SelfAstarNodeController.h"
 #include "Maruyama/Utility/Component/TargetManager.h"
 #include "Maruyama/Enemy/Component/AIVirtualController.h"
+#include "Maruyama/Utility/StateMachine/StateMachine.h"
 #include "Maruyama/Enemy/Component/Stator/AIPlayerStator.h"
 #include "Maruyama/Player/Component/UseWeapon.h"
 #include "Itabashi/ObjectMover.h"

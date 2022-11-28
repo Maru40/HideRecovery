@@ -34,13 +34,13 @@ namespace basecross {
 		//--------------------------------------------------------------------------------------
 		/// ステートマシン用の新規クラス(完成したら、前回の削除)
 		//--------------------------------------------------------------------------------------
-		template<class EnumType, class OwnerType, class TransitionStructMember>
+		template<class OwnerType, class EnumType, class TransitionStructMember>
 		class StateMachine
 		{
 		public:
 			using NodeType = NodeBase_StateMachine<OwnerType>;
 			using EdgeType = Edge_StateMachine<EnumType, TransitionStructMember>;
-			using GraphType = GraphBase<EnumType, NodeType, EdgeType>;
+			using GraphType = maru::GraphBase<EnumType, NodeType, EdgeType>;
 
 			//--------------------------------------------------------------------------------------
 			///	遷移先候補のパラメータ
@@ -96,6 +96,22 @@ namespace basecross {
 				}
 			}
 
+			/// <summary>
+			/// ノードの追加
+			/// </summary>
+			/// <param name="type">ノードのEnumType</param>
+			/// <param name="node">追加するノード</param>
+			void AddNode(const EnumType type, const std::shared_ptr<NodeType>& node) {
+				if (IsEmpty()) {
+					m_currentNodeType = type;
+					if (node) {
+						node->OnStart();
+					}
+				}
+
+				m_graph->AddNode(type, node);
+			}
+
 		public:
 			/// <summary>
 			/// コンストラクタ
@@ -118,17 +134,62 @@ namespace basecross {
 			/// <summary>
 			/// ノードの追加
 			/// </summary>
-			/// <param name="type">ノードのEnumType</param>
-			/// <param name="node">追加するノード</param>
-			void AddNode(const EnumType type, const std::shared_ptr<NodeType>& node) {
-				if (IsEmpty()) {
-					m_currentNodeType = type;
-					if (node) {
-						node->OnStart();
-					}
-				}
+			/// <param name="type">ノードのタイプ</param>
+			template<class T, class... Ts,
+				std::enable_if_t<
+					std::is_base_of_v<const NodeType, T> &&			//基底クラスの制限
+					std::is_constructible_v<T, const int, Ts...>,	//コンストラクタの監視
+				std::nullptr_t> = nullptr
+			>
+			void AddNode(const EnumType type, Ts&&... params) {
+				int typeInt = static_cast<int>(type);
+				auto newNode = std::make_shared<T>(typeInt, params...);
 
-				m_graph->AddNode(type, node);
+				AddNode(type, newNode);
+			}
+
+			/// <summary>
+			/// ノードの追加
+			/// </summary>
+			/// <param name="type">ノードのタイプ</param>
+			template<class T, class... Ts,
+				std::enable_if_t<
+					std::is_base_of_v<const NodeType, T>&&			//基底クラスの制限
+					std::is_constructible_v<T, Ts...>,				//コンストラクタの監視
+				std::nullptr_t> = nullptr
+			>
+			void AddNode(const EnumType type, Ts&&... params) {
+				auto newNode = std::make_shared<T>(params...);
+				newNode->SetIndex(static_cast<int>(type));
+
+				AddNode(type, newNode);
+			}
+
+			/// <summary>
+			/// エッジの追加
+			/// </summary>
+			/// <param name="edge">追加したいエッジ</param>
+			void AddEdge(const std::shared_ptr<EdgeType>& edge) {
+				m_graph->AddEdge(edge);
+			}
+
+			/// <summary>
+			/// エッジの追加
+			/// </summary>
+			/// <param name="from">元のタイプ</param>
+			/// <param name="to">遷移先のタイプ</param>
+			/// <param name="isTransitionFunc">遷移条件</param>
+			/// <param name="isEndTransition">終了時に遷移するかどうか</param>
+			void AddEdge(
+				const EnumType from, const EnumType to,
+				const std::function<bool(const TransitionStructMember& transition)>& isTransitionFunc,
+				const bool isEndTransition = false)
+			{
+				auto fromNode = GetNode(from);
+				auto toNode = GetNode(to);
+
+				auto newEdge = std::make_shared<EdgeType>(fromNode, toNode, isTransitionFunc, static_cast<int>(to), isEndTransition);
+				AddEdge(newEdge);
 			}
 
 			/// <summary>
@@ -186,7 +247,7 @@ namespace basecross {
 			/// </summary>
 			/// <param name="type">切り替えたいステート</param>
 			/// <param name="priority">優先度</param>
-			void ChangeState(const EnumType& type, const int& priority) {
+			void ChangeState(const EnumType& type, const int priority) {
 				m_transitionCandidates.push_back(TransitionCandidateParametor(type, priority));
 			}
 
@@ -281,7 +342,8 @@ namespace basecross {
 				//遷移先候補のソート
 				std::sort(m_transitionCandidates.begin(), m_transitionCandidates.end(),
 					[](const TransitionCandidateParametor& left, const TransitionCandidateParametor& right)
-					{ return left.priority > right.priority ? true : false; }); //優先度が高い順から遷移する。
+					{ return left.priority > right.priority ? true : false; }
+				); //優先度が高い順から遷移する。
 
 				ChangeState(m_transitionCandidates[0].type);
 			}

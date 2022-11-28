@@ -75,20 +75,20 @@ namespace basecross {
 			SettingParametor();
 			auto enemy = GetGameObject()->GetComponent<EnemyBase>();
 
-			//Start(¶¬’†)
-			m_stateMachine->AddNode(State::Start, nullptr);
+			////Start(¶¬’†)
+			//m_stateMachine->AddNode(State::Start, nullptr);
 
-			//œpœj
-			m_stateMachine->AddNode(
-				State::Plowling, std::make_shared<Enemy::StateNode::Plowling>(enemy, m_paramPtr->plowlingParamPtr));
+			////œpœj
+			//m_stateMachine->AddNode(
+			//	State::Plowling, std::make_shared<Enemy::StateNode::Plowling>(enemy, m_paramPtr->plowlingParamPtr));
 		}
 
 		void Stator_Villain::CreateEdge() {
 			using namespace UtilityStator;
 
-			//Start
-			m_stateMachine->AddEdge(State::Start, State::Plowling,
-				[&](const TransitionMember& member) { return GameManager::GetInstance()->GetCurrentState() == GameManager::State::Game; });
+			////Start
+			//m_stateMachine->AddEdge(State::Start, State::Plowling,
+			//	[&](const TransitionMember& member) { return GameManager::GetInstance()->GetCurrentState() == GameManager::State::Game; });
 
 		}
 

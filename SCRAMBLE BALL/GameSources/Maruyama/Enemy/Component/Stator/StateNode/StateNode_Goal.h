@@ -9,6 +9,7 @@
 #include "stdafx.h"
 
 #include "Maruyama/Enemy/StateMachine/EnemyStateNodeBase.h"
+#include "Maruyama/Utility/StateMachine/Node_StateMachine.h"
 
 namespace basecross {
 
@@ -39,7 +40,7 @@ namespace basecross {
 
 		namespace StateNode {
 
-			class Goal : public EnemyStateNodeBase<EnemyBase>
+			class Goal : public maru::NodeBase_StateMachine_Ex<EnemyBase>
 			{
 				std::weak_ptr<GoalAnimationController> m_goalAnimationController;
 

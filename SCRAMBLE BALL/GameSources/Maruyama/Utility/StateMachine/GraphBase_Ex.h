@@ -135,7 +135,8 @@ namespace basecross {
 			/// </summary>
 			/// <param name="edge">í«â¡ÇµÇΩÇ¢ÉGÉbÉW</param>
 			void AddEdge(const std::shared_ptr<EdgeType>& edge) {
-				m_edgesMap[edge->GetFromType<EnumType>()].push_back(edge);
+				auto type = static_cast<EnumType>(edge->GetFromIndex());
+				m_edgesMap[type].push_back(edge);
 			}
 
 			/// <summary>

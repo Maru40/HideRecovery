@@ -119,38 +119,38 @@ namespace basecross {
 			auto enemy = GetGameObject()->GetComponent<EnemyBase>();
 
 			//Start(¶¬’†)
-			m_stateMachine->AddNode(State::Start, nullptr);
+			//m_stateMachine->AddNode(State::Start, nullptr);
 
-			//œpœj
-			m_stateMachine->AddNode(
-				State::Plowling, std::make_shared<Enemy::StateNode::Plowling>(enemy, m_paramPtr->plowlingParamPtr));
+			////œpœj
+			//m_stateMachine->AddNode(
+			//	State::Plowling, std::make_shared<Enemy::StateNode::Plowling>(enemy, m_paramPtr->plowlingParamPtr));
 
-			//’Ç]
-			m_stateMachine->AddNode(
-				State::Chase, std::make_shared<Enemy::StateNode::Chase>(enemy, m_paramPtr->chaseParamPtr));
+			////’Ç]
+			//m_stateMachine->AddNode(
+			//	State::Chase, std::make_shared<Enemy::StateNode::Chase>(enemy, m_paramPtr->chaseParamPtr));
 		}
 
 		void Stator_Hero::CreateEdge() {
 			using namespace UtilityStator;
 
-			//Start
-			m_stateMachine->AddEdge(State::Start, State::Plowling,
-				[&](const TransitionMember& member) { return GameManager::GetInstance()->GetCurrentState() == GameManager::State::Game; });
+			////Start
+			//m_stateMachine->AddEdge(State::Start, State::Plowling,
+			//	[&](const TransitionMember& member) { return GameManager::GetInstance()->GetCurrentState() == GameManager::State::Game; });
 
-			//Plowling
-			m_stateMachine->AddEdge(State::Plowling, State::Chase, [&](const TransitionMember& member) { return IsInEyeRangeTarget(member); });
+			////Plowling
+			//m_stateMachine->AddEdge(State::Plowling, State::Chase, [&](const TransitionMember& member) { return IsInEyeRangeTarget(member); });
 
-			//Chase
-			m_stateMachine->AddEdge(State::Chase, State::Plowling, 
-				[&](const TransitionMember& member) { 
-					//ƒ^[ƒQƒbƒg‚ª‘¶Ý‚·‚é‚©‚Ç‚¤‚©
-					if (auto targetManager = GetGameObject()->GetComponent<TargetManager>(false)) {
-						return !targetManager->HasTarget();
-					}
+			////Chase
+			//m_stateMachine->AddEdge(State::Chase, State::Plowling, 
+			//	[&](const TransitionMember& member) { 
+			//		//ƒ^[ƒQƒbƒg‚ª‘¶Ý‚·‚é‚©‚Ç‚¤‚©
+			//		if (auto targetManager = GetGameObject()->GetComponent<TargetManager>(false)) {
+			//			return !targetManager->HasTarget();
+			//		}
 
-					return false;
-				}
-			);
+			//		return false;
+			//	}
+			//);
 
 		}
 

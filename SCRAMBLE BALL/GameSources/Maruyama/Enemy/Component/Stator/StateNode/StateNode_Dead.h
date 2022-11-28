@@ -9,6 +9,7 @@
 #include "stdafx.h"
 
 #include "Maruyama/Enemy/StateMachine/EnemyStateNodeBase.h"
+#include "Maruyama/Utility/StateMachine/Node_StateMachine.h"
 
 namespace basecross {
 
@@ -38,7 +39,7 @@ namespace basecross {
 
 		namespace StateNode {
 
-			class Dead : public EnemyStateNodeBase<EnemyBase>
+			class Dead : public maru::NodeBase_StateMachine<EnemyBase>
 			{
 			public:
 				Dead(const std::shared_ptr<EnemyBase>& owner);

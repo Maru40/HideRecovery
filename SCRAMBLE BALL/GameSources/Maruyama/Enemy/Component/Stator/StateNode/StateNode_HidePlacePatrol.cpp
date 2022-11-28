@@ -38,7 +38,7 @@ namespace basecross {
 		namespace StateNode {
 
 			HidePlacePatrol::HidePlacePatrol(const std::shared_ptr<EnemyBase>& owner) :
-				EnemyStateNodeBase(owner),
+				NodeBase_StateMachine(owner),
 				m_behaviorTree(new HidePlacePatrolTree(owner->GetGameObject())),
 				m_observeButtleTarget(new ObserveIsInEyeTarget(owner->GetGameObject()->GetComponent<EyeSearchRange>(false)))
 			{

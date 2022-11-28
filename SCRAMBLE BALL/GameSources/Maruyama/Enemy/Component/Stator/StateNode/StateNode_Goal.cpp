@@ -20,7 +20,7 @@ namespace basecross {
 		namespace StateNode {
 
 			Goal::Goal(const std::shared_ptr<EnemyBase>& owner):
-				EnemyStateNodeBase(owner)
+				NodeBase_StateMachine_Ex(owner)
 			{
 				auto object = owner->GetGameObject();
 

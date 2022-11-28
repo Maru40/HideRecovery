@@ -76,6 +76,10 @@ namespace basecross {
 
 			//Ž‹ŠE”ÍˆÍ“à‚È‚çA‘JˆÚ‚Å‚«‚éB
 			auto target = weakTarget.lock();
+			if (!target) {
+				continue;
+			}
+
 			auto targetPosition = target->GetComponent<Transform>()->GetPosition();
 			if (eyeRange->IsInEyeRange(targetPosition)) {
 				result.push_back(target);
