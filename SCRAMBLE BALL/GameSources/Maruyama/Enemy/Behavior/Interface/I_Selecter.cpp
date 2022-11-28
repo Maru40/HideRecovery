@@ -38,7 +38,7 @@ namespace basecross {
 			}
 
 			//--------------------------------------------------------------------------------------
-			/// ビヘイビアセレクターの改良型(開発途中のため、使用禁止)
+			/// ビヘイビアセレクター本体
 			//--------------------------------------------------------------------------------------
 
 			Selecter::Selecter():
@@ -84,7 +84,18 @@ namespace basecross {
 				}
 
 				auto transitionEdges = m_transitionEdges;		//メンバをソートするとconstにできないため、一時変数化
-				std::sort(transitionEdges.begin(), transitionEdges.end(), &SortEdges);	//昇順ソート
+
+				//エッジの優先度計算を先にする。
+				for (auto& weakEdge : transitionEdges) {
+					if (weakEdge.expired()) {	//存在しないなら
+						continue;
+					}
+
+					weakEdge.lock()->CalculatePriority();
+				}
+
+				//昇順ソート
+				std::sort(transitionEdges.begin(), transitionEdges.end(), &SortEdges);	
 
 				//並べ替えたノードが遷移できるかどうかを判断する。
 				for (const auto& edge : transitionEdges) {
