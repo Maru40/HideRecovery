@@ -48,11 +48,11 @@ namespace basecross {
 			}
 
 			void TesterTree::CreateEdge() {
-				m_behaviorTree->AddEdge(BehaviorType::First, BehaviorType::Selecter2, std::make_shared<PriorityControllerBase>(2.0f));
-				m_behaviorTree->AddEdge(BehaviorType::First, BehaviorType::Task1, std::make_shared<PriorityControllerBase>(1.0f));
+				//m_behaviorTree->AddEdge(BehaviorType::First, BehaviorType::Selecter2, std::make_shared<PriorityControllerBase>(2.0f));
+				//m_behaviorTree->AddEdge(BehaviorType::First, BehaviorType::Task1, std::make_shared<PriorityControllerBase>(1.0f));
 
-				m_behaviorTree->AddEdge(BehaviorType::Selecter2, BehaviorType::Task2, std::make_shared<PriorityControllerBase>(2.0f));
-				m_behaviorTree->AddEdge(BehaviorType::Selecter2, BehaviorType::Task3, std::make_shared<PriorityControllerBase>(1.0f));
+				//m_behaviorTree->AddEdge(BehaviorType::Selecter2, BehaviorType::Task2, std::make_shared<PriorityControllerBase>(2.0f));
+				//m_behaviorTree->AddEdge(BehaviorType::Selecter2, BehaviorType::Task3, std::make_shared<PriorityControllerBase>(1.0f));
 			}
 
 
