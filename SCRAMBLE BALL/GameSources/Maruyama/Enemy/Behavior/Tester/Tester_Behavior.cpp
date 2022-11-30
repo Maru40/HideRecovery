@@ -38,7 +38,7 @@ namespace basecross {
 			void TesterTree::CreateNode() {
 				m_behaviorTree->AddSelecter(BehaviorType::First, std::make_shared<Selecter>());
 
-				m_behaviorTree->AddSelecter(BehaviorType::Selecter2, std::make_shared<Selecter>());
+				m_behaviorTree->AddSelecter(BehaviorType::Selecter2, std::make_shared<Selecter>(Selecter::SelecterType::Sequence));
 
 				m_behaviorTree->AddTask(BehaviorType::Task1, std::make_shared<Task::TesterTaskFirst>());
 
@@ -48,6 +48,12 @@ namespace basecross {
 			}
 
 			void TesterTree::CreateEdge() {
+				m_behaviorTree->AddEdge(BehaviorType::First, BehaviorType::Selecter2, (int)BehaviorType::Selecter2);
+
+				m_behaviorTree->AddEdge(BehaviorType::Selecter2, BehaviorType::Task1, (int)BehaviorType::Task1);
+				m_behaviorTree->AddEdge(BehaviorType::Selecter2, BehaviorType::Task2, (int)BehaviorType::Task2);
+				m_behaviorTree->AddEdge(BehaviorType::Selecter2, BehaviorType::Task3, (int)BehaviorType::Task3);
+
 				//m_behaviorTree->AddEdge(BehaviorType::First, BehaviorType::Selecter2, std::make_shared<PriorityControllerBase>(2.0f));
 				//m_behaviorTree->AddEdge(BehaviorType::First, BehaviorType::Task1, std::make_shared<PriorityControllerBase>(1.0f));
 
