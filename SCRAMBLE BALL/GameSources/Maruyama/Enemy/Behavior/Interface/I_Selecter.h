@@ -28,7 +28,7 @@ namespace basecross {
 			//--------------------------------------------------------------------------------------
 			enum class SelectType {
 				Priority,	//優先度
-				//Sequence,	//シーケンス	//シーケンサーを別で用意するため、削除
+				Sequence,	//シーケンス
 				Random,		//ランダム
 			};
 
@@ -37,6 +37,9 @@ namespace basecross {
 			//--------------------------------------------------------------------------------------
 			class Selecter : public NodeBase
 			{
+			public:
+				using SelecterType = SelectType;
+
 			private:
 				std::weak_ptr<I_Node> m_currentNode;					//現在使用中のノード
 
@@ -66,6 +69,12 @@ namespace basecross {
 				/// </summary>
 				/// <returns>ランダムな遷移先</returns>
 				std::shared_ptr<I_Node> SearchRandomNode() const;
+
+				/// <summary>
+				/// シーケンサとしての遷移先を選ぶ
+				/// </summary>
+				/// <returns>シーケンサとしての遷移先</returns>
+				std::shared_ptr<I_Node> SearchSequenceNode() const;
 
 				/// <summary>
 				/// 現在使用中のノードを切り替える。
@@ -110,6 +119,12 @@ namespace basecross {
 				/// カレントノードが存在するかどうか
 				/// </summary>
 				bool HasCurrentNode() const noexcept { return !m_currentNode.expired(); }
+
+				/// <summary>
+				/// 現在のノードを設定
+				/// </summary>
+				/// <param name="node">設定するノード</param>
+				void SetCurrentNode(const std::shared_ptr<I_Node>& node) noexcept;
 
 				/// <summary>
 				/// 現在使用中のノードを返す
