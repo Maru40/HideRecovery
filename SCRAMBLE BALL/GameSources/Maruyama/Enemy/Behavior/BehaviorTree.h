@@ -198,7 +198,7 @@ namespace basecross {
 				/// <param name="node">遷移先を取得したいノード</param>
 				/// <returns>最優先の遷移先ノード</returns>
 				std::shared_ptr<I_Node> GetTransitionNode(const std::shared_ptr<I_Node>& node) {
-					//将来的にシーケンサ用の処理が入る。
+					//Selecterであることを保証する。
 					auto selecter = GetSelecter(node->GetType<EnumType>());
 					if (!selecter) {
 						return nullptr;
