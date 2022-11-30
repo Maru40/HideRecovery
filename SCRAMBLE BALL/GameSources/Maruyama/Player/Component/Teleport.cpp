@@ -161,6 +161,17 @@ namespace basecross {
 				auto moveEndEvent = [&, weakAnimator]() {
 					auto animator = weakAnimator.lock();
 					weakAnimator.lock()->ChangePlayerAnimation(PlayerAnimationState::State::EndTeleport);
+
+					//当たり判定復活
+					if (auto collision = GetGameObject()->GetComponent<CollisionObb>(false)) {
+						collision->SetUpdateActive(true);
+					}
+
+					//重力復活
+					if (auto gravity = GetGameObject()->GetComponent<Gravity>(false)) {
+						gravity->SetUpdateActive(true);
+					}
+
 					GetGameObject()->GetComponent<Transform>()->SetPosition(GetTeleportPosition());	//テレポート
 
 					auto playerObject = dynamic_pointer_cast<PlayerObject>(GetGameObject());
@@ -184,16 +195,6 @@ namespace basecross {
 					//表示
 					GetGameObject()->SetDrawActive(true);
 
-					//当たり判定復活
-					if (auto collision = GetGameObject()->GetComponent<CollisionObb>(false)) {
-						collision->SetUpdateActive(true);
-					}
-
-					//重力復活
-					if (auto gravity = GetGameObject()->GetComponent<Gravity>(false)) {
-						gravity->SetUpdateActive(true);
-					}
-
 					//音の再生
 					if (auto soundEmitter = m_soundEmmiter.lock()) {
 						soundEmitter->PlaySoundClip(m_teleportSoundClip);
@@ -203,7 +204,6 @@ namespace basecross {
 				//カメラを移動させる
 				auto mover = m_toTargetMove.lock();
 				if (mover) {
-
 					mover->MoveStart(m_cameraPosition, moveEndEvent);
 				}
 

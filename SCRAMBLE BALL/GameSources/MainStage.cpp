@@ -34,6 +34,8 @@
 #include "Itabashi/MainStageDisconnectUIController.h"
 #include "Itabashi/OnlineAliveChecker.h"
 
+#include "Maruyama/Enemy/Behavior/Tester/Object/BehaviorTesterObject.h"
+
 namespace basecross {
 	// wstring MainStage::sm_loadMapName = L"StageS1_Copy.csv";
 	wstring MainStage::sm_loadMapName = L"StageS2.csv";
@@ -124,12 +126,14 @@ namespace basecross {
 			// Mapの読み込み
 			CreateMap(sm_loadMapName);
 
-			Debug::GetInstance()->Log(L"入力------------------------------");
-			Debug::GetInstance()->Log(L"X  : 置く");
-			Debug::GetInstance()->Log(L"A  : 拾う");
-			Debug::GetInstance()->Log(L"B  : ブラフ");
-			Debug::GetInstance()->Log(L"↓ : 置く場所制限切り替え");
-			Debug::GetInstance()->Log(L"----------------------------------");
+			//AddGameObject<maru::Behavior::BehaviorTesterObject>();
+
+			//Debug::GetInstance()->Log(L"入力------------------------------");
+			//Debug::GetInstance()->Log(L"X  : 置く");
+			//Debug::GetInstance()->Log(L"A  : 拾う");
+			//Debug::GetInstance()->Log(L"B  : ブラフ");
+			//Debug::GetInstance()->Log(L"↓ : 置く場所制限切り替え");
+			//Debug::GetInstance()->Log(L"----------------------------------");
 		}
 		catch (...) {
 			throw;

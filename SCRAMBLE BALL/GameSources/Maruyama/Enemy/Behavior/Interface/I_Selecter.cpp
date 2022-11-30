@@ -14,6 +14,7 @@
 #include "Maruyama/TaskList/TaskList.h"
 
 #include "Maruyama/Utility/Random.h"
+#include "Maruyama/Utility/Utility.h"
 
 namespace basecross {
 	namespace maru {
@@ -47,7 +48,7 @@ namespace basecross {
 
 			Selecter::Selecter(const SelectType selectType) :
 				m_selectType(selectType)
-			{ }
+			{}
 
 			void Selecter::OnStart() {
 
@@ -62,8 +63,9 @@ namespace basecross {
 				for (auto& edge : m_transitionEdges) {
 					edge.lock()->GetToNode()->SetState(BehaviorState::Inactive);
 				}
-			}
 
+				SetCurrentNode(nullptr);	//ノードをnullptrに変更
+			}
 
 			std::shared_ptr<I_Node> Selecter::SearchCurrentNode() const {
 				switch (m_selectType)
@@ -72,12 +74,19 @@ namespace basecross {
 					return SearchFirstPriorityNode();
 				case maru::Behavior::SelectType::Random:
 					return SearchRandomNode();
+				case maru::Behavior::SelectType::Sequence:
+					return SearchSequenceNode();
 				}
 
 				return nullptr;
 			}
 
 			std::shared_ptr<I_Node> Selecter::SearchFirstPriorityNode() const {
+				//現在のステートがRunningなら、一度検索をしているため、終了。
+				if (IsState(BehaviorState::Running)) {
+					return nullptr;
+				}
+
 				//遷移先ノードが空ならnullptr
 				if (IsEmptyTransitionNodes()) {
 					return nullptr;
@@ -123,6 +132,18 @@ namespace basecross {
 				return randomEdge->GetToNode();
 			}
 
+			std::shared_ptr<I_Node> Selecter::SearchSequenceNode() const {
+				//積まれた上から順に遷移できるタスクに遷移。
+				for (auto& edge : m_transitionEdges) {
+					auto toNode = edge.lock()->GetToNode();
+					if (toNode->CanTransition()) {
+						return toNode;
+					}
+				}
+
+				return nullptr;
+			}
+
 			void Selecter::ChangeCurrentNode(const std::shared_ptr<I_Node>& node) {
 				//現在のノードの終了処理をする。
 				if (auto currentNode = GetCurrentNode()) {
@@ -155,6 +176,10 @@ namespace basecross {
 
 			bool Selecter::IsEmptyTransitionNodes() const {
 				return static_cast<int>(m_transitionEdges.size()) == 0;
+			}
+
+			void Selecter::SetCurrentNode(const std::shared_ptr<I_Node>& node) noexcept {
+				m_currentNode = node;
 			}
 
 			std::shared_ptr<I_Node> Selecter::GetCurrentNode() const noexcept {

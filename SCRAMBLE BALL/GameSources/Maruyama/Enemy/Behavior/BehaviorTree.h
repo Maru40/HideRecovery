@@ -198,7 +198,7 @@ namespace basecross {
 				/// <param name="node">遷移先を取得したいノード</param>
 				/// <returns>最優先の遷移先ノード</returns>
 				std::shared_ptr<I_Node> GetTransitionNode(const std::shared_ptr<I_Node>& node) {
-					//将来的にシーケンサ用の処理が入る。
+					//Selecterであることを保証する。
 					auto selecter = GetSelecter(node->GetType<EnumType>());
 					if (!selecter) {
 						return nullptr;
@@ -249,6 +249,7 @@ namespace basecross {
 				/// <param name="node">タスク</param>
 				void AddTask(const EnumType type, const std::shared_ptr<I_Task>& task) {
 					m_taskMap[type] = task;
+					task->SetIndex((int)type);
 					AddNode(type, task);
 				}
 
@@ -478,6 +479,20 @@ namespace basecross {
 				}
 
 				/// <summary>
+				/// 再起して巻き戻している時の、Pop処理と次のノードを返す処理
+				/// </summary>
+				/// <returns>次のノード</returns>
+				std::shared_ptr<I_Node> ReverseProcess() {
+					PopCurrentStack();
+
+					if (m_currentStack.empty()) {	//スタックが0になったら初期ノードを返す。
+						return GetNode(m_firstNodeType);
+					}
+
+					return m_currentStack.top().lock();
+				}
+
+				/// <summary>
 				/// 遷移先のノードが見つかるまで、スタックを巻き戻す。
 				/// </summary>
 				/// <param name="node">確認したいノード</param>
@@ -489,14 +504,12 @@ namespace basecross {
 
 					auto selecter = GetSelecter(node->GetType<EnumType>());
 					if (!selecter) {	//セレクターでないなら前のノードに戻る。
-						PopCurrentStack();
-						return ReverseStack(m_currentStack.top().lock());
+						return ReverseProcess();
 					}
 
 					auto nextNode = selecter->SearchCurrentNode();
 					if (!nextNode) {	//ノードが存在しないなら、手前のノードに戻る。
-						PopCurrentStack();
-						return ReverseStack(m_currentStack.top().lock());
+						return ReverseProcess();
 					}
 
 					return nextNode;
