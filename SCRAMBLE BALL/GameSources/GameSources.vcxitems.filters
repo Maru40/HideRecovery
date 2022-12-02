@@ -1522,6 +1522,9 @@
     <Filter Include="Maruyama\Enemy\BehaviorTree\Tester\Object">
       <UniqueIdentifier>{d0843bf2-2805-4fca-bfaf-940dd99bce73}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Itabashi\Patch\RayHelper">
+      <UniqueIdentifier>{097844f9-bc1c-4ea6-b982-eb68d48d9f90}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2883,6 +2886,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Tester\Object\BehaviorTesterObject.h">
       <Filter>Maruyama\Enemy\BehaviorTree\Tester\Object</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\RayHelper.h">
+      <Filter>Itabashi\Patch\RayHelper</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -4120,6 +4126,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Behavior\Tester\Object\BehaviorTesterObject.cpp">
       <Filter>Maruyama\Enemy\BehaviorTree\Tester\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\RayHelper.cpp">
+      <Filter>Itabashi\Patch\RayHelper</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
