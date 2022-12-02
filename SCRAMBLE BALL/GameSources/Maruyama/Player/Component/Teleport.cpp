@@ -169,6 +169,7 @@ namespace basecross {
 
 					//重力復活
 					if (auto gravity = GetGameObject()->GetComponent<Gravity>(false)) {
+						gravity->SetGravityVerocityZero();
 						gravity->SetUpdateActive(true);
 					}
 
@@ -219,6 +220,7 @@ namespace basecross {
 
 			//重力解除
 			if (auto gravity = GetGameObject()->GetComponent<Gravity>(false)) {
+				gravity->SetGravityVerocityZero();
 				gravity->SetUpdateActive(false);
 			}
 
