@@ -121,9 +121,7 @@ namespace basecross {
 			PlayerAnimationState::State::EndTeleport,
 			nullptr,
 			nullptr,
-			[&]() { 
-				m_param.isTeleporting = false; 
-			}
+			[&]() { m_param.isTeleporting = false; }
 		);
 	}
 
