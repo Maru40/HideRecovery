@@ -8,12 +8,12 @@
 #include "stdafx.h"
 #include "Project.h"
 
-#include "StatorBase.h"
+#include "Maruyama/Stator/StatorBase.h"
 
 #include "AIPlayerStator.h"
 
 #include "Maruyama/Enemy/Component/EnemyBase.h"
-#include "Maruyama/Utility/StateMachine/StateMachine.h"
+#include "Maruyama/StateMachine/StateMachine.h"
 
 #include "Maruyama/Enemy/Component/Stator/StateNode/StateNode_HidePlacePatrol.h"
 #include "Maruyama/Enemy/Component/Stator/StateNode/StateNode_Buttle.h"

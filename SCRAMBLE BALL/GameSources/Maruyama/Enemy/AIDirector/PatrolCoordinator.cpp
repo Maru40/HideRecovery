@@ -20,7 +20,7 @@
 #include "Maruyama/Interface/I_FactionMember.h"
 
 #include "Maruyama/Enemy/StateMachine/EnemyMainStateMachine.h"
-#include "Maruyama/Enemy/Component/Stator/StatorBase.h"
+#include "Maruyama/Stator/StatorBase.h"
 #include "Maruyama/Enemy/Component/Stator/EnemyStatorBase.h"
 
 #include "Maruyama/Utility/Component/TargetManager.h"

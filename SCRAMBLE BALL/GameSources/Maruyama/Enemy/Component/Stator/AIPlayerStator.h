@@ -8,7 +8,7 @@
 #pragma once
 #include "stdafx.h"
 
-#include "StatorBase.h"
+#include "Maruyama/Stator/StatorBase.h"
 
 namespace basecross {
 

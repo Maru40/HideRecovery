@@ -9,7 +9,7 @@
 #include "stdafx.h"
 #include "Project.h"
 
-#include "StatorBase.h"
+#include "Maruyama/Stator/StatorBase.h"
 
 namespace basecross {
 	namespace Enemy {

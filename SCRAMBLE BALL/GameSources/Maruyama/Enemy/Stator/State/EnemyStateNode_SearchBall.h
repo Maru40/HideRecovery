@@ -9,7 +9,7 @@
 #include "stdafx.h"
 #include "Project.h"
 
-#include "Maruyama/Utility/StateMachine/Node_StateMachine.h"
+#include "Maruyama/StateMachine/Node_StateMachine.h"
 
 namespace basecross {
 

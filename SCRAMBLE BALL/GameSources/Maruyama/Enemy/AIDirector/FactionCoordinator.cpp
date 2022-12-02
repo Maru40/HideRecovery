@@ -20,7 +20,7 @@
 #include "CombatCoordinator.h"
 
 #include "Maruyama/Utility/Component/TargetManager.h"
-#include "Maruyama/Enemy/Component/Stator/StatorBase.h"
+#include "Maruyama/Stator/StatorBase.h"
 #include "Maruyama/Enemy/Component/Stator/EnemyStatorBase.h"
 
 #include "PatrolCoordinator/HidePlacePatrol.h"
