@@ -68,6 +68,10 @@ namespace basecross {
 		void SettingFieldMap();
 		void SettingAnimationEvent();
 
+		void Setting_StartTeleportAnimation_Exit();
+
+		void Setting_MoveEvect_Exit();
+
 	public:
 		/// <summary>
 		/// テレポート開始
