@@ -108,139 +108,12 @@ namespace basecross {
 			return;
 		}
 
-		auto start = [&]() {
-
-		};
-
-		//アニメーション終了時に呼ぶイベント
-		std::weak_ptr<PlayerAnimator> weakAnimator = animator;
-		auto exit = [&, weakAnimator]() {
-			auto animator = weakAnimator.lock();
-
-			const bool IsFade = false;
-			if (IsFade) {
-				//フェード終了イベント
-				auto endEvent = [&, weakAnimator]() {
-					auto fadeManager = ScreenFadeManager::GetInstance(GetStage());
-					weakAnimator.lock()->ChangePlayerAnimation(PlayerAnimationState::State::EndTeleport);
-					GetGameObject()->GetComponent<Transform>()->SetPosition(GetTeleportPosition());	//テレポート
-					
-					if (fadeManager) {
-						fadeManager->FadeStart(FadeType::In);
-					}
-				};
-
-				auto fadeManager = ScreenFadeManager::GetInstance(GetStage());
-				//フェード開始イベント
-				if (fadeManager) {
-					fadeManager->FadeStart(FadeType::Out, endEvent);
-				}
-			}
-			else {
-
-				auto camera = m_camera.lock();
-
-				if (camera)
-				{
-					//カメラを今のカメラに合わせる。
-					auto& tpsCamera = GetStage()->GetView()->GetTargetCamera();
-					auto tpsCameraTrans = tpsCamera->GetCameraObject()->GetComponent<Transform>();
-					auto tpsAt = tpsCamera->GetAt();
-					auto tpsForward = tpsAt - tpsCamera->GetEye();
-
-					auto cameraTrans = camera->GetGameObject()->GetComponent<Transform>();
-					cameraTrans->SetPosition(tpsCameraTrans->GetPosition());
-					auto forwardController = camera->GetGameObject()->GetComponent<CameraForwardController>(false);
-					if (forwardController) {
-						forwardController->SetDirection(tpsForward);
-					}
-					camera->SetUpdateActive(true);
-				}
-
-				//移動しきったら、演出開始
-				auto moveEndEvent = [&, weakAnimator]() {
-					auto animator = weakAnimator.lock();
-					weakAnimator.lock()->ChangePlayerAnimation(PlayerAnimationState::State::EndTeleport);
-
-					//当たり判定復活
-					if (auto collision = GetGameObject()->GetComponent<CollisionObb>(false)) {
-						collision->SetUpdateActive(true);
-					}
-
-					//重力復活
-					if (auto gravity = GetGameObject()->GetComponent<Gravity>(false)) {
-						gravity->SetGravityVerocityZero();
-						gravity->SetUpdateActive(true);
-					}
-
-					GetGameObject()->GetComponent<Transform>()->SetPosition(GetTeleportPosition());	//テレポート
-
-					auto playerObject = dynamic_pointer_cast<PlayerObject>(GetGameObject());
-					auto springArm = playerObject->GetArm()->GetComponent<SpringArmComponent>();
-					springArm->GetGameObject()->GetComponent<Transform>()->SetPosition(GetTeleportPosition());
-					springArm->SetCurrentArmRange(springArm->GetArmRange());
-					springArm->OnUpdate2();
-
-					auto camera = m_camera.lock();
-
-					if (camera)
-					{
-						camera->SetUpdateActive(false);
-					}
-
-					//エフェクトの再生
-					if (auto efkComp = GetGameObject()->GetComponent<EfkComponent>(false)) {
-						efkComp->Play(L"Respawn");
-					}
-
-					//表示
-					GetGameObject()->SetDrawActive(true);
-
-					//音の再生
-					if (auto soundEmitter = m_soundEmmiter.lock()) {
-						soundEmitter->PlaySoundClip(m_teleportSoundClip);
-					}
-				};
-
-				//カメラを移動させる
-				auto mover = m_toTargetMove.lock();
-				if (mover) {
-					mover->MoveStart(m_cameraPosition, moveEndEvent);
-				}
-
-			}
-
-			//エフェクトの再生
-			if (auto efkComp = GetGameObject()->GetComponent<EfkComponent>(false)) {
-				efkComp->Play(L"Respawn");
-			}
-
-			//非表示
-			GetGameObject()->SetDrawActive(false);
-
-			//重力解除
-			if (auto gravity = GetGameObject()->GetComponent<Gravity>(false)) {
-				gravity->SetGravityVerocityZero();
-				gravity->SetUpdateActive(false);
-			}
-
-			//当たり判定解除
-			if (auto collision = GetGameObject()->GetComponent<CollisionObb>(false)) {
-				collision->SetUpdateActive(false);
-			}
-
-			//音の再生
-			if (auto soundEmitter = m_soundEmmiter.lock()) {
-				soundEmitter->PlaySoundClip(m_teleportSoundClip);
-			}
-		};
-
 		//アニメーションイベントの登録
 		animator->AddAnimationEvent(
 			PlayerAnimationState::State::StartTeleport,
-			start,
 			nullptr,
-			exit
+			nullptr,
+			[&]() { Setting_StartTeleportAnimation_Exit(); }
 		);
 
 		//テレポート終了アニメーションイベント
@@ -252,6 +125,105 @@ namespace basecross {
 				m_param.isTeleporting = false; 
 			}
 		);
+	}
+
+	void Teleport::Setting_StartTeleportAnimation_Exit() {
+		auto animator = GetGameObject()->GetComponent<PlayerAnimator>(false);
+		if (!animator) {
+			return;
+		}
+
+		//テレポートカメラの設定を変更
+		if (auto camera = m_camera.lock()) {
+			//カメラを今のカメラに合わせる。
+			auto& tpsCamera = GetStage()->GetView()->GetTargetCamera();
+			auto tpsCameraTrans = tpsCamera->GetCameraObject()->GetComponent<Transform>();
+			auto tpsAt = tpsCamera->GetAt();
+			auto tpsForward = tpsAt - tpsCamera->GetEye();
+
+			auto cameraTrans = camera->GetGameObject()->GetComponent<Transform>();
+			cameraTrans->SetPosition(tpsCameraTrans->GetPosition());
+			auto forwardController = camera->GetGameObject()->GetComponent<CameraForwardController>(false);
+			if (forwardController) {
+				forwardController->SetDirection(tpsForward);
+			}
+
+			camera->SetUpdateActive(true);	//カメラをアクティブ状態にする。
+		}
+
+		//カメラを移動を開始させる。
+		if (auto mover = m_toTargetMove.lock()) {
+			auto exitEvent = [&]() { Setting_MoveEvect_Exit(); };
+			mover->MoveStart(m_cameraPosition, exitEvent);
+		}
+
+		//エフェクトの再生
+		if (auto efkComp = GetGameObject()->GetComponent<EfkComponent>(false)) {
+			efkComp->Play(L"Respawn");
+		}
+
+		//非表示
+		GetGameObject()->SetDrawActive(false);
+
+		//重力解除
+		if (auto gravity = GetGameObject()->GetComponent<Gravity>(false)) {
+			gravity->SetGravityVerocityZero();
+			gravity->SetUpdateActive(false);
+		}
+
+		//当たり判定解除
+		if (auto collision = GetGameObject()->GetComponent<CollisionObb>(false)) {
+			collision->SetUpdateActive(false);
+		}
+
+		//音の再生
+		if (auto soundEmitter = m_soundEmmiter.lock()) {
+			soundEmitter->PlaySoundClip(m_teleportSoundClip);
+		}
+	}
+
+	void Teleport::Setting_MoveEvect_Exit() {
+		auto animator = GetGameObject()->GetComponent<PlayerAnimator>(false);
+		animator->ChangePlayerAnimation(PlayerAnimationState::State::EndTeleport);
+
+		//当たり判定復活
+		if (auto collision = GetGameObject()->GetComponent<CollisionObb>(false)) {
+			collision->SetUpdateActive(true);
+		}
+
+		//重力復活
+		if (auto gravity = GetGameObject()->GetComponent<Gravity>(false)) {
+			gravity->SetGravityVerocityZero();
+			gravity->SetUpdateActive(true);
+		}
+
+		//テレポート
+		GetGameObject()->GetComponent<Transform>()->SetPosition(GetTeleportPosition());	
+
+		//アームの設定をテレポートカメラに合わせる
+		auto playerObject = dynamic_pointer_cast<PlayerObject>(GetGameObject());
+		auto springArm = playerObject->GetArm()->GetComponent<SpringArmComponent>();
+		springArm->GetGameObject()->GetComponent<Transform>()->SetPosition(GetTeleportPosition());
+		springArm->SetCurrentArmRange(springArm->GetArmRange());
+		springArm->OnUpdate2();
+
+		//テレポートカメラのアクティブをfalseに変更
+		if (auto camera = m_camera.lock()) {
+			camera->SetUpdateActive(false);
+		}
+
+		//エフェクトの再生
+		if (auto efkComp = GetGameObject()->GetComponent<EfkComponent>(false)) {
+			efkComp->Play(L"Respawn");
+		}
+
+		//表示を戻す。
+		GetGameObject()->SetDrawActive(true);
+
+		//音の再生
+		if (auto soundEmitter = m_soundEmmiter.lock()) {
+			soundEmitter->PlaySoundClip(m_teleportSoundClip);
+		}
 	}
 
 	void Teleport::StartTeleport() {
