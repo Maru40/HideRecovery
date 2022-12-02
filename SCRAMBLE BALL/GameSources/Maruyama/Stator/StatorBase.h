@@ -8,7 +8,7 @@
 #pragma once
 #include "stdafx.h"
 
-#include "Maruyama/Utility/StateMachine/StateMachine.h"
+#include "Maruyama/StateMachine/StateMachine.h"
 
 namespace basecross {
 

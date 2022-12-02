@@ -1123,9 +1123,6 @@
     <Filter Include="Maruyama\Utility\StateMachine\GraphBase">
       <UniqueIdentifier>{778fd854-a641-4ee4-976f-7f3b67c3f322}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Maruyama\Utility\StateMachine\EdgeBase\Edge_StateMachine">
-      <UniqueIdentifier>{274722dc-4f71-4623-aa6f-27ce04d88c7b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Maruyama\Enemy\Component\ImpactMap\Astar\GraphAstar\AstarGraph">
       <UniqueIdentifier>{14a9c097-f3a6-472a-bb80-3c3755b9d5e6}</UniqueIdentifier>
     </Filter>
@@ -2478,24 +2475,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\BehaviorTree\BehaviorTreeComponentBase.h">
       <Filter>Maruyama\Enemy\Component\EachEnemy\Common\BehaviorTree\Base</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\StateMachine\StateMachine.h">
-      <Filter>Maruyama\Utility\StateMachine</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\StateMachine\NodeBase.h">
-      <Filter>Maruyama\Utility\StateMachine\NodeBase</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\StateMachine\EdgeBase.h">
-      <Filter>Maruyama\Utility\StateMachine\EdgeBase</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\StateMachine\GraphBase_Ex.h">
-      <Filter>Maruyama\Utility\StateMachine\GraphBase</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\StateMachine\Edge_StateMachine.h">
-      <Filter>Maruyama\Utility\StateMachine\EdgeBase\Edge_StateMachine</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\StateMachine\Node_StateMachine.h">
-      <Filter>Maruyama\Utility\StateMachine\NodeBase</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\AstarDebug\ImpactDataDraw.h">
       <Filter>Maruyama\Utility\DebugOjbect\AstarNodeDraw\ImpactDataDraw</Filter>
     </ClInclude>
@@ -2888,6 +2867,24 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Stator\StatorBase.h">
       <Filter>Maruyama\StatorBase</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\StateMachine\StateMachine.h">
+      <Filter>Maruyama\Utility\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\StateMachine\Node_StateMachine.h">
+      <Filter>Maruyama\Utility\StateMachine\NodeBase</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\StateMachine\NodeBase.h">
+      <Filter>Maruyama\Utility\StateMachine\NodeBase</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\StateMachine\GraphBase_Ex.h">
+      <Filter>Maruyama\Utility\StateMachine\GraphBase</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\StateMachine\Edge_StateMachine.h">
+      <Filter>Maruyama\Utility\StateMachine\EdgeBase</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\StateMachine\EdgeBase.h">
+      <Filter>Maruyama\Utility\StateMachine\EdgeBase</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -3746,24 +3743,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\BehaviorTree\BehaviorTreeComponentBase.cpp">
       <Filter>Maruyama\Enemy\Component\EachEnemy\Common\BehaviorTree\Base</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\StateMachine\StateMachine.cpp">
-      <Filter>Maruyama\Utility\StateMachine</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\StateMachine\NodeBase.cpp">
-      <Filter>Maruyama\Utility\StateMachine\NodeBase</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\StateMachine\EdgeBase.cpp">
-      <Filter>Maruyama\Utility\StateMachine\EdgeBase</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\StateMachine\GraphBase_Ex.cpp">
-      <Filter>Maruyama\Utility\StateMachine\GraphBase</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\StateMachine\Edge_StateMachine.cpp">
-      <Filter>Maruyama\Utility\StateMachine\EdgeBase\Edge_StateMachine</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\StateMachine\Node_StateMachine.cpp">
-      <Filter>Maruyama\Utility\StateMachine\NodeBase</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\AstarDebug\ImpactDataDraw.cpp">
       <Filter>Maruyama\Utility\DebugOjbect\AstarNodeDraw\ImpactDataDraw</Filter>
     </ClCompile>
@@ -4129,6 +4108,24 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Stator\StatorBase.cpp">
       <Filter>Maruyama\StatorBase</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\StateMachine\StateMachine.cpp">
+      <Filter>Maruyama\Utility\StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\StateMachine\Node_StateMachine.cpp">
+      <Filter>Maruyama\Utility\StateMachine\NodeBase</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\StateMachine\NodeBase.cpp">
+      <Filter>Maruyama\Utility\StateMachine\NodeBase</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\StateMachine\GraphBase_Ex.cpp">
+      <Filter>Maruyama\Utility\StateMachine\GraphBase</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\StateMachine\Edge_StateMachine.cpp">
+      <Filter>Maruyama\Utility\StateMachine\EdgeBase</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\StateMachine\EdgeBase.cpp">
+      <Filter>Maruyama\Utility\StateMachine\EdgeBase</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

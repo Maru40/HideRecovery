@@ -8,7 +8,7 @@
 
 #include "EnemyStateNode_SearchBall.h"
 
-#include "Maruyama/Utility/StateMachine/StateMachine.h"
+#include "Maruyama/StateMachine/StateMachine.h"
 #include "Maruyama/Enemy/Component/EnemyBase.h"
 
 namespace basecross {
