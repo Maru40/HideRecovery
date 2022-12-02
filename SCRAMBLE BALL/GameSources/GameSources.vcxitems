@@ -40,6 +40,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\PasswordTextUI.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\PCTStaticModelDraw.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\PlayerControlManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\RayHelper.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\SelectAppearanceChanger.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\SelfPlayerObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\UICancelEventer.h" />
@@ -496,6 +497,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineTestStage.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\OnlineTransformSynchronization.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\RayHelper.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\SelectAppearanceChanger.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\SelfPlayerObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Itabashi\UICancelEventer.cpp" />
