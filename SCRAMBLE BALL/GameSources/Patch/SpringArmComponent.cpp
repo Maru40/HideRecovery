@@ -1,6 +1,7 @@
-#include"SpringArmComponent.h"
+ï»¿#include"SpringArmComponent.h"
 
 #include "Patch/PlayerInputer.h"
+#include "Itabashi/RayHelper.h"
 #include "Maruyama/DebugClass/Object/DebugObject.h"
 
 #include "Maruyama/Camera/Component/LookAtCameraManager.h"
@@ -15,15 +16,15 @@ namespace basecross
 {
 	SpringArmComponent::Parametor::Parametor()
 		:Parametor(
-			20.0f,                           //ƒA[ƒ€ƒŒƒ“ƒW
-			Vec3(0.0f, 0.5f, 0.0f),          //ƒA[ƒ€‚Ì‰Šú•ûŒü
-			XMConvertToRadians(24.0f),       //‰Šú‰ñ“]
-			XMConvertToRadians(-90.0f),      //‰Šú‰ñ“]ˆÊ’u
-			3.0f,                            //Y²‰ñ“]ƒXƒs[ƒh
-			3.0f,                            //Z²‰ñ“]ƒXƒs[ƒh
-			XMConvertToRadians(17.0f),       //Y²‚ÌÅ‘å’l
-			XMConvertToRadians(17.0f),       //Y²‚ÌÅ¬’l
-			100.0f)                          //’Ç]ƒXƒs[ƒh
+			20.0f,                           //ã‚¢ãƒ¼ãƒ ãƒ¬ãƒ³ã‚¸
+			Vec3(0.0f, 0.5f, 0.0f),          //ã‚¢ãƒ¼ãƒ ã®åˆæœŸæ–¹å‘
+			XMConvertToRadians(24.0f),       //åˆæœŸå›è»¢
+			XMConvertToRadians(-90.0f),      //åˆæœŸå›è»¢ä½ç½®
+			3.0f,                            //Yè»¸å›è»¢ã‚¹ãƒ”ãƒ¼ãƒ‰
+			3.0f,                            //Zè»¸å›è»¢ã‚¹ãƒ”ãƒ¼ãƒ‰
+			XMConvertToRadians(17.0f),       //Yè»¸ã®æœ€å¤§å€¤
+			XMConvertToRadians(17.0f),       //Yè»¸ã®æœ€å°å€¤
+			100.0f)                          //è¿½å¾“ã‚¹ãƒ”ãƒ¼ãƒ‰
 	{}
 
 	SpringArmComponent::Parametor::Parametor(
@@ -96,7 +97,7 @@ namespace basecross
 	}
 
 	void SpringArmComponent::OnCreate() {
-		CheckRimitY();  //Šp“x§ŒÀ
+		CheckRimitY();  //è§’åº¦åˆ¶é™
 		m_param.armVec.y = sinf(m_param.radY);
 		m_param.armVec.x = cosf(m_param.radXZ);
 		m_param.armVec.z = sinf(m_param.radXZ);
@@ -125,47 +126,8 @@ namespace basecross
 		maxHitData.length = m_armRange;
 		maxHitData.point = startPosition + rayDirection * m_armRange;
 
-		for (auto& object : GetStage()->GetGameObjectVec())
-		{
-			auto collision = object->GetComponent<Collision>(false);
+		Physics::RayHelper::RayCast(startPosition, rayDirection, m_armRange, m_hitTags.data(), m_hitTags.size(), maxHitData);
 
-			if (!collision)
-			{
-				continue;
-			}
-
-			bool isHitTagFind = false;
-
-			for (auto& hitTag : m_hitTags)
-			{
-				if (object->FindTag(hitTag))
-				{
-					isHitTagFind = true;
-					break;
-				}
-			}
-
-			if (!isHitTagFind)
-			{
-				continue;
-			}
-
-			RayHitData hitData;
-			bool isHit = collision->IsRayHit(startPosition, rayDirection, hitData);
-
-			if (!isHit)
-			{
-				continue;
-			}
-
-			if (hitData.length < maxHitData.length)
-			{
-				maxHitData = hitData;
-			}
-		}
-		
-		//m_childTransform->SetPosition(transform->GetPosition() + CalculateDirect() * maxHitData.length);
-		//m_childTransform->SetPosition(CalculatePosition(maxHitData.length));
 		auto armRange = CalculateArmRange(maxHitData.length);
 		m_childTransform->SetPosition(transform->GetPosition() + CalculateDirect() * armRange);
 		CheckLookAt(armRange);
@@ -191,9 +153,9 @@ namespace basecross
 
 	Vec3 SpringArmComponent::CalculatePosition(const float& targetLength) {
 		constexpr float NearRange = 0.25f;
-		auto targetPosition = transform->GetPosition() + CalculateDirect() * targetLength;	//–Ú“I’n
+		auto targetPosition = transform->GetPosition() + CalculateDirect() * targetLength;	//ç›®çš„åœ°
 		auto toTargetPosition = targetPosition - m_childTransform->GetPosition();
-		if (toTargetPosition.length() < NearRange) {  //‹ß‚¢ˆÊ’u‚É‚¢‚½‚çB
+		if (toTargetPosition.length() < NearRange) {  //è¿‘ã„ä½ç½®ã«ã„ãŸã‚‰ã€‚
 			return m_childTransform->GetPosition();
 		}
 
@@ -214,7 +176,7 @@ namespace basecross
 		return range;
 	}
 
-	void SpringArmComponent::InputYVec()   //y²ŠÖŒW‚Ìˆ—
+	void SpringArmComponent::InputYVec()   //yè»¸é–¢ä¿‚ã®å‡¦ç†
 	{
 		auto& app = App::GetApp();
 		auto device = app->GetInputDevice();
@@ -232,13 +194,13 @@ namespace basecross
 		{
 			m_param.radY += -vertical * delta * m_param.speedY;
 
-			CheckRimitY();  //Šp“x§ŒÀ
+			CheckRimitY();  //è§’åº¦åˆ¶é™
 
 			m_param.armVec.y = sinf(m_param.radY);
 		}
 	}
 
-	void SpringArmComponent::InputRXVec()    //x²ŠÖŒW‚Ìˆ—
+	void SpringArmComponent::InputRXVec()    //xè»¸é–¢ä¿‚ã®å‡¦ç†
 	{
 		auto& app = App::GetApp();
 		auto device = app->GetInputDevice();
@@ -261,7 +223,7 @@ namespace basecross
 		}
 
 		if (abs(m_param.radXZ) >= XM_2PI) {
-			//ˆê‰ñ“]‚µ‚½‚ç0‚É–ß‚·
+			//ä¸€å›è»¢ã—ãŸã‚‰0ã«æˆ»ã™
 			m_param.radXZ = 0.0f;
 		}
 	}
@@ -269,12 +231,12 @@ namespace basecross
 
 	void SpringArmComponent::CheckRimitY()
 	{
-		if (m_param.radY >= m_param.maxY)  //ãŒÀ‚ğ’´‚¦‚½‚ç
+		if (m_param.radY >= m_param.maxY)  //ä¸Šé™ã‚’è¶…ãˆãŸã‚‰
 		{
 			m_param.radY = m_param.maxY;
 		}
 
-		if (m_param.radY <= m_param.minY)  //‰ºŒÀ‚ğ’´‚¦‚½‚ç
+		if (m_param.radY <= m_param.minY)  //ä¸‹é™ã‚’è¶…ãˆãŸã‚‰
 		{
 			m_param.radY = m_param.minY;
 		}
@@ -287,7 +249,7 @@ namespace basecross
 
 		constexpr float MaxSub = 0.95f;
 		auto subRange = m_armRange - armRange;
-		auto rate = subRange / m_armRange;	//’Z‚­‚È‚é‚Ù‚Ç‚‚­‚È‚éB
+		auto rate = subRange / m_armRange;	//çŸ­ããªã‚‹ã»ã©é«˜ããªã‚‹ã€‚
 
 		auto lookAt = m_childObject->GetComponent<LookAtCameraManager>(false);
 		if (!lookAt) {
@@ -318,7 +280,7 @@ namespace basecross
 			auto diffuse = draw->GetDiffuse();
 			float diffuseRate = (armRange / m_armRange);
 
-			//Š®‘S‚ÉÁ‚·
+			//å®Œå…¨ã«æ¶ˆã™
 			constexpr float VanishRate = 0.2f;
 			if (diffuseRate < VanishRate) {
 				if (!teleport->IsTeleporting()) {
@@ -331,7 +293,7 @@ namespace basecross
 				}
 			}
 
-			//”–‚­‚·‚é
+			//è–„ãã™ã‚‹
 			if (diffuseRate < 0.75f) {
 				diffuse.w = 1.0f * diffuseRate;
 				draw->SetDiffuse(diffuse);
