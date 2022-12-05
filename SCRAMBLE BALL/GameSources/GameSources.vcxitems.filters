@@ -1522,6 +1522,9 @@
     <Filter Include="Maruyama\StatorBase">
       <UniqueIdentifier>{aa7d8c44-71b3-4d6c-b478-c79969b426d3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\ThreadController">
+      <UniqueIdentifier>{cce29b18-79dc-41a5-9db8-c99876c2f247}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2886,6 +2889,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\StateMachine\EdgeBase.h">
       <Filter>Maruyama\Utility\StateMachine\EdgeBase</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\ThreadController\ThreadController.h">
+      <Filter>Maruyama\ThreadController</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -4126,6 +4132,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\StateMachine\EdgeBase.cpp">
       <Filter>Maruyama\Utility\StateMachine\EdgeBase</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\ThreadController\ThreadController.cpp">
+      <Filter>Maruyama\ThreadController</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
