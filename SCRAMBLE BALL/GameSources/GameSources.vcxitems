@@ -258,7 +258,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\Task_Wait.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\MulchTaskList.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\TaskList.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\ThreadController\ThreadController.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Thread\ThreadController.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Thread\ThreadPool.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\UI\2D\Component\FieldMap.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\UI\2D\Component\MapCursor.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\UI\2D\Component\Reticle.h" />
@@ -701,7 +702,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\Task_PlowlingMove.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\Task_ToTargetMove.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\Task_Wait.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\ThreadController\ThreadController.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Thread\ThreadController.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Thread\ThreadPool.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\UI\2D\Component\FieldMap.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\UI\2D\Component\MapCursor.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\UI\2D\Component\Reticle.cpp" />
