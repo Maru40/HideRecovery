@@ -68,10 +68,14 @@ namespace basecross {
 
 	namespace Tester {
 
+		static std::mutex sm_mutex;
+
 		std::wstring say_ok(int number) {
 			std::wstringstream debugTextStart;
 			debugTextStart << L"[say_ok (" << std::this_thread::get_id << L")] >>> Start";
+			sm_mutex.lock();
 			Debug::GetInstance()->Log(debugTextStart.str());
+			sm_mutex.unlock();
 
 			std::this_thread::sleep_for(std::chrono::milliseconds(2000)); // ‰½‚©d‚¢ˆ—
 			std::wstringstream oss;
@@ -79,7 +83,9 @@ namespace basecross {
 
 			std::wstringstream debugTextEnd;
 			debugTextEnd << L"[say_ok (" << std::this_thread::get_id << L")] >>> End";
+			sm_mutex.lock();
 			Debug::GetInstance()->Log(debugTextEnd.str());
+			sm_mutex.unlock();
 
 			return oss.str();
 		}
@@ -87,7 +93,9 @@ namespace basecross {
 		std::wstring TesterThread::say_hello(int number) {
 			std::wstringstream debugTextStart;
 			debugTextStart << L"[say_hello (" << std::this_thread::get_id << L")] >>> Start";
+			sm_mutex.lock();
 			Debug::GetInstance()->Log(debugTextStart.str());
+			sm_mutex.unlock();
 
 			std::this_thread::sleep_for(std::chrono::milliseconds(2000)); // ‰½‚©d‚¢ˆ—
 			std::wstringstream oss;
@@ -95,7 +103,9 @@ namespace basecross {
 
 			std::wstringstream debugTextEnd;
 			debugTextEnd << L"[say_hello (" << std::this_thread::get_id << L")] >>> End";
+			sm_mutex.lock();
 			Debug::GetInstance()->Log(debugTextEnd.str());
+			sm_mutex.unlock();
 
 			return oss.str();
 		}
