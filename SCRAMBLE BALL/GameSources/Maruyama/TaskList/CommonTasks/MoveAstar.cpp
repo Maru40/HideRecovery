@@ -164,6 +164,8 @@ namespace basecross {
 		}
 
 		void MoveAstar::NextRoute() {
+			//std::lock_guard<mutex> lock(m_mtx);	//ロック
+
 			if (m_areaRoute.empty()) {
 				SetIsSearchRoute(false);//検索終了
 				return;
@@ -176,9 +178,11 @@ namespace basecross {
 				return;
 			}
 
+			//ポジションの変更(排他必須)
 			m_param->movePositionsParam->positions = positions;
-			
-			SelectTask();	//タスクの再始動
+
+			//タスクの再始動(排他必須)
+			SelectTask();	
 
 			//idが違うならreturn
 			if (m_currentThreadID != std::this_thread::get_id()) {
@@ -186,7 +190,9 @@ namespace basecross {
 			}
 
 			std::lock_guard<mutex> lock(m_mtx);	//ロック
-			SetIsSearchRoute(false);	//検索終了
+
+			//検索終了(排他必須)
+			SetIsSearchRoute(false);	
 		}
 
 		std::queue<int> MoveAstar::CalculateMoveAreaRouteQueue() {
@@ -226,19 +232,17 @@ namespace basecross {
 				return std::vector<Vec3>();
 			}
 
-			int areaIndex = m_areaRoute.front();	//自分自身がいるエリアインデックス
-			m_areaRoute.pop();
+			//自分自身がいるエリアインデックス
+			int areaIndex = m_areaRoute.front();	
+			m_areaRoute.pop();	//(排他必須)
 			int targetAreaIndex = !m_areaRoute.empty() ? m_areaRoute.front() : areaIndex;
 			
 			if (m_currentThreadID != std::this_thread::get_id()) {
 				return {};
 			}
 
-			//m_mtx.lock();	//ロック
-
 			auto startNode = m_selfAstarNodeController.lock()->CalculateNode();
-			//m_mtx.unlock();	//ロック解除
-
+			
 			auto positions = CalculateRoutePositions(startNode, CalculateMoveTargetNode(), areaIndex, targetAreaIndex);
 
 			return positions;
