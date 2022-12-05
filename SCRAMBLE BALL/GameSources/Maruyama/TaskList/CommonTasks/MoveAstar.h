@@ -41,14 +41,14 @@ namespace basecross {
 		//--------------------------------------------------------------------------------------
 		///	threadを管理するデータ
 		//--------------------------------------------------------------------------------------
-		struct ThreadData
+		struct MoveAstar_ThreadData
 		{
 			bool m_isRunning;
 			std::thread m_thread;
 			std::function<void()> startEvent;
 			std::function<void()> exitEvent;
 
-			ThreadData(std::thread& newThread);
+			MoveAstar_ThreadData(std::thread& newThread);
 
 		private:
 			void StartEvent() { if (startEvent) { startEvent(); } }
@@ -76,6 +76,7 @@ namespace basecross {
 		{
 		public:
 			using Parametor = MoveAstar_Parametor;
+			using ThreadData = MoveAstar_ThreadData;
 
 		private:
 			const Parametor* m_param;						//パラメータ

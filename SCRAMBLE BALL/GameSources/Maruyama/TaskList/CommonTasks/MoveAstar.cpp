@@ -42,7 +42,7 @@ namespace basecross {
 		///	threadを管理するデータ
 		//--------------------------------------------------------------------------------------
 
-		ThreadData::ThreadData(std::thread& newThread) :
+		MoveAstar_ThreadData::MoveAstar_ThreadData(std::thread& newThread) :
 			m_isRunning(true)
 		{
 			newThread.swap(m_thread);
@@ -164,9 +164,8 @@ namespace basecross {
 		}
 
 		void MoveAstar::NextRoute() {
-			//std::lock_guard<mutex> lock(m_mtx);	//ロック
-
 			if (m_areaRoute.empty()) {
+				std::lock_guard<mutex> lock(m_mtx);	//ロック
 				SetIsSearchRoute(false);//検索終了
 				return;
 			}
