@@ -39,6 +39,28 @@ namespace basecross {
 		};
 
 		//--------------------------------------------------------------------------------------
+		///	threadを管理するデータ
+		//--------------------------------------------------------------------------------------
+		struct ThreadData
+		{
+			bool m_isRunning;
+			std::thread m_thread;
+			std::function<void()> startEvent;
+			std::function<void()> exitEvent;
+
+			ThreadData(std::thread& newThread);
+
+		private:
+			void StartEvent() { if (startEvent) { startEvent(); } }
+
+		public:
+			/// <summary>
+			/// 終了イベント(内部で呼ぶと排他制御がままならなくなるためこうしている。)
+			/// </summary>
+			void ExitEvent() { if (exitEvent) { exitEvent(); } }
+		};
+
+		//--------------------------------------------------------------------------------------
 		///	ターゲットの近くまでAstarを利用して移動するタスクパラメータ
 		//--------------------------------------------------------------------------------------
 		struct MoveAstar_Parametor {
@@ -76,6 +98,8 @@ namespace basecross {
 			std::mutex m_mtx;
 
 			std::thread::id m_currentThreadID;	//現在登録中のマルチタスク
+
+			std::shared_ptr<ThreadData> m_threadData;
 
 		public:
 			MoveAstar(const std::shared_ptr<Enemy::EnemyBase>& owner, const Parametor* paramPtr);

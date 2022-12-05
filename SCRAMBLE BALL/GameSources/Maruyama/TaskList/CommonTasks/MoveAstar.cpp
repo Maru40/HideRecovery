@@ -38,7 +38,23 @@ namespace basecross {
 
 	namespace Task {
 
-		//std::mutex MoveAstar::m_mtx;
+		//--------------------------------------------------------------------------------------
+		///	threadを管理するデータ
+		//--------------------------------------------------------------------------------------
+
+		ThreadData::ThreadData(std::thread& newThread) :
+			m_isRunning(true)
+		{
+			newThread.swap(m_thread);
+
+			std::thread observeRunning([&]() {
+				m_thread.join();
+				m_isRunning = false;
+				Debug::GetInstance()->Log(L"検索終了");
+			});
+
+			observeRunning.detach();
+		}
 
 		//--------------------------------------------------------------------------------------
 		///	ターゲットの近くまでAstarを利用して移動するタスクパラメータ
@@ -60,7 +76,8 @@ namespace basecross {
 			m_areaOpenDataHandler(new OpenDataHandler()),
 			m_openDataHandler(new OpenDataHandler()),
 			m_isInitializeSearch(true),
-			m_isSearchRoute(false)
+			m_isSearchRoute(false),
+			m_threadData(nullptr)
 		{
 			DefineTask();
 
@@ -74,11 +91,6 @@ namespace basecross {
 			//Debug::GetInstance()->ClearLog();
 			CalculateMoveAreaRouteQueue();	//徘徊エリアルートの取得
 
-			//検索中なら処理を中断
-			//if (IsSearchRoute()) {
-			//	return;
-			//}
-
 			if (m_isInitializeSearch) {
 				//初回検索のみバグるため、問題解決までの仮処理
 				m_isInitializeSearch = false;
@@ -86,13 +98,19 @@ namespace basecross {
 			}
 			else {
 				//NextRoute();
+				m_taskList->ForceStop();	//タスクの強制終了
 				StartThread_NextRoute();	//検索スレッドの開始
 			}
 		}
 
 		bool MoveAstar::OnUpdate() {
 			//ルート検索中は他の処理を止める。
-			if (IsSearchRoute()) {
+			//if (IsSearchRoute()) {
+			//	return false;
+			//}
+
+			//スレッドが検索中なら処理をしない。
+			if (m_threadData && m_threadData->m_isRunning) {
 				return false;
 			}
 
@@ -108,8 +126,6 @@ namespace basecross {
 
 		void MoveAstar::OnExit() {
 			m_taskList->ForceStop();
-
-			//Debug::GetInstance()->Log(L"▲▲▲ルートエンド");
 		}
 
 		void MoveAstar::DefineTask() {
@@ -138,15 +154,16 @@ namespace basecross {
 		void MoveAstar::StartThread_NextRoute() {
 			SetIsSearchRoute(true);
 			//スレッド生成
+			//m_threadData = ThreadData(nullptr);
+			//m_threadData = std::make_shared<ThreadData>([&]() { NextRoute(); });
 			std::thread nextRoute(&MoveAstar::NextRoute, this);
 			m_currentThreadID = nextRoute.get_id();	//IDの取得
-			nextRoute.detach();
+
+			m_threadData = std::make_shared<ThreadData>(nextRoute);
+			//nextRoute.detach();
 		}
 
 		void MoveAstar::NextRoute() {
-			//SetIsSearchRoute(true);		//検索開始
-			//std::lock_guard<std::mutex> lock(m_mtx);
-
 			if (m_areaRoute.empty()) {
 				SetIsSearchRoute(false);//検索終了
 				return;
