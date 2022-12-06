@@ -237,6 +237,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Stage\LoadStage.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Stage\MapShotStage.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Stage\MaruTestStage.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Stage\MaruTestStage_DebugLog.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\StateMachine\EdgeBase.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\StateMachine\Edge_StateMachine.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\StateMachine\GraphBase_Ex.h" />
@@ -683,6 +684,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Stage\LoadStage.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Stage\MapShotStage.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Stage\MaruTestStage.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Stage\MaruTestStage_DebugLog.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\StateMachine\EdgeBase.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\StateMachine\Edge_StateMachine.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\StateMachine\GraphBase_Ex.cpp" />

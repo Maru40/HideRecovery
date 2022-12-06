@@ -1531,6 +1531,9 @@
     <Filter Include="Maruyama\Thread\ThreadPool">
       <UniqueIdentifier>{2aba95de-baee-4a45-8aaa-a68de1d81cb8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Stage\MaruTestStage\DebugLogStage">
+      <UniqueIdentifier>{3d8a119b-a336-4da3-8156-05e14c667c1e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2901,6 +2904,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Thread\ThreadController.h">
       <Filter>Maruyama\Thread\ThreadController</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Stage\MaruTestStage_DebugLog.h">
+      <Filter>Maruyama\Stage\MaruTestStage\DebugLogStage</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -4147,6 +4153,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Thread\ThreadController.cpp">
       <Filter>Maruyama\Thread\ThreadController</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Stage\MaruTestStage_DebugLog.cpp">
+      <Filter>Maruyama\Stage\MaruTestStage\DebugLogStage</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
