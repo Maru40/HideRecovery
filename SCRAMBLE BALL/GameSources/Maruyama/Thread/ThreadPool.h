@@ -8,6 +8,7 @@
 #include "stdafx.h"
 
 #include <future>
+#include <tuple>
 
 #include "Watanabe/DebugClass/Debug.h"
 
@@ -95,11 +96,14 @@ namespace basecross {
 			auto future = task->get_future();
 
 			//PushTask([task]() { (*task)(); });
+			//ushTask([task, args...]() { (*task)(std::forward<Args>(args)...); });
+			//PushTask([task, args = std::move(args)...]() { (*task)(args...); });
+			//[task, tup = std::make_tuple(std::move(args)...)]{
+			//	
+			//};
+
 			PushTask([task, args...]() { (*task)(args...); });
-			//auto argsForward = std::forward<Args>(args)...;
-			//PushTask([task, args...]() { 
-			//	(*task)(args...); 
-			//});
+
 			return future;
 		}
 
