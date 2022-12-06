@@ -29,12 +29,13 @@ namespace basecross {
 		CreateViewLight();
 		auto log = AddGameObject<Debug>();
 		Debug::GetInstance()->Log(L"MaruTestStage_DebugLog");
+
+		AddGameObject<Tester::TesterThreadObject>();
 	}
 
 	void MaruTestStage_DebugLog::OnUpdate() {
 		if (PlayerInputer::GetInstance()->IsBDown()) {
-			Tester::TesterThread test;
-			test.Test();
+			
 		}
 	}
 
