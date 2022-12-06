@@ -1522,6 +1522,18 @@
     <Filter Include="Maruyama\StatorBase">
       <UniqueIdentifier>{aa7d8c44-71b3-4d6c-b478-c79969b426d3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Thread">
+      <UniqueIdentifier>{bcb25e86-4914-4363-a92e-37779fec5955}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Thread\ThreadController">
+      <UniqueIdentifier>{cce29b18-79dc-41a5-9db8-c99876c2f247}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Thread\ThreadPool">
+      <UniqueIdentifier>{2aba95de-baee-4a45-8aaa-a68de1d81cb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Stage\MaruTestStage\DebugLogStage">
+      <UniqueIdentifier>{3d8a119b-a336-4da3-8156-05e14c667c1e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2886,6 +2898,15 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\StateMachine\EdgeBase.h">
       <Filter>Maruyama\Utility\StateMachine\EdgeBase</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Thread\ThreadPool.h">
+      <Filter>Maruyama\Thread\ThreadPool</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Thread\ThreadController.h">
+      <Filter>Maruyama\Thread\ThreadController</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Stage\MaruTestStage_DebugLog.h">
+      <Filter>Maruyama\Stage\MaruTestStage\DebugLogStage</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -4126,6 +4147,15 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\StateMachine\EdgeBase.cpp">
       <Filter>Maruyama\Utility\StateMachine\EdgeBase</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Thread\ThreadPool.cpp">
+      <Filter>Maruyama\Thread\ThreadPool</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Thread\ThreadController.cpp">
+      <Filter>Maruyama\Thread\ThreadController</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Stage\MaruTestStage_DebugLog.cpp">
+      <Filter>Maruyama\Stage\MaruTestStage\DebugLogStage</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
