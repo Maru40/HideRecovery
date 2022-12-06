@@ -16,6 +16,7 @@
 #include "Itabashi/OnlineMatchStage.h"
 #include "Maruyama/Stage/MapShotStage.h"
 #include "Maruyama/Stage/MaruTestStage.h"
+#include "Maruyama/Stage/MaruTestStage_DebugLog.h"
 
 class LoadStage;
 
@@ -41,7 +42,7 @@ namespace basecross {
 			SetClearColor(Col);
 			//自分自身にイベントを送る
 			//これにより各ステージやオブジェクトがCreate時にシーンにアクセスできる
-			PostEvent(0.0f, GetThis<ObjectInterface>(), GetThis<Scene>(), L"ToLoadStage");
+			PostEvent(0.0f, GetThis<ObjectInterface>(), GetThis<Scene>(), L"MaruTestStage_DebugLog");
 		}
 		catch (...) {
 			throw;
@@ -95,6 +96,9 @@ namespace basecross {
 		}
 		else if (event->m_MsgStr == L"MaruTestStage") {
 			ResetActiveStage<MaruTestStage>();
+		}
+		else if (event->m_MsgStr == L"MaruTestStage_DebugLog") {
+			ResetActiveStage<MaruTestStage_DebugLog>();
 		}
 	}
 }
