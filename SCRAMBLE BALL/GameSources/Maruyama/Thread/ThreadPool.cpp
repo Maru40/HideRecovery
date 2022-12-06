@@ -99,7 +99,7 @@ namespace basecross {
 			return oss.str();
 		}
 
-		std::wstring TesterThreadObject::say_hello(int number, std::weak_ptr<FutureData>& data) {
+		std::wstring TesterThreadObject::say_hello(int number, std::shared_ptr<FutureData>& data) {
 			//std::lock_guard<std::mutex> lock(sm_mutex);
 
 			std::wstringstream debugTextStart;
@@ -126,9 +126,9 @@ namespace basecross {
 			sm_mutex.unlock();
 
 			//data->m_isRunning = false;
-			if (auto shareData = data.lock()) {
-				shareData->m_isRunning = false;
-			}
+			//if (auto shareData = data) {
+				data->m_isRunning = false;
+			//}
 			return oss.str();
 		}
 
@@ -152,8 +152,9 @@ namespace basecross {
 			m_futureData = std::make_shared<FutureData>();
 			std::weak_ptr<FutureData> weakfuture = m_futureData;
 			int i = 999;
+			//auto future = executor.Submit([&](int number, std::shared_ptr<FutureData> data) { return say_hello(number, data); }, i, m_futureData);
 			//auto future = executor.Submit([&](int number, std::weak_ptr<FutureData> data) { return say_hello(number, data); }, i, weakfuture);
-			auto future = executor.Submit(&TesterThreadObject::say_hello, this, 999, weakfuture);
+			auto future = executor.Submit(&TesterThreadObject::say_hello, this, 999, m_futureData);
 			m_futureData->MoveFuture(future);
 
 			//auto task = std::make_shared<std::packaged_task<std::wstring(TesterThreadObject*, int, std::weak_ptr<FutureData>&)>>(&TesterThreadObject::say_hello);
@@ -164,6 +165,8 @@ namespace basecross {
 
 			// Œ‹‰Ê‚Ìæ“¾
 			//Debug::GetInstance()->Log(ok_future.get());
+
+			Debug::GetInstance()->Log(FutureData::count);
 		}
 
 		void TesterThreadObject::OnUpdate() {

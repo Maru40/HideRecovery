@@ -96,6 +96,10 @@ namespace basecross {
 
 			//PushTask([task]() { (*task)(); });
 			PushTask([task, args...]() { (*task)(args...); });
+			//auto argsForward = std::forward<Args>(args)...;
+			//PushTask([task, args...]() { 
+			//	(*task)(args...); 
+			//});
 			return future;
 		}
 
@@ -157,7 +161,7 @@ namespace basecross {
 
 			std::shared_ptr<FutureData> m_futureData;
 
-			std::wstring say_hello(int number, std::weak_ptr<FutureData>& data);
+			std::wstring say_hello(int number, std::shared_ptr<FutureData>& data);
 
 		public:
 			TesterThreadObject(const std::shared_ptr<Stage>& stage);
