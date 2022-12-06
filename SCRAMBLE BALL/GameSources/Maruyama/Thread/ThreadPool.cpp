@@ -151,9 +151,16 @@ namespace basecross {
 			// ƒƒ“ƒoŠÖ”‚Ì”ñ“¯ŠúÀs
 			m_futureData = std::make_shared<FutureData>();
 			std::weak_ptr<FutureData> weakfuture = m_futureData;
-			auto future = executor.Submit([&](int number, std::weak_ptr<FutureData> data) { return say_hello(number, data); }, 999, weakfuture);
-			//auto future = executor.Submit(&TesterThreadObject::say_hello, this, 999, weakfuture);
+			int i = 999;
+			//auto future = executor.Submit([&](int number, std::weak_ptr<FutureData> data) { return say_hello(number, data); }, i, weakfuture);
+			auto future = executor.Submit(&TesterThreadObject::say_hello, this, 999, weakfuture);
 			m_futureData->MoveFuture(future);
+
+			//auto task = std::make_shared<std::packaged_task<std::wstring(TesterThreadObject*, int, std::weak_ptr<FutureData>&)>>(&TesterThreadObject::say_hello);
+			//auto task = std::make_shared<std::packaged_task<std::wstring(int)>>(&say_ok);
+			//(*task)();
+			//task->get_future();
+			//(*task)(this, 999, weakfuture);
 
 			// Œ‹‰Ê‚Ìæ“¾
 			//Debug::GetInstance()->Log(ok_future.get());

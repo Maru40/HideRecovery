@@ -85,17 +85,17 @@ namespace basecross {
 		template <class F, class... Args, 
 			class R = class std::result_of<std::decay_t<F>(std::decay_t<Args>...)>::type>
 #endif
-		std::future<R> Submit(F&& func, Args&&... args) {
-			auto task = std::make_shared<std::packaged_task<R()>>([func, args...]() {
-				return func(args...);
-			});
+		std::future<R> Submit(F&& func, Args... args) {
+			//auto task = std::make_shared<std::packaged_task<R()>>([func, args...]() {
+			//	return func(args...);
+			//});
 
-			//auto task = std::make_shared<std::packaged_task<R(Args&&...)>>(func);
+			auto task = std::make_shared<std::packaged_task<R(Args...)>>(func);
 
 			auto future = task->get_future();
 
-			PushTask([task]() { (*task)(); });
-			//PushTask([task, args...]() { (*task)(args...); });
+			//PushTask([task]() { (*task)(); });
+			PushTask([task, args...]() { (*task)(args...); });
 			return future;
 		}
 
