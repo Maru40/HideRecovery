@@ -9,6 +9,8 @@
 
 #include "ThreadPool.h"
 
+#include "Patch/PlayerInputer.h"
+
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
@@ -70,14 +72,19 @@ namespace basecross {
 
 		static std::mutex sm_mutex;
 
-		std::wstring say_ok(int number) {
+		std::wstring say_ok(int number, std::atomic<bool> isRuuning) {
 			std::wstringstream debugTextStart;
 			debugTextStart << L"[say_ok (" << std::this_thread::get_id << L")] >>> Start";
 			sm_mutex.lock();
 			Debug::GetInstance()->Log(debugTextStart.str());
 			sm_mutex.unlock();
 
-			std::this_thread::sleep_for(std::chrono::milliseconds(2000)); // 何か重い処理
+			//std::this_thread::sleep_for(std::chrono::milliseconds(2000)); // 何か重い処理
+			//constexpr int loopCount = 1000000000;
+			//for (int i = 0; i < loopCount; i++) {
+			//	int s = 0;
+			//}
+
 			std::wstringstream oss;
 			oss << "[say_ok (" << std::this_thread::get_id() << ")] >>> Hello! number: " << number;
 
@@ -90,14 +97,21 @@ namespace basecross {
 			return oss.str();
 		}
 
-		std::wstring TesterThread::say_hello(int number) {
+		std::wstring TesterThreadObject::say_hello(int number, bool* isRunning) {
 			std::wstringstream debugTextStart;
 			debugTextStart << L"[say_hello (" << std::this_thread::get_id << L")] >>> Start";
 			sm_mutex.lock();
 			Debug::GetInstance()->Log(debugTextStart.str());
 			sm_mutex.unlock();
 
-			std::this_thread::sleep_for(std::chrono::milliseconds(2000)); // 何か重い処理
+			//std::this_thread::sleep_for(std::chrono::milliseconds(2000)); // 何か重い処理
+			//constexpr int loopCount = static_cast<int>((float)INT_MAX * 1.0f);
+			constexpr int loopCount = INT_MAX;
+			int count = 0;
+			for (int i = 0; i < loopCount; i++) {
+				int s = 0;
+			}
+
 			std::wstringstream oss;
 			oss << "[say_hello (" << std::this_thread::get_id() << ")] >>> Hello! number: " << number;
 
@@ -105,27 +119,47 @@ namespace basecross {
 			debugTextEnd << L"[say_hello (" << std::this_thread::get_id << L")] >>> End";
 			sm_mutex.lock();
 			Debug::GetInstance()->Log(debugTextEnd.str());
+			//m_isRunning = false;
 			sm_mutex.unlock();
 
+			*isRunning = false;
 			return oss.str();
 		}
 
-		void TesterThread::Test() {
-			ThreadPool executor;
+		TesterThreadObject::TesterThreadObject(const std::shared_ptr<Stage>& stage):
+			GameObject(stage),
+			m_futureData(new FutureData())
+		{}
+
+		void TesterThreadObject::Test() {
+			ThreadPool& executor = m_executor;
+			m_isRunning = true;
 
 			// スレッド数の確認
 			int threadCount = executor.GetThreadCount();
 			Debug::GetInstance()->Log(threadCount);
 
 			// グローバル関数の非同期実行
-			auto ok_future = executor.Submit(say_ok, 100);
+			std::atomic<bool> isisis = true;
+			auto ok_future = executor.Submit(say_ok, 100, true);
 
 			// メンバ関数の非同期実行
-			auto hello_future = executor.Submit([&](auto number) { return say_hello(number); }, 999);
+			m_futureData = std::make_shared<FutureData>();
+			auto future = executor.Submit([&](int number, bool* isRunning) { return say_hello(number, isRunning); }, 999, &m_futureData->m_isRunning);
+			m_futureData->MoveFuture(future);
 
 			// 結果の取得
 			Debug::GetInstance()->Log(ok_future.get());
-			Debug::GetInstance()->Log(hello_future.get());
+		}
+
+		void TesterThreadObject::OnUpdate() {
+			if (PlayerInputer::GetInstance()->IsBDown()) {
+				Test();
+			}
+
+			if (!m_futureData->m_isRunning && m_futureData->m_future.valid()) {
+				Debug::GetInstance()->Log(m_futureData->m_future.get());
+			}
 		}
 
 	}

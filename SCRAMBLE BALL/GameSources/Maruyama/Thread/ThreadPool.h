@@ -85,7 +85,7 @@ namespace basecross {
 		template <class F, class... Args, 
 			class R = class std::result_of<std::decay_t<F>(std::decay_t<Args>...)>::type>
 #endif
-		std::future<R> Submit(F&& func, const Args&&... args) {
+		std::future<R> Submit(F&& func, Args&&... args) {
 			auto task = std::make_shared<std::packaged_task<R()>>([func, args...]() {
 				return func(args...);
 			});
@@ -116,14 +116,42 @@ namespace basecross {
 
 	namespace Tester {
 
-		class TesterThread {
-		private:
-			std::wstring say_hello(int number);
+		struct FutureData {
+			bool m_isRunning;
+			std::future<std::wstring> m_future;
 
-			bool m_isRuning = true;
+			FutureData() :
+				//FutureData(std::future<std::wstring>())
+				m_isRunning(true)
+			{}
+
+			FutureData(std::future<std::wstring>& newFuture) :
+				m_isRunning(true),
+				m_future(std::move(newFuture))
+			{}
+
+			void MoveFuture(std::future<std::wstring>& other) {
+				m_future = std::move(other);
+			}
+		};
+
+		class TesterThreadObject : public GameObject {
+		private:
+			ThreadPool m_executor;	//メンバとして持たないと、スレッド終了時にjoinしてしまう。
+			//std::future<std::wstring> m_hello_future;
+
+			std::atomic<bool> m_isRunning = false;
+
+			std::shared_ptr<FutureData> m_futureData;
+
+			std::wstring say_hello(int number, bool* isRunning);
 
 		public:
+			TesterThreadObject(const std::shared_ptr<Stage>& stage);
+
 			void Test();
+
+			void OnUpdate() override;
 		};
 
 	}
