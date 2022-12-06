@@ -90,9 +90,12 @@ namespace basecross {
 				return func(args...);
 			});
 
+			//auto task = std::make_shared<std::packaged_task<R(Args&&...)>>(func);
+
 			auto future = task->get_future();
 
 			PushTask([task]() { (*task)(); });
+			//PushTask([task, args...]() { (*task)(args...); });
 			return future;
 		}
 
@@ -117,18 +120,28 @@ namespace basecross {
 	namespace Tester {
 
 		struct FutureData {
+			static int count;
+
 			bool m_isRunning;
 			std::future<std::wstring> m_future;
 
 			FutureData() :
 				//FutureData(std::future<std::wstring>())
 				m_isRunning(true)
-			{}
+			{
+				count++;
+			}
 
 			FutureData(std::future<std::wstring>& newFuture) :
 				m_isRunning(true),
 				m_future(std::move(newFuture))
-			{}
+			{
+				count++;
+			}
+
+			~FutureData() {
+				count--;
+			}
 
 			void MoveFuture(std::future<std::wstring>& other) {
 				m_future = std::move(other);
@@ -144,7 +157,7 @@ namespace basecross {
 
 			std::shared_ptr<FutureData> m_futureData;
 
-			std::wstring say_hello(int number, bool* isRunning);
+			std::wstring say_hello(int number, std::weak_ptr<FutureData>& data);
 
 		public:
 			TesterThreadObject(const std::shared_ptr<Stage>& stage);

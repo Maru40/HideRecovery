@@ -70,6 +70,8 @@ namespace basecross {
 
 	namespace Tester {
 
+		int FutureData::count = 0;
+
 		static std::mutex sm_mutex;
 
 		std::wstring say_ok(int number, std::atomic<bool> isRuuning) {
@@ -97,7 +99,9 @@ namespace basecross {
 			return oss.str();
 		}
 
-		std::wstring TesterThreadObject::say_hello(int number, bool* isRunning) {
+		std::wstring TesterThreadObject::say_hello(int number, std::weak_ptr<FutureData>& data) {
+			//std::lock_guard<std::mutex> lock(sm_mutex);
+
 			std::wstringstream debugTextStart;
 			debugTextStart << L"[say_hello (" << std::this_thread::get_id << L")] >>> Start";
 			sm_mutex.lock();
@@ -119,10 +123,12 @@ namespace basecross {
 			debugTextEnd << L"[say_hello (" << std::this_thread::get_id << L")] >>> End";
 			sm_mutex.lock();
 			Debug::GetInstance()->Log(debugTextEnd.str());
-			//m_isRunning = false;
 			sm_mutex.unlock();
 
-			*isRunning = false;
+			//data->m_isRunning = false;
+			if (auto shareData = data.lock()) {
+				shareData->m_isRunning = false;
+			}
 			return oss.str();
 		}
 
@@ -140,16 +146,17 @@ namespace basecross {
 			Debug::GetInstance()->Log(threadCount);
 
 			// グローバル関数の非同期実行
-			std::atomic<bool> isisis = true;
-			auto ok_future = executor.Submit(say_ok, 100, true);
+			//auto ok_future = executor.Submit(say_ok, 100, true);
 
 			// メンバ関数の非同期実行
 			m_futureData = std::make_shared<FutureData>();
-			auto future = executor.Submit([&](int number, bool* isRunning) { return say_hello(number, isRunning); }, 999, &m_futureData->m_isRunning);
+			std::weak_ptr<FutureData> weakfuture = m_futureData;
+			auto future = executor.Submit([&](int number, std::weak_ptr<FutureData> data) { return say_hello(number, data); }, 999, weakfuture);
+			//auto future = executor.Submit(&TesterThreadObject::say_hello, this, 999, weakfuture);
 			m_futureData->MoveFuture(future);
 
 			// 結果の取得
-			Debug::GetInstance()->Log(ok_future.get());
+			//Debug::GetInstance()->Log(ok_future.get());
 		}
 
 		void TesterThreadObject::OnUpdate() {
@@ -159,6 +166,7 @@ namespace basecross {
 
 			if (!m_futureData->m_isRunning && m_futureData->m_future.valid()) {
 				Debug::GetInstance()->Log(m_futureData->m_future.get());
+				Debug::GetInstance()->Log(FutureData::count);
 			}
 		}
 
