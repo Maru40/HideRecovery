@@ -8,6 +8,8 @@
 #include "stdafx.h"
 
 #include <future>
+#include <tuple>
+#include <utility>
 
 #include "Watanabe/DebugClass/Debug.h"
 
@@ -85,14 +87,36 @@ namespace basecross {
 		template <class F, class... Args, 
 			class R = class std::result_of<std::decay_t<F>(std::decay_t<Args>...)>::type>
 #endif
-		std::future<R> Submit(F&& func, const Args&&... args) {
-			auto task = std::make_shared<std::packaged_task<R()>>([func, args...]() {
-				return func(args...);
-			});
+		std::future<R> Submit(F&& func, Args... args) {
+			//auto task = std::make_shared<std::packaged_task<R()>>([func, args...]() {
+			//	return func(args...);
+			//});
+
+			auto task = std::make_shared<std::packaged_task<R(Args...)>>(func);
 
 			auto future = task->get_future();
+	
+			//PushTask([task]() { (*task)(); });
+			//ushTask([task, args...]() { (*task)(std::forward<Args>(args)...); });
 
-			PushTask([task]() { (*task)(); });
+			//(*task)(std::move(args)...);
+
+			//[ar = std::move(args)](){};
+
+			//[task, tup = std::make_tuple(std::move(args)...)]{
+			//	
+			//};
+
+			//(*task)(std::forward<Args>(args)...);
+			//decltype(args) ar = std::forward<Args>(args);
+			//[ar = std::forward_as_tuple(args)]() {};
+
+			//decltype(args...) ar = std::move(args)...;
+
+			//[args = std::move(args)...]() -> decltype(auto) {};
+
+			PushTask([task, args...]() { (*task)(args...); });
+
 			return future;
 		}
 
@@ -116,14 +140,52 @@ namespace basecross {
 
 	namespace Tester {
 
-		class TesterThread {
-		private:
-			std::wstring say_hello(int number);
+		struct FutureData {
+			static int count;
 
-			bool m_isRuning = true;
+			bool m_isRunning;
+			std::future<std::wstring> m_future;
+
+			FutureData() :
+				//FutureData(std::future<std::wstring>())
+				m_isRunning(true)
+			{
+				count++;
+			}
+
+			FutureData(std::future<std::wstring>& newFuture) :
+				m_isRunning(true),
+				m_future(std::move(newFuture))
+			{
+				count++;
+			}
+
+			~FutureData() {
+				count--;
+			}
+
+			void MoveFuture(std::future<std::wstring>& other) {
+				m_future = std::move(other);
+			}
+		};
+
+		class TesterThreadObject : public GameObject {
+		private:
+			ThreadPool m_executor;	//メンバとして持たないと、スレッド終了時にjoinしてしまう。
+			//std::future<std::wstring> m_hello_future;
+
+			std::atomic<bool> m_isRunning = false;
+
+			std::shared_ptr<FutureData> m_futureData;
+
+			std::wstring say_hello(std::shared_ptr<FutureData>& data);
 
 		public:
+			TesterThreadObject(const std::shared_ptr<Stage>& stage);
+
 			void Test();
+
+			void OnUpdate() override;
 		};
 
 	}
