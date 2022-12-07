@@ -8,7 +8,7 @@
 #pragma once
 #include "stdafx.h"
 
-#include "Maruyama/Utility/CommonStructs/RectData.h"
+#include "Maruyama/Patch/CommonStructs/RectData.h"
 
 namespace basecross {
 
