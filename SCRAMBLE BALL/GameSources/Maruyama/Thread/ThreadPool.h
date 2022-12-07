@@ -9,6 +9,7 @@
 
 #include <future>
 #include <tuple>
+#include <utility>
 
 #include "Watanabe/DebugClass/Debug.h"
 
@@ -94,13 +95,25 @@ namespace basecross {
 			auto task = std::make_shared<std::packaged_task<R(Args...)>>(func);
 
 			auto future = task->get_future();
-
+	
 			//PushTask([task]() { (*task)(); });
 			//ushTask([task, args...]() { (*task)(std::forward<Args>(args)...); });
-			//PushTask([task, args = std::move(args)...]() { (*task)(args...); });
+
+			//(*task)(std::move(args)...);
+
+			//[ar = std::move(args)](){};
+
 			//[task, tup = std::make_tuple(std::move(args)...)]{
 			//	
 			//};
+
+			//(*task)(std::forward<Args>(args)...);
+			//decltype(args) ar = std::forward<Args>(args);
+			//[ar = std::forward_as_tuple(args)]() {};
+
+			//decltype(args...) ar = std::move(args)...;
+
+			//[args = std::move(args)...]() -> decltype(auto) {};
 
 			PushTask([task, args...]() { (*task)(args...); });
 
@@ -165,7 +178,7 @@ namespace basecross {
 
 			std::shared_ptr<FutureData> m_futureData;
 
-			std::wstring say_hello(int number, std::shared_ptr<FutureData>& data);
+			std::wstring say_hello(std::shared_ptr<FutureData>& data);
 
 		public:
 			TesterThreadObject(const std::shared_ptr<Stage>& stage);

@@ -99,7 +99,7 @@ namespace basecross {
 			return oss.str();
 		}
 
-		std::wstring TesterThreadObject::say_hello(int number, std::shared_ptr<FutureData>& data) {
+		std::wstring TesterThreadObject::say_hello(std::shared_ptr<FutureData>& data) {
 			//std::lock_guard<std::mutex> lock(sm_mutex);
 
 			std::wstringstream debugTextStart;
@@ -117,7 +117,7 @@ namespace basecross {
 			}
 
 			std::wstringstream oss;
-			oss << "[say_hello (" << std::this_thread::get_id() << ")] >>> Hello! number: " << number;
+			oss << "[say_hello (" << std::this_thread::get_id() << ")] >>> Hello! number: " << 999;
 
 			std::wstringstream debugTextEnd;
 			debugTextEnd << L"[say_hello (" << std::this_thread::get_id << L")] >>> End";
@@ -143,7 +143,7 @@ namespace basecross {
 
 			// スレッド数の確認
 			int threadCount = executor.GetThreadCount();
-			Debug::GetInstance()->Log(threadCount);
+			//Debug::GetInstance()->Log(threadCount);
 
 			// グローバル関数の非同期実行
 			//auto ok_future = executor.Submit(say_ok, 100, true);
@@ -154,8 +154,12 @@ namespace basecross {
 			int i = 999;
 			//auto future = executor.Submit([&](int number, std::shared_ptr<FutureData> data) { return say_hello(number, data); }, i, m_futureData);
 			//auto future = executor.Submit([&](int number, std::weak_ptr<FutureData> data) { return say_hello(number, data); }, i, weakfuture);
-			auto future = executor.Submit(&TesterThreadObject::say_hello, this, 999, m_futureData);
+			auto future = executor.Submit(&TesterThreadObject::say_hello, this, m_futureData);
 			m_futureData->MoveFuture(future);
+
+			//バインドテスト
+			//auto testBind = std::bind(&TesterThreadObject::say_hello, this, std::placeholders::_1);
+			//testBind(m_futureData);
 
 			//auto task = std::make_shared<std::packaged_task<std::wstring(TesterThreadObject*, int, std::weak_ptr<FutureData>&)>>(&TesterThreadObject::say_hello);
 			//auto task = std::make_shared<std::packaged_task<std::wstring(int)>>(&say_ok);
@@ -166,7 +170,7 @@ namespace basecross {
 			// 結果の取得
 			//Debug::GetInstance()->Log(ok_future.get());
 
-			Debug::GetInstance()->Log(FutureData::count);
+			//Debug::GetInstance()->Log(FutureData::count);
 		}
 
 		void TesterThreadObject::OnUpdate() {
