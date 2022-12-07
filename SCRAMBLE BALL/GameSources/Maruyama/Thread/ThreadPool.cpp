@@ -159,6 +159,8 @@ namespace basecross {
 
 			//バインドテスト
 			//auto testBind = std::bind(&TesterThreadObject::say_hello, this, std::placeholders::_1);
+			//auto testBind2 = std::bind(&TesterThreadObject::say_hello, this, m_futureData);
+			//testBind2();
 			//testBind(m_futureData);
 
 			//auto task = std::make_shared<std::packaged_task<std::wstring(TesterThreadObject*, int, std::weak_ptr<FutureData>&)>>(&TesterThreadObject::say_hello);
