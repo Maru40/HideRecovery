@@ -36,6 +36,8 @@ namespace basecross {
 		private:
 			Parametor m_param;
 
+			std::weak_ptr<GameObject> m_debugDrawObject;	//デバッグ
+
 		public:
 			Cell(const Parametor& param);
 
@@ -58,6 +60,17 @@ namespace basecross {
 			void SetParametor(const Parametor& parametor) noexcept { m_param = parametor; }
 
 			Parametor GetParametor() const noexcept { return m_param; }
+
+
+			//--------------------------------------------------------------------------------------
+			///	デバッグ
+			//--------------------------------------------------------------------------------------
+
+			void OnDebugDraw();
+
+			void CreateDebugDrawObject();
+
+			void SetDebugDrawActive(const bool isDraw);
 		};
 
 	}
