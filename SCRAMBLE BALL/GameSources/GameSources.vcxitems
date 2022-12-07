@@ -198,6 +198,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Load\LoadCSV.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Load\LoadData.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Load\StageMapCSV.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Patch\CommonStructs\RectData.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\HidePlaceOpener.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\AnimationCtrl.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\AttackBase.h" />
@@ -278,7 +279,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\UI\3D\Object\NumberObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\UI\3D\Object\NumbersObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\UI\BuilderVertexPCT.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\CommonStructs\RectData.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Component\AutoReflection.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Component\BillBoard.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Component\BillBoard_Ex.h" />
@@ -652,6 +652,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Load\LoadCSV.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Load\LoadData.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Load\StageMapCSV.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Patch\CommonStructs\RectData.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\HidePlaceOpener.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\BuffController.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\ChargeGun.cpp" />
@@ -725,7 +726,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\UI\3D\Object\NumberObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\UI\3D\Object\NumbersObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\UI\BuilderVertexPCT.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\CommonStructs\RectData.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Component\AutoReflection.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Component\BillBoard.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Component\BillBoard_Ex.cpp" />
