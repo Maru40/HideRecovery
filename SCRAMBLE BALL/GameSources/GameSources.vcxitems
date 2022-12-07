@@ -168,7 +168,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Generator\LoadPositionGenerator.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Generator\RandomPositionGenerator.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\AIImpacter.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\Factory_ImpactCellMap.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\FieldImpactMap.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\ImpactCellMap.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\ImpactManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\ImpactMap.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\OccupancyManager.h" />
@@ -276,6 +278,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\UI\3D\Object\NumberObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\UI\3D\Object\NumbersObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\UI\BuilderVertexPCT.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\CommonStructs\RectData.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Component\AutoReflection.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Component\BillBoard.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Component\BillBoard_Ex.h" />
@@ -624,7 +627,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Generator\LoadPositionGenerator.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Generator\RandomPosiitonGenerator.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\AIImpacter.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\Factory_ImpactCellMap.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\FieldImpactMap.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\ImpactCellMap.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\ImpactManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\ImpactMap.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\OccupancyManager.cpp" />
@@ -720,6 +725,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\UI\3D\Object\NumberObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\UI\3D\Object\NumbersObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\UI\BuilderVertexPCT.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\CommonStructs\RectData.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Component\AutoReflection.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Component\BillBoard.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Component\BillBoard_Ex.cpp" />
