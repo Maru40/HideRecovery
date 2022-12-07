@@ -1552,6 +1552,9 @@
     <Filter Include="Maruyama\Enemy\Component\ImpactMap\ImpactCellMap\CellHelper">
       <UniqueIdentifier>{a4c27fa6-82ca-44ce-84f4-ed817fb68067}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Enemy\Component\ImpactMap\ImpactCellMap\CellHelper\DebugCell">
+      <UniqueIdentifier>{4615d699-eae3-4d58-b7e8-7dff88909759}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2937,6 +2940,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\Cell.h">
       <Filter>Maruyama\Enemy\Component\ImpactMap\ImpactCellMap\CellHelper</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\DebugClass\DebugCell.h">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\ImpactCellMap\CellHelper\DebugCell</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -4198,6 +4204,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\Cell.cpp">
       <Filter>Maruyama\Enemy\Component\ImpactMap\ImpactCellMap\CellHelper</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\DebugClass\DebugCell.cpp">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\ImpactCellMap\CellHelper\DebugCell</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
