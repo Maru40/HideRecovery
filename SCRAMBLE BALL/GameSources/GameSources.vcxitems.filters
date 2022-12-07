@@ -1549,6 +1549,9 @@
     <Filter Include="Maruyama\Patch\CommonStructs\Rect">
       <UniqueIdentifier>{198ed585-c344-4e4f-9a40-a5a636498e7a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Enemy\Component\ImpactMap\ImpactCellMap\CellHelper">
+      <UniqueIdentifier>{a4c27fa6-82ca-44ce-84f4-ed817fb68067}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2931,6 +2934,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Patch\CommonStructs\RectData.h">
       <Filter>Maruyama\Patch\CommonStructs\Rect</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\Cell.h">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\ImpactCellMap\CellHelper</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -4189,6 +4195,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Patch\CommonStructs\RectData.cpp">
       <Filter>Maruyama\Patch\CommonStructs\Rect</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\Cell.cpp">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\ImpactCellMap\CellHelper</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
