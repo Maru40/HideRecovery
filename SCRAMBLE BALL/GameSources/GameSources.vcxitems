@@ -61,6 +61,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Camera\StartCamera.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Camera\UtilityStartCamera.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\DebugClass\Component\DebugNumber.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\DebugClass\Component\RectDraw.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\DebugClass\Object\ArrowObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\DebugClass\Object\DebugObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Effect\Component\AuraBase.h" />
@@ -168,7 +169,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Generator\LoadPositionGenerator.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Generator\RandomPositionGenerator.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\AIImpacter.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\Cell.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\DebugClass\DebugCell.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\Factory_CellMap.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\FieldCellMap.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\FieldImpactMap.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\CellMap.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\ImpactManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\ImpactMap.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\OccupancyManager.h" />
@@ -196,6 +202,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Load\LoadCSV.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Load\LoadData.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Load\StageMapCSV.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Patch\CommonStructs\RectData.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\HidePlaceOpener.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\AnimationCtrl.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\AttackBase.h" />
@@ -519,6 +526,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Camera\StartCamera.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Camera\UtilityStartCamera.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\DebugClass\Component\DebugNumber.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\DebugClass\Component\RectDraw.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\DebugClass\Object\ArrowObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\DebugClass\Object\DebugObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Effect\Component\AuraBase.cpp" />
@@ -624,7 +632,12 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Generator\LoadPositionGenerator.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Generator\RandomPosiitonGenerator.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\AIImpacter.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\Cell.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\DebugClass\DebugCell.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\Factory_CellMap.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\FieldCellMap.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\FieldImpactMap.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\CellMap.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\ImpactManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\ImpactMap.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\OccupancyManager.cpp" />
@@ -647,6 +660,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Load\LoadCSV.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Load\LoadData.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Load\StageMapCSV.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Patch\CommonStructs\RectData.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\HidePlaceOpener.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\BuffController.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\ChargeGun.cpp" />
