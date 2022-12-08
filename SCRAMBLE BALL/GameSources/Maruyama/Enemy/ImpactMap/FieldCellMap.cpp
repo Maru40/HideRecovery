@@ -10,6 +10,9 @@
 
 #include "FieldCellMap.h"
 
+#include "Cell.h"
+
+
 namespace basecross {
 
 	namespace maru {
@@ -19,7 +22,7 @@ namespace basecross {
 		{}
 
 		void FieldCellMap::OnCreate() {
-
+			
 		}
 
 		void FieldCellMap::OnUpdate() {
