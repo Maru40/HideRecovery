@@ -22,13 +22,22 @@ namespace basecross {
 		//--------------------------------------------------------------------------------------
 		class FieldCellMap : public Component
 		{
+			std::shared_ptr<CellMap> m_cellMap;
+
 		public:
 			FieldCellMap(const std::shared_ptr<GameObject>& objPtr);
 
 			void OnCreate() override;
 			void OnUpdate() override;
 
-			
+		public:
+			//--------------------------------------------------------------------------------------
+			///	アクセッサ
+			//--------------------------------------------------------------------------------------
+
+			void SetCellMap(const std::shared_ptr<CellMap>& cellMap);
+
+			const std::shared_ptr<CellMap>& GetCellMap() const;
 		};
 
 	}

@@ -26,5 +26,13 @@ namespace basecross {
 
 		}
 
+		void FieldCellMap::SetCellMap(const std::shared_ptr<CellMap>& cellMap) {
+			m_cellMap = cellMap;
+		}
+
+		const std::shared_ptr<CellMap>& FieldCellMap::GetCellMap() const {
+			return m_cellMap;
+		}
+
 	}
 }
