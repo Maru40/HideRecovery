@@ -34,6 +34,7 @@ namespace basecross {
 
 		AddGameObject<Tester::TesterThreadObject>();
 
+		//Cellのデバッグ表示
 		auto cellParam = maru::Cell::Parametor();
 		auto cell = std::make_shared<maru::Cell>(cellParam);
 		cell->OnDebugDraw(GetThis<Stage>());
