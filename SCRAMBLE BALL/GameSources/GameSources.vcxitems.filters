@@ -1558,6 +1558,12 @@
     <Filter Include="Maruyama\Enemy\Component\ImpactMap\ImpactCellMap\FieldCellMap">
       <UniqueIdentifier>{3524cfcf-133d-427a-9ca8-f729c28ce24c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\DebugClass">
+      <UniqueIdentifier>{db8b6d53-840d-4095-8c7d-5a6629bf16be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\DebugClass\RectDraw">
+      <UniqueIdentifier>{cc7eabc0-2daa-4998-841e-425d347e7fc7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2949,6 +2955,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\FieldCellMap.h">
       <Filter>Maruyama\Enemy\Component\ImpactMap\ImpactCellMap\FieldCellMap</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\DebugClass\Component\RectDraw.h">
+      <Filter>Maruyama\DebugClass\RectDraw</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -4216,6 +4225,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\FieldCellMap.cpp">
       <Filter>Maruyama\Enemy\Component\ImpactMap\ImpactCellMap\FieldCellMap</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\DebugClass\Component\RectDraw.cpp">
+      <Filter>Maruyama\DebugClass\RectDraw</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
