@@ -9,11 +9,12 @@
 #include "Patch/PlayerInputer.h"
 
 #include "Maruyama/Enemy/ImpactMap/Cell.h"
+#include "Maruyama/Enemy/ImpactMap/FieldCellMap.h"
 
 namespace basecross {
 
 	void MaruTestStage_DebugLog::CreateViewLight() {
-		const Vec3 eye(0.0f, 20.0f, -0.001f);
+		const Vec3 eye(0.0f, 30.0f, -0.000001f);
 		const Vec3 at(0, 0.0f, 0);
 		auto PtrView = CreateView<SingleView>();
 		//ビューのカメラの設定
@@ -35,9 +36,11 @@ namespace basecross {
 		AddGameObject<Tester::TesterThreadObject>();
 
 		//Cellのデバッグ表示
-		auto cellParam = maru::Cell::Parametor();
-		auto cell = std::make_shared<maru::Cell>(cellParam);
-		cell->OnDebugDraw(GetThis<Stage>());
+		//auto cellParam = maru::Cell::Parametor();
+		//auto cell = std::make_shared<maru::Cell>(cellParam);
+		//cell->OnDebugDraw(GetThis<Stage>());
+
+		AddGameObject<GameObject>()->AddComponent<maru::FieldCellMap>();
 	}
 
 	void MaruTestStage_DebugLog::OnUpdate() {
