@@ -49,6 +49,11 @@ namespace basecross {
 		private:
 
 		public:
+			/// <summary>
+			/// セルの生成
+			/// </summary>
+			/// <param name="param">パラメータ</param>
+			/// <returns>生成されたセル配列</returns>
 			static std::vector<std::shared_ptr<Cell>> CreateCells(const Parametor& param);
 		};
 
