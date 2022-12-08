@@ -15,14 +15,14 @@ namespace basecross {
 		//--------------------------------------------------------------------------------------
 		///	前方宣言
 		//--------------------------------------------------------------------------------------
-		class ImpactCellMap;
+		class CellMap;
 
 		//--------------------------------------------------------------------------------------
 		///	デバッグ表のCell
 		//--------------------------------------------------------------------------------------
 		class DebugCell : public Component
 		{
-			std::weak_ptr<ImpactCellMap> m_impactCellMap;
+			std::weak_ptr<CellMap> m_cellMap;	//Cell
 
 		public:
 			DebugCell(const std::shared_ptr<GameObject>& objPtr);

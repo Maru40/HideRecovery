@@ -16,7 +16,7 @@ namespace basecross {
 
 	namespace maru {
 
-		ImpactCellMap::ImpactCellMap()
+		CellMap::CellMap()
 
 		{}
 
@@ -24,11 +24,11 @@ namespace basecross {
 		///	アクセッサ
 		//--------------------------------------------------------------------------------------
 
-		void ImpactCellMap::SetCells(const std::vector<std::shared_ptr<Cell>>& cells) {
+		void CellMap::SetCells(const std::vector<std::shared_ptr<Cell>>& cells) {
 			m_cells = cells;
 		}
 
-		std::vector<std::shared_ptr<Cell>> ImpactCellMap::GetCells() {
+		std::vector<std::shared_ptr<Cell>> CellMap::GetCells() {
 			return m_cells;
 		}
 
