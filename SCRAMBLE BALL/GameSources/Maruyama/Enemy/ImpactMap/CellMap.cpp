@@ -8,7 +8,7 @@
 #include "stdafx.h"
 #include "Project.h"
 
-#include "ImpactCellMap.h"
+#include "CellMap.h"
 
 #include "Cell.h"
 
