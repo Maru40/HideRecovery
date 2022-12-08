@@ -1,15 +1,15 @@
 
 
 /*!
-@file Factory_ImpactCellMap.cpp
-@brief Factory_ImpactCellMapのクラス実体
+@file Factory_CellMap.cpp
+@brief Factory_CellMapのクラス実体
 担当：丸山裕喜
 */
 
 #include "stdafx.h"
 #include "Project.h"
 
-#include "Factory_ImpactCellMap.h"
+#include "Factory_CellMap.h"
 
 #include "Cell.h"
 
@@ -21,8 +21,8 @@ namespace basecross {
 		///	セルマップファクトリーのパラメータ
 		//--------------------------------------------------------------------------------------
 		
-		Factory_ImpactCellMap_Parametor::Factory_ImpactCellMap_Parametor():
-			Factory_ImpactCellMap_Parametor(
+		Factory_CellMap_Parametor::Factory_CellMap_Parametor():
+			Factory_CellMap_Parametor(
 				Rect(Vec3(0.0f), 2.0f, 2.0f),	//一つのセルを構成するRectData
 				5,								//widthCount
 				5,								//depthCount
@@ -30,7 +30,7 @@ namespace basecross {
 			)
 		{}
 
-		Factory_ImpactCellMap_Parametor::Factory_ImpactCellMap_Parametor(
+		Factory_CellMap_Parametor::Factory_CellMap_Parametor(
 			const Rect& oneCellRect,
 			const int widthCount,
 			const int depthCount,
@@ -46,7 +46,7 @@ namespace basecross {
 		///	セルマップファクトリー
 		//--------------------------------------------------------------------------------------
 
-		std::vector<std::shared_ptr<Cell>> Factory_ImpactCellMap::CreateCells(const Parametor& param) {
+		std::vector<std::shared_ptr<Cell>> Factory_CellMap::CreateCells(const Parametor& param) {
 			std::vector<std::shared_ptr<Cell>> result;
 
 			const float halfWidthCount = param.widthCount * 0.5f;

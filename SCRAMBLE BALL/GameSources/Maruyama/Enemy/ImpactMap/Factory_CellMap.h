@@ -1,6 +1,6 @@
 /*!
-@file Factory_ImpactCellMap.h
-@brief Factory_ImpactCellMapなど
+@file Factory_CellMap.h
+@brief Factory_CellMapなど
 担当：丸山裕喜
 */
 
@@ -21,16 +21,16 @@ namespace basecross {
 		//--------------------------------------------------------------------------------------
 		///	セルマップファクトリーのパラメータ
 		//--------------------------------------------------------------------------------------
-		struct Factory_ImpactCellMap_Parametor
+		struct Factory_CellMap_Parametor
 		{
 			Rect oneCellRect;		//一つのCellの生成情報。
 			int widthCount;			//横に展開するセルの数。
 			int depthCount;			//奥行きに展開するセルの数。
 			Vec3 centerPosition;	//マップの中心位置。
 
-			Factory_ImpactCellMap_Parametor();
+			Factory_CellMap_Parametor();
 
-			Factory_ImpactCellMap_Parametor(
+			Factory_CellMap_Parametor(
 				const Rect& oneCellRect,
 				const int widthCount,
 				const int depthCount,
@@ -41,10 +41,10 @@ namespace basecross {
 		//--------------------------------------------------------------------------------------
 		///	セルマップファクトリー
 		//--------------------------------------------------------------------------------------
-		class Factory_ImpactCellMap
+		class Factory_CellMap
 		{
 		public:
-			using Parametor = Factory_ImpactCellMap_Parametor;
+			using Parametor = Factory_CellMap_Parametor;
 
 		private:
 

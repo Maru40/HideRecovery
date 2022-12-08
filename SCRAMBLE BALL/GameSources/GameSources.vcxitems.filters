@@ -2934,7 +2934,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\CellMap.h">
       <Filter>Maruyama\Enemy\Component\ImpactMap\ImpactCellMap</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\Factory_ImpactCellMap.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\Factory_CellMap.h">
       <Filter>Maruyama\Enemy\Component\ImpactMap\ImpactCellMap\Factory</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Patch\CommonStructs\RectData.h">
@@ -4202,7 +4202,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\CellMap.cpp">
       <Filter>Maruyama\Enemy\Component\ImpactMap\ImpactCellMap</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\Factory_ImpactCellMap.cpp">
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\Factory_CellMap.cpp">
       <Filter>Maruyama\Enemy\Component\ImpactMap\ImpactCellMap\Factory</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Patch\CommonStructs\RectData.cpp">
