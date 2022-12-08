@@ -45,9 +45,11 @@ namespace basecross {
 
 		//‘å‚«‚³’²®
 		const auto& width = m_rect.width;
+		constexpr float Height = 1.0f;
 		const auto& depth = m_rect.depth;
 		auto objTrans = object->GetComponent<Transform>();
-		objTrans->SetScale(Vec3(width, 0.1f, depth));
+
+		objTrans->SetScale(Vec3(width, Height, depth));
 
 		m_rectObject = object;
 		m_rectObjectTransform = objTrans;
