@@ -61,7 +61,7 @@ namespace basecross {
 			m_debugDrawObject = drawObject;
 		}
 
-		void Cell:: SetDebugDrawActive(const bool isDraw) {
+		void Cell::SetDebugDrawActive(const bool isDraw) {
 			if (auto debugDraw = m_debugDrawObject.lock()) {
 				debugDraw->SetDrawActive(isDraw);
 			}
