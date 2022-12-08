@@ -11,6 +11,7 @@
 #include "Cell.h"
 
 #include "Maruyama/Utility/Utility.h"
+#include "Maruyama/DebugClass/Component/RectDraw.h"
 
 namespace basecross {
 
@@ -42,8 +43,12 @@ namespace basecross {
 		//--------------------------------------------------------------------------------------
 
 		void Cell::OnDebugDraw() {
+			OnDebugDraw(maru::Utility::GetStage());
+		}
+
+		void Cell::OnDebugDraw(const std::shared_ptr<Stage>& stage) {
 			if (m_debugDrawObject.expired()) {
-				CreateDebugDrawObject();
+				CreateDebugDrawObject(stage);
 				return;
 			}
 
@@ -51,13 +56,14 @@ namespace basecross {
 			transform->SetPosition(GetPosition());
 		}
 
-		void Cell::CreateDebugDrawObject() {
-			auto stage = maru::Utility::GetStage();
+		void Cell::CreateDebugDrawObject(const std::shared_ptr<Stage>& stage) {
+			//ステージが存在しなかったら、処理を飛ばす。
 			if (!stage) {
 				return;
 			}
 
 			auto drawObject = stage->Instantiate<GameObject>(GetPosition(), Quat::Identity());
+			drawObject->AddComponent<RectDraw>(m_param.rect);
 			m_debugDrawObject = drawObject;
 		}
 

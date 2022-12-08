@@ -67,8 +67,9 @@ namespace basecross {
 			//--------------------------------------------------------------------------------------
 
 			void OnDebugDraw();
+			void OnDebugDraw(const std::shared_ptr<Stage>& stage);
 
-			void CreateDebugDrawObject();
+			void CreateDebugDrawObject(const std::shared_ptr<Stage>& stage);
 
 			void SetDebugDrawActive(const bool isDraw);
 		};
