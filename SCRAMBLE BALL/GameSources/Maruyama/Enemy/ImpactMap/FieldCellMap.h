@@ -24,6 +24,8 @@ namespace basecross {
 		{
 			std::shared_ptr<CellMap> m_cellMap;
 
+			bool m_isDebugDraw;	//デバッグDrawをするかどうか
+
 		public:
 			FieldCellMap(const std::shared_ptr<GameObject>& objPtr);
 
@@ -38,6 +40,13 @@ namespace basecross {
 			void SetCellMap(const std::shared_ptr<CellMap>& cellMap);
 
 			const std::shared_ptr<CellMap>& GetCellMap() const;
+
+
+			//--------------------------------------------------------------------------------------
+			///	デバッグ
+			//--------------------------------------------------------------------------------------
+
+			void DebugCellsDraw();	//Cellのデバッグ表示
 		};
 
 	}
