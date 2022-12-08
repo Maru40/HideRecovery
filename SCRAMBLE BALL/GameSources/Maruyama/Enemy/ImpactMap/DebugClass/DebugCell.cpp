@@ -14,15 +14,15 @@ namespace basecross {
 
 	namespace maru {
 
-		DebugCell::DebugCell(const std::shared_ptr<GameObject>& objPtr) :
-			Component(objPtr)
+		DebugCellObject::DebugCellObject(const std::shared_ptr<Stage>& stage) :
+			GameObject(stage)
 		{}
 
-		void DebugCell::OnCreate() {
+		void DebugCellObject::OnCreate() {
 
 		}
 
-		void DebugCell::OnUpdate() {
+		void DebugCellObject::OnUpdate() {
 
 		}
 

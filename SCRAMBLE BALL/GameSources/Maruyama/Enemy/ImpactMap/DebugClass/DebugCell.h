@@ -20,12 +20,11 @@ namespace basecross {
 		//--------------------------------------------------------------------------------------
 		///	デバッグ表のCell
 		//--------------------------------------------------------------------------------------
-		class DebugCell : public Component
+		class DebugCellObject : public GameObject
 		{
-			std::weak_ptr<CellMap> m_cellMap;	//Cell
 
 		public:
-			DebugCell(const std::shared_ptr<GameObject>& objPtr);
+			DebugCellObject(const std::shared_ptr<Stage>& stage);
 
 			void OnCreate() override;
 			void OnUpdate() override;
