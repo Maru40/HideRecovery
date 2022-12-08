@@ -10,6 +10,8 @@
 
 #include "RectDraw.h"
 
+#include "Maruyama/UI/BuilderVertexPCT.h"
+
 namespace basecross {
 
 	RectDraw::RectDraw(const std::shared_ptr<GameObject>& objPtr, const maru::Rect& rect):
@@ -30,12 +32,18 @@ namespace basecross {
 	}
 
 	void RectDraw::CreateRectObject() {
+		//オブジェクト生成
 		auto object = GetStage()->Instantiate<GameObject>(m_rect.centerPosition, Quat::Identity());
-		auto draw = object->AddComponent<PNTStaticDraw>();
-		draw->SetMeshResource(L"DEFAULT_CUBE");
 		
-		//draw->SetOriginalMeshUse(true);
+		//頂点とインデックスデータの生成
+		auto buildParam = Builder::VertexPCTParametor(Vec3(m_rect.width, 1.0f, m_rect.depth) ,Vec2(0.0f, 0.0f) , L"");
+		auto data = Builder::BuilderVertexPCT(buildParam);
+		//表示コンポーネントのアタッチ
+		auto draw = object->AddComponent<PNTStaticDraw>();
+		draw->SetOriginalMeshUse(true);
+		draw->CreateOriginalMesh(data.m_vertices, data.m_indices);
 
+		//大きさ調整
 		const auto& width = m_rect.width;
 		const auto& depth = m_rect.depth;
 		auto objTrans = object->GetComponent<Transform>();
