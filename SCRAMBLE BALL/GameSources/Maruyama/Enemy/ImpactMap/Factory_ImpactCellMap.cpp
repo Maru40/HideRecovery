@@ -53,19 +53,19 @@ namespace basecross {
 			const float halfDepthCount = param.depthCount * 0.5f;
 
 			auto fieldRect = Rect(param.centerPosition, (float)param.widthCount, (float)param.depthCount);
-			auto startPosition = fieldRect.CalculateStartPosition();	//マップの左上の原点を取得
+			auto startPosition = fieldRect.CalculateStartPosition();				//マップの左上の原点を取得
 
 			//ループして生成
 			for (int i = 0 ; i < param.depthCount ; i++) {
-				float depth = startPosition.z + (param.oneCellRect.depth * i);	//縦位置の軸を決定
+				float depth = startPosition.z + (param.oneCellRect.depth * i);		//縦位置の軸を決定
 				for (int j = 0; j < param.widthCount; j++) {
 					float width = startPosition.x + (param.oneCellRect.width * j);	//横位置の軸を決定
 					auto position = Vec3(width, param.centerPosition.y, depth);
 
 					//Cellのパラメータを設定
 					auto cellParam = Cell::Parametor(param.oneCellRect);	
-					auto cell = std::make_shared<Cell>(cellParam);	//Cell生成
-					cell->SetPosition(position);					//Cellの位置変更
+					auto cell = std::make_shared<Cell>(cellParam);			//Cell生成
+					cell->SetPosition(position);							//Cellの位置変更
 
 					result.push_back(cell);	//resultに追加
 				}
