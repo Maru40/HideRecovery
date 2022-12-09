@@ -36,9 +36,10 @@ namespace basecross {
 		auto object = GetStage()->Instantiate<GameObject>(m_rect.centerPosition, Quat::Identity());
 		
 		//頂点とインデックスデータの生成
-		constexpr float fScale = 1.0f;
+		constexpr float fScale = 0.8f;
 		auto buildParam = Builder::VertexPCTParametor(Vec3(fScale) ,Vec2(0.0f, 0.0f) , L"");	//正方形用のセルを設定
 		auto data = Builder::BuilderVertexPCT(buildParam);
+
 		//表示コンポーネントのアタッチ
 		auto draw = object->AddComponent<PNTStaticDraw>();
 		draw->SetOriginalMeshUse(true);
