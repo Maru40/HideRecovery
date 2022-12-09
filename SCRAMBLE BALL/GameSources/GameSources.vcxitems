@@ -170,6 +170,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Generator\RandomPositionGenerator.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\AIImpacter.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\Cell.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\CellMapImpactManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\DebugClass\DebugCell.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\Factory_CellMap.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\FieldCellMap.h" />
@@ -266,6 +267,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\Task_Wait.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\MulchTaskList.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\TaskList.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Thread\FutureData.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Thread\ThreadController.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Thread\ThreadPool.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\UI\2D\Component\FieldMap.h" />
@@ -633,6 +635,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Generator\RandomPosiitonGenerator.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\AIImpacter.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\Cell.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\CellMapImpactManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\DebugClass\DebugCell.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\Factory_CellMap.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\FieldCellMap.cpp" />
@@ -718,6 +721,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\Task_PlowlingMove.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\Task_ToTargetMove.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\Task_Wait.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Thread\FutureData.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Thread\ThreadController.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Thread\ThreadPool.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\UI\2D\Component\FieldMap.cpp" />
