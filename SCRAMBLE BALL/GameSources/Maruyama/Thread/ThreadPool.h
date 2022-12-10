@@ -97,7 +97,7 @@ namespace basecross {
 			auto future = task->get_future();
 	
 			//PushTask([task]() { (*task)(); });
-			//ushTask([task, args...]() { (*task)(std::forward<Args>(args)...); });
+			//PushTask([task, args...]() { (*task)(std::forward<Args>(args)...); });
 
 			//(*task)(std::move(args)...);
 
