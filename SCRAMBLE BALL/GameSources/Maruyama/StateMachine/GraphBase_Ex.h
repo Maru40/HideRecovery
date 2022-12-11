@@ -27,8 +27,8 @@ namespace basecross {
 		//--------------------------------------------------------------------------------------
 		template<class EnumType, class NodeType, class EdgeType,
 			std::enable_if_t<
-			std::is_base_of_v<NodeBase, NodeType> &&	//NodeType‚ªNodeBase‚ğŒp³‚µ‚Ä‚¢‚é‚±‚Æ‚ğ•ÛØ‚·‚é
-			std::is_base_of_v<EdgeBase, EdgeType>,		//EdgeType‚ªEdgeBase‚ğŒp³‚µ‚Ä‚¢‚é‚±‚Æ‚ğ•ÛØ‚·‚é
+				std::is_base_of_v<NodeBase, NodeType> &&	//NodeType‚ªNodeBase‚ğŒp³‚µ‚Ä‚¢‚é‚±‚Æ‚ğ•ÛØ‚·‚é
+				std::is_base_of_v<EdgeBase, EdgeType>,		//EdgeType‚ªEdgeBase‚ğŒp³‚µ‚Ä‚¢‚é‚±‚Æ‚ğ•ÛØ‚·‚é
 			std::nullptr_t
 		> = nullptr>
 		class GraphBase
