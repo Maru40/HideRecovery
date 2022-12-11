@@ -2982,7 +2982,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\Factory_WayPointMap_FloodFill.h">
       <Filter>Maruyama\Enemy\Component\ImpactMap\Factory</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)SparseGraphBase.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Patch\Graphs\SparseGraphBase.h">
       <Filter>Maruyama\Patch\Graphs\SparseGraphBase</Filter>
     </ClInclude>
   </ItemGroup>
@@ -4265,7 +4265,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\Factory_WayPointMap_FloodFill.cpp">
       <Filter>Maruyama\Enemy\Component\ImpactMap\Factory</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)SparseGraphBase.cpp">
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Patch\Graphs\SparseGraphBase.cpp">
       <Filter>Maruyama\Patch\Graphs\SparseGraphBase</Filter>
     </ClCompile>
   </ItemGroup>
