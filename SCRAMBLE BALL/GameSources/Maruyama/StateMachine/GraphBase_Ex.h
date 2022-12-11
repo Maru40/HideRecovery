@@ -10,6 +10,8 @@
 #include "stdafx.h"
 #include "Project.h"
 
+#include "Maruyama/Patch/Graphs/SparseGraphBase.h"
+
 namespace basecross {
 
 	namespace maru {
@@ -31,7 +33,7 @@ namespace basecross {
 				std::is_base_of_v<EdgeBase, EdgeType>,		//EdgeTypeがEdgeBaseを継承していることを保証する
 			std::nullptr_t
 		> = nullptr>
-		class GraphBase
+		class GraphBase //: public SparseGraphBase<NodeType, EdgeType>
 		{
 		public:
 			//usingディレクティブ
@@ -186,7 +188,7 @@ namespace basecross {
 			/// アクティブなグラフかどうか
 			/// </summary>
 			/// <returns>アクティブなグラフならtrue</returns>
-			bool IsActive() {
+			bool IsActive() const noexcept {
 				return m_isActive;
 			}
 
@@ -194,7 +196,7 @@ namespace basecross {
 			/// グラフのアクティブ状態を設定
 			/// </summary>
 			/// <param name="isActive">グラフのアクティブ状態</param>
-			void SetActive(const bool isActive) {
+			void SetActive(const bool isActive) noexcept {
 				m_isActive = isActive;
 			}
 
@@ -202,7 +204,7 @@ namespace basecross {
 			/// ノードの有無を判断
 			/// </summary>
 			/// <returns>ノードが一つも存在しないのならばtrue</returns>
-			bool IsEmpty() const {
+			bool IsEmpty() const noexcept {
 				return static_cast<int>(m_nodeMap.size()) == 0 ? true : false;
 			}
 		};
