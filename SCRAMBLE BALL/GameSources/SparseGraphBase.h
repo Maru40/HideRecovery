@@ -30,6 +30,19 @@ namespace basecross {
 		class SparseGraphBase
 		{
 		public:
+			using NodeMap = std::map<int, std::shared_ptr<NodeType>>;
+			using EdgeVector = std::vector<std::shared_ptr<EdgeType>>;
+			using EdgeVectorMap = std::map<int, EdgeVector>;
+
+		private:
+			NodeMap m_nodeMap;			//ノードを格納する配列
+			EdgeVectorMap m_edgesMap;	//エッジを格納する配列
+
+			bool m_isActive = true;		//アクティブかどうか
+
+		public:
+			SparseGraphBase() = default;
+			virtual ~SparseGraphBase() = default;
 
 		};
 

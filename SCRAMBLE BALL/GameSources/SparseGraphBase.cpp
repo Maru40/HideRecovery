@@ -10,6 +10,9 @@
 
 #include "SparseGraphBase.h"
 
+#include "Maruyama/StateMachine/NodeBase.h"
+#include "Maruyama/StateMachine/EdgeBase.h"
+
 namespace basecross {
 
 	namespace maru {
