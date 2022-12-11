@@ -1570,6 +1570,15 @@
     <Filter Include="Maruyama\Thread\FutureData">
       <UniqueIdentifier>{7c611504-5f07-4a2b-87fb-bbdce571b232}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Enemy\Component\ImpactMap\Factory">
+      <UniqueIdentifier>{2096966d-dbf0-4977-b538-7f97c42efbf8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Patch\Graphs">
+      <UniqueIdentifier>{dfa5be36-6410-473e-a961-1650b9207359}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Patch\Graphs\SparseGraphBase">
+      <UniqueIdentifier>{88df59c9-3ddd-4d2d-94ce-6df80fe3fc3b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2970,6 +2979,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Thread\FutureData.h">
       <Filter>Maruyama\Thread\FutureData</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\Factory_WayPointMap_FloodFill.h">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)SparseGraphBase.h">
+      <Filter>Maruyama\Patch\Graphs\SparseGraphBase</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -4246,6 +4261,12 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Thread\FutureData.cpp">
       <Filter>Maruyama\Thread\FutureData</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\Factory_WayPointMap_FloodFill.cpp">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)SparseGraphBase.cpp">
+      <Filter>Maruyama\Patch\Graphs\SparseGraphBase</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

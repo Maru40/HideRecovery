@@ -173,6 +173,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\CellMapImpactManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\DebugClass\DebugCell.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\Factory_CellMap.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\Factory_WayPointMap_FloodFill.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\FieldCellMap.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\FieldImpactMap.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\CellMap.h" />
@@ -364,6 +365,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)ProjectBehavior.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ProjectShader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Scene.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)SparseGraphBase.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)VelocityManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\BoardPoly\GoalBP.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Watanabe\BoardPoly\HPGaugeBP.h" />
@@ -638,6 +640,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\CellMapImpactManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\DebugClass\DebugCell.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\Factory_CellMap.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\Factory_WayPointMap_FloodFill.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\FieldCellMap.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\FieldImpactMap.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\CellMap.cpp" />
@@ -801,6 +804,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectBehavior.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Scene.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)SparseGraphBase.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)VelocityManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\BoardPoly\GoalBP.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Watanabe\BoardPoly\HPGaugeBP.cpp" />
