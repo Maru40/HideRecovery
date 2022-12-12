@@ -205,7 +205,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Load\LoadData.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Load\StageMapCSV.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Patch\CommonStructs\RectData.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Patch\Graphs\SparseGraphBase.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Patch\Graphs\SparseGraph_Ex.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\HidePlaceOpener.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\AnimationCtrl.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\AttackBase.h" />
@@ -667,7 +667,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Load\LoadData.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Load\StageMapCSV.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Patch\CommonStructs\RectData.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Patch\Graphs\SparseGraphBase.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Patch\Graphs\SparseGraph_Ex.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\HidePlaceOpener.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\BuffController.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Player\Component\ChargeGun.cpp" />
