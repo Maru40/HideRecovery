@@ -24,11 +24,14 @@ namespace basecross {
 		{}
 
 		void FieldCellMap::OnCreate() {
+			//セルマップの生成
 			m_cellMap = std::make_shared<CellMap>();
 
+			//セル配列の生成
 			auto param= Factory_CellMap::Parametor();
 			auto cells = Factory_CellMap::CreateCells(param);
 
+			//セル配列の設定
 			m_cellMap->SetCells(cells);
 		}
 

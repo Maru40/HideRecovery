@@ -13,6 +13,8 @@
 
 #include "Cell.h"
 
+#include "Watanabe/DebugClass/Debug.h"
+
 namespace basecross {
 
 	namespace maru {
@@ -24,8 +26,8 @@ namespace basecross {
 		Factory_CellMap_Parametor::Factory_CellMap_Parametor():
 			Factory_CellMap_Parametor(
 				Rect(Vec3(0.0f), 2.0f, 2.0f),	//一つのセルを構成するRectData
-				5,								//widthCount
-				5,								//depthCount
+				6,								//widthCount
+				4,								//depthCount
 				Vec3(0.0f, 0.0f, 0.0f)			//centerPosition
 			)
 		{}
@@ -52,20 +54,32 @@ namespace basecross {
 			const float halfWidthCount = param.widthCount * 0.5f;
 			const float halfDepthCount = param.depthCount * 0.5f;
 
-			auto fieldRect = Rect(param.centerPosition, (float)param.widthCount, (float)param.depthCount);
+			const float halfOneRectWidth = param.oneCellRect.width * 0.5f;
+			const float halfOneRectDepth = param.oneCellRect.depth * 0.5f;
+
+			auto fieldRect = Rect(param.centerPosition, (float)param.widthCount * param.oneCellRect.width, (float)param.depthCount * param.oneCellRect.depth);
 			auto startPosition = fieldRect.CalculateStartPosition();				//マップの左上の原点を取得
 
 			//ループして生成
 			for (int i = 0 ; i < param.depthCount ; i++) {
-				float depth = startPosition.z + (param.oneCellRect.depth * i);		//縦位置の軸を決定
+				//縦位置の軸を決定
+				float depth = startPosition.z + (param.oneCellRect.depth * i);
+				depth += halfOneRectDepth;
+
+				Debug::GetInstance()->Log(L"★" + std::to_wstring(i) + L"★");
 				for (int j = 0; j < param.widthCount; j++) {
-					float width = startPosition.x + (param.oneCellRect.width * j);	//横位置の軸を決定
-					auto position = Vec3(width, param.centerPosition.y, depth);
+					//横位置の軸を決定
+					float width = startPosition.x + (param.oneCellRect.width * j);	
+					width += halfOneRectWidth;
+
+					auto position = Vec3(width, param.centerPosition.y, depth);	//位置情報の決定
 
 					//Cellのパラメータを設定
 					auto cellParam = Cell::Parametor(param.oneCellRect);	
 					auto cell = std::make_shared<Cell>(cellParam);			//Cell生成
 					cell->SetPosition(position);							//Cellの位置変更
+
+					Debug::GetInstance()->Log(position);
 
 					result.push_back(cell);	//resultに追加
 				}

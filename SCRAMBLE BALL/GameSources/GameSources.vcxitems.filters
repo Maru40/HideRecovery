@@ -1564,6 +1564,24 @@
     <Filter Include="Maruyama\DebugClass\RectDraw">
       <UniqueIdentifier>{cc7eabc0-2daa-4998-841e-425d347e7fc7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Enemy\Component\ImpactMap\FieldImpactMap\CellMapImpactManager">
+      <UniqueIdentifier>{df530ad3-6188-4a0a-8b59-c345aae0a708}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Thread\FutureData">
+      <UniqueIdentifier>{7c611504-5f07-4a2b-87fb-bbdce571b232}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\Component\ImpactMap\Factory">
+      <UniqueIdentifier>{2096966d-dbf0-4977-b538-7f97c42efbf8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Patch\Graphs">
+      <UniqueIdentifier>{dfa5be36-6410-473e-a961-1650b9207359}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Patch\Graphs\SparseGraphBase">
+      <UniqueIdentifier>{88df59c9-3ddd-4d2d-94ce-6df80fe3fc3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\Component\ImpactMap\Astar\AstarNode">
+      <UniqueIdentifier>{1f2c303c-3a5b-4072-9e46-d6093f2ecb70}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2958,6 +2976,21 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\DebugClass\Component\RectDraw.h">
       <Filter>Maruyama\DebugClass\RectDraw</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\CellMapImpactManager.h">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\FieldImpactMap\CellMapImpactManager</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Thread\FutureData.h">
+      <Filter>Maruyama\Thread\FutureData</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\Factory_WayPointMap_FloodFill.h">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Patch\Graphs\SparseGraph_Ex.h">
+      <Filter>Maruyama\Patch\Graphs\SparseGraphBase</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\AstarNode.h">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\AstarNode</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -4228,6 +4261,21 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\DebugClass\Component\RectDraw.cpp">
       <Filter>Maruyama\DebugClass\RectDraw</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\CellMapImpactManager.cpp">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\FieldImpactMap\CellMapImpactManager</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Thread\FutureData.cpp">
+      <Filter>Maruyama\Thread\FutureData</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\ImpactMap\Factory_WayPointMap_FloodFill.cpp">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Patch\Graphs\SparseGraph_Ex.cpp">
+      <Filter>Maruyama\Patch\Graphs\SparseGraphBase</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\AstarNode.cpp">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\AstarNode</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

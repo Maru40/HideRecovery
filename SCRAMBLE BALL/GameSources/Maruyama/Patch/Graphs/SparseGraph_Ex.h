@@ -1,72 +1,72 @@
 
 /*!
-@file GraphBase_Ex.h
-@brief GraphBase_Ex
-担当者：丸山 裕喜
+@file SparseGraphBase.h
+@brief SparseGraphBaseなど
+担当：丸山裕喜
 */
 
 #pragma once
-
 #include "stdafx.h"
-#include "Project.h"
 
 namespace basecross {
 
 	namespace maru {
+
 		//--------------------------------------------------------------------------------------
 		/// 前方宣言
 		//--------------------------------------------------------------------------------------
 		class NodeBase;
 		class EdgeBase;
 
-		//template<class EnumType, class NodeType, class EdgeType>
-		//class GraphBase;
+		//template<class NodeType, class EdgeType,
+		//	std::enable_if_t<
+		//		std::is_base_of_v<NodeBase, NodeType>&&		//NodeTypeがNodeBaseを継承していることを保証する
+		//		std::is_base_of_v<EdgeBase, EdgeType>,		//EdgeTypeがEdgeBaseを継承していることを保証する
+		//	std::nullptr_t
+		//> = nullptr>
+		//class SparseGraph;
 
 		//--------------------------------------------------------------------------------------
-		/// グラフの基底クラス。前のGraphBaseとは関係なく、完全新規、前回のは削除予定
+		///	汎用型グラフ(前回作成したSparseGraphの改良型、将来的にSparseGraphは削除予定)
 		//--------------------------------------------------------------------------------------
-		template<class EnumType, class NodeType, class EdgeType,
+		template<class NodeType, class EdgeType,
 			std::enable_if_t<
-				std::is_base_of_v<NodeBase, NodeType> &&	//NodeTypeがNodeBaseを継承していることを保証する
+				std::is_base_of_v<NodeBase, NodeType>&&		//NodeTypeがNodeBaseを継承していることを保証する
 				std::is_base_of_v<EdgeBase, EdgeType>,		//EdgeTypeがEdgeBaseを継承していることを保証する
 			std::nullptr_t
-		> = nullptr>
-		class GraphBase //: public SparseGraphBase<NodeType, EdgeType>
+		>>
+		class SparseGraph
 		{
 		public:
-			//usingディレクティブ
-
-			//using NodeType = NodeBase;
-			//using EdgeType = EdgeBase;
-
-			using NodeMap = std::map<EnumType, std::shared_ptr<NodeType>>;
+			using NodeMap = std::unordered_map<int, std::shared_ptr<NodeType>>;
 			using EdgeVector = std::vector<std::shared_ptr<EdgeType>>;
-			using EdgeVectorMap = std::map<EnumType, EdgeVector>;
+			using EdgeVectorMap = std::unordered_map<int, EdgeVector>;
 
 		private:
+			bool m_isActive = true;		//アクティブかどうか
+
+		protected:
 			NodeMap m_nodeMap;			//ノードを格納する配列
 			EdgeVectorMap m_edgesMap;	//エッジを格納する配列
 
-			bool m_isActive = true;		//アクティブかどうか
-
 		public:
-			GraphBase() = default;
-			virtual ~GraphBase() = default;
+			SparseGraph() = default;
+			virtual ~SparseGraph() = default;
 
 			/// <summary>
 			/// 指定したノードの取得
 			/// </summary>
-			/// <param name="type">ノードタイプ</param>
+			/// <param name="index">ノードインデックス</param>
 			/// <returns>指定したノード</returns>
-			std::shared_ptr<NodeType> GetNode(const EnumType type) const {
-				return m_nodeMap.at(type);
+			virtual std::shared_ptr<NodeType> GetNode(const int index) const {
+				return m_nodeMap.at(index);
 			}
 
 			/// <summary>
 			/// ノードの配列を取得
 			/// </summary>
 			/// <returns>ノード配列</returns>
-			NodeMap GetNodes() const {
+			virtual NodeMap GetNodes() const {
 				return m_nodeMap;
 			}
 
@@ -76,15 +76,15 @@ namespace basecross {
 			/// <param name="from">手前のインデックス</param>
 			/// <param name="to">先のインデックス</param>
 			/// <returns>指定したノードを連結するエッジの取得</returns>
-			std::shared_ptr<EdgeType> GetEdge(const EnumType from, const EnumType to) const {
+			virtual std::shared_ptr<EdgeType> GetEdge(const int from, const int to) const {
 				//存在しなかったらnullptrを返す。
-				if (m_edgesMap.count[from] == 0) {
+				if (m_edgesMap.count(0) == 0) {
 					return nullptr;
 				}
 
-				auto edges = m_edgesMap[from];
-				for (std::shared_ptr<EdgeBase>& edge : edges) {
-					if (edge->GetToType<EnumType>() == to) {
+				auto edges = m_edgesMap.at(from);
+				for (const auto& edge : edges) {
+					if (edge->GetToIndex() == to) {
 						return edge;
 					}
 				}
@@ -97,7 +97,7 @@ namespace basecross {
 			/// </summary>
 			/// <param name="from">取得したいノード</param>
 			/// <returns>指定したノードから伸びるエッジ配列</returns>
-			EdgeVector GetEdges(const EnumType from) const {
+			virtual EdgeVector GetEdges(const int from) const {
 				if (m_edgesMap.count(from) == 0) {
 					return EdgeVector();
 				}
@@ -109,24 +109,24 @@ namespace basecross {
 			/// エッジ連想配列を取得
 			/// </summary>
 			/// <returns>エッジ連想配列</returns>
-			EdgeVectorMap GetEdgesMap() const {
+			virtual EdgeVectorMap GetEdgesMap() const {
 				return m_edgesMap;
 			}
 
 			/// <summary>
 			/// ノードの追加
 			/// </summary>
-			/// <param name="type">ノードのタイプ</param>
+			/// <param name="index">ノードのタイプ</param>
 			/// <param name="node">ノードのポインタ</param>
-			virtual void AddNode(const EnumType type, const std::shared_ptr<NodeType>& node) {
-				m_nodeMap[type] = node;
+			virtual void AddNode(const int index, const std::shared_ptr<NodeType>& node) {
+				m_nodeMap[index] = node;
 			}
 
 			/// <summary>
 			/// ノードの削除
 			/// </summary>
 			/// <param name="node">削除したいノード</param>
-			void RemoveNode(const std::shared_ptr<NodeType>& node) {
+			virtual void RemoveNode(const std::shared_ptr<NodeType>& node) {
 				//maru::MyUtility::RemoveVec(m_nodeMap, node);
 			}
 
@@ -134,9 +134,9 @@ namespace basecross {
 			/// エッジの追加
 			/// </summary>
 			/// <param name="edge">追加したいエッジ</param>
-			void AddEdge(const std::shared_ptr<EdgeType>& edge) {
-				auto type = static_cast<EnumType>(edge->GetFromIndex());
-				m_edgesMap[type].push_back(edge);
+			virtual void AddEdge(const std::shared_ptr<EdgeType>& edge) {
+				int index = edge->GetFromIndex();
+				m_edgesMap[index].push_back(edge);
 			}
 
 			/// <summary>
@@ -149,11 +149,11 @@ namespace basecross {
 			template<class... Ts,
 				std::enable_if_t<
 					std::is_constructible_v<EdgeType, std::shared_ptr<NodeBase>&, std::shared_ptr<NodeBase>&, Ts...>,	//コンストラクタの引数の整合性を保証する
-					std::nullptr_t
-				> = nullptr>
-			void AddEdge(const EnumType fromType, const EnumType toType, Ts&&... params)
+				std::nullptr_t
+			> = nullptr>
+			void AddEdge(const int fromIndex, const int toIndex, Ts&&... params)
 			{
-				auto newEdge = std::make_shared<EdgeType>(GetNode(fromType), GetNode(toType), params...);
+				auto newEdge = std::make_shared<EdgeType>(GetNode(fromIndex), GetNode(toIndex), params...);
 				AddEdge(newEdge);
 			}
 
@@ -161,7 +161,7 @@ namespace basecross {
 			/// ノードの数の取得
 			/// </summary>
 			/// <returns>ノードの数</returns>
-			int GetNumNode() const {
+			int GetNumNode() const noexcept {
 				return static_cast<int>(m_nodeMap.size());
 			}
 
@@ -170,7 +170,7 @@ namespace basecross {
 			/// </summary>
 			/// <param name="from">どのノードから伸びるエッジか指定</param>
 			/// <returns>エッジの数</returns>
-			int GetNumEdge(const EnumType from) const {
+			virtual int GetNumEdge(const int from) const noexcept {
 				return static_cast<int>(m_edgesMap.count(from));
 			}
 
@@ -178,7 +178,7 @@ namespace basecross {
 			/// エッジ連想配列の数を取得
 			/// </summary>
 			/// <returns>エッジの連想配列</returns>
-			int GetNumEdgeMap() const {
+			int GetNumEdgeMap() const noexcept {
 				return static_cast<int>(m_edgesMap.size());
 			}
 
@@ -189,6 +189,7 @@ namespace basecross {
 			bool IsActive() const noexcept {
 				return m_isActive;
 			}
+
 
 			/// <summary>
 			/// グラフのアクティブ状態を設定
