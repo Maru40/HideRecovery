@@ -10,7 +10,7 @@
 #include "stdafx.h"
 #include "Project.h"
 
-#include "Maruyama/Patch/Graphs/SparseGraphBase.h"
+#include "Maruyama/Patch/Graphs/SparseGraph_Ex.h"
 
 namespace basecross {
 
