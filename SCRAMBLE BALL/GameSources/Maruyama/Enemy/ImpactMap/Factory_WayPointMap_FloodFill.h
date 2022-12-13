@@ -10,17 +10,22 @@
 
 #include "Maruyama/Patch/CommonStructs/RectData.h"
 
+//#include "Maruyama/Patch/Graphs/SparseGraph_Ex.h"
+
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
 	///	前方宣言
 	//--------------------------------------------------------------------------------------
-	class AstarGraph;
-	class GraphAstar;
+	//class AstarGraph;
+	//class GraphAstar;
 
 	namespace maru {
 		class NodeBase;
 		class EdgeBase;
+
+		//template<class NodeType, class EdgeType>
+		//class SparseGraph;
 
 		template<class NodeType, class EdgeType,
 			std::enable_if_t<
@@ -28,7 +33,7 @@ namespace basecross {
 				std::is_base_of_v<EdgeBase, EdgeType>,		//EdgeTypeがEdgeBaseを継承していることを保証する
 			std::nullptr_t
 		> = nullptr>
-		class SparceGraph;
+		class SparseGraph;
 
 		//--------------------------------------------------------------------------------------
 		///	Factory_影響マップ_フラッドフィルアルゴリズム
@@ -37,7 +42,7 @@ namespace basecross {
 		{
 		public:
 			//usingディレクティブ
-			using GraphType = SparceGraph<NodeBase, EdgeBase>;
+			using GraphType = SparseGraph<NodeBase, EdgeBase>;
 
 			struct Parametor {
 				float intervalRange = 5.0f;		//ノードの間隔距離

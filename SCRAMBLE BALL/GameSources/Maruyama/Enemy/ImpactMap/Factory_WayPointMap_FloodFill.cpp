@@ -9,9 +9,10 @@
 #include "Project.h"
 
 #include "Maruyama/Enemy/Astar/NavGraphNode.h"
+#include "Maruyama/Enemy/Astar/AstarNode.h"
 #include "Maruyama/Enemy/Astar/AstarEdge.h"
-#include "Maruyama/Enemy/Astar/AstarGraph.h"
-#include "Maruyama/Enemy/Astar/GraphAstar.h"
+#include "Maruyama/StateMachine/NodeBase.h"
+#include "Maruyama/StateMachine/EdgeBase.h"
 #include "Maruyama/Patch/Graphs/SparseGraph_Ex.h"
 
 #include "Maruyama/Enemy/ImpactMap/ImpactMap.h"
@@ -99,6 +100,9 @@ namespace basecross {
 
 			for (const auto& targetPosition : targetPositions) {
 				//graph->AddNode(targetPosition);	//ウェイポイントの生成
+				//graph->AddNode();
+				//graph->AddNode(0, std::make_shared<NodeBase>());
+				
 				//graph->AddEdge();
 			}
 		}
