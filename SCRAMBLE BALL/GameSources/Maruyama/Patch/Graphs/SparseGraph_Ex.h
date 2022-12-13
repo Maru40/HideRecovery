@@ -27,7 +27,7 @@ namespace basecross {
 				std::is_base_of_v<EdgeBase, EdgeType>,		//EdgeType‚ªEdgeBase‚ğŒp³‚µ‚Ä‚¢‚é‚±‚Æ‚ğ•ÛØ‚·‚é
 			std::nullptr_t
 		> = nullptr>
-		class SparseGraph_Ex
+		class SparseGraph
 		{
 		public:
 			using NodeMap = std::map<int, std::shared_ptr<NodeType>>;
@@ -42,8 +42,8 @@ namespace basecross {
 			EdgeVectorMap m_edgesMap;	//ƒGƒbƒW‚ğŠi”[‚·‚é”z—ñ
 
 		public:
-			SparseGraph_Ex() = default;
-			virtual ~SparseGraph_Ex() = default;
+			SparseGraph() = default;
+			virtual ~SparseGraph() = default;
 
 			/// <summary>
 			/// w’è‚µ‚½ƒm[ƒh‚Ìæ“¾
