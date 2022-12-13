@@ -123,6 +123,19 @@ namespace basecross {
 			}
 
 			/// <summary>
+			/// ノードの追加
+			/// </summary>
+			template<class T, class... Ts,
+				std::enable_if_t<
+					std::is_constructible_v<T, const int, const Ts...>,	//コンストラクタの引数制限をする。
+				std::nullptr_t
+			> = nullptr>
+			void AddNode(const int index, const Ts&&... params) {
+				auto node = std::make_shared<T>(index, params...);
+				AddNode(index, node);
+			}
+
+			/// <summary>
 			/// ノードの削除
 			/// </summary>
 			/// <param name="node">削除したいノード</param>
