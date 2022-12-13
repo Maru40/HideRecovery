@@ -18,6 +18,14 @@ namespace basecross {
 		class NodeBase;
 		class EdgeBase;
 
+		//template<class NodeType, class EdgeType,
+		//	std::enable_if_t<
+		//		std::is_base_of_v<NodeBase, NodeType>&&		//NodeTypeがNodeBaseを継承していることを保証する
+		//		std::is_base_of_v<EdgeBase, EdgeType>,		//EdgeTypeがEdgeBaseを継承していることを保証する
+		//	std::nullptr_t
+		//> = nullptr>
+		//class SparseGraph;
+
 		//--------------------------------------------------------------------------------------
 		///	汎用型グラフ(前回作成したSparseGraphの改良型、将来的にSparseGraphは削除予定)
 		//--------------------------------------------------------------------------------------
@@ -26,13 +34,13 @@ namespace basecross {
 				std::is_base_of_v<NodeBase, NodeType>&&		//NodeTypeがNodeBaseを継承していることを保証する
 				std::is_base_of_v<EdgeBase, EdgeType>,		//EdgeTypeがEdgeBaseを継承していることを保証する
 			std::nullptr_t
-		> = nullptr>
+		>>
 		class SparseGraph
 		{
 		public:
-			using NodeMap = std::map<int, std::shared_ptr<NodeType>>;
+			using NodeMap = std::unordered_map<int, std::shared_ptr<NodeType>>;
 			using EdgeVector = std::vector<std::shared_ptr<EdgeType>>;
-			using EdgeVectorMap = std::map<int, EdgeVector>;
+			using EdgeVectorMap = std::unordered_map<int, EdgeVector>;
 
 		private:
 			bool m_isActive = true;		//アクティブかどうか
@@ -70,13 +78,13 @@ namespace basecross {
 			/// <returns>指定したノードを連結するエッジの取得</returns>
 			virtual std::shared_ptr<EdgeType> GetEdge(const int from, const int to) const {
 				//存在しなかったらnullptrを返す。
-				if (m_edgesMap.count[from] == 0) {
+				if (m_edgesMap.count(0) == 0) {
 					return nullptr;
 				}
 
-				auto edges = m_edgesMap[from];
-				for (std::shared_ptr<EdgeBase>& edge : edges) {
-					if (edge->GetToType() == to) {
+				auto edges = m_edgesMap.at(from);
+				for (const auto& edge : edges) {
+					if (edge->GetToIndex() == to) {
 						return edge;
 					}
 				}
