@@ -1579,6 +1579,9 @@
     <Filter Include="Maruyama\Patch\Graphs\SparseGraphBase">
       <UniqueIdentifier>{88df59c9-3ddd-4d2d-94ce-6df80fe3fc3b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Enemy\Component\ImpactMap\Astar\AstarNode">
+      <UniqueIdentifier>{1f2c303c-3a5b-4072-9e46-d6093f2ecb70}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2985,6 +2988,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Patch\Graphs\SparseGraph_Ex.h">
       <Filter>Maruyama\Patch\Graphs\SparseGraphBase</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\AstarNode.h">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\AstarNode</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -4267,6 +4273,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Patch\Graphs\SparseGraph_Ex.cpp">
       <Filter>Maruyama\Patch\Graphs\SparseGraphBase</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\AstarNode.cpp">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\AstarNode</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
