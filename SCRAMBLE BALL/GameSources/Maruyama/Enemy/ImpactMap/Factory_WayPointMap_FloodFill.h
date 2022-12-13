@@ -19,19 +19,35 @@ namespace basecross {
 	class GraphAstar;
 
 	namespace maru {
+		class NodeBase;
+		class EdgeBase;
+
+		template<class NodeType, class EdgeType,
+			std::enable_if_t<
+				std::is_base_of_v<NodeBase, NodeType>&&		//NodeTypeがNodeBaseを継承していることを保証する
+				std::is_base_of_v<EdgeBase, EdgeType>,		//EdgeTypeがEdgeBaseを継承していることを保証する
+			std::nullptr_t
+		> = nullptr>
+		class SparceGraph;
 
 		//--------------------------------------------------------------------------------------
 		///	Factory_影響マップ_フラッドフィルアルゴリズム
 		//--------------------------------------------------------------------------------------
 		class Factory_WayPointMap_FloodFill
 		{
+		public:
+			//usingディレクティブ
+			using GraphType = SparceGraph<NodeBase, EdgeBase>;
+
 			struct Parametor {
 				float intervalRange = 5.0f;		//ノードの間隔距離
 			};
 
-			std::weak_ptr<Stage> m_stage;	//ステージ
+		private:
 
-			mutable std::mutex m_mutex{};	//ミューテックス
+			std::weak_ptr<Stage> m_stage;		//ステージ
+
+			mutable std::mutex m_mutex{};		//ミューテックス
 
 		public:
 
@@ -61,7 +77,7 @@ namespace basecross {
 			/// <param name="parametor">生成パラメータ</param>
 			void CreateWayPoints(
 				const Vec3& startPosition,
-				const std::shared_ptr<GraphAstar>& graph,
+				const std::shared_ptr<GraphType>& graph,
 				const Parametor& parametor
 			);
 
@@ -74,7 +90,7 @@ namespace basecross {
 			/// <param name="parametor">生成パラメータ</param>
 			void AddWayPointMap(
 				const Vec3& baseStartPosition,
-				const std::shared_ptr<GraphAstar>& graph,
+				const std::shared_ptr<GraphType>& graph,
 				const Parametor& parametor
 			);
 

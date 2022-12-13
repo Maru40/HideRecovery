@@ -12,6 +12,7 @@
 #include "Maruyama/Enemy/Astar/AstarEdge.h"
 #include "Maruyama/Enemy/Astar/AstarGraph.h"
 #include "Maruyama/Enemy/Astar/GraphAstar.h"
+#include "Maruyama/Patch/Graphs/SparseGraph_Ex.h"
 
 #include "Maruyama/Enemy/ImpactMap/ImpactMap.h"
 #include "Factory_WayPointMap_FloodFill.h"
@@ -91,20 +92,20 @@ namespace basecross {
 
 		void Factory_WayPointMap_FloodFill::CreateWayPoints(
 			const Vec3& startPosition,
-			const std::shared_ptr<GraphAstar>& graph,
+			const std::shared_ptr<GraphType>& graph,
 			const Parametor& parametor
 		) {
 			auto targetPositions = CalculationTargetPositions(startPosition, parametor);
 
 			for (const auto& targetPosition : targetPositions) {
-				graph->AddNode(targetPosition);	//ウェイポイントの生成
+				//graph->AddNode(targetPosition);	//ウェイポイントの生成
 				//graph->AddEdge();
 			}
 		}
 
 		void Factory_WayPointMap_FloodFill::AddWayPointMap(
 			const Vec3& baseStartPosition,
-			const std::shared_ptr<GraphAstar>& graph,
+			const std::shared_ptr<GraphType>& graph,
 			const Parametor& parametor
 		) {
 			std::queue<Vec3> startPositionQueue;
