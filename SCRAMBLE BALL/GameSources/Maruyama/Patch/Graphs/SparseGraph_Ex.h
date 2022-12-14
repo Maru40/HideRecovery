@@ -45,6 +45,8 @@ namespace basecross {
 		private:
 			bool m_isActive = true;		//アクティブかどうか
 
+			int m_nextNodeIndex = 0;	//次のノードのインデックス
+
 		protected:
 			NodeMap m_nodeMap;			//ノードを格納する配列
 			EdgeVectorMap m_edgesMap;	//エッジを格納する配列
@@ -118,8 +120,10 @@ namespace basecross {
 			/// </summary>
 			/// <param name="index">ノードのタイプ</param>
 			/// <param name="node">ノードのポインタ</param>
-			virtual void AddNode(const int index, const std::shared_ptr<NodeType>& node) {
+			virtual std::shared_ptr<NodeType> AddNode(const int index, const std::shared_ptr<NodeType>& node) {
 				m_nodeMap[index] = node;
+				m_nextNodeIndex++;	//ノードインデックスの加速
+				return node;
 			}
 
 			/// <summary>
@@ -130,9 +134,10 @@ namespace basecross {
 					std::is_constructible_v<T, const int, const Ts...>,	//コンストラクタの引数制限をする。
 				std::nullptr_t
 			> = nullptr>
-			void AddNode(const int index, const Ts&&... params) {
-				auto node = std::make_shared<T>(index, params...);
-				AddNode(index, node);
+			std::shared_ptr<NodeType> AddNode(Ts&&... params) {
+				int index = GetNextNodeIndex();
+				auto node = std::make_shared<NodeType>(index, params...);
+				return AddNode(index, node);
 			}
 
 			/// <summary>
@@ -194,6 +199,12 @@ namespace basecross {
 			int GetNumEdgeMap() const noexcept {
 				return static_cast<int>(m_edgesMap.size());
 			}
+
+			/// <summary>
+			/// 次のノードのインデックスを取得
+			/// </summary>
+			/// <returns>次のノードインデックス</returns>
+			_NODISCARD int GetNextNodeIndex() const noexcept { return m_nextNodeIndex; }
 
 			/// <summary>
 			/// アクティブなグラフかどうか
