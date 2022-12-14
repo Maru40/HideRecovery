@@ -102,6 +102,8 @@ namespace basecross {
 				//graph->AddNode(targetPosition);	//ウェイポイントの生成
 				//graph->AddNode();
 				//graph->AddNode(0, std::make_shared<NodeBase>());
+				graph->AddNode<AstarNode>(targetPosition);
+				//graph->AddEdge<AstarEdge>();
 				
 				//graph->AddEdge();
 			}

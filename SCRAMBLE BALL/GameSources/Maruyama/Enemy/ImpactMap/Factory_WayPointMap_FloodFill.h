@@ -11,6 +11,7 @@
 #include "Maruyama/Patch/CommonStructs/RectData.h"
 
 //#include "Maruyama/Patch/Graphs/SparseGraph_Ex.h"
+#include "Maruyama/Enemy/Astar/AstarNode.h"
 
 namespace basecross {
 
@@ -23,6 +24,7 @@ namespace basecross {
 	namespace maru {
 		class NodeBase;
 		class EdgeBase;
+		class AstarNode;
 
 		//template<class NodeType, class EdgeType>
 		//class SparseGraph;
@@ -42,7 +44,7 @@ namespace basecross {
 		{
 		public:
 			//usingディレクティブ
-			using GraphType = SparseGraph<NodeBase, EdgeBase>;
+			using GraphType = SparseGraph<AstarNode, EdgeBase>;
 
 			struct Parametor {
 				float intervalRange = 5.0f;		//ノードの間隔距離
