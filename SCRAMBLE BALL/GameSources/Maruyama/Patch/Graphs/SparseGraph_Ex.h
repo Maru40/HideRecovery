@@ -129,9 +129,9 @@ namespace basecross {
 			/// <summary>
 			/// ノードの追加
 			/// </summary>
-			template<class T, class... Ts,
+			template<class... Ts,
 				std::enable_if_t<
-					std::is_constructible_v<T, const int, const Ts...>,	//コンストラクタの引数制限をする。
+					std::is_constructible_v<NodeType, const int, const Ts...>,	//コンストラクタの引数制限をする。
 				std::nullptr_t
 			> = nullptr>
 			std::shared_ptr<NodeType> AddNode(Ts&&... params) {
