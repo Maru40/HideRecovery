@@ -18,6 +18,7 @@ namespace basecross {
 		///	前方宣言
 		//--------------------------------------------------------------------------------------
 		class AstarNode;
+		class Debug_DrawController;
 
 		//--------------------------------------------------------------------------------------
 		///	Astar用のノード
@@ -53,6 +54,14 @@ namespace basecross {
 			std::shared_ptr<AstarNode> GetParent() const noexcept;
 
 			bool HasParent() const noexcept;
+
+			//--------------------------------------------------------------------------------------
+			///	デバッグ系
+			//--------------------------------------------------------------------------------------
+
+			std::shared_ptr<Debug_DrawController> m_debugDrawController; //デバッグ表示用コントローラー
+
+			void OnDebugDraw();
 		};
 
 	}
