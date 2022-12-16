@@ -42,7 +42,7 @@ namespace basecross {
 			/// éläpå`ì‡Ç…Ç¢ÇÈÇ©Ç«Ç§Ç©
 			/// </summary>
 			/// <returns>éläpå`ì‡Ç»ÇÁtrue</returns>
-			bool IsInRect(const Vec3& position);
+			bool IsInRect(const Vec3& position) const;
 		};
 
 	}

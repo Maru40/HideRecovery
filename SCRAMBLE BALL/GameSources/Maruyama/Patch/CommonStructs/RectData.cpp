@@ -38,7 +38,7 @@ namespace basecross {
 			return startPosition;
 		}
 
-		bool Rect::IsInRect(const Vec3& position) {
+		bool Rect::IsInRect(const Vec3& position) const {
 			auto rectStartPosition = CalculateStartPosition();
 
 			if (position.x > rectStartPosition.x &&
