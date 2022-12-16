@@ -62,6 +62,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Camera\UtilityStartCamera.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\DebugClass\Component\DebugNumber.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\DebugClass\Component\RectDraw.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\DebugClass\Debug_DrawController.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\DebugClass\Object\ArrowObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\DebugClass\Object\DebugObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Effect\Component\AuraBase.h" />
@@ -532,6 +533,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Camera\UtilityStartCamera.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\DebugClass\Component\DebugNumber.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\DebugClass\Component\RectDraw.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\DebugClass\Debug_DrawController.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\DebugClass\Object\ArrowObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\DebugClass\Object\DebugObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Effect\Component\AuraBase.cpp" />
