@@ -46,36 +46,82 @@ namespace basecross {
 			//usingディレクティブ
 			using GraphType = SparseGraph<AstarNode, EdgeBase>;
 
+			/// <summary>
+			/// 八方向の進行タイプ
+			/// </summary>
+			enum class DirectionType {
+				Right,
+				RightForward,
+				RightBack,
+				Left,
+				LeftForward,
+				LeftBack,
+				Foward,
+				Back,
+			};
+
+			/// <summary>
+			/// 方向タイプ別データ
+			/// </summary>
+			struct DataByDirectionType {
+				Vec3 direction;	//方向
+				int plusIndex;	//加算するノードインデックス
+			};
+
+			/// <summary>
+			/// 生成用のデータ
+			/// </summary>
+			struct OpenData
+			{
+				std::weak_ptr<AstarNode> parentNode;	//自分の前のノード
+				std::shared_ptr<AstarNode> selfNode;	//自分自身のノード
+				bool isActive;							//ノードが生きているかどうか
+
+				OpenData(
+					const std::shared_ptr<AstarNode>& parentNode,
+					const std::shared_ptr<AstarNode>& selfNode	
+				);
+			};
+
+			/// <summary>
+			/// パラメータ
+			/// </summary>
 			struct Parametor {
 				float intervalRange = 5.0f;		//ノードの間隔距離
+				maru::Rect rect;				//四角データ
+				float createHeight = 0.5f;		//高さ設定
 			};
 
 		private:
-
 			std::weak_ptr<Stage> m_stage;		//ステージ
 
 			mutable std::mutex m_mutex{};		//ミューテックス
 
-		public:
+			std::queue<std::shared_ptr<OpenData>> m_openDataQueue;				//オープンデータキュー
+			std::unordered_map<DirectionType, int> m_plusIndexMapByDirection;	//方向別の加算するインデックス数
 
+		public:
 			Factory_WayPointMap_FloodFill(const std::shared_ptr<Stage>& stage);
 
 		private:
+			/// <summary>
+			/// 方向データに合わせたインデックスの上限を設定する。
+			/// </summary>
+			/// <param name="parametor">パラメータ</param>
+			/// <returns>方向データに合わせたインデックスの上限を設定する</returns>
+			std::unordered_map<DirectionType, int> SettingIndexByDirection(const Parametor& parametor);
+
 			/// <summary>
 			/// そのWayPointが生成できるかどうかを判断する。
 			/// </summary>
 			/// <param name="startPosition">開始位置</param>
 			/// <param name="targetPosition">生成したい位置</param>
 			/// <param name="parametor">生成パラメータ</param>
-			bool IsCreate(const Vec3& startPosition, const Vec3& targetPosition, const Parametor& parametor);
-
-			/// <summary>
-			/// 開始位置から八方向の中でウェイポイントを生成できる場所を返す。
-			/// </summary>
-			/// <param name="startPosition">開始位置</param>
-			/// <param name="parametor">生成パラメータ</param>
-			/// <returns>開始位置から八方向の中でウェイポイントを生成できる場所の配列</returns>
-			std::vector<Vec3> CalculationTargetPositions(const Vec3& startPosition, const Parametor& parametor);
+			bool IsCreate(
+				const std::shared_ptr<OpenData>& openData, 
+				const std::shared_ptr<GraphType>& graph,
+				const Parametor& parametor
+			);
 
 			/// <summary>
 			/// ウェイポイントの複数生成
@@ -83,8 +129,27 @@ namespace basecross {
 			/// <param name="startPosition">開始位置</param>
 			/// <param name="parametor">生成パラメータ</param>
 			void CreateWayPoints(
-				const Vec3& startPosition,
+				const std::shared_ptr<OpenData>& parentOpenData,
 				const std::shared_ptr<GraphType>& graph,
+				const Parametor& parametor
+			);
+
+			/// <summary>
+			/// インデックスを計算して返す
+			/// </summary>
+			/// <param name="parentOpenData">親となるオープンデータ</param>
+			/// <param name="directionType">生成する方向データ</param>
+			/// <returns></returns>
+			int CalculateIndex(const std::shared_ptr<OpenData>& parentOpenData, const DirectionType directionType) const;
+
+			/// <summary>
+			/// 八方向のOpenDataを生成する。
+			/// </summary>
+			/// <param name="parentOpenData">親となるオープンデータ</param>
+			/// <param name="parametor">パラメータ</param>
+			/// <returns>八方向のOpenDataを生成する</returns>
+			std::vector<std::shared_ptr<OpenData>> CreateChildrenOpenDatas(
+				const std::shared_ptr<OpenData>& parentOpenData,
 				const Parametor& parametor
 			);
 
@@ -96,7 +161,6 @@ namespace basecross {
 			/// <param name="graph">生成したいグラフ</param>
 			/// <param name="parametor">生成パラメータ</param>
 			void AddWayPointMap(
-				const Vec3& baseStartPosition,
 				const std::shared_ptr<GraphType>& graph,
 				const Parametor& parametor
 			);

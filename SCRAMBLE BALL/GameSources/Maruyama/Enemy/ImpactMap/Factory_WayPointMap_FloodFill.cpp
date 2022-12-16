@@ -20,10 +20,16 @@
 
 #include "Maruyama/Utility/UtilityObstacle.h"
 
+#include "Watanabe/DebugClass/Debug.h"
+
 namespace basecross {
 
 	namespace maru {
 
+		using DirectionType = Factory_WayPointMap_FloodFill::DirectionType;
+		using OpenData = Factory_WayPointMap_FloodFill::OpenData;
+
+		/*
 		//方向配列
 		const Vec3 DIRECTIONS[] = {
 			Vec3::Right(),										//右
@@ -37,7 +43,34 @@ namespace basecross {
 			Vec3::Forward(),									//奥
 			-Vec3::Forward()									//手前
 		};
+		*/
 
+		//方向マップ
+		const std::unordered_map<DirectionType, Vec3> DIRECTION_MAP = {
+			{ DirectionType::Right,			Vec3::Right() },										//右
+			{ DirectionType::RightForward,	(Vec3::Right() + Vec3::Forward()).GetNormalized()},		//右奥
+			{ DirectionType::RightBack,		(Vec3::Right() - Vec3::Forward()).GetNormalized()},		//右手前
+
+			{ DirectionType::Left,			-Vec3::Right()},										//左
+			{ DirectionType::LeftForward,	(-Vec3::Right() + Vec3::Forward()).GetNormalized() },	//左奥
+			{ DirectionType::LeftBack,		(-Vec3::Right() - Vec3::Forward()).GetNormalized() },	//左手前
+
+			{ DirectionType::Foward,		Vec3::Forward()},										//左奥
+			{ DirectionType::Back,			-Vec3::Forward()},										//左手前
+		};
+
+		//--------------------------------------------------------------------------------------
+		///	Factory_影響マップ_フラッドフィルアルゴリズムの生成用仮データ
+		//--------------------------------------------------------------------------------------
+
+		Factory_WayPointMap_FloodFill::OpenData::OpenData(
+			const std::shared_ptr<AstarNode>& parentNode,
+			const std::shared_ptr<AstarNode>& selfNode
+		):
+			parentNode(parentNode),
+			selfNode(selfNode),
+			isActive(true)
+		{}
 
 		//--------------------------------------------------------------------------------------
 		///	Factory_影響マップ_フラッドフィルアルゴリズム本体
@@ -58,69 +91,128 @@ namespace basecross {
 			*/
 		}
 
+		std::unordered_map<DirectionType, int> Factory_WayPointMap_FloodFill::SettingIndexByDirection(const Parametor& parametor) {
+			std::unordered_map<DirectionType, int> result;
+
+			const maru::Rect& rect = parametor.rect;
+			const float& intervalRange = parametor.intervalRange;
+
+			//基準となる横の大きさと、縦の大きさ
+			int widthCount = static_cast<int>(rect.width / intervalRange);
+
+			result[DirectionType::Right] = +1;
+			result[DirectionType::RightForward] = 1 + widthCount;
+			result[DirectionType::RightBack] = 1 - widthCount;
+			result[DirectionType::Left] = -1;
+			result[DirectionType::LeftForward] = -1 + widthCount;
+			result[DirectionType::LeftBack] = -1 - widthCount;
+			result[DirectionType::Foward] = +widthCount;
+			result[DirectionType::Back] = -widthCount;
+
+			return result;
+		}
+
 		bool Factory_WayPointMap_FloodFill::IsCreate(
-			const Vec3& startPosition,
-			const Vec3& targetPosition,
+			const std::shared_ptr<OpenData>& newOpenData,
+			const std::shared_ptr<GraphType>& graph,
 			const Parametor& parametor
 		) {
+			std::lock_guard<mutex> lock(m_mutex);	//ミューテックスロック
+
+			//ターゲットがエリアより外側にあるなら
+			if (!parametor.rect.IsInRect(newOpenData->selfNode->GetPosition())) {
+				return false;
+			}
+
+			//同じノードが存在するなら
+			if (graph->IsSomeIndexNode(newOpenData->selfNode->GetIndex())) {
+				return false;
+			}
+
+			auto startPosition = newOpenData->parentNode.lock()->GetPosition();
+			auto targetPosition = newOpenData->selfNode->GetPosition();
+
 			//障害物に当たっていたら
 			auto obstacleObjects = GetStage()->GetGameObjectVec();	//障害物配列
 			if (maru::UtilityObstacle::IsRayObstacle(startPosition, targetPosition, obstacleObjects)) {
 				return false;	//生成できない
 			}
 
-			return true;	//全ての条件を得ているため、生成できる。
+			return true;	//どの条件にも当てはまらないならtrue
 		}
 
-		std::vector<Vec3> Factory_WayPointMap_FloodFill::CalculationTargetPositions(
-			const Vec3& startPosition, 
+		void Factory_WayPointMap_FloodFill::CreateWayPoints(
+			const std::shared_ptr<OpenData>& parentOpenData,
+			const std::shared_ptr<GraphType>& graph,
 			const Parametor& parametor
 		) {
-			std::vector<Vec3> result;
+			auto openDatas = CreateChildrenOpenDatas(parentOpenData, parametor);	//オープンデータの生成
 
-			for (const auto& direction : DIRECTIONS) {
-				//生成したい場所を設定
-				auto targetPosition = startPosition + (direction * parametor.intervalRange);
-
-				//その場所に生成できるか判断
-				if (IsCreate(startPosition, targetPosition, parametor)) {
-					result.push_back(targetPosition);
+			//ループして、オープンデータの中から生成できるものを設定
+			for (const auto& openData : openDatas) {
+				if (IsCreate(openData, graph, parametor)) {
+					std::lock_guard<std::mutex> lock(m_mutex);
+					auto parentNode = openData->parentNode.lock();
+					auto selfNode = openData->selfNode;
+					auto node = graph->AddNode(openData->selfNode);					//グラフにノード追加
+					Debug::GetInstance()->Log(node->GetPosition());
+					graph->AddEdge(parentNode->GetIndex(), selfNode->GetIndex());	//グラフにエッジ追加
+					m_openDataQueue.push(openData);	//生成キューにOpenDataを追加
 				}
+			}
+		}
+
+		int Factory_WayPointMap_FloodFill::CalculateIndex(
+			const std::shared_ptr<OpenData>& parentOpenData,
+			const DirectionType directionType
+		) const {
+			const auto& parent = parentOpenData->selfNode;
+			int index = parent->GetIndex() + m_plusIndexMapByDirection.at(directionType);	//インデックスの計算
+			return index;
+		}
+
+		std::vector<std::shared_ptr<OpenData>> Factory_WayPointMap_FloodFill::CreateChildrenOpenDatas(
+			const std::shared_ptr<OpenData>& parentOpenData,
+			const Parametor& parametor
+		) {
+			std::vector<std::shared_ptr<OpenData>> result;
+
+			for (const auto& pair : DIRECTION_MAP) {
+				const DirectionType& directionType = pair.first;	//方向タイプ
+				const Vec3& direction = pair.second;				//方向ベクトル
+
+				Vec3 startPosition = parentOpenData->selfNode->GetPosition();					//開始位置
+				Vec3 targetPosition = startPosition + (direction * parametor.intervalRange);	//生成位置
+
+				int index = CalculateIndex(parentOpenData, directionType);			//インデックスの計算
+
+				const auto& parent = parentOpenData->selfNode;						//親ノードを取得
+				auto newNode = std::make_shared<AstarNode>(index, targetPosition);	//新規ノードの作成
+
+				auto newOpenData = std::make_shared<OpenData>(parent, newNode);		//新規データ作成
+				result.push_back(newOpenData);
 			}
 
 			return result;
 		}
 
-		void Factory_WayPointMap_FloodFill::CreateWayPoints(
-			const Vec3& startPosition,
-			const std::shared_ptr<GraphType>& graph,
-			const Parametor& parametor
-		) {
-			auto targetPositions = CalculationTargetPositions(startPosition, parametor);
-
-			for (const auto& targetPosition : targetPositions) {
-				//graph->AddNode(targetPosition);	//ウェイポイントの生成
-				//graph->AddNode();
-				//graph->AddNode(0, std::make_shared<NodeBase>());
-				graph->AddNode<AstarNode>(targetPosition);
-				//graph->AddEdge<AstarEdge>();
-				
-				//graph->AddEdge();
-			}
-		}
-
 		void Factory_WayPointMap_FloodFill::AddWayPointMap(
-			const Vec3& baseStartPosition,
 			const std::shared_ptr<GraphType>& graph,
 			const Parametor& parametor
 		) {
-			std::queue<Vec3> startPositionQueue;
-			startPositionQueue.push(baseStartPosition);
+			m_plusIndexMapByDirection = SettingIndexByDirection(parametor);	//方向別の加算するインデックス数をセッティング
 
-			while (!startPositionQueue.empty()) {	//キューが空になるまで
-				auto startPosition = startPositionQueue.front();
-				startPositionQueue.pop();
-				CreateWayPoints(startPosition, graph ,parametor);
+			auto baseStartPosition = parametor.rect.CalculateStartPosition();
+
+			maru::Utility::QueueClear(m_openDataQueue);
+			auto newNode = std::make_shared<AstarNode>(0, baseStartPosition);
+			graph->AddNode(newNode);
+			m_openDataQueue.push(std::make_shared<OpenData>(nullptr, newNode));
+
+			while (!m_openDataQueue.empty()) {	//キューが空になるまで
+				auto parentData = m_openDataQueue.front();
+				m_openDataQueue.pop();
+				CreateWayPoints(parentData, graph ,parametor);
 			}
 		}
 
