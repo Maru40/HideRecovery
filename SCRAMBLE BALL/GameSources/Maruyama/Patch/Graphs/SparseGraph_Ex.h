@@ -45,7 +45,7 @@ namespace basecross {
 		private:
 			bool m_isActive = true;		//アクティブかどうか
 
-			int m_nextNodeIndex = 0;	//次のノードのインデックス
+			//int m_nextNodeIndex = 0;	//次のノードのインデックス
 
 		protected:
 			NodeMap m_nodeMap;			//ノードを格納する配列
@@ -116,13 +116,21 @@ namespace basecross {
 			}
 
 			/// <summary>
+			/// 
+			/// </summary>
+			/// <param name="node"></param>
+			/// <returns></returns>
+			virtual std::shared_ptr<NodeType> AddNode(const std::shared_ptr<NodeType>& node) {
+				return AddNode(node->GetIndex(), node);
+			}
+
+			/// <summary>
 			/// ノードの追加
 			/// </summary>
 			/// <param name="index">ノードのタイプ</param>
 			/// <param name="node">ノードのポインタ</param>
 			virtual std::shared_ptr<NodeType> AddNode(const int index, const std::shared_ptr<NodeType>& node) {
 				m_nodeMap[index] = node;
-				m_nextNodeIndex++;	//ノードインデックスの加速
 				return node;
 			}
 
@@ -134,8 +142,8 @@ namespace basecross {
 					std::is_constructible_v<NodeType, const int, const Ts...>,	//コンストラクタの引数制限をする。
 				std::nullptr_t
 			> = nullptr>
-			std::shared_ptr<NodeType> AddNode(Ts&&... params) {
-				int index = GetNextNodeIndex();
+			std::shared_ptr<NodeType> AddNode(const int index, Ts&&... params) {
+				//int index = GetNextNodeIndex();
 				auto node = std::make_shared<NodeType>(index, params...);
 				return AddNode(index, node);
 			}
@@ -154,6 +162,10 @@ namespace basecross {
 			/// <param name="edge">追加したいエッジ</param>
 			virtual void AddEdge(const std::shared_ptr<EdgeType>& edge) {
 				int index = edge->GetFromIndex();
+				if (m_edgesMap.count(index) == 0) {
+					m_edgesMap[index] = EdgeVector();
+				}
+
 				m_edgesMap[index].push_back(edge);
 			}
 
@@ -204,7 +216,16 @@ namespace basecross {
 			/// 次のノードのインデックスを取得
 			/// </summary>
 			/// <returns>次のノードインデックス</returns>
-			_NODISCARD int GetNextNodeIndex() const noexcept { return m_nextNodeIndex; }
+			//_NODISCARD int GetNextNodeIndex() const noexcept { return m_nextNodeIndex; }
+
+			/// <summary>
+			/// 同じインデックスノードが存在するかどうか
+			/// </summary>
+			/// <param name="index">確認したいインデックス</param>
+			/// <returns>同じインデックスノードが存在するならtrue</returns>
+			bool IsSomeIndexNode(const int index) const {
+				return m_nodeMap.count(index) != 0;	//指定したインデックスノードが複数存在するなら、同じインデックスノードが存在する。
+			}
 
 			/// <summary>
 			/// アクティブなグラフかどうか
