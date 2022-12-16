@@ -22,7 +22,7 @@ namespace basecross {
 		//--------------------------------------------------------------------------------------
 
 		Debug_DrawData::Debug_DrawData() :
-			Debug_DrawData(maru::Rect())
+			Debug_DrawData(maru::Rect(Vec3(0.0f), 1.0f, 1.0f))
 		{}
 
 		Debug_DrawData::Debug_DrawData(const maru::Rect& rect) :
