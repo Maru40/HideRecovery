@@ -48,12 +48,16 @@ namespace basecross {
 		//方向マップ
 		const std::unordered_map<DirectionType, Vec3> DIRECTION_MAP = {
 			{ DirectionType::Right,			Vec3::Right() },										//右
-			{ DirectionType::RightForward,	(Vec3::Right() + Vec3::Forward()).GetNormalized()},		//右奥
-			{ DirectionType::RightBack,		(Vec3::Right() - Vec3::Forward()).GetNormalized()},		//右手前
+			//{ DirectionType::RightForward,	(Vec3::Right() + Vec3::Forward()).GetNormalized()},		//右奥
+			//{ DirectionType::RightBack,		(Vec3::Right() - Vec3::Forward()).GetNormalized()},		//右手前
+			{ DirectionType::RightForward,	(Vec3::Right() + Vec3::Forward())},		//右奥
+			{ DirectionType::RightBack,		(Vec3::Right() - Vec3::Forward())},		//右手前
 
 			{ DirectionType::Left,			-Vec3::Right()},										//左
-			{ DirectionType::LeftForward,	(-Vec3::Right() + Vec3::Forward()).GetNormalized() },	//左奥
-			{ DirectionType::LeftBack,		(-Vec3::Right() - Vec3::Forward()).GetNormalized() },	//左手前
+			//{ DirectionType::LeftForward,	(-Vec3::Right() + Vec3::Forward()).GetNormalized() },	//左奥
+			//{ DirectionType::LeftBack,		(-Vec3::Right() - Vec3::Forward()).GetNormalized() },	//左手前
+			{ DirectionType::LeftForward,	(-Vec3::Right() + Vec3::Forward()) },	//左奥
+			{ DirectionType::LeftBack,		(-Vec3::Right() - Vec3::Forward()) },	//左手前
 
 			{ DirectionType::Foward,		Vec3::Forward()},										//左奥
 			{ DirectionType::Back,			-Vec3::Forward()},										//左手前
@@ -99,15 +103,16 @@ namespace basecross {
 
 			//基準となる横の大きさと、縦の大きさ
 			int widthCount = static_cast<int>(rect.width / intervalRange);
+			int plusIndex = widthCount + 1;	//横の長さより一個分上で奥行き分のインデックスになる。
 
 			result[DirectionType::Right] = +1;
-			result[DirectionType::RightForward] = 1 + widthCount;
-			result[DirectionType::RightBack] = 1 - widthCount;
+			result[DirectionType::RightForward] = 1 + plusIndex;
+			result[DirectionType::RightBack] = 1 - plusIndex;
 			result[DirectionType::Left] = -1;
-			result[DirectionType::LeftForward] = -1 + widthCount;
-			result[DirectionType::LeftBack] = -1 - widthCount;
-			result[DirectionType::Foward] = +widthCount;
-			result[DirectionType::Back] = -widthCount;
+			result[DirectionType::LeftForward] = -1 + plusIndex;
+			result[DirectionType::LeftBack] = -1 - plusIndex;
+			result[DirectionType::Foward] = +plusIndex;
+			result[DirectionType::Back] = -plusIndex;
 
 			return result;
 		}
@@ -120,6 +125,8 @@ namespace basecross {
 			std::lock_guard<mutex> lock(m_mutex);	//ミューテックスロック
 
 			//ターゲットがエリアより外側にあるなら
+			int testIndex = newOpenData->selfNode->GetIndex();
+			auto selfPosition = newOpenData->selfNode->GetPosition();
 			if (!parametor.rect.IsInRect(newOpenData->selfNode->GetPosition())) {
 				return false;
 			}
@@ -176,17 +183,20 @@ namespace basecross {
 			const Parametor& parametor
 		) {
 			std::vector<std::shared_ptr<OpenData>> result;
+			const auto& parent = parentOpenData->selfNode;	//親ノードを取得
 
 			for (const auto& pair : DIRECTION_MAP) {
 				const DirectionType& directionType = pair.first;	//方向タイプ
 				const Vec3& direction = pair.second;				//方向ベクトル
 
-				Vec3 startPosition = parentOpenData->selfNode->GetPosition();					//開始位置
+				int index = CalculateIndex(parentOpenData, directionType);			//インデックスの計算
+				if (index < 0) {	//インデックスが0より小さいなら処理を飛ばす。
+					continue;
+				}
+
+				Vec3 startPosition = parent->GetPosition();			//開始位置
 				Vec3 targetPosition = startPosition + (direction * parametor.intervalRange);	//生成位置
 
-				int index = CalculateIndex(parentOpenData, directionType);			//インデックスの計算
-
-				const auto& parent = parentOpenData->selfNode;						//親ノードを取得
 				auto newNode = std::make_shared<AstarNode>(index, targetPosition);	//新規ノードの作成
 
 				auto newOpenData = std::make_shared<OpenData>(parent, newNode);		//新規データ作成
@@ -206,6 +216,7 @@ namespace basecross {
 
 			maru::Utility::QueueClear(m_openDataQueue);
 			auto newNode = std::make_shared<AstarNode>(0, baseStartPosition);
+			Debug::GetInstance()->Log(newNode->GetPosition());
 			graph->AddNode(newNode);
 			m_openDataQueue.push(std::make_shared<OpenData>(nullptr, newNode));
 
