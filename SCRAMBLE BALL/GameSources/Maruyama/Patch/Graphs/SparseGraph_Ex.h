@@ -61,6 +61,10 @@ namespace basecross {
 			/// <param name="index">ノードインデックス</param>
 			/// <returns>指定したノード</returns>
 			virtual std::shared_ptr<NodeType> GetNode(const int index) const {
+				if (m_nodeMap.count(index) == 0) {
+					return nullptr;
+				}
+
 				return m_nodeMap.at(index);
 			}
 
@@ -160,13 +164,15 @@ namespace basecross {
 			/// エッジの追加
 			/// </summary>
 			/// <param name="edge">追加したいエッジ</param>
-			virtual void AddEdge(const std::shared_ptr<EdgeType>& edge) {
+			virtual std::shared_ptr<EdgeType> AddEdge(const std::shared_ptr<EdgeType>& edge) {
 				int index = edge->GetFromIndex();
 				if (m_edgesMap.count(index) == 0) {
 					m_edgesMap[index] = EdgeVector();
 				}
 
 				m_edgesMap[index].push_back(edge);
+
+				return edge;
 			}
 
 			/// <summary>
@@ -181,10 +187,17 @@ namespace basecross {
 					std::is_constructible_v<EdgeType, std::shared_ptr<NodeType>&, std::shared_ptr<NodeType>&, Ts...>,	//コンストラクタの引数の整合性を保証する
 				std::nullptr_t
 			> = nullptr>
-			void AddEdge(const int fromIndex, const int toIndex, Ts&&... params)
+			std::shared_ptr<EdgeType> AddEdge(const int fromIndex, const int toIndex, Ts&&... params)
 			{
-				auto newEdge = std::make_shared<EdgeType>(GetNode(fromIndex), GetNode(toIndex), params...);
-				AddEdge(newEdge);
+				//どちらかのノードが存在しないなら生成できない。
+				auto fromNode = GetNode(fromIndex);
+				auto toNode = GetNode(toIndex);
+				if (!fromNode || !toNode) {
+					return nullptr;
+				}
+
+				auto newEdge = std::make_shared<EdgeType>(fromNode, toNode, params...);
+				return AddEdge(newEdge);
 			}
 
 			/// <summary>
@@ -213,6 +226,19 @@ namespace basecross {
 			}
 
 			/// <summary>
+			/// 全てのエッジの数
+			/// </summary>
+			/// <returns>全てのエッジの数</returns>
+			int GetNumAllEdges() const {
+				int count = 0;
+				for (auto& pair : m_edgesMap) {
+					count +=  static_cast<int>(pair.second.size());
+				}
+
+				return count;
+			}
+
+			/// <summary>
 			/// 次のノードのインデックスを取得
 			/// </summary>
 			/// <returns>次のノードインデックス</returns>
@@ -225,6 +251,28 @@ namespace basecross {
 			/// <returns>同じインデックスノードが存在するならtrue</returns>
 			bool IsSomeIndexNode(const int index) const {
 				return m_nodeMap.count(index) != 0;	//指定したインデックスノードが複数存在するなら、同じインデックスノードが存在する。
+			}
+
+			/// <summary>
+			/// 同じノードをつなぐエッジが存在するかどうか
+			/// </summary>
+			/// <param name="fromIndex">手前のノードインデックス</param>
+			/// <param name="toIndex">遷移先のノードインデックス</param>
+			/// <returns>存在するならtrue</returns>
+			bool IsSomeIndexEdge(const int fromIndex, const int toIndex) const {
+				//formIndexが存在しないなら、新規エッジ
+				if (m_edgesMap.count(fromIndex) == 0) {
+					return false;
+				}
+
+				//同じインデックスが存在するなら、true
+				for (auto& edge : m_edgesMap.at(fromIndex)) {
+					if (edge->GetToIndex() == toIndex) {
+						return true;
+					}
+				}
+
+				return false;	//存在しないため、同じでない
 			}
 
 			/// <summary>
