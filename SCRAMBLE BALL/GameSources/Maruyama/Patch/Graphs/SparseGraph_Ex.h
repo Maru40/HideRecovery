@@ -178,7 +178,7 @@ namespace basecross {
 			/// <param name="isEndTransition">終了時に遷移するかどうか</param>
 			template<class... Ts,
 				std::enable_if_t<
-					std::is_constructible_v<EdgeType, std::shared_ptr<NodeBase>&, std::shared_ptr<NodeBase>&, Ts...>,	//コンストラクタの引数の整合性を保証する
+					std::is_constructible_v<EdgeType, std::shared_ptr<NodeType>&, std::shared_ptr<NodeType>&, Ts...>,	//コンストラクタの引数の整合性を保証する
 				std::nullptr_t
 			> = nullptr>
 			void AddEdge(const int fromIndex, const int toIndex, Ts&&... params)
