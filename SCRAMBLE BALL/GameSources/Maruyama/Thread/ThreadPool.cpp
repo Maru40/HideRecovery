@@ -11,6 +11,8 @@
 
 #include "Patch/PlayerInputer.h"
 
+#include "Watanabe/DebugClass/Debug.h"
+
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
@@ -156,6 +158,8 @@ namespace basecross {
 			//auto future = executor.Submit([&](int number, std::weak_ptr<FutureData> data) { return say_hello(number, data); }, i, weakfuture);
 			auto future = executor.Submit(&TesterThreadObject::say_hello, this, m_futureData);
 			m_futureData->MoveFuture(future);
+
+			//executor.Submit(say_ok, 100, true);
 
 			//バインドテスト
 			//auto testBind = std::bind(&TesterThreadObject::say_hello, this, std::placeholders::_1);

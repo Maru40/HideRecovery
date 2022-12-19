@@ -24,6 +24,8 @@
 #include "Maruyama/Utility/Utility.h"
 #include "Watanabe/StageObject/Block.h"
 
+#include "Maruyama/Thread/ThreadPool.h"
+
 namespace basecross {
 
 	//デバッグ変数
@@ -44,6 +46,14 @@ namespace basecross {
 		auto PtrMultiLight = CreateLight<MultiLight>();
 		//デフォルトのライティングを指定
 		PtrMultiLight->SetDefaultLighting();
+	}
+
+	struct Test {
+
+	};
+
+	int say_ok(const int number) {
+		return 0;
 	}
 
 	void MaruTestStage_DebugLog::OnCreate() {
@@ -78,11 +88,26 @@ namespace basecross {
 		auto factoryParam = maru::Factory_WayPointMap_FloodFill::Parametor();
 		auto& rect = factoryParam.rect;
 		factoryParam.intervalRange = 5.0f;
-		rect.width = 100.0f - factoryParam.intervalRange;
-		rect.depth = 200.0f - factoryParam.intervalRange;
+		constexpr float Width = 100.0f;
+		constexpr float Depth = 200.0f;
+		rect.width = Width - factoryParam.intervalRange;
+		rect.depth = Depth - factoryParam.intervalRange;
 		floodFill->AddWayPointMap(graph, factoryParam);
 		Debug::GetInstance()->Log((int)graph->GetNodes().size());
 		Debug::GetInstance()->Log((int)graph->GetNumAllEdges());
+
+		//ThreadPool pool;
+		//pool.Submit(say_ok, 100);
+
+		//auto task = std::make_shared<std::packaged_task<void(int)>>(&say_ok);
+
+		//auto future = task->get_future();
+
+		//int i = 100;
+		//auto t = [task, i] { (*task)(i); };
+		//t();
+
+		//future.get();
 
 		m_debugGraph = graph;
 	}

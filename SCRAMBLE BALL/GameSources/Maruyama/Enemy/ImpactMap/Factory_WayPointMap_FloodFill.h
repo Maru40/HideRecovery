@@ -21,6 +21,7 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 	//class AstarGraph;
 	//class GraphAstar;
+	class ThreadPool;
 
 	namespace maru {
 		class NodeBase;
@@ -172,6 +173,11 @@ namespace basecross {
 				const std::shared_ptr<OpenData>& parentOpenData,
 				const Parametor& parametor
 			);
+
+			/// <summary>
+			/// マルチスレッドで生成(逆に遅くなったから使わない)
+			/// </summary>
+			void MulchiThreadCretae();
 
 		public:
 			/// <summary>

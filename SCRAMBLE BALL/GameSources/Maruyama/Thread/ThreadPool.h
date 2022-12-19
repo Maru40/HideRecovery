@@ -11,8 +11,6 @@
 #include <tuple>
 #include <utility>
 
-#include "Watanabe/DebugClass/Debug.h"
-
 namespace basecross {
 
 	//std::thread::hardware_concurrency() == 処理系でサポートされるスレッド並行数
@@ -85,7 +83,7 @@ namespace basecross {
 #else
 		// C++14 で, 関数の返り値の型R を取得する方法
 		template <class F, class... Args, 
-			class R = class std::result_of<std::decay_t<F>(std::decay_t<Args>...)>::type>
+			class R = typename std::result_of<std::decay_t<F>(std::decay_t<Args>...)>::type>
 #endif
 		std::future<R> Submit(F&& func, Args... args) {
 			//auto task = std::make_shared<std::packaged_task<R()>>([func, args...]() {
