@@ -126,6 +126,15 @@ namespace basecross {
 		) {
 			std::lock_guard<mutex> lock(m_mutex);	//ミューテックスロック
 
+			auto startPosition = newOpenData->parentNode.lock()->GetPosition();
+			auto targetPosition = newOpenData->selfNode->GetPosition();
+
+			//障害物に当たっていたら
+			auto obstacleObjects = GetStage()->GetGameObjectVec();	//障害物配列
+			if (isRayHit = maru::UtilityObstacle::IsRayObstacle(startPosition, targetPosition, obstacleObjects)) {
+				return false;	//生成できない
+			}
+
 			//ターゲットがエリアより外側にあるなら
 			int testIndex = newOpenData->selfNode->GetIndex();
 			auto selfPosition = newOpenData->selfNode->GetPosition();
@@ -136,15 +145,6 @@ namespace basecross {
 			//同じノードが存在するなら
 			if (graph->IsSomeIndexNode(newOpenData->selfNode->GetIndex())) {
 				return false;
-			}
-
-			auto startPosition = newOpenData->parentNode.lock()->GetPosition();
-			auto targetPosition = newOpenData->selfNode->GetPosition();
-
-			//障害物に当たっていたら
-			auto obstacleObjects = GetStage()->GetGameObjectVec();	//障害物配列
-			if (isRayHit = maru::UtilityObstacle::IsRayObstacle(startPosition, targetPosition, obstacleObjects)) {
-				return false;	//生成できない
 			}
 
 			return true;	//どの条件にも当てはまらないならtrue
