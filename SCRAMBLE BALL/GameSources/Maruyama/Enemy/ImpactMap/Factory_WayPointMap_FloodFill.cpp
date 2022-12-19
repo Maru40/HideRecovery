@@ -118,10 +118,11 @@ namespace basecross {
 			return result;
 		}
 
-		bool Factory_WayPointMap_FloodFill::IsCreate(
+		bool Factory_WayPointMap_FloodFill::IsNodeCreate(
 			const std::shared_ptr<OpenData>& newOpenData,
 			const std::shared_ptr<GraphType>& graph,
-			const Parametor& parametor
+			const Parametor& parametor,
+			bool& isRayHit
 		) {
 			std::lock_guard<mutex> lock(m_mutex);	//ミューテックスロック
 
@@ -142,11 +143,40 @@ namespace basecross {
 
 			//障害物に当たっていたら
 			auto obstacleObjects = GetStage()->GetGameObjectVec();	//障害物配列
-			if (maru::UtilityObstacle::IsRayObstacle(startPosition, targetPosition, obstacleObjects)) {
+			if (isRayHit = maru::UtilityObstacle::IsRayObstacle(startPosition, targetPosition, obstacleObjects)) {
 				return false;	//生成できない
 			}
 
 			return true;	//どの条件にも当てはまらないならtrue
+		}
+
+
+		bool Factory_WayPointMap_FloodFill::IsEdgeCreate(
+			const std::shared_ptr<OpenData>& newOpenData,
+			const std::shared_ptr<GraphType>& graph,
+			const Parametor& parametor,
+			const bool isRayHit
+		) {
+			//障害物に当たっているなら、生成しない
+			if (isRayHit) {
+				return false;
+			}
+
+			//ターゲットがエリアより外側にあるなら
+			int testIndex = newOpenData->selfNode->GetIndex();
+			auto selfPosition = newOpenData->selfNode->GetPosition();
+			if (!parametor.rect.IsInRect(newOpenData->selfNode->GetPosition())) {
+				return false;
+			}
+
+			//同じエッジが存在するなら
+			const auto parentNode = newOpenData->parentNode.lock();
+			const auto& selfNode = newOpenData->selfNode;
+			if (graph->IsSomeIndexEdge(parentNode->GetIndex(), selfNode->GetIndex())) {
+				return false;	//生成しない
+			}
+
+			return true;	//条件が通ったため、生成する。
 		}
 
 		void Factory_WayPointMap_FloodFill::CreateWayPoints(
@@ -158,14 +188,20 @@ namespace basecross {
 
 			//ループして、オープンデータの中から生成できるものを設定
 			for (const auto& openData : openDatas) {
-				if (IsCreate(openData, graph, parametor)) {
+				auto parentNode = openData->parentNode.lock();
+				auto selfNode = openData->selfNode;
+				bool isRayHit = false;	//障害物に当たったかどうかを記録する。
+
+				//ノードが生成できるなら
+				if (IsNodeCreate(openData, graph, parametor, isRayHit)) {
 					std::lock_guard<std::mutex> lock(m_mutex);
-					auto parentNode = openData->parentNode.lock();
-					auto selfNode = openData->selfNode;
-					auto node = graph->AddNode(openData->selfNode);					//グラフにノード追加
-					Debug::GetInstance()->Log(node->GetPosition());
-					graph->AddEdge(parentNode->GetIndex(), selfNode->GetIndex());	//グラフにエッジ追加
-					m_openDataQueue.push(openData);	//生成キューにOpenDataを追加
+					auto node = graph->AddNode(openData->selfNode);	//グラフにノード追加
+					m_openDataQueue.push(openData);					//生成キューにOpenDataを追加
+				}
+
+				//エッジの生成条件がそろっているなら
+				if (IsEdgeCreate(openData, graph, parametor, isRayHit)) {
+					auto edge = graph->AddEdge(parentNode->GetIndex(), selfNode->GetIndex());	//グラフにエッジ追加
 				}
 			}
 		}
@@ -217,7 +253,7 @@ namespace basecross {
 
 			maru::Utility::QueueClear(m_openDataQueue);
 			auto newNode = std::make_shared<AstarNode>(0, baseStartPosition);
-			Debug::GetInstance()->Log(newNode->GetPosition());
+			//Debug::GetInstance()->Log(newNode->GetPosition());
 			graph->AddNode(newNode);
 			m_openDataQueue.push(std::make_shared<OpenData>(nullptr, newNode));
 

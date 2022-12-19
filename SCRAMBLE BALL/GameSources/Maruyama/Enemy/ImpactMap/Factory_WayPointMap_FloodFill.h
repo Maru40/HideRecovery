@@ -116,13 +116,31 @@ namespace basecross {
 			/// <summary>
 			/// そのWayPointが生成できるかどうかを判断する。
 			/// </summary>
-			/// <param name="startPosition">開始位置</param>
-			/// <param name="targetPosition">生成したい位置</param>
+			/// <param name="newOpenData">新規データ</param>
+			/// <param name="graph">グラフ</param>
 			/// <param name="parametor">生成パラメータ</param>
-			bool IsCreate(
-				const std::shared_ptr<OpenData>& openData, 
+			/// <param name="isRayHit">障害物に当たったかどうかを参照したboolに保存する</param>
+			/// <returns>生成できるならtrue</returns>
+			bool IsNodeCreate(
+				const std::shared_ptr<OpenData>& newOpenData,
 				const std::shared_ptr<GraphType>& graph,
-				const Parametor& parametor
+				const Parametor& parametor,
+				bool& isRayHit
+			);
+
+			/// <summary>
+			/// エッジが生成できるかどうかを判断する。
+			/// </summary>
+			/// <param name="newOpenData">新規データ</param>
+			/// <param name="graph">グラフ</param>
+			/// <param name="parametor">生成パラメータ</param>
+			/// <param name="isRayHit">障害物にヒットしたかどうか</param>
+			/// <returns>生成できるならtrue</returns>
+			bool IsEdgeCreate(
+				const std::shared_ptr<OpenData>& newOpenData,
+				const std::shared_ptr<GraphType>& graph,
+				const Parametor& parametor,
+				const bool isRayHit
 			);
 
 			/// <summary>
