@@ -19,6 +19,8 @@
 #include "Maruyama/Enemy/ImpactMap/ImpactMap.h"
 #include "Factory_WayPointMap_FloodFill.h"
 
+#include "Maruyama/Thread/ThreadPool.h"
+
 #include "Maruyama/Utility/UtilityObstacle.h"
 
 #include "Watanabe/DebugClass/Debug.h"
@@ -124,7 +126,7 @@ namespace basecross {
 			const Parametor& parametor,
 			bool& isRayHit
 		) {
-			std::lock_guard<mutex> lock(m_mutex);	//ミューテックスロック
+			std::lock_guard<std::mutex> lock(m_mutex);	//ミューテックスロック
 
 			auto startPosition = newOpenData->parentNode.lock()->GetPosition();
 			auto targetPosition = newOpenData->selfNode->GetPosition();
@@ -157,6 +159,8 @@ namespace basecross {
 			const Parametor& parametor,
 			const bool isRayHit
 		) {
+			std::lock_guard<std::mutex> lock(m_mutex);	//ミューテックスロック
+
 			//障害物に当たっているなら、生成しない
 			if (isRayHit) {
 				return false;
@@ -194,13 +198,14 @@ namespace basecross {
 
 				//ノードが生成できるなら
 				if (IsNodeCreate(openData, graph, parametor, isRayHit)) {
-					std::lock_guard<std::mutex> lock(m_mutex);
+					std::lock_guard<std::mutex> lock(m_mutex);		//ミューテックスロック
 					auto node = graph->AddNode(openData->selfNode);	//グラフにノード追加
 					m_openDataQueue.push(openData);					//生成キューにOpenDataを追加
 				}
 
 				//エッジの生成条件がそろっているなら
 				if (IsEdgeCreate(openData, graph, parametor, isRayHit)) {
+					std::lock_guard<std::mutex> lock(m_mutex);	//ミューテックスロック
 					auto edge = graph->AddEdge(parentNode->GetIndex(), selfNode->GetIndex());	//グラフにエッジ追加
 				}
 			}
@@ -260,8 +265,37 @@ namespace basecross {
 			while (!m_openDataQueue.empty()) {	//キューが空になるまで
 				auto parentData = m_openDataQueue.front();
 				m_openDataQueue.pop();
-				CreateWayPoints(parentData, graph ,parametor);
+				CreateWayPoints(parentData, graph, parametor);
 			}
+
+		}
+
+
+
+
+
+		//逆に使わなくなったから使わない
+		void Factory_WayPointMap_FloodFill::MulchiThreadCretae() {
+			//while (!m_openDataQueue.empty()) {	//キューが空になるまで
+
+			//	auto threadPool = new ThreadPool();	//スレッドプールの生成
+
+			//	while (!m_openDataQueue.empty()) {	//キューが空になるまで
+			//		auto parentData = m_openDataQueue.front();
+			//		m_openDataQueue.pop();
+			//		//CreateWayPoints(parentData, graph, parametor);
+
+			//		threadPool->Submit(
+			//			&Factory_WayPointMap_FloodFill::CreateWayPoints,
+			//			this,
+			//			parentData,
+			//			graph,
+			//			parametor
+			//		);
+			//	}
+
+			//	delete(threadPool);
+			//}
 		}
 
 	}
