@@ -31,8 +31,8 @@ namespace basecross {
 	int test_debugCount = 0;
 	
 	void MaruTestStage_DebugLog::CreateViewLight() {
-		//const Vec3 eye(0.0f, 30.0f, -0.000001f);
-		const Vec3 eye(0.0f, 252.4f, -0.000001f);
+		const Vec3 eye(0.0f, 30.0f, -0.000001f);
+		//const Vec3 eye(0.0f, 252.4f, -0.000001f);
 		const Vec3 at(0, 0.0f, 0);
 		auto PtrView = CreateView<SingleView>();
 		//ビューのカメラの設定
@@ -70,7 +70,7 @@ namespace basecross {
 		//}
 
 		// Mapの読み込み
-		CreateMap(L"StageS2.csv");
+		//CreateMap(L"StageS2.csv");
 
 		//フラッドフィルアルゴリズムテスト
 		auto graph = std::make_shared<maru::SparseGraph<maru::AstarNode, maru::AstarEdge>>();
@@ -78,8 +78,10 @@ namespace basecross {
 		auto factoryParam = maru::Factory_WayPointMap_FloodFill::Parametor();
 		auto& rect = factoryParam.rect;
 		factoryParam.intervalRange = 5.0f;
-		rect.width = 100.0f - factoryParam.intervalRange;
-		rect.depth = 200.0f - factoryParam.intervalRange;
+		constexpr float Width = 10.0f;
+		constexpr float Depth = 20.0f;
+		rect.width = Width - factoryParam.intervalRange;
+		rect.depth = Depth - factoryParam.intervalRange;
 		floodFill->AddWayPointMap(graph, factoryParam);
 		Debug::GetInstance()->Log((int)graph->GetNodes().size());
 		Debug::GetInstance()->Log((int)graph->GetNumAllEdges());
@@ -93,7 +95,6 @@ namespace basecross {
 		}
 
 		if (m_debugGraph) {
-			return;
 			for (auto& node : m_debugGraph->GetNodes()) {
 				node.second->OnDebugDraw();
 			}
