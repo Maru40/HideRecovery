@@ -60,6 +60,7 @@ namespace basecross {
 		rect.depth = 10.0f;
 		floodFill->AddWayPointMap(graph, factoryParam);
 		Debug::GetInstance()->Log((int)graph->GetNodes().size());
+		Debug::GetInstance()->Log((int)graph->GetNumAllEdges());
 
 		m_debugGraph = graph;
 	}
