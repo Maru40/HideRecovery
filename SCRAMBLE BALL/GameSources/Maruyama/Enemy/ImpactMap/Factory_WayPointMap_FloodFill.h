@@ -10,8 +10,9 @@
 
 #include "Maruyama/Patch/CommonStructs/RectData.h"
 
-//#include "Maruyama/Patch/Graphs/SparseGraph_Ex.h"
 #include "Maruyama/Enemy/Astar/AstarNode.h"
+#include "Maruyama/Enemy/Astar/AstarEdge_Ex.h"
+//#include "Maruyama/Patch/Graphs/SparseGraph_Ex.h"
 
 namespace basecross {
 
@@ -25,6 +26,7 @@ namespace basecross {
 		class NodeBase;
 		class EdgeBase;
 		class AstarNode;
+		class AstarEdge;
 
 		//template<class NodeType, class EdgeType>
 		//class SparseGraph;
@@ -44,7 +46,7 @@ namespace basecross {
 		{
 		public:
 			//usingディレクティブ
-			using GraphType = SparseGraph<AstarNode, EdgeBase>;
+			using GraphType = SparseGraph<AstarNode, AstarEdge>;
 
 			/// <summary>
 			/// 八方向の進行タイプ

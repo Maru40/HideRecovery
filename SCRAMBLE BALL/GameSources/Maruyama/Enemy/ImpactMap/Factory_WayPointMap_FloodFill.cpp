@@ -8,9 +8,10 @@
 #include "stdafx.h"
 #include "Project.h"
 
-#include "Maruyama/Enemy/Astar/NavGraphNode.h"
 #include "Maruyama/Enemy/Astar/AstarNode.h"
-#include "Maruyama/Enemy/Astar/AstarEdge.h"
+#include "Maruyama/Enemy/Astar/AstarEdge_Ex.h"
+
+#include "Maruyama/Enemy/Astar/NavGraphNode.h"
 #include "Maruyama/StateMachine/NodeBase.h"
 #include "Maruyama/StateMachine/EdgeBase.h"
 #include "Maruyama/Patch/Graphs/SparseGraph_Ex.h"
