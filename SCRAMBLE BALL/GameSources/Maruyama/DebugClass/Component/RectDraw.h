@@ -21,8 +21,16 @@ namespace basecross {
 		std::weak_ptr<GameObject> m_rectObject;			//表示用のrectオブジェクト
 		std::weak_ptr<Transform> m_rectObjectTransform;	//表示用のrectオブジェクトのトランスフォーム
 
+		std::wstring m_texture;
+		Col4 m_color;
+
 	public:
-		RectDraw(const std::shared_ptr<GameObject>& objPtr, const maru::Rect& rect);
+		RectDraw(
+			const std::shared_ptr<GameObject>& objPtr, 
+			const maru::Rect& rect, 
+			const std::wstring& texture = L"",
+			const Col4& color = Col4(1.0f)
+		);
 
 		void OnCreate();
 		void OnUpdate();
