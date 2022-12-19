@@ -19,9 +19,15 @@ namespace basecross {
 		//--------------------------------------------------------------------------------------
 		struct Debug_DrawData {
 			maru::Rect rect;
+			std::wstring texture;
+			Col4 color;
 
 			Debug_DrawData();
-			Debug_DrawData(const maru::Rect& rect);
+			Debug_DrawData(
+				const maru::Rect& rect, 
+				const std::wstring& texture = L"",
+				const Col4& color = Col4(1.0f)
+			);
 		};
 
 		//--------------------------------------------------------------------------------------
@@ -42,6 +48,7 @@ namespace basecross {
 			Debug_DrawController(const Debug_DrawData& data);
 
 			void OnDraw(const Vec3& position);
+			void OnDraw(const Vec3& position, const Vec3& forward, const Vec3& scale);
 
 		private:
 			void CreateDebugDrawObject(const Vec3& position);

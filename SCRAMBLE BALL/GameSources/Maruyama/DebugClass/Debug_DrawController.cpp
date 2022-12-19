@@ -11,6 +11,7 @@
 #include "Debug_DrawController.h"
 
 #include "Maruyama/DebugClass/Component/RectDraw.h"
+#include "Maruyama/Utility/Component/BillBoard_Ex.h"
 #include "Maruyama/Utility/Utility.h"
 
 namespace basecross {
@@ -25,8 +26,14 @@ namespace basecross {
 			Debug_DrawData(maru::Rect(Vec3(0.0f), 1.0f, 1.0f))
 		{}
 
-		Debug_DrawData::Debug_DrawData(const maru::Rect& rect) :
-			rect(rect)
+		Debug_DrawData::Debug_DrawData(
+			const maru::Rect& rect, 
+			const std::wstring& texture,
+			const Col4& color
+		) :
+			rect(rect), 
+			texture(texture),
+			color(color)
 		{}
 
 		//--------------------------------------------------------------------------------------
@@ -42,6 +49,10 @@ namespace basecross {
 		{}
 
 		void Debug_DrawController::OnDraw(const Vec3& position) {
+			OnDraw(position, Vec3::Forward(), Vec3(1.0f));
+		}
+
+		void Debug_DrawController::OnDraw(const Vec3& position, const Vec3& forward, const Vec3& scale) {
 			if (m_drawObject.expired()) {
 				CreateDebugDrawObject(position);
 				return;
@@ -49,6 +60,8 @@ namespace basecross {
 
 			auto transform = m_drawObject.lock()->GetComponent<Transform>();
 			transform->SetPosition(position);
+			transform->SetForward(forward);
+			transform->SetScale(scale);
 		}
 
 		void Debug_DrawController::CreateDebugDrawObject(const Vec3& position) {
@@ -59,7 +72,8 @@ namespace basecross {
 			}
 
 			auto drawObject = stage->Instantiate<GameObject>(position, Quat::Identity());
-			drawObject->AddComponent<RectDraw>(m_data.rect);
+			drawObject->AddComponent<RectDraw>(m_data.rect, m_data.texture, m_data.color);
+			//drawObject->AddComponent<BillBoard_Ex>();
 			m_drawObject = drawObject;
 		}
 
