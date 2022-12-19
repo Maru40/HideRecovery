@@ -129,17 +129,17 @@ namespace basecross {
 			auto startPosition = newOpenData->parentNode.lock()->GetPosition();
 			auto targetPosition = newOpenData->selfNode->GetPosition();
 
-			//障害物に当たっていたら(先に障害物判定をしないと、エッジと共有しているためバグる(修正検討中))
-			auto obstacleObjects = GetStage()->GetGameObjectVec();	//障害物配列
-			if (isRayHit = maru::UtilityObstacle::IsRayObstacle(startPosition, targetPosition, obstacleObjects)) {
-				return false;	//生成できない
-			}
-
 			//ターゲットがエリアより外側にあるなら
 			int testIndex = newOpenData->selfNode->GetIndex();
 			auto selfPosition = newOpenData->selfNode->GetPosition();
 			if (!parametor.rect.IsInRect(newOpenData->selfNode->GetPosition())) {
 				return false;
+			}
+
+			//障害物に当たっていたら(先に障害物判定をしないと、エッジと共有しているためバグる(修正検討中))
+			auto obstacleObjects = GetStage()->GetGameObjectVec();	//障害物配列
+			if (isRayHit = maru::UtilityObstacle::IsRayObstacle(startPosition, targetPosition, obstacleObjects)) {
+				return false;	//生成できない
 			}
 
 			//同じノードが存在するなら
