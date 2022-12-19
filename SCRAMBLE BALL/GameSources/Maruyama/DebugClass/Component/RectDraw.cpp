@@ -47,7 +47,7 @@ namespace basecross {
 		
 		//頂点とインデックスデータの生成
 		constexpr float fScale = 0.8f;
-		auto buildParam = Builder::VertexPCTParametor(Vec3(fScale), Vec2(512.0f, 256.0f), m_texture);	//正方形用のセルを設定	//Arrow_TX
+		auto buildParam = Builder::VertexPCTParametor(Vec3(fScale), Vec2(256.0f, 512.0f), m_texture);	//正方形用のセルを設定	//Arrow_TX
 		buildParam.color = m_color;
 		auto data = Builder::BuilderVertexPCT(buildParam);
 
