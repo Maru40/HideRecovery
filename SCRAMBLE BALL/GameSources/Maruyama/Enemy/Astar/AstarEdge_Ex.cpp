@@ -53,7 +53,7 @@ namespace basecross {
 			auto position = (GetFromAstarNode()->GetPosition() + GetToAstarNode()->GetPosition()) / 2.0f;	//それぞれのノードの中間地点を取得
 
 			//スケール設定
-			constexpr float ScaleWidth = 0.75f;
+			constexpr float ScaleWidth = 1.0f;
 			constexpr float ScaleUp = 1.0f;
 			constexpr float ScaleAdjust = 0.95f;
 			const float Length = toNodeVec.length();
