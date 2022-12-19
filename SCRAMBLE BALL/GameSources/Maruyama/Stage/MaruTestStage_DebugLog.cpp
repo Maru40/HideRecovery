@@ -18,11 +18,12 @@
 #include "Maruyama/Enemy/Astar/AstarNode.h"
 #include "Maruyama/StateMachine/NodeBase.h"
 #include "Maruyama/StateMachine/EdgeBase.h"
+#include "Maruyama/Enemy/Astar/AstarEdge_Ex.h"
 
 namespace basecross {
 
 	//デバッグ変数
-	std::shared_ptr<maru::SparseGraph<maru::AstarNode, maru::EdgeBase>> m_debugGraph;
+	std::shared_ptr<maru::SparseGraph<maru::AstarNode, maru::AstarEdge>> m_debugGraph;
 	
 	void MaruTestStage_DebugLog::CreateViewLight() {
 		const Vec3 eye(0.0f, 30.0f, -0.000001f);
@@ -51,7 +52,7 @@ namespace basecross {
 		//AddGameObject<GameObject>()->AddComponent<maru::FieldCellMap>();
 
 		//フラッドフィルアルゴリズムテスト
-		auto graph = std::make_shared<maru::SparseGraph<maru::AstarNode, maru::EdgeBase>>();
+		auto graph = std::make_shared<maru::SparseGraph<maru::AstarNode, maru::AstarEdge>>();
 		auto floodFill = std::make_shared<maru::Factory_WayPointMap_FloodFill>(GetThis<Stage>());
 		auto factoryParam = maru::Factory_WayPointMap_FloodFill::Parametor();
 		auto& rect = factoryParam.rect;
@@ -71,6 +72,12 @@ namespace basecross {
 		if (m_debugGraph) {
 			for (auto& node : m_debugGraph->GetNodes()) {
 				node.second->OnDebugDraw();
+			}
+
+			for (auto& pair : m_debugGraph->GetEdgesMap()) {
+				for (auto& edge : pair.second) {
+					edge->OnDebugDraw();
+				}
 			}
 		}
 	}
