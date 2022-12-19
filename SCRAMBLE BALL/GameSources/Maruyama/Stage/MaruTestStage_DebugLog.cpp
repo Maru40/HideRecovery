@@ -77,7 +77,7 @@ namespace basecross {
 		auto floodFill = std::make_shared<maru::Factory_WayPointMap_FloodFill>(GetThis<Stage>());
 		auto factoryParam = maru::Factory_WayPointMap_FloodFill::Parametor();
 		auto& rect = factoryParam.rect;
-		factoryParam.intervalRange = 10.0f;
+		factoryParam.intervalRange = 5.0f;
 		rect.width = 100.0f - factoryParam.intervalRange;
 		rect.depth = 200.0f - factoryParam.intervalRange;
 		floodFill->AddWayPointMap(graph, factoryParam);
@@ -93,6 +93,7 @@ namespace basecross {
 		}
 
 		if (m_debugGraph) {
+			return;
 			for (auto& node : m_debugGraph->GetNodes()) {
 				node.second->OnDebugDraw();
 			}
