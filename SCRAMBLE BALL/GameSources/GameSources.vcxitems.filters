@@ -1582,6 +1582,12 @@
     <Filter Include="Maruyama\Enemy\Component\ImpactMap\Astar\AstarNode">
       <UniqueIdentifier>{1f2c303c-3a5b-4072-9e46-d6093f2ecb70}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\DebugClass\Debug_DrawController">
+      <UniqueIdentifier>{eb162645-ad84-4192-be20-777901aa5141}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\Component\ImpactMap\Astar\AstarEdge\AstarEdge_Ex">
+      <UniqueIdentifier>{adafee82-7d34-4a9c-8537-01ca9c856406}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -2991,6 +2997,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\AstarNode.h">
       <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\AstarNode</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\DebugClass\Debug_DrawController.h">
+      <Filter>Maruyama\DebugClass\Debug_DrawController</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\AstarEdge_Ex.h">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\AstarEdge\AstarEdge_Ex</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -4276,6 +4288,12 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\AstarNode.cpp">
       <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\AstarNode</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\DebugClass\Debug_DrawController.cpp">
+      <Filter>Maruyama\DebugClass\Debug_DrawController</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\AstarEdge_Ex.cpp">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\AstarEdge\AstarEdge_Ex</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

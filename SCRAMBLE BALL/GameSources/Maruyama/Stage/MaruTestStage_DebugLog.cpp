@@ -13,10 +13,26 @@
 
 #include "Maruyama/Enemy/ImpactMap/Factory_WayPointMap_FloodFill.h"
 
+#include "Maruyama/Patch/Graphs/SparseGraph_Ex.h"
+
+#include "Maruyama/Enemy/Astar/AstarNode.h"
+#include "Maruyama/StateMachine/NodeBase.h"
+#include "Maruyama/StateMachine/EdgeBase.h"
+#include "Maruyama/Enemy/Astar/AstarEdge_Ex.h"
+
+#include "Maruyama/Utility/UtilityObstacle.h"
+#include "Maruyama/Utility/Utility.h"
+#include "Watanabe/StageObject/Block.h"
+
 namespace basecross {
 
+	//デバッグ変数
+	std::shared_ptr<maru::SparseGraph<maru::AstarNode, maru::AstarEdge>> m_debugGraph;
+	int test_debugCount = 0;
+	
 	void MaruTestStage_DebugLog::CreateViewLight() {
-		const Vec3 eye(0.0f, 30.0f, -0.000001f);
+		//const Vec3 eye(0.0f, 30.0f, -0.000001f);
+		const Vec3 eye(0.0f, 252.4f, -0.000001f);
 		const Vec3 at(0, 0.0f, 0);
 		auto PtrView = CreateView<SingleView>();
 		//ビューのカメラの設定
@@ -41,14 +57,52 @@ namespace basecross {
 		//セルデバッグ表示
 		//AddGameObject<GameObject>()->AddComponent<maru::FieldCellMap>();
 
-		//フラッドフィルアルゴリズムテスト
-		//auto floodFill = maru::Factory_WayPointMap_FloodFill(GetThis<Stage>());
+		//Vec3 positions[] = {
+		//	Vec3(-2.5f, 0.0f, 0.0f),
+		//};
 
+		//for (auto& position : positions) {
+		//	auto object = Instantiate<GameObject>(position, Quat::Identity());
+		//	object->AddComponent<PNTStaticDraw>()->SetMeshResource(L"DEFAULT_CUBE");
+		//	object->AddComponent<CollisionObb>();
+		//	object->GetComponent<Transform>()->SetScale(Vec3(1.0f, 5.0f, 15.0f));
+		//	object->AddTag(maru::UtilityObstacle::DEFAULT_OBSTACLE_TAGS[0]);
+		//}
+
+		// Mapの読み込み
+		CreateMap(L"StageS2.csv");
+
+		//フラッドフィルアルゴリズムテスト
+		auto graph = std::make_shared<maru::SparseGraph<maru::AstarNode, maru::AstarEdge>>();
+		auto floodFill = std::make_shared<maru::Factory_WayPointMap_FloodFill>(GetThis<Stage>());
+		auto factoryParam = maru::Factory_WayPointMap_FloodFill::Parametor();
+		auto& rect = factoryParam.rect;
+		factoryParam.intervalRange = 5.0f;
+		rect.width = 100.0f - factoryParam.intervalRange;
+		rect.depth = 200.0f - factoryParam.intervalRange;
+		floodFill->AddWayPointMap(graph, factoryParam);
+		Debug::GetInstance()->Log((int)graph->GetNodes().size());
+		Debug::GetInstance()->Log((int)graph->GetNumAllEdges());
+
+		m_debugGraph = graph;
 	}
 
 	void MaruTestStage_DebugLog::OnUpdate() {
 		if (PlayerInputer::GetInstance()->IsBDown()) {
 			
+		}
+
+		if (m_debugGraph) {
+			return;
+			for (auto& node : m_debugGraph->GetNodes()) {
+				node.second->OnDebugDraw();
+			}
+
+			for (auto& pair : m_debugGraph->GetEdgesMap()) {
+				for (auto& edge : pair.second) {
+					edge->OnDebugDraw();
+				}
+			}
 		}
 	}
 
