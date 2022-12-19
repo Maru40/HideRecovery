@@ -20,6 +20,8 @@
 #include "Maruyama/StateMachine/EdgeBase.h"
 #include "Maruyama/Enemy/Astar/AstarEdge_Ex.h"
 
+#include "Maruyama/Utility/UtilityObstacle.h"
+
 namespace basecross {
 
 	//デバッグ変数
@@ -50,6 +52,18 @@ namespace basecross {
 
 		//セルデバッグ表示
 		//AddGameObject<GameObject>()->AddComponent<maru::FieldCellMap>();
+
+		Vec3 positions[] = {
+			Vec3(2.5f, 0.0f, 0.0f),
+		};
+
+		for (auto& position : positions) {
+			auto object = Instantiate<GameObject>(position, Quat::Identity());
+			object->AddComponent<PNTStaticDraw>()->SetMeshResource(L"DEFAULT_CUBE");
+			object->AddComponent<CollisionObb>();
+			object->GetComponent<Transform>()->SetScale(Vec3(1.0f, 5.0f, 2.0f));
+			object->AddTag(maru::UtilityObstacle::DEFAULT_OBSTACLE_TAGS[0]);
+		}
 
 		//フラッドフィルアルゴリズムテスト
 		auto graph = std::make_shared<maru::SparseGraph<maru::AstarNode, maru::AstarEdge>>();
