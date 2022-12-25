@@ -322,7 +322,7 @@ namespace basecross {
 					auto edges = GetEdges(fromType);
 					for (auto& edge : edges) {
 						if (toType == edge->GetToNode()->GetType<EnumType>()) {
-							return GetNode(toType);
+							return edge;
 						}
 					}
 
