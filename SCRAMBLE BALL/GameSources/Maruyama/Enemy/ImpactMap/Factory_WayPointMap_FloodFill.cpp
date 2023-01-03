@@ -255,6 +255,7 @@ namespace basecross {
 			m_plusIndexMapByDirection = SettingIndexByDirection(parametor);	//方向別の加算するインデックス数をセッティング
 
 			auto baseStartPosition = parametor.rect.CalculateStartPosition();
+			baseStartPosition.y = parametor.createHeight;	//高さの設定
 
 			maru::Utility::QueueClear(m_openDataQueue);
 			auto newNode = std::make_shared<AstarNode>(0, baseStartPosition);
