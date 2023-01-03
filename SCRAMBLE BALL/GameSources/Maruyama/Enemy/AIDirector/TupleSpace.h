@@ -50,6 +50,9 @@ namespace basecross {
 
 				virtual bool operator== (const I_Tuple& other);
 
+				//template<class T>
+				//bool operator!= (const T& other) = 0;
+
 				virtual std::shared_ptr<I_Tupler> GetRequester() const = 0;
 			};
 
