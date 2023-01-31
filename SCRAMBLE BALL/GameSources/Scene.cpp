@@ -59,7 +59,7 @@ namespace basecross {
 
 		if (pad.wButtons == ResetCommand)
 		{
-			PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToTitleStage");
+			PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToLoadStage");
 		}
 	}
 
