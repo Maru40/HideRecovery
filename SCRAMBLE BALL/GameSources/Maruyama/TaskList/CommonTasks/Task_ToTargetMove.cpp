@@ -186,15 +186,15 @@ namespace basecross {
 
 			auto velocity = velocityManager->GetVelocity();
 			auto moveDirection = velocity + force;
-			moveDirection += m_wallAvoid.lock()->TakeAvoidVec();
+			moveDirection += m_wallAvoid.lock()->TakeAvoidVec();	
 
-			moveDirection /= velocityManager->GetMaxSpeed();	//0 ～ 1の間に変更
+			moveDirection /= velocityManager->GetMaxSpeed();		//0 ～ 1の間に変更。
 
-			auto input = Vec2(moveDirection.x, moveDirection.z);
+			auto input = Vec2(moveDirection.x, moveDirection.z);	
 
-			m_virtualController.lock()->SetInputDirection(input);
+			m_virtualController.lock()->SetInputDirection(input);	//バーチャルコントローラーに入力方向を出力する。
 
-			m_onlineSynchronizer.lock()->Move(input);
+			m_onlineSynchronizer.lock()->Move(input);				//入力情報を渡す。
 		}
 
 		Vec3 ToTargetMove::CalculateVelocityForce() {

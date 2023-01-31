@@ -87,7 +87,7 @@ namespace basecross {
 		auto floodFill = std::make_shared<maru::Factory_WayPointMap_FloodFill>(GetThis<Stage>());
 		auto factoryParam = maru::Factory_WayPointMap_FloodFill::Parametor();
 		auto& rect = factoryParam.rect;
-		factoryParam.intervalRange = 5.0f;
+		factoryParam.intervalRange = 5.0f;	//インターバールレンジが1でも処理が可能。
 		constexpr float Width = 100.0f;
 		constexpr float Depth = 200.0f;
 		rect.width = Width - factoryParam.intervalRange;

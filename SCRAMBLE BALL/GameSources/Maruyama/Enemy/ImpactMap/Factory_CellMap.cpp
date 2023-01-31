@@ -57,7 +57,9 @@ namespace basecross {
 			const float halfOneRectWidth = param.oneCellRect.width * 0.5f;
 			const float halfOneRectDepth = param.oneCellRect.depth * 0.5f;
 
-			auto fieldRect = Rect(param.centerPosition, (float)param.widthCount * param.oneCellRect.width, (float)param.depthCount * param.oneCellRect.depth);
+			const float fieldRectWidth = (float)param.widthCount * param.oneCellRect.width;
+			const float fieldRectDepth = (float)param.depthCount * param.oneCellRect.depth;
+			auto fieldRect = Rect(param.centerPosition, fieldRectWidth, fieldRectDepth);
 			auto startPosition = fieldRect.CalculateStartPosition();				//マップの左上の原点を取得
 
 			//ループして生成

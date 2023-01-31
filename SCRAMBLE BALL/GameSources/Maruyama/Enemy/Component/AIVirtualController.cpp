@@ -36,22 +36,19 @@ namespace basecross {
 	void AIVirtualController::OnCollisionEnter(std::shared_ptr<GameObject>& other) {
 		auto playerStatus = m_status.lock();
 
-		if (playerStatus->IsDead())
-		{
+		if (playerStatus->IsDead()) {
 			return;
 		}
 
 		auto item = other->GetComponent<Item>(false);
 
-		if (!item)
-		{
+		if (!item) {
 			return;
 		}
 
 		auto onlinePlayerSynchronizer = m_onlineSynchronizer.lock();
 
-		if (!onlinePlayerSynchronizer)
-		{
+		if (!onlinePlayerSynchronizer) {
 			return;
 		}
 
