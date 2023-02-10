@@ -3003,6 +3003,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\AstarEdge_Ex.h">
       <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\AstarEdge\AstarEdge_Ex</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\AIDirector_Ex.h">
+      <Filter>Maruyama\Enemy\Component\AI\Director</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -4294,6 +4297,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\AstarEdge_Ex.cpp">
       <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\AstarEdge\AstarEdge_Ex</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\AIDirector_Ex.cpp">
+      <Filter>Maruyama\Enemy\Component\AI\Director</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

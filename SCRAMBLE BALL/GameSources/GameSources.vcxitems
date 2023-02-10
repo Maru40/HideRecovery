@@ -70,6 +70,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Effect\Component\EffectManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Effect\Component\ParticleManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Effect\Object\AuraObjectBase.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\AIDirector_Ex.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\Calculater\CombatCalculater.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\Calculater\HidePlacePatrolCalculater.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\CombatCoordinator.h" />
@@ -542,6 +543,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Effect\Component\EffectManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Effect\Component\ParticleManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Effect\Object\AuraObjectBase.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\AIDirector_Ex.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\Calculater\CombatCalculater.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\Calculater\HidePlacePatrolCalculater.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\CombatCoordinator.cpp" />
