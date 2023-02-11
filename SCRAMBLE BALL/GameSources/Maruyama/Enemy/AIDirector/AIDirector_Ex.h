@@ -14,12 +14,24 @@ namespace basecross {
 
 	namespace Enemy {
 
+		//--------------------------------------------------------------------------------------
+		/// ‘O•ûéŒ¾
+		//--------------------------------------------------------------------------------------
+		class I_AIRequester;
+
+		//--------------------------------------------------------------------------------------
+		/// AIDirector‚Ì‰ü—Ç”Å
+		//--------------------------------------------------------------------------------------
 		class AIDirector_Ex : public maru::SingletonComponent<AIDirector_Ex>
 		{
+		private:
+			
 
 		public:
 			AIDirector_Ex(const std::shared_ptr<GameObject>& owner);
 
+			//–½—ß‚ğ‚¨Šè‚¢‚·‚éB
+			void Request(std::shared_ptr<I_AIRequester>& requester);
 		};
 
 	}
