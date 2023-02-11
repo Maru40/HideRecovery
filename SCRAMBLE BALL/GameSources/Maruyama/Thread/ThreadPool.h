@@ -169,7 +169,7 @@ namespace basecross {
 
 		class TesterThreadObject : public GameObject {
 		private:
-			ThreadPool m_executor;	//メンバとして持たないと、スレッド終了時にjoinしてしまう。
+			std::shared_ptr<ThreadPool> m_executor;	//メンバとして持たないと、スレッド終了時にjoinしてしまう。
 			//std::future<std::wstring> m_hello_future;
 
 			std::atomic<bool> m_isRunning = false;
