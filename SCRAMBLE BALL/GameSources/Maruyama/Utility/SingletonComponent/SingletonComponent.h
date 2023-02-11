@@ -38,6 +38,8 @@ namespace basecross {
 				:Component(objPtr)
 			{}
 
+			virtual ~SingletonComponent() = default;
+
 			void OnDestroy() override {
 				sm_instance.reset();
 			}

@@ -1588,6 +1588,9 @@
     <Filter Include="Maruyama\Enemy\Component\ImpactMap\Astar\AstarEdge\AstarEdge_Ex">
       <UniqueIdentifier>{adafee82-7d34-4a9c-8537-01ca9c856406}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Enemy\Component\AI\Requester">
+      <UniqueIdentifier>{ba501373-5a23-48e8-b308-c81081307df3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -3006,6 +3009,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\AIDirector_Ex.h">
       <Filter>Maruyama\Enemy\Component\AI\Director</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\AIRequester.h">
+      <Filter>Maruyama\Enemy\Component\AI\Requester</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -4300,6 +4306,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\AIDirector_Ex.cpp">
       <Filter>Maruyama\Enemy\Component\AI\Director</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\AIRequester.cpp">
+      <Filter>Maruyama\Enemy\Component\AI\Requester</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

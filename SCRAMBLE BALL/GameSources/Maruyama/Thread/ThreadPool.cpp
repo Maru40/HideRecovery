@@ -136,11 +136,12 @@ namespace basecross {
 
 		TesterThreadObject::TesterThreadObject(const std::shared_ptr<Stage>& stage):
 			GameObject(stage),
-			m_futureData(new FutureData())
+			m_futureData(new FutureData()),
+			m_executor(new ThreadPool())
 		{}
 
 		void TesterThreadObject::Test() {
-			ThreadPool& executor = m_executor;
+			ThreadPool& executor = *m_executor.get();
 			m_isRunning = true;
 
 			// スレッド数の確認
@@ -184,6 +185,7 @@ namespace basecross {
 				Test();
 			}
 
+			//フューチャーデータがランニング状態でない、かつ、フューチャーがvalidなら
 			if (!m_futureData->m_isRunning && m_futureData->m_future.valid()) {
 				Debug::GetInstance()->Log(m_futureData->m_future.get());
 				Debug::GetInstance()->Log(FutureData::count);

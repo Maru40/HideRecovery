@@ -26,6 +26,8 @@
 
 #include "Maruyama/Thread/ThreadPool.h"
 
+#include "Maruyama/Enemy/AIDirector/AIDirector_Ex.h"
+
 namespace basecross {
 
 	//デバッグ変数
@@ -79,37 +81,11 @@ namespace basecross {
 		//	object->AddTag(maru::UtilityObstacle::DEFAULT_OBSTACLE_TAGS[0]);
 		//}
 
-		// Mapの読み込み
-		CreateMap(L"StageS2.csv");
+		//テストAIDirectorの生成
+		AddGameObject<GameObject>()->AddComponent<Enemy::AIDirector_Ex>();
 
-		//フラッドフィルアルゴリズムテスト
-		auto graph = std::make_shared<maru::SparseGraph<maru::AstarNode, maru::AstarEdge>>();
-		auto floodFill = std::make_shared<maru::Factory_WayPointMap_FloodFill>(GetThis<Stage>());
-		auto factoryParam = maru::Factory_WayPointMap_FloodFill::Parametor();
-		auto& rect = factoryParam.rect;
-		factoryParam.intervalRange = 5.0f;	//インターバールレンジが1でも処理が可能。
-		constexpr float Width = 100.0f;
-		constexpr float Depth = 200.0f;
-		rect.width = Width - factoryParam.intervalRange;
-		rect.depth = Depth - factoryParam.intervalRange;
-		floodFill->AddWayPointMap(graph, factoryParam);
-		Debug::GetInstance()->Log((int)graph->GetNodes().size());
-		Debug::GetInstance()->Log((int)graph->GetNumAllEdges());
-
-		//ThreadPool pool;
-		//pool.Submit(say_ok, 100);
-
-		//auto task = std::make_shared<std::packaged_task<void(int)>>(&say_ok);
-
-		//auto future = task->get_future();
-
-		//int i = 100;
-		//auto t = [task, i] { (*task)(i); };
-		//t();
-
-		//future.get();
-
-		m_debugGraph = graph;
+		//テストマップの生成
+		//CreateTestMap();	
 	}
 
 	void MaruTestStage_DebugLog::OnUpdate() {
@@ -129,6 +105,27 @@ namespace basecross {
 				}
 			}
 		}
+	}
+
+	void MaruTestStage_DebugLog::CreateTestMap() {
+		// Mapの読み込み
+		CreateMap(L"StageS2.csv");
+
+		//フラッドフィルアルゴリズムテスト
+		auto graph = std::make_shared<maru::SparseGraph<maru::AstarNode, maru::AstarEdge>>();
+		auto floodFill = std::make_shared<maru::Factory_WayPointMap_FloodFill>(GetThis<Stage>());
+		auto factoryParam = maru::Factory_WayPointMap_FloodFill::Parametor();
+		auto& rect = factoryParam.rect;
+		factoryParam.intervalRange = 5.0f;	//インターバールレンジが1でも処理が可能。
+		constexpr float Width = 100.0f;
+		constexpr float Depth = 200.0f;
+		rect.width = Width - factoryParam.intervalRange;
+		rect.depth = Depth - factoryParam.intervalRange;
+		floodFill->AddWayPointMap(graph, factoryParam);
+		Debug::GetInstance()->Log((int)graph->GetNodes().size());
+		Debug::GetInstance()->Log((int)graph->GetNumAllEdges());
+
+		m_debugGraph = graph;
 	}
 
 }
