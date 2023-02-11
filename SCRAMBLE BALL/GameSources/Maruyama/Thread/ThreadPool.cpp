@@ -184,6 +184,7 @@ namespace basecross {
 				Test();
 			}
 
+			//フューチャーデータがランニング状態でない、かつ、フューチャーがvalidなら
 			if (!m_futureData->m_isRunning && m_futureData->m_future.valid()) {
 				Debug::GetInstance()->Log(m_futureData->m_future.get());
 				Debug::GetInstance()->Log(FutureData::count);
