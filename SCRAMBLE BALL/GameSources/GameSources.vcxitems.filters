@@ -4304,11 +4304,11 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\AstarEdge_Ex.cpp">
       <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\AstarEdge\AstarEdge_Ex</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\AIDirector_Ex.cpp">
-      <Filter>Maruyama\Enemy\Component\AI\Director</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\AIRequester.cpp">
       <Filter>Maruyama\Enemy\Component\AI\Requester</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\AIDirector\AIDirector_Ex.cpp">
+      <Filter>Maruyama\Enemy\Component\AI\Director</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
