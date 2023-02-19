@@ -262,6 +262,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Stator\StatorBase.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\CrabWalk.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\MoveAstar.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\MoveAstar_Ex.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\OpenBox.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\TargetSeek.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\Task_AroundEyeCheck.h" />
@@ -341,7 +342,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineTestStage.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineTransformSynchronization.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\UtilityVelocity.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)MoveAstar_Ex.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Patch\AnimationHelper.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Patch\BasecrossInputer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Patch\Bezier.h" />
@@ -726,6 +726,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Stator\StatorBase.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\CrabWalk.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\MoveAstar.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\MoveAstar_Ex.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\OpenBox.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\TargetSeek.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\Task_AroundEyeCheck.cpp" />
@@ -795,7 +796,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Timer\WaitTimer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\UtilityObstacle.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\UtilityVelocity.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)MoveAstar_Ex.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Patch\BasecrossInputer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Patch\Bezier.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Patch\BezierTransitioner.cpp" />
