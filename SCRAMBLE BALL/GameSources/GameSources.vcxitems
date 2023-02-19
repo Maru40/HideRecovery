@@ -341,6 +341,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineTestStage.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Itabashi\OnlineTransformSynchronization.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Utility\UtilityVelocity.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MoveAstar_Ex.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Patch\AnimationHelper.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Patch\BasecrossInputer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Patch\Bezier.h" />
@@ -794,6 +795,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\Timer\WaitTimer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\UtilityObstacle.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Utility\UtilityVelocity.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MoveAstar_Ex.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Patch\BasecrossInputer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Patch\Bezier.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Patch\BezierTransitioner.cpp" />
