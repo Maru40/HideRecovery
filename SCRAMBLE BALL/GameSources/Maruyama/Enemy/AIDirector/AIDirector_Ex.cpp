@@ -26,7 +26,9 @@ namespace basecross {
 			m_threadPool(new ThreadPool())
 		{}
 
-		
+		_NODISCARD void AIDirector_Ex::Request(const std::shared_ptr<I_AIRequester>& requester, I_AIRequestEvent* const eventPtr) {
+			m_requestDatas.push(new AIRequestData(requester, eventPtr));	//ƒCƒxƒ“ƒg‚Ì¶¬
+		}
 
 	}
 
