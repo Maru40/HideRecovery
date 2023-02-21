@@ -17,7 +17,7 @@ namespace basecross {
 	class Heuristic;
 
 	//--------------------------------------------------------------------------------------
-	///	オープンデータ
+	///	オープンデータ(過去版)
 	//--------------------------------------------------------------------------------------
 	struct OpenData {
 		std::weak_ptr<NavGraphNode> parent;	//自分の手前のノード
@@ -49,13 +49,13 @@ namespace basecross {
 	};
 
 	//--------------------------------------------------------------------------------------
-	///	オープンデータを扱う者。
+	///	オープンデータを扱う者(過去版)
 	//--------------------------------------------------------------------------------------
 	class OpenDataHandler
 	{
 		using DataPtrList = std::list<std::shared_ptr<OpenData>>;
 
-		std::shared_ptr<Heuristic> m_heuristic;	//ヒュースリックの数値を計算するクラス。
+		std::shared_ptr<Heuristic> m_heuristic;				//ヒュースリックの数値を計算するクラス。
 
 		std::stack<std::weak_ptr<NavGraphNode>> m_route;	//生成したルート
 

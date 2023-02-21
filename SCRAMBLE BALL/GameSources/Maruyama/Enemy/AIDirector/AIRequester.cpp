@@ -14,6 +14,16 @@ namespace basecross {
 
 	namespace Enemy 
 	{
-		
+		//--------------------------------------------------------------------------------------
+		/// リクエストデータ本体
+		//--------------------------------------------------------------------------------------
+
+		AIRequestData::AIRequestData(
+			const std::shared_ptr<I_AIRequester>& requester,
+			I_AIRequestEvent* const eventPtr
+		) :
+			requester(requester),
+			eventPtr(eventPtr)
+		{}
 	}
 }

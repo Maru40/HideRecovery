@@ -27,6 +27,8 @@ namespace basecross {
 		/// 前方宣言
 		//--------------------------------------------------------------------------------------
 		class I_AIRequester;
+		class I_AIRequestEvent;
+		struct AIRequestData;
 
 		//--------------------------------------------------------------------------------------
 		/// AIDirectorの改良版
@@ -36,10 +38,15 @@ namespace basecross {
 		private:
 			std::unique_ptr<ThreadPool> m_threadPool;	//スレッドプール
 
+			//std::unordered_map<I_AIRequester*, std::queue<AIRequestData*>> m_requestsMap;	//リクエストマップ
+			std::queue<AIRequestData*> m_requestDatas;	//リクエスト一覧
+
 		public:
 			AIDirector_Ex(const std::shared_ptr<GameObject>& owner);
 
 			virtual ~AIDirector_Ex() = default;
+
+		private:
 
 			//リクエスト処理
 			//C++14,17でそれぞれ別のテンプレートが推奨されているため、分岐
@@ -59,6 +66,14 @@ namespace basecross {
 			_NODISCARD std::future<R> Request(F&& function, Args... args) {
 				return m_threadPool->Submit(function, args...);
 			}
+
+		public:
+			/// <summary>
+			/// タスクのリクエスト処理
+			/// </summary>
+			/// <param name="requester">リクエスト者</param>
+			_NODISCARD void Request(const std::shared_ptr<I_AIRequester>& requester, I_AIRequestEvent* const eventPtr);
+
 		};
 
 	}
