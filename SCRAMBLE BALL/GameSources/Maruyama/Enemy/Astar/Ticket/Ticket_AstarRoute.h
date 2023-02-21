@@ -22,10 +22,10 @@ namespace basecross {
 
 		template<class NodeType, class EdgeType,
 			std::enable_if_t<
-			std::is_base_of_v<NodeBase, NodeType>&&		//NodeTypeがNodeBaseを継承していることを保証する
-			std::is_base_of_v<EdgeBase, EdgeType>,		//EdgeTypeがEdgeBaseを継承していることを保証する
+				std::is_base_of_v<NodeBase, NodeType>&&		//NodeTypeがNodeBaseを継承していることを保証する
+				std::is_base_of_v<EdgeBase, EdgeType>,		//EdgeTypeがEdgeBaseを継承していることを保証する
 			std::nullptr_t
-		> = nullptr>
+		>>
 		class SparseGraph;
 	}
 
@@ -44,7 +44,8 @@ namespace basecross {
 		public:
 			//friend FriendTest;	//テストフレンド指定(将来的に消去)
 
-			using GraphType = maru::SparseGraph<maru::AstarNode, maru::AstarEdge>;	//グラフタイプ設定
+			using RouteStack = std::stack<std::weak_ptr<maru::AstarNode>>;			//ルートスタック
+			using GraphType = maru::SparseGraph < maru::AstarNode, maru::AstarEdge, nullptr> ;	//グラフタイプ設定
 
 		private:
 			bool m_isValid;		//有効状態であるかどうか
@@ -55,7 +56,7 @@ namespace basecross {
 			/// <param name="isValid"></param>
 			void SetIsValid(const bool isValid) { m_isValid = isValid; }
 
-			std::queue<std::weak_ptr<maru::AstarNode>> m_route;	//検索したルート
+			std::stack<std::weak_ptr<maru::AstarNode>> m_route;	//検索したルート
 
 		public:
 
@@ -85,6 +86,8 @@ namespace basecross {
 			/// </summary>
 			/// <returns>有効状態ならtrue</returns>
 			bool IsValid() const { return m_isValid; }
+
+			RouteStack GetRoute() const;
 
 		};
 		

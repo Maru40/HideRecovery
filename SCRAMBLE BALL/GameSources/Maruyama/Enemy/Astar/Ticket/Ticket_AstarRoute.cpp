@@ -12,9 +12,10 @@
 #include "Maruyama/Enemy/Astar/AstarEdge_Ex.h"
 #include "Ticket_AstarRoute.h"
 
-#include "Maruyama/Enemy/Astar/OpenDataHandler.h"
+#include "Maruyama/Enemy/Astar/OpenDataCalculater.h"
 
 #include "Maruyama/Utility/Utility.h"
+#include "Watanabe/DebugClass/Debug.h"
 
 namespace basecross {
 	namespace Ticket {
@@ -26,10 +27,21 @@ namespace basecross {
 		) {
 			SetIsValid(false);	//検索開始したため、無効状態に変更(将来的には別な場所で変更)
 
-			maru::Utility::QueueClear(m_route);	//現在のルートのクリア
+			maru::Utility::StackClear(m_route);				//現在のルートのクリア
 			
-			auto openHandler = OpenDataHandler();	//オープンデータ管理クラス
-			//openHandler.StartSearchAstar(startNode, targetNode, graph);
+			auto calculater = maru::OpenDataCalculater();	//オープンデータ管理クラス
+			auto isSuccess = calculater.StartSearchAstar(startNode, targetNode, graph);	//計算開始
+
+			if (!isSuccess) {
+				Debug::GetInstance()->Log(L"Ticket::AstarRoute::Start_RouteSearch() : ルート検索に失敗しました。");
+			}
+
+			m_route = calculater.GetRoute();	//ルートの取得
+			SetIsValid(true);					//有効状態に変更
+		}
+
+		AstarRoute::RouteStack AstarRoute::GetRoute() const {
+			return m_route;
 		}
 
 	}
