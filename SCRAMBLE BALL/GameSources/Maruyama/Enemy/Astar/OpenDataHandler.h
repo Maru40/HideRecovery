@@ -55,7 +55,7 @@ namespace basecross {
 	{
 		using DataPtrList = std::list<std::shared_ptr<OpenData>>;
 
-		std::shared_ptr<Heuristic> m_heuristic;	//ヒュースリックの数値を計算するクラス。
+		std::shared_ptr<Heuristic> m_heuristic;				//ヒュースリックの数値を計算するクラス。
 
 		std::stack<std::weak_ptr<NavGraphNode>> m_route;	//生成したルート
 
