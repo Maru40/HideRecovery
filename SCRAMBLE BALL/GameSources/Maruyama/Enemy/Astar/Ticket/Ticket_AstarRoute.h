@@ -34,7 +34,7 @@ namespace basecross {
 		//--------------------------------------------------------------------------------------
 		///	前方宣言
 		//--------------------------------------------------------------------------------------
-		class FriendTest;
+		
 
 		//--------------------------------------------------------------------------------------
 		///	ルート発行用チケット
@@ -42,9 +42,7 @@ namespace basecross {
 		class AstarRoute
 		{
 		public:
-			//friend FriendTest;	//テストフレンド指定(将来的に消去)
-
-			using RouteStack = std::stack<std::weak_ptr<maru::AstarNode>>;			//ルートスタック
+			using RouteStack = std::stack<std::weak_ptr<maru::AstarNode>>;						//検索ルートのスタック
 			using GraphType = maru::SparseGraph < maru::AstarNode, maru::AstarEdge, nullptr> ;	//グラフタイプ設定
 
 		private:
@@ -56,7 +54,7 @@ namespace basecross {
 			/// <param name="isValid"></param>
 			void SetIsValid(const bool isValid) { m_isValid = isValid; }
 
-			std::stack<std::weak_ptr<maru::AstarNode>> m_route;	//検索したルート
+			RouteStack m_route;	//検索したルート
 
 		public:
 
@@ -87,15 +85,12 @@ namespace basecross {
 			/// <returns>有効状態ならtrue</returns>
 			bool IsValid() const { return m_isValid; }
 
+			/// <summary>
+			/// 検索したルートの取得
+			/// </summary>
+			/// <returns>ルート</returns>
 			RouteStack GetRoute() const;
 
-		};
-		
-		class FriendTest
-		{
-			void Test(AstarRoute route) {
-				
-			}
 		};
 
 	}
