@@ -1594,8 +1594,11 @@
     <Filter Include="Maruyama\Utility\TaskList\CommonTasks\MoveAstar\Ex">
       <UniqueIdentifier>{72ca4896-bdf3-427b-8e0f-cda95f40d740}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Maruyama\Enemy\Component\ImpactMap\Astar\Tiket">
+    <Filter Include="Maruyama\Enemy\Component\ImpactMap\Astar\Ticket">
       <UniqueIdentifier>{ac0b2461-f807-43e6-980b-3add764b56bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\Component\ImpactMap\Astar\GraphAstar\Calculater">
+      <UniqueIdentifier>{dfa9a592-babf-4bec-8eaa-ca745d65e5c5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -3021,6 +3024,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\MoveAstar_Ex.h">
       <Filter>Maruyama\Utility\TaskList\CommonTasks\MoveAstar\Ex</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\Ticket\Ticket_AstarRoute.h">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\Ticket</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\OpenDataCalculater.h">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\GraphAstar\Calculater</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -4321,6 +4330,12 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\TaskList\CommonTasks\MoveAstar_Ex.cpp">
       <Filter>Maruyama\Utility\TaskList\CommonTasks\MoveAstar\Ex</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\Ticket\Ticket_AstarRoute.cpp">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\Ticket</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\OpenDataCalculater.cpp">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\GraphAstar\Calculater</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
