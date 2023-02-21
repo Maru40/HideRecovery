@@ -25,10 +25,10 @@ namespace basecross {
 
 		template<class NodeType, class EdgeType,
 			std::enable_if_t<
-			std::is_base_of_v<NodeBase, NodeType>&&		//NodeTypeがNodeBaseを継承していることを保証する
-			std::is_base_of_v<EdgeBase, EdgeType>,		//EdgeTypeがEdgeBaseを継承していることを保証する
+				std::is_base_of_v<NodeBase, NodeType>&&		//NodeTypeがNodeBaseを継承していることを保証する
+				std::is_base_of_v<EdgeBase, EdgeType>,		//EdgeTypeがEdgeBaseを継承していることを保証する
 			std::nullptr_t
-		> = nullptr>
+		>>
 		class SparseGraph;
 
 		//--------------------------------------------------------------------------------------
@@ -64,7 +64,7 @@ namespace basecross {
 		class OpenDataCalculater
 		{
 		public:
-			using GraphType = SparseGraph<AstarNode, AstarEdge>;		//グラフタイプ
+			using GraphType = SparseGraph<AstarNode, AstarEdge, nullptr>;		//グラフタイプ
 			using DataPtrList = std::list<std::shared_ptr<OpenData>>;	//データリスト
 
 		private:
