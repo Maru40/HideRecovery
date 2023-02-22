@@ -49,7 +49,7 @@ namespace basecross {
 
 	bool AstarThreadController::DeleteTicket(const std::shared_ptr<AstarRouteRequester>& requester) {
 		auto ticket = m_ticketMap[requester.get()];
-		//スレッドに停止を依頼する
+		ticket->SetIsStop(true);	//将来的にはスレッドプールから特定のデータを削除する。
 
 		return true;	//仮で成功を返す。
 	}
@@ -66,7 +66,7 @@ namespace basecross {
 	) {
 		auto ticket = PublishTicket(requester);	//チケットの発行
 
-		m_threadPool->Submit(&Ticket::AstarRoute::Start_RouteSearch, ticket.get(), startNode, targetNode, graph);	//スレッドにタスクの依頼
+		m_threadPool->Submit(&Ticket::AstarRoute::Start_RouteSearch, ticket, startNode, targetNode, graph);	//スレッドにタスクの依頼
 		
 		return ticket;
 	}

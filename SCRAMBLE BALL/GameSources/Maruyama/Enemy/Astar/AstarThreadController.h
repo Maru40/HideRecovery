@@ -57,7 +57,11 @@ namespace basecross {
 		/// <returns></returns>
 		std::shared_ptr<Ticket::AstarRoute> CreateTicket();
 
-		//チケットの発行依頼
+		/// <summary>
+		/// チケットの発行依頼
+		/// </summary>
+		/// <param name="requester">チケット発行依頼者</param>
+		/// <returns>発行したチケット</returns>
 		_NODISCARD std::shared_ptr<Ticket::AstarRoute> PublishTicket(const std::shared_ptr<AstarRouteRequester>& requester);
 
 		/// <summary>
