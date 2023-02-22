@@ -15,9 +15,25 @@ namespace basecross {
 
 	//std::thread::hardware_concurrency() == 処理系でサポートされるスレッド並行数
 
-	struct ThreadData
-	{
+	//--------------------------------------------------------------------------------------
+	///	スレッドリクエスト者
+	//--------------------------------------------------------------------------------------
+	class I_ThreadRequester {
 
+	};
+
+	//--------------------------------------------------------------------------------------
+	///	スレッド用タスクデータ
+	//--------------------------------------------------------------------------------------
+	struct ThreadTaskData
+	{
+		std::weak_ptr<I_ThreadRequester> requester;	//リクエスト者
+		std::function<void()> task;					//タスク
+
+		ThreadTaskData(
+			const std::shared_ptr<I_ThreadRequester>& requester, 
+			const std::function<void()>& task
+		);
 	};
 
 	//--------------------------------------------------------------------------------------
@@ -29,6 +45,7 @@ namespace basecross {
 		const std::uint_fast32_t m_threadCount;		//スレッド数
 
 		std::list<std::function<void()>> m_tasks;	//積まれたタスク
+		std::list<std::shared_ptr<ThreadTaskData>> m_taskDatas;	//積まれたタスクデータ
 		mutable std::mutex m_tasksMutex{};			//ミューテックス	
 
 		std::atomic<bool> m_running = true;			//タスクのActive
@@ -67,6 +84,7 @@ namespace basecross {
 
 				//タスクの追加
 				m_tasks.push_back(std::function<void()>(task));
+				//m_taskDatas.push_back(std::make_shared<ThreadTaskData>(std::function<void()>(task)));
 			}
 
 			//待機スレッドの起床

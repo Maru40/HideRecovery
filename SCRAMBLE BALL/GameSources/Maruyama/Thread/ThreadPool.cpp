@@ -16,6 +16,18 @@
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
+	///	スレッドデータ本体
+	//--------------------------------------------------------------------------------------s
+
+	ThreadTaskData::ThreadTaskData(
+		const std::shared_ptr<I_ThreadRequester>& requester,
+		const std::function<void()>& task
+	):
+		requester(requester),
+		task(task)
+	{}
+
+	//--------------------------------------------------------------------------------------
 	///	スレッドプール本体
 	//--------------------------------------------------------------------------------------
 
@@ -60,6 +72,13 @@ namespace basecross {
 				task = std::move(m_tasks.front());
 				m_tasks.pop_front();
 			}
+
+			//std::list<ThreadData> datas;
+			//auto newData = ThreadData();
+			//sauto isData = [newData](ThreadData& data) { return data.requester == newData.requester; };
+			//datas.remove_if(isData);
+			//auto istrue = []() { return true; };
+			//m_tasks.remove_if(istrue);
 
 			task();
 		}
