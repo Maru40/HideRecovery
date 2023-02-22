@@ -42,7 +42,9 @@ namespace basecross {
 		}
 
 		void MoveAstar_Ex::OnStart() {
-			m_taskList->ForceStop();
+			m_taskList->ForceStop();	//タスクのリセット
+
+			
 
 			SelectTask();
 		}
@@ -52,7 +54,7 @@ namespace basecross {
 		}
 
 		void MoveAstar_Ex::OnExit() {
-			m_taskList->ForceStop();
+			m_taskList->ForceStop();	//タスクのリセット
 		}
 
 		void MoveAstar_Ex::DefineTask() {
