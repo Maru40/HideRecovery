@@ -86,34 +86,11 @@ namespace basecross {
 			class R = typename std::result_of<std::decay_t<F>(std::decay_t<Args>...)>::type>
 #endif
 		std::future<R> Submit(F&& func, Args... args) {
-			//auto task = std::make_shared<std::packaged_task<R()>>([func, args...]() {
-			//	return func(args...);
-			//});
+			auto task = std::make_shared<std::packaged_task<R(Args...)>>(func);	//タスクのシェアポインタを生成
 
-			auto task = std::make_shared<std::packaged_task<R(Args...)>>(func);
+			auto future = task->get_future();									//タスクのフューチャーデータを取得
 
-			auto future = task->get_future();
-	
-			//PushTask([task]() { (*task)(); });
-			//PushTask([task, args...]() { (*task)(std::forward<Args>(args)...); });
-
-			//(*task)(std::move(args)...);
-
-			//[ar = std::move(args)](){};
-
-			//[task, tup = std::make_tuple(std::move(args)...)]{
-			//	
-			//};
-
-			//(*task)(std::forward<Args>(args)...);
-			//decltype(args) ar = std::forward<Args>(args);
-			//[ar = std::forward_as_tuple(args)]() {};
-
-			//decltype(args...) ar = std::move(args)...;
-
-			//[args = std::move(args)...]() -> decltype(auto) {};
-
-			PushTask([task, args...]() { (*task)(args...); });
+			PushTask([task, args...]() { (*task)(args...); });					//タスクの登録
 
 			return future;
 		}

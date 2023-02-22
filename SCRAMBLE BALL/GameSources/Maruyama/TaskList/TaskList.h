@@ -21,6 +21,11 @@ namespace basecross {
 	{
 	public:
 		/// <summary>
+		/// 生成時に一度だけ呼び出す処理
+		/// </summary>
+		virtual void OnCreate() {}
+
+		/// <summary>
 		/// 開始処理
 		/// </summary>
 		virtual void OnStart() = 0;
@@ -284,6 +289,8 @@ namespace basecross {
 		/// <param name="type">タスクのタイプ</param>
 		/// <param name="task">タスクのクラス</param>
 		void DefineTask(const EnumType type, const std::shared_ptr<I_TaskNode>& task) {
+			task->OnCreate();
+
 			DefineTask(type, 
 				[&, task]() { task->OnStart(); },
 				[&, task]() { return task->OnUpdate(); },
@@ -309,6 +316,23 @@ namespace basecross {
 				return;
 			}
 			m_defineTaskMap[type] = task;
+		}
+
+		/// <summary>
+		/// タスクの定義
+		/// </summary>
+		/// <typeparam name="T">タスククラスタイプ</typeparam>
+		/// <param name="type">タスクタイプ</param>
+		/// <param name="...params">パラメータパック</param>
+		template<class T, class... Ts,
+			std::enable_if_t<
+				std::is_base_of_v<I_TaskNode, T> &&
+				std::is_constructible_v<T, Ts...>,
+			std::nullptr_t> = nullptr
+		>
+		void DefineTask(const EnumType type, Ts&&... params) {
+			auto task = std::make_shared<T>(params...);
+			DefineTask(type, task);
 		}
 
 		/// <summary>

@@ -1600,6 +1600,12 @@
     <Filter Include="Maruyama\Enemy\Component\ImpactMap\Astar\GraphAstar\Calculater">
       <UniqueIdentifier>{dfa9a592-babf-4bec-8eaa-ca745d65e5c5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Enemy\Component\ImpactMap\Astar\AstarThreadController">
+      <UniqueIdentifier>{0e58f731-2be5-40b4-80f6-218325bac0af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\Component\ImpactMap\Astar\AstarThreadController\Requester">
+      <UniqueIdentifier>{ce816cfa-bb67-497f-8cf7-bf6f38596587}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -3030,6 +3036,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\OpenDataCalculater.h">
       <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\GraphAstar\Calculater</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\AstarThreadController.h">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\AstarThreadController</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\AstarRouteRequester.h">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\AstarThreadController\Requester</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -4336,6 +4348,12 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\OpenDataCalculater.cpp">
       <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\GraphAstar\Calculater</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\AstarThreadController.cpp">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\AstarThreadController</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\AstarRouteRequester.cpp">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\AstarThreadController\Requester</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

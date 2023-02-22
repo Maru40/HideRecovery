@@ -14,6 +14,7 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 	///	前方宣言
 	//--------------------------------------------------------------------------------------
+	class AstarThreadController;
 	namespace maru {
 		class NodeBase;
 		class EdgeBase;
@@ -42,10 +43,13 @@ namespace basecross {
 		class AstarRoute
 		{
 		public:
+			friend class AstarThreadController;
+
 			using RouteStack = std::stack<std::weak_ptr<maru::AstarNode>>;						//検索ルートのスタック
 			using GraphType = maru::SparseGraph < maru::AstarNode, maru::AstarEdge, nullptr> ;	//グラフタイプ設定
 
 		private:
+			bool m_isStop;		//停止されている状態かどうか
 			bool m_isValid;		//有効状態であるかどうか
 
 			/// <summary>
@@ -57,7 +61,7 @@ namespace basecross {
 			RouteStack m_route;	//検索したルート
 
 		public:
-
+			AstarRoute();
 
 		private:
 
@@ -84,6 +88,10 @@ namespace basecross {
 			/// </summary>
 			/// <returns>有効状態ならtrue</returns>
 			bool IsValid() const { return m_isValid; }
+
+			void SetIsStop(const bool isStop) { m_isStop = isStop; }
+
+			bool IsStop() const { return m_isStop; }
 
 			/// <summary>
 			/// 検索したルートの取得
