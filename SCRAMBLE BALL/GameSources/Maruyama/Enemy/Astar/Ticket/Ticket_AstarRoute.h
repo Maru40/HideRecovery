@@ -14,6 +14,7 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 	///	前方宣言
 	//--------------------------------------------------------------------------------------
+	class AstarThreadController;
 	namespace maru {
 		class NodeBase;
 		class EdgeBase;
@@ -42,6 +43,8 @@ namespace basecross {
 		class AstarRoute
 		{
 		public:
+			friend class AstarThreadController;
+
 			using RouteStack = std::stack<std::weak_ptr<maru::AstarNode>>;						//検索ルートのスタック
 			using GraphType = maru::SparseGraph < maru::AstarNode, maru::AstarEdge, nullptr> ;	//グラフタイプ設定
 
