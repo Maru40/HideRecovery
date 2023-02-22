@@ -31,13 +31,13 @@ namespace basecross {
 	std::shared_ptr<Ticket::AstarRoute> AstarThreadController::PublishTicket(const std::shared_ptr<AstarRouteRequester>& requester) {
 		//チケットの重複確認
 		if (IsDuplicationTicket(requester)) {
-			DeleteTicket(requester);	//削除申請
+			DeleteTicket(requester);		//削除申請
 		}
 
 		auto ticket = CreateTicket();		//チケットの生成
 		RegisterTicket(requester, ticket);	//チケットの登録
 
-		return ticket;	//発行したチケットを返す
+		return ticket;						//発行したチケットを返す
 	}
 
 	void AstarThreadController::RegisterTicket(
