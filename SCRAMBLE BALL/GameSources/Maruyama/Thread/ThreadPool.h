@@ -15,6 +15,11 @@ namespace basecross {
 
 	//std::thread::hardware_concurrency() == 処理系でサポートされるスレッド並行数
 
+	struct ThreadData
+	{
+
+	};
+
 	//--------------------------------------------------------------------------------------
 	///	スレッドプール
 	//--------------------------------------------------------------------------------------
@@ -23,7 +28,7 @@ namespace basecross {
 		std::unique_ptr<std::thread[]> m_threads;	//スレッド配列
 		const std::uint_fast32_t m_threadCount;		//スレッド数
 
-		std::queue<std::function<void()>> m_tasks;	//積まれたタスク
+		std::list<std::function<void()>> m_tasks;	//積まれたタスク
 		mutable std::mutex m_tasksMutex{};			//ミューテックス	
 
 		std::atomic<bool> m_running = true;			//タスクのActive
@@ -61,7 +66,7 @@ namespace basecross {
 				}
 
 				//タスクの追加
-				m_tasks.push(std::function<void()>(task));
+				m_tasks.push_back(std::function<void()>(task));
 			}
 
 			//待機スレッドの起床

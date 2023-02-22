@@ -58,7 +58,7 @@ namespace basecross {
 
 				//TaskQueue‚©‚çATask‚ğæ‚èo‚·B
 				task = std::move(m_tasks.front());
-				m_tasks.pop();
+				m_tasks.pop_front();
 			}
 
 			task();
