@@ -16,6 +16,18 @@
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
+	///	スレッドデータ本体
+	//--------------------------------------------------------------------------------------s
+
+	ThreadTaskData::ThreadTaskData(
+		I_ThreadRequester* const requester,
+		const std::function<void()>& task
+	):
+		requester(requester),
+		task(task)
+	{}
+
+	//--------------------------------------------------------------------------------------
 	///	スレッドプール本体
 	//--------------------------------------------------------------------------------------
 
@@ -49,20 +61,38 @@ namespace basecross {
 			{
 				//Task Queueが空でない、もしくは、ThreadPoolが終了するまで待機
 				std::unique_lock<std::mutex> lock(m_tasksMutex);
-				m_condition.wait(lock, [&] { return !m_tasks.empty() || !m_running; });
+				m_condition.wait(lock, [&] { return !m_taskDatas.empty() || !m_running; });
 
 				//ThreadPoolが終了中で、TaskQueueが空の時は、ループを抜ける。 == スレッドが終了する。
-				if (!m_running && m_tasks.empty()) {
+				if (!m_running && m_taskDatas.empty()) {
 					return;
 				}
 
 				//TaskQueueから、Taskを取り出す。
-				task = std::move(m_tasks.front());
-				m_tasks.pop();
+				auto data = std::move(m_taskDatas.front());
+				task = data->task;
+				m_taskDatas.pop_front();
 			}
+
+			//std::list<ThreadData> datas;
+			//auto newData = ThreadData();
+			//sauto isData = [newData](ThreadData& data) { return data.requester == newData.requester; };
+			//datas.remove_if(isData);
+			//auto istrue = []() { return true; };
+			//m_tasks.remove_if(istrue);
 
 			task();
 		}
+	}
+
+	void ThreadPool::DeleteTask(I_ThreadRequester* const requester) {
+		std::unique_lock<std::mutex> lock(m_tasksMutex);
+
+		auto isRemove = [requester](const std::shared_ptr<ThreadTaskData>& data) {
+			return requester == data->requester;
+		};
+
+		m_taskDatas.remove_if(isRemove);
 	}
 
 	//--------------------------------------------------------------------------------------
@@ -136,7 +166,7 @@ namespace basecross {
 		TesterThreadObject::TesterThreadObject(const std::shared_ptr<Stage>& stage):
 			GameObject(stage),
 			m_futureData(new FutureData()),
-			m_executor(new ThreadPool())
+			m_executor(new ThreadPool(1))
 		{}
 
 		void TesterThreadObject::Test() {
@@ -156,9 +186,10 @@ namespace basecross {
 			int i = 999;
 			//auto future = executor.Submit([&](int number, std::shared_ptr<FutureData> data) { return say_hello(number, data); }, i, m_futureData);
 			//auto future = executor.Submit([&](int number, std::weak_ptr<FutureData> data) { return say_hello(number, data); }, i, weakfuture);
-			auto future = executor.Submit(&TesterThreadObject::say_hello, this, m_futureData);
+			auto future = executor.Submit(this, &TesterThreadObject::say_hello, this, m_futureData);
 			m_futureData->MoveFuture(future);
 
+			//GetThis
 			//executor.Submit(say_ok, 100, true);
 
 			//バインドテスト
@@ -182,6 +213,11 @@ namespace basecross {
 		void TesterThreadObject::OnUpdate() {
 			if (PlayerInputer::GetInstance()->IsBDown()) {
 				Test();
+			}
+
+			if (PlayerInputer::GetInstance()->IsXDown()) {
+				//auto requester = new I_ThreadRequester();
+				//m_executor->DeleteTask(requester);
 			}
 
 			//フューチャーデータがランニング状態でない、かつ、フューチャーがvalidなら

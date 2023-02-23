@@ -17,6 +17,7 @@
 #include "Maruyama/Enemy/Astar/AstarNode.h"
 #include "Maruyama/Enemy/Astar/AstarEdge_Ex.h"
 #include "Ticket/Ticket_AstarRoute.h"
+#include "AstarRouteRequester.h"
 
 namespace basecross {
 
@@ -47,11 +48,13 @@ namespace basecross {
 		m_ticketMap[requester.get()] = ticket;
 	}
 
-	bool AstarThreadController::DeleteTicket(const std::shared_ptr<AstarRouteRequester>& requester) {
-		auto ticket = m_ticketMap[requester.get()];
-		ticket->SetIsStop(true);	//将来的にはスレッドプールから特定のデータを削除する。
+	void AstarThreadController::UnRegisterTicket(const std::shared_ptr<AstarRouteRequester>& requester) {
+		m_ticketMap[requester.get()] = nullptr;
+	}
 
-		return true;	//仮で成功を返す。
+	void AstarThreadController::DeleteTicket(const std::shared_ptr<AstarRouteRequester>& requester) {
+		m_threadPool->DeleteTask(requester.get());	//スレッドに登録したチケットの削除
+		UnRegisterTicket(requester);				//登録解除
 	}
 
 	bool AstarThreadController::IsDuplicationTicket(const std::shared_ptr<AstarRouteRequester>& requester) {
@@ -66,7 +69,7 @@ namespace basecross {
 	) {
 		auto ticket = PublishTicket(requester);	//チケットの発行
 
-		m_threadPool->Submit(&Ticket::AstarRoute::Start_RouteSearch, ticket, startNode, targetNode, graph);	//スレッドにタスクの依頼
+		m_threadPool->Submit(requester.get(), &Ticket::AstarRoute::Start_RouteSearch, ticket, startNode, targetNode, graph);	//スレッドにタスクの依頼
 		
 		return ticket;
 	}

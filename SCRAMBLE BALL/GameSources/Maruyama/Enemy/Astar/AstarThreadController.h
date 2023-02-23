@@ -75,11 +75,17 @@ namespace basecross {
 		);
 
 		/// <summary>
+		/// チケット登録解除
+		/// </summary>
+		/// <param name="requester">登録者</param>
+		void UnRegisterTicket(const std::shared_ptr<AstarRouteRequester>& requester);
+
+		/// <summary>
 		/// チケットの削除申請
 		/// </summary>
 		/// <param name="requester">削除申請者</param>
 		/// <returns>削除が成功したかどうか</returns>
-		bool DeleteTicket(const std::shared_ptr<AstarRouteRequester>& requester);
+		void DeleteTicket(const std::shared_ptr<AstarRouteRequester>& requester);
 
 		/// <summary>
 		/// チケットが重複しているかどうか

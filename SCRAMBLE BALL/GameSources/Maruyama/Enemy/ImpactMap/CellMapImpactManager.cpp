@@ -46,7 +46,7 @@ namespace basecross {
 
 		std::shared_ptr<CellMapImpactController::FutureData> CellMapImpactController::AddTask(const std::weak_ptr<GameObject>& requester) {
 			auto futureData = std::make_shared<FutureData>();	//フューチャーデータの生成。
-			auto future = m_threadPool->Submit(&CellMapImpactController::ThreadWoker_CalculateImpactCells, this, requester, futureData);	//スレッドにサブミット。
+			auto future = m_threadPool->Submit(this, &CellMapImpactController::ThreadWoker_CalculateImpactCells, this, requester, futureData);	//スレッドにサブミット。
 			futureData->MoveFuture(future);		//フューチャーの設定。
 			return futureData;	
 		}
