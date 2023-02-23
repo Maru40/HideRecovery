@@ -18,8 +18,10 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 	///	スレッドリクエスト者
 	//--------------------------------------------------------------------------------------
-	class I_ThreadRequester {
-
+	class I_ThreadRequester
+	{
+	public:
+		virtual ~I_ThreadRequester() = default;
 	};
 
 	//--------------------------------------------------------------------------------------
@@ -27,11 +29,11 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 	struct ThreadTaskData
 	{
-		std::weak_ptr<I_ThreadRequester> requester;	//リクエスト者
-		std::function<void()> task;					//タスク
+		I_ThreadRequester* const requester;	//リクエスト者
+		std::function<void()> task;			//タスク
 
 		ThreadTaskData(
-			const std::shared_ptr<I_ThreadRequester>& requester, 
+			I_ThreadRequester* const requester,
 			const std::function<void()>& task
 		);
 	};
@@ -44,7 +46,7 @@ namespace basecross {
 		std::unique_ptr<std::thread[]> m_threads;	//スレッド配列
 		const std::uint_fast32_t m_threadCount;		//スレッド数
 
-		std::list<std::function<void()>> m_tasks;	//積まれたタスク
+		//std::list<std::function<void()>> m_tasks;	//積まれたタスク
 		std::list<std::shared_ptr<ThreadTaskData>> m_taskDatas;	//積まれたタスクデータ
 		mutable std::mutex m_tasksMutex{};			//ミューテックス	
 
@@ -74,7 +76,7 @@ namespace basecross {
 		/// タスクの追加
 		/// </summary>
 		template<class F>
-		void PushTask(const F& task) {
+		void PushTask(I_ThreadRequester* const requester, const F& task) {
 			{
 				const std::lock_guard<std::mutex> lock(m_tasksMutex);
 
@@ -83,8 +85,8 @@ namespace basecross {
 				}
 
 				//タスクの追加
-				m_tasks.push_back(std::function<void()>(task));
-				//m_taskDatas.push_back(std::make_shared<ThreadTaskData>(std::function<void()>(task)));
+				//m_tasks.push_back(std::function<void()>(task));
+				m_taskDatas.push_back(std::make_shared<ThreadTaskData>(requester, std::function<void()>(task)));
 			}
 
 			//待機スレッドの起床
@@ -108,12 +110,12 @@ namespace basecross {
 		template <class F, class... Args, 
 			class R = typename std::result_of<std::decay_t<F>(std::decay_t<Args>...)>::type>
 #endif
-		std::future<R> Submit(F&& func, Args... args) {
+		std::future<R> Submit(I_ThreadRequester* const requester, F&& func, Args... args) {
 			auto task = std::make_shared<std::packaged_task<R(Args...)>>(func);	//タスクのシェアポインタを生成
 
 			auto future = task->get_future();									//タスクのフューチャーデータを取得
 
-			PushTask([task, args...]() { (*task)(args...); });					//タスクの登録
+			PushTask(requester, [task, args...]() { (*task)(args...); });					//タスクの登録
 
 			return future;
 		}
@@ -167,7 +169,7 @@ namespace basecross {
 			}
 		};
 
-		class TesterThreadObject : public GameObject {
+		class TesterThreadObject : public GameObject, public I_ThreadRequester {
 		private:
 			std::shared_ptr<ThreadPool> m_executor;	//メンバとして持たないと、スレッド終了時にjoinしてしまう。
 			//std::future<std::wstring> m_hello_future;
