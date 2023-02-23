@@ -48,11 +48,13 @@ namespace basecross {
 		m_ticketMap[requester.get()] = ticket;
 	}
 
-	bool AstarThreadController::DeleteTicket(const std::shared_ptr<AstarRouteRequester>& requester) {
-		auto ticket = m_ticketMap[requester.get()];
-		ticket->SetIsStop(true);	//将来的にはスレッドプールから特定のデータを削除する。
+	void AstarThreadController::UnRegisterTicket(const std::shared_ptr<AstarRouteRequester>& requester) {
+		m_ticketMap[requester.get()] = nullptr;
+	}
 
-		return true;	//仮で成功を返す。
+	void AstarThreadController::DeleteTicket(const std::shared_ptr<AstarRouteRequester>& requester) {
+		m_threadPool->DeleteTask(requester.get());	//スレッドに登録したチケットの削除
+		UnRegisterTicket(requester);				//登録解除
 	}
 
 	bool AstarThreadController::IsDuplicationTicket(const std::shared_ptr<AstarRouteRequester>& requester) {
