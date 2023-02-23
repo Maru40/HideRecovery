@@ -8,6 +8,8 @@
 
 #include "stdafx.h"
 
+#include "Maruyama/Thread/ThreadPool.h"
+
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
@@ -17,10 +19,10 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 	/// AstarRouteのリクエスト者
 	//--------------------------------------------------------------------------------------
-	class AstarRouteRequester
+	class AstarRouteRequester : public I_ThreadRequester
 	{
 	public:
-
+		virtual ~AstarRouteRequester() = default;
 	};
 
 }
