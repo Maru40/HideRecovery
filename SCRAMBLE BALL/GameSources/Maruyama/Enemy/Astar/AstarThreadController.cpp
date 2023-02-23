@@ -17,6 +17,7 @@
 #include "Maruyama/Enemy/Astar/AstarNode.h"
 #include "Maruyama/Enemy/Astar/AstarEdge_Ex.h"
 #include "Ticket/Ticket_AstarRoute.h"
+#include "AstarRouteRequester.h"
 
 namespace basecross {
 
@@ -66,7 +67,7 @@ namespace basecross {
 	) {
 		auto ticket = PublishTicket(requester);	//チケットの発行
 
-		m_threadPool->Submit(&Ticket::AstarRoute::Start_RouteSearch, ticket, startNode, targetNode, graph);	//スレッドにタスクの依頼
+		m_threadPool->Submit(requester.get(), &Ticket::AstarRoute::Start_RouteSearch, ticket, startNode, targetNode, graph);	//スレッドにタスクの依頼
 		
 		return ticket;
 	}
