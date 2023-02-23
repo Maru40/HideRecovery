@@ -84,6 +84,12 @@ namespace basecross {
 		//テストAIDirectorの生成
 		AddGameObject<GameObject>()->AddComponent<Enemy::AIDirector_Ex>();
 
+		//ポインタのアドレス確認
+		//GameObject* objPtr = new GameObject(GetThis<Stage>());
+		//Debug::GetInstance()->Log((int)(uintptr_t)objPtr);
+		//delete(objPtr);
+		//Debug::GetInstance()->Log((int)(uintptr_t)objPtr);
+
 		//テストマップの生成
 		//CreateTestMap();	
 	}
