@@ -12,6 +12,8 @@
 
 #include "Maruyama/Interface/I_Impact.h"
 
+#include "Maruyama/Thread/ThreadPool.h"
+
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
@@ -27,7 +29,7 @@ namespace basecross {
 		//--------------------------------------------------------------------------------------
 		///	セルマップの影響度コントローラー
 		//--------------------------------------------------------------------------------------
-		class CellMapImpactController
+		class CellMapImpactController : public I_ThreadRequester
 		{
 		public:
 			using Cells = std::vector<std::shared_ptr<Cell>>;
