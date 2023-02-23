@@ -85,6 +85,16 @@ namespace basecross {
 		}
 	}
 
+	void ThreadPool::DeleteTask(I_ThreadRequester* const requester) {
+		std::unique_lock<std::mutex> lock(m_tasksMutex);
+
+		auto isRemove = [requester](const std::shared_ptr<ThreadTaskData>& data) {
+			return requester == data->requester;
+		};
+
+		m_taskDatas.remove_if(isRemove);
+	}
+
 	//--------------------------------------------------------------------------------------
 	///	テスタークラス
 	//--------------------------------------------------------------------------------------
@@ -156,7 +166,7 @@ namespace basecross {
 		TesterThreadObject::TesterThreadObject(const std::shared_ptr<Stage>& stage):
 			GameObject(stage),
 			m_futureData(new FutureData()),
-			m_executor(new ThreadPool())
+			m_executor(new ThreadPool(1))
 		{}
 
 		void TesterThreadObject::Test() {
@@ -203,6 +213,11 @@ namespace basecross {
 		void TesterThreadObject::OnUpdate() {
 			if (PlayerInputer::GetInstance()->IsBDown()) {
 				Test();
+			}
+
+			if (PlayerInputer::GetInstance()->IsXDown()) {
+				//auto requester = new I_ThreadRequester();
+				//m_executor->DeleteTask(requester);
 			}
 
 			//フューチャーデータがランニング状態でない、かつ、フューチャーがvalidなら
