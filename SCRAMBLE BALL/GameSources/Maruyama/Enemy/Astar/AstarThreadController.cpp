@@ -52,6 +52,14 @@ namespace basecross {
 		m_ticketMap[requester.get()] = nullptr;
 	}
 
+	bool AstarThreadController::HasRegisterTicket(const std::shared_ptr<AstarRouteRequester>& requester) const {
+		if (m_ticketMap.count(requester.get()) == 0) {
+			return false;	//ˆê‚Â‚à‚È‚¢‚È‚çA“o˜^‚³‚ê‚Ä‚¢‚È‚¢B
+		}
+
+		return m_ticketMap.at(requester.get()) != nullptr;	//nullptr‚È‚ç“o˜^‚³‚ê‚Ä‚¢‚È‚¢B
+	}
+
 	void AstarThreadController::DeleteTicket(const std::shared_ptr<AstarRouteRequester>& requester) {
 		m_threadPool->DeleteTask(requester.get());	//ƒXƒŒƒbƒh‚É“o˜^‚µ‚½ƒ`ƒPƒbƒg‚Ìíœ
 		UnRegisterTicket(requester);				//“o˜^‰ğœ

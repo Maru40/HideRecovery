@@ -81,6 +81,12 @@ namespace basecross {
 		void UnRegisterTicket(const std::shared_ptr<AstarRouteRequester>& requester);
 
 		/// <summary>
+		/// すでにチケットが登録されているかどうか
+		/// </summary>
+		/// <param name="requester">登録者</param>
+		bool HasRegisterTicket(const std::shared_ptr<AstarRouteRequester>& requester) const;
+
+		/// <summary>
 		/// チケットの削除申請
 		/// </summary>
 		/// <param name="requester">削除申請者</param>
