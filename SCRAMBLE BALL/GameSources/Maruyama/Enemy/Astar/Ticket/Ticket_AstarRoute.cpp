@@ -29,7 +29,7 @@ namespace basecross {
 			const std::shared_ptr<maru::AstarNode>& targetNode,
 			const std::shared_ptr<GraphType>& graph
 		) {
-			SetIsValid(false);	//検索開始したため、無効状態に変更(将来的には別な場所で変更)
+			SetIsValid(false);								//検索開始したため、無効状態に変更(将来的には別な場所で変更)
 
 			maru::Utility::StackClear(m_route);				//現在のルートのクリア
 			
