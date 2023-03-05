@@ -1606,6 +1606,12 @@
     <Filter Include="Maruyama\Enemy\Component\ImpactMap\Astar\AstarThreadController\Requester">
       <UniqueIdentifier>{ce816cfa-bb67-497f-8cf7-bf6f38596587}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Enemy\Tester">
+      <UniqueIdentifier>{5396f799-1031-4c21-acc7-6507274d5872}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maruyama\Enemy\Tester\AstarTester">
+      <UniqueIdentifier>{c2d8509e-57c6-4ac2-89ab-dcba19a1f871}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -3042,6 +3048,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\AstarRouteRequester.h">
       <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\AstarThreadController\Requester</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Tester\Astar\Tester_AstarRequester.h">
+      <Filter>Maruyama\Enemy\Tester\AstarTester</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -4354,6 +4363,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\AstarRouteRequester.cpp">
       <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\AstarThreadController\Requester</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Tester\Astar\Tester_AstarRequester.cpp">
+      <Filter>Maruyama\Enemy\Tester\AstarTester</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

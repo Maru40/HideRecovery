@@ -200,6 +200,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\StateMachine\StateEdgeBase.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\StateMachine\StateNodeBase.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Stator\State\EnemyStateNode_SearchBall.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Tester\Astar\Tester_AstarRequester.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Interface\I_BrackBoard.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Interface\I_Damaged.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Interface\I_FactionMember.h" />
@@ -673,6 +674,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Object\HeroObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Object\VillainEnemyObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Stator\State\EnemyStateNode_SearchBall.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Tester\Astar\Tester_AstarRequester.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Interface\I_Damaged.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Interface\I_FactionMember.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Interface\I_Impact.cpp" />
