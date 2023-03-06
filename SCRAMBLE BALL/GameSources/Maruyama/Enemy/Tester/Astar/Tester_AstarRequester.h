@@ -17,13 +17,11 @@ namespace basecross {
 	namespace Enemy {
 		namespace Tester {
 
-			class AstarRequester : public Component, public AstarRouteRequester {
+			class AstarRequester : public AstarRouteRequester {
 			private:
 				std::weak_ptr<Ticket::AstarRoute> m_ticket;
 
 			public:
-				AstarRequester(const std::shared_ptr<GameObject>& owner);
-
 				virtual ~AstarRequester() = default;
 
 			private:

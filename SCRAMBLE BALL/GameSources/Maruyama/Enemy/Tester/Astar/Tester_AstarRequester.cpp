@@ -22,10 +22,6 @@ namespace basecross {
 	namespace Enemy {
 		namespace Tester {
 
-			AstarRequester::AstarRequester(const std::shared_ptr<GameObject>& owner):
-				Component(owner)
-			{}
-
 			void AstarRequester::Request() {
 				using namespace maru;
 
@@ -36,9 +32,9 @@ namespace basecross {
 				auto testNode = std::make_shared<maru::AstarNode>();
 				auto testGraph = std::make_shared <maru::SparseGraph<AstarNode, AstarEdge, nullptr>>();
 
-				auto ticket =  threadController->Start_RouteSearch(GetThis<AstarRouteRequester>(), testNode, testNode, testGraph);
+				//auto ticket =  threadController->Start_RouteSearch(GetThis<AstarRouteRequester>(), testNode, testNode, testGraph);
 
-				ticket->IsValid();
+				//ticket->IsValid();
 			}
 
 		}
