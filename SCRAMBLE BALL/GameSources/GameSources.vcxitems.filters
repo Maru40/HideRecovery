@@ -1612,6 +1612,9 @@
     <Filter Include="Maruyama\Enemy\Tester\AstarTester">
       <UniqueIdentifier>{c2d8509e-57c6-4ac2-89ab-dcba19a1f871}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maruyama\Enemy\Component\SelfAstarNodeController\SelfAstarNodeContorller_Ex">
+      <UniqueIdentifier>{9dfc1034-5a10-41f2-b21e-24303511b386}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -3051,6 +3054,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Tester\Astar\Tester_AstarRequester.h">
       <Filter>Maruyama\Enemy\Tester\AstarTester</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\SelfAstarNodeController_Ex.h">
+      <Filter>Maruyama\Enemy\Component\SelfAstarNodeController\SelfAstarNodeContorller_Ex</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -4366,6 +4372,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Tester\Astar\Tester_AstarRequester.cpp">
       <Filter>Maruyama\Enemy\Tester\AstarTester</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\SelfAstarNodeController_Ex.cpp">
+      <Filter>Maruyama\Enemy\Component\SelfAstarNodeController\SelfAstarNodeContorller_Ex</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
