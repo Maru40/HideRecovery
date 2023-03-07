@@ -31,12 +31,10 @@ namespace basecross {
 	{
 		I_ThreadRequester* const requester;	//リクエスト者
 		std::function<void()> task;			//タスク
-		std::function<void()> endTask;		//終了時に呼び出したい処理
 
 		ThreadTaskData(
 			I_ThreadRequester* const requester,
-			const std::function<void()>& task,
-			const std::function<void()>& endTask = nullptr
+			const std::function<void()>& task
 		);
 	};
 
