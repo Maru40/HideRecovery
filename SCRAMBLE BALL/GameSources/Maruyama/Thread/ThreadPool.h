@@ -115,7 +115,7 @@ namespace basecross {
 
 			auto future = task->get_future();									//タスクのフューチャーデータを取得
 
-			PushTask(requester, [task, args...]() { (*task)(args...); });					//タスクの登録
+			PushTask(requester, [task, args...]() { (*task)(args...); });		//タスクの登録
 
 			return future;
 		}
