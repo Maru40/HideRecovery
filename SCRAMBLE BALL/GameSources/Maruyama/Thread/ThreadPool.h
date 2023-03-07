@@ -31,10 +31,12 @@ namespace basecross {
 	{
 		I_ThreadRequester* const requester;	//リクエスト者
 		std::function<void()> task;			//タスク
+		std::function<void()> endTask;		//終了時に呼び出したい処理
 
 		ThreadTaskData(
 			I_ThreadRequester* const requester,
-			const std::function<void()>& task
+			const std::function<void()>& task,
+			const std::function<void()>& endTask = nullptr
 		);
 	};
 
@@ -46,7 +48,6 @@ namespace basecross {
 		std::unique_ptr<std::thread[]> m_threads;	//スレッド配列
 		const std::uint_fast32_t m_threadCount;		//スレッド数
 
-		//std::list<std::function<void()>> m_tasks;	//積まれたタスク
 		std::list<std::shared_ptr<ThreadTaskData>> m_taskDatas;	//積まれたタスクデータ
 		mutable std::mutex m_tasksMutex{};			//ミューテックス	
 

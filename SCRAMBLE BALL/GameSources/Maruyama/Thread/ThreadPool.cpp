@@ -21,10 +21,12 @@ namespace basecross {
 
 	ThreadTaskData::ThreadTaskData(
 		I_ThreadRequester* const requester,
-		const std::function<void()>& task
+		const std::function<void()>& task,
+		const std::function<void()>& endTask
 	):
 		requester(requester),
-		task(task)
+		task(task),
+		endTask(endTask)
 	{}
 
 	//--------------------------------------------------------------------------------------
