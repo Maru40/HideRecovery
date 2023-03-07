@@ -120,6 +120,10 @@ namespace basecross {
 			return future;
 		}
 
+		/// <summary>
+		/// タスクの削除
+		/// </summary>
+		/// <param name="requester">申請者</param>
 		void DeleteTask(I_ThreadRequester* const requester);
 
 		//--------------------------------------------------------------------------------------
