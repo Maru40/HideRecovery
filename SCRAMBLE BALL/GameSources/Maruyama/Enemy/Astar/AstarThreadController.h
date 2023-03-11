@@ -8,13 +8,22 @@
 
 #include "stdafx.h"
 
+#include <future>
+
+//namespace std {
+//	template<class T>
+//	class future;
+//}
+
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
 	/// 前方宣言
 	//--------------------------------------------------------------------------------------
 	class AstarRouteRequester;
+	class I_SelfAstarNodeRequester;
 	class ThreadPool;
+
 	namespace maru {
 		class AstarNode;
 		class AstarEdge_Ex;
@@ -112,6 +121,12 @@ namespace basecross {
 			const std::shared_ptr<AstarRouteRequester>& requester,
 			const std::shared_ptr<maru::AstarNode>& startNode,
 			const std::shared_ptr<maru::AstarNode>& targetNode,
+			const std::shared_ptr<GraphType>& graph
+		);
+
+		//自分のノードを検索開始
+		std::future<std::shared_ptr<maru::AstarNode>> Start_SelfAstarNodeSearch(
+			const std::shared_ptr<I_SelfAstarNodeRequester>& requester,
 			const std::shared_ptr<GraphType>& graph
 		);
 		

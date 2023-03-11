@@ -19,6 +19,8 @@
 #include "Ticket/Ticket_AstarRoute.h"
 #include "AstarRouteRequester.h"
 
+#include "Maruyama/Enemy/Component/SelfAstarNodeController_Ex.h"
+
 namespace basecross {
 
 	AstarThreadController::AstarThreadController(const std::uint_fast32_t& threadCount) :
@@ -80,6 +82,13 @@ namespace basecross {
 		m_threadPool->Submit(requester.get(), &Ticket::AstarRoute::Start_RouteSearch, ticket, startNode, targetNode, graph);	//スレッドにタスクの依頼
 		
 		return ticket;
+	}
+
+	std::future<std::shared_ptr<maru::AstarNode>> AstarThreadController::Start_SelfAstarNodeSearch(
+		const std::shared_ptr<I_SelfAstarNodeRequester>& requester,
+		const std::shared_ptr<GraphType>& graph
+	) {
+		return m_threadPool->Submit(requester.get(), &I_SelfAstarNodeRequester::Search_SelfAstarNode, requester.get());
 	}
 
 }
