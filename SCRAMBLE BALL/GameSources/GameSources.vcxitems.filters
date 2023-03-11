@@ -3057,6 +3057,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Component\SelfAstarNodeController_Ex.h">
       <Filter>Maruyama\Enemy\Component\SelfAstarNodeController\SelfAstarNodeContorller_Ex</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Maruyama\Enemy\Astar\Ticket\Ticket_SearchSelfAstarNode.h">
+      <Filter>Maruyama\Enemy\Component\ImpactMap\Astar\Ticket</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
