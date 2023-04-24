@@ -15,6 +15,10 @@
 
 #include "Maruyama/Thread/ThreadPool.h"
 
+#include "Maruyama/Enemy/Astar/AstarNode.h"
+#include "Maruyama/Enemy/Astar/AstarEdge_Ex.h"
+#include "Maruyama/Enemy/Astar/AstarThreadController.h"
+
 namespace basecross {
 
 	std::weak_ptr<Enemy::AIDirector_Ex> maru::SingletonComponent<Enemy::AIDirector_Ex>::sm_instance;
@@ -23,12 +27,10 @@ namespace basecross {
 
 		AIDirector_Ex::AIDirector_Ex(const std::shared_ptr<GameObject>& owner) :
 			SingletonComponent(owner),
-			m_threadPool(new ThreadPool())
+			m_astarThread(new AstarThreadController(1))
 		{}
 
-		_NODISCARD void AIDirector_Ex::Request(const std::shared_ptr<I_AIRequester>& requester, I_AIRequestEvent* const eventPtr) {
-			m_requestDatas.push(new AIRequestData(requester, eventPtr));	//ÉCÉxÉìÉgÇÃê∂ê¨
-		}
+		_NODISCARD const std::unique_ptr<AstarThreadController>& AIDirector_Ex::GetAstarThreadController() const { return m_astarThread; }
 
 	}
 

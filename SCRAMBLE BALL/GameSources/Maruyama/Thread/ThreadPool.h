@@ -46,7 +46,6 @@ namespace basecross {
 		std::unique_ptr<std::thread[]> m_threads;	//スレッド配列
 		const std::uint_fast32_t m_threadCount;		//スレッド数
 
-		//std::list<std::function<void()>> m_tasks;	//積まれたタスク
 		std::list<std::shared_ptr<ThreadTaskData>> m_taskDatas;	//積まれたタスクデータ
 		mutable std::mutex m_tasksMutex{};			//ミューテックス	
 
@@ -115,11 +114,15 @@ namespace basecross {
 
 			auto future = task->get_future();									//タスクのフューチャーデータを取得
 
-			PushTask(requester, [task, args...]() { (*task)(args...); });					//タスクの登録
+			PushTask(requester, [task, args...]() { (*task)(args...); });		//タスクの登録
 
 			return future;
 		}
 
+		/// <summary>
+		/// タスクの削除
+		/// </summary>
+		/// <param name="requester">申請者</param>
 		void DeleteTask(I_ThreadRequester* const requester);
 
 		//--------------------------------------------------------------------------------------

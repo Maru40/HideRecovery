@@ -74,13 +74,6 @@ namespace basecross {
 				m_taskDatas.pop_front();
 			}
 
-			//std::list<ThreadData> datas;
-			//auto newData = ThreadData();
-			//sauto isData = [newData](ThreadData& data) { return data.requester == newData.requester; };
-			//datas.remove_if(isData);
-			//auto istrue = []() { return true; };
-			//m_tasks.remove_if(istrue);
-
 			task();
 		}
 	}
