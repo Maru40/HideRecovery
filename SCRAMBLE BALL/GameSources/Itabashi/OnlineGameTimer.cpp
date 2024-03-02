@@ -55,7 +55,7 @@ namespace basecross
 			return;
 		}
 
-		Online::OnlineManager::RaiseEvent(false, nullptr, 0, GAMETIMER_START_CHECK_EVENT_CODE);
+		Online::OnlineManager::RaiseEvent(true, nullptr, 0, GAMETIMER_START_CHECK_EVENT_CODE);
 	}
 
 	void OnlineGameTimer::GameCountStart()
@@ -171,7 +171,7 @@ namespace basecross
 
 			auto raiseOption = ExitGames::LoadBalancing::RaiseEventOptions();
 			raiseOption.setReceiverGroup(ExitGames::Lite::ReceiverGroup::MASTER_CLIENT);
-			Online::OnlineManager::RaiseEvent(false, nullptr, 0, GAMETIMER_START_OK_EVENT_CODE, raiseOption);
+			Online::OnlineManager::RaiseEvent(true, nullptr, 0, GAMETIMER_START_OK_EVENT_CODE, raiseOption);
 			return;
 		}
 

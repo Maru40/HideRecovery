@@ -65,7 +65,7 @@ namespace basecross
 		auto hideItemId = hideItem->GetGameObject()->GetComponent<Online::OnlineStatus>()->GetInstanceId();
 		auto hidePlaceId = hidePlace->GetGameObject()->GetComponent<Online::OnlineStatus>()->GetInstanceId();
 
-		Online::OnlineManager::RaiseEvent(false, (std::uint8_t*)&OnlineItemHideData(hideItemId,hidePlaceId), sizeof(OnlineItemHideData), ITEM_RANDOM_HIDE_EVENT_CODE);
+		Online::OnlineManager::RaiseEvent(true, (std::uint8_t*)&OnlineItemHideData(hideItemId,hidePlaceId), sizeof(OnlineItemHideData), ITEM_RANDOM_HIDE_EVENT_CODE);
 	}
 
 	void OnlineGameItemManager::ExecuteRandomHideItem(std::uint32_t hideItemInstanceId, std::uint32_t hidePlaceInstanceId)

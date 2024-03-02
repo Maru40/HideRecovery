@@ -46,7 +46,7 @@ namespace Online
 			}
 		}
 
-		OnlineManager::RaiseEvent(false, (std::uint8_t*)m_playerNumbers, sizeof(m_playerNumbers), EXECUTE_UPDATE_PLAYER_NUMBERS);
+		OnlineManager::RaiseEvent(true, (std::uint8_t*)m_playerNumbers, sizeof(m_playerNumbers), EXECUTE_UPDATE_PLAYER_NUMBERS);
 	}
 
 	void OnlineMatching::ExecuteGetPlayerStateEvent(int playerNumbers[])
@@ -196,7 +196,7 @@ namespace Online
 			}
 		}
 
-		OnlineManager::RaiseEvent(false, (std::uint8_t*)m_playerNumbers, sizeof(m_playerNumbers), EXECUTE_UPDATE_PLAYER_NUMBERS);
+		OnlineManager::RaiseEvent(true, (std::uint8_t*)m_playerNumbers, sizeof(m_playerNumbers), EXECUTE_UPDATE_PLAYER_NUMBERS);
 	}
 
 	void OnlineMatching::StartFreeMatching()
