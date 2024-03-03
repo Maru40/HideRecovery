@@ -7,6 +7,7 @@
 #include "Maruyama/Utility/Utility.h"
 #include "Maruyama/Utility/Random.h"
 #include "ObjectHider.h"
+#include "OnlineStatus.h"
 
 namespace basecross
 {
@@ -55,7 +56,17 @@ namespace basecross
 			return;
 		}
 
-		Online::OnlineManager::RaiseEvent(false, nullptr, 0, GAMETIMER_START_CHECK_EVENT_CODE);
+		auto status = maru::Utility::FindComponents<Online::OnlineStatus>(GetStage());
+		auto ids = std::vector<std::uint32_t>(status.size() + 1);
+
+		ids[0] = static_cast<std::uint32_t>(status.size());
+
+		for (int i = 0; i < status.size(); ++i)
+		{
+			ids[i + 1] = status[i]->GetInstanceId();
+		}
+
+		Online::OnlineManager::RaiseEvent(true, reinterpret_cast<std::uint8_t*>(ids.data()), ids.size() * sizeof(std::uint32_t), GAMETIMER_START_CHECK_EVENT_CODE);
 	}
 
 	void OnlineGameTimer::GameCountStart()
@@ -169,9 +180,17 @@ namespace basecross
 				return;
 			}
 
+			auto status = maru::Utility::FindComponents<Online::OnlineStatus>(GetStage());
+			auto* ids = reinterpret_cast<const std::uint32_t*>(bytes);
+
+			for (int i = 0; i < ids[0]; ++i)
+			{
+				status[i]->ChangeInstanceId(ids[i + 1]);
+			}
+
 			auto raiseOption = ExitGames::LoadBalancing::RaiseEventOptions();
 			raiseOption.setReceiverGroup(ExitGames::Lite::ReceiverGroup::MASTER_CLIENT);
-			Online::OnlineManager::RaiseEvent(false, nullptr, 0, GAMETIMER_START_OK_EVENT_CODE, raiseOption);
+			Online::OnlineManager::RaiseEvent(true, nullptr, 0, GAMETIMER_START_OK_EVENT_CODE, raiseOption);
 			return;
 		}
 

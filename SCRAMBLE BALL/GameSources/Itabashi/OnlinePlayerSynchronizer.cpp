@@ -618,7 +618,7 @@ namespace basecross
 		if (!Online::OnlineExtension::IsGameMaster())
 		{
 			auto data = OnlinePlayerData<std::uint32_t>(m_onlinePlayerNumber, instanceId);
-			Online::OnlineManager::RaiseEvent(false, (std::uint8_t*)&data, sizeof(data), TRY_OPEN_HIDEPLACE_EVENT_CODE);
+			Online::OnlineManager::RaiseEvent(true, (std::uint8_t*)&data, sizeof(data), TRY_OPEN_HIDEPLACE_EVENT_CODE);
 			return;
 		}
 
@@ -675,7 +675,7 @@ namespace basecross
 		if (!Online::OnlineExtension::IsGameMaster())
 		{
 			auto data = OnlinePlayerData<std::uint32_t>(m_onlinePlayerNumber, instanceId);
-			Online::OnlineManager::RaiseEvent(false, (std::uint8_t*)&data, sizeof(data), TRY_ITEM_AQUISITION_EVENT_CODE);
+			Online::OnlineManager::RaiseEvent(true, (std::uint8_t*)&data, sizeof(data), TRY_ITEM_AQUISITION_EVENT_CODE);
 			return;
 		}
 
